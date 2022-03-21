@@ -6,7 +6,7 @@ DJI Mobile SDK V5 has a series of APIs to control the software and hardware inte
 
 ## Integration
 
-For further detail on how to integrate the DJI Android SDK into your Android Studio project, please check the [Integrate SDK into Application] tutorial.
+For further detail on how to integrate the DJI Android SDK into your Android Studio project, please check the [Integrate SDK into Application](https://developer.dji.com/cn/document/36799544-729a-4f1a-ae60-8afe9a546db8) tutorial.
 
 ## License
 
