@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--dialog -->
+    <dimen name="image_dialog_width">340dp</dimen>
+    <dimen name="gen_corner_radius">4dp</dimen>
+
+    <!-- left menu -->
+
+    <dimen name="leftmenu_thumb_radius">34dp</dimen>
+
+    <dimen name="buttonsize_height">35dp</dimen>
+    <dimen name="edittextview_width">80dp</dimen>
+    <dimen name="seekbar_radius">42dp</dimen>
+    <dimen name="seekbar_half_radius">21dp</dimen>
+
+
+    <!-- margin -->
+    <!-- margin -->
+    <dimen name="view_top_min_margin">3dp</dimen>
+    <dimen name="view_top_mid_margin">6dp</dimen>
+    <dimen name="view_top_max_margin">14dp</dimen>
+    <dimen name="view_simple_marginleft">20dp</dimen>
+    <dimen name="view_simple_marginright">20dp</dimen>
+
+
+    <dimen name="fpv_scroll_tv_height">100dp</dimen>
+
+    <!-- text size -->
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_normal_medium">14sp</dimen>
+    <dimen name="text_size_normal">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+    <dimen name="text_size_between_small_tiny">8sp</dimen>
+    <dimen name="text_size_tiny">6sp</dimen>
+
+    <!-- padding -->
+
+    <dimen name="camera_exposure_mode_selector_radius">100dp</dimen>
+
+    <!-- corner-->
+    <dimen name="rounded_corner_small">4dp</dimen>
+
+    <!--Dialog-->
+    <dimen name="dialog_divide_view_height">4dp</dimen>
+    <dimen name="dialog_title_size">16sp</dimen>
+    <dimen name="dialog_content_size">12sp</dimen>
+    <dimen name="dialog_btn_size">14sp</dimen>
+    <dimen name="dialog_title_margin_top">24dp</dimen>
+    <dimen name="dialog_content_margin_top">14dp</dimen>
+    <dimen name="dialog_divide_line_margin_top">24dp</dimen>
+    <dimen name="dialog_btn_height">44dp</dimen>
+    <dimen name="dialog_margin_left">24dp</dimen>
+    <dimen name="dialog_line_spacing_extra">8dp</dimen>
+
+    <dimen name="imageview_dlg_title_icon_width">20dp</dimen>
+    <dimen name="dialog_title_margin_left_img">8dp</dimen>
+    <dimen name="textview_slidertitle_size">14sp</dimen>
+    <dimen name="textview_slidertitle_padding">5dp</dimen>
+    <dimen name="base_dialog_width">320dp</dimen>
+    <dimen name="base_dialog_width2">340dp</dimen>
+
+    <dimen name="seek_bar_space">-4dp</dimen>
+
+    <!-- camera capture border -->
+    <dimen name="camera_capture_border_stroke">2dp</dimen>
+    <dimen name="camera_capture_border_padding">4dp</dimen>
+    <dimen name="camera_capture_padding">8dp</dimen>
+
+    <!-- ExpandableListAdapter-->
+    <dimen name="expand_list_text_size">4sp</dimen>
+
+    <!--Edit Text-->
+    <dimen name="editor_edit_text_size">14sp</dimen>
+    <dimen name="editor_tip_text_size">12sp</dimen>
+
+    <dimen name="slide_dialog_slide_text_size">14sp</dimen>
+
+    <dimen name="watermark_preview_text_size">10sp</dimen>
+    <dimen name="watermark_preview_text_margin">16dp</dimen>
+
+    <dimen name="keyvalue_list_spinner_width">110dp</dimen>
+</resources>

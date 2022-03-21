@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions{
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api deps.appcompat
+    api deps.constraintLayout
+    api deps.aacCommon
+    api deps.aacRuntime
+    api deps.kotlinLib
+    api deps.ktxCore
+    api deps.ktxFrag
+    api deps.ktxNavigation
+    api deps.ktxNavigationUi
+    api deps.recyclerview
+    api deps.legacySupport
+    api deps.lifecycleViewModel
+    api deps.lifecycleLiveData
+    api deps.amap3DMap
+    api deps.amapSearch
+    api deps.amapLocation
+
+
+    compileOnly files("../../${project.AIRCRAFT_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
+    runtimeOnly files("../../${project.NETWORK_IMP_RELEASE}${project.MSDK_VERSION}.aar")
+}

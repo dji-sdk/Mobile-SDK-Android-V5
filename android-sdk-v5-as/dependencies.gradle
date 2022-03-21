@@ -1,0 +1,71 @@
+ext {
+    deps = [:]
+    // 三方依赖库
+    deps.amUtilViewpager = 'am.util:viewpager:25.1.0'
+    deps.bcpkix = 'org.bouncycastle:bcpkix-jdk15on:1.57'
+    deps.bcprov = 'org.bouncycastle:bcprov-jdk15on:1.57'
+    deps.eventbusProcessor = 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    deps.eventbus = 'org.greenrobot:eventbus:3.0.0'
+    deps.gson = 'com.google.code.gson:gson:2.8.5'
+    deps.hugo = 'com.jakewharton.hugo:hugo-annotations:1.2.1'
+    deps.mapbox = 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.0'
+    deps.mapboxService = 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.0.0'
+    deps.mapboxTurf = 'com.mapbox.mapboxsdk:mapbox-sdk-turf:4.0.0'
+    deps.mapzenLost = 'com.mapzen.android:lost:3.0.4'
+    deps.okhttpLoggingInterceptor = 'com.squareup.okhttp3:logging-interceptor:3.14.9'
+    deps.okio = 'com.squareup.okio:okio:1.15.0'
+    deps.firebaseAnalytics = 'com.google.firebase:firebase-analytics'
+    deps.firebaseCore = 'com.google.firebase:firebase-core'
+    deps.rx3Android = 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    deps.rx3Java = 'io.reactivex.rxjava3:rxjava:3.0.0'
+    deps.room_safe = 'com.commonsware.cwac:saferoom.x:1.3.0'
+    deps.tagtabstrip = 'am.widget:tagtabstrip:25.1.0'
+    deps.wire = 'com.squareup.wire:wire-runtime:2.2.0'
+    deps.websocket = 'org.java-websocket:Java-WebSocket:1.5.1'
+    deps.amap3DMap = 'com.amap.api:3dmap:7.3.0'
+    deps.amapSearch = 'com.amap.api:search:7.3.0'
+    deps.amapLocation = 'com.amap.api:location:4.9.0'
+    deps.protobufJava = 'com.google.protobuf:protobuf-java:3.8.0'
+    deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
+
+    //androidx
+    deps.fragment = 'androidx.fragment:fragment:1.2.0'
+    deps.aacCommon = 'androidx.arch.core:core-common:2.1.0'
+    deps.aacRuntime = 'androidx.arch.core:core-runtime:2.1.0'
+    deps.annotation = 'androidx.annotation:annotation:1.1.0'
+    deps.appcompat = 'androidx.appcompat:appcompat:1.2.0'
+    deps.cardview = 'androidx.cardview:cardview:1.0.0'
+    deps.constraintLayout = 'androidx.constraintlayout:constraintlayout:1.1.3'
+    deps.multidex = 'androidx.multidex:multidex:2.0.1'
+    deps.testEspresso = 'androidx.test.espresso:espresso-core:3.1.0'
+    deps.recyclerview = 'androidx.recyclerview:recyclerview:1.1.0'
+    deps.paging = 'androidx.paging:paging-runtime:2.1.2'
+    deps.lifecycleExtensions = 'androidx.lifecycle:lifecycle-extensions:2.3.1'
+    deps.lifecycleJava8 = 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
+    deps.lifecycleRuntime = 'androidx.lifecycle:lifecycle-runtime:2.3.1'
+    deps.lifecycleViewModel = 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
+    deps.lifecycleLiveData = 'androidx.lifecycle:lifecycle-livedata:2.3.1'
+    deps.lifecycleProcess = 'androidx.lifecycle:lifecycle-process:2.3.1'
+    deps.room = 'androidx.room:room-runtime:2.2.6'
+    deps.room_rxjava = 'androidx.room:room-rxjava2:2.1.0'
+    deps.room_compiler = 'androidx.room:room-compiler:2.2.6'
+    deps.legacySupport = 'androidx.legacy:legacy-support-v4:1.0.0'
+    deps.media = 'androidx.media:media:1.0.0'
+
+    //kotlin
+    deps.kotlinLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    deps.ktxCore = "androidx.core:core-ktx:1.3.2"
+    deps.ktxFrag = "androidx.fragment:fragment-ktx:1.3.3"
+    deps.ktxNavigation = "androidx.navigation:navigation-fragment-ktx:2.2.1"
+    deps.ktxNavigationUi = "androidx.navigation:navigation-ui-ktx:2.2.1"
+
+    deps.networkRtkHelper = "com.dji:library-networkrtk-helper:2.0.2"
+
+    //测试
+    deps.junit4 = "junit:junit:4.12"
+    deps.jnitCore = 'androidx.test:core:1.0.0'
+    deps.robolectric = 'org.robolectric:robolectric:4.6.1'
+    deps.testRunner =  'androidx.test:runner:1.4.0'
+    deps.junitExt = 'androidx.test.ext:junit:1.1.2'
+    deps.espressoCore = 'androidx.test.espresso:espresso-core:3.3.0'
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:ignore="MissingDefaultResource">
+    <item android:state_pressed="true">
+        <shape
+            android:shape="oval"
+            android:useLevel="false">
+            <solid android:color="@color/white"/>
+            <size
+                android:width="12dp"
+                android:height="12dp"/>
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape
+            android:shape="oval"
+            android:useLevel="false">
+            <solid android:color="@color/white"/>
+            <size
+                android:width="12dp"
+                android:height="12dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape
+            android:shape="oval"
+            android:useLevel="false">
+            <solid android:color="@color/while_60"/>
+            <size
+                android:width="12dp"
+                android:height="12dp"/>
+        </shape>
+    </item>
+</selector>

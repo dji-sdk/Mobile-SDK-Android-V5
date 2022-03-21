@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mission_action_type">
+        <item>Stay</item>
+        <item>StartTakePhoto</item>
+        <item>StartRecord</item>
+        <item>StopRecord</item>
+        <item>RotateAircraft</item>
+        <item>GimbalPitch</item>
+    </string-array>
+
+
+
+
+    <string-array name="index_arrays">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>65534</item>
+    </string-array>
+
+    <string-array name="sub_index_arrays">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="sub_type_arrays">
+        <item>65534</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DULCollection">
+        <attr name="widgetSpacing" format="dimension"/>
+        <attr name="fillColor" format="color"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="roundedCorner" format="boolean"/>
+        <attr name="widgetArrangement" format="enum">
+            <enum name="start" value="0"/>
+            <enum name="end" value="1"/>
+            <enum name="center" value="2"/>
+            <enum name="auto" value="3"/>
+        </attr>
+        <attr name="autosize" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="PreFlightCheckListPanel">
+        <attr name="excludeItem">
+            <flag name="overall" value="1"/>
+            <flag name="flightMode" value="2"/>
+            <flag name="compass" value="4"/>
+            <flag name="IMUStatus" value="8"/>
+            <flag name="ESCStatus" value="16"/>
+            <flag name="visionSensors" value="32"/>
+            <flag name="radioChannelQuality" value="64"/>
+            <flag name="remoteControllerMode" value="128"/>
+            <flag name="aircraftBattery" value="256"/>
+            <flag name="remoteControllerBattery" value="512"/>
+            <flag name="aircraftBatteryTemperature" value="1024"/>
+            <flag name="remainingStorageCapacity" value="2048"/>
+            <flag name="gimbalStatus" value="4096"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="BatteryWidget">
+        <attr name="excludeView">
+            <flag name="batteryIcon" value="1"/>
+            <flag name="percentage" value="2"/>
+            <flag name="singleVoltage" value="4"/>
+            <flag name="doubleVoltage" value="8"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FPVWidget">
+        <attr name="videoSource" format="enum">
+            <enum name="auto" value="0"/>
+            <enum name="primary" value="1"/>
+            <enum name="secondary" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <attr name="segmentedBackground" format="reference"/>
+    <attr name="segmentedForeground" format="reference"/>
+    <attr name="segmentedDivider" format="reference"/>
+    <attr name="textSize" format="dimension"/>
+    <attr name="textColor" format="color"/>
+    <attr name="segmentedTexts" format="reference"/>
+    <attr name="segmentedIcons" format="reference"/>
+    <attr name="segmentedEnableDivider" format="boolean"/>
+    <declare-styleable name="DULSegmentedView">
+        <attr name="textSize"/>
+        <attr name="segmentedBackground"/>
+        <attr name="segmentedForeground"/>
+        <attr name="segmentedDivider"/>
+        <attr name="textColor"/>
+        <attr name="segmentedTexts"/>
+        <attr name="segmentedIcons"/>
+        <attr name="segmentedEnableDivider"/>
+    </declare-styleable>
+
+    <declare-styleable name="RemainingFlightTimeWidget">
+        <attr name="isMocked" format="boolean"/>
+    </declare-styleable>
+</resources>

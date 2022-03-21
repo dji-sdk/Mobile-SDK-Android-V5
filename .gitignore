@@ -1,6 +1,5 @@
 # Built application files
 *.apk
-*.aar
 *.ap_
 *.aab
 
@@ -83,3 +82,15 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# Android Profiling
+*.hprof
+
+*.DS_Store
+
+# ivtTest
+android-sdk-v5-ivt/tools/*_testfile.txt
+android-sdk-v5-ivt/tools/results/
+
+.idea/
+.userinfo

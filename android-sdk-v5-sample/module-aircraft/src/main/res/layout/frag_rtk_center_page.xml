@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_enable_rtk_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_enable_rtk_hint" />
+
+            <RadioGroup
+                android:id="@+id/rtk_open_state_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_enable_rtk_hint"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/btn_enable_rtk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/btn_enable_rtk" />
+
+                <RadioButton
+                    android:id="@+id/btn_disable_rtk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:text="@string/btn_enable_rtk" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_rtk_enable_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rtk_open_state_radio_group"
+                android:text="@string/tv_rtk_enable_hint" />
+
+            <TextView
+                android:id="@+id/tv_rtk_enable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rtk_open_state_radio_group"
+                android:layout_toRightOf="@id/tv_rtk_enable_hint"
+                android:text="@string/tv_rtk_is_off" />
+
+            <RelativeLayout
+                android:id="@+id/rl_rtk_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_rtk_enable">
+
+                <RelativeLayout
+                    android:id="@+id/rl_rtk_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_rtk_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/tv_rtk_source" />
+
+                    <RadioGroup
+                        android:id="@+id/rtk_source_radio_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv_rtk_source"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/btn_rtk_source_network"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/btn_rtk_source_network" />
+
+                        <RadioButton
+                            android:id="@+id/btn_rtk_source_qx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:text="@string/btn_rtk_source_qx"
+                            android:visibility="gone" />
+
+                        <RadioButton
+                            android:id="@+id/btn_rtk_source_base_rtk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:checked="true"
+                            android:text="@string/btn_rtk_source_base_rtk" />
+                    </RadioGroup>
+
+                    <Button
+                        android:id="@+id/bt_open_network_rtk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rtk_source_radio_group"
+                        android:text="@string/bt_open_network_rtk"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/bt_open_rtk_station"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rtk_source_radio_group"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/bt_open_network_rtk"
+                        android:text="@string/bt_open_rtk_station" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_rtk_info_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_rtk_source"
+                    android:layout_marginBottom="10dp">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_rtk_location_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_rtk_location_hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_rtk_location_hint"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_location_hint"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_location"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_trk_location_strategy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_location_hint"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_location"
+                            android:text="null" />
+
+
+                        <TextView
+                            android:id="@+id/tv_rtk_station_position"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_location"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_station_position"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_station_position_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_station_position"
+                            android:text="null" />
+
+
+                        <TextView
+                            android:id="@+id/tv_rtk_mobile_position"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_station_position"
+                            android:layout_marginTop="25dp"
+                            android:text="@string/tv_rtk_mobile_position"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_mobile_position_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_mobile_position"
+                            android:text="null" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_std_position"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_mobile_position"
+                            android:layout_marginTop="25dp"
+                            android:text="@string/tv_rtk_std_position"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_std_position_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_std_position"
+                            android:text="null" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_head"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_std_position"
+                            android:layout_marginTop="25dp"
+                            android:text="@string/tv_rtk_head"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_head_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_std_position"
+                            android:layout_marginTop="25dp"
+                            android:layout_toRightOf="@id/tv_rtk_head"
+                            android:text="null" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_real_head"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_head"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_real_head"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_real_head_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_head"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_real_head"
+                            android:text="null" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_real_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_real_head"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_real_location"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_real_location_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_real_location"
+                            android:text="null" />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_rtk_systemState_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rl_rtk_location_info"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_rtk_systemState_info_hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_rtk_systemState_info_hint"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_connect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_systemState_info_hint"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_connect"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_tv_rtk_connect_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_systemState_info_hint"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_connect"
+                            android:text="null" />
+
+
+                        <TextView
+                            android:id="@+id/tv_rtk_healthy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_connect"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_healthy"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_healthy_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_connect"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_healthy"
+                            android:text="null" />
+
+
+                        <TextView
+                            android:id="@+id/tv_rtk_error"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_healthy"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_error"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_error_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_healthy"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_error"
+                            android:text="null" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_antenna_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_error"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_antenna_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_antenna_1_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_error"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_antenna_1"
+                            android:text="null" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_antenna_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_antenna_1"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_antenna_2"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_antenna_2_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_antenna_1"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_antenna_2"
+                            android:text="null" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_station"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_antenna_2"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_station"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_station_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_antenna_2"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/tv_rtk_station"
+                            android:text="null" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_button_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_start_search_station"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_start_search_station"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn_stop_search_station"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_stop_search_station"
+                app:layout_constraintTop_toBottomOf="@id/btn_start_search_station"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn_login"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_login"
+                app:layout_constraintTop_toBottomOf="@id/btn_stop_search_station"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn_set_station_position"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_set_station_position"
+                app:layout_constraintTop_toBottomOf="@id/btn_login"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn_get_station_position"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_get_station_position"
+                app:layout_constraintTop_toBottomOf="@id/btn_set_station_position"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn_reset_station_position"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_reset_station_position"
+                app:layout_constraintTop_toBottomOf="@id/btn_get_station_position"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btn_reset_station_password"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_reset_station_password"
+                app:layout_constraintTop_toBottomOf="@id/btn_reset_station_position"
+                tools:ignore="MissingConstraints" />
+
+
+            <Button
+                android:id="@+id/btn_set_station_name"
+                style="@style/main_fragment_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_set_station_name"
+                app:layout_constraintTop_toBottomOf="@id/btn_reset_station_password"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_station_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@id/sv_button_list"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_station_name"
+        app:layout_constraintEnd_toStartOf="@id/tv_station_name_info"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_name_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_station_id"
+        app:layout_constraintEnd_toStartOf="@id/tv_station_id_info"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_name"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_id_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_name"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_signal_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_station_signal_level"
+        app:layout_constraintEnd_toStartOf="@id/tv_station_signal_level_info"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_id"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_signal_level_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_id"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_station_battery_current"
+        app:layout_constraintEnd_toStartOf="@id/tv_station_battery_current_info"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_signal_level"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_current_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_signal_level"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_station_battery_temperature"
+        app:layout_constraintEnd_toStartOf="@id/tv_station_battery_temperature_info"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_battery_current"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_temperature_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_battery_current"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_voltage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_station_battery_voltage"
+        app:layout_constraintEnd_toStartOf="@id/tv_station_battery_voltage_info"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_battery_temperature"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_voltage_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_battery_temperature"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_capacity_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_station_battery_capacity_percent"
+        app:layout_constraintEnd_toStartOf="@id/tv_station_battery_capacity_percent_info"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_battery_voltage"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_station_battery_capacity_percent_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="null"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_battery_voltage"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

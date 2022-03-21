@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_medium"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ll_megaphone_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <TextView
+            android:id="@+id/tv_megaphone_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="4"
+            android:background="@color/black_half"
+            android:text="@string/title_megaphone"
+            android:textSize="26sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/window_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_megaphone_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v_line"
+        android:layout_marginTop="54dp">
+
+        <LinearLayout
+            android:id="@+id/ll_controler"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/black_half">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/megaphone_state"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/tv_megaphone_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="N/A"
+                    android:textSize="18sp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/white"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/megaphone_control"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"/>
+
+                <ImageButton
+                    android:id="@+id/btn_play_mode"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="60dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_action_playback_repeat"/>
+
+                <ImageButton
+                    android:id="@+id/btn_play_control"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_media_play" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_cur_volume_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="@string/cur_volume_value"
+                    android:textSize="12sp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/window_bg"
+                    android:layout_below="@+id/sb_volume_control"
+                    android:layout_marginLeft="20dp"/>
+
+                <SeekBar
+                    android:id="@+id/sb_volume_control"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="20"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_real_time_upload_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@string/rt_transmission_status"/>
+
+                <TextView
+                    android:id="@+id/et_upload_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black_half"
+                    android:textColor="@color/white"
+                    android:text=""
+                    android:textSize="15sp"
+                    android:layout_below="@+id/tv_real_time_upload_status" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/window_bg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_record_title"/>
+
+        <LinearLayout
+            android:id="@+id/ll_btns"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/black_half">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1">
+                    <Button
+                        android:id="@+id/tts_frg_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textAllCaps="false"
+                        android:text="@string/btn_tts" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/record_frg_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textAllCaps="false"
+                        android:text="@string/btn_rt_voice" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+
+                    <Button
+                        android:id="@+id/file_list_frg_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="@string/btn_audio_list" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

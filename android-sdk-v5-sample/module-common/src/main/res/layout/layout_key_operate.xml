@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Key name" />
+
+        <Button
+            android:id="@+id/bt_add_command"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="Add As Command"
+            android:textAllCaps="false"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <include layout="@layout/layout_deliver_horizontal_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_get"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="GET"/>
+        <Button
+            android:id="@+id/bt_set"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SET"/>
+        <Button
+            android:id="@+id/bt_listen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="LISTEN"/>
+
+        <Button
+            android:id="@+id/bt_action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ACTION"/>
+
+        <Button
+            android:id="@+id/bt_unlistenall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="UNLISTENALL"/>
+
+
+        <Button
+            android:id="@+id/bt_gpscoord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:text="StatrGpsTest"/>
+
+    </LinearLayout>
+    <include layout="@layout/layout_deliver_horizontal_line"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="index"/>
+
+            <Spinner
+                android:id="@+id/sp_index"
+                android:layout_height="wrap_content"
+                android:layout_width="@dimen/keyvalue_list_spinner_width"
+                android:textColor="@color/white"
+                android:dropDownWidth="@dimen/keyvalue_list_spinner_width"
+                android:entries="@array/index_arrays"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="subtype"/>
+
+            <Spinner
+                android:id="@+id/sp_subtype"
+                android:layout_height="wrap_content"
+                android:layout_width="@dimen/keyvalue_list_spinner_width"
+                android:textColor="@color/white"
+                android:dropDownWidth="@dimen/keyvalue_list_spinner_width"
+                android:entries="@array/sub_type_arrays"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="subIndex"/>
+
+            <Spinner
+                android:id="@+id/sp_subindex"
+                android:layout_height="wrap_content"
+                android:layout_width="@dimen/keyvalue_list_spinner_width"
+                android:textColor="@color/white"
+                android:dropDownWidth="@dimen/keyvalue_list_spinner_width"
+                android:entries="@array/sub_index_arrays"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <include layout="@layout/layout_deliver_horizontal_line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:scrollbars="vertical"
+            android:text="tv_result"
+            android:editable="false"
+            android:textIsSelectable="true"
+            android:textColor="@color/white"
+            android:textSize="10sp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/tv_tip"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:gravity="left"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:text="operate_listen_record_tips"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/btn_clearlog"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_stroke_common_with_color"
+                android:text="Clear All"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
+

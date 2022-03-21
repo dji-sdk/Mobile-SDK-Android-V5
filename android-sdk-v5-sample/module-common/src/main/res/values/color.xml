@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white_medium_transparent">#4cffffff</color>
+    <color name="white_transparent">#33ffffff</color>
+    <color name="gray_progress_bg">#7Fa1a1a1</color>
+    <color name="white_half">#77ffffff</color>
+    <color name="while_60">#99ffffff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="dark_gray">#80000000</color>
+    <color name="light_gray">#B3FFFFFF</color>
+    <color name="light_gray2">#444444</color>
+    <color name="lighter_gray">#99FFFFFF</color>
+    <color name="grid_line">#ccffffff</color>
+    <color name="white_40_percent">#66ffffff</color>
+    <color name="blue">#20A3F6</color>
+
+    <color name="debug_1">@android:color/holo_red_light</color>
+    <color name="debug_2">@android:color/holo_blue_light</color>
+    <color name="debug_3">@android:color/holo_green_light</color>
+    <color name="debug_4">@android:color/holo_orange_light</color>
+
+    <color name="gray_dark">#00ffffff</color>
+    <color name="blue_sea">#3f00aeff</color>
+    <color name="blue_light">#ff00d8ff</color>
+    <color name="blue_highlight">#ff1fa3f6</color>
+
+    <color name="gray_medium">#ff626262</color>
+
+    <color name="red_dark">#4cff0000</color>
+    <color name="red_light">#ffe72b2b</color>
+
+    <color name="red">#ff0000</color>
+
+    <color name="black_transparent">#b2000000</color>
+    <color name="black_medium">#64000000</color>
+    <color name="black_twenty">#33000000</color>
+    <color name="black_light">#4C000000</color>
+    <color name="black_half">#77000000</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="gray">#ff5e5e5e</color>
+    <color name="gray_highlight">#ffdbdddc</color>
+    <color name="gray_light">#ffbfbfbf</color>
+    <color name="gray_divider_line">#0affffff</color>
+    <color name="gray_light_divider_line">#1affffff</color>
+
+    <color name="yellow_medium">#ffcf9e0a</color>
+    <color name="yellow">#ffffc000</color>
+    <color name="left_menu_txt">#ff8e6b00</color>
+
+    <color name="green">#ff3fc14d</color>
+    <color name="green_transparent">#50478f0d</color>
+    <color name="white_af">#64FFFFFF</color>
+
+    <!--Dialog-->
+    <color name="dialog_bg_white">#FFFFFF</color>
+    <color name="dialog_title_gray">#212121</color>
+    <color name="dialog_content_gray">#212121</color>
+    <color name="dialog_btn_blue">#1088F2</color>
+    <color name="dialog_btn_gray">#727272</color>
+    <color name="dialog_divide_line_gray">#EFEFEF</color>
+    <color name="dialog_scrollbar">#FFD8D8D8</color>
+    <color name="dialog_tip_gray">#727272</color>
+    <color name="dialog_tip_edit_gray">#BCBCBC</color>
+
+    <!-- camera capture border -->
+    <color name="camera_capture_gray">#ffA59CA5</color>
+    <color name="manual_osd_view_bg">#CC000000</color>
+    
+    <color name="sunburn_alert">#EE2B2A</color>
+
+    <color name="button_normal">#50808080</color>
+    <color name="button_press">#5086BFFF</color>
+    <color name="window_bg">#c7c7c7</color>
+
+    <color name="colorAccent">#FF4081</color>
+    <color name="darkturquoise">#00CED1</color>
+    <color name="honeydew">#F0FFF0</color>
+    <color name="default_selected_bg_color">#dedede</color>
+    <color name="activity_background">#FF000000</color>
+
+</resources>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="news_title">MSDK 5.0.0</string>
+    <string name="news_description">DJI Mobile SDK V5 has a series of APIs to control the software and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.</string>
+
+    <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/en-us/community/topics</string>
+    <string name="release_node_url">https://developer.dji.com/document/fa8f7ff4-1c05-4550-918e-0282f27752b9</string>
+    <string name="tech_support_url">https://sdk-forum.dji.net/hc/en-us/requests/new</string>
+
+    <string name="app_name_all">MSDK ALL</string>
+    <string name="app_name_aircraft">MSDK Aircraft</string>
+    <string name="app_name_handheld">MSDK Handheld</string>
+
+    <string name="item_key_value_title">Key/Value</string>
+    <string name="item_key_value_description">Demonstrate how to use the Key/Value function</string>
+
+    <string name="item_multi_video_decoding_title">Multi-Video Decoding</string>
+    <string name="item_multi_video_decoding_description">Demonstrate how to use the Multi-Video Decoding function</string>
+
+    <string name="item_waypoint_title">Waypoint</string>
+    <string name="item_waypoint_description">Demonstrate how to use the waypoint flight function</string>
+
+    <string name="item_virtual_stick_title">Virtual Stick</string>
+    <string name="item_virtual_description">Demonstrate how to use the virtual stick function</string>
+
+    <string name="item_handheld_title">Handheld</string>
+    <string name="item_handheld_description">Demonstrate how to use the handheld function</string>
+
+    <string name="item_diagnostic_title">Diagnostic</string>
+    <string name="item_diagnostic_description">Demonstrate how to use the diagnostic function</string>
+
+    <string name="item_flight_record_title">Flight Record</string>
+    <string name="item_flight_record_description">Demonstrate how to use the Flight Record function</string>
+
+    <string name="item_rtk_title">Network RTK</string>
+    <string name="item_rtk_description">Demonstrate how to use the RTK function</string>
+
+    <string name="item_megaphone_title">Megaphone</string>
+    <string name="item_megaphone_description">Demonstrate how to use the Megaphone function</string>
+
+    <string name="btn_init_msdk">Init MSDK</string>
+    <string name="btn_unInit_msdk">UnInit MSDK</string>
+    <string name="btn_register_app">Register app</string>
+    <string name="btn_enable_ldm">Enable LDM</string>
+    <string name="btn_disable_ldm">Disable LDM</string>
+
+    <string name="btn_enable_virtual_stick">Enable Virtual Stick</string>
+    <string name="btn_disable_virtual_stick">Disable Virtual Stick</string>
+    <string name="btn_set_virtual_stick_speed_level">Set Speed Level</string>
+    <string name="btn_use_rc_stick_value">Use RC stick Value</string>
+
+    <string name="btn_take_off">Take Off</string>
+    <string name="btn_landing">Landing</string>
+
+    <string name="btn_start_channel">Start Channel</string>
+    <string name="btn_close_channel">Close Channel</string>
+    <string name="btn_yuv_screen_shot">YUV Screen Shot</string>
+    <string name="btn_resume_video">Resume Video</string>
+    <string name="btn_start_socket">Start Socket</string>
+    <string name="btn_close_socket">Close Socket</string>
+    <string name="btn_start_broadcast">Start Broadcast</string>
+    <string name="btn_stop_broadcast">Stop Broadcast</string>
+    <string name="btn_switch_source">SwitchSource</string>
+
+    <string name="btn_start_custom_network_rtk_service">Start Custom NetWork RTK</string>
+    <string name="btn_stop_custom_network_rtk_service">Stop Custom NetWork RTK</string>
+    <string name="btn_set_custom_network_rtk_settings">Set Custom NetWork RTK Settings</string>
+    <string name="btn_start_qx_network_rtk_service">Start QX NetWork RTK</string>
+    <string name="btn_stop_qx_network_rtk_service">Stop QX NetWork RTK</string>
+    <string name="btn_set_qx_network_rtk_coordinate_system">Set QX NetWork RTK Coordinate System</string>
+
+    <string name="btn_get_flight_record_path">Get Flight Record Path</string>
+    <string name="btn_get_fly_compressed_path">Get Fly Compressed Log Path</string>
+
+
+    <string name="n_a">N/A</string>
+    <string name="video_stream_manager">Video Stream Manager</string>
+    <string name="reset_all_video_channel">Reset All Video Channel</string>
+    <string name="select_stream_source">Select Stream Source</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="popup_picker_finish">Finish</string>
+    <string name="popup_picker_trigger">Trigger</string>
+
+    <string name="no_product">No product connected</string>
+    <string name="wsbridge_ip">WSBridge IP</string>
+    <string name="sdk_version">Version: %1$s</string>
+    <string name="product_name">Product Name: %1$s</string>
+    <string name="is_debug">Is Debug: %1$s</string>
+    <string name="registration_status">Registration Status: %1$s</string>
+    <string name="package_product_category">Package Category: %1$s</string>
+    <string name="remote_controller">Remote Controller Only</string>
+    <string name="unregistered">Unregistered</string>
+    <string name="registered">Registered</string>
+    <string name="logs">Logs</string>
+    <string name="news">Notification</string>
+    <string name="showcase">Showcase &amp; Tools</string>
+    <string name="widget_list">Widget List</string>
+    <string name="testing_tools">Testing Tools</string>
+    <string name="default_layout">Default Layout</string>
+    <string name="sdk_forum">SDK Forum</string>
+    <string name="release_nodes">Release Nodes</string>
+    <string name="tech_support">Tech Support</string>
+
+    <!--Megaphone-->
+    <string name="btn_start_audio_mode">Audio Record</string>
+    <string name="btn_start_tts_mode">TTS</string>
+    <string name="btn_file_list">File List</string>
+    <string name="upload_status">Upload Status</string>
+    <string name="record_btn_title">Click To Start Record</string>
+    <string name="btn_send_tts_data">Send TTS</string>
+    <string name="title_megaphone">Megaphone</string>
+    <string name="megaphone_state">Megaphone State</string>
+    <string name="megaphone_control">Megaphone Control</string>
+    <string name="rt_transmission_status">Real-time Transmission Status:</string>
+    <string name="btn_tts">TTS</string>
+    <string name="btn_rt_voice">Real-time Voice</string>
+    <string name="btn_audio_list">Audio List</string>
+    <string name="cur_volume_value">current volume:</string>
+
+
+    <string name="item_simulator_title">Simulator</string>
+    <string name="item_simulator_description">Demonstrate how to use the Simulator function</string>
+    <string name="btn_enable_simulator">Enable Simulator</string>
+    <string name="btn_disable_simulator">Disable Simulator</string>
+
+    <string name="item_upgrade_title">Upgrade</string>
+    <string name="item_upgrade_description">Demonstrate how to use the Upgrade function</string>
+
+
+    <!--PSDK-->
+    <string name="item_psdk_title">PSDK Test</string>
+    <string name="item_psdk_description">Demonstrate how to use PSDK related functions</string>
+    <string name="btn_send_data_to_psdk">Send Data To PaySdk</string>
+    <string name="btn_get_data_from_psdk">Get data From PaySdk</string>
+    <string name="tv_send_data_to_psdk_hint">Please enter test data sent to PSDK</string>
+
+    <string name="btn_mission_uploadkmz">uploadKmz</string>
+    <string name="btn_mission_start">Start Mission</string>
+    <string name="btn_mission_pause">Pause Misson</string>
+    <string name="btn_mission_resume">Resume Mission</string>
+    <string name="btn_mission_stop">Stop Mission</string>
+    <string name="btn_get_payload_product_name">Get Payload Product Name </string>
+
+    <!-- StationRTK   -->
+    <string name="item_station_trk_title">Station RTK Test</string>
+    <string name="item_station_trk_description">Demonstrate how to use base station RTK related functions</string>
+    <string name="btn_start_search_station">Start Search RTK Station </string>
+    <string name="btn_stop_search_station">Stop Search RTK Station </string>
+    <string name="btn_login">Login As Admin </string>
+    <string name="btn_set_station_position">Set Station Position </string>
+    <string name="btn_get_station_position">Get Station Position </string>
+    <string name="btn_reset_station_position">Reset Station Position </string>
+    <string name="btn_reset_station_password">Reset Station Password </string>
+    <string name="btn_set_station_name">Set Station Name </string>
+    <string name="tv_station_name">Station Name: </string>
+    <string name="tv_station_id">Station Id: </string>
+    <string name="tv_station_signal_level">Station Signal Level: </string>
+    <string name="tv_station_battery_current">Station Battery Current: </string>
+    <string name="tv_station_battery_temperature">Station Battery Temperature: </string>
+    <string name="tv_station_battery_voltage">Station Battery Voltage: </string>
+    <string name="tv_station_battery_capacity_percent">Station Battery Capacity Percent: </string>
+
+    <!-- RTK Center   <-->
+    <string name="item_trk_center_title">RTK Center</string>
+    <string name="item_trk_center_description">Demonstrate how to use RTK related functions</string>
+    <string name="tv_enable_rtk_hint">1.To set the RTK module on the drone to on or off, it must be set before the drone blade starts to rotate. After the start, the call is invalid.</string>
+    <string name="btn_enable_rtk">Open RTK</string>
+    <string name="btn_disable_rtk">Close RTK</string>
+    <string name="tv_rtk_enable_hint">2. Get RTK open status: </string>
+    <string name="tv_rtk_is_on">RTK is on</string>
+    <string name="tv_rtk_is_off">RTK is off</string>
+    <string name="tv_rtk_source">3. Select RTK service type</string>
+    <string name="btn_rtk_source_network">Custom Network RTK</string>
+    <string name="btn_rtk_source_qx">Chihiro RTK</string>
+    <string name="btn_rtk_source_base_rtk">D-RTK2</string>
+    <string name="bt_open_network_rtk">Open custom network RTK</string>
+    <string name="bt_open_rtk_station">Open D-RTK2</string>
+    <string name="tv_rtk_location_hint">4.RTKLocationInfo information display</string>
+    <string name="tv_rtk_location">The positioning strategy of RTK module：</string>
+    <string name="tv_rtk_station_position">The location of the ground-side RTK Station：</string>
+    <string name="tv_rtk_mobile_position">UAV position calculated by RTK module：</string>
+    <string name="tv_rtk_std_position">The standard deviation of the drone position calculated by the RTK module：</string>
+    <string name="tv_rtk_head">UAV orientation data calculated by RTK module：</string>
+    <string name="tv_rtk_real_head">The orientation data of the UAV calculated by the flight control fusion algorithm：</string>
+    <string name="tv_rtk_real_location">The position data of the UAV calculated by the flight control fusion algorithm：</string>
+    <string name="tv_rtk_systemState_info_hint">5. RTKSystemState information display: </string>
+    <string name="tv_rtk_connect">Flight controller and fuselage RTK connection status: </string>
+    <string name="tv_rtk_healthy">RTK module data health status：</string>
+    <string name="tv_rtk_error">RTK module error message: </string>
+    <string name="tv_rtk_antenna_1">The number of satellites searched by the antenna 1 of the UAV RTK module：</string>
+    <string name="tv_rtk_antenna_2">The number of satellites searched by the antenna 2 of the UAV RTK module：</string>
+    <string name="tv_rtk_station">The number of satellites searched by the D-RTK2 ground base station: </string>
+
+
+    <!-- key Type-->
+    <string name="key_type_battery">battery key</string>
+    <string name="key_type_gimbal">gimbal key</string>
+    <string name="key_type_camera">camera key</string>
+    <string name="key_type_wifi">WiFi key</string>
+    <string name="key_type_ble">BLE key</string>
+    <string name="key_type_product">Product key</string>
+    <string name="key_type_rtk_base">RTK Base Station Key</string>
+    <string name="key_type_rtk_mobile">RTK Mobile Station Key</string>
+    <string name="key_type_ocu_sync">OcuSync Key</string>
+    <string name="key_type_radar">Radar Key</string>
+    <string name="key_type_app">App Key</string>
+    <string name="key_type_camera_action">action key</string>
+    <string name="key_type_camera_listen">listen key</string>
+    <string name="key_type_camera_get_set">set、get key</string>
+    <string name="home_operate_disconnected_tips">device disconnect</string>
+    <string name="operate_case_filter">Filter</string>
+    <string name="operate_select_item_for_setting">Select Item</string>
+    <string name="operate_listen_record_tips">push info：</string>
+    <string name="operate_pls_select_key_first_tips">please select key firtst</string>
+    <string name="battery">Battery</string>
+    <string name="batterybox">BatteryBox</string>
+    <string name="bigbattery">BigBattery</string>
+    <string name="gimbal">Gimbal</string>
+    <string name="camera">Camera</string>
+    <string name="wifi">WiFi</string>
+    <string name="ble">BLE</string>
+    <string name="airlink">AIRLINK</string>
+    <string name="flight_assistant">FlightAssistant</string>
+    <string name="flight_control">FlightController</string>
+    <string name="product">Product</string>
+    <string name="app_key">AppKey</string>
+    <string name="rtkbase">RTK Base</string>
+    <string name="rtkmobile">RTK mobile</string>
+    <string name="ocusync">OcuSync</string>
+    <string name="radar">Radar</string>
+    <string name="mobile_network">Mobile Network</string>
+    <string name="on_board">OnBoard</string>
+    <string name="payload">Payload</string>
+    <string name="lidar">Lidar</string>
+    <string name="key">Key List</string>
+    <string name="key_search">Search</string>
+    <string name="commonlyused_key">Commonly Used Key</string>
+    <string name="key_value_set">Set </string>
+</resources>

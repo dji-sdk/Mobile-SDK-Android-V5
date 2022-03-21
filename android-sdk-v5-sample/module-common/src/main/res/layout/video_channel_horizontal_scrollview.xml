@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/horizontal_scrollView_itemContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/startChannel"
+            style="@style/main_fragment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:text="@string/btn_start_channel"
+            android:textColor="#009688" />
+
+        <Button
+            android:id="@+id/closeChannel"
+            style="@style/main_fragment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:text="@string/btn_close_channel"
+            android:textColor="#009688" />
+
+        <Button
+            android:id="@+id/yuvScreenShot"
+            style="@style/main_fragment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:text="@string/btn_yuv_screen_shot"
+            android:textColor="#009688" />
+
+        <Button
+            android:id="@+id/startSocket"
+            style="@style/main_fragment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:visibility="gone"
+            android:text="@string/btn_start_socket"
+            android:textColor="#009688" />
+
+        <Button
+            android:id="@+id/closeSocket"
+            style="@style/main_fragment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:visibility="gone"
+            android:text="@string/btn_close_socket"
+            android:textColor="#009688" />
+
+        <Button
+            android:id="@+id/startBroadcast"
+            style="@style/main_fragment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:paddingStart="10dp"
+            android:text="@string/btn_start_broadcast"
+            android:textColor="#009688" />
+
+        <Button
+            android:id="@+id/stopBroadcast"
+            style="@style/main_fragment_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:paddingStart="10dp"
+            android:text="@string/btn_stop_broadcast"
+            android:textColor="#009688" />
+    </LinearLayout>
+
+</HorizontalScrollView>
