@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="dji.v5.ux.cameracore.widget.cameracapture.recordvideo.RecordVideoWidget">
+
+    <dji.v5.ux.cameracore.ui.ProgressRingView
+        android:id="@+id/progress_ring_view_border"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_view_center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/uxsdk_selector_start_record_video"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_ring_view_border"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintLeft_toLeftOf="@+id/progress_ring_view_border"
+        app:layout_constraintRight_toRightOf="@+id/progress_ring_view_border"
+        app:layout_constraintTop_toTopOf="@+id/progress_ring_view_border"
+        app:layout_constraintWidth_percent="0.8"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/image_view_storage_status_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_center"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="@+id/image_view_center"
+        app:layout_constraintStart_toStartOf="@+id/image_view_center"
+        app:layout_constraintTop_toTopOf="@+id/image_view_center"
+        app:layout_constraintWidth_percent="0.5"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/uxsdk_ic_sdcard_slow" />
+
+    <TextView
+        android:id="@+id/text_view_video_record_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|top"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="9sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress_ring_view_border"
+        tools:text="00:00"
+        tools:visibility="visible"
+        tools:ignore="SmallSp" />
+
+</merge>

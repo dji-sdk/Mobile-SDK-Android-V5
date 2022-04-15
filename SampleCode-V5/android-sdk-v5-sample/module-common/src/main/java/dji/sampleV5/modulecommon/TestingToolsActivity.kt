@@ -30,6 +30,18 @@ abstract class TestingToolsActivity : AppCompatActivity() {
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
+        // 设置监听防止系统UI获取焦点后进入到非全屏状态
+        window.decorView.setOnSystemUiVisibilityChangeListener(){
+            if (it and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
+                window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_IMMERSIVE or
+                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+            }
+        }
+
         supportFragmentManager.commit {
             replace(R.id.main_info_fragment_container, MSDKInfoFragment())
         }

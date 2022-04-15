@@ -146,6 +146,7 @@ public class WheelScroller {
                     lastTouchedY = event.getY();
                 }
                 break;
+            default:break;
         }
         
         if (!gestureDetector.onTouchEvent(event) && event.getAction() == MotionEvent.ACTION_UP) {

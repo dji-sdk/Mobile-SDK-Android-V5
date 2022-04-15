@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!--    <dji.ux.beta.map.widget.map.MapWidget-->
+<!--        android:id="@+id/map_widget"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <ScrollView-->
+<!--        android:id="@+id/settings_scroll_view"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintWidth_percent="0.35">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/uxsdk_dark_gray"-->
+<!--            android:padding="8dp">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/settings_text"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginRight="5dp"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/map_settings"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/settings_separator"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_margin="@dimen/map_settings_item_separator"-->
+<!--                android:background="@color/uxsdk_colorAccent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/settings_text" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/center_selector_label"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/center_map"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/map_center_selector"-->
+<!--                app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toLeftOf="@+id/map_center_selector"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/map_center_selector" />-->
+
+<!--            <RadioGroup-->
+<!--                android:id="@+id/map_center_selector"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintLeft_toRightOf="@+id/center_selector_label"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/settings_separator">-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/map_center_aircraft"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="@drawable/selector_map_type_bg"-->
+<!--                    android:button="@null"-->
+<!--                    android:checked="true"-->
+<!--                    android:drawableStart="@drawable/uxsdk_ic_compass_aircraft"-->
+<!--                    android:drawableLeft="@drawable/uxsdk_ic_compass_aircraft"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:textColor="@drawable/selector_map_type_text" />-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/map_center_home"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="@drawable/selector_map_type_bg"-->
+<!--                    android:button="@null"-->
+<!--                    android:drawableStart="@drawable/uxsdk_ic_compass_home"-->
+<!--                    android:drawableLeft="@drawable/uxsdk_ic_compass_home"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:textColor="@drawable/selector_map_type_text" />-->
+
+<!--                <RadioButton-->
+<!--                    android:id="@+id/map_center_none"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:background="@drawable/selector_map_type_bg"-->
+<!--                    android:button="@null"-->
+<!--                    android:drawableStart="@android:drawable/ic_notification_clear_all"-->
+<!--                    android:drawableLeft="@android:drawable/ic_notification_clear_all"-->
+<!--                    android:padding="8dp"-->
+<!--                    android:textColor="@drawable/selector_map_type_text" />-->
+
+<!--            </RadioGroup>-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/home_point"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:checked="true"-->
+<!--                android:text="@string/show_home_point"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/map_center_selector" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/login_state_indicator"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:checked="true"-->
+<!--                android:text="@string/dji_account_indicator"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/home_point" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/map_spinner"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/bg_spinner"-->
+<!--                android:entries="@array/mapTypeArray"-->
+<!--                android:paddingRight="30dp"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/login_state_indicator" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_map_provider_test"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_map_type_bg"-->
+<!--                android:padding="10dp"-->
+<!--                android:text="@string/map_overlay"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/map_spinner" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/fly_zone_settings_text"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_separator"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/fly_zone_settings"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/btn_map_provider_test" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/fly_zone_settings_separator"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_margin="@dimen/map_settings_item_separator"-->
+<!--                android:background="@color/uxsdk_colorAccent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/fly_zone_settings_text" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/flyzone_legend"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:text="@string/fly_zone_legend"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/fly_zone_settings_separator" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/flyzone_unlock"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:checked="true"-->
+<!--                android:text="@string/unlock_flyzones"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/flyzone_legend" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btn_fly_zone"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_map_type_bg"-->
+<!--                android:padding="10dp"-->
+<!--                android:text="@string/fly_zone"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/flyzone_unlock" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/flight_settings_text"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_separator"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/flight_settings"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/btn_fly_zone" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/flight_settings_separator"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_margin="@dimen/map_settings_item_separator"-->
+<!--                android:background="@color/uxsdk_colorAccent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/flight_settings_text" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/home_direction"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:checked="true"-->
+<!--                android:text="@string/home_direction"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/flight_settings_separator" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/lock_bounds"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:checked="true"-->
+<!--                android:text="@string/auto_frame"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/home_direction" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/flight_path"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:checked="true"-->
+<!--                android:text="@string/show_flight_path"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/lock_bounds" />-->
+
+<!--            <CheckBox-->
+<!--                android:id="@+id/gimbal_yaw"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:checked="true"-->
+<!--                android:text="@string/show_gimbal_yaw"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/flight_path" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/clear_flight_path"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_map_type_bg"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="8dp"-->
+<!--                android:text="@string/clear_flight_path"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:textColor="@color/uxsdk_black"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/gimbal_yaw" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/other_settings_text"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_separator"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/other_settings"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/clear_flight_path" />-->
+
+<!--            <View-->
+<!--                android:id="@+id/other_settings_separator"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_margin="@dimen/map_settings_item_separator"-->
+<!--                android:background="@color/uxsdk_colorAccent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/other_settings_text" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/icon_change_settings_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/icon_change_settings"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/other_settings_separator" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/icon_spinner"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/bg_spinner"-->
+<!--                android:entries="@array/iconArray"-->
+<!--                android:paddingRight="30dp"-->
+<!--                android:spinnerMode="dropdown"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/icon_change_settings_text" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/replace"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_map_type_bg"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="8dp"-->
+<!--                android:text="@string/replace_icon"-->
+<!--                android:textAllCaps="true"-->
+<!--                android:textColor="@color/uxsdk_black"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/icon_spinner" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/icon_1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_icon_bg"-->
+<!--                android:padding="8dp"-->
+<!--                app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toLeftOf="@+id/icon_2"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/replace"-->
+<!--                app:srcCompat="@drawable/ic_drone"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/icon_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_icon_bg"-->
+<!--                android:padding="8dp"-->
+<!--                app:layout_constraintLeft_toRightOf="@+id/icon_1"-->
+<!--                app:layout_constraintRight_toLeftOf="@+id/icon_3"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/replace"-->
+<!--                app:srcCompat="@drawable/ic_butterfly"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/icon_3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_icon_bg"-->
+<!--                android:padding="8dp"-->
+<!--                app:layout_constraintLeft_toRightOf="@+id/icon_2"-->
+<!--                app:layout_constraintRight_toLeftOf="@+id/icon_4"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/replace"-->
+<!--                app:srcCompat="@drawable/ic_bird"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/icon_4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_icon_bg"-->
+<!--                android:padding="8dp"-->
+<!--                app:layout_constraintLeft_toRightOf="@+id/icon_3"-->
+<!--                app:layout_constraintRight_toLeftOf="@+id/icon_5"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/replace"-->
+<!--                app:srcCompat="@drawable/ic_house"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/icon_5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/replace"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:layout_toRightOf="@id/icon_4"-->
+<!--                android:background="@drawable/selector_icon_bg"-->
+<!--                android:padding="8dp"-->
+<!--                app:layout_constraintLeft_toRightOf="@+id/icon_4"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/replace"-->
+<!--                app:srcCompat="@drawable/ic_cat"-->
+<!--                tools:ignore="ContentDescription" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/line_color_settings_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/uxsdk_transparent"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/line_color_settings"-->
+<!--                android:textColor="@color/uxsdk_white"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/icon_1" />-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/line_spinner"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/bg_spinner"-->
+<!--                android:entries="@array/lineTypeArray"-->
+<!--                android:paddingRight="30dp"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/line_color_settings_text" />-->
+
+<!--            <SeekBar-->
+<!--                android:id="@+id/line_width_picker"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:max="100"-->
+<!--                android:progress="5"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/line_spinner" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/line_color"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/map_settings_item_separator"-->
+<!--                android:background="@drawable/selector_map_type_bg"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="8dp"-->
+<!--                android:text="@string/new_color"-->
+<!--                android:textAllCaps="true"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/line_width_picker" />-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--    </ScrollView>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/btn_settings"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:background="@color/uxsdk_light_gray_300"-->
+<!--        android:padding="5dp"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/ic_settings_white_24dp"-->
+<!--        tools:ignore="ContentDescription" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

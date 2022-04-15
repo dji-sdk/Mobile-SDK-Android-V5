@@ -10,6 +10,7 @@ import dji.sampleV5.modulecommon.util.Helper
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.BasicAircraftControlVM
+import dji.sampleV5.moduleaircraft.models.SimulatorVM
 import dji.sampleV5.moduleaircraft.models.VirtualStickVM
 import dji.sampleV5.moduleaircraft.virtualstick.OnScreenJoystick
 import dji.sampleV5.moduleaircraft.virtualstick.OnScreenJoystickListener
@@ -32,6 +33,7 @@ class VirtualStickFragment : DJIFragment() {
 
     private val basicAircraftControlVM: BasicAircraftControlVM by activityViewModels()
     private val virtualStickVM: VirtualStickVM by activityViewModels()
+    private val simulatorVM: SimulatorVM by activityViewModels()
     private val deviation: Double = 0.02
 
     override fun onCreateView(
@@ -52,6 +54,12 @@ class VirtualStickFragment : DJIFragment() {
         }
         virtualStickVM.useRcStick.observe(viewLifecycleOwner) {
             updateVirtualStickInfo()
+        }
+        virtualStickVM.currentVirtualStickStateInfo.observe(viewLifecycleOwner){
+            updateVirtualStickInfo()
+        }
+        simulatorVM.simulatorStateSb.observe(viewLifecycleOwner){
+            simulator_state_info_tv.text = it
         }
     }
 
@@ -160,6 +168,12 @@ class VirtualStickFragment : DJIFragment() {
         builder.append("Speed Level:").append(virtualStickVM.currentSpeedLevel.value)
         builder.append("\n")
         builder.append("UseRcStick:").append(virtualStickVM.useRcStick.value)
+        builder.append("\n")
+        builder.append("IsVirtualStickEnable:").append(virtualStickVM.currentVirtualStickStateInfo.value?.state?.isVirtualStickEnable)
+        builder.append("\n")
+        builder.append("CurrentControlPermissionOwner:").append(virtualStickVM.currentVirtualStickStateInfo.value?.state?.currentFlightControlAuthorityOwner)
+        builder.append("\n")
+        builder.append("Change Reason:").append(virtualStickVM.currentVirtualStickStateInfo.value?.reason)
         builder.append("\n")
         mainHandler.post {
             virtual_stick_info_tv.text = builder.toString()

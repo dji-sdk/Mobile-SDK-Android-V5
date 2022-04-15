@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    tools:background="@color/uxsdk_red"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <View
+        android:id="@+id/view_title_bar_container"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/uxsdk_top_bar_default_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_back_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/view_title_bar_container"
+        app:layout_constraintEnd_toEndOf="@+id/image_view_back"
+        app:layout_constraintStart_toStartOf="@+id/view_title_bar_container"
+        app:layout_constraintTop_toTopOf="@+id/view_title_bar_container" />
+
+    <ImageView
+        android:id="@+id/image_view_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/uxsdk_spacing_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/view_title_bar_container"
+        app:layout_constraintStart_toStartOf="@+id/view_title_bar_container"
+        app:layout_constraintTop_toTopOf="@+id/view_title_bar_container"
+        app:srcCompat="@drawable/uxsdk_title_bar_back_button_selector"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/uxsdk_spacing_normal"
+        android:paddingLeft="@dimen/uxsdk_spacing_normal"
+        android:paddingEnd="@dimen/uxsdk_spacing_normal"
+        android:paddingRight="@dimen/uxsdk_spacing_normal"
+        android:textAlignment="center"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view_title_bar_container"
+        app:layout_constraintEnd_toStartOf="@+id/image_view_close"
+        app:layout_constraintStart_toEndOf="@id/image_view_back"
+        app:layout_constraintTop_toTopOf="@+id/view_title_bar_container"
+        tools:text="A title goes here" />
+
+    <View
+        android:id="@+id/view_close_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/view_title_bar_container"
+        app:layout_constraintEnd_toEndOf="@+id/view_title_bar_container"
+        app:layout_constraintStart_toStartOf="@+id/image_view_close"
+        app:layout_constraintTop_toTopOf="@+id/view_title_bar_container" />
+
+    <ImageView
+        android:id="@+id/image_view_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/uxsdk_spacing_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/view_title_bar_container"
+        app:layout_constraintEnd_toEndOf="@+id/view_title_bar_container"
+        app:layout_constraintTop_toTopOf="@+id/view_title_bar_container"
+        app:srcCompat="@drawable/uxsdk_title_bar_close_button_selector"
+        tools:ignore="ContentDescription" />
+
+
+</merge>

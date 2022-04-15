@@ -1,0 +1,39 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+  <path
+      android:pathData="M3.5,11L3.5,16.0059C3.5,16.2779 3.722,16.5 3.9941,16.5L9,16.5L9,18L3.9941,18C2.8928,18 2,17.1055 2,16.0059L2,11L3.5,11ZM18,11L18,16.0059C18,17.1072 17.1055,18 16.0059,18L11,18L11,16.5L16.0059,16.5C16.2779,16.5 16.5,16.278 16.5,16.0059L16.5,11L18,11ZM14.0046,5C14.5543,5 15,5.4557 15,5.9954L15,14.0046C15,14.5543 14.5443,15 14.0046,15L5.9954,15C5.4457,15 5,14.5443 5,14.0046L5,5.9954C5,5.4457 5.4557,5 5.9954,5L14.0046,5ZM16.0059,2C17.1072,2 18,2.8945 18,3.9941L18,9L16.5,9L16.5,3.9941C16.5,3.7221 16.278,3.5 16.0059,3.5L11,3.5L11,2L16.0059,2ZM9,2L9,3.5L3.9941,3.5C3.7221,3.5 3.5,3.722 3.5,3.9941L3.5,9L2,9L2,3.9941C2,2.8928 2.8945,2 3.9941,2L9,2Z"
+      android:strokeWidth="1"
+      android:fillColor="#FFFFFF"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"/>
+  <group>
+    <clip-path
+        android:pathData="M3.5,11L3.5,16.0059C3.5,16.2779 3.722,16.5 3.9941,16.5L9,16.5L9,18L3.9941,18C2.8928,18 2,17.1055 2,16.0059L2,11L3.5,11ZM18,11L18,16.0059C18,17.1072 17.1055,18 16.0059,18L11,18L11,16.5L16.0059,16.5C16.2779,16.5 16.5,16.278 16.5,16.0059L16.5,11L18,11ZM14.0046,5C14.5543,5 15,5.4557 15,5.9954L15,14.0046C15,14.5543 14.5443,15 14.0046,15L5.9954,15C5.4457,15 5,14.5443 5,14.0046L5,5.9954C5,5.4457 5.4557,5 5.9954,5L14.0046,5ZM16.0059,2C17.1072,2 18,2.8945 18,3.9941L18,9L16.5,9L16.5,3.9941C16.5,3.7221 16.278,3.5 16.0059,3.5L11,3.5L11,2L16.0059,2ZM9,2L9,3.5L3.9941,3.5C3.7221,3.5 3.5,3.722 3.5,3.9941L3.5,9L2,9L2,3.9941C2,2.8928 2.8945,2 3.9941,2L9,2Z"/>
+  </group>
+</vector>

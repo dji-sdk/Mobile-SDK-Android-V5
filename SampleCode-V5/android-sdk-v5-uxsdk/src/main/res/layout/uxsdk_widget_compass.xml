@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    tools:parentTag="dji.v5.ux.core.widget.compass.CompassWidget">
+
+    <ImageView
+        android:id="@+id/imageview_compass_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_compass_background"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_inner_circles"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background"
+        app:srcCompat="@drawable/uxsdk_ic_compass_inner_circles"
+        tools:ignore="ContentDescription" />
+
+    <ProgressBar
+        android:id="@+id/progressbar_compass_attitude"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:padding="0dp"
+        android:progress="50"
+        android:progressDrawable="@drawable/uxsdk_compass_attitude"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background" />
+
+    <dji.v5.ux.core.widget.compass.VisualCompassView
+        android:id="@+id/visual_compass_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background" />
+
+    <dji.v5.ux.core.widget.compass.GimbalYawView
+        android:id="@+id/gimbal_yaw_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background" />
+
+    <ImageView
+        android:id="@+id/imageview_compass_rc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background"
+        app:srcCompat="@drawable/uxsdk_compass_rc"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_compass_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background"
+        app:srcCompat="@drawable/uxsdk_ic_compass_home"
+        tools:ignore="ContentDescription" />
+
+
+    <ImageView
+        android:id="@+id/imageview_gimbal_heading"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintDimensionRatio="37:45"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background"
+        app:srcCompat="@drawable/uxsdk_ic_compass_gimbal_yaw"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_compass_aircraft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintRight_toRightOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background"
+        app:srcCompat="@drawable/uxsdk_ic_compass_aircraft"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_north"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_compass_background"
+        app:layout_constraintLeft_toLeftOf="@id/imageview_compass_background"
+        app:layout_constraintTop_toTopOf="@id/imageview_compass_background"
+        app:srcCompat="@drawable/uxsdk_ic_compass_north"
+        tools:ignore="ContentDescription" />
+
+</merge>

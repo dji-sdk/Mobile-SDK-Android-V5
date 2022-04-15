@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+  <path
+      android:pathData="M4.3866,10L4.3866,18.5095L11.7507,18.5095L11.7507,10L15.136,10L15.136,30L11.7507,30L11.7507,21.6663L4.3866,21.6663L4.3866,30L1,30L1,10L4.3866,10ZM24.8554,10C27.5363,10 29.3398,10.948 30.2645,12.844C30.6809,13.7082 30.9202,14.7884 31,16.0605L31,16.0605L31,23.9379C30.9202,25.2116 30.6809,26.2902 30.2645,27.1544C29.3398,29.052 27.5363,29.9984 24.8554,29.9984L24.8554,29.9984L17.5832,29.9984L17.5832,10ZM24.5715,13.1294L20.9577,13.1294L20.9577,26.869L24.5715,26.869C25.7003,26.869 26.498,26.5981 26.9631,26.0564C27.4281,25.5147 27.662,24.6796 27.662,23.5494L27.662,23.5494L27.662,16.449C27.662,15.3204 27.4281,14.4837 26.9631,13.942C26.498,13.4002 25.7003,13.1294 24.5715,13.1294L24.5715,13.1294Z"
+      android:strokeWidth="1"
+      android:fillColor="#FEFEFE"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>

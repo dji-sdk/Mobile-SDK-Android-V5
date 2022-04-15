@@ -29,6 +29,9 @@
     <string name="item_diagnostic_title">诊断管理</string>
     <string name="item_diagnostic_description">演示如何使用诊断相关功能</string>
 
+    <string name="item_live_stream_title">直播管理</string>
+    <string name="item_live_stream_description">演示如何使用直播相关功能</string>
+
     <string name="item_flight_record_title">飞行记录</string>
     <string name="item_flight_record_description">演示如何使用飞行记录相关功能</string>
 
@@ -95,7 +98,7 @@
     <string name="is_debug">Is Debug: %1$s</string>
     <string name="registration_status">注册状态：%1$s</string>
     <string name="package_product_category">包产品类型: %1$s</string>
-    <string name="remote_controller">仅遥控连接</string>
+    <string name="remote_controller">遥控</string>
     <string name="unregistered">未注册</string>
     <string name="registered">已注册</string>
     <string name="logs">日志</string>
@@ -145,7 +148,7 @@
     <string name="btn_get_station_position">获取基站坐标 </string>
     <string name="btn_reset_station_position">重置基站坐标</string>
     <string name="btn_reset_station_password">重置基站密码</string>
-    <string name="btn_set_station_name">设置基站名: </string>
+    <string name="btn_set_station_name">设置基站名</string>
     <string name="tv_station_name">基站名称：</string>
     <string name="tv_station_id">基站ID：</string>
     <string name="tv_station_signal_level">基站信号强度：</string>
@@ -173,17 +176,18 @@
     <string name="tv_rtk_location">RTK模块的定位策略：</string>
     <string name="tv_rtk_station_position">地面端基站的位置: </string>
     <string name="tv_rtk_mobile_position">RTK模块计算出的无人机位置: </string>
+    <string name="tv_rtk_position_std_distance">地面端基站的位置和RTK模块计算出的无人机位置的距离：</string>
     <string name="tv_rtk_std_position">RTK模块计算出的无人机位置的标准差: </string>
     <string name="tv_rtk_head">RTK模块计算出的无人机朝向数据：</string>
     <string name="tv_rtk_real_head">无人机经过飞控融合算法计算后的朝向数据: </string>
     <string name="tv_rtk_real_location">无人机经过飞控融合算法计算后的位置数据: </string>
     <string name="tv_rtk_systemState_info_hint">5.RTKSystemState信息展示: </string>
     <string name="tv_rtk_connect">飞控与机身RTK连接状态: </string>
-    <string name="tv_rtk_healthy">飞控与机身RTK连接状态: </string>
+    <string name="tv_rtk_healthy">飞行器的RTK模块的健康状态: </string>
     <string name="tv_rtk_error">RTK模块错误信息: </string>
     <string name="tv_rtk_antenna_1">无人机RTK模块的天线1搜索到的卫星数: </string>
     <string name="tv_rtk_antenna_2">无人机RTK模块的天线2搜索到的卫星数: </string>
-    <string name="tv_rtk_station">D-RTK2地面基站搜索到的卫星数: </string>
+    <string name="tv_rtk_station">RTK搜索到的卫星数: </string>
 
     <string name="btn_mission_uploadkmz">上传KMZ文件</string>
     <string name="btn_mission_start">开始任务</string>
@@ -237,5 +241,40 @@
     <string name="key_search">搜索</string>
     <string name="commonlyused_key">常用Key</string>
     <string name="key_value_set">设置 </string>
+    <string name="index_tips">index:表示负载的位置一般为0 \n subType:表示镜头 0 = zoom ，1 = wide ， 2 = ir \n subIndex:目前只有电池箱用到表示下一级小配件位置</string>
+
+    <!-- Live Stream -->
+    <string name="btn_set_live_stream_config">设置直播配置</string>
+    <string name="btn_get_live_stream_config">获取直播配置</string>
+    <string name="btn_start_live_stream">开始直播</string>
+    <string name="btn_stop_live_stream">关闭直播</string>
+    <string name="btn_set_live_stream_channel_type">设置直播通道类型</string>
+    <string name="btn_get_live_stream_channel_type">获取直播通道类型</string>
+    <string name="btn_set_live_stream_quality">设置直播画质</string>
+    <string name="btn_get_live_stream_quality">获取直播画质</string>
+    <string name="btn_set_live_stream_bit_rate_mode">设置直播比特率模式</string>
+    <string name="btn_get_live_stream_bit_rate_mode">获取直播比特率模式</string>
+    <string name="btn_set_live_stream_bit_rate">设置直播比特率</string>
+    <string name="btn_get_live_stream_bit_rate">获取直播比特率</string>
+    <string name="btn_enable_audio">开启声音</string>
+    <string name="btn_disable_audio">关闭声音</string>
+    <string name="ad_select_live_stream_type">选择直播类型</string>
+    <string name="ad_select_live_stream_channel_type">选择直播通道类型</string>
+    <string name="ad_select_live_stream_bit_rate_mode">选择直播比特率模式</string>
+    <string name="ad_select_live_stream_quality">选择直播质量</string>
+    <string name="ad_set_live_stream_bit_rate">设置直播比特率</string>
+
+    <string name="ad_set_live_stream_rtmp_config">RTMP配置</string>
+    <string name="ad_set_live_stream_rtsp_config">RTSP配置</string>
+    <string name="ad_set_live_stream_gb28181_config">GB28181配置</string>
+    <string name="ad_set_live_stream_agora_config">Agora配置</string>
+
+    <string name="ad_confirm">确认</string>
+    <string name="ad_cancel">取消</string>
+
+    <string name="msg_start_live_stream_success">开启直播成功！</string>
+    <string name="msg_start_live_stream_failed">开启直播失败: %1$s</string>
+    <string name="msg_stop_live_stream_success">停止直播成功!</string>
+    <string name="msg_stop_live_stream_failed">停止直播失败: %1$s</string>
 
 </resources>

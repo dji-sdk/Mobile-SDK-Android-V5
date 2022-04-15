@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <string name="uxsdk_widget_default_ratio" translatable="false">W,1:1</string>
+    <string name="uxsdk_widget_battery_ratio" translatable="false">W,25:11</string>
+    <string name="uxsdk_widget_remote_control_signal_ratio" translatable="false">W,19:11</string>
+    <string name="uxsdk_widget_video_signal_ratio" translatable="false">W,19:11</string>
+    <string name="uxsdk_widget_air_sense_ratio" translatable="false">W,37:32</string>
+    <string name="uxsdk_widget_gps_signal_ratio" translatable="false">W,21:11</string>
+    <string name="uxsdk_widget_compass_ratio" translatable="false">W,1:1</string>
+    <string name="uxsdk_widget_base_dashboard_distance_ratio" translatable="false">W,81:16</string>
+    <string name="uxsdk_widget_dashboard_ratio" translatable="false">W,476:91</string>
+    <string name="uxsdk_widget_flight_mode_ratio" translatable="false">W,52:11</string>
+    <string name="uxsdk_widget_fpv_ratio" translatable="false">W,16:9</string>
+    <string name="uxsdk_widget_radar_ratio" translatable="false">W,17:8</string>
+    <string name="uxsdk_widget_user_account_login_ratio" translatable="false">W,4:1</string>
+    <string name="uxsdk_widget_remaining_flight_time_ratio" translatable="false">W,400:3</string>
+    <string name="uxsdk_icon_single_battery_ratio" translatable="false">W,1:1</string>
+    <string name="uxsdk_icon_dual_battery_ratio" translatable="false">W,23:16</string>
+    <string name="uxsdk_icon_flight_mode_ratio" translatable="false">W,1:1</string>
+    <string name="uxsdk_widget_auto_exposure_lock_ratio" translatable="false">W,10:9</string>
+    <string name="uxsdk_widget_camera_controls_ratio" translatable="false">W,1:4</string>
+
+    <string name="uxsdk_widget_rtk_enabled_ratio" translatable="false">W,49:10</string>
+    <string name="uxsdk_widget_rtk_ratio" translatable="false">W,10:7</string>
+    <string name="uxsdk_widget_rtk_satellite_status_ratio" translatable="false">W,1:1</string>
+
+    <string name="uxsdk_widget_map_ratio" translatable="false">W,4:3</string>
+    <string name="uxsdk_widget_simulator_control_ratio" translatable="false">1:3</string>
+
+    <string name="uxsdk_widget_base_camera_info_ratio" translatable="false">2:1</string>
+    <string name="uxsdk_widget_camera_config_ssd_ratio" translatable="false">W,5:1</string>
+</resources>

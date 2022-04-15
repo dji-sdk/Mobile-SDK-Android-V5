@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="27dp"
+    android:height="24dp"
+    android:viewportWidth="27"
+    android:viewportHeight="24">
+
+    <group>
+        <group
+            android:translateX="-3.000000"
+            android:translateY="-4.000000">
+            <path
+                android:fillColor="#000000"
+                android:strokeWidth="1"
+                android:pathData="M15.3983785,23.5 C15.5713365,24.0262143 15.7974103,24.5283284 16.0702576,25 L4.59036145,25 C3.71306024,25 3,24.2377818 3,23.3 L3,12.8887381 L2.9394748,12.8301138 L3,12.767626 L3,9.7 C3,8.76283636 3.71306024,8 4.59036145,8 L7.61788423,8 L7.67650846,7.9394748 L7.73899628,8 L25.4096386,8 C26.2863614,8 27,8.76283636 27,9.7 L27,14.0702576 C26.5283284,13.7974103 26.0262143,13.5713365 25.5,13.3983785 L25.5,9.7 C25.5,9.56973845 25.4347592,9.5 25.4096386,9.5 L21.9299713,9.5 L9.06005446,23.5 L15.3983785,23.5 Z M7.02255123,23.5 L19.8924681,9.5 L15.0638443,9.5 L4.5,21.3472508 L4.5,23.3 C4.5,23.4308797 4.56466247,23.5 4.59036145,23.5 L7.02255123,23.5 Z M4.5,19.0933837 L13.0541374,9.5 L8.25326911,9.5 L4.5,13.3749745 L4.5,19.0933837 Z M4.5,11.2189863 L6.16499629,9.5 L4.59036145,9.5 C4.56495218,9.5 4.5,9.56944737 4.5,9.7 L4.5,11.2189863 Z M4.92,6 L25.08,6 L25.08,7 L4.92,7 L4.92,6 Z M6.84,4 L23.16,4 L23.16,5 L6.84,5 L6.84,4 Z M23,28 C19.1340068,28 16,24.8659932 16,21 C16,17.1340068 19.1340068,14 23,14 C26.8659932,14 30,17.1340068 30,21 C30,24.8659932 26.8659932,28 23,28 Z M26.3256836,17.1064453 L26.3256836,16.046875 L19.722168,16.046875 L19.722168,17.1064453 L24.9995117,17.1064453 C23.9513294,18.3961653 23.1503934,19.6437114 22.5966797,20.8491211 C22.042966,22.0545308 21.7661133,23.4091722 21.7661133,24.9130859 L21.7661133,26 L23.112793,26 L23.112793,24.9130859 C23.112793,23.4912038 23.3338194,22.2083391 23.7758789,21.0644531 C24.2179384,19.9205672 25.0678648,18.6012445 26.3256836,17.1064453 Z" />
+        </group>
+    </group>
+</vector>

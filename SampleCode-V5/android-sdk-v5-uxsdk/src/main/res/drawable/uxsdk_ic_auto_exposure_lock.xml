@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="9dp"
+    android:height="11dp"
+    android:viewportWidth="9"
+    android:viewportHeight="11">
+  <path
+      android:pathData="M7.4859,4.6494C7.9212,4.6494 8.2739,4.9404 8.2739,5.2993L8.2739,10.0596C8.2739,10.4185 7.9212,10.7087 7.4859,10.7087L1.7114,10.7087C1.2766,10.7087 0.9239,10.4185 0.9239,10.0596L0.9239,5.2993C0.9239,4.9404 1.2766,4.6494 1.7114,4.6494L7.4859,4.6494ZM2.6123,4.0408L1.7108,4.0408L1.7108,2.7729C1.7108,1.2441 3.0066,0 4.5989,0C6.1913,0 7.487,1.2441 7.487,2.7729L7.487,4.0408L6.585,4.0408L6.585,2.7729C6.585,1.7214 5.6942,0.8662 4.5989,0.8662C3.5037,0.8662 2.6123,1.7214 2.6123,2.7729L2.6123,4.0408Z"
+      android:strokeWidth="1"
+      android:fillColor="#FFFFFF"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>

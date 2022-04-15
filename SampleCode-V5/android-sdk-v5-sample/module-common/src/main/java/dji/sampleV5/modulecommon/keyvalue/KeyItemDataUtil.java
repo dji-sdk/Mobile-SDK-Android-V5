@@ -40,7 +40,7 @@ import dji.v5.utils.common.LogUtils;
  */
 public class KeyItemDataUtil {
     private static final String TAG = KeyItemDataUtil.class.getSimpleName();
-    private static final String KEY_RREFIX = "key";
+    private static final String KEY_RREFIX = "Key";
 
     private KeyItemDataUtil(){
         //dosomething
@@ -202,6 +202,7 @@ public class KeyItemDataUtil {
 
         Class<?> tdClazz;
         Field field = null;
+        boolean isDjiValue = false;
         try {
             if (keyInfo.getIdentifier().isEmpty()) {
                 item.setName(keyName.contains(KEY_RREFIX) ? keyName.substring(KEY_RREFIX.length()) : keyName);
@@ -209,6 +210,9 @@ public class KeyItemDataUtil {
             IDJIValueConverter<?, ?> clazzConvert = keyInfo.getTypeConverter();
             if (clazzConvert instanceof SingleValueConverter) {
                 field = clazzConvert.getClass().getDeclaredField("dClass");
+                Field tmp = clazzConvert.getClass().getDeclaredField("isDJIValue");
+                tmp.setAccessible(true);
+                isDjiValue = tmp.getBoolean(clazzConvert);
             }
              else if (clazzConvert instanceof DJIValueConverter) {
                 field  = clazzConvert.getClass().getDeclaredField("tClass");
@@ -219,6 +223,7 @@ public class KeyItemDataUtil {
                  tdClazz = (Class<?>) field.get(clazzConvert);
                  item.param = tdClazz.newInstance();
                  item.result = tdClazz.newInstance();
+                 item.setSingleDJIValue(isDjiValue);
                  item.initGenericInstance();
              }
         } catch (Exception e) {

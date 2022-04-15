@@ -48,6 +48,8 @@ class DiagnosticFragment : DJIFragment() {
             builder.append("    ").append("code:").append(it.informationCode()).append("\n")
             builder.append("    ").append("warningLevel:").append(it.warningLevel()).append("\n")
             builder.append("    ").append("title:").append(it.title()).append("\n")
+            builder.append("    ").append("componentId:").append(it.componentId()).append("\n")
+            builder.append("    ").append("sensorIndex:").append(it.sensorIndex()).append("\n")
             builder.append("    ").append("description:").append(it.description()).append("\n")
             builder.append("*******************************").append("\n")
         }

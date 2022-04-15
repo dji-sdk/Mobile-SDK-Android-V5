@@ -1,5 +1,7 @@
 package dji.sampleV5.moduleaircraft.data
 
+import dji.sdk.keyvalue.value.common.LocationCoordinate2D
+
 /**
  * @author feel.feng
  * @time 2022/03/19 6:30 下午
@@ -11,4 +13,5 @@ data class FlightControlState(
     , val head : Float = 0.0f
     , val height : Double = 0.0
     , val distance: Double= 0.0
+    , val homeLocation: LocationCoordinate2D
 )

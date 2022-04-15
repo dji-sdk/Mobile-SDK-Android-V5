@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="17dp"
+    android:viewportHeight="17"
+    android:viewportWidth="24">
+
+    <group
+        android:translateX="-3.000000"
+        android:translateY="-7.000000">
+        <path
+            android:fillColor="#000000"
+            android:pathData="M4.5,9.00010618 L4.5,21.9998938 C4.5,22.2781985 4.72275516,22.5 5.00494659,22.5 L24.9950534,22.5 C25.275072,22.5 25.5,22.2755672 25.5,21.9998938 L25.5,9.00010618 C25.5,8.72180145 25.2772448,8.5 24.9950534,8.5 L5.00494659,8.5 C4.72492798,8.5 4.5,8.72443281 4.5,9.00010618 Z M3,9.00010618 C3,7.89547804 3.89702623,7 5.00494659,7 L24.9950534,7 C26.1023548,7 27,7.89005841 27,9.00010618 L27,21.9998938 C27,23.104522 26.1029738,24 24.9950534,24 L5.00494659,24 C3.89764516,24 3,23.1099416 3,21.9998938 L3,9.00010618 Z"
+            android:strokeWidth="1" />
+    </group>
+
+</vector>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="211dp"
+    android:layout_height="60dp"
+    tools:parentTag="dji.v5.ux.cameracore.widget.cameracontrols.exposuresettings.ISOAndEISettingWidget">
+
+    <TextView
+        android:id="@+id/textview_iso_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintVertical_bias="0"
+        android:textColor = "@color/uxsdk_white"
+        android:textSize="@dimen/uxsdk_text_size_small"
+        android:text="@string/uxsdk_camera_exposure_iso_title" />
+
+    <FrameLayout
+        android:id="@+id/seek_bar_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_iso_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/uxsdk_black_30_percent">
+
+        <dji.v5.ux.core.ui.SeekBarView
+            android:id="@+id/seekbar_ei"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <LinearLayout
+            android:id="@+id/seekbar_iso_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/button_iso_auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uxsdk_selector_cycle_button_background"
+                android:src="@drawable/uxsdk_auto_iso"
+                android:adjustViewBounds="true"
+                android:layout_weight="0"
+                android:layout_gravity="center"
+                android:layout_margin="5dp" />
+
+            <dji.v5.ux.core.ui.SeekBarView
+                android:id="@+id/seekbar_iso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+    </FrameLayout>
+
+</merge>

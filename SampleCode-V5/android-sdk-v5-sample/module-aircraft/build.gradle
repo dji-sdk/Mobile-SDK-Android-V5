@@ -28,6 +28,7 @@ dependencies {
 
     //drone 依赖rtk的aar
     implementation deps.networkRtkHelper
+    api project(':uxsdk')
 
     compileOnly files("../../${project.AIRCRAFT_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
 }

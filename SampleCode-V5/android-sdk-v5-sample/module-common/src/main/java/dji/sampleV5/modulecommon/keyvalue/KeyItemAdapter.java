@@ -1,6 +1,7 @@
 package dji.sampleV5.modulecommon.keyvalue;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +61,18 @@ public class KeyItemAdapter  extends RecyclerView.Adapter<KeyItemAdapter.ComView
         }
         TextView textView = viewHolder.getView(R.id.tv_item_name);
         textView.setText(keyItem.getName());
+        if (keyItem.isItemSelected()) {
+            textView.setBackgroundColor(Color.GRAY);
+        } else {
+            textView.setBackgroundColor(Color.TRANSPARENT);
+        }
         textView.setOnClickListener(v -> {
             if (callback != null) {
                 callback.actionChange(keyItem);
             }
         });
     }
+
 
 
     @Override

@@ -1,6 +1,11 @@
 package dji.sampleV5.aircraft
 
 import dji.sampleV5.modulecommon.DJIMainActivity
+import dji.v5.ux.core.communication.DefaultGlobalPreferences
+import dji.v5.ux.core.communication.GlobalPreferencesManager
+import dji.v5.ux.core.util.UxSharedPreferencesUtil
+import dji.v5.ux.sample.showcase.defaultlayout.DefaultLayoutActivity
+import dji.v5.ux.sample.showcase.widgetlist.WidgetsActivity
 
 /**
  * Class Description
@@ -13,7 +18,10 @@ import dji.sampleV5.modulecommon.DJIMainActivity
 class DJIAircraftMainActivity : DJIMainActivity() {
 
     override fun prepareUxActivity() {
-
+        UxSharedPreferencesUtil.initialize(this)
+        GlobalPreferencesManager.initialize(DefaultGlobalPreferences(this))
+        enableDefaultLayout(DefaultLayoutActivity::class.java)
+        enableWidgetList(WidgetsActivity::class.java)
     }
 
     override fun prepareTestingToolsActivity() {

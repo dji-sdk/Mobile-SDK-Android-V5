@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="dji.ux.beta.accessory.widget.rtk.RTKSatelliteStatusWidget">
+
+    <TextView
+        android:id="@+id/textview_rtk_status_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/uxsdk_rtk_status_desc"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="@dimen/uxsdk_text_size_normal"
+        app:layout_constraintBottom_toBottomOf="@id/textview_rtk_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="D-RTK 2 Mobile Station Status:" />
+
+    <TextView
+        android:id="@+id/textview_rtk_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textview_rtk_status_title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="RTK Connected. RTK data not in use"
+        tools:textColor="@color/uxsdk_rtk_status_connected_not_in_use" />
+
+    <ImageView
+        android:id="@+id/imageview_table_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/uxsdk_rtk_status_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_rtk_status"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_aircraft_coordinates_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_aircraft_location"
+        app:layout_constraintStart_toEndOf="@+id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/imageview_table_background" />
+
+    <View
+        android:id="@+id/rtk_base_station_separator"
+        style="@style/UXSDKRTKSatelliteStatusItemColumnDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textview_gps_title"
+        app:layout_constraintTop_toTopOf="@id/imageview_table_background" />
+
+    <TextView
+        android:id="@+id/textview_base_station_coordinates_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:layout_width="0dp"
+        android:text="@string/uxsdk_rtk_panel_base_station_location"
+        app:layout_constraintBottom_toBottomOf="@id/textview_aircraft_coordinates_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_aircraft_coordinates_title"
+        tools:text="D-RTK 2 Mobile Station" />
+
+    <View
+        android:id="@+id/rtk_orientation_positioning_separator"
+        style="@style/UXSDKRTKSatelliteStatusItemRowDivider"
+        app:layout_constraintTop_toBottomOf="@id/textview_aircraft_coordinates_title" />
+
+    <View
+        android:id="@+id/rtk_aircraft_separator"
+        style="@style/UXSDKRTKSatelliteStatusItemColumnDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textview_gps_title"
+        app:layout_constraintTop_toTopOf="@id/imageview_table_background" />
+
+    <TextView
+        android:id="@+id/textview_orientation_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_orientation_status_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rtk_orientation_positioning_separator" />
+
+    <TextView
+        android:id="@+id/textview_positioning_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_positioning_status_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_orientation_title" />
+
+    <TextView
+        android:id="@+id/textview_orientation"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_orientation_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_orientation_title"
+        tools:text="N/A" />
+
+    <ImageView
+        android:id="@+id/imageview_orientation"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_orientation_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_orientation_title"
+        app:srcCompat="@drawable/uxsdk_ic_rtk_status"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_positioning"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_positioning_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_positioning_title"
+        tools:text="N/A" />
+
+    <View
+        android:id="@+id/rtk_location_separator"
+        style="@style/UXSDKRTKSatelliteStatusItemRowDivider"
+        app:layout_constraintTop_toBottomOf="@id/textview_positioning_title" />
+
+    <TextView
+        android:id="@+id/textview_latitude_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_lat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rtk_location_separator" />
+
+    <TextView
+        android:id="@+id/textview_longitude_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_lng"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_latitude_title" />
+
+    <TextView
+        android:id="@+id/textview_altitude_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_longitude_title" />
+
+    <TextView
+        android:id="@+id/textview_aircraft_latitude"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_latitude_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_latitude_title"
+        tools:text="34.421715" />
+
+    <TextView
+        android:id="@+id/textview_aircraft_longitude"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_longitude_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_longitude_title"
+        tools:text="-122.137059" />
+
+    <TextView
+        android:id="@+id/textview_aircraft_altitude"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_altitude_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_altitude_title"
+        tools:text="13.469095" />
+
+    <TextView
+        android:id="@+id/textview_base_station_latitude"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_latitude_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_latitude_title"
+        tools:text="37.421659" />
+
+    <TextView
+        android:id="@+id/textview_base_station_longitude"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_longitude_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_longitude_title"
+        tools:text="-122.136960" />
+
+    <TextView
+        android:id="@+id/textview_base_station_altitude"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_altitude_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_altitude_title"
+        tools:text="0.603945" />
+
+    <TextView
+        android:id="@+id/textview_course_angle_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_antenna_angle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_altitude_title" />
+
+    <TextView
+        android:id="@+id/textview_course_angle_value"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_course_angle_title"
+        app:layout_constraintStart_toStartOf="@id/textview_aircraft_coordinates_title"
+        app:layout_constraintTop_toTopOf="@id/textview_course_angle_title"
+        tools:text="267" />
+
+    <View
+        android:id="@+id/rtk_satellite_count_separator"
+        style="@style/UXSDKRTKSatelliteStatusItemRowDivider"
+        app:layout_constraintTop_toBottomOf="@id/textview_course_angle_title" />
+
+    <TextView
+        android:id="@+id/textview_ant1_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:layout_width="0dp"
+        android:text="@string/uxsdk_rtk_panel_antenna_1"
+        app:layout_constraintEnd_toStartOf="@id/textview_ant2_title"
+        app:layout_constraintStart_toEndOf="@+id/rtk_aircraft_separator"
+        app:layout_constraintTop_toBottomOf="@+id/rtk_satellite_count_separator" />
+
+    <View
+        android:id="@+id/rtk_antenna_separator"
+        style="@style/UXSDKRTKSatelliteStatusItemColumnDivider"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/textview_galileo_title"
+        app:layout_constraintEnd_toStartOf="@id/rtk_base_station_separator"
+        app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_ant1_title" />
+
+    <TextView
+        android:id="@+id/textview_ant2_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:layout_width="0dp"
+        android:text="@string/uxsdk_rtk_panel_antenna_2"
+        app:layout_constraintEnd_toStartOf="@id/rtk_base_station_separator"
+        app:layout_constraintStart_toEndOf="@id/rtk_antenna_separator"
+        app:layout_constraintTop_toBottomOf="@id/rtk_satellite_count_separator" />
+
+    <TextView
+        android:id="@+id/textview_gps_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:layout_width="@dimen/uxsdk_setting_rtk_satellite_item_desc_width"
+        android:text="@string/uxsdk_rtk_panel_gps_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_ant1_title" />
+
+    <TextView
+        android:id="@+id/textview_gps_antenna_1"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_gps_title"
+        app:layout_constraintStart_toEndOf="@+id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_gps_title"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/textview_gps_antenna_2"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_gps_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_antenna_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_gps_title"
+        tools:text="11" />
+
+    <TextView
+        android:id="@+id/textview_gps_base_station"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_gps_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_gps_title"
+        tools:text="12" />
+
+    <TextView
+        android:id="@+id/textview_beidou_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_beidou_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_gps_title" />
+
+    <TextView
+        android:id="@+id/textview_beidou_antenna_1"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_beidou_title"
+        app:layout_constraintStart_toEndOf="@+id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_beidou_title"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/textview_beidou_antenna_2"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_beidou_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_antenna_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_beidou_title"
+        tools:text="11" />
+
+    <TextView
+        android:id="@+id/textview_beidou_base_station"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_beidou_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_beidou_title"
+        tools:text="12" />
+
+    <TextView
+        android:id="@+id/textview_glonass_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_glonass_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_beidou_title" />
+
+    <TextView
+        android:id="@+id/textview_glonass_antenna_1"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_glonass_title"
+        app:layout_constraintStart_toEndOf="@+id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_glonass_title"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/textview_glonass_antenna_2"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_glonass_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_antenna_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_glonass_title"
+        tools:text="11" />
+
+    <TextView
+        android:id="@+id/textview_glonass_base_station"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_glonass_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_glonass_title"
+        tools:text="12" />
+
+    <TextView
+        android:id="@+id/textview_galileo_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:text="@string/uxsdk_rtk_panel_galileo_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_glonass_title" />
+
+    <TextView
+        android:id="@+id/textview_galileo_antenna_1"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_galileo_title"
+        app:layout_constraintStart_toEndOf="@+id/rtk_aircraft_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_galileo_title"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/textview_galileo_antenna_2"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_galileo_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_antenna_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_galileo_title"
+        tools:text="11" />
+
+    <TextView
+        android:id="@+id/textview_galileo_base_station"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintBottom_toBottomOf="@id/textview_galileo_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_base_station_separator"
+        app:layout_constraintTop_toTopOf="@id/textview_galileo_title"
+        tools:text="12" />
+
+    <TextView
+        android:id="@+id/textview_standard_deviation_title"
+        style="@style/UXSDKSatelliteStatusItem"
+        android:layout_width="0dp"
+        android:text="@string/uxsdk_rtk_standard_deviation"
+        app:layout_constraintEnd_toEndOf="@id/textview_gps_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_galileo_title" />
+
+    <TextView
+        android:id="@+id/textview_standard_deviation"
+        style="@style/UXSDKSatelliteStatusItem"
+        app:layout_constraintStart_toEndOf="@+id/rtk_aircraft_separator"
+        app:layout_constraintTop_toBottomOf="@id/textview_galileo_antenna_1"
+        tools:text="0m\n0m\n0m" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_standard_deviation" />
+
+</merge>

@@ -1,11 +1,17 @@
 -keepattributes Exceptions,InnerClasses,*Annotation*,Signature,EnclosingMethod
 
+-dontshrink
 -dontoptimize
 -dontpreverify
+-dontnote
+-ignorewarnings
 
 -keepclassmembers enum * {
     public static <methods>;
 }
+
+# 避免混淆Annotation、内部类、泛型、匿名类
+-keepattributes *Annotation*,InnerClasses,Signature,EnclosingMethod
 
 -keepnames class * implements java.io.Serializable
 -keepclassmembers class * implements java.io.Serializable {
@@ -29,6 +35,7 @@
 -keep class net.sqlcipher.database.* { *; }
 -keep class dji.** { *; }
 -keep class com.dji.** { *; }
+-keep class djimrtc.** { *; }
 -keep class com.google.** { *; }
 -keep class org.bouncycastle.** { *; }
 -keep class org.** { *; }
@@ -68,6 +75,8 @@
 }
 -keep class kotlin.** { *; }
 -keep class androidx.** { *; }
+-keep class android.** { *; }
+-keep class com.android.** { *; }
 -keep class android.media.** { *; }
 -keep class okio.** { *; }
 -keep class com.lmax.disruptor.** {
@@ -108,3 +117,9 @@
 -keep class dji.sdk.utmiss.** { *; }
 -keep class utmisslib.** { *; }
 #<------------ utmiss config end------------>
+
+# 地图相关
+-keep class com.dji.mapkit.amap.provider.AMapProvider {*;}
+-keep class com.dji.mapkit.maplibre.provider.MapLibreProvider {*;}
+-keep class com.dji.mapkit.core.** {*;}
+-keep class com.autonavi.** {*;}

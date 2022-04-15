@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="11dp"
+    android:height="11dp"
+    android:viewportWidth="11"
+    android:viewportHeight="11">
+  <path
+      android:pathData="M10.5264,0.3285L10.6251,0.4156C11.0316,0.8222 11.0301,1.4827 10.6204,1.8925L6.9465,5.5651L10.6204,9.2389C10.998,9.6165 11.0313,10.2065 10.7122,10.617L10.6251,10.7157C10.2186,11.1222 9.558,11.1207 9.1483,10.711L5.4745,7.0371L1.8019,10.711C1.3927,11.1201 0.7344,11.125 0.3251,10.7157C-0.0815,10.3092 -0.08,9.6486 0.3298,9.2389L4.0025,5.5651L0.3298,1.8925C-0.0794,1.4833 -0.0843,0.825 0.3251,0.4156C0.7316,0.0091 1.3921,0.0106 1.8019,0.4204L5.4745,4.0931L9.1483,0.4204C9.5259,0.0427 10.1159,0.0095 10.5264,0.3285Z"
+      android:strokeWidth="1"
+      android:fillColor="#FFFFFF"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>

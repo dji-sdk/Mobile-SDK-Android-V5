@@ -12,11 +12,15 @@ import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.models.RTKCenterVM
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
+import dji.sdk.keyvalue.value.rtkmobilestation.RTKLocation
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKSatelliteInfo
 import dji.v5.manager.aircraft.rtk.RTKLocationInfo
 import dji.v5.manager.aircraft.rtk.RTKSystemState
+import dji.v5.utils.common.LogUtils
+import dji.v5.ux.core.util.GpsUtils
 
 import kotlinx.android.synthetic.main.frag_rtk_center_page.*
+
 
 /**
  * Description :
@@ -27,6 +31,7 @@ import kotlinx.android.synthetic.main.frag_rtk_center_page.*
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
 class RTKCenterFragment : DJIFragment() {
+    private val TAG = LogUtils.getTag("RTKCenterFragment")
     private val rtkCenterVM: RTKCenterVM by activityViewModels()
 
     override fun onCreateView(
@@ -56,39 +61,20 @@ class RTKCenterFragment : DJIFragment() {
             rtkCenterVM.getAircraftRTKModuleEnabled()
         }
         //选择RTK服务类型并展示相关界面，默认选择基站RTK
-        rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.BASE_STATION)
         rtk_source_radio_group.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.btn_rtk_source_base_rtk -> {
-                    //将打开对应入口的按钮进行显示或隐藏操作
-                    bt_open_rtk_station.visible()
-                    bt_open_network_rtk.gone()
-                    rl_rtk_info_show.visible()
-                    //显示基站RTK的信息
-                    tv_rtk_station_info.visible()
-                    tv_rtk_station.visible()
-                    rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.BASE_STATION)
+                    LogUtils.d(TAG, "点击切换到基站RTK")
+                    //这里只切换UI，真正的切源操作放到具体页面
+                    updateRTKUI(RTKReferenceStationSource.BASE_STATION)
                 }
                 R.id.btn_rtk_source_network -> {
-                    //将打开对应入口的按钮进行显示或隐藏操作
-                    bt_open_rtk_station.gone()
-                    bt_open_network_rtk.visible()
-                    rl_rtk_info_show.visible()
-                    //隐藏基站RTK的信息
-                    tv_rtk_station_info.gone()
-                    tv_rtk_station.gone()
-
-                    rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
+                    LogUtils.d(TAG, "点击切换到网络RTK")
+                    updateRTKUI(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
                 }
-                else -> {
-                    //将网络RTK入口和基站RTK入口关闭
-                    bt_open_rtk_station.gone()
-                    bt_open_network_rtk.gone()
-                    rl_rtk_info_show.gone()
-                    //隐藏基站RTK的信息
-                    tv_rtk_station_info.gone()
-                    tv_rtk_station.gone()
-                    ToastUtils.showToast("Qianxun RTK does not currently support")
+                R.id.btn_rtk_source_qx -> {
+                    LogUtils.d(TAG, "点击切换到千寻RTK")
+                    updateRTKUI(RTKReferenceStationSource.QX_NETWORK_SERVICE)
                 }
             }
         }
@@ -105,6 +91,7 @@ class RTKCenterFragment : DJIFragment() {
         rtkCenterVM.addRTKLocationInfoListener()
         rtkCenterVM.addRTKSystemStateListener()
         rtkCenterVM.getAircraftRTKModuleEnabled()
+        rtkCenterVM.getRTKReferenceStationSource()
 
     }
 
@@ -126,6 +113,35 @@ class RTKCenterFragment : DJIFragment() {
         rtkCenterVM.rtkSystemStateLD.observe(viewLifecycleOwner, {
             showRTKSystemStateInfo(it.data)
         })
+        rtkCenterVM.rtkSourceLD.observe(viewLifecycleOwner, {
+            it?.run {
+                updateRTKUI(data)
+            }
+        })
+    }
+
+    private fun updateRTKUI(rtkReferenceStationSource: RTKReferenceStationSource?) {
+        when (rtkReferenceStationSource) {
+            RTKReferenceStationSource.BASE_STATION -> {
+                bt_open_rtk_station.visible()
+                bt_open_network_rtk.gone()
+                rl_rtk_info_show.visible()
+                btn_rtk_source_base_rtk.isChecked = true
+            }
+            RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE -> {
+                bt_open_rtk_station.gone()
+                bt_open_network_rtk.visible()
+                rl_rtk_info_show.visible()
+                btn_rtk_source_network.isChecked = true
+            }
+            RTKReferenceStationSource.QX_NETWORK_SERVICE -> {
+                //待实现
+            }
+            else -> {
+                ToastUtils.showToast("Current rtk reference station source is:$rtkReferenceStationSource")
+            }
+        }
+
     }
 
     private fun showRTKSystemStateInfo(rtkSystemState: RTKSystemState?) {
@@ -155,9 +171,11 @@ class RTKCenterFragment : DJIFragment() {
             tv_trk_location_strategy.text = rtkLocation?.positioningSolution?.name
             tv_rtk_station_position_info.text = rtkLocation?.baseStationLocation?.toString()
             tv_rtk_mobile_position_info.text = rtkLocation?.mobileStationLocation?.toString()
+            tv_rtk_position_std_distance_info.text = getRTKLocationDistance(rtkLocation)?.toString()
             tv_rtk_std_position_info.text = "stdLongitude:${rtkLocation?.stdLongitude}" +
                     ",stdLatitude:${rtkLocation?.stdLatitude}" +
                     ",stdAltitude=${rtkLocation?.stdAltitude}"
+
 
             tv_rtk_head_info.text = rtkHeading?.toString()
             tv_rtk_real_head_info.text = realHeading?.toString()
@@ -220,10 +238,21 @@ class RTKCenterFragment : DJIFragment() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         rtkCenterVM.clearAllRTKLocationInfoListener()
         rtkCenterVM.clearAllRTKSystemStateListener()
+    }
+
+    private fun getRTKLocationDistance(rtklocation: RTKLocation?): Double? {
+        rtklocation?.run {
+            baseStationLocation?.let { baseStationLocation ->
+                mobileStationLocation?.let { mobileStationLocation ->
+                    return GpsUtils.distance3D(baseStationLocation, mobileStationLocation)
+                }
+            }
+        }
+        return null
     }
 
 }

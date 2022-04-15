@@ -1,0 +1,59 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+  <path
+      android:pathData="M12.5707,7.3959C12.5707,4.5423 10.2565,2.2296 7.4011,2.2296C4.5457,2.2296 2.2298,4.5423 2.2298,7.3959C2.2298,10.2495 4.5457,12.5622 7.4011,12.5622"
+      android:strokeWidth="2"
+      android:fillColor="#00000000"
+      android:strokeColor="#FEFEFE"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M12.5707,23.9281C12.5707,26.7816 10.2565,29.0944 7.4011,29.0944C4.5457,29.0944 2.2298,26.7816 2.2298,23.9281C2.2298,21.0745 4.5457,18.7618 7.4011,18.7618"
+      android:strokeWidth="2"
+      android:fillColor="#00000000"
+      android:strokeColor="#FEFEFE"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M18.7753,23.9281C18.7753,26.7816 21.0894,29.0944 23.9449,29.0944C26.8003,29.0944 29.1162,26.7816 29.1162,23.9281C29.1162,21.0745 26.8003,18.7618 23.9449,18.7618"
+      android:strokeWidth="2"
+      android:fillColor="#00000000"
+      android:strokeColor="#FEFEFE"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M18.7753,7.3959C18.7753,4.5423 21.0894,2.2296 23.9449,2.2296C26.8003,2.2296 29.1162,4.5423 29.1162,7.3959C29.1162,10.2495 26.8003,12.5622 23.9449,12.5622"
+      android:strokeWidth="2"
+      android:fillColor="#00000000"
+      android:strokeColor="#FEFEFE"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M24.2266,22.7593C23.9175,22.6045 23.6938,22.4334 23.4225,22.1758C22.3569,21.1702 22.3437,20.9225 21.704,20.1434C20.599,18.7922 19.6139,17.3709 19.6073,16.0067C19.6008,14.6409 20.3687,13.2489 21.5643,11.7201C22.4408,10.6004 23.1627,9.5866 23.1627,9.5866C23.3238,9.4187 23.6626,8.8222 24.3204,8.5304L24.3154,8.5288C24.7085,8.3479 24.9798,7.9551 24.9798,7.4987C24.9798,6.8712 24.4667,6.3627 23.8336,6.3627C23.2235,6.3627 22.7236,6.8369 22.6907,7.4335C22.5953,7.7529 22.1628,8.3185 21.9984,8.4636C21.9984,8.4636 20.6335,9.5116 19.8277,10.1733C17.9908,11.681 14.6164,12.0787 11.9359,10.3184C11.5807,10.0837 10.183,9.034 10.183,9.034C10.183,9.034 8.8756,7.9306 8.6388,7.2949C8.5418,6.7652 8.0748,6.3627 7.5123,6.3627C6.8792,6.3627 6.3662,6.8712 6.3662,7.4987C6.3662,7.9241 6.603,8.2957 6.9532,8.4897L6.9483,8.4929C7.542,8.7912 8.157,9.3991 8.7786,10.1733C9.4035,10.9508 10.0251,11.7445 10.3162,12.1765C11.1367,13.3973 11.9359,14.4322 11.9359,15.8616C11.9359,16.8575 11.3308,18.0636 10.183,19.6691C9.8656,20.114 9.0976,21.1523 8.4546,21.8564C7.8363,22.5312 7.9152,22.3877 7.2213,22.7284C6.7296,22.8555 6.3662,23.2988 6.3662,23.8253C6.3662,24.4528 6.8792,24.9613 7.5123,24.9613C7.9547,24.9613 8.3395,24.7119 8.5303,24.3452L8.5401,24.3566C8.5401,24.3566 9.0318,23.5026 9.8689,22.8767C10.7042,22.2508 11.3439,21.7684 11.6778,21.5369C13.0739,20.5655 14.3615,19.7408 15.7264,19.7408C17.0913,19.7408 18.9068,20.7334 20.5726,22.0634C21.2074,22.5686 21.7682,22.9777 21.9984,23.2124C22.1694,23.3559 22.4983,23.7161 22.7072,24.0355C22.8075,24.562 23.2729,24.9613 23.8336,24.9613C24.4667,24.9613 24.9798,24.4528 24.9798,23.8253C24.9798,23.3363 24.6657,22.9191 24.2266,22.7593"
+      android:strokeWidth="1"
+      android:fillColor="#FEFEFE"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <gradient
+        android:startColor="#e8e9ed"
+        android:endColor="#a3a2a3"
+        android:angle="-90"
+        />
+    <corners android:radius="@dimen/uxsdk_camera_exposure_mode_selector_radius" >
+    </corners>
+
+</shape>

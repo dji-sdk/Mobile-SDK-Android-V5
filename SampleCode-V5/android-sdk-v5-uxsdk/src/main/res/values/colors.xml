@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <color name="uxsdk_transparent">#00000000</color>
+    <color name="uxsdk_background">#33ffffff</color>
+
+    <color name="uxsdk_black">#000000</color>
+    <color name="uxsdk_black_80_percent">#CC000000</color>
+    <color name="uxsdk_black_70_percent">#b2000000</color>
+    <color name="uxsdk_black_60_percent">#99000000</color>
+    <color name="uxsdk_black_50_percent">#7F000000</color>
+    <color name="uxsdk_black_47_percent">#77000000</color>
+    <color name="uxsdk_black_40_percent">#66000000</color>
+    <color name="uxsdk_black_30_percent">#4C000000</color>
+    <color name="uxsdk_black_20_percent">#32000000</color>
+    <color name="uxsdk_black_10_percent">#1A000000</color>
+
+    <color name="uxsdk_white">#FFFFFF</color>
+    <color name="uxsdk_white_85_percent">#D9FFFFFF</color>
+    <color name="uxsdk_white_80_percent">#CCFFFFFF</color>
+    <color name="uxsdk_white_75_percent">#B3FFFFFF</color>
+    <color name="uxsdk_white_70_percent">#B3FFFFFF</color>
+    <color name="uxsdk_white_60_percent">#99FFFFFF</color>
+    <color name="uxsdk_white_50_percent">#7FFFFFFF</color>
+    <color name="uxsdk_white_47_percent">#77FFFFFF</color>
+    <color name="uxsdk_white_40_percent">#66ffffff</color>
+    <color name="uxsdk_white_33_percent">#55FFFFFF</color>
+    <color name="uxsdk_white_30_percent">#4DFFFFFF</color>
+    <color name="uxsdk_white_20_percent">#33FFFFFF</color>
+    <color name="uxsdk_white_10_percent">#1AFFFFFF</color>
+    <color name="uxsdk_white_0_percent">#00FFFFFF</color>
+
+    <color name="uxsdk_gray_material_300">#E0E0E0</color>
+    <color name="uxsdk_gray_60">#9B9B9B</color>
+    <color name="uxsdk_gray_58">#959595</color>
+    <color name="uxsdk_gray_45">#727272</color>
+    <color name="uxsdk_gray_37">#5E5E5E</color>
+    <color name="uxsdk_gray_640">#5B5B5B</color>
+
+    <color name="uxsdk_light_gray_50">#F7F9FA</color>
+    <color name="uxsdk_light_gray_100">#F0F1F2</color>
+    <color name="uxsdk_light_gray_200">#D4D7D9</color>
+    <color name="uxsdk_light_gray_300">#BABDBF</color>
+    <color name="uxsdk_light_gray_400">#9FA3A6</color>
+    <color name="uxsdk_light_gray_500">#85898C</color>
+    <color name="uxsdk_light_gray_600">#6C7073</color>
+    <color name="uxsdk_light_gray_700">#535759</color>
+    <color name="uxsdk_light_gray_800">#474747</color>
+    <color name="uxsdk_light_gray_800_transparent">#00474747</color>
+    <color name="uxsdk_light_gray_900">#232526</color>
+
+    <color name="uxsdk_blue">#20A3F6</color>
+    <color name="uxsdk_blue_material_A400">#00B0FF</color>
+    <color name="uxsdk_blue_material_A400_25_percent">#3F00B0FF</color>
+    <color name="uxsdk_blue_material_A400_66_percent">#9900B0FF</color>
+    <color name="uxsdk_blue_highlight">#ff1fa3f6</color>
+
+    <color name="uxsdk_red">#ff0000</color>
+    <color name="uxsdk_red_material_700">#CB1A1A</color>
+    <color name="uxsdk_red_material_700_transparent">#00CB1A1A</color>
+    <color name="uxsdk_red_material_800">#C62828</color>
+    <color name="uxsdk_red_material_900_30_percent">#4CB71C1C</color>
+    <color name="uxsdk_red_material_A700">#FFD0021B</color>
+    <color name="uxsdk_red_material_A700_67_percent">#AAD0021B</color>
+    <color name="uxsdk_red_material_A700_22_percent">#55D0021B</color>
+    <color name="uxsdk_red_500">#E70102</color>
+
+    <color name="uxsdk_orange_material_800">#EF6E10</color>
+
+    <color name="uxsdk_red_gimbal_pitch_end">#F25466</color>
+
+    <color name="uxsdk_yellow">#FFC000</color>
+    <color name="uxsdk_yellow_transparent">#00FFC000</color>
+    <color name="uxsdk_yellow_500">#ffcc00</color>
+
+    <color name="uxsdk_green">#ff3fc14d</color>
+    <color name="uxsdk_green_material_400">#61BD17</color>
+    <color name="uxsdk_green_material_400_transparent">#0061BD17</color>
+    <color name="uxsdk_green_material_800">#FF0BE315</color>
+    <color name="uxsdk_green_material_800_67_percent">#AA0BE315</color>
+    <color name="uxsdk_green_material_800_22_percent">#550BE315</color>
+    <color name="uxsdk_green_500">#0AEE8B</color>
+
+    <color name="uxsdk_user_account_login_widget_background">#1FA3F6</color>
+    <color name="uxsdk_user_account_login_widget_pressed_background">#801FA3F6</color>
+    <color name="uxsdk_background_blue">#242d34</color>
+
+    <!--BatteryWidget-->
+    <color name="uxsdk_battery_healthy">@color/uxsdk_green</color>
+    <color name="uxsdk_battery_overheating">@color/uxsdk_yellow_500</color>
+    <color name="uxsdk_battery_danger">@color/uxsdk_red</color>
+
+    <!--ShootPhotoWidget-->
+    <color name="uxsdk_shoot_photo_pressed">@color/uxsdk_gray_640</color>
+    <color name="uxsdk_shoot_photo_normal">@color/uxsdk_white</color>
+    <color name="uxsdk_shoot_photo_hasselblad_ring">#EF6E10</color>
+
+    <color name="uxsdk_centerpoint_yellow">#fbc600</color>
+    <color name="uxsdk_centerpoint_red">#f14443</color>
+    <color name="uxsdk_centerpoint_blue">#3da2f8</color>
+    <color name="uxsdk_centerpoint_green">#58d65c</color>
+
+    <!-- System Status Widget-->
+    <color name="uxsdk_status_good">@color/uxsdk_green_500</color>
+    <color name="uxsdk_status_normal">@color/uxsdk_white</color>
+    <color name="uxsdk_status_warning">#ff9d00</color>
+    <color name="uxsdk_status_error">@color/uxsdk_red_500</color>
+    <color name="uxsdk_status_offline">@color/uxsdk_gray_60</color>
+    <color name="uxsdk_status_edit_text_color">#1fa3f6</color>
+
+    <!-- Slider Dialog-->
+    <color name="uxsdk_slider_text">#825100</color>
+    <color name="uxsdk_slider_filled">#0AEE8B</color>
+    <color name="uxsdk_slider_thumb_selected">#DBDDDC</color>
+
+    <!--FPV-->
+    <color name="uxsdk_fpv_text_background">#991c2831</color>
+
+    <color name="uxsdk_black_transparent">#b2000000</color>
+    <color name="uxsdk_gray">#ff5e5e5e</color>
+
+    <color name="uxsdk_colorPrimary">#242d34</color>
+    <color name="uxsdk_colorPrimaryDark">#000000</color>
+    <color name="uxsdk_colorAccent">#FF4081</color>
+    <color name="uxsdk_colorLightBackground">#FFFFFF</color>
+
+    <color name="uxsdk_gray_4">#444444</color>
+    <color name="uxsdk_dark_theme_background">#303030</color>
+    <color name="uxsdk_light_gray">#B3FFFFFF</color>
+    <color name="uxsdk_dark_gray">#80000000</color>
+
+    <color name="uxsdk_pfd_main_color">#99FFAA</color>
+    <color name="uxsdk_pfd_hsi_main_color">#CC99FFAA</color>
+    <color name="uxsdk_pfd_hsi_radar_main_color">#99009919</color>
+    <color name="uxsdk_pfd_barrier_color">#EE2B2A</color>
+    <color name="uxsdk_pfd_hsi_barrier_color">#CCEE7877</color>
+    <color name="uxsdk_pfd_hsi_radar_barrier_color">#99991C1B</color>
+    <color name="uxsdk_pfd_avoidance_color">#FFC003</color>
+    <color name="uxsdk_pfd_hsi_avoidance_color">#CCFFDF80</color>
+    <color name="uxsdk_pfd_hsi_radar_avoidance_color">#99997302</color>
+    <color name="uxsdk_pfd_hsi_perception_disabled_stroke_color">#4CFF0000</color>
+
+    <color name="uxsdk_gimbal_mark_1">#00CFFF</color>
+    <color name="uxsdk_gimbal_mark_2">#FFDB05</color>
+    <color name="uxsdk_gimbal_mark_3">#8274FF</color>
+
+    <!-- RTK -->
+    <color name="uxsdk_rtk_status_connected_in_use">#ff7ed321</color>
+    <color name="uxsdk_rtk_status_connected_not_in_use">#fff8e71c</color>
+    <color name="uxsdk_rtk_status_disconnected">@color/uxsdk_red_material_A700</color>
+
+    <!-- Map Widget-->
+    <color name="uxsdk_zone_altitude">#979797</color>
+    <color name="uxsdk_zone_restricted">#de4329</color>
+    <color name="uxsdk_zone_authorization">#1088f2</color>
+    <color name="uxsdk_zone_warning">#ffcc00</color>
+    <color name="uxsdk_zone_warning_enhanced">#ee8815</color>
+
+    <color name="uxsdk_unlocked_border">#37c4db</color>
+
+    <color name="uxsdk_custom_unlock_not_sent">#008000</color>
+    <color name="uxsdk_custom_unlock_sent">#00BE00</color>
+    <color name="uxsdk_custom_unlock_enabled">#00ff00</color>
+</resources>

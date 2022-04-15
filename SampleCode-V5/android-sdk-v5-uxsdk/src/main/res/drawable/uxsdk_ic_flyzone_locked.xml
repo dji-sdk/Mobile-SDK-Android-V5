@@ -1,0 +1,41 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <group
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        android:translateX="3"
+        android:translateY="3">
+        <path
+            android:fillColor="#000000"
+            android:fillType="evenOdd"
+            android:pathData="M16,21.9146L16,24.509C16,24.7802 16.2319,25 16.5,25C16.7761,25 17,24.7721 17,24.509L17,21.9146C17.5826,21.7087 18,21.1531 18,20.5C18,19.6716 17.3284,19 16.5,19C15.6716,19 15,19.6716 15,20.5C15,21.1531 15.4174,21.7087 16,21.9146L16,21.9146ZM9,14L9,10.4992C9,6.3567 12.3579,3 16.5,3C20.6337,3 24,6.3575 24,10.4992L24,14C25.6591,14.0047 27,15.3503 27,17.0095L27,26.9905C27,28.6634 25.6529,30 23.9912,30L9.0088,30C7.3456,30 6,28.6526 6,26.9905L6,17.0095C6,15.3396 7.3423,14.0047 9,14L9,14L9,14ZM12,14L12,10.5009C12,8.0092 14.0147,6 16.5,6C18.9802,6 21,8.0151 21,10.5009L21,14L12,14L12,14L12,14Z"
+            android:strokeWidth="1"
+            android:strokeColor="#00EEEEEE" />
+    </group>
+</vector>

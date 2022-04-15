@@ -23,6 +23,7 @@ import dji.sampleV5.modulecommon.models.KeyValueVM
 import dji.sampleV5.modulecommon.util.ToastUtils.showToast
 import dji.sampleV5.modulecommon.util.Util
 import dji.sdk.keyvalue.converter.EmptyValueConverter
+import dji.v5.utils.common.LogUtils
 
 import kotlinx.android.synthetic.main.fragment_key_list.*
 import kotlinx.android.synthetic.main.layout_key_operate.*
@@ -39,8 +40,8 @@ import java.util.*
  *
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
- class KeyValueFragment  : DJIFragment() , View.OnClickListener{
-
+class KeyValueFragment : DJIFragment(), View.OnClickListener {
+    private val TAG = LogUtils.getTag("KeyValueFragment")
     private val keyValueVM: KeyValueVM by activityViewModels()
 
     var currentChannelType: ChannelType? = ChannelType.CHANNEL_TYPE_CAMERA
@@ -134,6 +135,7 @@ import java.util.*
         setSPColor(sp_subindex)
         setSPColor(sp_subtype)
     }
+
     private fun initViewAndListener(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
         tv_operate_title.setOnClickListener {
@@ -148,9 +150,11 @@ import java.util.*
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //Do Something
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 //Do Something
             }
+
             override fun afterTextChanged(s: Editable) {
                 cameraParamsAdapter?.getFilter()?.filter(s.toString())
             }
@@ -186,6 +190,7 @@ import java.util.*
                 return
             }
             initKeyInfo(keyItem)
+            cameraParamsAdapter?.notifyDataSetChanged()
         }
     }
 
@@ -209,8 +214,7 @@ import java.util.*
         }
 
 
-
-    private  fun appendLogMessageRecord(appendStr: String): String? {
+    private fun appendLogMessageRecord(appendStr: String?): String {
         val curTime = SimpleDateFormat("HH:mm:ss").format(Date())
         logMessage.append(curTime)
             .append(":")
@@ -235,7 +239,7 @@ import java.util.*
         }
 
 
-    private  fun setSPColor(sp: Spinner) {
+    private fun setSPColor(sp: Spinner) {
         sp.viewTreeObserver.addOnGlobalLayoutListener {
             (sp.selectedView as TextView).setTextColor(
                 Color.WHITE
@@ -254,18 +258,27 @@ import java.util.*
     private fun initKeyInfo(keyItem: KeyItem<*, *>) {
         currentKeyItem = keyItem
         currentKeyItem!!.setKeyOperateCallBack(keyItemOperateCallBack)
-
         tv_name?.text = keyItem.name
         bt_add_command.setVisibility(if (selectMode) View.VISIBLE else View.GONE)
         processListenLogic()
         bt_gpscoord.setVisibility(View.GONE)
         tv_tip.setVisibility(View.GONE)
-        keyItem.count = keyItem.count + 1
+        keyItem.count = System.currentTimeMillis()
+        resetSelected()
         bt_set.setEnabled(currentKeyItem!!.canSet())
         bt_get.setEnabled(currentKeyItem!!.canGet())
         bt_listen.setEnabled(currentKeyItem!!.canListen())
         bt_action.setEnabled(currentKeyItem!!.canAction())
-        keyValuesharedPreferences?.edit()?.putInt(keyItem.toString(), keyItem.count)?.commit()
+        keyValuesharedPreferences?.edit()?.putLong(keyItem.toString(), keyItem.count)?.commit()
+        keyItem.isItemSelected = true
+    }
+
+    private fun resetSelected() {
+        for (item in data) {
+            if (item.isItemSelected) {
+                item.isItemSelected = false
+            }
+        }
     }
 
     /**
@@ -399,8 +412,9 @@ import java.util.*
 
         }
         for (item in currentKeyItemList) {
-            val count = keyValuesharedPreferences?.getInt(item.toString(), 0)
-            if (count != null && count != 0) {
+            item.isItemSelected = false;
+            val count = keyValuesharedPreferences?.getLong(item.toString(), 0L)
+            if (count != null && count != 0L) {
                 item.count = count
             }
         }
@@ -420,7 +434,7 @@ import java.util.*
         }
         setKeyInfo()
 
-        when(view?.id) {
+        when (view?.id) {
             R.id.bt_get -> {
                 get()
             }
@@ -449,8 +463,6 @@ import java.util.*
     }
 
 
-
-
     /**
      * key列表条件过滤
      */
@@ -468,7 +480,7 @@ import java.util.*
             })
     }
 
-    private  fun channelTypeFilterOperate() {
+    private fun channelTypeFilterOperate() {
         KeyValueDialogUtil.showChannelFilterListWindow(
             tv_operate_title,
             currentChannelList,
@@ -502,14 +514,14 @@ import java.util.*
                 currentKeyItem!!.setSubComponetIndex(subIndex)
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            LogUtils.e(TAG, e.message)
         }
     }
 
     /**
      * 获取操作
      */
-    private  fun get() {
+    private fun get() {
         if (!currentKeyItem?.canGet()!!) {
             showToast("not support get")
             return
@@ -517,7 +529,7 @@ import java.util.*
         currentKeyItem!!.doGet()
     }
 
-    private  fun unListenAll() {
+    private fun unListenAll() {
         release()
         processListenLogic()
     }
@@ -525,7 +537,7 @@ import java.util.*
     /**
      * 监听操作
      */
-    private  fun listen() {
+    private fun listen() {
         if (!currentKeyItem?.canListen()!!) {
             showToast("not support listen")
             return
@@ -547,7 +559,7 @@ import java.util.*
     /**
      * 设置操作
      */
-    private  fun set() {
+    private fun set() {
         if (!currentKeyItem?.canSet()!!) {
             showToast("not support set")
             return
@@ -587,7 +599,7 @@ import java.util.*
     /**
      * 动作操作
      */
-    private  fun action() {
+    private fun action() {
         if (!currentKeyItem?.canAction()!!) {
             showToast("not support action")
             return
@@ -629,7 +641,7 @@ import java.util.*
      *
      * @param list
      */
-    private  fun releaseKeyInfo(list: MutableList<KeyItem<*, *>>?) {
+    private fun releaseKeyInfo(list: MutableList<KeyItem<*, *>>?) {
         if (list == null) {
             return
         }

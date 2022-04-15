@@ -8,6 +8,8 @@ import dji.sampleV5.modulecommon.util.Util
 import dji.v5.utils.common.LogUtils
 import java.lang.Exception
 import java.lang.StringBuilder
+import java.lang.reflect.Field
+import java.lang.reflect.ParameterizedType
 import java.util.*
 
 /**
@@ -37,13 +39,20 @@ object KeyItemHelper {
                 if (clazz.isEnum) {
                     dataMap[clazz.canonicalName] =
                         buildParamsSubItemListWithEnum(field.type as Class<Enum<*>>)
+                } else if (isEnumList(field)) {
+                    val type = field.genericType
+                    if (type is ParameterizedType) {
+                        val subObject: Class<out Enum<*>> =
+                            type.actualTypeArguments[0] as Class<Enum<*>>
+                        dataMap[clazz.canonicalName] = buildParamsSubItemListWithEnum(subObject)
+                    }
                 } else {
                     dataMap.clear()
                     break
                 }
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            LogUtils.e(TAG,e.message)
         }
         return dataMap
     }
@@ -68,8 +77,8 @@ object KeyItemHelper {
                 val list = subItemList[0]
                 val clazz = Class.forName(nameList[0]!!) as Class<Enum<*>>
                 showSimpleSubItemList(anchor.context, list, clazz, object :
-                    KeyItemActionListener<String?> {
-                    override fun actionChange(t: String?) {
+                    KeyItemActionListener<List<String>?> {
+                    override fun actionChange(t: List<String>?) {
                         updateClassData(param, dataMap)
                         callBack.actionChange(param.toString())
                     }
@@ -156,7 +165,7 @@ object KeyItemHelper {
                 list.add(item)
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            LogUtils.e(TAG,e.message)
         }
         return list
     }
@@ -215,12 +224,13 @@ object KeyItemHelper {
      * @param data
      * @param name
      */
-    fun updatedSelectedInfo(data: List<EnumItem>, name: String) {
+     fun updatedSelectedInfo(data: List<EnumItem>, names: List<String?>) {
         for (item in data) {
-            if (item.getName() == name) {
-                item.setSelected(true)
-            } else {
-                item.setSelected(false)
+            item.setSelected(false)
+            for (name in names) {
+                if (item.getName().equals(name)) {
+                    item.setSelected(true)
+                }
             }
         }
     }
@@ -231,27 +241,34 @@ object KeyItemHelper {
     fun <E : Enum<*>?> showSimpleSubItemList(
         context: Context?,
         simpleItemList: List<EnumItem>,
-        clazz: Class<E>?,
-        callBack: KeyItemActionListener<String?>
+        clazz: Class<E>,
+        callBack: KeyItemActionListener<List<String>?>
     ) {
         val StrList = getSubItemNameList(simpleItemList)
         if (StrList.size == 0) {
             return
         }
         val selectedIndex = getSelectedIndex(simpleItemList)
-        KeyValueDialogUtil.showSingleChoiceDialog(
-            context,
-            StrList,
-            selectedIndex,
-            object :
-                KeyItemActionListener<String?> {
-                override fun actionChange(t: String?) {
-                    if (t != null) {
-                        updatedSelectedInfo(simpleItemList, t)
+        if (clazz.isEnum) {
+            KeyValueDialogUtil.showSingleChoiceDialog(
+                context,
+                StrList,
+                selectedIndex,
+                object : KeyItemActionListener<List<String>?> {
+                    override fun actionChange(values: List<String>?) {
+                        updatedSelectedInfo(simpleItemList, values!!)
+                        callBack.actionChange(values)
                     }
-                    callBack.actionChange(t)
-                }
-            })
+                })
+        } else {
+            KeyValueDialogUtil.showMultiChoiceDialog(
+                context,
+                StrList,
+            ) { values ->
+                updatedSelectedInfo(simpleItemList, values!!)
+                callBack.actionChange(values)
+            }
+        }
     }
 
     /**
@@ -269,23 +286,10 @@ object KeyItemHelper {
                 if (field.name == FILED_CHANGE || field.name == "serialVersionUID") {
                     continue
                 }
+                field.isAccessible = true
                 val clazz = field.type
-                if (clazz.isEnum) {
-                    field[obj] = clazz.enumConstants!![0]
-                    return;
-                }
-
-                if (Util.isWrapClass(clazz)) {
-                    if (clazz == Boolean::class.java) {
-                        field[obj] = false
-                    } else {
-                        field[obj] = 0
-                    }
-                    return
-                }
-                if (clazz == MutableList::class.java) {
-                    field[obj] = ArrayList<Any>()
-                    return
+                if (setFieldPro(field , obj)){
+                    continue
                 }
 
                 val subObj = clazz.newInstance()
@@ -296,6 +300,45 @@ object KeyItemHelper {
         } catch (e: Exception) {
             LogUtils.e(TAG, e.message)
         }
+    }
+
+     fun setFieldPro(field:Field , obj: Any?):Boolean{
+         val clazz = field.type
+         if (clazz.isEnum) {
+             field[obj] = clazz.enumConstants!![0]
+             return true;
+         }
+
+         if (Util.isWrapClass(clazz)) {
+             if (clazz == Boolean::class.javaObjectType) {
+                 field[obj] = false
+             } else {
+                 field[obj] = 0
+             }
+             return true
+         }
+         if (clazz == MutableList::class.java) {
+             field[obj] = ArrayList<Any>()// todo
+             return true
+         } else if (clazz == String::class.java) {
+             field[obj] = ""
+             return true
+         }
+         return false
+     }
+
+    private fun isEnumList(field: Field): Boolean {
+        if (field.type == MutableList::class.java) {
+            val type = field.genericType
+            if (type is ParameterizedType) {
+                val subType = type.actualTypeArguments[0]
+                val clazz = subType as Class<*>
+                if (clazz.isEnum) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     /**
@@ -316,12 +359,42 @@ object KeyItemHelper {
                     if (clazz.isEnum) {
                         val itemList = subItemMap[clazz.canonicalName]!!
                         field[obj] = getEnumData(clazz as Class<Enum<*>>, getSelectedValue(itemList))
+                    } else if (isEnumList(field)) {
+                        setEnumListProperty(field , obj , subItemMap)
                     }
                 }
             }
         } catch (e: Exception) {
            LogUtils.e(TAG , e.message)
         }
+    }
+
+    fun setEnumListProperty(field: Field , obj: Any? , subItemMap: Map<String?, List<EnumItem>>) {
+        val type = field.genericType
+        val clazz = field.type
+        if (type is ParameterizedType) {
+            val subObject = type.actualTypeArguments[0] as Class<Enum<*>>
+            val itemList = subItemMap[clazz.canonicalName]
+            val list: MutableList<Any> = ArrayList()
+            val values: List<String> = getSelectedValues(itemList!!)
+            for (value in values) {
+                val test: Any = getEnumData(subObject, value)!!
+                list.add(test)
+            }
+            field[obj] = list
+        }
+    }
+    fun getSelectedValues(data: List<EnumItem>): List<String> {
+        var value: String = ""
+        val values: MutableList<String> = ArrayList()
+        for (i in data.indices) {
+            if (data[i].isSelected()) {
+                value = data[i].getName()!!
+                values.add(value)
+                continue
+            }
+        }
+        return values
     }
 
     /**

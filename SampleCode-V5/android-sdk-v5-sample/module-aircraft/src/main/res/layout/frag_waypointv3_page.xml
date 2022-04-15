@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.amap.api.maps.MapView
+    <FrameLayout
         android:id="@+id/wp_map"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.85">
-    </com.amap.api.maps.MapView>
+        app:layout_constraintWidth_percent="0.85"></FrameLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/waypoint_button_list"
@@ -77,11 +76,58 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/kmz_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/kml_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/ic_waypoint_kml"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="KMZ Import"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kml_img" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Spinner
+        android:id="@+id/sp_map_switch"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_stroke_common_with_color"
+        android:dropDownWidth="120dp"
+        android:entries="@array/maps_array_all"
+        android:spinnerMode="dropdown"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/kmz_btn"
+        app:layout_constraintStart_toEndOf="@+id/kmz_btn"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/mission_execute_state_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:text="Mission Execute State info:"
         android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"

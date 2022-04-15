@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:parentTag="dji.v5.ux.map.MapWidget">
+
+    <View
+        android:id="@+id/view_legend_background"
+        android:layout_width="350dp"
+        android:layout_height="160dp"
+        android:background="@color/uxsdk_white_60_percent"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageview_legend_warning_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintStart_toStartOf="@+id/view_legend_background"
+        app:layout_constraintTop_toTopOf="@+id/view_legend_background"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_legend_warning_zone"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_warning"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_warning_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_warning_zone" />
+
+    <ImageView
+        android:id="@+id/imageview_legend_self_unlock_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintEnd_toStartOf="@+id/textview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/textview_legend_warning_zone"
+        app:layout_constraintTop_toTopOf="@+id/view_legend_background"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_legend_self_unlock_zone"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_self_unlock"
+        app:layout_constraintEnd_toEndOf="@+id/view_legend_background"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_self_unlock_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_self_unlock_zone" />
+
+
+    <ImageView
+        android:id="@+id/imageview_legend_enhanced_warning_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintStart_toStartOf="@+id/view_legend_background"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_legend_warning_zone"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_legend_enhanced_warning_zone"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_enhanced_warning"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_enhanced_warning_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_enhanced_warning_zone" />
+
+
+    <ImageView
+        android:id="@+id/imageview_legend_custom_unlock_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintEnd_toStartOf="@+id/textview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/textview_legend_warning_zone"
+        app:layout_constraintTop_toBottomOf="@+id/textview_legend_warning_zone"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_legend_custom_unlock_zone"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_custom_unlock"
+        app:layout_constraintEnd_toEndOf="@+id/view_legend_background"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_custom_unlock_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_custom_unlock_zone" />
+
+
+    <ImageView
+        android:id="@+id/imageview_legend_authorized_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintStart_toStartOf="@+id/view_legend_background"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_legend_enhanced_warning_zone"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_legend_authorized_zone"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_authorized"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_authorized_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_authorized_zone" />
+
+    <ImageView
+        android:id="@+id/imageview_legend_custom_unlock_aircraft_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintEnd_toStartOf="@+id/textview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/textview_legend_warning_zone"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_legend_custom_unlock_zone"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_legend_custom_unlock_aircraft_zone"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_custom_unlock_aircraft"
+        app:layout_constraintEnd_toEndOf="@+id/view_legend_background"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_custom_unlock_aircraft_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_custom_unlock_aircraft_zone" />
+
+
+    <ImageView
+        android:id="@+id/imageview_legend_restricted_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintStart_toStartOf="@+id/view_legend_background"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_legend_authorized_zone"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_legend_restricted_zone"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_restricted"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_restricted_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_restricted_zone" />
+
+
+    <ImageView
+        android:id="@+id/imageview_legend_custom_unlock_enabled_zone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="@dimen/uxsdk_map_widget_margin"
+        android:background="@drawable/uxsdk_flyzone_legend_drawable"
+        app:layout_constraintEnd_toStartOf="@+id/textview_legend_self_unlock_zone"
+        app:layout_constraintStart_toEndOf="@+id/textview_legend_warning_zone"
+        app:layout_constraintTop_toBottomOf="@+id/textview_legend_custom_unlock_aircraft_zone"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_custom_unlock_enabled_zone"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/uxsdk_map_widget_margin"
+        android:text="@string/uxsdk_fly_zone_custom_unlock_enabled"
+        app:layout_constraintEnd_toEndOf="@+id/view_legend_background"
+        app:layout_constraintStart_toEndOf="@+id/imageview_legend_custom_unlock_enabled_zone"
+        app:layout_constraintTop_toTopOf="@+id/imageview_legend_custom_unlock_enabled_zone" />
+
+    <!--suppress AndroidDomInspection -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/constraint_group_legend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="textview_legend_custom_unlock_zone,
+        textview_legend_warning_zone,imageview_legend_enhanced_warning_zone,
+        textview_legend_custom_unlock_aircraft_zone,imageview_legend_restricted_zone,
+        textview_custom_unlock_enabled_zone,textview_legend_self_unlock_zone,
+        image_legend_custom_unlock_enabled_zone,imageview_legend_warning_zone,
+        image_legend_custom_unlock_aircraft_zone,imageview_legend_self_unlock_zone,
+        image_legend_authorized_zone,imageview_legend_custom_unlock_zone,view_legend_background,
+        textview_legend_restricted_zone,textview_legend_enhanced_warning_zone,textview_legend_authorized_zone" />
+
+    <dji.v5.ux.core.widget.useraccount.UserAccountLoginWidget
+        android:id="@+id/widget_login"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:uxsdk_messageTextEnabled="false"
+        app:uxsdk_stateTextEnabled="false"
+        app:uxsdk_userIconEnabled="false" />
+
+
+</merge>

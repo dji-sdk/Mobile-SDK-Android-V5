@@ -150,16 +150,19 @@ abstract class DJIMainActivity : AppCompatActivity() {
         val permissionExternalRead = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
         val permissionExternalWrite = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         val permissionRecordAudio = ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+        val permissionKillBackgroundProcess = ActivityCompat.checkSelfPermission(this, Manifest.permission.KILL_BACKGROUND_PROCESSES)
         if (permissionExternalRead != PackageManager.PERMISSION_GRANTED
             && permissionExternalWrite != PackageManager.PERMISSION_GRANTED
             && permissionRecordAudio != PackageManager.PERMISSION_GRANTED
+            && permissionKillBackgroundProcess != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(
                     "android.permission.READ_EXTERNAL_STORAGE",
                     "android.permission.WRITE_EXTERNAL_STORAGE",
-                    "android.permission.RECORD_AUDIO"
+                    "android.permission.RECORD_AUDIO",
+                    "android.permission.KILL_BACKGROUND_PROCESSES"
                 ), REQUEST_CODE
             )
         }

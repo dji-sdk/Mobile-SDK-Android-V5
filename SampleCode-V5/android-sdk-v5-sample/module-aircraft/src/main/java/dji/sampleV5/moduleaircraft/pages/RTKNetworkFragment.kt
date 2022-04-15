@@ -10,8 +10,10 @@ import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.Helper
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.R
+import dji.sampleV5.moduleaircraft.models.RTKCenterVM
 import dji.sampleV5.moduleaircraft.models.RTKVM
 import dji.sdk.keyvalue.value.rtkbasestation.RTKCustomNetworkSetting
+import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.JsonUtil
@@ -28,6 +30,7 @@ import kotlinx.android.synthetic.main.frag_network_rtk_page.*
 class RTKNetworkFragment : DJIFragment() {
 
     private val rtkVM: RTKVM by activityViewModels()
+    private val rtkCenterVM: RTKCenterVM by activityViewModels()
     private val rtkMsgBuilder: StringBuilder = StringBuilder()
 
     override fun onCreateView(
@@ -45,6 +48,7 @@ class RTKNetworkFragment : DJIFragment() {
     }
 
     private fun initBtnListener() {
+        rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
         btn_start_custom_network_rtk_service.setOnClickListener {
             rtkVM.startCustomNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
@@ -68,17 +72,11 @@ class RTKNetworkFragment : DJIFragment() {
             })
         }
         btn_set_custom_network_rtk_settings.setOnClickListener {
-            val defaultSettings = RTKCustomNetworkSetting(
-                "",
-                0,
-                "",
-                "",
-                ""
-            )
-            openInputDialog(JsonUtil.toJson(defaultSettings), "Set Custom Network Rtk Settings") {
+            val currentCustomNetworkRTKSettingCache = rtkVM.getCurrentCustomNetworkRTKSettingCache(context)
+            openInputDialog(currentCustomNetworkRTKSettingCache, "Set Custom Network Rtk Settings") {
                 val setting = JsonUtil.toBean(it, RTKCustomNetworkSetting::class.java)
                 setting?.let {
-                    rtkVM.setCustomNetworkRTKSettings(setting)
+                    rtkVM.setCustomNetworkRTKSettings(context,setting)
                 }
             }
         }
@@ -126,8 +124,7 @@ class RTKNetworkFragment : DJIFragment() {
     }
 
     private fun initListener() {
-        rtkVM.listenRtkLocation()
-        rtkVM.listenRtkSource()
+
         rtkVM.addNetworkRTKServiceInfoCallback()
         rtkVM.currentRTKState.observe(viewLifecycleOwner) {
             updateRTKInfo()
@@ -149,8 +146,6 @@ class RTKNetworkFragment : DJIFragment() {
     private fun updateRTKInfo() {
         rtkMsgBuilder.apply {
             setLength(0)
-            append("RtkSource:").append(JsonUtil.toJson(rtkVM.rtkSource.value)).append("\n")
-            append("RtkLocation:").append(JsonUtil.toJson(rtkVM.rtkLocation.value)).append("\n")
             append("CurrentRTKState:").append(rtkVM.currentRTKState.value).append("\n")
             append("CurrentRTKErrorMsg:").append(rtkVM.currentRTKErrorMsg.value).append("\n")
             append("CurrentQxNetworkCoordinateSystem:").append(rtkVM.currentQxNetworkCoordinateSystem.value)

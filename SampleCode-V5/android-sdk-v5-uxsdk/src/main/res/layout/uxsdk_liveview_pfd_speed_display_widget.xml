@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:parentTag="dji.v5.ux.core.widget.hsi.SpeedDisplayWidget"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <dji.v5.ux.core.ui.hsi.dashboard.SpeedDashBoard
+        android:id="@+id/pfd_speed_dash_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:uxsdk_calibration_framework_padding_start="@dimen/uxsdk_11_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:uxsdk_framework_height="@dimen/uxsdk_104_dp"
+        app:uxsdk_dash_board_align="right"
+        app:uxsdk_show_calibration_framework="false"
+        app:uxsdk_max_value="400"
+        app:uxsdk_min_value="0"
+        app:uxsdk_name="SPD"
+        app:uxsdk_offset_per_unit="0.2"
+        app:uxsdk_pointer_line_inner_width="0dp"
+        app:uxsdk_pointer_line_outer_width="0dp"
+        app:uxsdk_pointer_triangle_width="@dimen/uxsdk_6_dp"
+        app:uxsdk_current_calibration_text_size="@dimen/uxsdk_text_size_medium_large"
+        app:uxsdk_name_text_size="@dimen/uxsdk_text_size_normal"
+        app:uxsdk_unit_text_size="@dimen/uxsdk_text_size_between_small_tiny"
+        app:uxsdk_pointer_width="@dimen/uxsdk_97_dp"
+        app:uxsdk_pointer_height="@dimen/uxsdk_31_dp"
+        app:uxsdk_pointer_divider_bottom_width="@dimen/uxsdk_35_dp"
+        app:uxsdk_pointer_divider_top_width="@dimen/uxsdk_44_dp"
+        app:uxsdk_unit="m/s" />
+
+    <TextView
+        android:id="@+id/pfd_ws_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/pfd_speed_dash_board"
+        app:layout_constraintEnd_toEndOf="@+id/pfd_speed_dash_board"
+        android:layout_marginTop="@dimen/uxsdk_5_dp"
+        android:layout_marginEnd="@dimen/uxsdk_25_dp"
+        android:text="WS 00.0  "
+        android:textColor="@color/uxsdk_pfd_main_color"
+        android:shadowColor="@color/uxsdk_black_47_percent"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:textSize="@dimen/uxsdk_text_size_normal_medium" />
+</merge>

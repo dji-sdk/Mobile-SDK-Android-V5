@@ -11,10 +11,13 @@ import android.view.View.OnTouchListener
 import dji.sampleV5.moduleaircraft.R
 import dji.v5.utils.common.LogUtils
 import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.roundToInt
+import kotlin.math.sin
 
 class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(context, attrs),
     SurfaceHolder.Callback, OnTouchListener {
-
     private var mJoystick: Bitmap? = null
     private lateinit var mHolder: SurfaceHolder
     private var mKnobBounds: Rect? = null
@@ -34,11 +37,11 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
 
     private fun initBounds(pCanvas: Canvas?) {
         mBackgroundSize = pCanvas!!.height
-        mKnobSize = Math.round(mBackgroundSize * 0.4f)
+        mKnobSize = (mBackgroundSize * 0.4f).roundToInt()
         mKnobBounds = Rect()
         mRadius = mBackgroundSize * 0.5f
-        mKnobX = Math.round((mBackgroundSize - mKnobSize) * 0.5f)
-        mKnobY = Math.round((mBackgroundSize - mKnobSize) * 0.5f)
+        mKnobX = ((mBackgroundSize - mKnobSize) * 0.5f).roundToInt()
+        mKnobY = ((mBackgroundSize - mKnobSize) * 0.5f).roundToInt()
     }
 
     private fun init() {
@@ -57,27 +60,23 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
         mJoystickListener = pJoystickListener
     }
 
-    override fun surfaceChanged(
-        arg0: SurfaceHolder, arg1: Int,
-        arg2: Int, arg3: Int
-    ) {
-
-    }
-
     override fun surfaceCreated(arg0: SurfaceHolder) {
         if (!mThread!!.isRunning()) {
             try {
                 LogUtils.e("OnScreenJoystick","surfaceCreated","mThread!!.start()",mThread == null)
                 mThread!!.start()
             }catch (e :Exception){
-                e.printStackTrace()
                 LogUtils.e("OnScreenJoystick","surfaceCreated",e.message,e.cause)
             }
         }
     }
 
+    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+        //暂时实现
+    }
+
     override fun surfaceDestroyed(arg0: SurfaceHolder) {
-        LogUtils.e("OnScreenJoystick","surfaceDestroyed")
+        LogUtils.e("OnScreenJoystick", "surfaceDestroyed")
         var retry = true
         mThread!!.setRunning(false)
         while (retry) {
@@ -105,21 +104,21 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
         val y = pEvent.y
         when (pEvent.action) {
             MotionEvent.ACTION_UP -> if (isAutoCentering) {
-                mKnobX = Math.round((mBackgroundSize - mKnobSize) * 0.5f)
-                mKnobY = Math.round((mBackgroundSize - mKnobSize) * 0.5f)
+                mKnobX = ((mBackgroundSize - mKnobSize) * 0.5f).roundToInt()
+                mKnobY = ((mBackgroundSize - mKnobSize) * 0.5f).roundToInt()
             }
             else ->
                 // Check if coordinates are in bounds. If they aren't move the knob
                 // to the closest coordinate inbounds.
                 if (checkBounds(x, y)) {
-                    mKnobX = Math.round(x - mKnobSize * 0.5f)
-                    mKnobY = Math.round(y - mKnobSize * 0.5f)
+                    mKnobX = (x - mKnobSize * 0.5f).roundToInt()
+                    mKnobY = (y - mKnobSize * 0.5f).roundToInt()
                 } else {
                     val angle = Math.atan2((y - mRadius).toDouble(), (x - mRadius).toDouble())
                     mKnobX =
-                        (Math.round(mRadius + (mRadius - mKnobSize * 0.5f) * Math.cos(angle)) - mKnobSize * 0.5f).toInt()
+                        ((mRadius + (mRadius - mKnobSize * 0.5f) * cos(angle)).roundToInt() - mKnobSize * 0.5f).toInt()
                     mKnobY =
-                        (Math.round(mRadius + (mRadius - mKnobSize * 0.5f) * Math.sin(angle)) - mKnobSize * 0.5f).toInt()
+                        ((mRadius + (mRadius - mKnobSize * 0.5f) * sin(angle)).roundToInt() - mKnobSize * 0.5f).toInt()
                 }
         }
         pushTouchEvent()
@@ -127,10 +126,7 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
     }
 
     private fun checkBounds(pX: Float, pY: Float): Boolean {
-        return Math.pow((mRadius - pX).toDouble(), 2.0) + Math.pow(
-            (mRadius - pY).toDouble(),
-            2.0
-        ) <= Math
+        return (mRadius - pX).toDouble().pow(2.0) + (mRadius - pY).toDouble().pow(2.0) <= Math
             .pow((mRadius - mKnobSize * 0.5f).toDouble(), 2.0)
     }
 
@@ -167,8 +163,8 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
                 // draw everything to the canvas
                 var canvas: Canvas? = null
                 try {
-                    canvas = mHolder!!.lockCanvas(null)
-                    synchronized(mHolder!!) {
+                    canvas = mHolder.lockCanvas(null)
+                    synchronized(mHolder) {
 
                         // reset canvas
                         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
@@ -177,7 +173,7 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
                 } catch (e: Exception) {
                 } finally {
                     if (canvas != null) {
-                        mHolder!!.unlockCanvasAndPost(canvas)
+                        mHolder.unlockCanvasAndPost(canvas)
                     }
                 }
             }

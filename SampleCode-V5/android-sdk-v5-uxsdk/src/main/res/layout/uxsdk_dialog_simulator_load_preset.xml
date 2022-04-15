@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textview_load_preset_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_simulator_dialog_margin"
+        android:gravity="center"
+        android:padding="@dimen/uxsdk_simulator_dialog_padding"
+        android:text="@string/uxsdk_simulator_save_preset_list"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="@dimen/uxsdk_simulator_header_text_size"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_header_separator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/uxsdk_simulator_dialog_margin"
+        android:background="@color/uxsdk_gray_45"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_load_preset_header" />
+
+    <TextView
+        android:id="@+id/textview_empty_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/uxsdk_simulator_dialog_margin"
+        android:text="@string/uxsdk_simulator_save_preset_list_empty"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_header_separator" />
+
+    <TextView
+        android:id="@+id/textview_confirmation_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/uxsdk_simulator_dialog_margin"
+        android:text="@string/uxsdk_simulator_save_preset_list_empty"
+        android:textColor="@color/uxsdk_white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_header_separator" />
+
+    <ScrollView
+        android:id="@+id/scroll_view_preset_list_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/uxsdk_simulator_dialog_margin"
+        android:layout_marginRight="@dimen/uxsdk_simulator_dialog_margin"
+        android:paddingTop="@dimen/uxsdk_simulator_dialog_padding"
+        android:paddingBottom="@dimen/uxsdk_simulator_dialog_padding"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textview_cancel_simulator_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/view_header_separator">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_preset_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textview_cancel_simulator_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/uxsdk_simulator_dialog_margin"
+        android:background="@drawable/uxsdk_selector_dialog_button_background"
+        android:gravity="center"
+        android:padding="@dimen/uxsdk_simulator_dialog_padding"
+        android:text="@string/uxsdk_app_cancel"
+        android:textColor="@color/uxsdk_selector_dialog_button_text"
+        android:textSize="@dimen/uxsdk_simulator_dialog_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textview_delete_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/uxsdk_simulator_dialog_margin"
+        android:background="@drawable/uxsdk_selector_dialog_button_background"
+        android:gravity="center"
+        android:padding="@dimen/uxsdk_simulator_dialog_padding"
+        android:text="@string/uxsdk_app_yes"
+        android:textColor="@color/uxsdk_selector_dialog_button_text"
+        android:textSize="@dimen/uxsdk_simulator_dialog_button_text_size"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_confirmation_delete" />
+
+    <TextView
+        android:id="@+id/textview_delete_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/uxsdk_simulator_dialog_margin"
+        android:background="@drawable/uxsdk_selector_dialog_button_background"
+        android:gravity="center"
+        android:padding="@dimen/uxsdk_simulator_dialog_padding"
+        android:text="@string/uxsdk_app_no"
+        android:textColor="@color/uxsdk_selector_dialog_button_text"
+        android:textSize="@dimen/uxsdk_simulator_dialog_button_text_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/textview_delete_yes"
+        app:layout_constraintTop_toBottomOf="@+id/textview_confirmation_delete" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

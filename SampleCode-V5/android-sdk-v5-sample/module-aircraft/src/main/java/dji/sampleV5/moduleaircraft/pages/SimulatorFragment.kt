@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.frag_simulator_page.*
  * @time 2022/01/26 11:22 上午
  * @description:
  */
-class SimulatorFragment : DJIFragment(){
+class SimulatorFragment : DJIFragment() {
     private val simulatorVM: SimulatorVM by activityViewModels()
     var sb = StringBuffer()
 
@@ -39,16 +39,16 @@ class SimulatorFragment : DJIFragment(){
         btn_enable_simulator.setOnClickListener {
             simulator_lng_et
             val coordinate2D = LocationCoordinate2D(simulator_lat_et.text.toString().toDouble(), simulator_lng_et.text.toString().toDouble())
-            val data = InitializationSettings.createInstance(coordinate2D,  simulator_gps_num_et.text.toString().toInt());
-            simulatorVM.enableSimulator(data , object :CommonCallbacks.CompletionCallback {
+            val data = InitializationSettings.createInstance(coordinate2D, simulator_gps_num_et.text.toString().toInt());
+            simulatorVM.enableSimulator(data, object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
-                    ToastUtils.showToast(context , "start Success");
-                    mainHandler.post {simulator_state_info_tv.setTextColor(Color.BLACK) }
+                    ToastUtils.showToast(context, "start Success");
+                    mainHandler.post { simulator_state_info_tv.setTextColor(Color.BLACK) }
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast(context , "start Failed" + error.description());
-                    mainHandler.post {simulator_state_info_tv.setTextColor(Color.RED) }
+                    ToastUtils.showToast(context, "start Failed" + error.description());
+
                 }
 
             })
@@ -56,55 +56,22 @@ class SimulatorFragment : DJIFragment(){
 
 
         btn_disable_simulator.setOnClickListener {
-            simulatorVM.disableSimulator(object :CommonCallbacks.CompletionCallback {
+            simulatorVM.disableSimulator(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
-                    ToastUtils.showToast(context , "disable Success");
-                    mainHandler.post {simulator_state_info_tv.setTextColor(Color.RED) }
+                    ToastUtils.showToast(context, "disable Success");
+                    mainHandler.post { simulator_state_info_tv.setTextColor(Color.RED) }
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast(context , "close Failed" + error.description());
+                    ToastUtils.showToast(context, "close Failed" + error.description());
                 }
 
             });
         }
 
-        simulatorVM.addSimulatorListener { state ->
-            // ToastUtils.showToast(context , "callback Test");
-            sb.append("Motor On : " + state.areMotorsOn())
-                    .append("\n")
-                    .append("In the Air : " + state.isFlying)
-                    .append("\n")
-                    .append("Roll : " + state.roll)
-                    .append("\n")
-                    .append("Pitch : " + state.pitch)
-                    .append("\n")
-                    .append("Yaw : " + state.yaw)
-                    .append("\n")
-                    .append("PositionX : " + state.positionX)
-                    .append("\n")
-                    .append("PositionY : " + state.positionY)
-                    .append("\n")
-                    .append("PositionZ : " + state.positionZ)
-                    .append("\n")
-                    .append("Latitude : " + state.location.latitude)
-                    .append("\n")
-                    .append("Longitude : " + state.location.longitude)
-                    .append("\n")
-
-            simulator_state_info_tv.setText(sb.toString())
-            sb.delete(0, sb.length)
+        simulatorVM.simulatorStateSb.observe(viewLifecycleOwner) {
+            simulator_state_info_tv.text = it
+            simulator_state_info_tv.setTextColor(if (simulatorVM.isSimulatorOn()) Color.BLACK else Color.RED)
         }
-        if (simulatorVM.isSimulatorOn()) {
-            simulator_state_info_tv.setTextColor(Color.BLACK)
-        } else{
-            simulator_state_info_tv.setTextColor(Color.RED)
-        }
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        simulatorVM.removeAllSimulatorListener()
     }
 }

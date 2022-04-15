@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    tools:parentTag="dji.v5.ux.cameracore.widget.cameracontrols.exposuresettings.ExposureModeSettingWidget">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_camera_mode_p"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent = "0.25"
+        android:background="@drawable/uxsdk_selector_camera_exposure_mode_setting">
+
+        <TextView
+            android:id="@+id/textview_camera_mode_p"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/imageview_exposure_automode_icon"
+            app:layout_constraintWidth_percent = "0.6"
+            app:layout_constraintHeight_percent = "0.3"
+            android:duplicateParentState="true"
+            android:gravity="center"
+            android:text="@string/uxsdk_camera_exposure_mode_p"
+            android:textSize="@dimen/uxsdk_text_size_between_small_tiny"
+            android:textColor="@drawable/uxsdk_selector_camera_exposure_mode_text_color" />
+
+        <ImageView
+            android:id="@+id/imageview_exposure_automode_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_camera_mode_p"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent = "0.4"
+            app:layout_constraintHeight_percent = "0.4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/uxsdk_selector_camera_auto_exposure_mode" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_camera_mode_s"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layout_camera_mode_p"
+        app:layout_constraintWidth_percent = "0.25"
+        android:background="@drawable/uxsdk_selector_camera_exposure_mode_setting">
+
+        <TextView
+            android:id="@+id/textview_camera_mode_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:duplicateParentState="true"
+            android:text="@string/uxsdk_camera_exposure_mode_s"
+            android:textSize="@dimen/uxsdk_text_size_normal_medium"
+            android:textColor="@drawable/uxsdk_selector_camera_exposure_mode_text_color" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_camera_mode_a"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layout_camera_mode_s"
+        app:layout_constraintWidth_percent = "0.25"
+        android:background="@drawable/uxsdk_selector_camera_exposure_mode_setting">
+
+        <TextView
+            android:id="@+id/textview_camera_mode_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:duplicateParentState="true"
+            android:text="@string/uxsdk_camera_exposure_mode_a"
+            android:textSize="@dimen/uxsdk_text_size_normal_medium"
+            android:textColor="@drawable/uxsdk_selector_camera_exposure_mode_text_color" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_camera_mode_m"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/uxsdk_selector_camera_exposure_mode_setting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layout_camera_mode_a"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textview_camera_mode_m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:layout_gravity="center"
+            android:text="@string/uxsdk_camera_exposure_mode_m"
+            android:textSize="@dimen/uxsdk_text_size_normal_medium"
+            android:textColor="@drawable/uxsdk_selector_camera_exposure_mode_text_color" />
+    </FrameLayout>
+
+</merge>

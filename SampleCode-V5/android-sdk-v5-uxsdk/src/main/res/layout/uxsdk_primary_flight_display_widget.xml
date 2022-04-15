@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="dji.v5.ux.core.widget.hsi.PrimaryFlightDisplayWidget">
+
+    <dji.v5.ux.core.ui.hsi.AircraftAttitudeView
+        android:id="@+id/fpv_attitude"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:uxsdk_actual_height="@dimen/uxsdk_187_dp"
+        app:uxsdk_actual_width="@dimen/uxsdk_187_dp" />
+
+    <View
+        android:id="@+id/fpv_attitude_place_holder"
+        android:layout_width="@dimen/uxsdk_187_dp"
+        android:layout_height="@dimen/uxsdk_187_dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.v5.ux.core.widget.hsi.SpeedDisplayFpvWidget
+        android:id="@+id/fpv_speed_value_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fpv_attitude_place_holder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <dji.v5.ux.core.widget.hsi.AttitudeDisplayFpvWidget
+        android:id="@+id/fpv_height_value_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/fpv_attitude_place_holder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</merge>

@@ -30,6 +30,9 @@
     <string name="item_diagnostic_title">Diagnostic</string>
     <string name="item_diagnostic_description">Demonstrate how to use the diagnostic function</string>
 
+    <string name="item_live_stream_title">Live Stream</string>
+    <string name="item_live_stream_description">Demonstrate how to use the live stream function</string>
+
     <string name="item_flight_record_title">Flight Record</string>
     <string name="item_flight_record_description">Demonstrate how to use the Flight Record function</string>
 
@@ -182,6 +185,7 @@
     <string name="tv_rtk_location">The positioning strategy of RTK module：</string>
     <string name="tv_rtk_station_position">The location of the ground-side RTK Station：</string>
     <string name="tv_rtk_mobile_position">UAV position calculated by RTK module：</string>
+    <string name="tv_rtk_position_std_distance">The distance between the position of the ground base station and the position of the UAV calculated by the RTK module：</string>
     <string name="tv_rtk_std_position">The standard deviation of the drone position calculated by the RTK module：</string>
     <string name="tv_rtk_head">UAV orientation data calculated by RTK module：</string>
     <string name="tv_rtk_real_head">The orientation data of the UAV calculated by the flight control fusion algorithm：</string>
@@ -192,7 +196,7 @@
     <string name="tv_rtk_error">RTK module error message: </string>
     <string name="tv_rtk_antenna_1">The number of satellites searched by the antenna 1 of the UAV RTK module：</string>
     <string name="tv_rtk_antenna_2">The number of satellites searched by the antenna 2 of the UAV RTK module：</string>
-    <string name="tv_rtk_station">The number of satellites searched by the D-RTK2 ground base station: </string>
+    <string name="tv_rtk_station">The number of satellites searched by the RTK: </string>
 
 
     <!-- key Type-->
@@ -239,4 +243,41 @@
     <string name="key_search">Search</string>
     <string name="commonlyused_key">Commonly Used Key</string>
     <string name="key_value_set">Set </string>
+
+    <!-- Live Stream -->
+    <string name="btn_get_live_stream_config">Get Live Stream Config</string>
+    <string name="btn_set_live_stream_config">Set Live Stream Config</string>
+    <string name="btn_start_live_stream">Start Live Stream</string>
+    <string name="btn_stop_live_stream">Stop Live Stream</string>
+    <string name="btn_set_live_stream_channel_type">Set Live Stream Channel Type</string>
+    <string name="btn_get_live_stream_channel_type">Get Live Stream Channel Type</string>
+    <string name="btn_set_live_stream_quality">Set Live Stream Quality</string>
+    <string name="btn_get_live_stream_quality">Get Live Stream Quality</string>
+    <string name="btn_set_live_stream_bit_rate_mode">Set Live Stream Bite Rate Mode</string>
+    <string name="btn_get_live_stream_bit_rate_mode">Get Live Stream Bite Rate Mode</string>
+    <string name="btn_set_live_stream_bit_rate">Set Live Stream Bite Rate</string>
+    <string name="btn_get_live_stream_bit_rate">Get Live Stream Bite Rate</string>
+    <string name="btn_enable_audio">Enable Audio</string>
+    <string name="btn_disable_audio">Disable Audio</string>
+    <string name="ad_select_live_stream_type">Select Live Stream Type</string>
+    <string name="ad_select_live_stream_channel_type">Select Live Stream Channel Type</string>
+    <string name="ad_select_live_stream_bit_rate_mode">Select Live Stream Bit Rate Mode</string>
+    <string name="ad_select_live_stream_quality">Select Live Stream Quality</string>
+    <string name="ad_set_live_stream_bit_rate">Set Live Stream bit Rate</string>
+
+    <string name="ad_set_live_stream_rtmp_config">RTMP Config</string>
+    <string name="ad_set_live_stream_rtsp_config">RTSP Config</string>
+    <string name="ad_set_live_stream_gb28181_config">GB28181 Config</string>
+    <string name="ad_set_live_stream_agora_config">Agora Config</string>
+
+    <string name="ad_confirm">Confirm</string>
+    <string name="ad_cancel">Cancel</string>
+
+
+
+    <string name="msg_start_live_stream_success">Start Live Stream Success!</string>
+    <string name="msg_start_live_stream_failed">Start Live Stream Failed: %1$s</string>
+    <string name="msg_stop_live_stream_success">Stop Live Stream Success!</string>
+    <string name="msg_stop_live_stream_failed">Stop Live Stream Failed: %1$s</string>
+    <string name="index_tips">index:represent the position of the load is generally 0 \n subType:represent lens ,0 = zoom ,1 = wide , 2 = ir \n subIndex:currently only the battery box is used to indicate the location of the next level gadgets</string>
 </resources>

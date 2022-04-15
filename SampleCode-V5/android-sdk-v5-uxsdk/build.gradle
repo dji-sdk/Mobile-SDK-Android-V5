@@ -1,0 +1,62 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+
+    resourcePrefix "uxsdk_"
+    defaultConfig {
+        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions{
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation deps.annotation
+    implementation deps.appcompat
+    implementation deps.multidex
+    implementation deps.legacySupport
+    implementation deps.recyclerview
+    implementation deps.okio
+    implementation deps.wire
+    implementation deps.constraintLayout
+    implementation deps.lifecycleJava8
+    implementation deps.lifecycleRuntime
+    implementation deps.lifecycleProcess
+    implementation deps.media
+    implementation deps.kotlinLib
+    implementation deps.ktxCore
+    implementation deps.rx3Android
+    implementation deps.rx3Java
+
+    api deps.maplibreAnotation
+    api deps.maplibreTurf
+    api deps.maplibreSdk
+    api deps.amap3DMap
+    api deps.amapSearch
+
+    api deps.playservicesplaces
+    api deps.playservicesmaps
+    api deps.playserviceslocation
+    api deps.playservicesbase
+
+    compileOnly files("../${project.AIRCRAFT_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
+
+    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Amap.aar")
+    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Core.aar")
+    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Maplibre.aar")
+    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Google.aar")
+}

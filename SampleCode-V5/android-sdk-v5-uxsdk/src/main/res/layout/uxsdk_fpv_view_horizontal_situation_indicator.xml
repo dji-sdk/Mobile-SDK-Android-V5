@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/uxsdk_350_dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:parentTag="dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget">
+
+    <dji.v5.ux.core.widget.hsi.SpeedDisplayWidget
+        android:id="@+id/pfd_hsi_speed_display"
+        android:layout_marginTop="@dimen/uxsdk_4_dp"
+        android:layout_marginEnd="@dimen/uxsdk_n8_dp"
+        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <dji.v5.ux.core.ui.hsi.HSIView
+        android:id="@+id/pfd_hsi_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_141_dp"
+        app:uxsdk_hsi_max_perception_stroke_width="@dimen/uxsdk_3_dp"
+        app:uxsdk_hsi_radar_max_perception_stroke_width="@dimen/uxsdk_5_dp"
+        app:uxsdk_hsi_aircraft_indicator_size="@dimen/uxsdk_13_dp"
+        app:uxsdk_hsi_bitmap_offset="@dimen/uxsdk_2_dp"
+        app:uxsdk_hsi_degree_indicator_height="@dimen/uxsdk_4_dp"
+        app:uxsdk_hsi_degree_indicator_text_size="@dimen/uxsdk_text_size_small"
+        app:uxsdk_hsi_degree_indicator_width="@dimen/uxsdk_9_dp"
+        app:uxsdk_hsi_gimbal_indicator_max_scope="@dimen/uxsdk_11_dp"
+        app:uxsdk_hsi_gimbal_indicator_size="@dimen/uxsdk_6_dp"
+        app:uxsdk_hsi_marker_indicator_text_size="@dimen/uxsdk_text_size_medium"
+        app:uxsdk_hsi_rng_point_marker_size="@dimen/uxsdk_13_dp"
+        app:uxsdk_hsi_smart_track_point_marker_size="@dimen/uxsdk_13_dp"
+        app:uxsdk_hsi_marker_margin_horizontal="@dimen/uxsdk_2_dp"
+        app:uxsdk_hsi_marker_margin_vertical="@dimen/uxsdk_2_dp"
+        app:uxsdk_hsi_marker_indicator_height="@dimen/uxsdk_26_dp"
+        app:uxsdk_hsi_marker_indicator_width="@dimen/uxsdk_30_dp"
+        app:uxsdk_hsi_heading_line_width="@dimen/uxsdk_1_dp"
+        app:uxsdk_hsi_pin_point_marker_size="@dimen/uxsdk_13_dp"
+        app:uxsdk_hsi_home_point_marker_size="@dimen/uxsdk_13_dp" />
+
+    <dji.v5.ux.core.widget.hsi.AttitudeDisplayWidget
+        android:id="@+id/pfd_hsi_attitude_display"
+        android:layout_marginTop="@dimen/uxsdk_4_dp"
+        android:layout_marginStart="@dimen/uxsdk_n8_dp"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</merge>

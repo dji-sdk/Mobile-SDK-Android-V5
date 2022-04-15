@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+  <path
+      android:pathData="M19.6083,9.3055L30,29.9342L29.9329,30L19.6083,25.7723L9.2853,30L9.2182,29.9342L19.6083,9.3055ZM12.9756,2L12.9756,4.1531L19.561,4.1531L19.561,6.3061L4.1951,6.3061L4.1951,27.8369L6.3902,27.8369L6.3902,29.99L2,29.99L2,4.1531L8.5854,4.1531L8.5854,2L12.9756,2ZM19.8127,14.706L19.8127,23.5821L25.3805,25.902L19.8127,14.706ZM10.7805,21.3777L8.5854,25.6838L6.3902,25.6838L6.3902,21.3777L10.7805,21.3777ZM14.0059,14.9184L11.8108,19.2246L6.3902,19.2246L6.3902,14.9184L14.0059,14.9184ZM17.3658,8.4592L15.1707,12.7654L6.3902,12.7654L6.3902,8.4592L17.3658,8.4592Z"
+      android:strokeWidth="1"
+      android:fillColor="#FEFEFE"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>

@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.0.0 beta1
+# DJI Mobile SDK for Android V5 Latest Version 5.0.0 beta2
 
 ## What Is This?
 

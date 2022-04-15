@@ -85,6 +85,16 @@
         android:text="virtual info">
     </TextView>
 
+    <TextView
+        android:id="@+id/simulator_state_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="simulator state info:"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
     <dji.sampleV5.moduleaircraft.virtualstick.OnScreenJoystick
         android:id="@+id/left_stick_view"
         android:background="@mipmap/joystick_bg"

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_livestream_gb28181_server_ip"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="input 28181 server ip"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_livestream_gb28181_server_port"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="input 28181 server port"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_livestream_gb28181_server_ip" />
+
+            <EditText
+                android:id="@+id/et_livestream_gb28181_server_id"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="input 28181 server id"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_livestream_gb28181_server_port" />
+
+            <EditText
+                android:id="@+id/et_livestream_gb28181_agent_id"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="input 28181 agent id"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_livestream_gb28181_server_id" />
+
+            <EditText
+                android:id="@+id/et_livestream_gb28181_channel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="input 28181 channel"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_livestream_gb28181_agent_id" />
+
+            <EditText
+                android:id="@+id/et_livestream_gb28181_local_port"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="input 28181 local port"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_livestream_gb28181_channel" />
+
+            <EditText
+                android:id="@+id/et_livestream_gb28181_password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="input 28181 password"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_livestream_gb28181_local_port" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

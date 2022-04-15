@@ -4,18 +4,25 @@ import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.value.common.EmptyMsg
 import dji.v5.common.callback.CommonCallbacks
-import dji.sdk.keyvalue.key.KeyTools
-import dji.v5.manager.KeyManager
+import dji.v5.common.error.IDJIError
+import dji.v5.et.action
+import dji.v5.et.create
 
 class BasicAircraftControlVM : DJIViewModel() {
 
     fun startTakeOff(callback: CommonCallbacks.CompletionCallbackWithParam<EmptyMsg>) {
-        KeyManager.getInstance()
-            .performAction(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff), null, callback)
+        FlightControllerKey.KeyStartTakeoff.create().action({
+            callback.onSuccess(it)
+        }, { e: IDJIError ->
+            callback.onFailure(e)
+        })
     }
 
     fun startLanding(callback: CommonCallbacks.CompletionCallbackWithParam<EmptyMsg>) {
-        KeyManager.getInstance()
-            .performAction(KeyTools.createKey(FlightControllerKey.KeyStartAutoLanding), null, callback)
+        FlightControllerKey.KeyStartAutoLanding.create().action({
+            callback.onSuccess(it)
+        }, { e: IDJIError ->
+            callback.onFailure(e)
+        })
     }
 }

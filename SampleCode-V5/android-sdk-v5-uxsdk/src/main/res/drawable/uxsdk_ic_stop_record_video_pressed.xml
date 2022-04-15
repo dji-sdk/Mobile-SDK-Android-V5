@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="18dp"
+    android:height="18dp"
+    android:viewportHeight="18"
+    android:viewportWidth="18">
+    <group
+        android:pivotX="9"
+        android:pivotY="9"
+        android:scaleX="0.5"
+        android:scaleY="0.5">
+        <path
+            android:fillColor="#E70102"
+            android:fillType="evenOdd"
+            android:pathData="M4.5,0L13.5,0A4.5,4.5 0,0 1,18 4.5L18,13.5A4.5,4.5 0,0 1,13.5 18L4.5,18A4.5,4.5 0,0 1,0 13.5L0,4.5A4.5,4.5 0,0 1,4.5 0z"
+            android:strokeColor="#00000000"
+            android:strokeWidth="1" />
+        <path
+            android:fillAlpha="0.400447237"
+            android:fillColor="#000000"
+            android:fillType="evenOdd"
+            android:pathData="M4.5,0L13.5,0A4.5,4.5 0,0 1,18 4.5L18,13.5A4.5,4.5 0,0 1,13.5 18L4.5,18A4.5,4.5 0,0 1,0 13.5L0,4.5A4.5,4.5 0,0 1,4.5 0z"
+            android:strokeColor="#00000000"
+            android:strokeWidth="1" />
+    </group>
+</vector>

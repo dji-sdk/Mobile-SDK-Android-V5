@@ -1,11 +1,15 @@
 package dji.sampleV5.moduleaircraft.models
 
+import android.R
+import android.content.Context
+import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import dji.sampleV5.moduleaircraft.data.FlightControlState
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sampleV5.moduleaircraft.data.MissionUploadStateInfo
 import dji.sdk.keyvalue.key.*
-import dji.sdk.keyvalue.value.common.Attitude
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -15,6 +19,9 @@ import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.waypoint3.WaylineExecutingInfoListener
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionManager
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
+import dji.v5.manager.areacode.AreaCodeManager
+import dji.v5.utils.common.ContextUtil
+import dji.v5.utils.common.DjiSharedPreferencesManager
 
 /**
  * @author feel.feng
@@ -22,6 +29,10 @@ import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
  * @description:
  */
 class WayPointV3VM : DJIViewModel() {
+
+    val CHINA_COUNTRY_CODE = "CN"
+    val HK_COUNTRY_CODE = "HK"
+    val MACAU_COUNTRY_CODE = "MO"
     val RadToDeg = 57.295779513082321
     val missionUploadState = MutableLiveData<MissionUploadStateInfo>()
 
@@ -96,18 +107,21 @@ class WayPointV3VM : DJIViewModel() {
     }
 
     fun listenFlightControlState() {
-        val homelocation : LocationCoordinate2D = KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyHomeLocation))
-        KeyManager.getInstance().listen(
-            KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this
-        ) { _, newValue ->
-            newValue?.let {
-                val height = getHeight()
-                val distance = calculateDistance(homelocation.latitude , homelocation.longitude , it.latitude , it.longitude)
-                val heading = getHeading()
-                flightControlState.value = FlightControlState(it.longitude, it.latitude , distance = distance , height = height , head = heading)
-                refreshFlightControlState()
+        val homelocation : LocationCoordinate2D ?= KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyHomeLocation))
+        homelocation?.let {
+            KeyManager.getInstance().listen(
+                KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this
+            ) { _, newValue ->
+                newValue?.let {
+                    val height = getHeight()
+                    val distance = calculateDistance(homelocation.latitude , homelocation.longitude , it.latitude , it.longitude)
+                    val heading = getHeading()
+                    flightControlState.value = FlightControlState(it.longitude, it.latitude , distance = distance , height = height , head = heading , homeLocation = homelocation)
+                    refreshFlightControlState()
+                }
             }
         }
+
     }
 
 
@@ -148,9 +162,46 @@ class WayPointV3VM : DJIViewModel() {
         return alpha * earthR
     }
 
-    private fun   getHeading() = (compassHeadKey.get()?:0.0).toFloat()
+    private fun getHeading() = (compassHeadKey.get(0.0)).toFloat()
 
-    private fun  getHeight():Double  = (altitudeKey.get()?:0.0)
+    private fun getHeight(): Double = (altitudeKey.get(0.0))
 
 
+    fun isInMainlandChina(): Boolean {
+        return CHINA_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCodeSync.areaCode)
+    }
+
+    fun isMacau(): Boolean {
+        return MACAU_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCodeSync.areaCode)
+    }
+
+    fun isHongKong(): Boolean {
+        return HK_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCodeSync.areaCode)
+    }
+
+    fun getMapType(context: Context?):Int{
+       return DjiSharedPreferencesManager.getInt(context , "map_selection" , 0)
+    }
+
+    fun saveMapType(context: Context?, pos :Int) {
+        DjiSharedPreferencesManager.putInt( context, "map_selection" , pos)
+    }
+
+    fun getMapSpinnerAdapter() : ArrayAdapter<String> {
+        return  if (isGoogleMapsSupported()) {
+            ArrayAdapter<String>(
+                ContextUtil.getContext(), R.layout.simple_spinner_dropdown_item, ContextUtil.getContext().resources.getStringArray(
+                    dji.sampleV5.moduleaircraft.R.array.maps_array_all))
+        } else {
+            ArrayAdapter<String>(
+                ContextUtil.getContext(), R.layout.simple_spinner_dropdown_item, ContextUtil.getContext().resources.getStringArray(
+                    dji.sampleV5.moduleaircraft.R.array.maps_array))
+        }
+    }
+
+    fun isGoogleMapsSupported(): Boolean {
+        val googleApiAvailability = GoogleApiAvailability.getInstance()
+        val resultCode = googleApiAvailability.isGooglePlayServicesAvailable(ContextUtil.getContext())
+        return resultCode == ConnectionResult.SUCCESS
+    }
 }

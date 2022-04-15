@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="200dp"
+    android:layout_height="50dp"
+    tools:parentTag="dji.v5.ux.core.ui.SeekBarView">
+
+    <ImageView
+        android:id="@+id/imageview_track"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/uxsdk_selector_slider_bar_track"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/max_barrier"
+        app:layout_constraintStart_toEndOf="@+id/min_barrier"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/imageview_baseline"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@color/uxsdk_green"
+        app:layout_constraintBottom_toBottomOf="@+id/imageview_thumb"
+        app:layout_constraintTop_toTopOf="@+id/imageview_thumb"
+        tools:ignore="ContentDescription"
+        tools:layout_constraintStart_toEndOf="@+id/imageview_thumb" />
+
+    <ImageView
+        android:id="@+id/imageview_thumb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:src="@drawable/uxsdk_seek_thumb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:layout_constraintEnd_toStartOf="@+id/imageview_track"
+        tools:layout_constraintStart_toStartOf="@+id/imageview_track" />
+
+    <TextView
+        android:id="@+id/textview_min_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/uxsdk_white_75_percent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10000" />
+
+    <ImageView
+        android:id="@+id/imageview_minus"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/uxsdk_selector_cycle_button_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_camera_decrement_minus"
+        tools:ignore="ContentDescription" />
+
+    <!--suppress AndroidDomInspection -->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/min_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="textview_min_value, imageview_minus"
+        tools:layout_editor_absoluteX="40dp" />
+
+    <TextView
+        android:id="@+id/textview_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/uxsdk_selector_slider_bar_text"
+        android:textSize="@dimen/uxsdk_text_size_small"
+        app:layout_constraintBottom_toTopOf="@+id/imageview_thumb"
+        tools:layout_constraintEnd_toStartOf="@+id/imageview_track"
+        tools:layout_constraintStart_toStartOf="@+id/imageview_track"
+        tools:text="100" />
+
+    <!--suppress AndroidDomInspection -->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/max_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="textview_max_value, imageview_plus" />
+
+    <ImageView
+        android:id="@+id/imageview_plus"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@drawable/uxsdk_selector_cycle_button_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_camera_increment_plus"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_max_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAlignment="gravity"
+        android:textColor="@color/uxsdk_white_75_percent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10000" />
+
+</merge>

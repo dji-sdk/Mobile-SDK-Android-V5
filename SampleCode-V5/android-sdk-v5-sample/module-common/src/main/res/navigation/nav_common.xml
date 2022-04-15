@@ -23,4 +23,10 @@
         android:label="diagnostic_page"
         tools:layout="@layout/frag_diagnostic_page"/>
 
+    <fragment
+        android:id="@+id/key_live_stream_page"
+        android:name="dji.sampleV5.modulecommon.pages.LiveStreamFragment"
+        android:label="live_stream_page"
+        tools:layout="@layout/frag_live_stream_page"/>
+
 </navigation>

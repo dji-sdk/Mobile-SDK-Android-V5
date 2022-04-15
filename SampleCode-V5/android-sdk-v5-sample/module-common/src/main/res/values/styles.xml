@@ -21,6 +21,7 @@
         <item name="android:layout_marginTop">0dp</item>
         <item name="android:gravity">center</item>
         <item name="android:color">@color/white</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:autoSizeMaxTextSize">14dp</item>
         <item name="android:autoSizeMinTextSize">9dp</item>
         <item name="android:autoSizeTextType">uniform</item>

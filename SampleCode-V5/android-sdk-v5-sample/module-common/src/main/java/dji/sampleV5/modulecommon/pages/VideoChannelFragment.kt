@@ -34,6 +34,7 @@ import java.io.*
 
 class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.Callback,
     YuvDataListener {
+    private val TAG = LogUtils.getTag("VideoChannelFragment")
     private val PATH: String = "/DJI_ScreenShot"
     private val multiVideoChannelVM: MultiVideoChannelVM by activityViewModels()
     private lateinit var channelVM: VideoChannelVM
@@ -151,11 +152,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                 video_stream_info.text = videoStreamInfo
             }
         }
-        channelVM.videoChannel?.let {
-            it.addStreamDataListener(streamDataListener)
-        } ?: let {
-            showDisconnectToast()
-        }
+        channelVM.videoChannel?.addStreamDataListener(streamDataListener) ?: showDisconnectToast()
         this@VideoChannelFragment.setFragmentResultListener("ResetAllVideoChannel") { requestKey, _ ->
             if ("ResetAllVideoChannel" == requestKey) {
                 mainHandler.post {
@@ -169,9 +166,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
 
     override fun onDestroyView() {
         super.onDestroyView()
-        channelVM.videoChannel?.let {
-            it.removeStreamDataListener(streamDataListener)
-        }
+        channelVM.videoChannel?.removeStreamDataListener(streamDataListener)
         if (videoDecoder != null) {
             videoDecoder?.destory()
             videoDecoder = null
@@ -197,7 +192,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                             )
                         }
                     }
-                }?: let {
+                } ?: let {
                     showDisconnectToast()
                 }
             }
@@ -231,12 +226,12 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                             this@VideoChannelFragment.context?.let {
                                 ToastUtils.showToast(
                                     it,
-                                    "Close Channel Failed: (errorCode ${error?.errorCode()}, description: ${error?.description()})"
+                                    "Close Channel Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
                                 )
                             }
                         }
                     })
-                }?: let {
+                } ?: let {
                     showDisconnectToast()
                 }
             }
@@ -279,12 +274,12 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                             this@VideoChannelFragment.context?.let {
                                 ToastUtils.showToast(
                                     it,
-                                    "Start Socket Server Failed: (errorCode ${error?.errorCode()}, description: ${error?.description()})"
+                                    "Start Socket Server Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
                                 )
                             }
                         }
                     })
-                }?: let {
+                } ?: let {
                     showDisconnectToast()
                 }
             }
@@ -317,13 +312,13 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                             this@VideoChannelFragment.context?.let {
                                 ToastUtils.showToast(
                                     it,
-                                    "Close Socket Server Failed: (errorCode ${error?.errorCode()}, description: ${error?.description()})"
+                                    "Close Socket Server Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
                                 )
                             }
                         }
 
                     })
-                }?: let {
+                } ?: let {
                     showDisconnectToast()
                 }
             }
@@ -423,7 +418,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                         this@VideoChannelFragment.context?.let {
                             ToastUtils.showToast(
                                 it,
-                                "Start Channel Failed: (errorCode ${error?.errorCode()}, description: ${error?.description()})"
+                                "Start Channel Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
                             )
                         }
                     }
@@ -502,7 +497,8 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             data?.let {
                 AsyncTask.execute(object : Runnable {
                     override fun run() {
-                        var path: String = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), PATH)
+                        var path: String =
+                            DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), PATH)
                         val dir = File(path)
                         if (!dir.exists() || !dir.isDirectory) {
                             dir.mkdirs()
@@ -517,8 +513,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                             fos = FileOutputStream(file)
                             fos.write(it, 0, it.size)
                         } catch (e: Exception) {
-                            LogUtils.e(logTag, "error on saving yuv")
-                            e.printStackTrace()
+                            LogUtils.e(TAG, e.message)
                         } finally {
                             fos?.let {
                                 fos.flush()
@@ -591,7 +586,12 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             yuvFrame[length + 2 * i] = v[i]
             yuvFrame[length + 2 * i + 1] = u[i]
         }
-        screenShot(yuvFrame, DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), PATH), width, height)
+        screenShot(
+            yuvFrame,
+            DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), PATH),
+            width,
+            height
+        )
     }
 
     private fun newSaveYuvDataToJPEG(yuvFrame: ByteArray, width: Int, height: Int) {
@@ -661,7 +661,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         }
     }
 
-    private fun showDisconnectToast(){
+    private fun showDisconnectToast() {
         ToastUtils.showToast(ContextUtil.getContext(), "video stream disconnect")
     }
 }

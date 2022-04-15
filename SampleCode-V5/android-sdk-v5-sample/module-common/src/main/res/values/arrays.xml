@@ -21,6 +21,18 @@
         <item>65534</item>
     </string-array>
 
+    <string-array name="maps_array">
+        <item>Auto</item>
+        <item>AMap</item>
+        <item>Maplibre</item>
+    </string-array>
+
+    <string-array name="maps_array_all">
+        <item>Auto</item>
+        <item>AMap</item>
+        <item>Maplibre</item>
+        <item>Google</item>
+    </string-array>
     <string-array name="sub_index_arrays">
         <item>0</item>
         <item>1</item>

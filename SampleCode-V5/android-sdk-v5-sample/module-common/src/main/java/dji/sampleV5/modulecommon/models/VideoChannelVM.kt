@@ -63,10 +63,6 @@ class VideoChannelVM(channelType: VideoChannelType) : DJIViewModel() {
         }
     }
 
-    private fun getDJIVideoChannel() {
-
-    }
-
     fun refreshVideoChannelInfo() {
         videoChannelInfo.postValue(videoChannelInfo.value)
     }

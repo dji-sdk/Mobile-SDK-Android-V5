@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/live_stream_button_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_set_live_stream_config"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_live_stream_config"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_get_live_stream_config"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_get_live_stream_config"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_live_stream_config"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_start_live_stream"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_start_live_stream"
+                app:layout_constraintTop_toBottomOf="@+id/btn_get_live_stream_config"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_stop_live_stream"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_stop_live_stream"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_live_stream"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_set_live_stream_channel_type"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_live_stream_channel_type"
+                app:layout_constraintTop_toBottomOf="@+id/btn_stop_live_stream"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_get_live_stream_channel_type"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_get_live_stream_channel_type"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_live_stream_channel_type"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_set_live_stream_quality"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_live_stream_quality"
+                app:layout_constraintTop_toBottomOf="@+id/btn_get_live_stream_channel_type"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_get_live_stream_quality"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_get_live_stream_quality"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_live_stream_quality"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_set_live_stream_bit_rate_mode"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_live_stream_bit_rate_mode"
+                app:layout_constraintTop_toBottomOf="@+id/btn_get_live_stream_quality"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_get_live_stream_bit_rate_mode"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_get_live_stream_bit_rate_mode"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_live_stream_bit_rate_mode"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_set_live_stream_bit_rate"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_live_stream_bit_rate"
+                app:layout_constraintTop_toBottomOf="@+id/btn_get_live_stream_bit_rate_mode"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_get_live_stream_bit_rate"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_get_live_stream_bit_rate"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_live_stream_bit_rate"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_enable_audio"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_enable_audio"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/btn_get_live_stream_bit_rate"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+
+            <Button
+                android:id="@+id/btn_disable_audio"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_disable_audio"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/btn_enable_audio"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:layout_editor_absoluteX="3dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        app:layout_constraintLeft_toRightOf="@+id/live_stream_button_list"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+        <SurfaceView
+            android:id="@+id/live_stream_surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <TextView
+            android:id="@+id/tv_live_stream_info"
+            android:layout_width="400dp"
+            android:layout_height="200dp"
+            android:text="@string/n_a"
+            android:textColor="#3659F4"
+            android:background="@color/button_press"
+            android:layout_marginBottom="100dp"
+            app:layout_constraintLeft_toLeftOf="@+id/live_stream_surface_view"
+            app:layout_constraintTop_toBottomOf="@+id/live_stream_surface_view"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

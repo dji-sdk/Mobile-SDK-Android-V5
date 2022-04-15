@@ -27,7 +27,7 @@
         android:layout_weight="1"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:text=" index:表示负载的位置一般为0 \n subType:表示镜头 0 = zoom ，1 = wide ， 2 = ir \n subIndex:目前只有电池箱用到表示下一级小配件位置"
+        android:text="@string/index_tips"
         android:gravity="left" />
 
     <LinearLayout

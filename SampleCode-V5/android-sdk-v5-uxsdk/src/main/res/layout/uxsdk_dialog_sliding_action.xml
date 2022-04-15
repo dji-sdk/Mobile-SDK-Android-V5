@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/uxsdk_background_black_rectangle">
+
+    <ImageView
+        android:id="@+id/image_view_dialog_icon"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_dialog_title"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@id/text_view_dialog_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_takeoff_yellow"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_view_dialog_title"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:textColor="@color/uxsdk_white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_view_dialog_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Are you sure you want to take off?" />
+
+    <TextView
+        android:id="@+id/text_view_dialog_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/uxsdk_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dialog_title"
+        app:layout_constraintWidth_percent="0.9"
+        tools:text="Ensure it is safe to take off. The aircraft will rise to 3.9 ft and hover." />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/uxsdk_white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dialog_description"
+        app:layout_constraintWidth_percent="0.9"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/text_view_action"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/uxsdk_background_sliding_seekbar_text"
+        android:drawableEnd="@drawable/uxsdk_ic_double_arrow"
+        android:drawablePadding="6dp"
+        android:gravity="end|center_vertical"
+        android:paddingStart="6dp"
+        android:paddingLeft="6dp"
+        android:paddingEnd="6dp"
+        android:paddingRight="6dp"
+        android:textColor="@color/uxsdk_slider_text"
+        android:textSize="@dimen/uxsdk_text_size_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/slide_seek_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/slide_seek_bar"
+        app:layout_constraintWidth_percent="0.8"
+        tools:text="Slide to Take Off" />
+
+    <dji.v5.ux.core.ui.SlideAndFillSeekBar
+        android:id="@+id/slide_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:max="100"
+        android:padding="0dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/uxsdk_sliding_seekbar_progress"
+        android:thumb="@drawable/uxsdk_sliding_seekbar_thumb"
+        android:thumbOffset="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <View
+        android:id="@+id/view_separator"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/uxsdk_gray_640"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slide_seek_bar" />
+
+    <TextView
+        android:id="@+id/text_view_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/uxsdk_app_cancel"
+        android:textColor="@color/uxsdk_white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_separator" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

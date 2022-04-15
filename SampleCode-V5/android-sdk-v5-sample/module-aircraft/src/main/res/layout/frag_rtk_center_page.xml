@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:text="@string/btn_enable_rtk" />
+                    android:text="@string/btn_disable_rtk" />
             </RadioGroup>
 
             <TextView
@@ -86,7 +86,7 @@
                             android:id="@+id/btn_rtk_source_network"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"
+                            android:checked="false"
                             android:text="@string/btn_rtk_source_network" />
 
                         <RadioButton
@@ -102,7 +102,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
-                            android:checked="true"
+                            android:checked="false"
                             android:text="@string/btn_rtk_source_base_rtk" />
                     </RadioGroup>
 
@@ -121,7 +121,8 @@
                         android:layout_below="@id/rtk_source_radio_group"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@id/bt_open_network_rtk"
-                        android:text="@string/bt_open_rtk_station" />
+                        android:text="@string/bt_open_rtk_station"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -196,11 +197,28 @@
                             android:text="null" />
 
                         <TextView
+                            android:id="@+id/tv_rtk_position_std_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_mobile_position_info"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/tv_rtk_position_std_distance"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_rtk_position_std_distance_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_rtk_position_std_distance"
+                            android:text="null" />
+
+
+                        <TextView
                             android:id="@+id/tv_rtk_std_position"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_rtk_mobile_position"
-                            android:layout_marginTop="25dp"
+                            android:layout_below="@id/tv_rtk_position_std_distance_info"
+                            android:layout_marginTop="5dp"
                             android:text="@string/tv_rtk_std_position"
                             android:textStyle="bold" />
 

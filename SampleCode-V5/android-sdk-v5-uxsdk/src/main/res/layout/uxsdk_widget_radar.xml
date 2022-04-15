@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="dji.v5.ux.core.widget.radar.RadarWidget">
+
+    <ImageView
+        android:id="@+id/imageview_radar_forward_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_forward_0"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_forward_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_forward_1"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_forward_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_forward_2"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_forward_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_forward_3"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_forward_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06"
+        app:srcCompat="@drawable/uxsdk_ic_radar_arrow"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_forward_distance"
+        style="@style/UXSDKRadarWidgetDistanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageview_forward_arrow"
+        tools:text="1.5 m" />
+
+    <ImageView
+        android:id="@+id/imageview_backward_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.884"
+        app:srcCompat="@drawable/uxsdk_ic_radar_arrow"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_backward_distance"
+        style="@style/UXSDKRadarWidgetDistanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/imageview_backward_arrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="1.5 m" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_backward_0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_backward_0"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_backward_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_backward_1"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_backward_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_backward_2"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_backward_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.155"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_backward_3"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.115"
+        app:srcCompat="@drawable/uxsdk_ic_radar_left"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageview_left_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_arrow"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_left_distance"
+        style="@style/UXSDKRadarWidgetDistanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageview_left_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1.5 m" />
+
+    <ImageView
+        android:id="@+id/imageview_right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_radar_arrow"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/textview_right_distance"
+        style="@style/UXSDKRadarWidgetDistanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imageview_right_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1.5 m" />
+
+    <ImageView
+        android:id="@+id/imageview_radar_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.115"
+        app:srcCompat="@drawable/uxsdk_ic_radar_right"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageview_upward_obstacle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="@string/uxsdk_widget_default_ratio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_upward_obstacle"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
+
+</merge>

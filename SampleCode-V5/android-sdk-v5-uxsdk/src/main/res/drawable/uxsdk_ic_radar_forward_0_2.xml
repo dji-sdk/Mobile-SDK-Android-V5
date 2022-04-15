@@ -1,0 +1,45 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="347dp"
+    android:height="35dp"
+    android:viewportWidth="347"
+    android:viewportHeight="35"
+    tools:ignore="VectorRaster">
+  <path
+      android:pathData="M0.204,16.464L6.455,21.382C33.069,15.875 62.5,11.787 93.496,9.211L90.446,3.45C58.231,6.203 27.686,10.574 0.204,16.464"
+      android:strokeWidth="1"
+      android:fillColor="#4BD663"
+      android:fillAlpha="0.4"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+  <path
+      android:pathData="M7.662,22.624L14.048,27.651C39.643,22.598 67.779,18.854 97.354,16.5L94.25,10.634C63.431,13.164 34.157,17.192 7.662,22.624"
+      android:strokeWidth="1"
+      android:fillColor="#FFC700"
+      android:fillAlpha="0.399031929"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>

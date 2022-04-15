@@ -28,6 +28,15 @@ ext {
     deps.protobufJava = 'com.google.protobuf:protobuf-java:3.8.0'
     deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
 
+    deps.maplibreAnotation = 'org.maplibre.gl:android-plugin-annotation-v9:1.0.0'
+    deps.maplibreTurf =  'org.maplibre.gl:android-sdk-turf:5.9.0'
+    deps.maplibreSdk = 'org.maplibre.gl:android-sdk:9.4.2'
+    // google map
+    deps.playservicesplaces = 'com.google.android.gms:play-services-places:16.0.0'
+    deps.playservicesmaps    = 'com.google.android.gms:play-services-maps:16.0.0'
+    deps.playserviceslocation = 'com.google.android.gms:play-services-location:16.0.0'
+    deps.playservicesbase    = 'com.google.android.gms:play-services-base:16.0.0'
+
     //androidx
     deps.fragment = 'androidx.fragment:fragment:1.2.0'
     deps.aacCommon = 'androidx.arch.core:core-common:2.1.0'

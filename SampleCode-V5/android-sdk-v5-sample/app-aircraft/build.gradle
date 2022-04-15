@@ -19,12 +19,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../../android-sdk-v5-as/proguard-relative/sample.pro'
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../../android-sdk-v5-as/proguard-relative/sample.pro'
         }
@@ -56,6 +56,18 @@ android {
         doNotStrip "*/*/libFlightRecordEngine.so"
         doNotStrip "*/*/libvideo-framing.so"
         doNotStrip "*/*/libwaes.so"
+        doNotStrip "*/*/libagora-rtsa-sdk.so"
+        doNotStrip "*/*/libc++.so"
+        doNotStrip "*/*/libc++_shared.so"
+        doNotStrip "*/*/libmrtc_28181.so"
+        doNotStrip "*/*/libmrtc_agora.so"
+        doNotStrip "*/*/libmrtc_core.so"
+        doNotStrip "*/*/libmrtc_core_jni.so"
+        doNotStrip "*/*/libmrtc_data.so"
+        doNotStrip "*/*/libmrtc_log.so"
+        doNotStrip "*/*/libmrtc_onvif.so"
+        doNotStrip "*/*/libmrtc_rtmp.so"
+        doNotStrip "*/*/libmrtc_rtsp.so"
     }
 }
 
@@ -74,5 +86,6 @@ dependencies {
 
     implementation project(':sample-module-aircraft')
 
+    compileOnly files("../../${project.AIRCRAFT_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
     implementation files("../../${project.AIRCRAFT_RELEASE}${project.MSDK_VERSION}${project.AAR_FILE_TYPE}")
 }

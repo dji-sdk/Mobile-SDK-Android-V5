@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import dji.sampleV5.modulecommon.R;
@@ -35,13 +37,13 @@ public class KeyValueDialogUtil {
     /**
      * 显示单选对话框
      */
-    public static void showSingleChoiceDialog(Context context, List<String> data, int selectedIndex, final KeyItemActionListener<String> callBack) {
+    public static void showSingleChoiceDialog(Context context, List<String> data, int selectedIndex, final KeyItemActionListener<List<String>> callBack) {
         AlertDialog dialog;
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         final String[] items = data.toArray(new String[data.size()]);
         builder.setSingleChoiceItems(items, selectedIndex, (dialog1, which) -> {
             if (callBack != null) {
-                callBack.actionChange(items[which]);
+                callBack.actionChange(Arrays.asList(items[which]));
                 dialog1.dismiss();
             }
         });
@@ -49,7 +51,25 @@ public class KeyValueDialogUtil {
         dialog = builder.create();
         dialog.show();
     }
+    public static  void showMultiChoiceDialog(Context context, List<String> data, final KeyItemActionListener<List<String>> callBack){
+        AlertDialog dialog;
+        List<String> values = new ArrayList<>();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final String[] items = data.toArray(new String[data.size()]);
+        builder.setMultiChoiceItems(items, null, (dialog1, which, isChecked) -> {
+            if (isChecked) {
+                values.add(items[which]);
+            } else {
+                values.remove(items[which]);
+            }
 
+        });
+        builder.setPositiveButton(R.string.confirm, (dialog12, which) -> callBack.actionChange(values));
+        builder.setCancelable(true);
+        dialog = builder.create();
+        dialog.show();
+
+    }
     /**
      * 显示简单列表弹窗
      *

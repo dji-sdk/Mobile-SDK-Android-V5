@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <integer-array name="uxsdk_iso_values">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </integer-array>
+    <string-array name="uxsdk_camera_white_balance_name_array">
+        <item>@string/uxsdk_camera_wb_auto</item>
+        <item>@string/uxsdk_camera_wb_outdoor</item>
+        <item>@string/uxsdk_camera_wb_indoor</item>
+        <item>@string/uxsdk_camera_wb_water</item>
+        <item>@string/uxsdk_camera_wb_tungsten</item>
+        <item>@string/uxsdk_camera_wb_neon</item>
+        <item>@string/uxsdk_camera_wb_custom</item>
+        <item>@string/uxsdk_camera_wb_neutral</item>
+    </string-array>
+    <string-array name="uxsdk_camera_video_resolution_name_array">
+        <item>@string/uxsdk_camera_video_resolution_640_480p</item>
+        <item>@string/uxsdk_camera_video_resolution_640_512p</item>
+        <item>@string/uxsdk_camera_video_resolution_1280_720p</item>
+        <item>@string/uxsdk_camera_video_resolution_1920_1080p</item>
+        <item>@string/uxsdk_camera_video_resolution_2704_1520p</item>
+        <item>@string/uxsdk_camera_video_resolution_2720_1530p</item>
+        <item>@string/uxsdk_camera_video_resolution_3840x1572p</item>
+        <item>@string/uxsdk_camera_video_resolution_3840_2160p</item>
+        <item>@string/uxsdk_camera_video_resolution_4096_2160p</item>
+        <item>@string/uxsdk_camera_video_resolution_4608x2160p</item>
+        <item>@string/uxsdk_camera_video_resolution_4608x2592p</item>
+        <item>@string/uxsdk_camera_video_resolution_5280x2160p</item>
+        <item>@string/uxsdk_camera_video_resolution_MaxResolution</item>
+        <item>@string/uxsdk_camera_video_resolution_None</item>
+        <item>@string/uxsdk_camera_video_resolution_5760x3240p</item>
+        <item>@string/uxsdk_camera_video_resolution_6016x3200p</item>
+        <item>@string/uxsdk_camera_video_resolution_2048x1080p</item>
+        <item>@string/uxsdk_camera_video_resolution_5280x2972p</item>
+        <item>@string/uxsdk_camera_video_resolution_336x256p</item>
+        <item>@string/uxsdk_camera_video_resolution_3712x2088p</item>
+        <item>@string/uxsdk_camera_video_resolution_3944x2088p</item>
+        <item>@string/uxsdk_camera_video_resolution_2688x1512p</item>
+    </string-array>
+
+    <string-array name="uxsdk_camera_video_frame_rate_real_value_array">
+        <item>@string/uxsdk_camera_video_frame_rate_value_24</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_true_24</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_25</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_30</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_true_30</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_48</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_true_48</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_50</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_60</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_true_60</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_96</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_100</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_120</item>
+        <item>@string/uxsdk_camera_video_frame_rate_value_240</item>
+    </string-array>
+
+    <string-array name="uxsdk_camera_ssd_color_array">
+        <item>@string/uxsdk_camera_ssd_color_standard</item>
+        <item>@string/uxsdk_camera_ssd_color_dlog</item>
+        <item>@string/uxsdk_camera_ssd_color_rec709</item>
+        <item>@string/uxsdk_camera_ssd_color_cine_like</item>
+        <item>@string/uxsdk_camera_ssd_color_raw_color</item>
+    </string-array>
+
+    <string-array name="uxsdk_camera_color_type">
+        <item>@string/uxsdk_camera_filter_none</item>
+        <item>@string/uxsdk_camera_filter_art</item>
+        <item>@string/uxsdk_camera_filter_reminiscence</item>
+        <item>@string/uxsdk_camera_filter_inverse</item>
+        <item>@string/uxsdk_camera_filter_blackandwhite</item>
+        <item>@string/uxsdk_camera_filter_bright</item>
+        <item>@string/uxsdk_camera_filter_dcinelike</item>
+        <item>@string/uxsdk_camera_filter_Portrait</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>@string/uxsdk_camera_filter_M31</item>
+        <item>@string/uxsdk_camera_filter_delta</item>
+        <item>@string/uxsdk_camera_filter_kdx</item>
+        <item>@string/uxsdk_camera_filter_dk79</item>
+        <item>@string/uxsdk_camera_filter_prismo</item>
+        <item>@string/uxsdk_camera_filter_jugo</item>
+        <item>@string/uxsdk_camera_filter_vision4</item>
+        <item>@string/uxsdk_camera_filter_vision6</item>
+        <item>@string/uxsdk_camera_filter_truecolor</item>
+        <item>@string/uxsdk_camera_filter_dlog</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>null</item>
+        <item>@string/uxsdk_camera_filter_solarize</item>
+        <item>@string/uxsdk_camera_filter_posterize</item>
+        <item>@string/uxsdk_camera_filter_whiteboard</item>
+        <item>@string/uxsdk_camera_filter_blackboard</item>>
+        <item>@string/uxsdk_camera_filter_aqua</item>
+        <item>@string/uxsdk_camera_filter_truecolor_ext</item>
+        <item>null</item>
+        <item>@string/uxsdk_camera_filter_film_a</item>
+        <item>@string/uxsdk_camera_filter_film_b</item>
+        <item>@string/uxsdk_camera_filter_film_c</item>
+        <item>@string/uxsdk_camera_filter_film_d</item>
+        <item>@string/uxsdk_camera_filter_film_e</item>
+        <item>@string/uxsdk_camera_filter_film_f</item>
+        <item>@string/uxsdk_camera_filter_film_g</item>
+        <item>@string/uxsdk_camera_filter_film_h</item>
+        <item>@string/uxsdk_camera_filter_film_i</item>
+        <item>@string/uxsdk_camera_filter_hlg</item>
+    </string-array>
+</resources>

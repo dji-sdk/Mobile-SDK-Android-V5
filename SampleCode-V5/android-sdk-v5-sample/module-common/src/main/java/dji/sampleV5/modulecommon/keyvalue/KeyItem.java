@@ -3,9 +3,12 @@ package dji.sampleV5.modulecommon.keyvalue;
 
 import androidx.annotation.NonNull;
 
+import org.json.JSONObject;
+
 import dji.sampleV5.modulecommon.util.ToastUtils;
 import dji.sampleV5.modulecommon.util.Util;
 import dji.sdk.keyvalue.converter.EmptyValueConverter;
+import dji.sdk.keyvalue.converter.SingleValueConverter;
 import dji.sdk.keyvalue.key.DJIActionKeyInfo;
 import dji.sdk.keyvalue.key.DJIKeyInfo;
 import dji.sdk.keyvalue.value.base.DJIValue;
@@ -32,18 +35,19 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
      */
     protected String name;
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
     /**
      * 使用次数，用户排序
      */
-    private int count;
+    private long count;
+    public boolean isSingleDJIValue;
 
     /**
      * 参数key的能力携带实体
@@ -54,6 +58,16 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
      * 需要调用者注入的回调接口，用于结果通知
      */
     protected KeyItemActionListener<Object> keyOperateCallBack;
+    private boolean isItemSelected ;
+    public boolean isItemSelected() {
+        return isItemSelected;
+    }
+
+    public void setItemSelected(boolean itemSelected) {
+        isItemSelected = itemSelected;
+    }
+
+
 
     /**
      * 推送数据回调（需要调用者注入）
@@ -319,8 +333,29 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
      * @return
      */
     public P buildParamFromJsonStr(String jsonStr) {
-        P p = (P) keyInfo.getTypeConverter().fromStr(jsonStr);
+        P p;
+        if (keyInfo.getTypeConverter() instanceof SingleValueConverter && !isSingleDJIValue) {
+            p = (P) keyInfo.getTypeConverter().fromStr(getSingleJsonValue(jsonStr));
+        } else {
+             p = (P) keyInfo.getTypeConverter().fromStr(jsonStr);
+        }
         return p;
+    }
+
+    /**
+     * 获取SingleValue 中原始类型包装类的value值
+     * @param jsonStr
+     * @return
+     */
+    private String getSingleJsonValue(String jsonStr) {
+        String value = "";
+        try {
+            JSONObject jsonObj = new JSONObject(jsonStr);
+            value = jsonObj.getString("value");
+        }catch (Exception e) {
+            LogUtils.e(TAG ,e.getMessage());
+        }
+        return  value;
     }
 
     /**
@@ -348,7 +383,22 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
 
     @Override
     public int compareTo(KeyItem keyItem) {
-        return   keyItem.count - this.count ;
+        if (keyItem.count - this.count > 0) {
+            return  1;
+        } else if (keyItem.count - this.count < 0) {
+            return  -1;
+        } else {
+            return  0;
+        }
+    }
+
+
+    public boolean isSingleDJIValue() {
+        return isSingleDJIValue;
+    }
+
+    public void setSingleDJIValue(boolean singleDJIValue) {
+        isSingleDJIValue = singleDJIValue;
     }
 
     @Override

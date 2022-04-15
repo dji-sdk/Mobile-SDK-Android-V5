@@ -3,11 +3,15 @@ package dji.sampleV5.moduleaircraft.models
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sdk.keyvalue.key.RemoteControllerKey
+import dji.sdk.keyvalue.value.flightcontroller.FlightControlAuthority
+import dji.sdk.keyvalue.value.flightcontroller.FlightControlAuthorityChangeReason
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.et.create
 import dji.v5.et.listen
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.virtualstick.VirtualStickManager
+import dji.v5.manager.aircraft.virtualstick.VirtualStickState
+import dji.v5.manager.aircraft.virtualstick.VirtualStickStateListener
 
 /**
  * Class Description
@@ -21,6 +25,7 @@ class VirtualStickVM : DJIViewModel() {
 
     val currentSpeedLevel = MutableLiveData(0.0)
     var useRcStick = MutableLiveData(false)
+    val currentVirtualStickStateInfo = MutableLiveData(VirtualStickStateInfo())
 
     // RC Stick Value
     private var RCStickLeftHorizontal = 0
@@ -30,6 +35,20 @@ class VirtualStickVM : DJIViewModel() {
 
     init {
         currentSpeedLevel.value = VirtualStickManager.getInstance().speedLevel
+        VirtualStickManager.getInstance().setVirtualStickStateListener(object :
+            VirtualStickStateListener {
+            override fun onVirtualStickStateUpdate(stickState: VirtualStickState) {
+                currentVirtualStickStateInfo.postValue(currentVirtualStickStateInfo.value?.apply {
+                    this.state = stickState
+                })
+            }
+
+            override fun onChangeReasonUpdate(reason: FlightControlAuthorityChangeReason) {
+                currentVirtualStickStateInfo.postValue(currentVirtualStickStateInfo.value?.apply {
+                    this.reason = reason
+                })
+            }
+        })
     }
 
     fun enableVirtualStick(callback: CommonCallbacks.CompletionCallback) {
@@ -56,19 +75,19 @@ class VirtualStickVM : DJIViewModel() {
     }
 
     fun listenRCStick() {
-        RemoteControllerKey.KeyStickLeftHorizontal.create().listen(this){
+        RemoteControllerKey.KeyStickLeftHorizontal.create().listen(this) {
             RCStickLeftHorizontal = it ?: 0
             tryUpdateVirtualStickByRc()
         }
-        RemoteControllerKey.KeyStickLeftVertical.create().listen(this){
+        RemoteControllerKey.KeyStickLeftVertical.create().listen(this) {
             RCStickRightHorizontal = it ?: 0
             tryUpdateVirtualStickByRc()
         }
-        RemoteControllerKey.KeyStickRightHorizontal.create().listen(this){
+        RemoteControllerKey.KeyStickRightHorizontal.create().listen(this) {
             RCStickRightHorizontal = it ?: 0
             tryUpdateVirtualStickByRc()
         }
-        RemoteControllerKey.KeyStickRightVertical.create().listen(this){
+        RemoteControllerKey.KeyStickRightVertical.create().listen(this) {
             RCStickRightVertical = it ?: 0
             tryUpdateVirtualStickByRc()
         }
@@ -83,5 +102,11 @@ class VirtualStickVM : DJIViewModel() {
 
     override fun onCleared() {
         KeyManager.getInstance().cancelListen(this)
+        VirtualStickManager.getInstance().clearAllVirtualStickStateListener()
     }
+
+    data class VirtualStickStateInfo(
+        var state: VirtualStickState = VirtualStickState(false, FlightControlAuthority.UNKNOWN),
+        var reason: FlightControlAuthorityChangeReason = FlightControlAuthorityChangeReason.UNKNOWN
+    )
 }

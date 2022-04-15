@@ -1,5 +1,6 @@
 package dji.sampleV5.moduleaircraft.models
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import dji.rtk.CoordinateSystem
 import dji.sampleV5.modulecommon.models.DJIViewModel
@@ -15,6 +16,7 @@ import dji.sdk.keyvalue.key.KeyTools
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.rtk.RTKCenter
 import dji.v5.manager.aircraft.rtk.network.INetworkServiceInfoListener
+import dji.v5.utils.common.DjiSharedPreferencesManager
 import dji.v5.utils.common.LogUtils
 
 /**
@@ -26,13 +28,14 @@ import dji.v5.utils.common.LogUtils
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
 class RTKVM : DJIViewModel() {
-
+    companion object {
+        const val CUSTOM_RTK_SETTING_CACHE = "customRTKSettingChache"
+    }
     val currentRTKState = MutableLiveData(RTKServiceState.RTCM_NORMAL)
     val currentRTKErrorMsg = MutableLiveData("")
     val currentCustomNetworkRTKSettings = MutableLiveData<RTKCustomNetworkSetting>()
     val currentQxNetworkCoordinateSystem = MutableLiveData<CoordinateSystem>()
-    val rtkLocation = MutableLiveData<RTKLocation>()
-    val rtkSource = MutableLiveData<RTKReferenceStationSource>()
+
 
     private val networkServiceInfoListener: INetworkServiceInfoListener = object :
         INetworkServiceInfoListener {
@@ -49,6 +52,20 @@ class RTKVM : DJIViewModel() {
         }
     }
 
+    fun getCurrentCustomNetworkRTKSettingCache(context: Context?): String {
+        val defaultSettings = RTKCustomNetworkSetting(
+            "",
+            0,
+            "",
+            "",
+            ""
+        )
+        context?.let {
+            return DjiSharedPreferencesManager.getString(context, CUSTOM_RTK_SETTING_CACHE, defaultSettings.toString());
+        }
+        return defaultSettings.toString()
+    }
+
     override fun onCleared() {
         RTKCenter.getInstance().customRTKManager.removeNetworkRTKServiceInfoListener(
             networkServiceInfoListener
@@ -56,7 +73,6 @@ class RTKVM : DJIViewModel() {
         RTKCenter.getInstance().qxrtkManager.removeNetworkRTKServiceInfoListener(
             networkServiceInfoListener
         )
-        KeyManager.getInstance().cancelListen(this)
     }
 
     fun addNetworkRTKServiceInfoCallback() {
@@ -68,23 +84,6 @@ class RTKVM : DJIViewModel() {
         )
     }
 
-    fun listenRtkLocation() {
-        KeyManager.getInstance().listen(
-            KeyTools.createKey(RtkMobileStationKey.KeyRTKLocation),
-            this, true
-        ) { _, newValue ->
-            rtkLocation.value = newValue
-        }
-    }
-
-    fun listenRtkSource() {
-        KeyManager.getInstance().listen(
-            KeyTools.createKey(RtkBaseStationKey.KeyRTKReferenceStationSource),
-            this, true
-        ) { _, newValue ->
-            rtkSource.value = newValue
-        }
-    }
 
     // custom network
     fun startCustomNetworkRTKService(callback: CommonCallbacks.CompletionCallback) {
@@ -95,15 +94,16 @@ class RTKVM : DJIViewModel() {
         RTKCenter.getInstance().customRTKManager.stopNetworkRTKService(callback)
     }
 
-    fun setCustomNetworkRTKSettings(settings: RTKCustomNetworkSetting) {
+    fun setCustomNetworkRTKSettings(context: Context?, settings: RTKCustomNetworkSetting) {
         RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings = settings
-        currentCustomNetworkRTKSettings.value =
-            RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings
+        currentCustomNetworkRTKSettings.value = RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings
+        context?.let {
+            DjiSharedPreferencesManager.putString(it, CUSTOM_RTK_SETTING_CACHE, settings.toString())
+        }
     }
 
     fun getCustomNetworkRTKSettings() {
-        currentCustomNetworkRTKSettings.value =
-            RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings
+        currentCustomNetworkRTKSettings.value = RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings
     }
 
     //qx network

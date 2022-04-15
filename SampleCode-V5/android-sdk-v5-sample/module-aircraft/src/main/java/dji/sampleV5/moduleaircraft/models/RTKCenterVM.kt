@@ -7,6 +7,7 @@ import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.rtk.*
+import dji.v5.utils.common.LogUtils
 
 
 /**
@@ -18,11 +19,13 @@ import dji.v5.manager.aircraft.rtk.*
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
 class RTKCenterVM : DJIViewModel() {
+    private val TAG="RTKCenterVM"
     val setAircraftRTKModuleEnableLD = MutableLiveData<DJIBaseResult<Boolean>>()
     val getAircraftRTKModuleEnabledLD = MutableLiveData<DJIBaseResult<Boolean>>()
     val setRTKReferenceStationSourceLD = MutableLiveData<DJIBaseResult<Boolean>>()
     val rtkLocationInfoLD = MutableLiveData<DJIBaseResult<RTKLocationInfo>>()
     val rtkSystemStateLD = MutableLiveData<DJIBaseResult<RTKSystemState>>()
+    val rtkSourceLD = MutableLiveData<DJIBaseResult<RTKReferenceStationSource>>()
 
     private val rtkLocationInfoListener = RTKLocationInfoListener {
         rtkLocationInfoLD.postValue(DJIBaseResult.success(it))
@@ -50,6 +53,20 @@ class RTKCenterVM : DJIViewModel() {
             CommonCallbacks.CompletionCallbackWithParam<Boolean> {
             override fun onSuccess(t: Boolean?) {
                 getAircraftRTKModuleEnabledLD.postValue(DJIBaseResult.success(t))
+            }
+
+            override fun onFailure(error: IDJIError) {
+                getAircraftRTKModuleEnabledLD.postValue(DJIBaseResult.failed(error.toString()))
+            }
+
+        })
+    }
+
+    fun getRTKReferenceStationSource() {
+        RTKCenter.getInstance().getRTKReferenceStationSource(object : CommonCallbacks.CompletionCallbackWithParam<RTKReferenceStationSource> {
+            override fun onSuccess(t: RTKReferenceStationSource?) {
+                LogUtils.d(TAG,"getRTKReferenceStationSource,t=$t")
+                rtkSourceLD.postValue(DJIBaseResult.success(t))
             }
 
             override fun onFailure(error: IDJIError) {

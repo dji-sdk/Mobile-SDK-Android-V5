@@ -1,0 +1,35 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp"
+    android:height="17dp"
+    android:viewportWidth="16"
+    android:viewportHeight="17">
+  <path
+      android:pathData="M15.1413,6L0.8587,6C0.3842,6 0,6.369 0,6.8228L0,16.1781C0,16.6318 0.3842,17 0.8587,17L15.1413,17C15.6158,17 16,16.6318 16,16.1781L16,6.8228C16,6.369 15.6158,6 15.1413,6M4.25,14C2.7334,14 1.5,12.7652 1.5,11.2491C1.5,9.7339 2.7334,8.5 4.25,8.5C5.7666,8.5 7,9.7339 7,11.2491C7,12.7652 5.7666,14 4.25,14M11.7504,14C10.2341,14 9,12.7652 9,11.2491C9,9.7339 10.2341,8.5 11.7504,8.5C13.2668,8.5 14.5,9.7339 14.5,11.2491C14.5,12.7652 13.2668,14 11.7504,14M3.8,0L4.2,0C4.6418,0 5,0.3582 5,0.8L5,5L5,5L3,5L3,0.8C3,0.3582 3.3582,0 3.8,0ZM11.8,0L12.2,0C12.6418,0 13,0.3582 13,0.8L13,5L13,5L11,5L11,0.8C11,0.3582 11.3582,0 11.8,0ZM4.2505,12.5C3.5608,12.5 3,11.9394 3,11.25C3,10.5606 3.5608,10 4.2505,10C4.9403,10 5.5,10.5606 5.5,11.25C5.5,11.9394 4.9403,12.5 4.2505,12.5M11.7505,12.5C11.0608,12.5 10.5,11.9394 10.5,11.25C10.5,10.5606 11.0608,10 11.7505,10C12.4403,10 13,10.5606 13,11.25C13,11.9394 12.4403,12.5 11.7505,12.5"
+      android:strokeWidth="1"
+      android:fillColor="#FEFEFE"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>

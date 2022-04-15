@@ -1,0 +1,52 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="347dp"
+    android:height="35dp"
+    android:viewportWidth="347"
+    android:viewportHeight="35"
+    tools:ignore="VectorRaster">
+  <path
+      android:pathData="M103.368,17.613L106.579,23.608C127.022,22.157 148.4,21.354 170.423,21.286L170.448,15.1C147.527,15.169 125.036,16.022 103.368,17.613"
+      android:strokeWidth="1"
+      android:fillColor="#FF0000"
+      android:fillAlpha="0.6"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+  <path
+      android:pathData="M170.485,5.977L170.509,0C144.874,0.074 119.709,1.101 95.556,3.026L98.646,8.796C121.816,7.006 145.923,6.049 170.485,5.977"
+      android:strokeWidth="1"
+      android:fillColor="#FFC700"
+      android:fillAlpha="0.399031929"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+  <path
+      android:pathData="M102.56,16.104C124.488,14.489 147.256,13.627 170.455,13.565L170.479,7.482C146.185,7.545 122.341,8.476 99.412,10.225L102.56,16.104Z"
+      android:strokeWidth="1"
+      android:fillColor="#FF0000"
+      android:fillAlpha="0.4"
+      android:fillType="evenOdd"
+      android:strokeColor="#00000000"/>
+</vector>
