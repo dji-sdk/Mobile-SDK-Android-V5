@@ -91,7 +91,7 @@
     <string name="wsbridge_ip">WSBridge IP</string>
     <string name="sdk_version">Version: %1$s</string>
     <string name="product_name">Product Name: %1$s</string>
-    <string name="is_debug">Is Debug: %1$s</string>
+    <string name="is_sdk_debug">Is SDK Debug: %1$s</string>
     <string name="registration_status">Registration Status: %1$s</string>
     <string name="package_product_category">Package Category: %1$s</string>
     <string name="remote_controller">Remote Controller Only</string>

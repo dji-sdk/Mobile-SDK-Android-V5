@@ -97,7 +97,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="4dp"
                 android:gravity="center"
-                android:text="@string/is_debug"
+                android:text="@string/is_sdk_debug"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 

@@ -65,7 +65,6 @@ class RTKCenterVM : DJIViewModel() {
     fun getRTKReferenceStationSource() {
         RTKCenter.getInstance().getRTKReferenceStationSource(object : CommonCallbacks.CompletionCallbackWithParam<RTKReferenceStationSource> {
             override fun onSuccess(t: RTKReferenceStationSource?) {
-                LogUtils.d(TAG,"getRTKReferenceStationSource,t=$t")
                 rtkSourceLD.postValue(DJIBaseResult.success(t))
             }
 

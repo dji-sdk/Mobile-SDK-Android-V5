@@ -12,6 +12,8 @@ import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.virtualstick.VirtualStickManager
 import dji.v5.manager.aircraft.virtualstick.VirtualStickState
 import dji.v5.manager.aircraft.virtualstick.VirtualStickStateListener
+import dji.v5.utils.common.LogUtils
+import kotlin.math.log
 
 /**
  * Class Description
@@ -28,10 +30,7 @@ class VirtualStickVM : DJIViewModel() {
     val currentVirtualStickStateInfo = MutableLiveData(VirtualStickStateInfo())
 
     // RC Stick Value
-    private var RCStickLeftHorizontal = 0
-    private var RCStickLeftVertical = 0
-    private var RCStickRightHorizontal = 0
-    private var RCStickRightVertical = 0
+    var stickValue = MutableLiveData(RCStickValue(0, 0, 0, 0))
 
     init {
         currentSpeedLevel.value = VirtualStickManager.getInstance().speedLevel
@@ -65,38 +64,51 @@ class VirtualStickVM : DJIViewModel() {
     }
 
     fun setLeftPosition(horizontal: Int, vertical: Int) {
+        LogUtils.d(logTag, "horizontal:$horizontal,vertical:$vertical")
         VirtualStickManager.getInstance().leftStick.horizontalPosition = horizontal
         VirtualStickManager.getInstance().leftStick.verticalPosition = vertical
     }
 
     fun setRightPosition(horizontal: Int, vertical: Int) {
+        LogUtils.d(logTag, "horizontal:$horizontal,vertical:$vertical")
         VirtualStickManager.getInstance().rightStick.horizontalPosition = horizontal
         VirtualStickManager.getInstance().rightStick.verticalPosition = vertical
     }
 
     fun listenRCStick() {
         RemoteControllerKey.KeyStickLeftHorizontal.create().listen(this) {
-            RCStickLeftHorizontal = it ?: 0
+            it?.let {
+                stickValue.value?.leftHorizontal = it
+            }
             tryUpdateVirtualStickByRc()
         }
         RemoteControllerKey.KeyStickLeftVertical.create().listen(this) {
-            RCStickRightHorizontal = it ?: 0
+            it?.let {
+                stickValue.value?.leftVertical = it
+            }
             tryUpdateVirtualStickByRc()
         }
         RemoteControllerKey.KeyStickRightHorizontal.create().listen(this) {
-            RCStickRightHorizontal = it ?: 0
+            it?.let {
+                stickValue.value?.rightHorizontal = it
+            }
             tryUpdateVirtualStickByRc()
         }
         RemoteControllerKey.KeyStickRightVertical.create().listen(this) {
-            RCStickRightVertical = it ?: 0
+            it?.let {
+                stickValue.value?.rightVertical = it
+            }
             tryUpdateVirtualStickByRc()
         }
     }
 
     private fun tryUpdateVirtualStickByRc() {
+        stickValue.postValue(stickValue.value)
         if (useRcStick.value == true) {
-            setLeftPosition(RCStickLeftHorizontal, RCStickLeftVertical)
-            setRightPosition(RCStickRightHorizontal, RCStickRightVertical)
+            stickValue.value?.apply {
+                setLeftPosition(leftHorizontal, leftVertical)
+                setRightPosition(rightHorizontal, rightVertical)
+            }
         }
     }
 
@@ -109,4 +121,13 @@ class VirtualStickVM : DJIViewModel() {
         var state: VirtualStickState = VirtualStickState(false, FlightControlAuthority.UNKNOWN),
         var reason: FlightControlAuthorityChangeReason = FlightControlAuthorityChangeReason.UNKNOWN
     )
+
+    data class RCStickValue(
+        var leftHorizontal: Int, var leftVertical:
+        Int, var rightHorizontal: Int, var rightVertical: Int
+    ) {
+        override fun toString(): String {
+            return "leftHorizontal=$leftHorizontal,leftVertical=$leftVertical,\nrightHorizontal=$rightHorizontal,rightVertical=$rightVertical"
+        }
+    }
 }

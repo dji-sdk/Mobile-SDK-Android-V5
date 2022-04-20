@@ -27,11 +27,11 @@ import dji.v5.utils.common.LogUtils
  *
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
-class RTKVM : DJIViewModel() {
+class RTKNetworkVM : DJIViewModel() {
     companion object {
         const val CUSTOM_RTK_SETTING_CACHE = "customRTKSettingChache"
     }
-    val currentRTKState = MutableLiveData(RTKServiceState.RTCM_NORMAL)
+    val currentRTKState = MutableLiveData(RTKServiceState.UNKNOWN)
     val currentRTKErrorMsg = MutableLiveData("")
     val currentCustomNetworkRTKSettings = MutableLiveData<RTKCustomNetworkSetting>()
     val currentQxNetworkCoordinateSystem = MutableLiveData<CoordinateSystem>()

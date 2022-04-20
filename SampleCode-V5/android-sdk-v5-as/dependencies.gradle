@@ -27,6 +27,7 @@ ext {
     deps.amapLocation = 'com.amap.api:location:4.9.0'
     deps.protobufJava = 'com.google.protobuf:protobuf-java:3.8.0'
     deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
+    deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
     deps.maplibreAnotation = 'org.maplibre.gl:android-plugin-annotation-v9:1.0.0'
     deps.maplibreTurf =  'org.maplibre.gl:android-sdk-turf:5.9.0'
