@@ -49,10 +49,17 @@ class RTKCenterFragment : DJIFragment() {
 
         //只要打开RTK开关才会显示相关功能界面
         rtk_open_state_radio_group.setOnCheckedChangeListener { _, checkedId ->
+            val rtkOpen = rtkCenterVM.getAircraftRTKModuleEnabledLD.value
             if (checkedId == R.id.btn_enable_rtk) {
+                LogUtils.d(TAG, "RTK已开启")
                 rl_rtk_all.visible()
-                rtkCenterVM.setAircraftRTKModuleEnabled(true)
+                //避免重复开启
+                if (rtkOpen?.data ==false) {
+                    rtkCenterVM.setAircraftRTKModuleEnabled(true)
+                }
+
             } else {
+                LogUtils.d(TAG, "RTK已关闭")
                 rl_rtk_all.gone()
                 rtkCenterVM.setAircraftRTKModuleEnabled(false)
             }
@@ -64,16 +71,16 @@ class RTKCenterFragment : DJIFragment() {
         rtk_source_radio_group.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.btn_rtk_source_base_rtk -> {
-                    LogUtils.d(TAG, "点击切换到基站RTK")
+                    LogUtils.d(TAG, "切换到基站RTK")
                     //这里只切换UI，真正的切源操作放到具体页面
                     updateRTKUI(RTKReferenceStationSource.BASE_STATION)
                 }
                 R.id.btn_rtk_source_network -> {
-                    LogUtils.d(TAG, "点击切换到网络RTK")
+                    LogUtils.d(TAG, "切换到网络RTK")
                     updateRTKUI(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
                 }
                 R.id.btn_rtk_source_qx -> {
-                    LogUtils.d(TAG, "点击切换到千寻RTK")
+                    LogUtils.d(TAG, "切换到千寻RTK")
                     updateRTKUI(RTKReferenceStationSource.QX_NETWORK_SERVICE)
                 }
             }
@@ -101,8 +108,14 @@ class RTKCenterFragment : DJIFragment() {
         })
 
         rtkCenterVM.getAircraftRTKModuleEnabledLD.observe(viewLifecycleOwner, {
-            it.data?.processResult("RTK is on", "RTK is off", tv_rtk_enable)
-
+            LogUtils.d(TAG,"RTK开启状态：${it.data}")
+            if (it?.data==true) {
+                btn_enable_rtk.isChecked = true
+                tv_rtk_enable.text="RTK is on"
+            } else {
+                btn_disable_rtk.isChecked = true
+                tv_rtk_enable.text="RTK is off"
+            }
         })
         rtkCenterVM.setRTKReferenceStationSourceLD.observe(viewLifecycleOwner, {
             it.isSuccess.processResult("Switch RTK service type successfully", "Switch RTK service type failed")

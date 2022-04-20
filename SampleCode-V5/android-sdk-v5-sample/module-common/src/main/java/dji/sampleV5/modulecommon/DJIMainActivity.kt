@@ -63,7 +63,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
             text_view_version.text = StringUtils.getResStr(R.string.sdk_version, it.SDKVersion + " " + it.buildVer)
             text_view_product_name.text = StringUtils.getResStr(R.string.product_name, it.productType.name)
             text_view_package_product_category.text = StringUtils.getResStr(R.string.package_product_category, it.packageProductCategory)
-            text_view_is_debug.text = StringUtils.getResStr(R.string.is_debug, it.isDebug)
+            text_view_is_debug.text = StringUtils.getResStr(R.string.is_sdk_debug, it.isDebug)
         }
         baseMainActivityVm.registerState.observe(this) {
             text_view_registered.text = StringUtils.getResStr(R.string.registration_status, it)
@@ -152,9 +152,9 @@ abstract class DJIMainActivity : AppCompatActivity() {
         val permissionRecordAudio = ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
         val permissionKillBackgroundProcess = ActivityCompat.checkSelfPermission(this, Manifest.permission.KILL_BACKGROUND_PROCESSES)
         if (permissionExternalRead != PackageManager.PERMISSION_GRANTED
-            && permissionExternalWrite != PackageManager.PERMISSION_GRANTED
-            && permissionRecordAudio != PackageManager.PERMISSION_GRANTED
-            && permissionKillBackgroundProcess != PackageManager.PERMISSION_GRANTED
+            || permissionExternalWrite != PackageManager.PERMISSION_GRANTED
+            || permissionRecordAudio != PackageManager.PERMISSION_GRANTED
+            || permissionKillBackgroundProcess != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,

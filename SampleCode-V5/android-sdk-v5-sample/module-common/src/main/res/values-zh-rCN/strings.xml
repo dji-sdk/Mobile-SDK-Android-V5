@@ -95,7 +95,7 @@
     <string name="wsbridge_ip">WSBridge IP</string>
     <string name="sdk_version">SDK版本: %1$s</string>
     <string name="product_name">产品名称: %1$s</string>
-    <string name="is_debug">Is Debug: %1$s</string>
+    <string name="is_sdk_debug">Is SDK Debug: %1$s</string>
     <string name="registration_status">注册状态：%1$s</string>
     <string name="package_product_category">包产品类型: %1$s</string>
     <string name="remote_controller">遥控</string>

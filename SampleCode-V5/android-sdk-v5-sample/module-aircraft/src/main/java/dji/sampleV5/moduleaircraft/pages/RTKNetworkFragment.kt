@@ -11,12 +11,13 @@ import dji.sampleV5.modulecommon.util.Helper
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.RTKCenterVM
-import dji.sampleV5.moduleaircraft.models.RTKVM
+import dji.sampleV5.moduleaircraft.models.RTKNetworkVM
 import dji.sdk.keyvalue.value.rtkbasestation.RTKCustomNetworkSetting
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.JsonUtil
+import dji.v5.utils.common.LogUtils
 import kotlinx.android.synthetic.main.frag_network_rtk_page.*
 
 /**
@@ -29,7 +30,9 @@ import kotlinx.android.synthetic.main.frag_network_rtk_page.*
  */
 class RTKNetworkFragment : DJIFragment() {
 
-    private val rtkVM: RTKVM by activityViewModels()
+    private val TAG="RTKNetworkFragment"
+    private var currentError:String=""
+    private val rtkVM: RTKNetworkVM by activityViewModels()
     private val rtkCenterVM: RTKCenterVM by activityViewModels()
     private val rtkMsgBuilder: StringBuilder = StringBuilder()
 
@@ -57,6 +60,8 @@ class RTKNetworkFragment : DJIFragment() {
 
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast(context, "StartCustomNetworkRTKService onFailure $error")
+                    LogUtils.d(TAG,"StartCustomNetworkRTKService onFailure $error")
+                    currentError=error.toString()
                 }
             })
         }
@@ -68,6 +73,9 @@ class RTKNetworkFragment : DJIFragment() {
 
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast(context, "StopCustomNetworkRTKService onFailure $error")
+                    LogUtils.d(TAG,"StopCustomNetworkRTKService onFailure $error")
+                    currentError=error.toString()
+
                 }
             })
         }
@@ -147,9 +155,9 @@ class RTKNetworkFragment : DJIFragment() {
         rtkMsgBuilder.apply {
             setLength(0)
             append("CurrentRTKState:").append(rtkVM.currentRTKState.value).append("\n")
-            append("CurrentRTKErrorMsg:").append(rtkVM.currentRTKErrorMsg.value).append("\n")
-            append("CurrentQxNetworkCoordinateSystem:").append(rtkVM.currentQxNetworkCoordinateSystem.value)
-                .append("\n")
+            append("CurrentRTKErrorMsg:").append(rtkVM.currentRTKErrorMsg.value+",$currentError").append("\n")
+//            append("CurrentQxNetworkCoordinateSystem:").append(rtkVM.currentQxNetworkCoordinateSystem.value)
+//                .append("\n")
             append("CurrentCustomNetworkRTKSettings:").append(rtkVM.currentCustomNetworkRTKSettings.value)
                 .append("\n")
         }

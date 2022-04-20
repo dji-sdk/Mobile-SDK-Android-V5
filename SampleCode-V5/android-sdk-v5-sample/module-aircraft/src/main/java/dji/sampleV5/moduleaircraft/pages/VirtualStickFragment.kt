@@ -18,6 +18,7 @@ import dji.sdk.keyvalue.value.common.EmptyMsg
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.virtualstick.Stick
+import dji.v5.utils.common.JsonUtil
 import kotlinx.android.synthetic.main.frag_virtual_stick_page.*
 import kotlin.math.abs
 
@@ -56,6 +57,9 @@ class VirtualStickFragment : DJIFragment() {
             updateVirtualStickInfo()
         }
         virtualStickVM.currentVirtualStickStateInfo.observe(viewLifecycleOwner){
+            updateVirtualStickInfo()
+        }
+        virtualStickVM.stickValue.observe(viewLifecycleOwner){
             updateVirtualStickInfo()
         }
         simulatorVM.simulatorStateSb.observe(viewLifecycleOwner){
@@ -174,6 +178,8 @@ class VirtualStickFragment : DJIFragment() {
         builder.append("CurrentControlPermissionOwner:").append(virtualStickVM.currentVirtualStickStateInfo.value?.state?.currentFlightControlAuthorityOwner)
         builder.append("\n")
         builder.append("Change Reason:").append(virtualStickVM.currentVirtualStickStateInfo.value?.reason)
+        builder.append("\n")
+        builder.append("Stick Value:").append(virtualStickVM.stickValue.value?.toString())
         builder.append("\n")
         mainHandler.post {
             virtual_stick_info_tv.text = builder.toString()

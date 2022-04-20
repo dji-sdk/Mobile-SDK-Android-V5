@@ -263,6 +263,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         exposureSettingsPanel.updateCameraSource(cameraIndex, lensType);
         //飞行控件只在fpv图传下显示
         pfvFlightDisplayWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.VISIBLE : View.GONE);
+        updateInteractionEnabled();
     }
 
     /**
@@ -294,6 +295,9 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             primaryFpvWidget.updateVideoSource(secondaryStreamSource, secondaryVideoChannel);
             secondaryFPVWidget.updateVideoSource(primaryStreamSource, primaryVideoChannel);
         }
+    }
+
+    private void updateInteractionEnabled(){
         StreamSource newPrimaryStreamSource = primaryFpvWidget.getStreamSource();
         fpvInteractionWidget.setInteractionEnabled(false);
         if (newPrimaryStreamSource != null) {
