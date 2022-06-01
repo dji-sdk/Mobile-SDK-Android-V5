@@ -1,0 +1,13 @@
+name: "Validate Gradle Wrapper"
+on: [pull_request]
+
+jobs:
+  validation:
+    name: "Validation"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: SampleCode-V5/android-sdk-v5-as
+    steps:
+      - uses: actions/checkout@v3.0.0
+      - uses: gradle/wrapper-validation-action@v1
