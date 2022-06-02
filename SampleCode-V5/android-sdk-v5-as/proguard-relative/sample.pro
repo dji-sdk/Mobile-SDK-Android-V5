@@ -123,3 +123,4 @@
 -keep class com.dji.mapkit.maplibre.provider.MapLibreProvider {*;}
 -keep class com.dji.mapkit.core.** {*;}
 -keep class com.autonavi.** {*;}
+-keep class com.alibaba.fastjson.**{*;}

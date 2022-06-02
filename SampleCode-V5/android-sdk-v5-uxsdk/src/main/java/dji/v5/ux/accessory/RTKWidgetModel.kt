@@ -23,6 +23,10 @@
 
 package dji.v5.ux.accessory
 
+import dji.sdk.keyvalue.key.DJIKey
+import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.key.RtkMobileStationKey
+import dji.v5.manager.KeyManager
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
@@ -35,14 +39,13 @@ private const val TAG = "RTKWidgetModel"
  * Widget Model for the [RTKWidget] used to define
  * the underlying logic and communication
  */
-class RTKWidgetModel(djiSdkModel: DJISDKModel,
-                     uxKeyManager: ObservableInMemoryKeyedStore
+class RTKWidgetModel(
+    djiSdkModel: DJISDKModel,
+    uxKeyManager: ObservableInMemoryKeyedStore
 ) : WidgetModel(djiSdkModel, uxKeyManager) {
 
     //region Fields
     private val rtkEnabledProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
-    private val rtkSupportedProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
-    private val isRTKConnectedProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     //endregion
 
     //region Data
@@ -53,30 +56,15 @@ class RTKWidgetModel(djiSdkModel: DJISDKModel,
         @JvmName("getRTKEnabled")
         get() = rtkEnabledProcessor.toFlowable()
 
-    /**
-     * Get whether the RTK is supported.
-     */
-    val rtkSupported: Flowable<Boolean>
-        @JvmName("getRTKSupported")
-        get() = rtkSupportedProcessor.toFlowable()
-    //endregion
 
     //region Lifecycle
     override fun inSetup() {
-//        val rtkSupportedKey = FlightControllerKey.create(FlightControllerKey.IS_RTK_SUPPORTED)
-//        bindDataProcessor(rtkSupportedKey, rtkSupportedProcessor)
-//        val rtkEnabledKey: DJIKey = FlightControllerKey.createRTKKey(FlightControllerKey.RTK_ENABLED)
-//        bindDataProcessor(rtkEnabledKey, rtkEnabledProcessor)
-//        val isRTKConnectedKey: DJIKey = FlightControllerKey.createRTKKey(FlightControllerKey.IS_RTK_CONNECTED)
-//        bindDataProcessor(isRTKConnectedKey, isRTKConnectedProcessor) {
-//            addDisposable(djiSdkModel.getValue(rtkEnabledKey)
-//                    .observeOn(SchedulerProvider.io())
-//                    .subscribe(Consumer { }, RxUtil.logErrorConsumer(TAG, "isRTKEnabled: ")))
-//        }
+        val rtkEnabledKey: DJIKey<Boolean> = KeyTools.createKey(RtkMobileStationKey.KeyRTKEnable)
+        bindDataProcessor(rtkEnabledKey, rtkEnabledProcessor)
     }
 
     override fun inCleanup() {
-        // Nothing to clean up
+        // do nothing
     }
 
     override fun updateStates() {

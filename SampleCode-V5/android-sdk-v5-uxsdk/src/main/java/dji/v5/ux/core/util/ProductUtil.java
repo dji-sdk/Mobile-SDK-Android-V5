@@ -98,7 +98,7 @@ public final class ProductUtil {
 //     * @return `true` if the connected product is in the  Matrice 200 V2 or Matrice 300 series.
 //     * `false` if the connected product is not in the Matrice 200 V2 or Matrice 300 series.
 //     */
-//    public static boolean isM200V2OrM300(Model model) {
+//    public static boolean isM200V2M300(Model model) {
 //        return Model.MATRICE_200_V2.equals(model)
 //                || Model.MATRICE_210_V2.equals(model)
 //                || Model.MATRICE_210_RTK_V2.equals(model)

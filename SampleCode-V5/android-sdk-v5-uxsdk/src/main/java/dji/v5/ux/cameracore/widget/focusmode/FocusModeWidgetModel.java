@@ -122,12 +122,12 @@ public class FocusModeWidgetModel extends WidgetModel implements ICameraIndex {
 
     @Override
     protected void onProductConnectionChanged(boolean isConnected) {
-        super.onProductConnectionChanged(isConnected);
-        if (isConnected) {
-            isFocusModeSupportedDataProcessor.onNext(djiSdkModel.isKeySupported(focusModeKey));
-        } else {
-            isFocusModeSupportedDataProcessor.onNext(false);
-        }
+//        super.onProductConnectionChanged(isConnected);
+//        if (isConnected) {
+//            isFocusModeSupportedDataProcessor.onNext(djiSdkModel.isKeySupported(focusModeKey));
+//        } else {
+//            isFocusModeSupportedDataProcessor.onNext(false);
+//        }
     }
 
     //endregion

@@ -1,300 +1,291 @@
-/*
- * Copyright (c) 2018-2020 DJI
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- *
- */
-
 package dji.v5.ux.accessory
 
+
+import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
+import dji.sdk.keyvalue.value.rtkbasestation.RTKServiceState
+import dji.sdk.keyvalue.value.rtkbasestation.RTKStationConnetState
+import dji.sdk.keyvalue.value.rtkmobilestation.RTKLocation
+import dji.v5.common.error.IDJIError
+import dji.v5.manager.aircraft.rtk.*
+import dji.v5.manager.aircraft.rtk.network.INetworkServiceInfoListener
+import dji.v5.manager.aircraft.rtk.station.RTKStationConnectStatusListener
+import dji.v5.manager.interfaces.IRTKCenter
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.DJISDKModel
+import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.WidgetModel
+import dji.v5.ux.core.communication.GlobalPreferenceKeys
 import dji.v5.ux.core.communication.GlobalPreferencesInterface
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
-
-private const val TAG = "RTKStatusWidgetModel"
+import dji.v5.ux.core.communication.UXKeys
+import dji.v5.ux.core.util.DataProcessor
+import dji.v5.ux.core.util.UnitConversionUtil
+import io.reactivex.rxjava3.core.Flowable
 
 /**
- * Widget Model for the [RTKSatelliteStatusWidget] used to define
+ * Description :Widget Model for the [RTKSatelliteStatusWidget] used to define
  * the underlying logic and communication
+ *
+ * @author: Byte.Cai
+ *  date : 2022/5/23
+ *
+ * Copyright (c) 2022, DJI All Rights Reserved.
  */
+private const val TAG = "RTKSatelliteStatusWidgetModel"
+
 class RTKSatelliteStatusWidgetModel(
     djiSdkModel: DJISDKModel,
     uxKeyManager: ObservableInMemoryKeyedStore,
-    private val preferencesManager: GlobalPreferencesInterface?
-) : WidgetModel(djiSdkModel, uxKeyManager)/**, NetworkServiceState.Callback **/{
+    private val preferencesManager: GlobalPreferencesInterface?,
+    private val rtkCenter: IRTKCenter
+) :
+    WidgetModel(djiSdkModel, uxKeyManager) {
 
-//    //region Fields
-//    private val rtkStateProcessor: DataProcessor<RTKState> = DataProcessor.create(RTKState.Builder().build())
-//    private val isRTKConnectedProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
-//    private val modelProcessor: DataProcessor<Model> = DataProcessor.create(Model.UNKNOWN_AIRCRAFT)
-//    private val referenceStationSourceProcessor: DataProcessor<ReferenceStationSource> = DataProcessor.create(ReferenceStationSource.UNKNOWN)
-//    private val unitTypeProcessor: DataProcessor<UnitConversionUtil.UnitType> = DataProcessor.create(UnitConversionUtil.UnitType.METRIC)
-//    private val networkServiceStateProcessor: DataProcessor<NetworkServiceChannelState> = DataProcessor.create(NetworkServiceChannelState.UNKNOWN)
-//
-//    private val rtkBaseStationStateProcessor: DataProcessor<RTKBaseStationState> = DataProcessor.create(RTKBaseStationState.DISCONNECTED)
-//    private val rtkNetworkServiceStateProcessor: DataProcessor<RTKNetworkServiceState> = DataProcessor.create(
-//            RTKNetworkServiceState(NetworkServiceChannelState.UNKNOWN,
-//                    isRTKBeingUsed = false,
-//                    isNetworkServiceOpen = false,
-//                    rtkSignal = RTKSignal.BASE_STATION))
-//    private val standardDeviationProcessor: DataProcessor<StandardDeviation> = DataProcessor.create(StandardDeviation(
-//            0f,
-//            0f,
-//            0f,
-//            UnitConversionUtil.UnitType.METRIC))
-//    private val rtkSignalProcessor: DataProcessor<RTKSignal> = DataProcessor.create(RTKSignal.BASE_STATION)
-//    //endregion
-//
-//    //region Data
-//    /**
-//     * Get whether the RTK is connected.
-//     */
-//    val isRTKConnected: Flowable<Boolean>
-//        get() = Flowable.combineLatest(isRTKConnectedProcessor.toFlowable(), productConnection,
-//                BiFunction { isRTKConnected: Boolean, isProductConnected: Boolean -> isRTKConnected && isProductConnected })
-//
-//    /**
-//     * Get the RTK state.
-//     */
-//    @get:JvmName("getRTKState")
-//    val rtkState: Flowable<RTKState>
-//        get() = rtkStateProcessor.toFlowable()
-//
-//    /**
-//     * Get the model of the product.
-//     */
-//    val model: Flowable<Model>
-//        get() = modelProcessor.toFlowable()
-//
-//    /**
-//     * Get the source of the RTK signal.
-//     */
-//    @get:JvmName("getRTKSignal")
-//    val rtkSignal: Flowable<RTKSignal>
-//        get() = rtkSignalProcessor.toFlowable()
-//
-//    /**
-//     * Get the standard deviation of the location accuracy.
-//     */
-//    val standardDeviation: Flowable<StandardDeviation>
-//        get() = standardDeviationProcessor.toFlowable()
-//
-//    /**
-//     * Get the state of the RTK base station.
-//     */
-//    @get:JvmName("getRTKBaseStationState")
-//    val rtkBaseStationState: Flowable<RTKBaseStationState>
-//        get() = rtkBaseStationStateProcessor.toFlowable()
-//
-//    /**
-//     * Get the state of the network service.
-//     */
-//    @get:JvmName("getRTKNetworkServiceState")
-//    val rtkNetworkServiceState: Flowable<RTKNetworkServiceState>
-//        get() = rtkNetworkServiceStateProcessor.toFlowable()
-//
-//    /**
-//     * Sends the latest network service state or base station state to the corresponding flowable.
-//     */
-//    fun updateRTKConnectionState() {
-//        if (isNetworkServiceOpen(referenceStationSourceProcessor.value)) {
-//            updateNetworkServiceState()
-//        } else {
-//            updateBaseStationState()
-//        }
-//    }
-//    //endregion
-//
-//    //region Constructor
-//    init {
-//        if (preferencesManager != null) {
-//            unitTypeProcessor.onNext(preferencesManager.unitType)
-//        }
-//    }
-//    //endregion
-//
-//    //region Lifecycle
-//    override fun inSetup() {
-//        val rtkStateKey: DJIKey = FlightControllerKey.createRTKKey(FlightControllerKey.RTK_STATE)
-//        bindDataProcessor(rtkStateKey, rtkStateProcessor)
-//        val isRTKConnectedKey: DJIKey = FlightControllerKey.createRTKKey(FlightControllerKey.IS_RTK_CONNECTED)
-//        bindDataProcessor(isRTKConnectedKey, isRTKConnectedProcessor)
-//        val modelKey: DJIKey = ProductKey.create(ProductKey.MODEL_NAME)
-//        bindDataProcessor(modelKey, modelProcessor) { value: Any ->
-//            if (value == Model.MATRICE_210_RTK) {
-//                rtkSignalProcessor.onNext(RTKSignal.BASE_STATION)
-//            }
-//        }
-//        val rtkSignalKey: DJIKey = FlightControllerKey.createRTKKey(FlightControllerKey.RTK_REFERENCE_STATION_SOURCE)
-//        bindDataProcessor(rtkSignalKey, referenceStationSourceProcessor) { value: Any ->
-//            when (value) {
-//                ReferenceStationSource.NETWORK_RTK -> {
-//                    rtkSignalProcessor.onNext(RTKSignal.NETWORK_RTK)
-//                }
-//                ReferenceStationSource.BASE_STATION -> {
-//                    rtkSignalProcessor.onNext(RTKSignal.D_RTK_2)
-//                }
-//                ReferenceStationSource.CUSTOM_NETWORK_SERVICE -> {
-//                    rtkSignalProcessor.onNext(RTKSignal.CUSTOM_NETWORK)
-//                }
-//            }
-//        }
-//        val unitKey = UXKeys.create(GlobalPreferenceKeys.UNIT_TYPE)
-//        bindDataProcessor(unitKey, unitTypeProcessor)
-//        RTKNetworkServiceProvider.getInstance().addNetworkServiceStateCallback(this)
-//        preferencesManager?.setUpListener()
-//    }
-//
-//    override fun inCleanup() {
-//        RTKNetworkServiceProvider.getInstance().removeNetworkServiceStateCallback(this)
-//        preferencesManager?.cleanup()
-//    }
-//
-//    override fun updateStates() {
-//        updateRTKConnectionState()
-//
-//        var stdLatitude = 0f
-//        var stdLongitude = 0f
-//        var stdAltitude = 0f
-//        val standardDeviation = rtkStateProcessor.value.mobileStationStandardDeviation
-//        standardDeviation?.let {
-//            if (unitTypeProcessor.value == UnitConversionUtil.UnitType.IMPERIAL) {
-//                stdLatitude = UnitConversionUtil.convertMetersToFeet(it.stdLatitude)
-//                stdLongitude = UnitConversionUtil.convertMetersToFeet(it.stdLongitude)
-//                stdAltitude = UnitConversionUtil.convertMetersToFeet(it.stdAltitude)
-//            } else {
-//                stdLatitude = it.stdLatitude
-//                stdLongitude = it.stdLongitude
-//                stdAltitude = it.stdAltitude
-//            }
-//        }
-//        standardDeviationProcessor.onNext(StandardDeviation(
-//                stdLatitude,
-//                stdLongitude,
-//                stdAltitude,
-//                unitTypeProcessor.value))
-//    }
-//
-//    override fun onNetworkServiceStateUpdate(networkServiceState: NetworkServiceState?) {
-//        if (networkServiceState != null && networkServiceStateProcessor.value != networkServiceState.channelState) {
-//            networkServiceStateProcessor.onNext(networkServiceState.channelState)
-//            updateNetworkServiceState()
-//        }
-//    }
-//
-//    //endregion
-//
-//    //region Helper methods
-//    private fun updateNetworkServiceState() {
-//        rtkNetworkServiceStateProcessor.onNext(RTKNetworkServiceState(networkServiceStateProcessor.value,
-//                rtkStateProcessor.value.isRTKBeingUsed,
-//                isNetworkServiceOpen(referenceStationSourceProcessor.value),
-//                rtkSignalProcessor.value))
-//    }
-//
-//    private fun updateBaseStationState() {
-//        if (isRTKConnectedProcessor.value && productConnectionProcessor.value) {
-//            if (rtkStateProcessor.value.isRTKBeingUsed) {
-//                rtkBaseStationStateProcessor.onNext(RTKBaseStationState.CONNECTED_IN_USE)
-//            } else {
-//                rtkBaseStationStateProcessor.onNext(RTKBaseStationState.CONNECTED_NOT_IN_USE)
-//            }
-//        } else {
-//            rtkBaseStationStateProcessor.onNext(RTKBaseStationState.DISCONNECTED)
-//        }
-//    }
-//
-//    private fun isNetworkServiceOpen(rtkSignal: ReferenceStationSource): Boolean {
-//        return rtkSignal == ReferenceStationSource.NETWORK_RTK
-//                || rtkSignal == ReferenceStationSource.DPS
-//                || rtkSignal == ReferenceStationSource.CUSTOM_NETWORK_SERVICE
-//    }
-//
-//    //endregion
-//
-//    //region Classes
-//    /**
-//     * The state of the RTK base station
-//     */
-//    enum class RTKBaseStationState {
-//        /**
-//         * The RTK base station is connected and in use.
-//         */
-//        CONNECTED_IN_USE,
-//
-//        /**
-//         * The RTK base station is connected and not in use.
-//         */
-//        CONNECTED_NOT_IN_USE,
-//
-//        /**
-//         * The RTK base station is disconnected.
-//         */
-//        DISCONNECTED
-//    }
-//
-//    /**
-//     * The state of the network service.
-//     */
-//    data class RTKNetworkServiceState(val state: NetworkServiceChannelState,
-//                                      val isRTKBeingUsed: Boolean,
-//                                      val isNetworkServiceOpen: Boolean,
-//                                      @get:JvmName("getRTKSignal")
-//                                       val rtkSignal: RTKSignal)
-//
-//    /**
-//     * The standard deviation of the location accuracy.
-//     */
-//    data class StandardDeviation(val latitude: Float,
-//                                 val longitude: Float,
-//                                 val altitude: Float,
-//                                 val unitType: UnitConversionUtil.UnitType)
-//
-//    enum class RTKSignal {
-//        /**
-//         * Network RTK
-//         */
-//        NETWORK_RTK,
-//
-//        /**
-//         * D-RTK 2 Mobile Station
-//         */
-//        D_RTK_2,
-//
-//        /**
-//         * D-RTK Base Station
-//         */
-//        BASE_STATION,
-//
-//        /**
-//         * Custom Network RTK
-//         */
-//        CUSTOM_NETWORK
-//    }
+    private val rtkLocationInfoProcessor: DataProcessor<RTKLocationInfo> = DataProcessor.create(RTKLocationInfo())
+    private val rtkSystemStateProcessor: DataProcessor<RTKSystemState> = DataProcessor.create(RTKSystemState())
+    private val rtkStationConnectStateProcessor: DataProcessor<RTKStationConnetState> =
+        DataProcessor.create(RTKStationConnetState.UNKNOWN)
+    private val rtkNetworkServiceInfoProcessor: DataProcessor<RTKServiceState> =
+        DataProcessor.create(RTKServiceState.UNKNOWN)
+
+    private val unitTypeProcessor: DataProcessor<UnitConversionUtil.UnitType> =
+        DataProcessor.create(UnitConversionUtil.UnitType.METRIC)
+
+    //rtk连接数据的封装Processor，用于widget显示rtk是否连接和数据是否正在使用
+    private val rtkBaseStationStateProcessor: DataProcessor<RTKBaseStationState> =
+        DataProcessor.create(RTKBaseStationState.DISCONNECTED)
+    private val rtkNetworkServiceStateProcessor: DataProcessor<RTKNetworkServiceState> = DataProcessor.create(
+        RTKNetworkServiceState(
+            RTKServiceState.UNKNOWN,
+            isRTKBeingUsed = false,
+            isNetworkServiceOpen = false,
+            rtkSignal = RTKReferenceStationSource.UNKNOWN
+        )
+    )
+
+    //标准差
+    private val standardDeviationProcessor: DataProcessor<StandardDeviation> = DataProcessor.create(
+        StandardDeviation(
+            0f,
+            0f,
+            0f,
+            UnitConversionUtil.UnitType.METRIC
+        )
+    )
+
+    private val rtkLocationInfoListener = RTKLocationInfoListener {
+        rtkLocationInfoProcessor.onNext(it)
+        updateStandardDeviation(it.rtkLocation)
+
+    }
+    private val rtkSystemStateListener = RTKSystemStateListener {
+        LogUtils.i(TAG, it)
+        rtkSystemStateProcessor.onNext(it)
+        //RTKSystemState涉及RTK服务类型的改变，所以有关于RTK服务类型的都需要更新
+        updateRTKConnectionState()
+
+    }
+    private val stationConnectStatusListener = RTKStationConnectStatusListener {
+        LogUtils.i(TAG, it)
+        rtkStationConnectStateProcessor.onNext(it)
+        updateRTKConnectionState()
+    }
+
+    private var mRTKServiceState = RTKServiceState.UNKNOWN
+
+    private val networkServiceInfoListener: INetworkServiceInfoListener = object :
+        INetworkServiceInfoListener {
+        override fun onServiceStateUpdate(state: RTKServiceState?) {
+            state?.let {
+                if (mRTKServiceState != state) {
+                    LogUtils.i(TAG, "onServiceStateUpdate RTKServiceState=$state")
+                    mRTKServiceState = state
+                    rtkNetworkServiceInfoProcessor.onNext(it)
+                    updateRTKConnectionState()
+                }
+            }
+        }
+
+        override fun onErrorCodeUpdate(error: IDJIError?) {
+            error?.let {
+                LogUtils.e(TAG, error.toString())
+            }
+        }
+    }
+
+    @get:JvmName("getRTKLocationInfo")
+    val rtkLocationInfo: Flowable<RTKLocationInfo>
+        get() = rtkLocationInfoProcessor.toFlowable()
+
+
+    @get:JvmName("getRTKSystemState")
+    val rtkSystemState: Flowable<RTKSystemState>
+        get() = rtkSystemStateProcessor.toFlowable()
+
+
+    /**
+     * Get the standard deviation of the location accuracy.
+     */
+    val standardDeviation: Flowable<StandardDeviation>
+        get() = standardDeviationProcessor.toFlowable()
+
+    /**
+     * Get the state of the RTK base station.
+     */
+    @get:JvmName("getRTKBaseStationState")
+    val rtkBaseStationState: Flowable<RTKBaseStationState>
+        get() = rtkBaseStationStateProcessor.toFlowable()
+
+    /**
+     * Get the state of the network service.
+     */
+    @get:JvmName("getRTKNetworkServiceState")
+    val rtkNetworkServiceState: Flowable<RTKNetworkServiceState>
+        get() = rtkNetworkServiceStateProcessor.toFlowable()
+
+
+    //region Constructor
+    init {
+        if (preferencesManager != null) {
+            unitTypeProcessor.onNext(preferencesManager.unitType)
+        }
+    }
     //endregion
 
+
     override fun inSetup() {
-        //暂无实现
+        rtkCenter.addRTKLocationInfoListener(rtkLocationInfoListener)
+        rtkCenter.addRTKSystemStateListener(rtkSystemStateListener)
+        rtkCenter.qxrtkManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
+        rtkCenter.customRTKManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
+        rtkCenter.rtkStationManager.addRTKStationConnectStatusListener(stationConnectStatusListener)
+        //测试发现productConnection有时候返回true比较慢，所以在其值返回也是要刷新依赖其者的状态
+        productConnection.observeOn(SchedulerProvider.ui()).subscribe {
+            updateRTKConnectionState()
+        }
+
+        val unitKey = UXKeys.create(GlobalPreferenceKeys.UNIT_TYPE)
+        bindDataProcessor(unitKey, unitTypeProcessor)
+        updateRTKConnectionState()
     }
 
     override fun inCleanup() {
-        //暂无实现
+        rtkCenter.removeRTKLocationInfoListener(rtkLocationInfoListener)
+        rtkCenter.removeRTKSystemStateListener(rtkSystemStateListener)
+        rtkCenter.rtkStationManager.removeRTKStationConnectStatusListener(stationConnectStatusListener)
+        rtkCenter.qxrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+        rtkCenter.customRTKManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+    }
+
+
+    private fun updateStandardDeviation(rtkLocation: RTKLocation?) {
+        var stdLatitude = 0f
+        var stdLongitude = 0f
+        var stdAltitude = 0f
+        rtkLocation?.let {
+            if (unitTypeProcessor.value == UnitConversionUtil.UnitType.IMPERIAL) {
+                stdLatitude = UnitConversionUtil.convertMetersToFeet(it.stdLatitude.toFloat())
+                stdLongitude = UnitConversionUtil.convertMetersToFeet(it.stdLongitude.toFloat())
+                stdAltitude = UnitConversionUtil.convertMetersToFeet(it.stdAltitude.toFloat())
+            } else {
+                stdLatitude = it.stdLatitude.toFloat()
+                stdLongitude = it.stdLongitude.toFloat()
+                stdAltitude = it.stdAltitude.toFloat()
+            }
+        }
+        standardDeviationProcessor.onNext(
+            StandardDeviation(
+                stdLatitude,
+                stdLongitude,
+                stdAltitude,
+                unitTypeProcessor.value
+            )
+        )
+    }
+
+    /**
+     * Sends the latest network service state or base station state to the corresponding flowable.
+     */
+    fun updateRTKConnectionState() {
+        rtkSystemStateProcessor.value.rtkReferenceStationSource?.let {
+            if (isNetworkServiceOpen(it)) {
+                updateNetworkServiceState()
+            } else {
+                updateBaseStationState()
+            }
+        }
+
+    }
+
+
+    /**
+     * The state of the network service.
+     */
+    data class RTKNetworkServiceState(
+        val state: RTKServiceState?,
+        val isRTKBeingUsed: Boolean?,
+        val isNetworkServiceOpen: Boolean?,
+        @get:JvmName("getRTKSignal")
+        val rtkSignal: RTKReferenceStationSource?
+    )
+
+    /**
+     * The state of the RTK base station
+     */
+    enum class RTKBaseStationState {
+        /**
+         * The RTK base station is connected and in use.
+         */
+        CONNECTED_IN_USE,
+
+        /**
+         * The RTK base station is connected and not in use.
+         */
+        CONNECTED_NOT_IN_USE,
+
+        /**
+         * The RTK base station is disconnected.
+         */
+        DISCONNECTED
+    }
+
+    /**
+     * The standard deviation of the location accuracy.
+     */
+    data class StandardDeviation(
+        val latitude: Float,
+        val longitude: Float,
+        val altitude: Float,
+        val unitType: UnitConversionUtil.UnitType
+    )
+
+    //region Helper methods
+    private fun updateNetworkServiceState() {
+        rtkNetworkServiceStateProcessor.onNext(
+            RTKNetworkServiceState(
+                rtkNetworkServiceInfoProcessor.value,
+                rtkSystemStateProcessor.value.rtkHealthy,
+                isNetworkServiceOpen(rtkSystemStateProcessor.value.rtkReferenceStationSource),
+                rtkSystemStateProcessor.value.rtkReferenceStationSource
+            )
+        )
+    }
+
+    private fun updateBaseStationState() {
+        if (rtkStationConnectStateProcessor.value == RTKStationConnetState.CONNECTED && productConnectionProcessor.value) {
+            if (rtkSystemStateProcessor.value.rtkHealthy) {
+                rtkBaseStationStateProcessor.onNext(RTKBaseStationState.CONNECTED_IN_USE)
+            } else {
+                rtkBaseStationStateProcessor.onNext(RTKBaseStationState.CONNECTED_NOT_IN_USE)
+            }
+        } else {
+            rtkBaseStationStateProcessor.onNext(RTKBaseStationState.DISCONNECTED)
+        }
+    }
+
+
+    private fun isNetworkServiceOpen(rtkSignal: RTKReferenceStationSource?): Boolean {
+        return rtkSignal == RTKReferenceStationSource.QX_NETWORK_SERVICE
+                || rtkSignal == RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE
     }
 }

@@ -71,6 +71,11 @@ ext {
 
     deps.networkRtkHelper = "com.dji:library-networkrtk-helper:2.0.2"
 
+    //glide
+    deps.glide =   'com.github.bumptech.glide:glide:4.9.0'
+    deps.glidecompiler = 'com.github.bumptech.glide:compiler:4.9.0'
+    deps.fastjson = 'com.alibaba:fastjson:1.1.72.android'
+
     //测试
     deps.junit4 = "junit:junit:4.12"
     deps.jnitCore = 'androidx.test:core:1.0.0'

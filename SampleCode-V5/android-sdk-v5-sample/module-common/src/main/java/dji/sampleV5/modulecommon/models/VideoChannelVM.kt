@@ -24,7 +24,6 @@ class VideoChannelVM(channelType: VideoChannelType) : DJIViewModel() {
                 videoChannelInfo.value?.streamSource = videoChannel!!.streamSource
                 videoChannelInfo.value?.videoChannelType = videoChannel!!.videoChannelType
                 videoChannelInfo.value?.format = videoChannel!!.streamFormat.name
-                initListeners()
                 videoChannelStateListener = VideoChannelStateChangeListener { _, to ->
                     /**
                      * 码流通道切换事件回调方法
@@ -44,6 +43,7 @@ class VideoChannelVM(channelType: VideoChannelType) : DJIViewModel() {
                     }
                     refreshVideoChannelInfo()
                 }
+                initListeners()
             }
     }
 

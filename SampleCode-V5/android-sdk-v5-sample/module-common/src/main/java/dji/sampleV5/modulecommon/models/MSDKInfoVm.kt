@@ -7,9 +7,7 @@ import dji.sampleV5.modulecommon.data.IN_INNER_NETWORK_STR
 import dji.sampleV5.modulecommon.data.IN_OUT_NETWORK_STR
 import dji.sampleV5.modulecommon.data.MSDKInfo
 import dji.sdk.keyvalue.key.FlightControllerKey
-import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.key.ProductKey
-import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.DJINetworkError
 import dji.v5.et.create
 import dji.v5.et.get
@@ -26,7 +24,6 @@ import dji.v5.utils.inner.SDKConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.security.Key
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**

@@ -24,16 +24,16 @@
 package dji.v5.ux.cameracore.widget.cameracapture.recordvideo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
+import dji.sdk.keyvalue.value.CameraStorageInfo;
+import dji.sdk.keyvalue.value.CameraStorageInfos;
 import dji.sdk.keyvalue.value.camera.CameraSDCardState;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
 import dji.sdk.keyvalue.value.camera.CameraType;
 import dji.sdk.keyvalue.value.camera.SSDOperationState;
-import dji.sdk.keyvalue.value.camera.SSDVideoLicense;
 import dji.sdk.keyvalue.value.camera.VideoFrameRate;
 import dji.sdk.keyvalue.value.camera.VideoResolution;
 import dji.sdk.keyvalue.value.camera.VideoResolutionFrameRate;
@@ -55,22 +55,16 @@ import io.reactivex.rxjava3.core.Flowable;
  */
 public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex {
 
-    //region Constants
     private static final int INVALID_AVAILABLE_RECORDING_TIME = -1;
     private static final int MAX_VIDEO_TIME_THRESHOLD_MINUTES = 29;
     private static final int SECONDS_PER_MIN = 60;
-    //endregion
 
-    //region Public data
     private final DataProcessor<CameraVideoStorageState> cameraVideoStorageState;
     private final DataProcessor<Boolean> isRecording;
     private final DataProcessor<String> cameraDisplayName;
     private final DataProcessor<CameraType> cameraType;
     private final DataProcessor<Integer> recordingTimeInSeconds;
     private final DataProcessor<VideoResolutionFrameRate> recordedVideoParameters;
-    //region Internal data
-    private final DataProcessor<List<SSDVideoLicense>> cameraSSDVideoLicenseDataProcessor;
-    //endregion
     private final DataProcessor<VideoResolutionFrameRate> nonSSDRecordedVideoParameters;
     private final DataProcessor<VideoResolutionFrameRate> ssdRecordedVideoParameters;
     private final DataProcessor<CameraStorageLocation> storageLocation;
@@ -78,9 +72,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
     private final DataProcessor<CameraSDCardState> storageState;
     private final DataProcessor<CameraSDCardState> innerStorageState;
     private final DataProcessor<SSDOperationState> ssdState;
-    private final DataProcessor<Integer> sdCardRecordingTime;
-    private final DataProcessor<Integer> innerStorageRecordingTime;
-    private final DataProcessor<Integer> ssdRecordingTime;
+    private final DataProcessor<CameraStorageInfos> cameraStorageInfos;
     private final DataProcessor<RecordingState> recordingStateProcessor;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.CAMERA_LENS_ZOOM;
@@ -110,10 +102,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         storageState = DataProcessor.create(CameraSDCardState.NORMAL);
         innerStorageState = DataProcessor.create(CameraSDCardState.UNKNOWN_ERROR);
         ssdState = DataProcessor.create(SSDOperationState.UNKNOWN);
-        sdCardRecordingTime = DataProcessor.create(INVALID_AVAILABLE_RECORDING_TIME);
-        innerStorageRecordingTime = DataProcessor.create(INVALID_AVAILABLE_RECORDING_TIME);
-        ssdRecordingTime = DataProcessor.create(INVALID_AVAILABLE_RECORDING_TIME);
-        cameraSSDVideoLicenseDataProcessor = DataProcessor.create(new ArrayList<>());
+        cameraStorageInfos = DataProcessor.create(new CameraStorageInfos(CameraStorageLocation.UNKNOWN, new ArrayList<>()));
         recordingStateProcessor = DataProcessor.create(RecordingState.UNKNOWN);
     }
     //endregion
@@ -122,7 +111,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
     @Override
     protected void inSetup() {
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsRecording, cameraIndex), isRecording, newValue -> {
-            if ((boolean) newValue) {
+            if (newValue) {
                 recordingStateProcessor.onNext(RecordingState.RECORDING_IN_PROGRESS);
             } else {
                 recordingStateProcessor.onNext(RecordingState.RECORDING_STOPPED);
@@ -134,12 +123,11 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraSDCardState, cameraIndex), sdCardState);
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageState, cameraIndex), innerStorageState);
         bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDOperationState, cameraIndex), ssdState);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDAvailableRecordingTimeInSeconds, cameraIndex), sdCardRecordingTime);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageAvailableVideoDuration, cameraIndex), innerStorageRecordingTime);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDVideoLicenses, cameraIndex), cameraSSDVideoLicenseDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraStorageInfos, cameraIndex), cameraStorageInfos);
+
         // Resolution and Frame Rates
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyVideoResolutionFrameRate, cameraIndex,lensType), nonSSDRecordedVideoParameters);
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeySSDVideoResolutionFrameRate, cameraIndex,lensType), ssdRecordedVideoParameters);
+        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyVideoResolutionFrameRate, cameraIndex, lensType), nonSSDRecordedVideoParameters);
+        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeySSDVideoResolutionFrameRate, cameraIndex, lensType), ssdRecordedVideoParameters);
     }
 
     @Override
@@ -257,16 +245,13 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
             return;
         }
 
-        SSDVideoLicense currentSSDVideoLicense = cameraSSDVideoLicenseDataProcessor.getValue().get(0);
-        int availableRecordingTime = getAvailableRecordingTime(currentStorageLocation, currentSSDVideoLicense);
+        int availableRecordingTime = getAvailableRecordingTime();
         if (availableRecordingTime == INVALID_AVAILABLE_RECORDING_TIME) {
             return;
         }
 
         CameraVideoStorageState newCameraVideoStorageState = null;
-        if (currentSSDVideoLicense != SSDVideoLicense.UNKNOWN) {
-            newCameraVideoStorageState = new CameraSSDVideoStorageState(CameraStorageLocation.UNKNOWN, availableRecordingTime, ssdState.getValue());
-        } else if (CameraStorageLocation.SDCARD.equals(currentStorageLocation)) {
+        if (CameraStorageLocation.SDCARD.equals(currentStorageLocation)) {
             if (!CameraSDCardState.UNKNOWN_ERROR.equals(sdCardState.getValue())) {
                 newCameraVideoStorageState = new CameraSDVideoStorageState(currentStorageLocation, availableRecordingTime, sdCardState.getValue());
             } else if (!CameraSDCardState.UNKNOWN_ERROR.equals(storageState.getValue())) {
@@ -282,21 +267,13 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         }
     }
 
-    private int getAvailableRecordingTime(CameraStorageLocation storageLocation,
-                                          SSDVideoLicense ssdVideoLicense) {
-        if (ssdVideoLicense != SSDVideoLicense.UNKNOWN) {
-            return ssdRecordingTime.getValue();
+    private int getAvailableRecordingTime() {
+        CameraStorageInfo info = cameraStorageInfos.getValue().getCurrentCameraStorageInfo();
+        if (info == null) {
+            return INVALID_AVAILABLE_RECORDING_TIME;
         }
-
-        switch (storageLocation) {
-            case SDCARD:
-                return sdCardRecordingTime.getValue();
-            case INTERNAL:
-                return innerStorageRecordingTime.getValue();
-            case UNKNOWN:
-            default:
-                return INVALID_AVAILABLE_RECORDING_TIME;
-        }
+        Integer availableVideoDuration = info.getAvailableVideoDuration();
+        return availableVideoDuration == null ? INVALID_AVAILABLE_RECORDING_TIME : availableVideoDuration;
     }
 
     /**

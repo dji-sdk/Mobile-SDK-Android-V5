@@ -24,11 +24,11 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/here_map"
-          android:title="@string/provider_here_maps"/>
+          android:title="@string/uxsdk_provider_here_maps"/>
     <item android:id="@+id/google_map"
-          android:title="@string/provider_google_maps" />
+          android:title="@string/uxsdk_provider_google_maps" />
     <item android:id="@+id/amap"
-          android:title="@string/provider_amaps" />
+          android:title="@string/uxsdk_provider_amaps" />
     <item android:id="@+id/mapbox"
-          android:title="@string/provider_mapbox" />
+          android:title="@string/uxsdk_provider_mapbox" />
 </menu>

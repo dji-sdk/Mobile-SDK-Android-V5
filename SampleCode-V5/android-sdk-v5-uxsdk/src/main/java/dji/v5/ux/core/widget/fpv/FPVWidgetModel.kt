@@ -106,8 +106,8 @@ class FPVWidgetModel(
         // 无需实现
     }
 
-    fun updateStreamSource(){
-        streamSource = getVideoChannel()?.getStreamSource()
+    fun initStreamSource(){
+        streamSource = getVideoChannel()?.streamSource
     }
 
     //region Lifecycle
@@ -152,7 +152,7 @@ class FPVWidgetModel(
 
     private fun updateCameraDisplay() {
         streamSource?.let {
-            var cameraName = it.physicalDeviceCategory.name + "_" + it.physicalDeviceType.name
+            var cameraName = it.physicalDeviceCategory.name + "_" + it.physicalDeviceType.deviceType
             if (currentLensType != CameraLensType.CAMERA_LENS_DEFAULT) {
                 cameraName = cameraName + "_" + currentLensType.name
             }

@@ -5,15 +5,18 @@ import android.os.HandlerThread
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sdk.keyvalue.key.DJIKey
+import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.key.PayloadKey
 import dji.sdk.keyvalue.value.common.ComponentIndexType
+import dji.sdk.keyvalue.value.payload.MegaphonePlayStateMsg
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.recorder.AudioRecordHandler
 import dji.v5.common.recorder.EncodedDataCallback
 import dji.v5.common.recorder.OpusEncoder
 import dji.v5.common.recorder.SourceDataCallback
-import dji.sdk.keyvalue.key.KeyTools
+import dji.v5.et.create
+import dji.v5.et.listen
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.megaphone.*
 import dji.v5.utils.common.ContextUtil
@@ -35,6 +38,8 @@ class MegaphoneVM : DJIViewModel() {
     val curRealTimeSentBytes = MutableLiveData(0L)
     val curRealTimeTotalBytes = MutableLiveData(0L)
     var isPayloadConnect = MutableLiveData(false)
+    var megaphonePlayState = MutableLiveData<MegaphonePlayStateMsg>()
+    var isQuickPlay = false
 
     private var audioRecorderHandler: AudioRecordHandler? = null
     private var opusEncoder: OpusEncoder? = null
@@ -67,14 +72,18 @@ class MegaphoneVM : DJIViewModel() {
         handler = Handler(handlerThread!!.looper)
         addListener()
 
-        KeyManager.getInstance().listen(
-            DJIKey.create(PayloadKey.KeyConnection, 0, 2),
-            this,
-            object : CommonCallbacks.KeyListener<Boolean> {
-                override fun onValueChange(oldValue: Boolean?, newValue: Boolean?) {
-                    isPayloadConnect.value = newValue ?: false
-                }
-            })
+        PayloadKey.KeyConnection.create(ComponentIndexType.UP).listen(this){
+            it?.let {
+                isPayloadConnect.value = it
+            }
+        }
+
+        PayloadKey.KeyMegaphonePlayState.create(ComponentIndexType.UP).listen(this){
+            it?.let {
+                megaphonePlayState.value = it
+            }
+        }
+
     }
 
     override fun onCleared() {
@@ -153,24 +162,26 @@ class MegaphoneVM : DJIViewModel() {
             ) {
                 //这里直接发送数据到csdk，同时缓存到本地文件(回调中新开线程写文件)
                 handler!!.post {
-                    mAudioBos!!.write(data)
+                    mAudioBos!!.write(data,0,size)
                 }
 
-                MegaphoneManager.getInstance().sendRealTimeDataToMegaphone(
-                    data,
-                    data?.size!!,
-                    object : CommonCallbacks.CompletionCallback {
-                        override fun onSuccess() {
-                            LogUtils.d(
-                                TAG,
-                                "send real time data to megaphone success ${data?.size!!}"
-                            )
-                        }
+                handler!!.post {
+                    MegaphoneManager.getInstance().sendRealTimeDataToMegaphone(
+                        data,
+                        size,
+                        object : CommonCallbacks.CompletionCallback {
+                            override fun onSuccess() {
+                                LogUtils.d(
+                                    TAG,
+                                    "send real time data to megaphone success ${data?.size!!}"
+                                )
+                            }
 
-                        override fun onFailure(error: IDJIError) {
-                            LogUtils.d(TAG, "send real time data to megaphone failed")
-                        }
-                    })
+                            override fun onFailure(error: IDJIError) {
+                                LogUtils.d(TAG, "send real time data to megaphone failed")
+                            }
+                        })
+                }
             }
         })
 
@@ -233,16 +244,6 @@ class MegaphoneVM : DJIViewModel() {
             .appendEOFToRealTimeData(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     LogUtils.d(TAG, "apped real time EOF to megaphone success")
-                    MegaphoneManager.getInstance()
-                        .startPlay(object : CommonCallbacks.CompletionCallback {
-                            override fun onSuccess() {
-                                LogUtils.d(TAG, "Start Play Success")
-                            }
-
-                            override fun onFailure(error: IDJIError) {
-                                LogUtils.d(TAG, "Start Play Failed")
-                            }
-                        })
                 }
 
                 override fun onFailure(error: IDJIError) {

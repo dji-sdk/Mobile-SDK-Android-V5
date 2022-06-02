@@ -1,10 +1,9 @@
 package dji.sampleV5.modulecommon.keyvalue;
 
 
-import androidx.annotation.NonNull;
-
 import org.json.JSONObject;
 
+import androidx.annotation.NonNull;
 import dji.sampleV5.modulecommon.util.ToastUtils;
 import dji.sampleV5.modulecommon.util.Util;
 import dji.sdk.keyvalue.converter.EmptyValueConverter;
@@ -114,7 +113,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
     }
 
     /**
-     * 是否可以监听
+     * 是否可以Listen
      *
      * @return
      */
@@ -167,7 +166,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                 @Override
                 public void onFailure(@NonNull IDJIError error) {
                     if (keyOperateCallBack != null) {
-                        keyOperateCallBack.actionChange("【GET】 GetErrorMsg==" + error.errorCode());
+                        keyOperateCallBack.actionChange("【GET】 GetErrorMsg==" + error.toString());
                     }
                 }
             });
@@ -212,7 +211,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                 @Override
                 public void onFailure(@NonNull IDJIError error) {
                     if (keyOperateCallBack != null) {
-                        keyOperateCallBack.actionChange("【SET】SetErrorMsg==" + error.description());
+                        keyOperateCallBack.actionChange("【SET】SetErrorMsg==" + error.toString());
                     }
                 }
             });
@@ -258,7 +257,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
             @Override
             public void onFailure(@NonNull IDJIError error) {
                 if (keyOperateCallBack != null) {
-                    keyOperateCallBack.actionChange("【ACTION】 ActionErrorMsg==" + error.description());
+                    keyOperateCallBack.actionChange("【ACTION】 ActionErrorMsg==" + error.toString());
                 }
             }
         });
@@ -284,7 +283,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
 
 
     /**
-     * 注册监听（新接口）
+     * 注册Listen（新接口）
      *
      * @param listenHolder
      */
@@ -293,7 +292,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
     }
 
     /**
-     * 取消监听（新接口）
+     * 取消Listen（新接口）
      *
      * @param listenHolder
      */

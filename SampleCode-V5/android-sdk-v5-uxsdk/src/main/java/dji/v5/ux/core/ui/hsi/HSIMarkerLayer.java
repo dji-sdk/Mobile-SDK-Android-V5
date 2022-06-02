@@ -255,7 +255,7 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
     public void onStart() {
         mCompositeDisposable = new CompositeDisposable();
 
-        addDisposable(widgetModel.aircraftLocationDataProcessor.toFlowable().subscribe(location -> {
+        addDisposable(widgetModel.getAircraftLocationDataProcessor().toFlowable().subscribe(location -> {
             if (location != null) {
                 mAircraftLocation = location;
                 if (mHomeLocation != null) {
@@ -265,13 +265,13 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
             }
         }));
 
-        addDisposable(widgetModel.homeLocationDataProcessor.toFlowable().subscribe(locationCoordinate2D -> {
+        addDisposable(widgetModel.getHomeLocationDataProcessor().toFlowable().subscribe(locationCoordinate2D -> {
             mHomeLocation = locationCoordinate2D;
             mHomeDistance = computeRelativeLocation(mHomeLocation.getLatitude(), mHomeLocation.getLongitude());
         }));
 
         addDisposable(Flowable.combineLatest(mSubject.hide().toFlowable(BackpressureStrategy.LATEST),
-                widgetModel.airSenseSystemInformationProcessor.toFlowable().filter(info -> info.getWarningLevel() != AirSenseWarningLevel.UNKNOWN).distinctUntilChanged(),
+                widgetModel.getAirSenseSystemInformationProcessor().toFlowable().filter(info -> info.getWarningLevel() != AirSenseWarningLevel.UNKNOWN).distinctUntilChanged(),
                 (locationCoordinate2D, airSenseSystemInformation) -> airSenseSystemInformation)
                 .sample(300, TimeUnit.MILLISECONDS)
                 .subscribe(this::airSenseSystemInformationHandler));

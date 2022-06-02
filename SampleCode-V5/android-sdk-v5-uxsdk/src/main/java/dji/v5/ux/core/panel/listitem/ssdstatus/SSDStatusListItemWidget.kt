@@ -31,6 +31,8 @@ import android.util.AttributeSet
 import androidx.annotation.StyleRes
 import androidx.core.content.res.use
 import dji.sdk.keyvalue.value.camera.SSDOperationState
+import dji.v5.utils.common.JsonUtil
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.SchedulerProvider
@@ -155,6 +157,7 @@ open class SSDStatusListItemWidget @JvmOverloads constructor(
     //region Reactions to models
 
     private fun updateUI(ssdState: SSDState) {
+        LogUtils.i(logTag,JsonUtil.toJson(ssdState))
         widgetStateDataProcessor.onNext(SSDStateUpdated(ssdState))
         when (ssdState) {
             SSDState.ProductDisconnected,
@@ -162,8 +165,7 @@ open class SSDStatusListItemWidget @JvmOverloads constructor(
 
             is SSDState.CurrentSSDState -> {
                 isEnabled = true
-                listItemLabel = getSSDMessage(ssdState.ssdOperationState,
-                        ssdState.remainingSpace)
+                listItemLabel = getSSDMessage(ssdState.ssdOperationState, ssdState.remainingSpace)
                 listItemLabelTextColor = getSSDMessageColor(ssdState.ssdOperationState)
                 listItemButtonEnabled = getFormatButtonVisibility(ssdState.ssdOperationState)
             }
@@ -243,8 +245,7 @@ open class SSDStatusListItemWidget @JvmOverloads constructor(
                         showAlertDialog(title = getString(R.string.uxsdk_ssd_dialog_title),
                                 icon = formatErrorDialogIcon,
                                 dialogTheme = dialogTheme,
-                                message = String.format(getString(R.string.uxsdk_ssd_format_error),
-                                        error.djiError.description()),
+                                message = getString(R.string.uxsdk_ssd_format_error, error.djiError.description()),
                                 dialogDismissListener = dialogDismissListener)
                         uiUpdateStateProcessor.onNext(DialogDisplayed(dialogType))
                     }

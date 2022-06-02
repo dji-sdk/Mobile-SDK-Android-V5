@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018-2020 DJI
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,14 +26,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:parentTag="dji.ux.beta.accessory.widget.rtk.RTKWidget">
+    tools:background="@android:color/background_dark"
+    tools:parentTag="dji.v5.ux.accessory.RTKWidget">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollview_rtk_state"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingStart="10dp"
-        android:paddingTop="10dp"
         android:paddingEnd="10dp"
         app:layout_constraintBottom_toTopOf="@+id/rtk_dialog_separator"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <dji.ux.beta.accessory.widget.rtk.RTKEnabledWidget
+            <dji.v5.ux.accessory.RTKEnabledWidget
                 android:id="@+id/widget_rtk_enabled"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,18 +53,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <dji.ux.beta.accessory.widget.rtk.RTKSatelliteStatusWidget
+            <dji.v5.ux.accessory.RTKSatelliteStatusWidget
                 android:id="@+id/widget_rtk_satellite_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="22dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/widget_rtk_enabled" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/textview_rtk_description"
@@ -80,7 +78,8 @@
         app:layout_constraintBottom_toTopOf="@id/rtk_dialog_separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/widget_rtk_enabled" />
+        app:layout_constraintTop_toBottomOf="@id/widget_rtk_enabled"
+        tools:visibility="visible" />
 
     <View
         android:id="@+id/rtk_dialog_separator"

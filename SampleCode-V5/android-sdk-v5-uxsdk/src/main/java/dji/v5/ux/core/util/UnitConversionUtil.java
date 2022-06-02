@@ -194,9 +194,9 @@ public final class UnitConversionUtil {
     }
 
     public static String getSpaceWithUnit(@NonNull Context context, int space) {
-        String result = String.format(context.getString(R.string.uxsdk_storage_status_remaining_space_mb), space);
+        String result = context.getString(R.string.uxsdk_storage_status_remaining_space_mb, space);
         if (space > 1024) {
-            result = String.format(context.getString(R.string.uxsdk_storage_status_remaining_space_gb), space / 1024f);
+            result = context.getString(R.string.uxsdk_storage_status_remaining_space_gb, space / 1024f);
         }
         return result;
     }

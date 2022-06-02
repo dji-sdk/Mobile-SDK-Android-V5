@@ -45,7 +45,7 @@ import dji.v5.ux.core.util.UnitConversionUtil.UnitType
 /**
  * Get the [String] for the given [stringRes].
  */
-fun View.getString(@StringRes stringRes: Int, vararg value: Any): String = StringUtils.getResStr(stringRes, *value)
+fun View.getString(@StringRes stringRes: Int, vararg value: Any): String = context.resources.getString(stringRes, *value)
 
 /**
  * Get the [Drawable] for the given [drawableRes].

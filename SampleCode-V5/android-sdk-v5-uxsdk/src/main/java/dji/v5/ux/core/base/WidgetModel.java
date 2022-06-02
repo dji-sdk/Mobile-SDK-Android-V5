@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+
 import dji.sdk.keyvalue.key.DJIKey;
 import dji.sdk.keyvalue.key.KeyTools;
 import dji.sdk.keyvalue.key.ProductKey;
@@ -215,8 +216,8 @@ public abstract class WidgetModel {
      * @param sideEffectConsumer Consumer to be called along with data processor
      */
     protected <T> void bindDataProcessor(@NonNull DJIKey<T> key,
-                                     @NonNull DataProcessor<T> dataProcessor,
-                                     @NonNull Consumer<T> sideEffectConsumer) {
+                                         @NonNull DataProcessor<T> dataProcessor,
+                                         @NonNull Consumer<T> sideEffectConsumer) {
         registerKey(key, dataProcessor::onNext, sideEffectConsumer);
     }
 
@@ -242,14 +243,14 @@ public abstract class WidgetModel {
      * @param sideEffectConsumer Consumer to be called along with data processor
      */
     protected <T> void bindDataProcessor(@NonNull UXKey key,
-                                     @NonNull DataProcessor<T> dataProcessor,
-                                     @NonNull Consumer<T> sideEffectConsumer) {
+                                         @NonNull DataProcessor<T> dataProcessor,
+                                         @NonNull Consumer<T> sideEffectConsumer) {
         registerKey(key, dataProcessor::onNext, sideEffectConsumer);
     }
 
     private <T> void registerKey(@NonNull DJIKey<T> djiKey,
-                             @NonNull Consumer<T> bindConsumer,
-                             @NonNull Consumer<T> sideEffectConsumer) {
+                                 @NonNull Consumer<T> bindConsumer,
+                                 @NonNull Consumer<T> sideEffectConsumer) {
         if (keyDisposables == null) {
             throw new IllegalStateException("Call this method only when in inSetup");
         }
@@ -261,8 +262,8 @@ public abstract class WidgetModel {
     }
 
     private <T> void registerKey(@NonNull UXKey uxKey,
-                             @NonNull Consumer<T> bindConsumer,
-                             @NonNull Consumer<T> sideEffectConsumer) {
+                                 @NonNull Consumer<T> bindConsumer,
+                                 @NonNull Consumer<T> sideEffectConsumer) {
         if (keyDisposables == null) {
             throw new IllegalStateException("Call this method only when in inSetup");
         }

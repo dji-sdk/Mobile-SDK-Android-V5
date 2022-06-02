@@ -4,7 +4,7 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
-import dji.sampleV5.moduleaircraft.data.DJIBaseResult
+import dji.sampleV5.modulecommon.data.DJIBaseResult
 import dji.sdk.keyvalue.key.PayloadKey
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.common.EmptyMsg

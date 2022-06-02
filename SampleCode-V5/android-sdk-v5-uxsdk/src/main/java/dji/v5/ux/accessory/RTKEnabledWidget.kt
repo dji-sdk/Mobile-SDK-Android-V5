@@ -54,9 +54,9 @@ private const val TAG = "RTKEnabledWidget"
  * This widget displays a switch that will enable or disable RTK.
  */
 open class RTKEnabledWidget @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ConstraintLayoutWidget<RTKEnabledWidget.ModelState>(context, attrs, defStyleAttr), CompoundButton.OnCheckedChangeListener {
 
     //region Fields
@@ -194,7 +194,7 @@ open class RTKEnabledWidget @JvmOverloads constructor(
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         addDisposable(widgetModel.canEnableRTK.firstOrError()
                 .observeOn(SchedulerProvider.ui())
-                .subscribe(Consumer { canEnableRTK: Boolean ->
+                .subscribe({ canEnableRTK: Boolean ->
                     if (!canEnableRTK) {
                         setRTKSwitch(!isChecked)
                         showLongToast(R.string.uxsdk_rtk_enabled_motors_running)
@@ -225,7 +225,7 @@ open class RTKEnabledWidget @JvmOverloads constructor(
         addDisposable(widgetModel.rtkEnabled
                 .firstOrError()
                 .observeOn(SchedulerProvider.ui())
-                .subscribe(Consumer { rtkEnabled: Boolean ->
+                .subscribe({ rtkEnabled: Boolean ->
                     if (rtkEnabled != enabled) {
                         addDisposable(toggleRTK(enabled))
                     }

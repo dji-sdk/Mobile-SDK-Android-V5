@@ -81,5 +81,7 @@
     <color name="honeydew">#F0FFF0</color>
     <color name="default_selected_bg_color">#dedede</color>
     <color name="activity_background">#FF000000</color>
+    
+    <color name="half_transparent">#80FFFFFF</color>
 
 </resources>

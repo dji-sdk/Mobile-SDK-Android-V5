@@ -32,7 +32,7 @@ import dji.v5.common.error.IDJIError
 data class UXSDKError(
         @get:JvmName("getDJIError")
         val djiError: IDJIError
-) : Throwable() {
+) : Throwable(djiError.toString()) {
 
     override fun toString(): String {
         return djiError.toString()

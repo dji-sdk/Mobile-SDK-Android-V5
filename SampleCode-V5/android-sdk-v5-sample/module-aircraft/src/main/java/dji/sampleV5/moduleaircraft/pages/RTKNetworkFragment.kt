@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import dji.rtk.CoordinateSystem
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.Helper
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.R
-import dji.sampleV5.moduleaircraft.models.RTKCenterVM
 import dji.sampleV5.moduleaircraft.models.RTKNetworkVM
+import dji.v5.ux.core.extension.show
+import dji.v5.ux.core.extension.hide
+import dji.sampleV5.moduledrone.pages.RTKCenterFragment.Companion.KEY_IS_QX_RTK
 import dji.sdk.keyvalue.value.rtkbasestation.RTKCustomNetworkSetting
-import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.JsonUtil
@@ -30,11 +31,11 @@ import kotlinx.android.synthetic.main.frag_network_rtk_page.*
  */
 class RTKNetworkFragment : DJIFragment() {
 
-    private val TAG="RTKNetworkFragment"
-    private var currentError:String=""
-    private val rtkVM: RTKNetworkVM by activityViewModels()
-    private val rtkCenterVM: RTKCenterVM by activityViewModels()
+    private val TAG = "RTKNetworkFragment"
+    private var currentOtherError: String = ""
+    private val rtkNetworkVM: RTKNetworkVM by viewModels()
     private val rtkMsgBuilder: StringBuilder = StringBuilder()
+    private var isQXRTK = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,105 +49,125 @@ class RTKNetworkFragment : DJIFragment() {
         super.onViewCreated(view, savedInstanceState)
         initBtnListener()
         initListener()
+        initView()
+    }
+
+    private fun initView() {
+        arguments?.run {
+            isQXRTK = getBoolean(KEY_IS_QX_RTK, false)
+        }
+        if (isQXRTK) {
+            btn_start_custom_network_rtk_service.hide()
+            btn_stop_custom_network_rtk_service.hide()
+            btn_set_custom_network_rtk_settings.hide()
+            btn_start_qx_network_rtk_service.show()
+            btn_stop_qx_network_rtk_service.show()
+        } else {
+            btn_start_custom_network_rtk_service.show()
+            btn_stop_custom_network_rtk_service.show()
+            btn_set_custom_network_rtk_settings.show()
+            btn_start_qx_network_rtk_service.hide()
+            btn_stop_qx_network_rtk_service.hide()
+        }
     }
 
     private fun initBtnListener() {
-        rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
+        /**
+         * 自定义网络RTK接口
+         */
         btn_start_custom_network_rtk_service.setOnClickListener {
-            rtkVM.startCustomNetworkRTKService(object : CommonCallbacks.CompletionCallback {
+            rtkNetworkVM.startCustomNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     ToastUtils.showToast(context, "StartCustomNetworkRTKService Success")
+                    updateErrMsg(isSuccess = true)
+
                 }
 
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast(context, "StartCustomNetworkRTKService onFailure $error")
-                    LogUtils.d(TAG,"StartCustomNetworkRTKService onFailure $error")
-                    currentError=error.toString()
+                    updateErrMsg(error.toString())
+
                 }
             })
         }
         btn_stop_custom_network_rtk_service.setOnClickListener {
-            rtkVM.stopCustomNetworkRTKService(object : CommonCallbacks.CompletionCallback {
+            rtkNetworkVM.stopCustomNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     ToastUtils.showToast(context, "StopCustomNetworkRTKService Success")
+                    updateErrMsg(isSuccess = true)
                 }
 
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast(context, "StopCustomNetworkRTKService onFailure $error")
-                    LogUtils.d(TAG,"StopCustomNetworkRTKService onFailure $error")
-                    currentError=error.toString()
+                    updateErrMsg(error.toString())
 
                 }
             })
         }
         btn_set_custom_network_rtk_settings.setOnClickListener {
-            val currentCustomNetworkRTKSettingCache = rtkVM.getCurrentCustomNetworkRTKSettingCache(context)
-            openInputDialog(currentCustomNetworkRTKSettingCache, "Set Custom Network Rtk Settings") {
+            val currentCustomNetworkRTKSettingCache = rtkNetworkVM.getCurrentCustomNetworkRTKSettingCache(context)
+            openInputDialog(currentCustomNetworkRTKSettingCache, "Set custom network RTK account information") {
                 val setting = JsonUtil.toBean(it, RTKCustomNetworkSetting::class.java)
                 setting?.let {
-                    rtkVM.setCustomNetworkRTKSettings(context,setting)
+                    rtkNetworkVM.setCustomNetworkRTKSettings(context, setting)
                 }
             }
         }
+        /**
+         * 千寻RTK接口
+         */
+        //获取初始化坐标系
+        rtkNetworkVM.getQXNetworkRTKCoordinateSystem()
         btn_start_qx_network_rtk_service.setOnClickListener {
-            rtkVM.startQXNetworkRTKService(object : CommonCallbacks.CompletionCallback {
-                override fun onSuccess() {
-                    ToastUtils.showToast(context, "StartQXNetworkRTKService Success")
-                    rtkVM.getQXNetworkRTKCoordinateSystem()
-                }
+            val coordinateSystem = CoordinateSystem.values()
+            initPopupNumberPicker(Helper.makeList(coordinateSystem)) {
+                rtkNetworkVM.startQXNetworkRTKService(coordinateSystem[indexChosen[0]], object : CommonCallbacks.CompletionCallback {
+                    override fun onSuccess() {
+                        ToastUtils.showToast(context, "StartQXNetworkRTKService Success")
+                        updateErrMsg(isSuccess = true)
+                    }
 
-                override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast(context, "StartQXNetworkRTKService onFailure $error")
-                }
-            })
+                    override fun onFailure(error: IDJIError) {
+                        ToastUtils.showToast(context, "StartQXNetworkRTKService onFailure $error")
+                        updateErrMsg(error.toString())
+                    }
+                })
+                resetIndex()
+            }
         }
         btn_stop_qx_network_rtk_service.setOnClickListener {
-            rtkVM.stopQXNetworkRTKService(object : CommonCallbacks.CompletionCallback {
+            rtkNetworkVM.stopQXNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     ToastUtils.showToast(context, "StopQXNetworkRTKService Success")
+                    updateErrMsg(isSuccess = true)
                 }
 
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast(context, "StopQXNetworkRTKService onFailure $error")
+                    updateErrMsg(error.toString())
                 }
             })
-        }
-        btn_set_qx_network_rtk_coordinate_system.setOnClickListener {
-            val coordinateSystem = CoordinateSystem.values()
-            initPopupNumberPicker(Helper.makeList(coordinateSystem)) {
-                rtkVM.setQXNetworkRTKCoordinateSystem(coordinateSystem[indexChosen[0]],
-                    object : CommonCallbacks.CompletionCallback {
-                        override fun onSuccess() {
-                            ToastUtils.showToast(context, "SetQXNetworkRTKCoordinateSystem Success")
-                        }
-
-                        override fun onFailure(error: IDJIError) {
-                            ToastUtils.showToast(
-                                context, "SetQXNetworkRTKCoordinateSystem onFailure $error"
-                            )
-                        }
-                    })
-                resetIndex()
-            }
         }
     }
 
     private fun initListener() {
-
-        rtkVM.addNetworkRTKServiceInfoCallback()
-        rtkVM.currentRTKState.observe(viewLifecycleOwner) {
+        rtkNetworkVM.addNetworkRTKServiceInfoCallback()
+        rtkNetworkVM.currentRTKState.observe(viewLifecycleOwner) {
+            if (isQXRTK) {
+                rtkNetworkVM.getQXNetworkRTKCoordinateSystem()
+            }
             updateRTKInfo()
         }
-        rtkVM.currentRTKErrorMsg.observe(viewLifecycleOwner) {
+        rtkNetworkVM.currentRTKErrorMsg.observe(viewLifecycleOwner) {
             updateRTKInfo()
         }
-        rtkVM.currentQxNetworkCoordinateSystem.observe(viewLifecycleOwner) {
+        rtkNetworkVM.currentQxNetworkCoordinateSystem.observe(viewLifecycleOwner) {
             updateRTKInfo()
         }
-        rtkVM.currentCustomNetworkRTKSettings.observe(viewLifecycleOwner) {
+        rtkNetworkVM.currentCustomNetworkRTKSettings.observe(viewLifecycleOwner) {
             updateRTKInfo()
         }
-        rtkVM.currentRTKState.observe(viewLifecycleOwner) {
+        rtkNetworkVM.currentRTKState.observe(viewLifecycleOwner) {
             updateRTKInfo()
         }
     }
@@ -154,13 +175,32 @@ class RTKNetworkFragment : DJIFragment() {
     private fun updateRTKInfo() {
         rtkMsgBuilder.apply {
             setLength(0)
-            append("CurrentRTKState:").append(rtkVM.currentRTKState.value).append("\n")
-            append("CurrentRTKErrorMsg:").append(rtkVM.currentRTKErrorMsg.value+",$currentError").append("\n")
-//            append("CurrentQxNetworkCoordinateSystem:").append(rtkVM.currentQxNetworkCoordinateSystem.value)
-//                .append("\n")
-            append("CurrentCustomNetworkRTKSettings:").append(rtkVM.currentCustomNetworkRTKSettings.value)
+            append("CurrentRTKState:").append(rtkNetworkVM.currentRTKState.value).append("\n")
+            append("CurrentRTKErrorMsg:").append(rtkNetworkVM.currentRTKErrorMsg.value + ",$currentOtherError").append("\n")
+            append("CurrentQxNetworkCoordinateSystem:").append(rtkNetworkVM.currentQxNetworkCoordinateSystem.value)
+                .append("\n")
+            append("CurrentCustomNetworkRTKSettings:").append(rtkNetworkVM.currentCustomNetworkRTKSettings.value)
                 .append("\n")
         }
-        text_network_rtk_info.text = rtkMsgBuilder.toString()
+        activity?.runOnUiThread {
+            text_network_rtk_info.text = rtkMsgBuilder.toString()
+        }
+    }
+
+    fun updateErrMsg(errMsg: String? = null, isSuccess: Boolean = false) {
+        //成功之后清除之前的错误信息
+        currentOtherError = if (isSuccess) {
+            ""
+        } else {
+            errMsg ?: ""
+
+        }
+        updateRTKInfo()
+        LogUtils.d(TAG, "[updateErrMsg]currentError=$currentOtherError")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        rtkNetworkVM.removeNetworkServiceInfoListener()
     }
 }

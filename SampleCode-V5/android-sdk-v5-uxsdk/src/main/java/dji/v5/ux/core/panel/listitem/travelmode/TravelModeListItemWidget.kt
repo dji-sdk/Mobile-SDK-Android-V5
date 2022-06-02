@@ -226,8 +226,7 @@ open class TravelModeListItemWidget @JvmOverloads constructor(
                                 showAlertDialog(title = getString(R.string.uxsdk_list_item_travel_mode),
                                         icon = errorDialogIcon,
                                         dialogTheme = dialogTheme,
-                                        message = String.format(getString(R.string.uxsdk_exit_travel_mode_failed),
-                                                error.djiError.description()),
+                                        message = getString(R.string.uxsdk_exit_travel_mode_failed, error.djiError.description()),
                                         dialogDismissListener = dialogDismissListener)
                                 uiUpdateStateProcessor.onNext(DialogDisplayed(ExitTravelModeError))
                             }
@@ -259,8 +258,7 @@ open class TravelModeListItemWidget @JvmOverloads constructor(
                                 showAlertDialog(title = getString(R.string.uxsdk_list_item_travel_mode),
                                         icon = errorDialogIcon,
                                         dialogTheme = dialogTheme,
-                                        message = String.format(getString(R.string.uxsdk_enter_travel_mode_failed),
-                                                error.djiError.description()),
+                                        message = getString(R.string.uxsdk_enter_travel_mode_failed, error.djiError.description()),
                                         dialogDismissListener = dialogDismissListener)
                                 uiUpdateStateProcessor.onNext(DialogDisplayed(dialogType))
                             }

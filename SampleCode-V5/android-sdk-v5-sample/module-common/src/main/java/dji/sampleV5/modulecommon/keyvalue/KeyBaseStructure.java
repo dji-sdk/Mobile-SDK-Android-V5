@@ -4,7 +4,7 @@ package dji.sampleV5.modulecommon.keyvalue;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import dji.sampleV5.modulecommon.util.Util;
+
 import dji.sdk.keyvalue.key.DJIActionKeyInfo;
 import dji.sdk.keyvalue.key.DJIKey;
 import dji.sdk.keyvalue.key.DJIKeyInfo;
@@ -34,7 +34,7 @@ public class KeyBaseStructure<P, R>   {
     protected String listenRecord = "";
 
     /**
-     * 推送监听宿主
+     * 推送Listener宿主
      */
     protected Object listenHolder;
 
@@ -167,7 +167,7 @@ public class KeyBaseStructure<P, R>   {
 
 
     /**
-     * 设置监听
+     * 设置Listener
      *
      * @param keyInfo
      * @param listenHolder
@@ -181,7 +181,7 @@ public class KeyBaseStructure<P, R>   {
     }
 
     /**
-     * 取消监听
+     * 取消Listener
      *
      * @param keyInfo
      * @param listenHolder

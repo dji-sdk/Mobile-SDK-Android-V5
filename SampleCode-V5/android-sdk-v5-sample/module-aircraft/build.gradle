@@ -26,7 +26,7 @@ android {
 dependencies {
     api project(':sample-module-common')
 
-    //drone 依赖rtk的aar
+    //aircraft 依赖rtk的aar
     implementation deps.networkRtkHelper
     api project(':uxsdk')
 

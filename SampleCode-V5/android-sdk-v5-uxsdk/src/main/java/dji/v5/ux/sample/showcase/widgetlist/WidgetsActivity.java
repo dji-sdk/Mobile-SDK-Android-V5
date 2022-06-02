@@ -30,6 +30,8 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.accessory.RTKEnabledWidget;
 import dji.v5.ux.accessory.RTKSatelliteStatusWidget;
@@ -83,13 +85,14 @@ import dji.v5.ux.visualcamera.shutter.CameraConfigShutterWidget;
 import dji.v5.ux.visualcamera.ssd.CameraConfigSSDWidget;
 import dji.v5.ux.visualcamera.storage.CameraConfigStorageWidget;
 import dji.v5.ux.visualcamera.wb.CameraConfigWBWidget;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 /**
  * Displays a list of widget names. Clicking on a widget name will show that widget in a separate
  * panel on large devices, or in a new activity on smaller devices.
  */
 public class WidgetsActivity extends AppCompatActivity implements WidgetListFragment.OnWidgetItemSelectedListener {
-
+    public static final String TAG = LogUtils.getTag("WidgetsActivity");
     protected ArrayList<WidgetListItem> widgetListItems;
 
     @Override
@@ -103,61 +106,62 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
                 .beginTransaction()
                 .add(R.id.fragment_container, listFragment)
                 .commit();
+
     }
 
     private void populateList() {
         widgetListItems = new ArrayList<>();
-        widgetListItems.add(new WidgetListItem(R.string.air_sense_widget_title, new WidgetViewHolder(AirSenseWidget.class, 58, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.altitude_widget_title, new WidgetViewHolder(AGLAltitudeWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.auto_exposure_lock_widget_title, new WidgetViewHolder(AutoExposureLockWidget.class, 35, 35)));
-        widgetListItems.add(new WidgetListItem(R.string.battery_widget_title, new WidgetViewHolder(BatteryWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_capture_widget_title, new WidgetViewHolder(CameraCaptureWidget.class, 50, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_config_aperture_widget_title, new WidgetViewHolder(CameraConfigApertureWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_config_ev_widget_title, new WidgetViewHolder(CameraConfigEVWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_config_iso_widget_title, new WidgetViewHolder(CameraConfigISOAndEIWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_config_shutter_widget_title, new WidgetViewHolder(CameraConfigShutterWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_config_ssd_widget_title, new WidgetViewHolder(CameraConfigSSDWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 28)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_config_storage_widget_title, new WidgetViewHolder(CameraConfigStorageWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 28)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_config_wb_widget_title, new WidgetViewHolder(CameraConfigWBWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_controls_widget_title, new WidgetViewHolder(CameraControlsWidget.class, 50, 213)));
-        widgetListItems.add(new WidgetListItem(R.string.camera_settings_menu_indicator_widget_title, new WidgetViewHolder(CameraSettingsMenuIndicatorWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.compass_widget_title, new WidgetViewHolder(CompassWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 91)));
-        widgetListItems.add(new WidgetListItem(R.string.connection_widget_title, new WidgetViewHolder(ConnectionWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.distance_home_widget_title, new WidgetViewHolder(DistanceHomeWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.distance_rc_widget_title, new WidgetViewHolder(DistanceRCWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.exposure_settings_indicator_widget_title, new WidgetViewHolder(ExposureSettingsIndicatorWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.flight_mode_widget_title, new WidgetViewHolder(FlightModeWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.focus_exposure_switch_widget_title, new WidgetViewHolder(FocusExposureSwitchWidget.class, 35, 35)));
-        widgetListItems.add(new WidgetListItem(R.string.focus_mode_widget_title, new WidgetViewHolder(FocusModeWidget.class, 35, 35)));
-        widgetListItems.add(new WidgetListItem(R.string.fpv_widget_title, new WidgetViewHolder(FPVWidget.class, 150, 100)));
-        widgetListItems.add(new WidgetListItem(R.string.fpv_interaction_widget_title, new WidgetViewHolder(FPVInteractionWidget.class, 150, 100)));
-        widgetListItems.add(new WidgetListItem(R.string.gps_signal_widget_title, new WidgetViewHolder(GPSSignalWidget.class, 95, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.horizontal_velocity_widget_title, new WidgetViewHolder(HorizontalVelocityWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.photo_video_switch_widget_title, new WidgetViewHolder(PhotoVideoSwitchWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.system_status_widget_title, new WidgetViewHolder(SystemStatusWidget.class, 238, 33)));
-        widgetListItems.add(new WidgetListItem(R.string.record_video_widget_title, new WidgetViewHolder(RecordVideoWidget.class, 50, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.remaining_flight_time_widget_title, new WidgetViewHolder(RemainingFlightTimeWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 30)));
-        widgetListItems.add(new WidgetListItem(R.string.remote_control_signal_widget_title, new WidgetViewHolder(RemoteControllerSignalWidget.class, 38, 22)));
-        widgetListItems.add(new WidgetListItem(R.string.rtk_enabled_widget_title, new WidgetViewHolder(RTKEnabledWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 150)));
-        widgetListItems.add(new WidgetListItem(R.string.rtk_satellite_status_widget_title, new WidgetViewHolder(RTKSatelliteStatusWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 350)));
-        widgetListItems.add(new WidgetListItem(R.string.rtk_widget_title, new WidgetViewHolder(RTKWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 200)));
-        widgetListItems.add(new WidgetListItem(R.string.shoot_photo_widget_title, new WidgetViewHolder(ShootPhotoWidget.class, 50, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.simulator_indicator_control_widgets_title, new WidgetViewHolder(SimulatorIndicatorWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT), new WidgetViewHolder(SimulatorControlWidget.class, 300, ViewGroup.LayoutParams.MATCH_PARENT)));
-        widgetListItems.add(new WidgetListItem(R.string.system_status_panel_title, new WidgetViewHolder(SystemStatusListPanelWidget.class, 550, 200)));
-        widgetListItems.add(new WidgetListItem(R.string.telemetry_widget_title, new WidgetViewHolder(TelemetryPanelWidget.class, 350, 91)));
-        widgetListItems.add(new WidgetListItem(R.string.top_bar_panel_title, new WidgetViewHolder(TopBarPanelWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 25)));
-        widgetListItems.add(new WidgetListItem(R.string.user_account_login_widget_title, new WidgetViewHolder(UserAccountLoginWidget.class, 240, 60)));
-        widgetListItems.add(new WidgetListItem(R.string.vertical_velocity_widget_title, new WidgetViewHolder(VerticalVelocityWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.vision_widget_title, new WidgetViewHolder(VisionWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.video_signal_widget_title, new WidgetViewHolder(VideoSignalWidget.class, 86, 50)));
-        widgetListItems.add(new WidgetListItem(R.string.vps_widget_title, new WidgetViewHolder(VPSWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.exposure_setting_panel_title, new WidgetViewHolder(ExposureSettingsPanel.class, 211, 316)));
-        widgetListItems.add(new WidgetListItem(R.string.exposure_mode_setting_widget_title, new WidgetViewHolder(ExposureModeSettingWidget.class, 160, 30)));
-        widgetListItems.add(new WidgetListItem(R.string.iso_and_ei_setting_widget_title, new WidgetViewHolder(ISOAndEISettingWidget.class, 211, 60)));
-        widgetListItems.add(new WidgetListItem(R.string.horizontal_situation_indicator_widget_title, new WidgetViewHolder(HorizontalSituationIndicatorWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
-        widgetListItems.add(new WidgetListItem(R.string.speed_display_widget_title, new WidgetViewHolder(SpeedDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
-        widgetListItems.add(new WidgetListItem(R.string.attitude_display_widget_title, new WidgetViewHolder(AttitudeDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
-        widgetListItems.add(new WidgetListItem(R.string.primary_flight_display_widget_title, new WidgetViewHolder(PrimaryFlightDisplayWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_air_sense_widget_title, new WidgetViewHolder(AirSenseWidget.class, 58, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_altitude_widget_title, new WidgetViewHolder(AGLAltitudeWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_auto_exposure_lock_widget_title, new WidgetViewHolder(AutoExposureLockWidget.class, 35, 35)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_battery_widget_title, new WidgetViewHolder(BatteryWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_capture_widget_title, new WidgetViewHolder(CameraCaptureWidget.class, 50, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_config_aperture_widget_title, new WidgetViewHolder(CameraConfigApertureWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_config_ev_widget_title, new WidgetViewHolder(CameraConfigEVWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_config_iso_widget_title, new WidgetViewHolder(CameraConfigISOAndEIWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_config_shutter_widget_title, new WidgetViewHolder(CameraConfigShutterWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_config_ssd_widget_title, new WidgetViewHolder(CameraConfigSSDWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 28)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_config_storage_widget_title, new WidgetViewHolder(CameraConfigStorageWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 28)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_config_wb_widget_title, new WidgetViewHolder(CameraConfigWBWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_controls_widget_title, new WidgetViewHolder(CameraControlsWidget.class, 50, 213)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_settings_menu_indicator_widget_title, new WidgetViewHolder(CameraSettingsMenuIndicatorWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_compass_widget_title, new WidgetViewHolder(CompassWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 91)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_connection_widget_title, new WidgetViewHolder(ConnectionWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_distance_home_widget_title, new WidgetViewHolder(DistanceHomeWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_distance_rc_widget_title, new WidgetViewHolder(DistanceRCWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_settings_indicator_widget_title, new WidgetViewHolder(ExposureSettingsIndicatorWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flight_mode_widget_title, new WidgetViewHolder(FlightModeWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_focus_exposure_switch_widget_title, new WidgetViewHolder(FocusExposureSwitchWidget.class, 35, 35)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_focus_mode_widget_title, new WidgetViewHolder(FocusModeWidget.class, 35, 35)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_fpv_widget_title, new WidgetViewHolder(FPVWidget.class, 150, 100)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_fpv_interaction_widget_title, new WidgetViewHolder(FPVInteractionWidget.class, 150, 100)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_gps_signal_widget_title, new WidgetViewHolder(GPSSignalWidget.class, 95, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_horizontal_velocity_widget_title, new WidgetViewHolder(HorizontalVelocityWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_photo_video_switch_widget_title, new WidgetViewHolder(PhotoVideoSwitchWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_system_status_widget_title, new WidgetViewHolder(SystemStatusWidget.class, 238, 33)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_record_video_widget_title, new WidgetViewHolder(RecordVideoWidget.class, 50, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_remaining_flight_time_widget_title, new WidgetViewHolder(RemainingFlightTimeWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 30)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_remote_control_signal_widget_title, new WidgetViewHolder(RemoteControllerSignalWidget.class, 38, 22)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_rtk_enabled_widget_title, new WidgetViewHolder(RTKEnabledWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 150)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_rtk_satellite_status_widget_title, new WidgetViewHolder(RTKSatelliteStatusWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 350)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_rtk_widget_title, new WidgetViewHolder(RTKWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_shoot_photo_widget_title, new WidgetViewHolder(ShootPhotoWidget.class, 50, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_simulator_indicator_control_widgets_title, new WidgetViewHolder(SimulatorIndicatorWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT), new WidgetViewHolder(SimulatorControlWidget.class, 300, ViewGroup.LayoutParams.MATCH_PARENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_system_status_panel_title, new WidgetViewHolder(SystemStatusListPanelWidget.class, 550, 200)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_telemetry_widget_title, new WidgetViewHolder(TelemetryPanelWidget.class, 350, 91)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_top_bar_panel_title, new WidgetViewHolder(TopBarPanelWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, 25)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_user_account_login_widget_title, new WidgetViewHolder(UserAccountLoginWidget.class, 240, 60)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_vertical_velocity_widget_title, new WidgetViewHolder(VerticalVelocityWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_vision_widget_title, new WidgetViewHolder(VisionWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_video_signal_widget_title, new WidgetViewHolder(VideoSignalWidget.class, 86, 50)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_vps_widget_title, new WidgetViewHolder(VPSWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_setting_panel_title, new WidgetViewHolder(ExposureSettingsPanel.class, 211, 316)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_mode_setting_widget_title, new WidgetViewHolder(ExposureModeSettingWidget.class, 160, 30)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_iso_and_ei_setting_widget_title, new WidgetViewHolder(ISOAndEISettingWidget.class, 211, 60)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_horizontal_situation_indicator_widget_title, new WidgetViewHolder(HorizontalSituationIndicatorWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_speed_display_widget_title, new WidgetViewHolder(SpeedDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_attitude_display_widget_title, new WidgetViewHolder(AttitudeDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_primary_flight_display_widget_title, new WidgetViewHolder(PrimaryFlightDisplayWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
     }
 
     @Override

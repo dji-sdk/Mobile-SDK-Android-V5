@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -147,7 +148,7 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.missionUploadState.observe(viewLifecycleOwner) {
             it?.let {
               if (it.error != null) {
-                  mission_upload_state_tv?.text = "Upload State: error:${it.error.description()} "
+                  mission_upload_state_tv?.text = "Upload State: error:${getErroMsg(it.error)} "
               } else if (it.tips.isNotEmpty()) {
                   mission_upload_state_tv?.text = it.tips
               } else{
@@ -167,7 +168,7 @@ class WayPointV3Fragment : DJIFragment() {
                     }
 
                     override fun onFailure(error: IDJIError) {
-                        ToastUtils.showToast("startMission Failed " + error.description())
+                        ToastUtils.showToast("startMission Failed " + getErroMsg(error))
                     }
 
                 } )
@@ -182,7 +183,7 @@ class WayPointV3Fragment : DJIFragment() {
                     ToastUtils.showToast("pauseMission Success")
                 }
                 override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast("pauseMission Failed " + error.description())
+                    ToastUtils.showToast("pauseMission Failed " + getErroMsg(error))
                 }
             })
 
@@ -194,7 +195,7 @@ class WayPointV3Fragment : DJIFragment() {
                     ToastUtils.showToast("resumeMission Success")
                 }
                 override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast("resumeMission Failed " + error.description())
+                    ToastUtils.showToast("resumeMission Failed " + getErroMsg(error))
                 }
             })
 
@@ -228,7 +229,7 @@ class WayPointV3Fragment : DJIFragment() {
                         ToastUtils.showToast("stopMission Success")
                     }
                     override fun onFailure(error: IDJIError) {
-                        ToastUtils.showToast("stopMission Failed " + error.description())
+                        ToastUtils.showToast("stopMission Failed " + getErroMsg(error))
                     }
                 })
             }
@@ -433,6 +434,13 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.cancelListenFlightControlState()
         wayPointV3VM.removeAllMissionStateListener()
         wayPointV3VM.clearAllWaylineExecutingInfoListener()
+    }
+
+    fun getErroMsg(error: IDJIError):String{
+        if (!TextUtils.isEmpty(error.description())){
+            return error.description();
+        }
+        return error.errorCode()
     }
 
 }

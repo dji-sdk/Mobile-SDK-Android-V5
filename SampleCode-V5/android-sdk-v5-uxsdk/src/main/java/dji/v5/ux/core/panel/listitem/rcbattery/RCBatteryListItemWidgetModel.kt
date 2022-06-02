@@ -26,6 +26,8 @@ package dji.v5.ux.core.panel.listitem.rcbattery
 import dji.sdk.keyvalue.key.RemoteControllerKey
 import dji.sdk.keyvalue.value.remotecontroller.BatteryInfo
 import dji.sdk.keyvalue.key.KeyTools
+import dji.v5.utils.common.JsonUtil
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
@@ -39,15 +41,14 @@ import io.reactivex.rxjava3.core.Flowable
  */
 
 class RCBatteryListItemWidgetModel(
-        djiSdkModel: DJISDKModel,
-        keyedStore: ObservableInMemoryKeyedStore
+    djiSdkModel: DJISDKModel,
+    keyedStore: ObservableInMemoryKeyedStore
 ) : WidgetModel(djiSdkModel, keyedStore) {
 
     //region Fields
 
     private val rcBatteryLevelProcessor: DataProcessor<BatteryInfo> = DataProcessor.create(BatteryInfo())
     private val rcBatteryStateProcessor: DataProcessor<RCBatteryState> = DataProcessor.create(RCDisconnected)
-    private val rcBatteryLowProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     private val rcConnectionProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     //endregion
 
@@ -64,9 +65,6 @@ class RCBatteryListItemWidgetModel(
     override fun inSetup() {
         bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyConnection), rcConnectionProcessor)
         bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyBatteryInfo), rcBatteryLevelProcessor)
-//        val rcBatteryLowKey = RemoteControllerKey.create(RemoteControllerKey.IS_CHARGE_REMAINING_LOW)
-//
-//        bindDataProcessor(rcBatteryLowKey, rcBatteryLowProcessor)
     }
 
     override fun inCleanup() {
@@ -74,8 +72,8 @@ class RCBatteryListItemWidgetModel(
     }
 
     override fun updateStates() {
-        val rcBatteryLevelPercent = 0
-        if (rcConnectionProcessor.value && rcBatteryLowProcessor.value) {
+        val rcBatteryLevelPercent = rcBatteryLevelProcessor.value.batteryPercent
+        if (rcConnectionProcessor.value && rcBatteryLevelPercent < 30) {
             rcBatteryStateProcessor.onNext(RCBatteryState.Low(rcBatteryLevelPercent))
         } else if (rcConnectionProcessor.value) {
             rcBatteryStateProcessor.onNext(RCBatteryState.Normal(rcBatteryLevelPercent))

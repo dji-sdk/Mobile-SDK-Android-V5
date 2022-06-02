@@ -141,6 +141,11 @@
         <item name="uxsdk_list_item_title">@string/uxsdk_list_item_rc_stick_mode</item>
     </style>
 
+    <style name="UXSDKObstacleAvoidanceListItemWidget">
+        <item name="uxsdk_list_item_icon">@drawable/uxsdk_ic_rc_list_item</item>
+        <item name="uxsdk_list_item_title">@string/uxsdk_obstacle_action_type</item>
+    </style>
+
     <style name="UXSDKReturnToHomeAltitudeListItem">
         <item name="uxsdk_list_item_icon">@drawable/uxsdk_ic_return_home_altitude</item>
         <item name="uxsdk_list_item_title">@string/uxsdk_list_item_max_return_to_home_altitude</item>

@@ -30,6 +30,7 @@ import dji.sdk.keyvalue.value.rtkmobilestation.RTKHomePointDataSource
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKHomePointInfo
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKTakeoffAltitudeInfo
 import dji.sdk.keyvalue.key.KeyTools
+import dji.v5.manager.KeyManager
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
@@ -41,6 +42,8 @@ import io.reactivex.rxjava3.core.Flowable
  * Widget Model for the [RTKEnabledWidget] used to define
  * the underlying logic and communication
  */
+private const val TAG = "RTKEnabledWidgetModel"
+
 class RTKEnabledWidgetModel(
     djiSdkModel: DJISDKModel,
     keyedStore: ObservableInMemoryKeyedStore
@@ -83,6 +86,11 @@ class RTKEnabledWidgetModel(
         // do nothing
     }
 
+    /**
+     * RTK能否开启，这里捆绑了几个逻辑：
+     * 1、只有在电机关闭时才可以设置RTK开启/关闭状态；
+     * 2、如果电机已开启，则需要飞行高度已设置+返航点的类型设置为RTK，这时才可以开启/关闭RTK
+     */
     override fun updateStates() {
         canEnableRTKProcessor.onNext(
             !isMotorOnProcessor.value || (isRTKTakeoffHeightSetProcessor.value.valid

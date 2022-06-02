@@ -121,10 +121,7 @@ class WayPointV3VM : DJIViewModel() {
                 }
             }
         }
-
     }
-
-
 
     fun cancelListenFlightControlState() {
         KeyManager.getInstance().cancelListen(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this)
@@ -165,7 +162,6 @@ class WayPointV3VM : DJIViewModel() {
     private fun getHeading() = (compassHeadKey.get(0.0)).toFloat()
 
     private fun getHeight(): Double = (altitudeKey.get(0.0))
-
 
     fun isInMainlandChina(): Boolean {
         return CHINA_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCodeSync.areaCode)

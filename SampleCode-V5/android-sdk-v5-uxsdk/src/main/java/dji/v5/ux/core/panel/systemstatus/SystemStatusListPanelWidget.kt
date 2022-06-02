@@ -134,7 +134,6 @@ class SystemStatusListPanelWidget @JvmOverloads constructor(
                 return it
             }
         }
-
         return 0
     }
     //endregion

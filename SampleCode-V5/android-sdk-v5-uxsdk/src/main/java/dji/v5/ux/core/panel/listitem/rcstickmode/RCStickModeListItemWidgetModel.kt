@@ -24,12 +24,14 @@
 package dji.v5.ux.core.panel.listitem.rcstickmode
 
 import dji.sdk.keyvalue.key.RemoteControllerKey
-import dji.sdk.keyvalue.value.remotecontroller.RcControllerModeMsg
-import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.remotecontroller.ControlMode
+import dji.v5.et.create
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.util.DataProcessor
+import dji.v5.ux.core.util.RxUtil
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -45,12 +47,8 @@ class RCStickModeListItemWidgetModel(
     keyedStore: ObservableInMemoryKeyedStore
 ) : WidgetModel(djiSdkModel, keyedStore) {
 
-
-    private val rcStickModeStateProcessor: DataProcessor<RCStickModeState> =
-        DataProcessor.create(RCStickModeState.ProductDisconnected)
-
-    private val aircraftMappingStyleProcessor: DataProcessor<RcControllerModeMsg> =
-        DataProcessor.create(RcControllerModeMsg())
+    private val rcStickModeStateProcessor: DataProcessor<RCStickModeState> = DataProcessor.create(RCStickModeState.ProductDisconnected)
+    private val controlModeProcessor: DataProcessor<ControlMode> = DataProcessor.create(ControlMode.UNKNOWN)
 
     /**
      * Get the current rc stick list item state
@@ -60,21 +58,17 @@ class RCStickModeListItemWidgetModel(
     /**
      * Set control stick mode to RC
      *
-     * @param rcStickModeState - state representing stick mode to be set to RC
+     * @param mode - state representing stick mode to be set to RC
      * @return Completable representing the action
      */
-    fun setControlStickMode(rcStickModeState: RCStickModeState): Completable {
-//        val aircraftMappingStyle: RcControllerModeMsg = when (rcStickModeState) {
-//            RCStickModeState.Mode1 -> STYLE_1
-//            is RCStickModeState.Custom -> STYLE_CUSTOM
-//            RCStickModeState.Mode3 -> STYLE_3
-//            else -> STYLE_2
-//        }
-        return djiSdkModel.setValue(KeyTools.createKey(RemoteControllerKey.KeyRcControllerMode), RcControllerModeMsg())
+    fun setControlStickMode(mode: ControlMode): Completable {
+        return djiSdkModel.setValue(RemoteControllerKey.KeyControlMode.create(), mode)
     }
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyRcControllerMode), aircraftMappingStyleProcessor)
+        bindDataProcessor(RemoteControllerKey.KeyControlMode.create(), controlModeProcessor) {
+            updateCurrentStickMode(it)
+        }
     }
 
     override fun inCleanup() {
@@ -82,32 +76,31 @@ class RCStickModeListItemWidgetModel(
     }
 
     override fun updateStates() {
-//        if (productConnectionProcessor.value == true) {
-//            addDisposable(getControlStickMode()
-//                    .subscribe(Consumer {
-//                        if (it is AircraftMappingStyle) {
-//                            updateCurrentStickMode(it)
-//                        }
-//                    }, RxUtil.logErrorConsumer(TAG, "getMappingStyle ")))
-//
-//        } else {
-//            rcStickModeStateProcessor.onNext(RCStickModeState.ProductDisconnected)
-//        }
-
+        if (productConnectionProcessor.value) {
+            addDisposable(
+                getControlStickMode()
+                    .subscribe(
+                        { updateCurrentStickMode(it) },
+                        RxUtil.logErrorConsumer(TAG, "getMappingStyle ")
+                    )
+            )
+        } else {
+            rcStickModeStateProcessor.onNext(RCStickModeState.ProductDisconnected)
+        }
     }
-//
-//    private fun updateCurrentStickMode(mappingStyle: AircraftMappingStyle) {
-//        when (mappingStyle) {
-//            STYLE_1 -> rcStickModeStateProcessor.onNext(RCStickModeState.Mode1)
-//            STYLE_2 -> rcStickModeStateProcessor.onNext(RCStickModeState.Mode2)
-//            STYLE_3 -> rcStickModeStateProcessor.onNext(RCStickModeState.Mode3)
-//            STYLE_CUSTOM -> rcStickModeStateProcessor.onNext(RCStickModeState.Custom)
-//            UNKNOWN -> rcStickModeStateProcessor.onNext(RCStickModeState.ProductDisconnected)
-//        }
-//    }
 
-    private fun getControlStickMode(): Single<RcControllerModeMsg> {
-        return djiSdkModel.getValue(KeyTools.createKey(RemoteControllerKey.KeyRcControllerMode))
+    private fun updateCurrentStickMode(mode: ControlMode) {
+        when (mode) {
+            ControlMode.JP -> rcStickModeStateProcessor.onNext(RCStickModeState.JP)
+            ControlMode.USA -> rcStickModeStateProcessor.onNext(RCStickModeState.USA)
+            ControlMode.CH -> rcStickModeStateProcessor.onNext(RCStickModeState.CH)
+            ControlMode.CUSTOM -> rcStickModeStateProcessor.onNext(RCStickModeState.Custom)
+            ControlMode.UNKNOWN -> rcStickModeStateProcessor.onNext(RCStickModeState.ProductDisconnected)
+        }
+    }
+
+    private fun getControlStickMode(): Single<ControlMode> {
+        return djiSdkModel.getValue(RemoteControllerKey.KeyControlMode.create())
     }
 
     /**
@@ -120,19 +113,19 @@ class RCStickModeListItemWidgetModel(
         object ProductDisconnected : RCStickModeState()
 
         /**
-         * When product is connected and stick mode is 1
+         * When product is connected and stick mode is JP
          */
-        object Mode1 : RCStickModeState()
+        object JP : RCStickModeState()
 
         /**
-         * When product is connected and stick mode is 2
+         * When product is connected and stick mode is USA
          */
-        object Mode2 : RCStickModeState()
+        object USA : RCStickModeState()
 
         /**
-         * When product is connected and stick mode is 3
+         * When product is connected and stick mode is CH
          */
-        object Mode3 : RCStickModeState()
+        object CH : RCStickModeState()
 
         /**
          * When product is connected and stick mode is custom

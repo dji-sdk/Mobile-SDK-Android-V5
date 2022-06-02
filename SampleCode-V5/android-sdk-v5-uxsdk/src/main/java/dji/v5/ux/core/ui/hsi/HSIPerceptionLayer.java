@@ -124,8 +124,8 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     @NonNull
     private final List<Shape> mRadarShapeList = new ArrayList<>();
 
-    @Nullable
-    private CompositeDisposable mDisposable;
+    @NonNull
+    private CompositeDisposable mDisposable = new CompositeDisposable();
 
     @NonNull
     private HSIWidgetModel widgetModel;
@@ -145,7 +145,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     private final PathPool mPathPool = new PathPool(128);
     private final PathPool mRadarPathPool = new PathPool(128);
 
-    public HSIPerceptionLayer(@NonNull Context context, @Nullable AttributeSet attrs, HSIContract.HSIContainer container,HSIWidgetModel widgetModel) {
+    public HSIPerceptionLayer(@NonNull Context context, @Nullable AttributeSet attrs, HSIContract.HSIContainer container, HSIWidgetModel widgetModel) {
         mHSIContainer = container;
         this.widgetModel = widgetModel;
 
@@ -188,10 +188,10 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     public void onStart() {
         mDisposable = new CompositeDisposable();
 
-        mDisposable.add(widgetModel.perceptionTOFDistanceProcessor.toFlowable()
+        mDisposable.add(widgetModel.getPerceptionTOFDistanceProcessor().toFlowable()
                 .subscribe(status -> mToFPublisher.onNext(status.getDists())));
 
-        mDisposable.add(widgetModel.obstacleAvoidanceSensorStateProcessor.toFlowable().subscribe(omniAvoidanceState -> {
+        mDisposable.add(widgetModel.getObstacleAvoidanceSensorStateProcessor().toFlowable().subscribe(omniAvoidanceState -> {
             mVisionPerceptionEnableState[0] = omniAvoidanceState.getIsFrontObstacleAvoidanceEnable();
             mVisionPerceptionEnableState[1] = omniAvoidanceState.getIsRightObstacleAvoidanceEnable();
             mVisionPerceptionEnableState[2] = omniAvoidanceState.getIsBackObstacleAvoidanceEnable();
@@ -200,10 +200,10 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
 
         mDisposable.add(
                 Flowable.combineLatest(
-                        widgetModel.omniHorizontalAvoidanceEnabledProcessor.toFlowable(),
-                        widgetModel.perceptionFullDistanceProcessor.toFlowable(),
-                        widgetModel.omniHorizontalRadarDistanceProcessor.toFlowable(),
-                        widgetModel.horizontalAvoidanceDistanceProcessor.toFlowable(),
+                        widgetModel.getOmniHorizontalAvoidanceEnabledProcessor().toFlowable(),
+                        widgetModel.getPerceptionFullDistanceProcessor().toFlowable(),
+                        widgetModel.getOmniHorizontalRadarDistanceProcessor().toFlowable(),
+                        widgetModel.getHorizontalAvoidanceDistanceProcessor().toFlowable(),
                         (avoidanceEnabled, radarStatus, radarDistance, avoidanceDistance) -> {
                             mHorizontalPerceptionDistance = radarDistance;
                             mHorizontalBarrierAvoidanceDistance = avoidanceDistance;
@@ -220,9 +220,9 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
 
         mDisposable.add(
                 Flowable.combineLatest(
-                        widgetModel.radarConnectionProcessor.toFlowable(),
-                        widgetModel.radarHorizontalObstacleAvoidanceEnabledProcessor.toFlowable(),
-                        widgetModel.radarObstacleAvoidanceStateProcessor.toFlowable(),
+                        widgetModel.getRadarConnectionProcessor().toFlowable(),
+                        widgetModel.getRadarHorizontalObstacleAvoidanceEnabledProcessor().toFlowable(),
+                        widgetModel.getRadarObstacleAvoidanceStateProcessor().toFlowable(),
                         (isRadarConnected, radarEnable, avoidanceState) -> {
                             mIsRadarConnected = isRadarConnected;
                             mShowRadarPerceptionInfo = radarEnable;
@@ -237,8 +237,8 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         );
 
         mDisposable.add(Flowable.combineLatest(
-                widgetModel.flightModeProcessor.toFlowable(),
-                widgetModel.multipleFlightModeEnabledProcessor.toFlowable(),
+                widgetModel.getFlightModeProcessor().toFlowable(),
+                widgetModel.getMultipleFlightModeEnabledProcessor().toFlowable(),
                 (fcFlightMode, isMultiModeOpen) -> {
                     mFlightMode = fcFlightMode;
                     mIsMultiModeOpen = isMultiModeOpen;
@@ -276,7 +276,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                 }));
     }
 
-    private List<Integer> performDisposableMap(){
+    private List<Integer> performDisposableMap() {
         List<Integer> perception = mPerceptionHorizontalDistances;
         List<Integer> tof = mToFHorizontalDistances;
         if (tof.size() == 0 || perception.size() == 0) {
@@ -316,13 +316,9 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
 
     @Override
     public void onStop() {
-        if (mDisposable != null) {
-            mDisposable.dispose();
-        }
-
+        mDisposable.dispose();
         mPathPool.clear();
         mRadarPathPool.clear();
-
         mHSIContainer = null;
     }
 
@@ -339,7 +335,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                         mRadarShapeList.clear();
                         mRadarShapeList.addAll(list);
                     }
-                    if(mHSIContainer !=null) {
+                    if (mHSIContainer != null) {
                         mHSIContainer.updateWidget();
                     }
                 });
@@ -409,7 +405,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     }
 
     private void drawPerception(Canvas canvas, Paint paint, int compassSize) {
-        if(mHSIContainer == null) return;
+        if (mHSIContainer == null) return;
         canvas.save();
 
         int perceptionAngleTotal = 360 - DEFAULT_PERCEPTION_BLIND_AREA_COUNT * DEFAULT_PERCEPTION_BLIND_AREA_ANGLE;
@@ -466,7 +462,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     }
 
     private void drawBarrier(Canvas canvas, Paint paint, int compassSize) {
-        if(mHSIContainer == null) return;
+        if (mHSIContainer == null) return;
 
         if (mShapeList.isEmpty()) {
             return;
@@ -496,7 +492,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                     paint.setStrokeWidth(mMaxPerceptionStrokeWidth);
                     float arcRadius = radius - (float) mMaxPerceptionStrokeWidth / 2;
                     canvas.drawArc(-arcRadius, -arcRadius, arcRadius, arcRadius, 270,
-                            ((ArcShape) shape).mToAngle - (float)shape.mFromAngle, false, paint);
+                            ((ArcShape) shape).mToAngle - (float) shape.mFromAngle, false, paint);
                     paint.setStrokeWidth(lastStrokeWidth);
                 }
             }
@@ -520,7 +516,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     }
 
     private void drawRadarBarrier(Canvas canvas, Paint paint, int compassSize) {
-        if(mHSIContainer == null){
+        if (mHSIContainer == null) {
             return;
         }
 
@@ -535,20 +531,20 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
             for (Shape shape : mRadarShapeList) {
                 canvas.save();
                 if (shape instanceof PathShape) {
-                    canvas.rotate((float)shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET);
+                    canvas.rotate((float) shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET);
                     paint.setStyle(Paint.Style.FILL);
                     paint.setColor(shape.mColor);
                     canvas.drawPath(((PathShape) shape).mPath, paint);
                     mRadarPathPool.recycle(((PathShape) shape).mPath);
                 } else if (shape instanceof ArcShape) {
-                    canvas.rotate((float)shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET);
+                    canvas.rotate((float) shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET);
                     paint.setColor(shape.mColor);
                     paint.setStyle(Paint.Style.STROKE);
                     float lastStrokeWidth = paint.getStrokeWidth();
                     paint.setStrokeWidth(mRadarMaxPerceptionStrokeWidth);
                     float arcRadius = radius - (float) mRadarMaxPerceptionStrokeWidth / 2;
                     canvas.drawArc(-arcRadius, -arcRadius, arcRadius, arcRadius, 270,
-                            ((ArcShape) shape).mToAngle - (float)shape.mFromAngle, false, paint);
+                            ((ArcShape) shape).mToAngle - (float) shape.mFromAngle, false, paint);
                     paint.setStrokeWidth(lastStrokeWidth);
                 }
                 canvas.restore();
@@ -581,7 +577,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     private List<Shape> updateDrawShape2(List<Integer> horizontalBarrierDistance, int startOffset, int[] levelColor) {
 
         List<Shape> shapeList = new ArrayList<>();
-        if(mHSIContainer == null){
+        if (mHSIContainer == null) {
             return shapeList;
         }
 
@@ -649,7 +645,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         return shapeList;
     }
 
-    private boolean needShape(float distanceInMeter,int visibleDistanceInHsi,int i,List<Integer> horizontalBarrierDistance,Path path1,PathShape lastShape){
+    private boolean needShape(float distanceInMeter, int visibleDistanceInHsi, int i, List<Integer> horizontalBarrierDistance, Path path1, PathShape lastShape) {
         return (distanceInMeter >= visibleDistanceInHsi || i == horizontalBarrierDistance.size() - 1)
                 && !path1.isEmpty() && lastShape != null;
     }
@@ -672,7 +668,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     private List<Shape> updateDrawShape(List<Integer> horizontalBarrierDistance, int startOffset, int[] levelColor) {
         List<Shape> shapeList = new ArrayList<>();
 
-        if(mHSIContainer == null) return shapeList;
+        if (mHSIContainer == null) return shapeList;
 
 
         int rotationOffset = 360 / horizontalBarrierDistance.size();
@@ -746,7 +742,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                 && !path1.isEmpty() && lastShape instanceof PathShape;
     }
 
-    private int getAreaColor(float minDistanceInMeter,int[] levelColor){
+    private int getAreaColor(float minDistanceInMeter, int[] levelColor) {
         int areaColor;
         if (minDistanceInMeter > mHorizontalPerceptionDistance) {
             areaColor = levelColor[0];//

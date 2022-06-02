@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018-2020 DJI
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,7 +26,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:parentTag="dji.ux.beta.accessory.widget.rtk.RTKSatelliteStatusWidget">
+    tools:background="@android:color/black"
+    tools:parentTag="dji.v5.ux.accessory.RTKSatelliteStatusWidget">
 
     <TextView
         android:id="@+id/textview_rtk_status_title"
@@ -128,6 +128,7 @@
     <ImageView
         android:id="@+id/imageview_orientation"
         style="@style/UXSDKSatelliteStatusItem"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/textview_orientation_title"
         app:layout_constraintStart_toEndOf="@id/rtk_aircraft_separator"
         app:layout_constraintTop_toTopOf="@id/textview_orientation_title"

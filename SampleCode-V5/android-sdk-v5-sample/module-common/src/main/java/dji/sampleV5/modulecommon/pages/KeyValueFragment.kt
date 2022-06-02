@@ -23,6 +23,9 @@ import dji.sampleV5.modulecommon.models.KeyValueVM
 import dji.sampleV5.modulecommon.util.ToastUtils.showToast
 import dji.sampleV5.modulecommon.util.Util
 import dji.sdk.keyvalue.converter.EmptyValueConverter
+import dji.sdk.keyvalue.value.product.ProductType
+import dji.v5.manager.capability.CapabilityManager
+import dji.v5.utils.common.DjiSharedPreferencesManager
 import dji.v5.utils.common.LogUtils
 
 import kotlinx.android.synthetic.main.fragment_key_list.*
@@ -31,6 +34,15 @@ import java.lang.Exception
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
+import android.widget.ArrayAdapter
+
+import android.R.attr.data
+import android.R.attr.data
+import dji.sdk.keyvalue.key.ComponentType
+import dji.sdk.keyvalue.value.common.CameraLensType
+import dji.sdk.keyvalue.value.common.ComponentIndexType
+
 
 /**
  * Class Description
@@ -44,9 +56,11 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     private val TAG = LogUtils.getTag("KeyValueFragment")
     private val keyValueVM: KeyValueVM by activityViewModels()
 
+    val CAPABILITY_ENABLE = "capabilityenable"
     var currentChannelType: ChannelType? = ChannelType.CHANNEL_TYPE_CAMERA
     val LISTEN_RECORD_MAX_LENGTH = 2000
     val HIGH_FREQUENCY_KEY_SP_NAME = "highfrequencykey"
+    val LENS_TAG = "CAMERA_LENS_"
 
     var contentView: View? = null
     var recyclerView: RecyclerView? = null
@@ -103,9 +117,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         contentView?.let { initView(it) }
         initRemoteData()
         val parent = contentView!!.parent as ViewGroup
-        if (parent != null) {
-            parent.removeView(contentView)
-        }
+        parent.removeView(contentView)
     }
 
     fun initLocalData() {
@@ -134,6 +146,12 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         setSPColor(sp_index)
         setSPColor(sp_subindex)
         setSPColor(sp_subtype)
+        iv_capability.isChecked = isCapabilitySwitchOn()
+        msdkInfoVm.msdkInfo.observe(viewLifecycleOwner){
+            iv_capability.isEnabled = it.productType != ProductType.UNRECOGNIZED
+            setDataWithCapability(iv_capability.isChecked)
+        }
+        iv_capability.setOnCheckedChangeListener { compoundButton, enable -> setDataWithCapability(enable) }
     }
 
     private fun initViewAndListener(view: View) {
@@ -271,6 +289,28 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         bt_action.setEnabled(currentKeyItem!!.canAction())
         keyValuesharedPreferences?.edit()?.putLong(keyItem.toString(), keyItem.count)?.commit()
         keyItem.isItemSelected = true
+
+        updateComponentSpinner(keyItem)
+
+    }
+
+    private fun updateComponentSpinner( keyItem: KeyItem<*, *>){
+        var componentType = ComponentType.find(keyItem.keyInfo.componentType)
+        if (componentType == ComponentType.CAMERA) {
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                CapabilityManager.getInstance().getSupportLens("Key" + keyItem.name))
+            sp_subtype.adapter = adapter
+            tv_subtype.text = "lenstype"
+        } else{
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                requireContext().resources.getStringArray(R.array.sub_type_arrays))
+            sp_subtype.adapter = adapter
+            tv_subtype.text = "subtype"
+        }
     }
 
     private fun resetSelected() {
@@ -282,7 +322,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     }
 
     /**
-     * 处理监听显示控件
+     * 处理Listen显示控件
      */
     private fun processListenLogic() {
         if (currentKeyItem == null) {
@@ -420,12 +460,58 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         }
 
         tv_operate_title?.text = tips
-        data.clear()
-        data.addAll(currentKeyItemList)
-        cameraParamsAdapter?.notifyDataSetChanged()
+        setDataWithCapability(isCapabilitySwitchOn())
     }
 
 
+    private fun setDataWithCapability(enable: Boolean) {
+        var showList: MutableList<KeyItem<*, *>> = ArrayList(currentKeyItemList)
+        changeCurrentList(enable , showList)
+        data.clear()
+        data.addAll(showList)
+        resetSearchFilter()
+        setKeyCount(showList.size)
+        cameraParamsAdapter?.notifyDataSetChanged()
+        DjiSharedPreferencesManager.putBoolean(context , CAPABILITY_ENABLE ,enable)
+        if (enable) {
+            tv_capablity?.text = "Officially released key"
+        } else{
+            tv_capablity?.text = "All key"
+        }
+    }
+
+
+    /**
+     *  能力集开关打开，并且获取的产品名称在能力集列表中则更新列表
+     */
+    private fun changeCurrentList(enable:Boolean , showList: MutableList<KeyItem<*, *>>){
+        var type  = msdkInfoVm.msdkInfo.value?.productType?.name
+        if (enable && CapabilityManager.getInstance().isProductSupported(type)) {
+            val iterator = showList.iterator();
+            while (iterator.hasNext()) {
+                if (!CapabilityManager.getInstance()
+                        .isKeySupported( type,"Key" + iterator.next().name)
+                ) {
+                    iterator.remove()
+                }
+            }
+        }
+    }
+    /**
+     * 清空search框
+     */
+    private fun resetSearchFilter(){
+        et_filter.setText("")
+        cameraParamsAdapter?.getFilter()?.filter("")
+    }
+
+    private fun isCapabilitySwitchOn() : Boolean{
+       return DjiSharedPreferencesManager.getBoolean(context , CAPABILITY_ENABLE ,false)
+    }
+
+    private fun setKeyCount(  count :Int){
+        tv_count.text = "(${count})";
+    }
     override fun onClick(view: View) {
 
         if (Util.isBlank(tv_name.text.toString()) || currentKeyItem == null) {
@@ -467,7 +553,8 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
      * key列表条件过滤
      */
     private fun keyFilterOperate() {
-        val sortlist: List<KeyItem<*, *>> = ArrayList(currentKeyItemList)
+        val sortlist: MutableList<KeyItem<*, *>> = ArrayList(currentKeyItemList)
+        changeCurrentList(isCapabilitySwitchOn() , sortlist)
         Collections.sort(sortlist)
         KeyValueDialogUtil.showFilterListWindow(
             ll_channel_filter_container,
@@ -481,9 +568,17 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     }
 
     private fun channelTypeFilterOperate() {
+        var showChannelList  : MutableList<ChannelType> = ArrayList()
+        val capabilityChannelList = arrayOf(ChannelType.CHANNEL_TYPE_BATTERY ,ChannelType.CHANNEL_TYPE_AIRLINK , ChannelType.CHANNEL_TYPE_CAMERA,
+            ChannelType.CHANNEL_TYPE_GIMBAL,ChannelType.CHANNEL_TYPE_REMOTE_CONTROLLER , ChannelType.CHANNEL_TYPE_FLIGHT_CONTROL)
+        if (isCapabilitySwitchOn()){
+            showChannelList = capabilityChannelList.toMutableList()
+        } else{
+            showChannelList = currentChannelList
+        }
         KeyValueDialogUtil.showChannelFilterListWindow(
             tv_operate_title,
-            currentChannelList,
+            showChannelList,
             object :
                 KeyItemActionListener<ChannelType?> {
                 override fun actionChange(channelType: ChannelType?) {
@@ -496,16 +591,44 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     }
 
 
+    private fun getCameraSubIndex(lensName:String):Int{
+
+        return  when(lensName){
+            CameraLensType.CAMERA_LENS_DEFAULT.name -> CameraLensType.CAMERA_LENS_DEFAULT.value()
+            CameraLensType.CAMERA_LENS_ZOOM.name -> CameraLensType.CAMERA_LENS_ZOOM.value()
+            CameraLensType.CAMERA_LENS_THERMAL.name -> CameraLensType.CAMERA_LENS_THERMAL.value()
+            CameraLensType.CAMERA_LENS_WIDE.name -> CameraLensType.CAMERA_LENS_WIDE.value()
+            else -> {CameraLensType.UNKNOWN.value()}
+        }
+    }
+
+    private fun getComponentIndex(compentName:String):Int{
+        return  when(compentName){
+            ComponentIndexType.LEFT_OR_MAIN.name-> ComponentIndexType.LEFT_OR_MAIN.value()
+            ComponentIndexType.RIGHT.name -> ComponentIndexType.RIGHT.value()
+            ComponentIndexType.UP.name -> ComponentIndexType.UP.value()
+            else -> {ComponentIndexType.UNKNOWN.value()}
+        }
+    }
     private fun setKeyInfo() {
         if (currentKeyItem == null) {
             return
         }
         try {
-            val index = sp_index.getSelectedItem().toString().toInt()
+            val index = getComponentIndex(sp_index.getSelectedItem().toString())
+
             if (index != -1) {
                 currentKeyItem!!.setComponetIndex(index)
             }
-            val subtype = sp_subtype.getSelectedItem().toString().toInt()
+            var subtype:Int
+            if (ComponentType.find(currentKeyItem!!.keyInfo.componentType) == ComponentType.CAMERA)
+            {
+                subtype = getCameraSubIndex(LENS_TAG + sp_subtype.getSelectedItem().toString())
+
+            } else{
+                subtype = sp_subtype.getSelectedItem().toString().toInt()
+            }
+
             if (subtype != -1) {
                 currentKeyItem!!.setSubComponetType(subtype)
             }
@@ -535,7 +658,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     }
 
     /**
-     * 监听操作
+     * Listen操作
      */
     private fun listen() {
         if (!currentKeyItem?.canListen()!!) {
@@ -564,7 +687,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             showToast("not support set")
             return
         }
-        if (currentKeyItem!!.getSubItemMap().size != 0) {
+        if (currentKeyItem!!.subItemMap.isNotEmpty()) {
             processSubListLogic(
                 bt_set,
                 currentKeyItem!!.getParam(),
@@ -582,7 +705,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 })
         } else {
             KeyValueDialogUtil.showInputDialog(
-                getActivity(),
+                activity,
                 currentKeyItem,
                 object :
                     KeyItemActionListener<String?> {
@@ -625,19 +748,14 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             currentKeyItem!!.doAction(currentKeyItem!!.getParamJsonStr())
         } else {
             KeyValueDialogUtil.showInputDialog(
-                getActivity(),
-                currentKeyItem,
-                object :
-                    KeyItemActionListener<String?> {
-                    override fun actionChange(s: String?) {
-                        currentKeyItem!!.doAction(s)
-                    }
-                })
+                activity,
+                currentKeyItem
+            ) { s -> currentKeyItem!!.doAction(s) }
         }
     }
 
     /**
-     * 注销监听，移除业务回调
+     * 注销Listen，移除业务回调
      *
      * @param list
      */
@@ -649,7 +767,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             item.removeCallBack()
             item.cancelListen(this)
         }
-        list.clear()
+
     }
 
 

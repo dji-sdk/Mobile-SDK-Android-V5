@@ -17,16 +17,29 @@ android {
         }
     }
 
+    //配置签名信息
+    signingConfigs {
+        release {
+            storeFile file(project.STORE_FILE)
+            storePassword project.STORE_PASSWORD
+            keyAlias project.KEY_ALIAS
+            keyPassword project.KEY_PASSWORD
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../../android-sdk-v5-as/proguard-relative/sample.pro'
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    '../../android-sdk-v5-as/proguard-relative/sample.pro'
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../../android-sdk-v5-as/proguard-relative/sample.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    '../../android-sdk-v5-as/proguard-relative/sample.pro'
         }
     }
 
@@ -37,6 +50,12 @@ android {
 
     kotlinOptions{
         jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    //关闭lint
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     packagingOptions {
@@ -80,9 +99,11 @@ dependencies {
     implementation deps.room_rxjava
     annotationProcessor deps.room_compiler
     implementation deps.room_safe
+    implementation deps.fastjson
 
     //网络库的依赖项
     implementation deps.okhttp3
+    implementation deps.leakcanary
 
     implementation project(':sample-module-aircraft')
 

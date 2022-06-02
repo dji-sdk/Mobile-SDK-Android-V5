@@ -44,28 +44,29 @@ import dji.v5.ux.core.util.UnitConversionUtil.TemperatureUnitType.*
  *
  */
 open class AircraftBatteryTemperatureListItemWidget @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ListItemLabelButtonWidget<Any>(
-        context,
-        attrs,
-        defStyleAttr,
-        WidgetType.LABEL,
-        R.style.UXSDKAircraftBatteryTemperatureListItem
+    context,
+    attrs,
+    defStyleAttr,
+    WidgetType.LABEL,
+    R.style.UXSDKAircraftBatteryTemperatureListItem
 ) {
 
     private val widgetModel by lazy {
         AircraftBatteryTemperatureListItemWidgetModel(
-                DJISDKModel.getInstance(),
-                ObservableInMemoryKeyedStore.getInstance(),
-                GlobalPreferencesManager.getInstance())
+            DJISDKModel.getInstance(),
+            ObservableInMemoryKeyedStore.getInstance(),
+            GlobalPreferencesManager.getInstance()
+        )
     }
 
     override fun reactToModelChanges() {
         addReaction(widgetModel.aircraftBatteryTemperatureState
-                .observeOn(SchedulerProvider.ui())
-                .subscribe { this.updateUI(it) })
+            .observeOn(SchedulerProvider.ui())
+            .subscribe { this.updateUI(it) })
     }
 
     override fun onAttachedToWindow() {
@@ -86,10 +87,11 @@ open class AircraftBatteryTemperatureListItemWidget @JvmOverloads constructor(
 
 
     override val widgetSizeDescription: WidgetSizeDescription =
-            WidgetSizeDescription(WidgetSizeDescription.SizeType.OTHER,
-                    widthDimension = WidgetSizeDescription.Dimension.EXPAND,
-                    heightDimension = WidgetSizeDescription.Dimension.WRAP)
-
+        WidgetSizeDescription(
+            WidgetSizeDescription.SizeType.OTHER,
+            widthDimension = WidgetSizeDescription.Dimension.EXPAND,
+            heightDimension = WidgetSizeDescription.Dimension.WRAP
+        )
 
     private fun updateUI(aircraftBatteryTemperatureItemState: AircraftBatteryTemperatureItemState) {
         when (aircraftBatteryTemperatureItemState) {
@@ -101,11 +103,10 @@ open class AircraftBatteryTemperatureListItemWidget @JvmOverloads constructor(
             is AircraftBatteryState -> {
                 listItemLabelTextColor = getColor(R.color.uxsdk_white)
                 listItemLabel = when (aircraftBatteryTemperatureItemState.unitType) {
-                    CELSIUS -> String.format(getString(R.string.uxsdk_celsius_unit), aircraftBatteryTemperatureItemState.temperature)
-                    FAHRENHEIT -> String.format(getString(R.string.uxsdk_celsius_unit), aircraftBatteryTemperatureItemState.temperature)
-                    KELVIN -> String.format(getString(R.string.uxsdk_celsius_unit), aircraftBatteryTemperatureItemState.temperature)
+                    CELSIUS -> getString(R.string.uxsdk_celsius_unit, aircraftBatteryTemperatureItemState.temperature)
+                    FAHRENHEIT -> getString(R.string.uxsdk_celsius_unit, aircraftBatteryTemperatureItemState.temperature)
+                    KELVIN -> getString(R.string.uxsdk_celsius_unit, aircraftBatteryTemperatureItemState.temperature)
                 }
-
             }
         }
 

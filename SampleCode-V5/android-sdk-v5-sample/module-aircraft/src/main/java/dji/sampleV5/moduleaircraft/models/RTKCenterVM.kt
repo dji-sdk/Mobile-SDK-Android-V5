@@ -1,13 +1,12 @@
 package dji.sampleV5.moduleaircraft.models
 
 import androidx.lifecycle.MutableLiveData
-import dji.sampleV5.moduleaircraft.data.DJIBaseResult
+import dji.sampleV5.modulecommon.data.DJIBaseResult
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.rtk.*
-import dji.v5.utils.common.LogUtils
 
 
 /**
@@ -19,13 +18,13 @@ import dji.v5.utils.common.LogUtils
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
 class RTKCenterVM : DJIViewModel() {
-    private val TAG="RTKCenterVM"
     val setAircraftRTKModuleEnableLD = MutableLiveData<DJIBaseResult<Boolean>>()
     val getAircraftRTKModuleEnabledLD = MutableLiveData<DJIBaseResult<Boolean>>()
     val setRTKReferenceStationSourceLD = MutableLiveData<DJIBaseResult<Boolean>>()
     val rtkLocationInfoLD = MutableLiveData<DJIBaseResult<RTKLocationInfo>>()
     val rtkSystemStateLD = MutableLiveData<DJIBaseResult<RTKSystemState>>()
-    val rtkSourceLD = MutableLiveData<DJIBaseResult<RTKReferenceStationSource>>()
+    val setRTKAccuracyMaintainLD = MutableLiveData<DJIBaseResult<Boolean>>()
+    val getRTKAccuracyMaintainLD = MutableLiveData<DJIBaseResult<Boolean>>()
 
     private val rtkLocationInfoListener = RTKLocationInfoListener {
         rtkLocationInfoLD.postValue(DJIBaseResult.success(it))
@@ -62,18 +61,6 @@ class RTKCenterVM : DJIViewModel() {
         })
     }
 
-    fun getRTKReferenceStationSource() {
-        RTKCenter.getInstance().getRTKReferenceStationSource(object : CommonCallbacks.CompletionCallbackWithParam<RTKReferenceStationSource> {
-            override fun onSuccess(t: RTKReferenceStationSource?) {
-                rtkSourceLD.postValue(DJIBaseResult.success(t))
-            }
-
-            override fun onFailure(error: IDJIError) {
-                getAircraftRTKModuleEnabledLD.postValue(DJIBaseResult.failed(error.toString()))
-            }
-
-        })
-    }
 
     fun setRTKReferenceStationSource(source: RTKReferenceStationSource) {
         RTKCenter.getInstance().setRTKReferenceStationSource(source, object : CommonCallbacks.CompletionCallback {
@@ -97,6 +84,7 @@ class RTKCenterVM : DJIViewModel() {
         RTKCenter.getInstance().addRTKSystemStateListener(rtkSystemStateListener)
     }
 
+
     fun removeRTKLocationInfoListener() {
         RTKCenter.getInstance().removeRTKLocationInfoListener(rtkLocationInfoListener)
     }
@@ -105,11 +93,40 @@ class RTKCenterVM : DJIViewModel() {
         RTKCenter.getInstance().removeRTKSystemStateListener(rtkSystemStateListener)
     }
 
-    fun clearAllRTKLocationInfoListener() {
+
+    private fun clearAllRTKLocationInfoListener() {
         RTKCenter.getInstance().clearAllRTKLocationInfoListener()
     }
 
-    fun clearAllRTKSystemStateListener() {
+    private fun clearAllRTKSystemStateListener() {
         RTKCenter.getInstance().clearAllRTKSystemStateListener()
     }
+
+
+    fun setRTKMaintainAccuracyEnabled(enable: Boolean) {
+        RTKCenter.getInstance().setRTKMaintainAccuracyEnabled(enable, object : CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                setRTKAccuracyMaintainLD.postValue(DJIBaseResult.success())
+            }
+
+            override fun onFailure(error: IDJIError) {
+                setRTKAccuracyMaintainLD.postValue(DJIBaseResult.failed(error.toString()))
+            }
+
+        })
+    }
+
+    fun getRTKMaintainAccuracyEnabled() {
+        RTKCenter.getInstance().getRTKMaintainAccuracyEnabled(object : CommonCallbacks.CompletionCallbackWithParam<Boolean> {
+            override fun onSuccess(t: Boolean?) {
+                getRTKAccuracyMaintainLD.postValue(DJIBaseResult.success(t))
+            }
+
+            override fun onFailure(error: IDJIError) {
+                getRTKAccuracyMaintainLD.postValue(DJIBaseResult.failed(error.toString()))
+            }
+
+        })
+    }
+
 }

@@ -652,19 +652,20 @@
         <!-- E.g., app:excludeItem="flight_mode|rc_stick_mode" -->
         <attr name="uxsdk_excludeItem">
             <flag name="flight_mode" value="1"/>
-            <flag name="rc_stick_mode" value="16"/>
-            <flag name="rc_battery" value="32"/>
-            <flag name="aircraft_battery_temperature" value="64"/>
-            <flag name="sd_card_status" value="128"/>
-            <flag name="emmc_status" value="256"/>
-            <flag name="max_altitude" value="512"/>
-            <flag name="max_flight_distance" value="1024"/>
-            <flag name="travel_mode" value="2048"/>
-            <flag name="unit_mode" value="4096"/>
-            <flag name="ssd_status" value="8192"/>
-            <flag name="novice_mode" value="16384"/>
-            <flag name="overview_status" value="32768"/>
-            <flag name="rth_altitude" value="65536"/>
+            <flag name="rc_stick_mode" value="2"/>
+            <flag name="rc_battery" value="3"/>
+            <flag name="aircraft_battery_temperature" value="4"/>
+            <flag name="sd_card_status" value="5"/>
+            <flag name="emmc_status" value="6"/>
+            <flag name="max_altitude" value="7"/>
+            <flag name="max_flight_distance" value="8"/>
+            <flag name="travel_mode" value="9"/>
+            <flag name="unit_mode" value="10"/>
+            <flag name="ssd_status" value="11"/>
+            <flag name="novice_mode" value="12"/>
+            <flag name="overview_status" value="13"/>
+            <flag name="rth_altitude" value="14"/>
+            <flag name="obstacle_avoidance" value="15"/>
         </attr>
     </declare-styleable>
 
@@ -1111,8 +1112,6 @@
         <attr name="uxsdk_rtkValuesTextSize" format="dimension" />
         <attr name="uxsdk_rtkValuesTextColor" format="color" />
         <attr name="uxsdk_rtkValuesBackgroundDrawable" format="reference" />
-        <attr name="uxsdk_orientationIconEnabledColor" format="color" />
-        <attr name="uxsdk_orientationIconDisabledColor" format="color" />
         <attr name="uxsdk_orientationIcon" format="reference" />
         <attr name="uxsdk_rtkSeparatorsColor" />
         <attr name="uxsdk_tableBackground" format="reference" />

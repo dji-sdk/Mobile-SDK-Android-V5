@@ -198,18 +198,19 @@ open class EMMCStatusListItemWidget @JvmOverloads constructor(
                             message = getString(R.string.uxsdk_emmc_format_complete),
                             dialogDismissListener = dialogDismissListener)
                     uiUpdateStateProcessor.onNext(DialogDisplayed(dialogType))
-                }, { error ->
+                }) { error ->
                     if (error is UXSDKError) {
                         dialogType = FormatError
-                        showAlertDialog(title = getString(R.string.uxsdk_emmc_dialog_title),
-                                icon = formatErrorDialogIcon,
-                                dialogTheme = dialogTheme,
-                                message = String.format(getString(R.string.uxsdk_emmc_format_error),
-                                        error.djiError.description()),
-                                dialogDismissListener = dialogDismissListener)
+                        showAlertDialog(
+                            title = getString(R.string.uxsdk_emmc_dialog_title),
+                            icon = formatErrorDialogIcon,
+                            dialogTheme = dialogTheme,
+                            message = getString(R.string.uxsdk_emmc_format_error, error.djiError.description()),
+                            dialogDismissListener = dialogDismissListener
+                        )
                         uiUpdateStateProcessor.onNext(DialogDisplayed(dialogType))
                     }
-                }))
+                })
 
     }
 
@@ -245,7 +246,7 @@ open class EMMCStatusListItemWidget @JvmOverloads constructor(
             CameraSDCardState.FORMATTING -> getString(R.string.uxsdk_storage_status_formatting)
             CameraSDCardState.BUSY -> getString(R.string.uxsdk_storage_status_busy)
             CameraSDCardState.FULL -> getString(R.string.uxsdk_storage_status_full)
-            CameraSDCardState.SLOW -> String.format(getString(R.string.uxsdk_storage_status_slow), getSpaceWithUnit(context, space))
+            CameraSDCardState.SLOW -> getString(R.string.uxsdk_storage_status_slow, getSpaceWithUnit(context, space))
             CameraSDCardState.NO_REMAINING_FILE_INDICES -> getString(R.string.uxsdk_storage_status_file_indices)
             CameraSDCardState.INITIALIZING -> getString(R.string.uxsdk_storage_status_initial)
             CameraSDCardState.FORMAT_RECOMMENDED -> getString(R.string.uxsdk_storage_status_formatting_recommended)

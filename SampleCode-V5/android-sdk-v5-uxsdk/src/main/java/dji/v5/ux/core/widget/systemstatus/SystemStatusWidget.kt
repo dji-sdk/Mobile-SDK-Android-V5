@@ -225,7 +225,7 @@ open class SystemStatusWidget @JvmOverloads constructor(
             } else {
                 resources.getString(R.string.uxsdk_value_meters, String.format(Locale.US, "%.0f", maxHeight))
             }
-        return resources.getString(R.string.uxsdk_max_flight_height_limit, maxHeightStr)
+        return getString(R.string.uxsdk_max_flight_height_limit, maxHeightStr)
     }
 
     private fun blinkBackground(isUrgentMessage: Boolean) {
@@ -237,8 +237,8 @@ open class SystemStatusWidget @JvmOverloads constructor(
     }
 
     private fun reactToCompassError(): Disposable {
-        return Flowable.combineLatest(widgetModel.systemStatus, widgetModel.isMotorOn,
-            BiFunction<DJIDeviceStatus, Boolean, Pair<DJIDeviceStatus, Boolean>> { first: DJIDeviceStatus, second: Boolean -> Pair(first, second) })
+        return Flowable.combineLatest(widgetModel.systemStatus, widgetModel.isMotorOn
+        ) { first: DJIDeviceStatus, second: Boolean -> Pair(first, second) }
             .observeOn(SchedulerProvider.ui())
             .subscribe(
                 Consumer { values: Pair<DJIDeviceStatus, Boolean> -> updateVoiceNotification(values.first, values.second) },

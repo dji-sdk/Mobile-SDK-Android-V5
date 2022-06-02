@@ -115,10 +115,15 @@
     <string name="uxsdk_rc_battery_percent">%1$d%%</string>
 
     <string name="uxsdk_list_item_rc_stick_mode">Control Stick Mode</string>
-    <string name="uxsdk_rc_stick_mode_1">Mode 1</string>
-    <string name="uxsdk_rc_stick_mode_2">Mode 2</string>
-    <string name="uxsdk_rc_stick_mode_3">Mode 3</string>
+    <string name="uxsdk_rc_stick_mode_jp">JP</string>
+    <string name="uxsdk_rc_stick_mode_usa">USA</string>
+    <string name="uxsdk_rc_stick_mode_ch">CH</string>
     <string name="uxsdk_rc_stick_mode_custom">Custom</string>
+
+    <string name="uxsdk_obstacle_action_type">Obstacle Action</string>
+    <string name="uxsdk_obstacle_action_type_close">Close</string>
+    <string name="uxsdk_obstacle_action_type_stop">Stop</string>
+    <string name="uxsdk_obstacle_action_type_avoid">Avoid</string>
 
     <string name="uxsdk_list_item_sd_card">SD Card Remaining Capacity</string>
     <string name="uxsdk_list_item_format_button">Format</string>
@@ -276,7 +281,7 @@
     <string name="uxsdk_rtk_panel_altitude_value">%1$.3f</string>
     <string name="uxsdk_rtk_panel_course_angle_value">%1$.2f</string>
     <string name="uxsdk_rtk_panel_lng">Longitude:</string>
-    <string name="uxsdk_rtk_panel_height">Altitude:</string>
+    <string name="uxsdk_rtk_panel_height">Ellipsoidal Height:</string>
     <string name="uxsdk_rtk_panel_antenna_angle">Course Angle:</string>
     <string name="uxsdk_rtk_panel_orientation_status_text">Orientation:</string>
     <string name="uxsdk_rtk_panel_positioning_status_text">Positioning:</string>
@@ -290,17 +295,22 @@
     <string name="uxsdk_rtk_solution_none">NONE</string>
     <string name="uxsdk_rtk_solution_single">SINGLE</string>
     <string name="uxsdk_rtk_solution_float">FLOAT</string>
-    <string name="uxsdk_rtk_solution_fixed">FIXED</string>
+    <string name="uxsdk_rtk_solution_fixed">FIX</string>
     <string name="uxsdk_rtk_solution_unknown">UNKNOWN</string>
     <string name="uxsdk_rtk_state_connect">RTK connected. RTK data in use</string>
     <string name="uxsdk_rtk_state_connect_not_healthy">RTK connected. RTK data not in use</string>
     <string name="uxsdk_rtk_state_disconnect">Not connected</string>
+    <string name="uxsdk_rtk_state_not_bind">Account Not Registered</string>
+    <string name="uxsdk_rtk_state_not_active">Account not activated</string>
     <string name="uxsdk_rtk_state_pause">Suspending account…</string>
     <string name="uxsdk_rtk_state_account_expire">Time verification failed</string>
+    <string name="uxsdk_rtk_state_connecting">Connecting...</string>
+    <string name="uxsdk_rtk_state_coordinate_fialed">Setting network RTK coordinates failed</string>
     <string name="uxsdk_rtk_state_network_err">Network unavailable</string>
     <string name="uxsdk_rtk_state_auth_failed">Verification failed</string>
     <string name="uxsdk_rtk_state_unknown">Unknown error</string>
-    <string name="uxsdk_rtk_nrtk_state_inner_error">%sInternal error</string>
+
+    <string name="uxsdk_rtk_nrtk_state_inner_error">Internal error</string>
     <string name="uxsdk_rtk_nrtk_state_unknown">Unknown error</string>
     <string name="uxsdk_rtk_nrtk_account_error">Account error</string>
     <string name="uxsdk_rtk_nrtk_connecting">Connecting to server…</string>
@@ -310,6 +320,7 @@
     <string name="uxsdk_rtk_type_rtk_mobile_station">D-RTK 2 Mobile Station</string>
     <string name="uxsdk_rtk_type_rtk_base_station">Base Station</string>
     <string name="uxsdk_rtk_type_custom_rtk">Custom Network RTK</string>
+    <string name="uxsdk_rtk_type_unknown_rtk">Unknown RTK</string>
     <string name="uxsdk_rtk_status_desc">%1$s Status:</string>
 
     <string name="uxsdk_fly_zone_unlock">Unlock</string>
@@ -331,132 +342,118 @@
     <string name="uxsdk_fly_zone_custom_unlock_enabled">Custom Unlock Enabled</string>
     <string name="uxsdk_custom_fly_zone_duplicate">%1$s is currently enabled. Do you wish you disable it and enable %2$s</string>
 
-    <string name="dji_ux_sample_app_name">DJI UX Sample App</string>
-    <string name="no_product">No product connected</string>
-    <string name="wsbridge_ip">WSBridge IP</string>
-    <string name="sdk_version">Version: %1$s</string>
-    <string name="product_name">Product Name: %1$s</string>
-    <string name="remote_controller">Remote Controller Only</string>
-    <string name="unregistered">Unregistered</string>
-    <string name="registered">Registered</string>
-    <string name="logs">Logs</string>
-    <string name="showcase">Showcase</string>
-    <string name="widget_list">Widget List</string>
-    <string name="default_layout">Default Layout</string>
-    <string name="map">Map</string>
-
     <!--Map Widget Activity-->
-    <string name="provider_google_maps">Google Maps</string>
-    <string name="provider_here_maps">Here Maps</string>
-    <string name="provider_amaps">AMaps</string>
-    <string name="provider_mapbox">Mapbox</string>
-    <string name="error_map_not_initialized">The map has not been initialized yet</string>
-    <string name="home_direction">Home Direction</string>
-    <string name="auto_frame">Auto Frame</string>
-    <string name="unlock_flyzones">Unlock Fly Zones</string>
-    <string name="show_flight_path">Show Flight Path</string>
-    <string name="show_home_point">Show Home Point</string>
-    <string name="show_gimbal_yaw">Show Gimbal Yaw</string>
-    <string name="clear_flight_path">Clear Flight Path</string>
-    <string name="replace_icon">Replace Icon</string>
-    <string name="fly_zone">Fly Zone</string>
-    <string name="fly_zone_legend">Fly Zone Legend</string>
-    <string name="dji_account_indicator">DJI Account Login Indicator</string>
-    <string name="all">All</string>
-    <string name="auth">Authorization</string>
-    <string name="warning">Warning</string>
-    <string name="enhanced_warning">Enhanced Warning</string>
-    <string name="restricted">Restricted</string>
-    <string name="maximum_height">Maximum Height</string>
-    <string name="self_unlocked">Self-Unlocked</string>
-    <string name="custom_unlocked">Custom Unlocked</string>
-    <string name="new_color">New Color</string>
-    <string name="sync">Sync</string>
-    <string name="map_settings">Map Settings</string>
-    <string name="center_map">Center Map</string>
-    <string name="map_overlay">Map Overlay</string>
-    <string name="fly_zone_settings">Fly Zone Settings</string>
-    <string name="flight_settings">Flight Settings</string>
-    <string name="other_settings">Other Settings</string>
-    <string name="icon_change_settings">Icon Change Settings</string>
-    <string name="line_color_settings">Line Color Settings</string>
-    <string name="marker_drag_started">Marker %1$d drag started</string>
-    <string name="marker_drag_ended">Marker %1$d drag ended</string>
-    <string name="marker_clicked">Marker %1$d clicked</string>
-    <string-array name="iconArray">
+    <string name="uxsdk_provider_google_maps">Google Maps</string>
+    <string name="uxsdk_provider_here_maps">Here Maps</string>
+    <string name="uxsdk_provider_amaps">AMaps</string>
+    <string name="uxsdk_provider_mapbox">Mapbox</string>
+    <string name="uxsdk_error_map_not_initialized">The map has not been initialized yet</string>
+    <string name="uxsdk_home_direction">Home Direction</string>
+    <string name="uxsdk_auto_frame">Auto Frame</string>
+    <string name="uxsdk_unlock_flyzones">Unlock Fly Zones</string>
+    <string name="uxsdk_show_flight_path">Show Flight Path</string>
+    <string name="uxsdk_show_home_point">Show Home Point</string>
+    <string name="uxsdk_show_gimbal_yaw">Show Gimbal Yaw</string>
+    <string name="uxsdk_clear_flight_path">Clear Flight Path</string>
+    <string name="uxsdk_replace_icon">Replace Icon</string>
+    <string name="uxsdk_fly_zone">Fly Zone</string>
+    <string name="uxsdk_fly_zone_legend">Fly Zone Legend</string>
+    <string name="uxsdk_dji_account_indicator">DJI Account Login Indicator</string>
+    <string name="uxsdk_all">All</string>
+    <string name="uxsdk_auth">Authorization</string>
+    <string name="uxsdk_warning">Warning</string>
+    <string name="uxsdk_enhanced_warning">Enhanced Warning</string>
+    <string name="uxsdk_restricted">Restricted</string>
+    <string name="uxsdk_maximum_height">Maximum Height</string>
+    <string name="uxsdk_self_unlocked">Self-Unlocked</string>
+    <string name="uxsdk_custom_unlocked">Custom Unlocked</string>
+    <string name="uxsdk_new_color">New Color</string>
+    <string name="uxsdk_sync">Sync</string>
+    <string name="uxsdk_map_settings">Map Settings</string>
+    <string name="uxsdk_center_map">Center Map</string>
+    <string name="uxsdk_map_overlay">Map Overlay</string>
+    <string name="uxsdk_fly_zone_settings">Fly Zone Settings</string>
+    <string name="uxsdk_flight_settings">Flight Settings</string>
+    <string name="uxsdk_other_settings">Other Settings</string>
+    <string name="uxsdk_icon_change_settings">Icon Change Settings</string>
+    <string name="uxsdk_line_color_settings">Line Color Settings</string>
+    <string name="uxsdk_marker_drag_started">Marker %1$d drag started</string>
+    <string name="uxsdk_marker_drag_ended">Marker %1$d drag ended</string>
+    <string name="uxsdk_marker_clicked">Marker %1$d clicked</string>
+    <string-array name="uxsdk_iconArray">
         <item>Aircraft</item>
         <item>Home</item>
         <item>Gimbal Yaw</item>
         <item>Locked Zone</item>
         <item>Unlocked Zone</item>
     </string-array>
-    <string-array name="mapTypeArray">
+    <string-array name="uxsdk_mapTypeArray">
         <item>Standard</item>
         <item>Satellite</item>
         <item>Hybrid</item>
     </string-array>
-    <string-array name="lineTypeArray">
+    <string-array name="uxsdk_lineTypeArray">
         <item>Home Direction</item>
         <item>Flight Path</item>
         <item>Fly Zone Border</item>
     </string-array>
 
-    <string name="designed_aspect_ratio">Designed Aspect Ratio: </string>
-    <string name="current_widget_size">Current Widget Size: </string>
-    <string name="pinch_to_resize">* Pinch to resize widget</string>
+    <string name="uxsdk_designed_aspect_ratio">Designed Aspect Ratio: </string>
+    <string name="uxsdk_current_widget_size">Current Widget Size: </string>
+    <string name="uxsdk_pinch_to_resize">* Pinch to resize widget</string>
 
     <!-- Widget List Strings -->
-    <string name="altitude_widget_title">Altitude Widget</string>
-    <string name="auto_exposure_lock_widget_title">Auto Exposure Lock Widget</string>
-    <string name="battery_widget_title">Battery Widget</string>
-    <string name="camera_capture_widget_title">Camera Capture Widget</string>
-    <string name="camera_config_aperture_widget_title">Camera Config Aperture Widget</string>
-    <string name="camera_config_ev_widget_title">Camera Config EV Widget</string>
-    <string name="camera_config_iso_widget_title">Camera Config ISO Widget</string>
-    <string name="camera_config_shutter_widget_title">Camera Config Shutter Widget</string>
-    <string name="camera_config_ssd_widget_title">Camera Config SSD Widget</string>
-    <string name="camera_config_storage_widget_title">Camera Config Storage Widget</string>
-    <string name="camera_config_wb_widget_title">Camera Config WB Widget</string>
-    <string name="camera_controls_widget_title">Camera Controls Widget</string>
-    <string name="camera_settings_menu_indicator_widget_title">Camera Settings Menu Indicator Widget</string>
-    <string name="compass_widget_title">Compass Widget</string>
-    <string name="telemetry_widget_title">Telemetry Panel</string>
-    <string name="distance_home_widget_title">Distance Home Widget</string>
-    <string name="distance_rc_widget_title">Distance RC Widget</string>
-    <string name="exposure_settings_indicator_widget_title">Exposure Settings Indicator Widget</string>
-    <string name="focus_exposure_switch_widget_title">Focus Exposure Switch Widget</string>
-    <string name="focus_mode_widget_title">Focus Mode Widget</string>
-    <string name="fpv_widget_title">FPV Widget</string>
-    <string name="fpv_interaction_widget_title">FPV Interaction Widget</string>
-    <string name="horizontal_velocity_widget_title">Horizontal Velocity Widget</string>
-    <string name="record_video_widget_title">Record Video Widget</string>
-    <string name="remote_control_signal_widget_title">Remote Control Signal Widget</string>
-    <string name="photo_video_switch_widget_title">Photo Video Switch Widget</string>
-    <string name="shoot_photo_widget_title">Shoot Photo Widget</string>
-    <string name="simulator_indicator_control_widgets_title">Simulator Indicator and Control Widgets</string>
-    <string name="system_status_panel_title">System Status Panel</string>
-    <string name="system_status_widget_title">System Status Widget</string>
-    <string name="top_bar_panel_title">Top Bar Panel</string>
-    <string name="user_account_login_widget_title">User Account Login Widget</string>
-    <string name="vertical_velocity_widget_title">Vertical Velocity Widget</string>
-    <string name="vision_widget_title">Vision Widget</string>
-    <string name="vps_widget_title">VPS Widget</string>
-    <string name="flight_mode_widget_title">Flight Mode Widget</string>
-    <string name="video_signal_widget_title">Video Signal Widget</string>
-    <string name="gps_signal_widget_title">GPS Signal Widget</string>
-    <string name="air_sense_widget_title">Air Sense Widget</string>
-    <string name="connection_widget_title">Connection Widget</string>
-    <string name="rtk_widget_title">RTK Widget</string>
-    <string name="rtk_enabled_widget_title">RTK Enabled Widget</string>
-    <string name="rtk_satellite_status_widget_title">RTK Satellite Status Widget</string>
-    <string name="remaining_flight_time_widget_title">Remaining Flight Time Widget</string>
-    <string name="exposure_setting_panel_title">Exposure Setting Panel</string>
-    <string name="exposure_mode_setting_widget_title">Exposure Mode Setting Widget</string>
-    <string name="iso_and_ei_setting_widget_title">ISO And EI Setting Widget</string>
-    <string name="horizontal_situation_indicator_widget_title">Horizontal Situation Indicator Widget</string>
-    <string name="speed_display_widget_title">Speed Display Widget</string>
-    <string name="attitude_display_widget_title">Attitude Display Widget</string>
-    <string name="primary_flight_display_widget_title">Primary Flight Display Widget</string>
+    <string name="uxsdk_altitude_widget_title">Altitude Widget</string>
+    <string name="uxsdk_auto_exposure_lock_widget_title">Auto Exposure Lock Widget</string>
+    <string name="uxsdk_battery_widget_title">Battery Widget</string>
+    <string name="uxsdk_camera_capture_widget_title">Camera Capture Widget</string>
+    <string name="uxsdk_camera_config_aperture_widget_title">Camera Config Aperture Widget</string>
+    <string name="uxsdk_camera_config_ev_widget_title">Camera Config EV Widget</string>
+    <string name="uxsdk_camera_config_iso_widget_title">Camera Config ISO Widget</string>
+    <string name="uxsdk_camera_config_shutter_widget_title">Camera Config Shutter Widget</string>
+    <string name="uxsdk_camera_config_ssd_widget_title">Camera Config SSD Widget</string>
+    <string name="uxsdk_camera_config_storage_widget_title">Camera Config Storage Widget</string>
+    <string name="uxsdk_camera_config_wb_widget_title">Camera Config WB Widget</string>
+    <string name="uxsdk_camera_controls_widget_title">Camera Controls Widget</string>
+    <string name="uxsdk_camera_settings_menu_indicator_widget_title">Camera Settings Menu Indicator Widget</string>
+    <string name="uxsdk_compass_widget_title">Compass Widget</string>
+    <string name="uxsdk_telemetry_widget_title">Telemetry Panel</string>
+    <string name="uxsdk_distance_home_widget_title">Distance Home Widget</string>
+    <string name="uxsdk_distance_rc_widget_title">Distance RC Widget</string>
+    <string name="uxsdk_exposure_settings_indicator_widget_title">Exposure Settings Indicator Widget</string>
+    <string name="uxsdk_focus_exposure_switch_widget_title">Focus Exposure Switch Widget</string>
+    <string name="uxsdk_focus_mode_widget_title">Focus Mode Widget</string>
+    <string name="uxsdk_fpv_widget_title">FPV Widget</string>
+    <string name="uxsdk_fpv_interaction_widget_title">FPV Interaction Widget</string>
+    <string name="uxsdk_horizontal_velocity_widget_title">Horizontal Velocity Widget</string>
+    <string name="uxsdk_record_video_widget_title">Record Video Widget</string>
+    <string name="uxsdk_remote_control_signal_widget_title">Remote Control Signal Widget</string>
+    <string name="uxsdk_photo_video_switch_widget_title">Photo Video Switch Widget</string>
+    <string name="uxsdk_shoot_photo_widget_title">Shoot Photo Widget</string>
+    <string name="uxsdk_simulator_indicator_control_widgets_title">Simulator Indicator and Control Widgets</string>
+    <string name="uxsdk_system_status_panel_title">System Status Panel</string>
+    <string name="uxsdk_system_status_widget_title">System Status Widget</string>
+    <string name="uxsdk_top_bar_panel_title">Top Bar Panel</string>
+    <string name="uxsdk_user_account_login_widget_title">User Account Login Widget</string>
+    <string name="uxsdk_vertical_velocity_widget_title">Vertical Velocity Widget</string>
+    <string name="uxsdk_vision_widget_title">Vision Widget</string>
+    <string name="uxsdk_vps_widget_title">VPS Widget</string>
+    <string name="uxsdk_flight_mode_widget_title">Flight Mode Widget</string>
+    <string name="uxsdk_video_signal_widget_title">Video Signal Widget</string>
+    <string name="uxsdk_gps_signal_widget_title">GPS Signal Widget</string>
+    <string name="uxsdk_air_sense_widget_title">Air Sense Widget</string>
+    <string name="uxsdk_connection_widget_title">Connection Widget</string>
+    <string name="uxsdk_rtk_widget_title">RTK Widget</string>
+    <string name="uxsdk_rtk_enabled_widget_title">RTK Enabled Widget</string>
+    <string name="uxsdk_rtk_satellite_status_widget_title">RTK Satellite Status Widget</string>
+    <string name="uxsdk_remaining_flight_time_widget_title">Remaining Flight Time Widget</string>
+    <string name="uxsdk_exposure_setting_panel_title">Exposure Setting Panel</string>
+    <string name="uxsdk_exposure_mode_setting_widget_title">Exposure Mode Setting Widget</string>
+    <string name="uxsdk_iso_and_ei_setting_widget_title">ISO And EI Setting Widget</string>
+    <string name="uxsdk_horizontal_situation_indicator_widget_title">Horizontal Situation Indicator Widget</string>
+    <string name="uxsdk_speed_display_widget_title">Speed Display Widget</string>
+    <string name="uxsdk_attitude_display_widget_title">Attitude Display Widget</string>
+    <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>

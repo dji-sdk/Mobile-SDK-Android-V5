@@ -24,19 +24,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_list_title"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:layout_marginTop="5dp"
                 android:paddingLeft="5dp"
-                android:text="@string/key"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_list_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/key"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:textSize="12sp"
+                    android:text="(12573)"
+                    android:textColor="@color/gray"/>
+            </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/iv_action_arrow"
@@ -94,6 +106,25 @@
             android:id="@+id/ll_channel_filter_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <Switch
+                android:id="@+id/iv_capability"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20dp"
+                android:enabled="false" />
+
+            <TextView
+                android:id="@+id/tv_capablity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@+id/iv_capability"
+                />
 
             <TextView
                 android:id="@+id/tv_operate_title"

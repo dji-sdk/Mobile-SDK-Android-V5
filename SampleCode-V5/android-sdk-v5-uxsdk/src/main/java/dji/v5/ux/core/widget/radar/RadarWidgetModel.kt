@@ -128,7 +128,7 @@ class RadarWidgetModel(djiSdkModel: DJISDKModel,
 //                Function3 { level: ObstacleAvoidanceLevel,
 //                            model: Model,
 //                            isMotorOn: Boolean ->
-//                    if (ProductUtil.isM200V2OrM300(model) && isMotorOn) {
+//                    if (ProductUtil.isM200V2M300(model) && isMotorOn) {
 //                        level
 //                    } else {
 //                        ObstacleAvoidanceLevel.NONE

@@ -16,4 +16,6 @@ class DJIRTKBaseStationConnectInfo(
     var signalLevel: Int,
     var rtkStationName: String,
     var connectStatus: RTKStationConnetState = RTKStationConnetState.IDLE
-) : RTKStationInfo(baseStationId, signalLevel, rtkStationName)
+) : RTKStationInfo(baseStationId, signalLevel, rtkStationName) {
+    constructor() : this(0, 0, "")
+}

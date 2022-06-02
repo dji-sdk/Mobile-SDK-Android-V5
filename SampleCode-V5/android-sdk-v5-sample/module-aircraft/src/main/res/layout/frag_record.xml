@@ -37,4 +37,13 @@
         android:layout_below="@+id/recording_status_text"
         android:src="@drawable/ic_mic_white_36dp" />
 
+    <CheckBox
+        android:id="@+id/cb_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quick_play"
+        android:textColor="@color/white"
+        android:buttonTint="@color/white"
+        />
+
 </RelativeLayout>

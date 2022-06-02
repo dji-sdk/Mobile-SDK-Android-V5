@@ -19,9 +19,7 @@ import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.sdk.keyvalue.key.KeyTools
 import dji.v5.manager.KeyManager
-import dji.v5.manager.aircraft.megaphone.MegaphoneStatus
-import dji.v5.manager.aircraft.megaphone.PlayMode
-import dji.v5.manager.aircraft.megaphone.WorkMode
+import dji.v5.manager.aircraft.megaphone.*
 import dji.v5.utils.common.LogUtils
 import kotlinx.android.synthetic.main.frag_megaphone_page.*
 
@@ -51,7 +49,7 @@ class MegaphoneFragment : DJIFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         /**
-         * 初始化监听，同时拿一次当前喊话器的状态
+         * 初始化Listener，同时拿一次当前喊话器的状态
          */
         initBtnListener()
 
@@ -63,10 +61,15 @@ class MegaphoneFragment : DJIFragment() {
         }
         megaphoneVM.curRealTimeUploadedState.observe(viewLifecycleOwner) {
             updateUploadStatus()
+            updateUploadState()
         }
 
         megaphoneVM.isPayloadConnect.observe(viewLifecycleOwner) {
             updateMegaphoneConnectState()
+        }
+
+        megaphoneVM.megaphonePlayState.observe(viewLifecycleOwner){
+            updateMegaphonePlayState()
         }
 
         megaphoneVM.getPlayMode(object : CommonCallbacks.CompletionCallbackWithParam<PlayMode> {
@@ -104,36 +107,11 @@ class MegaphoneFragment : DJIFragment() {
                 LogUtils.e(TAG, "get volume onFailure,$error")
             }
         })
+    }
 
-        KeyManager.getInstance()
-            .listen(
-                KeyTools.createKey(PayloadKey.KeyMegaphonePlayState, ComponentIndexType.UP),
-                this
-            ) { _, newValue ->
-                newValue?.let {
-                    curPlayMode = PlayMode.find(newValue.playMode.value())
-                    if (curPlayMode == PlayMode.SINGLE) {
-                        btn_play_mode.setImageResource(R.drawable.ic_action_playback_repeat_1)
-                    } else {
-                        btn_play_mode.setImageResource(R.drawable.ic_action_playback_repeat)
-                    }
-
-                    tv_megaphone_state.text = newValue.state.toString()
-
-                    sb_volume_control.progress = newValue.volume
-                    val textSource =
-                        getString(R.string.cur_volume_value) + "${newValue.volume}"
-                    tv_cur_volume_value.text = textSource
-
-                    if (newValue.state == MegaphoneSystemState.PLAYING) {
-                        btn_play_control.setImageResource(R.drawable.ic_media_stop)
-                        isPlaying = true
-                    } else {
-                        btn_play_control.setImageResource(R.drawable.ic_media_play)
-                        isPlaying = false
-                    }
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        KeyManager.getInstance().cancelListen(this)
     }
 
     private fun initBtnListener() {
@@ -299,6 +277,21 @@ class MegaphoneFragment : DJIFragment() {
         }
     }
 
+    private fun updateUploadState() {
+        if (UploadState.UPLOAD_SUCCESS == (megaphoneVM.curRealTimeUploadedState.value) && megaphoneVM.isQuickPlay) {
+            MegaphoneManager.getInstance()
+                .startPlay(object : CommonCallbacks.CompletionCallback {
+                    override fun onSuccess() {
+                        LogUtils.d(TAG, "Start Play Success")
+                    }
+
+                    override fun onFailure(error: IDJIError) {
+                        LogUtils.d(TAG, "Start Play Failed")
+                    }
+                })
+        }
+    }
+
     private fun updateMegaphoneConnectState() {
         mainHandler.post {
             if (megaphoneVM.isPayloadConnect.value == false) {
@@ -309,6 +302,32 @@ class MegaphoneFragment : DJIFragment() {
                 val textSource =
                     getString(R.string.title_megaphone) + "<font color=\'#00ff00\'><small>connect</small></font>"
                 tv_megaphone_title.text = Html.fromHtml(textSource)
+            }
+        }
+    }
+
+    private fun updateMegaphonePlayState(){
+        mainHandler.post{
+            curPlayMode = PlayMode.find(megaphoneVM.megaphonePlayState.value!!.playMode.value())
+            if (curPlayMode == PlayMode.SINGLE) {
+                btn_play_mode.setImageResource(R.drawable.ic_action_playback_repeat_1)
+            } else {
+                btn_play_mode.setImageResource(R.drawable.ic_action_playback_repeat)
+            }
+
+            tv_megaphone_state.text = megaphoneVM.megaphonePlayState.value!!.state.toString()
+
+            sb_volume_control.progress = megaphoneVM.megaphonePlayState.value!!.volume
+            val textSource =
+                getString(R.string.cur_volume_value) + "${megaphoneVM.megaphonePlayState.value!!.volume}"
+            tv_cur_volume_value.text = textSource
+
+            if (megaphoneVM.megaphonePlayState.value!!.state == MegaphoneSystemState.PLAYING) {
+                btn_play_control.setImageResource(R.drawable.ic_media_stop)
+                isPlaying = true
+            } else {
+                btn_play_control.setImageResource(R.drawable.ic_media_play)
+                isPlaying = false
             }
         }
     }

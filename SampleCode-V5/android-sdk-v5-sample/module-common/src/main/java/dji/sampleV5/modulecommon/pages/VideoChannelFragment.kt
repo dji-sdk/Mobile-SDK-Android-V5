@@ -3,8 +3,7 @@ package dji.sampleV5.modulecommon.pages
 import android.graphics.ImageFormat
 import android.graphics.Rect
 import android.graphics.YuvImage
-import android.os.AsyncTask
-import android.os.Bundle
+import android.os.*
 import android.view.*
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
@@ -31,7 +30,6 @@ import kotlinx.android.synthetic.main.video_channel_horizontal_scrollview.*
 import kotlinx.android.synthetic.main.video_channel_page.*
 import java.io.*
 
-
 class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.Callback,
     YuvDataListener {
     private val TAG = LogUtils.getTag("VideoChannelFragment")
@@ -53,8 +51,18 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
     private var checkedItem: Int = -1
     private var count: Int = 0
     private var stringBuilder: StringBuilder? = StringBuilder()
-
-    //组帧后数据监听
+    private val DISPLAY = 100
+    private val mHandler: Handler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg?.what) {
+                DISPLAY -> {
+                    display(msg?.obj.toString())
+                }
+            }
+        }
+    }
+    //组帧后数据Listener
     private val streamDataListener =
         StreamDataListener {
             /**
@@ -144,7 +152,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         channelVM.videoChannelInfo.observe(viewLifecycleOwner) {
             it?.let {
                 val videoStreamInfo =
-                    "\n StreamSource: [${it.streamSource?.physicalDeviceCategory} : ${it.streamSource?.physicalDeviceType} : ${it.streamSource?.physicalDevicePosition}] \n " +
+                    "\n StreamSource: [${it.streamSource?.physicalDeviceCategory} : ${it.streamSource?.physicalDeviceType?.deviceType} : ${it.streamSource?.physicalDevicePosition}] \n " +
                             "ChannelType: [${it.videoChannelType.name}] State: [${it.videoChannelState}] \n " +
                             "DecoderState: [${it.decoderState}] Resolution: [${it.resolution}] \n " +
                             "FPS: [${it.fps}] Format: [${it.format}] BitRate: [${it.bitRate} Kb/s] \n " +
@@ -442,7 +450,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             channelVM.videoChannel?.let {
                 videoDecoder = VideoDecoder(
                     this@VideoChannelFragment.context,
-                    channelVM.videoChannel!!.videoChannelType,
+                    it.videoChannelType,
                     DecoderOutputMode.SURFACE_MODE,
                     surfaceView.holder
                 )
@@ -466,13 +474,15 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
      */
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
         if (videoDecoder == null) {
-            videoDecoder = VideoDecoder(
-                this@VideoChannelFragment.context,
-                VideoChannelType.PRIMARY_STREAM_CHANNEL,
-                DecoderOutputMode.SURFACE_MODE,
-                surfaceView.holder
-            )
-            videoDecoder?.addDecoderStateChangeListener(decoderStateChangeListener)
+            channelVM.videoChannel?.let {
+                videoDecoder = VideoDecoder(
+                    this@VideoChannelFragment.context,
+                    channelVM.videoChannel!!.videoChannelType,
+                    DecoderOutputMode.SURFACE_MODE,
+                    surfaceView.holder
+                )
+                videoDecoder?.addDecoderStateChangeListener(decoderStateChangeListener)
+            }
         } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()
         }
@@ -650,13 +660,13 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         } catch (e: IOException) {
             LogUtils.e(logTag, "test screenShot: compress yuv image error: ${e.message}")
         }
-        display(path)
+        Message.obtain(mHandler, DISPLAY, path).sendToTarget()
     }
 
     private fun display(path: String) {
         stringBuilder?.let {
-            it.append(path)
-            it.append("\n")
+            it.insert(0, path)
+            it.insert(0, "\n")
             yuv_screen_save_path.text = it
         }
     }

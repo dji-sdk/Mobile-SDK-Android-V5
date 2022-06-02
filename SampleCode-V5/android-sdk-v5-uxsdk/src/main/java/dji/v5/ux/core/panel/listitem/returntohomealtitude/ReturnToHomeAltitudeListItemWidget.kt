@@ -143,31 +143,32 @@ open class ReturnToHomeAltitudeListItemWidget @JvmOverloads constructor(
         val currentValue = listItemEditTextValue?.toIntOrNull()
         if (currentValue != null
             && widgetModel.isInputInRange(currentValue)) {
-            addDisposable(widgetModel.returnToHomeAltitudeState.firstOrError()
-                .observeOn(SchedulerProvider.ui())
-                .subscribe({
-                    if (it is ReturnToHomeAltitudeValue) {
-                        if (it.maxFlightAltitude < currentValue) {
-                            val dialogDismissListener = DialogInterface.OnDismissListener {
-                                uiUpdateStateProcessor.onNext(DialogDismissed(MaxAltitudeExceeded))
+            addDisposable(
+                widgetModel.returnToHomeAltitudeState.firstOrError()
+                    .observeOn(SchedulerProvider.ui())
+                    .subscribe({
+                        if (it is ReturnToHomeAltitudeValue) {
+                            if (it.maxFlightAltitude < currentValue) {
+                                val dialogDismissListener = DialogInterface.OnDismissListener {
+                                    uiUpdateStateProcessor.onNext(DialogDismissed(MaxAltitudeExceeded))
+                                }
+                                showAlertDialog(
+                                    dialogTheme = dialogTheme,
+                                    icon = errorDialogIcon,
+                                    title = getString(R.string.uxsdk_list_rth_dialog_title),
+                                    message = getString(R.string.uxsdk_rth_error_dialog_message, it.maxFlightAltitude),
+                                    dialogDismissListener = dialogDismissListener
+                                )
+                                uiUpdateStateProcessor.onNext(DialogDisplayed(MaxAltitudeExceeded))
+                                resetToDefaultValue()
+                            } else {
+                                setReturnToHomeAltitude(currentValue)
                             }
-                            showAlertDialog(
-                                dialogTheme = dialogTheme,
-                                icon = errorDialogIcon,
-                                title = getString(R.string.uxsdk_list_rth_dialog_title),
-                                message = getString(R.string.uxsdk_rth_error_dialog_message, it.maxFlightAltitude),
-                                dialogDismissListener = dialogDismissListener
-                            )
-                            uiUpdateStateProcessor.onNext(DialogDisplayed(MaxAltitudeExceeded))
-                            resetToDefaultValue()
-                        } else {
-                            setReturnToHomeAltitude(currentValue)
                         }
-                    }
-                }, {
-                    resetToDefaultValue()
-                    LogUtils.d(TAG, it.message)
-                })
+                    }, {
+                        resetToDefaultValue()
+                        LogUtils.d(TAG, it.message)
+                    })
             )
 
         } else {
@@ -200,18 +201,9 @@ open class ReturnToHomeAltitudeListItemWidget @JvmOverloads constructor(
         listItemEditTextVisibility = true
         listItemHintVisibility = true
         listItemHint = if (returnToHomeAltitudeListItemState.unitType == UnitType.METRIC) {
-            String.format(
-                getString(R.string.uxsdk_altitude_range_meters),
-                returnToHomeAltitudeListItemState.minLimit,
-                returnToHomeAltitudeListItemState.maxLimit
-            )
+            getString(R.string.uxsdk_altitude_range_meters, returnToHomeAltitudeListItemState.minLimit, returnToHomeAltitudeListItemState.maxLimit)
         } else {
-            String.format(
-                getString(R.string.uxsdk_altitude_range_feet),
-                returnToHomeAltitudeListItemState.minLimit,
-                returnToHomeAltitudeListItemState.maxLimit
-            )
-
+            getString(R.string.uxsdk_altitude_range_feet, returnToHomeAltitudeListItemState.minLimit, returnToHomeAltitudeListItemState.maxLimit)
         }
         listItemEditTextValue = returnToHomeAltitudeListItemState.returnToHomeAltitude.toString()
         isEnabled = true
@@ -247,39 +239,41 @@ open class ReturnToHomeAltitudeListItemWidget @JvmOverloads constructor(
     }
 
     private fun setReturnToHomeAltitude(currentValue: Int) {
-        addDisposable(widgetModel.setReturnToHomeAltitude(currentValue)
-            .observeOn(SchedulerProvider.ui())
-            .subscribe({
-                val dialogDismissListener = DialogInterface.OnDismissListener {
-                    uiUpdateStateProcessor.onNext(DialogDismissed(DialogType.ReturnHomeAltitudeChangeConfirmation))
-                }
-                showAlertDialog(
-                    dialogTheme = dialogTheme,
-                    icon = successDialogIcon,
-                    title = getString(R.string.uxsdk_list_rth_dialog_title),
-                    message = getString(R.string.uxsdk_rth_success_dialog_message),
-                    dialogDismissListener = dialogDismissListener
-                )
-                uiUpdateStateProcessor.onNext(DialogDisplayed(DialogType.ReturnHomeAltitudeChangeConfirmation))
-                widgetStateDataProcessor.onNext(ModelState.SetReturnToHomeAltitudeSucceeded)
-            }, { error ->
-                if (error is UXSDKError) {
-                    showToast(error.djiError.description())
-                    widgetStateDataProcessor.onNext(ModelState.SetReturnToHomeAltitudeFailed(error))
-                    LogUtils.e(TAG, error.djiError.description())
-                }
-            })
+        addDisposable(
+            widgetModel.setReturnToHomeAltitude(currentValue)
+                .observeOn(SchedulerProvider.ui())
+                .subscribe({
+                    val dialogDismissListener = DialogInterface.OnDismissListener {
+                        uiUpdateStateProcessor.onNext(DialogDismissed(DialogType.ReturnHomeAltitudeChangeConfirmation))
+                    }
+                    showAlertDialog(
+                        dialogTheme = dialogTheme,
+                        icon = successDialogIcon,
+                        title = getString(R.string.uxsdk_list_rth_dialog_title),
+                        message = getString(R.string.uxsdk_rth_success_dialog_message),
+                        dialogDismissListener = dialogDismissListener
+                    )
+                    uiUpdateStateProcessor.onNext(DialogDisplayed(DialogType.ReturnHomeAltitudeChangeConfirmation))
+                    widgetStateDataProcessor.onNext(ModelState.SetReturnToHomeAltitudeSucceeded)
+                }, { error ->
+                    if (error is UXSDKError) {
+                        showToast(error.djiError.description())
+                        widgetStateDataProcessor.onNext(ModelState.SetReturnToHomeAltitudeFailed(error))
+                        LogUtils.e(TAG, error.djiError.description())
+                    }
+                })
         )
     }
 
     private fun resetToDefaultValue() {
-        addDisposable(widgetModel.returnToHomeAltitudeState.firstOrError()
-            .observeOn(SchedulerProvider.ui())
-            .subscribe({
-                updateUI(it)
-            }, {
-                LogUtils.e(TAG, it.message)
-            })
+        addDisposable(
+            widgetModel.returnToHomeAltitudeState.firstOrError()
+                .observeOn(SchedulerProvider.ui())
+                .subscribe({
+                    updateUI(it)
+                }, {
+                    LogUtils.e(TAG, it.message)
+                })
         )
     }
     //endregion

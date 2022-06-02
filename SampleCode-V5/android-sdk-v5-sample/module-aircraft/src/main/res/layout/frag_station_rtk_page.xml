@@ -102,6 +102,16 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <TextView
+        android:id="@+id/tv_station_list_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:visibility="gone"
+        android:text="@string/tv_station_list_tip"
+        app:layout_constraintStart_toEndOf="@id/sv_button_list"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_station_list"
         android:layout_width="wrap_content"
@@ -109,7 +119,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toEndOf="@id/sv_button_list"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_station_list_tip"
         tools:ignore="MissingConstraints" />
 
     <TextView

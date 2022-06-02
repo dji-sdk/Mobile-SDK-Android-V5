@@ -1,0 +1,661 @@
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <string name="uxsdk_app_name">DJIUXSDK Beta</string>
+    <string name="uxsdk_app_yes">是</string>
+    <string name="uxsdk_app_no">否</string>
+    <string name="uxsdk_app_ok">OK</string>
+    <string name="uxsdk_app_save">保存</string>
+    <string name="uxsdk_app_cancel">取消</string>
+    <string name="uxsdk_error">报错</string>
+    <string name="uxsdk_alert">警报</string>
+    <string name="uxsdk_tips">提示</string>
+    <string name="uxsdk_success">成功</string>
+    <string name="uxsdk_enable">开启</string>
+    <string name="uxsdk_disable">关闭</string>
+    <string name="uxsdk_not_a_num">N/A</string>
+
+    <string name="uxsdk_user_login_widget_logout">登出</string>
+    <string name="uxsdk_user_login_widget_login">登录</string>
+    <string name="uxsdk_user_login_widget_refresh">刷新</string>
+    <string name="uxsdk_user_login_widget_token">令牌过期</string>
+    <string name="uxsdk_user_login_widget_not_logged_in">未登录</string>
+    <string name="uxsdk_user_login_widget_logged_in_authorized">登录并授权解锁飞行区</string>
+    <string name="uxsdk_user_login_widget_logged_in_not_authorized">登录但未授权解锁飞行区</string>
+
+    <string name="uxsdk_string_default_value">N/A</string>
+
+    <string name="uxsdk_battery_percent">%1$d%%</string>
+    <string name="uxsdk_battery_voltage_unit">%.2f V</string>
+
+    <string name="uxsdk_gps_rtk_enabled">R</string>
+
+    <string name="uxsdk_home_location_letter">H</string>
+
+
+    <!-- Telemetry widgets -->
+    <string name="uxsdk_unit_meters">m</string>
+    <string name="uxsdk_unit_feet">ft</string>
+    <string name="uxsdk_value_meters">%1$s m</string>
+    <string name="uxsdk_value_feet">%1$s ft</string>
+    <string name="uxsdk_unit_meter_per_second">m/s</string>
+    <string name="uxsdk_unit_km_per_hr">km/h</string>
+    <string name="uxsdk_unit_mile_per_hr">mph</string>
+    <string name="uxsdk_altitude_title">H</string>
+    <string name="uxsdk_agl_title">H AGL</string>
+    <string name="uxsdk_amsl_altitude_title">H AMSL</string>
+    <string name="uxsdk_distance_home_title">D</string>
+    <string name="uxsdk_distance_rc_title">DRC</string>
+    <string name="uxsdk_vps_title">VPS</string>
+    <string name="uxsdk_horizontal_velocity_title">H.S.</string>
+    <string name="uxsdk_vertical_velocity_title">V.S.</string>
+
+    <string name="uxsdk_video_time_hours">%1$02d:%2$02d:%3$02d</string>
+    <string name="uxsdk_video_time">%1$02d:%2$02d</string>
+
+    <!-- picture format -->
+    <string name="uxsdk_camera_picture_format_raw">RAW</string>
+    <string name="uxsdk_camera_picture_format_jpeg">JPEG</string>
+    <string name="uxsdk_camera_picture_format_jpegraw">JPEG+RAW</string>
+    <string name="uxsdk_camera_picture_format_tiff">TIFF</string>
+    <string name="uxsdk_camera_picture_format_radiometic_jpeg">Radiometric JPEG</string>
+    <string name="uxsdk_camera_picture_format_low_tiff">TIFF Linear Low</string>
+    <string name="uxsdk_camera_picture_format_high_tiff">TIFF Linear High</string>
+    <string name="uxsdk_camera_picture_format_jr">J+R</string>
+
+    <string name="uxsdk_message_air_sense_warning_title">有另一架飞行器在附近，请谨慎飞行。</string>
+    <string name="uxsdk_message_air_sense_warning_content">与另一架飞行器距离比较接近，请下降至一个更安全的高度。</string>
+    <string name="uxsdk_message_air_sense_dangerous_content">与另一架飞行器距离非常接近，请下降至一个更安全的高度。</string>
+    <string name="uxsdk_air_sense_terms_content">请确保你已经阅读并理解了大疆 AirSense 警告。</string>
+    <string name="uxsdk_air_sense_never_show">不再提示</string>
+
+    <string name="uxsdk_visual_radar_avoidance_disabled_message_post">避障已关闭，请谨慎飞行。</string>
+
+    <string name="uxsdk_ei_title">EI</string>
+
+    <string name="uxsdk_max_flight_height_limit">最大飞行高度： %1$s</string>
+
+    <!-- System Status List -->
+    <string name="uxsdk_list_item_flight_mode_title">飞行模式</string>
+    <string name="uxsdk_list_item_aircraft_battery_temp">飞行器电池温度</string>
+    <string name="uxsdk_list_item_radio_quality">无线电频道质量</string>
+    <string name="uxsdk_celsius_unit">%1$.1f°C</string>
+    <string name="uxsdk_fahrenheit_unit">%1$.1f°F</string>
+    <string name="uxsdk_kelvins_unit">%1$.1fK</string>
+    <string name="uxsdk_list_item_travel_mode">运输模式</string>
+    <string name="uxsdk_enter_travel_mode_success">飞行器将自动收起起落架并进入运输模式。</string>
+    <string name="uxsdk_enter_travel_mode_failed">进入运输模式失败。 %1$s</string>
+    <string name="uxsdk_exit_travel_mode_failed">退出运输模式失败。 %1$s</string>
+    <string name="uxsdk_travel_mode_enter">进入</string>
+    <string name="uxsdk_travel_mode_exit">退出</string>
+    <string name="uxsdk_travel_mode_enter_confirmation">飞行器将进入运输模式以便运输。请将飞行器放置在一个平坦、坚硬的平面并取下云台。如果飞行器没有进入运输模式，请手动调节起落架。</string>
+
+    <string name="uxsdk_list_item_rc_battery">遥控器电池</string>
+    <string name="uxsdk_rc_battery_percent">%1$d%%</string>
+
+    <string name="uxsdk_list_item_rc_stick_mode">控制杆模式</string>
+    <string name="uxsdk_rc_stick_mode_jp">日本手</string>
+    <string name="uxsdk_rc_stick_mode_usa">美国手</string>
+    <string name="uxsdk_rc_stick_mode_ch">中国手</string>
+    <string name="uxsdk_rc_stick_mode_custom">自定义</string>
+
+    <string name="uxsdk_obstacle_action_type">避障动作</string>
+    <string name="uxsdk_obstacle_action_type_close">关闭动作</string>
+    <string name="uxsdk_obstacle_action_type_stop">悬停</string>
+    <string name="uxsdk_obstacle_action_type_avoid">绕行</string>
+
+    <string name="uxsdk_list_item_sd_card">SD 卡剩余容量</string>
+    <string name="uxsdk_list_item_format_button">格式化</string>
+    <string name="uxsdk_list_item_emmc">eMMC 剩余容量</string>
+
+    <string name="uxsdk_storage_status_not_supported">不支持</string>
+    <string name="uxsdk_storage_status_usb_connected">USB 连接</string>
+    <string name="uxsdk_storage_status_missing">未插入</string>
+    <string name="uxsdk_storage_status_full">已满</string>
+    <string name="uxsdk_storage_status_slow">慢速， %1$s</string>
+    <string name="uxsdk_storage_status_write_protect">写保护</string>
+    <string name="uxsdk_storage_status_not_formatted">未格式化</string>
+    <string name="uxsdk_storage_status_formatting">格式化中&#8230;</string>
+    <string name="uxsdk_storage_status_invalid">无效</string>
+    <string name="uxsdk_storage_status_busy">忙碌</string>
+    <string name="uxsdk_storage_status_unknown_error">未知错误</string>
+    <string name="uxsdk_storage_status_initial">初始化进行中</string>
+    <string name="uxsdk_storage_status_recover_file">视频文件修复中</string>
+    <string name="uxsdk_storage_status_write_slow">慢速写入速度</string>
+    <string name="uxsdk_storage_status_formatting_recommended">建议格式化</string>
+    <string name="uxsdk_storage_status_needs_formatting">需要格式化</string>
+    <string name="uxsdk_storage_status_remaining_space_mb">%1$d MB</string>
+    <string name="uxsdk_storage_status_remaining_space_gb">%1$.2f GB</string>
+    <string name="uxsdk_storage_status_file_indices">没有文件索引</string>
+    <string name="uxsdk_sd_card_format_confirmation">是否确定要格式化 SD 卡吗？</string>
+    <string name="uxsdk_sd_card_format_complete">SD 卡格式化完成。</string>
+    <string name="uxsdk_sd_card_dialog_title">SD 卡格式化</string>
+    <string name="uxsdk_sd_card_format_error">SD 卡格式化错误 %1$s</string>
+
+    <string name="uxsdk_emmc_dialog_title">eMMC 存储器格式化</string>
+    <string name="uxsdk_emmc_format_error">格式化内部存储器（eMMC）错误 %1$s</string>
+    <string name="uxsdk_emmc_format_confirmation">是否确定要格式化内部存储器（eMMC）？</string>
+    <string name="uxsdk_emmc_format_complete">内部存储器（eMMC）格式化完成。</string>
+
+    <string name="uxsdk_list_item_max_flight_distance">最大飞行距离</string>
+    <string name="uxsdk_list_item_max_flight_altitude">最大飞行高度</string>
+    <string name="uxsdk_limit_required_error">设置失败。飞行高度超过最大限制 (400 ft/ 120 m)</string>
+    <string name="uxsdk_limit_high_notice">更改最大高度设置可能违反当地法律法规 (FAA 设置飞行限制为400 ft / 120 m)。\n 你将为调整这些设置后的飞机行为全权负责。\n DJI及其关联公司不承担任何损害赔偿责任，包括合同法、侵权法（包括过失责任）、衡平法及其他法律下的责任。</string>
+    <string name="uxsdk_list_item_value_out_of_range">设置失败。请输入范围内数值。</string>
+    <string name="uxsdk_limit_return_home_warning">失控保护下的返航高度不能超过最大飞行高度。失控保护下的返航高度会被设置为 %1$d ft / %2$d m。</string>
+
+    <string name="uxsdk_list_item_max_return_to_home_altitude">返航高度</string>
+    <string name="uxsdk_rth_error_dialog_message">返航高度不能超过最高最大飞行高度 %1$d。</string>
+    <string name="uxsdk_list_rth_dialog_title">返航高度</string>
+    <string name="uxsdk_rth_success_dialog_message">返回高度已修改，请注意飞行安全。</string>
+
+    <string name="uxsdk_novice_mode_altitude_meters">30m</string>
+    <string name="uxsdk_novice_mode_altitude_feet">100ft</string>
+    <string name="uxsdk_novice_mode_distance_meters">30m</string>
+    <string name="uxsdk_novice_mode_distance_feet">100ft</string>
+    <string name="uxsdk_altitude_range_meters">(%1$d~%2$dm)</string>
+    <string name="uxsdk_altitude_range_feet">≈ (%1$d~%2$dft)</string>
+
+    <string name="uxsdk_system_status_disabled">关闭</string>
+    <string name="uxsdk_system_status_normal">正常</string>
+
+    <!-- System Status List -->
+    <string name="uxsdk_system_status_list_title">系统状态列表</string>
+
+    <string name="uxsdk_list_item_overview_status">整体状况</string>
+
+    <string name="uxsdk_list_item_novice_mode">新手模式</string>
+
+    <string name="uxsdk_novice_mode_disabled_message">当你关闭新手模式时，飞行速度和灵敏度会显著提升。请谨慎飞行。</string>
+
+    <string name="uxsdk_novice_mode_enabled_message">开启新手模式。高度和距离会被限制为100ft / 30m。</string>
+
+    <string name="uxsdk_list_item_unit_mode">单位模式</string>
+    <string name="uxsdk_list_item_unit_mode_imperial">英制</string>
+    <string name="uxsdk_list_item_unit_mode_metric">公制</string>
+    <string name="uxsdk_dialog_unit_change_notice">英制单位模式设置成功。测量值将遵循英制单位系统。由于飞机支持公制单位系统，所见数值为近似换算。</string>
+    <string name="uxsdk_dialog_unit_change_example">示例：10m ≈  32ft - 34ft</string>
+
+    <string name="uxsdk_list_item_ssd">SSD 剩余容量</string>
+    <string name="uxsdk_ssd_not_found">未插入</string>
+    <string name="uxsdk_ssd_saving">保存中</string>
+    <string name="uxsdk_ssd_formatting">格式化中</string>
+    <string name="uxsdk_ssd_initializing">初始化中</string>
+    <string name="uxsdk_ssd_error">错误</string>
+    <string name="uxsdk_ssd_full">已满</string>
+    <string name="uxsdk_ssd_poor_connection">连接不良</string>
+    <string name="uxsdk_ssd_switching_license">切换证书</string>
+    <string name="uxsdk_ssd_formatting_required">需要格式化</string>
+    <string name="uxsdk_ssd_not_initialized">未初始化</string>
+    <string name="uxsdk_ssd_dialog_title">SSD 存储格式</string>
+    <string name="uxsdk_ssd_format_error">格式化 SSD 错误。 %1$s</string>
+    <string name="uxsdk_ssd_format_confirmation">是否确定格式化 SSD ？</string>
+    <string name="uxsdk_ssd_format_complete">SSD 格式化完成。</string>
+
+    <string name="uxsdk_location_default">N/A, N/A</string>
+    <string name="uxsdk_location_coordinates">%1$s, %2$s</string>
+
+    <!-- Auto Exposure Lock -->
+    <string name="uxsdk_auto_exposure_lock_widget_display_string">AE</string>
+
+    <!-- Camera Setting Menu -->
+    <string name="uxsdk_camera_setting_menu">MENU</string>
+    <!-- Focus Mode -->
+    <string name="uxsdk_widget_focus_mode_manual">MF</string>
+    <string name="uxsdk_widget_focus_mode_auto">AF</string>
+    <string name="uxsdk_widget_focus_mode_afc">AFC</string>
+    <string name="uxsdk_widget_focus_mode_separator">/</string>
+
+    <string name="uxsdk_camera_exposure_mode_p">AUTO</string>
+    <string name="uxsdk_camera_exposure_mode_s">S</string>
+    <string name="uxsdk_camera_exposure_mode_a">A</string>
+    <string name="uxsdk_camera_exposure_mode_m">M</string>
+    <string name="uxsdk_camera_exposure_iso_title">ISO</string>
+    <string name="uxsdk_camera_ei">EI</string>
+
+    <!-- Take Off Widget -->
+    <string name="uxsdk_take_off_header">是否起飞？</string>
+    <string name="uxsdk_take_off_message">确保起飞环境安全。飞机会攀升至 %1$s 高度并悬停。</string>
+    <string name="uxsdk_take_off_atti_message">定位失败。飞机会自动飞行至离地 %1$s 。请不要在狭窄处或人群中或建筑物附近起飞。请不要触碰桨叶。</string>
+    <string name="uxsdk_precision_takeoff">精确记录起飞点</string>
+    <string name="uxsdk_precision_takeoff_message">精确起飞模式开启后，飞机会自行攀升至 %1$s。这将允许飞机通过VPS图像更精确地返回返航点。确保有充足的环境光以及起飞路径上没有被树、电缆或其他物体阻碍。在起飞期间移动摇杆可能会影响图像获取。紧急情况下，可以使用摇杆使飞机下降。</string>
+    <string name="uxsdk_take_off_action">滑动起飞</string>
+
+    <string name="uxsdk_land_header">是否降落？</string>
+    <string name="uxsdk_land_message">飞机会在它当前的位置降落。请检查降落区域清晰。</string>
+    <string name="uxsdk_land_action">滑动以起飞</string>
+
+    <string name="uxsdk_land_confirmation_header">是否继续降落？</string>
+    <string name="uxsdk_land_confirmation_message">飞机已下降至 %1$s。</string>
+    <string name="uxsdk_land_confirmation_message_in2">飞机正在低空悬停。请确保降落点安全并且向下推动摇杆以降落。</string>
+
+    <string name="uxsdk_unsafe_to_land_header">不适合降落。</string>
+    <string name="uxsdk_unsafe_to_land_message">本区域不适合降落。请移动至更安全的位置。</string>
+    <string name="uxsdk_unsafe_to_land_action">滑动以强制降落</string>
+
+    <!-- Return Home Widget -->
+    <string name="uxsdk_return_to_home_header">是否返航并降落？</string>
+    <string name="uxsdk_return_to_home_action">滑动以返航</string>
+    <string name="uxsdk_return_home_at_current_altitude">飞机与返航点的距离不超过 65.6 ft (20 m)。如果RTH启动了，飞机会在当前高度返航。</string>
+    <string name="uxsdk_return_home_inner_desc">飞机距返航点小于 20 m (65.6 ft)。 如果RTH启动了，飞机会着陆。</string>
+    <string name="uxsdk_return_home_near_nfz">正在接近禁飞区。当前返航路径可能会被扭曲。请在地图上确认或目视飞机的飞行路径以确保安全。</string>
+    <string name="uxsdk_return_home_wifi">飞机将会朝向返航点并设置返航路径。使用虚拟摇杆调整飞机方向。点击取消返航按钮以停止返航。</string>
+    <string name="uxsdk_return_home_below_desc">飞机会调整机头朝向以面对返航点，并调整自身高度至 %1$s。当前飞机为 %2$s。点击遥控器上的返航按钮可以停止返航。</string>
+
+    <!-- RTK Widget -->
+    <string name="uxsdk_rtk_panel_antenna_1">天线 1</string>
+    <string name="uxsdk_rtk_panel_antenna_2">天线 2</string>
+    <string name="uxsdk_rtk_panel_base_station">基站</string>
+    <string name="uxsdk_rtk_panel_satellite_num">卫星#</string>
+    <string name="uxsdk_rtk_panel_gps_num">GPS:</string>
+    <string name="uxsdk_rtk_panel_beidou_num">BeiDou:</string>
+    <string name="uxsdk_rtk_panel_glonass_num">GLONASS:</string>
+    <string name="uxsdk_rtk_panel_galileo_num">Galileo:</string>
+
+    <string name="uxsdk_rtk_panel_aircraft_location">飞机</string>
+    <string name="uxsdk_rtk_panel_base_station_location">基站</string>
+    <string name="uxsdk_rtk_panel_lat">纬度：</string>
+    <string name="uxsdk_rtk_panel_coordinate_value">%1$.9f</string>
+    <string name="uxsdk_rtk_panel_altitude_value">%1$.3f</string>
+    <string name="uxsdk_rtk_panel_course_angle_value">%1$.2f</string>
+    <string name="uxsdk_rtk_panel_lng">经度：</string>
+    <string name="uxsdk_rtk_panel_height">椭球高：</string>
+    <string name="uxsdk_rtk_panel_antenna_angle">航向角：</string>
+    <string name="uxsdk_rtk_panel_orientation_status_text">朝向：</string>
+    <string name="uxsdk_rtk_panel_positioning_status_text">定位：</string>
+    <string name="uxsdk_rtk_standard_deviation">标准差：</string>
+    <string name="uxsdk_rtk_introduction_txt">RTK 定位基于信号载波相位的相位，在特定坐标上输出厘米级3D定位。航向由遥控器的两个天线决定。</string>
+
+    <string name="uxsdk_rtk_enabled_title_rtk_switch">RTK 定位</string>
+    <string name="uxsdk_rtk_enabled_desc">当RTK 模块故障时，手动关闭RTK 并切换回GPS 模式。(如果您在起飞后启动RTK，GPS将继续被使用。)</string>
+    <string name="uxsdk_rtk_enabled_motors_running">发动机正在工作。请停止发动机并再次尝试。</string>
+
+    <string name="uxsdk_rtk_solution_none">NONE</string>
+    <string name="uxsdk_rtk_solution_single">SINGLE</string>
+    <string name="uxsdk_rtk_solution_float">FLOAT</string>
+    <string name="uxsdk_rtk_solution_fixed">FIXED</string>
+    <string name="uxsdk_rtk_solution_unknown">未知</string>
+
+    <string name="uxsdk_rtk_state_connect">连接成功，RTK数据使用中</string>
+    <string name="uxsdk_rtk_state_connect_not_healthy">连接成功，RTK功能未使用</string>
+    <string name="uxsdk_rtk_state_disconnect">未连接</string>
+    <string name="uxsdk_rtk_state_pause">暂停账户…</string>
+    <string name="uxsdk_rtk_state_account_expire">时间验证失败</string>
+    <string name="uxsdk_rtk_state_network_err">网络不可用</string>
+    <string name="uxsdk_rtk_state_auth_failed">验证失败</string>
+    <string name="uxsdk_rtk_state_not_bind">账号未注册</string>
+    <string name="uxsdk_rtk_state_connecting">连接中</string>
+    <string name="uxsdk_rtk_state_not_active">账号未激活</string>
+    <string name="uxsdk_rtk_state_coordinate_fialed">设置网络RTK坐标系失败</string>
+    <string name="uxsdk_rtk_state_unknown">未知错误</string>
+
+    <string name="uxsdk_rtk_nrtk_state_inner_error">内部错误</string>
+    <string name="uxsdk_rtk_nrtk_state_unknown">未知错误</string>
+    <string name="uxsdk_rtk_nrtk_account_error">账户错误</string>
+    <string name="uxsdk_rtk_nrtk_connecting">连接到服务器…</string>
+    <string name="uxsdk_rtk_nrtk_invalid_request">请求被服务器拒绝</string>
+    <string name="uxsdk_rtk_nrtk_server_not_reachable">连接到服务器失败</string>
+    <string name="uxsdk_rtk_type_nrtk">网络 RTK</string>
+    <string name="uxsdk_rtk_type_rtk_mobile_station">D-RTK 2 移动站</string>
+    <string name="uxsdk_rtk_type_rtk_base_station">基站</string>
+    <string name="uxsdk_rtk_type_custom_rtk">自定义网络 RTK</string>
+    <string name="uxsdk_rtk_type_unknown_rtk">未知RTK类型</string>
+    <string name="uxsdk_rtk_status_desc">%1$s 状态：</string>
+
+
+    <string name="uxsdk_fly_zone_unlock">解锁</string>
+    <string name="uxsdk_fly_zone_unlock_zone">解锁 %1$s</string>
+    <string name="uxsdk_fly_zone_unlock_confirmation">点击解锁，表明你有权在该飞行区域操作。本次请求的记录将与您的DJI账户链接。点击取消以中止操作。</string>
+    <string name="uxsdk_fly_zone_unlock_end_time">当前未解锁并于 %1$s 到期</string>
+    <string name="uxsdk_fly_zone_unlock_failed_unauthorized">解锁失败。您在此区域无权解锁。</string>
+    <string name="uxsdk_fly_zone_unlock_failed">解锁失败。 %1$s</string>
+    <string name="uxsdk_fly_zone_login_failed">登录失败。你无权执行该操作。</string>
+    <string name="uxsdk_fly_zone_login_failed_error">出错。登录失败。请再次尝试。</string>
+    <string name="uxsdk_fly_zone_warning">警告</string>
+    <string name="uxsdk_fly_zone_enhanced_warning">增强警告</string>
+    <string name="uxsdk_fly_zone_authorized">授权</string>
+    <string name="uxsdk_fly_zone_restricted">受限</string>
+    <string name="uxsdk_fly_zone_self_unlock">自解锁</string>
+    <string name="uxsdk_fly_zone_custom_unlock">自定义解锁</string>
+    <string name="uxsdk_self_fly_zone_login_requirement">您必须登录您的DJI账户以解锁飞行区域。点击登录以继续。</string>
+    <string name="uxsdk_fly_zone_custom_unlock_aircraft">在飞机上自定义解锁</string>
+    <string name="uxsdk_fly_zone_custom_unlock_enabled">开启自定义解锁</string>
+    <string name="uxsdk_custom_fly_zone_duplicate">%1$s 当前已开启。是否关闭它并开启 %2$s</string>
+
+    <string name="uxsdk_map">地图</string>
+
+    <!--Map Widget Activity-->
+    <string name="uxsdk_provider_google_maps">Google 地图</string>
+    <string name="uxsdk_provider_here_maps">Here 地图</string>
+    <string name="uxsdk_provider_amaps">高德地图</string>
+    <string name="uxsdk_provider_mapbox">Mapbox</string>
+    <string name="uxsdk_error_map_not_initialized">地图还未初始化</string>
+    <string name="uxsdk_home_direction">返航方向</string>
+    <string name="uxsdk_auto_frame">自动框架</string>
+    <string name="uxsdk_unlock_flyzones">解锁飞行区域</string>
+    <string name="uxsdk_show_flight_path">显示飞行路径</string>
+    <string name="uxsdk_show_home_point">显示返航点</string>
+    <string name="uxsdk_show_gimbal_yaw">显示云台偏航</string>
+    <string name="uxsdk_clear_flight_path">清理飞行路径</string>
+    <string name="uxsdk_replace_icon">替换图标</string>
+    <string name="uxsdk_fly_zone">飞行区域</string>
+    <string name="uxsdk_fly_zone_legend">Fly Zone Legend</string>
+    <string name="uxsdk_dji_account_indicator">DJI Account Login Indicator</string>
+    <string name="uxsdk_all">全部</string>
+    <string name="uxsdk_auth">授权</string>
+    <string name="uxsdk_warning">警告</string>
+    <string name="uxsdk_enhanced_warning">增强警告</string>
+    <string name="uxsdk_restricted">受限</string>
+    <string name="uxsdk_maximum_height">最大高度</string>
+    <string name="uxsdk_self_unlocked">自解锁</string>
+    <string name="uxsdk_custom_unlocked">自定义解锁</string>
+    <string name="uxsdk_new_color">新颜色</string>
+    <string name="uxsdk_sync">同步</string>
+    <string name="uxsdk_map_settings">地图设置</string>
+    <string name="uxsdk_center_map">中心地图</string>
+    <string name="uxsdk_map_overlay">地图覆盖</string>
+    <string name="uxsdk_fly_zone_settings">飞行区域设置</string>
+    <string name="uxsdk_flight_settings">飞行设置</string>
+    <string name="uxsdk_other_settings">其他设置</string>
+    <string name="uxsdk_icon_change_settings">图标替换设置</string>
+    <string name="uxsdk_line_color_settings">线条颜色设置</string>
+    <string name="uxsdk_marker_drag_started">标记 %1$d 拖动开始</string>
+    <string name="uxsdk_marker_drag_ended">标记 %1$d 拖动结束</string>
+    <string name="uxsdk_marker_clicked">标记 %1$d 点击</string>
+    <string-array name="uxsdk_iconArray">
+        <item>飞行器</item>
+        <item>返航点</item>
+        <item>云台偏航</item>
+        <item>禁区</item>
+        <item>解禁区</item>
+    </string-array>
+    <string-array name="uxsdk_mapTypeArray">
+        <item>标准</item>
+        <item>卫星</item>
+        <item>混合</item>
+    </string-array>
+    <string-array name="uxsdk_lineTypeArray">
+        <item>返航方向</item>
+        <item>飞行路径</item>
+        <item>飞行区域边界</item>
+    </string-array>
+
+    <string name="uxsdk_designed_aspect_ratio">经设计的纵横比： </string>
+    <string name="uxsdk_current_widget_size">当前控件尺寸： </string>
+    <string name="uxsdk_pinch_to_resize">* Pinch to resize widget</string>
+
+    <!-- Widget List Strings -->
+    <string name="uxsdk_altitude_widget_title">高度控件</string>
+    <string name="uxsdk_auto_exposure_lock_widget_title">AE锁控件</string>
+    <string name="uxsdk_battery_widget_title">电池控件</string>
+    <string name="uxsdk_camera_capture_widget_title">相机捕捉控件</string>
+    <string name="uxsdk_camera_config_aperture_widget_title">相机光圈设置控件</string>
+    <string name="uxsdk_camera_config_ev_widget_title">相机EV设置控件</string>
+    <string name="uxsdk_camera_config_iso_widget_title">相机ISO设置控件</string>
+    <string name="uxsdk_camera_config_shutter_widget_title">相机快门设置控件</string>
+    <string name="uxsdk_camera_config_ssd_widget_title">相机SSD设置控件</string>
+    <string name="uxsdk_camera_config_storage_widget_title">相机存储设置控件</string>
+    <string name="uxsdk_camera_config_wb_widget_title">相机WB设置控件</string>
+    <string name="uxsdk_camera_controls_widget_title">相机控制控件</string>
+    <string name="uxsdk_camera_settings_menu_indicator_widget_title">Camera Settings Menu Indicator Widget</string>
+    <string name="uxsdk_compass_widget_title">指南针控件</string>
+    <string name="uxsdk_telemetry_widget_title">遥测面板</string>
+    <string name="uxsdk_distance_home_widget_title">Distance Home Widget</string>
+    <string name="uxsdk_distance_rc_widget_title">Distance RC Widget</string>
+    <string name="uxsdk_exposure_settings_indicator_widget_title">曝光设置指示控件</string>
+    <string name="uxsdk_focus_exposure_switch_widget_title">对焦曝光切换控件</string>
+    <string name="uxsdk_focus_mode_widget_title">对焦模式控件</string>
+    <string name="uxsdk_fpv_widget_title">FPV 控件</string>
+    <string name="uxsdk_fpv_interaction_widget_title">FPV 交互控件</string>
+    <string name="uxsdk_horizontal_velocity_widget_title">水平速度控件</string>
+    <string name="uxsdk_record_video_widget_title">视频录制控件</string>
+    <string name="uxsdk_remote_control_signal_widget_title">遥感控制信号控件</string>
+    <string name="uxsdk_photo_video_switch_widget_title">相片视频切换控件</string>
+    <string name="uxsdk_shoot_photo_widget_title">拍照控件</string>
+    <string name="uxsdk_simulator_indicator_control_widgets_title">Simulator Indicator and Control Widgets</string>
+    <string name="uxsdk_system_status_panel_title">系统状态面板</string>
+    <string name="uxsdk_system_status_widget_title">系统状态空间</string>
+    <string name="uxsdk_top_bar_panel_title">顶栏面板</string>
+    <string name="uxsdk_user_account_login_widget_title">用户账号登录控件</string>
+    <string name="uxsdk_vertical_velocity_widget_title">垂直速度控件</string>
+    <string name="uxsdk_vision_widget_title">视觉控件</string>
+    <string name="uxsdk_vps_widget_title">VPS 控件</string>
+    <string name="uxsdk_flight_mode_widget_title">飞行模式控件</string>
+    <string name="uxsdk_video_signal_widget_title">视频信号控件</string>
+    <string name="uxsdk_gps_signal_widget_title">GPS 信号控件</string>
+    <string name="uxsdk_air_sense_widget_title">空气感应控件</string>
+    <string name="uxsdk_connection_widget_title">连接控件</string>
+    <string name="uxsdk_rtk_widget_title">RTK 控件</string>
+    <string name="uxsdk_rtk_enabled_widget_title">RTK 开启控件</string>
+    <string name="uxsdk_rtk_satellite_status_widget_title">RTK 卫星状态控件</string>
+    <string name="uxsdk_remaining_flight_time_widget_title">剩余飞行时间控件</string>
+    <string name="uxsdk_exposure_setting_panel_title">曝光设置控件</string>
+    <string name="uxsdk_exposure_mode_setting_widget_title">曝光模式设置控件</string>
+    <string name="uxsdk_iso_and_ei_setting_widget_title">ISO 和 EI 设置控件</string>
+    <string name="uxsdk_horizontal_situation_indicator_widget_title">水平状态指示控件</string>
+    <string name="uxsdk_speed_display_widget_title">速度展示控件</string>
+    <string name="uxsdk_attitude_display_widget_title">姿态展示空间</string>
+    <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
+
+    <!-- Simulator Widget -->
+    <string name="uxsdk_simulator_zero_string">0</string>
+    <string name="uxsdk_simulator_null_string">N/A</string>
+    <string name="uxsdk_simulator_widget_title">模拟器状态</string>
+    <string name="uxsdk_simulator_widget_lat">纬度</string>
+    <string name="uxsdk_simulator_widget_lng">经度</string>
+    <string name="uxsdk_simulator_widget_world_x">World-X</string>
+    <string name="uxsdk_simulator_widget_world_y">World-Y</string>
+    <string name="uxsdk_simulator_widget_world_z">World-Z</string>
+    <string name="uxsdk_simulator_widget_pitch">俯仰</string>
+    <string name="uxsdk_simulator_widget_yaw">偏航</string>
+    <string name="uxsdk_simulator_widget_roll">横滚</string>
+    <string name="uxsdk_simulator_widget_flying_state">飞行状态</string>
+    <string name="uxsdk_simulator_widget_motor_started">发动机启动</string>
+    <string name="uxsdk_simulator_widget_satellite">卫星记数</string>
+    <string name="uxsdk_simulator_widget_frequency">频率</string>
+    <string name="uxsdk_simulator_position_title">位置</string>
+    <string name="uxsdk_simulator_attitude_title">姿态</string>
+    <string name="uxsdk_simulator_aircraft_status_title">飞行器</string>
+    <string name="uxsdk_simulator_aircraft_wind_title">风模拟</string>
+    <string name="uxsdk_simulator_input_val_error">输入需要模拟的数值</string>
+    <string name="uxsdk_simulator_save_preset">保存预设</string>
+    <string name="uxsdk_simulator_preset_name_hint">输入预设名称</string>
+    <string name="uxsdk_simulator_preset_name_empty_error">预设名称不能为空</string>
+    <string name="uxsdk_simulator_preset_error">错误加载预设。</string>
+    <string name="uxsdk_simulator_save_preset_list">预设列表</string>
+    <string name="uxsdk_simulator_save_preset_delete">是否确认删除 %1$s？</string>
+    <string name="uxsdk_simulator_save_preset_list_empty">没有保存的预设</string>
+    <string name="uxsdk_simulator_preset">预设</string>
+    <string name="uxsdk_simulator_wind_speed_x">风速 X</string>
+    <string name="uxsdk_simulator_wind_speed_y">风速 Y</string>
+    <string name="uxsdk_simulator_wind_speed_z">风速 Z</string>
+    <string name="uxsdk_simulator_widget_lat_hint">纬度范围 -90 至 90</string>
+    <string name="uxsdk_simulator_widget_lng_hint">经度范围 -180 至 180</string>
+
+    <!-- white balance -->
+    <string name="uxsdk_camera_wb_auto">自动</string>
+    <string name="uxsdk_camera_wb_outdoor">晴天</string>
+    <string name="uxsdk_camera_wb_indoor">阴天</string>
+    <string name="uxsdk_camera_wb_water">雨天</string>
+    <string name="uxsdk_camera_wb_tungsten">白炽灯</string>
+    <string name="uxsdk_camera_wb_neon">氖灯</string>
+    <string name="uxsdk_camera_wb_custom">自定义</string>
+    <string name="uxsdk_camera_wb_neutral">平衡</string>
+
+    <!-- video resolution -->
+    <string name="uxsdk_camera_video_resolution_640_480p">640x480</string>
+    <string name="uxsdk_camera_video_resolution_640_512p">640x512</string>
+    <string name="uxsdk_camera_video_resolution_1280_720p">1280x720</string>
+    <string name="uxsdk_camera_video_resolution_1920_1080p">1920x1080</string>
+    <string name="uxsdk_camera_video_resolution_2704_1520p">2704x1520</string>
+    <string name="uxsdk_camera_video_resolution_2720_1530p">2720x1530</string>
+    <string name="uxsdk_camera_video_resolution_3840x1572p">3840x1572</string>
+    <string name="uxsdk_camera_video_resolution_3840_2160p">3840x2160</string>
+    <string name="uxsdk_camera_video_resolution_4096_2160p">4096x2160</string>
+    <string name="uxsdk_camera_video_resolution_4608x2160p">4608x2160</string>
+    <string name="uxsdk_camera_video_resolution_4608x2592p">4608x2592</string>
+    <string name="uxsdk_camera_video_resolution_5280x2160p">5280x2160</string>
+    <string name="uxsdk_camera_video_resolution_MaxResolution">Max</string>
+    <string name="uxsdk_camera_video_resolution_None">Not Recorded</string>
+    <string name="uxsdk_camera_video_resolution_5760x3240p">5760x3240</string>
+    <string name="uxsdk_camera_video_resolution_6016x3200p">6016x3200</string>
+    <string name="uxsdk_camera_video_resolution_2048x1080p">2048x1080</string>
+    <string name="uxsdk_camera_video_resolution_5280x2972p">5280x2972</string>
+    <string name="uxsdk_camera_video_resolution_336x256p">336x256</string>
+    <string name="uxsdk_camera_video_resolution_3712x2088p">3712x2088</string>
+    <string name="uxsdk_camera_video_resolution_3944x2088p">3944x2088</string>
+    <string name="uxsdk_camera_video_resolution_2688x1512p">2688x1512</string>
+    <string name="uxsdk_camera_video_resolution_hq">HQ</string>
+    <string name="uxsdk_camera_video_resolution_full_fov">Full FOV</string>
+    <string name="uxsdk_slow_tag">SLOW</string>
+
+
+    <!-- video frame rate value-->
+    <string name="uxsdk_camera_video_frame_rate_value_24">23.976</string>
+    <string name="uxsdk_camera_video_frame_rate_value_true_24">24.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_25">25.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_30">29.970</string>
+    <string name="uxsdk_camera_video_frame_rate_value_true_30">30.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_48">47.950</string>
+    <string name="uxsdk_camera_video_frame_rate_value_true_48">48.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_50">50.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_60">59.940</string>
+    <string name="uxsdk_camera_video_frame_rate_value_true_60">60.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_96">96.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_100">100.000</string>
+    <string name="uxsdk_camera_video_frame_rate_value_120">119.880</string>
+    <string name="uxsdk_camera_video_frame_rate_value_240">240.000</string>
+
+    <!-- SSD Color -->
+    <string name="uxsdk_camera_ssd_color_standard">标准</string>
+    <string name="uxsdk_camera_ssd_color_dlog">DLog</string>
+    <string name="uxsdk_camera_ssd_color_rec709">Rec.709</string>
+    <string name="uxsdk_camera_ssd_color_cine_like">CineLike</string>
+    <string name="uxsdk_camera_ssd_color_raw_color">RAW</string>
+    <string name="uxsdk_camera_ssd_color_unknown">未知</string>
+
+    <!-- Storage -->
+    <string name="uxsdk_storage_title_time">TIME</string>
+    <string name="uxsdk_storage_title_capacity">容量</string>
+    <string name="uxsdk_storage_title_status">状态</string>
+    <string name="uxsdk_storage_value_full">已满</string>
+    <string name="uxsdk_storage_remaining_space">%1$d MB</string>
+
+    <!-- SD Status -->
+    <string name="uxsdk_sd_card_usb_connected">USB 已连接</string>
+    <string name="uxsdk_sd_card_missing">无 SD卡</string>
+    <string name="uxsdk_sd_card_full">SD卡已满</string>
+    <string name="uxsdk_sd_card_slow">慢速 SD卡</string>
+    <string name="uxsdk_sd_card_write_protect">SD卡写保护</string>
+    <string name="uxsdk_sd_card_not_formatted">SD卡未格式化</string>
+    <string name="uxsdk_sd_card_formatting">SD卡正在格式化 &#8230;</string>
+    <string name="uxsdk_sd_card_invalid">SD卡无效</string>
+    <string name="uxsdk_sd_card_busy">SD卡忙碌</string>
+    <string name="uxsdk_sd_card_unknown_error">SD卡未知错误</string>
+    <string name="uxsdk_sd_card_initial">SD卡初始化中</string>
+    <string name="uxsdk_sd_card_recover_file">视频文件修复中</string>
+    <string name="uxsdk_sd_card_write_slow">慢写速度</string>
+    <string name="uxsdk_sd_card_needs_formatting">建议SD卡格式化</string>
+
+    <!-- Internal Status -->
+    <string name="uxsdk_internal_storage_missing">无内部存储器</string>
+    <string name="uxsdk_internal_storage_full">内部存储器已满</string>
+    <string name="uxsdk_internal_storage_slow">慢速度存储器</string>
+    <string name="uxsdk_internal_storage_write_protect">内部存储器写保护</string>
+    <string name="uxsdk_internal_storage_not_formatted">内部存储器未格式化</string>
+    <string name="uxsdk_internal_storage_formatting">内部存储器正在格式化 &#8230;</string>
+    <string name="uxsdk_internal_storage_invalid">内部存储器无效</string>
+    <string name="uxsdk_internal_storage_busy">内部存储器忙碌</string>
+    <string name="uxsdk_internal_storage_unknown_error">内部存储器未知错误</string>
+    <string name="uxsdk_internal_storage_initial">内部存储器初始化</string>
+
+    <!-- SSD Status -->
+    <string name="uxsdk_ssd_status_error_nossd">无 SSD 可用</string>
+    <string name="uxsdk_camera_ssd_saving">保存到 SSD</string>
+    <string name="uxsdk_ssd_status_formatting">F格式化中…</string>
+    <string name="uxsdk_ssd_status_init">SSD 初始化…</string>
+    <string name="uxsdk_ssd_status_recognize_failed">SSD 识别失败。</string>
+    <string name="uxsdk_ssd_status_verify_failed">SSD 认证失败</string>
+    <string name="uxsdk_ssd_status_full">SSD 已满</string>
+    <string name="uxsdk_ssd_status_poor_connection">连接失败</string>
+    <string name="uxsdk_ssd_status_switching_mode">切换模式中…</string>
+    <string name="uxsdk_ssd_status_need_format">需要格式化。</string>
+
+    <!-- SSD License -->
+    <string name="uxsdk_camera_ssd_video_license_cdng">CinemaDNG</string>
+    <string name="uxsdk_camera_ssd_video_license_422hq">ProRes 422HQ</string>
+    <string name="uxsdk_camera_ssd_video_license_4444xq">ProRes 4444XQ</string>
+
+    <!-- SD Color -->
+    <string name="uxsdk_camera_filter_none">无</string>
+    <string name="uxsdk_camera_filter_art">Art</string>
+    <string name="uxsdk_camera_filter_reminiscence">Reminiscence</string>
+    <string name="uxsdk_camera_filter_inverse">Inverse</string>
+    <string name="uxsdk_camera_filter_blackandwhite">Black &amp; White</string>
+    <string name="uxsdk_camera_filter_bright">Bright</string>
+    <string name="uxsdk_camera_filter_dcinelike">D-CineLike</string>
+    <string name="uxsdk_camera_filter_Portrait">Portrait</string>
+    <string name="uxsdk_camera_filter_M31">M31</string>
+    <string name="uxsdk_camera_filter_delta">Delta</string>
+    <string name="uxsdk_camera_filter_kdx">Kdx</string>
+    <string name="uxsdk_camera_filter_dk79">DK79</string>
+    <string name="uxsdk_camera_filter_prismo">Prismo</string>
+    <string name="uxsdk_camera_filter_jugo">Jugo</string>
+    <string name="uxsdk_camera_filter_vision4">Vision4</string>
+    <string name="uxsdk_camera_filter_vision6">Vision6</string>
+    <string name="uxsdk_camera_filter_solarize">Solarize</string>
+    <string name="uxsdk_camera_filter_posterize">Posterize</string>
+    <string name="uxsdk_camera_filter_whiteboard">Whiteboard</string>
+    <string name="uxsdk_camera_filter_blackboard">Blackboard</string>>
+    <string name="uxsdk_camera_filter_aqua">Aqua</string>
+    <string name="uxsdk_camera_filter_truecolor">TrueColor</string>
+    <string name="uxsdk_camera_filter_dlog">D-Log</string>
+    <string name="uxsdk_camera_filter_hlg">HLG</string>
+    <string name="uxsdk_camera_filter_truecolor_ext">TrueColorExt</string>
+    <string name="uxsdk_camera_filter_film_a">Film A</string>
+    <string name="uxsdk_camera_filter_film_b">Film B</string>
+    <string name="uxsdk_camera_filter_film_c">Film C</string>
+    <string name="uxsdk_camera_filter_film_d">Film D</string>
+    <string name="uxsdk_camera_filter_film_e">Film E</string>
+    <string name="uxsdk_camera_filter_film_f">Film F</string>
+    <string name="uxsdk_camera_filter_film_g">Film G</string>
+    <string name="uxsdk_camera_filter_film_h">Film H</string>
+    <string name="uxsdk_camera_filter_film_i">Film I</string>
+    <string name="uxsdk_camera_filter_rec_709">Rec.709</string>
+
+    <!-- Camera Config Widgets -->
+    <string name="uxsdk_aperture_title">F</string>
+    <string name="uxsdk_aperture_integer">%1$d</string>
+    <string name="uxsdk_aperture_integer_with_decimal">%1$d.%2$d</string>
+    <string name="uxsdk_shutter_title">快门</string>
+    <string name="uxsdk_ev_title">曝光值</string>
+    <string name="uxsdk_exposure_auto_iso_title">ISO（感光度）自动调整</string>
+    <string name="uxsdk_exposure_locked_iso_title">ISO（感光度）锁定</string>
+    <string name="uxsdk_exposure_iso_title">ISO（感光度）</string>
+    <string name="uxsdk_white_balance_title">WB %1$s</string>
+    <string name="uxsdk_white_balance_temp">%1$dK</string>
+</resources>
+
+
+ 

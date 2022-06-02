@@ -82,7 +82,9 @@ public class GimbalControlView extends FrameLayout {
         gimbalMove = findViewById(R.id.gimbal_control_move);
         gimbalArrow = findViewById(R.id.gimbal_control_arrow);
 
-        vibrator = (Vibrator) context.getSystemService(Service.VIBRATOR_SERVICE);
+        if (!isInEditMode()){
+            vibrator = (Vibrator) context.getSystemService(Service.VIBRATOR_SERVICE);
+        }
         isVibrationEnabled = true;
         vibrationDuration = DEFAULT_VIBRATION_DURATION;
     }

@@ -41,6 +41,7 @@ import dji.v5.common.video.channel.VideoChannelType;
 import dji.v5.common.video.stream.PhysicalDevicePosition;
 import dji.v5.common.video.stream.StreamSource;
 import dji.v5.manager.datacenter.MediaDataCenter;
+import dji.v5.utils.common.JsonUtil;
 import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.cameracore.widget.autoexposurelock.AutoExposureLockWidget;
@@ -99,6 +100,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected CameraControlsWidget cameraControlsWidget;
     protected ExposureSettingsPanel exposureSettingsPanel;
     protected PrimaryFlightDisplayWidget pfvFlightDisplayWidget;
+    protected View cameraConfigBackground;
 
     private int widgetHeight;
     private int widgetWidth;
@@ -106,7 +108,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     private int deviceWidth;
     private int deviceHeight;
     private CompositeDisposable compositeDisposable;
-    private final DataProcessor<Boolean> cameraSourceProcessor = DataProcessor.create(false);
+    private final DataProcessor<CameraSource> cameraSourceProcessor = DataProcessor.create(new CameraSource(PhysicalDevicePosition.UNKNOWN, CameraLensType.UNKNOWN));
     //endregion
 
     //region Lifecycle
@@ -154,12 +156,16 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         focusExposureSwitchWidget = findViewById(R.id.widget_focus_exposure_switch);
         exposureSettingsPanel = findViewById(R.id.panel_camera_controls_exposure_settings);
         pfvFlightDisplayWidget = findViewById(R.id.widget_fpv_flight_display_widget);
+        cameraConfigBackground = findViewById(R.id.camera_config_background);
         cameraControlsWidget = findViewById(R.id.widget_camera_controls);
         cameraControlsWidget.getExposureSettingsIndicatorWidget().setStateChangeResourceId(R.id.panel_camera_controls_exposure_settings);
 
         initClickListener();
         MediaDataCenter.getInstance().getVideoStreamManager().addStreamSourcesListener(sources -> runOnUiThread(() -> updateFPVWidgetSource(sources)));
-        primaryFpvWidget.setOnFPVStreamSourceListener(this::onCameraSourceUpdated);
+        primaryFpvWidget.setOnFPVStreamSourceListener((devicePosition, lensType) -> cameraSourceProcessor.onNext(new CameraSource(devicePosition, lensType)));
+        //小surfaceView放置在顶部，避免被大的遮挡
+        secondaryFPVWidget.setSurfaceViewZOrderOnTop(true);
+        secondaryFPVWidget.setSurfaceViewZOrderMediaOverlay(true);
     }
 
     private void initClickListener() {
@@ -196,9 +202,8 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                 }));
         compositeDisposable.add(cameraSourceProcessor.toFlowable()
                 .observeOn(AndroidSchedulers.mainThread())
-                .sample(300, TimeUnit.MILLISECONDS)
-                .subscribe(result -> {
-                })
+                .throttleFirst(100, TimeUnit.MILLISECONDS)
+                .subscribe(result -> onCameraSourceUpdated(result.devicePosition, result.lensType))
         );
     }
 
@@ -225,6 +230,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     }
 
     private void updateFPVWidgetSource(List<StreamSource> streamSources) {
+        LogUtils.i(TAG, JsonUtil.toJson(streamSources));
         if (streamSources == null) {
             return;
         }
@@ -256,14 +262,39 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         cameraConfigWBWidget.updateCameraSource(cameraIndex, lensType);
         cameraConfigStorageWidget.updateCameraSource(cameraIndex, lensType);
         cameraConfigSSDWidget.updateCameraSource(cameraIndex, lensType);
+        cameraConfigApertureWidget.updateCameraSource(cameraIndex, lensType);
         autoExposureLockWidget.updateCameraSource(cameraIndex, lensType);
         focusModeWidget.updateCameraSource(cameraIndex, lensType);
         focusExposureSwitchWidget.updateCameraSource(cameraIndex, lensType);
         cameraControlsWidget.updateCameraSource(cameraIndex, lensType);
         exposureSettingsPanel.updateCameraSource(cameraIndex, lensType);
-        //飞行控件只在fpv图传下显示
-        pfvFlightDisplayWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.VISIBLE : View.GONE);
+        updateViewVisibility(devicePosition);
         updateInteractionEnabled();
+    }
+
+    private void updateViewVisibility(PhysicalDevicePosition devicePosition) {
+        //只在fpv下显示
+        pfvFlightDisplayWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.VISIBLE : View.INVISIBLE);
+
+        //fpv下不显示
+        cameraConfigISOAndEIWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        lensControlWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraConfigShutterWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraConfigEVWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraConfigWBWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraConfigStorageWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraConfigSSDWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraConfigApertureWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        autoExposureLockWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        focusModeWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        focusExposureSwitchWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraControlsWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        cameraConfigBackground.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+
+        //有其他的显示逻辑，这里确保fpv下不显示
+        if (devicePosition == PhysicalDevicePosition.NOSE) {
+            exposureSettingsPanel.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -297,7 +328,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         }
     }
 
-    private void updateInteractionEnabled(){
+    private void updateInteractionEnabled() {
         StreamSource newPrimaryStreamSource = primaryFpvWidget.getStreamSource();
         fpvInteractionWidget.setInteractionEnabled(false);
         if (newPrimaryStreamSource != null) {
@@ -341,5 +372,14 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             view.requestLayout();
         }
     }
-    //endregion
+
+    private static class CameraSource {
+        PhysicalDevicePosition devicePosition;
+        CameraLensType lensType;
+
+        public CameraSource(PhysicalDevicePosition devicePosition, CameraLensType lensType) {
+            this.devicePosition = devicePosition;
+            this.lensType = lensType;
+        }
+    }
 }

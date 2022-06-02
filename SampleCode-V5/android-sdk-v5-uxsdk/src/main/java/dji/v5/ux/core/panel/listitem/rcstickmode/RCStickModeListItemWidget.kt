@@ -25,6 +25,7 @@ package dji.v5.ux.core.panel.listitem.rcstickmode
 
 import android.content.Context
 import android.util.AttributeSet
+import dji.sdk.keyvalue.value.remotecontroller.ControlMode
 import dji.v5.utils.common.LogUtils
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.R
@@ -72,9 +73,9 @@ open class RCStickModeListItemWidget @JvmOverloads constructor(
 
     //region Constructor
     init {
-        mode1ItemIndex = addOptionToGroup(getString(R.string.uxsdk_rc_stick_mode_1))
-        mode2ItemIndex = addOptionToGroup(getString(R.string.uxsdk_rc_stick_mode_2))
-        mode3ItemIndex = addOptionToGroup(getString(R.string.uxsdk_rc_stick_mode_3))
+        mode1ItemIndex = addOptionToGroup(getString(R.string.uxsdk_rc_stick_mode_jp))
+        mode2ItemIndex = addOptionToGroup(getString(R.string.uxsdk_rc_stick_mode_usa))
+        mode3ItemIndex = addOptionToGroup(getString(R.string.uxsdk_rc_stick_mode_ch))
     }
     //endregion
 
@@ -105,16 +106,16 @@ open class RCStickModeListItemWidget @JvmOverloads constructor(
     override fun onOptionTapped(optionIndex: Int, optionLabel: String) {
         val rcStickModeState = when (optionIndex) {
             mode1ItemIndex -> {
-                RCStickModeState.Mode1
+                ControlMode.JP
             }
             mode2ItemIndex -> {
-                RCStickModeState.Mode2
+                ControlMode.USA
             }
             mode3ItemIndex -> {
-                RCStickModeState.Mode3
+                ControlMode.CH
             }
             modeCustomItemIndex -> {
-                RCStickModeState.Custom
+                ControlMode.CUSTOM
             }
             else -> return
         }
@@ -136,15 +137,15 @@ open class RCStickModeListItemWidget @JvmOverloads constructor(
             RCStickModeState.ProductDisconnected -> {
                 isEnabled = false
             }
-            RCStickModeState.Mode1 -> {
+            RCStickModeState.JP -> {
                 isEnabled = true
                 setSelected(mode1ItemIndex)
             }
-            RCStickModeState.Mode2 -> {
+            RCStickModeState.USA -> {
                 isEnabled = true
                 setSelected(mode2ItemIndex)
             }
-            RCStickModeState.Mode3 -> {
+            RCStickModeState.CH -> {
                 isEnabled = true
                 setSelected(mode3ItemIndex)
             }

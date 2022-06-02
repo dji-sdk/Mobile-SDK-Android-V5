@@ -25,6 +25,8 @@ package dji.v5.ux.core.panel.listitem.rcbattery
 
 import android.content.Context
 import android.util.AttributeSet
+import dji.v5.utils.common.JsonUtil
+import dji.v5.utils.common.LogUtils
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.R
 import dji.v5.ux.core.base.DJISDKModel
@@ -42,33 +44,34 @@ import dji.v5.ux.core.panel.listitem.rcbattery.RCBatteryListItemWidgetModel.RCBa
  * Remote controller battery list item
  */
 open class RCBatteryListItemWidget @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ListItemLabelButtonWidget<ModelState>(
-        context,
-        attrs,
-        defStyleAttr,
-        WidgetType.LABEL,
-        R.style.UXSDKRCBatteryListItem
+    context,
+    attrs,
+    defStyleAttr,
+    WidgetType.LABEL,
+    R.style.UXSDKRCBatteryListItem
 ) {
 
     //region Fields
     private val widgetModel by lazy {
         RCBatteryListItemWidgetModel(
-                DJISDKModel.getInstance(),
-                ObservableInMemoryKeyedStore.getInstance())
+            DJISDKModel.getInstance(),
+            ObservableInMemoryKeyedStore.getInstance()
+        )
     }
     //endregion
 
     //region Lifecycle
     override fun reactToModelChanges() {
         addReaction(widgetModel.productConnection
-                .observeOn(SchedulerProvider.ui())
-                .subscribe { widgetStateDataProcessor.onNext(ProductConnected(it)) })
+            .observeOn(SchedulerProvider.ui())
+            .subscribe { widgetStateDataProcessor.onNext(ProductConnected(it)) })
         addReaction(widgetModel.rcBatteryState
-                .observeOn(SchedulerProvider.ui())
-                .subscribe { this.updateUI(it) })
+            .observeOn(SchedulerProvider.ui())
+            .subscribe { this.updateUI(it) })
     }
 
     override fun onAttachedToWindow() {
@@ -100,13 +103,11 @@ open class RCBatteryListItemWidget @JvmOverloads constructor(
             }
             is RCBatteryState.Normal -> {
                 listItemLabelTextColor = normalValueColor
-                listItemLabel = String.format(getString(R.string.uxsdk_rc_battery_percent),
-                        rcBatteryState.remainingChargePercent)
+                listItemLabel = getString(R.string.uxsdk_rc_battery_percent, rcBatteryState.remainingChargePercent)
             }
             is RCBatteryState.Low -> {
                 listItemLabelTextColor = errorValueColor
-                listItemLabel = String.format(getString(R.string.uxsdk_rc_battery_percent),
-                        rcBatteryState.remainingChargePercent)
+                listItemLabel = getString(R.string.uxsdk_rc_battery_percent, rcBatteryState.remainingChargePercent)
             }
         }
     }
@@ -117,9 +118,11 @@ open class RCBatteryListItemWidget @JvmOverloads constructor(
 
 
     override val widgetSizeDescription: WidgetSizeDescription =
-            WidgetSizeDescription(WidgetSizeDescription.SizeType.OTHER,
-                    widthDimension = WidgetSizeDescription.Dimension.EXPAND,
-                    heightDimension = WidgetSizeDescription.Dimension.WRAP)
+        WidgetSizeDescription(
+            WidgetSizeDescription.SizeType.OTHER,
+            widthDimension = WidgetSizeDescription.Dimension.EXPAND,
+            heightDimension = WidgetSizeDescription.Dimension.WRAP
+        )
 
     //endregion
 

@@ -32,6 +32,8 @@ import dji.sdk.keyvalue.value.rtkbasestation.DroneNestRtkPostionType
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKReceiverInfo
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKSatelliteInfo
 import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.common.LocationCoordinate3D
+import dji.sdk.keyvalue.value.rtkbasestation.DroneNestRtkCoordRealtimeMsg
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.functions.Consumer
 import dji.v5.ux.core.base.DJISDKModel
@@ -58,7 +60,7 @@ class GPSSignalWidgetModel(
     private val rtkSatelliteInfoProcessor: DataProcessor<RTKSatelliteInfo> = DataProcessor.create(RTKSatelliteInfo())
     private val redundancySensorUsedStateProcessor: DataProcessor<RedundancySensorUsedStateMsg> = DataProcessor.create(RedundancySensorUsedStateMsg())
     private val satelliteNumberProcessor = DataProcessor.create(0)
-    private val aircraftNestRtkPositionTypeProcessor = DataProcessor.create(DroneNestRtkPostionType.UNKNOWN)
+    private val aircraftNestRtkPositionTypeProcessor = DataProcessor.create(DroneNestRtkCoordRealtimeMsg(LocationCoordinate3D(), DroneNestRtkPostionType.UNKNOWN))
     //endregion
 
     //region Data
@@ -94,7 +96,7 @@ class GPSSignalWidgetModel(
      */
     val isRTKAccurate: Flowable<Boolean>
         get() = aircraftNestRtkPositionTypeProcessor.toFlowable()
-            .concatMap { state: DroneNestRtkPostionType -> Flowable.just(state == DroneNestRtkPostionType.FIXED_POINT) }
+            .concatMap { state: DroneNestRtkCoordRealtimeMsg -> Flowable.just(state.type == DroneNestRtkPostionType.FIXED_POINT) }
 
     //region Lifecycle
     override fun inSetup() {
@@ -113,7 +115,7 @@ class GPSSignalWidgetModel(
         }
         bindDataProcessor(KeyTools.createKey(RtkMobileStationKey.KeyRTKSatelliteInfo), rtkSatelliteInfoProcessor)
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyRedundancySensorUsedState), redundancySensorUsedStateProcessor)
-        bindDataProcessor(KeyTools.createKey(RtkBaseStationKey.KeyDroneNestRtkPostionType), aircraftNestRtkPositionTypeProcessor)
+        bindDataProcessor(KeyTools.createKey(RtkBaseStationKey.KeyDroneNestRtkCoordRealtime), aircraftNestRtkPositionTypeProcessor)
     }
 
     override fun inCleanup() {

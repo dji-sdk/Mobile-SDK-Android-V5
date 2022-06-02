@@ -35,6 +35,7 @@ import dji.v5.ux.core.panel.listitem.flightmode.FlightModeListItemWidget
 import dji.v5.ux.core.panel.listitem.maxaltitude.MaxAltitudeListItemWidget
 import dji.v5.ux.core.panel.listitem.maxflightdistance.MaxFlightDistanceListItemWidget
 import dji.v5.ux.core.panel.listitem.novicemode.NoviceModeListItemWidget
+import dji.v5.ux.core.panel.listitem.obstacleavoidance.ObstacleAvoidanceListItemWidget
 import dji.v5.ux.core.panel.listitem.overview.OverviewListItemWidget
 import dji.v5.ux.core.panel.listitem.rcbattery.RCBatteryListItemWidget
 import dji.v5.ux.core.panel.listitem.rcstickmode.RCStickModeListItemWidget
@@ -51,9 +52,9 @@ private const val TAG = "systemstatuslist"
  * [SmartListModel] to handheld what items should be shown for the [SystemStatusListPanelWidget].
  */
 open class SystemStatusSmartListModel @JvmOverloads constructor(
-        context: Context,
-        private val attrs: AttributeSet? = null,
-        excludedItems: Set<WidgetID>? = null
+    context: Context,
+    private val attrs: AttributeSet? = null,
+    excludedItems: Set<WidgetID>? = null
 ) : SmartListModel(context, attrs, excludedItems) {
 
     //region Default Items
@@ -61,20 +62,19 @@ open class SystemStatusSmartListModel @JvmOverloads constructor(
      * List of [WidgetID] of widgets that are allowed in this list.
      */
     override val registeredWidgetIDList: List<WidgetID> by lazy {
-        listOf(OVERVIEW_STATUS.widgetID,
-                RTH_ALTITUDE.widgetID,
-                MAX_ALTITUDE.widgetID,
-                MAX_FLIGHT_DISTANCE.widgetID,
-                FLIGHT_MODE.widgetID,
-                RC_STICK_MODE.widgetID,
-                RC_BATTERY.widgetID,
-                AIRCRAFT_BATTERY_TEMPERATURE.widgetID,
-                SD_CARD_STATUS.widgetID,
-                EMMC_STATUS.widgetID,
-                SSD_STATUS.widgetID,
-                TRAVEL_MODE.widgetID,
-                NOVICE_MODE.widgetID,
-                UNIT_MODE.widgetID)
+        listOf(
+            OVERVIEW_STATUS.widgetID,
+            RTH_ALTITUDE.widgetID,
+            MAX_ALTITUDE.widgetID,
+            MAX_FLIGHT_DISTANCE.widgetID,
+            FLIGHT_MODE.widgetID,
+            RC_STICK_MODE.widgetID,
+            RC_BATTERY.widgetID,
+            AIRCRAFT_BATTERY_TEMPERATURE.widgetID,
+            TRAVEL_MODE.widgetID,
+            NOVICE_MODE.widgetID,
+            OBSTACLE_AVOIDANCE.widgetID
+        )
     }
 
     /**
@@ -82,9 +82,9 @@ open class SystemStatusSmartListModel @JvmOverloads constructor(
      */
     override val defaultActiveWidgetSet: Set<WidgetID> by lazy {
         registeredWidgetIDList.toSet()
-                .minus(EMMC_STATUS.widgetID)
-                .minus(TRAVEL_MODE.widgetID)
-                .minus(SSD_STATUS.widgetID)
+            .minus(EMMC_STATUS.widgetID)
+            .minus(TRAVEL_MODE.widgetID)
+            .minus(SSD_STATUS.widgetID)
     }
     //endregion
 
@@ -100,25 +100,6 @@ open class SystemStatusSmartListModel @JvmOverloads constructor(
 
     override fun onAircraftModelChanged(model: ProductType) {
         resetSystemStatusListToDefault()
-        when (model) {
-//            ProductType.INSPIRE_1,
-//            ProductType.INSPIRE_1_PRO,
-//            ProductType.INSPIRE_1_RAW -> onLandingGearUpdate(true)
-//            ProductType.INSPIRE_2 -> {
-//                onLandingGearUpdate(true)
-//                onSSDSupported(true)
-//            }
-            ProductType.MAVIC_AIR,
-//            ProductType.MAVIC_2_ZOOM,
-//            ProductType.MAVIC_2_PRO,
-            ProductType.MAVIC_2,
-            ProductType.MAVIC_2_ENTERPRISE,
-//            ProductType.MAVIC_2_ENTERPRISE_DUAL
-            -> onInternalStorageSupported(true)
-            else -> {
-                // Do Nothing 
-            }
-        }
     }
 
     override fun onProductConnectionChanged(isConnected: Boolean) {
@@ -144,6 +125,7 @@ open class SystemStatusSmartListModel @JvmOverloads constructor(
             UNIT_MODE -> UnitModeListItemWidget(context, attrs)
             SSD_STATUS -> SSDStatusListItemWidget(context, attrs)
             NOVICE_MODE -> NoviceModeListItemWidget(context, attrs)
+            OBSTACLE_AVOIDANCE -> ObstacleAvoidanceListItemWidget(context, attrs)
             null -> throw IllegalStateException("The WidgetID ($widgetID) is not recognized.")
         }
     }
@@ -196,68 +178,72 @@ open class SystemStatusSmartListModel @JvmOverloads constructor(
         /**
          * Maps to [RCStickModeListItemWidget].
          */
-        RC_STICK_MODE("rc_stick_mode", 16),
+        RC_STICK_MODE("rc_stick_mode", 2),
 
         /**
          * Maps to [RCBatteryListItemWidget].
          */
-        RC_BATTERY("rc_battery", 32),
+        RC_BATTERY("rc_battery", 3),
 
         /**
          * Maps to [AircraftBatteryTemperatureListItemWidget].
          */
-        AIRCRAFT_BATTERY_TEMPERATURE("aircraft_battery_temperature", 64),
+        AIRCRAFT_BATTERY_TEMPERATURE("aircraft_battery_temperature", 4),
 
         /**
          * Maps to [SDCardStatusListItemWidget].
          */
-        SD_CARD_STATUS("sd_card_status", 128),
+        SD_CARD_STATUS("sd_card_status", 5),
 
         /**
          * Maps to [EMMCStatusListItemWidget].
          */
-        EMMC_STATUS("emmc_status", 256),
+        EMMC_STATUS("emmc_status", 6),
 
         /**
          * Maps to [MaxAltitudeListItemWidget].
          */
-        MAX_ALTITUDE("max_altitude", 512),
+        MAX_ALTITUDE("max_altitude", 7),
 
         /**
          * Maps to [MaxFlightDistanceListItemWidget].
          */
-        MAX_FLIGHT_DISTANCE("max_flight_distance", 1024),
+        MAX_FLIGHT_DISTANCE("max_flight_distance", 8),
 
         /**
          * Maps to [TravelModeListItemWidget].
          */
-        TRAVEL_MODE("travel_mode", 2048),
+        TRAVEL_MODE("travel_mode", 9),
 
         /**
          * Maps to [UnitModeListItemWidget].
          */
-        UNIT_MODE("unit_mode", 4096),
+        UNIT_MODE("unit_mode", 10),
 
         /**
          * Maps to [SSDStatusListItemWidget].
          */
-        SSD_STATUS("ssd_status", 8192),
+        SSD_STATUS("ssd_status", 11),
 
         /**
          * Maps to [NoviceModeListItemWidget].
          */
-        NOVICE_MODE("novice_mode", 16384),
+        NOVICE_MODE("novice_mode", 12),
 
         /**
          * Maps to [OverviewListItemWidget].
          */
-        OVERVIEW_STATUS("overview_status", 32768),
+        OVERVIEW_STATUS("overview_status", 13),
 
         /**
          * Maps to [ReturnToHomeAltitudeListItemWidget].
          */
-        RTH_ALTITUDE("rth_altitude", 65536);
+        RTH_ALTITUDE("rth_altitude", 14),
 
+        /**
+         * Maps to [ObstacleAvoidanceListItemWidget].
+         */
+        OBSTACLE_AVOIDANCE("obstacle_avoidance", 15);
 
         /**
          * Checks if the item is excluded given the flag [excludeItems].
@@ -275,14 +261,14 @@ open class SystemStatusSmartListModel @JvmOverloads constructor(
              */
             @JvmStatic
             fun from(widgetID: WidgetID): SystemStatusListItem? =
-                    values.find { it.widgetID == widgetID }
+                values.find { it.widgetID == widgetID }
 
             /**
              * Create a [SystemStatusListItem] from an int value.
              */
             @JvmStatic
             fun from(value: Int): SystemStatusListItem? =
-                    values.find { it.value == value }
+                values.find { it.value == value }
         }
     }
 }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/network_rtk_button_list"
         android:layout_width="0dp"
@@ -24,12 +26,20 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/btn_set_custom_network_rtk_settings"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_custom_network_rtk_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
                 android:id="@+id/btn_start_custom_network_rtk_service"
                 style="@style/main_fragment_btn"
                 android:text="@string/btn_start_custom_network_rtk_service"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_custom_network_rtk_settings" />
 
             <Button
                 android:id="@+id/btn_stop_custom_network_rtk_service"
@@ -39,19 +49,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_start_custom_network_rtk_service" />
 
-            <Button
-                android:id="@+id/btn_set_custom_network_rtk_settings"
-                style="@style/main_fragment_btn"
-                android:text="@string/btn_set_custom_network_rtk_settings"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_stop_custom_network_rtk_service" />
 
             <Button
                 android:id="@+id/btn_start_qx_network_rtk_service"
                 style="@style/main_fragment_btn"
                 android:text="@string/btn_start_qx_network_rtk_service"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_set_custom_network_rtk_settings" />
@@ -60,31 +62,30 @@
                 android:id="@+id/btn_stop_qx_network_rtk_service"
                 style="@style/main_fragment_btn"
                 android:text="@string/btn_stop_qx_network_rtk_service"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_start_qx_network_rtk_service" />
 
-            <Button
-                android:id="@+id/btn_set_qx_network_rtk_coordinate_system"
-                style="@style/main_fragment_btn"
-                android:visibility="gone"
-                android:text="@string/btn_set_qx_network_rtk_coordinate_system"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_stop_qx_network_rtk_service" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/text_network_rtk_info"
+    <!--加上HorizontalScrollView，错误比较多时，可以横向滚动查看-->
+    <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="rtk"
-        android:textColor="@color/red"
-        android:textSize="11dp"
         app:layout_constraintStart_toEndOf="@+id/network_rtk_button_list"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
+        <TextView
+            android:id="@+id/text_network_rtk_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rtk"
+            android:textColor="@color/red"
+            android:textSize="11dp" />
+
+
+    </HorizontalScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

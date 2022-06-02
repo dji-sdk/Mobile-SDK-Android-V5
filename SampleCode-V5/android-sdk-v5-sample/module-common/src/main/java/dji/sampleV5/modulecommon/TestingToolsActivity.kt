@@ -30,7 +30,7 @@ abstract class TestingToolsActivity : AppCompatActivity() {
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
-        // 设置监听防止系统UI获取焦点后进入到非全屏状态
+        // 设置Listener防止系统UI获取焦点后进入到非全屏状态
         window.decorView.setOnSystemUiVisibilityChangeListener(){
             if (it and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
                 window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or

@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +37,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
     private val baseMainActivityVm: BaseMainActivityVm by viewModels()
     protected val msdkInfoVm: MSDKInfoVm by viewModels()
     private val REQUEST_CODE: Int = 100
+    private val handler:Handler = Handler(Looper.getMainLooper())
 
     abstract fun prepareUxActivity()
 
@@ -94,9 +97,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
             override fun onRegisterSuccess() {
                 ToastUtils.showToast("Register Success")
                 msdkInfoVm.initListener()
-                runOnUiThread {
-                    prepareUxActivity()
-                }
+                handler.postDelayed({ prepareUxActivity() }, 1500)
             }
 
             override fun onRegisterFailure(error: IDJIError?) {

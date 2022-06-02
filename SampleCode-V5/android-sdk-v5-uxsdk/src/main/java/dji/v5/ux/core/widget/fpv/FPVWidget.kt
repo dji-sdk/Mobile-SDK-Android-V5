@@ -25,7 +25,6 @@ package dji.v5.ux.core.widget.fpv
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.SurfaceTexture
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.SurfaceHolder
@@ -38,15 +37,16 @@ import androidx.annotation.FloatRange
 import androidx.annotation.StyleRes
 import androidx.constraintlayout.widget.Guideline
 import androidx.core.content.res.use
-import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.common.video.decoder.DecoderOutputMode
 import dji.v5.common.video.decoder.DecoderState
 import dji.v5.common.video.decoder.VideoDecoder
 import dji.v5.common.video.interfaces.IVideoDecoder
 import dji.v5.common.video.interfaces.StreamDataListener
+import dji.v5.common.video.stream.PhysicalDevicePosition
 import dji.v5.common.video.stream.PhysicalDeviceType
 import dji.v5.common.video.stream.StreamSource
+import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
@@ -63,6 +63,7 @@ import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.core.widget.fpv.FPVWidget.ModelState
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.functions.Consumer
+import kotlin.concurrent.thread
 
 private const val TAG = "FPVWidget"
 private const val ADJUST_ASPECT_RATIO_DELAY = 300
@@ -89,7 +90,6 @@ open class FPVWidget @JvmOverloads constructor(
     private val horizontalOffset: Guideline = findViewById(R.id.horizontal_offset)
     private var fpvStateChangeResourceId: Int = INVALID_RESOURCE
     private var videoDecoder: IVideoDecoder? = null
-    private var holder: SurfaceHolder? = null
 
     private val widgetModel: FPVWidgetModel = FPVWidgetModel(
         DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance(), FlatCameraModule()
@@ -310,13 +310,13 @@ open class FPVWidget @JvmOverloads constructor(
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
-        this.holder = holder
+        LogUtils.i(logTag, "surfaceCreated", videoChannelType, videoDecoder == null)
         if (videoDecoder == null) {
             videoDecoder = VideoDecoder(
                 context,
                 videoChannelType,
                 DecoderOutputMode.SURFACE_MODE,
-                holder
+                fpvSurfaceView.holder,
             )
         } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()
@@ -324,17 +324,17 @@ open class FPVWidget @JvmOverloads constructor(
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
-        this.holder = holder
         if (videoDecoder == null) {
             videoDecoder = VideoDecoder(
                 context,
                 videoChannelType,
                 DecoderOutputMode.SURFACE_MODE,
-                holder
+                fpvSurfaceView.holder,
             )
         } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()
         }
+        LogUtils.i(logTag, "surfaceChanged", videoChannelType, videoDecoder?.videoWidth, videoDecoder?.videoHeight)
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder?) {
@@ -378,6 +378,14 @@ open class FPVWidget @JvmOverloads constructor(
 
     fun setOnFPVStreamSourceListener(listener: FPVStreamSourceListener) {
         widgetModel.streamSourceListener = listener
+    }
+
+    fun setSurfaceViewZOrderOnTop(onTop:Boolean){
+        fpvSurfaceView.setZOrderOnTop(onTop)
+    }
+
+    fun setSurfaceViewZOrderMediaOverlay(isMediaOverlay:Boolean){
+        fpvSurfaceView.setZOrderMediaOverlay(isMediaOverlay)
     }
 
     //endregion
@@ -456,7 +464,7 @@ open class FPVWidget @JvmOverloads constructor(
 
     private fun updateGridLineVisibility() {
         gridLineView.visibility = if (isGridLinesEnabled
-            && widgetModel.streamSource?.physicalDeviceType == PhysicalDeviceType.FPV) View.VISIBLE else View.GONE
+            && widgetModel.streamSource?.physicalDevicePosition == PhysicalDevicePosition.NOSE) View.VISIBLE else View.GONE
     }
     //endregion
 
@@ -485,7 +493,7 @@ open class FPVWidget @JvmOverloads constructor(
             if (!isInEditMode) {
                 typedArray.getIntegerAndUse(R.styleable.FPVWidget_uxsdk_videoChannelType) {
                     videoChannelType = (VideoChannelType.find(it))
-                    widgetModel.updateStreamSource()
+                    widgetModel.initStreamSource()
                 }
                 typedArray.getBooleanAndUse(R.styleable.FPVWidget_uxsdk_gridLinesEnabled, true) {
                     isGridLinesEnabled = it

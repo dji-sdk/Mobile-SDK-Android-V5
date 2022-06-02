@@ -21,17 +21,16 @@ import dji.v5.utils.common.LogUtils
  *
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
-class RtkStationScanAdapter(val context:Context,list: List<DJIRTKBaseStationConnectInfo>?) :
+class RtkStationScanAdapter(val context: Context, list: List<DJIRTKBaseStationConnectInfo>?) :
     RecyclerView.Adapter<RtkStationScanAdapter.RtkViewHolder>() {
 
-   private val LEVEL_0 = 0
-   private val LEVEL_1 = 1
-   private val LEVEL_2 = 2
-   private val LEVEL_3 = 3
-   private val LEVEL_4 = 4
-   private  var baseStationInfoList: List<DJIRTKBaseStationConnectInfo>? = list
-    private val TAG="RtkStationScanAdapter"
-
+    private val LEVEL_0 = 0
+    private val LEVEL_1 = 1
+    private val LEVEL_2 = 2
+    private val LEVEL_3 = 3
+    private val LEVEL_4 = 4
+    private var baseStationInfoList: List<DJIRTKBaseStationConnectInfo>? = list
+    private val TAG = "RtkStationScanAdapter"
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RtkViewHolder {
@@ -45,11 +44,15 @@ class RtkStationScanAdapter(val context:Context,list: List<DJIRTKBaseStationConn
             holder.mRtkStationNameTv.text = info.rtkStationName
             holder.mConnectSignalIv.setBackgroundResource(getSignalLevelDrawable(info.signalLevel))
             holder.itemView.setOnClickListener {
-                if (!checkConnecting()) {//上一笔连接还没结束的话则不响应新的连接请求
-                    val pos = holder.layoutPosition
+                val pos = holder.layoutPosition
+                val isConnecting = checkConnecting()
+                val hasConnected = checkConnected(pos)
+                if (!isConnecting && !hasConnected) {//上一笔连接还没结束或者基站已连接则不响应新的连接请求
                     mOnItemClickListener?.onItemClick(holder.itemView, pos)
+                } else if (checkConnecting()) {
+                    ToastUtils.showToast("The station is currently connecting, please try to connect later！")
                 } else {
-                    ToastUtils.showToast("The base station is currently connecting, please try to connect later！")
+                    ToastUtils.showToast("The station has connected!")
                 }
             }
             when (info.connectStatus) {
@@ -92,7 +95,7 @@ class RtkStationScanAdapter(val context:Context,list: List<DJIRTKBaseStationConn
 
     @DrawableRes
     fun getSignalLevelDrawable(signalLevel: Int): Int {
-        LogUtils.d(TAG,"getSignalLevelDrawable,signalLevel=$signalLevel")
+        LogUtils.d(TAG, "getSignalLevelDrawable,signalLevel=$signalLevel")
         return when (signalLevel) {
             LEVEL_0 -> R.drawable.ic_topbar_signal_level_0
             LEVEL_1 -> R.drawable.ic_topbar_signal_level_1
@@ -129,13 +132,22 @@ class RtkStationScanAdapter(val context:Context,list: List<DJIRTKBaseStationConn
         baseStationInfoList?.let {
             for (station in it) {
                 if (station.connectStatus == RTKStationConnetState.CONNECTING) {
-                    return@let true
+                    return true
                 }
             }
-            return@let false
+            return false
         }
         return false
     }
 
-
+    private fun checkConnected(position: Int): Boolean {
+        baseStationInfoList?.run {
+            val stationInfo = get(position)
+            if (stationInfo.connectStatus == RTKStationConnetState.CONNECTED) {
+                return true
+            }
+            return false
+        }
+        return false
+    }
 }

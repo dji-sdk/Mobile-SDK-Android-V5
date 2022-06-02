@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018-2020 DJI
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,7 +26,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:parentTag="dji.ux.beta.accessory.widget.rtk.RTKEnabledWidget">
+    tools:background="@android:color/background_dark"
+    tools:parentTag="dji.v5.ux.accessory.RTKEnabledWidget">
 
     <TextView
         android:id="@+id/textview_rtk_title"

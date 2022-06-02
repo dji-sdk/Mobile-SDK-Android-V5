@@ -21,8 +21,6 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-
-import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
 
 public class ScrollableAttributeDashBoard extends View {
@@ -685,7 +683,7 @@ public class ScrollableAttributeDashBoard extends View {
     }
 
     private void drawWaypointAttr(Canvas canvas) {
-        LogUtils.d(LogUtils.getTag(this), "drawWaypointAttr");
+//        LogUtils.d(LogUtils.getTag(this), "drawWaypointAttr");
     }
 
     protected String getCurrentValueDisplayFormat() {

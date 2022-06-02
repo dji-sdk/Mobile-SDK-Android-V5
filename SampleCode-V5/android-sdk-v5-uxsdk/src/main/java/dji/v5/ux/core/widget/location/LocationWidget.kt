@@ -97,9 +97,7 @@ open class LocationWidget @JvmOverloads constructor(
     private fun updateUI(locationState: LocationState) {
         widgetStateDataProcessor.onNext(LocationStateUpdated(locationState))
         valueString = if (locationState is LocationState.CurrentLocation) {
-            String.format(getString(R.string.uxsdk_location_coordinates),
-                    metricDecimalFormat.format(locationState.latitude).toString(),
-                    metricDecimalFormat.format(locationState.longitude).toString())
+            getString(R.string.uxsdk_location_coordinates, metricDecimalFormat.format(locationState.latitude).toString(), metricDecimalFormat.format(locationState.longitude).toString())
         } else {
             getString(R.string.uxsdk_location_default)
         }

@@ -25,6 +25,7 @@ package dji.v5.ux.core.base;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import dji.sdk.keyvalue.key.DJIKey;
 import dji.v5.common.callback.CommonCallbacks;
 import dji.v5.common.error.IDJIError;
@@ -37,6 +38,7 @@ import io.reactivex.rxjava3.core.FlowableEmitter;
 import io.reactivex.rxjava3.core.FlowableOnSubscribe;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleOnSubscribe;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 /**
  * Encapsulates communication with SDK KeyManager for SDKKeys.
@@ -44,11 +46,14 @@ import io.reactivex.rxjava3.core.SingleOnSubscribe;
 public class DJISDKModel {
 
     //region Fields
-    private static final String TAG = LogUtils.getTag("DJISDKModel");
+    private final String TAG = LogUtils.getTag(this);
     private static final int MAX_COMPONENT_INDEX = 10;
     //endregion
 
     private DJISDKModel() {
+        //设置所有RX的全局Error代理，为了避免某些Widget不设置errorConsumer而导致crash。
+        // 如果某个Widget有添加特定的error，则调用特定的error；否则调用全局的error
+        RxJavaPlugins.setErrorHandler(throwable -> LogUtils.e(TAG, throwable.getMessage()));
     }
 
     public static DJISDKModel getInstance() {
@@ -86,18 +91,19 @@ public class DJISDKModel {
      */
     @NonNull
     public <T> Single<T> getValue(@NonNull final DJIKey<T> key) {
-        return Single.create((SingleOnSubscribe<T>) emitter -> KeyManager.getInstance().getValue(key, new CommonCallbacks.CompletionCallbackWithParam<T>() {
-            @Override
-            public void onSuccess(@NonNull T value) {
-                LogUtils.d(TAG, "Got current value for  key " + key.toString());
-                emitter.onSuccess(value);
-            }
+        return Single.create((SingleOnSubscribe<T>) emitter -> KeyManager.getInstance().getValue(key,
+                new CommonCallbacks.CompletionCallbackWithParam<T>() {
+                    @Override
+                    public void onSuccess(@NonNull T value) {
+                        LogUtils.d(TAG, "Got current value for  key " + key.toString());
+                        emitter.onSuccess(value);
+                    }
 
-            @Override
-            public void onFailure(@NonNull IDJIError djiError) {
-                LogUtils.e(TAG, "Failure getting key " + key.toString() + ". " + djiError.toString());
-            }
-        })).subscribeOn(SchedulerProvider.computation());
+                    @Override
+                    public void onFailure(@NonNull IDJIError djiError) {
+                        LogUtils.d(TAG, "Failure getting key " + key.toString() + ". " + djiError.toString());
+                    }
+                })).subscribeOn(SchedulerProvider.computation());
     }
 
     /**
@@ -130,8 +136,8 @@ public class DJISDKModel {
 
                             @Override
                             public void onFailure(@NonNull IDJIError djiError) {
-                                LogUtils.e("setValue", key, value, djiError);
-                                //emitter.onError(new UXSDKError(djiError));
+                                LogUtils.e(TAG, key, value, djiError);
+                                emitter.onError(new UXSDKError(djiError));
                             }
                         }
                 )).subscribeOn(SchedulerProvider.computation());
@@ -145,24 +151,26 @@ public class DJISDKModel {
      * @return A completable indicating success/error performing the action.
      */
     @NonNull
-    public <Param, Result> Completable performAction(@NonNull final DJIKey.ActionKey<Param, Result> key, final Param argument) {
-        return Completable.create(emitter -> KeyManager.getInstance().performAction(key, argument, new CommonCallbacks.CompletionCallbackWithParam<Result>() {
-            @Override
-            public void onSuccess(@NonNull Object o) {
-                emitter.onComplete();
-            }
+    public <Param, Result> Completable performAction(@NonNull final DJIKey.ActionKey<Param, Result> key,
+                                                     final Param argument) {
+        return Completable.create(emitter -> KeyManager.getInstance().performAction(key, argument,
+                new CommonCallbacks.CompletionCallbackWithParam<Result>() {
+                    @Override
+                    public void onSuccess(@NonNull Object o) {
+                        emitter.onComplete();
+                    }
 
-            @Override
-            public void onFailure(@NonNull IDJIError djiError) {
-                LogUtils.e(TAG, "Failure performing action key " + key.toString() + ". " + djiError.toString());
-                //emitter.onError(new UXSDKError(djiError));
-            }
-        })).subscribeOn(SchedulerProvider.computation());
+                    @Override
+                    public void onFailure(@NonNull IDJIError djiError) {
+                        LogUtils.e(TAG, "Failure performing action key " + key.toString() + ". " + djiError.toString());
+                        //emitter.onError(new UXSDKError(djiError));
+                    }
+                })).subscribeOn(SchedulerProvider.computation());
     }
 
     @NonNull
     public <Param, Result> Completable performAction(@NonNull final DJIKey.ActionKey<Param, Result> key) {
-        return performAction(key,null);
+        return performAction(key, null);
     }
 
     /**
@@ -178,20 +186,13 @@ public class DJISDKModel {
     private <T> void registerKey(@NonNull final FlowableEmitter<T> emitter,
                                  @NonNull final DJIKey<T> key,
                                  @NonNull final Object listener) {
-        // Get current value
-        KeyManager.getInstance().getValue(key, new CommonCallbacks.CompletionCallbackWithParam<T>() {
-            @Override
-            public void onSuccess(@NonNull T value) {
-                //LogUtil.DjiLog( "Got current value for  key " + key.toString());
-                emitter.onNext(value);
-            }
+        // Get current value.这里改为采用同步方式获取值，一是避免异步带来的执行时机不确定；二是listen内部也会通过异常的形式获取一次最新值
+        T value = KeyManager.getInstance().getValue(key);
+        if (value != null) {
+            emitter.onNext((T) value);
+            LogUtils.d(TAG, "Got current value for  key ", ":", value);
+        }
 
-            @Override
-            public void onFailure(@NonNull IDJIError djiError) {
-                //LogUtil.DjiLog("Failure getting key " + key.toString() + ". " + djiError.getDescription());
-                //emitter.onError(new Throwable(key + " " + djiError.toString()));
-            }
-        });
 
         // Start listening to changes
         CommonCallbacks.KeyListener<T> keyListener = (oldValue, newValue) -> {

@@ -68,7 +68,7 @@
 
     <string name="btn_start_custom_network_rtk_service">Start Custom NetWork RTK</string>
     <string name="btn_stop_custom_network_rtk_service">Stop Custom NetWork RTK</string>
-    <string name="btn_set_custom_network_rtk_settings">Set Custom NetWork RTK Settings</string>
+    <string name="btn_set_custom_network_rtk_settings">Set custom network RTK account information</string>
     <string name="btn_start_qx_network_rtk_service">Start QX NetWork RTK</string>
     <string name="btn_stop_qx_network_rtk_service">Stop QX NetWork RTK</string>
     <string name="btn_set_qx_network_rtk_coordinate_system">Set QX NetWork RTK Coordinate System</string>
@@ -113,6 +113,7 @@
     <string name="btn_file_list">File List</string>
     <string name="upload_status">Upload Status</string>
     <string name="record_btn_title">Click To Start Record</string>
+    <string name="quick_play">Quick Play</string>
     <string name="btn_send_tts_data">Send TTS</string>
     <string name="title_megaphone">Megaphone</string>
     <string name="megaphone_state">Megaphone State</string>
@@ -165,6 +166,8 @@
     <string name="tv_station_battery_temperature">Station Battery Temperature: </string>
     <string name="tv_station_battery_voltage">Station Battery Voltage: </string>
     <string name="tv_station_battery_capacity_percent">Station Battery Capacity Percent: </string>
+    <string name="tv_station_list_tip">Please click the list below for base station connection</string>
+
 
     <!-- RTK Center   <-->
     <string name="item_trk_center_title">RTK Center</string>
@@ -179,9 +182,16 @@
     <string name="btn_rtk_source_network">Custom Network RTK</string>
     <string name="btn_rtk_source_qx">Chihiro RTK</string>
     <string name="btn_rtk_source_base_rtk">D-RTK2</string>
-    <string name="bt_open_network_rtk">Open custom network RTK</string>
+    <string name="bt_open_network_rtk">Open  network RTK </string>
     <string name="bt_open_rtk_station">Open D-RTK2</string>
-    <string name="tv_rtk_location_hint">4.RTKLocationInfo information display</string>
+    <string name="tv_rtk_precision_preservation_hint">4.When the communication of the RTK module is abnormal, the current RTK state will be automatically maintained, but the accuracy will gradually decrease. If the connection is not reconnected for more than 10 minutes, the RTK will be automatically exited</string>
+    <string name="bt_turn_on_rtk_precision_preservation">Turn on RTK precision preservation</string>
+    <string name="bt_turn_off_rtk_precision_preservation">Turn off RTK precision preservation</string>
+    <string name="tv_rtk_precision_preservation_open_status">5.RTK precision remains on:</string>
+    <string name="tv_rtk_precision_preservation_turn_on">RTK precision hold is on:</string>
+    <string name="tv_rtk_precision_preservation_turn_off">RTK precision remains on:</string>
+
+    <string name="tv_rtk_location_hint">6.RTKLocationInfo information display</string>
     <string name="tv_rtk_location">The positioning strategy of RTK module：</string>
     <string name="tv_rtk_station_position">The location of the ground-side RTK Station：</string>
     <string name="tv_rtk_mobile_position">UAV position calculated by RTK module：</string>
@@ -190,13 +200,23 @@
     <string name="tv_rtk_head">UAV orientation data calculated by RTK module：</string>
     <string name="tv_rtk_real_head">The orientation data of the UAV calculated by the flight control fusion algorithm：</string>
     <string name="tv_rtk_real_location">The position data of the UAV calculated by the flight control fusion algorithm：</string>
-    <string name="tv_rtk_systemState_info_hint">5. RTKSystemState information display: </string>
+    <string name="tv_rtk_systemState_info_hint">7. RTKSystemState information display: </string>
     <string name="tv_rtk_connect">Flight controller and fuselage RTK connection status: </string>
     <string name="tv_rtk_healthy">RTK module data health status：</string>
     <string name="tv_rtk_error">RTK module error message: </string>
     <string name="tv_rtk_antenna_1">The number of satellites searched by the antenna 1 of the UAV RTK module：</string>
     <string name="tv_rtk_antenna_2">The number of satellites searched by the antenna 2 of the UAV RTK module：</string>
     <string name="tv_rtk_station">The number of satellites searched by the RTK: </string>
+
+    <!--Login-->
+    <string name="btn_login_account">Login account </string>
+    <string name="btn_logout_account">Logout account</string>
+    <string name="btn_get_login_info">Get logged info </string>
+    <string name="tv_login_state">Current login status: </string>
+    <string name="tv_login_account">Current login account: </string>
+    <string name="tv_login_error">Login error: </string>
+    <string name="item_login_account_title">Login Account </string>
+    <string name="item_login_account_description">Demonstrate DJI account login related functions</string>
 
 
     <!-- key Type-->
@@ -244,6 +264,11 @@
     <string name="commonlyused_key">Commonly Used Key</string>
     <string name="key_value_set">Set </string>
 
+    <!-- Log Info -->
+    <string name="btn_get_latest_log_info">Update Crash Log Info</string>
+    <string name="item_log_info_title">Crash Log Info </string>
+    <string name="item_log_info_description">Demonstrate Crash Log Info functions</string>
+
     <!-- Live Stream -->
     <string name="btn_get_live_stream_config">Get Live Stream Config</string>
     <string name="btn_set_live_stream_config">Set Live Stream Config</string>
@@ -274,10 +299,15 @@
     <string name="ad_cancel">Cancel</string>
 
 
-
     <string name="msg_start_live_stream_success">Start Live Stream Success!</string>
     <string name="msg_start_live_stream_failed">Start Live Stream Failed: %1$s</string>
     <string name="msg_stop_live_stream_success">Stop Live Stream Success!</string>
     <string name="msg_stop_live_stream_failed">Stop Live Stream Failed: %1$s</string>
     <string name="index_tips">index:represent the position of the load is generally 0 \n subType:represent lens ,0 = zoom ,1 = wide , 2 = ir \n subIndex:currently only the battery box is used to indicate the location of the next level gadgets</string>
+
+    <string name="item_media_playback_title">Media Playback</string>
+    <string name="item_media_playback_description">Demonstrate how to use the media playback function</string>
+
+    <string name="msg_download_compelete_tips">Download compelete ,average download speed</string>
+    <string name="msg_download_save_tips">File is saved in</string>
 </resources>

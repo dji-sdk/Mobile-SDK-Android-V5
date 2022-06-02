@@ -215,11 +215,11 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         mMarkerLayer.onStart();
         mPerceptionLayer.onStart();
 
-        mCompositeDisposable.add(widgetModel.radarConnectionProcessor.toFlowable().subscribe(aBoolean -> {
+        mCompositeDisposable.add(widgetModel.getRadarConnectionProcessor().toFlowable().subscribe(aBoolean -> {
             mIsRadarConnected = aBoolean;
             updateWidget();
         }));
-        mCompositeDisposable.add(widgetModel.radarHorizontalObstacleAvoidanceEnabledProcessor.toFlowable().subscribe(aBoolean -> {
+        mCompositeDisposable.add(widgetModel.getRadarHorizontalObstacleAvoidanceEnabledProcessor().toFlowable().subscribe(aBoolean -> {
             mIsRadarAvailable = aBoolean;
             updateWidget();
         }));
@@ -233,14 +233,14 @@ public class HSIView extends View implements HSIContract.HSIContainer {
                     updateWidget();
                 });
 
-        mCompositeDisposable.add(widgetModel.velocityProcessor.toFlowable().subscribe(velocity3D -> {
+        mCompositeDisposable.add(widgetModel.getVelocityProcessor().toFlowable().subscribe(velocity3D -> {
             mSpeedX = velocity3D.getX().floatValue();
             mSpeedY = velocity3D.getY().floatValue();
             mSpeedZ = velocity3D.getZ().floatValue();
             recalculateAndInvalidate();
         }));
 
-        mCompositeDisposable.add(widgetModel.aircraftAttitudeProcessor.toFlowable().subscribe(attitude -> {
+        mCompositeDisposable.add(widgetModel.getAircraftAttitudeProcessor().toFlowable().subscribe(attitude -> {
             mYaw = attitude.getYaw().floatValue();
             mCurrentDegree = mYaw + (mYaw < 0 ? 359f : 0);
             mRoll = attitude.getRoll().floatValue();
@@ -251,9 +251,9 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         mCompositeDisposable.add(Flowable.fromArray(new Integer[]{0, 1, 2})
                 .flatMap(index -> Flowable.combineLatest(
                         //云台连接状态
-                        widgetModel.gimbalConnectionProcessorList.get(index).toFlowable(),
+                        widgetModel.getGimbalConnectionProcessorList().get(index).toFlowable(),
                         //云台相对机身的Yaw夹角
-                        widgetModel.gimbalAttitudeInDegreesProcessorList.get(index).toFlowable(),
+                        widgetModel.getGimbalAttitudeInDegreesProcessorList().get(index).toFlowable(),
 
                         ((isConnected, attitude) -> {
                             mGimbalConnected[index] = isConnected;

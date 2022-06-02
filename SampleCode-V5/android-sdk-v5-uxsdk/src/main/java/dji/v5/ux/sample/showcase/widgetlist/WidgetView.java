@@ -86,7 +86,7 @@ public class WidgetView extends ConstraintLayout {
         containerView = findViewById(R.id.widget_container);
         aspectRatioTextView = findViewById(R.id.textview_aspect_ratio);
         currentSizeTextView = findViewById(R.id.textview_current_size);
-        findViewById(R.id.textview_current_size).setOnTouchListener((v, event) -> {
+        findViewById(R.id.widget_container).setOnTouchListener((v, event) -> {
             scaleGestureDetector.onTouchEvent(event);
             return true;
         });

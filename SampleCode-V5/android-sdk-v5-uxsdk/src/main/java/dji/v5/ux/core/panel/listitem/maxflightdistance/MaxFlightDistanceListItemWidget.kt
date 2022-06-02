@@ -173,13 +173,9 @@ open class MaxFlightDistanceListItemWidget @JvmOverloads constructor(
         listItemEditTextVisibility = true
         listItemButtonVisibility = true
         listItemHint = if (maxFlightDistanceState.unitType == UnitType.METRIC) {
-            String.format(getString(R.string.uxsdk_altitude_range_meters),
-                    maxFlightDistanceState.minDistanceLimit,
-                    maxFlightDistanceState.maxDistanceLimit)
+            getString(R.string.uxsdk_altitude_range_meters, maxFlightDistanceState.minDistanceLimit, maxFlightDistanceState.maxDistanceLimit)
         } else {
-            String.format(getString(R.string.uxsdk_altitude_range_feet),
-                    maxFlightDistanceState.minDistanceLimit,
-                    maxFlightDistanceState.maxDistanceLimit)
+            getString(R.string.uxsdk_altitude_range_feet, maxFlightDistanceState.minDistanceLimit, maxFlightDistanceState.maxDistanceLimit)
         }
         listItemEditTextValue = maxFlightDistanceState.flightDistanceLimit.toString()
         listItemEditTextColor = editTextNormalColor

@@ -36,6 +36,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
     private lateinit var dialog: AlertDialog
     private lateinit var configDialog: AlertDialog
     private var checkedItem: Int = -1
+    private var isConfigSelected = false
     private var liveStreamType:LiveStreamType = LiveStreamType.UNKNOWN
     private var liveStreamChannelType:VideoChannelType = VideoChannelType.PRIMARY_STREAM_CHANNEL
     private var liveStreamBitrateMode:LiveVideoBitrateMode = LiveVideoBitrateMode.AUTO
@@ -479,8 +480,22 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                 .setView(editText)
                 .setPositiveButton(R.string.ad_confirm) { dialog, _ ->
                     kotlin.run {
-                        val inputValue = editText.text.toString().toInt()
-                        liveStreamVM.setLiveVideoBitRate(inputValue)
+                        var inputValue = -1
+                        try {
+                            editText.text?.let {
+                                inputValue = it.toString().toInt()
+                            } ?: let {
+                                inputValue = -1
+                            }
+                        } catch (e: Exception) {
+                            inputValue = -1
+                        }
+
+                        if (inputValue == -1) {
+                            ToastUtils.showToast("input is invalid")
+                        } else {
+                            liveStreamVM.setLiveVideoBitRate(inputValue)
+                        }
                         dialog.dismiss()
                     }
                 }
@@ -647,6 +662,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         .setCancelable(false)
                         .setSingleChoiceItems(items, checkedItem) { _, i ->
                             checkedItem = i
+                            isConfigSelected = true
                             ToastUtils.showToast(
                                 it,
                                 "选择的直播类型为： " + (items[i] ?: "直播类型为null"),
@@ -654,14 +670,18 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         }
                         .setPositiveButton("确认") { dialog, _ ->
                             kotlin.run {
-                                liveStreamType = liveStreamTypes[checkedItem]
-                                setLiveStreamConfig(liveStreamType)
+                                if(isConfigSelected){
+                                    liveStreamType = liveStreamTypes[checkedItem]
+                                    setLiveStreamConfig(liveStreamType)
+                                }
                                 dialog.dismiss()
+                                isConfigSelected = false
                             }
                         }
                         .setNegativeButton("取消") { dialog, _ ->
                             kotlin.run {
                                 dialog.dismiss()
+                                isConfigSelected = false
                             }
                         }
                         .create()

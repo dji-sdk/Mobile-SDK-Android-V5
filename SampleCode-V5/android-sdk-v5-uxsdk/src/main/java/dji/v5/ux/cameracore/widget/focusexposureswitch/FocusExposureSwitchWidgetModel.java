@@ -111,12 +111,12 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
 
     @Override
     protected void onProductConnectionChanged(boolean isConnected) {
-        super.onProductConnectionChanged(isConnected);
-        if (isConnected) {
-            isFocusModeSupportedDataProcessor.onNext(djiSdkModel.isKeySupported(KeyTools.createCameraKey(CameraKey.KeyCameraFocusMode,cameraIndex, lensType)));
-        } else {
-            isFocusModeSupportedDataProcessor.onNext(false);
-        }
+//        super.onProductConnectionChanged(isConnected);
+//        if (isConnected) {
+//            isFocusModeSupportedDataProcessor.onNext(djiSdkModel.isKeySupported(KeyTools.createCameraKey(CameraKey.KeyCameraFocusMode,cameraIndex, lensType)));
+//        } else {
+//            isFocusModeSupportedDataProcessor.onNext(false);
+//        }
     }
     //endregion
 

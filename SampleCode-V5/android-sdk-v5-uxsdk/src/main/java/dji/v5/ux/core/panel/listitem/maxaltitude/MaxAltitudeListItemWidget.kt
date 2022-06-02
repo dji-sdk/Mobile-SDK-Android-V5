@@ -157,35 +157,23 @@ open class MaxAltitudeListItemWidget @JvmOverloads constructor(
         val currentValue = listItemEditTextValue?.toIntOrNull()
         if (currentValue != null
             && widgetModel.isInputInRange(currentValue)) {
-            addDisposable(widgetModel.maxAltitudeState.firstOrError()
-                .observeOn(SchedulerProvider.ui())
-                .subscribe({
-                    if (it is MaxAltitudeState.MaxAltitudeValue) {
-                        when {
-                            isOverAlarmLimit(currentValue, it.unitType) -> {
-                                val dialogDismissListener = DialogInterface.OnDismissListener {
-                                    uiUpdateStateProcessor.onNext(DialogDismissed(FlightLimitNeededError))
+            addDisposable(
+                widgetModel.maxAltitudeState.firstOrError()
+                    .observeOn(SchedulerProvider.ui())
+                    .subscribe({
+                        if (it is MaxAltitudeState.MaxAltitudeValue) {
+                            when {
+                                isOverAlarmLimit(currentValue, it.unitType) -> {
+                                    showOverAlarmLimitDialog(currentValue, it.returnToHomeHeight, it.unitType)
                                 }
-                                showAlertDialog(
-                                    dialogTheme = dialogTheme,
-                                    title = getString(R.string.uxsdk_list_item_max_flight_altitude),
-                                    icon = errorDialogIcon,
-                                    message = getString(R.string.uxsdk_limit_required_error),
-                                    dialogDismissListener = dialogDismissListener
-                                )
-                                uiUpdateStateProcessor.onNext(DialogDisplayed(FlightLimitNeededError))
-                                resetToDefaultValue()
-                                showOverAlarmLimitDialog(currentValue, it.returnToHomeHeight, it.unitType)
-
-                            }
-                            else -> {
-                                verifyReturnHomeAltitudeValue(currentValue, it.returnToHomeHeight, it.unitType)
+                                else -> {
+                                    verifyReturnHomeAltitudeValue(currentValue, it.returnToHomeHeight, it.unitType)
+                                }
                             }
                         }
-                    }
-                }, {
-                    LogUtils.d(TAG, it.message)
-                })
+                    }, {
+                        LogUtils.d(TAG, it.message)
+                    })
             )
 
         } else {
@@ -209,18 +197,9 @@ open class MaxAltitudeListItemWidget @JvmOverloads constructor(
         listItemEditTextVisibility = true
         listItemHintVisibility = true
         listItemHint = if (maxAltitudeListItemState.unitType == UnitType.METRIC) {
-            String.format(
-                getString(R.string.uxsdk_altitude_range_meters),
-                maxAltitudeListItemState.minAltitudeLimit,
-                maxAltitudeListItemState.maxAltitudeLimit
-            )
+            getString(R.string.uxsdk_altitude_range_meters, maxAltitudeListItemState.minAltitudeLimit, maxAltitudeListItemState.maxAltitudeLimit)
         } else {
-            String.format(
-                getString(R.string.uxsdk_altitude_range_feet),
-                maxAltitudeListItemState.minAltitudeLimit,
-                maxAltitudeListItemState.maxAltitudeLimit
-            )
-
+            getString(R.string.uxsdk_altitude_range_feet, maxAltitudeListItemState.minAltitudeLimit, maxAltitudeListItemState.maxAltitudeLimit)
         }
         listItemEditTextValue = maxAltitudeListItemState.altitudeLimit.toString()
         isEnabled = true
@@ -322,10 +301,7 @@ open class MaxAltitudeListItemWidget @JvmOverloads constructor(
                 dialogTheme = dialogTheme,
                 icon = confirmationDialogIcon,
                 title = getString(R.string.uxsdk_list_item_max_flight_altitude),
-                message = String.format(
-                    getString(R.string.uxsdk_limit_return_home_warning),
-                    imperialHeight, metricHeight
-                ),
+                message = getString(R.string.uxsdk_limit_return_home_warning, imperialHeight, metricHeight),
                 dialogClickListener = dialogListener,
                 dialogDismissListener = dialogDismissListener
             )
@@ -337,29 +313,31 @@ open class MaxAltitudeListItemWidget @JvmOverloads constructor(
     }
 
     private fun setMaxAltitudeValue(currentValue: Int) {
-        addDisposable(widgetModel.setFlightMaxAltitude(currentValue)
-            .observeOn(SchedulerProvider.ui())
-            .subscribe({
-                showToast(getString(R.string.uxsdk_success))
-                widgetStateDataProcessor.onNext(ModelState.SetMaxAltitudeSucceeded)
-            }, { error ->
-                resetToDefaultValue()
-                if (error is UXSDKError) {
-                    showToast(error.djiError.description())
-                    widgetStateDataProcessor.onNext(ModelState.SetMaxAltitudeFailed(error))
-                }
-            })
+        addDisposable(
+            widgetModel.setFlightMaxAltitude(currentValue)
+                .observeOn(SchedulerProvider.ui())
+                .subscribe({
+                    showToast(getString(R.string.uxsdk_success))
+                    widgetStateDataProcessor.onNext(ModelState.SetMaxAltitudeSucceeded)
+                }, { error ->
+                    resetToDefaultValue()
+                    if (error is UXSDKError) {
+                        showToast(error.djiError.description())
+                        widgetStateDataProcessor.onNext(ModelState.SetMaxAltitudeFailed(error))
+                    }
+                })
         )
     }
 
     private fun resetToDefaultValue() {
-        addDisposable(widgetModel.maxAltitudeState.firstOrError()
-            .observeOn(SchedulerProvider.ui())
-            .subscribe({
-                updateUI(it)
-            }, {
-                LogUtils.e(TAG, it.message)
-            })
+        addDisposable(
+            widgetModel.maxAltitudeState.firstOrError()
+                .observeOn(SchedulerProvider.ui())
+                .subscribe({
+                    updateUI(it)
+                }, {
+                    LogUtils.e(TAG, it.message)
+                })
         )
     }
     //endregion

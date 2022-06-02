@@ -2,7 +2,7 @@ package dji.sampleV5.moduleaircraft.models
 
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
-import dji.sampleV5.moduleaircraft.data.DJIBaseResult
+import dji.sampleV5.modulecommon.data.DJIBaseResult
 import dji.sampleV5.moduleaircraft.data.DJIRTKBaseStationConnectInfo
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D
 import dji.sdk.keyvalue.value.rtkbasestation.RTKBaseStationResetPasswordInfo
@@ -128,9 +128,11 @@ class RTKStationVM : DJIViewModel() {
     fun addConnectedRTKStationInfoListener() {
         rtkStationManager.addConnectedRTKStationInfoListener(connectedRTKStationInfoListener)
     }
+
     fun removeConnectedRTKStationInfoListener() {
         rtkStationManager.removeConnectedRTKStationInfoListener(connectedRTKStationInfoListener)
     }
+
     fun clearAllConnectedRTKStationInfoListener() {
         rtkStationManager.clearAllConnectedRTKStationInfoListener()
     }
@@ -207,7 +209,7 @@ class RTKStationVM : DJIViewModel() {
     }
 
     fun resetRTKStationPosition() {
-        rtkStationManager.resetRTKStationReferencingPosition(object :
+        rtkStationManager.resetRTKStationReferencePosition(object :
             CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
                 resetStationPositionLD.postValue(DJIBaseResult.success())
@@ -276,6 +278,5 @@ class RTKStationVM : DJIViewModel() {
         val signalLevel = this.signalLevel
         return DJIRTKBaseStationConnectInfo(baseStationId, signalLevel, name)
     }
-
 
 }

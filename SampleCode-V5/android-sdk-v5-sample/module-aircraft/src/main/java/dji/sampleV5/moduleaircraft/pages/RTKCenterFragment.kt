@@ -4,19 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.CompoundButton
+import android.widget.RadioGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.models.RTKCenterVM
+import dji.sampleV5.modulecommon.util.ToastHelper.showToast
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKLocation
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKSatelliteInfo
 import dji.v5.manager.aircraft.rtk.RTKLocationInfo
 import dji.v5.manager.aircraft.rtk.RTKSystemState
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.StringUtils
+import dji.v5.ux.core.extension.hide
+import dji.v5.ux.core.extension.show
 import dji.v5.ux.core.util.GpsUtils
 
 import kotlinx.android.synthetic.main.frag_rtk_center_page.*
@@ -30,9 +36,17 @@ import kotlinx.android.synthetic.main.frag_rtk_center_page.*
  *
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
-class RTKCenterFragment : DJIFragment() {
+class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
     private val TAG = LogUtils.getTag("RTKCenterFragment")
+
+    companion object {
+        const val KEY_IS_QX_RTK = "key_is_qx_rtk"
+    }
+
     private val rtkCenterVM: RTKCenterVM by activityViewModels()
+    private var mIsUpdatingKeepStatus = false
+    private var mIsUpdatingPrecisionStatus = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,116 +59,50 @@ class RTKCenterFragment : DJIFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //初始化
         initListener()
+        rtkCenterVM.addRTKLocationInfoListener()
+        rtkCenterVM.addRTKSystemStateListener()
 
-        //只要打开RTK开关才会显示相关功能界面
-        rtk_open_state_radio_group.setOnCheckedChangeListener { _, checkedId ->
-            val rtkOpen = rtkCenterVM.getAircraftRTKModuleEnabledLD.value
-            if (checkedId == R.id.btn_enable_rtk) {
-                LogUtils.d(TAG, "RTK已开启")
-                rl_rtk_all.visible()
-                //避免重复开启
-                if (rtkOpen?.data ==false) {
-                    rtkCenterVM.setAircraftRTKModuleEnabled(true)
-                }
+        rtkCenterVM.getAircraftRTKModuleEnabled()
+        rtkCenterVM.getRTKMaintainAccuracyEnabled()
 
-            } else {
-                LogUtils.d(TAG, "RTK已关闭")
-                rl_rtk_all.gone()
-                rtkCenterVM.setAircraftRTKModuleEnabled(false)
-            }
+    }
 
-            //每次开启或者关闭RTK模块后，都需要再次获取其开启状态
-            rtkCenterVM.getAircraftRTKModuleEnabled()
-        }
-        //选择RTK服务类型并展示相关界面，默认选择基站RTK
-        rtk_source_radio_group.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.btn_rtk_source_base_rtk -> {
-                    LogUtils.d(TAG, "切换到基站RTK")
-                    //这里只切换UI，真正的切源操作放到具体页面
-                    updateRTKUI(RTKReferenceStationSource.BASE_STATION)
-                }
-                R.id.btn_rtk_source_network -> {
-                    LogUtils.d(TAG, "切换到网络RTK")
-                    updateRTKUI(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
-                }
-                R.id.btn_rtk_source_qx -> {
-                    LogUtils.d(TAG, "切换到千寻RTK")
-                    updateRTKUI(RTKReferenceStationSource.QX_NETWORK_SERVICE)
-                }
-            }
-        }
+    private fun initListener() {
+        tb_rtk_keep_status_switch.setOnCheckedChangeListener(this)
+        tb_precision_preservation_switch.setOnCheckedChangeListener(this)
+        rtk_source_radio_group.setOnCheckedChangeListener(this)
 
         //处理打开相关RTK逻辑
         bt_open_network_rtk.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_open_network_trk_pag)
+            Navigation.findNavController(it).navigate(R.id.action_open_network_trk_pag, networkRTKParam)
         }
         bt_open_rtk_station.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_open_rtk_station_page)
         }
 
-        //监听数据源
-        rtkCenterVM.addRTKLocationInfoListener()
-        rtkCenterVM.addRTKSystemStateListener()
-        rtkCenterVM.getAircraftRTKModuleEnabled()
-        rtkCenterVM.getRTKReferenceStationSource()
-
-    }
-
-    private fun initListener() {
-        rtkCenterVM.setAircraftRTKModuleEnableLD.observe(viewLifecycleOwner, {
-            it.isSuccess.processResult("Set successfully", "Set failed")
-        })
-
-        rtkCenterVM.getAircraftRTKModuleEnabledLD.observe(viewLifecycleOwner, {
-            LogUtils.d(TAG,"RTK开启状态：${it.data}")
-            if (it?.data==true) {
-                btn_enable_rtk.isChecked = true
-                tv_rtk_enable.text="RTK is on"
-            } else {
-                btn_disable_rtk.isChecked = true
-                tv_rtk_enable.text="RTK is off"
-            }
-        })
-        rtkCenterVM.setRTKReferenceStationSourceLD.observe(viewLifecycleOwner, {
-            it.isSuccess.processResult("Switch RTK service type successfully", "Switch RTK service type failed")
-        })
-        rtkCenterVM.rtkLocationInfoLD.observe(viewLifecycleOwner, {
-            showRTKInfo(it.data)
-        })
-        rtkCenterVM.rtkSystemStateLD.observe(viewLifecycleOwner, {
-            showRTKSystemStateInfo(it.data)
-        })
-        rtkCenterVM.rtkSourceLD.observe(viewLifecycleOwner, {
-            it?.run {
-                updateRTKUI(data)
-            }
-        })
-    }
-
-    private fun updateRTKUI(rtkReferenceStationSource: RTKReferenceStationSource?) {
-        when (rtkReferenceStationSource) {
-            RTKReferenceStationSource.BASE_STATION -> {
-                bt_open_rtk_station.visible()
-                bt_open_network_rtk.gone()
-                rl_rtk_info_show.visible()
-                btn_rtk_source_base_rtk.isChecked = true
-            }
-            RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE -> {
-                bt_open_rtk_station.gone()
-                bt_open_network_rtk.visible()
-                rl_rtk_info_show.visible()
-                btn_rtk_source_network.isChecked = true
-            }
-            RTKReferenceStationSource.QX_NETWORK_SERVICE -> {
-                //待实现
-            }
-            else -> {
-                ToastUtils.showToast("Current rtk reference station source is:$rtkReferenceStationSource")
-            }
+        //RTK开启状态
+        rtkCenterVM.getAircraftRTKModuleEnabledLD.observe(viewLifecycleOwner) {
+            updateRTKOpenSwitchStatus(it.data)
         }
-
+        //RTK 位置信息
+        rtkCenterVM.rtkLocationInfoLD.observe(viewLifecycleOwner) {
+            showRTKInfo(it.data)
+        }
+        //RTK SystemState信息
+        rtkCenterVM.rtkSystemStateLD.observe(viewLifecycleOwner) {
+            showRTKSystemStateInfo(it.data)
+        }
+        //RTK精度维持
+        rtkCenterVM.getRTKAccuracyMaintainLD.observe(viewLifecycleOwner) {
+            it.data?.showToast(
+                StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_on),
+                StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_off),
+                tv_rtk_precision_preservation_hint_info
+            )
+            updateRTKMaintainAccuracy(it.data)
+        }
     }
 
     private fun showRTKSystemStateInfo(rtkSystemState: RTKSystemState?) {
@@ -176,6 +124,12 @@ class RTKCenterFragment : DJIFragment() {
             tv_rtk_error_info.text = error?.toString()
             //展示卫星数
             showSatelliteInfo(satelliteInfo)
+            //更新RTK服务类型
+            updateRTKUI(rtkReferenceStationSource)
+            //更新飞控和机身的RTK是否正常连接
+            updateRTKOpenSwitchStatus(isRTKEnabled)
+
+
         }
     }
 
@@ -193,7 +147,6 @@ class RTKCenterFragment : DJIFragment() {
             tv_rtk_head_info.text = rtkHeading?.toString()
             tv_rtk_real_head_info.text = realHeading?.toString()
             tv_rtk_real_location_info.text = real3DLocation?.toString()
-
 
         }
 
@@ -221,42 +174,6 @@ class RTKCenterFragment : DJIFragment() {
         }
     }
 
-
-    private fun View.visible() {
-        this.visibility = View.VISIBLE
-    }
-
-    private fun View.gone() {
-        this.visibility = View.GONE
-    }
-
-
-    private fun Boolean.processResult(
-        positiveMsg: String,
-        negativeMsg: String,
-        textView: TextView? = null
-    ) {
-        textView?.run {
-            text = if (this@processResult) {
-                positiveMsg
-            } else {
-                negativeMsg
-            }
-            return@processResult
-        }
-        if (this) {
-            ToastUtils.showToast(positiveMsg)
-        } else {
-            ToastUtils.showToast(negativeMsg)
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        rtkCenterVM.clearAllRTKLocationInfoListener()
-        rtkCenterVM.clearAllRTKSystemStateListener()
-    }
-
     private fun getRTKLocationDistance(rtklocation: RTKLocation?): Double? {
         rtklocation?.run {
             baseStationLocation?.let { baseStationLocation ->
@@ -268,4 +185,102 @@ class RTKCenterFragment : DJIFragment() {
         return null
     }
 
+
+    //基站开启状态和精度维持Listener
+    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        when (buttonView) {
+            tb_rtk_keep_status_switch -> {
+                if (mIsUpdatingKeepStatus) {
+                    return
+                }
+                mIsUpdatingKeepStatus = true
+                rtkCenterVM.setAircraftRTKModuleEnabled(isChecked)
+                rtkCenterVM.getAircraftRTKModuleEnabled()
+
+            }
+            tb_precision_preservation_switch -> {
+                if (mIsUpdatingPrecisionStatus) {
+                    return
+                }
+                mIsUpdatingPrecisionStatus = true
+                rtkCenterVM.setRTKMaintainAccuracyEnabled(isChecked)
+                rtkCenterVM.getRTKMaintainAccuracyEnabled()
+
+            }
+        }
+    }
+
+    //RTK源切换
+    override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+        when (checkedId) {
+            R.id.btn_rtk_source_base_rtk -> {
+                LogUtils.d(TAG, "Turn on switch to base station RTK ")
+                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.BASE_STATION)
+            }
+            R.id.btn_rtk_source_network -> {
+                LogUtils.d(TAG, "Turn on switch to custom network RTK ")
+                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
+            }
+            R.id.btn_rtk_source_qx -> {
+                LogUtils.d(TAG, "Turn on switch to custom QX RTK ")
+                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.QX_NETWORK_SERVICE)
+            }
+        }
+    }
+
+
+    private fun updateRTKOpenSwitchStatus(isChecked: Boolean?) {
+        tb_rtk_keep_status_switch.setOnCheckedChangeListener(null)
+        tb_rtk_keep_status_switch.isChecked = isChecked ?: false
+        tb_rtk_keep_status_switch.setOnCheckedChangeListener(this)
+        rl_rtk_all.isVisible = isChecked ?: false
+        mIsUpdatingKeepStatus = false
+
+        if (isChecked == null || !isChecked) {
+            tv_rtk_enable.text="RTK is off"
+        }else{
+            tv_rtk_enable.text="RTK is on"
+        }
+
+    }
+
+    private fun updateRTKMaintainAccuracy(isChecked: Boolean?) {
+        tb_precision_preservation_switch.setOnCheckedChangeListener(null)
+        tb_precision_preservation_switch.isChecked = isChecked ?: false
+        tb_precision_preservation_switch.setOnCheckedChangeListener(this)
+        mIsUpdatingPrecisionStatus = false
+    }
+
+    //用于区分是哪个网络rtk
+    private var networkRTKParam = Bundle()
+    private fun updateRTKUI(rtkReferenceStationSource: RTKReferenceStationSource?) {
+        rtk_source_radio_group.setOnCheckedChangeListener(null)
+        when (rtkReferenceStationSource) {
+            RTKReferenceStationSource.BASE_STATION -> {
+                bt_open_rtk_station.show()
+                bt_open_network_rtk.hide()
+                rl_rtk_info_show.show()
+                btn_rtk_source_base_rtk.isChecked = true
+                networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
+            }
+            RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE -> {
+                bt_open_rtk_station.hide()
+                bt_open_network_rtk.show()
+                rl_rtk_info_show.show()
+                btn_rtk_source_network.isChecked = true
+                networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
+            }
+            RTKReferenceStationSource.QX_NETWORK_SERVICE -> {
+                bt_open_rtk_station.hide()
+                bt_open_network_rtk.show()
+                rl_rtk_info_show.show()
+                btn_rtk_source_qx.isChecked = true
+                networkRTKParam.putBoolean(KEY_IS_QX_RTK, true)
+            }
+            else -> {
+                ToastUtils.showToast("Current rtk reference station source is:$rtkReferenceStationSource")
+            }
+        }
+        rtk_source_radio_group.setOnCheckedChangeListener(this)
+    }
 }

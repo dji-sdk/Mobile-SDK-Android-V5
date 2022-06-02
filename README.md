@@ -1,8 +1,12 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.0.0 beta2
+# DJI Mobile SDK for Android V5 Latest Version 5.0.0 beta3
 
 ## What Is This?
 
 DJI Mobile SDK V5 has a series of APIs to control the software and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.
+
+### Support Product:
+
+1. M30_SERIES
 
 ## Integration
 
