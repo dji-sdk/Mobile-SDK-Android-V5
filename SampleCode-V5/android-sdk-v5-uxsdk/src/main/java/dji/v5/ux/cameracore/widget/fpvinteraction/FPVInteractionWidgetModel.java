@@ -92,7 +92,7 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
             controlModeProcessor.onNext(preferencesManager.getControlMode());
         }
         aeLockedProcessor = DataProcessor.create(false);
-        isYawAdjustSupportedProcessor = DataProcessor.create(false);
+        isYawAdjustSupportedProcessor = DataProcessor.create(true);
         this.preferencesManager = preferencesManager;
         this.keyedStore = keyedStore;
     }

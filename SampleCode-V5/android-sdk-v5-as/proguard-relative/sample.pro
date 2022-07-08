@@ -124,3 +124,7 @@
 -keep class com.dji.mapkit.core.** {*;}
 -keep class com.autonavi.** {*;}
 -keep class com.alibaba.fastjson.**{*;}
+
+
+## keep 千寻相关接口
+-keep class com.qx.wz.dj.rtcm.** {*;}

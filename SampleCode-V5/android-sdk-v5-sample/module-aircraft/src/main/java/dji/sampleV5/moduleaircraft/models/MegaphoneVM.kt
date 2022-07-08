@@ -2,6 +2,7 @@ package dji.sampleV5.moduleaircraft.models
 
 import android.os.Handler
 import android.os.HandlerThread
+import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sdk.keyvalue.key.DJIKey
@@ -37,9 +38,13 @@ class MegaphoneVM : DJIViewModel() {
     val curRealTimeUploadedState = MutableLiveData(UploadState.UNKNOWN)
     val curRealTimeSentBytes = MutableLiveData(0L)
     val curRealTimeTotalBytes = MutableLiveData(0L)
-    var isPayloadConnect = MutableLiveData(false)
+    var isLeftPayloadConnect = MutableLiveData(false)
+    var isRightPayloadConnect = MutableLiveData(false)
+    var isUpPayloadConnect = MutableLiveData(false)
+    var isOSDKPayloadConnect = MutableLiveData(false)
     var megaphonePlayState = MutableLiveData<MegaphonePlayStateMsg>()
     var isQuickPlay = false
+    var curMegaphoneIndex = MegaphoneIndex.UNKNOWN
 
     private var audioRecorderHandler: AudioRecordHandler? = null
     private var opusEncoder: OpusEncoder? = null
@@ -53,6 +58,7 @@ class MegaphoneVM : DJIViewModel() {
 
     private var handlerThread: HandlerThread? = null
     private var handler: Handler? = null
+    private var handlerMain: Handler? = null
 
     private val listener: RealTimeTransimissionStateListener =
         object : RealTimeTransimissionStateListener {
@@ -63,6 +69,17 @@ class MegaphoneVM : DJIViewModel() {
 
             override fun onUploadedStatus(state: UploadState?) {
                 curRealTimeUploadedState.value = state
+
+                if (state == UploadState.UPLOAD_SUCCESS) {
+                    handlerMain?.postDelayed(object : Runnable {
+                        override fun run() {
+                            //clear status
+                            curRealTimeUploadedState.value = UploadState.UNKNOWN
+                            curRealTimeSentBytes.value = 0
+                            curRealTimeTotalBytes.value = 0
+                        }
+                    }, 5000)
+                }
             }
         }
 
@@ -70,20 +87,39 @@ class MegaphoneVM : DJIViewModel() {
         handlerThread = HandlerThread("IO_Handler_Thread")
         handlerThread!!.start()
         handler = Handler(handlerThread!!.looper)
+        handlerMain = Handler(Looper.getMainLooper())
         addListener()
 
+        PayloadKey.KeyConnection.create(ComponentIndexType.LEFT_OR_MAIN).listen(this){
+            it?.let {
+                isLeftPayloadConnect.value = it
+            }
+        }
+        PayloadKey.KeyConnection.create(ComponentIndexType.RIGHT).listen(this){
+            it?.let {
+                isRightPayloadConnect.value = it
+            }
+        }
         PayloadKey.KeyConnection.create(ComponentIndexType.UP).listen(this){
             it?.let {
-                isPayloadConnect.value = it
+                isUpPayloadConnect.value = it
             }
         }
-
-        PayloadKey.KeyMegaphonePlayState.create(ComponentIndexType.UP).listen(this){
+        PayloadKey.KeyConnection.create(ComponentIndexType.FPV).listen(this){
             it?.let {
-                megaphonePlayState.value = it
+                isOSDKPayloadConnect.value = it
             }
         }
 
+        getMegaphoneIndex(object: CommonCallbacks.CompletionCallbackWithParam<MegaphoneIndex>{
+            override fun onSuccess(t: MegaphoneIndex?) {
+                addListener(t!!)
+            }
+
+            override fun onFailure(error: IDJIError) {
+                LogUtils.d(TAG, "get megaphone index failed")
+            }
+        })
     }
 
     override fun onCleared() {
@@ -97,7 +133,7 @@ class MegaphoneVM : DJIViewModel() {
     }
 
     fun removeAllListener() {
-        MegaphoneManager.getInstance().clearAllRealTimeTransimissionStateListener()
+        MegaphoneManager.getInstance().clearAllRealTimeTransmissionStateListener()
     }
 
     fun setVolume(volume: Int, callback: CommonCallbacks.CompletionCallback) {
@@ -106,6 +142,15 @@ class MegaphoneVM : DJIViewModel() {
 
     fun getVolume(callback: CommonCallbacks.CompletionCallbackWithParam<Int>) {
         MegaphoneManager.getInstance().getVolume(callback)
+    }
+
+    fun setMegaphoneIndex(megaphoneIndex: MegaphoneIndex,callback:CommonCallbacks.CompletionCallback){
+        MegaphoneManager.getInstance().setMegaphoneIndex(megaphoneIndex,callback)
+        addListener(megaphoneIndex)
+    }
+
+    fun getMegaphoneIndex(callback: CommonCallbacks.CompletionCallbackWithParam<MegaphoneIndex>){
+        MegaphoneManager.getInstance().getMegaphoneIndex(callback)
     }
 
     fun setPlayMode(playMode: PlayMode, callback: CommonCallbacks.CompletionCallback) {
@@ -145,6 +190,20 @@ class MegaphoneVM : DJIViewModel() {
 
     fun stopPushingFile(callback: CommonCallbacks.CompletionCallback) {
         MegaphoneManager.getInstance().cancelPushingFileToMegaphone(callback)
+    }
+
+    fun addListener(megaphoneIndex: MegaphoneIndex){
+        if (curMegaphoneIndex != MegaphoneIndex.UNKNOWN) {
+            PayloadKey.KeyMegaphonePlayState.create(ComponentIndexType.find(curMegaphoneIndex.value()))
+                .canListen()
+        }
+        PayloadKey.KeyMegaphonePlayState.create(ComponentIndexType.find(megaphoneIndex.value()))
+            .listen(this) {
+                it?.let {
+                    megaphonePlayState.value = it
+                }
+            }
+        curMegaphoneIndex = megaphoneIndex
     }
 
     fun initRecorder() {

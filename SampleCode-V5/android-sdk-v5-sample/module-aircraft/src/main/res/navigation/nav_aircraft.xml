@@ -27,8 +27,7 @@
         android:id="@+id/network_rtk_page"
         android:name="dji.sampleV5.moduleaircraft.pages.RTKNetworkFragment"
         android:label="network_rtk_page"
-        android:layout="@layout/frag_network_rtk_page">
-    </fragment>
+        android:layout="@layout/frag_network_rtk_page" />
 
     <fragment
         android:id="@+id/flight_upgrade_page"
@@ -45,7 +44,7 @@
     <fragment
         android:id="@+id/megaphone_page"
         android:name="dji.sampleV5.moduleaircraft.pages.MegaphoneFragment"
-        android:layout="@layout/frag_megaphone_page"/>
+        android:layout="@layout/frag_megaphone_page" />
 
     <fragment
         android:id="@+id/psdk_data_page"
@@ -61,8 +60,7 @@
         android:id="@+id/station_rtk_page"
         android:name="dji.sampleV5.moduleaircraft.pages.RTKStationFragment"
         android:label="station_rtk_test_page"
-        android:layout="@layout/frag_station_rtk_page">
-    </fragment>
+        android:layout="@layout/frag_station_rtk_page" />
     <fragment
         android:id="@+id/rtk_center_page"
         android:name="dji.sampleV5.moduledrone.pages.RTKCenterFragment"
@@ -78,4 +76,34 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/perception_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.PerceptionFragment"
+        android:label="perception_page"
+        android:layout="@layout/frag_perception_page" />
+
+    <fragment
+        android:id="@+id/uas_jp_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.UASJapanFragment"
+        android:label="uas_jp_page"
+        tools:layout="@layout/frag_uas_jp_page" />
+
+    <fragment
+        android:id="@+id/uas_france_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.UASFranceFragment"
+        android:label="uas_france_page"
+        tools:layout="@layout/frag_uas_france_page" />
+    <fragment
+        android:id="@+id/uas_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.UASRemoteFragment"
+        android:label="uas_page"
+        tools:layout="@layout/frag_uas_page">
+        <action
+            android:id="@+id/action_open_uas_jp_pag"
+            app:destination="@id/uas_jp_page" />
+
+        <action
+            android:id="@+id/action_open_uas_france_page"
+            app:destination="@id/uas_france_page" />
+    </fragment>
 </navigation>

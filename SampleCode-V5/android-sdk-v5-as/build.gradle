@@ -23,6 +23,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url REPO_MAVEN2
+        }
         google()
         jcenter()
         mavenCentral()

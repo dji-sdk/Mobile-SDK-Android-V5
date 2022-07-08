@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_handle"
+    app:startDestination="@id/handle_page">
+
+    <fragment
+        android:id="@+id/handle_page"
+        android:name="dji.sampleV5.modulehandheld.pages.HandheldFragment"
+        android:label="handle_page"
+        tools:layout="@layout/frag_handheld_page" />
+
+</navigation>

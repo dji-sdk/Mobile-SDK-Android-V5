@@ -1,10 +1,9 @@
 package dji.sampleV5.moduleaircraft.models
 
 import android.text.TextUtils
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
-import dji.sampleV5.modulecommon.data.DJIBaseResult
+import dji.sampleV5.modulecommon.data.DJIToastResult
 import dji.sdk.keyvalue.key.PayloadKey
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.common.EmptyMsg
@@ -25,21 +24,8 @@ import java.text.SimpleDateFormat
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
 class PayLoadVM : DJIViewModel() {
-    private val sendMessageLiveData = MutableLiveData<DJIBaseResult<String>>()
-    private val receiveMessageLiveData = MutableLiveData<DJIBaseResult<String>>()
-    private val productNameLiveData = MutableLiveData<DJIBaseResult<String>>()
+    val receiveMessageLiveData = MutableLiveData<String>()
 
-    fun getSendMessageLiveData(): LiveData<DJIBaseResult<String>> {
-        return sendMessageLiveData
-    }
-
-    fun getReceiveMessageLiveData(): LiveData<DJIBaseResult<String>> {
-        return receiveMessageLiveData
-    }
-
-    fun getProductNameLiveData(): LiveData<DJIBaseResult<String>> {
-        return productNameLiveData
-    }
 
     fun sendMessageToPayLoadSdk(byteArray: ByteArray) {
         KeyManager.getInstance().performAction(
@@ -47,53 +33,49 @@ class PayLoadVM : DJIViewModel() {
             byteArray,
             object : CommonCallbacks.CompletionCallbackWithParam<EmptyMsg> {
                 override fun onSuccess(t: EmptyMsg?) {
-                    sendMessageLiveData.postValue(DJIBaseResult.success(t.toString()))
+                    sendToastMsg(DJIToastResult.success("Send success"))
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    sendMessageLiveData.postValue(DJIBaseResult.failed(error.toString()))
+                    sendToastMsg(DJIToastResult.failed(error.toString()))
                 }
 
             })
     }
 
     fun receiveFromPayLoadSdk() {
-        KeyManager.getInstance().listen(
-            KeyTools.createKey(PayloadKey.KeyDataFromPayload, ComponentIndexType.UP), this
-        ) { oldValue, newValue ->
+        KeyManager.getInstance().listen(KeyTools.createKey(PayloadKey.KeyDataFromPayload, ComponentIndexType.UP), this) { oldValue, newValue ->
             var result = "接收时间：${getTimeNow()}"
             newValue?.let {
                 var newValueString = String(newValue)
                 result += "，接收内容：$newValueString"
-                receiveMessageLiveData.postValue(DJIBaseResult.success(result))
+                receiveMessageLiveData.postValue(result)
                 return@listen
             }
             result += ",接收内容为空"
-            receiveMessageLiveData.postValue(DJIBaseResult.success(result))
+            receiveMessageLiveData.postValue(result)
         }
     }
 
     fun getProductName() {
-        val productName =
-            KeyManager.getInstance().getValue(
-                KeyTools.createKey(
-                    PayloadKey.KeyPayloadProductName,
-                    ComponentIndexType.UP
-                )
-            )
+        val productName = KeyManager.getInstance().getValue(KeyTools.createKey(PayloadKey.KeyPayloadProductName, ComponentIndexType.UP))
         if (TextUtils.isEmpty(productName)) {//如果获取到的缓存为空，则走异步获取流程
             PayloadKey.KeyPayloadProductName.create(ComponentIndexType.UP).get({
-                productNameLiveData.postValue(DJIBaseResult.success(it))
+                sendToastMsg(DJIToastResult.success(it))
             }) {
-                productNameLiveData.postValue(DJIBaseResult.failed(it.toString()))
+                sendToastMsg(DJIToastResult.failed(it.toString()))
             }
         } else {
-            productNameLiveData.postValue(DJIBaseResult.success(productName))
+            sendToastMsg(DJIToastResult.success(productName))
         }
     }
 
     private fun getTimeNow(): String {
         val currentTime = System.currentTimeMillis()
         return SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(currentTime)
+    }
+
+    private fun sendToastMsg(djiToastResult: DJIToastResult) {
+        toastResult?.postValue(djiToastResult)
     }
 }

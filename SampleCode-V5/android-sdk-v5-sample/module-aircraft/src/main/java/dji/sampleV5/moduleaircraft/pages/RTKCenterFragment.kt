@@ -13,7 +13,7 @@ import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.models.RTKCenterVM
-import dji.sampleV5.modulecommon.util.ToastHelper.showToast
+import dji.v5.common.utils.GpsUtils
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKLocation
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKSatelliteInfo
@@ -23,7 +23,6 @@ import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
-import dji.v5.ux.core.util.GpsUtils
 
 import kotlinx.android.synthetic.main.frag_rtk_center_page.*
 
@@ -48,11 +47,7 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
     private var mIsUpdatingPrecisionStatus = false
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_rtk_center_page, container, false)
     }
 
@@ -64,7 +59,6 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         rtkCenterVM.addRTKLocationInfoListener()
         rtkCenterVM.addRTKSystemStateListener()
 
-        rtkCenterVM.getAircraftRTKModuleEnabled()
         rtkCenterVM.getRTKMaintainAccuracyEnabled()
 
     }
@@ -83,25 +77,26 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         }
 
         //RTK开启状态
-        rtkCenterVM.getAircraftRTKModuleEnabledLD.observe(viewLifecycleOwner) {
-            updateRTKOpenSwitchStatus(it.data)
+        rtkCenterVM.aircraftRTKModuleEnabledLD.observe(viewLifecycleOwner) {
+            updateRTKOpenSwitchStatus(it)
         }
         //RTK 位置信息
         rtkCenterVM.rtkLocationInfoLD.observe(viewLifecycleOwner) {
-            showRTKInfo(it.data)
+            showRTKInfo(it)
         }
         //RTK SystemState信息
         rtkCenterVM.rtkSystemStateLD.observe(viewLifecycleOwner) {
-            showRTKSystemStateInfo(it.data)
+            showRTKSystemStateInfo(it)
         }
         //RTK精度维持
-        rtkCenterVM.getRTKAccuracyMaintainLD.observe(viewLifecycleOwner) {
-            it.data?.showToast(
-                StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_on),
-                StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_off),
-                tv_rtk_precision_preservation_hint_info
-            )
-            updateRTKMaintainAccuracy(it.data)
+        rtkCenterVM.rtkAccuracyMaintainLD.observe(viewLifecycleOwner) {
+            if (it == true) {
+                tv_rtk_precision_preservation_hint_info.text=StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_on)
+            }else{
+                tv_rtk_precision_preservation_hint_info.text= StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_off)
+            }
+            LogUtils.d(TAG,"精度保持状态$it")
+            updateRTKMaintainAccuracy(it)
         }
     }
 
@@ -178,7 +173,8 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         rtklocation?.run {
             baseStationLocation?.let { baseStationLocation ->
                 mobileStationLocation?.let { mobileStationLocation ->
-                    return GpsUtils.distance3D(baseStationLocation, mobileStationLocation)
+                    return GpsUtils.gps2m(baseStationLocation.latitude,baseStationLocation.longitude,baseStationLocation.altitude,
+                        mobileStationLocation.latitude,mobileStationLocation.longitude,mobileStationLocation.altitude)
                 }
             }
         }
@@ -195,16 +191,18 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                 }
                 mIsUpdatingKeepStatus = true
                 rtkCenterVM.setAircraftRTKModuleEnabled(isChecked)
-                rtkCenterVM.getAircraftRTKModuleEnabled()
 
             }
             tb_precision_preservation_switch -> {
                 if (mIsUpdatingPrecisionStatus) {
+                    //上次set之后还没拿到最新值，则不响应此次设置
+                    tb_precision_preservation_switch.setOnCheckedChangeListener(null)
+                    tb_precision_preservation_switch.isChecked=!isChecked
+                    tb_precision_preservation_switch.setOnCheckedChangeListener(this)
                     return
                 }
                 mIsUpdatingPrecisionStatus = true
                 rtkCenterVM.setRTKMaintainAccuracyEnabled(isChecked)
-                rtkCenterVM.getRTKMaintainAccuracyEnabled()
 
             }
         }
@@ -226,6 +224,7 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                 rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.QX_NETWORK_SERVICE)
             }
         }
+        ToastUtils.showToast(StringUtils.getResStr(R.string.switch_rtk_type_tip))
     }
 
 
@@ -237,9 +236,9 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         mIsUpdatingKeepStatus = false
 
         if (isChecked == null || !isChecked) {
-            tv_rtk_enable.text="RTK is off"
-        }else{
-            tv_rtk_enable.text="RTK is on"
+            tv_rtk_enable.text = "RTK is off"
+        } else {
+            tv_rtk_enable.text = "RTK is on"
         }
 
     }
@@ -282,5 +281,11 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
             }
         }
         rtk_source_radio_group.setOnCheckedChangeListener(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        rtkCenterVM.removeRTKLocationInfoListener()
+        rtkCenterVM.removeRTKSystemStateListener()
     }
 }

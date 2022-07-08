@@ -20,6 +20,7 @@ class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
     private lateinit var primaryFragmentView: FragmentContainerView
     private lateinit var secondaryFragmentView: FragmentContainerView
     private lateinit var fabResetAllVideoChannel: FloatingActionButton
+    private lateinit var fabGetAllVideoChannel: FloatingActionButton
     private var isFABOpen = false
 
     override fun onCreateView(
@@ -34,6 +35,8 @@ class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
         fabResetAllVideoChannel =
             view.findViewById(R.id.fab_reset_all_video_channel) as FloatingActionButton
         fabResetAllVideoChannel.setOnClickListener(this)
+        fabGetAllVideoChannel = view.findViewById(R.id.fab_get_all_channels) as FloatingActionButton
+        fabGetAllVideoChannel.setOnClickListener(this)
         return view
     }
 
@@ -41,12 +44,14 @@ class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
     private fun showFABMenu() {
         isFABOpen = true
         fabResetAllVideoChannel.visibility = View.VISIBLE
+        fabGetAllVideoChannel.visibility = View.VISIBLE
     }
 
     @SuppressLint("RestrictedApi")
     private fun closeFABMenu() {
         isFABOpen = false
         fabResetAllVideoChannel.visibility = View.GONE
+        fabGetAllVideoChannel.visibility = View.GONE
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,6 +90,17 @@ class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
                     ToastUtils.showToast(
                         it,
                         "Reset All Video Channel Success"
+                    )
+                }
+            }
+            R.id.fab_get_all_channels -> {
+                multiVideoChannelVM.getAllVideoChannels()?.let {
+                    ToastUtils.showToast(
+                        multiVideoChannelVM.getAllVideoChannels().toString()
+                    )
+                } ?: let {
+                    ToastUtils.showToast(
+                        "There is no available channel"
                     )
                 }
             }

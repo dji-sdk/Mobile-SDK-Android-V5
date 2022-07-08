@@ -84,6 +84,7 @@
     <string name="n_a">N/A</string>
     <string name="video_stream_manager">码流管理器</string>
     <string name="reset_all_video_channel">重置所有视频通道</string>
+    <string name="get_all_video_channel">获取所有视频通道</string>
     <string name="select_stream_source">选择码流源</string>
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
@@ -122,6 +123,7 @@
     <string name="title_megaphone">喊话器</string>
     <string name="megaphone_state">喊话器状态</string>
     <string name="megaphone_control">喊话器控制</string>
+    <string name="megaphone_index">喊话器位置</string>
     <string name="rt_transmission_status">实时数据传输状态：</string>
     <string name="btn_tts">文字转语音</string>
     <string name="btn_rt_voice">实时喊话</string>
@@ -157,7 +159,16 @@
     <string name="tv_station_battery_voltage">基站电池电压：</string>
     <string name="tv_station_battery_temperature">基站电池温度：</string>
     <string name="tv_station_battery_capacity_percent">基站电池容量百分比：</string>
+    <string name="tv_station_location">基站位置：</string>
+    <string name="tv_station_relative_distance">相对距离%1$sm</string>
     <string name="tv_station_list_tip">请点击下面列表进行基站连接</string>
+    <string name="switch_rtk_type_tip">切换RTK服务类型需要重启飞行器</string>
+
+    <string name="tip_input_station_password" >输入密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”</string>
+    <string name="tip_reset_station_password" >重置密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”</string>
+    <string name="tip_input_station_location" >输入基站坐标</string>
+    <string name="tip_change_station_name" >修改基站名称,注意：基站名字UTF-8下只取4个字节，比如设置名字为“abcdef”，最后效果是“abcd”</string>
+
 
 
     <!--RTK Center-->
@@ -213,6 +224,31 @@
     <string name="tv_login_error">登录模块错误: </string>
     <string name="item_login_account_title">登录账号</string>
     <string name="item_login_account_description">演示DJI账户登录相关功能</string>
+
+    <!--感知-->
+    <string name="item_perception_title">感知</string>
+    <string name="item_perception_description">演示如何使用感知的相关功能</string>
+    <string name="tv_obstacle_avoidance_master_switch_tip">1.避障总开启状态：</string>
+    <string name="bt_set_obstacle_avoidance_sub_switch">2.设置特定方向的避障开启状态：</string>
+    <string name="bt_set_obstacle_avoidance_upwrard_switch">上</string>
+    <string name="bt_set_obstacle_avoidance_down_switch">下</string>
+    <string name="bt_set_obstacle_avoidance_horizontal_switch">水平</string>
+    <string name="bt_set_vision_positioning_enable_tip">3.视觉定位开启状态：</string>
+    <string name="bt_set_precision_landing_enable_tip">4.精准降落开启状态：</string>
+    <string name="tv_other_obstacle_avoidance_tip">5.其他避障信息展示： </string>
+    <string name="bt_set_obstacle_avoidance_type">设置避障类型</string>
+    <string name="bt_get_obstacle_avoidance_type">获取障碍类型</string>
+    <string name="bt_set_obstacle_avoidance_warning_distance">设置特定方向的告警距离</string>
+    <string name="bt_get_obstacle_avoidance_warning_distance">获取特定方向的告警距离</string>
+    <string name="bt_set_obstacle_avoidance_braking_distance">设置特定方向的刹停距离</string>
+    <string name="bt_get_obstacle_avoidance_braking_distance">获取特定方向的刹停距离</string>
+
+    <!--UAS-->
+    <string name="item_uas_title">无人机远程识别</string>
+    <string name="item_uas_description">演示如何使用无人机远程识别相关功能</string>
+    <string name="bt_set_eid_enable">Set electronicId enabled</string>
+    <string name="bt_set_ua_registration_number">Set ua registration number</string>
+
 
     <!-- key类型 -->
     <string name="key_type_battery">battery key</string>

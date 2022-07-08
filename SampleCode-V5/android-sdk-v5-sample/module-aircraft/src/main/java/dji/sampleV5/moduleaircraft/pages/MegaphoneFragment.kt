@@ -5,7 +5,9 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.SeekBar
+import android.widget.Spinner
 import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.pages.DJIFragment
@@ -36,6 +38,7 @@ class MegaphoneFragment : DJIFragment() {
     private var curPlayMode: PlayMode = PlayMode.UNKNOWN
     private lateinit var curWorkMode: WorkMode
     private var isPlaying: Boolean = false
+    private var isFirstSwitch:Boolean = true
     private val TAG: String = "MegaphoneFragment"
 
     override fun onCreateView(
@@ -64,7 +67,19 @@ class MegaphoneFragment : DJIFragment() {
             updateUploadState()
         }
 
-        megaphoneVM.isPayloadConnect.observe(viewLifecycleOwner) {
+        megaphoneVM.isLeftPayloadConnect.observe(viewLifecycleOwner) {
+            updateMegaphoneConnectState()
+        }
+
+        megaphoneVM.isRightPayloadConnect.observe(viewLifecycleOwner) {
+            updateMegaphoneConnectState()
+        }
+
+        megaphoneVM.isUpPayloadConnect.observe(viewLifecycleOwner) {
+            updateMegaphoneConnectState()
+        }
+
+        megaphoneVM.isOSDKPayloadConnect.observe(viewLifecycleOwner) {
             updateMegaphoneConnectState()
         }
 
@@ -107,6 +122,16 @@ class MegaphoneFragment : DJIFragment() {
                 LogUtils.e(TAG, "get volume onFailure,$error")
             }
         })
+
+        megaphoneVM.getMegaphoneIndex(object : CommonCallbacks.CompletionCallbackWithParam<MegaphoneIndex>{
+            override fun onSuccess(t: MegaphoneIndex?) {
+                tv_cur_megaphone_index.text = t?.let { t.name }?:let { "N/A" }
+            }
+
+            override fun onFailure(error: IDJIError) {
+                LogUtils.e(TAG, "get megaphone index onFailure,$error")
+            }
+        })
     }
 
     override fun onDestroyView() {
@@ -145,6 +170,42 @@ class MegaphoneFragment : DJIFragment() {
                     })
             }
         })
+        sp_megaphone_switch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (isFirstSwitch) {
+                    isFirstSwitch = false
+                    return
+                }
+                megaphoneVM.setMegaphoneIndex(MegaphoneIndex.find(position),object:CommonCallbacks.CompletionCallback{
+                    override fun onSuccess() {
+                        ToastUtils.showToast(context, "set megaphone index success")
+
+                        megaphoneVM.getMegaphoneIndex(object : CommonCallbacks.CompletionCallbackWithParam<MegaphoneIndex>{
+                            override fun onSuccess(t: MegaphoneIndex?) {
+                                tv_cur_megaphone_index.text = t?.let { t.name }?:let { "N/A" }
+                            }
+
+                            override fun onFailure(error: IDJIError) {
+                                LogUtils.e(TAG, "get megaphone index onFailure,$error")
+                            }
+                        })
+                    }
+
+                    override fun onFailure(error: IDJIError) {
+                        ToastUtils.showToast(context, "set megaphone index failed: $error")
+                    }
+                })
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                //空方法，不实现
+            }
+        }
         changeFragment()
     }
 
@@ -221,6 +282,7 @@ class MegaphoneFragment : DJIFragment() {
             val ttsFragment = TTSFragment()
             transaction.replace(R.id.fragment_container, ttsFragment)
             transaction.commit()
+            megaphoneVM.removeAllListener()
         }
 
         record_frg_btn.setOnClickListener {
@@ -241,6 +303,7 @@ class MegaphoneFragment : DJIFragment() {
             val recordFragment = RecordFragment()
             transaction.replace(R.id.fragment_container, recordFragment)
             transaction.commit()
+            megaphoneVM.addListener()
         }
 
         file_list_frg_btn.setOnClickListener {
@@ -261,6 +324,7 @@ class MegaphoneFragment : DJIFragment() {
             val localFileFragment = LocalFileFragment()
             transaction.replace(R.id.fragment_container, localFileFragment!!)
             transaction.commit()
+            megaphoneVM.removeAllListener()
         }
     }
 
@@ -290,19 +354,44 @@ class MegaphoneFragment : DJIFragment() {
                     }
                 })
         }
+//        megaphoneVM.curRealTimeUploadedState.value = UploadState.UNKNOWN
     }
 
     private fun updateMegaphoneConnectState() {
         mainHandler.post {
-            if (megaphoneVM.isPayloadConnect.value == false) {
-                val textSource =
-                    getString(R.string.title_megaphone) + "<font color=\'#ff0000\'><small>disconnect</small></font>"
-                tv_megaphone_title.text = Html.fromHtml(textSource)
+            var connectionBuilder = StringBuilder()
+            if (megaphoneVM.isLeftPayloadConnect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>left</small></font>"
+                connectionBuilder.append(textSource)
             } else {
-                val textSource =
-                    getString(R.string.title_megaphone) + "<font color=\'#00ff00\'><small>connect</small></font>"
-                tv_megaphone_title.text = Html.fromHtml(textSource)
+                val textSource = "<font color=\'#00ff00\'><small>left</small></font>"
+                connectionBuilder.append(textSource)
             }
+
+            if (megaphoneVM.isRightPayloadConnect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>right</small></font>"
+                connectionBuilder.append("  "+textSource)
+            } else {
+                val textSource = "<font color=\'#00ff00\'><small>right</small></font>"
+                connectionBuilder.append("  "+textSource)
+            }
+
+            if (megaphoneVM.isUpPayloadConnect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>up</small></font>"
+                connectionBuilder.append("  "+textSource)
+            } else {
+                val textSource = "<font color=\'#00ff00\'><small>up</small></font>"
+                connectionBuilder.append("  "+textSource)
+            }
+
+            if (megaphoneVM.isOSDKPayloadConnect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>osdk</small></font>"
+                connectionBuilder.append("  "+textSource)
+            } else {
+                val textSource = "<font color=\'#00ff00\'><small>osdk</small></font>"
+                connectionBuilder.append("  "+textSource)
+            }
+            tv_megaphone_connect_status.text = Html.fromHtml(connectionBuilder.toString())
         }
     }
 

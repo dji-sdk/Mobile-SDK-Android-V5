@@ -3,6 +3,7 @@ package dji.sampleV5.modulecommon.models
 import androidx.lifecycle.MutableLiveData
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.common.video.channel.VideoChannelState
 import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.interfaces.ILiveStreamManager
@@ -11,6 +12,7 @@ import dji.v5.manager.datacenter.livestream.settings.AgoraSettings
 import dji.v5.manager.datacenter.livestream.settings.GB28181Settings
 import dji.v5.manager.datacenter.livestream.settings.RtmpSettings
 import dji.v5.manager.datacenter.livestream.settings.RtspSettings
+import dji.v5.manager.datacenter.video.VideoStreamManager
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DjiSharedPreferencesManager
 
@@ -253,5 +255,10 @@ class LiveStreamVM : DJIViewModel() {
 
     fun refreshLiveStreamError() {
         curLiveStreamError.postValue(curLiveStreamError.value)
+    }
+
+    fun getChannelStatus(channel: VideoChannelType): VideoChannelState {
+        return VideoStreamManager.getInstance().getAvailableVideoChannel(channel)
+            ?.let { it.videoChannelStatus } ?: let { VideoChannelState.CLOSE }
     }
 }

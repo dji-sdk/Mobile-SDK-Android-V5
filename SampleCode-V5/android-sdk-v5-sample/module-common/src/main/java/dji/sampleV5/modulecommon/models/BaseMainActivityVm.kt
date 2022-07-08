@@ -3,6 +3,7 @@ package dji.sampleV5.modulecommon.models
 import android.content.Context
 import androidx.annotation.NonNull
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import dji.sampleV5.modulecommon.R
 import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent

@@ -1,5 +1,6 @@
 package dji.sampleV5.modulecommon.pages
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
@@ -11,6 +12,7 @@ import dji.sampleV5.modulecommon.models.LiveStreamVM
 import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.common.video.channel.VideoChannelState
 import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.common.video.decoder.DecoderOutputMode
 import dji.v5.common.video.decoder.DecoderState
@@ -38,7 +40,6 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
     private var checkedItem: Int = -1
     private var isConfigSelected = false
     private var liveStreamType:LiveStreamType = LiveStreamType.UNKNOWN
-    private var liveStreamChannelType:VideoChannelType = VideoChannelType.PRIMARY_STREAM_CHANNEL
     private var liveStreamBitrateMode:LiveVideoBitrateMode = LiveVideoBitrateMode.AUTO
     private var liveStreamQuality:StreamQuality = StreamQuality.UNKNOWN
     private val msg = "input is null"
@@ -609,29 +610,15 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         }
                         .setPositiveButton("确认") { dialog, _ ->
                             kotlin.run {
-                                liveStreamChannelType = liveStreamChannelTypes[checkedItem]
-
-                                videoDecoder?.let {
-                                    videoDecoder?.onPause()
-                                    videoDecoder?.destory()
-                                    videoDecoder = null
-                                }
-
-                                if (videoDecoder == null) {
-                                    videoDecoder = VideoDecoder(
-                                        this@LiveStreamFragment.context,
-                                        liveStreamChannelType,
-                                        DecoderOutputMode.SURFACE_MODE,
-                                        surfaceView.holder,
-                                        curWidth,
-                                        curHeight,
-                                        true
+                                if (liveStreamVM.getVideoChannel() != liveStreamChannelTypes[checkedItem]) {
+                                    judgeChannel(it,liveStreamChannelTypes[checkedItem])
+                                }else{
+                                    ToastUtils.showToast(
+                                        it,
+                                        "Chanel is same"
                                     )
-                                } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
-                                    videoDecoder?.onResume()
                                 }
 
-                                liveStreamVM.setVideoChannel(liveStreamChannelType)
                                 dialog.dismiss()
                             }
                         }
@@ -645,6 +632,41 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
             }
             dialog.show()
         }
+    }
+
+    private fun judgeChannel(context:Context,videoChannel:VideoChannelType){
+        if (liveStreamVM.getChannelStatus(videoChannel) == VideoChannelState.ON) {
+            setVideChannel(videoChannel)
+        }else{
+            ToastUtils.showToast(
+                context,
+                "Chanel is not open"
+            )
+        }
+    }
+
+    private fun setVideChannel(videoChannel:VideoChannelType){
+        videoDecoder?.let {
+            videoDecoder?.onPause()
+            videoDecoder?.destory()
+            videoDecoder = null
+        }
+
+        if (videoDecoder == null) {
+            videoDecoder = VideoDecoder(
+                this@LiveStreamFragment.context,
+                videoChannel,
+                DecoderOutputMode.SURFACE_MODE,
+                surfaceView.holder,
+                curWidth,
+                curHeight,
+                true
+            )
+        } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
+            videoDecoder?.onResume()
+        }
+
+        liveStreamVM.setVideoChannel(videoChannel)
     }
 
     private fun showSetLiveStreamConfigDialog() {
@@ -718,7 +740,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         } ?: let {
             videoDecoder = VideoDecoder(
                 this@LiveStreamFragment.context,
-                VideoChannelType.PRIMARY_STREAM_CHANNEL,
+                liveStreamVM.getVideoChannel(),
                 DecoderOutputMode.SURFACE_MODE,
                 surfaceView.holder,
                 surfaceView.width,
@@ -735,7 +757,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         if (videoDecoder == null) {
             videoDecoder = VideoDecoder(
                 this@LiveStreamFragment.context,
-                VideoChannelType.PRIMARY_STREAM_CHANNEL,
+                liveStreamVM.getVideoChannel(),
                 DecoderOutputMode.SURFACE_MODE,
                 surfaceView.holder,
                 width,

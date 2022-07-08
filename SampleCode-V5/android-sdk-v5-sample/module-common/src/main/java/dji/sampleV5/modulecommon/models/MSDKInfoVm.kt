@@ -1,11 +1,9 @@
 package dji.sampleV5.modulecommon.models
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dji.sampleV5.modulecommon.data.DEFAULT_STR
-import dji.sampleV5.modulecommon.data.IN_INNER_NETWORK_STR
-import dji.sampleV5.modulecommon.data.IN_OUT_NETWORK_STR
-import dji.sampleV5.modulecommon.data.MSDKInfo
+import dji.sampleV5.modulecommon.data.*
 import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.key.ProductKey
 import dji.v5.common.error.DJINetworkError
@@ -48,12 +46,13 @@ class MSDKInfoVm : DJIViewModel() {
         msdkInfo.value?.isDebug = msdkInfoModel.isDebug()
         msdkInfo.value?.packageProductCategory = msdkInfoModel.getPackageProductCategory()
 
-        areaCodeChangeListener =
-            AreaCodeChangeListener { _, changed ->
-                msdkInfo.value?.countryCode = if (changed == null) DEFAULT_STR else changed.areaCode
-                refreshMSDKInfo()
-            }
+        areaCodeChangeListener = AreaCodeChangeListener { _, changed ->
+            LogUtils.i(logTag, "areaCodeData", changed)
+            msdkInfo.value?.countryCode = if (changed == null) DEFAULT_STR else changed.areaCode
+            refreshMSDKInfo()
+        }
         netWorkStatusListener = IDJINetworkStatusListener {
+            LogUtils.i(logTag, "isNetworkAvailable", it)
             updateNetworkInfo(it)
             refreshMSDKInfo()
         }
@@ -79,14 +78,14 @@ class MSDKInfoVm : DJIViewModel() {
         if (isInited.getAndSet(true)) {
             return
         }
-        FlightControllerKey.KeyConnection.create().listen(this){
+        FlightControllerKey.KeyConnection.create().listen(this) {
             LogUtils.i(tag, "KeyConnection:$it")
             updateFirmwareVersion()
         }
 
         AreaCodeManager.getInstance().addAreaCodeChangeListener(areaCodeChangeListener)
         DJINetworkManager.getInstance().addNetworkStatusListener(netWorkStatusListener)
-        ProductKey.KeyProductType.create().listen(this){
+        ProductKey.KeyProductType.create().listen(this) {
             LogUtils.i(tag, "KeyProductType:$it")
             it?.let {
                 msdkInfo.value?.productType = it
@@ -102,19 +101,15 @@ class MSDKInfoVm : DJIViewModel() {
     }
 
     private fun updateNetworkInfo(isAvailable: Boolean) {
-        if (!isAvailable) {
-            msdkInfo.value?.networkInfo = DJINetworkError.NO_NETWORK
-            return
-        }
-
-        viewModelScope.launch {
-            var isInInnerNetwork: Boolean
-            withContext(Dispatchers.IO) {
-                isInInnerNetwork = SDKConfig.getInstance().isInInnerNetwork
-            }
-            msdkInfo.value?.networkInfo =
-                if (isInInnerNetwork) IN_INNER_NETWORK_STR else IN_OUT_NETWORK_STR
-        }
+        msdkInfo.value?.networkInfo = if(isAvailable) ONLINE_STR else NO_NETWORK_STR
+//        viewModelScope.launch {
+//            var isInInnerNetwork: Boolean
+//            withContext(Dispatchers.IO) {
+//                isInInnerNetwork = SDKConfig.getInstance().isInInnerNetwork
+//            }
+//            msdkInfo.value?.networkInfo =
+//                if (isInInnerNetwork) IN_INNER_NETWORK_STR else IN_OUT_NETWORK_STR
+//        }
     }
 
     private fun updateFirmwareVersion() {

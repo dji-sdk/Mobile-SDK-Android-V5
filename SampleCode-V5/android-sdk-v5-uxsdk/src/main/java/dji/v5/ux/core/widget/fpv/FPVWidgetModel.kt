@@ -116,7 +116,7 @@ class FPVWidgetModel(
             currentCameraIndex = CameraUtil.getCameraIndex(source.physicalDevicePosition)
             val videoViewChangedConsumer = { _: Any -> videoViewChangedProcessor.onNext(true) }
             bindDataProcessor(CameraKey.KeyCameraOrientation.create(currentCameraIndex), orientationProcessor, videoViewChangedConsumer)
-            bindDataProcessor(CameraKey.KeyCameraVideoStreamSource.create(currentCameraIndex), streamSourceCameraTypeProcessor) {
+            bindDataProcessor(CameraKey.KeyLiveViewCameraSource.create(currentCameraIndex), streamSourceCameraTypeProcessor) {
                 currentLensType = when (it) {
                     CameraVideoStreamSourceType.WIDE_CAMERA -> CameraLensType.CAMERA_LENS_WIDE
                     CameraVideoStreamSourceType.ZOOM_CAMERA -> CameraLensType.CAMERA_LENS_ZOOM

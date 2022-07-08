@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_perception_button_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_obstacle_avoidance_master_switch_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/tv_obstacle_avoidance_master_switch_tip" />
+
+            <ToggleButton
+                android:id="@+id/tb_obstacle_avoidance_master_switch"
+                android:layout_width="36dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/tv_obstacle_avoidance_master_switch_tip"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/tv_obstacle_avoidance_sub_switch_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_obstacle_avoidance_master_switch_tip"
+                android:layout_marginTop="10dp"
+                android:text="@string/bt_set_obstacle_avoidance_sub_switch" />
+
+            <RelativeLayout
+                android:id="@+id/rl_obstacle_avoidance_up_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_obstacle_avoidance_sub_switch_tip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_obstacle_avoidance_up_switch_tip"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bt_set_obstacle_avoidance_upwrard_switch"
+                    android:textSize="10sp" />
+
+                <ToggleButton
+                    android:id="@+id/tv_obstacle_avoidance_up_switch"
+                    android:layout_width="36dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/tv_obstacle_avoidance_up_switch_tip"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/toggle_selector"
+                    android:textOff=""
+                    android:textOn="" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_obstacle_avoidance_down_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_obstacle_avoidance_sub_switch_tip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/rl_obstacle_avoidance_up_switch">
+
+                <TextView
+                    android:id="@+id/tv_obstacle_avoidance_down_switch_tip"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bt_set_obstacle_avoidance_down_switch"
+                    android:textSize="10sp" />
+
+                <ToggleButton
+                    android:id="@+id/tv_obstacle_avoidance_down_switch"
+                    android:layout_width="36dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/tv_obstacle_avoidance_down_switch_tip"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/toggle_selector"
+                    android:textOff=""
+                    android:textOn="" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_obstacle_avoidance_horizontal_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_obstacle_avoidance_sub_switch_tip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/rl_obstacle_avoidance_down_switch">
+
+                <TextView
+                    android:id="@+id/tv_obstacle_avoidance_horizontal_switch_tip"
+                    android:layout_width="36dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/bt_set_obstacle_avoidance_horizontal_switch"
+                    android:textSize="10sp" />
+
+                <ToggleButton
+                    android:id="@+id/tv_obstacle_avoidance_horizontal_switch"
+                    android:layout_width="36dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/tv_obstacle_avoidance_horizontal_switch_tip"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/toggle_selector"
+                    android:textOff=""
+                    android:textOn="" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/bt_set_vision_positioning_enable_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_obstacle_avoidance_up_switch"
+                android:layout_marginTop="10dp"
+                android:text="@string/bt_set_vision_positioning_enable_tip" />
+
+            <ToggleButton
+                android:id="@+id/tb_set_vision_positioning_enable_switch"
+                android:layout_width="36dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/rl_obstacle_avoidance_up_switch"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/bt_set_vision_positioning_enable_tip"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn="" />
+
+
+            <TextView
+                android:id="@+id/bt_set_precision_landing_enable_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_set_vision_positioning_enable_tip"
+                android:layout_marginTop="10dp"
+                android:text="@string/bt_set_precision_landing_enable_tip" />
+
+            <ToggleButton
+                android:id="@+id/tb_set_precision_landing_enable_switch"
+                android:layout_width="36dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/bt_set_vision_positioning_enable_tip"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/bt_set_precision_landing_enable_tip"
+                android:background="@drawable/toggle_selector"
+                android:textOff=""
+                android:textOn="" />
+
+
+            <TextView
+                android:id="@+id/tv_other_obstacle_avoidance_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_set_precision_landing_enable_tip"
+                android:layout_marginTop="10dp"
+                android:text="@string/tv_other_obstacle_avoidance_tip" />
+
+            <Button
+                android:id="@+id/bt_set_obstacle_avoidance_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_other_obstacle_avoidance_tip"
+                android:layout_marginTop="10dp"
+                android:text="@string/bt_set_obstacle_avoidance_type" />
+
+            <Button
+                android:id="@+id/bt_set_obstacle_avoidance_braking_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_set_obstacle_avoidance_type"
+                android:text="@string/bt_set_obstacle_avoidance_braking_distance" />
+
+            <Button
+                android:id="@+id/bt_set_obstacle_avoidance_warning_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_set_obstacle_avoidance_braking_distance"
+                android:text="@string/bt_set_obstacle_avoidance_warning_distance" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--加上HorizontalScrollView，错误比较多时，可以横向滚动查看-->
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/sv_perception_button_list">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_perception_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="11dp" />
+
+            <TextView
+                android:id="@+id/tv_error_msg_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_perception_info"
+                android:text="ErrorMsg:"
+                android:textColor="@color/red"
+                android:textSize="11dp" />
+
+            <TextView
+                android:id="@+id/tv_error_msg"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_perception_info"
+                android:layout_toRightOf="@+id/tv_error_msg_tip"
+                android:inputType="textMultiLine"
+                android:textColor="@color/red"
+                android:textSize="11dp"
+                tools:text="测试" />
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+
+</RelativeLayout>

@@ -8,13 +8,9 @@ import dji.v5.ux.R
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
-import dji.v5.ux.core.util.GpsUtils
-import dji.v5.ux.core.util.UnitUtils
+import dji.v5.common.utils.GpsUtils
+import dji.v5.common.utils.UnitUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.BackpressureStrategy
-import io.reactivex.rxjava3.core.Flowable
-import io.reactivex.rxjava3.core.FlowableEmitter
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.uxsdk_liveview_pfd_attitude_display_widget.view.*
 import java.lang.Double.NaN
 import java.util.*

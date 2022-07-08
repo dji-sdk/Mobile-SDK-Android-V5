@@ -2,8 +2,9 @@ package dji.sampleV5.moduleaircraft.models
 
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
-import dji.sampleV5.modulecommon.data.DJIBaseResult
+import dji.sampleV5.modulecommon.data.DJIToastResult
 import dji.sampleV5.moduleaircraft.data.DJIRTKBaseStationConnectInfo
+
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D
 import dji.sdk.keyvalue.value.rtkbasestation.RTKBaseStationResetPasswordInfo
 import dji.sdk.keyvalue.value.rtkbasestation.RTKStationConnetState
@@ -12,6 +13,7 @@ import dji.sdk.keyvalue.value.rtkbasestation.RTKStationInfo
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.rtk.RTKCenter
+import dji.v5.manager.aircraft.rtk.RTKLocationInfo
 import dji.v5.manager.aircraft.rtk.station.*
 import dji.v5.utils.common.LogUtils
 import java.util.ArrayList
@@ -27,68 +29,44 @@ import java.util.ArrayList
 class RTKStationVM : DJIViewModel() {
     private val TAG = "StationRTKVM"
     private val rtkStationManager = RTKCenter.getInstance().rtkStationManager
-    val startSearchStationLD = MutableLiveData<DJIBaseResult<String>>()
-    val stopSearchStationLD = MutableLiveData<DJIBaseResult<String>>()
 
-    val stationListLD = MutableLiveData<DJIBaseResult<List<DJIRTKBaseStationConnectInfo>>>()
+    val stationListLD = MutableLiveData<List<DJIRTKBaseStationConnectInfo>>()
 
-    val connectRTKStationLD = MutableLiveData<DJIBaseResult<Boolean>>()
+    val appStationConnectStatusLD = MutableLiveData<RTKStationConnetState>()
 
-    val appStationConnectStatusLD = MutableLiveData<DJIBaseResult<RTKStationConnetState>>()
+    val appStationConnectedInfoLD = MutableLiveData<ConnectedRTKStationInfo>()
 
-    val appStationConnectedInfoLD = MutableLiveData<DJIBaseResult<ConnectedRTKStationInfo>>()
+    val stationPositionLD = MutableLiveData<LocationCoordinate3D?>()
 
+    val rtkLocationLD = MutableLiveData<RTKLocationInfo>()
 
-    val loginLD = MutableLiveData<DJIBaseResult<Boolean>>()
-
-    val setStationPositionLD = MutableLiveData<DJIBaseResult<Boolean>>()
-    val getStationPositionLD = MutableLiveData<DJIBaseResult<LocationCoordinate3D>>()
-
-    val resetStationPositionLD = MutableLiveData<DJIBaseResult<Boolean>>()
-
-    val resetStationPasswordLD = MutableLiveData<DJIBaseResult<Boolean>>()
-
-    val setStationNameLD = MutableLiveData<DJIBaseResult<Boolean>>()
 
     private val searchStationListener =
         SearchRTKStationListener { newConnectInfoList ->
-            val convertToDJIRTKBaseStationConnectInfo =
-                convertToDJIRTKBaseStationConnectInfo(newConnectInfoList)
-            stationListLD.postValue(
-                DJIBaseResult.success(
-                    convertToDJIRTKBaseStationConnectInfo
-                )
-            )
-
+            val convertToDJIRTKBaseStationConnectInfo = convertToDJIRTKBaseStationConnectInfo(newConnectInfoList)
+            stationListLD.postValue(convertToDJIRTKBaseStationConnectInfo)
         }
 
     private val stationConnectStatusListener =
         RTKStationConnectStatusListener { newRtkBaseStationConnectState ->
-            appStationConnectStatusLD.postValue(
-                DJIBaseResult.success(
-                    newRtkBaseStationConnectState
-                )
-            )
+            appStationConnectStatusLD.postValue(newRtkBaseStationConnectState)
         }
 
     private val connectedRTKStationInfoListener =
         ConnectedRTKStationInfoListener { newValue ->
-            appStationConnectedInfoLD.postValue(
-                DJIBaseResult.success(newValue)
-            )
+            appStationConnectedInfoLD.postValue(newValue)
         }
-
 
     fun startSearchStation() {
         LogUtils.d(TAG, "startSearchStation")
         rtkStationManager.startSearchRTKStation(object :
             CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
-                startSearchStationLD.postValue(DJIBaseResult.success())
+                sendToastMsg(DJIToastResult.success("Searing rtk station..."))
             }
 
             override fun onFailure(error: IDJIError) {
-                startSearchStationLD.postValue(DJIBaseResult.failed(error.toString()))
+                sendToastMsg(DJIToastResult.failed(error.toString()))
 
             }
 
@@ -98,12 +76,12 @@ class RTKStationVM : DJIViewModel() {
     fun stopSearchStation() {
         rtkStationManager.stopSearchRTKStation(object : CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
-                stopSearchStationLD.postValue(DJIBaseResult.success())
+                sendToastMsg(DJIToastResult.success("Stop search station  success"))
 
             }
 
             override fun onFailure(error: IDJIError) {
-                stopSearchStationLD.postValue(DJIBaseResult.failed(error.toString()))
+                sendToastMsg(DJIToastResult.failed(error.toString()))
             }
 
         })
@@ -119,6 +97,12 @@ class RTKStationVM : DJIViewModel() {
 
     fun addStationConnectStatusListener() {
         rtkStationManager.addRTKStationConnectStatusListener(stationConnectStatusListener)
+    }
+
+    fun addRTKLocationListener() {
+        RTKCenter.getInstance().addRTKLocationInfoListener {
+            rtkLocationLD.postValue(it)
+        }
     }
 
     fun removeStationConnectStatusListener() {
@@ -149,32 +133,18 @@ class RTKStationVM : DJIViewModel() {
         rtkStationManager.startConnectToRTKStation(stationId, object :
             CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
-                connectRTKStationLD.postValue(DJIBaseResult.success())
+                sendToastMsg(DJIToastResult.success("Station connecting..."))
             }
 
             override fun onFailure(error: IDJIError) {
-                connectRTKStationLD.postValue(DJIBaseResult.failed(error.toString()))
-
+                sendToastMsg(DJIToastResult.failed(error.toString()))
             }
 
         })
     }
 
-    fun loginAsAdmin(password: String) {
-        rtkStationManager.loginRTKStation(password, object :
-            CommonCallbacks.CompletionCallback {
-            override fun onSuccess() {
-                loginLD.postValue(DJIBaseResult.success())
-
-            }
-
-            override fun onFailure(error: IDJIError) {
-                loginLD.postValue(DJIBaseResult.failed(error.toString()))
-
-            }
-
-
-        })
+    fun loginAsAdmin(password: String, callbacks: CommonCallbacks.CompletionCallback) {
+        rtkStationManager.loginRTKStation(password, callbacks)
     }
 
     fun setRTKStationPosition(locationCoordinate3D: LocationCoordinate3D) {
@@ -182,42 +152,40 @@ class RTKStationVM : DJIViewModel() {
             locationCoordinate3D,
             object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
-                    setStationPositionLD.postValue(DJIBaseResult.success())
-
+                    sendToastMsg(DJIToastResult.success("SetRTKStationPosition success"))
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    setStationPositionLD.postValue(DJIBaseResult.failed(error.toString()))
+                    sendToastMsg(DJIToastResult.failed(error.toString()))
                 }
 
-            });
+            })
     }
 
     fun getRTKStationPosition() {
         rtkStationManager.getRTKStationReferencePosition(object :
             CommonCallbacks.CompletionCallbackWithParam<LocationCoordinate3D> {
             override fun onSuccess(locationCoordinate3D: LocationCoordinate3D?) {
-                getStationPositionLD.postValue(DJIBaseResult.success(locationCoordinate3D))
-
+                stationPositionLD.postValue(locationCoordinate3D)
             }
 
             override fun onFailure(error: IDJIError) {
-                getStationPositionLD.postValue(DJIBaseResult.failed(error.toString()))
+                sendToastMsg(DJIToastResult.failed(error.toString()))
             }
 
-        });
+        })
     }
 
     fun resetRTKStationPosition() {
         rtkStationManager.resetRTKStationReferencePosition(object :
             CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
-                resetStationPositionLD.postValue(DJIBaseResult.success())
+                sendToastMsg(DJIToastResult.success("Reset station position success"))
 
             }
 
             override fun onFailure(error: IDJIError) {
-                resetStationPositionLD.postValue(DJIBaseResult.failed(error.toString()))
+                sendToastMsg(DJIToastResult.failed(error.toString()))
 
             }
 
@@ -229,12 +197,12 @@ class RTKStationVM : DJIViewModel() {
         rtkStationManager.resetRTKStationPassword(passwordParam, object :
             CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
-                resetStationPasswordLD.postValue(DJIBaseResult.success())
+                sendToastMsg(DJIToastResult.success("Reset station password success"))
 
             }
 
             override fun onFailure(error: IDJIError) {
-                resetStationPasswordLD.postValue(DJIBaseResult.failed(error.toString()))
+                sendToastMsg(DJIToastResult.failed(error.toString()))
 
             }
 
@@ -246,11 +214,11 @@ class RTKStationVM : DJIViewModel() {
         rtkStationManager.setRTKStationName(name, object :
             CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
-                setStationNameLD.postValue(DJIBaseResult.success())
+                sendToastMsg(DJIToastResult.success("Set station name success"))
             }
 
             override fun onFailure(error: IDJIError) {
-                setStationNameLD.postValue(DJIBaseResult.failed(error.toString()))
+                sendToastMsg(DJIToastResult.failed(error.toString()))
 
             }
 
@@ -277,6 +245,10 @@ class RTKStationVM : DJIViewModel() {
         val name = this.stationName
         val signalLevel = this.signalLevel
         return DJIRTKBaseStationConnectInfo(baseStationId, signalLevel, name)
+    }
+
+    private fun sendToastMsg(djiToastResult: DJIToastResult) {
+        toastResult?.postValue(djiToastResult)
     }
 
 }

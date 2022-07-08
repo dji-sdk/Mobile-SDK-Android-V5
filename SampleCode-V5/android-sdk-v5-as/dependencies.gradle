@@ -1,12 +1,15 @@
 ext {
     deps = [:]
+    //DJI三方库
+    deps.networkRtkHelper = "com.dji:library-networkrtk-helper:2.0.2"
+
     // 三方依赖库
     deps.amUtilViewpager = 'am.util:viewpager:25.1.0'
     deps.bcpkix = 'org.bouncycastle:bcpkix-jdk15on:1.57'
     deps.bcprov = 'org.bouncycastle:bcprov-jdk15on:1.57'
     deps.eventbusProcessor = 'org.greenrobot:eventbus-annotation-processor:3.0.1'
     deps.eventbus = 'org.greenrobot:eventbus:3.0.0'
-    deps.gson = 'com.google.code.gson:gson:2.8.5'
+    deps.gson = 'com.google.code.gson:gson:2.8.6'
     deps.hugo = 'com.jakewharton.hugo:hugo-annotations:1.2.1'
     deps.mapbox = 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.0'
     deps.mapboxService = 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.0.0'
@@ -28,10 +31,11 @@ ext {
     deps.protobufJava = 'com.google.protobuf:protobuf-java:3.8.0'
     deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
     deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+    deps.bugly = 'com.tencent.bugly:crashreport:4.0.4'
 
     deps.maplibreAnotation = 'org.maplibre.gl:android-plugin-annotation-v9:1.0.0'
     deps.maplibreTurf =  'org.maplibre.gl:android-sdk-turf:5.9.0'
-    deps.maplibreSdk = 'org.maplibre.gl:android-sdk:9.4.2'
+    deps.maplibreSdk = 'org.maplibre.gl:android-sdk:9.5.2'
     // google map
     deps.playservicesplaces = 'com.google.android.gms:play-services-places:16.0.0'
     deps.playservicesmaps    = 'com.google.android.gms:play-services-maps:16.0.0'
@@ -56,9 +60,9 @@ ext {
     deps.lifecycleViewModel = 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
     deps.lifecycleLiveData = 'androidx.lifecycle:lifecycle-livedata:2.3.1'
     deps.lifecycleProcess = 'androidx.lifecycle:lifecycle-process:2.3.1'
-    deps.room = 'androidx.room:room-runtime:2.2.6'
-    deps.room_rxjava = 'androidx.room:room-rxjava2:2.1.0'
-    deps.room_compiler = 'androidx.room:room-compiler:2.2.6'
+    deps.room = 'androidx.room:room-runtime:2.3.0'
+    deps.room_rxjava = 'androidx.room:room-rxjava3:2.3.0'
+    deps.room_compiler = 'androidx.room:room-compiler:2.3.0'
     deps.legacySupport = 'androidx.legacy:legacy-support-v4:1.0.0'
     deps.media = 'androidx.media:media:1.0.0'
 
@@ -68,8 +72,6 @@ ext {
     deps.ktxFrag = "androidx.fragment:fragment-ktx:1.3.3"
     deps.ktxNavigation = "androidx.navigation:navigation-fragment-ktx:2.2.1"
     deps.ktxNavigationUi = "androidx.navigation:navigation-ui-ktx:2.2.1"
-
-    deps.networkRtkHelper = "com.dji:library-networkrtk-helper:2.0.2"
 
     //glide
     deps.glide =   'com.github.bumptech.glide:glide:4.9.0'
@@ -83,4 +85,9 @@ ext {
     deps.testRunner =  'androidx.test:runner:1.4.0'
     deps.junitExt = 'androidx.test.ext:junit:1.1.2'
     deps.espressoCore = 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //aspectJ
+    deps.aspectj_tools = 'org.aspectj:aspectjtools:1.9.6'
+    deps.aspectj_rt = 'org.aspectj:aspectjrt:1.9.6'
+    deps.aspectj_weaver = 'org.aspectj:aspectjweaver:1.9.6'
 }

@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
-import dji.sdk.keyvalue.value.CameraStorageInfo;
-import dji.sdk.keyvalue.value.CameraStorageInfos;
+import dji.sdk.keyvalue.value.camera.CameraStorageInfo;
+import dji.sdk.keyvalue.value.camera.CameraStorageInfos;
 import dji.sdk.keyvalue.value.camera.CameraSDCardState;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
 import dji.sdk.keyvalue.value.camera.CameraType;
@@ -89,7 +89,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         cameraVideoStorageState = DataProcessor.create(cameraSDVideoStorageState);
         isRecording = DataProcessor.create(false);
         cameraDisplayName = DataProcessor.create("");
-        cameraType = DataProcessor.create(CameraType.UNKNOWN);
+        cameraType = DataProcessor.create(CameraType.NOT_SUPPORTED);
         recordingTimeInSeconds = DataProcessor.create(0);
         VideoResolutionFrameRate resolutionAndFrameRate = new VideoResolutionFrameRate(
                 VideoResolution.UNKNOWN,

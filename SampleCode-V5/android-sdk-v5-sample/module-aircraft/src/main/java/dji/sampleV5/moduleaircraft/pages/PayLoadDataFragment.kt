@@ -36,10 +36,7 @@ class PayLoadDataFragment : DJIFragment() {
     private var messageList = ArrayList<String>()
     private lateinit var payLoadAdapter: ArrayAdapter<String>
     private val payLoadVM by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            ViewModelProvider.NewInstanceFactory()
-        ).get(PayLoadVM::class.java)
+        ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(PayLoadVM::class.java)
     }
     private val onKeyListener: View.OnKeyListener = object : View.OnKeyListener {
         override
@@ -57,11 +54,7 @@ class PayLoadDataFragment : DJIFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_payload_page, container, false)
 
     }
@@ -74,50 +67,17 @@ class PayLoadDataFragment : DJIFragment() {
     }
 
     private fun initView() {
-        payLoadAdapter =
-            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, messageList)
+        payLoadAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, messageList)
         message_listview.adapter = payLoadAdapter
 
-        payLoadVM.getSendMessageLiveData()
-            .observe(viewLifecycleOwner,
-                { t ->
-                    t?.run {
-                        if (isSuccess) {
-                            ToastUtils.showToast("Send success")
-                        } else {
-                            ToastUtils.showToast("Send fail:$msg")
 
-                        }
-                    }
-                })
+        payLoadVM.receiveMessageLiveData.observe(viewLifecycleOwner, { t ->
+            LogUtils.d(TAG, t)
+            messageList.add(t)
+            payLoadAdapter.notifyDataSetChanged()
+            message_listview.setSelection(messageList.size - 1)
+        })
 
-        payLoadVM.getReceiveMessageLiveData()
-            .observe(viewLifecycleOwner, { t ->
-                t?.run {
-                    if (isSuccess) {
-                        LogUtils.d(TAG, data)
-                        messageList.add(data ?: "Response is empty")
-                        payLoadAdapter.notifyDataSetChanged()
-                        message_listview.setSelection(messageList.size - 1)
-                    } else {
-                        ToastUtils.showToast("Receive fail：${msg}")
-                    }
-
-                }
-            })
-
-
-        payLoadVM.getProductNameLiveData().observe(viewLifecycleOwner,
-            { t ->
-                t.run {
-                    if (isSuccess) {
-                        ToastUtils.showToast("GetProductName success：ProductName=${data}")
-                    } else {
-                        ToastUtils.showToast("GetProductName fail：${msg}")
-
-                    }
-                }
-            })
 
     }
 
@@ -132,8 +92,10 @@ class PayLoadDataFragment : DJIFragment() {
             val size = sendByteArray.size
             val sendText = "The content sent is：${ed_data.text},byte length is：$size"
             if (size > MAX_LENGTH_OF_SEND_DATA) {
-                ToastUtils.showToast("The length of the sent content is $size bytes, which exceeds the maximum sending length of $MAX_LENGTH_OF_SEND_DATA bytes," +
-                        " and the sending fails!!!")
+                ToastUtils.showToast(
+                    "The length of the sent content is $size bytes, which exceeds the maximum sending length of $MAX_LENGTH_OF_SEND_DATA bytes," +
+                            " and the sending fails!!!"
+                )
                 return@setOnClickListener
             }
             payLoadVM.sendMessageToPayLoadSdk(sendByteArray)

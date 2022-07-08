@@ -12,7 +12,7 @@ import java.util.Locale;
 
 import androidx.annotation.Nullable;
 import dji.v5.ux.R;
-import dji.v5.ux.core.util.UnitUtils;
+import dji.v5.common.utils.UnitUtils;
 import dji.v5.ux.core.widget.hsi.AttitudeDisplayModel;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 

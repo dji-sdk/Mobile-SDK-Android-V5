@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import androidx.annotation.NonNull;
 import dji.sampleV5.modulecommon.util.ToastUtils;
 import dji.sampleV5.modulecommon.util.Util;
+import dji.sdk.keyvalue.converter.DJIValueConverter;
 import dji.sdk.keyvalue.converter.EmptyValueConverter;
 import dji.sdk.keyvalue.converter.SingleValueConverter;
 import dji.sdk.keyvalue.key.DJIActionKeyInfo;
@@ -203,6 +204,10 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                 @Override
                 public void onSuccess() {
                     if (keyOperateCallBack != null) {
+                        // 保存上一次设置成功的对象，下次set时可使用保存过的对象 序列化json
+                        if (getKeyInfo().getTypeConverter() instanceof DJIValueConverter) {
+                            param = p;
+                        }
                         keyOperateCallBack.actionChange("【SET】" + p.getClass().getSimpleName() + " success");
                     }
                     ToastUtils.INSTANCE.showToast("set " + p.getClass().getSimpleName() + " success");
@@ -268,16 +273,14 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
      */
     private CommonCallbacks.KeyListener<R> listenSDKCallback =
         ( oldValue ,newValue) -> {
-            String data = "";
-            if (oldValue != null) {
-                data = "oldValue:" + oldValue.toString() ;
-            }
-            if (newValue != null) {
-                data = data + "newValue:" + newValue.toString();
-            }
-            data = "【LISTEN】" + getName() + " result:" + data;
+            StringBuffer sb = new StringBuffer("【LISTEN】");
+            sb.append(getName());
+            sb.append(" result:");
+            sb.append("oldValue:").append(oldValue);
+            sb.append(" newValue:").append(newValue);
+
             if (pushCallBack != null) {
-                pushCallBack.actionChange(data);
+                pushCallBack.actionChange(sb.toString());
             }
         };
 

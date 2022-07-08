@@ -17,12 +17,14 @@ import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.MegaphoneVM
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.megaphone.FileInfo
 import dji.v5.manager.aircraft.megaphone.UploadType
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.FileUtils
+import dji.v5.utils.common.LogUtils
 import kotlinx.android.synthetic.main.frag_local_file.*
 import java.io.File
 
@@ -54,28 +56,31 @@ class LocalFileFragment:DJIFragment(){
         }
 
         btn_start_upload.setOnClickListener {
-            if(et_local_file_path!!.text!=null){
+            if (et_local_file_path!!.text != null) {
                 val filePath:String = et_local_file_path!!.text.toString()
-                val fileInfo = FileInfo(
-                    UploadType.VOICE_FILE,
-                    File(filePath),
-                    null
-                )
-                megaphoneVM.pushFileToMegaphone(
-                    fileInfo,
-                    object : CommonCallbacks.CompletionCallbackWithProgress<Int> {
-                        override fun onProgressUpdate(progress: Int) {
-                            tv_local_file_upload_status.text = progress.toString()
-                        }
+                val file = File(filePath)
+                if(file.exists()){
+                    val fileInfo = FileInfo(
+                        UploadType.VOICE_FILE,
+                        file,
+                        null
+                    )
+                    megaphoneVM.pushFileToMegaphone(
+                        fileInfo,
+                        object : CommonCallbacks.CompletionCallbackWithProgress<Int> {
+                            override fun onProgressUpdate(progress: Int) {
+                                tv_local_file_upload_status.text = progress.toString()
+                            }
 
-                        override fun onSuccess() {
-                            tv_local_file_upload_status.text = "upload success"
-                        }
+                            override fun onSuccess() {
+                                tv_local_file_upload_status.text = "upload success"
+                            }
 
-                        override fun onFailure(error: IDJIError) {
-                            tv_local_file_upload_status.text = "upload failed"
-                        }
-                    })
+                            override fun onFailure(error: IDJIError) {
+                                tv_local_file_upload_status.text = "upload failed"
+                            }
+                        })
+                }
             }
         }
 
@@ -133,118 +138,29 @@ class LocalFileFragment:DJIFragment(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE && resultCode == -1 && data != null) {
-            val uri = data.data
-            et_local_file_path.setText(uri?.let { getPath(ContextUtil.getContext(), it) })
-        }
-    }
-
-    fun getPath(context: Context, uri: Uri): String? {
-        val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-
-        // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-            // ExternalStorageProvider
-            if (isExternalStorageDocument(uri)) {
-                val path = getExternalStorageDocument(uri)
-                path?.let {
-                    it
-                }
-            } else if (isDownloadsDocument(uri)) {
-                return getDownLoadDocument(context, uri)
-            } else if (isMediaDocument(uri)) {
-                return getMediaDocument(context, uri)
+        super.onActivityResult(requestCode, resultCode, data)
+        data?.apply {
+            getData()?.let {
+                et_local_file_path.setText(getPath(context, it))
             }
-        } else if ("content".equals(uri.scheme, ignoreCase = true)) {
-            return getDataColumn(context, uri, null, null)
-        } else if ("file".equals(uri.scheme, ignoreCase = true)) {
-            return uri.path
         }
-        return null
     }
-
-    fun getExternalStorageDocument(uri: Uri):String{
-        val docId = DocumentsContract.getDocumentId(uri)
-        val split = docId.split(":".toRegex()).toTypedArray()
-        val type = split[0]
-        if ("primary".equals(type, ignoreCase = true)) {
-            return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+    fun getPath(context: Context?, uri: Uri?): String {
+        if (DocumentsContract.isDocumentUri(context, uri) && isExternalStorageDocument(uri)) {
+            val docId = DocumentsContract.getDocumentId(uri)
+            val split = docId.split(":".toRegex()).toTypedArray()
+            if (split.size != 2 ) {
+                return ""
+            }
+            val type = split[0]
+            if ("primary".equals(type, ignoreCase = true)) {
+                return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+            }
         }
         return ""
     }
 
-    fun getDownLoadDocument(context: Context, uri: Uri): String? {
-        val id = DocumentsContract.getDocumentId(uri)
-        val contentUri = ContentUris.withAppendedId(
-            Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
-        )
-        return getDataColumn(
-            context,
-            contentUri,
-            null,
-            null
-        )
-    }
-
-    fun getMediaDocument(context: Context, uri: Uri): String? {
-        val docId = DocumentsContract.getDocumentId(uri)
-        val split = docId.split(":".toRegex()).toTypedArray()
-        val type = split[0]
-        var contentUri: Uri? = null
-        if ("image" == type) {
-            contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        } else if ("video" == type) {
-            contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-        } else if ("audio" == type) {
-            contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        }
-        val selection = "_id=?"
-        val selectionArgs = arrayOf(
-            split[1]
-        )
-        return getDataColumn(
-            context,
-            contentUri,
-            selection,
-            selectionArgs
-        )
-    }
-
-    fun getDataColumn(
-        context: Context, uri: Uri?, selection: String?,
-        selectionArgs: Array<String>?
-    ): String? {
-        var cursor: Cursor? = null
-        val column = "_data"
-        val projection = arrayOf(
-            column
-        )
-        try {
-            cursor = context.contentResolver.query(
-                uri!!, projection, selection, selectionArgs,
-                null
-            )
-            if (cursor != null && cursor.moveToFirst()) {
-                val column_index = cursor.getColumnIndexOrThrow(column)
-                return cursor.getString(column_index)
-            }
-        } finally {
-            cursor?.close()
-        }
-        return null
-    }
-
-
-    fun isExternalStorageDocument(uri: Uri): Boolean {
-        return "com.android.externalstorage.documents" == uri.authority
-    }
-
-
-    fun isDownloadsDocument(uri: Uri): Boolean {
-        return "com.android.providers.downloads.documents" == uri.authority
-    }
-
-    fun isMediaDocument(uri: Uri): Boolean {
-        return "com.android.providers.media.documents" == uri.authority
+    fun isExternalStorageDocument(uri: Uri?): Boolean {
+        return "com.android.externalstorage.documents" == uri?.authority
     }
 }

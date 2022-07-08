@@ -14,7 +14,7 @@ import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
-import dji.v5.ux.core.util.UnitUtils
+import dji.v5.common.utils.UnitUtils
 import kotlinx.android.synthetic.main.uxsdk_liveview_pfd_speed_display_widget.view.*
 import java.util.*
 

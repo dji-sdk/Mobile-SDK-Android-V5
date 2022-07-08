@@ -91,22 +91,7 @@ android {
 }
 
 dependencies {
-    //本地aar依赖编译时，需要手动添加sdk对其他aar的依赖。
-    implementation deps.gson
-    implementation deps.websocket
-    implementation deps.rx3Java
-    implementation deps.room
-    implementation deps.room_rxjava
-    annotationProcessor deps.room_compiler
-    implementation deps.room_safe
-    implementation deps.fastjson
-
-    //网络库的依赖项
-    implementation deps.okhttp3
-    implementation deps.leakcanary
-
     implementation project(':sample-module-aircraft')
-
     compileOnly files("../../${project.AIRCRAFT_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
     implementation files("../../${project.AIRCRAFT_RELEASE}${project.MSDK_VERSION}${project.AAR_FILE_TYPE}")
 }

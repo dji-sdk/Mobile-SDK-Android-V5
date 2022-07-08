@@ -10,9 +10,11 @@ object ToastUtils {
     private val handler = Handler(Looper.getMainLooper())
 
     fun showToast(context: Context?, msg: String) {
-        handler.post {
-            context?.let {
-                Toast.makeText(it.applicationContext, msg, Toast.LENGTH_SHORT).show()
+        context?.let {
+            it.applicationContext.apply {
+                handler.post {
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

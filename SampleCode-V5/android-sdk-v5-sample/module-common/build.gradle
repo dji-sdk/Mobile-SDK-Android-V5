@@ -24,6 +24,27 @@ android {
 }
 
 dependencies {
+
+    //本地sdk aar依赖编译时，需要手动添加sdk对其他aar的依赖。
+    /** <-----------------sdk 所需--------------------> **/
+    api deps.gson
+    api deps.websocket
+    api deps.rx3Java
+    api deps.room
+    api deps.room_rxjava
+    annotationProcessor deps.room_compiler
+    api deps.room_safe
+    api deps.fastjson
+    implementation deps.aspectj_rt
+    api deps.rx3Android
+    //脚本替换使用，勿动。
+    //compileOnly all
+
+    //网路库
+    //runtimeOnly networkImp
+    implementation deps.okhttp3
+
+    /** <-----------------sample所需--------------------> **/
     api deps.appcompat
     api deps.constraintLayout
     api deps.aacCommon
@@ -37,10 +58,13 @@ dependencies {
     api deps.legacySupport
     api deps.lifecycleViewModel
     api deps.lifecycleLiveData
+    implementation deps.leakcanary
+    implementation deps.bugly
     api deps.glide
     kapt deps.glidecompiler
-    api deps.rx3Android
 
-    compileOnly files("../../${project.AIRCRAFT_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
+    compileOnly files("../../${project.ALL_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
+
+    //网络库的依赖项
     runtimeOnly files("../../${project.NETWORK_IMP_RELEASE}${project.MSDK_VERSION}.aar")
 }

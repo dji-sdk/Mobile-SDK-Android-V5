@@ -121,7 +121,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
         panoramaMode = DataProcessor.create(PhotoPanoramaMode.UNKNOWN);
         isShootingPhoto = DataProcessor.create(false);
         isShootingInterval = DataProcessor.create(false);
-        cameraType = DataProcessor.create(CameraType.UNKNOWN);
+        cameraType = DataProcessor.create(CameraType.NOT_SUPPORTED);
         isShootingPanorama = DataProcessor.create(false);
         isStoringPhoto = DataProcessor.create(false);
         storageLocation = DataProcessor.create(CameraStorageLocation.SDCARD);

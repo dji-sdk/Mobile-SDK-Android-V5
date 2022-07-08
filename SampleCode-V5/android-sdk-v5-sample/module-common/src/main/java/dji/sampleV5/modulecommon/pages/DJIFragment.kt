@@ -33,6 +33,7 @@ open class DJIFragment : Fragment() {
 
     protected val msdkInfoVm: MSDKInfoVm by activityViewModels()
 
+
     open fun updateTitle() {
         arguments?.let {
             val title = it.getInt(MAIN_FRAGMENT_PAGE_TITLE, R.string.testing_tools)
@@ -74,4 +75,5 @@ open class DJIFragment : Fragment() {
         ) { _, _ -> onStrInput(inputServer.text.toString()) }
         builder.show()
     }
+
 }

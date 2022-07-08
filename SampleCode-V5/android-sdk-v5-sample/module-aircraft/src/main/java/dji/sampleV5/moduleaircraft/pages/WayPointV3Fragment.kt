@@ -44,6 +44,8 @@ import com.dji.mapkit.google.provider.GoogleProvider
 import com.dji.mapkit.maplibre.provider.MapLibreProvider
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.manager.aircraft.waypoint3.model.WaypointMissionExecuteState
+import java.io.IOException
+import kotlin.collections.ArrayList
 
 
 /**
@@ -57,8 +59,9 @@ class WayPointV3Fragment : DJIFragment() {
     private val WAYPOINT_SAMPLE_FILE_NAME : String = "waypointsample.kmz"
     private val WAYPOINT_SAMPLE_FILE_DIR : String = "waypoint/"
     private val WAYPOINT_SAMPLE_FILE_CACHE_DIR : String = "waypoint/cache/"
-    private val MISSION_ID = "sample"  // 每个航线任务的唯一ID ，由用户自行定义
-    val missionHashMap : HashMap<String,String> = HashMap<String,String>()
+    private val WAYPOINT_FILE_TAG = ".kmz"
+
+
     var mapView : DJIMapView? = null
     var map :DJIMap? = null
     var mapkitOptions:MapkitOptions? =null
@@ -66,8 +69,9 @@ class WayPointV3Fragment : DJIFragment() {
     var homePointBitMap:DJIBitmapDescriptor? = null
     var mAircraftMarker: DJIMarker? = null
     var homePointMarKer: DJIMarker? = null
-    var curMissionPath : String? = null
+    var curMissionPath : String = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME)
     var validLenth :Int = 2
+    var curMissionExecuteState : WaypointMissionExecuteState ?= null
 
 
     override fun onCreateView(
@@ -117,6 +121,7 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.addMissionStateListener() {
             mission_execute_state_tv?.text = "Mission Execute State : ${it.name}"
             btn_mission_upload.isEnabled = it == WaypointMissionExecuteState.READY
+            curMissionExecuteState = it
         }
         wayPointV3VM.addWaylineExecutingInfoListener(){
             wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
@@ -125,21 +130,11 @@ class WayPointV3Fragment : DJIFragment() {
 
        btn_mission_upload?.setOnClickListener {
 
-           var missionPath  = curMissionPath?:DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME)
-           var cachePath = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_CACHE_DIR)
-           val waypointFile = File( missionPath )
-
-           // 上传时生成一个uuid 将missionid与uuid绑定
-           val uuid =   UUID.randomUUID().toString().replace("-", "_")
-           missionHashMap.put(MISSION_ID , uuid)
-           val file = File(cachePath)
-           val renameFile = File(file.parentFile, "$uuid.kmz")
-           renameFile.createNewFile()
-
-           FileUtils.copyFileByChannel(missionPath, renameFile.path)
+         //  var missionPath  = curMissionPath?:DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME)
+           val waypointFile = File( curMissionPath )
 
            if (waypointFile.exists()) {
-               wayPointV3VM.pushKMZFileToAircraft(MISSION_ID, renameFile.path)
+               wayPointV3VM.pushKMZFileToAircraft( curMissionPath)
            } else{
                ToastUtils.showToast("Mission file not found!");
            }
@@ -160,21 +155,18 @@ class WayPointV3Fragment : DJIFragment() {
 
 
         btn_mission_start.setOnClickListener {
-            val missionId : String? = missionHashMap.get(MISSION_ID)
-            if (missionId != null) {
-                wayPointV3VM.startMission(missionId ,object : CommonCallbacks.CompletionCallback {
-                    override fun onSuccess() {
-                        ToastUtils.showToast("startMission Success")
-                    }
 
-                    override fun onFailure(error: IDJIError) {
-                        ToastUtils.showToast("startMission Failed " + getErroMsg(error))
-                    }
+            wayPointV3VM.startMission(FileUtils.getFileName(curMissionPath , WAYPOINT_FILE_TAG), object : CommonCallbacks.CompletionCallback {
+                override fun onSuccess() {
+                    ToastUtils.showToast("startMission Success")
+                }
 
-                } )
-            } else{
-                ToastUtils.showToast("Please Upload Mission")
-            }
+                override fun onFailure(error: IDJIError) {
+                    ToastUtils.showToast("startMission Failed " + getErroMsg(error))
+                }
+
+            })
+
         }
 
         btn_mission_pause.setOnClickListener {
@@ -222,9 +214,12 @@ class WayPointV3Fragment : DJIFragment() {
 
         }
         btn_mission_stop.setOnClickListener {
-            val missionId : String? = missionHashMap.get(MISSION_ID)
-            missionId ?.let {
-                wayPointV3VM.stopMission(missionId , object :CommonCallbacks.CompletionCallback{
+
+                if (curMissionExecuteState == WaypointMissionExecuteState.READY) {
+                    ToastUtils.showToast("Mission not start")
+                    return@setOnClickListener
+                }
+                wayPointV3VM.stopMission(FileUtils.getFileName(curMissionPath , WAYPOINT_FILE_TAG) , object :CommonCallbacks.CompletionCallback{
                     override fun onSuccess() {
                         ToastUtils.showToast("stopMission Success")
                     }
@@ -232,7 +227,7 @@ class WayPointV3Fragment : DJIFragment() {
                         ToastUtils.showToast("stopMission Failed " + getErroMsg(error))
                     }
                 })
-            }
+
         }
 
 
@@ -257,19 +252,46 @@ class WayPointV3Fragment : DJIFragment() {
             }
         }
     }
-    fun getPath(context: Context?, uri: Uri?): String? {
+    fun getPath(context: Context?, uri: Uri?): String {
         if (DocumentsContract.isDocumentUri(context, uri) && isExternalStorageDocument(uri)) {
             val docId = DocumentsContract.getDocumentId(uri)
             val split = docId.split(":".toRegex()).toTypedArray()
             if (split.size != validLenth ) {
-                return null
+                return ""
             }
             val type = split[0]
             if ("primary".equals(type, ignoreCase = true)) {
                 return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+            } else {
+                return getExtSdCardPaths(requireContext()).get(0)!! + "/" + split[1]
             }
         }
-        return null
+        return ""
+    }
+
+    private fun getExtSdCardPaths(context: Context): ArrayList<String?> {
+
+        var sExtSdCardPaths  = ArrayList<String?>()
+
+        for (file in context.getExternalFilesDirs("external")) {
+            if (file != null && file != context.getExternalFilesDir("external")) {
+                val index = file.absolutePath.lastIndexOf("/Android/data")
+                if (index >= 0) {
+                    var path: String? = file.absolutePath.substring(0, index)
+                    try {
+                        path = File(path).canonicalPath
+                    } catch (e: IOException) {
+                        LogUtils.e(logTag , e.message)
+
+                    }
+                    sExtSdCardPaths.add(path)
+                }
+            }
+        }
+        if (sExtSdCardPaths.isEmpty()) {
+            sExtSdCardPaths.add("/storage/sdcard1")
+        }
+        return sExtSdCardPaths
     }
 
     fun isExternalStorageDocument(uri: Uri?): Boolean {

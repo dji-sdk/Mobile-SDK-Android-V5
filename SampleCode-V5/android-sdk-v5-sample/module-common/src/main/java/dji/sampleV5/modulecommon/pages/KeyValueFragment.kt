@@ -39,9 +39,12 @@ import android.widget.ArrayAdapter
 
 import android.R.attr.data
 import android.R.attr.data
+import dji.sdk.keyvalue.key.CameraKey
 import dji.sdk.keyvalue.key.ComponentType
+import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
+import dji.v5.manager.KeyManager
 
 
 /**
@@ -58,7 +61,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
 
     val CAPABILITY_ENABLE = "capabilityenable"
     var currentChannelType: ChannelType? = ChannelType.CHANNEL_TYPE_CAMERA
-    val LISTEN_RECORD_MAX_LENGTH = 2000
+    val LISTEN_RECORD_MAX_LENGTH = 6000
     val HIGH_FREQUENCY_KEY_SP_NAME = "highfrequencykey"
     val LENS_TAG = "CAMERA_LENS_"
 
@@ -151,6 +154,15 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             iv_capability.isEnabled = it.productType != ProductType.UNRECOGNIZED
             setDataWithCapability(iv_capability.isChecked)
         }
+        sp_index.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                setKeyInfo()
+                currentKeyItem?.let { updateComponentSpinner(it) }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+               //do nothing
+            }
+        })
         iv_capability.setOnCheckedChangeListener { compoundButton, enable -> setDataWithCapability(enable) }
     }
 
@@ -220,18 +232,21 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         KeyItemActionListener<Any> { t -> //  processListenLogic();
             t?.let {
                 tv_result.text = appendLogMessageRecord(t.toString())
-                val scrollOffset = (tv_result!!.layout.getLineTop(tv_result!!.lineCount)
-                        - tv_result!!.height)
-                if (scrollOffset > 0) {
-                    tv_result!!.scrollTo(0, scrollOffset)
-                } else {
-                    tv_result!!.scrollTo(0, 0)
-                }
+                scrollToBottom()
             }
 
         }
 
 
+    private fun scrollToBottom(){
+        val scrollOffset = (tv_result!!.layout.getLineTop(tv_result!!.lineCount)
+                - tv_result!!.height)
+        if (scrollOffset > 0) {
+            tv_result!!.scrollTo(0, scrollOffset)
+        } else {
+            tv_result!!.scrollTo(0, 0)
+        }
+    }
     private fun appendLogMessageRecord(appendStr: String?): String {
         val curTime = SimpleDateFormat("HH:mm:ss").format(Date())
         logMessage.append(curTime)
@@ -253,6 +268,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     val pushCallback: KeyItemActionListener<String> =
         KeyItemActionListener<String> { t -> //  processListenLogic();
             tv_result?.text = appendLogMessageRecord(t)
+            scrollToBottom()
 
         }
 
@@ -296,13 +312,18 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
 
     private fun updateComponentSpinner( keyItem: KeyItem<*, *>){
         var componentType = ComponentType.find(keyItem.keyInfo.componentType)
-        if (componentType == ComponentType.CAMERA) {
+        if (componentType == ComponentType.CAMERA && isCapabilitySwitchOn()) {
+            var list = CapabilityManager.getInstance().getSupportLens("Key" + keyItem.name)
             val adapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_list_item_1,
-                CapabilityManager.getInstance().getSupportLens("Key" + keyItem.name))
+                list)
             sp_subtype.adapter = adapter
             tv_subtype.text = "lenstype"
+            var defalutIndex = list.indexOf("DEFAULT")
+            if (defalutIndex != -1) {
+                sp_subtype.setSelection(defalutIndex)
+            }
         } else{
             val adapter = ArrayAdapter(
                 requireContext(),
@@ -471,6 +492,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         data.addAll(showList)
         resetSearchFilter()
         setKeyCount(showList.size)
+        resetSelected()
         cameraParamsAdapter?.notifyDataSetChanged()
         DjiSharedPreferencesManager.putBoolean(context , CAPABILITY_ENABLE ,enable)
         if (enable) {
@@ -489,13 +511,48 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         if (enable && CapabilityManager.getInstance().isProductSupported(type)) {
             val iterator = showList.iterator();
             while (iterator.hasNext()) {
-                if (!CapabilityManager.getInstance()
-                        .isKeySupported( type,"Key" + iterator.next().name)
-                ) {
+                if (isNeedRemove("Key" +iterator.next().name)) {
                     iterator.remove()
                 }
             }
         }
+    }
+
+
+    private fun isNeedRemove(keyName:String): Boolean{
+        var isNeedRemove = false;
+        var type  = msdkInfoVm.msdkInfo.value?.productType?.name
+
+        val cameraType = KeyManager.getInstance().getValue(
+            KeyTools.createKey(
+                CameraKey.KeyCameraType,
+                CapabilityManager.getInstance().componentIndex
+            )
+        )
+
+        when (currentChannelType) {
+            ChannelType.CHANNEL_TYPE_CAMERA -> {
+                if (!CapabilityManager.getInstance()
+                        .isCameraKeySupported(type, cameraType?.name, keyName)) {
+                    isNeedRemove = true
+                }
+            }
+            ChannelType.CHANNEL_TYPE_AIRLINK -> {
+                if (!CapabilityManager.getInstance()
+                        .isKeySupported(type, "", ComponentType.AIRLINK,  keyName)) {
+                    isNeedRemove = true
+                }
+            }
+            else -> {
+                if (!CapabilityManager.getInstance()
+                        .isKeySupported(type,  keyName)
+                ) {
+                    isNeedRemove = true
+                }
+            }
+        }
+
+        return isNeedRemove
     }
     /**
      * 清空search框
@@ -619,9 +676,10 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
 
             if (index != -1) {
                 currentKeyItem!!.setComponetIndex(index)
+                CapabilityManager.getInstance().setComponetIndex(index)
             }
             var subtype:Int
-            if (ComponentType.find(currentKeyItem!!.keyInfo.componentType) == ComponentType.CAMERA)
+            if (ComponentType.find(currentKeyItem!!.keyInfo.componentType) == ComponentType.CAMERA && isCapabilitySwitchOn())
             {
                 subtype = getCameraSubIndex(LENS_TAG + sp_subtype.getSelectedItem().toString())
 

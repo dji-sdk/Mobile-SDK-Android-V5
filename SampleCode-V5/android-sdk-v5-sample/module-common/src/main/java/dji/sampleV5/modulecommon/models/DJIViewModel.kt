@@ -1,6 +1,7 @@
 package dji.sampleV5.modulecommon.models
 
 import androidx.lifecycle.ViewModel
+import dji.sampleV5.modulecommon.util.DJIToastUtil
 import dji.v5.utils.common.LogUtils
 
 /**
@@ -12,6 +13,7 @@ import dji.v5.utils.common.LogUtils
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
 open class DJIViewModel : ViewModel() {
+    val toastResult = DJIToastUtil.dJIToastLD
 
     val logTag = LogUtils.getTag(this)
 

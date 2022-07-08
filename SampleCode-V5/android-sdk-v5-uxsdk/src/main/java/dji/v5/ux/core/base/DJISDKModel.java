@@ -27,17 +27,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import dji.sdk.keyvalue.key.DJIKey;
-import dji.v5.common.callback.CommonCallbacks;
-import dji.v5.common.error.IDJIError;
+import dji.v5.common.utils.RxUtil;
 import dji.v5.manager.KeyManager;
 import dji.v5.utils.common.LogUtils;
-import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.FlowableEmitter;
-import io.reactivex.rxjava3.core.FlowableOnSubscribe;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleOnSubscribe;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 /**
@@ -51,9 +46,6 @@ public class DJISDKModel {
     //endregion
 
     private DJISDKModel() {
-        //设置所有RX的全局Error代理，为了避免某些Widget不设置errorConsumer而导致crash。
-        // 如果某个Widget有添加特定的error，则调用特定的error；否则调用全局的error
-        RxJavaPlugins.setErrorHandler(throwable -> LogUtils.e(TAG, throwable.getMessage()));
     }
 
     public static DJISDKModel getInstance() {
@@ -66,7 +58,7 @@ public class DJISDKModel {
      * @param listener The listener to unregister.
      */
     public void removeListener(@NonNull final Object listener) {
-        removeKeyListeners(listener).subscribe();
+        RxUtil.removeListener(listener);
     }
 
     /**
@@ -78,8 +70,7 @@ public class DJISDKModel {
      */
     @NonNull
     public <T> Flowable<T> addListener(@NonNull final DJIKey<T> key, @NonNull final Object listener) {
-        return Flowable.create((FlowableOnSubscribe<T>) emitter -> registerKey(emitter, key, listener), BackpressureStrategy.LATEST)
-                .subscribeOn(SchedulerProvider.computation());
+        return RxUtil.addListener(key, listener);
     }
 
     /**
@@ -91,19 +82,7 @@ public class DJISDKModel {
      */
     @NonNull
     public <T> Single<T> getValue(@NonNull final DJIKey<T> key) {
-        return Single.create((SingleOnSubscribe<T>) emitter -> KeyManager.getInstance().getValue(key,
-                new CommonCallbacks.CompletionCallbackWithParam<T>() {
-                    @Override
-                    public void onSuccess(@NonNull T value) {
-                        LogUtils.d(TAG, "Got current value for  key " + key.toString());
-                        emitter.onSuccess(value);
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull IDJIError djiError) {
-                        LogUtils.d(TAG, "Failure getting key " + key.toString() + ". " + djiError.toString());
-                    }
-                })).subscribeOn(SchedulerProvider.computation());
+        return RxUtil.getValue(key);
     }
 
     /**
@@ -127,20 +106,7 @@ public class DJISDKModel {
      */
     @NonNull
     public <T> Completable setValue(@NonNull final DJIKey<T> key, @NonNull final T value) {
-        return Completable.create(
-                emitter -> KeyManager.getInstance().setValue(key, value, new CommonCallbacks.CompletionCallback() {
-                            @Override
-                            public void onSuccess() {
-                                emitter.onComplete();
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull IDJIError djiError) {
-                                LogUtils.e(TAG, key, value, djiError);
-                                emitter.onError(new UXSDKError(djiError));
-                            }
-                        }
-                )).subscribeOn(SchedulerProvider.computation());
+        return RxUtil.setValue(key, value);
     }
 
     /**
@@ -153,19 +119,7 @@ public class DJISDKModel {
     @NonNull
     public <Param, Result> Completable performAction(@NonNull final DJIKey.ActionKey<Param, Result> key,
                                                      final Param argument) {
-        return Completable.create(emitter -> KeyManager.getInstance().performAction(key, argument,
-                new CommonCallbacks.CompletionCallbackWithParam<Result>() {
-                    @Override
-                    public void onSuccess(@NonNull Object o) {
-                        emitter.onComplete();
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull IDJIError djiError) {
-                        LogUtils.e(TAG, "Failure performing action key " + key.toString() + ". " + djiError.toString());
-                        //emitter.onError(new UXSDKError(djiError));
-                    }
-                })).subscribeOn(SchedulerProvider.computation());
+        return RxUtil.performAction(key, argument);
     }
 
     @NonNull
@@ -183,32 +137,6 @@ public class DJISDKModel {
         return KeyManager.getInstance().isKeySupported(key);
     }
 
-    private <T> void registerKey(@NonNull final FlowableEmitter<T> emitter,
-                                 @NonNull final DJIKey<T> key,
-                                 @NonNull final Object listener) {
-        // Get current value.这里改为采用同步方式获取值，一是避免异步带来的执行时机不确定；二是listen内部也会通过异常的形式获取一次最新值
-        T value = KeyManager.getInstance().getValue(key);
-        if (value != null) {
-            emitter.onNext((T) value);
-            LogUtils.d(TAG, "Got current value for  key ", ":", value);
-        }
-
-
-        // Start listening to changes
-        CommonCallbacks.KeyListener<T> keyListener = (oldValue, newValue) -> {
-            if (newValue != null && !emitter.isCancelled()) {
-                emitter.onNext(newValue);
-            }
-        };
-        KeyManager.getInstance().listen(key, listener, keyListener);
-    }
-
-    private Flowable<Boolean> removeKeyListeners(final Object listener) {
-        if (listener == null) {
-            return Flowable.just(true);
-        }
-        return Flowable.just(true).doOnSubscribe(subscription -> KeyManager.getInstance().cancelListen(listener));
-    }
 
     private static class SingletonHolder {
         private static final DJISDKModel instance = new DJISDKModel();

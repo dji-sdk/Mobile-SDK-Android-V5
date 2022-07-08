@@ -41,8 +41,8 @@ class WayPointV3VM : DJIViewModel() {
     var altitudeKey :DJIKey<Double> = FlightControllerKey.KeyAltitude.create()
 
 
-    fun pushKMZFileToAircraft(missionId: String, missionPath: String) {
-        WaypointMissionManager.getInstance().pushKMZFileToAircraft(missionId, missionPath, object :
+    fun pushKMZFileToAircraft( missionPath: String) {
+        WaypointMissionManager.getInstance().pushKMZFileToAircraft( missionPath, object :
             CommonCallbacks.CompletionCallbackWithProgress<Double> {
             override fun onProgressUpdate(progress: Double) {
                 missionUploadState.value = MissionUploadStateInfo(updateProgress = progress)
@@ -164,15 +164,15 @@ class WayPointV3VM : DJIViewModel() {
     private fun getHeight(): Double = (altitudeKey.get(0.0))
 
     fun isInMainlandChina(): Boolean {
-        return CHINA_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCodeSync.areaCode)
+        return CHINA_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCode.areaCode)
     }
 
     fun isMacau(): Boolean {
-        return MACAU_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCodeSync.areaCode)
+        return MACAU_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCode.areaCode)
     }
 
     fun isHongKong(): Boolean {
-        return HK_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCodeSync.areaCode)
+        return HK_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCode.areaCode)
     }
 
     fun getMapType(context: Context?):Int{

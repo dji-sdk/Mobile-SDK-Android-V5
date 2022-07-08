@@ -57,7 +57,7 @@ import dji.v5.utils.common.LogUtils;
 
 public class AndUtil {
     // 香港跟台北可以用GoogleMap
-    public static final Set<String> CHINA_TIME_ZONE = new HashSet<String>();
+    private static final Set<String> CHINA_TIME_ZONE = new HashSet<String>();
     public static final int MIX_PIXEL = 60;
     private static final String DEF_TYPE = "string";
     private static final String UTF_8 = "UTF-8";

@@ -15,16 +15,21 @@ import dji.sampleV5.moduleaircraft.data.RtkStationScanAdapter
 import dji.sampleV5.moduleaircraft.models.RTKStationVM
 import dji.sampleV5.modulecommon.keyvalue.KeyItemActionListener
 import dji.sampleV5.modulecommon.keyvalue.KeyValueDialogUtil
+import dji.v5.common.utils.GpsUtils
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D
 import dji.sdk.keyvalue.value.rtkbasestation.RTKBaseStationResetPasswordInfo
 import dji.sdk.keyvalue.value.rtkbasestation.RTKStationConnetState
 import dji.sdk.keyvalue.value.rtkbasestation.RTKStationInfo
+import dji.v5.common.callback.CommonCallbacks
+import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.rtk.station.ConnectedRTKStationInfo
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.StringUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
 import kotlinx.android.synthetic.main.frag_station_rtk_page.*
 import kotlin.collections.ArrayList
+import kotlin.math.ceil
 
 /**
  * Description :基站TRK操作界面
@@ -36,22 +41,20 @@ import kotlin.collections.ArrayList
  */
 class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListener {
     private val stationList = ArrayList<DJIRTKBaseStationConnectInfo>()
+
     //这里只能用fragment级别的viewModel，否则会出现粘性事件
     private val rtkStationVM: RTKStationVM by viewModels()
     private lateinit var rtkStationScanAdapter: RtkStationScanAdapter
     private var loginStatus = false
     private var connectState = RTKStationConnetState.UNKNOWN
+    private var rtkLocation: LocationCoordinate3D = LocationCoordinate3D()
 
     companion object {
         private const val STATION_PASSWORD_LENGTH = 6//密码长度必须为6
         private const val TAG = "StationRTKFragment"
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_station_rtk_page, container, false)
     }
 
@@ -66,94 +69,37 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
     private fun initView() {
         LogUtils.d(TAG, "initView")
         //初始化stationTRTK列表
-        val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rv_station_list.layoutManager = layoutManager
         rtkStationScanAdapter = RtkStationScanAdapter(requireContext(), stationList)
         rv_station_list.adapter = rtkStationScanAdapter
 
-        rtkStationVM.startSearchStationLD.observe(viewLifecycleOwner
-        ) {
-            it.isSuccess.processResult(
-                "Searing rtk station...",
-                "Search station  fail：${it.msg}"
-            )
-        }
-
-        rtkStationVM.stopSearchStationLD.observe(viewLifecycleOwner) {
-            it.isSuccess.processResult(
-                "Stop search station  success",
-                "Stop search station  fail：${it.msg}!!!"
-            )
-        }
-
 
         rtkStationVM.stationListLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult("Listener stationList fail:${result.msg}") {
-                handleStationRTKList(result.data)
-            }
-
+            handleStationRTKList(result)
         }
 
-        rtkStationVM.connectRTKStationLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult(
-                "Station connecting...",
-                "Station connect fail:${result.msg}"
-            )
-
-        }
 
         rtkStationVM.appStationConnectStatusLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult("App station connect status fail:${result.msg}") {
-                handleConnectStatus(result.data)
-            }
+            handleConnectStatus(result)
         }
 
         rtkStationVM.appStationConnectedInfoLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult("Listener station connected information fail:${result.msg}") {
-                showConnectStationInfo(result.data)
-                handleReconnectedStationInfo(result.data)
-            }
+            showConnectStationInfo(result)
+            handleReconnectedStationInfo(result)
         }
+        rtkStationVM.rtkLocationLD.observe(viewLifecycleOwner) { result ->
+            tv_station_location_info.text = result.rtkLocation.baseStationLocation.toString()
+            rtkLocation = result.rtkLocation.baseStationLocation
+        }
+        rtkStationVM.stationPositionLD.observe(viewLifecycleOwner, {
+            ToastUtils.showToast(it.toString())
+        })
 
-        rtkStationVM.loginLD.observe(viewLifecycleOwner) { result ->
-            if (result.isSuccess) {
-                loginStatus = true
-                ToastUtils.showToast("Login success")
-            } else {
-                loginStatus = false
-                ToastUtils.showToast("Login fail:${result.msg}")
-            }
-        }
 
-        rtkStationVM.setStationPositionLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult(
-                "Set station position success",
-                "Set station position fail:${result.msg}"
-            )
-        }
-        rtkStationVM.resetStationPositionLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult(
-                "Reset station position success",
-                "Reset station position fail:${result.msg}"
-            )
-        }
-        rtkStationVM.resetStationPasswordLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult(
-                "Reset station password success",
-                "Reset station password fail:${result.msg}"
-            )
-        }
-
-        rtkStationVM.setStationNameLD.observe(viewLifecycleOwner) { result ->
-            result.isSuccess.processResult(
-                "Set station name success",
-                "Set station name fail:${result.msg}"
-            )
-
-        }
         //清除数据
         showConnectStationInfo(ConnectedRTKStationInfo())
+
     }
 
     override fun onResume() {
@@ -167,6 +113,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         rtkStationVM.addSearchRTKStationListener()
         rtkStationVM.addStationConnectStatusListener()
         rtkStationVM.addConnectedRTKStationInfoListener()
+        rtkStationVM.addRTKLocationListener()
         rtkStationScanAdapter.setOnItemClickListener(this)
 
         btn_start_search_station.setOnClickListener {
@@ -186,11 +133,21 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
                 ToastUtils.showToast("Please connect to the base station first！")
                 return@setOnClickListener
             }
-            showDialog("输入密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”") {
+            showDialog(StringUtils.getResStr(R.string.tip_input_station_password)) {
                 it?.run {
                     val password = trim()
                     if (!TextUtils.isEmpty(password) && password.length == STATION_PASSWORD_LENGTH) {
-                        rtkStationVM.loginAsAdmin(password)
+                        rtkStationVM.loginAsAdmin(password, object : CommonCallbacks.CompletionCallback {
+                            override fun onSuccess() {
+                                loginStatus = true
+                                ToastUtils.showToast("Login Success")
+                            }
+
+                            override fun onFailure(error: IDJIError) {
+                                ToastUtils.showToast(error.toString())
+                            }
+
+                        })
                     } else {
                         ToastUtils.showToast("The password length does not meet the requirements, the password length must be 6！！！")
                     }
@@ -200,12 +157,28 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         }
         btn_set_station_position.setOnClickListener {
             process {
-                val locationCoordinate3D = LocationCoordinate3D(1.0, 1.0, 1.0)
-                showDialog("输入基站坐标", locationCoordinate3D.toString()) {
-                    it?.let {
-                        rtkStationVM.setRTKStationPosition(LocationCoordinate3D.fromJson(it))
+                rtkLocation.run {
+                    val locationCoordinate3D = LocationCoordinate3D(latitude, longitude, altitude)
+                    showDialog(StringUtils.getResStr(R.string.tip_input_station_location), locationCoordinate3D.toString()) {
+                        it?.let {
+                            val inputLocation = LocationCoordinate3D.fromJson(it)
+                            val distance = ceil(
+                                GpsUtils.gps2m(
+                                    latitude,
+                                    longitude,
+                                    altitude,
+                                    inputLocation.latitude,
+                                    inputLocation.longitude,
+                                    inputLocation.altitude
+                                )
+                            ).toInt()
+                            ToastUtils.showToast(StringUtils.getResStr(R.string.tv_station_relative_distance,distance))
+                            rtkStationVM.setRTKStationPosition(inputLocation)
+
+                        }
                     }
                 }
+
             }
         }
         btn_get_station_position.setOnClickListener {
@@ -220,7 +193,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
             process {
                 val rtkBaseStationResetPasswordInfo =
                     RTKBaseStationResetPasswordInfo("111111", "111111")
-                showDialog("重置密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”", rtkBaseStationResetPasswordInfo.toString()) {
+                showDialog(StringUtils.getResStr(R.string.tip_reset_station_password), rtkBaseStationResetPasswordInfo.toString()) {
                     it?.let {
                         val resetPasswordInfo = it.trim()
                         rtkStationVM.resetStationPassword(RTKBaseStationResetPasswordInfo.fromJson(resetPasswordInfo))
@@ -231,7 +204,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         }
         btn_set_station_name.setOnClickListener {
             process {
-                showDialog("修改基站名称,注意：基站名字UTF-8下只取4个字节，比如设置名字为“abcdef”，最后效果是“abcd”") {
+                showDialog(StringUtils.getResStr(R.string.tip_change_station_name)) {
                     it?.let {
                         val stationName = it.trim()
                         rtkStationVM.setStationName(stationName)
@@ -239,10 +212,6 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
                 }
             }
         }
-
-        rtkStationVM.getStationPositionLD.observe(viewLifecycleOwner, {
-            ToastUtils.showToast(it.data.toString())
-        })
 
 
     }
@@ -387,16 +356,8 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         rtkStationVM.clearAllStationConnectStatusListener()
         rtkStationVM.clearAllSearchRTKStationListener()
         rtkStationVM.clearAllConnectedRTKStationInfoListener()
-
     }
 
-    private fun Boolean.processResult(negativeMsg: String, block: () -> Unit) {
-        if (this) {
-            block()
-        } else {
-            ToastUtils.showToast(negativeMsg)
-        }
-    }
 
     private fun showDialog(title: String, msg: String = "", callback: KeyItemActionListener<String>) {
         KeyValueDialogUtil.showInputDialog(

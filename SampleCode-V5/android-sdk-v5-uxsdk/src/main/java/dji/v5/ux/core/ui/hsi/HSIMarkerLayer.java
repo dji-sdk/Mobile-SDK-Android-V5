@@ -22,16 +22,16 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import dji.v5.common.utils.GpsUtils;
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D;
 import dji.sdk.keyvalue.value.flightcontroller.AirSenseAirplaneState;
 import dji.sdk.keyvalue.value.flightcontroller.AirSenseSystemInformation;
 import dji.sdk.keyvalue.value.flightcontroller.AirSenseWarningLevel;
 import dji.v5.utils.common.ContextUtil;
-import dji.v5.utils.common.LocationUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.core.util.AndUtil;
 import dji.v5.ux.core.util.DisplayUtil;
-import dji.v5.ux.core.util.UnitUtils;
+import dji.v5.common.utils.UnitUtils;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
@@ -369,7 +369,7 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
 
     @NonNull
     private BearingDistance computeRelativeLocation(double latitude, double longitude) {
-        if (!isAircraftLocationAvailable() || !LocationUtils.isValid(latitude, longitude)) {
+        if (!isAircraftLocationAvailable() || !GpsUtils.isValid(latitude, longitude)) {
             return INVALID_BEARING_DISTANCE;
         }
         Location.distanceBetween(mAircraftLocation.getLatitude(), mAircraftLocation.getLongitude(), latitude, longitude, mFloats);
@@ -381,7 +381,7 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
 
     private boolean isAircraftLocationAvailable() {
         return mAircraftLocation != null
-                && LocationUtils.isValid(mAircraftLocation.getLatitude(), mAircraftLocation.getLongitude());
+                && GpsUtils.isValid(mAircraftLocation.getLatitude(), mAircraftLocation.getLongitude());
     }
 
     /**

@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 import dji.v5.ux.core.base.SchedulerProvider;
-import dji.v5.ux.core.util.UnitUtils;
+import dji.v5.common.utils.UnitUtils;
 import dji.v5.ux.core.widget.hsi.SpeedDisplayModel;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 

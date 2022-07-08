@@ -3,6 +3,8 @@ package dji.sampleV5.modulecommon.pages
 import android.graphics.ImageFormat
 import android.graphics.Rect
 import android.graphics.YuvImage
+import android.media.MediaCodecInfo
+import android.media.MediaFormat
 import android.os.*
 import android.view.*
 import android.widget.Button
@@ -501,7 +503,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         videoDecoder?.onPause()
     }
 
-    override fun onReceive(data: ByteArray?, width: Int, height: Int) {
+    override fun onReceive(mediaFormat:MediaFormat?, data: ByteArray?, width: Int, height: Int) {
         if (++count == 30) {
             count = 0
             data?.let {
@@ -530,10 +532,24 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                                 fos.close()
                             }
                         }
-//                        newSaveYuvDataToJPEG(data,width,height)
-                        newSaveYuvDataToJPEG420P(data, width, height)
+                        saveYuvData(mediaFormat,data,width,height)
                     }
                 })
+            }
+        }
+    }
+
+    private fun saveYuvData(mediaFormat: MediaFormat?, data: ByteArray?, width: Int, height: Int) {
+        data?.let {
+            mediaFormat?.let {
+                when (it.getInteger(MediaFormat.KEY_COLOR_FORMAT)) {
+                    0, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar -> {
+                        newSaveYuvDataToJPEG(data, width, height)
+                    }
+                    MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Planar -> {
+                        newSaveYuvDataToJPEG420P(data, width, height)
+                    }
+                }
             }
         }
     }
@@ -640,7 +656,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             null
         )
         val outputFile: OutputStream
-        val path = dir.toString() + "/ScreenShot_" + System.currentTimeMillis() + ".jpg"
+        val path = dir.toString() + "/ScreenShot_" + System.currentTimeMillis() + ".jpeg"
         outputFile = try {
             FileOutputStream(File(path))
         } catch (e: FileNotFoundException) {

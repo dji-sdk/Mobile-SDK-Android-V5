@@ -87,7 +87,7 @@ public class KeyItemAdapter  extends RecyclerView.Adapter<KeyItemAdapter.ComView
                     List<KeyItem<?,?>> filteredList = new ArrayList<>();
                     for (KeyItem<?,?> item : dataList) {
                         if (((KeyItem<?,?>)item).getName().toLowerCase().contains(charString) ||
-                                ((KeyItem<?,?>)item).getKeyInfo().getIdentifier().toLowerCase().contains(charString)){
+                                ((KeyItem<?,?>)item).getKeyInfo().getIdentifier().contains(charString)){
                             filteredList.add(item);
                         }
 

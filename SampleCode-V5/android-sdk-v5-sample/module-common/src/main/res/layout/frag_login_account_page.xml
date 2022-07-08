@@ -52,69 +52,70 @@
                 app:layout_constraintTop_toBottomOf="@id/btn_logout" />
 
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
 
-    <TextView
-        android:id="@+id/tv_login_account"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_login_account"
-        app:layout_constraintEnd_toStartOf="@id/tv_login_account_info"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginLeft="20dp"
+        app:layout_constraintStart_toEndOf="@id/sv_button_list"
+        tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/tv_login_account_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        android:text="null"
-        />
+        <TextView
+            android:id="@+id/tv_login_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_login_account"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/tv_login_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/tv_login_state"
-        app:layout_constraintEnd_toStartOf="@id/tv_login_state_info"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_account"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/tv_login_account_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="null"
+            app:layout_constraintLeft_toRightOf="@+id/tv_login_account"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/tv_login_state_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_account"
-        tools:ignore="MissingConstraints"
-        tools:text="Login" />
+        <TextView
+            android:id="@+id/tv_login_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/tv_login_state"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_account_info"
+            tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/tv_login_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/tv_login_error"
-        app:layout_constraintEnd_toStartOf="@id/tv_login_error_info"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_state"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/tv_login_state_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_login_state"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_account_info"
+            tools:ignore="MissingConstraints"
+            tools:text="Login" />
 
-    <TextView
-        android:id="@+id/tv_login_error_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_login_state"
-        tools:ignore="MissingConstraints"
-        android:text="null" />
+        <TextView
+            android:id="@+id/tv_login_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/tv_login_error"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_state"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tv_login_error_info"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="null"
+            app:layout_constraintLeft_toRightOf="@+id/tv_login_error"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_state"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

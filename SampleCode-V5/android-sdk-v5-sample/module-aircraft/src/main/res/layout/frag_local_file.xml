@@ -17,6 +17,7 @@
 
             <EditText
                 android:id="@+id/et_local_file_path"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

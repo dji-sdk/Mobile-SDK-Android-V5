@@ -95,7 +95,7 @@ open class LensControlWidget @JvmOverloads constructor(
     }
 
     private fun showView(type: CameraType) {
-        if (type == CameraType.H20 || type == CameraType.H20T) {
+        if (type == CameraType.ZENMUSE_H20 || type == CameraType.ZENMUSE_H20T || type == CameraType.ZENMUSE_H20N) {
             this.visibility = VISIBLE
         } else {
             this.visibility = GONE

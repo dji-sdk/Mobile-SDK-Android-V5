@@ -80,6 +80,7 @@
     <string name="n_a">N/A</string>
     <string name="video_stream_manager">Video Stream Manager</string>
     <string name="reset_all_video_channel">Reset All Video Channel</string>
+    <string name="get_all_video_channel">Get All Video Channel</string>
     <string name="select_stream_source">Select Stream Source</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
@@ -118,6 +119,7 @@
     <string name="title_megaphone">Megaphone</string>
     <string name="megaphone_state">Megaphone State</string>
     <string name="megaphone_control">Megaphone Control</string>
+    <string name="megaphone_index">Megaphone Index</string>
     <string name="rt_transmission_status">Real-time Transmission Status:</string>
     <string name="btn_tts">TTS</string>
     <string name="btn_rt_voice">Real-time Voice</string>
@@ -166,8 +168,14 @@
     <string name="tv_station_battery_temperature">Station Battery Temperature: </string>
     <string name="tv_station_battery_voltage">Station Battery Voltage: </string>
     <string name="tv_station_battery_capacity_percent">Station Battery Capacity Percent: </string>
+    <string name="tv_station_location">Station Location：</string>
+    <string name="tv_station_relative_distance">Relative Distance %1$s m</string>
     <string name="tv_station_list_tip">Please click the list below for base station connection</string>
-
+    <string name="switch_rtk_type_tip">Switching RTK service type requires restarting the aircraft</string>
+    <string name="tip_input_station_password" >Enter the password, note that the password must be a string consisting of 6 numbers from 0-9, such as "012345"</string>
+    <string name="tip_reset_station_password" >Reset the password, note that the password must be a string consisting of 6 numbers from 0 to 9, such as "012345"</string>
+    <string name="tip_input_station_location" >Enter base station coordinates</string>
+    <string name="tip_change_station_name" >Modify the base station name, note: the base station name only takes 4 bytes under UTF-8, such as setting the name to "abcdef", the final effect is "abcd"</string>
 
     <!-- RTK Center   <-->
     <string name="item_trk_center_title">RTK Center</string>
@@ -217,6 +225,30 @@
     <string name="tv_login_error">Login error: </string>
     <string name="item_login_account_title">Login Account </string>
     <string name="item_login_account_description">Demonstrate DJI account login related functions</string>
+
+    <!--Perception-->
+    <string name="item_perception_title">Perception module</string>
+    <string name="item_perception_description">Demonstrate how to use the related functions of perception</string>
+    <string name="tv_obstacle_avoidance_master_switch_tip">1.Obstacle avoidance master switch:</string>
+    <string name="bt_set_obstacle_avoidance_sub_switch">2.Set the obstacle avoidance on state of a specific direction：</string>
+    <string name="bt_set_obstacle_avoidance_upwrard_switch">Upward</string>
+    <string name="bt_set_obstacle_avoidance_down_switch">Down</string>
+    <string name="bt_set_obstacle_avoidance_horizontal_switch">Horizontal</string>
+    <string name="bt_set_vision_positioning_enable_tip">3.Visual positioning enabled：</string>
+    <string name="bt_set_precision_landing_enable_tip">4.Precise landing enabled：</string>
+    <string name="tv_other_obstacle_avoidance_tip">5.Other obstacle avoidance information display： </string>
+    <string name="bt_set_obstacle_avoidance_type">Set obstacle avoidance type</string>
+    <string name="bt_get_obstacle_avoidance_type">Get obstacle avoidance type</string>
+    <string name="bt_set_obstacle_avoidance_warning_distance">Set the alarm distance in a specific direction</string>
+    <string name="bt_get_obstacle_avoidance_warning_distance">Get the alarm distance in a specific direction</string>
+    <string name="bt_set_obstacle_avoidance_braking_distance">Set the stopping distance in a specific direction</string>
+    <string name="bt_get_obstacle_avoidance_braking_distance">Get the stopping distance in a specific direction</string>
+
+    <!--UAS-->
+    <string name="item_uas_title">UAS module</string>
+    <string name="item_uas_description">Demonstrate how to use the related functions of uas</string>
+    <string name="bt_set_eid_enable">Set electronicId enabled</string>
+    <string name="bt_set_ua_registration_number">Set ua registration number</string>
 
 
     <!-- key Type-->

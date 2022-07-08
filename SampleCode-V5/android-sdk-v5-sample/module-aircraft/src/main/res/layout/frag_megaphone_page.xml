@@ -23,6 +23,17 @@
             android:textColor="@color/white"
             android:gravity="center"/>
 
+        <TextView
+            android:id="@+id/tv_megaphone_connect_status"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="4"
+            android:background="@color/black_half"
+            android:text="N/A"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
     </LinearLayout>
 
     <View
@@ -109,6 +120,48 @@
                     android:scaleType="fitXY"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/ic_media_play" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/megaphone_index"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/tv_cur_megaphone_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="N/A"
+                    android:textSize="13sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="100dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="20dp"/>
+
+                <Spinner
+                    android:id="@+id/sp_megaphone_switch"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_stroke_common_with_color"
+                    android:dropDownWidth="120dp"
+                    android:entries="@array/megaphone_index_array"
+                    android:spinnerMode="dropdown"
+                    android:textColor="@color/white"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </RelativeLayout>
 
