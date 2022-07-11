@@ -12,13 +12,13 @@ DJI Mobile SDK V5 has a series of APIs to control the software and hardware inte
 ### Integration
 
 For further detail on how to integrate the DJI Android SDK into your Android Studio project, please check the tutorial：
-- [文档概览](https://developer.dji.com/cn/document/6fbf4c20-f7e3-41ad-80f5-32f01c4eeaad)
-- [Overview of Document](https://developer.dji.com/document/9cc25998-69f2-4661-99ee-ccdbe81b57c4)
+- [文档概览](https://developer.dji.com/doc/mobile-sdk-tutorial/cn/overview.html)
+- [Overview of Document](https://developer.dji.com/doc/mobile-sdk-tutorial/en/overview.html)
 
 ### Begin
 
-- [在用户自己工程中运行 MSDK V5 的重要注意事项](https://developer.dji.com/cn/document/36799544-729a-4f1a-ae60-8afe9a546db8#%E5%9C%A8%E7%94%A8%E6%88%B7%E8%87%AA%E5%B7%B1%E5%B7%A5%E7%A8%8B%E4%B8%AD%E8%BF%90%E8%A1%8C-msdk-v5-%E7%9A%84%E9%87%8D%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
-- [Important Steps Before Run MSDK V5 On Your Own Project](https://developer.dji.com/document/9163b015-e273-476d-a957-3c72a95c6f09#important-steps-before-run-msdk-v5-on-your-own-project)
+- [在用户自己工程中运行 MSDK V5 的重要注意事项](https://developer.dji.com/doc/mobile-sdk-tutorial/cn/quick-start.html#%E5%9C%A8%E7%94%A8%E6%88%B7%E8%87%AA%E5%B7%B1%E5%B7%A5%E7%A8%8B%E4%B8%AD%E8%BF%90%E8%A1%8C-msdk-v5-%E7%9A%84%E9%87%8D%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
+- [Important Steps Before Run MSDK V5 On Your Own Project](https://developer.dji.com/doc/mobile-sdk-tutorial/en/quick-start.html#important-steps-before-run-msdk-v5-on-your-own-project)
 
 ### API Diff
 
