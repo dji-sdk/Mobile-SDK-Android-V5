@@ -1,7 +1,13 @@
 ext {
     deps = [:]
-    //DJI三方库
-    deps.networkRtkHelper = "com.dji:library-networkrtk-helper:2.0.2"
+    //DJI MSDK V5包
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.0.0"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.0.0"
+    deps.handheld = "com.dji:dji-sdk-v5-handheld:5.0.0"
+    deps.handheldProvided = "com.dji:dji-sdk-v5-handheld-provided:5.0.0"
+    deps.all = "com.dji:dji-sdk-v5-all:5.0.0"
+    deps.allProvided = "com.dji:dji-sdk-v5-all-provided:5.0.0"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.0.0"
 
     // 三方依赖库
     deps.amUtilViewpager = 'am.util:viewpager:25.1.0'

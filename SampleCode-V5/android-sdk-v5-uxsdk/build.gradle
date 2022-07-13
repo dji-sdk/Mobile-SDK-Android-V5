@@ -53,7 +53,8 @@ dependencies {
     api deps.playserviceslocation
     api deps.playservicesbase
 
-    compileOnly files("../${project.AIRCRAFT_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
+    compileOnly deps.aircraftProvided
+    implementation deps.aircraft
 
     api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Amap.aar")
     api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Core.aar")
