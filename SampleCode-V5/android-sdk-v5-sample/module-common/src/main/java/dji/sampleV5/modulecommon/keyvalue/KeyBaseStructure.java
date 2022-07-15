@@ -1,6 +1,8 @@
 package dji.sampleV5.modulecommon.keyvalue;
 
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

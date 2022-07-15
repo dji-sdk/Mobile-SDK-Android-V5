@@ -1,6 +1,8 @@
 package dji.sampleV5.modulecommon.keyvalue;
 
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
@@ -161,6 +163,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
 
                     if (keyOperateCallBack != null && data != null) {
                         keyOperateCallBack.actionChange("【GET】" + getName() + " result: " + data.toString());
+                        Log.d("keyData", data.toString());
                     }
                 }
 

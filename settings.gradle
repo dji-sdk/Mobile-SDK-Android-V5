@@ -1,0 +1,2 @@
+project(':build.gradle').projectDir = new File(rootDir, 'SampleCode-V5/android-sdk-v5-as/build.gradle')
+include ':build.gradle'
