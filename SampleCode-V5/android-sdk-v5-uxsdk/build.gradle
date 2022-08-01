@@ -54,7 +54,7 @@ dependencies {
     api deps.playservicesbase
 
     compileOnly deps.aircraftProvided
-    implementation deps.aircraft
+    compileOnly deps.aircraft
 
     api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Amap.aar")
     api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Core.aar")
