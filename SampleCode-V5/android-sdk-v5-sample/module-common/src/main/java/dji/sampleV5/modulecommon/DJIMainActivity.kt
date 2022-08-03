@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -21,6 +23,7 @@ import dji.v5.manager.interfaces.SDKManagerCallback
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import dji.sampleV5.modulecommon.DataTransfering
 
 /**
  * Class Description
@@ -47,6 +50,11 @@ abstract class DJIMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val button = findViewById<Button>(R.id.testing_tool_button2)
+        button.setOnClickListener {
+            DataTransfering.Test();
+        }
 
         window.decorView.apply {
             systemUiVisibility =
