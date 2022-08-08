@@ -19,6 +19,8 @@ import dji.v5.common.callback.CommonCallbacks;
 import dji.v5.common.error.IDJIError;
 import dji.v5.utils.common.LogUtils;
 
+import dji.sampleV5.modulecommon.DataTransfering;
+
 /**
  *
  * KeyItem作为key能力和动作的载体来进行封装
@@ -164,7 +166,8 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                     if (keyOperateCallBack != null && data != null) {
                         keyOperateCallBack.actionChange("【GET】" + getName() + " result: " + data.toString());
                         //Log.d("keyData", data.toString());
-                        Log.d("keyData", "test");
+                        Log.d("keyData", data.toString());
+                        DataTransfering.SendMessageThread(data.toString());
                     }
                 }
 
