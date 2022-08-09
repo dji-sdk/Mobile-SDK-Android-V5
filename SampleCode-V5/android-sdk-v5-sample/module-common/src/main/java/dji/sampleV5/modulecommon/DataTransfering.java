@@ -12,44 +12,57 @@ import java.nio.charset.StandardCharsets;
 public class DataTransfering{
 
     public static String DISCONNECT_MESSAGE = "!DISCONNECT";
-    public static Socket socket = null;
     public static int headerLength = 64;
     public static Charset SELCHARSET = StandardCharsets.UTF_8;
+
+    private Socket socket             = null;
+    private DataInputStream  dIn      = null;
+    private DataOutputStream dOut     = null;
 
     public static void SendMessageThread(String msg){
 
         Thread th = new Thread(() ->{
-            DataTransfering.SendMessage(msg);
+            SendMessageOld(msg);
         });
         th.start();
     }
 
-    public static void Connect(String serverIp, int port){
+    public DataTransfering(String serverIp, int port){
         Log.d("Sockets", "Server Attempting to connect: " + serverIp + " on Port: " + port);
         try{
             socket = new Socket(serverIp, port);
-        } catch (IOException e) {
+            Log.d("Sockets", "Connected!");
 
-            e.printStackTrace();
+            dIn     = new DataInputStream(socket.getInputStream());
+            dOut    = new DataOutputStream(socket.getOutputStream());
+
+        } catch (IOException e) {
+            Log.d("Sockets", e.toString());
         }
 
     }
 
-    public static void Disconnect(){
-        SendMessageThread(DISCONNECT_MESSAGE);
-        try{
+    public void Disconnect(){
+        SendMessage(DISCONNECT_MESSAGE);
+        try
+        {
+            dIn.close();
+            dOut.close();
             socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch(IOException i)
+        {
+            Log.d("Sockets", i.toString());
         }
 
     }
 
-    public static void SendMessage (String message){
-
+    public static void SendMessageOld(String message){
         try {
-            DataOutputStream dOut = new DataOutputStream(socket.getOutputStream());
-            DataInputStream dIn = new DataInputStream(socket.getInputStream());
+            Socket socketStatic = new Socket("192.168.43.11", 2004);
+
+            DataOutputStream dOut = new DataOutputStream(socketStatic.getOutputStream());
+            DataInputStream dIn = new DataInputStream(socketStatic.getInputStream());
 
             byte[] byteMessage = message.getBytes(SELCHARSET);
             byte[] headerBytes = getHeaderBytes(byteMessage);
@@ -68,6 +81,25 @@ public class DataTransfering{
 
             e.printStackTrace();
         }
+    }
+
+    public void SendMessage (String message){
+
+        byte[] byteMessage = message.getBytes(SELCHARSET);
+        byte[] headerBytes = getHeaderBytes(byteMessage);
+
+        try {
+            dOut.write(headerBytes);
+            dOut.write(byteMessage);
+
+            if(dIn.read() == 89){
+                Log.d("Sockets", "Message received sucessfully");
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
 
     }
 
@@ -80,7 +112,7 @@ public class DataTransfering{
 
         //Creates bytes of UTF-8 (space = 32) array of 64
         String spacesHeader = "";
-        for(int i = 0; i <= headerLength-1; i++){
+        for(int i = 0; i < headerLength; i++){
             spacesHeader += " ";
         }
 
@@ -91,4 +123,3 @@ public class DataTransfering{
     }
 
 }
-

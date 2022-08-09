@@ -167,7 +167,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                         keyOperateCallBack.actionChange("【GET】" + getName() + " result: " + data.toString());
                         //Log.d("keyData", data.toString());
                         Log.d("keyData", data.toString());
-                        DataTransfering.SendMessageThread(data.toString());
+                        //DataTransfering.SendMessageThread(data.toString());
                     }
                 }
 

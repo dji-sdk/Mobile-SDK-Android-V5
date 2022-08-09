@@ -53,6 +53,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
         button.setOnClickListener {
             //ON CLICK!!
             DataStreamingController.SendTestData();
+            //DataTransfering.SendMessageThread("Mano vardas Kestas");
         }
 
         window.decorView.apply {
