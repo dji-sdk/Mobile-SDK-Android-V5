@@ -52,7 +52,9 @@ abstract class DJIMainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.testing_tool_button2)
         button.setOnClickListener {
             //ON CLICK!!
-            DataStreamingController.SendTestData();
+
+            DataStreamingController.getAircraftLocation();
+            //DataStreamingController.SendTestDataTry();
             //DataTransfering.SendMessageThread("Mano vardas Kestas");
         }
 

@@ -572,7 +572,27 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     override fun onClick(view: View) {
 
         if (Util.isBlank(tv_name.text.toString()) || currentKeyItem == null) {
-            showToast("please select key first")
+            showToast("\n" +
+                    "        )\n" +
+                    "\n" +
+                    "        when (currentChannelType) {\n" +
+                    "            ChannelType.CHANNEL_TYPE_CAMERA -> {\n" +
+                    "                if (!CapabilityManager.getInstance()\n" +
+                    "                        .isCameraKeySupported(type, cameraType?.name, keyName)) {\n" +
+                    "                    isNeedRemove = true\n" +
+                    "                }\n" +
+                    "            }\n" +
+                    "            ChannelType.CHANNEL_TYPE_AIRLINK -> {\n" +
+                    "                if (!CapabilityManager.getInstance()\n" +
+                    "                        .isKeySupported(type, \"\", ComponentType.AIRLINK,  keyName)) {\n" +
+                    "                    isNeedRemove = true\n" +
+                    "                }\n" +
+                    "            }\n" +
+                    "            else -> {\n" +
+                    "                if (!CapabilityManager.getInstance()\n" +
+                    "                        .isKeySupported(type,  keyName)\n" +
+                    "                ) {\n" +
+                    "                 please select key first")
             return
         }
         setKeyInfo()
