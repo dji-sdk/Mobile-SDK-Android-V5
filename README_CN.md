@@ -1,6 +1,6 @@
 # DJI Mobile SDK for Android V5 最新版本 V5.0.0
 
-[英文版](README.md)
+[English Version](README.md)
 
 ## DJI Mobile SDK V5 是什么?
 
