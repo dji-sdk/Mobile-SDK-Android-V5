@@ -28,9 +28,48 @@ import dji.sampleV5.modulecommon.models.KeyValueVM;
 import dji.sampleV5.modulecommon.util.ToastUtils;
 import dji.sampleV5.modulecommon.util.Util;
 import dji.sdk.keyvalue.converter.EmptyValueConverter;
+
+/*
+https://developer.dji.com/api-reference/android-api/Components/KeyManager/DJIKey.html
+ */
 import dji.sdk.keyvalue.key.DJIKey;
 import dji.sdk.keyvalue.key.FlightControllerKey;
+import dji.sdk.keyvalue.key.CameraKey;
+import dji.sdk.keyvalue.key.BatteryKey;
+
+//ieskau camera import, bet siti kazkode neveik, nenutuokiu kolkas kas kaip su kuom.
+//import dji.sdk.camera
+//import dji.sdk.camera.VideoFeed
+//import dji.sdk.camera.VideoFeeder
+//import dji.common.airlink
+//import com.dji.sdk.sample.demo.camera;
+//import dji.v5.manager.interfaces;
+import dji.v5.manager.video.channel.BaseVideoChannel;
+
+import dji.sdk.keyvalue.value.airlink.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import dji.v5.common.callback.CommonCallbacks.CompletionCallback;
+import dji.v5.common.video.channel.VideoChannelType;
+import dji.v5.common.video.interfaces.IVideoChannel;
+import dji.v5.common.video.stream.StreamSource;
+import dji.v5.manager.datacenter.video.StreamSourceListener;
+import java.util.List;
+
+import androidx.lifecycle.MutableLiveData;
+import dji.sampleV5.modulecommon.data.VideoChannelInfo;
+import dji.v5.common.video.interfaces.IVideoChannel;
+import dji.v5.common.video.channel.VideoChannelState;
+import dji.v5.common.video.interfaces.VideoChannelStateChangeListener;
+import dji.v5.common.video.channel.VideoChannelType;
+import dji.v5.manager.datacenter.MediaDataCenter;
+
+import dji.v5.manager.interfaces.IVideoStreamManager;
+import dji.v5.manager.video.DualChannelVideoStreamManagerDelegate;
+import dji.v5.manager.video.channel.BaseVideoChannel;
+
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D;
+import dji.sdk.keyvalue.value.common.Velocity3D;
 import dji.sdk.keyvalue.value.product.ProductType;
 import dji.v5.manager.KeyManager;
 import dji.v5.manager.capability.CapabilityManager;
@@ -51,6 +90,19 @@ public class DataStreamingController {
             DataStreamingController.SendTestData();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void ExecuteRepeaded() throws InterruptedException{
+        for (int i = 0; i < 50; i++) {
+            Thread thMessage = new Thread(() -> {
+                getAircraftLocation();
+                //dataTransfer.SendMessage(getAircraftLocation());
+                //GetAndSendData();
+            });
+            thMessage.start();
+            thMessage.join();
+            Thread.sleep(1000);
         }
     }
 
@@ -97,15 +149,32 @@ public class DataStreamingController {
     }
 
 
+    public static void TestCamera(){
+
+    }
+
 
     public static String getAircraftLocation() {
-
 
         double heading = (double) KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyCompassHeading));
         double altitude = (double) KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyAltitude));
 
+        Log.d("keyValueTesting", "H: " + String.valueOf(heading) + " A: " + String.valueOf(altitude));
+
+        Velocity3D vel = (Velocity3D) KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity));
+        if(vel != null){
+            Log.d("keyValueTesting", vel.x.toString() + " " + vel.y.toString() + " " + vel.z.toString() +"\n");
+        }
+
+
         //https://developer.dji.com/api-reference/android-api/Components/FlightController/DJIFlightController_DJILocationCoordinate3D.html#djiflightcontroller_djilocationcoordinate3d_constructor_inline
         LocationCoordinate3D loc = KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation3D));
+
+        if(loc != null){
+            Log.d("keyValueTesting", loc.latitude.toString() + " " + loc.longitude + " " + loc.altitude + "\n");
+        }
+
+
 
         //double lo = (double) KeyManager.getInstance().getValue(FlightControllerKey.create(FlightControllerKey.AIRCRAFT_LOCATION_LONGITUDE));
         //double altitude = (double) KeyManager.getInstance().getValue(FlightControllerKey.create(FlightControllerKey.ALTITUDE));
@@ -118,8 +187,6 @@ public class DataStreamingController {
 
         Log.d("messageTest", message);
         */
-
-
 
         return "";
     }

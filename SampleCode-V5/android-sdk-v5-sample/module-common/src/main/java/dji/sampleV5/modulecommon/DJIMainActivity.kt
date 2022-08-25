@@ -53,7 +53,12 @@ abstract class DJIMainActivity : AppCompatActivity() {
         button.setOnClickListener {
             //ON CLICK!!
 
-            DataStreamingController.getAircraftLocation();
+            //Test if drone active (product name valid)
+            //Test if internet is online (cannot test if registered otherwise and does not work)
+
+
+            DataStreamingController.TestCamera();
+            //DataStreamingController.ExecuteRepeaded();
             //DataStreamingController.SendTestDataTry();
             //DataTransfering.SendMessageThread("Mano vardas Kestas");
         }
