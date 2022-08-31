@@ -91,6 +91,11 @@ android {
         doNotStrip "*/*/libmrtc_rtmp.so"
         doNotStrip "*/*/libmrtc_rtsp.so"
     }
+
+    configurations {
+        cleanedAnnotations
+        implementation.exclude group: 'org.jetbrains' , module:'annotations'
+    }
 }
 
 
@@ -98,6 +103,6 @@ dependencies {
     implementation project(':sample-module-aircraft')
     implementation project(':sample-module-handheld')
     
-    compileOnly files("../../${project.ALL_PROVIDED}${project.MSDK_VERSION}${project.PROVIDED_FILE_TYPE}")
-    implementation files("../../${project.ALL_RELEASE}${project.MSDK_VERSION}${project.AAR_FILE_TYPE}")
+    compileOnly deps.allProvided
+    implementation deps.all
 }
