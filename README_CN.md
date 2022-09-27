@@ -59,7 +59,7 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 - [5.0.0_beta2_5.0.0_beta3_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta2_5.0.0_beta3_android_diff.html)
 
 ### 离线文档
-- [API](Docs/Android_API/cn)
+- [API](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/Android_API/cn/index.html)
 
 ### 软件证书
 

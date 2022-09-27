@@ -61,7 +61,7 @@ Supported Product:
 - [5.0.0_beta2_5.0.0_beta3_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta2_5.0.0_beta3_android_diff.html)
 
 ### Offline Documentation
-- [API](Docs/Android_API/en)
+- [API](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/Android_API/en/index.html)
 
 ### Software License
 
