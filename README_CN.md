@@ -8,7 +8,7 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 
 
 当前版本支持机型：
-* [Mavic 3 行业系列](https://www.dji.com/cn/mavic-3-enterprise)
+* [DJI Mavic 3 行业系列](https://www.dji.com/cn/mavic-3-enterprise)
 * [经纬 M30 系列](https://www.dji.com/cn/matrice-30?site=brandsite&from=nav)
 * [经纬 M300 RTK](https://www.dji.com/cn/matrice-300?site=brandsite&from=nav)
 
@@ -16,15 +16,19 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 
 ```
 ├── Docs
-│   └── API-Diff     // API差异
-│       ├── 5.0.0_5.1.0_android_diff.html
-│       ├── 5.0.0_beta2_5.0.0_beta3_android_diff.html
-│       └── 5.0.0_beta3_5.0.0_android_diff.html
-├── LICENSE.txt     //软件证书
+│   ├── API-Diff
+│   │   ├── 5.0.0_5.1.0_android_diff.html
+│   │   ├── 5.0.0_beta2_5.0.0_beta3_android_diff.html
+│   │   └── 5.0.0_beta3_5.0.0_android_diff.html
+│   └── Android_API
+│       ├── cn
+│       └── en
+├── LICENSE.txt
 ├── README.md
 ├── README_CN.md
 └── SampleCode-V5
-    ├── android-sdk-v5-as     //定义属于Android Studio所需的项目信息
+    ├── android-sdk-v5-as
+    │   ├── build
     │   ├── build.gradle
     │   ├── dependencies.gradle
     │   ├── gradle
@@ -32,17 +36,19 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
     │   ├── gradlew
     │   ├── gradlew.bat
     │   ├── libs
+    │   ├── local.properties
     │   ├── msdkkeystore.jks
     │   ├── proguard-relative
     │   └── settings.gradle
-    ├── android-sdk-v5-sample     //定义属于Sample项目的功能
+    ├── android-sdk-v5-sample
     │   ├── app-aircraft
     │   ├── app-all
     │   ├── app-handheld
     │   ├── module-aircraft
     │   ├── module-common
     │   └── module-handheld
-    └── android-sdk-v5-uxsdk     //定义UI框架
+    └── android-sdk-v5-uxsdk
+        ├── build
         ├── build.gradle
         └── src
 ```
@@ -51,6 +57,9 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 - [5.0.0_5.1.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_5.1.0_android_diff.html)
 - [5.0.0_beta3_5.0.0_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta3_5.0.0_android_diff.html)
 - [5.0.0_beta2_5.0.0_beta3_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta2_5.0.0_beta3_android_diff.html)
+
+### 离线文档
+- [API](Docs/Android_API/cn)
 
 ### 软件证书
 
