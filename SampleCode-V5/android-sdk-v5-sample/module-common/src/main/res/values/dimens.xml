@@ -80,4 +80,8 @@
     <dimen name="watermark_preview_text_margin">16dp</dimen>
 
     <dimen name="keyvalue_list_spinner_width">110dp</dimen>
+
+    <dimen name="mission_waypoint_index_text_large_size">11px</dimen>
+    <dimen name="mission_waypoint_index_text_medium_size">9px</dimen>
+    <dimen name="mission_waypoint_index_text_small_size">6px</dimen>
 </resources>

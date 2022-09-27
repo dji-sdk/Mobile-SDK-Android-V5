@@ -24,23 +24,30 @@
 package dji.v5.ux.core.base.widget
 
 import android.content.Context
+import android.os.Looper
 import android.util.AttributeSet
+import android.view.View
 import android.widget.FrameLayout
+import dji.v5.utils.common.LogUtils
+import dji.v5.ux.BuildConfig
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.processors.PublishProcessor
 import dji.v5.ux.core.base.WidgetSizeDescription
+import java.lang.RuntimeException
+import java.lang.StringBuilder
 
 /**
  * This is a base class for widgets requiring FrameLayout.
  * T is the type of Widget State Update, @see[getWidgetStateUpdate].
  */
 abstract class FrameLayoutWidget<T> @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
+    protected val tag = LogUtils.getTag(this)
 
     //region Fields
     private var reactionDisposables: CompositeDisposable? = null
@@ -115,7 +122,7 @@ abstract class FrameLayoutWidget<T> @JvmOverloads constructor(
      * By default the widget size is a ratio
      */
     open val widgetSizeDescription: WidgetSizeDescription =
-            WidgetSizeDescription(WidgetSizeDescription.SizeType.RATIO)
+        WidgetSizeDescription(WidgetSizeDescription.SizeType.RATIO)
     //endregion
 
     //region Reactions
@@ -153,5 +160,31 @@ abstract class FrameLayoutWidget<T> @JvmOverloads constructor(
         private const val TAG: String = "FrameLayoutWidget"
         const val INVALID_RESOURCE: Int = -1
         const val INVALID_COLOR: Int = 0
+    }
+
+    /**
+     * 接管处理下可能存在的异步invalidate
+     * https://cloud.tencent.com/developer/article/1846821
+     */
+    override fun invalidate() {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            super.invalidate()
+        } else {
+            recordInvalidateCallStack(this)
+        }
+    }
+
+    open fun recordInvalidateCallStack(view: View) {
+        view.postInvalidate()
+        if (BuildConfig.DEBUG) {
+            throw RuntimeException("Only the original thread that created a view hierarchy can touch its views.")
+        } else {
+            val stringBuilder = StringBuilder()
+            for (stackTraceElement in Thread.currentThread().stackTrace) {
+                stringBuilder.append(stackTraceElement)
+                stringBuilder.append("\n")
+            }
+            LogUtils.e(TAG, " async call invalidate \n$stringBuilder")
+        }
     }
 }

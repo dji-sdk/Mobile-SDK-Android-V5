@@ -38,12 +38,12 @@ import dji.v5.ux.core.widget.airsense.AirSenseWidget
 import dji.v5.ux.core.widget.battery.BatteryWidget
 import dji.v5.ux.core.widget.connection.ConnectionWidget
 import dji.v5.ux.core.widget.flightmode.FlightModeWidget
-import dji.v5.ux.core.widget.gpssignal.GPSSignalWidget
+import dji.v5.ux.core.widget.gpssignal.GpsSignalWidget
 import dji.v5.ux.core.widget.remotecontrollersignal.RemoteControllerSignalWidget
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget
 import dji.v5.ux.core.widget.videosignal.VideoSignalWidget
-import dji.v5.ux.core.widget.vision.VisionWidget
+import dji.v5.ux.core.widget.perception.PerceptionStateWidget
 import java.util.*
 
 /**
@@ -55,7 +55,7 @@ import java.util.*
  * - [SimulatorIndicatorWidget]
  * - [AirSenseWidget]
  * - [GPSSignalWidget]
- * - [VisionWidget]
+ * - [PerceptionStateWidget]
  * - [RemoteControllerSignalWidget]
  * - [VideoSignalWidget]
  * - [BatteryWidget]
@@ -106,11 +106,11 @@ open class TopBarPanelWidget @JvmOverloads constructor(
      * Getter for [GPSSignalWidget]. Null when excluded from the bar panel.
      */
     @get:JvmName("getGPSSignalWidget")
-    val gpsSignalWidget: GPSSignalWidget?
+    val gpsSignalWidget: GpsSignalWidget?
     /**
-     * Getter for [VisionWidget]. Null when excluded from the bar panel.
+     * Getter for [PerceptionStateWidget]. Null when excluded from the bar panel.
      */
-    val visionWidget: VisionWidget?
+    val visionWidget: PerceptionStateWidget?
     /**
      * Getter for [RemoteControllerSignalWidget]. Null when excluded from the bar panel.
      */
@@ -169,13 +169,13 @@ open class TopBarPanelWidget @JvmOverloads constructor(
             airSenseWidget = null
         }
         if (!WidgetValue.GPS_SIGNAL.isItemExcluded(excludedItemsValue)) {
-            gpsSignalWidget = GPSSignalWidget(context, attrs)
-            rightPanelItems.add(PanelItem(gpsSignalWidget as GPSSignalWidget))
+            gpsSignalWidget = GpsSignalWidget(context, attrs)
+            rightPanelItems.add(PanelItem(gpsSignalWidget as GpsSignalWidget))
         } else {
             gpsSignalWidget = null
         }
         if (!WidgetValue.VISION.isItemExcluded(excludedItemsValue)) {
-            visionWidget = VisionWidget(context, attrs)
+            visionWidget = PerceptionStateWidget(context, attrs)
             rightPanelItems.add(PanelItem(visionWidget))
         } else {
             visionWidget = null

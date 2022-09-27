@@ -44,6 +44,7 @@
     <string name="uxsdk_widget_camera_controls_ratio" translatable="false">W,1:4</string>
 
     <string name="uxsdk_widget_rtk_enabled_ratio" translatable="false">W,49:10</string>
+    <string name="uxsdk_widget_rtk_keep_status_ratio" translatable="false">W,49:10</string>
     <string name="uxsdk_widget_rtk_ratio" translatable="false">W,10:7</string>
     <string name="uxsdk_widget_rtk_satellite_status_ratio" translatable="false">W,1:1</string>
 

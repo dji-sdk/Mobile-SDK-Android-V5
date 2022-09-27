@@ -27,7 +27,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
     android:layout_height="50dp"
-    tools:parentTag="dji.v5.ux.core.ui.SeekBarView">
+    tools:parentTag="dji.v5.ux.core.ui.HorizontalSeekBar">
 
     <ImageView
         android:id="@+id/imageview_track"

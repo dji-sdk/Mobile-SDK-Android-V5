@@ -34,6 +34,8 @@
     <!-- text size -->
     <dimen name="uxsdk_text_size_large_2">22sp</dimen>
     <dimen name="uxsdk_text_size_large">20sp</dimen>
+    <dimen name="uxsdk_text_size_15sp">15sp</dimen>
+    <dimen name="uxsdk_text_size_13sp">13sp</dimen>
     <dimen name="uxsdk_text_size_medium_large">18sp</dimen>
     <dimen name="uxsdk_text_size_medium">16sp</dimen>
     <dimen name="uxsdk_text_size_normal_medium">14sp</dimen>
@@ -562,4 +564,6 @@
     <dimen name="uxsdk_simulator_dialog_height">300dp</dimen>
     <dimen name="uxsdk_simulator_dialog_button_text_size">16sp</dimen>
 
+    <!-- Zoom Widget -->
+    <dimen name="uxsdk_pixel_benchmark">1.2dp</dimen>
 </resources>

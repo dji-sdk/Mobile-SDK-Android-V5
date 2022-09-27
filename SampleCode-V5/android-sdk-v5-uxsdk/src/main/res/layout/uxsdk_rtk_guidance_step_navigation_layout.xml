@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!--1-->
+    <FrameLayout
+        android:layout_width="@dimen/uxsdk_25_dp"
+        android:layout_height="@dimen/uxsdk_25_dp">
+
+        <TextView
+            android:id="@+id/rtk_guidance_step_first_number"
+            android:layout_width="@dimen/uxsdk_25_dp"
+            android:layout_height="@dimen/uxsdk_25_dp"
+            android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_blue_solid"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/rtk_guidance_step_first_image"
+            android:layout_width="@dimen/uxsdk_25_dp"
+            android:layout_height="@dimen/uxsdk_25_dp"
+            android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_blue"
+            android:gravity="center"
+            android:src="@drawable/uxsdk_ic_rtk_guidance_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!--横线-->
+    <View
+        android:id="@+id/rtk_guidance_start_divider"
+        android:layout_width="@dimen/uxsdk_47_dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/uxsdk_4_dp"
+        android:background="@color/uxsdk_gray" />
+
+    <!--2-->
+    <FrameLayout
+        android:layout_width="@dimen/uxsdk_25_dp"
+        android:layout_height="@dimen/uxsdk_25_dp"
+        android:layout_marginStart="@dimen/uxsdk_4_dp">
+
+        <TextView
+            android:id="@+id/rtk_guidance_step_second_number"
+            android:layout_width="@dimen/uxsdk_25_dp"
+            android:layout_height="@dimen/uxsdk_25_dp"
+            android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_gray"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/rtk_guidance_step_second_image"
+            android:layout_width="@dimen/uxsdk_25_dp"
+            android:layout_height="@dimen/uxsdk_25_dp"
+            android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_blue"
+            android:gravity="center"
+            android:src="@drawable/uxsdk_ic_rtk_guidance_tick"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!--横线-->
+    <View
+        android:id="@+id/rtk_guidance_end_divider"
+        android:layout_width="47dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/uxsdk_4_dp"
+        android:background="@color/uxsdk_blue" />
+
+    <!--3-->
+    <TextView
+        android:id="@+id/rtk_guidance_step_third_number"
+        android:layout_width="@dimen/uxsdk_25_dp"
+        android:layout_height="@dimen/uxsdk_25_dp"
+        android:layout_marginStart="@dimen/uxsdk_4_dp"
+        android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_gray"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@color/black" />
+
+</LinearLayout>

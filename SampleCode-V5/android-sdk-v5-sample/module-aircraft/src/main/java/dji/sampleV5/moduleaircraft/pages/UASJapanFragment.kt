@@ -48,7 +48,7 @@ class UASJapanFragment : DJIFragment() {
             val uaTest = JsonUtil.toJson(UATest())
             showDialog("输入从民航局获取的信息", uaTest.toString()) {
                 it?.let {
-                    LogUtils.d(TAG, it)
+                    LogUtils.i(TAG, it)
                     uasJapanVM.setUARegistrationNumber(it)
                 }
             }
@@ -75,7 +75,7 @@ class UASJapanFragment : DJIFragment() {
 
     private fun updateInfo() {
         tv_ua_import_tip.text = "isUARegistrationNumberImport:${uasJapanVM.uaRegNumberStatus.value?.isUARegistrationNumberImport},\n" +
-                "uasRemoteIDStatus=${uasJapanVM.uasRemoteIDStatus.value?.isBroadcastRemoteIdEnabled},\n" +
+                "uasRemoteIDStatus=${uasJapanVM.uasRemoteIDStatus.value},\n" +
                 "uaRegistrationNumber=${uasJapanVM.uaRegistrationNumber.value}"
 
 

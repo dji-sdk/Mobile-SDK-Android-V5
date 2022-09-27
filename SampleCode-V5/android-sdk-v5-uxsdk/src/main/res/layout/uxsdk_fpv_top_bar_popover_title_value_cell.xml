@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
+    tools:background="@color/uxsdk_black_90_percent"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <TextView
+        android:id="@+id/tv_value"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/uxsdk_18_dp"
+        android:singleLine="true"
+        android:textSize="@dimen/uxsdk_12_dp"
+        android:textStyle="bold"
+        android:textColor="@color/uxsdk_white"
+        tools:text="强"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/uxsdk_14_dp"
+        android:singleLine="true"
+        android:textSize="@dimen/uxsdk_10_dp"
+        android:textStyle="normal"
+        android:textColor="@color/uxsdk_white_45_percent"
+        android:layout_marginTop="@dimen/uxsdk_4_dp"
+        android:fontFamily="@font/noto_sans_cjk_sc_medium"
+        android:includeFontPadding="false"
+        tools:text="GPS信号"
+        android:gravity="center"/>
+
+</LinearLayout>

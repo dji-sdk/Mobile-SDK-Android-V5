@@ -47,7 +47,8 @@
                 android:text="@string/btn_mission_start"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_mission_upload" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_wayline_select" />
+
 
             <Button
                 android:id="@+id/btn_mission_pause"
@@ -72,6 +73,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_mission_resume" />
+
+            <Button
+                android:id="@+id/btn_wayline_select"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_mission_wayline_select"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_mission_upload" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -169,5 +178,19 @@
         android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
         app:layout_constraintTop_toBottomOf="@+id/wayline_aircraft_height"></TextView>
+
+    <ImageButton
+        android:id="@+id/map_locate"
+        android:padding="10dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/selector_blue_rect_mask"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_map_osd_locate"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/wp_map"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    tools:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_8_dp">
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/uxsdk_text_size_normal_medium"
+            android:visibility="gone"
+            android:text="RTK 服务类型"
+            tools:visibility="visible" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/uxsdk_30_dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/uxsdk_bg_spinner"
+            android:gravity="center"
+            android:minWidth="@dimen/uxsdk_136_dp"
+            android:popupBackground="@drawable/uxsdk_bg_spinner_pop"
+            android:spinnerMode="dropdown"
+             />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_16_dp"
+        android:layout_marginBottom="@dimen/uxsdk_22_dp"
+        android:textColor="@color/uxsdk_white_60_percent"
+        android:textSize="@dimen/uxsdk_text_size_normal"
+        android:visibility="gone"
+        tools:text="切换RTK服务类型需要重启飞行器\n 请确保D-RTK 2 移动站处于空旷地带，切勿挪动架设位置。起桨后不支持扫描和对频RTK基站"
+        tools:visibility="visible" />
+
+</LinearLayout>

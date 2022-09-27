@@ -12,6 +12,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.StyleRes
 import androidx.core.content.res.use
+import androidx.fragment.app.FragmentTransaction
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.sdk.keyvalue.value.rtkbasestation.RTKServiceState
 import dji.sdk.keyvalue.value.rtkmobilestation.GNSSType
@@ -47,12 +48,12 @@ private const val TAG = "RTKSatelliteStatusWidget"
 open class RTKSatelliteStatusWidget @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : ConstraintLayoutWidget<RTKSatelliteStatusWidget.ModelState>(context, attrs, defStyleAttr) {
-
     //region Fields
     private val rtkStatusTitleTextView: TextView = findViewById(R.id.textview_rtk_status_title)
     private val rtkStatusTextView: TextView = findViewById(R.id.textview_rtk_status)
+    private val baseStationConnectImageView: ImageView = findViewById(R.id.imageview_connect_arrow)
     private val tableBackgroundImageView: ImageView = findViewById(R.id.imageview_table_background)
     private val antenna1TitleTextView: TextView = findViewById(R.id.textview_ant1_title)
     private val antenna2TitleTextView: TextView = findViewById(R.id.textview_ant2_title)
@@ -489,7 +490,14 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
 
     init {
         initItemValues()
+        initListener()
         attrs?.let { initAttributes(context, it) }
+    }
+
+    private fun initListener() {
+        baseStationConnectImageView.setOnClickListener {
+            rtkStationListener?.showConnectView()
+        }
     }
 
     override fun onAttachedToWindow() {
@@ -576,7 +584,7 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
      * @param color The color of the text
      */
     fun setRTKConnectionStatusLabelTextColor(
-        state: RTKSatelliteStatusWidgetModel.RTKBaseStationState, @ColorInt color: Int
+        state: RTKSatelliteStatusWidgetModel.RTKBaseStationState, @ColorInt color: Int,
     ) {
         connectionStateTextColorMap[state] = color
         widgetModel.updateRTKConnectionState()
@@ -750,6 +758,7 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
 
     private fun updateNetworkServiceStatus(networkServiceState: RTKSatelliteStatusWidgetModel.RTKNetworkServiceState) {
         //去除RTKNetworkServiceState默认值带来的的影响
+        LogUtils.i(TAG, "updateNetworkServiceStatus:$networkServiceState")
         if (networkServiceState.isNetworkServiceOpen == false) {
             return
         }
@@ -763,7 +772,8 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
             RTKServiceState.RTCM_USER_HAS_ACTIVATE,
             RTKServiceState.RTCM_USER_ACCOUNT_EXPIRES_SOON,
             RTKServiceState.RTCM_USE_DEFAULT_MOUNT_POINT,
-            RTKServiceState.TRANSMITTING ->
+            RTKServiceState.TRANSMITTING,
+            ->
                 if (networkServiceState.isRTKBeingUsed == true) {
                     rtkStatusColor =
                         getRTKConnectionStatusLabelTextColor(RTKSatelliteStatusWidgetModel.RTKBaseStationState.CONNECTED_IN_USE)
@@ -779,13 +789,15 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
             RTKServiceState.SERVICE_SUSPENSION -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_pause)
             RTKServiceState.RTCM_USER_NOT_ACTIVATED -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_not_active)
             RTKServiceState.RTCM_ILLEGAL_UTC_TIME,
-            RTKServiceState.ACCOUNT_EXPIRED -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_account_expire)
+            RTKServiceState.ACCOUNT_EXPIRED,
+            -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_account_expire)
             RTKServiceState.NETWORK_NOT_REACHABLE -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_network_err)
             RTKServiceState.LOGIN_FAILURE -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_auth_failed)
             RTKServiceState.RTCM_SET_COORDINATE_FAILURE -> rtkStatusStr =
                 getString(R.string.uxsdk_rtk_state_coordinate_fialed)
             RTKServiceState.RTCM_CONNECTING,
-            RTKServiceState.READY -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_connecting)
+            RTKServiceState.READY,
+            -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_connecting)
             RTKServiceState.ACCOUNT_ERROR -> rtkStatusStr = getString(R.string.uxsdk_rtk_nrtk_account_error)
             RTKServiceState.CONNECTING -> rtkStatusStr = getString(R.string.uxsdk_rtk_nrtk_connecting)
             RTKServiceState.INVALID_REQUEST -> rtkStatusStr = getString(R.string.uxsdk_rtk_nrtk_invalid_request)
@@ -956,14 +968,19 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
             }
         }
 
-        updateBaseStationTitle(rtkSystemState?.rtkReferenceStationSource)
+        updateBaseStationUI(rtkSystemState?.rtkReferenceStationSource)
     }
 
-    private fun updateBaseStationTitle(stationSource: RTKReferenceStationSource?) {
+    private fun updateBaseStationUI(stationSource: RTKReferenceStationSource?) {
         stationSource?.let {
             val name = RTKUtil.getRTKTypeName(this, stationSource)
             baseStationCoordinatesTitleTextView.text = name
             rtkStatusTitleTextView.text = resources.getString(R.string.uxsdk_rtk_status_desc, name)
+        }
+        if (stationSource == RTKReferenceStationSource.BASE_STATION) {
+            baseStationConnectImageView.show()
+        } else {
+            baseStationConnectImageView.hide()
         }
     }
 
@@ -977,6 +994,15 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
          */
         data class ProductConnected(val isConnected: Boolean) : ModelState()
 
+    }
+
+    interface RTKStationListener {
+        fun showConnectView()
+    }
+
+    private var rtkStationListener: RTKStationListener? = null
+    fun setRTKConnectListener(rtkStationListener: RTKStationListener) {
+        this.rtkStationListener = rtkStationListener
     }
     //endregion
 }

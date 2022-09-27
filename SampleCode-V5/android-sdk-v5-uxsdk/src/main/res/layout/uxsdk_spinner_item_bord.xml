@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingLeft="13dp"
+          android:paddingRight="10dp"
+          android:paddingTop="4dp"
+          android:paddingBottom="4dp"
+          android:textSize="@dimen/uxsdk_text_size_normal_medium"
+          android:textColor="@color/white"
+          android:gravity="center"
+          android:drawableRight="@drawable/uxsdk_ic_spinner_cell_expand">
+
+</TextView>

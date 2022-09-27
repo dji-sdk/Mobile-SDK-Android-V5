@@ -42,8 +42,6 @@
 -keep class com.squareup.wire.** { *; }
 -keep class sun.misc.Unsafe { *; }
 -keep class com.secneo.** {*;}
--keep class org.greenrobot.eventbus.**{*;}
--keep class com.commonsware.**{*;}
 -keep class io.reactivex.**{*;}
 -keep class okhttp3.**{*;}
 -keep class okio.**{*;}
@@ -123,7 +121,6 @@
 -keep class com.dji.mapkit.maplibre.provider.MapLibreProvider {*;}
 -keep class com.dji.mapkit.core.** {*;}
 -keep class com.autonavi.** {*;}
--keep class com.alibaba.fastjson.**{*;}
 
 
 ## keep 千寻相关接口

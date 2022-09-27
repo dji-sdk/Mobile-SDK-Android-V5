@@ -31,13 +31,12 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import androidx.annotation.AnimatorRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.AnimatorRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import dji.v5.ux.R;
 import dji.v5.ux.core.util.SettingDefinitions.ControlMode;
 
@@ -100,8 +99,8 @@ public class FocusTargetView extends FrameLayout {
                 getHandler().postDelayed(this::removeImageBackground, focusTargetDuration);
             }
         }
-        setTranslationX(x - getWidth() / 2f);
-        setTranslationY(y - getHeight() / 2f);
+        setX(x - getWidth() / 2f);
+        setY(y - getHeight() / 2f);
     }
 
     /**

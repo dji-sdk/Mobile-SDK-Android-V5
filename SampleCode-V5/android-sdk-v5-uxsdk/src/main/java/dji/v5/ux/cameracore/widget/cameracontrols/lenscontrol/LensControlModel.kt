@@ -29,9 +29,8 @@ open class LensControlModel constructor(
 
     private var cameraIndex = ComponentIndexType.LEFT_OR_MAIN
 
-    val cameraTypeProcessor: DataProcessor<CameraType> = DataProcessor.create(CameraType.NOT_SUPPORTED)
     val cameraVideoStreamSourceProcessor: DataProcessor<CameraVideoStreamSourceType> = DataProcessor.create(CameraVideoStreamSourceType.UNKNOWN)
-    val cameraVideoStreamSourceRangeProcessor: DataProcessor<Array<CameraVideoStreamSourceType>> = DataProcessor.create(arrayOf())
+    val cameraVideoStreamSourceRangeProcessor: DataProcessor<List<CameraVideoStreamSourceType>> = DataProcessor.create(listOf())
 
     override fun getCameraIndex() = cameraIndex
 
@@ -46,9 +45,8 @@ open class LensControlModel constructor(
     }
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraType,cameraIndex),cameraTypeProcessor)
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyLiveViewCameraSource,cameraIndex),cameraVideoStreamSourceProcessor)
-        //bindDataProcessor(CameraKey.create(CameraKey.CAMERA_VIDEO_STREAM_SOURCE_RANGE, cameraIndex),cameraVideoStreamSourceRangeProcessor)
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraVideoStreamSourceRange, cameraIndex),cameraVideoStreamSourceRangeProcessor)
     }
 
     override fun inCleanup() {

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/rtk_guidance_close"
+        android:layout_width="@dimen/uxsdk_23_dp"
+        android:layout_height="@dimen/uxsdk_23_dp"
+        android:layout_marginStart="@dimen/uxsdk_16_dp"
+        android:layout_marginTop="@dimen/uxsdk_13_dp"
+        android:background="@drawable/uxsdk_ic_rtk_guidance_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--上方导航栏-->
+    <include
+        android:id="@+id/rtk_guidance_step_navigation"
+        layout="@layout/uxsdk_rtk_guidance_step_navigation_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/rtk_guidance_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rtk_guidance_close" />
+
+    <!--左边的图片或者动图-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/rtk_guidance_lottie_animation"
+        android:layout_width="@dimen/uxsdk_280_dp"
+        android:layout_height="@dimen/uxsdk_230_dp"
+        android:layout_marginStart="@dimen/uxsdk_30_dp"
+        android:layout_marginTop="@dimen/uxsdk_48_dp"
+        app:layout_constraintEnd_toStartOf="@id/rtk_guidance_step_title"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rtk_guidance_close" />
+
+    <View
+        android:id="@+id/rtk_guidance_replay_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.8"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintEnd_toEndOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintStart_toStartOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintTop_toTopOf="@id/rtk_guidance_lottie_animation" />
+
+    <Button
+        android:id="@+id/rtk_guidance_replay_btn"
+        android:layout_width="@dimen/uxsdk_100_dp"
+        android:layout_height="@dimen/uxsdk_24_dp"
+        android:background="@drawable/uxsdk_bg_rtk_guidance_replay"
+        android:drawableStart="@drawable/uxsdk_ic_rtk_guidance_replay"
+        android:paddingStart="@dimen/uxsdk_23_dp"
+        android:paddingEnd="@dimen/uxsdk_23_dp"
+        android:text="@string/uxsdk_rtk_guidance_replay"
+        android:textAllCaps="false"
+        android:textColor="@color/uxsdk_setting_menu_rtk_txt_gray"
+        android:textSize="@dimen/uxsdk_text_size_normal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintEnd_toEndOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintStart_toStartOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintTop_toTopOf="@id/rtk_guidance_lottie_animation" />
+
+    <TextView
+        android:id="@+id/rtk_guidance_lottie_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/uxsdk_rtk_guidance_step2_tip"
+        android:textColor="@color/uxsdk_blue"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/rtk_guidance_replay_btn"
+        app:layout_constraintEnd_toEndOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintStart_toStartOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintTop_toTopOf="@id/rtk_guidance_lottie_animation" />
+
+    <!--右边的文字布局-->
+    <TextView
+        android:id="@+id/rtk_guidance_step_title"
+        android:layout_width="@dimen/uxsdk_280_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_48_dp"
+        android:layout_marginEnd="@dimen/uxsdk_30_dp"
+        android:text="@string/uxsdk_rtk_guidance_step1_title"
+        android:textSize="@dimen/uxsdk_text_size_medium_large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rtk_guidance_lottie_animation"
+        app:layout_constraintTop_toBottomOf="@id/rtk_guidance_close" />
+
+    <TextView
+        android:id="@+id/rtk_guidance_step_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_16_dp"
+        android:text="@string/uxsdk_rtk_guidance_step1_content"
+        android:textSize="@dimen/uxsdk_text_size_13sp"
+        app:layout_constraintEnd_toEndOf="@id/rtk_guidance_step_title"
+        app:layout_constraintStart_toStartOf="@id/rtk_guidance_step_title"
+        app:layout_constraintTop_toBottomOf="@id/rtk_guidance_step_title" />
+
+    <include
+        android:id="@+id/rtk_guidance_step_image"
+        layout="@layout/uxsdk_rtk_guidance_step_image_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_15_dp"
+        app:layout_constraintBottom_toTopOf="@id/rtk_guidance_step_image_desc"
+        app:layout_constraintEnd_toEndOf="@id/rtk_guidance_step_title"
+        app:layout_constraintStart_toStartOf="@id/rtk_guidance_step_title"
+        app:layout_constraintTop_toBottomOf="@id/rtk_guidance_step_content" />
+
+    <TextView
+        android:id="@+id/rtk_guidance_step_image_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_10_dp"
+        android:text="@string/uxsdk_rtk_guidance_step2_image_desc"
+        android:textSize="@dimen/uxsdk_text_size_small"
+        app:layout_constraintBottom_toTopOf="@id/rtk_guidance_step_next"
+        app:layout_constraintEnd_toEndOf="@id/rtk_guidance_step_title"
+        app:layout_constraintStart_toStartOf="@id/rtk_guidance_step_title"
+        app:layout_constraintTop_toBottomOf="@id/rtk_guidance_step_image" />
+
+    <Button
+        android:id="@+id/rtk_guidance_step_previous"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@null"
+        android:text="@string/uxsdk_rtk_guidance_btn_previous"
+        android:textColor="@color/uxsdk_blue"
+        android:textSize="@dimen/uxsdk_text_size_15sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/rtk_guidance_step_next"
+        app:layout_constraintEnd_toStartOf="@id/rtk_guidance_step_next"
+        app:layout_constraintStart_toStartOf="@id/rtk_guidance_step_title"
+        app:layout_constraintTop_toTopOf="@id/rtk_guidance_step_next" />
+
+
+    <Button
+        android:id="@+id/rtk_guidance_step_next"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/uxsdk_40_dp"
+        android:layout_marginTop="@dimen/uxsdk_19_dp"
+        android:background="@drawable/uxsdk_bg_rtk_guidance_step_next"
+        android:text="@string/uxsdk_rtk_guidance_btn_next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/uxsdk_text_size_15sp"
+        app:layout_constraintEnd_toEndOf="@id/rtk_guidance_step_title"
+        app:layout_constraintStart_toEndOf="@id/rtk_guidance_step_previous"
+        app:layout_constraintTop_toBottomOf="@id/rtk_guidance_step_image_desc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

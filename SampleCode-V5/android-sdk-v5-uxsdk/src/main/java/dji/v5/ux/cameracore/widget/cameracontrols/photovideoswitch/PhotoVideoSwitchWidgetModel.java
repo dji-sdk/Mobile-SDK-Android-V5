@@ -26,7 +26,7 @@ package dji.v5.ux.cameracore.widget.cameracontrols.photovideoswitch;
 import androidx.annotation.NonNull;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
-import dji.sdk.keyvalue.value.camera.CameraWorkMode;
+import dji.sdk.keyvalue.value.camera.CameraMode;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.ux.core.base.DJISDKModel;
@@ -125,7 +125,7 @@ public class PhotoVideoSwitchWidgetModel extends WidgetModel implements ICameraI
      */
     public Flowable<Boolean> isPictureMode() {
         return flatCameraModule.getCameraModeDataProcessor().toFlowable().map(cameraMode ->
-                cameraMode == CameraWorkMode.SHOOT_PHOTO
+                cameraMode == CameraMode.PHOTO_NORMAL
         );
     }
 
@@ -135,10 +135,10 @@ public class PhotoVideoSwitchWidgetModel extends WidgetModel implements ICameraI
      * @return Completable
      */
     public Completable toggleCameraMode() {
-        if (flatCameraModule.getCameraModeDataProcessor().getValue() == CameraWorkMode.SHOOT_PHOTO) {
-            return flatCameraModule.setCameraMode(djiSdkModel, CameraWorkMode.RECORD_VIDEO);
+        if (flatCameraModule.getCameraModeDataProcessor().getValue() == CameraMode.PHOTO_NORMAL) {
+            return flatCameraModule.setCameraMode(djiSdkModel, CameraMode.VIDEO_NORMAL);
         } else {
-            return flatCameraModule.setCameraMode(djiSdkModel, CameraWorkMode.SHOOT_PHOTO);
+            return flatCameraModule.setCameraMode(djiSdkModel, CameraMode.PHOTO_NORMAL);
         }
     }
 

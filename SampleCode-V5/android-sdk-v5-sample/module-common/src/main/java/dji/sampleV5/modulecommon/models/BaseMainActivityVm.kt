@@ -66,6 +66,10 @@ class BaseMainActivityVm : DJIViewModel() {
         })
     }
 
+    fun releaseSDKCallback() {
+        SDKManager.getInstance().destroy()
+    }
+
     fun updateNews() {
         sdkNews.postValue(SDKNews(R.string.news_title, R.string.news_description, "2022-03-21"))
     }

@@ -15,13 +15,11 @@ import dji.v5.ux.core.base.ICameraIndex
 import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
-import dji.v5.ux.core.ui.SeekBarView
+import dji.v5.ux.core.ui.HorizontalSeekBar
 import dji.v5.ux.core.util.AudioUtil
 import dji.v5.ux.core.util.CameraUtil
 import dji.v5.ux.core.util.RxUtil
-import dji.v5.ux.core.util.SettingDefinitions
 import io.reactivex.rxjava3.functions.Action
-import kotlinx.android.synthetic.main.uxsdk_widget_exposure_mode_setting.view.*
 import kotlinx.android.synthetic.main.uxsdk_widget_iso_ei_setting.view.*
 
 /**
@@ -37,7 +35,7 @@ open class ISOAndEISettingWidget @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayoutWidget<ISOAndEISettingWidget.ModelState>(context, attrs, defStyleAttr),
-    View.OnClickListener, SeekBarView.OnSeekBarChangeListener, ICameraIndex {
+    View.OnClickListener, HorizontalSeekBar.OnSeekBarChangeListener, ICameraIndex {
 
     private val LOCKED_ISO_VALUE = "500"
 
@@ -164,7 +162,7 @@ open class ISOAndEISettingWidget @JvmOverloads constructor(
         return null
     }
 
-    override fun onProgressChanged(view: SeekBarView, progress: Int, isFromUI: Boolean) {
+    override fun onProgressChanged(view: HorizontalSeekBar, progress: Int, isFromUI: Boolean) {
         if (view == seekbar_iso) {
             if (isISOLocked) {
                 seekbar_iso.text = LOCKED_ISO_VALUE
@@ -181,11 +179,11 @@ open class ISOAndEISettingWidget @JvmOverloads constructor(
         }
     }
 
-    override fun onStartTrackingTouch(view: SeekBarView, progress: Int) {
+    override fun onStartTrackingTouch(view: HorizontalSeekBar, progress: Int) {
         isSeekBarTracking = true
     }
 
-    override fun onStopTrackingTouch(view: SeekBarView, progress: Int) {
+    override fun onStopTrackingTouch(view: HorizontalSeekBar, progress: Int) {
         isSeekBarTracking = false
         AudioUtil.playSoundInBackground(context, R.raw.uxsdk_camera_ev_center)
         if (view == seekbar_iso) {
@@ -202,11 +200,11 @@ open class ISOAndEISettingWidget @JvmOverloads constructor(
         }
     }
 
-    override fun onPlusClicked(view: SeekBarView) {
+    override fun onPlusClicked(view: HorizontalSeekBar) {
         //暂未实现
     }
 
-    override fun onMinusClicked(view: SeekBarView) {
+    override fun onMinusClicked(view: HorizontalSeekBar) {
         //暂未实现
     }
 

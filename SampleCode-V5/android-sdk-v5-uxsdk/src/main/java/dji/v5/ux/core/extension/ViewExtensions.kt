@@ -30,7 +30,9 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
+import android.util.SparseLongArray
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -174,18 +176,17 @@ var ImageView.imageDrawable: Drawable?
  */
 fun View.showAlertDialog(
     @StyleRes dialogTheme: Int = R.style.Theme_AppCompat_Dialog,
-    isCancellable: Boolean = true,
     title: String? = getString(R.string.uxsdk_alert),
     icon: Drawable? = null,
     message: String? = null,
     dismissButton: String? = getString(R.string.uxsdk_app_ok),
     dialogClickListener: DialogInterface.OnClickListener? = null,
-    dialogDismissListener: DialogInterface.OnDismissListener? = null
+    dialogDismissListener: DialogInterface.OnDismissListener? = null,
 ) {
     val builder = AlertDialog.Builder(context, dialogTheme)
     builder.setTitle(title)
     builder.setIcon(icon)
-    builder.setCancelable(isCancellable)
+    builder.setCancelable(true)
     builder.setMessage(message)
     builder.setPositiveButton(dismissButton, dialogClickListener)
     builder.setOnDismissListener(dialogDismissListener)
@@ -206,22 +207,19 @@ fun View.showAlertDialog(
  */
 fun View.showConfirmationDialog(
     @StyleRes dialogTheme: Int = R.style.Theme_AppCompat_Dialog,
-    isCancellable: Boolean = true,
     title: String? = getString(R.string.uxsdk_alert),
     icon: Drawable? = null,
     message: String? = null,
-    positiveButton: String? = getString(R.string.uxsdk_app_ok),
-    negativeButton: String? = getString(R.string.uxsdk_app_cancel),
     dialogClickListener: DialogInterface.OnClickListener? = null,
-    dialogDismissListener: DialogInterface.OnDismissListener? = null
+    dialogDismissListener: DialogInterface.OnDismissListener? = null,
 ) {
     val builder = AlertDialog.Builder(context, dialogTheme)
     builder.setIcon(icon)
     builder.setTitle(title)
-    builder.setCancelable(isCancellable)
+    builder.setCancelable(true)
     builder.setMessage(message)
-    builder.setPositiveButton(positiveButton, dialogClickListener)
-    builder.setNegativeButton(negativeButton, dialogClickListener)
+    builder.setPositiveButton(getString(R.string.uxsdk_app_ok), dialogClickListener)
+    builder.setNegativeButton(getString(R.string.uxsdk_app_cancel), dialogClickListener)
     builder.setOnDismissListener(dialogDismissListener)
     val dialog = builder.create()
     dialog.show()
@@ -267,7 +265,7 @@ fun View.setBorder(
     leftBorder: Int = 0,
     topBorder: Int = 0,
     rightBorder: Int = 0,
-    bottomBorder: Int = 0
+    bottomBorder: Int = 0,
 ) {
     val borderColorDrawable = ColorDrawable(borderColor)
     val backgroundColorDrawable = ColorDrawable(backgroundColor)
@@ -298,4 +296,33 @@ fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int) -> Unit): T {
         event.invoke(adapterPosition)
     }
     return this
+}
+
+const val TRANSITION_OFFSET = 80
+private const val FAST_CLICK_DURATION = 300
+private val sClickTimes: SparseLongArray = SparseLongArray()
+
+/**
+ * 判断是否点击过快
+ * @param viewId
+ * @param duration
+ * @return
+ */
+fun Button.isFastClick(duration: Int): Boolean {
+    val prevTime: Long = sClickTimes.get(this.id)
+    val now = System.currentTimeMillis()
+    val isFast = now - prevTime < duration
+    if (!isFast) {
+        sClickTimes.put(this.id, now)
+    }
+    return isFast
+}
+
+/**
+ * 判断是否点击过快
+ * @param viewId
+ * @return
+ */
+fun Button.isFastClick(): Boolean {
+    return isFastClick(FAST_CLICK_DURATION)
 }

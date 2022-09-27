@@ -3,8 +3,7 @@ package dji.sampleV5.moduleaircraft.models
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sdk.keyvalue.key.RemoteControllerKey
-import dji.sdk.keyvalue.value.flightcontroller.FlightControlAuthority
-import dji.sdk.keyvalue.value.flightcontroller.FlightControlAuthorityChangeReason
+import dji.sdk.keyvalue.value.flightcontroller.*
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.et.create
 import dji.v5.et.listen
@@ -13,7 +12,6 @@ import dji.v5.manager.aircraft.virtualstick.VirtualStickManager
 import dji.v5.manager.aircraft.virtualstick.VirtualStickState
 import dji.v5.manager.aircraft.virtualstick.VirtualStickStateListener
 import dji.v5.utils.common.LogUtils
-import kotlin.math.log
 
 /**
  * Class Description
@@ -28,6 +26,13 @@ class VirtualStickVM : DJIViewModel() {
     val currentSpeedLevel = MutableLiveData(0.0)
     var useRcStick = MutableLiveData(false)
     val currentVirtualStickStateInfo = MutableLiveData(VirtualStickStateInfo())
+
+    val virtualStickAdvancedParam = MutableLiveData(VirtualStickFlightControlParam()).apply {
+        value?.rollPitchCoordinateSystem = FlightCoordinateSystem.BODY
+        value?.verticalControlMode = VerticalControlMode.VELOCITY
+        value?.yawControlMode = YawControlMode.ANGULAR_VELOCITY
+        value?.rollPitchControlMode = RollPitchControlMode.ANGLE
+    }
 
     // RC Stick Value
     var stickValue = MutableLiveData(RCStickValue(0, 0, 0, 0))
@@ -64,15 +69,27 @@ class VirtualStickVM : DJIViewModel() {
     }
 
     fun setLeftPosition(horizontal: Int, vertical: Int) {
-        LogUtils.d(logTag, "horizontal:$horizontal,vertical:$vertical")
+        LogUtils.i(logTag, "horizontal:$horizontal,vertical:$vertical")
         VirtualStickManager.getInstance().leftStick.horizontalPosition = horizontal
         VirtualStickManager.getInstance().leftStick.verticalPosition = vertical
     }
 
     fun setRightPosition(horizontal: Int, vertical: Int) {
-        LogUtils.d(logTag, "horizontal:$horizontal,vertical:$vertical")
+        LogUtils.i(logTag, "horizontal:$horizontal,vertical:$vertical")
         VirtualStickManager.getInstance().rightStick.horizontalPosition = horizontal
         VirtualStickManager.getInstance().rightStick.verticalPosition = vertical
+    }
+
+    fun sendVirtualStickAdvancedParam(param: VirtualStickFlightControlParam) {
+        VirtualStickManager.getInstance().sendVirtualStickAdvancedParam(param)
+    }
+
+    fun disableVirtualStickAdvancedMode() {
+        VirtualStickManager.getInstance().setVirtualStickAdvancedModeEnabled(false)
+    }
+
+    fun enableVirtualStickAdvancedMode() {
+        VirtualStickManager.getInstance().setVirtualStickAdvancedModeEnabled(true)
     }
 
     fun listenRCStick() {
@@ -118,7 +135,7 @@ class VirtualStickVM : DJIViewModel() {
     }
 
     data class VirtualStickStateInfo(
-        var state: VirtualStickState = VirtualStickState(false, FlightControlAuthority.UNKNOWN),
+        var state: VirtualStickState = VirtualStickState(false, FlightControlAuthority.UNKNOWN, false),
         var reason: FlightControlAuthorityChangeReason = FlightControlAuthorityChangeReason.UNKNOWN
     )
 
@@ -127,7 +144,8 @@ class VirtualStickVM : DJIViewModel() {
         Int, var rightHorizontal: Int, var rightVertical: Int
     ) {
         override fun toString(): String {
-            return "leftHorizontal=$leftHorizontal,leftVertical=$leftVertical,\nrightHorizontal=$rightHorizontal,rightVertical=$rightVertical"
+            return "leftHorizontal=$leftHorizontal,leftVertical=$leftVertical,\n" +
+                    "rightHorizontal=$rightHorizontal,rightVertical=$rightVertical"
         }
     }
 }

@@ -46,6 +46,7 @@ import dji.v5.ux.core.base.ICameraIndex;
 import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
+import dji.v5.ux.core.util.CameraUtil;
 import dji.v5.ux.core.util.DisplayUtil;
 
 /**
@@ -120,7 +121,7 @@ public class CameraConfigEVWidget extends ConstraintLayoutWidget implements ICam
 
     //region Reactions to model
     private void updateUI(@NonNull CameraExposureCompensation exposureCompensation) {
-        evValueTextView.setText(exposureCompensation.name());
+        evValueTextView.setText(CameraUtil.exposureValueDisplayName(exposureCompensation));
     }
 
     private void updateVisibility(@NonNull ExposureSensitivityMode exposureSensitivityMode) {

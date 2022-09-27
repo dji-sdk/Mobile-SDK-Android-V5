@@ -28,8 +28,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mapbox.mapboxsdk.location.modes.CameraMode;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +35,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Constraints;
-import dji.sdk.keyvalue.value.camera.CameraWorkMode;
+import dji.sdk.keyvalue.value.camera.CameraMode;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.ux.R;
@@ -61,7 +59,7 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
     //region Fields
     private static final String TAG = "CameraCaptureWidget";
     private CameraCaptureWidgetModel widgetModel;
-    private Map<CameraWorkMode, View> widgetMap;
+    private Map<CameraMode, View> widgetMap;
     //endregion
 
     //region Lifecycle
@@ -82,8 +80,8 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
         widgetMap = new HashMap<>();
 
         if (!isInEditMode()) {
-            addViewByMode(CameraWorkMode.SHOOT_PHOTO, new ShootPhotoWidget(context));
-            addViewByMode(CameraWorkMode.RECORD_VIDEO, new RecordVideoWidget(context));
+            addViewByMode(CameraMode.PHOTO_NORMAL, new ShootPhotoWidget(context));
+            addViewByMode(CameraMode.VIDEO_NORMAL, new RecordVideoWidget(context));
             widgetModel = new CameraCaptureWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
         }
     }
@@ -146,7 +144,7 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
     }
 
     //region private helpers
-    private void onCameraModeChange(CameraWorkMode cameraMode) {
+    private void onCameraModeChange(CameraMode cameraMode) {
         for (View view : widgetMap.values()) {
             if (view != null) view.setVisibility(GONE);
         }
@@ -165,7 +163,7 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
      * @param cameraMode instance of camera mode
      * @param view       the view to be shown for camera mode
      */
-    public void addViewByMode(@NonNull CameraWorkMode cameraMode, @NonNull View view) {
+    public void addViewByMode(@NonNull CameraMode cameraMode, @NonNull View view) {
         if (widgetMap.get(cameraMode) != null) {
             removeView(widgetMap.get(cameraMode));
         }
@@ -181,7 +179,7 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
      *
      * @param cameraMode for which the view should be removed
      */
-    public void removeViewByMode(@NonNull CameraWorkMode cameraMode) {
+    public void removeViewByMode(@NonNull CameraMode cameraMode) {
         if (widgetMap.get(cameraMode) == null) return;
         removeView(widgetMap.get(cameraMode));
         widgetMap.remove(cameraMode);
@@ -194,7 +192,7 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
      * @return View for the mode
      */
     @Nullable
-    public View getViewByMode(@NonNull CameraWorkMode cameraMode) {
+    public View getViewByMode(@NonNull CameraMode cameraMode) {
         return widgetMap.get(cameraMode);
     }
 
@@ -205,10 +203,10 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
      */
     @Nullable
     public ShootPhotoWidget getShootPhotoWidget() {
-        if (widgetMap.get(CameraWorkMode.SHOOT_PHOTO) == null || !(widgetMap.get(CameraWorkMode.SHOOT_PHOTO) instanceof ShootPhotoWidget)) {
+        if (widgetMap.get(CameraMode.PHOTO_NORMAL) == null || !(widgetMap.get(CameraMode.PHOTO_NORMAL) instanceof ShootPhotoWidget)) {
             return null;
         }
-        return (ShootPhotoWidget) widgetMap.get(CameraWorkMode.SHOOT_PHOTO);
+        return (ShootPhotoWidget) widgetMap.get(CameraMode.PHOTO_NORMAL);
     }
 
     /**
@@ -218,10 +216,10 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
      */
     @Nullable
     public RecordVideoWidget getRecordVideoWidget() {
-        if (widgetMap.get(CameraWorkMode.RECORD_VIDEO) == null || !(widgetMap.get(CameraWorkMode.RECORD_VIDEO) instanceof RecordVideoWidget)) {
+        if (widgetMap.get(CameraMode.VIDEO_NORMAL) == null || !(widgetMap.get(CameraMode.VIDEO_NORMAL) instanceof RecordVideoWidget)) {
             return null;
         }
-        return (RecordVideoWidget) widgetMap.get(CameraWorkMode.RECORD_VIDEO);
+        return (RecordVideoWidget) widgetMap.get(CameraMode.VIDEO_NORMAL);
     }
     //endregion
 }

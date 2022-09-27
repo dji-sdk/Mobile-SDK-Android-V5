@@ -202,7 +202,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textview_simulator_longitude_value" />
 
-            <dji.v5.ux.core.ui.SeekBarView
+            <dji.v5.ux.core.ui.HorizontalSeekBar
                 android:id="@+id/seek_bar_satellite_count"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/uxsdk_simulator_row_height"
@@ -246,7 +246,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textview_simulator_satellite_value" />
 
-            <dji.v5.ux.core.ui.SeekBarView
+            <dji.v5.ux.core.ui.HorizontalSeekBar
                 android:id="@+id/seek_bar_frequency"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/uxsdk_simulator_row_height"
@@ -627,7 +627,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textview_wind_section_header" />
 
-            <dji.v5.ux.core.ui.SeekBarView
+            <dji.v5.ux.core.ui.HorizontalSeekBar
                 android:id="@+id/seek_bar_wind_speed_x"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/uxsdk_simulator_row_height"
@@ -656,7 +656,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textview_wind_speed_x_label" />
 
-            <dji.v5.ux.core.ui.SeekBarView
+            <dji.v5.ux.core.ui.HorizontalSeekBar
                 android:id="@+id/seek_bar_wind_speed_y"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/uxsdk_simulator_row_height"
@@ -685,7 +685,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textview_wind_speed_y_label" />
 
-            <dji.v5.ux.core.ui.SeekBarView
+            <dji.v5.ux.core.ui.HorizontalSeekBar
                 android:id="@+id/seek_bar_wind_speed_z"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/uxsdk_simulator_row_height"

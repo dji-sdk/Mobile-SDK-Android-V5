@@ -37,7 +37,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
+import dji.v5.common.video.channel.VideoChannelState;
 import dji.v5.common.video.channel.VideoChannelType;
+import dji.v5.common.video.interfaces.IVideoChannel;
+import dji.v5.common.video.interfaces.VideoChannelStateChangeListener;
 import dji.v5.common.video.stream.PhysicalDevicePosition;
 import dji.v5.common.video.stream.StreamSource;
 import dji.v5.manager.datacenter.MediaDataCenter;
@@ -51,6 +54,7 @@ import dji.v5.ux.cameracore.widget.cameracontrols.lenscontrol.LensControlWidget;
 import dji.v5.ux.cameracore.widget.focusexposureswitch.FocusExposureSwitchWidget;
 import dji.v5.ux.cameracore.widget.focusmode.FocusModeWidget;
 import dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget;
+import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.extension.ViewExtensions;
 import dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget;
 import dji.v5.ux.core.panel.topbar.TopBarPanelWidget;
@@ -66,9 +70,9 @@ import dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget;
 import dji.v5.ux.visualcamera.ev.CameraConfigEVWidget;
 import dji.v5.ux.visualcamera.iso.CameraConfigISOAndEIWidget;
 import dji.v5.ux.visualcamera.shutter.CameraConfigShutterWidget;
-import dji.v5.ux.visualcamera.ssd.CameraConfigSSDWidget;
 import dji.v5.ux.visualcamera.storage.CameraConfigStorageWidget;
 import dji.v5.ux.visualcamera.wb.CameraConfigWBWidget;
+import dji.v5.ux.visualcamera.zoom.FocalZoomWidget;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -93,13 +97,13 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected CameraConfigEVWidget cameraConfigEVWidget;
     protected CameraConfigWBWidget cameraConfigWBWidget;
     protected CameraConfigStorageWidget cameraConfigStorageWidget;
-    protected CameraConfigSSDWidget cameraConfigSSDWidget;
     protected AutoExposureLockWidget autoExposureLockWidget;
     protected FocusModeWidget focusModeWidget;
     protected FocusExposureSwitchWidget focusExposureSwitchWidget;
     protected CameraControlsWidget cameraControlsWidget;
     protected ExposureSettingsPanel exposureSettingsPanel;
     protected PrimaryFlightDisplayWidget pfvFlightDisplayWidget;
+    protected FocalZoomWidget focalZoomWidget;
     protected View cameraConfigBackground;
 
     private int widgetHeight;
@@ -109,6 +113,8 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     private int deviceHeight;
     private CompositeDisposable compositeDisposable;
     private final DataProcessor<CameraSource> cameraSourceProcessor = DataProcessor.create(new CameraSource(PhysicalDevicePosition.UNKNOWN, CameraLensType.UNKNOWN));
+    private VideoChannelStateChangeListener primaryChannelStateListener = null;
+    private VideoChannelStateChangeListener secondaryChannelStateListener = null;
     //endregion
 
     //region Lifecycle
@@ -150,34 +156,37 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         cameraConfigEVWidget = findViewById(R.id.widget_camera_config_ev);
         cameraConfigWBWidget = findViewById(R.id.widget_camera_config_wb);
         cameraConfigStorageWidget = findViewById(R.id.widget_camera_config_storage);
-        cameraConfigSSDWidget = findViewById(R.id.widget_camera_config_ssd);
         autoExposureLockWidget = findViewById(R.id.widget_auto_exposure_lock);
         focusModeWidget = findViewById(R.id.widget_focus_mode);
         focusExposureSwitchWidget = findViewById(R.id.widget_focus_exposure_switch);
         exposureSettingsPanel = findViewById(R.id.panel_camera_controls_exposure_settings);
         pfvFlightDisplayWidget = findViewById(R.id.widget_fpv_flight_display_widget);
         cameraConfigBackground = findViewById(R.id.camera_config_background);
+        focalZoomWidget = findViewById(R.id.widget_focal_zoom);
         cameraControlsWidget = findViewById(R.id.widget_camera_controls);
         cameraControlsWidget.getExposureSettingsIndicatorWidget().setStateChangeResourceId(R.id.panel_camera_controls_exposure_settings);
 
         initClickListener();
         MediaDataCenter.getInstance().getVideoStreamManager().addStreamSourcesListener(sources -> runOnUiThread(() -> updateFPVWidgetSource(sources)));
-        primaryFpvWidget.setOnFPVStreamSourceListener((devicePosition, lensType) -> cameraSourceProcessor.onNext(new CameraSource(devicePosition, lensType)));
+        primaryFpvWidget.setOnFPVStreamSourceListener((devicePosition, lensType) -> {
+            LogUtils.i(TAG, devicePosition, lensType);
+            cameraSourceProcessor.onNext(new CameraSource(devicePosition, lensType));
+        });
         //小surfaceView放置在顶部，避免被大的遮挡
         secondaryFPVWidget.setSurfaceViewZOrderOnTop(true);
         secondaryFPVWidget.setSurfaceViewZOrderMediaOverlay(true);
     }
 
     private void initClickListener() {
-        secondaryFPVWidget.setOnClickListener(v -> {
-            swapVideoSource();
-        });
+        secondaryFPVWidget.setOnClickListener(v -> swapVideoSource());
+        initChannelStateListener();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         MediaDataCenter.getInstance().getVideoStreamManager().clearAllStreamSourcesListeners();
+        removeChannelStateListener();
     }
 
     @Override
@@ -201,9 +210,9 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                     }
                 }));
         compositeDisposable.add(cameraSourceProcessor.toFlowable()
-                .observeOn(AndroidSchedulers.mainThread())
-                .throttleFirst(100, TimeUnit.MILLISECONDS)
-                .subscribe(result -> onCameraSourceUpdated(result.devicePosition, result.lensType))
+                .observeOn(SchedulerProvider.computation())
+                .throttleLast(500, TimeUnit.MILLISECONDS)
+                .subscribe(result -> runOnUiThread(() -> onCameraSourceUpdated(result.devicePosition, result.lensType)))
         );
     }
 
@@ -236,7 +245,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         }
 
         //没有数据
-        if (streamSources.size() == 0) {
+        if (streamSources.isEmpty()) {
             secondaryFPVWidget.setVisibility(View.GONE);
             return;
         }
@@ -250,6 +259,40 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         secondaryFPVWidget.setVisibility(View.VISIBLE);
     }
 
+    private void initChannelStateListener() {
+        IVideoChannel primaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL);
+        IVideoChannel secondaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL);
+        if (primaryChannel != null) {
+            primaryChannelStateListener = (from, to) -> {
+                StreamSource primaryStreamSource = primaryChannel.getStreamSource();
+                if (VideoChannelState.ON == to && primaryStreamSource != null) {
+                    runOnUiThread(() -> primaryFpvWidget.updateVideoSource(primaryStreamSource, VideoChannelType.PRIMARY_STREAM_CHANNEL));
+                }
+            };
+            primaryChannel.addVideoChannelStateChangeListener(primaryChannelStateListener);
+        }
+        if (secondaryChannel != null) {
+            secondaryChannelStateListener = (from, to) -> {
+                StreamSource secondaryStreamSource = secondaryChannel.getStreamSource();
+                if (VideoChannelState.ON == to && secondaryStreamSource != null) {
+                    runOnUiThread(() -> secondaryFPVWidget.updateVideoSource(secondaryStreamSource, VideoChannelType.SECONDARY_STREAM_CHANNEL));
+                }
+            };
+            secondaryChannel.addVideoChannelStateChangeListener(secondaryChannelStateListener);
+        }
+    }
+
+    private void removeChannelStateListener() {
+        IVideoChannel primaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL);
+        IVideoChannel secondaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL);
+        if (primaryChannel != null) {
+            primaryChannel.removeVideoChannelStateChangeListener(primaryChannelStateListener);
+        }
+        if (secondaryChannel != null) {
+            secondaryChannel.removeVideoChannelStateChangeListener(secondaryChannelStateListener);
+        }
+    }
+
     private void onCameraSourceUpdated(PhysicalDevicePosition devicePosition, CameraLensType lensType) {
         LogUtils.i(TAG, "onCameraSourceUpdated", devicePosition, lensType);
         ComponentIndexType cameraIndex = CameraUtil.getCameraIndex(devicePosition);
@@ -261,13 +304,13 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         cameraConfigEVWidget.updateCameraSource(cameraIndex, lensType);
         cameraConfigWBWidget.updateCameraSource(cameraIndex, lensType);
         cameraConfigStorageWidget.updateCameraSource(cameraIndex, lensType);
-        cameraConfigSSDWidget.updateCameraSource(cameraIndex, lensType);
         cameraConfigApertureWidget.updateCameraSource(cameraIndex, lensType);
         autoExposureLockWidget.updateCameraSource(cameraIndex, lensType);
         focusModeWidget.updateCameraSource(cameraIndex, lensType);
         focusExposureSwitchWidget.updateCameraSource(cameraIndex, lensType);
         cameraControlsWidget.updateCameraSource(cameraIndex, lensType);
         exposureSettingsPanel.updateCameraSource(cameraIndex, lensType);
+        focalZoomWidget.updateCameraSource(cameraIndex,lensType);
         updateViewVisibility(devicePosition);
         updateInteractionEnabled();
     }
@@ -283,13 +326,13 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         cameraConfigEVWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         cameraConfigWBWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         cameraConfigStorageWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
-        cameraConfigSSDWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         cameraConfigApertureWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         autoExposureLockWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         focusModeWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         focusExposureSwitchWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         cameraControlsWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         cameraConfigBackground.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        focalZoomWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
 
         //有其他的显示逻辑，这里确保fpv下不显示
         if (devicePosition == PhysicalDevicePosition.NOSE) {
@@ -343,12 +386,12 @@ public class DefaultLayoutActivity extends AppCompatActivity {
 
         private static final int DURATION = 300;
 
-        private View view;
-        private int toHeight;
-        private int fromHeight;
-        private int toWidth;
-        private int fromWidth;
-        private int margin;
+        private final View view;
+        private final int toHeight;
+        private final int fromHeight;
+        private final int toWidth;
+        private final int fromWidth;
+        private final int margin;
 
         private ResizeAnimation(View v, int fromWidth, int fromHeight, int toWidth, int toHeight, int margin) {
             this.toHeight = toHeight;

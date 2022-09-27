@@ -312,9 +312,8 @@ object KeyItemHelper {
          if (Util.isWrapClass(clazz)) {
              if (clazz == Boolean::class.javaObjectType) {
                  field[obj] = false
-             } else {
-                 field[obj] = 0
              }
+             //如果需要 可在else 中可给Integer Double 等设置初始值
              return true
          }
          if (clazz == MutableList::class.java) {

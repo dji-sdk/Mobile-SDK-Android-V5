@@ -4,7 +4,7 @@
     <string name="news_description">DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件服务接口，开放全开源的生产代码级 Sample 和丰富的教程，为开发者提供了具有竞争力的无人机移动端解决方案，极大的提升开发体验和效率。</string>
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/zh-cn/community/topics</string>
-    <string name="release_node_url">https://developer.dji.com/cn/document/19ce7591-d462-4634-ad87-b3a1dccd2cb6</string>
+    <string name="release_node_url">https://developer.dji.com/ doc/mobile-sdk-tutorial/cn/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/zh-cn/requests/new</string>
 
     <string name="app_name_all">MSDK全部功能</string>
@@ -32,14 +32,17 @@
     <string name="item_live_stream_title">直播管理</string>
     <string name="item_live_stream_description">演示如何使用直播相关功能</string>
 
-    <string name="item_flight_record_title">飞行记录</string>
-    <string name="item_flight_record_description">演示如何使用飞行记录相关功能</string>
+    <string name="item_flight_record_title">飞行日志</string>
+    <string name="item_flight_record_description">演示如何使用飞行日志相关功能</string>
 
     <string name="item_rtk_title">网络RTK</string>
     <string name="item_rtk_description">演示如何使用RTK相关功能</string>
 
     <string name="item_megaphone_title">喊话器</string>
     <string name="item_megaphone_description">演示如何使用喊话器相关功能</string>
+
+    <string name="item_lte_title">LTE</string>
+    <string name="item_lte_description">演示如何使用LTE相关功能</string>
 
     <string name="item_simulator_title">模拟器</string>
     <string name="item_simulator_description">演示如何使用RTK相关功能</string>
@@ -53,10 +56,14 @@
     <string name="btn_enable_ldm">开启LDM</string>
     <string name="btn_disable_ldm">关闭LDM</string>
 
-    <string name="btn_enable_virtual_stick">Enable Virtual Stick</string>
-    <string name="btn_disable_virtual_stick">Disable Virtual Stick</string>
-    <string name="btn_set_virtual_stick_speed_level">Set Speed Level</string>
-    <string name="btn_use_rc_stick_value">使用遥控的摇杆值</string>
+    <string name="btn_enable_virtual_stick">开启虚拟摇杆</string>
+    <string name="btn_disable_virtual_stick">关闭虚拟摇杆</string>
+    <string name="btn_set_virtual_stick_speed_level">设置Stick模式速度级别</string>
+    <string name="btn_use_rc_stick_value">开始/停止使用遥控摇杆值</string>
+    <string name="set_virtual_stick_advanced_param">设置虚拟摇杆高级模式参数</string>
+    <string name="send_virtual_stick_advanced_param">发送虚拟摇杆高级模式参数</string>
+    <string name="enable_virtual_stick_advanced_mode">开启虚拟摇杆高级模式</string>
+    <string name="disable_virtual_stick_advanced_mode">关闭虚拟摇杆高级模式</string>
 
     <string name="btn_take_off">起飞</string>
     <string name="btn_landing">降落</string>
@@ -73,13 +80,6 @@
 
     <string name="btn_get_flight_record_path">获取飞行记录存储路径</string>
     <string name="btn_get_fly_compressed_path">获取飞行精简日志路径</string>
-
-    <string name="btn_start_custom_network_rtk_service">开始自定义网络RTK</string>
-    <string name="btn_stop_custom_network_rtk_service">停止自定义网络RTK</string>
-    <string name="btn_set_custom_network_rtk_settings">设置自定义网络RTK账号信息</string>
-    <string name="btn_start_qx_network_rtk_service">开始QX网络RTK</string>
-    <string name="btn_stop_qx_network_rtk_service">停止QX网络RTK</string>
-    <string name="btn_set_qx_network_rtk_coordinate_system">设置千寻网络RTK坐标系</string>
 
     <string name="n_a">N/A</string>
     <string name="video_stream_manager">码流管理器</string>
@@ -133,6 +133,18 @@
     <string name="item_upgrade_title">升级</string>
     <string name="item_upgrade_description">演示如何使用升级相关功能</string>
 
+    <!--Network RTK-->
+    <string name="btn_start_custom_network_rtk_service">开始自定义网络RTK</string>
+    <string name="btn_stop_custom_network_rtk_service">停止自定义网络RTK</string>
+    <string name="btn_set_custom_network_rtk_settings">设置自定义网络RTK账号信息</string>
+    <string name="btn_start_qx_network_rtk_service">开始QX网络RTK</string>
+    <string name="btn_stop_qx_network_rtk_service">停止QX网络RTK</string>
+    <string name="btn_set_qx_network_rtk_coordinate_system">设置千寻网络RTK坐标系</string>
+
+    <!--CMSS RTK-->
+    <string name="btn_start_cmcc_rtk_service">开启CMCC网络RTK</string>
+    <string name="btn_stop_cmcc_rtk_service">停止CMCC网络RTK</string>
+
     <!--PSDK-->
     <string name="item_psdk_title">PSDK</string>
     <string name="item_psdk_description">演示如何使用PSDK相关功能</string>
@@ -164,11 +176,10 @@
     <string name="tv_station_list_tip">请点击下面列表进行基站连接</string>
     <string name="switch_rtk_type_tip">切换RTK服务类型需要重启飞行器</string>
 
-    <string name="tip_input_station_password" >输入密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”</string>
-    <string name="tip_reset_station_password" >重置密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”</string>
-    <string name="tip_input_station_location" >输入基站坐标</string>
-    <string name="tip_change_station_name" >修改基站名称,注意：基站名字UTF-8下只取4个字节，比如设置名字为“abcdef”，最后效果是“abcd”</string>
-
+    <string name="tip_input_station_password">输入密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”</string>
+    <string name="tip_reset_station_password">重置密码，注意密码必须由0-9的6个数字组成的字符串，比如“012345”</string>
+    <string name="tip_input_station_location">输入基站坐标</string>
+    <string name="tip_change_station_name">修改基站名称,注意：基站名字UTF-8下只取4个字节，比如设置名字为“abcdef”，最后效果是“abcd”</string>
 
 
     <!--RTK Center-->
@@ -184,8 +195,10 @@
     <string name="btn_rtk_source_network">自定义网络RTK</string>
     <string name="btn_rtk_source_qx">千寻RTK</string>
     <string name="btn_rtk_source_base_rtk">D-RTK2</string>
+    <string name="btn_rtk_source_cmcc_rtk">CMCC</string>
     <string name="bt_open_network_rtk">打开网络RTK</string>
     <string name="bt_open_rtk_station">打开D-RTK2</string>
+    <string name="bt_open_cmcc_rtk">打开CMCC RTK</string>
     <string name="tv_rtk_precision_preservation_hint">4.当发生RTK模块通信异常时，将自动维持当前RTK状态，但是精度逐渐下降，若超过10分钟未重连，自动退出RTK</string>
     <string name="bt_turn_on_rtk_precision_preservation">打开RTK精度保持</string>
     <string name="bt_turn_off_rtk_precision_preservation">关闭RTK精度保持</string>
@@ -204,6 +217,7 @@
     <string name="tv_rtk_systemState_info_hint">7.RTKSystemState信息展示: </string>
     <string name="tv_rtk_connect">飞控与机身RTK连接状态: </string>
     <string name="tv_rtk_healthy">飞行器的RTK模块的健康状态: </string>
+    <string name="tv_rtk_keep_status">RTK精度保持开启状态: </string>
     <string name="tv_rtk_error">RTK模块错误信息: </string>
     <string name="tv_rtk_antenna_1">无人机RTK模块的天线1搜索到的卫星数: </string>
     <string name="tv_rtk_antenna_2">无人机RTK模块的天线2搜索到的卫星数: </string>
@@ -213,6 +227,7 @@
     <string name="btn_mission_start">开始任务</string>
     <string name="btn_mission_pause">暂停任务</string>
     <string name="btn_mission_resume">恢复任务</string>
+    <string name="btn_mission_wayline_select">选择航线ID</string>
     <string name="btn_mission_stop">结束任务</string>
 
     <!--登录-->
@@ -228,20 +243,52 @@
     <!--感知-->
     <string name="item_perception_title">感知</string>
     <string name="item_perception_description">演示如何使用感知的相关功能</string>
-    <string name="tv_obstacle_avoidance_master_switch_tip">1.避障总开启状态：</string>
-    <string name="bt_set_obstacle_avoidance_sub_switch">2.设置特定方向的避障开启状态：</string>
+    <string name="bt_set_obstacle_avoidance_sub_switch">1.设置特定方向的避障开启状态：</string>
+    <string name="tv_sense_switch_status">感知开关状态：</string>
     <string name="bt_set_obstacle_avoidance_upwrard_switch">上</string>
     <string name="bt_set_obstacle_avoidance_down_switch">下</string>
     <string name="bt_set_obstacle_avoidance_horizontal_switch">水平</string>
-    <string name="bt_set_vision_positioning_enable_tip">3.视觉定位开启状态：</string>
-    <string name="bt_set_precision_landing_enable_tip">4.精准降落开启状态：</string>
-    <string name="tv_other_obstacle_avoidance_tip">5.其他避障信息展示： </string>
+    <string name="tv_radar_switch_status">雷达开关状态：</string>
+    <string name="bt_set_radar_obstacle_avoidance_upwrard_switch">上</string>
+    <string name="bt_set_radar_obstacle_avoidance_horizontal_switch">水平</string>
+    <string name="bt_set_vision_positioning_enable_tip">2.视觉定位开启状态：</string>
+    <string name="bt_set_precision_landing_enable_tip">3.精准降落开启状态：</string>
+    <string name="tv_other_obstacle_avoidance_tip">4.其他避障信息展示： </string>
     <string name="bt_set_obstacle_avoidance_type">设置避障类型</string>
-    <string name="bt_get_obstacle_avoidance_type">获取障碍类型</string>
     <string name="bt_set_obstacle_avoidance_warning_distance">设置特定方向的告警距离</string>
-    <string name="bt_get_obstacle_avoidance_warning_distance">获取特定方向的告警距离</string>
     <string name="bt_set_obstacle_avoidance_braking_distance">设置特定方向的刹停距离</string>
-    <string name="bt_get_obstacle_avoidance_braking_distance">获取特定方向的刹停距离</string>
+
+
+    <!--机载数据安全-->
+    <string name="item_security_code_title">安全密码</string>
+    <string name="item_security_code_description">演示如何使用安全密码相关功能</string>
+    <string name="btn_verify_password">验证密码</string>
+    <string name="btn_modify_password">修改密码</string>
+    <string name="btn_reset_password">重置密码</string>
+    <string name="btn_set_password">设置密码</string>
+    <string name="tip_set_password">密码长度至少4位，建议使用数字,大写、小写字母组成密码</string>
+    <string name="tip_set_password_fail">当前设备SD卡不支持加密</string>
+    <string name="tip_verify_password_fail">当前设备SD卡无需解密</string>
+    <string name="tip_reset_password">重置安全密码将会格式化SD卡，请确认媒体数据已备份</string>
+    <string name="tip_set_password_not_support">当前设备SD不支持加密，无法设置密码</string>
+    <string name="tip_has_set_password_already">当前设备SD已设置密码，无法继续设置密码。您可以选择修改密码或者重置密码</string>
+    <string name="tip_modify_password_not_support">当前设备SD还未设置密码，请先设置密码</string>
+    <string name="tip_device_type">MASTER表示飞机，SLAVE1表示左云台，SLAVE2表示右云台，SLAVE3表示上云台</string>
+
+    <string name="securitycode_operation_result_no_err">操作成功</string>
+    <string name="securitycode_operation_result_running">系统繁忙，请稍后再试</string>
+    <string name="securitycode_operation_result_busy">系统繁忙，请稍后再试</string>
+    <string name="securitycode_operation_result_set_failed">密码设置失败，请重试</string>
+    <string name="securitycode_operation_result_verify_failed">密码验证失败</string>
+    <string name="securitycode_operation_result_new_pw_repeat">新密码与旧密码重复，请重新设置</string>
+    <string name="securitycode_operation_result_reset_failed">取消密码失败，请重试</string>
+    <string name="securitycode_operation_result_not_current_device_result">非当前设备错误</string>
+    <string name="securitycode_operation_result_unknown">未知错误</string>
+    <string name="securitycode_operation_result_user_name_format_invalid">用户名格式无效</string>
+    <string name="securitycode_operation_result_control_not_support">操作类型不支持</string>
+    <string name="securitycode_operation_result_feature_not_support">功能不支持</string>
+    <string name="securitycode_operation_result_command_not_support">命令不支持</string>
+
 
     <!--UAS-->
     <string name="item_uas_title">无人机远程识别</string>
@@ -342,5 +389,9 @@
 
     <string name="msg_download_compelete_tips">下载完成平均下载速度</string>
     <string name="msg_download_save_tips">文件保存在</string>
+
+    <string name="delete_files">删除文件</string>
+    <string name="select_files">选择文件</string>
+    <string name="unselect_files">取消选择</string>
 
 </resources>

@@ -256,7 +256,7 @@ public class CameraConfigSSDWidget extends ConstraintLayoutWidget implements ICa
         if (index != null && ssdColorArray != null && index < ssdColorArray.length) {
             ssdColorName = ssdColorArray[index];
         }
-        String clipInfoString = ssdClipFileName.toString() + " " + ssdColorName;
+        String clipInfoString = ssdClipFileName + " " + ssdColorName;
         ssdClipInfoTextView.setText(clipInfoString);
     }
 

@@ -10,10 +10,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import dji.sampleV5.modulecommon.pages.DJIFragment
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.PayLoadVM
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_flight_record_page.*
 import kotlinx.android.synthetic.main.frag_payload_page.*
 
@@ -72,7 +72,7 @@ class PayLoadDataFragment : DJIFragment() {
 
 
         payLoadVM.receiveMessageLiveData.observe(viewLifecycleOwner, { t ->
-            LogUtils.d(TAG, t)
+            LogUtils.i(TAG, t)
             messageList.add(t)
             payLoadAdapter.notifyDataSetChanged()
             message_listview.setSelection(messageList.size - 1)
@@ -99,7 +99,7 @@ class PayLoadDataFragment : DJIFragment() {
                 return@setOnClickListener
             }
             payLoadVM.sendMessageToPayLoadSdk(sendByteArray)
-            LogUtils.d(TAG, sendText)
+            LogUtils.i(TAG, sendText)
             ToastUtils.showToast(sendText)
         }
 

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018-2020 DJI
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,9 +21,9 @@
   ~
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <attr name="uxsdk_unit_text_size" format="dimension"/>
+    <attr name="uxsdk_unit_text_size" format="dimension" />
 
     <declare-styleable name="SeekBarView">
         <attr name="uxsdk_minValueVisible" format="boolean" />
@@ -117,7 +116,7 @@
     <attr name="uxsdk_titleTextAppearance" format="reference" />
     <attr name="uxsdk_titleTextSize" format="dimension" />
     <attr name="uxsdk_titleTextColor" format="color|reference" />
-    <attr name="uxsdk_titleTextBackground" format="reference"/>
+    <attr name="uxsdk_titleTextBackground" format="reference" />
 
     <attr name="uxsdk_disabledAlpha" format="float" />
     <attr name="uxsdk_enabledAlpha" format="float" />
@@ -212,33 +211,29 @@
         <attr name="uxsdk_messageTextAppearance" />
         <attr name="uxsdk_messageTextSize" />
         <attr name="uxsdk_messageTextEnabled" format="boolean" />
-        <attr name="uxsdk_messageTextColorAuthorized" format="color" />
-        <attr name="uxsdk_messageTextColorTokenOutOfDate" format="color" />
-        <attr name="uxsdk_messageTextColorNotAuthorized" format="color" />
+        <attr name="uxsdk_messageTextColorLoggedIN" format="color" />
         <attr name="uxsdk_messageTextColorNotLoggedIn" format="color" />
+        <attr name="uxsdk_messageTextColorTokenOutOfDate" format="color" />
         <attr name="uxsdk_messageTextBackground" />
         <attr name="uxsdk_stateTextEnabled" format="boolean" />
         <attr name="uxsdk_stateTextAppearance" format="reference" />
         <attr name="uxsdk_stateTextSize" format="dimension" />
-        <attr name="uxsdk_stateTextColorAuthorized" format="color" />
+        <attr name="uxsdk_stateTextColorLoggedIn" format="color" />
         <attr name="uxsdk_stateTextColorTokenOutOfDate" format="color" />
-        <attr name="uxsdk_stateTextColorNotAuthorized" format="color" />
         <attr name="uxsdk_stateTextColorNotLoggedIn" format="color" />
         <attr name="uxsdk_stateTextBackground" format="reference" />
         <attr name="uxsdk_userIconEnabled" format="boolean" />
-        <attr name="uxsdk_userIconAuthorized" format="reference" />
-        <attr name="uxsdk_userIconNotAuthorized" format="reference" />
+        <attr name="uxsdk_userIconLoggedIn" format="reference" />
         <attr name="uxsdk_userIconTokenOutOfDate" format="reference" />
         <attr name="uxsdk_userIconNotLoggedIn" format="reference" />
         <attr name="uxsdk_userIconBackground" format="reference" />
         <attr name="uxsdk_actionIconEnabled" format="boolean" />
-        <attr name="uxsdk_actionIconAuthorized" format="reference" />
-        <attr name="uxsdk_actionIconNotAuthorized" format="reference" />
+        <attr name="uxsdk_actionIconLoggedIn" format="reference" />
         <attr name="uxsdk_actionIconTokenOutOfDate" format="reference" />
         <attr name="uxsdk_actionIconNotLoggedIn" format="reference" />
         <attr name="uxsdk_actionIconBackground" format="reference" />
     </declare-styleable>
-    <declare-styleable name="VisionWidget">
+    <declare-styleable name="PerceptionStateWidget">
         <attr name="uxsdk_normalVisionIcon" format="reference" />
         <attr name="uxsdk_closedVisionIcon" format="reference" />
         <attr name="uxsdk_disabledVisionIcon" format="reference" />
@@ -249,7 +244,7 @@
         <attr name="uxsdk_visionIconBackground" format="reference" />
         <attr name="uxsdk_disconnectedStateIconColor" />
     </declare-styleable>
-    
+
     <declare-styleable name="RemoteControllerSignalWidget">
         <attr name="uxsdk_rcIcon" format="reference" />
         <attr name="uxsdk_rcSignalIcon" format="reference" />
@@ -435,11 +430,11 @@
         <attr name="uxsdk_closeButtonIcon" format="reference" />
         <attr name="uxsdk_closeButtonIconBackground" format="reference" />
         <attr name="uxsdk_closeButtonIconColor" format="color|reference" />
-        <attr name="uxsdk_titleText"/>
-        <attr name="uxsdk_titleTextSize"/>
-        <attr name="uxsdk_titleTextColor"/>
-        <attr name="uxsdk_titleTextBackground"/>
-        <attr name="uxsdk_titleTextAppearance"/>
+        <attr name="uxsdk_titleText" />
+        <attr name="uxsdk_titleTextSize" />
+        <attr name="uxsdk_titleTextColor" />
+        <attr name="uxsdk_titleTextBackground" />
+        <attr name="uxsdk_titleTextAppearance" />
     </declare-styleable>
 
     <declare-styleable name="BarPanelWidget">
@@ -464,7 +459,7 @@
     </declare-styleable>
 
     <declare-styleable name="PanelNavigationView">
-        <attr name="uxsdk_animationEnabled" format="boolean"/>
+        <attr name="uxsdk_animationEnabled" format="boolean" />
         <attr name="uxsdk_animationAddViewToTop" format="reference" />
         <attr name="uxsdk_animationRemoveViewFromTop" format="reference" />
         <attr name="uxsdk_animationShowView" format="reference" />
@@ -478,10 +473,10 @@
     <attr name="uxsdk_list_item_button_background" format="reference" />
     <attr name="uxsdk_list_item_button_enabled" format="boolean" />
     <attr name="uxsdk_list_item_button_visibility" format="boolean" />
-    <attr name="uxsdk_list_item_dialog_theme" format="integer|reference"/>
+    <attr name="uxsdk_list_item_dialog_theme" format="integer|reference" />
     <attr name="uxsdk_list_item_confirmation_dialog_icon" format="reference" />
-    <attr name="uxsdk_list_item_success_dialog_icon" format="reference"/>
-    <attr name="uxsdk_list_item_error_dialog_icon" format="reference"/>
+    <attr name="uxsdk_list_item_success_dialog_icon" format="reference" />
+    <attr name="uxsdk_list_item_error_dialog_icon" format="reference" />
     <attr name="uxsdk_toast_messages_enabled" format="boolean" />
 
 
@@ -513,12 +508,12 @@
         <attr name="uxsdk_list_item_label_background" format="reference" />
         <attr name="uxsdk_list_item_label_visibility" format="boolean" />
         <attr name="uxsdk_list_item_button_text" />
-        <attr name="uxsdk_list_item_button_text_size"/>
-        <attr name="uxsdk_list_item_button_text_color"/>
-        <attr name="uxsdk_list_item_button_appearance"/>
-        <attr name="uxsdk_list_item_button_background"/>
-        <attr name="uxsdk_list_item_button_enabled"/>
-        <attr name="uxsdk_list_item_button_visibility"/>
+        <attr name="uxsdk_list_item_button_text_size" />
+        <attr name="uxsdk_list_item_button_text_color" />
+        <attr name="uxsdk_list_item_button_appearance" />
+        <attr name="uxsdk_list_item_button_background" />
+        <attr name="uxsdk_list_item_button_enabled" />
+        <attr name="uxsdk_list_item_button_visibility" />
     </declare-styleable>
 
     <declare-styleable name="ListItemEditTextButtonWidget">
@@ -529,12 +524,12 @@
         <attr name="uxsdk_list_item_hint_background" format="reference" />
         <attr name="uxsdk_list_item_hint_visibility" format="boolean" />
         <attr name="uxsdk_list_item_button_text" />
-        <attr name="uxsdk_list_item_button_text_size"/>
-        <attr name="uxsdk_list_item_button_text_color"/>
-        <attr name="uxsdk_list_item_button_appearance"/>
-        <attr name="uxsdk_list_item_button_background"/>
-        <attr name="uxsdk_list_item_button_enabled"/>
-        <attr name="uxsdk_list_item_button_visibility"/>
+        <attr name="uxsdk_list_item_button_text_size" />
+        <attr name="uxsdk_list_item_button_text_color" />
+        <attr name="uxsdk_list_item_button_appearance" />
+        <attr name="uxsdk_list_item_button_background" />
+        <attr name="uxsdk_list_item_button_enabled" />
+        <attr name="uxsdk_list_item_button_visibility" />
         <attr name="uxsdk_list_item_edit_text" format="string|reference" />
         <attr name="uxsdk_list_item_edit_text_size" format="dimension|reference" />
         <attr name="uxsdk_list_item_edit_text_color" format="color|reference" />
@@ -594,16 +589,16 @@
         <attr name="uxsdk_list_item_dialog_theme" />
         <attr name="uxsdk_travel_mode_active_icon" format="reference" />
         <attr name="uxsdk_travel_mode_inactive_icon" format="reference" />
-        <attr name="uxsdk_enter_travel_mode_button_string" format="string"/>
-        <attr name="uxsdk_exit_travel_mode_button_string" format="string"/>
+        <attr name="uxsdk_enter_travel_mode_button_string" format="string" />
+        <attr name="uxsdk_exit_travel_mode_button_string" format="string" />
         <attr name="uxsdk_list_item_confirmation_dialog_icon" />
         <attr name="uxsdk_list_item_error_dialog_icon" />
         <attr name="uxsdk_list_item_success_dialog_icon" />
     </declare-styleable>
-    
+
     <declare-styleable name="MaxAltitudeListItemWidget">
         <attr name="uxsdk_list_item_dialog_theme" />
-        <attr name="uxsdk_toast_messages_enabled"/>
+        <attr name="uxsdk_toast_messages_enabled" />
         <attr name="uxsdk_list_item_error_dialog_icon" />
         <attr name="uxsdk_list_item_confirmation_dialog_icon" />
     </declare-styleable>
@@ -617,8 +612,8 @@
 
     <declare-styleable name="MaxFlightDistanceListItemWidget">
         <attr name="uxsdk_toast_messages_enabled" />
-        <attr name="uxsdk_enable_action_button_string" format="string"/>
-        <attr name="uxsdk_disable_action_button_string" format="string"/>
+        <attr name="uxsdk_enable_action_button_string" format="string" />
+        <attr name="uxsdk_disable_action_button_string" format="string" />
     </declare-styleable>
 
     <declare-styleable name="UnitModeListItemWidget">
@@ -651,45 +646,45 @@
     <declare-styleable name="SystemStatusListPanelWidget">
         <!-- E.g., app:excludeItem="flight_mode|rc_stick_mode" -->
         <attr name="uxsdk_excludeItem">
-            <flag name="flight_mode" value="1"/>
-            <flag name="rc_stick_mode" value="2"/>
-            <flag name="rc_battery" value="3"/>
-            <flag name="aircraft_battery_temperature" value="4"/>
-            <flag name="sd_card_status" value="5"/>
-            <flag name="emmc_status" value="6"/>
-            <flag name="max_altitude" value="7"/>
-            <flag name="max_flight_distance" value="8"/>
-            <flag name="travel_mode" value="9"/>
-            <flag name="unit_mode" value="10"/>
-            <flag name="ssd_status" value="11"/>
-            <flag name="novice_mode" value="12"/>
-            <flag name="overview_status" value="13"/>
-            <flag name="rth_altitude" value="14"/>
-            <flag name="obstacle_avoidance" value="15"/>
+            <flag name="flight_mode" value="1" />
+            <flag name="rc_stick_mode" value="2" />
+            <flag name="rc_battery" value="3" />
+            <flag name="aircraft_battery_temperature" value="4" />
+            <flag name="sd_card_status" value="5" />
+            <flag name="emmc_status" value="6" />
+            <flag name="max_altitude" value="7" />
+            <flag name="max_flight_distance" value="8" />
+            <flag name="travel_mode" value="9" />
+            <flag name="unit_mode" value="10" />
+            <flag name="ssd_status" value="11" />
+            <flag name="novice_mode" value="12" />
+            <flag name="overview_status" value="13" />
+            <flag name="rth_altitude" value="14" />
+            <flag name="obstacle_avoidance" value="15" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="TelemetryPanelWidget">
         <!-- E.g., app:excludeItem="flight_mode|radio_quality" -->
         <attr name="uxsdk_excludeTelemetryItem">
-            <flag name="amsl_altitude" value="1"/>
-            <flag name="agl_altitude" value="2"/>
-            <flag name="horizontal_velocity" value="4"/>
-            <flag name="distance_rc" value="8"/>
-            <flag name="distance_home" value="16"/>
-            <flag name="vertical_velocity" value="32"/>
-            <flag name="vps" value="64"/>
-            <flag name="location" value="128"/>
+            <flag name="amsl_altitude" value="1" />
+            <flag name="agl_altitude" value="2" />
+            <flag name="horizontal_velocity" value="4" />
+            <flag name="distance_rc" value="8" />
+            <flag name="distance_home" value="16" />
+            <flag name="vertical_velocity" value="32" />
+            <flag name="vps" value="64" />
+            <flag name="location" value="128" />
         </attr>
-        <attr name="uxsdk_telemetry_widget_theme" format="integer|reference"/>
+        <attr name="uxsdk_telemetry_widget_theme" format="integer|reference" />
     </declare-styleable>
 
 
     <declare-styleable name="TopBarPanelWidget">
         <!-- E.g., app:excludeItem="flight_mode|simulator_indicator" -->
         <attr name="uxsdk_excludeTopBarItem">
-            <flag name="system_status" value="1"/>
-            <flag name="flight_mode" value="2"/>
+            <flag name="system_status" value="1" />
+            <flag name="flight_mode" value="2" />
             <flag name="simulator_indicator" value="4" />
             <flag name="air_sense" value="8" />
             <flag name="gps_signal" value="16" />
@@ -731,7 +726,7 @@
             <flag name="top" value="48" />
         </attr>
         <attr name="uxsdk_unit_string" format="string|reference" />
-        <attr name="uxsdk_unit_text_size"/>
+        <attr name="uxsdk_unit_text_size" />
         <attr name="uxsdk_unit_text_color" format="color|reference" />
         <attr name="uxsdk_unit_text_appearance" format="reference" />
         <attr name="uxsdk_unit_background" format="reference" />
@@ -759,109 +754,109 @@
     </declare-styleable>
 
     <declare-styleable name="ScrollableAttributeDashBoard">
-        <attr name="uxsdk_name" format="string"/>
-        <attr name="uxsdk_unit" format="string"/>
-        <attr name="uxsdk_max_value" format="float"/>
-        <attr name="uxsdk_min_value" format="float"/>
-        <attr name="uxsdk_offset_per_unit" format="float"/>
-        <attr name="uxsdk_current_value" format="float"/>
-        <attr name="uxsdk_current_calibration_text_size" format="dimension"/>
-        <attr name="uxsdk_name_text_size" format="dimension"/>
-        <attr name="uxsdk_unit_text_size"/>
-        <attr name="uxsdk_calibration_text_size" format="dimension"/>
-        <attr name="uxsdk_framework_stroke_width" format="dimension"/>
-        <attr name="uxsdk_framework_width" format="dimension"/>
-        <attr name="uxsdk_framework_height" format="dimension"/>
-        <attr name="uxsdk_degree_line_short" format="dimension"/>
-        <attr name="uxsdk_degree_line_long" format="dimension"/>
-        <attr name="uxsdk_pointer_divider_top_width" format="dimension"/>
-        <attr name="uxsdk_pointer_divider_bottom_width" format="dimension"/>
-        <attr name="uxsdk_pointer_width" format="dimension"/>
-        <attr name="uxsdk_pointer_height" format="dimension"/>
-        <attr name="uxsdk_show_calibration_framework" format="boolean"/>
-        <attr name="uxsdk_calibration_framework_padding_start" format="dimension"/>
-        <attr name="uxsdk_pointer_line_inner_width" format="dimension"/>
-        <attr name="uxsdk_pointer_line_outer_width" format="dimension"/>
-        <attr name="uxsdk_pointer_triangle_width" format="dimension"/>
+        <attr name="uxsdk_name" format="string" />
+        <attr name="uxsdk_unit" format="string" />
+        <attr name="uxsdk_max_value" format="float" />
+        <attr name="uxsdk_min_value" format="float" />
+        <attr name="uxsdk_offset_per_unit" format="float" />
+        <attr name="uxsdk_current_value" format="float" />
+        <attr name="uxsdk_current_calibration_text_size" format="dimension" />
+        <attr name="uxsdk_name_text_size" format="dimension" />
+        <attr name="uxsdk_unit_text_size" />
+        <attr name="uxsdk_calibration_text_size" format="dimension" />
+        <attr name="uxsdk_framework_stroke_width" format="dimension" />
+        <attr name="uxsdk_framework_width" format="dimension" />
+        <attr name="uxsdk_framework_height" format="dimension" />
+        <attr name="uxsdk_degree_line_short" format="dimension" />
+        <attr name="uxsdk_degree_line_long" format="dimension" />
+        <attr name="uxsdk_pointer_divider_top_width" format="dimension" />
+        <attr name="uxsdk_pointer_divider_bottom_width" format="dimension" />
+        <attr name="uxsdk_pointer_width" format="dimension" />
+        <attr name="uxsdk_pointer_height" format="dimension" />
+        <attr name="uxsdk_show_calibration_framework" format="boolean" />
+        <attr name="uxsdk_calibration_framework_padding_start" format="dimension" />
+        <attr name="uxsdk_pointer_line_inner_width" format="dimension" />
+        <attr name="uxsdk_pointer_line_outer_width" format="dimension" />
+        <attr name="uxsdk_pointer_triangle_width" format="dimension" />
         <attr name="uxsdk_dash_board_align">
-            <enum name="left" value="0"/>
-            <enum name="right" value="1"/>
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
         </attr>
-        <attr name="attribute_visible_calibration_unit_count" format="integer"/>
+        <attr name="attribute_visible_calibration_unit_count" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="AttitudeDashBoard">
-        <attr name="uxsdk_distance_predict_line_width" format="dimension"/>
-        <attr name="uxsdk_avoidance_max_height" format="dimension"/>
-        <attr name="uxsdk_barrier_distance" format="integer"/>
-        <attr name="uxsdk_barrier_indicator_color" format="color"/>
-        <attr name="uxsdk_avoidance_indicator_color" format="color"/>
-        <attr name="uxsdk_avoidance_indicator_stroke_color" format="color"/>
-        <attr name="uxsdk_barrier_distance_text_size" format="dimension"/>
-        <attr name="uxsdk_barrier_indicator_width" format="dimension"/>
-        <attr name="uxsdk_barrier_indicator_height" format="dimension"/>
-        <attr name="uxsdk_avoidance_indicator_width" format="dimension"/>
-        <attr name="uxsdk_avoidance_indicator_stroke_width" format="dimension"/>
-        <attr name="uxsdk_max_perception_distance_in_meter" format="integer"/>
-        <attr name="uxsdk_return_to_home_indicator_color" format="color"/>
-        <attr name="uxsdk_max_flight_height_indicator_color" format="color"/>
-        <attr name="uxsdk_return_to_home_indicator_width" format="dimension"/>
-        <attr name="uxsdk_max_flight_height_indicator_width" format="dimension"/>
-        <attr name="uxsdk_max_flight_height_indicator_height" format="dimension"/>
+        <attr name="uxsdk_distance_predict_line_width" format="dimension" />
+        <attr name="uxsdk_avoidance_max_height" format="dimension" />
+        <attr name="uxsdk_barrier_distance" format="integer" />
+        <attr name="uxsdk_barrier_indicator_color" format="color" />
+        <attr name="uxsdk_avoidance_indicator_color" format="color" />
+        <attr name="uxsdk_avoidance_indicator_stroke_color" format="color" />
+        <attr name="uxsdk_barrier_distance_text_size" format="dimension" />
+        <attr name="uxsdk_barrier_indicator_width" format="dimension" />
+        <attr name="uxsdk_barrier_indicator_height" format="dimension" />
+        <attr name="uxsdk_avoidance_indicator_width" format="dimension" />
+        <attr name="uxsdk_avoidance_indicator_stroke_width" format="dimension" />
+        <attr name="uxsdk_max_perception_distance_in_meter" format="integer" />
+        <attr name="uxsdk_return_to_home_indicator_color" format="color" />
+        <attr name="uxsdk_max_flight_height_indicator_color" format="color" />
+        <attr name="uxsdk_return_to_home_indicator_width" format="dimension" />
+        <attr name="uxsdk_max_flight_height_indicator_width" format="dimension" />
+        <attr name="uxsdk_max_flight_height_indicator_height" format="dimension" />
         <attr name="uxsdk_barrier_distance_text_align">
-            <enum name="vertical" value="0"/>
-            <enum name="horizontal" value="1"/>
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="HSIView">
-        <attr name="uxsdk_hsi_degree_indicator_width" format="dimension"/>
-        <attr name="uxsdk_hsi_degree_indicator_height" format="dimension"/>
-        <attr name="uxsdk_hsi_degree_indicator_text_size" format="dimension"/>
-        <attr name="uxsdk_hsi_degree_indicator_color" format="color"/>
-        <attr name="uxsdk_hsi_aircraft_indicator_size" format="dimension"/>
-        <attr name="uxsdk_hsi_gimbal_indicator_size" format="dimension"/>
-        <attr name="uxsdk_hsi_gimbal_indicator_max_scope" format="dimension"/>
-        <attr name="uxsdk_hsi_marker_indicator_text_size" format="dimension"/>
-        <attr name="uxsdk_hsi_home_point_marker_size" format="dimension"/>
-        <attr name="uxsdk_hsi_home_point_marker" format="reference"/>
-        <attr name="uxsdk_hsi_home_point_marker_text_color" format="color"/>
-        <attr name="uxsdk_hsi_waypoint_marker_size" format="dimension"/>
-        <attr name="uxsdk_hsi_waypoint_marker" format="reference"/>
-        <attr name="uxsdk_hsi_waypoint_marker_text_color" format="color"/>
-        <attr name="uxsdk_hsi_rng_point_marker_size" format="dimension"/>
-        <attr name="uxsdk_hsi_rng_point_marker" format="reference"/>
-        <attr name="uxsdk_hsi_rng_point_marker_text_color" format="color"/>
-        <attr name="uxsdk_hsi_smart_track_point_marker_size" format="dimension"/>
-        <attr name="uxsdk_hsi_smart_track_point_marker" format="reference"/>
-        <attr name="uxsdk_hsi_smart_track_point_marker_text_color" format="color"/>
-        <attr name="uxsdk_hsi_pin_point_marker_size" format="dimension"/>
-        <attr name="uxsdk_hsi_pin_point_marker" format="reference"/>
-        <attr name="uxsdk_hsi_pin_point_marker_text_color" format="color"/>
-        <attr name="uxsdk_hsi_marker_margin_vertical" format="dimension"/>
-        <attr name="uxsdk_hsi_marker_margin_horizontal" format="dimension"/>
-        <attr name="uxsdk_hsi_marker_indicator_height" format="dimension"/>
-        <attr name="uxsdk_hsi_marker_indicator_width" format="dimension"/>
-        <attr name="uxsdk_hsi_marker_indicator_stroke_color" format="color"/>
-        <attr name="uxsdk_hsi_marker_indicator_background_color" format="color"/>
-        <attr name="uxsdk_hsi_marker_indicator_margin_to_compass" format="dimension"/>
-        <attr name="uxsdk_hsi_aircraft_heading_offset_x" format="dimension"/>
-        <attr name="uxsdk_hsi_aircraft_heading_offset_y" format="dimension"/>
-        <attr name="uxsdk_hsi_heading_line_width" format="dimension"/>
-        <attr name="uxsdk_hsi_avoidance_setting_area_color" format="color"/>
-        <attr name="uxsdk_hsi_perception_setting_area_color" format="color"/>
-        <attr name="uxsdk_hsi_max_perception_area_color" format="color"/>
-        <attr name="uxsdk_hsi_max_perception_stroke_width" format="dimension"/>
-        <attr name="uxsdk_hsi_radar_avoidance_setting_area_color" format="color"/>
-        <attr name="uxsdk_hsi_radar_perception_setting_area_color" format="color"/>
-        <attr name="uxsdk_hsi_radar_max_perception_area_color" format="color"/>
-        <attr name="uxsdk_hsi_radar_max_perception_stroke_width" format="dimension"/>
-        <attr name="uxsdk_hsi_bitmap_offset" format="dimension"/>
+        <attr name="uxsdk_hsi_degree_indicator_width" format="dimension" />
+        <attr name="uxsdk_hsi_degree_indicator_height" format="dimension" />
+        <attr name="uxsdk_hsi_degree_indicator_text_size" format="dimension" />
+        <attr name="uxsdk_hsi_degree_indicator_color" format="color" />
+        <attr name="uxsdk_hsi_aircraft_indicator_size" format="dimension" />
+        <attr name="uxsdk_hsi_gimbal_indicator_size" format="dimension" />
+        <attr name="uxsdk_hsi_gimbal_indicator_max_scope" format="dimension" />
+        <attr name="uxsdk_hsi_marker_indicator_text_size" format="dimension" />
+        <attr name="uxsdk_hsi_home_point_marker_size" format="dimension" />
+        <attr name="uxsdk_hsi_home_point_marker" format="reference" />
+        <attr name="uxsdk_hsi_home_point_marker_text_color" format="color" />
+        <attr name="uxsdk_hsi_waypoint_marker_size" format="dimension" />
+        <attr name="uxsdk_hsi_waypoint_marker" format="reference" />
+        <attr name="uxsdk_hsi_waypoint_marker_text_color" format="color" />
+        <attr name="uxsdk_hsi_rng_point_marker_size" format="dimension" />
+        <attr name="uxsdk_hsi_rng_point_marker" format="reference" />
+        <attr name="uxsdk_hsi_rng_point_marker_text_color" format="color" />
+        <attr name="uxsdk_hsi_smart_track_point_marker_size" format="dimension" />
+        <attr name="uxsdk_hsi_smart_track_point_marker" format="reference" />
+        <attr name="uxsdk_hsi_smart_track_point_marker_text_color" format="color" />
+        <attr name="uxsdk_hsi_pin_point_marker_size" format="dimension" />
+        <attr name="uxsdk_hsi_pin_point_marker" format="reference" />
+        <attr name="uxsdk_hsi_pin_point_marker_text_color" format="color" />
+        <attr name="uxsdk_hsi_marker_margin_vertical" format="dimension" />
+        <attr name="uxsdk_hsi_marker_margin_horizontal" format="dimension" />
+        <attr name="uxsdk_hsi_marker_indicator_height" format="dimension" />
+        <attr name="uxsdk_hsi_marker_indicator_width" format="dimension" />
+        <attr name="uxsdk_hsi_marker_indicator_stroke_color" format="color" />
+        <attr name="uxsdk_hsi_marker_indicator_background_color" format="color" />
+        <attr name="uxsdk_hsi_marker_indicator_margin_to_compass" format="dimension" />
+        <attr name="uxsdk_hsi_aircraft_heading_offset_x" format="dimension" />
+        <attr name="uxsdk_hsi_aircraft_heading_offset_y" format="dimension" />
+        <attr name="uxsdk_hsi_heading_line_width" format="dimension" />
+        <attr name="uxsdk_hsi_avoidance_setting_area_color" format="color" />
+        <attr name="uxsdk_hsi_perception_setting_area_color" format="color" />
+        <attr name="uxsdk_hsi_max_perception_area_color" format="color" />
+        <attr name="uxsdk_hsi_max_perception_stroke_width" format="dimension" />
+        <attr name="uxsdk_hsi_radar_avoidance_setting_area_color" format="color" />
+        <attr name="uxsdk_hsi_radar_perception_setting_area_color" format="color" />
+        <attr name="uxsdk_hsi_radar_max_perception_area_color" format="color" />
+        <attr name="uxsdk_hsi_radar_max_perception_stroke_width" format="dimension" />
+        <attr name="uxsdk_hsi_bitmap_offset" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="AircraftAttitudeView">
-        <attr name="uxsdk_actual_width" format="dimension"/>
-        <attr name="uxsdk_actual_height" format="dimension"/>
+        <attr name="uxsdk_actual_width" format="dimension" />
+        <attr name="uxsdk_actual_height" format="dimension" />
     </declare-styleable>
 
     <attr name="uxsdk_cameraSettingBackgroundColor" format="color" />
@@ -1069,22 +1064,14 @@
     <attr name="uxsdk_rtkSeparatorsColor" format="color" />
 
     <declare-styleable name="RTKWidget">
-        <attr name="uxsdk_rtkDescriptionTextAppearance" format="reference" />
-        <attr name="uxsdk_rtkDescriptionTextSize" format="dimension" />
-        <attr name="uxsdk_rtkDescriptionTextColor" format="color" />
-        <attr name="uxsdk_rtkDescriptionBackgroundDrawable" format="reference" />
-        <attr name="uxsdk_dialogOkTextAppearance" format="reference" />
-        <attr name="uxsdk_dialogOkTextSize" format="dimension" />
-        <attr name="uxsdk_dialogOkTextColor" format="color" />
-        <attr name="uxsdk_dialogOkBackgroundDrawable" format="reference" />
         <attr name="uxsdk_rtkSeparatorsColor" />
     </declare-styleable>
 
     <declare-styleable name="RTKEnabledWidget">
-        <attr name="uxsdk_titleTextSize"/>
-        <attr name="uxsdk_titleTextColor"/>
-        <attr name="uxsdk_titleTextBackground"/>
-        <attr name="uxsdk_titleTextAppearance"/>
+        <attr name="uxsdk_titleTextSize" />
+        <attr name="uxsdk_titleTextColor" />
+        <attr name="uxsdk_titleTextBackground" />
+        <attr name="uxsdk_titleTextAppearance" />
         <attr name="uxsdk_rtkEnabledSwitchThumbIcon" format="reference" />
         <attr name="uxsdk_rtkEnabledSwitchTrackIcon" format="reference" />
         <attr name="uxsdk_descriptionTextSize" format="dimension" />
@@ -1305,10 +1292,10 @@
         <attr name="uxsdk_capacityValueTextColor" />
         <attr name="uxsdk_capacityValueTextBackground" />
         <attr name="uxsdk_capacityValueTextSize" />
-        <attr name="uxsdk_cameraColorTextAppearance" format="reference"/>
-        <attr name="uxsdk_cameraColorTextColor" format="color"/>
-        <attr name="uxsdk_cameraColorTextBackground" format="reference"/>
-        <attr name="uxsdk_cameraColorTextSize" format="dimension"/>
+        <attr name="uxsdk_cameraColorTextAppearance" format="reference" />
+        <attr name="uxsdk_cameraColorTextColor" format="color" />
+        <attr name="uxsdk_cameraColorTextBackground" format="reference" />
+        <attr name="uxsdk_cameraColorTextSize" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="CameraConfigSSDWidget">
@@ -1347,4 +1334,38 @@
         <attr name="uxsdk_ssdFormattingRequiredIcon" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="DescSpinnerCell">
+        <attr name="uxsdk_summary" format="string|reference" />
+        <attr name="uxsdk_desc" format="string|reference" />
+        <attr name="uxsdk_entries" format="reference" />
+    </declare-styleable>
+
+
+    <attr name="uxsdk_progress" format="integer" min="0"></attr>
+    <attr name="uxsdk_max" format="integer" min="1"></attr>
+    <attr name="uxsdk_progressDrawable" format="reference"></attr>
+    <attr name="uxsdk_progressHeight" format="dimension|reference"></attr>
+    <attr name="uxsdk_thumb" format="reference"></attr>
+    <attr name="uxsdk_secondaryProgress" format="integer" min="0"></attr>
+    <attr name="uxsdk_secondaryThumb" format="reference"></attr>
+
+    <declare-styleable name="VerticalSeekBar">
+        <attr name="uxsdk_progress"></attr>
+        <attr name="uxsdk_secondaryProgress"></attr>
+        <attr name="uxsdk_max"></attr>
+        <attr name="uxsdk_progressDrawable"></attr>
+        <attr name="uxsdk_progressHeight"></attr>
+        <attr name="uxsdk_thumb"></attr>
+        <attr name="uxsdk_secondaryThumb"></attr>
+    </declare-styleable>
+
+    <style name="DisableSeekBar" parent="@android:style/Theme">
+        <item name="android:disabledAlpha">1.0</item>
+    </style>
+
+    <declare-styleable name="FpvTitleValueCell">
+        <attr name="uxsdk_title" format="string|reference"/>
+        <attr name="uxsdk_value" format="string|reference"/>
+        <attr name="uxsdk_layout" format="reference"/>
+    </declare-styleable>
 </resources>

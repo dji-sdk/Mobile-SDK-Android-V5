@@ -1,11 +1,13 @@
 package dji.sampleV5.modulecommon.models
 
 import androidx.lifecycle.MutableLiveData
-import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.*
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.ToastUtils
 
 /**
  * @author feel.feng
@@ -18,10 +20,10 @@ class MediaVM : DJIViewModel() {
     var fileListState = MutableLiveData<MediaFileListState>()
     fun init(){
         addMediaFileListStateListener()
-        mediaFileListData.value = MediaManager.getInstance().mediaFileListData
-        MediaManager.getInstance().addMediaFileListStateListener { mediaFileListState ->
+        mediaFileListData.value = MediaDataCenter.getInstance().mediaManager.mediaFileListData
+        MediaDataCenter.getInstance().mediaManager.addMediaFileListStateListener { mediaFileListState ->
             if (mediaFileListState == MediaFileListState.UP_TO_DATE) {
-                val data = MediaManager.getInstance().mediaFileListData;
+                val data = MediaDataCenter.getInstance().mediaManager.mediaFileListData;
                 mediaFileListData.postValue(data)
             }
         }
@@ -31,12 +33,12 @@ class MediaVM : DJIViewModel() {
 
     fun destroy(){
         removeAllFileListStateListener()
-        MediaManager.getInstance().release()
+        MediaDataCenter.getInstance().mediaManager.release()
     }
 
     fun pullMediaFileListFromCamera( ){
         var currentTime  = System.currentTimeMillis()
-        MediaManager.getInstance().pullMediaFileListFromCamera(PullMediaFileListParam.Builder().build(), object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.pullMediaFileListFromCamera(PullMediaFileListParam.Builder().build(), object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 ToastUtils.showToast("Spend time:${(System.currentTimeMillis() - currentTime)/1000}s")
                 LogUtils.i(TAG, "fetch success")
@@ -48,7 +50,7 @@ class MediaVM : DJIViewModel() {
     }
 
     private fun addMediaFileListStateListener(){
-        MediaManager.getInstance().addMediaFileListStateListener(object :MediaFileListStateListener {
+        MediaDataCenter.getInstance().mediaManager.addMediaFileListStateListener(object :MediaFileListStateListener {
             override fun onUpdate(mediaFileListState: MediaFileListState) {
                 fileListState.postValue(mediaFileListState)
             }
@@ -57,10 +59,15 @@ class MediaVM : DJIViewModel() {
     }
 
     private fun removeAllFileListStateListener(){
-        MediaManager.getInstance().removeAllMediaFileListStateListener()
+        MediaDataCenter.getInstance().mediaManager.removeAllMediaFileListStateListener()
     }
     fun getMediaFileList(): List<MediaFile> {
        return mediaFileListData.value?.data!!
 
+    }
+
+     fun  setComponentIndex(index: ComponentIndexType) {
+        val mediaSource = MediaFileListDataSource.Builder().setIndexType(index).build()
+        MediaDataCenter.getInstance().mediaManager.setMediaFileDataSource(mediaSource)
     }
 }

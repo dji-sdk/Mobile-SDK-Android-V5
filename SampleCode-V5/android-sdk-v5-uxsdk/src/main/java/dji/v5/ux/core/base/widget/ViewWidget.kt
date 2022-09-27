@@ -3,6 +3,7 @@ package dji.v5.ux.core.base.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.WidgetSizeDescription
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -17,6 +18,7 @@ abstract class ViewWidget @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    protected val logTag = LogUtils.getTag(this)
     //region Fields
     private var reactionDisposables: CompositeDisposable? = null
     private var compositeDisposable: CompositeDisposable? = null

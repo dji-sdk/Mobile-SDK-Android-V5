@@ -26,7 +26,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@android:color/black"
+    android:background="@color/black"
     tools:parentTag="dji.v5.ux.accessory.RTKSatelliteStatusWidget">
 
     <TextView
@@ -53,6 +53,21 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="RTK Connected. RTK data not in use"
         tools:textColor="@color/uxsdk_rtk_status_connected_not_in_use" />
+
+    <ImageView
+        android:id="@+id/imageview_connect_arrow"
+        android:layout_width="@dimen/uxsdk_16_dp"
+        android:layout_height="@dimen/uxsdk_16_dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/uxsdk_16_dp"
+        android:background="@drawable/uxsdk_ic_common_arrow_r_s"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textview_rtk_status"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_rtk_status"
+
+        />
 
     <ImageView
         android:id="@+id/imageview_table_background"

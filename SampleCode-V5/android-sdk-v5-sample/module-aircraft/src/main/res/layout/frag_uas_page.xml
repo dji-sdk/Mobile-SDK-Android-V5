@@ -26,18 +26,24 @@
             <Button
                 android:id="@+id/btn_france"
                 style="@style/main_fragment_btn"
-                android:text="Open France UAS Page"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Open France Page"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/btn_jp"
                 style="@style/main_fragment_btn"
-                android:text="Open UAS Jp Page"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Open Japan Page"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_france" />
+
+
+            <Button
+                android:id="@+id/btn_us"
+                style="@style/main_fragment_btn"
+                android:text="Open America Page"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_jp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

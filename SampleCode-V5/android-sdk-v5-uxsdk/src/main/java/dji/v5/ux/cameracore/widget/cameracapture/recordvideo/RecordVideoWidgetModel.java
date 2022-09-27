@@ -246,9 +246,6 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         }
 
         int availableRecordingTime = getAvailableRecordingTime();
-        if (availableRecordingTime == INVALID_AVAILABLE_RECORDING_TIME) {
-            return;
-        }
 
         CameraVideoStorageState newCameraVideoStorageState = null;
         if (CameraStorageLocation.SDCARD.equals(currentStorageLocation)) {

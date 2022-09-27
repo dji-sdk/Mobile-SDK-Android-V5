@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.0.0
+# DJI Mobile SDK for Android V5 Latest Version 5.1.0
 
 [中文版](README_CN.md)
 
@@ -7,6 +7,7 @@
 DJI Mobile SDK V5 has a series of APIs to control the software and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.
 
 Supported Product:
+* [DJI Mavic 3 Enterprise Series](https://www.dji.com/cn/mavic-3-enterprise)
 * [M30 Series](https://www.dji.com/matrice-30?site=brandsite&from=nav)
 * [M300 RTK](https://www.dji.com/matrice-300?site=brandsite&from=nav)
 
@@ -16,6 +17,7 @@ Supported Product:
 ```
 ├── Docs
 │   └── API-Diff     // API Difference
+│       ├── 5.0.0_5.1.0_android_diff.html
 │       ├── 5.0.0_beta2_5.0.0_beta3_android_diff.html
 │       └── 5.0.0_beta3_5.0.0_android_diff.html
 ├── LICENSE.txt     //Software License
@@ -46,7 +48,7 @@ Supported Product:
 ```
 
 ### API Difference
-
+- [5.0.0_5.1.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_5.1.0_android_diff.html)
 - [5.0.0_beta3_5.0.0_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta3_5.0.0_android_diff.html)
 - [5.0.0_beta2_5.0.0_beta3_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta2_5.0.0_beta3_android_diff.html)
 
@@ -90,7 +92,7 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.0.0
+> **Notice:** sdkVersion = 5.1.0
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

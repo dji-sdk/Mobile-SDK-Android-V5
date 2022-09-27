@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.models.LoginVM
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.account.LoginInfo
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_login_account_page.*
 
 /**
@@ -39,7 +39,7 @@ class LoginFragment : DJIFragment() {
         //尝试获取已有的登录信息
         showLoginInfo()
         loginVM.addLoginStateChangeListener {
-            activity?.runOnUiThread {
+            mainHandler.post {
                 it?.run {
                     tv_login_account_info.text = if (TextUtils.isEmpty(account)) {
                         "UNKNOWN"
@@ -79,14 +79,14 @@ class LoginFragment : DJIFragment() {
             })
         }
         btn_get_login_info.setOnClickListener {
-            val loginInfo=showLoginInfo()
+            val loginInfo = showLoginInfo()
             //同时将获取到的结果Toast出来
             ToastUtils.showToast(tv_login_account_info.text.toString() + "-" + loginInfo.loginState.name)
         }
 
     }
 
-    private fun showLoginInfo():LoginInfo {
+    private fun showLoginInfo(): LoginInfo {
         //将获取到的结果刷新到UI
         val loginInfo = loginVM.getLoginInfo()
         tv_login_account_info.text = if (TextUtils.isEmpty(loginInfo.account)) {
@@ -105,16 +105,18 @@ class LoginFragment : DJIFragment() {
     }
 
     private fun clearErrMsg() {
-        activity?.runOnUiThread {
-            tv_login_error_info.text = ""
+        if (isFragmentShow()) {
+            mainHandler.post {
+                tv_login_error_info.text = ""
+            }
         }
-
     }
 
     private fun showErrMsg(msg: String) {
-        activity?.runOnUiThread {
-            tv_login_error_info.text = msg
-
+        if (isFragmentShow()) {
+            mainHandler.post {
+                tv_login_error_info.text = msg
+            }
         }
     }
 

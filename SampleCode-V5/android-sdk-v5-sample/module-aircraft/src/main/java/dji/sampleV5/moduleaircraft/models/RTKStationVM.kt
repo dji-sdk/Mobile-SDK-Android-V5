@@ -58,7 +58,7 @@ class RTKStationVM : DJIViewModel() {
         }
 
     fun startSearchStation() {
-        LogUtils.d(TAG, "startSearchStation")
+        LogUtils.i(TAG, "startSearchStation")
         rtkStationManager.startSearchRTKStation(object :
             CommonCallbacks.CompletionCallback {
             override fun onSuccess() {

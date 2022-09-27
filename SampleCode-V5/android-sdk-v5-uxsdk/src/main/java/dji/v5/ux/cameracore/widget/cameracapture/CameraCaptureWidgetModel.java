@@ -24,7 +24,7 @@
 package dji.v5.ux.cameracore.widget.cameracapture;
 
 import androidx.annotation.NonNull;
-import dji.sdk.keyvalue.value.camera.CameraWorkMode;
+import dji.sdk.keyvalue.value.camera.CameraMode;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.ux.core.base.DJISDKModel;
@@ -94,9 +94,9 @@ public class CameraCaptureWidgetModel extends WidgetModel implements ICameraInde
     /**
      * Get the current camera Mode
      *
-     * @return Flowable with {@link CameraWorkMode} instance
+     * @return Flowable with {@link CameraMode} instance
      */
-    public Flowable<CameraWorkMode> getCameraMode() {
+    public Flowable<CameraMode> getCameraMode() {
         return flatCameraModule.getCameraModeDataProcessor().toFlowable();
     }
     //endregion

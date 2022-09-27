@@ -41,7 +41,7 @@
     <string name="uxsdk_user_login_widget_refresh">刷新</string>
     <string name="uxsdk_user_login_widget_token">令牌过期</string>
     <string name="uxsdk_user_login_widget_not_logged_in">未登录</string>
-    <string name="uxsdk_user_login_widget_logged_in_authorized">登录并授权解锁飞行区</string>
+    <string name="uxsdk_user_login_widget_logged_in">已登录</string>
     <string name="uxsdk_user_login_widget_logged_in_not_authorized">登录但未授权解锁飞行区</string>
 
     <string name="uxsdk_string_default_value">N/A</string>
@@ -320,8 +320,14 @@
     <string name="uxsdk_rtk_type_rtk_mobile_station">D-RTK 2 移动站</string>
     <string name="uxsdk_rtk_type_rtk_base_station">基站</string>
     <string name="uxsdk_rtk_type_custom_rtk">自定义网络 RTK</string>
+    <string name="uxsdk_rtk_type_cmcc_rtk">CMCC RTK</string>
     <string name="uxsdk_rtk_type_unknown_rtk">未知RTK类型</string>
     <string name="uxsdk_rtk_status_desc">%1$s 状态：</string>
+
+
+    <!--精度保持-->
+    <string name="uxsdk_rtk_keep_status_mode">精度保持</string>
+    <string name="uxsdk_rtk_keep_status_hint">当发生RTK模块通信异常时，将自动维持当前RTK状态，但是精度逐渐下降，若超过10分钟未重新连接，自动退出RTK.</string>
 
 
     <string name="uxsdk_fly_zone_unlock">解锁</string>
@@ -406,57 +412,63 @@
     <string name="uxsdk_pinch_to_resize">* Pinch to resize widget</string>
 
     <!-- Widget List Strings -->
-    <string name="uxsdk_altitude_widget_title">高度控件</string>
-    <string name="uxsdk_auto_exposure_lock_widget_title">AE锁控件</string>
-    <string name="uxsdk_battery_widget_title">电池控件</string>
-    <string name="uxsdk_camera_capture_widget_title">相机捕捉控件</string>
-    <string name="uxsdk_camera_config_aperture_widget_title">相机光圈设置控件</string>
-    <string name="uxsdk_camera_config_ev_widget_title">相机EV设置控件</string>
-    <string name="uxsdk_camera_config_iso_widget_title">相机ISO设置控件</string>
-    <string name="uxsdk_camera_config_shutter_widget_title">相机快门设置控件</string>
-    <string name="uxsdk_camera_config_ssd_widget_title">相机SSD设置控件</string>
-    <string name="uxsdk_camera_config_storage_widget_title">相机存储设置控件</string>
-    <string name="uxsdk_camera_config_wb_widget_title">相机WB设置控件</string>
-    <string name="uxsdk_camera_controls_widget_title">相机控制控件</string>
+    <!-- 这个不适合翻译，需要方便开发者根据名称找到代码 -->
+    <string name="uxsdk_altitude_widget_title">Altitude Widget</string>
+    <string name="uxsdk_auto_exposure_lock_widget_title">Auto Exposure Lock Widget</string>
+    <string name="uxsdk_battery_widget_title">Battery Widget</string>
+    <string name="uxsdk_camera_capture_widget_title">Camera Capture Widget</string>
+    <string name="uxsdk_camera_config_aperture_widget_title">Camera Config Aperture Widget</string>
+    <string name="uxsdk_camera_config_ev_widget_title">Camera Config EV Widget</string>
+    <string name="uxsdk_camera_config_iso_widget_title">Camera Config ISO Widget</string>
+    <string name="uxsdk_camera_config_shutter_widget_title">Camera Config Shutter Widget</string>
+    <string name="uxsdk_camera_config_ssd_widget_title">Camera Config SSD Widget</string>
+    <string name="uxsdk_camera_config_storage_widget_title">Camera Config Storage Widget</string>
+    <string name="uxsdk_camera_config_wb_widget_title">Camera Config WB Widget</string>
+    <string name="uxsdk_camera_controls_widget_title">Camera Controls Widget</string>
     <string name="uxsdk_camera_settings_menu_indicator_widget_title">Camera Settings Menu Indicator Widget</string>
-    <string name="uxsdk_compass_widget_title">指南针控件</string>
-    <string name="uxsdk_telemetry_widget_title">遥测面板</string>
+    <string name="uxsdk_compass_widget_title">Compass Widget</string>
+    <string name="uxsdk_telemetry_widget_title">Telemetry Panel</string>
     <string name="uxsdk_distance_home_widget_title">Distance Home Widget</string>
     <string name="uxsdk_distance_rc_widget_title">Distance RC Widget</string>
-    <string name="uxsdk_exposure_settings_indicator_widget_title">曝光设置指示控件</string>
-    <string name="uxsdk_focus_exposure_switch_widget_title">对焦曝光切换控件</string>
-    <string name="uxsdk_focus_mode_widget_title">对焦模式控件</string>
-    <string name="uxsdk_fpv_widget_title">FPV 控件</string>
-    <string name="uxsdk_fpv_interaction_widget_title">FPV 交互控件</string>
-    <string name="uxsdk_horizontal_velocity_widget_title">水平速度控件</string>
-    <string name="uxsdk_record_video_widget_title">视频录制控件</string>
-    <string name="uxsdk_remote_control_signal_widget_title">遥感控制信号控件</string>
-    <string name="uxsdk_photo_video_switch_widget_title">相片视频切换控件</string>
-    <string name="uxsdk_shoot_photo_widget_title">拍照控件</string>
+    <string name="uxsdk_exposure_settings_indicator_widget_title">Exposure Settings Indicator Widget</string>
+    <string name="uxsdk_focus_exposure_switch_widget_title">Focus Exposure Switch Widget</string>
+    <string name="uxsdk_focus_mode_widget_title">Focus Mode Widget</string>
+    <string name="uxsdk_fpv_widget_title">FPV Widget</string>
+    <string name="uxsdk_fpv_interaction_widget_title">FPV Interaction Widget</string>
+    <string name="uxsdk_horizontal_velocity_widget_title">Horizontal Velocity Widget</string>
+    <string name="uxsdk_record_video_widget_title">Record Video Widget</string>
+    <string name="uxsdk_remote_control_signal_widget_title">Remote Control Signal Widget</string>
+    <string name="uxsdk_photo_video_switch_widget_title">Photo Video Switch Widget</string>
+    <string name="uxsdk_shoot_photo_widget_title">Shoot Photo Widget</string>
     <string name="uxsdk_simulator_indicator_control_widgets_title">Simulator Indicator and Control Widgets</string>
-    <string name="uxsdk_system_status_panel_title">系统状态面板</string>
-    <string name="uxsdk_system_status_widget_title">系统状态空间</string>
-    <string name="uxsdk_top_bar_panel_title">顶栏面板</string>
-    <string name="uxsdk_user_account_login_widget_title">用户账号登录控件</string>
-    <string name="uxsdk_vertical_velocity_widget_title">垂直速度控件</string>
-    <string name="uxsdk_vision_widget_title">视觉控件</string>
-    <string name="uxsdk_vps_widget_title">VPS 控件</string>
-    <string name="uxsdk_flight_mode_widget_title">飞行模式控件</string>
-    <string name="uxsdk_video_signal_widget_title">视频信号控件</string>
-    <string name="uxsdk_gps_signal_widget_title">GPS 信号控件</string>
-    <string name="uxsdk_air_sense_widget_title">空气感应控件</string>
-    <string name="uxsdk_connection_widget_title">连接控件</string>
-    <string name="uxsdk_rtk_widget_title">RTK 控件</string>
-    <string name="uxsdk_rtk_enabled_widget_title">RTK 开启控件</string>
-    <string name="uxsdk_rtk_satellite_status_widget_title">RTK 卫星状态控件</string>
-    <string name="uxsdk_remaining_flight_time_widget_title">剩余飞行时间控件</string>
-    <string name="uxsdk_exposure_setting_panel_title">曝光设置控件</string>
-    <string name="uxsdk_exposure_mode_setting_widget_title">曝光模式设置控件</string>
-    <string name="uxsdk_iso_and_ei_setting_widget_title">ISO 和 EI 设置控件</string>
-    <string name="uxsdk_horizontal_situation_indicator_widget_title">水平状态指示控件</string>
-    <string name="uxsdk_speed_display_widget_title">速度展示控件</string>
-    <string name="uxsdk_attitude_display_widget_title">姿态展示空间</string>
+    <string name="uxsdk_system_status_panel_title">System Status Panel</string>
+    <string name="uxsdk_system_status_widget_title">System Status Widget</string>
+    <string name="uxsdk_top_bar_panel_title">Top Bar Panel</string>
+    <string name="uxsdk_user_account_login_widget_title">User Account Login Widget</string>
+    <string name="uxsdk_vertical_velocity_widget_title">Vertical Velocity Widget</string>
+    <string name="uxsdk_vision_widget_title">Vision Widget</string>
+    <string name="uxsdk_vps_widget_title">VPS Widget</string>
+    <string name="uxsdk_flight_mode_widget_title">Flight Mode Widget</string>
+    <string name="uxsdk_video_signal_widget_title">Video Signal Widget</string>
+    <string name="uxsdk_gps_signal_widget_title">GPS Signal Widget</string>
+    <string name="uxsdk_air_sense_widget_title">Air Sense Widget</string>
+    <string name="uxsdk_connection_widget_title">Connection Widget</string>
+    <string name="uxsdk_rtk_widget_title">RTK Widget</string>
+    <string name="uxsdk_rtk_enabled_widget_title">RTK Enabled Widget</string>
+    <string name="uxsdk_rtk_keep_status_widget_title">RTK Keep Status Widget</string>
+    <string name="uxsdk_rtk_type_switch_widget_title">RTK Type Switch Widget</string>
+    <string name="uxsdk_rtk_satellite_status_widget_title">RTK Satellite Status Widget</string>
+    <string name="uxsdk_rtk_rtk_station_connect_widget_title">RTK Station Connect Widget</string>
+    <string name="uxsdk_remaining_flight_time_widget_title">Remaining Flight Time Widget</string>
+    <string name="uxsdk_exposure_setting_panel_title">Exposure Setting Panel</string>
+    <string name="uxsdk_exposure_mode_setting_widget_title">Exposure Mode Setting Widget</string>
+    <string name="uxsdk_iso_and_ei_setting_widget_title">ISO And EI Setting Widget</string>
+    <string name="uxsdk_horizontal_situation_indicator_widget_title">Horizontal Situation Indicator Widget</string>
+    <string name="uxsdk_speed_display_widget_title">Speed Display Widget</string>
+    <string name="uxsdk_attitude_display_widget_title">Attitude Display Widget</string>
     <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
+    <string name="uxsdk_exposure_meter_widget_title">Exposure Metering Widget</string>
+    <string name="uxsdk_focal_zoom_widget_title">Focal Zoom Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>
@@ -650,11 +662,92 @@
     <string name="uxsdk_aperture_integer_with_decimal">%1$d.%2$d</string>
     <string name="uxsdk_shutter_title">快门</string>
     <string name="uxsdk_ev_title">曝光值</string>
-    <string name="uxsdk_exposure_auto_iso_title">ISO（感光度）自动调整</string>
-    <string name="uxsdk_exposure_locked_iso_title">ISO（感光度）锁定</string>
-    <string name="uxsdk_exposure_iso_title">ISO（感光度）</string>
+    <string name="uxsdk_exposure_auto_iso_title">ISO(自动)</string>
+    <string name="uxsdk_exposure_locked_iso_title">ISO(锁定)</string>
+    <string name="uxsdk_exposure_iso_title">ISO</string>
     <string name="uxsdk_white_balance_title">WB %1$s</string>
     <string name="uxsdk_white_balance_temp">%1$dK</string>
+
+    <!--RTK Type Widget-->
+    <string name="uxsdk_rtk_coordinate_title">RTK坐标系</string>
+    <string name="uxsdk_rtk_type_switch_title">RTK 服务类型</string>
+    <string name="uxsdk_rtk_base_gps_input_desc">请确保D-RTK 2 移动站处于空旷地带，切勿挪动架设位置。起桨后不支持扫描和对频RTK基站。</string>
+    <string name="uxsdk_rtk_coordinate_c2000">C2000</string>
+    <string name="uxsdk_rtk_coordinate_wgs84">WGS84</string>
+    <string name="uxsdk_rtk_setting_menu_setting_success">设置成功</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail_no_network">设置失败，请检查网络是否正常连接</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail_settings_invalid">设置失败，参数有误</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail_incorrect_reference_station_source">RTK服务出错，请重启APP或飞行器再重试</string>
+
+    <string name="uxsdk_rtk_setting_menu_type_rtk_none">无</string>
+    <string name="uxsdk_rtk_setting_menu_type_nrtk">网络RTK</string>
+    <string name="uxsdk_rtk_setting_menu_type_custom_rtk">自定义网络RTK</string>
+    <string name="uxsdk_rtk_setting_menu_type_rtk_station">D-RTK 2 移动站</string>
+    <string name="uxsdk_rtk_setting_menu_type_rtk_station_selected">选取 D-RTK 2 移动站</string>
+    <string name="uxsdk_rtk_setting_menu_type_nrtk_desc">千寻网络RTK</string>
+    <string name="uxsdk_rtk_channel_b_not_support_net_rtk">B控不支持网络RTK</string>
+    <string name="uxsdk_rtk_channel_b_not_support_net_custom_rtk">B控不支持自定义网络RTK</string>
+    <string name="uxsdk_rtk_setting_menu_esc_beeping_tip">当前电机已起转，请停转电机再试。</string>
+    <string name="uxsdk_rtk_setting_menu_switch_des_info">切换RTK服务类型需重启飞行器</string>
+    <string name="uxsdk_rtk_setting_menu_base_gps_input_desc"> 请确保D-RTK 2 移动站处于空旷地带，切勿挪动架设位置。起桨后不支持扫描和对频RTK基站。</string>
+    <string name="uxsdk_rtk_setting_menu_station_net_rtk_desc">你正在接收RTK网络信号，请确保网络连接正常</string>
+    <string name="uxsdk_rtk_setting_menu_settting">设置</string>
+    <string name="uxsdk_rtk_setting_menu_rtk_setting_success">设置成功</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail">设置失败</string>
+    <string name="uxsdk_rtk_setting_menu_rtk_setting_fail_settings_invalid">设置失败，参数有误</string>
+
+    <!--Lens Control Widget-->
+    <string name="uxsdk_lens_type_wide">广角</string>
+    <string name="uxsdk_lens_type_zoom">变焦</string>
+    <string name="uxsdk_lens_type_ir">红外</string>
+
+    <!--RTK Connect Widget-->
+    <string name="uxsdk_rtk_problem_detection">请检测以下问题</string>
+    <string name="uxsdk_rtk_signal_search_again">重新搜索</string>
+    <string name="uxsdk_rtk_base_station_not_found">附近没有可用的 D-RTK 2 移动站</string>
+    <string name="uxsdk_rtk_base_station_not_found_reason">1、D-RTK 2 移动站是否开机；\n2、D-RTK 2 移动站是否处于空旷地带；\n3、D-RTK 2 移动站是否切为广播模式。</string>
+    <string name="uxsdk_rtk_connect_description">查看 D-RTK 连接说明</string>
+    <string name="uxsdk_rtk_base_station_connect_fail">连接失败</string>
+    <string name="uxsdk_rtk_base_station_search_false_and_try_again">请求失败，请重试！</string>
+
+    <!--rtk guidance-->
+    <string name="uxsdk_rtk_guidance_reset_title">重置密码</string>
+    <string name="uxsdk_rtk_guidance_step1_title">开启电源</string>
+    <string name="uxsdk_rtk_guidance_step2_title">切换模式</string>
+    <string name="uxsdk_rtk_guidance_step3_title">APP连接</string>
+    <string name="uxsdk_rtk_guidance_reset_content">对频按钮长按3s，同时短按模式按钮，红灯闪灯多次后，密码重置为初始密码：123456</string>
+    <string name="uxsdk_rtk_guidance_step1_content">长按3秒开启设备电源，等待系统完成初始化，指示灯转为绿灯常亮</string>
+    <string name="uxsdk_rtk_guidance_step2_content">长按模式按钮2秒，模式灯变为黄色，即为【切换模式】。点击模式按钮，切换移动站连接模式。</string>
+    <string name="uxsdk_rtk_guidance_step3_content">在RTK设置页面，选择该D-RTK2移动站，即连接成功</string>
+    <string name="uxsdk_rtk_guidance_step2_image_desc">切为广播模式或从广播模式切出，设备会自动重启，需要10s左右，请耐心等待。</string>
+    <string name="uxsdk_rtk_guidance_btn_previous">上一步</string>
+    <string name="uxsdk_rtk_guidance_btn_next">下一步</string>
+    <string name="uxsdk_rtk_guidance_btn_finish">完成</string>
+    <string name="uxsdk_rtk_guidance_replay">重播</string>
+    <string name="uxsdk_rtk_guidance_reset_tip">重置成功</string>
+    <string name="uxsdk_rtk_guidance_step2_tip">连续点击可连续切换</string>
+    <string name="uxsdk_rtk_guidance_five_mode">模式灯一组五次闪烁即为广播模式</string>
+
+
+    <!--GpsSignalWidget-->
+    <string name="uxsdk_fpv_top_bar_rtk_title">RTK 定位</string>
+    <string name="uxsdk_setting_menu_rtk_state_disconnect">未连接</string>
+    <string name="uxsdk_fpv_top_bar_gps_title">GNSS 定位</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_title">信号</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_state_strong">强</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_state_normal">一般</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_state_weak">弱</string>
+    <string name="uxsdk_fpv_top_bar_rtk_state_title">RTK 状态</string>
+    <string name="uxsdk_fpv_top_bar_rtk_state_fixed">已收敛</string>
+    <string name="uxsdk_fpv_top_bar_rtk_state_not_fixed">未收敛</string>
+    <string name="uxsdk_fpv_top_bar_satellite_count">星数</string>
+    <string name="uxsdk_checklist_manual_rtk_not_open">未开启</string>
+    <string name="uxsdk_checklist_rtk_status_converging">收敛中</string>
+    <string name="uxsdk_checklist_rtk_status_connected">已连接</string>
+    <string name="uxsdk_abnormal">异常</string>
+    <string name="uxsdk_normal">正常</string>
+
+
 </resources>
 
 

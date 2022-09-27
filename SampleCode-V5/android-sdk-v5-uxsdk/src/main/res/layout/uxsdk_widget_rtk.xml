@@ -53,6 +53,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <dji.v5.ux.accessory.RTKTypeSwitchWidget
+                android:id="@+id/widget_rtk_type_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/widget_rtk_enabled" />
+
             <dji.v5.ux.accessory.RTKSatelliteStatusWidget
                 android:id="@+id/widget_rtk_satellite_status"
                 android:layout_width="match_parent"
@@ -61,44 +71,16 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/widget_rtk_enabled" />
+                app:layout_constraintTop_toBottomOf="@+id/widget_rtk_type_switch" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/textview_rtk_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
-        android:text="@string/uxsdk_rtk_introduction_txt"
-        android:textColor="@color/uxsdk_white"
-        android:textSize="@dimen/uxsdk_text_size_normal"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/rtk_dialog_separator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/widget_rtk_enabled"
-        tools:visibility="visible" />
 
     <View
         android:id="@+id/rtk_dialog_separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/uxsdk_white_50_percent"
-        app:layout_constraintBottom_toTopOf="@id/textview_ok" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/textview_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="5dp"
-        android:text="@string/uxsdk_app_ok"
-        android:textColor="@color/uxsdk_white"
-        android:textSize="@dimen/uxsdk_text_size_normal_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 </merge>

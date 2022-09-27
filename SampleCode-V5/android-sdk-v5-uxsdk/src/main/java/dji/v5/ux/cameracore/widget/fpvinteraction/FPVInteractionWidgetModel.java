@@ -73,7 +73,7 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
     //region Fields
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private int gimbalIndex;
-    private CameraLensType lensIndex;
+    private CameraLensType lensIndex = CameraLensType.CAMERA_LENS_WIDE;
     private DJIKey<DoublePoint2D> focusTargetKey;
     private DJIKey<IntPoint2D> meteringTargetKey;
     private DJIKey<CameraMeteringMode> meteringModeKey;
@@ -130,7 +130,7 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
 
     //region Helpers
     private void setMeteringMode(CameraMeteringMode meteringMode) {
-        if (meteringMode == CameraMeteringMode.SPOT) {
+        if (meteringMode == CameraMeteringMode.REGION) {
             setControlMode(SettingDefinitions.ControlMode.SPOT_METER);
         } else if (meteringMode == CameraMeteringMode.CENTER) {
             setControlMode(SettingDefinitions.ControlMode.CENTER_METER);
@@ -139,11 +139,13 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
     //endregion
 
     //region Data
+    @Override
     @NonNull
     public ComponentIndexType getCameraIndex() {
         return cameraIndex;
     }
 
+    @Override
     @NonNull
     public CameraLensType getLensType() {
         return lensIndex;
@@ -249,8 +251,8 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
             int column = (int) (targetX * NUM_COLUMNS);
             int row = (int) (targetY * NUM_ROWS);
             if (column >= 0 && column < NUM_COLUMNS && row >= 0 && row < NUM_ROWS) {
-                if (meteringModeProcessor.getValue() != CameraMeteringMode.SPOT) {
-                    return djiSdkModel.setValue(meteringModeKey, CameraMeteringMode.SPOT)
+                if (meteringModeProcessor.getValue() != CameraMeteringMode.REGION) {
+                    return djiSdkModel.setValue(meteringModeKey, CameraMeteringMode.REGION)
                             .andThen(djiSdkModel.setValue(meteringTargetKey, createPoint(column, row)));
                 } else {
                     return djiSdkModel.setValue(meteringTargetKey, createPoint(column, row));

@@ -48,12 +48,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:uxsdk_cameraNameTextSize="14dp"
             app:uxsdk_cameraSideTextSize="14dp"
-            app:uxsdk_videoChannelType="primaryStreamChannel" />
+            app:uxsdk_videoChannelType="primaryStreamChannel" >
 
-        <dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget
-            android:id="@+id/widget_fpv_interaction"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget
+                android:id="@+id/widget_fpv_interaction"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+        </dji.v5.ux.core.widget.fpv.FPVWidget>
 
         <dji.v5.ux.core.widget.fpv.FPVWidget
             android:id="@+id/widget_secondary_fpv"
@@ -179,19 +182,6 @@
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
-        app:layout_constraintEnd_toStartOf="@+id/widget_camera_config_ssd"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei" />
-
-    <dji.v5.ux.visualcamera.ssd.CameraConfigSSDWidget
-        android:id="@+id/widget_camera_config_ssd"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/uxsdk_camera_config_height"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/uxsdk_dark_gray"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
         app:layout_constraintEnd_toStartOf="@+id/widget_auto_exposure_lock"
         app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei" />
 
@@ -239,6 +229,16 @@
         app:layout_constraintHeight_percent="0.45"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45" />
+
+    <dji.v5.ux.visualcamera.zoom.FocalZoomWidget
+        android:id="@+id/widget_focal_zoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@+id/widget_camera_config_iso_and_ei"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/widget_camera_controls" />
 
     <dji.v5.ux.cameracore.widget.cameracontrols.exposuresettings.ExposureSettingsPanel
         android:id="@+id/panel_camera_controls_exposure_settings"
@@ -317,6 +317,7 @@
         android:id="@+id/widget_fpv_flight_display_widget"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

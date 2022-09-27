@@ -27,12 +27,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ScaleGestureDetector;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import dji.v5.ux.R;
+import dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget;
 
 /**
  * A view with a single widget and an indicator of the current size of the widget. This widget
@@ -53,9 +53,7 @@ public class WidgetView extends ConstraintLayout {
     private float scaleFactor = 1.0f;
     //region Views
     private ViewGroup widget;
-    //endregion
 
-    //region Lifecycle
     public WidgetView(Context context) {
         super(context);
     }
@@ -78,7 +76,7 @@ public class WidgetView extends ConstraintLayout {
     public ViewGroup init(WidgetViewHolder widgetViewHolder) {
         this.widgetViewHolder = widgetViewHolder;
         scaleGestureDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
-        inflate(getContext(), R.layout.view_widget, this);
+        inflate(getContext(), R.layout.uxsdk_view_widget, this);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
@@ -93,18 +91,21 @@ public class WidgetView extends ConstraintLayout {
         widget = widgetViewHolder.getWidget(getContext());
         if (widget != null) {
             containerView.addView(widget);
-            final ViewTreeObserver obs = widget.getViewTreeObserver();
-            obs.addOnPreDrawListener(() -> {
-                if (originalHeight == 0 && originalWidth == 0) {
-                    originalHeight = widget.getHeight();
-                    originalWidth = widget.getWidth();
-                }
-                return true;
-            });
         }
         aspectRatioTextView.setText(widgetViewHolder.getIdealDimensionRatioString());
-
         return widget;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        post(()->{
+            if (originalHeight == 0 && originalWidth == 0) {
+                originalHeight = widget.getHeight();
+                originalWidth = widget.getWidth();
+                this.invalidate();
+            }
+        });
     }
 
     @Override
@@ -126,9 +127,9 @@ public class WidgetView extends ConstraintLayout {
                 layoutParams.height = originalHeight * (int) scaleFactor;
                 layoutParams.width = originalWidth * (int) scaleFactor;
                 widget.setLayoutParams(layoutParams);
-//                if (widget instanceof FPVInteractionWidget) {
-//                    ((FPVInteractionWidget) widget).adjustAspectRatio(layoutParams.width, layoutParams.height);
-//                }
+                if (widget instanceof FPVInteractionWidget) {
+                    ((FPVInteractionWidget) widget).adjustAspectRatio(layoutParams.width, layoutParams.height);
+                }
                 currentSizeTextView.setText(widgetViewHolder.getWidgetSize());
             }
             return true;

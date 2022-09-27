@@ -34,13 +34,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
 
 /**
  * Displays a list of widget names.
  */
 public class WidgetListFragment extends Fragment {
-
+    public static final String TAG = "WidgetListFragment";
     //region Views
     protected RecyclerView widgetRecyclerView;
     //region Fields
@@ -62,7 +64,8 @@ public class WidgetListFragment extends Fragment {
         widgetRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager widgetLayoutManager = new LinearLayoutManager(getContext());
         widgetRecyclerView.setLayoutManager(widgetLayoutManager);
-        RecyclerView.Adapter widgetAdapter = new WidgetListItemAdapter(((WidgetsActivity) getActivity()).widgetListItems, onWidgetItemSelectedListener);
+        RecyclerView.Adapter<WidgetListItemAdapter.WidgetListItemViewHolder> widgetAdapter = new WidgetListItemAdapter(((WidgetsActivity) getActivity()).widgetListItems,
+                onWidgetItemSelectedListener);
         widgetRecyclerView.setAdapter(widgetAdapter);
         return rootView;
     }
@@ -105,7 +108,6 @@ public class WidgetListFragment extends Fragment {
      * A callback for widget item selection
      */
     public interface OnWidgetItemSelectedListener {
-
         /**
          * Called when a widget item is selected.
          *
@@ -113,4 +115,5 @@ public class WidgetListFragment extends Fragment {
          */
         void onWidgetItemSelected(int position);
     }
+
 }

@@ -45,22 +45,51 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_get_list_state" />
+            <LinearLayout
+                android:id="@+id/sp_choose_component_lyt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_list_count">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Select Component"/>
+                <Spinner
+                    android:id="@+id/sp_choose_component"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white"
+                    android:entries="@array/media_component_arrays"
+                  />
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btn_refresh_file_list"
                 style="@style/main_fragment_btn"
                 android:text="获取文件列表"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_list_count" />
+                app:layout_constraintTop_toBottomOf="@+id/sp_choose_component_lyt" />
 
+            <Button
+                android:id="@+id/btn_select"
+                style="@style/main_fragment_btn"
+                android:text="@string/select_files"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_refresh_file_list"/>
 
             <Button
                 android:id="@+id/btn_delete"
                 style="@style/main_fragment_btn"
-                android:text="删除"
+                android:enabled="false"
+                android:text="@string/delete_files"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_refresh_file_list" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_select" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

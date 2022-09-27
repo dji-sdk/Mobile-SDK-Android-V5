@@ -51,7 +51,7 @@ import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.communication.OnStateChangeCallback
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.ui.SeekBarView
+import dji.v5.ux.core.ui.HorizontalSeekBar
 import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.EditTextNumberInputFilter
 import dji.v5.ux.core.util.RxUtil
@@ -67,7 +67,6 @@ import dji.v5.ux.training.simulatorcontrol.preset.SimulatorPresetData
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.math.max
 
 /**
@@ -97,8 +96,8 @@ open class SimulatorControlWidget @JvmOverloads constructor(
     }
     private val latitudeEditText: EditText = findViewById(R.id.edit_text_simulator_lat)
     private val longitudeEditText: EditText = findViewById(R.id.edit_text_simulator_lng)
-    private val frequencySeekBar: SeekBarView = findViewById(R.id.seek_bar_frequency)
-    private val satelliteCountSeekBar: SeekBarView = findViewById(R.id.seek_bar_satellite_count)
+    private val frequencySeekBar: HorizontalSeekBar = findViewById(R.id.seek_bar_frequency)
+    private val satelliteCountSeekBar: HorizontalSeekBar = findViewById(R.id.seek_bar_satellite_count)
     private val simulatorTitleTextView: TextView = findViewById(R.id.textview_simulator_title)
     private val simulatorSwitch: Switch = findViewById(R.id.switch_simulator)
     private val latitudeTextView: TextView = findViewById(R.id.textview_simulator_latitude_value)
@@ -130,9 +129,9 @@ open class SimulatorControlWidget @JvmOverloads constructor(
     private val windXLabelTextView: TextView = findViewById(R.id.textview_wind_speed_x_label)
     private val windYLabelTextView: TextView = findViewById(R.id.textview_wind_speed_y_label)
     private val windZLabelTextView: TextView = findViewById(R.id.textview_wind_speed_z_label)
-    private val windSpeedXSeekBar: SeekBarView = findViewById(R.id.seek_bar_wind_speed_x)
-    private val windSpeedYSeekBar: SeekBarView = findViewById(R.id.seek_bar_wind_speed_y)
-    private val windSpeedZSeekBar: SeekBarView = findViewById(R.id.seek_bar_wind_speed_z)
+    private val windSpeedXSeekBar: HorizontalSeekBar = findViewById(R.id.seek_bar_wind_speed_x)
+    private val windSpeedYSeekBar: HorizontalSeekBar = findViewById(R.id.seek_bar_wind_speed_y)
+    private val windSpeedZSeekBar: HorizontalSeekBar = findViewById(R.id.seek_bar_wind_speed_z)
     private val positionSectionHeaderTextView: TextView = findViewById(R.id.textview_location_section_header)
     private val windSectionHeaderTextView: TextView = findViewById(R.id.textview_wind_section_header)
     private val attitudeSectionHeaderTextView: TextView = findViewById(R.id.textview_attitude_section_header)
@@ -144,9 +143,9 @@ open class SimulatorControlWidget @JvmOverloads constructor(
     private val buttonGroup: Group = findViewById(R.id.constraint_group_buttons)
     private lateinit var df: DecimalFormat
     private var shouldReactToCheckChange = false
-    private val seekBarChangeListener = object : SeekBarView.OnSeekBarChangeListener {
-        override fun onProgressChanged(seekBarView: SeekBarView, progress: Int, isFromUI: Boolean) {
-            when (seekBarView) {
+    private val seekBarChangeListener = object : HorizontalSeekBar.OnSeekBarChangeListener {
+        override fun onProgressChanged(horizontalSeekBar: HorizontalSeekBar, progress: Int, isFromUI: Boolean) {
+            when (horizontalSeekBar) {
                 satelliteCountSeekBar -> {
                     satelliteCountSeekBar.text = satelliteCountSeekBar.progress.toString()
                 }
@@ -154,40 +153,40 @@ open class SimulatorControlWidget @JvmOverloads constructor(
                     frequencySeekBar.text = max(MIN_FREQUENCY, frequencySeekBar.progress).toString()
                 }
                 windSpeedXSeekBar -> {
-                    seekBarView.text = normalizeWindValue(seekBarView.progress).toString()
+                    horizontalSeekBar.text = normalizeWindValue(horizontalSeekBar.progress).toString()
                     if (isFromUI) {
-                        setWindSpeedUI(WIND_DIRECTION_X, seekBarView.progress > 0)
+                        setWindSpeedUI(WIND_DIRECTION_X, horizontalSeekBar.progress > 0)
                     }
 
                 }
                 windSpeedYSeekBar -> {
-                    seekBarView.text = normalizeWindValue(seekBarView.progress).toString()
+                    horizontalSeekBar.text = normalizeWindValue(horizontalSeekBar.progress).toString()
                     if (isFromUI) {
-                        setWindSpeedUI(WIND_DIRECTION_Y, seekBarView.progress > 0)
+                        setWindSpeedUI(WIND_DIRECTION_Y, horizontalSeekBar.progress > 0)
                     }
                 }
                 windSpeedZSeekBar -> {
-                    seekBarView.text = normalizeWindValue(seekBarView.progress).toString()
+                    horizontalSeekBar.text = normalizeWindValue(horizontalSeekBar.progress).toString()
                     if (isFromUI) {
-                        setWindSpeedUI(WIND_DIRECTION_Z, seekBarView.progress > 0)
+                        setWindSpeedUI(WIND_DIRECTION_Z, horizontalSeekBar.progress > 0)
                     }
                 }
             }
         }
 
-        override fun onMinusClicked(seekBarView: SeekBarView) {
+        override fun onMinusClicked(horizontalSeekBar: HorizontalSeekBar) {
             //No implementation
         }
 
-        override fun onPlusClicked(seekBarView: SeekBarView) {
+        override fun onPlusClicked(horizontalSeekBar: HorizontalSeekBar) {
             //No implementation
         }
 
-        override fun onStartTrackingTouch(seekBarView: SeekBarView, progress: Int) {
+        override fun onStartTrackingTouch(horizontalSeekBar: HorizontalSeekBar, progress: Int) {
             //No implementation
         }
 
-        override fun onStopTrackingTouch(seekBarView: SeekBarView, progress: Int) {
+        override fun onStopTrackingTouch(horizontalSeekBar: HorizontalSeekBar, progress: Int) {
             //No implementation
         }
 

@@ -4,7 +4,6 @@ package dji.sampleV5.modulecommon.keyvalue;
 import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
-import dji.sampleV5.modulecommon.util.ToastUtils;
 import dji.sampleV5.modulecommon.util.Util;
 import dji.sdk.keyvalue.converter.DJIValueConverter;
 import dji.sdk.keyvalue.converter.EmptyValueConverter;
@@ -16,6 +15,7 @@ import dji.sdk.keyvalue.value.common.EmptyMsg;
 import dji.v5.common.callback.CommonCallbacks;
 import dji.v5.common.error.IDJIError;
 import dji.v5.utils.common.LogUtils;
+import dji.v5.utils.common.ToastUtils;
 
 /**
  *
@@ -160,14 +160,14 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                 public void onSuccess(R data) {
 
                     if (keyOperateCallBack != null && data != null) {
-                        keyOperateCallBack.actionChange("【GET】" + getName() + " result: " + data.toString());
+                        keyOperateCallBack.actionChange(getName()+"【GET】 success result: " + data.toString());
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull IDJIError error) {
                     if (keyOperateCallBack != null) {
-                        keyOperateCallBack.actionChange("【GET】 GetErrorMsg==" + error.toString());
+                        keyOperateCallBack.actionChange(getName() + "【GET】 GetErrorMsg==" + error.toString());
                     }
                 }
             });

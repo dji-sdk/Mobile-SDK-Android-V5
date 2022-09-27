@@ -72,16 +72,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_landing" />
 
+
+            <Button
+                android:id="@+id/btn_enable_virtual_stick_advanced_mode"
+                style="@style/main_fragment_btn"
+                android:text="@string/enable_virtual_stick_advanced_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_use_rc_stick" />
+
+            <Button
+                android:id="@+id/btn_disable_virtual_stick_advanced_mode"
+                style="@style/main_fragment_btn"
+                android:text="@string/disable_virtual_stick_advanced_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_enable_virtual_stick_advanced_mode" />
+
+            <Button
+                android:id="@+id/btn_set_virtual_stick_advanced_param"
+                style="@style/main_fragment_btn"
+                android:text="@string/set_virtual_stick_advanced_param"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_disable_virtual_stick_advanced_mode" />
+
+            <Button
+                android:id="@+id/btn_send_virtual_stick_advanced_param"
+                style="@style/main_fragment_btn"
+                android:text="@string/send_virtual_stick_advanced_param"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_set_virtual_stick_advanced_param" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/virtual_stick_info_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/uxsdk_500_dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/stick_button_list"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="13dp"
+        android:textColor="@color/green"
+        android:maxLines="30"
+        android:textSize="10dp"
         android:text="virtual info">
     </TextView>
 
@@ -100,7 +134,6 @@
         android:background="@mipmap/joystick_bg"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_margin="5dp"
         app:layout_constraintStart_toEndOf="@+id/stick_button_list"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -109,9 +142,17 @@
         android:background="@mipmap/joystick_bg"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_margin="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget
+        android:id="@+id/widget_horizontal_situation_indicator"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/stick_button_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

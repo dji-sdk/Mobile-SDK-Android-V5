@@ -34,7 +34,7 @@ class MSDKCommonOperateVm : DJIViewModel() {
     }
 
     fun unInitSDK(){
-        SDKManager.getInstance().destroy();
+        SDKManager.getInstance().destroy()
     }
 
     fun registerApp() {

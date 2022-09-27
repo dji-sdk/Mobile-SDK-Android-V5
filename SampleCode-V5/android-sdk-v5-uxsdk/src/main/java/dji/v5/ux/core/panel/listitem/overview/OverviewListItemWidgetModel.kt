@@ -47,6 +47,7 @@ class OverviewListItemWidgetModel(
 
     private val deviceStatusChangeListener = DJIDeviceStatusChangeListener { _, to ->
         systemStatusProcessor.onNext(to)
+        updateStates()
     }
 
     /**

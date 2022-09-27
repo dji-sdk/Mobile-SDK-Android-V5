@@ -1,5 +1,9 @@
 package dji.sampleV5.moduleaircraft.models
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.provider.DocumentsContract
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.v5.manager.aircraft.flightrecord.FlightLogManager
 
@@ -16,5 +20,18 @@ class FlightRecordVM : DJIViewModel() {
 
     fun getFlyClogPath(): String {
         return FlightLogManager.getInstance().flyClogPath
+    }
+
+    fun openFileChooser( path:String , context : Context?) {
+
+        val uri = Uri.parse("content://com.android.externalstorage.documents/document/primary:$path")
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,uri)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        context?.startActivity(
+            Intent.createChooser(intent, "Log Path"))
     }
 }

@@ -73,6 +73,9 @@ class RTKNetworkVM : DJIViewModel() {
         RTKCenter.getInstance().qxrtkManager.addNetworkRTKServiceInfoListener(
             networkServiceInfoListener
         )
+        RTKCenter.getInstance().cmccrtkManager.addNetworkRTKServiceInfoListener(
+            networkServiceInfoListener
+        )
     }
 
     fun removeNetworkServiceInfoListener() {
@@ -80,6 +83,9 @@ class RTKNetworkVM : DJIViewModel() {
             networkServiceInfoListener
         )
         RTKCenter.getInstance().qxrtkManager.removeNetworkRTKServiceInfoListener(
+            networkServiceInfoListener
+        )
+        RTKCenter.getInstance().cmccrtkManager.removeNetworkRTKServiceInfoListener(
             networkServiceInfoListener
         )
     }
@@ -128,5 +134,14 @@ class RTKNetworkVM : DJIViewModel() {
                 LogUtils.i(TAG, "getQXNetworkRTKCoordinateSystem onFailure $error")
             }
         })
+    }
+    //cmcc rtk
+
+    fun startCMCCRTKService(coordinateSystem: CoordinateSystem, callback: CommonCallbacks.CompletionCallback) {
+        RTKCenter.getInstance().cmccrtkManager.startNetworkRTKService(coordinateSystem, callback)
+    }
+
+    fun stopCMCCRTKService(callback: CommonCallbacks.CompletionCallback) {
+        RTKCenter.getInstance().cmccrtkManager.stopNetworkRTKService(callback)
     }
 }

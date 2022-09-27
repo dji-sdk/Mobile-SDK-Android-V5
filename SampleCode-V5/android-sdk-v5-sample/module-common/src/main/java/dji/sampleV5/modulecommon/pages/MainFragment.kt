@@ -14,7 +14,6 @@ import dji.sampleV5.modulecommon.data.FragmentPageInfo
 import dji.sampleV5.modulecommon.data.FragmentPageInfoItem
 import dji.sampleV5.modulecommon.data.MAIN_FRAGMENT_PAGE_TITLE
 import dji.sampleV5.modulecommon.models.MSDKCommonOperateVm
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
@@ -22,6 +21,7 @@ import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.interfaces.SDKManagerCallback
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.StringUtils
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_main_page.*
 
 /**
@@ -35,6 +35,7 @@ import kotlinx.android.synthetic.main.frag_main_page.*
 class MainFragment : DJIFragment() {
 
     private val msdkCommonOperateVm: MSDKCommonOperateVm by activityViewModels()
+    private val fragmentPageInfoIds: MutableList<Int> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +56,11 @@ class MainFragment : DJIFragment() {
         msdkInfoVm.mainTitle.value = StringUtils.getResStr(context, R.string.testing_tools)
     }
 
+    override fun onDestroyView() {
+        fragmentPageInfoIds.clear()
+        super.onDestroyView()
+    }
+
     private fun initMainList() {
         val adapter = MainFragmentListAdapter { item -> adapterOnItemClick(item) }
         view_list.adapter = adapter
@@ -72,6 +78,11 @@ class MainFragment : DJIFragment() {
     }
 
     private fun addDestination(id: Int) {
+        //过滤调重复id，减少刷新频率
+        if (fragmentPageInfoIds.contains(id)) {
+            return
+        }
+        fragmentPageInfoIds.add(id)
         view?.let {
             val v = Navigation.findNavController(it).navInflater.inflate(id)
             Navigation.findNavController(it).graph.addAll(v)
@@ -96,29 +107,30 @@ class MainFragment : DJIFragment() {
             msdkCommonOperateVm.registerApp()
         }
         enableLDM_btn.setOnClickListener {
-            msdkCommonOperateVm.enableLDM(requireContext(), object:CommonCallbacks.CompletionCallback {
+            msdkCommonOperateVm.enableLDM(requireContext(), object :
+                CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     msdkInfoVm.updateLDMStatus()
-                    ToastUtils.showToast(ContextUtil.getContext(),"LDM enabled success");
+                    ToastUtils.showToast("LDM enabled success");
                 }
 
                 override fun onFailure(error: IDJIError) {
                     msdkInfoVm.updateLDMStatus()
-                    ToastUtils.showToast(ContextUtil.getContext(), "LDM enabled failed:$error");
+                    ToastUtils.showToast("LDM enabled failed:$error");
                 }
 
             })
         }
         disableLDM_btn.setOnClickListener {
-            msdkCommonOperateVm.disableLDM(object:CommonCallbacks.CompletionCallback {
+            msdkCommonOperateVm.disableLDM(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     msdkInfoVm.updateLDMStatus()
-                    ToastUtils.showToast(ContextUtil.getContext(),"LDM disabled success");
+                    ToastUtils.showToast("LDM disabled success");
                 }
 
                 override fun onFailure(error: IDJIError) {
                     msdkInfoVm.updateLDMStatus()
-                    ToastUtils.showToast(ContextUtil.getContext(), "LDM disabled failed:$error");
+                    ToastUtils.showToast("LDM disabled failed:$error");
                 }
 
             })
@@ -131,33 +143,33 @@ class MainFragment : DJIFragment() {
             msdkCommonOperateVm.initMSDK(it, object :
                 SDKManagerCallback {
                 override fun onRegisterSuccess() {
-                    ToastUtils.showToast(it,"Register Success!!!")
+                    ToastUtils.showToast("Register Success!!!")
                     msdkInfoVm.initListener()
                     MediaDataCenter.getInstance().videoStreamManager
                 }
 
                 override fun onRegisterFailure(error: IDJIError?) {
-                    ToastUtils.showToast(it,"Register Failure: (errorCode: ${error?.errorCode()}, description: ${error?.description()})")
+                    ToastUtils.showToast("Register Failure: (errorCode: ${error?.errorCode()}, description: ${error?.description()})")
                 }
 
                 override fun onProductDisconnect(product: Int) {
-                    ToastUtils.showToast(it,"Product: $product Disconnect")
+                    ToastUtils.showToast("Product: $product Disconnect")
                 }
 
                 override fun onProductConnect(product: Int) {
-                    ToastUtils.showToast(it,"Product: $product Connect")
+                    ToastUtils.showToast("Product: $product Connect")
                 }
 
                 override fun onProductChanged(product: Int) {
-                    ToastUtils.showToast(it,"Product: $product Changed")
+                    ToastUtils.showToast("Product: $product Changed")
                 }
 
                 override fun onInitProcess(event: DJISDKInitEvent?, totalProcess: Int) {
-                    ToastUtils.showToast(it,"Init Process event: ${event?.name}")
+                    ToastUtils.showToast("Init Process event: ${event?.name}")
                 }
 
                 override fun onDatabaseDownloadProgress(current: Long, total: Long) {
-                    ToastUtils.showToast(it,"Database Download Progress current: $current, total: $total")
+                    ToastUtils.showToast("Database Download Progress current: $current, total: $total")
                 }
             })
         }
@@ -165,6 +177,6 @@ class MainFragment : DJIFragment() {
 
     private fun unInitSDK() {
         msdkCommonOperateVm.unInitSDK()
-        ToastUtils.showToast(ContextUtil.getContext(), "uninit sdk success")
+        ToastUtils.showToast("uninit sdk success")
     }
 }

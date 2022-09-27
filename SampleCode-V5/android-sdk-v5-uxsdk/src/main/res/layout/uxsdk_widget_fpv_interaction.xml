@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018-2020 DJI
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,8 +21,7 @@
   ~
   -->
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,23 +29,19 @@
 
     <dji.v5.ux.cameracore.widget.fpvinteraction.FocusTargetView
         android:id="@+id/view_focus_target"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintHeight_percent="0.20"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <dji.v5.ux.cameracore.widget.fpvinteraction.ExposureMeterView
-        android:id="@+id/view_exposure_meter"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintHeight_percent="0.20"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:layout_width="@dimen/uxsdk_48_dp"
+        android:layout_height="@dimen/uxsdk_48_dp" />
 
     <dji.v5.ux.cameracore.widget.fpvinteraction.GimbalControlView
         android:id="@+id/view_gimbal_control"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</merge>
+    <dji.v5.ux.cameracore.widget.fpvinteraction.ExposureMeteringWidget
+        android:id="@+id/view_exposure_meter"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</FrameLayout>

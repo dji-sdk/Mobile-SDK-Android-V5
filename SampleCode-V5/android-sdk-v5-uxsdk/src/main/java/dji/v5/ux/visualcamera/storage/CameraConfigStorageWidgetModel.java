@@ -23,16 +23,20 @@
 
 package dji.v5.ux.visualcamera.storage;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
 import dji.sdk.keyvalue.value.camera.CameraColor;
-import dji.sdk.keyvalue.value.camera.CameraSDCardState;
+import dji.sdk.keyvalue.value.camera.CameraMode;
+import dji.sdk.keyvalue.value.camera.CameraStorageInfo;
+import dji.sdk.keyvalue.value.camera.CameraStorageInfos;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
-import dji.sdk.keyvalue.value.camera.CameraWorkMode;
 import dji.sdk.keyvalue.value.camera.PhotoFileFormat;
+import dji.sdk.keyvalue.value.camera.SDCardLoadState;
 import dji.sdk.keyvalue.value.camera.VideoFrameRate;
 import dji.sdk.keyvalue.value.camera.VideoResolution;
 import dji.sdk.keyvalue.value.camera.VideoResolutionFrameRate;
@@ -52,27 +56,20 @@ import io.reactivex.rxjava3.core.Flowable;
  */
 public class CameraConfigStorageWidgetModel extends WidgetModel implements ICameraIndex {
 
-    //region Constants
-    /**
-     * The available capture count is unknown.
-     */
-    protected static final int INVALID_AVAILABLE_CAPTURE_COUNT = -1;
-    /**
-     * The available recording time is unknown.
-     */
-    protected static final int INVALID_AVAILABLE_RECORDING_TIME = -1;
-    //endregion
+    protected static final int INVALID_AVAILABLE_CAPACITY = -1;
 
     //region Internal Data
     private final DataProcessor<CameraStorageLocation> storageLocationProcessor;
+    private final DataProcessor<CameraStorageInfos> storageInfosProcessor;
     private final DataProcessor<VideoResolutionFrameRate> resolutionAndFrameRateProcessor;
     private final DataProcessor<PhotoFileFormat> photoFileFormatProcessor;
-    private final DataProcessor<CameraSDCardState> sdCardState;
-    private final DataProcessor<CameraSDCardState> innerStorageState;
+    private final DataProcessor<SDCardLoadState> sdCardState;
+    private final DataProcessor<SDCardLoadState> innerStorageState;
     private final DataProcessor<Integer> sdAvailableCaptureCount;
     private final DataProcessor<Integer> innerStorageAvailableCaptureCount;
     private final DataProcessor<Integer> sdCardRecordingTime;
     private final DataProcessor<Integer> innerStorageRecordingTime;
+    private final DataProcessor<Integer> availableCapacity;
     private final DataProcessor<CameraColor> cameraColorProcessor;
     //region Public Data
     private final DataProcessor<ImageFormat> imageFormatProcessor;
@@ -80,7 +77,7 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
     private final DataProcessor<CameraStorageState> cameraStorageState;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.CAMERA_LENS_ZOOM;
-    private FlatCameraModule flatCameraModule;
+    private final FlatCameraModule flatCameraModule;
     //endregion
 
     //region Constructor
@@ -90,25 +87,22 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
         storageLocationProcessor = DataProcessor.create(CameraStorageLocation.UNKNOWN);
         resolutionAndFrameRateProcessor = DataProcessor.create(new VideoResolutionFrameRate());
         photoFileFormatProcessor = DataProcessor.create(PhotoFileFormat.UNKNOWN);
-        sdCardState = DataProcessor.create(CameraSDCardState.UNKNOWN);
-        innerStorageState = DataProcessor.create(CameraSDCardState.UNKNOWN);
-        sdAvailableCaptureCount = DataProcessor.create(INVALID_AVAILABLE_CAPTURE_COUNT);
-        innerStorageAvailableCaptureCount = DataProcessor.create(INVALID_AVAILABLE_CAPTURE_COUNT);
-        sdCardRecordingTime = DataProcessor.create(INVALID_AVAILABLE_RECORDING_TIME);
-        innerStorageRecordingTime = DataProcessor.create(INVALID_AVAILABLE_RECORDING_TIME);
-        cameraColorProcessor = DataProcessor.create(CameraColor.UNKNOWN);
+        sdCardState = DataProcessor.create(SDCardLoadState.UNKNOWN);
+        innerStorageState = DataProcessor.create(SDCardLoadState.UNKNOWN);
 
+        cameraColorProcessor = DataProcessor.create(CameraColor.UNKNOWN);
+        availableCapacity = DataProcessor.create(INVALID_AVAILABLE_CAPACITY);
+        sdAvailableCaptureCount = DataProcessor.create(INVALID_AVAILABLE_CAPACITY);
+        innerStorageAvailableCaptureCount = DataProcessor.create(INVALID_AVAILABLE_CAPACITY);
+        sdCardRecordingTime = DataProcessor.create(INVALID_AVAILABLE_CAPACITY);
+        innerStorageRecordingTime = DataProcessor.create(INVALID_AVAILABLE_CAPACITY);
         imageFormatProcessor = DataProcessor.create(new ImageFormat(
-                CameraWorkMode.UNKNOWN,
-                PhotoFileFormat.UNKNOWN,
-                VideoResolution.UNKNOWN,
-                VideoFrameRate.UNKNOWN));
+                CameraMode.UNKNOWN, PhotoFileFormat.UNKNOWN,
+                VideoResolution.UNKNOWN, VideoFrameRate.UNKNOWN));
         CameraStorageState cameraSSDStorageState = new CameraStorageState(
-                CameraWorkMode.UNKNOWN,
-                CameraStorageLocation.UNKNOWN,
-                CameraSDCardState.UNKNOWN,
-                INVALID_AVAILABLE_CAPTURE_COUNT,
-                INVALID_AVAILABLE_RECORDING_TIME);
+                CameraMode.UNKNOWN, CameraStorageLocation.UNKNOWN, SDCardLoadState.UNKNOWN,
+                INVALID_AVAILABLE_CAPACITY, INVALID_AVAILABLE_CAPACITY, INVALID_AVAILABLE_CAPACITY);
+        storageInfosProcessor = DataProcessor.create(new CameraStorageInfos(CameraStorageLocation.UNKNOWN, new ArrayList<>()));
         cameraStorageState = DataProcessor.create(cameraSSDStorageState);
         flatCameraModule = new FlatCameraModule();
         addModule(flatCameraModule);
@@ -165,15 +159,27 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
     //region LifeCycle
     @Override
     protected void inSetup() {
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraStorageLocation, cameraIndex), storageLocationProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraStorageInfos, cameraIndex), storageInfosProcessor, cameraStorageInfos -> {
+            storageLocationProcessor.onNext(cameraStorageInfos.getCurrentStorageType());
+
+            CameraStorageInfo internalInfo = cameraStorageInfos.getCameraStorageInfoByLocation(CameraStorageLocation.INTERNAL);
+            if (internalInfo != null) {
+                innerStorageState.onNext(internalInfo.getStorageState());
+                availableCapacity.onNext(internalInfo.getStorageLeftCapacity());
+                sdAvailableCaptureCount.onNext(internalInfo.getAvailablePhotoCount());
+                sdCardRecordingTime.onNext(internalInfo.getAvailableVideoDuration());
+            }
+
+            CameraStorageInfo sdcardInfo = cameraStorageInfos.getCameraStorageInfoByLocation(CameraStorageLocation.SDCARD);
+            if (sdcardInfo != null) {
+                sdCardState.onNext(sdcardInfo.getStorageState());
+                availableCapacity.onNext(sdcardInfo.getStorageLeftCapacity());
+                innerStorageAvailableCaptureCount.onNext(sdcardInfo.getAvailablePhotoCount());
+                innerStorageRecordingTime.onNext(sdcardInfo.getAvailableVideoDuration());
+            }
+        });
         bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyVideoResolutionFrameRate, cameraIndex, lensType), resolutionAndFrameRateProcessor);
         bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyPhotoFileFormat, cameraIndex, lensType), photoFileFormatProcessor);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraSDCardState, cameraIndex), sdCardState);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageState, cameraIndex), innerStorageState);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeySDCardAvailablePhotoCount, cameraIndex), sdAvailableCaptureCount);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageAvailablePhotoCount, cameraIndex), innerStorageAvailableCaptureCount);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDAvailableRecordingTimeInSeconds, cameraIndex), sdCardRecordingTime);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageAvailableVideoDuration, cameraIndex), innerStorageRecordingTime);
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraColor, cameraIndex), cameraColorProcessor);
     }
 
@@ -199,15 +205,15 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
             return;
         }
 
-        CameraSDCardState sdCardOperationState = null;
-        switch (currentStorageLocation){
+        SDCardLoadState sdCardOperationState = null;
+        switch (currentStorageLocation) {
             case SDCARD:
-                if (!CameraSDCardState.UNKNOWN.equals(sdCardState.getValue())) {
+                if (!SDCardLoadState.UNKNOWN.equals(sdCardState.getValue())) {
                     sdCardOperationState = sdCardState.getValue();
                 }
                 break;
             case INTERNAL:
-                if (!CameraSDCardState.UNKNOWN.equals(innerStorageState.getValue())){
+                if (!SDCardLoadState.UNKNOWN.equals(innerStorageState.getValue())) {
                     sdCardOperationState = innerStorageState.getValue();
                 }
                 break;
@@ -219,8 +225,10 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
             cameraStorageState.onNext(new CameraStorageState(flatCameraModule.getCameraModeDataProcessor().getValue(),
                     currentStorageLocation,
                     sdCardOperationState,
+                    availableCapacity.getValue(),
                     getAvailableCaptureCount(currentStorageLocation),
-                    getAvailableRecordingTime(currentStorageLocation)));
+                    getAvailableRecordingTime(currentStorageLocation)
+            ));
         }
     }
 
@@ -232,7 +240,7 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
                 return innerStorageAvailableCaptureCount.getValue();
             case UNKNOWN:
             default:
-                return INVALID_AVAILABLE_CAPTURE_COUNT;
+                return INVALID_AVAILABLE_CAPACITY;
         }
     }
 
@@ -244,7 +252,7 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
                 return innerStorageRecordingTime.getValue();
             case UNKNOWN:
             default:
-                return INVALID_AVAILABLE_RECORDING_TIME;
+                return INVALID_AVAILABLE_CAPACITY;
         }
     }
     //endregion
@@ -255,12 +263,12 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
      * The image format info
      */
     public static class ImageFormat {
-        private CameraWorkMode cameraMode;
-        private PhotoFileFormat photoFileFormat;
-        private VideoResolution resolution;
-        private VideoFrameRate frameRate;
+        private final CameraMode cameraMode;
+        private final PhotoFileFormat photoFileFormat;
+        private final VideoResolution resolution;
+        private final VideoFrameRate frameRate;
 
-        protected ImageFormat(@Nullable CameraWorkMode cameraMode,
+        protected ImageFormat(@Nullable CameraMode cameraMode,
                               @Nullable PhotoFileFormat photoFileFormat,
                               @Nullable VideoResolution resolution,
                               @Nullable VideoFrameRate frameRate) {
@@ -276,7 +284,7 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
          * @return The current camera mode.
          */
         @Nullable
-        public CameraWorkMode getCameraMode() {
+        public CameraMode getCameraMode() {
             return cameraMode;
         }
 
@@ -315,20 +323,22 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
      * The camera storage state info.
      */
     public static class CameraStorageState {
-        private final CameraWorkMode cameraMode;
+        private final CameraMode cameraMode;
+        private final int availableCapacity;
+        private final CameraStorageLocation storageLocation;
+        private final SDCardLoadState storageOperationState;
         private final long availableCaptureCount;
         private final int availableRecordingTime;
-        private CameraStorageLocation storageLocation;
-        private CameraSDCardState storageOperationState;
 
         @VisibleForTesting
-        protected CameraStorageState(@NonNull CameraWorkMode cameraMode,
+        protected CameraStorageState(@NonNull CameraMode cameraMode,
                                      @NonNull CameraStorageLocation storageLocation,
-                                     @NonNull CameraSDCardState storageOperationState,
-                                     long availableCaptureCount, int availableRecordingTime) {
+                                     @NonNull SDCardLoadState storageOperationState,
+                                     int availableCapacity, long availableCaptureCount, int availableRecordingTime) {
             this.cameraMode = cameraMode;
             this.storageLocation = storageLocation;
             this.storageOperationState = storageOperationState;
+            this.availableCapacity = availableCapacity;
             this.availableCaptureCount = availableCaptureCount;
             this.availableRecordingTime = availableRecordingTime;
         }
@@ -339,7 +349,7 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
          * @return The current camera mode.
          */
         @NonNull
-        public CameraWorkMode getCameraMode() {
+        public CameraMode getCameraMode() {
             return cameraMode;
         }
 
@@ -359,62 +369,25 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
          * @return The current storage operation state.
          */
         @NonNull
-        public CameraSDCardState getStorageOperationState() {
+        public SDCardLoadState getStorageOperationState() {
             return storageOperationState;
         }
 
         /**
-         * Get the available capture count in the current storage location.
+         * Get the available capacity in the current storage location.
          *
-         * @return The available capture count in the current storage location.
+         * @return The available capacity in the current storage location.
          */
-        public long getAvailableCaptureCount() {
-            return availableCaptureCount;
+        public int getAvailableCapacity() {
+            return availableCapacity;
         }
 
-        /**
-         * Get the available recording time in the current storage location.
-         *
-         * @return The available recording time in the current storage location.
-         */
         public int getAvailableRecordingTime() {
             return availableRecordingTime;
         }
 
-        @Override
-        @NonNull
-        public String toString() {
-            return "CameraStorageState{" +
-                    "cameraMode=" + cameraMode +
-                    ", storageLocation=" + storageLocation +
-                    ", storageOperationState=" + storageOperationState +
-                    ", availableCaptureCount=" + availableCaptureCount +
-                    ", availableRecordingTime=" + availableRecordingTime +
-                    '}';
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            CameraStorageState that = (CameraStorageState) o;
-
-            if (availableCaptureCount != that.availableCaptureCount) return false;
-            if (availableRecordingTime != that.availableRecordingTime) return false;
-            if (cameraMode != that.cameraMode) return false;
-            if (storageLocation != that.storageLocation) return false;
-            return storageOperationState == that.storageOperationState;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = cameraMode != null ? cameraMode.hashCode() : 0;
-            result = 31 * result + (storageLocation != null ? storageLocation.hashCode() : 0);
-            result = 31 * result + (storageOperationState != null ? storageOperationState.hashCode() : 0);
-            result = 31 * result + (int) (availableCaptureCount ^ (availableCaptureCount >>> 32));
-            result = 31 * result + availableRecordingTime;
-            return result;
+        public long getAvailableCaptureCount() {
+            return availableCaptureCount;
         }
     }
     //endregion

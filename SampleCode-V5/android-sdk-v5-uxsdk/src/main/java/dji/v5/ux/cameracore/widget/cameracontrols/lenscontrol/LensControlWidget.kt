@@ -4,17 +4,16 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Button
-import dji.sdk.keyvalue.value.camera.CameraType
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
+import dji.v5.utils.common.StringUtils
 import dji.v5.ux.R
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.ICameraIndex
 import dji.v5.ux.core.base.SchedulerProvider.ui
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
-import dji.v5.ux.core.util.SettingDefinitions
 import kotlinx.android.synthetic.main.uxsdk_camera_lens_control_widget.view.*
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -35,7 +34,6 @@ open class LensControlWidget @JvmOverloads constructor(
 
     private var firstBtnSource = CameraVideoStreamSourceType.ZOOM_CAMERA
     private var secondBtnSource = CameraVideoStreamSourceType.WIDE_CAMERA
-    private val currentLensArrayIndex = AtomicInteger(-1)
 
     private val widgetModel by lazy {
         LensControlModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance())
@@ -46,10 +44,10 @@ open class LensControlWidget @JvmOverloads constructor(
     }
 
     override fun reactToModelChanges() {
-        addReaction(widgetModel.cameraTypeProcessor.toFlowable().observeOn(ui()).subscribe {
-            showView(it)
-        })
         addReaction(widgetModel.cameraVideoStreamSourceRangeProcessor.toFlowable().observeOn(ui()).subscribe {
+            updateBtnView()
+        })
+        addReaction(widgetModel.cameraVideoStreamSourceProcessor.toFlowable().observeOn(ui()).subscribe {
             updateBtnView()
         })
         first_len_btn.setOnClickListener(this)
@@ -87,65 +85,61 @@ open class LensControlWidget @JvmOverloads constructor(
     override fun getLensType() = widgetModel.getLensType()
 
     override fun updateCameraSource(cameraIndex: ComponentIndexType, lensType: CameraLensType) {
-        if (widgetModel.getCameraIndex() == cameraIndex){
+        if (widgetModel.getCameraIndex() == cameraIndex) {
             return
         }
-        currentLensArrayIndex.set(-1)
         widgetModel.updateCameraSource(cameraIndex, lensType)
-    }
-
-    private fun showView(type: CameraType) {
-        if (type == CameraType.ZENMUSE_H20 || type == CameraType.ZENMUSE_H20T || type == CameraType.ZENMUSE_H20N) {
-            this.visibility = VISIBLE
-        } else {
-            this.visibility = GONE
-        }
     }
 
     private fun dealLensBtnClicked(source: CameraVideoStreamSourceType) {
         if (source == widgetModel.cameraVideoStreamSourceProcessor.value) {
             return
         }
-        addDisposable(widgetModel.setCameraVideoStreamSource(source).observeOn(ui()).subscribe {
-            updateBtnView()
-        })
+        addDisposable(widgetModel.setCameraVideoStreamSource(source).observeOn(ui()).subscribe())
     }
 
     private fun updateBtnView() {
-        val cameraVideoStreamSourceRange = widgetModel.cameraVideoStreamSourceRangeProcessor.value
-        if (cameraVideoStreamSourceRange.isEmpty()) {
+        val videoSourceRange = widgetModel.cameraVideoStreamSourceRangeProcessor.value
+        //单源
+        if (videoSourceRange.size <= 1) {
             this.visibility = GONE
             return
         }
-        this.visibility = VISIBLE
-        if (cameraVideoStreamSourceRange.size <= 1) {
-            updateBtnText(first_len_btn, cameraVideoStreamSourceRange[getCurrentLensArrayIndexAndIncrease(cameraVideoStreamSourceRange.size)].also {
+        //双源
+        if (videoSourceRange.size == 2) {
+            updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange,widgetModel.cameraVideoStreamSourceProcessor.value).also {
                 firstBtnSource = it
             })
             second_len_btn.visibility = GONE
             return
         }
-        second_len_btn.visibility = VISIBLE
-        updateBtnText(first_len_btn, cameraVideoStreamSourceRange[getCurrentLensArrayIndexAndIncrease(cameraVideoStreamSourceRange.size)].also {
+        //超过2个源
+        second_len_btn.visibility = visibility
+        this.visibility = VISIBLE
+        updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange, secondBtnSource).also {
             firstBtnSource = it
         })
-        updateBtnText(second_len_btn, cameraVideoStreamSourceRange[getCurrentLensArrayIndexAndIncrease(cameraVideoStreamSourceRange.size)].also {
+        updateBtnText(second_len_btn, getProperVideoSource(videoSourceRange, firstBtnSource).also {
             secondBtnSource = it
         })
     }
 
     private fun updateBtnText(button: Button, source: CameraVideoStreamSourceType) {
         button.text = when (source) {
-            CameraVideoStreamSourceType.WIDE_CAMERA -> "WIDE"
-            CameraVideoStreamSourceType.ZOOM_CAMERA -> "ZOOM"
-            CameraVideoStreamSourceType.INFRARED_CAMERA -> "IR"
-            else -> "UNKNOWN"
+            CameraVideoStreamSourceType.WIDE_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_wide)
+            CameraVideoStreamSourceType.ZOOM_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_zoom)
+            CameraVideoStreamSourceType.INFRARED_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_ir)
+            else -> ""
         }
     }
 
-    private fun getCurrentLensArrayIndexAndIncrease(range: Int): Int {
-        currentLensArrayIndex.set(currentLensArrayIndex.incrementAndGet() % range)
-        return currentLensArrayIndex.get()
+    private fun getProperVideoSource(range: List<CameraVideoStreamSourceType>, exceptSource: CameraVideoStreamSourceType): CameraVideoStreamSourceType {
+        for (source in range) {
+            if (source != widgetModel.cameraVideoStreamSourceProcessor.value && source != exceptSource) {
+                return source
+            }
+        }
+        return exceptSource;
     }
 
     sealed class ModelState

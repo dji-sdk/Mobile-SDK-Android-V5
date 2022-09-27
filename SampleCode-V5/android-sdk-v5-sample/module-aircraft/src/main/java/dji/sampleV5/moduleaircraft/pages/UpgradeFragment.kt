@@ -8,8 +8,13 @@ import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.UpgradeVM
+import dji.v5.common.callback.CommonCallbacks
+import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.upgrade.UpgradeManager
 import dji.v5.manager.aircraft.upgrade.UpgradeableComponent
+import dji.v5.manager.aircraft.upgrade.model.ComponentType
+import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_upgrade_page.*
 
 
@@ -28,8 +33,9 @@ class UpgradeFragment : DJIFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        UpgradeManager.getInstance()
+
         initListener();
+
     }
 
     private fun showInfo() {
@@ -39,9 +45,9 @@ class UpgradeFragment : DJIFragment(){
         for ( component in components) {
             sb.append("ComponentType  : " + component.componentType)
                     .append("\n")
-                    .append("firmwareVersion : " + component.firmwareVersion)
+                    .append("firmwareVersion : " + component.firmwareInformation?.version)
                     .append("\n")
-                    .append("latestFwInfo : " + component.latestFwInfo)
+                    .append("latestFwInfo : " + component.latestFirmwareInformation?.version)
                     .append("\n")
                     .append("state : " + component.state )
                     .append("\n")
@@ -55,8 +61,30 @@ class UpgradeFragment : DJIFragment(){
 
     private fun initListener() {
         btn_get_upgrade_state.setOnClickListener {
-            showInfo()
+            UpgradeManager.getInstance().checkUpgradeableComponents(object :CommonCallbacks.CompletionCallbackWithParam<ComponentType> {
 
+                override fun onFailure(error: IDJIError) {
+                    mainHandler.post {
+                        showInfo()
+                        ToastUtils.showToast("fetch error $error") }
+
+                }
+
+                override fun onSuccess(type: ComponentType) {
+
+                    mainHandler.post {
+                        showInfo()
+                        ToastUtils.showToast( "$type fetch success") }
+                }
+
+            })
+
+        }
+
+        btn_addlistener_test.setOnClickListener{
+            UpgradeVM.addUpgradeableComponentListener(){
+                LogUtils.i(tag , "component is $it")
+            }
         }
     }
 

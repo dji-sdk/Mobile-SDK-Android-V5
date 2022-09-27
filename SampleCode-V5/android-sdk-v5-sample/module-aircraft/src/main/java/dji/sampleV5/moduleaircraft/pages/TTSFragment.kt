@@ -54,11 +54,11 @@ class TTSFragment:DJIFragment(){
                             tv_tts_upload_status.text = "upload success!"
                             megaphoneVM.startPlay(object:CommonCallbacks.CompletionCallback{
                                 override fun onSuccess() {
-                                    LogUtils.d("TTS","Start Play Success")
+                                    LogUtils.i("TTS","Start Play Success")
                                 }
 
                                 override fun onFailure(error: IDJIError) {
-                                    LogUtils.d("TTS","Start Play Failed")
+                                    LogUtils.i("TTS","Start Play Failed")
                                 }
                             })
                         }

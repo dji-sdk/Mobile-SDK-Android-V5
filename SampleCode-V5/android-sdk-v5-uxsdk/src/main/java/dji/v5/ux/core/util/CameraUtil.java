@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import dji.sdk.keyvalue.value.camera.CameraAperture;
+import dji.sdk.keyvalue.value.camera.CameraExposureCompensation;
 import dji.sdk.keyvalue.value.camera.CameraFlatMode;
 import dji.sdk.keyvalue.value.camera.CameraISO;
 import dji.sdk.keyvalue.value.camera.CameraShutterSpeed;
@@ -49,7 +50,7 @@ import dji.v5.ux.R;
  */
 public final class CameraUtil {
 
-    private static final String SHUTTER_SUBSTITUENT1 = "SHUTTER_SPEED_1_";
+    private static final String SHUTTER_SUBSTITUENT1 = "SHUTTER_SPEED1_";
     private static final String SHUTTER_SUPPLANTER1 = "";
 
     private static final String SHUTTER_WIFI_REGEX_2 = "(\\d+)_DOT_(\\d+)";
@@ -62,16 +63,16 @@ public final class CameraUtil {
     private static final String SHUTTER_SUPPLANTER4 = "1.$1\"";
 
     // Convert the  N_5_0 to -5.0, N_0_0 to 0, P_1_0 to +1.0
-    private static final String EV_SUBSTITUENT1 = "N_0_0";
-    private static final String EV_SUPPLANTER1 = "0";
+    private static final String EV_SUBSTITUENT1 = "EV";
+    private static final String EV_SUPPLANTER1 = "";
 
-    private static final String EV_SUBSTITUENT2 = "N_";
+    private static final String EV_SUBSTITUENT2 = "NEG_";
     private static final String EV_SUPPLANTER2 = "-";
 
-    private static final String EV_SUBSTITUENT3 = "P_";
+    private static final String EV_SUBSTITUENT3 = "POS_";
     private static final String EV_SUPPLANTER3 = "+";
 
-    private static final String EV_SUBSTITUENT4 = "_";
+    private static final String EV_SUBSTITUENT4 = "P";
     private static final String EV_SUPPLANTER4 = ".";
 
     private CameraUtil() {
@@ -134,14 +135,13 @@ public final class CameraUtil {
     @NonNull
     public static String frameRateDisplayName(@NonNull VideoFrameRate frameRate) {
         final String originalFrameRateString = frameRate.toString();
-
         String processedFrameRateString;
-        Matcher matcher = Pattern.compile("FRAME_RATE_(\\d{2,3})_DOT_.*").matcher(originalFrameRateString);
+        Matcher matcher = Pattern.compile("RATE_(\\d{2,3})DOT_.*").matcher(originalFrameRateString);
         if (matcher.find()) {
             String tempRate = matcher.group(1);
-            processedFrameRateString = Integer.toString(Integer.valueOf(tempRate) + 1);
+            processedFrameRateString = Integer.toString(Integer.parseInt(tempRate) + 1);
         } else {
-            matcher = Pattern.compile("FRAME_RATE_(\\d{2,3})_FPS").matcher(originalFrameRateString);
+            matcher = Pattern.compile("RATE_(\\d{2,3})FPS").matcher(originalFrameRateString);
             if (matcher.find()) {
                 processedFrameRateString = matcher.group(1);
             } else {
@@ -150,7 +150,6 @@ public final class CameraUtil {
         }
 
         return processedFrameRateString;
-
     }
 
     @NonNull
@@ -229,11 +228,29 @@ public final class CameraUtil {
 
         String shutterName = shutterSpeed.name();
         shutterName = shutterName.replace(SHUTTER_SUBSTITUENT1, SHUTTER_SUPPLANTER1).
-                replaceAll(SHUTTER_WIFI_REGEX_2, SHUTTER_WIFI_REPLACE_2).
-                replaceAll(SHUTTER_SUBSTITUENT3, SHUTTER_SUPPLANTER3).
-                replaceAll(SHUTTER_SUBSTITUENT4, SHUTTER_SUPPLANTER4);
+                replace(SHUTTER_WIFI_REGEX_2, SHUTTER_WIFI_REPLACE_2).
+                replace(SHUTTER_SUBSTITUENT3, SHUTTER_SUPPLANTER3).
+                replace(SHUTTER_SUBSTITUENT4, SHUTTER_SUPPLANTER4);
 
         return shutterName;
+    }
+
+    /**
+     * Convert the Exposure Compensation enum name to the string to show on the UI.
+     *
+     * @param ev The exposure compensation value to convert.
+     * @return A String to display.
+     */
+    @NonNull
+    public static String exposureValueDisplayName(@NonNull CameraExposureCompensation ev) {
+        if (ev == CameraExposureCompensation.NEG_0EV) {
+            return "0";
+        }
+        String enumName = ev.name();
+        return enumName.replace(EV_SUBSTITUENT1, EV_SUPPLANTER1).
+                replace(EV_SUBSTITUENT2, EV_SUPPLANTER2).
+                replace(EV_SUBSTITUENT3, EV_SUPPLANTER3).
+                replace(EV_SUBSTITUENT4, EV_SUPPLANTER4);
     }
 
     public static int convertISOToInt(CameraISO iso) {

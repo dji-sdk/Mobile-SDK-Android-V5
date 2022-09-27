@@ -13,8 +13,10 @@ import dji.v5.utils.common.LogUtils
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
 open class DJIViewModel : ViewModel() {
-    val toastResult = DJIToastUtil.dJIToastLD
+    val toastResult
+        get() = DJIToastUtil.dJIToastLD
 
     val logTag = LogUtils.getTag(this)
+
 
 }

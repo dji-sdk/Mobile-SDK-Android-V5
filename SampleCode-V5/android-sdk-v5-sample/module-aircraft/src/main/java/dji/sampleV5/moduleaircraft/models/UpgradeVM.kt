@@ -14,6 +14,7 @@ import dji.v5.manager.aircraft.upgrade.UpgradeableComponentListener
 class UpgradeVM : DJIViewModel() {
 
     fun addUpgradeableComponentListener(listener: UpgradeableComponentListener) {
+        UpgradeManager.getInstance().init()
         UpgradeManager.getInstance().addUpgradeableComponentListener(listener)
     }
 

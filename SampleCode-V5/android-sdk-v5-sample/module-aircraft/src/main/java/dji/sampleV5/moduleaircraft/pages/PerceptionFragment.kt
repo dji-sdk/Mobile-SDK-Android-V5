@@ -6,17 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.PerceptionVM
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.Helper
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.perception.ObstacleAvoidanceType
 import dji.v5.manager.aircraft.perception.PerceptionDirection
 import dji.v5.manager.aircraft.perception.PerceptionInfo
+import dji.v5.manager.aircraft.perception.ObstacleData
+import dji.v5.manager.aircraft.perception.radar.RadarInformation
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.ToastUtils
+import dji.v5.ux.core.extension.hide
+import dji.v5.ux.core.extension.show
 import kotlinx.android.synthetic.main.frag_perception_page.*
 
 /**
@@ -31,7 +36,23 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
     private val TAG = LogUtils.getTag("PerceptionFragment")
 
     private val perceptionVM: PerceptionVM by viewModels()
-    private val perceptionMsgBuilder: StringBuilder = StringBuilder()
+
+    //感知开关等信息
+    private val perceptionInfoMsgBuilder: StringBuilder = StringBuilder()
+
+    //雷达特有的开关等信息
+    private val radarInfoMsgBuilder: StringBuilder = StringBuilder()
+
+    //感知避障数据
+    private val perceptionObstacleDataBuilder: StringBuilder = StringBuilder()
+
+    //雷达避障数据
+    private val radarObstacleDataBuilder: StringBuilder = StringBuilder()
+    private var perceptionInfo: PerceptionInfo? = null
+    private var radarInformation: RadarInformation? = null
+    private var obstacleData: ObstacleData? = null
+    private var radarObstacleData: ObstacleData? = null
+    private var isRadarConnected = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_perception_page, container, false)
@@ -39,7 +60,6 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tb_obstacle_avoidance_master_switch.setOnCheckedChangeListener(this)
         tb_set_vision_positioning_enable_switch.setOnCheckedChangeListener(this)
         tb_set_precision_landing_enable_switch.setOnCheckedChangeListener(this)
         tv_obstacle_avoidance_up_switch.setOnCheckedChangeListener(this)
@@ -88,23 +108,6 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         when (buttonView) {
-            tb_obstacle_avoidance_master_switch -> {
-                perceptionVM.setOverallObstacleAvoidanceEnabled(isChecked, object : CommonCallbacks.CompletionCallback {
-                    override fun onSuccess() {
-                        updateCurrentErrorMsg(isSuccess = true)
-
-                    }
-
-                    override fun onFailure(error: IDJIError) {
-                        handleSwitchButtonError(error)
-                        tb_obstacle_avoidance_master_switch.setOnCheckedChangeListener(null)
-                        tb_obstacle_avoidance_master_switch.isChecked = !isChecked
-                        tb_obstacle_avoidance_master_switch.setOnCheckedChangeListener(this@PerceptionFragment)
-
-                    }
-
-                })
-            }
             tb_set_vision_positioning_enable_switch -> {
                 perceptionVM.setVisionPositioningEnabled(isChecked, object : CommonCallbacks.CompletionCallback {
                     override fun onSuccess() {
@@ -193,6 +196,43 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
 
                 })
             }
+
+            //雷达避障子开关
+            tv_radar_obstacle_avoidance_up_switch -> {
+                perceptionVM.setRadarObstacleAvoidanceEnabled(isChecked, PerceptionDirection.UPWARD, object : CommonCallbacks.CompletionCallback {
+                    override fun onSuccess() {
+                        updateCurrentErrorMsg(isSuccess = true)
+
+                    }
+
+                    override fun onFailure(error: IDJIError) {
+                        handleSwitchButtonError(error)
+                        tv_radar_obstacle_avoidance_up_switch.setOnCheckedChangeListener(null)
+                        tv_radar_obstacle_avoidance_up_switch.isChecked = !isChecked
+                        tv_radar_obstacle_avoidance_up_switch.setOnCheckedChangeListener(this@PerceptionFragment)
+
+                    }
+
+                })
+            }
+
+            tv_radar_obstacle_avoidance_horizontal_switch -> {
+                perceptionVM.setRadarObstacleAvoidanceEnabled(isChecked, PerceptionDirection.HORIZONTAL, object : CommonCallbacks.CompletionCallback {
+                    override fun onSuccess() {
+                        updateCurrentErrorMsg(isSuccess = true)
+
+                    }
+
+                    override fun onFailure(error: IDJIError) {
+                        handleSwitchButtonError(error)
+                        tv_radar_obstacle_avoidance_horizontal_switch.setOnCheckedChangeListener(null)
+                        tv_radar_obstacle_avoidance_horizontal_switch.isChecked = !isChecked
+                        tv_radar_obstacle_avoidance_horizontal_switch.setOnCheckedChangeListener(this@PerceptionFragment)
+
+                    }
+
+                })
+            }
         }
     }
 
@@ -220,7 +260,9 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
 
 
     private fun updateCurrentErrorMsg(errorMsg: String? = null, isSuccess: Boolean = false) {
-        tv_error_msg.text = if (isSuccess) "" else errorMsg
+        if (isFragmentShow()) {
+            tv_error_msg.text = if (isSuccess) "" else errorMsg
+        }
     }
 
     private fun showToast(toastMsg: String) {
@@ -229,29 +271,45 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
 
     private fun observerPerceptionInfo() {
         perceptionVM.perceptionInfo.observe(viewLifecycleOwner, {
-            updatePerceptionInfo(it)
-            changeObstacleAvoidanceEnableSwitch(it)
+            perceptionInfo = it
+            updatePerceptionInfo()
+            changeObstacleAvoidanceEnableSwitch()
             changeOtherEnableSwitch(it)
         })
+        perceptionVM.obstacleData.observe(viewLifecycleOwner, {
+            obstacleData = it
+            updatePerceptionInfo()
+        })
+        perceptionVM.obstacleDataForRadar.observe(viewLifecycleOwner, {
+            radarObstacleData = it
+            updatePerceptionInfo()
+        })
+
+        perceptionVM.radarInformation.observe(viewLifecycleOwner, {
+            radarInformation = it
+            changeObstacleAvoidanceEnableSwitch()
+            updatePerceptionInfo()
+        })
+        perceptionVM.radarConnect.observe(viewLifecycleOwner, {
+            isRadarConnected = it
+            if (it) {
+                rl_radar_obstacle_avoidance_switch.show()
+            } else {
+                rl_radar_obstacle_avoidance_switch.hide()
+            }
+        })
+
+
     }
 
     private fun changeOtherEnableSwitch(perceptionInfo: PerceptionInfo) {
         perceptionInfo.apply {
-            //避障总开关
-            val checked1 = tb_obstacle_avoidance_master_switch.isChecked
-            if (checked1 != isOverallObstacleAvoidanceEnabled) {
-                tb_obstacle_avoidance_master_switch.setOnCheckedChangeListener(null)
-                tb_obstacle_avoidance_master_switch.isChecked = isOverallObstacleAvoidanceEnabled
-                tb_obstacle_avoidance_master_switch.setOnCheckedChangeListener(this@PerceptionFragment)
-            }
-
             //视觉定位
             val checked2 = tb_set_vision_positioning_enable_switch.isChecked
             if (checked2 != isVisionPositioningEnabled) {
                 tb_set_vision_positioning_enable_switch.setOnCheckedChangeListener(null)
                 tb_set_vision_positioning_enable_switch.isChecked = isVisionPositioningEnabled
                 tb_set_vision_positioning_enable_switch.setOnCheckedChangeListener(this@PerceptionFragment)
-
             }
             //精准降落
             val check3 = tb_set_precision_landing_enable_switch.isChecked
@@ -265,8 +323,8 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
 
     }
 
-    private fun changeObstacleAvoidanceEnableSwitch(perceptionInfo: PerceptionInfo) {
-        perceptionInfo.apply {
+    private fun changeObstacleAvoidanceEnableSwitch() {
+        perceptionInfo?.apply {
             //避障子开关
             val checked1 = tv_obstacle_avoidance_up_switch.isChecked
             if (checked1 != isUpwardObstacleAvoidanceEnabled) {
@@ -289,14 +347,29 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
                 tv_obstacle_avoidance_horizontal_switch.setOnCheckedChangeListener(this@PerceptionFragment)
             }
         }
+        radarInformation?.apply {
+            val checked1 = tv_radar_obstacle_avoidance_up_switch.isChecked
+            if (checked1 != isUpwardObstacleAvoidanceEnabled) {
+                tv_radar_obstacle_avoidance_up_switch.setOnCheckedChangeListener(null)
+                tv_radar_obstacle_avoidance_up_switch.isChecked = isUpwardObstacleAvoidanceEnabled
+                tv_radar_obstacle_avoidance_up_switch.setOnCheckedChangeListener(this@PerceptionFragment)
+            }
+
+            val checked2 = tv_radar_obstacle_avoidance_horizontal_switch.isChecked
+            if (checked2 != isHorizontalObstacleAvoidanceEnabled) {
+                tv_radar_obstacle_avoidance_horizontal_switch.setOnCheckedChangeListener(null)
+                tv_radar_obstacle_avoidance_horizontal_switch.isChecked = isHorizontalObstacleAvoidanceEnabled
+                tv_radar_obstacle_avoidance_horizontal_switch.setOnCheckedChangeListener(this@PerceptionFragment)
+            }
+        }
 
     }
 
-    private fun updatePerceptionInfo(perceptionInfo: PerceptionInfo) {
-        perceptionMsgBuilder.apply {
-            perceptionInfo.apply {
-                setLength(0)
-                append("isOverallObstacleAvoidanceEnabled:").append(isOverallObstacleAvoidanceEnabled).append("\n")
+    private var result: String = ""
+    private fun updatePerceptionInfo() {
+        perceptionInfoMsgBuilder.apply {
+            perceptionInfo?.apply {
+                clear()
                 append("ObstacleAvoidanceEnabled:").append(
                     " upward:$isUpwardObstacleAvoidanceEnabled,down:$isDownwardObstacleAvoidanceEnabled,horizontal:$isHorizontalObstacleAvoidanceEnabled"
                 ).append("\n")
@@ -309,11 +382,44 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
                 append("ObstacleAvoidanceWarningDistance:").append(" upward:$upwardObstacleAvoidanceWarningDistance,down:$downwardObstacleAvoidanceWarningDistance,horizontal:$horizontalObstacleAvoidanceWarningDistance")
                     .append("\n")
             }
-
-
         }
+
+        perceptionObstacleDataBuilder.apply {
+            obstacleData?.apply {
+                clear()
+                append("\n").append("ObstacleDataForPerception:").append("\n")
+                append("horizontalObstacleDistance:$horizontalObstacleDistance").append("\n")
+                append("upwardObstacleDistance:$upwardObstacleDistance").append("\n")
+                append("downwardObstacleDistance:$downwardObstacleDistance").append("\n")
+                append("horizontalAngleInterval:$horizontalAngleInterval").append("\n")
+            }
+        }
+        result = perceptionInfoMsgBuilder.toString() + perceptionObstacleDataBuilder.toString()
+        if (isRadarConnected) {
+            radarObstacleDataBuilder.clear()
+            radarObstacleDataBuilder.apply {
+                radarObstacleData?.apply {
+                    append("\n").append("ObstacleDataForRadar:").append("\n")
+                    append("horizontalObstacleDistance:$horizontalObstacleDistance").append("\n")
+                    append("upwardObstacleDistance:$upwardObstacleDistance").append("\n")
+                    append("horizontalAngleInterval:$horizontalAngleInterval").append("\n")
+
+                }
+            }
+
+            radarInfoMsgBuilder.clear()
+            radarInfoMsgBuilder.apply {
+                radarInformation?.apply {
+                    append("\n").append("RadarInformation:").append("\n")
+                    append("isHorizontalObstacleAvoidanceEnabled:$isHorizontalObstacleAvoidanceEnabled").append("\n")
+                    append("isUpwardObstacleAvoidanceEnabled:$isUpwardObstacleAvoidanceEnabled").append("\n")
+                }
+            }
+            result = result + radarInfoMsgBuilder.toString() + radarObstacleDataBuilder.toString()
+        }
+
         activity?.runOnUiThread {
-            tv_perception_info.text = perceptionMsgBuilder.toString()
+            tv_perception_info.text = result
         }
     }
 }

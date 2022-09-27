@@ -63,12 +63,20 @@ class MegaphoneVM : DJIViewModel() {
     private val listener: RealTimeTransimissionStateListener =
         object : RealTimeTransimissionStateListener {
             override fun onProgress(sentBytes: Long, totalBytes: Long) {
-                curRealTimeSentBytes.value = sentBytes
-                curRealTimeTotalBytes.value = totalBytes
+                handlerMain?.post(object : Runnable {
+                    override fun run() {
+                        curRealTimeSentBytes.value = sentBytes
+                        curRealTimeTotalBytes.value = totalBytes
+                    }
+                })
             }
 
             override fun onUploadedStatus(state: UploadState?) {
-                curRealTimeUploadedState.value = state
+                handlerMain?.post(object : Runnable {
+                    override fun run() {
+                        curRealTimeUploadedState.value = state
+                    }
+                })
 
                 if (state == UploadState.UPLOAD_SUCCESS) {
                     handlerMain?.postDelayed(object : Runnable {
@@ -117,7 +125,7 @@ class MegaphoneVM : DJIViewModel() {
             }
 
             override fun onFailure(error: IDJIError) {
-                LogUtils.d(TAG, "get megaphone index failed")
+                LogUtils.i(TAG, "get megaphone index failed")
             }
         })
     }
@@ -230,14 +238,14 @@ class MegaphoneVM : DJIViewModel() {
                         size,
                         object : CommonCallbacks.CompletionCallback {
                             override fun onSuccess() {
-                                LogUtils.d(
+                                LogUtils.i(
                                     TAG,
                                     "send real time data to megaphone success ${data?.size!!}"
                                 )
                             }
 
                             override fun onFailure(error: IDJIError) {
-                                LogUtils.d(TAG, "send real time data to megaphone failed")
+                                LogUtils.i(TAG, "send real time data to megaphone failed")
                             }
                         })
                 }
@@ -267,11 +275,11 @@ class MegaphoneVM : DJIViewModel() {
         MegaphoneManager.getInstance()
             .startRealTimeTransmission(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
-                    LogUtils.d(TAG, "start real time transmission success!")
+                    LogUtils.i(TAG, "start real time transmission success!")
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    LogUtils.d(TAG, "start real time transmission failed $error")
+                    LogUtils.i(TAG, "start real time transmission failed $error")
                 }
             })
         mStartTime = System.currentTimeMillis()
@@ -302,11 +310,11 @@ class MegaphoneVM : DJIViewModel() {
         MegaphoneManager.getInstance()
             .appendEOFToRealTimeData(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
-                    LogUtils.d(TAG, "apped real time EOF to megaphone success")
+                    LogUtils.i(TAG, "apped real time EOF to megaphone success")
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    LogUtils.d(TAG, "apped real time EOF to megaphone failed: $error")
+                    LogUtils.i(TAG, "apped real time EOF to megaphone failed: $error")
                 }
             })
     }

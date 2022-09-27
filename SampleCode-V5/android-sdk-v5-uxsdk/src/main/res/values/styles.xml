@@ -238,4 +238,57 @@
     <style name="MapTheme" parent="AppTheme">
         <item name="android:textColorSecondary">@color/uxsdk_colorAccent</item>
     </style>
+
+    <!--RTK-->
+    <style name="uxsdk_setting_menu_rtk_input_left_item_title">
+        <item name="android:textColor">@color/uxsdk_setting_menu_rtk_common_title_txt</item>
+        <item name="android:textSize">@dimen/uxsdk_text_size_normal_medium</item>
+        <item name="android:layout_width">0px</item>
+        <item name="android:padding">@dimen/uxsdk_5_dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="uxsdk_setting_menu_rtk_input_right_item_title">
+        <item name="android:textColor">@color/uxsdk_setting_menu_rtk_common_title_txt</item>
+        <item name="android:textSize">@dimen/uxsdk_text_size_normal_medium</item>
+        <item name="android:layout_width">0px</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:background">@drawable/uxsdk_bg_setting_ui_rtk_edit</item>
+        <item name="android:paddingStart">@dimen/uxsdk_15_dp</item>
+        <item name="android:paddingTop">@dimen/uxsdk_5_dp</item>
+        <item name="android:paddingBottom">@dimen/uxsdk_5_dp</item>
+        <item name="android:layout_marginRight">@dimen/uxsdk_20_dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:inputType">textNoSuggestions</item>
+        <item name="android:imeOptions">flagNoExtractUi|flagNoFullscreen</item>
+    </style>
+
+        <!-- Caption -->
+    <style name="UXSDK_Caption">
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="UXSDK_Caption.Caption1">
+        <item name="android:textSize">@dimen/uxsdk_12_dp</item>
+        <item name="lineHeight">@dimen/uxsdk_18_dp</item>
+    </style>
+
+    <style name="UXSDK_Caption.Caption1.Regular">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="UXSDK_Caption.Caption1.Regular.Light">
+        <item name="android:textColor">#F2000000</item>
+    </style>
+
+    <style name="UXSDK_Caption.Caption1.Regular.Light.Secondary">
+        <item name="android:textColor">#A5000000</item>
+    </style>
+
+
+
 </resources>

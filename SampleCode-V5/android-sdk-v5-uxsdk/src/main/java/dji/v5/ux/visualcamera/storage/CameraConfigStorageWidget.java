@@ -42,11 +42,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import dji.sdk.keyvalue.value.camera.CameraColor;
-import dji.sdk.keyvalue.value.camera.CameraSDCardState;
+import dji.sdk.keyvalue.value.camera.CameraMode;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
-import dji.sdk.keyvalue.value.camera.CameraWorkMode;
+import dji.sdk.keyvalue.value.camera.SDCardLoadState;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
+import dji.v5.utils.common.StringUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.ICameraIndex;
@@ -61,7 +62,7 @@ import dji.v5.ux.core.util.RxUtil;
  * Shows the camera's current capacity and other information for internal and SD card storage
  * locations.
  */
-public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implements ICameraIndex {
+public class CameraConfigStorageWidget extends ConstraintLayoutWidget implements ICameraIndex {
     //region Fields
     private static final String TAG = "ConfigStorageWidget";
     private CameraConfigStorageWidgetModel widgetModel;
@@ -149,7 +150,7 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
     }
 
     private void updateStatus(CameraConfigStorageWidgetModel.CameraStorageState cameraStorageState) {
-        CameraWorkMode cameraMode = cameraStorageState.getCameraMode();
+        CameraMode cameraMode = cameraStorageState.getCameraMode();
 
         updateForegroundDrawable(cameraStorageState);
 
@@ -160,13 +161,18 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
             status = getInternalStorageStatus(cameraStorageState.getStorageOperationState());
         }
 
+        /**
+         * 如果getAvailableRecordingTime、getAvailableCaptureCount有效，则优先使用
+         * 否则直接显示剩余容量。
+         */
         if (TextUtils.isEmpty(status)) {
             statusCapacityTitleTextView.setText(getResources().getText(R.string.uxsdk_storage_title_capacity));
-            if (cameraMode == CameraWorkMode.RECORD_VIDEO) {
-                statusCapacityValueTextView.setText(CameraUtil.formatVideoTime(getResources(),
-                        cameraStorageState.getAvailableRecordingTime()));
-            } else {
+            if (cameraMode == CameraMode.VIDEO_NORMAL && cameraStorageState.getAvailableRecordingTime() > 0) {
+                statusCapacityValueTextView.setText(CameraUtil.formatVideoTime(getResources(), cameraStorageState.getAvailableRecordingTime()));
+            } else if (cameraMode == CameraMode.PHOTO_NORMAL && cameraStorageState.getAvailableCaptureCount() > 0) {
                 statusCapacityValueTextView.setText(String.valueOf(cameraStorageState.getAvailableCaptureCount()));
+            } else {
+                statusCapacityValueTextView.setText(StringUtils.getResStr(R.string.uxsdk_storage_remaining_space, cameraStorageState.getAvailableCapacity()));
             }
         } else {
             statusCapacityTitleTextView.setText(getResources().getText(R.string.uxsdk_storage_title_status));
@@ -181,7 +187,7 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
                 case NOT_INSERTED:
                     foregroundDrawable = getSDCardStorageIcon(StorageIconState.NOT_INSERTED);
                     break;
-                case NORMAL:
+                case INSERTED:
                     foregroundDrawable = getSDCardStorageIcon(StorageIconState.NORMAL);
                     break;
                 default:
@@ -193,7 +199,7 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
                 case NOT_INSERTED:
                     foregroundDrawable = getInternalStorageIcon(StorageIconState.NOT_INSERTED);
                     break;
-                case NORMAL:
+                case INSERTED:
                     foregroundDrawable = getInternalStorageIcon(StorageIconState.NORMAL);
                     break;
                 default:
@@ -229,8 +235,7 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
             return getResources().getString(R.string.uxsdk_string_default_value);
         }
 
-        if (imageFormat.getCameraMode() == CameraWorkMode.RECORD_VIDEO ||
-                imageFormat.getCameraMode() == CameraWorkMode.BROADCAST) {
+        if (imageFormat.getCameraMode() == CameraMode.VIDEO_NORMAL) {
             String processedResolutionString = CameraUtil.resolutionShortDisplayName(imageFormat.getResolution());
             String processedFrameRateString = CameraUtil.frameRateDisplayName(imageFormat.getFrameRate());
             return processedResolutionString + "/" + processedFrameRateString;
@@ -239,51 +244,51 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
         }
     }
 
-    private String getSDCardStatus(CameraSDCardState sdCardOperationState) {
+    private String getSDCardStatus(SDCardLoadState sdCardOperationState) {
         String valueStr;
         switch (sdCardOperationState) {
-            case USB_CONNECTED:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_usb_connected);
-                break;
+//            case USB_CONNECTED:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_usb_connected);
+//                break;
             case NOT_INSERTED:
                 valueStr = getResources().getString(R.string.uxsdk_sd_card_missing);
                 break;
-            case FULL:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_full);
-                break;
-            case SLOW:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_slow);
-                break;
-            case INVALID:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_invalid);
-                break;
-            case READ_ONLY:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_write_protect);
-                break;
-            case FORMAT_NEEDED:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_not_formatted);
-                break;
-            case FORMATTING:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_formatting);
-                break;
-            case BUSY:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_busy);
-                break;
-            case UNKNOWN_ERROR:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_unknown_error);
-                break;
-            case INITIALIZING:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_initial);
-                break;
-            case RECOVERING_FILES:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_recover_file);
-                break;
-            case FORMAT_RECOMMENDED:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_needs_formatting);
-                break;
-            case WRITING_SLOWLY:
-                valueStr = getResources().getString(R.string.uxsdk_sd_card_write_slow);
-                break;
+//            case FULL:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_full);
+//                break;
+//            case SLOW:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_slow);
+//                break;
+//            case INVALID:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_invalid);
+//                break;
+//            case READ_ONLY:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_write_protect);
+//                break;
+//            case FORMAT_NEEDED:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_not_formatted);
+//                break;
+//            case FORMATTING:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_formatting);
+//                break;
+//            case BUSY:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_busy);
+//                break;
+//            case UNKNOWN_ERROR:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_unknown_error);
+//                break;
+//            case INITIALIZING:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_initial);
+//                break;
+//            case RECOVERING_FILES:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_recover_file);
+//                break;
+//            case FORMAT_RECOMMENDED:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_needs_formatting);
+//                break;
+//            case WRITING_SLOWLY:
+//                valueStr = getResources().getString(R.string.uxsdk_sd_card_write_slow);
+//                break;
             default:
                 valueStr = "";
                 break;
@@ -291,39 +296,39 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
         return valueStr;
     }
 
-    private String getInternalStorageStatus(CameraSDCardState sdCardOperationState) {
+    private String getInternalStorageStatus(SDCardLoadState sdCardOperationState) {
         String valueStr;
         switch (sdCardOperationState) {
             case NOT_INSERTED:
                 valueStr = getResources().getString(R.string.uxsdk_internal_storage_missing);
                 break;
-            case FULL:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_full);
-                break;
-            case SLOW:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_slow);
-                break;
-            case INVALID:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_invalid);
-                break;
-            case READ_ONLY:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_write_protect);
-                break;
-            case FORMAT_NEEDED:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_not_formatted);
-                break;
-            case FORMATTING:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_formatting);
-                break;
-            case BUSY:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_busy);
-                break;
-            case UNKNOWN_ERROR:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_unknown_error);
-                break;
-            case INITIALIZING:
-                valueStr = getResources().getString(R.string.uxsdk_internal_storage_initial);
-                break;
+//            case FULL:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_full);
+//                break;
+//            case SLOW:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_slow);
+//                break;
+//            case INVALID:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_invalid);
+//                break;
+//            case READ_ONLY:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_write_protect);
+//                break;
+//            case FORMAT_NEEDED:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_not_formatted);
+//                break;
+//            case FORMATTING:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_formatting);
+//                break;
+//            case BUSY:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_busy);
+//                break;
+//            case UNKNOWN_ERROR:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_unknown_error);
+//                break;
+//            case INITIALIZING:
+//                valueStr = getResources().getString(R.string.uxsdk_internal_storage_initial);
+//                break;
             default:
                 valueStr = "";
                 break;
@@ -837,7 +842,7 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
     private void initAttributes(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CameraConfigStorageWidget);
 
-        if (!isInEditMode()){
+        if (!isInEditMode()) {
             updateCameraSource(ComponentIndexType.find(typedArray.getInt(R.styleable.CameraConfigStorageWidget_uxsdk_cameraIndex, 0)),
                     CameraLensType.find(typedArray.getInt(R.styleable.CameraConfigStorageWidget_uxsdk_lensType, 0)));
         }
@@ -888,7 +893,7 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
         typedArray.recycle();
     }
 
-    private void setCameraColorText(Context context, TypedArray typedArray){
+    private void setCameraColorText(Context context, TypedArray typedArray) {
         int cameraColorTextAppearanceId =
                 typedArray.getResourceId(R.styleable.CameraConfigStorageWidget_uxsdk_cameraColorTextAppearance, INVALID_RESOURCE);
         if (cameraColorTextAppearanceId != INVALID_RESOURCE) {
@@ -911,7 +916,7 @@ public class CameraConfigStorageWidget extends ConstraintLayoutWidget  implement
         }
     }
 
-    private void setStatusCapacity(Context context, TypedArray typedArray){
+    private void setStatusCapacity(Context context, TypedArray typedArray) {
         int capacityTextAppearanceId =
                 typedArray.getResourceId(R.styleable.CameraConfigStorageWidget_uxsdk_capacityTextAppearance, INVALID_RESOURCE);
         if (capacityTextAppearanceId != INVALID_RESOURCE) {

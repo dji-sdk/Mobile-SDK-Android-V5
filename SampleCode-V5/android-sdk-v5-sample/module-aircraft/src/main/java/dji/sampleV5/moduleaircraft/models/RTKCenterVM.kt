@@ -33,7 +33,7 @@ class RTKCenterVM : DJIViewModel() {
     fun setAircraftRTKModuleEnabled(boolean: Boolean) {
         RTKCenter.getInstance().setAircraftRTKModuleEnabled(boolean, object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
-                //结果以添加的监听拿到为准
+                //结果以添加的listener结果为准
             }
 
             override fun onFailure(error: IDJIError) {
@@ -67,13 +67,8 @@ class RTKCenterVM : DJIViewModel() {
     }
 
 
-    private val handle = android.os.Handler()
     fun setRTKMaintainAccuracyEnabled(enable: Boolean) {
         RTKCenter.getInstance().setRTKMaintainAccuracyEnabled(enable, null)
-        //设置之后，不能立马获取，需要延迟一段时间才能拿到最新值
-        handle.postDelayed({
-            getRTKMaintainAccuracyEnabled()
-        }, 500)
     }
 
     fun getRTKMaintainAccuracyEnabled() {

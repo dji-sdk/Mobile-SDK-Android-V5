@@ -17,7 +17,6 @@ import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.MegaphoneVM
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.megaphone.FileInfo

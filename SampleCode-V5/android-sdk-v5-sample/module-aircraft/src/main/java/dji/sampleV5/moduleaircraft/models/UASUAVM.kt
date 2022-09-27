@@ -1,0 +1,33 @@
+package dji.sampleV5.moduleaircraft.models
+
+import androidx.lifecycle.MutableLiveData
+import dji.sampleV5.modulecommon.models.DJIViewModel
+import dji.v5.manager.aircraft.uas.UASRemoteIDManager
+import dji.v5.manager.aircraft.uas.UASRemoteIDStatus
+import dji.v5.manager.areacode.AreaCode
+import dji.v5.utils.common.ToastUtils
+
+/**
+ * Description :美国无人机远程识别VM
+ *
+ * @author: Byte.Cai
+ *  date : 2022/8/3
+ *
+ * Copyright (c) 2022, DJI All Rights Reserved.
+ */
+class UASUAVM : DJIViewModel() {
+    val uasRemoteIDStatus = MutableLiveData<UASRemoteIDStatus>()
+
+    init {
+        val error = UASRemoteIDManager.getInstance().setAreaCode(AreaCode.UNITED_STATES_OF_AMERICA)
+        error?.apply {
+            ToastUtils.showToast(toString())
+        }
+    }
+
+    fun addRemoteIdStatusListener() {
+        UASRemoteIDManager.getInstance().addUASRemoteIDStatusListener {
+            uasRemoteIDStatus.postValue(it)
+        }
+    }
+}

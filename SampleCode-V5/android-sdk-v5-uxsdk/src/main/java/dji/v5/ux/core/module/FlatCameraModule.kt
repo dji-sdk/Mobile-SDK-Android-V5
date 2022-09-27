@@ -29,6 +29,7 @@ import dji.sdk.keyvalue.value.camera.CameraWorkMode
 import dji.sdk.keyvalue.value.camera.CameraFlatMode
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.camera.CameraMode
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.ux.core.base.BaseModule
 import dji.v5.ux.core.base.DJISDKModel
@@ -47,14 +48,13 @@ class FlatCameraModule : BaseModule(), ICameraIndex {
 
     //region Fields
     private val isFlatCameraModeSupportedDataProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
-    private val flatCameraModeDataProcessor: DataProcessor<CameraFlatMode> = DataProcessor.create(CameraFlatMode.UNKNOWN)
     private var cameraIndex = ComponentIndexType.LEFT_OR_MAIN
     private var lensType = CameraLensType.CAMERA_LENS_ZOOM
 
     /**
      * The camera mode.
      */
-    val cameraModeDataProcessor: DataProcessor<CameraWorkMode> = DataProcessor.create(CameraWorkMode.UNKNOWN)
+    val cameraModeDataProcessor: DataProcessor<CameraMode> = DataProcessor.create(CameraMode.UNKNOWN)
 
     /**
      *  The shoot photo mode.
@@ -64,17 +64,10 @@ class FlatCameraModule : BaseModule(), ICameraIndex {
 
     //region Lifecycle
     override fun setup(widgetModel: WidgetModel) {
-        bindDataProcessor(widgetModel, KeyTools.createKey(CameraKey.KeyCameraWorkMode, cameraIndex), cameraModeDataProcessor)
+        bindDataProcessor(widgetModel, KeyTools.createKey(CameraKey.KeyCameraMode, cameraIndex), cameraModeDataProcessor)
         bindDataProcessor(widgetModel, KeyTools.createKey(CameraKey.KeyShootPhotoMode, cameraIndex), shootPhotoModeProcessor)
         val isFlatCameraModeSupportedKey = KeyTools.createKey(CameraKey.KeyCameraFlatModeSupported, cameraIndex)
-        bindDataProcessor(widgetModel, isFlatCameraModeSupportedKey, isFlatCameraModeSupportedDataProcessor) { isFlatCameraModeSupported ->
-            if (isFlatCameraModeSupported as Boolean) {
-                updateModes(flatCameraModeDataProcessor.value)
-            }
-        }
-        bindDataProcessor(widgetModel, KeyTools.createKey(CameraKey.KeyCameraFlatMode, cameraIndex), flatCameraModeDataProcessor) { flatCameraMode: Any ->
-            updateModes(flatCameraMode as CameraFlatMode)
-        }
+        bindDataProcessor(widgetModel, isFlatCameraModeSupportedKey, isFlatCameraModeSupportedDataProcessor)
     }
 
     override fun cleanup() {
@@ -88,16 +81,8 @@ class FlatCameraModule : BaseModule(), ICameraIndex {
      *
      * @return Completable
      */
-    fun setCameraMode(djiSdkModel: DJISDKModel, cameraMode: CameraWorkMode): Completable {
-        return if (isFlatCameraModeSupportedDataProcessor.value) {
-            if (cameraMode == CameraWorkMode.SHOOT_PHOTO) {
-                djiSdkModel.setValue(KeyTools.createKey(CameraKey.KeyCameraFlatMode, cameraIndex), CameraFlatMode.PHOTO_NORMAL)
-            } else {
-                djiSdkModel.setValue(KeyTools.createKey(CameraKey.KeyCameraFlatMode, cameraIndex), CameraFlatMode.VIDEO_NORMAL)
-            }
-        } else {
-            djiSdkModel.setValue(KeyTools.createKey(CameraKey.KeyCameraWorkMode, cameraIndex), cameraMode)
-        }
+    fun setCameraMode(djiSdkModel: DJISDKModel, cameraMode: CameraMode): Completable {
+        return djiSdkModel.setValue(KeyTools.createKey(CameraKey.KeyCameraMode, cameraIndex), cameraMode);
     }
 
     /**
@@ -124,12 +109,12 @@ class FlatCameraModule : BaseModule(), ICameraIndex {
     }
 
     //region Helpers
-    private fun updateModes(flatCameraMode: CameraFlatMode) {
+    private fun updateModes(flatCameraMode: CameraMode) {
         cameraModeDataProcessor.onNext(
             if (flatCameraMode.isPictureMode()) {
-                CameraWorkMode.SHOOT_PHOTO
+                CameraMode.PHOTO_NORMAL
             } else {
-                CameraWorkMode.RECORD_VIDEO
+                CameraMode.VIDEO_NORMAL
             }
         )
         shootPhotoModeProcessor.onNext(flatCameraMode.toShootPhotoMode())

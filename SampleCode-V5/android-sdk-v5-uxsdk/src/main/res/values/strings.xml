@@ -41,7 +41,7 @@
     <string name="uxsdk_user_login_widget_refresh">Refresh</string>
     <string name="uxsdk_user_login_widget_token">Token out of date</string>
     <string name="uxsdk_user_login_widget_not_logged_in">Not Logged In.</string>
-    <string name="uxsdk_user_login_widget_logged_in_authorized">Logged in and authorized to unlock flyzones.</string>
+    <string name="uxsdk_user_login_widget_logged_in">Logged in</string>
     <string name="uxsdk_user_login_widget_logged_in_not_authorized">Logged in but not authorized to unlock flyzones.</string>
 
     <string name="uxsdk_string_default_value">N/A</string>
@@ -183,7 +183,7 @@
 
     <!-- System Status List -->
     <string name="uxsdk_system_status_list_title">System Status List</string>
-    
+
     <string name="uxsdk_list_item_overview_status">Overall Status</string>
 
     <string name="uxsdk_list_item_novice_mode">Beginner Mode</string>
@@ -320,8 +320,14 @@
     <string name="uxsdk_rtk_type_rtk_mobile_station">D-RTK 2 Mobile Station</string>
     <string name="uxsdk_rtk_type_rtk_base_station">Base Station</string>
     <string name="uxsdk_rtk_type_custom_rtk">Custom Network RTK</string>
+    <string name="uxsdk_rtk_type_cmcc_rtk">CMCC RTK</string>
     <string name="uxsdk_rtk_type_unknown_rtk">Unknown RTK</string>
     <string name="uxsdk_rtk_status_desc">%1$s Status:</string>
+
+    <!--RTK keep Status-->
+    <string name="uxsdk_rtk_keep_status_mode">Maintain Positioning Accuracy Mode</string>
+    <string name="uxsdk_rtk_keep_status_hint">In case of an RTK module communication error, the aircraft will automatically maintain the current RTK status with gradually decreasing accuracy. The aircraft will exit RTK if the connection is not re-established within 10 minutes.</string>
+
 
     <string name="uxsdk_fly_zone_unlock">Unlock</string>
     <string name="uxsdk_fly_zone_unlock_zone">Unlock %1$s</string>
@@ -341,6 +347,8 @@
     <string name="uxsdk_fly_zone_custom_unlock_aircraft">Custom Unlock on Aircraft</string>
     <string name="uxsdk_fly_zone_custom_unlock_enabled">Custom Unlock Enabled</string>
     <string name="uxsdk_custom_fly_zone_duplicate">%1$s is currently enabled. Do you wish you disable it and enable %2$s</string>
+
+    <string name="uxsdk_map">map</string>
 
     <!--Map Widget Activity-->
     <string name="uxsdk_provider_google_maps">Google Maps</string>
@@ -445,15 +453,20 @@
     <string name="uxsdk_connection_widget_title">Connection Widget</string>
     <string name="uxsdk_rtk_widget_title">RTK Widget</string>
     <string name="uxsdk_rtk_enabled_widget_title">RTK Enabled Widget</string>
+    <string name="uxsdk_rtk_keep_status_widget_title">RTK Keep Status Widget</string>
     <string name="uxsdk_rtk_satellite_status_widget_title">RTK Satellite Status Widget</string>
+    <string name="uxsdk_rtk_type_switch_widget_title">RTK Type Switch Widget</string>
     <string name="uxsdk_remaining_flight_time_widget_title">Remaining Flight Time Widget</string>
     <string name="uxsdk_exposure_setting_panel_title">Exposure Setting Panel</string>
+    <string name="uxsdk_rtk_rtk_station_connect_widget_title">RTK Station Connect Widget</string>
     <string name="uxsdk_exposure_mode_setting_widget_title">Exposure Mode Setting Widget</string>
     <string name="uxsdk_iso_and_ei_setting_widget_title">ISO And EI Setting Widget</string>
     <string name="uxsdk_horizontal_situation_indicator_widget_title">Horizontal Situation Indicator Widget</string>
     <string name="uxsdk_speed_display_widget_title">Speed Display Widget</string>
     <string name="uxsdk_attitude_display_widget_title">Attitude Display Widget</string>
     <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
+    <string name="uxsdk_exposure_meter_widget_title">Exposure Metering Widget</string>
+    <string name="uxsdk_focal_zoom_widget_title">Focal Zoom Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>
@@ -651,4 +664,85 @@
     <string name="uxsdk_exposure_iso_title">ISO</string>
     <string name="uxsdk_white_balance_title">WB %1$s</string>
     <string name="uxsdk_white_balance_temp">%1$dK</string>
+
+    <!--RTK Coordinate widget-->
+    <string name="uxsdk_rtk_coordinate_title">RTK Coordinates</string>
+    <string name="uxsdk_rtk_type_switch_title">Select RTK Service Type</string>
+    <string name="uxsdk_rtk_base_gps_input_desc">Make sure D-RTK 2 Mobile Station is in open area and do not adjust position after setup. Unable to connect to mobile station after starting aircraft propellers</string>
+    <string name="uxsdk_rtk_coordinate_c2000">C2000</string>
+    <string name="uxsdk_rtk_coordinate_wgs84">WGS84</string>
+    <string name="uxsdk_rtk_setting_menu_setting_success">Set successfully</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail_no_network">Setting failed. Check network connection</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail_settings_invalid">Setting failed. Invalid parameters误</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail_incorrect_reference_station_source">RTK service error. Restart DJI Pilot or aircraft and try again</string>
+    <string name="uxsdk_rtk_setting_menu_type_rtk_none">NONE</string>
+    <string name="uxsdk_rtk_setting_menu_type_nrtk">Network RTK</string>
+    <string name="uxsdk_rtk_setting_menu_type_rtk_station">D-RTK2 Mobile Station</string>
+    <string name="uxsdk_rtk_setting_menu_type_custom_rtk">Custom Network RTK</string>
+    <string name="uxsdk_rtk_setting_menu_type_rtk_station_selected">Select D-RTK 2 Mobile Station</string>
+    <string name="uxsdk_rtk_setting_menu_type_nrtk_desc">Qianxun Network RTK</string>
+    <string name="uxsdk_rtk_channel_b_not_support_net_rtk">Network RTK not supported by Controller B</string>
+    <string name="uxsdk_rtk_channel_b_not_support_net_custom_rtk">Custom network RTK not supported by Controller B</string>
+    <string name="uxsdk_rtk_setting_menu_esc_beeping_tip">Motors are running. Stop them and try again.</string>
+    <string name="uxsdk_rtk_setting_menu_switch_des_info">Restart aircraft after switching RTK services</string>
+    <string name="uxsdk_rtk_setting_menu_base_gps_input_desc">Make sure D-RTK 2 Mobile Station is in open area and do not adjust position after setup. Unable to connect to mobile station after starting aircraft propellers</string>
+    <string name="uxsdk_rtk_setting_menu_station_net_rtk_desc">Receiving RTK signal. Ensure network connection is stable</string>
+    <string name="uxsdk_rtk_setting_menu_settting">Save</string>
+    <string name="uxsdk_rtk_setting_menu_rtk_setting_success">Set successfully</string>
+    <string name="uxsdk_rtk_setting_menu_setting_fail">Setting failed</string>
+    <string name="uxsdk_rtk_setting_menu_rtk_setting_fail_settings_invalid">Setting failed. Invalid parameters</string>
+
+
+    <!--Lens Control Widget-->
+    <string name="uxsdk_lens_type_wide">WIDE</string>
+    <string name="uxsdk_lens_type_zoom">ZOOM</string>
+    <string name="uxsdk_lens_type_ir">IR</string>
+
+    <!--RTK Connect Widget-->
+    <string name="uxsdk_rtk_problem_detection">Check the following</string>
+    <string name="uxsdk_rtk_signal_search_again">Retry</string>
+    <string name="uxsdk_rtk_base_station_not_found">No D-RTK 2 Mobile Stations found</string>
+    <string name="uxsdk_rtk_base_station_not_found_reason">1. Check whether the D-RTK 2 Mobile Station is powered on\n2. Ensure the D-RTK 2 Mobile Station is placed in an open area free of obstructions\n3. Check whether the D-RTK 2 Mobile Station is set in Broadcast mode</string>
+    <string name="uxsdk_rtk_connect_description">View D-RTK 2 connection guide</string>
+    <string name="uxsdk_rtk_base_station_connect_fail">Connection failed</string>
+    <string name="uxsdk_rtk_base_station_search_false_and_try_again">Request failed. Check and try again</string>
+
+    <!--rtk guidance-->
+    <string name="uxsdk_rtk_guidance_reset_title">Reset Password</string>
+    <string name="uxsdk_rtk_guidance_step1_title">Power On</string>
+    <string name="uxsdk_rtk_guidance_step2_title">Switch Modes</string>
+    <string name="uxsdk_rtk_guidance_step3_title">Connect to DJI Pilot</string>
+    <string name="uxsdk_rtk_guidance_reset_content">Press and hold the linking button for 3 seconds while pressing the M button simultaneously. The indicator will blink red several times to indicate that the password has been reset to 123456</string>
+    <string name="uxsdk_rtk_guidance_step1_content">Press and hold the power button for 3 seconds. The indicator will display solid green to indicate initialization is complete</string>
+    <string name="uxsdk_rtk_guidance_step2_content">Press and hold the operating mode button for two seconds until the indicator blinks yellow. Then, press the same button to switch mobile station modes.</string>
+    <string name="uxsdk_rtk_guidance_step3_content">Go to RTK Settings and select the current D-RTK 2 mobile station. Linking is now complete</string>
+    <string name="uxsdk_rtk_guidance_step2_image_desc">The device automatically restarts after switching to and from Broadcast mode. Restarting takes around 10s</string>
+    <string name="uxsdk_rtk_guidance_btn_previous">Back</string>
+    <string name="uxsdk_rtk_guidance_btn_next">Next</string>
+    <string name="uxsdk_rtk_guidance_btn_finish">Complete</string>
+    <string name="uxsdk_rtk_guidance_replay">Replay</string>
+    <string name="uxsdk_rtk_guidance_reset_tip">Reset Success</string>
+    <string name="uxsdk_rtk_guidance_step2_tip">Tap to switch modes</string>
+    <string name="uxsdk_rtk_guidance_five_mode">Broadcast mode is indicated by the indicator blinking five times in a row</string>
+
+
+    <!--GpsSignalWidget-->
+    <string name="uxsdk_fpv_top_bar_rtk_title">RTK Positioning</string>
+    <string name="uxsdk_fpv_top_bar_rtk_state_title">RTK Status</string>
+    <string name="uxsdk_setting_menu_rtk_state_disconnect">Not Connected</string>
+    <string name="uxsdk_fpv_top_bar_gps_title">GNSS Positioning</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_title">Signal</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_state_strong">Strong</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_state_normal">Normal</string>
+    <string name="uxsdk_fpv_top_bar_gps_signal_state_weak">Weak</string>
+    <string name="uxsdk_fpv_top_bar_rtk_state_fixed">Converged</string>
+    <string name="uxsdk_fpv_top_bar_rtk_state_not_fixed">Not Converged</string>
+    <string name="uxsdk_fpv_top_bar_satellite_count">Satellites</string>
+    <string name="uxsdk_checklist_manual_rtk_not_open">Disabled</string>
+    <string name="uxsdk_checklist_rtk_status_converging">Converging...</string>
+    <string name="uxsdk_checklist_rtk_status_connected">Connected</string>
+    <string name="uxsdk_abnormal">Abnormal</string>
+    <string name="uxsdk_normal">Normal</string>
+
+
 </resources>

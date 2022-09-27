@@ -23,10 +23,22 @@
 
 package dji.v5.ux.core.widget.useraccount;
 
+
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+
+import dji.v5.common.callback.CommonCallbacks;
+import dji.v5.common.error.IDJIError;
+import dji.v5.manager.account.LoginInfo;
+import dji.v5.manager.account.LoginInfoUpdateListener;
+import dji.v5.manager.interfaces.IUserAccountManager;
 import dji.v5.ux.core.base.DJISDKModel;
+import dji.v5.ux.core.base.UXSDKError;
 import dji.v5.ux.core.base.WidgetModel;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
+import dji.v5.ux.core.util.DataProcessor;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
 
 /**
  * User Account Login Widget Model
@@ -34,154 +46,103 @@ import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
  * Widget Model for {@link UserAccountLoginWidget} used to define the
  * underlying logic and communication
  */
-public class UserAccountLoginWidgetModel extends WidgetModel
-       /** implements UserAccountManager.UserAccountStateChangeListener**/ {
+public class UserAccountLoginWidgetModel extends WidgetModel {
 
-//    //region Fields
-//    private static final String TAG = "LoginWidgetModel";
-//    private final DataProcessor<UserAccountState> userAccountStateDataProcessor;
-//    private final DataProcessor<UserAccountInformation> userAccountInformationDataProcessor;
-//    private UserAccountManager userAccountManager;
-//
-//    //endregion
-//
-//    public UserAccountLoginWidgetModel(@NonNull DJISDKModel djiSdkModel,
-//                                       @NonNull ObservableInMemoryKeyedStore keyedStore,
-//                                       @NonNull UserAccountManager userAccountManager) {
-//        super(djiSdkModel, keyedStore);
-//        this.userAccountManager = userAccountManager;
-//        userAccountStateDataProcessor = DataProcessor.create(UserAccountState.UNKNOWN);
-//        userAccountInformationDataProcessor = DataProcessor.create(new UserAccountInformation("", false));
-//    }
-//
-//    @Override
-//    protected void inSetup() {
-//        if (userAccountManager != null) {
-//            userAccountManager.addUserAccountStateChangeListener(this);
-//            UserAccountState userAccountState = userAccountManager.getUserAccountState();
-//            userAccountStateDataProcessor.onNext(userAccountState);
-//            if (userAccountState == UserAccountState.AUTHORIZED) {
-//                userAccountManager.getLoggedInDJIUserAccountName(new CommonCallbacks.CompletionCallbackWith<String>() {
-//                    @Override
-//                    public void onSuccess(String s) {
-//                        userAccountInformationDataProcessor.onNext(new UserAccountInformation(s, true));
-//                    }
-//
-//                    @Override
-//                    public void onFailure(DJIError error) {
-//                        DJILog.e(TAG, error.getDescription());
-//                    }
-//                });
-//            }
-//        }
-//    }
-//
-//    @Override
-//    protected void inCleanup() {
-//        userAccountManager.removeUserAccountStateChangeListener(this);
-//    }
-//
-//    @Override
-//    protected void updateStates() {
-//        //empty
-//    }
-//
-//    @Override
-//    public void onUserAccountStateChanged(UserAccountState state, UserAccountInformation information) {
-//        userAccountStateDataProcessor.onNext(state);
-//        userAccountInformationDataProcessor.onNext(information);
-//    }
-//
-//    //region Data
-//
-//    /**
-//     * Get user account information
-//     *
-//     * @return Flowable of type UserAccountInformation
-//     */
-//    public Flowable<UserAccountInformation> getUserAccountInformation() {
-//        return userAccountInformationDataProcessor.toFlowable();
-//    }
-//
-//    /**
-//     * Get user account state
-//     *
-//     * @return Flowable of type UserAccountState
-//     */
-//    public Flowable<UserAccountState> getUserAccountState() {
-//        return userAccountStateDataProcessor.toFlowable();
-//    }
-//
-//    //endregion
-//
-//    //region Actions
-//
-//    /**
-//     * Log into user account
-//     *
-//     * @param context for showing logging pop up
-//     * @return completable indicating the success or failure
-//     */
-//    public Completable loginUser(@NonNull Context context) {
-//
-//        return Completable.create(emitter -> {
-//            if (userAccountManager == null) {
-//                emitter.onError(new UXSDKError(UXSDKErrorDescription.USER_ACCOUNT_MANAGER_ERROR));
-//                return;
-//            }
-//            userAccountManager.logIntoDJIUserAccount(context,
-//                    new CommonCallbacks.CompletionCallbackWith<UserAccountState>() {
-//                        @Override
-//                        public void onSuccess(UserAccountState userAccountState) {
-//                            emitter.onComplete();
-//                        }
-//
-//                        @Override
-//                        public void onFailure(DJIError error) {
-//                            if (!emitter.isDisposed()) {
-//                                UXSDKError uxsdkError = new UXSDKError(error);
-//                                emitter.onError(uxsdkError);
-//                            }
-//                        }
-//                    });
-//        });
-//    }
-//
-//    /**
-//     * Log out the current logged in user account
-//     *
-//     * @return completable indicating the success or failure
-//     */
-//    public Completable logoutUser() {
-//        return Completable.create(emitter -> {
-//            if (userAccountManager == null) {
-//                emitter.onError(new UXSDKError(UXSDKErrorDescription.USER_ACCOUNT_MANAGER_ERROR));
-//                return;
-//            }
-//            userAccountManager.logoutOfDJIUserAccount(error -> {
-//                if (error == null) {
-//                    emitter.onComplete();
-//                } else {
-//                    emitter.onError(new UXSDKError(error));
-//                }
-//            });
-//        });
-//    }
+    //region Fields
+    private DataProcessor<LoginInfo> loginInfoDataProcessor;
+    private IUserAccountManager userAccountManager;
+    private LoginInfoUpdateListener loginInfoUpdateListener = loginInfo -> loginInfoDataProcessor.onNext(loginInfo);
+
 
     //endregion
 
-
-    public UserAccountLoginWidgetModel(@NonNull DJISDKModel djiSdkModel, @NonNull ObservableInMemoryKeyedStore uxKeyManager) {
-        super(djiSdkModel, uxKeyManager);
+    public UserAccountLoginWidgetModel(@NonNull DJISDKModel djiSdkModel,
+                                       @NonNull ObservableInMemoryKeyedStore keyedStore,
+                                       @NonNull IUserAccountManager userAccountManager) {
+        super(djiSdkModel, keyedStore);
+        this.userAccountManager = userAccountManager;
+        loginInfoDataProcessor = DataProcessor.create(new LoginInfo());
     }
+
 
     @Override
     protected void inSetup() {
-        //暂无实现
+        if (userAccountManager != null) {
+            userAccountManager.addLoginInfoUpdateListener(loginInfoUpdateListener);
+        }
     }
 
     @Override
     protected void inCleanup() {
-        //暂无实现
+        userAccountManager.removeLoginInfoUpdateListener(loginInfoUpdateListener);
     }
+
+    @Override
+    protected void updateStates() {
+        //empty
+    }
+
+
+    //region Data
+
+    /**
+     * Get user account information
+     *
+     * @return Flowable of type UserAccountInformation
+     */
+    public Flowable<LoginInfo> getUserAccountInformation() {
+        return loginInfoDataProcessor.toFlowable();
+    }
+
+
+    //endregion
+
+    //region Actions
+
+    /**
+     * Log into user account
+     *
+     * @param context for showing logging pop up
+     * @return completable indicating the success or failure
+     */
+    public Completable loginUser(@NonNull FragmentActivity context) {
+
+        return Completable.create(emitter -> userAccountManager.logInDJIUserAccount(context, false, new CommonCallbacks.CompletionCallback() {
+            @Override
+            public void onSuccess() {
+                emitter.onComplete();
+            }
+
+            @Override
+            public void onFailure(@NonNull IDJIError error) {
+                if (!emitter.isDisposed()) {
+                    UXSDKError uxsdkError = new UXSDKError(error);
+                    emitter.onError(uxsdkError);
+                }
+            }
+        }));
+    }
+
+    /**
+     * Log out the current logged in user account
+     *
+     * @return completable indicating the success or failure
+     */
+    public Completable logoutUser() {
+        return Completable.create(emitter -> userAccountManager.logOutDJIUserAccount(new CommonCallbacks.CompletionCallback() {
+            @Override
+            public void onSuccess() {
+                emitter.onComplete();
+            }
+
+            @Override
+            public void onFailure(@NonNull IDJIError error) {
+                emitter.onError(new UXSDKError(error));
+            }
+        }));
+    }
+
+    //endregion
+
+
 }

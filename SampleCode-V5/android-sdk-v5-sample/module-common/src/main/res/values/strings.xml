@@ -5,7 +5,7 @@
     <string name="news_description">DJI Mobile SDK V5 has a series of APIs to control the software and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.</string>
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/en-us/community/topics</string>
-    <string name="release_node_url">https://developer.dji.com/document/fa8f7ff4-1c05-4550-918e-0282f27752b9</string>
+    <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/en/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/en-us/requests/new</string>
 
     <string name="app_name_all">MSDK ALL</string>
@@ -33,14 +33,17 @@
     <string name="item_live_stream_title">Live Stream</string>
     <string name="item_live_stream_description">Demonstrate how to use the live stream function</string>
 
-    <string name="item_flight_record_title">Flight Record</string>
-    <string name="item_flight_record_description">Demonstrate how to use the Flight Record function</string>
+    <string name="item_flight_record_title">Flight Log</string>
+    <string name="item_flight_record_description">Demonstrate how to use the Flight Log function</string>
 
     <string name="item_rtk_title">Network RTK</string>
     <string name="item_rtk_description">Demonstrate how to use the RTK function</string>
 
     <string name="item_megaphone_title">Megaphone</string>
     <string name="item_megaphone_description">Demonstrate how to use the Megaphone function</string>
+
+    <string name="item_lte_title">LTE</string>
+    <string name="item_lte_description">Demonstrate how to use the LTE function</string>
 
     <string name="btn_init_msdk">Init MSDK</string>
     <string name="btn_unInit_msdk">UnInit MSDK</string>
@@ -51,7 +54,11 @@
     <string name="btn_enable_virtual_stick">Enable Virtual Stick</string>
     <string name="btn_disable_virtual_stick">Disable Virtual Stick</string>
     <string name="btn_set_virtual_stick_speed_level">Set Speed Level</string>
-    <string name="btn_use_rc_stick_value">Use RC stick Value</string>
+    <string name="btn_use_rc_stick_value">Start/Stop Use Rc Stick Value</string>
+    <string name="set_virtual_stick_advanced_param">Set Virtual Stick Advanced Param</string>
+    <string name="send_virtual_stick_advanced_param">Send Virtual Stick Advanced Param</string>
+    <string name="enable_virtual_stick_advanced_mode">Enable Virtual Stick Advanced Mode</string>
+    <string name="disable_virtual_stick_advanced_mode">Disable Virtual Stick Advanced Mode</string>
 
     <string name="btn_take_off">Take Off</string>
     <string name="btn_landing">Landing</string>
@@ -65,13 +72,6 @@
     <string name="btn_start_broadcast">Start Broadcast</string>
     <string name="btn_stop_broadcast">Stop Broadcast</string>
     <string name="btn_switch_source">SwitchSource</string>
-
-    <string name="btn_start_custom_network_rtk_service">Start Custom NetWork RTK</string>
-    <string name="btn_stop_custom_network_rtk_service">Stop Custom NetWork RTK</string>
-    <string name="btn_set_custom_network_rtk_settings">Set custom network RTK account information</string>
-    <string name="btn_start_qx_network_rtk_service">Start QX NetWork RTK</string>
-    <string name="btn_stop_qx_network_rtk_service">Stop QX NetWork RTK</string>
-    <string name="btn_set_qx_network_rtk_coordinate_system">Set QX NetWork RTK Coordinate System</string>
 
     <string name="btn_get_flight_record_path">Get Flight Record Path</string>
     <string name="btn_get_fly_compressed_path">Get Fly Compressed Log Path</string>
@@ -135,6 +135,18 @@
     <string name="item_upgrade_title">Upgrade</string>
     <string name="item_upgrade_description">Demonstrate how to use the Upgrade function</string>
 
+    <!--Network RTK-->
+    <string name="btn_start_custom_network_rtk_service">Start Custom NetWork RTK</string>
+    <string name="btn_stop_custom_network_rtk_service">Stop Custom NetWork RTK</string>
+    <string name="btn_set_custom_network_rtk_settings">Set custom network RTK account information</string>
+    <string name="btn_start_qx_network_rtk_service">Start QX NetWork RTK</string>
+    <string name="btn_stop_qx_network_rtk_service">Stop QX NetWork RTK</string>
+    <string name="btn_set_qx_network_rtk_coordinate_system">Set QX NetWork RTK Coordinate System</string>
+
+    <!--CMSS RTK-->
+    <string name="btn_start_cmcc_rtk_service">Start CMCC RTK</string>
+    <string name="btn_stop_cmcc_rtk_service">Stop CMCC RTK</string>
+
 
     <!--PSDK-->
     <string name="item_psdk_title">PSDK Test</string>
@@ -148,6 +160,7 @@
     <string name="btn_mission_pause">Pause Misson</string>
     <string name="btn_mission_resume">Resume Mission</string>
     <string name="btn_mission_stop">Stop Mission</string>
+    <string name="btn_mission_wayline_select">Select Wayline ID</string>
     <string name="btn_get_payload_product_name">Get Payload Product Name </string>
 
     <!-- StationRTK   -->
@@ -172,10 +185,10 @@
     <string name="tv_station_relative_distance">Relative Distance %1$s m</string>
     <string name="tv_station_list_tip">Please click the list below for base station connection</string>
     <string name="switch_rtk_type_tip">Switching RTK service type requires restarting the aircraft</string>
-    <string name="tip_input_station_password" >Enter the password, note that the password must be a string consisting of 6 numbers from 0-9, such as "012345"</string>
-    <string name="tip_reset_station_password" >Reset the password, note that the password must be a string consisting of 6 numbers from 0 to 9, such as "012345"</string>
-    <string name="tip_input_station_location" >Enter base station coordinates</string>
-    <string name="tip_change_station_name" >Modify the base station name, note: the base station name only takes 4 bytes under UTF-8, such as setting the name to "abcdef", the final effect is "abcd"</string>
+    <string name="tip_input_station_password">Enter the password, note that the password must be a string consisting of 6 numbers from 0-9, such as "012345"</string>
+    <string name="tip_reset_station_password">Reset the password, note that the password must be a string consisting of 6 numbers from 0 to 9, such as "012345"</string>
+    <string name="tip_input_station_location">Enter base station coordinates</string>
+    <string name="tip_change_station_name">Modify the base station name, note: the base station name only takes 4 bytes under UTF-8, such as setting the name to "abcdef", the final effect is "abcd"</string>
 
     <!-- RTK Center   <-->
     <string name="item_trk_center_title">RTK Center</string>
@@ -190,8 +203,10 @@
     <string name="btn_rtk_source_network">Custom Network RTK</string>
     <string name="btn_rtk_source_qx">Chihiro RTK</string>
     <string name="btn_rtk_source_base_rtk">D-RTK2</string>
+    <string name="btn_rtk_source_cmcc_rtk">CMCC</string>
     <string name="bt_open_network_rtk">Open  network RTK </string>
     <string name="bt_open_rtk_station">Open D-RTK2</string>
+    <string name="bt_open_cmcc_rtk">Open CMCC RTK</string>
     <string name="tv_rtk_precision_preservation_hint">4.When the communication of the RTK module is abnormal, the current RTK state will be automatically maintained, but the accuracy will gradually decrease. If the connection is not reconnected for more than 10 minutes, the RTK will be automatically exited</string>
     <string name="bt_turn_on_rtk_precision_preservation">Turn on RTK precision preservation</string>
     <string name="bt_turn_off_rtk_precision_preservation">Turn off RTK precision preservation</string>
@@ -211,6 +226,8 @@
     <string name="tv_rtk_systemState_info_hint">7. RTKSystemState information display: </string>
     <string name="tv_rtk_connect">Flight controller and fuselage RTK connection status: </string>
     <string name="tv_rtk_healthy">RTK module data health status：</string>
+    <string name="tv_rtk_keep_status">RTK precision remains on: </string>
+
     <string name="tv_rtk_error">RTK module error message: </string>
     <string name="tv_rtk_antenna_1">The number of satellites searched by the antenna 1 of the UAV RTK module：</string>
     <string name="tv_rtk_antenna_2">The number of satellites searched by the antenna 2 of the UAV RTK module：</string>
@@ -229,21 +246,50 @@
     <!--Perception-->
     <string name="item_perception_title">Perception module</string>
     <string name="item_perception_description">Demonstrate how to use the related functions of perception</string>
-    <string name="tv_obstacle_avoidance_master_switch_tip">1.Obstacle avoidance master switch:</string>
-    <string name="bt_set_obstacle_avoidance_sub_switch">2.Set the obstacle avoidance on state of a specific direction：</string>
+    <string name="bt_set_obstacle_avoidance_sub_switch">1.Set the obstacle avoidance on state of a specific direction：</string>
+    <string name="tv_sense_switch_status">Sensing switch status：</string>
     <string name="bt_set_obstacle_avoidance_upwrard_switch">Upward</string>
     <string name="bt_set_obstacle_avoidance_down_switch">Down</string>
     <string name="bt_set_obstacle_avoidance_horizontal_switch">Horizontal</string>
-    <string name="bt_set_vision_positioning_enable_tip">3.Visual positioning enabled：</string>
-    <string name="bt_set_precision_landing_enable_tip">4.Precise landing enabled：</string>
-    <string name="tv_other_obstacle_avoidance_tip">5.Other obstacle avoidance information display： </string>
+    <string name="tv_radar_switch_status">Radar switch status：</string>
+    <string name="bt_set_radar_obstacle_avoidance_upwrard_switch">Upward</string>
+    <string name="bt_set_radar_obstacle_avoidance_horizontal_switch">Horizontal</string>
+    <string name="bt_set_vision_positioning_enable_tip">2.Visual positioning enabled：</string>
+    <string name="bt_set_precision_landing_enable_tip">3.Precise landing enabled：</string>
+    <string name="tv_other_obstacle_avoidance_tip">4.Other obstacle avoidance information display： </string>
     <string name="bt_set_obstacle_avoidance_type">Set obstacle avoidance type</string>
-    <string name="bt_get_obstacle_avoidance_type">Get obstacle avoidance type</string>
     <string name="bt_set_obstacle_avoidance_warning_distance">Set the alarm distance in a specific direction</string>
-    <string name="bt_get_obstacle_avoidance_warning_distance">Get the alarm distance in a specific direction</string>
     <string name="bt_set_obstacle_avoidance_braking_distance">Set the stopping distance in a specific direction</string>
-    <string name="bt_get_obstacle_avoidance_braking_distance">Get the stopping distance in a specific direction</string>
 
+    <!--Security Code-->
+    <string name="item_security_code_title">Security Password</string>
+    <string name="item_security_code_description">Demonstrate how to use security password related features</string>
+    <string name="btn_verify_password">Verify Password</string>
+    <string name="btn_modify_password">Modify Password</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_set_password">Set Password</string>
+    <string name="tip_set_password">The length of the password should be at least 4 digits. It is recommended to use numbers, uppercase and lowercase letters to form the password.</string>
+    <string name="tip_reset_password">Resetting the security password will format the SD card, please make sure the media data is backed up</string>
+    <string name="tip_set_password_fail">The SD card of the current device is encrypted and does not support repeated password settings. If you need to change the password, please click the Change Password function.</string>
+    <string name="tip_set_password_not_support">The current device SD does not support encryption and cannot set a password</string>
+    <string name="tip_verify_password_fail">The current device SD card does not need to be decrypted</string>
+    <string name="tip_modify_password_not_support">The current device SD has not set a password, please set a password first</string>
+    <string name="tip_has_set_password_already">The current device SD has been set with a password and cannot continue to set the password. You can choose to change your password or reset your password</string>
+    <string name="tip_device_type">MASTER means aircraft, SLAVE1 means left gimbal, SLAVE2 means right gimbal, SLAVE3 means upper gimbal</string>
+
+    <string name="securitycode_operation_result_no_err">Operation success</string>
+    <string name="securitycode_operation_result_running">System busy. Try again later</string>
+    <string name="securitycode_operation_result_busy">System busy. Try again later</string>
+    <string name="securitycode_operation_result_set_failed">Setting security code failed. Try again</string>
+    <string name="securitycode_operation_result_verify_failed">Verifying security code failed</string>
+    <string name="securitycode_operation_result_new_pw_repeat">New security code is the same as current security code. Try again</string>
+    <string name="securitycode_operation_result_reset_failed">Disabling security code error</string>
+    <string name="securitycode_operation_result_not_current_device_result">Another device error</string>
+    <string name="securitycode_operation_result_unknown">Unknown error</string>
+    <string name="securitycode_operation_result_user_name_format_invalid">Username contains invalid characters</string>
+    <string name="securitycode_operation_result_control_not_support">Operation not supported</string>
+    <string name="securitycode_operation_result_feature_not_support">Feature not supported</string>
+    <string name="securitycode_operation_result_command_not_support">Command not supported</string>
     <!--UAS-->
     <string name="item_uas_title">UAS module</string>
     <string name="item_uas_description">Demonstrate how to use the related functions of uas</string>
@@ -342,4 +388,9 @@
 
     <string name="msg_download_compelete_tips">Download compelete ,average download speed</string>
     <string name="msg_download_save_tips">File is saved in</string>
+
+
+    <string name="delete_files">delete file</string>
+    <string name="select_files">select file</string>
+    <string name="unselect_files"> unselect file</string>
 </resources>

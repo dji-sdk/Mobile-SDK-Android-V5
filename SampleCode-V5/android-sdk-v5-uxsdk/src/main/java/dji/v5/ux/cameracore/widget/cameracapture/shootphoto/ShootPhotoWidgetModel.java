@@ -23,11 +23,14 @@
 
 package dji.v5.ux.cameracore.widget.cameracapture.shootphoto;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
-import dji.sdk.keyvalue.value.camera.CameraSDCardState;
 import dji.sdk.keyvalue.value.camera.CameraShootPhotoMode;
+import dji.sdk.keyvalue.value.camera.CameraStorageInfo;
+import dji.sdk.keyvalue.value.camera.CameraStorageInfos;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
 import dji.sdk.keyvalue.value.camera.CameraType;
 import dji.sdk.keyvalue.value.camera.PhotoAEBPhotoCount;
@@ -35,6 +38,7 @@ import dji.sdk.keyvalue.value.camera.PhotoAEBSettings;
 import dji.sdk.keyvalue.value.camera.PhotoBurstCount;
 import dji.sdk.keyvalue.value.camera.PhotoIntervalShootSettings;
 import dji.sdk.keyvalue.value.camera.PhotoPanoramaMode;
+import dji.sdk.keyvalue.value.camera.SDCardLoadState;
 import dji.sdk.keyvalue.value.camera.SSDOperationState;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
@@ -80,10 +84,10 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
     private final DataProcessor<PhotoBurstCount> rawBurstCount;
     private final DataProcessor<PhotoIntervalShootSettings> timeIntervalSettings;
     private final DataProcessor<PhotoPanoramaMode> panoramaMode;
+    private final DataProcessor<CameraStorageInfos> storageInfosProcessor;
     private final DataProcessor<CameraStorageLocation> storageLocation;
-    private final DataProcessor<CameraSDCardState> sdCardState;
-    private final DataProcessor<CameraSDCardState> storageState;
-    private final DataProcessor<CameraSDCardState> innerStorageState;
+    private final DataProcessor<SDCardLoadState> sdCardState;
+    private final DataProcessor<SDCardLoadState> innerStorageState;
     private final DataProcessor<SSDOperationState> ssdState;
     private final DataProcessor<Integer> sdAvailableCaptureCount;
     private final DataProcessor<Integer> innerStorageAvailableCaptureCount;
@@ -107,7 +111,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
 
         this.cameraPhotoState = DataProcessor.create(cameraPhotoState);
         CameraSDPhotoStorageState cameraSDStorageState = new CameraSDPhotoStorageState(
-                CameraStorageLocation.SDCARD, 0, CameraSDCardState.NOT_INSERTED);
+                CameraStorageLocation.SDCARD, 0, SDCardLoadState.NOT_INSERTED);
         cameraStorageState = DataProcessor.create(cameraSDStorageState);
         canStartShootingPhoto = DataProcessor.create(false);
         shootPhotoNotAllowed = DataProcessor.create(true);
@@ -125,14 +129,14 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
         isShootingPanorama = DataProcessor.create(false);
         isStoringPhoto = DataProcessor.create(false);
         storageLocation = DataProcessor.create(CameraStorageLocation.SDCARD);
-        sdCardState = DataProcessor.create(CameraSDCardState.UNKNOWN_ERROR);
-        storageState = DataProcessor.create(CameraSDCardState.NORMAL);
-        innerStorageState = DataProcessor.create(CameraSDCardState.UNKNOWN_ERROR);
+        sdCardState = DataProcessor.create(SDCardLoadState.UNKNOWN);
+        innerStorageState = DataProcessor.create(SDCardLoadState.UNKNOWN);
         ssdState = DataProcessor.create(SSDOperationState.UNKNOWN);
         sdAvailableCaptureCount = DataProcessor.create(INVALID_AVAILABLE_CAPTURE_COUNT);
         innerStorageAvailableCaptureCount = DataProcessor.create(INVALID_AVAILABLE_CAPTURE_COUNT);
         rawPhotoBurstCaptureCount = DataProcessor.create(INVALID_AVAILABLE_CAPTURE_COUNT);
         isProductConnected = DataProcessor.create(false);
+        storageInfosProcessor = DataProcessor.create(new CameraStorageInfos(CameraStorageLocation.UNKNOWN, new ArrayList<>()));
         flatCameraModule = new FlatCameraModule();
         addModule(flatCameraModule);
     }
@@ -288,9 +292,21 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraType, cameraIndex), cameraType, type -> cameraDisplayName.onNext(type.name()));
 
         // Storage
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraStorageLocation, cameraIndex), storageLocation);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraSDCardState, cameraIndex), sdCardState);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageState, cameraIndex), innerStorageState);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraStorageInfos, cameraIndex), storageInfosProcessor, cameraStorageInfos -> {
+            storageLocation.onNext(cameraStorageInfos.getCurrentStorageType());
+
+            CameraStorageInfo internalInfo = cameraStorageInfos.getCameraStorageInfoByLocation(CameraStorageLocation.INTERNAL);
+            if (internalInfo != null) {
+                innerStorageState.onNext(internalInfo.getStorageState());
+                sdAvailableCaptureCount.onNext(internalInfo.getAvailablePhotoCount());
+            }
+
+            CameraStorageInfo sdcardInfo = cameraStorageInfos.getCameraStorageInfoByLocation(CameraStorageLocation.SDCARD);
+            if (sdcardInfo != null) {
+                sdCardState.onNext(sdcardInfo.getStorageState());
+                innerStorageAvailableCaptureCount.onNext(sdcardInfo.getAvailablePhotoCount());
+            }
+        });
         bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDOperationState, cameraIndex), ssdState);
         bindDataProcessor(KeyTools.createKey(CameraKey.KeySDCardAvailablePhotoCount, cameraIndex), sdAvailableCaptureCount);
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageAvailablePhotoCount, cameraIndex), innerStorageAvailableCaptureCount);
@@ -379,18 +395,12 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
 
         CameraShootPhotoMode currentShootPhotoMode = flatCameraModule.getShootPhotoModeProcessor().getValue();
         long availableCaptureCount = getAvailableCaptureCount(currentStorageLocation, currentShootPhotoMode);
-        if (availableCaptureCount == INVALID_AVAILABLE_CAPTURE_COUNT) {
-            return;
-        }
-
         CameraPhotoStorageState newCameraPhotoStorageState = null;
         if (currentShootPhotoMode == CameraShootPhotoMode.RAW_BURST) {
             newCameraPhotoStorageState = new CameraSSDPhotoStorageState(CameraStorageLocation.UNKNOWN, availableCaptureCount, ssdState.getValue());
         } else if (CameraStorageLocation.SDCARD.equals(currentStorageLocation)) {
-            if (!CameraSDCardState.UNKNOWN_ERROR.equals(sdCardState.getValue())) {
+            if (!SDCardLoadState.UNKNOWN.equals(sdCardState.getValue())) {
                 newCameraPhotoStorageState = new CameraSDPhotoStorageState(currentStorageLocation, availableCaptureCount, sdCardState.getValue());
-            } else if (!CameraSDCardState.UNKNOWN_ERROR.equals(storageState.getValue())) {
-                newCameraPhotoStorageState = new CameraSDPhotoStorageState(currentStorageLocation, availableCaptureCount, storageState.getValue());
             }
         } else if (CameraStorageLocation.INTERNAL.equals(currentStorageLocation)) {
             newCameraPhotoStorageState = new CameraSDPhotoStorageState(currentStorageLocation, availableCaptureCount, innerStorageState.getValue());
@@ -425,9 +435,8 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
     private void onCameraConnected(boolean isCameraConnected) {
         if (!isCameraConnected) {
             // Reset storage state
-            sdCardState.onNext(CameraSDCardState.UNKNOWN_ERROR);
-            storageState.onNext(CameraSDCardState.UNKNOWN_ERROR);
-            innerStorageState.onNext(CameraSDCardState.UNKNOWN_ERROR);
+            sdCardState.onNext(SDCardLoadState.UNKNOWN);
+            innerStorageState.onNext(SDCardLoadState.UNKNOWN);
             ssdState.onNext(SSDOperationState.UNKNOWN);
         }
     }

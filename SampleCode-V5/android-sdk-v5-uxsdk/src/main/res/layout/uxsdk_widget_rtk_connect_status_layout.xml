@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/uxsdk_16_dp"
+    tools:background="@color/uxsdk_gray">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_rtk_not_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_rtk_signal_selected_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/uxsdk_36_dp"
+            android:gravity="center_vertical"
+            android:text="@string/uxsdk_rtk_base_station_not_found"
+            android:textColor="@color/uxsdk_white_60_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/rtk_signal_problem_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/uxsdk_23_dp"
+            android:text="@string/uxsdk_rtk_problem_detection"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_rtk_signal_selected_title" />
+
+        <TextView
+            android:id="@+id/tv_rtk_signal_problem_checked_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/uxsdk_20_dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/uxsdk_white_60_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rtk_signal_problem_checked" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_rtk_has_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_rtk_signal_searching"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/uxsdk_36_dp"
+            android:gravity="center_vertical"
+            android:text="@string/uxsdk_rtk_setting_menu_type_rtk_station_selected"
+            android:textColor="@color/uxsdk_white_60_percent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_rtk_signal_search_iv"
+            android:layout_width="@dimen/uxsdk_22_dp"
+            android:layout_height="@dimen/uxsdk_22_dp"
+            android:layout_marginStart="@dimen/uxsdk_4_dp"
+            android:src="@drawable/uxsdk_ic_refresh"
+            app:layout_constraintBottom_toBottomOf="@id/tv_rtk_signal_searching"
+            app:layout_constraintStart_toEndOf="@id/tv_rtk_signal_searching"
+            app:layout_constraintTop_toTopOf="@id/tv_rtk_signal_searching" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rl_rtk_signal_searching_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_rtk_signal_searching" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/bt_rtk_signal_search_again"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_30_dp"
+        android:layout_marginBottom="@dimen/uxsdk_12_dp"
+        android:background="@drawable/uxsdk_bg_white_radius"
+        android:gravity="center"
+        android:text="@string/uxsdk_rtk_signal_search_again"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

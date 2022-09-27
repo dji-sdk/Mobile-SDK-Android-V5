@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 最新版本 V5.0.0
+# DJI Mobile SDK for Android V5 最新版本 V5.1.0
 
 [English Version](README.md)
 
@@ -8,6 +8,7 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 
 
 当前版本支持机型：
+* [DJI Mavic 3 行业系列](https://www.dji.com/cn/mavic-3-enterprise)
 * [经纬 M30 系列](https://www.dji.com/cn/matrice-30?site=brandsite&from=nav)
 * [经纬 M300 RTK](https://www.dji.com/cn/matrice-300?site=brandsite&from=nav)
 
@@ -16,6 +17,7 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 ```
 ├── Docs
 │   └── API-Diff     // API差异
+│       ├── 5.0.0_5.1.0_android_diff.html
 │       ├── 5.0.0_beta2_5.0.0_beta3_android_diff.html
 │       └── 5.0.0_beta3_5.0.0_android_diff.html
 ├── LICENSE.txt     //软件证书
@@ -46,7 +48,7 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 ```
 
 ### API 差异
-
+- [5.0.0_5.1.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_5.1.0_android_diff.html)
 - [5.0.0_beta3_5.0.0_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta3_5.0.0_android_diff.html)
 - [5.0.0_beta2_5.0.0_beta3_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta2_5.0.0_beta3_android_diff.html)
 
@@ -90,7 +92,7 @@ App模块：
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.0.0
+> **注意：** sdkVersion = 5.1.0
 
 | SDK包  <div style="width: 150pt">  | 说明  <div style="width: 200pt">   | 使用方式 <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

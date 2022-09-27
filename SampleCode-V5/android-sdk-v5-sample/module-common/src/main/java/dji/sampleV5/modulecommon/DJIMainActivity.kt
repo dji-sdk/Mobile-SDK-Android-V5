@@ -8,18 +8,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import dji.sampleV5.modulecommon.models.BaseMainActivityVm
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
 import dji.sampleV5.modulecommon.util.Helper
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
 import dji.v5.manager.interfaces.SDKManagerCallback
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -33,16 +34,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 abstract class DJIMainActivity : AppCompatActivity() {
 
     val tag: String = LogUtils.getTag(this)
+    private val permissionArray = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.KILL_BACKGROUND_PROCESSES,
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION,
+    )
 
     private val baseMainActivityVm: BaseMainActivityVm by viewModels()
     protected val msdkInfoVm: MSDKInfoVm by viewModels()
-    private val REQUEST_CODE: Int = 100
-    private val handler:Handler = Handler(Looper.getMainLooper())
+    private val handler: Handler = Handler(Looper.getMainLooper())
 
     abstract fun prepareUxActivity()
 
     abstract fun prepareTestingToolsActivity()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +62,14 @@ abstract class DJIMainActivity : AppCompatActivity() {
         }
 
         initMSDKInfoView()
-        requestPermission()
+        checkPermission()
         registerApp()
         prepareTestingToolsActivity()
     }
 
     @SuppressLint("SetTextI18n")
     private fun initMSDKInfoView() {
+        ToastUtils.init(this)
         msdkInfoVm.msdkInfo.observe(this) {
             text_view_version.text = StringUtils.getResStr(R.string.sdk_version, it.SDKVersion + " " + it.buildVer)
             text_view_product_name.text = StringUtils.getResStr(R.string.product_name, it.productType.name)
@@ -147,40 +155,39 @@ abstract class DJIMainActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestPermission() {
-        val permissionExternalRead = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-        val permissionExternalWrite = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        val permissionRecordAudio = ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-        val permissionKillBackgroundProcess = ActivityCompat.checkSelfPermission(this, Manifest.permission.KILL_BACKGROUND_PROCESSES)
-        if (permissionExternalRead != PackageManager.PERMISSION_GRANTED
-            || permissionExternalWrite != PackageManager.PERMISSION_GRANTED
-            || permissionRecordAudio != PackageManager.PERMISSION_GRANTED
-            || permissionKillBackgroundProcess != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    "android.permission.READ_EXTERNAL_STORAGE",
-                    "android.permission.WRITE_EXTERNAL_STORAGE",
-                    "android.permission.RECORD_AUDIO",
-                    "android.permission.KILL_BACKGROUND_PROCESSES"
-                ), REQUEST_CODE
-            )
+    private fun checkPermission() {
+        for (i in permissionArray.indices) {
+            if (!isPermissionGranted(permissionArray[i])) {
+                requestPermission()
+                break
+            }
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            REQUEST_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                ToastUtils.showToast(this, "Request Permission Success")
-            } else {
-                ToastUtils.showToast(this, "Request Permission Failed")
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { result ->
+            result?.entries?.forEach {
+                if (it.value == false) {
+                    requestPermission()
+                    return@forEach
+                }
             }
-            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
+
+    private fun requestPermission() {
+        requestPermissionLauncher.launch(permissionArray)
+    }
+
+    private fun isPermissionGranted(permission: String): Boolean {
+        return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        baseMainActivityVm.releaseSDKCallback()
+        ToastUtils.destroy()
     }
 }

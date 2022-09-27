@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018-2020 DJI
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -151,4 +150,19 @@
         <item>@string/uxsdk_camera_filter_film_i</item>
         <item>@string/uxsdk_camera_filter_hlg</item>
     </string-array>
+
+    <string-array name="uxsdk_rtk_guidance_title">
+        <item>@string/uxsdk_rtk_guidance_reset_title</item>
+        <item>@string/uxsdk_rtk_guidance_step1_title</item>
+        <item>@string/uxsdk_rtk_guidance_step2_title</item>
+        <item>@string/uxsdk_rtk_guidance_step3_title</item>
+    </string-array>
+
+    <string-array name="uxsdk_rtk_guidance_content">
+        <item>@string/uxsdk_rtk_guidance_reset_content</item>
+        <item>@string/uxsdk_rtk_guidance_step1_content</item>
+        <item>@string/uxsdk_rtk_guidance_step2_content</item>
+        <item>@string/uxsdk_rtk_guidance_step3_content</item>
+    </string-array>
+
 </resources>

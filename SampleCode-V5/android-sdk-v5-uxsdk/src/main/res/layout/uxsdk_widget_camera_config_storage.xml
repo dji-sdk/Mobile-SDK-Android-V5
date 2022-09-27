@@ -22,9 +22,11 @@
   ~
   -->
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:parentTag="dji.v5.ux.visualcamera.storage.CameraConfigStorageWidget">
 
     <ImageView
@@ -32,9 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
+        app:layout_constraintTop_toTopOf="@+id/textview_status_capacity_title"
         app:layout_constraintBottom_toBottomOf="@+id/textview_status_capacity_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textview_status_capacity_title"
+        app:layout_constraintEnd_toStartOf="@+id/textview_camera_color"
         tools:ignore="ContentDescription"
         tools:src="@drawable/uxsdk_ic_config_internal_none" />
 
@@ -45,8 +48,11 @@
         android:layout_marginStart="2dp"
         android:textColor="@color/uxsdk_white_50_percent"
         android:textSize="@dimen/uxsdk_text_size_small"
-        app:layout_constraintStart_toEndOf="@+id/imageview_storage_icon"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="@+id/textview_status_capacity_title"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_status_capacity_title"
+        app:layout_constraintStart_toEndOf="@+id/imageview_storage_icon"
+        app:layout_constraintEnd_toStartOf="@+id/barrier"
         tools:text="Black &amp; White" />
 
     <TextView
@@ -57,8 +63,11 @@
         android:maxLines="1"
         android:textColor="@color/uxsdk_white"
         android:textSize="@dimen/uxsdk_text_size_normal"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/textview_status_capacity_value"
         app:layout_constraintBottom_toBottomOf="@+id/textview_status_capacity_value"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/barrier"
         tools:text="1080P/240" />
 
     <!--suppress AndroidDomInspection -->
@@ -78,9 +87,11 @@
         android:layout_marginEnd="2dp"
         android:textColor="@color/uxsdk_white_33_percent"
         android:textSize="@dimen/uxsdk_text_size_small"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textview_status_capacity_value"
         app:layout_constraintStart_toEndOf="@+id/barrier"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:text="CAPACITY" />
 
     <TextView
@@ -91,9 +102,11 @@
         android:layout_marginEnd="2dp"
         android:textColor="@color/uxsdk_white"
         android:textSize="@dimen/uxsdk_text_size_normal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/textview_status_capacity_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/barrier"
-        app:layout_constraintTop_toBottomOf="@+id/textview_status_capacity_title"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:text="100:33" />
 
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>

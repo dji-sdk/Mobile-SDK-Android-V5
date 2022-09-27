@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dji.sampleV5.modulecommon.pages.DJIFragment
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.data.DJIRTKBaseStationConnectInfo
 import dji.sampleV5.moduleaircraft.data.RtkStationScanAdapter
@@ -25,6 +24,7 @@ import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.rtk.station.ConnectedRTKStationInfo
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
+import dji.v5.utils.common.ToastUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
 import kotlinx.android.synthetic.main.frag_station_rtk_page.*
@@ -67,7 +67,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
 
 
     private fun initView() {
-        LogUtils.d(TAG, "initView")
+        LogUtils.i(TAG, "initView")
         //初始化stationTRTK列表
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rv_station_list.layoutManager = layoutManager
@@ -89,8 +89,11 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
             handleReconnectedStationInfo(result)
         }
         rtkStationVM.rtkLocationLD.observe(viewLifecycleOwner) { result ->
-            tv_station_location_info.text = result.rtkLocation.baseStationLocation.toString()
-            rtkLocation = result.rtkLocation.baseStationLocation
+            result.rtkLocation?.apply {
+                tv_station_location_info.text = baseStationLocation.toString()
+                rtkLocation = baseStationLocation
+            }
+
         }
         rtkStationVM.stationPositionLD.observe(viewLifecycleOwner, {
             ToastUtils.showToast(it.toString())
@@ -161,20 +164,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
                     val locationCoordinate3D = LocationCoordinate3D(latitude, longitude, altitude)
                     showDialog(StringUtils.getResStr(R.string.tip_input_station_location), locationCoordinate3D.toString()) {
                         it?.let {
-                            val inputLocation = LocationCoordinate3D.fromJson(it)
-                            val distance = ceil(
-                                GpsUtils.gps2m(
-                                    latitude,
-                                    longitude,
-                                    altitude,
-                                    inputLocation.latitude,
-                                    inputLocation.longitude,
-                                    inputLocation.altitude
-                                )
-                            ).toInt()
-                            ToastUtils.showToast(StringUtils.getResStr(R.string.tv_station_relative_distance,distance))
-                            rtkStationVM.setRTKStationPosition(inputLocation)
-
+                            setRTKStationPosition(it)
                         }
                     }
                 }
@@ -196,6 +186,11 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
                 showDialog(StringUtils.getResStr(R.string.tip_reset_station_password), rtkBaseStationResetPasswordInfo.toString()) {
                     it?.let {
                         val resetPasswordInfo = it.trim()
+                        val fromJson = RTKBaseStationResetPasswordInfo.fromJson(resetPasswordInfo)
+                        if (fromJson == null) {
+                            showToJsonErrorMsg()
+                            return@let
+                        }
                         rtkStationVM.resetStationPassword(RTKBaseStationResetPasswordInfo.fromJson(resetPasswordInfo))
                     }
 
@@ -232,10 +227,10 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         //过滤重复的数据，防止界面重新刷新
         if (checkNeedUpdateUI(list)) {
             stationList.clear()
-            LogUtils.d(TAG, "clear stationList")
+            LogUtils.i(TAG, "clear stationList")
             list?.let {
                 for (i in it) {
-                    LogUtils.d(TAG, "stationName=${i.rtkStationName}+,signalLevel=${i.signalLevel}")
+                    LogUtils.i(TAG, "stationName=${i.rtkStationName}+,signalLevel=${i.signalLevel}")
                     stationList.add(i)
                     tv_station_list_tip.show()
                 }
@@ -257,7 +252,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         selectedRTKStationConnectInfo.run {
             rtkStationVM.startConnectToRTKStation(baseStationId)
             selectedRTKStationConnectInfo.refresh(RTKStationConnetState.CONNECTING)
-            LogUtils.d(TAG, "click and connecting rtk")
+            LogUtils.i(TAG, "click and connecting rtk")
         }
 
     }
@@ -273,7 +268,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
 
     private fun DJIRTKBaseStationConnectInfo.refresh(connectState: RTKStationConnetState?) {
         connectState?.let {
-            LogUtils.d(TAG, "connectState=$connectState")
+            LogUtils.i(TAG, "connectState=$connectState")
             this.connectStatus = it
         }
         rtkStationScanAdapter.notifyDataSetChanged()
@@ -284,7 +279,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         if (rtkBaseStationConnectState == null) {
             return
         }
-        LogUtils.d(TAG, rtkBaseStationConnectState.name)
+        LogUtils.i(TAG, rtkBaseStationConnectState.name)
         when (rtkBaseStationConnectState) {
             RTKStationConnetState.CONNECTED -> {
                 ToastUtils.showToast("Station has connected")
@@ -293,7 +288,7 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
                 ToastUtils.showToast("Station has disconnected")
             }
             else -> {
-                LogUtils.d(TAG, "Current station status is $rtkBaseStationConnectState")
+                LogUtils.i(TAG, "Current station status is $rtkBaseStationConnectState")
             }
         }
         connectState = rtkBaseStationConnectState
@@ -366,4 +361,30 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
             callback.actionChange(it)
         }
     }
+
+    private fun showToJsonErrorMsg() {
+        ToastUtils.showToast("数据解析失败，请重试")
+    }
+
+    private fun setRTKStationPosition(input: String) {
+        val inputLocation = LocationCoordinate3D.fromJson(input)
+        if (inputLocation == null) {
+            showToJsonErrorMsg()
+            return
+        }
+        val distance = ceil(
+            GpsUtils.gps2m(
+                rtkLocation.latitude,
+                rtkLocation.longitude,
+                rtkLocation.altitude,
+                inputLocation.latitude,
+                inputLocation.longitude,
+                inputLocation.altitude
+            )
+        ).toInt()
+        ToastUtils.showToast(StringUtils.getResStr(R.string.tv_station_relative_distance, distance))
+        rtkStationVM.setRTKStationPosition(inputLocation)
+    }
+
+
 }

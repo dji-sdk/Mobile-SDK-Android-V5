@@ -141,11 +141,13 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
         return controlModeDataProcessor.toFlowable();
     }
 
+    @Override
     @NonNull
     public ComponentIndexType getCameraIndex() {
         return cameraIndex;
     }
 
+    @Override
     @NonNull
     public CameraLensType getLensType() {
         return lensType;
@@ -182,7 +184,7 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
     }
 
     private Completable setMeteringMode() {
-        return djiSdkModel.setValue(KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode,cameraIndex, lensType), CameraMeteringMode.SPOT)
+        return djiSdkModel.setValue(KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode,cameraIndex, lensType), CameraMeteringMode.REGION)
                 .doOnComplete(
                         () -> {
                             preferencesManager.setControlMode(ControlMode.SPOT_METER);

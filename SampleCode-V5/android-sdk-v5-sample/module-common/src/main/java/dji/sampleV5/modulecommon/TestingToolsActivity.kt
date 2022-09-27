@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import dji.sampleV5.modulecommon.models.MSDKCommonOperateVm
 import dji.sampleV5.modulecommon.util.DJIToastUtil
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.modulecommon.views.MSDKInfoFragment
+import dji.v5.utils.common.ToastUtils
 
 /**
  * Class Description
@@ -48,8 +48,7 @@ abstract class TestingToolsActivity : AppCompatActivity() {
         supportFragmentManager.commit {
             replace(R.id.main_info_fragment_container, MSDKInfoFragment())
         }
-
-
+        
         DJIToastUtil.dJIToastLD = testToolsVM.djiToastResult
         testToolsVM.djiToastResult.observe(this) { result ->
             result?.msg?.let {
@@ -58,13 +57,12 @@ abstract class TestingToolsActivity : AppCompatActivity() {
         }
 
         loadPages()
-
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
         DJIToastUtil.dJIToastLD=null
     }
+
     abstract fun loadPages()
 }

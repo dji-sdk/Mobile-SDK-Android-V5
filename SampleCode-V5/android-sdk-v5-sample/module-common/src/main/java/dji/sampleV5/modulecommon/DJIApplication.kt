@@ -1,15 +1,10 @@
 package dji.sampleV5.modulecommon
 
 import android.app.Application
-import android.content.Context
-import com.tencent.bugly.Bugly
 import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.bugly.crashreport.CrashReport.setAllThreadStackEnable
 import dji.v5.manager.SDKManager
-import dji.v5.utils.common.ContextUtil
-import dji.v5.utils.common.DeviceInfoUtil
-import dji.v5.utils.common.JsonUtil
-import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.*
 import dji.v5.utils.inner.SDKConfig
 
 /**
@@ -24,11 +19,13 @@ open class DJIApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        ContextUtil.init(this.applicationContext)
         CrashReport.UserStrategy(this).apply {
             appPackageName = this@DJIApplication.packageName
             appChannel = SDKManager.getInstance().productCategory.name
-            appVersion = SDKManager.getInstance().sdkVersion + "_" + SDKConfig.getInstance().buildVersion
+            appVersion = SDKManager.getInstance().sdkVersion
+            if ("LOCAL" == SDKConfig.getInstance().buildVersion){
+                appVersion = appVersion + "_" + "LOCAL"
+            }
             deviceID = SDKConfig.getInstance().deviceId
             deviceModel = DeviceInfoUtil.getDeviceModel()
             isEnableANRCrashMonitor = true

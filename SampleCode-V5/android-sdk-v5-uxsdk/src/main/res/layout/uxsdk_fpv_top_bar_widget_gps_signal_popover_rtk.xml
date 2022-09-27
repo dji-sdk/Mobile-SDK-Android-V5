@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/rtk_title_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_36_dp"
+        android:background="@color/uxsdk_fpv_popover_title_background_color">
+
+        <TextView
+            style="@style/UXSDK_Caption.Caption1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/uxsdk_16_dp"
+            android:text="@string/uxsdk_fpv_top_bar_rtk_title"
+            android:textColor="@color/uxsdk_white_75_percent" />
+
+
+        <Switch
+            android:id="@+id/switch_rtk_enable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginEnd="@dimen/uxsdk_16_dp"
+            android:thumb="@drawable/uxsdk_selector_switch_thumb"
+            android:track="@drawable/uxsdk_switch_background" />
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/rtk_content_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_52_dp"
+        android:background="@color/uxsdk_fpv_popover_content_background_color"
+        android:gravity="center_horizontal"
+        android:paddingStart="@dimen/uxsdk_16_dp"
+        android:paddingEnd="@dimen/uxsdk_16_dp">
+
+        <dji.v5.ux.accessory.item.TitleValueCell
+            android:id="@+id/tv_rtk_state"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/uxsdk_12_dp"
+            android:paddingRight="@dimen/uxsdk_12_dp"
+            app:uxsdk_title="@string/uxsdk_fpv_top_bar_rtk_state_title"
+            app:uxsdk_value="@string/uxsdk_setting_menu_rtk_state_disconnect" />
+
+        <dji.v5.ux.accessory.item.TitleValueCell
+            android:id="@+id/tv_rtk_signal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/uxsdk_12_dp"
+            android:paddingRight="@dimen/uxsdk_12_dp"
+            app:uxsdk_title="@string/uxsdk_fpv_top_bar_gps_signal_title"
+            app:uxsdk_value="@string/uxsdk_fpv_top_bar_gps_signal_state_strong" />
+
+        <dji.v5.ux.accessory.item.TitleValueCell
+            android:id="@+id/tv_rtk_satellite_count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/uxsdk_12_dp"
+            android:paddingRight="@dimen/uxsdk_12_dp"
+            app:uxsdk_title="@string/uxsdk_fpv_top_bar_satellite_count"
+            app:uxsdk_value="--" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/gps_title_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_36_dp"
+        android:background="@color/uxsdk_fpv_popover_title_background_color">
+
+        <TextView
+            style="@style/UXSDK_Caption.Caption1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/uxsdk_16_dp"
+            android:text="@string/uxsdk_fpv_top_bar_gps_title"
+            android:textColor="@color/uxsdk_white_75_percent" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/gps_content_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/uxsdk_52_dp"
+        android:background="@color/uxsdk_fpv_popover_content_background_color"
+        android:gravity="center">
+
+        <dji.v5.ux.accessory.item.TitleValueCell
+            android:id="@+id/tv_gps_signal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/uxsdk_40_dp"
+            android:paddingLeft="@dimen/uxsdk_16_dp"
+            android:paddingRight="@dimen/uxsdk_16_dp"
+            app:uxsdk_title="@string/uxsdk_fpv_top_bar_gps_signal_title"
+            app:uxsdk_value="@string/uxsdk_fpv_top_bar_gps_signal_state_strong" />
+
+        <dji.v5.ux.accessory.item.TitleValueCell
+            android:id="@+id/tv_gps_satellite_count"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/uxsdk_40_dp"
+            android:paddingLeft="@dimen/uxsdk_16_dp"
+            android:paddingRight="@dimen/uxsdk_16_dp"
+            app:uxsdk_title="@string/uxsdk_fpv_top_bar_satellite_count"
+            app:uxsdk_value="--" />
+
+    </LinearLayout>
+
+</LinearLayout>

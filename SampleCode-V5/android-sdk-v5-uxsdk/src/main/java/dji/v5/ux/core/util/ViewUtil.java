@@ -23,11 +23,15 @@
 
 package dji.v5.ux.core.util;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
@@ -118,5 +122,30 @@ public final class ViewUtil {
 //            Toast.makeText(context, message, duration).show();
 //        }
 //    }
+
+    public static boolean dispatchKeyEvent(Context context, KeyEvent keyEvent) {
+        Activity activity = contextToActivity(context);
+        if (activity != null) {
+            activity.dispatchKeyEvent(keyEvent);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static Activity contextToActivity(Context context) {
+        if(context == null){
+            return null;
+        }
+        if (context instanceof Activity) {
+            return (Activity) context;
+        } else if (context instanceof ContextWrapper) {
+            Context context2 = ((ContextWrapper)context).getBaseContext();
+            if (context2 instanceof Activity) {
+                return (Activity) context2;
+            }
+        }
+        return null;
+    }
 
 }

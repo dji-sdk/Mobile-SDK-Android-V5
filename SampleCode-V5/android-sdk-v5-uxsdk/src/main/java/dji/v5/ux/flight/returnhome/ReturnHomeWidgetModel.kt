@@ -38,7 +38,7 @@ import dji.v5.ux.core.communication.GlobalPreferencesInterface
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.communication.UXKeys
 import dji.v5.ux.core.util.DataProcessor
-import dji.v5.ux.core.util.LocationUtil
+import dji.v5.utils.common.LocationUtil
 import dji.v5.ux.core.util.UnitConversionUtil
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable

@@ -6,6 +6,7 @@ import android.view.View
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
+import kotlinx.android.synthetic.main.uxsdk_fpv_view_horizontal_situation_indicator.view.*
 
 /**
  * Class Description
@@ -20,7 +21,7 @@ open class HorizontalSituationIndicatorWidget @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayoutWidget<HorizontalSituationIndicatorWidget.ModelState>(context, attrs, defStyleAttr) {
-    private val tag = LogUtils.getTag("HorizontalSituationIndicatorWidget")
+
     override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
         View.inflate(context, R.layout.uxsdk_fpv_view_horizontal_situation_indicator, this)
     }
@@ -31,6 +32,11 @@ open class HorizontalSituationIndicatorWidget @JvmOverloads constructor(
 
     override fun getIdealDimensionRatioString(): String? {
         return null
+    }
+
+    fun setSimpleModeEnable(isEnable: Boolean) {
+        pfd_hsi_speed_display.visibility = if (isEnable) VISIBLE else GONE
+        pfd_hsi_attitude_display.visibility = if (isEnable) VISIBLE else GONE
     }
 
     sealed class ModelState

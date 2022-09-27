@@ -19,6 +19,7 @@ import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.waypoint3.WaylineExecutingInfoListener
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionManager
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
+import dji.v5.manager.areacode.AreaCode
 import dji.v5.manager.areacode.AreaCodeManager
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DjiSharedPreferencesManager
@@ -29,10 +30,6 @@ import dji.v5.utils.common.DjiSharedPreferencesManager
  * @description:
  */
 class WayPointV3VM : DJIViewModel() {
-
-    val CHINA_COUNTRY_CODE = "CN"
-    val HK_COUNTRY_CODE = "HK"
-    val MACAU_COUNTRY_CODE = "MO"
     val RadToDeg = 57.295779513082321
     val missionUploadState = MutableLiveData<MissionUploadStateInfo>()
 
@@ -66,8 +63,8 @@ class WayPointV3VM : DJIViewModel() {
         missionUploadState.postValue(missionUploadState.value)
     }
 
-    fun startMission(missionId: String, callback: CommonCallbacks.CompletionCallback) {
-        WaypointMissionManager.getInstance().startMission(missionId, callback)
+    fun startMission(missionId: String,  waylineIDs:List<Int> , callback: CommonCallbacks.CompletionCallback) {
+        WaypointMissionManager.getInstance().startMission(missionId, waylineIDs ,callback)
     }
 
     fun pauseMission(callback: CommonCallbacks.CompletionCallback) {
@@ -126,6 +123,9 @@ class WayPointV3VM : DJIViewModel() {
     fun cancelListenFlightControlState() {
         KeyManager.getInstance().cancelListen(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this)
     }
+    fun getAvailableWaylineIDs(missionPath: String) : List<Int> {
+        return WaypointMissionManager.getInstance().getAvailableWaylineIDs(missionPath)
+    }
 
     private fun refreshFlightControlState() {
         flightControlState.postValue(flightControlState.value)
@@ -164,15 +164,16 @@ class WayPointV3VM : DJIViewModel() {
     private fun getHeight(): Double = (altitudeKey.get(0.0))
 
     fun isInMainlandChina(): Boolean {
-        return CHINA_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCode.areaCode)
+        return AreaCodeManager.getInstance().areaCode.areaCodeEnum==AreaCode.CHINA
     }
 
     fun isMacau(): Boolean {
-        return MACAU_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCode.areaCode)
+        return AreaCodeManager.getInstance().areaCode.areaCodeEnum==AreaCode.MACAU
     }
 
     fun isHongKong(): Boolean {
-        return HK_COUNTRY_CODE.equals(AreaCodeManager.getInstance().areaCode.areaCode)
+        return AreaCodeManager.getInstance().areaCode.areaCodeEnum==AreaCode.HONG_KONG
+
     }
 
     fun getMapType(context: Context?):Int{

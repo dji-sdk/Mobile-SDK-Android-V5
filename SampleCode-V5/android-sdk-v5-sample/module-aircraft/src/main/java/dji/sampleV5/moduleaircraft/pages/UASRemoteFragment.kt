@@ -31,8 +31,11 @@ class UASRemoteFragment : DJIFragment() {
         }
         btn_jp.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_open_uas_jp_pag)
-
         }
+        btn_us.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_open_uas_us_page)
+        }
+
 
     }
 

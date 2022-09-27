@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.modulecommon.pages.DJIFragment
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.models.RTKCenterVM
 import dji.v5.common.utils.GpsUtils
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
@@ -21,6 +20,7 @@ import dji.v5.manager.aircraft.rtk.RTKLocationInfo
 import dji.v5.manager.aircraft.rtk.RTKSystemState
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
+import dji.v5.utils.common.ToastUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
 
@@ -40,6 +40,7 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
 
     companion object {
         const val KEY_IS_QX_RTK = "key_is_qx_rtk"
+        const val KEY_IS_CMCC_RTK = "key_is_cmcc_rtk"
     }
 
     private val rtkCenterVM: RTKCenterVM by activityViewModels()
@@ -75,6 +76,10 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         bt_open_rtk_station.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_open_rtk_station_page)
         }
+        bt_open_cmcc_rtk.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_open_network_trk_pag, networkRTKParam)
+        }
+
 
         //RTK开启状态
         rtkCenterVM.aircraftRTKModuleEnabledLD.observe(viewLifecycleOwner) {
@@ -90,14 +95,18 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         }
         //RTK精度维持
         rtkCenterVM.rtkAccuracyMaintainLD.observe(viewLifecycleOwner) {
-            if (it == true) {
-                tv_rtk_precision_preservation_hint_info.text=StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_on)
-            }else{
-                tv_rtk_precision_preservation_hint_info.text= StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_off)
-            }
-            LogUtils.d(TAG,"精度保持状态$it")
-            updateRTKMaintainAccuracy(it)
+            updateRtkAccuracyMaintainStatus(it)
         }
+    }
+
+    private fun updateRtkAccuracyMaintainStatus(status: Boolean?) {
+        if (status == true) {
+            tv_rtk_precision_preservation_hint_info.text = StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_on)
+        } else {
+            tv_rtk_precision_preservation_hint_info.text = StringUtils.getResStr(R.string.tv_rtk_precision_preservation_turn_off)
+        }
+        LogUtils.i(TAG, "精度保持状态$status")
+        updateRTKMaintainAccuracy(status)
     }
 
     private fun showRTKSystemStateInfo(rtkSystemState: RTKSystemState?) {
@@ -116,6 +125,8 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                     "unhealthy"
                 }
             }
+
+
             tv_rtk_error_info.text = error?.toString()
             //展示卫星数
             showSatelliteInfo(satelliteInfo)
@@ -123,7 +134,8 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
             updateRTKUI(rtkReferenceStationSource)
             //更新飞控和机身的RTK是否正常连接
             updateRTKOpenSwitchStatus(isRTKEnabled)
-
+            //rtk精度保持是否开启
+            updateRtkAccuracyMaintainStatus(rtkMaintainAccuracyEnabled)
 
         }
     }
@@ -173,8 +185,10 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         rtklocation?.run {
             baseStationLocation?.let { baseStationLocation ->
                 mobileStationLocation?.let { mobileStationLocation ->
-                    return GpsUtils.gps2m(baseStationLocation.latitude,baseStationLocation.longitude,baseStationLocation.altitude,
-                        mobileStationLocation.latitude,mobileStationLocation.longitude,mobileStationLocation.altitude)
+                    return GpsUtils.gps2m(
+                        baseStationLocation.latitude, baseStationLocation.longitude, baseStationLocation.altitude,
+                        mobileStationLocation.latitude, mobileStationLocation.longitude, mobileStationLocation.altitude
+                    )
                 }
             }
         }
@@ -197,7 +211,7 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                 if (mIsUpdatingPrecisionStatus) {
                     //上次set之后还没拿到最新值，则不响应此次设置
                     tb_precision_preservation_switch.setOnCheckedChangeListener(null)
-                    tb_precision_preservation_switch.isChecked=!isChecked
+                    tb_precision_preservation_switch.isChecked = !isChecked
                     tb_precision_preservation_switch.setOnCheckedChangeListener(this)
                     return
                 }
@@ -212,17 +226,22 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
         when (checkedId) {
             R.id.btn_rtk_source_base_rtk -> {
-                LogUtils.d(TAG, "Turn on switch to base station RTK ")
+                LogUtils.i(TAG, "Turn on switch to base station RTK ")
                 rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.BASE_STATION)
             }
             R.id.btn_rtk_source_network -> {
-                LogUtils.d(TAG, "Turn on switch to custom network RTK ")
+                LogUtils.i(TAG, "Turn on switch to custom network RTK ")
                 rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
             }
             R.id.btn_rtk_source_qx -> {
-                LogUtils.d(TAG, "Turn on switch to custom QX RTK ")
+                LogUtils.i(TAG, "Turn on switch to custom QX RTK ")
                 rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.QX_NETWORK_SERVICE)
             }
+            R.id.btn_rtk_source_cmcc_rtk -> {
+                LogUtils.i(TAG, "Turn on switch to CMCC RTK ")
+                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.NTRIP_NETWORK_SERVICE)
+            }
+
         }
         ToastUtils.showToast(StringUtils.getResStr(R.string.switch_rtk_type_tip))
     }
@@ -258,23 +277,37 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
             RTKReferenceStationSource.BASE_STATION -> {
                 bt_open_rtk_station.show()
                 bt_open_network_rtk.hide()
-                rl_rtk_info_show.show()
+                bt_open_cmcc_rtk.hide()
                 btn_rtk_source_base_rtk.isChecked = true
                 networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
+                networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, false)
+
             }
             RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE -> {
-                bt_open_rtk_station.hide()
                 bt_open_network_rtk.show()
-                rl_rtk_info_show.show()
+                bt_open_rtk_station.hide()
+                bt_open_cmcc_rtk.hide()
                 btn_rtk_source_network.isChecked = true
                 networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
+                networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, false)
+
             }
             RTKReferenceStationSource.QX_NETWORK_SERVICE -> {
-                bt_open_rtk_station.hide()
                 bt_open_network_rtk.show()
-                rl_rtk_info_show.show()
+                bt_open_rtk_station.hide()
+                bt_open_cmcc_rtk.hide()
                 btn_rtk_source_qx.isChecked = true
                 networkRTKParam.putBoolean(KEY_IS_QX_RTK, true)
+                networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, false)
+
+            }
+            RTKReferenceStationSource.NTRIP_NETWORK_SERVICE -> {
+                bt_open_cmcc_rtk.show()
+                bt_open_rtk_station.hide()
+                bt_open_network_rtk.hide()
+                btn_rtk_source_cmcc_rtk.isChecked = true
+                networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
+                networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, true)
             }
             else -> {
                 ToastUtils.showToast("Current rtk reference station source is:$rtkReferenceStationSource")

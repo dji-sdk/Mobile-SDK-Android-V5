@@ -53,4 +53,11 @@
         <item>4</item>
     </string-array>
 
+
+    <string-array name="media_component_arrays">
+        <item>MAIN</item>
+        <item>RIGHT</item>
+        <item>UP</item>
+    </string-array>
+
 </resources>

@@ -231,4 +231,84 @@ public class KeyItemDataUtil {
         }
 
     }
+    public static int getAllKeyListCount(){
+        List<KeyItem<?, ?>> allKeyList = new ArrayList<>();
+        getAllKeyList(allKeyList);
+        return  allKeyList.size();
+    }
+    public static void getAllKeyList(List<KeyItem<?, ?>>  allKeyList) {
+        List<KeyItem<?, ?>> keyList = new ArrayList<>();
+        initBatteryKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initAirlinkKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initGimbalKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initCameraKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initFlightAssistantKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initFlightControllerKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initRemoteControllerKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initBleKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initProductKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initRtkBaseStationKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initRtkMobileStationKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initOcuSyncKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initRadarKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initMobileNetworkKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initMobileNetworkLinkRCKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initOnboardKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initPayloadKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initLidarKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+    }
 }

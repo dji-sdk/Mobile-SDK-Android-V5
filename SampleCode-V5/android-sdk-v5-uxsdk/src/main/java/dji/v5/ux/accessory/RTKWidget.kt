@@ -53,10 +53,8 @@ open class RTKWidget @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayoutWidget<RTKWidget.ModelState>(context, attrs, defStyleAttr), View.OnClickListener {
+) : ConstraintLayoutWidget<RTKWidget.ModelState>(context, attrs, defStyleAttr) {
     //region Fields
-    private val dialogOkTextView: TextView = findViewById(R.id.textview_ok)
-    private val rtkDescriptionTextView: TextView = findViewById(R.id.textview_rtk_description)
     private val rtkDialogSeparator: View = findViewById(R.id.rtk_dialog_separator)
 
     private val widgetModel by lazy {
@@ -79,86 +77,13 @@ open class RTKWidget @JvmOverloads constructor(
     val rtkSatelliteStatusWidget: RTKSatelliteStatusWidget = findViewById(R.id.widget_rtk_satellite_status)
 
     /**
-     * Text color state list for the RTK description text view
+     * Get the RTK Type Switch Widget so it can be customized.
      */
-    var rtkDescriptionTextColors: ColorStateList
-        @JvmName("getRTKDescriptionTextColors")
-        get() = rtkDescriptionTextView.textColors
-        @JvmName("setRTKDescriptionTextColors")
-        set(colorStateList) {
-            rtkDescriptionTextView.textColorStateList = colorStateList
-        }
+    @get:JvmName("getRTKTypeSwitchWidget")
+    val rtkTypeSwitchWidget: RTKTypeSwitchWidget = findViewById(R.id.widget_rtk_type_switch)
 
-    /**
-     * The text color for the RTK description text view
-     */
-    var rtkDescriptionTextColor: Int
-        @JvmName("getRTKDescriptionTextColor")
-        @ColorInt
-        get() = rtkDescriptionTextView.textColor
-        @JvmName("setRTKDescriptionTextColor")
-        set(@ColorInt color) {
-            rtkDescriptionTextView.textColor = color
-        }
 
-    /**
-     * The text size of the RTK description text view
-     */
-    var rtkDescriptionTextSize: Float
-        @JvmName("getRTKDescriptionTextSize")
-        get() = rtkDescriptionTextView.textSize
-        @JvmName("setRTKDescriptionTextSize")
-        set(textSize) {
-            rtkDescriptionTextView.textSize = textSize
-        }
 
-    /**
-     * The background for the RTK description text view
-     */
-    var rtkDescriptionTextBackground: Drawable?
-        @JvmName("getRTKDescriptionTextBackground")
-        get() = rtkDescriptionTextView.background
-        @JvmName("setRTKDescriptionTextBackground")
-        set(drawable) {
-            rtkDescriptionTextView.background = drawable
-        }
-
-    /**
-     * The text color state list of the dialog OK text view
-     */
-    var dialogOkTextColors: ColorStateList?
-        get() = dialogOkTextView.textColors
-        set(colorStateList) {
-            dialogOkTextView.textColorStateList = colorStateList
-        }
-
-    /**
-     * The text color of the dialog OK text view
-     */
-    var dialogOkTextColor: Int
-        @ColorInt
-        get() = dialogOkTextView.textColor
-        set(@ColorInt color) {
-            dialogOkTextView.textColor = color
-        }
-
-    /**
-     * The text size of the dialog OK text view
-     */
-    var dialogOkTextSize: Float
-        get() = dialogOkTextView.textSize
-        set(textSize) {
-            dialogOkTextView.textSize = textSize
-        }
-
-    /**
-     * The background for the dialog OK text view
-     */
-    var dialogOkTextBackground: Drawable?
-        get() = dialogOkTextView.background
-        set(drawable) {
-            dialogOkTextView.background = drawable
-        }
 
     /**
      * The color for the separator line views
@@ -182,7 +107,6 @@ open class RTKWidget @JvmOverloads constructor(
 
     init {
         LogUtils.i(TAG, "init")
-        dialogOkTextView.setOnClickListener(this)
         attrs?.let { initAttributes(context, it) }
     }
     //endregion
@@ -212,21 +136,16 @@ open class RTKWidget @JvmOverloads constructor(
             .subscribe { rtkEnabled: Boolean -> updateUIForRTKEnabled(rtkEnabled) })
     }
 
-    override fun onClick(v: View) {
-        if (v.id == R.id.textview_ok) {
-            visibility = View.GONE
-        }
-    }
 
 
     //region Reactions to model
     private fun updateUIForRTKEnabled(rtkEnabled: Boolean) {
         if (rtkEnabled) {
-            rtkSatelliteStatusWidget.visibility = View.VISIBLE
-            rtkDescriptionTextView.visibility = View.GONE
+            rtkSatelliteStatusWidget.show()
+            rtkTypeSwitchWidget.show()
         } else {
-            rtkSatelliteStatusWidget.visibility = View.GONE
-            rtkDescriptionTextView.visibility = View.VISIBLE
+            rtkSatelliteStatusWidget.hide()
+            rtkTypeSwitchWidget.hide()
         }
     }
     //endregion
@@ -237,70 +156,12 @@ open class RTKWidget @JvmOverloads constructor(
         return resources.getString(R.string.uxsdk_widget_rtk_ratio)
     }
 
-    /**
-     * Set text appearance of the RTK description text view
-     *
-     * @param textAppearance Style resource for text appearance
-     */
-    fun setRTKDescriptionTextAppearance(@StyleRes textAppearance: Int) {
-        rtkDescriptionTextView.setTextAppearance(context, textAppearance)
-    }
 
-    /**
-     * Set the background for the RTK description text view
-     *
-     * @param resourceId Integer ID of the background resource
-     */
-    fun setRTKDescriptionTextBackground(@DrawableRes resourceId: Int) {
-        rtkDescriptionTextBackground = getDrawable(resourceId)
-    }
-
-    /**
-     * Set text appearance of the dialog OK text view
-     *
-     * @param textAppearance Style resource for text appearance
-     */
-    fun setDialogOkTextAppearance(@StyleRes textAppearance: Int) {
-        dialogOkTextView.setTextAppearance(context, textAppearance)
-    }
-
-    /**
-     * Set the background for the dialog OK text view
-     *
-     * @param resourceId Integer ID of the background resource
-     */
-    fun setDialogOkTextBackground(@DrawableRes resourceId: Int) {
-        dialogOkTextBackground = getDrawable(resourceId)
-    }
 
     //Initialize all customizable attributes
     @SuppressLint("Recycle")
     private fun initAttributes(context: Context, attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.RTKWidget).use { typedArray ->
-            typedArray.getResourceIdAndUse(R.styleable.RTKWidget_uxsdk_rtkDescriptionTextAppearance) {
-                setRTKDescriptionTextAppearance(it)
-            }
-            typedArray.getDimensionAndUse(R.styleable.RTKWidget_uxsdk_rtkDescriptionTextSize) {
-                rtkDescriptionTextSize = DisplayUtil.pxToSp(context, it)
-            }
-            typedArray.getColorAndUse(R.styleable.RTKWidget_uxsdk_rtkDescriptionTextColor) {
-                rtkDescriptionTextColor = it
-            }
-            typedArray.getDrawableAndUse(R.styleable.RTKWidget_uxsdk_rtkDescriptionBackgroundDrawable) {
-                rtkDescriptionTextBackground = it
-            }
-            typedArray.getResourceIdAndUse(R.styleable.RTKWidget_uxsdk_dialogOkTextAppearance) {
-                setDialogOkTextAppearance(it)
-            }
-            typedArray.getDimensionAndUse(R.styleable.RTKWidget_uxsdk_dialogOkTextSize) {
-                dialogOkTextSize = DisplayUtil.pxToSp(context, it)
-            }
-            typedArray.getColorAndUse(R.styleable.RTKWidget_uxsdk_dialogOkTextColor) {
-                dialogOkTextColor = it
-            }
-            typedArray.getDrawableAndUse(R.styleable.RTKWidget_uxsdk_dialogOkBackgroundDrawable) {
-                dialogOkTextBackground = it
-            }
             typedArray.getColorAndUse(R.styleable.RTKWidget_uxsdk_rtkSeparatorsColor) {
                 rtkSeparatorsColor = it
             }

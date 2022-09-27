@@ -36,8 +36,8 @@ import dji.v5.ux.core.communication.GlobalPreferencesInterface
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.toDistance
 import dji.v5.ux.core.util.DataProcessor
-import dji.v5.ux.core.util.LocationUtil
-import dji.v5.ux.core.util.LocationUtil.distanceBetween
+import dji.v5.utils.common.LocationUtil
+import dji.v5.utils.common.LocationUtil.distanceBetween
 import dji.v5.ux.core.util.UnitConversionUtil
 import dji.v5.ux.core.widget.distancerc.DistanceRCWidgetModel.DistanceRCState.*
 

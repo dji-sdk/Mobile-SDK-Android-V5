@@ -1,5 +1,7 @@
 package dji.sampleV5.moduleaircraft.pages
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -14,7 +16,6 @@ import android.widget.AdapterView
 import androidx.annotation.IntDef
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.pages.DJIFragment
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.WayPointV3VM
 import dji.v5.common.callback.CommonCallbacks
@@ -23,7 +24,6 @@ import dji.v5.utils.common.*
 import kotlinx.android.synthetic.main.frag_waypointv3_page.*
 import java.io.File
 import java.util.*
-import kotlin.collections.HashMap
 
 
 import com.dji.mapkit.amap.provider.AMapProvider
@@ -38,14 +38,23 @@ import com.dji.mapkit.core.models.DJIBitmapDescriptor
 import com.dji.mapkit.core.models.DJIBitmapDescriptorFactory
 import com.dji.mapkit.core.models.DJICameraPosition
 import com.dji.mapkit.core.models.DJILatLng
-import com.dji.mapkit.core.models.annotations.DJIMarker
-import com.dji.mapkit.core.models.annotations.DJIMarkerOptions
 import com.dji.mapkit.google.provider.GoogleProvider
 import com.dji.mapkit.maplibre.provider.MapLibreProvider
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.manager.aircraft.waypoint3.model.WaypointMissionExecuteState
 import java.io.IOException
 import kotlin.collections.ArrayList
+import android.content.DialogInterface
+
+import android.content.DialogInterface.OnMultiChoiceClickListener
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.widget.ImageView
+import android.widget.TextView
+import com.dji.mapkit.core.models.annotations.*
+import dji.sdk.wpmz.jni.JNIWPMZManager
+import dji.sdk.wpmz.value.mission.WaylineExecuteWaypoint
+import dji.v5.ux.core.util.AndUtil
 
 
 /**
@@ -56,33 +65,36 @@ import kotlin.collections.ArrayList
 class WayPointV3Fragment : DJIFragment() {
 
     private val wayPointV3VM: WayPointV3VM by activityViewModels()
-    private val WAYPOINT_SAMPLE_FILE_NAME : String = "waypointsample.kmz"
-    private val WAYPOINT_SAMPLE_FILE_DIR : String = "waypoint/"
-    private val WAYPOINT_SAMPLE_FILE_CACHE_DIR : String = "waypoint/cache/"
+    private val WAYPOINT_SAMPLE_FILE_NAME: String = "waypointsample.kmz"
+    private val WAYPOINT_SAMPLE_FILE_DIR: String = "waypoint/"
+    private val WAYPOINT_SAMPLE_FILE_CACHE_DIR: String = "waypoint/cache/"
     private val WAYPOINT_FILE_TAG = ".kmz"
 
-
-    var mapView : DJIMapView? = null
-    var map :DJIMap? = null
-    var mapkitOptions:MapkitOptions? =null
+    var mapView: DJIMapView? = null
+    var map: DJIMap? = null
+    var mapkitOptions: MapkitOptions? = null
     var droneBitmap: DJIBitmapDescriptor? = null
-    var homePointBitMap:DJIBitmapDescriptor? = null
+    var waypointBitmap: DJIBitmapDescriptor? = null
+    var homePointBitMap: DJIBitmapDescriptor? = null
     var mAircraftMarker: DJIMarker? = null
     var homePointMarKer: DJIMarker? = null
-    var curMissionPath : String = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME)
-    var validLenth :Int = 2
-    var curMissionExecuteState : WaypointMissionExecuteState ?= null
-
+    var curMissionPath: String = DiskUtil.getExternalCacheDirPath(
+        ContextUtil.getContext(),
+        WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME
+    )
+    var validLenth: Int = 2
+    var curMissionExecuteState: WaypointMissionExecuteState? = null
+    var selectWaylines: ArrayList<Int> = ArrayList()
+    var homeLine: DJIPolyline? = null
+    var AircraftPos: DJILatLng? = null
+    var isNeedToCenter: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-
-
-        return  inflater.inflate(R.layout.frag_waypointv3_page, container, false)
-
+        return inflater.inflate(R.layout.frag_waypointv3_page, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,8 +104,6 @@ class WayPointV3Fragment : DJIFragment() {
         initData()
     }
 
-
-
     private fun prepareMissionData() {
         val dirName =
             DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR)
@@ -101,7 +111,10 @@ class WayPointV3Fragment : DJIFragment() {
         if (!dir.exists()) {
             dir.mkdirs()
         }
-        val cachedirName = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_CACHE_DIR)
+        val cachedirName = DiskUtil.getExternalCacheDirPath(
+            ContextUtil.getContext(),
+            WAYPOINT_SAMPLE_FILE_CACHE_DIR
+        )
         val cachedir = File(cachedirName)
         if (!cachedir.exists()) {
             cachedir.mkdirs()
@@ -111,69 +124,74 @@ class WayPointV3Fragment : DJIFragment() {
             FileUtils.copyAssetsFile(
                 ContextUtil.getContext(),
                 WAYPOINT_SAMPLE_FILE_NAME,
-                destPath)
+                destPath
+            )
         }
     }
 
     private fun initView(savedInstanceState: Bundle?) {
-
         sp_map_switch.adapter = wayPointV3VM.getMapSpinnerAdapter()
         wayPointV3VM.addMissionStateListener() {
             mission_execute_state_tv?.text = "Mission Execute State : ${it.name}"
             btn_mission_upload.isEnabled = it == WaypointMissionExecuteState.READY
             curMissionExecuteState = it
         }
-        wayPointV3VM.addWaylineExecutingInfoListener(){
+        wayPointV3VM.addWaylineExecutingInfoListener() {
             wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
-                    "WaypointIndex:${it.currentWaypointIndex}"
+                    "WaypointIndex:${it.currentWaypointIndex} \n" +
+                    "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionID}"
+
         }
 
-       btn_mission_upload?.setOnClickListener {
+        btn_mission_upload?.setOnClickListener {
 
-         //  var missionPath  = curMissionPath?:DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME)
-           val waypointFile = File( curMissionPath )
+            //  var missionPath  = curMissionPath?:DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME)
+            val waypointFile = File(curMissionPath)
 
-           if (waypointFile.exists()) {
-               wayPointV3VM.pushKMZFileToAircraft( curMissionPath)
-           } else{
-               ToastUtils.showToast("Mission file not found!");
-           }
-       }
+            if (waypointFile.exists()) {
+                wayPointV3VM.pushKMZFileToAircraft(curMissionPath)
+            } else {
+                ToastUtils.showToast("Mission file not found!");
+            }
+            markWaypoints()
+        }
 
         wayPointV3VM.missionUploadState.observe(viewLifecycleOwner) {
             it?.let {
-              if (it.error != null) {
-                  mission_upload_state_tv?.text = "Upload State: error:${getErroMsg(it.error)} "
-              } else if (it.tips.isNotEmpty()) {
-                  mission_upload_state_tv?.text = it.tips
-              } else{
-                  mission_upload_state_tv?.text = "Upload State: progress:${it.updateProgress} "
-              }
+                if (it.error != null) {
+                    mission_upload_state_tv?.text = "Upload State: error:${getErroMsg(it.error)} "
+                } else if (it.tips.isNotEmpty()) {
+                    mission_upload_state_tv?.text = it.tips
+                } else {
+                    mission_upload_state_tv?.text = "Upload State: progress:${it.updateProgress} "
+                }
 
             }
         }
 
 
         btn_mission_start.setOnClickListener {
+            wayPointV3VM.startMission(
+                FileUtils.getFileName(curMissionPath, WAYPOINT_FILE_TAG),
+                selectWaylines,
+                object : CommonCallbacks.CompletionCallback {
+                    override fun onSuccess() {
+                        ToastUtils.showToast("startMission Success")
+                    }
 
-            wayPointV3VM.startMission(FileUtils.getFileName(curMissionPath , WAYPOINT_FILE_TAG), object : CommonCallbacks.CompletionCallback {
-                override fun onSuccess() {
-                    ToastUtils.showToast("startMission Success")
-                }
-
-                override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast("startMission Failed " + getErroMsg(error))
-                }
-
-            })
+                    override fun onFailure(error: IDJIError) {
+                        ToastUtils.showToast("startMission Failed " + getErroMsg(error))
+                    }
+                })
 
         }
 
         btn_mission_pause.setOnClickListener {
-            wayPointV3VM.pauseMission(object :CommonCallbacks.CompletionCallback{
+            wayPointV3VM.pauseMission(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     ToastUtils.showToast("pauseMission Success")
                 }
+
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast("pauseMission Failed " + getErroMsg(error))
                 }
@@ -182,10 +200,11 @@ class WayPointV3Fragment : DJIFragment() {
         }
 
         btn_mission_resume.setOnClickListener {
-            wayPointV3VM.resumeMission(object :CommonCallbacks.CompletionCallback{
+            wayPointV3VM.resumeMission(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     ToastUtils.showToast("resumeMission Success")
                 }
+
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast("resumeMission Failed " + getErroMsg(error))
                 }
@@ -193,49 +212,66 @@ class WayPointV3Fragment : DJIFragment() {
 
         }
 
+        btn_wayline_select.setOnClickListener {
+            if (curMissionPath == null) {
+                ToastUtils.showToast("please upload mission")
+                return@setOnClickListener
+            }
+            selectWaylines.clear()
+            var waylineids = wayPointV3VM.getAvailableWaylineIDs(curMissionPath)
+            showMultiChoiceDialog(waylineids)
+        }
+
         kmz_btn.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "*/*"
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             startActivityForResult(
-                Intent.createChooser(intent, "Select KMZ File"), 0)
+                Intent.createChooser(intent, "Select KMZ File"), 0
+            )
+        }
+
+        map_locate.setOnClickListener {
+            isNeedToCenter = true
+            AircraftPos?.let {
+                moveToCenter(map?.getCameraPosition()!!.zoom, AircraftPos!!)
+            }
         }
 
         sp_map_switch.setSelection(wayPointV3VM.getMapType(context))
-        sp_map_switch.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+        sp_map_switch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-               mapSwitch(pos)
-               wayPointV3VM.saveMapType(context,pos)
+                mapSwitch(pos)
+                wayPointV3VM.saveMapType(context, pos)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 // donothing
             }
-
         }
         btn_mission_stop.setOnClickListener {
-
-                if (curMissionExecuteState == WaypointMissionExecuteState.READY) {
-                    ToastUtils.showToast("Mission not start")
-                    return@setOnClickListener
-                }
-                wayPointV3VM.stopMission(FileUtils.getFileName(curMissionPath , WAYPOINT_FILE_TAG) , object :CommonCallbacks.CompletionCallback{
+            if (curMissionExecuteState == WaypointMissionExecuteState.READY) {
+                ToastUtils.showToast("Mission not start")
+                return@setOnClickListener
+            }
+            wayPointV3VM.stopMission(
+                FileUtils.getFileName(curMissionPath, WAYPOINT_FILE_TAG),
+                object : CommonCallbacks.CompletionCallback {
                     override fun onSuccess() {
                         ToastUtils.showToast("stopMission Success")
                     }
+
                     override fun onFailure(error: IDJIError) {
                         ToastUtils.showToast("stopMission Failed " + getErroMsg(error))
                     }
                 })
-
         }
 
-
         mapView?.onCreate(savedInstanceState)
-
-
         droneBitmap = DJIBitmapDescriptorFactory.fromResource(R.mipmap.aircraft)
-        homePointBitMap  = DJIBitmapDescriptorFactory.fromResource(R.mipmap.home_point)
+        waypointBitmap = DJIBitmapDescriptorFactory.fromResource(R.mipmap.waypoint_position)
+        homePointBitMap = DJIBitmapDescriptorFactory.fromResource(R.mipmap.home_point)
+
 
     }
 
@@ -246,17 +282,18 @@ class WayPointV3Fragment : DJIFragment() {
                 curMissionPath = getPath(context, it)
                 if (curMissionPath?.contains(".kmz") == false) {
                     ToastUtils.showToast("Please choose KMZ file")
-                } else{
+                } else {
                     ToastUtils.showToast("KMZ file path:${curMissionPath}")
                 }
             }
         }
     }
+
     fun getPath(context: Context?, uri: Uri?): String {
         if (DocumentsContract.isDocumentUri(context, uri) && isExternalStorageDocument(uri)) {
             val docId = DocumentsContract.getDocumentId(uri)
             val split = docId.split(":".toRegex()).toTypedArray()
-            if (split.size != validLenth ) {
+            if (split.size != validLenth) {
                 return ""
             }
             val type = split[0]
@@ -270,9 +307,7 @@ class WayPointV3Fragment : DJIFragment() {
     }
 
     private fun getExtSdCardPaths(context: Context): ArrayList<String?> {
-
-        var sExtSdCardPaths  = ArrayList<String?>()
-
+        var sExtSdCardPaths = ArrayList<String?>()
         for (file in context.getExternalFilesDirs("external")) {
             if (file != null && file != context.getExternalFilesDir("external")) {
                 val index = file.absolutePath.lastIndexOf("/Android/data")
@@ -281,8 +316,7 @@ class WayPointV3Fragment : DJIFragment() {
                     try {
                         path = File(path).canonicalPath
                     } catch (e: IOException) {
-                        LogUtils.e(logTag , e.message)
-
+                        LogUtils.e(logTag, e.message)
                     }
                     sExtSdCardPaths.add(path)
                 }
@@ -304,65 +338,72 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.flightControlState.observe(viewLifecycleOwner) {
             it?.let {
                 wayline_aircraft_height?.text = String.format("Aircraft Height: %.2f", it.height)
-                wayline_aircraft_distance?.text  = String.format("Aircraft Distance: %.2f", it.distance)
-                updateAircraftLocation(it.latitude , it.longtitude , it.head , it.homeLocation)
+                wayline_aircraft_distance?.text =
+                    String.format("Aircraft Distance: %.2f", it.distance)
+                updateAircraftLocation(it.latitude, it.longtitude, it.head, it.homeLocation)
             }
         }
     }
 
-
-    private fun updateAircraftLocation(aircraftLat: Double, aircraftLng: Double , aircraftHead : Float , homePoint: LocationCoordinate2D) {
-        if(map == null) {
+    private fun updateAircraftLocation(
+        aircraftLat: Double,
+        aircraftLng: Double,
+        aircraftHead: Float,
+        homePoint: LocationCoordinate2D,
+    ) {
+        if (map == null) {
             return
         }
-        val pos = DJILatLng(aircraftLat, aircraftLng)
+        AircraftPos = DJILatLng(aircraftLat, aircraftLng)
         val zoomLevel = map?.getCameraPosition()!!.zoom
 
-        val cameraPosition = DJICameraPosition.Builder()
-            .target(pos)
-            .zoom(if (wayPointV3VM.getMapType(context) == MapProvider.MAPLIBRE_PROVIDER)  -1.0f else zoomLevel )
-            .build()
 
-        val cu : DJICameraUpdate = DJICameraUpdateFactory.newCameraPosition(cameraPosition)
         val markerOptions = DJIMarkerOptions()
-        markerOptions.position(pos)
+        markerOptions.position(AircraftPos)
         markerOptions.icon(droneBitmap)
+        markerOptions.zIndex(1)
         markerOptions.anchor(0.5f, 0.5f)
 
-
         val marOptionHomePoint = DJIMarkerOptions()
-        marOptionHomePoint.position(DJILatLng(homePoint.latitude , homePoint.longitude))
+        var homeCoordinate = DJILatLng(homePoint.latitude, homePoint.longitude)
+        marOptionHomePoint.position(homeCoordinate)
         marOptionHomePoint.icon(homePointBitMap)
-        marOptionHomePoint.anchor(0.5f,0.5f)
+        marOptionHomePoint.anchor(0.5f, 0.5f)
 
-
-
-        if (isLocationValid(homePoint.latitude , homePoint.longitude)){
+        if (isLocationValid(homePoint.latitude, homePoint.longitude)) {
             if (homePointMarKer == null) {
                 homePointMarKer = map?.addMarker(marOptionHomePoint)
-            } else{
-                homePointMarKer?.position = DJILatLng(homePoint.latitude , homePoint.longitude)
+            } else {
+                homePointMarKer?.position = DJILatLng(homePoint.latitude, homePoint.longitude)
             }
-
         }
 
         if (isLocationValid(aircraftLat, aircraftLng)) {
             if (mAircraftMarker != null) {
-               // mAircraftMarker!!.remove()
-                mAircraftMarker?.position = pos;
+                // mAircraftMarker!!.remove()
+                mAircraftMarker?.position = AircraftPos
             } else {
                 mAircraftMarker = map?.addMarker(markerOptions)
             }
 
             mAircraftMarker!!.rotation = (aircraftHead - map!!.getCameraPosition().bearing)
-            map!!.moveCamera(cu)
+            moveToCenter(zoomLevel, AircraftPos)
 
         }
-
-
-
-
+        updateHomeLine(mAircraftMarker!!, homeCoordinate)
     }
+
+    fun moveToCenter(zoomLevel: Float, pos: DJILatLng?) {
+        if (isNeedToCenter) {
+            val cameraPosition = DJICameraPosition.Builder()
+                .target(pos)
+                .zoom(if (wayPointV3VM.getMapType(context) == MapProvider.MAPLIBRE_PROVIDER) -1.0f else zoomLevel)
+                .build()
+            val cu: DJICameraUpdate = DJICameraUpdateFactory.newCameraPosition(cameraPosition)
+            map!!.animateCamera(cu)
+        }
+    }
+
 
     @IntDef(
         MapProvider.MAP_AUTO,
@@ -379,8 +420,7 @@ class WayPointV3Fragment : DJIFragment() {
         }
     }
 
-
-    fun createMapView(@MapProvider type:Int){
+    fun createMapView(@MapProvider type: Int) {
         // 初始化MapKit
         Mapkit.inHongKong(wayPointV3VM.isHongKong())
         Mapkit.inMacau(wayPointV3VM.isMacau())
@@ -388,7 +428,6 @@ class WayPointV3Fragment : DJIFragment() {
 
         val useAmap = wayPointV3VM.isInMainlandChina();
         val builder = MapkitOptions.Builder()
-
 
         builder.addMapProvider(
             if (type == MapProvider.AMAP_PROVIDER) {
@@ -402,20 +441,24 @@ class WayPointV3Fragment : DJIFragment() {
             }
         )
         mapkitOptions = builder.build()
-
-        mapView = DJIMapView(context, builder.build())
+        mapView = DJIMapView(activity, builder.build())
         mapView?.getDJIMapAsync(OnDJIMapReadyCallback {
             map = it
             resetMarker()
+            map?.addOnCameraChangeListener {
+                isNeedToCenter = false
+            }
+
         })
         wp_map.addView(mapView)
     }
 
-    fun resetMarker(){
+    fun resetMarker() {
         homePointMarKer = null
         mAircraftMarker = null
     }
-    fun mapSwitch(@MapProvider type: Int){
+
+    fun mapSwitch(@MapProvider type: Int) {
         //销毁
         mapView?.apply {
             onPause()
@@ -430,7 +473,6 @@ class WayPointV3Fragment : DJIFragment() {
             onStart()
             onResume()
         }
-
     }
 
     fun isLocationValid(latitude: Double, longitude: Double): Boolean {
@@ -446,23 +488,152 @@ class WayPointV3Fragment : DJIFragment() {
         super.onResume()
         mapView?.onResume()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         mapView?.onDestroy()
     }
+
     override fun onDestroy() {
         super.onDestroy()
-
         wayPointV3VM.cancelListenFlightControlState()
         wayPointV3VM.removeAllMissionStateListener()
         wayPointV3VM.clearAllWaylineExecutingInfoListener()
+        map?.removeAllOnCameraChangeListeners()
     }
 
-    fun getErroMsg(error: IDJIError):String{
-        if (!TextUtils.isEmpty(error.description())){
+    fun getErroMsg(error: IDJIError): String {
+        if (!TextUtils.isEmpty(error.description())) {
             return error.description();
         }
         return error.errorCode()
+    }
+
+
+    fun showMultiChoiceDialog(waylineids: List<Int>) {
+        var items: ArrayList<String> = ArrayList()
+        waylineids
+            .filter {
+                it >= 0
+            }
+            .map {
+                items.add(it.toString())
+            }
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
+        builder.setTitle("Select Wayline")
+        builder.setPositiveButton("OK", null)
+        builder.setMultiChoiceItems(
+            items.toTypedArray(),
+            null,
+            object : OnMultiChoiceClickListener {
+                override fun onClick(p0: DialogInterface?, index: Int, isSelect: Boolean) {
+                    if (isSelect) {
+                        selectWaylines.add(index)
+                    } else {
+                        selectWaylines.remove(index)
+                    }
+                }
+            }).create().show()
+
+    }
+
+    fun markWaypoints() {
+        // version参数实际未用到
+        var waypoints: ArrayList<WaylineExecuteWaypoint> = ArrayList<WaylineExecuteWaypoint>()
+        val parseInfo = JNIWPMZManager.getWaylines("1.0.0", curMissionPath)
+        var waylines = parseInfo.waylines
+        waylines.forEach() {
+            waypoints.addAll(it.waypoints)
+            markLine(it.waypoints)
+        }
+        waypoints.forEach() {
+            markWaypoint(DJILatLng(it.location.latitude, it.location.longitude), it.waypointIndex)
+        }
+    }
+
+    fun markWaypoint(latlong: DJILatLng, waypointIndex: Int) {
+        var markOptions = DJIMarkerOptions()
+        markOptions.position(latlong)
+        markOptions.icon(getMarkerRes(waypointIndex, 0f))
+        markOptions.title(waypointIndex.toString())
+        markOptions.isInfoWindowEnable = true
+        map?.addMarker(markOptions)
+    }
+
+    fun markLine(waypoints: List<WaylineExecuteWaypoint>) {
+
+        var djiwaypoints = waypoints.filter {
+            true
+        }.map {
+            DJILatLng(it.location.latitude, it.location.longitude)
+        }
+        var lineOptions = DJIPolylineOptions()
+        lineOptions.width(5f)
+        lineOptions.color(Color.GREEN)
+        lineOptions.addAll(djiwaypoints)
+        map?.addPolyline(lineOptions)
+    }
+
+    fun updateHomeLine(aircraftMarker: DJIMarker, homeCoordinate: DJILatLng) {
+
+        if (homeLine != null) {
+            val points: MutableList<DJILatLng> = java.util.ArrayList()
+            points.add(aircraftMarker.getPosition())
+            points.add(homeCoordinate)
+            homeLine!!.setPoints(points)
+        } else {
+            //create new line
+            val homeLineOptions = DJIPolylineOptions().add(aircraftMarker.getPosition())
+                .add(homeCoordinate)
+                .color(Color.WHITE)
+                .width(5f)
+
+            //draw new line
+            homeLine = map!!.addPolyline(homeLineOptions)
+        }
+    }
+
+    /**
+     * Convert view to bitmap
+     * Notice: recycle the bitmap after use
+     */
+    fun getMarkerBitmap(
+        index: Int,
+        rotation: Float,
+    ): Bitmap? {
+        // create View for marker
+        @SuppressLint("InflateParams") val markerView: View =
+            LayoutInflater.from(activity)
+                .inflate(R.layout.waypoint_marker_style_layout, null)
+        val markerBg = markerView.findViewById<ImageView>(R.id.image_content)
+        val markerTv = markerView.findViewById<TextView>(R.id.image_text)
+        markerTv.text = index.toString()
+        markerTv.setTextColor(AndUtil.getResColor(R.color.blue))
+        markerTv.textSize =
+            AndUtil.getDimension(R.dimen.mission_waypoint_index_text_large_size)
+
+        markerBg.setImageResource(R.mipmap.mission_edit_waypoint_normal)
+
+        markerBg.rotation = rotation
+        // convert view to bitmap
+        markerView.destroyDrawingCache()
+        markerView.measure(
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        )
+        markerView.layout(0, 0, markerView.measuredWidth, markerView.measuredHeight)
+        markerView.isDrawingCacheEnabled = true
+        return markerView.getDrawingCache(true)
+    }
+
+    private fun getMarkerRes(
+        index: Int,
+        rotation: Float,
+    ): DJIBitmapDescriptor? {
+        return DJIBitmapDescriptorFactory.fromBitmap(
+            getMarkerBitmap(index + 1, rotation)
+        )
     }
 
 }

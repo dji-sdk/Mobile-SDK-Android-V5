@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import dji.sdk.keyvalue.value.common.IntMsg
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.MediaManager
 import dji.v5.manager.datacenter.media.VideoPlayStatus
 import dji.v5.utils.common.LogUtils
@@ -18,7 +19,7 @@ class VideoPlayVM : DJIViewModel(){
     var videoPlayStatus =  MutableLiveData<VideoPlayStatus>()
 
     fun addVideoPlayStateListener(){
-        MediaManager.getInstance().addVideoPlayStateListener {
+        MediaDataCenter.getInstance().mediaManager.addVideoPlayStateListener {
             videoPlayStatus.postValue(it)
         }
     }
@@ -27,14 +28,14 @@ class VideoPlayVM : DJIViewModel(){
     fun removeAllListener(){
 
         videoPlayStatus.postValue(VideoPlayStatus.Builder().build())
-        MediaManager.getInstance().removeAllVideoPlayStateListener()
+        MediaDataCenter.getInstance().mediaManager.removeAllVideoPlayStateListener()
     }
 
 
     fun seek(position: Int) {
         val seekTo = IntMsg()
         seekTo.value = position
-        MediaManager.getInstance().seekVideo(position  , object : CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.seekVideo(position  , object : CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 LogUtils.i(TAG, "seekVideo video success")
             }
@@ -47,7 +48,7 @@ class VideoPlayVM : DJIViewModel(){
     }
 
      fun pause(){
-        MediaManager.getInstance().pauseVideo(object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.pauseVideo(object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 LogUtils.i(TAG, "play success")
             }
@@ -61,7 +62,7 @@ class VideoPlayVM : DJIViewModel(){
 
 
      fun resume(){
-        MediaManager.getInstance().resumeVideo(object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.resumeVideo(object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 LogUtils.i(TAG, "resume success")
             }
@@ -76,7 +77,7 @@ class VideoPlayVM : DJIViewModel(){
 
      fun stop(){
 
-        MediaManager.getInstance().stopVideo(object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.stopVideo(object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 LogUtils.i(TAG, "stop success");
             }

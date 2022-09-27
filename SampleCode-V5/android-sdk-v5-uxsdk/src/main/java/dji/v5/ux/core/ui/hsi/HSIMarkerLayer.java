@@ -65,12 +65,12 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
 
     private final int mHomePointMarkerTextColor;
 
-//    @NonNull
-//    private final Bitmap mWayPointBitmap;
-//
-//    private final int mWayPointMarkerSize;
-//
-//    private final int mWayPointMarkerTextColor;
+    //    @NonNull
+    //    private final Bitmap mWayPointBitmap;
+    //
+    //    private final int mWayPointMarkerSize;
+    //
+    //    private final int mWayPointMarkerTextColor;
 
     private final int mMarkerIndicatorTextSize;
 
@@ -156,7 +156,8 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
     @NonNull
     private HSIWidgetModel widgetModel;
 
-    public HSIMarkerLayer(@NonNull Context context, @Nullable AttributeSet attrs, @NonNull HSIContract.HSIContainer container, @NonNull HSIWidgetModel widgetModel) {
+    public HSIMarkerLayer(@NonNull Context context, @Nullable AttributeSet attrs, @NonNull HSIContract.HSIContainer container,
+                          @NonNull HSIWidgetModel widgetModel) {
         mHSIContainer = container;
 
         this.widgetModel = widgetModel;
@@ -168,12 +169,12 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
                 typedArray.getResourceId(R.styleable.HSIView_uxsdk_hsi_home_point_marker, R.drawable.uxsdk_fpv_pfd_hsi_home_point));
         mHomePointMarkerTextColor = typedArray.getColor(R.styleable.HSIView_uxsdk_hsi_home_point_marker_text_color,
                 Color.parseColor("#FFCC00"));
-//        mWayPointMarkerSize = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_waypoint_marker_size,
-//                context.getResources().getDimensionPixelSize(R.dimen.uxsdk_12_dp));
-//        mWayPointBitmap = BitmapFactory.decodeResource(context.getResources(),
-//                typedArray.getResourceId(R.styleable.HSIView_uxsdk_hsi_waypoint_marker, R.drawable.fpv_pfd_hsi_waypoint));
-//        mWayPointMarkerTextColor = typedArray.getColor(R.styleable.HSIView_uxsdk_hsi_waypoint_marker_text_color,
-//                ContextCompat.getColor(context, R.color.blue_highlight));
+        //        mWayPointMarkerSize = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_waypoint_marker_size,
+        //                context.getResources().getDimensionPixelSize(R.dimen.uxsdk_12_dp));
+        //        mWayPointBitmap = BitmapFactory.decodeResource(context.getResources(),
+        //                typedArray.getResourceId(R.styleable.HSIView_uxsdk_hsi_waypoint_marker, R.drawable.fpv_pfd_hsi_waypoint));
+        //        mWayPointMarkerTextColor = typedArray.getColor(R.styleable.HSIView_uxsdk_hsi_waypoint_marker_text_color,
+        //                ContextCompat.getColor(context, R.color.blue_highlight));
         mPinPointMarkerSize = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_pin_point_marker_size,
                 context.getResources().getDimensionPixelSize(R.dimen.uxsdk_12_dp));
         mPinPointBitmap = BitmapFactory.decodeResource(context.getResources(),
@@ -277,63 +278,63 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
                 .subscribe(this::airSenseSystemInformationHandler));
 
         // PinPoint，只显示选中的PIN点
-//        addDisposable(Observable.combineLatest(mSubject, PinPointService.getInstance().getSelectPinPoints(),
-//                (locationCoordinate3D, pinSelectData) -> {
-//
-//                    mSelectPinDistance = null;
-//                    if (pinSelectData == PinSelectData.NONE) {
-//                        return INVALID_BEARING_DISTANCE;
-//                    }
-//
-//                    PinPoint pinPoint = pinSelectData.getPinPoint();
-//                    Location3D location = pinPoint.getLocation();
-//                    BearingDistance distance = computeRelativeLocation(location.latitude, location.longitude);
-//                    if (distance.isValidate()) {
-//                        mSelectPinDistance = distance;
-//                        mSelectPinDistance.mColor = pinPoint.getColor();
-//                        mSelectPinDistance.mName = pinPoint.getName();
-//                    }
-//                    return distance;
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.computation())
-//                .subscribe(distance -> {
-//                    mPinPointsDistances.clear();
-//                    if (distance.isValidate()) {
-//                        mPinPointsDistances.add(distance);
-//                    }
-//                    mHSIContainer.updateWidget();
-//                }));
+        //        addDisposable(Observable.combineLatest(mSubject, PinPointService.getInstance().getSelectPinPoints(),
+        //                (locationCoordinate3D, pinSelectData) -> {
+        //
+        //                    mSelectPinDistance = null;
+        //                    if (pinSelectData == PinSelectData.NONE) {
+        //                        return INVALID_BEARING_DISTANCE;
+        //                    }
+        //
+        //                    PinPoint pinPoint = pinSelectData.getPinPoint();
+        //                    Location3D location = pinPoint.getLocation();
+        //                    BearingDistance distance = computeRelativeLocation(location.latitude, location.longitude);
+        //                    if (distance.isValidate()) {
+        //                        mSelectPinDistance = distance;
+        //                        mSelectPinDistance.mColor = pinPoint.getColor();
+        //                        mSelectPinDistance.mName = pinPoint.getName();
+        //                    }
+        //                    return distance;
+        //                })
+        //                .observeOn(AndroidSchedulers.mainThread())
+        //                .subscribeOn(Schedulers.computation())
+        //                .subscribe(distance -> {
+        //                    mPinPointsDistances.clear();
+        //                    if (distance.isValidate()) {
+        //                        mPinPointsDistances.add(distance);
+        //                    }
+        //                    mHSIContainer.updateWidget();
+        //                }));
 
         // RNG Point
-//        addDisposable(Observable.combineLatest(mSubject, PinPointService.getInstance().getRNGPoint(),
-//                (locationCoordinate3D, location3D) -> {
-//                    if (!location3D.isAvailable()) {
-//                        return INVALID_BEARING_DISTANCE;
-//                    }
-//                    return computeRelativeLocation(location3D.latitude, location3D.longitude);
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.computation())
-//                .subscribe(bearingDistance -> {
-//                    mRngDistance = bearingDistance;
-//                    mHSIContainer.updateWidget();
-//                }));
+        //        addDisposable(Observable.combineLatest(mSubject, PinPointService.getInstance().getRNGPoint(),
+        //                (locationCoordinate3D, location3D) -> {
+        //                    if (!location3D.isAvailable()) {
+        //                        return INVALID_BEARING_DISTANCE;
+        //                    }
+        //                    return computeRelativeLocation(location3D.latitude, location3D.longitude);
+        //                })
+        //                .observeOn(AndroidSchedulers.mainThread())
+        //                .subscribeOn(Schedulers.computation())
+        //                .subscribe(bearingDistance -> {
+        //                    mRngDistance = bearingDistance;
+        //                    mHSIContainer.updateWidget();
+        //                }));
 
         // Smart Track Point
-//        addDisposable(Observable.combineLatest(mSubject, SmartTrackService.getInstance().getTrackTargetPostion(),
-//                (locationCoordinate3D, location3D) -> {
-//                    if (!location3D.isAvailable()) {
-//                        return INVALID_BEARING_DISTANCE;
-//                    }
-//                    return computeRelativeLocation(location3D.latitude, location3D.longitude);
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.computation())
-//                .subscribe(bearingDistance -> {
-//                    mSmartTrackDistance = bearingDistance;
-//                    mHSIContainer.updateWidget();
-//                }));
+        //        addDisposable(Observable.combineLatest(mSubject, SmartTrackService.getInstance().getTrackTargetPostion(),
+        //                (locationCoordinate3D, location3D) -> {
+        //                    if (!location3D.isAvailable()) {
+        //                        return INVALID_BEARING_DISTANCE;
+        //                    }
+        //                    return computeRelativeLocation(location3D.latitude, location3D.longitude);
+        //                })
+        //                .observeOn(AndroidSchedulers.mainThread())
+        //                .subscribeOn(Schedulers.computation())
+        //                .subscribe(bearingDistance -> {
+        //                    mSmartTrackDistance = bearingDistance;
+        //                    mHSIContainer.updateWidget();
+        //                }));
     }
 
     @Override
@@ -475,25 +476,25 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
      * @param paint
      * @param compassSize
      */
-//    private void drawWayPoint(Canvas canvas, Paint paint, int compassSize) {
-//        LocationCoordinate2D location = getWayPointLocation();
-//        if (location == null) {
-//            return;
-//        }
-//        BearingDistance distance = computeRelativeLocation(location.getLatitude(), location.getLongitude());
-//        MissionExecutePointInfo pointInfo = MissionManagerDelegate.INSTANCE.getExecutePointInfo();
-//        if (pointInfo != null) {
-//            distance.mName = String.format("%02d", pointInfo.getTargetIndex() + 1);
-//        }
-//        canvas.save();
-//        drawMarkerOnHsi(canvas, compassSize, distance, false);
-//        drawMarker(canvas, mWayPointBitmap, mWayPointMarkerSize, mWayPointMarkerSize, 0, 0, paint, false);
-//        canvas.restore();
-//
-//        drawMarkerIndicator(canvas, compassSize / 2, -compassSize / 2, (int) -(mHSIContainer.getDegreeIndicatorHeight()),
-//                mWayPointBitmap, mWayPointMarkerSize, mWayPointMarkerSize, mMarkerIndicatorTextSize,
-//                mWayPointMarkerTextColor, distance, INDICATOR_ALIGN_LEFT, INDICATOR_ALIGN_TOP, paint);
-//    }
+    //    private void drawWayPoint(Canvas canvas, Paint paint, int compassSize) {
+    //        LocationCoordinate2D location = getWayPointLocation();
+    //        if (location == null) {
+    //            return;
+    //        }
+    //        BearingDistance distance = computeRelativeLocation(location.getLatitude(), location.getLongitude());
+    //        MissionExecutePointInfo pointInfo = MissionManagerDelegate.INSTANCE.getExecutePointInfo();
+    //        if (pointInfo != null) {
+    //            distance.mName = String.format("%02d", pointInfo.getTargetIndex() + 1);
+    //        }
+    //        canvas.save();
+    //        drawMarkerOnHsi(canvas, compassSize, distance, false);
+    //        drawMarker(canvas, mWayPointBitmap, mWayPointMarkerSize, mWayPointMarkerSize, 0, 0, paint, false);
+    //        canvas.restore();
+    //
+    //        drawMarkerIndicator(canvas, compassSize / 2, -compassSize / 2, (int) -(mHSIContainer.getDegreeIndicatorHeight()),
+    //                mWayPointBitmap, mWayPointMarkerSize, mWayPointMarkerSize, mMarkerIndicatorTextSize,
+    //                mWayPointMarkerTextColor, distance, INDICATOR_ALIGN_LEFT, INDICATOR_ALIGN_TOP, paint);
+    //    }
 
     /**
      * 绘制Adsb Point
@@ -532,14 +533,14 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
         return 180 + degree;
     }
 
-//    private LocationCoordinate2D getWayPointLocation() {
-//        List<Location3D> points = MissionManagerDelegate.INSTANCE.getTargetAndNextPointList();
-//        if (points.size() > 0) {
-//            Location3D location = points.get(0);
-//            return new LocationCoordinate2D(location.latitude, location.longitude);
-//        }
-//        return null;
-//    }
+    //    private LocationCoordinate2D getWayPointLocation() {
+    //        List<Location3D> points = MissionManagerDelegate.INSTANCE.getTargetAndNextPointList();
+    //        if (points.size() > 0) {
+    //            Location3D location = points.get(0);
+    //            return new LocationCoordinate2D(location.latitude, location.longitude);
+    //        }
+    //        return null;
+    //    }
 
     private void drawMarkerOnHsi(Canvas canvas, int compassSize, BearingDistance distance, boolean isPointToAircraft) {
         if (distance == null || !distance.isValidate()) {
@@ -587,7 +588,8 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
         }
         canvas.save();
         canvas.translate(translationX, translationY);
-        drawMarkerIndicatorBackground(canvas, compassRadius, translationX, translationY, horizontalAlign, verticalAlign, distance.mName, textSize, paint);
+        drawMarkerIndicatorBackground(canvas, compassRadius, translationX, translationY, horizontalAlign, verticalAlign, distance.mName, textSize,
+                paint);
         drawMarkerIndicatorContent(canvas, marker, markerWidth, markerHeight, textSize, textColor,
                 distance, horizontalAlign, verticalAlign, paint);
         canvas.restore();
@@ -598,7 +600,8 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
                                                @IndicatorAlign int verticalAlign,
                                                String name, int textSize, Paint paint) {
         CIRCLE_PATH.reset();
-        CIRCLE_PATH.addCircle((float) -translationX, (float) -translationY + compassRadius, (float) compassRadius + mMarkerIndicatorMarginToCompass * 2, Path.Direction.CW);
+        CIRCLE_PATH.addCircle((float) -translationX, (float) -translationY + compassRadius,
+                (float) compassRadius + mMarkerIndicatorMarginToCompass * 2, Path.Direction.CW);
 
         PATH.reset();
         PATH.rLineTo(horizontalAlign == INDICATOR_ALIGN_LEFT ? mMarkerIndicatorWidth : -mMarkerIndicatorWidth, 0);
@@ -657,7 +660,7 @@ public class HSIMarkerLayer implements HSIContract.HSILayer {
             float dy = (float) ((double) mMarkerIndicatorHeight / 2 + (double) HSIView.RECT.height() / 2);
             canvas.translate(horizontalAlign == INDICATOR_ALIGN_LEFT ? -dx : dx, verticalAlign == INDICATOR_ALIGN_TOP ? dy : -dy + HSIView.RECT.height());
             // 加阴影
-            int shadowColor = AndUtil.getResColor(ContextUtil.getContext(), R.color.uxsdk_black_47_percent);
+            int shadowColor = AndUtil.getResColor(R.color.uxsdk_black_47_percent);
             paint.setShadowLayer(3, 2, 2, shadowColor);
             canvas.drawText(name, 0, baseline, paint);
         }

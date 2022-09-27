@@ -73,6 +73,9 @@ public class WidgetListItemAdapter extends RecyclerView.Adapter<WidgetListItemAd
     public void onBindViewHolder(WidgetListItemViewHolder holder, int position, List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
     }
+
+
+
     //endregion
 
     /**

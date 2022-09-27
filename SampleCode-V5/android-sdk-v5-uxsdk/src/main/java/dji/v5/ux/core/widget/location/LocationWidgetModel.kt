@@ -31,7 +31,7 @@ import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.util.DataProcessor
-import dji.v5.ux.core.util.LocationUtil
+import dji.v5.utils.common.LocationUtil
 import dji.v5.ux.core.widget.location.LocationWidgetModel.LocationState.ProductDisconnected
 
 /**

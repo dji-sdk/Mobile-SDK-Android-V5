@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
@@ -87,11 +89,6 @@ android {
         doNotStrip "*/*/libmrtc_onvif.so"
         doNotStrip "*/*/libmrtc_rtmp.so"
         doNotStrip "*/*/libmrtc_rtsp.so"
-    }
-
-    configurations {
-        cleanedAnnotations
-        implementation.exclude group: 'org.jetbrains' , module:'annotations'
     }
 }
 

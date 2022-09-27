@@ -22,12 +22,11 @@
   ~
   -->
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:parentTag="dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textview_title"
@@ -39,10 +38,11 @@
         android:layout_marginRight="2dp"
         android:textColor="@color/uxsdk_white_33_percent"
         android:textSize="@dimen/uxsdk_text_size_small"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@id/textview_value"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="F" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textview_value"
@@ -54,8 +54,9 @@
         android:layout_marginRight="2dp"
         android:textColor="@color/uxsdk_white"
         android:textSize="@dimen/uxsdk_text_size_normal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_title"
-        tools:text="4" />
-</merge>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

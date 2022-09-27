@@ -49,6 +49,7 @@ import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
+import dji.v5.utils.common.ContextUtil;
 import dji.v5.utils.common.LogUtils;
 
 /**
@@ -159,8 +160,9 @@ public class AndUtil {
         }
     }
 
-    public static String getResString(Context context, String idName) {
-        if (context != null && !TextUtils.isEmpty(idName)) {
+    public static String getResString(String idName) {
+        if (ContextUtil.getContext() != null && !TextUtils.isEmpty(idName)) {
+            Context context = ContextUtil.getContext();
             int resId = context.getResources().getIdentifier(idName, DEF_TYPE, context.getPackageName());
             return context.getString(resId);
         }
@@ -168,9 +170,9 @@ public class AndUtil {
     }
 
     @SuppressLint("ResourceType")
-    public static String getResString(Context context, @StringRes int resId) {
-        if (context != null && resId > 0) {
-            return context.getString(resId);
+    public static String getResString(@StringRes int resId) {
+        if (ContextUtil.getContext() != null && resId > 0) {
+            return ContextUtil.getContext().getString(resId);
         }
         return "";
     }
@@ -189,15 +191,16 @@ public class AndUtil {
     }
 
     @SuppressLint("ResourceType")
-    public static String getResString(Context context, @StringRes int resId, Object... formatArgs) {
-        if (context != null && resId > 0) {
-            return context.getString(resId, formatArgs);
+    public static String getResString(@StringRes int resId, Object... formatArgs) {
+        if (ContextUtil.getContext() != null && resId > 0) {
+            return ContextUtil.getContext().getResources().getString(resId, formatArgs);
         }
         return "";
     }
 
-    public static String getResString(Context context, String idName, Object... formatArgs) {
-        if (context != null && !TextUtils.isEmpty(idName)) {
+    public static String getResString(String idName, Object... formatArgs) {
+        if (ContextUtil.getContext() != null && !TextUtils.isEmpty(idName)) {
+            Context context = ContextUtil.getContext();
             int resId = context.getResources().getIdentifier(idName, DEF_TYPE, context.getPackageName());
             return context.getString(resId, formatArgs);
         }
@@ -205,23 +208,24 @@ public class AndUtil {
     }
 
     public static String getFormatResString(Context context, @StringRes int resId, Object... formatArgs) {
-        return getFormatResString(context, Locale.US, resId, formatArgs);
+        return getFormatResString(Locale.US, resId, formatArgs);
     }
 
     @SuppressLint("ResourceType")
-    public static String getFormatResString(Context context, Locale locale, @StringRes int resId, Object... formatArgs) {
-        if (context != null && resId > 0) {
-            return String.format(locale, context.getResources().getString(resId), formatArgs);
+    public static String getFormatResString(Locale locale, @StringRes int resId, Object... formatArgs) {
+        if (ContextUtil.getContext() != null && resId > 0) {
+            return String.format(locale, ContextUtil.getContext().getResources().getString(resId), formatArgs);
         }
         return "";
     }
 
-    public static String getFormatResString(Context context, String idName, Object... formatArgs) {
-        return getFormatResString(context, Locale.US, idName, formatArgs);
+    public static String getFormatResString(String idName, Object... formatArgs) {
+        return getFormatResString(Locale.US, idName, formatArgs);
     }
 
-    public static String getFormatResString(Context context, Locale locale, String idName, Object... formatArgs) {
-        if (context != null && !TextUtils.isEmpty(idName)) {
+    public static String getFormatResString(Locale locale, String idName, Object... formatArgs) {
+        if (ContextUtil.getContext() != null && !TextUtils.isEmpty(idName)) {
+            Context context = ContextUtil.getContext();
             int resId = context.getResources().getIdentifier(idName, DEF_TYPE, context.getPackageName());
             return String.format(locale, context.getResources().getString(resId), formatArgs);
         }
@@ -237,25 +241,26 @@ public class AndUtil {
     }
 
     @SuppressLint("ResourceType")
-    public static int getResColor(Context context, @ColorRes int resId) {
-        if (context != null && resId > 0) {
-            return context.getResources().getColor(resId);
+    public static int getResColor(@ColorRes int resId) {
+        if (ContextUtil.getContext() != null && resId > 0) {
+
+            return ContextUtil.getContext().getResources().getColor(resId);
         }
         return 0;
     }
 
     @SuppressLint("ResourceType")
-    public static Drawable getResDrawable(Context context, @DrawableRes int resId) {
-        if (context != null && resId > 0) {
-            return context.getResources().getDrawable(resId);
+    public static Drawable getResDrawable(@DrawableRes int resId) {
+        if (ContextUtil.getContext() != null && resId > 0) {
+            return ContextUtil.getContext().getResources().getDrawable(resId);
         }
         return null;
     }
 
     @SuppressLint("ResourceType")
-    public static float getDimension(Context context, @DimenRes int resId) {
-        if (context != null && resId > 0) {
-            return context.getResources().getDimension(resId);
+    public static float getDimension(@DimenRes int resId) {
+        if (ContextUtil.getContext() != null&& resId > 0) {
+            return ContextUtil.getContext().getResources().getDimension(resId);
         }
         return 0f;
     }
@@ -398,41 +403,42 @@ public class AndUtil {
         return a.equals(b);
     }
 
-//    /**
-//     * 返回一个点是否在一个多边形区域内
-//     *
-//     * @param points 多边形坐标点列表
-//     * @param point  待判断点
-//     * @return true 多边形包含这个点,false 多边形未包含这个点。
-//     */
-//    public static boolean isPolygonContainsPoint(List<DJILatLng> points, DJILatLng point) {
-//        int nCross = 0;
-//        for (int i = 0; i < points.size(); i++) {
-//            DJILatLng p1 = points.get(i);
-//            DJILatLng p2 = points.get((i + 1) % points.size());
-//            // 取多边形任意一个边,做点point的水平延长线,求解与当前边的交点个数
-//            // p1p2是水平线段,要么没有交点,要么有无限个交点
-//            if (p1.getLongitude() == p2.getLongitude()) {
-//                continue;
-//            }
-//            // point 在p1p2 底部 --> 无交点
-//            if (point.getLongitude() < Math.min(p1.getLongitude(), p2.getLongitude())) {
-//                continue;
-//            }
-//            // point 在p1p2 顶部 --> 无交点
-//            if (point.getLongitude() >= Math.max(p1.getLongitude(), p2.getLongitude())) {
-//                continue;
-//            }
-//            // 求解 point点水平线与当前p1p2边的交点的 X 坐标
-//            double x = (point.getLongitude() - p1.getLongitude()) * (p2.getLatitude() - p1.getLatitude()) / (p2.getLongitude() - p1.getLongitude()) + p1.getLatitude();
-//            // 当x=point.x时,说明point在p1p2线段上
-//            if (x > point.getLatitude()) {
-//                nCross++; // 只统计单边交点
-//            }
-//        }
-//        // 单边交点为偶数，点在多边形之外 ---
-//        return (nCross % 2 == 1);
-//    }
+    //    /**
+    //     * 返回一个点是否在一个多边形区域内
+    //     *
+    //     * @param points 多边形坐标点列表
+    //     * @param point  待判断点
+    //     * @return true 多边形包含这个点,false 多边形未包含这个点。
+    //     */
+    //    public static boolean isPolygonContainsPoint(List<DJILatLng> points, DJILatLng point) {
+    //        int nCross = 0;
+    //        for (int i = 0; i < points.size(); i++) {
+    //            DJILatLng p1 = points.get(i);
+    //            DJILatLng p2 = points.get((i + 1) % points.size());
+    //            // 取多边形任意一个边,做点point的水平延长线,求解与当前边的交点个数
+    //            // p1p2是水平线段,要么没有交点,要么有无限个交点
+    //            if (p1.getLongitude() == p2.getLongitude()) {
+    //                continue;
+    //            }
+    //            // point 在p1p2 底部 --> 无交点
+    //            if (point.getLongitude() < Math.min(p1.getLongitude(), p2.getLongitude())) {
+    //                continue;
+    //            }
+    //            // point 在p1p2 顶部 --> 无交点
+    //            if (point.getLongitude() >= Math.max(p1.getLongitude(), p2.getLongitude())) {
+    //                continue;
+    //            }
+    //            // 求解 point点水平线与当前p1p2边的交点的 X 坐标
+    //            double x = (point.getLongitude() - p1.getLongitude()) * (p2.getLatitude() - p1.getLatitude()) / (p2.getLongitude() - p1
+    //            .getLongitude()) + p1.getLatitude();
+    //            // 当x=point.x时,说明point在p1p2线段上
+    //            if (x > point.getLatitude()) {
+    //                nCross++; // 只统计单边交点
+    //            }
+    //        }
+    //        // 单边交点为偶数，点在多边形之外 ---
+    //        return (nCross % 2 == 1);
+    //    }
 
     public static boolean isEquals(Point p1, Point p2) {
         int disx = p1.x - p2.x;
@@ -461,7 +467,7 @@ public class AndUtil {
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
-            LogUtils.e(TAG,e.getMessage());
+            LogUtils.e(TAG, e.getMessage());
         }
 
         return resultData;

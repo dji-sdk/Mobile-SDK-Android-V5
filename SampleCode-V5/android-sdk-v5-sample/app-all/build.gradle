@@ -91,11 +91,6 @@ android {
         doNotStrip "*/*/libmrtc_rtmp.so"
         doNotStrip "*/*/libmrtc_rtsp.so"
     }
-
-    configurations {
-        cleanedAnnotations
-        implementation.exclude group: 'org.jetbrains' , module:'annotations'
-    }
 }
 
 

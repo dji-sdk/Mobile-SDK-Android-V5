@@ -17,7 +17,6 @@ import dji.sampleV5.modulecommon.data.DEFAULT_STR
 import dji.sampleV5.modulecommon.models.MultiVideoChannelVM
 import dji.sampleV5.modulecommon.models.VideoChannelVM
 import dji.sampleV5.modulecommon.models.VideoChannelVMFactory
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.video.channel.VideoChannelState
@@ -28,6 +27,7 @@ import dji.v5.common.video.stream.StreamSource
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DiskUtil
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.video_channel_horizontal_scrollview.*
 import kotlinx.android.synthetic.main.video_channel_page.*
 import java.io.*
@@ -64,6 +64,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             }
         }
     }
+
     //组帧后数据Listener
     private val streamDataListener =
         StreamDataListener {
@@ -108,13 +109,12 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
              * @param oldState 解码器前一个状态
              * @param newState 解码器当前状态
              */
-            this@VideoChannelFragment.context?.let { it ->
-                ToastUtils.showToast(it, "Decoder State change from $oldState to $newState")
-                mainHandler.post {
-                    channelVM.videoChannelInfo.value?.decoderState = newState
-                    channelVM.refreshVideoChannelInfo()
-                }
+            ToastUtils.showToast("Decoder State change from $oldState to $newState")
+            mainHandler.post {
+                channelVM.videoChannelInfo.value?.decoderState = newState
+                channelVM.refreshVideoChannelInfo()
             }
+
         }
 
     override fun onCreateView(
@@ -143,13 +143,17 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         }
         val factory = VideoChannelVMFactory(videoChannelType)
         channelVM = ViewModelProvider(this, factory).get(VideoChannelVM::class.java)
+        init()
+    }
+
+    private fun init(){
+        multiVideoChannelVM.videoStreamSources.observe(viewLifecycleOwner) {
+            streamSources = it
+        }
         initVideoChannelInfo()
     }
 
     private fun initVideoChannelInfo() {
-        multiVideoChannelVM.videoStreamSources.observe(viewLifecycleOwner) {
-            streamSources = it
-        }
         streamSources = multiVideoChannelVM.videoStreamSources.value
         channelVM.videoChannelInfo.observe(viewLifecycleOwner) {
             it?.let {
@@ -178,7 +182,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         super.onDestroyView()
         channelVM.videoChannel?.removeStreamDataListener(streamDataListener)
         if (videoDecoder != null) {
-            videoDecoder?.destory()
+            videoDecoder?.destroy()
             videoDecoder = null
         }
     }
@@ -195,16 +199,12 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                     if (channelVM.videoChannel!!.videoChannelStatus == VideoChannelState.CLOSE) {
                         showStartChannelDialog()
                     } else {
-                        this@VideoChannelFragment.context?.let {
-                            ToastUtils.showToast(
-                                it,
-                                "${channelVM.videoChannel!!.videoChannelType} has already started, Please restart ${channelVM.videoChannel!!.videoChannelType}"
-                            )
-                        }
+                        ToastUtils.showToast(
+                            "${channelVM.videoChannel!!.videoChannelType} has already started, Please restart ${channelVM.videoChannel!!.videoChannelType}"
+                        )
+
                     }
-                } ?: let {
-                    showDisconnectToast()
-                }
+                } ?: showDisconnectToast()
             }
             R.id.closeChannel -> {
                 channelVM.videoChannel?.let {
@@ -221,9 +221,8 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                                 channelVM.videoChannelInfo.value?.socket = DEFAULT_STR
                                 channelVM.refreshVideoChannelInfo()
                             }
-                            this@VideoChannelFragment.context?.let {
-                                ToastUtils.showToast(it, "Close Channel Success")
-                            }
+                            ToastUtils.showToast("Close Channel Success")
+
                         }
 
                         /**
@@ -233,24 +232,18 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                          * @param error The DJI error result
                          */
                         override fun onFailure(error: IDJIError) {
-                            this@VideoChannelFragment.context?.let {
-                                ToastUtils.showToast(
-                                    it,
-                                    "Close Channel Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
-                                )
-                            }
+                            ToastUtils.showToast(
+                                "Close Channel Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
+                            )
+
                         }
                     })
-                } ?: let {
-                    showDisconnectToast()
-                }
+                } ?: showDisconnectToast()
             }
             R.id.yuvScreenShot -> {
                 channelVM.videoChannel?.let {
                     handlerYUV()
-                } ?: let {
-                    showDisconnectToast()
-                }
+                } ?: showDisconnectToast()
             }
             R.id.startSocket -> {
                 channelVM.videoChannel?.let {
@@ -269,9 +262,8 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                                 channelVM.videoChannelInfo.value?.socket = socketStr
                                 channelVM.refreshVideoChannelInfo()
                             }
-                            this@VideoChannelFragment.context?.let {
-                                ToastUtils.showToast(it, "Start Socket Server Success")
-                            }
+                            ToastUtils.showToast("Start Socket Server Success")
+
                         }
 
                         /**
@@ -281,17 +273,13 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                          * @param error The DJI error result
                          */
                         override fun onFailure(error: IDJIError) {
-                            this@VideoChannelFragment.context?.let {
-                                ToastUtils.showToast(
-                                    it,
-                                    "Start Socket Server Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
-                                )
-                            }
+                            ToastUtils.showToast(
+                                "Start Socket Server Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
+                            )
+
                         }
                     })
-                } ?: let {
-                    showDisconnectToast()
-                }
+                } ?: showDisconnectToast()
             }
             R.id.closeSocket -> {
                 channelVM.videoChannel?.let {
@@ -307,9 +295,8 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                                 channelVM.refreshVideoChannelInfo()
                             }
 
-                            this@VideoChannelFragment.context?.let {
-                                ToastUtils.showToast(it, "Close Server Socket Success")
-                            }
+                            ToastUtils.showToast("Close Server Socket Success")
+
                         }
 
                         /**
@@ -319,33 +306,24 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                          * @param error The DJI error result
                          */
                         override fun onFailure(error: IDJIError) {
-                            this@VideoChannelFragment.context?.let {
-                                ToastUtils.showToast(
-                                    it,
-                                    "Close Socket Server Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
-                                )
-                            }
+                            ToastUtils.showToast(
+                                "Close Socket Server Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
+                            )
                         }
 
                     })
-                } ?: let {
-                    showDisconnectToast()
-                }
+                } ?: showDisconnectToast()
             }
             R.id.startBroadcast -> {
                 if (serverSocket != null) {
                     serverSocket?.startBroadcast()
-                    this@VideoChannelFragment.context?.let {
-                        ToastUtils.showToast(it, "Start Broadcast Frame Success")
-                    }
+                    ToastUtils.showToast("Start Broadcast Frame Success")
                 }
             }
             R.id.stopBroadcast -> {
                 if (serverSocket != null) {
                     serverSocket?.stopBroadcast()
-                    this@VideoChannelFragment.context?.let {
-                        ToastUtils.showToast(it, "Stop Broadcast Frame Success")
-                    }
+                    ToastUtils.showToast("Stop Broadcast Frame Success")
                 }
             }
         }
@@ -372,7 +350,6 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                         ) { _, i ->
                             checkedItem = i
                             ToastUtils.showToast(
-                                it,
                                 "选择的码流源为： " + (items[i] ?: "空"),
                             )
                         }.setPositiveButton(R.string.confirm) { dialog, _ ->
@@ -413,9 +390,8 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                             channelVM.refreshVideoChannelInfo()
                         }
 
-                        this@VideoChannelFragment.context?.let {
-                            ToastUtils.showToast(it, "Start Channel Success")
-                        }
+                        ToastUtils.showToast("Start Channel Success")
+
                     }
 
                     /**
@@ -425,17 +401,12 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                      * @param error The DJI error result
                      */
                     override fun onFailure(error: IDJIError) {
-                        this@VideoChannelFragment.context?.let {
-                            ToastUtils.showToast(
-                                it,
-                                "Start Channel Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
-                            )
-                        }
+                        ToastUtils.showToast(
+                            "Start Channel Failed: (errorCode ${error.errorCode()}, description: ${error.description()})"
+                        )
                     }
                 })
-        } ?: let {
-            showDisconnectToast()
-        }
+        } ?: showDisconnectToast()
     }
 
     /**
@@ -503,7 +474,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         videoDecoder?.onPause()
     }
 
-    override fun onReceive(mediaFormat:MediaFormat?, data: ByteArray?, width: Int, height: Int) {
+    override fun onReceive(mediaFormat: MediaFormat?, data: ByteArray?, width: Int, height: Int) {
         if (++count == 30) {
             count = 0
             data?.let {
@@ -532,7 +503,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                                 fos.close()
                             }
                         }
-                        saveYuvData(mediaFormat,data,width,height)
+                        saveYuvData(mediaFormat, data, width, height)
                     }
                 })
             }
@@ -562,7 +533,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             yuv_screen_save_path.visibility = View.VISIBLE
             videoDecoder?.let {
                 videoDecoder!!.onPause()
-                videoDecoder!!.destory()
+                videoDecoder!!.destroy()
                 videoDecoder = null
             }
             videoDecoder = VideoDecoder(
@@ -582,7 +553,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             yuv_screen_save_path.visibility = View.INVISIBLE
             videoDecoder?.let {
                 videoDecoder!!.onPause()
-                videoDecoder!!.destory()
+                videoDecoder!!.destroy()
                 videoDecoder = null
             }
             videoDecoder = VideoDecoder(
@@ -688,6 +659,6 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
     }
 
     private fun showDisconnectToast() {
-        ToastUtils.showToast(ContextUtil.getContext(), "video stream disconnect")
+        ToastUtils.showToast("video stream disconnect")
     }
 }

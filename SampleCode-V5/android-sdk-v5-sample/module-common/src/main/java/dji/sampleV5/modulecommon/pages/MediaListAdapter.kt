@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.recyclerview.widget.RecyclerView
 
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.FragmentPageInfoItem
+import dji.sampleV5.modulecommon.util.AnimationUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 
@@ -20,6 +22,7 @@ import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.utils.common.ContextUtil
 import kotlinx.android.synthetic.main.item_mediafile_list.view.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import java.util.ArrayList
 
 /**
  * @author feel.feng
@@ -33,6 +36,8 @@ class MediaListAdapter(
 ) :
     RecyclerView.Adapter<MediaListAdapter.ViewHolder>() {
 
+    val mSelectedItems: ArrayList<MediaFile> = ArrayList<MediaFile>()
+    var selectionMode : Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View =
@@ -82,24 +87,33 @@ class MediaListAdapter(
 
 
         holder.textView.text = mediaFile.fileName.toString()
+        holder.updateSelection(selectionMode, mSelectedItems.contains(mediaFile))
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    class ViewHolder(view: View, private val onItemClick: (MediaFile, View) -> Unit) :
+    inner class ViewHolder(view: View, private val onItemClick: (MediaFile, View) -> Unit) :
         RecyclerView.ViewHolder(view) {
         var imageView = view.iv_thumbnail
         var textView = view.tv_media_info
         var mediaFile: MediaFile? = null
+        var rightTopIcon = view.right_top_icon
 
         init {
 
-            view.setOnClickListener {
+            imageView.setOnClickListener {
+
                 mediaFile?.let {
 
-                    onItemClick(it, view)
+                    if (selectionMode) {
+                        holderClickAction(this, mediaFile!!)
+                    } else {
+                        onItemClick(it, view)
+                    }
+
+
                 }
             }
         }
@@ -108,6 +122,42 @@ class MediaListAdapter(
             mediaFile = data
         }
 
+        fun updateSelection(selectionMode: Boolean, selected: Boolean) {
+            rightTopIcon.setVisibility(if (selectionMode) View.VISIBLE else View.GONE)
+            rightTopIcon.setSelected(selected)
+            AnimationUtils.springView(rightTopIcon, DynamicAnimation.SCALE_X, 1.1f)
+            AnimationUtils.springView(rightTopIcon, DynamicAnimation.SCALE_Y, 1.1f)
+        }
+
     }
+
+
+     fun holderClickAction(
+        holder: ViewHolder,
+        media: MediaFile
+    ) {
+
+         if (selectionMode) {
+             if (mSelectedItems.contains(holder.mediaFile)) {
+                 mSelectedItems.remove(holder.mediaFile)
+             } else {
+                 holder.mediaFile?.let { it1 -> mSelectedItems.add(it1) }
+             }
+             val selected = mSelectedItems.contains(media)
+             holder.updateSelection(selectionMode, selected)
+
+         }
+
+    }
+
+     fun getSelectedItems(): ArrayList<MediaFile> {
+        return mSelectedItems
+    }
+
+    fun  setSelectMode(selectionMode: Boolean) {
+        this.selectionMode = selectionMode;
+    }
+
+
 
 }

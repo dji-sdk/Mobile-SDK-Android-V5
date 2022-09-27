@@ -3,13 +3,13 @@ package dji.sampleV5.moduleaircraft.models
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.data.DJIToastResult
 import dji.sampleV5.modulecommon.models.DJIViewModel
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.uas.UARegistrationNumberStatus
 import dji.v5.manager.aircraft.uas.UASRemoteIDManager
 import dji.v5.manager.aircraft.uas.UASRemoteIDStatus
 import dji.v5.manager.areacode.AreaCode
+import dji.v5.utils.common.ToastUtils
 
 /**
  * Description :日本无人机远程识别VM

@@ -58,6 +58,7 @@ class SystemStatusWidgetModel(
 
     private val deviceStatusChangeListener = DJIDeviceStatusChangeListener { _, to ->
         systemStatusProcessor.onNext(to)
+        updateStates()
     }
 
     //region Data

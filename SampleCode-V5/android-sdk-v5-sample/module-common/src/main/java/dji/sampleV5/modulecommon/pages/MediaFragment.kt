@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
@@ -14,15 +15,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MEDIA_FILE_DETAILS_STR
 import dji.sampleV5.modulecommon.models.MediaVM
-import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.DJIList
 import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.manager.datacenter.media.MediaFileListState
 import dji.v5.manager.datacenter.media.MediaManager
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_media_page.*
+import java.util.ArrayList
 
 /**
  * @author feel.feng
@@ -53,7 +57,7 @@ class MediaFragment : DJIFragment(){
 
 
     private fun initData() {
-        MediaManager.getInstance().enable(  object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.enable(  object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 if (!isload) {
                     mediaVM.init()
@@ -88,11 +92,12 @@ class MediaFragment : DJIFragment(){
     private fun initView() {
         media_recycle_list.layoutManager = GridLayoutManager(context , 3)
         btn_delete.setOnClickListener(){
-            var mediafiles = DJIList<MediaFile>()
-            if (MediaManager.getInstance().mediaFileListData.data.size != 0) {
-                mediafiles.add(MediaManager.getInstance().mediaFileListData.data[0])
-                MediaManager.getInstance().deleteMediaFiles(mediafiles , object :CommonCallbacks.CompletionCallback {
+            var mediafiles = ArrayList<MediaFile>()
+            if (adapter?.getSelectedItems()?.size != 0) {
+                mediafiles.addAll(adapter?.getSelectedItems()!!)
+                MediaDataCenter.getInstance().mediaManager.deleteMediaFiles(mediafiles , object :CommonCallbacks.CompletionCallback {
                     override fun onSuccess() {
+                        clearSelectFiles()
                         ToastUtils.showToast("delete success ");
                     }
 
@@ -101,6 +106,8 @@ class MediaFragment : DJIFragment(){
                     }
 
                 })
+            } else {
+                ToastUtils.showToast("please select files ");
             }
 
         }
@@ -108,6 +115,39 @@ class MediaFragment : DJIFragment(){
            mediaVM.pullMediaFileListFromCamera()
         }
 
+        btn_select.setOnClickListener() {
+
+            adapter?.selectionMode = !adapter?.selectionMode!!
+            clearSelectFiles()
+            btn_select.setText(
+                if (adapter?.selectionMode!!) {
+                    R.string.unselect_files
+                } else {
+                    R.string.select_files
+                }
+            )
+            updateDeleteBtn(adapter?.selectionMode!!)
+        }
+
+
+        sp_choose_component.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+                mediaVM.setComponentIndex(ComponentIndexType.find(index))
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //do nothing
+            }
+        }
+
+    }
+    private fun updateDeleteBtn(enable: Boolean) {
+        btn_delete.isEnabled = enable
+    }
+
+    private fun clearSelectFiles() {
+        adapter?.mSelectedItems?.clear()
+        adapter?.notifyDataSetChanged()
     }
 
     private fun onItemClick(mediaFile: MediaFile , view: View){
@@ -126,14 +166,14 @@ class MediaFragment : DJIFragment(){
 
     override fun onDestroyView() {
         super.onDestroyView()
-        MediaManager.getInstance().stopPullMediaFileListFromCamera()
+        MediaDataCenter.getInstance().mediaManager.stopPullMediaFileListFromCamera()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        MediaManager.getInstance().disable( object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.disable( object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
-                LogUtils.d(TAG , "exit success");
+                LogUtils.i(TAG , "exit success");
             }
             override fun onFailure(error: IDJIError) {
                 LogUtils.e(TAG , "exit failed " + error.description());

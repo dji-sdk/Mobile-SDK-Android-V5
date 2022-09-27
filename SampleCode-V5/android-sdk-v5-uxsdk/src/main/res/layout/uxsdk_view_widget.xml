@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        android:background="@color/uxsdk_gray_45"
+        app:layout_constraintStart_toStartOf="@+id/textview_aspect_ratio_label"
+        app:layout_constraintEnd_toEndOf="@+id/textview_current_size"
+        app:layout_constraintBottom_toBottomOf="@id/textview_current_size_label"
+        app:layout_constraintTop_toTopOf="@+id/textview_aspect_ratio_label" />
+
+    <TextView
+        android:id="@+id/textview_aspect_ratio_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="8dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="8dp"
+        android:paddingStart="24dp"
+        android:paddingTop="24dp"
+        android:text="@string/uxsdk_designed_aspect_ratio"
+        android:textColor="@color/uxsdk_light_gray_50"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_current_size_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:paddingEnd="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/uxsdk_current_widget_size"
+        android:textColor="@color/uxsdk_light_gray_50"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textview_aspect_ratio_label"
+        app:layout_constraintTop_toBottomOf="@+id/textview_aspect_ratio_label" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="textview_aspect_ratio_label,textview_current_size_label" />
+
+    <TextView
+        android:id="@+id/textview_aspect_ratio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:textColor="@color/uxsdk_light_gray_50"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toTopOf="@+id/textview_aspect_ratio_label"
+        tools:text="1.0" />
+
+    <TextView
+        android:id="@+id/textview_current_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:paddingEnd="24dp"
+        android:paddingRight="24dp"
+        android:textColor="@color/uxsdk_light_gray_50"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/textview_aspect_ratio_label"
+        android:text="[180.0, 180.0]"/>
+
+    <TextView
+        android:id="@+id/textview_resize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/uxsdk_pinch_to_resize"
+        android:textColor="@color/uxsdk_light_gray_50"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/textview_current_size"
+        app:layout_constraintStart_toStartOf="@+id/textview_aspect_ratio_label"
+        app:layout_constraintTop_toBottomOf="@+id/textview_current_size_label" />
+
+    <LinearLayout
+        android:id="@+id/widget_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_resize"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

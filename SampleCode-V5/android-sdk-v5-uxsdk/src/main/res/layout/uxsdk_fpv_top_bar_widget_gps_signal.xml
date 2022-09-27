@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center|left"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/uxsdk_black_95_percent">
+
+        <ImageView
+            android:id="@+id/iv_rtk_icon"
+            android:layout_width="@dimen/uxsdk_20_dp"
+            android:layout_height="@dimen/uxsdk_12_dp"
+            android:src="@drawable/uxsdk_ic_fpv_topbar_rtk_normal"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_satellite_icon"
+                android:layout_width="@dimen/uxsdk_8_dp"
+                android:layout_height="@dimen/uxsdk_8_dp"
+                android:src="@drawable/uxsdk_ic_fpv_topbar_satellite_normal" />
+
+            <TextView
+                android:id="@+id/tv_satellite_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/uxsdk_2_dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/uxsdk_9_dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

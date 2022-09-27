@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="@dimen/uxsdk_9_dp"
+        android:layout_height="@dimen/uxsdk_9_dp"
+        android:background="@drawable/uxsdk_ic_rtk_guidance_light_green" />
+
+    <ImageView
+        android:layout_width="@dimen/uxsdk_9_dp"
+        android:layout_height="@dimen/uxsdk_10_dp"
+        android:layout_marginStart="@dimen/uxsdk_2_dp"
+        android:background="@drawable/uxsdk_ic_rtk_guidance_light_green" />
+
+    <ImageView
+        android:layout_width="@dimen/uxsdk_9_dp"
+        android:layout_height="@dimen/uxsdk_10_dp"
+        android:layout_marginStart="@dimen/uxsdk_2_dp"
+        android:background="@drawable/uxsdk_ic_rtk_guidance_light_green" />
+
+    <ImageView
+        android:layout_width="@dimen/uxsdk_9_dp"
+        android:layout_height="@dimen/uxsdk_10_dp"
+        android:layout_marginStart="@dimen/uxsdk_2_dp"
+        android:background="@drawable/uxsdk_ic_rtk_guidance_light_green" />
+
+    <ImageView
+        android:layout_width="@dimen/uxsdk_9_dp"
+        android:layout_height="@dimen/uxsdk_10_dp"
+        android:layout_marginStart="@dimen/uxsdk_2_dp"
+        android:background="@drawable/uxsdk_ic_rtk_guidance_light_green" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/uxsdk_2_dp"
+        android:text="@string/uxsdk_rtk_guidance_five_mode"
+        android:textSize="@dimen/uxsdk_text_size_small" />
+
+</LinearLayout>

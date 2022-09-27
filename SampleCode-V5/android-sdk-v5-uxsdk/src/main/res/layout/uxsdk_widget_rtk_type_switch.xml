@@ -1,0 +1,134 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@android:color/background_dark"
+    tools:parentTag="dji.v5.ux.accessory.RTKTypeSwitchWidget">
+
+    <dji.v5.ux.accessory.DescSpinnerCell
+        android:id="@+id/cell_rtk_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:uxsdk_desc="@string/uxsdk_rtk_base_gps_input_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:uxsdk_summary="@string/uxsdk_rtk_type_switch_title" />
+
+    <LinearLayout
+        android:id="@+id/ll_rtk_custom_detail_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_10_dp"
+        android:background="@drawable/uxsdk_bg_setting_ui_rtk_status"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/uxsdk_4_dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/cell_rtk_type">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/uxsdk_12_dp">
+
+            <TextView
+                style="@style/uxsdk_setting_menu_rtk_input_left_item_title"
+                android:text="NTRIP Host:" />
+
+            <EditText
+                android:id="@+id/net_rtk_ntrip_host"
+                style="@style/uxsdk_setting_menu_rtk_input_right_item_title"
+                tools:text="52.80.55.204" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/uxsdk_12_dp">
+
+            <TextView
+                style="@style/uxsdk_setting_menu_rtk_input_left_item_title"
+                android:text="Port:" />
+
+            <EditText
+                android:id="@+id/net_rtk_ntrip_port"
+                style="@style/uxsdk_setting_menu_rtk_input_right_item_title"
+                android:inputType="number"
+                android:maxLength="5"
+                tools:text="8001" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/uxsdk_12_dp">
+
+            <TextView
+                style="@style/uxsdk_setting_menu_rtk_input_left_item_title"
+                android:text="User:" />
+
+            <EditText
+                android:id="@+id/net_rtk_ntrip_user"
+                style="@style/uxsdk_setting_menu_rtk_input_right_item_title"
+                tools:text="user1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/uxsdk_12_dp">
+
+            <TextView
+                style="@style/uxsdk_setting_menu_rtk_input_left_item_title"
+                android:text="Password:" />
+
+            <EditText
+                android:id="@+id/net_rtk_ntrip_pwd"
+                style="@style/uxsdk_setting_menu_rtk_input_right_item_title"
+                android:inputType="textPassword"
+                tools:text="123" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/uxsdk_12_dp">
+
+            <TextView
+                style="@style/uxsdk_setting_menu_rtk_input_left_item_title"
+                android:text="Mountpoint:" />
+
+            <EditText
+                android:id="@+id/net_rtk_ntrip_mountpoint"
+                style="@style/uxsdk_setting_menu_rtk_input_right_item_title"
+                android:layout_weight="2"
+                tools:text="RTCM32_GGB" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_set_net_rtk_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/uxsdk_bg_selector_blue_rect_mask"
+            android:text="@string/uxsdk_rtk_setting_menu_settting"
+            android:textAllCaps="false"
+            android:textColor="@color/uxsdk_setting_menu_rtk_tiny_green" />
+
+    </LinearLayout>
+
+    <dji.v5.ux.accessory.DescSpinnerCell
+        android:id="@+id/cell_coordinate_system"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/ll_rtk_custom_detail_view"
+        app:uxsdk_summary="@string/uxsdk_rtk_coordinate_title"
+        tools:visibility="visible" />
+
+</merge>

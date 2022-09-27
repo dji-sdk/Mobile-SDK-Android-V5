@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MAIN_FRAGMENT_PAGE_TITLE
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
@@ -63,6 +64,9 @@ open class DJIFragment : Fragment() {
 
     fun resetIndex() {
         indexChosen = intArrayOf(-1, -1, -1)
+    }
+    fun isFragmentShow():Boolean {
+       return lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED)
     }
 
     fun openInputDialog(text: String, title: String, onStrInput: (str: String) -> Unit) {

@@ -31,16 +31,16 @@ import io.reactivex.rxjava3.core.Flowable
  *
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
-private const val TAG = "RTKSatelliteStatusWidgetModel"
 
 class RTKSatelliteStatusWidgetModel(
     djiSdkModel: DJISDKModel,
     uxKeyManager: ObservableInMemoryKeyedStore,
     private val preferencesManager: GlobalPreferencesInterface?,
-    private val rtkCenter: IRTKCenter
+    private val rtkCenter: IRTKCenter,
 ) :
     WidgetModel(djiSdkModel, uxKeyManager) {
 
+    private val TAG = LogUtils.getTag(this)
     private val rtkLocationInfoProcessor: DataProcessor<RTKLocationInfo> = DataProcessor.create(RTKLocationInfo())
     private val rtkSystemStateProcessor: DataProcessor<RTKSystemState> = DataProcessor.create(RTKSystemState())
     private val rtkStationConnectStateProcessor: DataProcessor<RTKStationConnetState> =
@@ -79,10 +79,10 @@ class RTKSatelliteStatusWidgetModel(
 
     }
     private val rtkSystemStateListener = RTKSystemStateListener {
-        LogUtils.i(TAG, it)
         rtkSystemStateProcessor.onNext(it)
         //RTKSystemState涉及RTK服务类型的改变，所以有关于RTK服务类型的都需要更新
         updateRTKConnectionState()
+        updateRTKListener(it.rtkReferenceStationSource)
 
     }
     private val stationConnectStatusListener = RTKStationConnectStatusListener {
@@ -112,6 +112,7 @@ class RTKSatelliteStatusWidgetModel(
             }
         }
     }
+
 
     @get:JvmName("getRTKLocationInfo")
     val rtkLocationInfo: Flowable<RTKLocationInfo>
@@ -158,6 +159,7 @@ class RTKSatelliteStatusWidgetModel(
         rtkCenter.addRTKSystemStateListener(rtkSystemStateListener)
         rtkCenter.qxrtkManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
         rtkCenter.customRTKManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
+        rtkCenter.cmccrtkManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
         rtkCenter.rtkStationManager.addRTKStationConnectStatusListener(stationConnectStatusListener)
         //测试发现productConnection有时候返回true比较慢，所以在其值返回也是要刷新依赖其者的状态
         productConnection.observeOn(SchedulerProvider.ui()).subscribe {
@@ -175,6 +177,43 @@ class RTKSatelliteStatusWidgetModel(
         rtkCenter.rtkStationManager.removeRTKStationConnectStatusListener(stationConnectStatusListener)
         rtkCenter.qxrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
         rtkCenter.customRTKManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+        rtkCenter.cmccrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+    }
+
+    private fun updateRTKListener(rtkSource: RTKReferenceStationSource) {
+        when (rtkSource) {
+            RTKReferenceStationSource.QX_NETWORK_SERVICE -> {
+                rtkCenter.customRTKManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.cmccrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.rtkStationManager.removeRTKStationConnectStatusListener(stationConnectStatusListener)
+                rtkCenter.qxrtkManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
+            }
+            RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE -> {
+                rtkCenter.qxrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.cmccrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.rtkStationManager.removeRTKStationConnectStatusListener(stationConnectStatusListener)
+                rtkCenter.customRTKManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
+
+            }
+            RTKReferenceStationSource.NTRIP_NETWORK_SERVICE -> {
+                rtkCenter.qxrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.customRTKManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.rtkStationManager.removeRTKStationConnectStatusListener(stationConnectStatusListener)
+                rtkCenter.cmccrtkManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)
+
+            }
+            RTKReferenceStationSource.BASE_STATION -> {
+                rtkCenter.qxrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.customRTKManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.cmccrtkManager.removeNetworkRTKServiceInfoListener(networkServiceInfoListener)
+                rtkCenter.rtkStationManager.addRTKStationConnectStatusListener(stationConnectStatusListener)
+
+            }
+            else -> {
+                //do nothing
+            }
+        }
+
     }
 
 
@@ -226,7 +265,7 @@ class RTKSatelliteStatusWidgetModel(
         val isRTKBeingUsed: Boolean?,
         val isNetworkServiceOpen: Boolean?,
         @get:JvmName("getRTKSignal")
-        val rtkSignal: RTKReferenceStationSource?
+        val rtkSignal: RTKReferenceStationSource?,
     )
 
     /**
@@ -256,7 +295,7 @@ class RTKSatelliteStatusWidgetModel(
         val latitude: Float,
         val longitude: Float,
         val altitude: Float,
-        val unitType: UnitConversionUtil.UnitType
+        val unitType: UnitConversionUtil.UnitType,
     )
 
     //region Helper methods
@@ -287,5 +326,6 @@ class RTKSatelliteStatusWidgetModel(
     private fun isNetworkServiceOpen(rtkSignal: RTKReferenceStationSource?): Boolean {
         return rtkSignal == RTKReferenceStationSource.QX_NETWORK_SERVICE
                 || rtkSignal == RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE
+                || rtkSignal == RTKReferenceStationSource.NTRIP_NETWORK_SERVICE
     }
 }

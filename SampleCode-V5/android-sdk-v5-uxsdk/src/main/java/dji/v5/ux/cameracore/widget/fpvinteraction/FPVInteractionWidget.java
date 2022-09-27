@@ -49,7 +49,7 @@ import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.ICameraIndex;
 import dji.v5.ux.core.base.IGimbalIndex;
 import dji.v5.ux.core.base.SchedulerProvider;
-import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
+import dji.v5.ux.core.base.widget.FrameLayoutWidget;
 import dji.v5.ux.core.communication.GlobalPreferencesManager;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
 import dji.v5.ux.core.util.RxUtil;
@@ -68,7 +68,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * When the widget is long pressed then dragged, the gimbal controls will appear and the aircraft's
  * gimbal will move. The speed at which the gimbal moves is based on the drag distance.
  */
-public class FPVInteractionWidget extends ConstraintLayoutWidget implements View.OnTouchListener, ICameraIndex, IGimbalIndex {
+public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements View.OnTouchListener, ICameraIndex, IGimbalIndex {
 
     private static final String TAG = "FPVInteractionWidget";
     private static final int LONG_PRESS_TIME = 500; // Time in milliseconds
@@ -76,7 +76,7 @@ public class FPVInteractionWidget extends ConstraintLayoutWidget implements View
     private final Handler handler = new Handler();
     //region Fields
     private FocusTargetView focusTargetView;
-    private ExposureMeterView exposureMeterView;
+    private ExposureMeteringWidget exposureMeterView;
     private GimbalControlView gimbalControlView;
     private FPVInteractionWidgetModel widgetModel;
     private int relativeViewHeight, relativeViewWidth;
@@ -231,7 +231,7 @@ public class FPVInteractionWidget extends ConstraintLayoutWidget implements View
                     addDisposable(Flowable.combineLatest(widgetModel.getControlMode(), widgetModel.isAeLocked(), Pair::new)
                             .firstOrError()
                             .observeOn(SchedulerProvider.ui())
-                            .subscribe((Pair<SettingDefinitions.ControlMode, Boolean> values) -> updateTarget((ControlMode) (values.first), (Boolean) (values.second), targetX, targetY),
+                            .subscribe((Pair<SettingDefinitions.ControlMode, Boolean> values) -> updateTarget(values.first, values.second, targetX, targetY),
                                     RxUtil.logErrorConsumer(TAG, "Update Target: ")));
                 }
                 break;
@@ -462,17 +462,9 @@ public class FPVInteractionWidget extends ConstraintLayoutWidget implements View
         int focusTargetDuration = typedArray.getInt(R.styleable.FPVInteractionWidget_uxsdk_focusTargetDuration, FocusTargetView.DEFAULT_FOCUS_TARGET_DURATION);
         setFocusTargetDuration(focusTargetDuration);
 
-        Drawable centerMeterIcon = typedArray.getDrawable(R.styleable.FPVInteractionWidget_uxsdk_centerMeterIcon);
-        if (centerMeterIcon != null) {
-            setCenterMeterIcon(centerMeterIcon);
-        }
-        Drawable spotMeterIcon = typedArray.getDrawable(R.styleable.FPVInteractionWidget_uxsdk_spotMeterIcon);
-        if (spotMeterIcon != null) {
-            setSpotMeterIcon(spotMeterIcon);
-        }
-        float centerMeterScaleX = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleX, ExposureMeterView.DEFAULT_CENTER_METER_SCALE_X);
+        float centerMeterScaleX = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleX, ExposureMeteringWidget.DEFAULT_CENTER_METER_SCALE_X);
         setCenterMeterScaleX(centerMeterScaleX);
-        float centerMeterScaleY = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleY, ExposureMeterView.DEFAULT_CENTER_METER_SCALE_Y);
+        float centerMeterScaleY = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleY, ExposureMeteringWidget.DEFAULT_CENTER_METER_SCALE_Y);
         setCenterMeterScaleY(centerMeterScaleY);
 
         Drawable gimbalPointIcon = typedArray.getDrawable(R.styleable.FPVInteractionWidget_uxsdk_gimbalPointIcon);
@@ -619,62 +611,6 @@ public class FPVInteractionWidget extends ConstraintLayoutWidget implements View
      */
     public void setFocusTargetDuration(long duration) {
         focusTargetView.setFocusTargetDuration(duration);
-    }
-
-    /**
-     * Get the drawable resource for the center meter icon.
-     *
-     * @return The drawable resource for the icon.
-     */
-    @Nullable
-    public Drawable getCenterMeterIcon() {
-        return exposureMeterView.getCenterMeterIcon();
-    }
-
-    /**
-     * Set the resource ID for the center meter icon.
-     *
-     * @param resourceId The resource ID of the icon.
-     */
-    public void setCenterMeterIcon(@DrawableRes int resourceId) {
-        setCenterMeterIcon(getResources().getDrawable(resourceId));
-    }
-
-    /**
-     * Set the drawable resource for the center meter icon.
-     *
-     * @param centerMeterIcon The drawable resource for the icon.
-     */
-    public void setCenterMeterIcon(@Nullable Drawable centerMeterIcon) {
-        exposureMeterView.setCenterMeterIcon(centerMeterIcon);
-    }
-
-    /**
-     * Get the drawable resource for the spot meter icon.
-     *
-     * @return The drawable resource for the icon.
-     */
-    @Nullable
-    public Drawable getSpotMeterIcon() {
-        return exposureMeterView.getSpotMeterIcon();
-    }
-
-    /**
-     * Set the resource ID for the spot meter icon.
-     *
-     * @param resourceId The resource ID of the icon.
-     */
-    public void setSpotMeterIcon(@DrawableRes int resourceId) {
-        setSpotMeterIcon(getResources().getDrawable(resourceId));
-    }
-
-    /**
-     * Set the drawable resource for the spot meter icon.
-     *
-     * @param spotMeterIcon The drawable resource for the icon.
-     */
-    public void setSpotMeterIcon(@Nullable Drawable spotMeterIcon) {
-        exposureMeterView.setSpotMeterIcon(spotMeterIcon);
     }
 
     /**

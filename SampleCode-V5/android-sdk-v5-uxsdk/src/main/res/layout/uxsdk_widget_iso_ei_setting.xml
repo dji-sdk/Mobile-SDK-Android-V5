@@ -28,7 +28,7 @@
         android:layout_height="0dp"
         android:background="@color/uxsdk_black_30_percent">
 
-        <dji.v5.ux.core.ui.SeekBarView
+        <dji.v5.ux.core.ui.HorizontalSeekBar
             android:id="@+id/seekbar_ei"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp" />
 
-            <dji.v5.ux.core.ui.SeekBarView
+            <dji.v5.ux.core.ui.HorizontalSeekBar
                 android:id="@+id/seekbar_iso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

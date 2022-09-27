@@ -23,8 +23,8 @@
 
 package dji.v5.ux.cameracore.widget.cameracapture.shootphoto;
 
-import dji.sdk.keyvalue.value.camera.CameraSDCardState;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
+import dji.sdk.keyvalue.value.camera.SDCardLoadState;
 
 /**
  *  Class represents storage state for SD card and internal storage
@@ -32,9 +32,9 @@ import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
  *
  */
 public class CameraSDPhotoStorageState extends CameraPhotoStorageState {
-    private CameraSDCardState storageOperationState;
+    private SDCardLoadState storageOperationState;
 
-    public CameraSDPhotoStorageState(CameraStorageLocation storageLocation, long availableCaptureCount, CameraSDCardState storageOperationState) {
+    public CameraSDPhotoStorageState(CameraStorageLocation storageLocation, long availableCaptureCount, SDCardLoadState storageOperationState) {
         super(storageLocation, availableCaptureCount);
         this.storageOperationState = storageOperationState;
     }
@@ -45,7 +45,7 @@ public class CameraSDPhotoStorageState extends CameraPhotoStorageState {
      * @return instance of CameraSDCardState
      *  representing state for SDCard or internal Storage
      */
-    public CameraSDCardState getStorageOperationState() {
+    public SDCardLoadState getStorageOperationState() {
         return storageOperationState;
     }
 

@@ -48,7 +48,6 @@ import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.*
 import dji.v5.ux.core.ui.SlidingDialog
 import dji.v5.ux.core.util.DisplayUtil
-import dji.v5.ux.core.util.ProductUtil
 import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.core.util.UnitConversionUtil
 import dji.v5.ux.R

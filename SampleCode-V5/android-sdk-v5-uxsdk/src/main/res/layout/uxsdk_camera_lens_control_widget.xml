@@ -14,6 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/second_len_btn"
         android:text="first"
         android:textColor="@color/uxsdk_black"
         android:textSize="@dimen/uxsdk_text_size_normal_medium" />

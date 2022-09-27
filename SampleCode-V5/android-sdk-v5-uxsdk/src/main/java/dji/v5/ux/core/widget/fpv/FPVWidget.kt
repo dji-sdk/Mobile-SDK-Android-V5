@@ -42,11 +42,8 @@ import dji.v5.common.video.decoder.DecoderOutputMode
 import dji.v5.common.video.decoder.DecoderState
 import dji.v5.common.video.decoder.VideoDecoder
 import dji.v5.common.video.interfaces.IVideoDecoder
-import dji.v5.common.video.interfaces.StreamDataListener
 import dji.v5.common.video.stream.PhysicalDevicePosition
-import dji.v5.common.video.stream.PhysicalDeviceType
 import dji.v5.common.video.stream.StreamSource
-import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
@@ -63,7 +60,6 @@ import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.core.widget.fpv.FPVWidget.ModelState
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.functions.Consumer
-import kotlin.concurrent.thread
 
 private const val TAG = "FPVWidget"
 private const val ADJUST_ASPECT_RATIO_DELAY = 300
@@ -287,12 +283,17 @@ open class FPVWidget @JvmOverloads constructor(
         //后面补上
     }
 
+    override fun setVisibility(visibility: Int) {
+        super.setVisibility(visibility)
+        fpvSurfaceView.visibility = visibility
+    }
+
     override fun onDetachedFromWindow() {
         destroyListeners()
         if (!isInEditMode) {
             widgetModel.cleanup()
         }
-        videoDecoder?.destory()
+        videoDecoder?.destroy()
         videoDecoder = null
         super.onDetachedFromWindow()
     }
@@ -317,6 +318,9 @@ open class FPVWidget @JvmOverloads constructor(
                 videoChannelType,
                 DecoderOutputMode.SURFACE_MODE,
                 fpvSurfaceView.holder,
+                fpvSurfaceView.width,
+                fpvSurfaceView.height,
+                true
             )
         } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()
@@ -330,6 +334,9 @@ open class FPVWidget @JvmOverloads constructor(
                 videoChannelType,
                 DecoderOutputMode.SURFACE_MODE,
                 fpvSurfaceView.holder,
+                fpvSurfaceView.width,
+                fpvSurfaceView.height,
+                true
             )
         } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()

@@ -103,4 +103,10 @@ public class WidgetFragment extends Fragment {
             }
         }
     }
+
+    @Override
+    public void onDestroyView() {
+        rootView.removeAllViews();
+        super.onDestroyView();
+    }
 }

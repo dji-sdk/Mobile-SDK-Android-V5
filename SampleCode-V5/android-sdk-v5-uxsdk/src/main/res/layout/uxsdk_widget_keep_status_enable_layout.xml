@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@android:color/background_dark">
+
+    <TextView
+        android:id="@+id/rtk_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:minHeight="@dimen/uxsdk_20_dp"
+        android:text="@string/uxsdk_rtk_keep_status_mode"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="@dimen/uxsdk_text_size_normal_medium"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/rtk_keep_status_icon"
+        android:layout_width="@dimen/uxsdk_36_dp"
+        android:layout_height="@dimen/uxsdk_20_dp"
+        android:layout_marginStart="6dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/uxsdk_ic_fpv_topbar_rtk_caution"
+        app:layout_constraintStart_toEndOf="@id/rtk_summary"
+        app:layout_constraintTop_toTopOf="@id/rtk_summary" />
+
+    <Switch
+        android:id="@+id/rtk_keep_status_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:textOff=""
+        android:textOn=""
+        android:thumb="@drawable/uxsdk_selector_switch_thumb"
+        android:track="@drawable/uxsdk_switch_background"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rtk_summary" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_16_dp"
+        android:layout_marginBottom="@dimen/uxsdk_22_dp"
+        android:fadingEdge="horizontal"
+        android:text="@string/uxsdk_rtk_keep_status_hint"
+        android:textColor="@color/uxsdk_white_60_percent"
+        android:textSize="@dimen/uxsdk_text_size_normal"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rtk_summary" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

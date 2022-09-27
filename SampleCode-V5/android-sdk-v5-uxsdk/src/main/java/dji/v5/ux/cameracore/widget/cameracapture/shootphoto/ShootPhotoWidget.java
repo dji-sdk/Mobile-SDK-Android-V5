@@ -39,9 +39,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import dji.sdk.keyvalue.value.camera.CameraSDCardState;
 import dji.sdk.keyvalue.value.camera.CameraShootPhotoMode;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
+import dji.sdk.keyvalue.value.camera.SDCardLoadState;
 import dji.sdk.keyvalue.value.camera.SSDOperationState;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
@@ -220,24 +220,16 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
 
     private Drawable updateResourceWithStorageInternal(CameraSDPhotoStorageState sdStorageState) {
         Drawable foregroundDrawable = null;
-        if (sdStorageState.getStorageOperationState() == CameraSDCardState.NOT_INSERTED) {
+        if (sdStorageState.getStorageOperationState() == SDCardLoadState.NOT_INSERTED) {
             foregroundDrawable = getInternalStorageIcon(StorageIconState.NOT_INSERTED);
-        } else if (sdStorageState.getStorageOperationState() == CameraSDCardState.FULL) {
-            foregroundDrawable = getInternalStorageIcon(StorageIconState.FULL);
-        } else if (sdStorageState.getStorageOperationState() == CameraSDCardState.SLOW) {
-            foregroundDrawable = getInternalStorageIcon(StorageIconState.SLOW);
         }
         return foregroundDrawable;
     }
 
     private Drawable updateResourceWithStorageInSDCard(CameraSDPhotoStorageState sdStorageState) {
         Drawable foregroundDrawable = null;
-        if (sdStorageState.getStorageOperationState() == CameraSDCardState.NOT_INSERTED) {
+        if (sdStorageState.getStorageOperationState() == SDCardLoadState.NOT_INSERTED) {
             foregroundDrawable = getSDCardStorageIcon(StorageIconState.NOT_INSERTED);
-        } else if (sdStorageState.getStorageOperationState() == CameraSDCardState.FULL) {
-            foregroundDrawable = getSDCardStorageIcon(StorageIconState.FULL);
-        } else if (sdStorageState.getStorageOperationState() == CameraSDCardState.SLOW) {
-            foregroundDrawable = getSDCardStorageIcon(StorageIconState.SLOW);
         }
         return foregroundDrawable;
     }

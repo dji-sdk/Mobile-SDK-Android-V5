@@ -7,17 +7,16 @@ import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MEDIA_FILE_DETAILS_STR
 import dji.sampleV5.modulecommon.models.VideoPlayVM
-import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.common.video.decoder.*
 import dji.v5.common.video.interfaces.*
+import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.MediaFile
-import dji.v5.manager.datacenter.media.MediaManager
 import dji.v5.manager.datacenter.media.VideoPlayState
+import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.video_play_page.*
-import java.io.*
 
 
 class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickListener {
@@ -87,7 +86,7 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     override fun onDestroyView() {
         super.onDestroyView()
         if (videoDecoder != null) {
-            videoDecoder?.destory()
+            videoDecoder?.destroy()
             videoDecoder = null
         }
         videoPlayVM.stop()
@@ -100,6 +99,7 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
         } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()
         }
+        videoDecoder?.mediaFile = mediaFile
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
@@ -130,16 +130,16 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
         }
     }
 
-    private fun createVideoDecoder():VideoDecoder{
+    private fun createVideoDecoder():IVideoDecoder{
       return  VideoDecoder(
             this@VideoPlayFragment.context,
-            VideoChannelType.PRIMARY_STREAM_CHANNEL,
+            VideoChannelType.EXTENDED_STREAM_CHANNEL,
             DecoderOutputMode.SURFACE_MODE,
             surfaceView.holder
         )
     }
     private fun play(){
-        MediaManager.getInstance().playVideo(mediaFile , object :CommonCallbacks.CompletionCallbackWithParam<IVideoFrame>{
+        MediaDataCenter.getInstance().mediaManager.playVideo(mediaFile , object :CommonCallbacks.CompletionCallbackWithParam<IVideoFrame>{
             override fun onSuccess(data: IVideoFrame?) {
                 videoDecoder?.queueInFrame(data!!)
 
@@ -175,7 +175,4 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
             }
         })
     }
-
-
-
 }

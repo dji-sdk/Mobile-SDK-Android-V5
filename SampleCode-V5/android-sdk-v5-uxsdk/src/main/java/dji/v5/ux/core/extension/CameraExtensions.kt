@@ -25,22 +25,20 @@
 
 package dji.v5.ux.core.extension
 
-import dji.sdk.keyvalue.value.camera.CameraShootPhotoMode
 import dji.sdk.keyvalue.value.camera.CameraFlatMode
+import dji.sdk.keyvalue.value.camera.CameraMode
+import dji.sdk.keyvalue.value.camera.CameraShootPhotoMode
 
 /**
  * Convert [CameraFlatMode] to [CameraShootPhotoMode]
  */
-fun CameraFlatMode.toShootPhotoMode(): CameraShootPhotoMode {
+fun CameraMode.toShootPhotoMode(): CameraShootPhotoMode {
     return when (this) {
-        CameraFlatMode.PHOTO_NORMAL -> CameraShootPhotoMode.NORMAL
-        CameraFlatMode.PHOTO_HDR -> CameraShootPhotoMode.HDR
-        CameraFlatMode.PHOTO_BURST -> CameraShootPhotoMode.BURST
-        CameraFlatMode.PHOTO_AEB -> CameraShootPhotoMode.AEB
-        CameraFlatMode.PHOTO_INTERVAL -> CameraShootPhotoMode.INTERVAL
-        CameraFlatMode.PHOTO_PANO -> CameraShootPhotoMode.VISION_PANO
-        CameraFlatMode.PHOTO_EHDR -> CameraShootPhotoMode.EHDR
-        CameraFlatMode.PHOTO_HYPERLIGHT -> CameraShootPhotoMode.HYPER_LIGHT
+        CameraMode.PHOTO_NORMAL -> CameraShootPhotoMode.NORMAL
+        CameraMode.PHOTO_INTERVAL -> CameraShootPhotoMode.INTERVAL
+        CameraMode.PHOTO_HYPER_LIGHT -> CameraShootPhotoMode.HYPER_LIGHT
+        CameraMode.PHOTO_PANORAMA -> CameraShootPhotoMode.VISION_PANO
+        CameraMode.PHOTO_SUPER_RESOLUTION -> CameraShootPhotoMode.PANO_APP
         else -> CameraShootPhotoMode.UNKNOWN
     }
 }
@@ -65,14 +63,10 @@ fun CameraShootPhotoMode.toFlatCameraMode(): CameraFlatMode {
 /**
  * Check if flat camera mode is picture mode
  */
-fun CameraFlatMode.isPictureMode(): Boolean {
-    return this == CameraFlatMode.PHOTO_COUNTDOWN
-            || this == CameraFlatMode.PHOTO_AEB
-            || this == CameraFlatMode.PHOTO_NORMAL
-            || this == CameraFlatMode.PHOTO_BURST
-            || this == CameraFlatMode.PHOTO_HDR
-            || this == CameraFlatMode.PHOTO_INTERVAL
-            || this == CameraFlatMode.PHOTO_HYPERLIGHT
-            || this == CameraFlatMode.PHOTO_PANO
-            || this == CameraFlatMode.PHOTO_EHDR
+fun CameraMode.isPictureMode(): Boolean {
+    return this == CameraMode.PHOTO_NORMAL
+            || this == CameraMode.PHOTO_INTERVAL
+            || this == CameraMode.PHOTO_HYPER_LIGHT
+            || this == CameraMode.PHOTO_PANORAMA
+            || this == CameraMode.PHOTO_SUPER_RESOLUTION
 }

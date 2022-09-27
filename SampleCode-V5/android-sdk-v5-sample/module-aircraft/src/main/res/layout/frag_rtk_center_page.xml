@@ -91,6 +91,14 @@
                             android:layout_marginLeft="40dp"
                             android:checked="false"
                             android:text="@string/btn_rtk_source_base_rtk" />
+
+                        <RadioButton
+                            android:id="@+id/btn_rtk_source_cmcc_rtk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
+                            android:checked="false"
+                            android:text="@string/btn_rtk_source_cmcc_rtk" />
                     </RadioGroup>
 
                     <Button
@@ -110,6 +118,17 @@
                         android:layout_toRightOf="@id/bt_open_network_rtk"
                         android:text="@string/bt_open_rtk_station"
                         android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/bt_open_cmcc_rtk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rtk_source_radio_group"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/bt_open_rtk_station"
+                        android:text="@string/bt_open_cmcc_rtk"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -358,7 +377,7 @@
                             android:id="@+id/tv_rtk_healthy_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_rtk_connect"
+                            android:layout_below="@id/tv_tv_rtk_connect_info"
                             android:layout_marginTop="5dp"
                             android:layout_toRightOf="@id/tv_rtk_healthy"
                             android:text="null" />

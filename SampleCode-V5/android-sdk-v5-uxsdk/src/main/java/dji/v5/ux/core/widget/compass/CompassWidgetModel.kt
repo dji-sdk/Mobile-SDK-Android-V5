@@ -38,6 +38,7 @@ import dji.sdk.keyvalue.value.common.Attitude
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.remotecontroller.RcGPSInfo
 import dji.sdk.keyvalue.key.KeyTools
+import dji.v5.utils.common.LocationUtil
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel

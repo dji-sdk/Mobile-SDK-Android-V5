@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.models.MultiVideoChannelVM
-import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.v5.utils.common.ToastUtils
 
 
 class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
@@ -57,13 +57,16 @@ class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         multiVideoChannelVM.initMultiVideoChannels()
+        multiVideoChannelVM.initChannelStateListener()
+        multiVideoChannelVM.addConnectionListener()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         multiVideoChannelVM.removeStreamSourceListener()
+        multiVideoChannelVM.removeChannelStateListener()
+        multiVideoChannelVM.removeConnectionListener()
     }
-
 
 
     /**
@@ -86,17 +89,15 @@ class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
                     "ResetAllVideoChannel",
                     bundleOf("ResetAllVideoChannel" to true)
                 )
-                this@MultiVideoChannelFragment.context?.let {
-                    ToastUtils.showToast(
-                        it,
-                        "Reset All Video Channel Success"
-                    )
-                }
+                ToastUtils.showToast(
+                    "Reset All Video Channel Success"
+                )
             }
             R.id.fab_get_all_channels -> {
                 multiVideoChannelVM.getAllVideoChannels()?.let {
                     ToastUtils.showToast(
-                        multiVideoChannelVM.getAllVideoChannels().toString()
+                        multiVideoChannelVM.getAllVideoChannels().toString() + "\n"
+                    + multiVideoChannelVM.availableVideoStreamSources.value
                     )
                 } ?: let {
                     ToastUtils.showToast(

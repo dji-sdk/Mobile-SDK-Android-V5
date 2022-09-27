@@ -87,12 +87,18 @@
         android:name="dji.sampleV5.moduleaircraft.pages.UASJapanFragment"
         android:label="uas_jp_page"
         tools:layout="@layout/frag_uas_jp_page" />
+    <fragment
+        android:id="@+id/uas_us_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.UASUSFragment"
+        android:label="uas_us_page"
+        tools:layout="@layout/frag_uas_us_page" />
 
     <fragment
         android:id="@+id/uas_france_page"
         android:name="dji.sampleV5.moduleaircraft.pages.UASFranceFragment"
         android:label="uas_france_page"
         tools:layout="@layout/frag_uas_france_page" />
+
     <fragment
         android:id="@+id/uas_page"
         android:name="dji.sampleV5.moduleaircraft.pages.UASRemoteFragment"
@@ -105,5 +111,20 @@
         <action
             android:id="@+id/action_open_uas_france_page"
             app:destination="@id/uas_france_page" />
+
+        <action
+            android:id="@+id/action_open_uas_us_page"
+            app:destination="@id/uas_us_page" />
     </fragment>
+
+    <fragment
+        android:id="@+id/lte_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.LTEFragment"
+        android:label="lte_page"
+        android:layout="@layout/frag_lte_page" />
+    <fragment
+        android:id="@+id/security_code_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.SecurityCodeFragment"
+        android:label="security_code_page"
+        tools:layout="@layout/frag_security_code_page" />
 </navigation>
