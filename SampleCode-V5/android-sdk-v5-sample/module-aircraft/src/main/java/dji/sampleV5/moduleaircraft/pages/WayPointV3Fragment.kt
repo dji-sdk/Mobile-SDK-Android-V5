@@ -47,29 +47,15 @@ import dji.sdk.wpmz.value.mission.WaylineExecuteWaypoint
 
 import dji.v5.ux.core.util.AndUtil
 import dji.v5.ux.map.MapWidget
-import dji.v5.ux.mapkit.amap.provider.AMapProvider
-import dji.v5.ux.mapkit.core.Mapkit
-import dji.v5.ux.mapkit.core.MapkitOptions
-import dji.v5.ux.mapkit.core.camera.DJICameraUpdate
-import dji.v5.ux.mapkit.core.camera.DJICameraUpdateFactory
 import dji.v5.ux.mapkit.core.maps.DJIMap
-import dji.v5.ux.mapkit.core.maps.DJIMapView
 import dji.v5.ux.mapkit.core.models.DJIBitmapDescriptor
 import dji.v5.ux.mapkit.core.models.DJIBitmapDescriptorFactory
-import dji.v5.ux.mapkit.core.models.DJICameraPosition
 import dji.v5.ux.mapkit.core.models.DJILatLng
-import dji.v5.ux.mapkit.core.models.annotations.DJIMarker
-import dji.v5.ux.mapkit.core.models.annotations.DJIMarkerOptions
-import dji.v5.ux.mapkit.core.models.annotations.DJIPolyline
-import dji.v5.ux.mapkit.core.models.annotations.DJIPolylineOptions
-import dji.v5.ux.mapkit.gmap.provider.GoogleProvider
-import dji.v5.ux.mapkit.maplibre.provider.MaplibreProvider
-import dji.v5.ux.sample.showcase.map.MapWidgetActivity
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import dji.v5.ux.mapkit.core.models.annotations.DJIMarkerOptions
+
+import dji.v5.ux.mapkit.core.models.annotations.DJIPolylineOptions
+
 
 
 /**
@@ -84,9 +70,7 @@ class WayPointV3Fragment : DJIFragment() {
     private val WAYPOINT_SAMPLE_FILE_DIR: String = "waypoint/"
     private val WAYPOINT_SAMPLE_FILE_CACHE_DIR: String = "waypoint/cache/"
     private val WAYPOINT_FILE_TAG = ".kmz"
-    private var unzipChildDir = "temp/"
-    private var unzipDir = "wpmz/"
-    private var mDisposable : Disposable ?= null
+
 
 
     var curMissionPath: String = DiskUtil.getExternalCacheDirPath(
@@ -397,11 +381,6 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.removeAllMissionStateListener()
         wayPointV3VM.clearAllWaylineExecutingInfoListener()
 
-        mDisposable?.let {
-            if (!it.isDisposed) {
-                it.dispose()
-            }
-        }
     }
 
     fun getErroMsg(error: IDJIError): String {
