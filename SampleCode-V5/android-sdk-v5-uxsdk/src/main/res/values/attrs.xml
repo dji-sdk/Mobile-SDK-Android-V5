@@ -233,7 +233,7 @@
         <attr name="uxsdk_actionIconNotLoggedIn" format="reference" />
         <attr name="uxsdk_actionIconBackground" format="reference" />
     </declare-styleable>
-    <declare-styleable name="PerceptionStateWidget">
+    <declare-styleable name="VisionWidget">
         <attr name="uxsdk_normalVisionIcon" format="reference" />
         <attr name="uxsdk_closedVisionIcon" format="reference" />
         <attr name="uxsdk_disabledVisionIcon" format="reference" />
@@ -1367,5 +1367,26 @@
         <attr name="uxsdk_title" format="string|reference"/>
         <attr name="uxsdk_value" format="string|reference"/>
         <attr name="uxsdk_layout" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="DJIMapView">
+        <attr name="defaultProvider">
+            <flag name="GoogleMap" value="0x1" />
+            <flag name="AMap" value="0x2" />
+            <flag name="Maplibre" value="0x3" />
+        </attr>
+
+        <attr name="optionProvider">
+            <flag name="GoogleMap" value="0x1" />
+            <flag name="AMap" value="0x2" />
+            <flag name="Maplibre" value="0x3" />
+        </attr>
+
+        <attr name="cameraTargetLat" format="float" />
+        <attr name="cameraTargetLng" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="StrokeTextView">
+        <attr name="uxsdk_textStrokeWidth" format="dimension"/>
+        <attr name="uxsdk_textStrokeColor" format="color"/>
     </declare-styleable>
 </resources>

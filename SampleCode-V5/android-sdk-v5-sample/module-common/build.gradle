@@ -11,6 +11,18 @@ android {
         targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders["AMAP_API_KEY"] = project.AMAP_API_KEY
+        manifestPlaceholders["GMAP_API_KEY"] = project.GMAP_API_KEY
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "String", "MAPLIBRE_TOKEN", MAPLIBRE_TOKEN
+        }
+
+        debug {
+            buildConfigField "String", "MAPLIBRE_TOKEN", MAPLIBRE_TOKEN
+        }
     }
 
     compileOptions {

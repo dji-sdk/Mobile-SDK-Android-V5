@@ -135,7 +135,7 @@ public class RtkGuidanceView extends ConstraintLayout implements View.OnClickLis
     private void initWidgetParams() {
         setLayoutParams(new Constraints.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
-        setBackgroundResource(R.color.white);
+        setBackgroundResource(R.color.uxsdk_white);
         mLottieAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -226,8 +226,8 @@ public class RtkGuidanceView extends ConstraintLayout implements View.OnClickLis
                 R.drawable.uxsdk_bg_rtk_guidance_step_oval_gray :
                 R.drawable.uxsdk_bg_rtk_guidance_step_oval_blue_solid);
         textView.setTextColor(isSelected ?
-                getResColor(R.color.black) :
-                getResColor(R.color.white));
+                getResColor(R.color.uxsdk_black) :
+                getResColor(R.color.uxsdk_white));
     }
 
     /**

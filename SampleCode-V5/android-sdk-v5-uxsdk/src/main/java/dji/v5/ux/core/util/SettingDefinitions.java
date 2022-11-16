@@ -227,9 +227,9 @@ public final class SettingDefinitions {
          */
         AMAP(2),
         /**
-         * Mapbox Provider
+         * MAPLIBRE Provider
          */
-        MAPBOX(3);
+        MAPLIBRE(3);
 
         private int index;
 

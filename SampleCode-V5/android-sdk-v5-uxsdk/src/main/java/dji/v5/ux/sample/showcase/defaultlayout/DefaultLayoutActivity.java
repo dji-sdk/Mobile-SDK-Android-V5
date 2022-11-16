@@ -65,6 +65,7 @@ import dji.v5.ux.core.widget.fpv.FPVWidget;
 import dji.v5.ux.core.widget.hsi.PrimaryFlightDisplayWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
+import dji.v5.ux.map.MapWidget;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
 import dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget;
 import dji.v5.ux.visualcamera.ev.CameraConfigEVWidget;
@@ -111,6 +112,8 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     private int widgetMargin;
     private int deviceWidth;
     private int deviceHeight;
+	
+	protected MapWidget mapWidget;
     private CompositeDisposable compositeDisposable;
     private final DataProcessor<CameraSource> cameraSourceProcessor = DataProcessor.create(new CameraSource(PhysicalDevicePosition.UNKNOWN, CameraLensType.UNKNOWN));
     private VideoChannelStateChangeListener primaryChannelStateListener = null;
@@ -164,6 +167,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         cameraConfigBackground = findViewById(R.id.camera_config_background);
         focalZoomWidget = findViewById(R.id.widget_focal_zoom);
         cameraControlsWidget = findViewById(R.id.widget_camera_controls);
+		mapWidget = findViewById(R.id.widget_map);
         cameraControlsWidget.getExposureSettingsIndicatorWidget().setStateChangeResourceId(R.id.panel_camera_controls_exposure_settings);
 
         initClickListener();
@@ -175,6 +179,11 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         //小surfaceView放置在顶部，避免被大的遮挡
         secondaryFPVWidget.setSurfaceViewZOrderOnTop(true);
         secondaryFPVWidget.setSurfaceViewZOrderMediaOverlay(true);
+
+        mapWidget.initAMap(map -> {
+            // map.setOnMapClickListener(latLng -> onViewClick(mapWidget));
+        });
+        mapWidget.onCreate(savedInstanceState);
     }
 
     private void initClickListener() {
@@ -185,6 +194,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mapWidget.onDestroy();
         MediaDataCenter.getInstance().getVideoStreamManager().clearAllStreamSourcesListeners();
         removeChannelStateListener();
     }
@@ -192,6 +202,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mapWidget.onResume();
         compositeDisposable = new CompositeDisposable();
         compositeDisposable.add(systemStatusListPanelWidget.closeButtonPressed()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -222,6 +233,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             compositeDisposable.dispose();
             compositeDisposable = null;
         }
+        mapWidget.onPause();
         super.onPause();
     }
     //endregion

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="news_title">MSDK 5.0.0</string>
-    <string name="news_description">DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件服务接口，开放全开源的生产代码级 Sample 和丰富的教程，为开发者提供了具有竞争力的无人机移动端解决方案，极大的提升开发体验和效率。</string>
+    <string name="news_title">MSDK 5.1.0</string>
+    <string name="news_description">"- 新增支持机型和设备：\n- 支持DJI Mavic 3E\n- 支持DJI Mavic 3T\n- 支持Zenmuse H20N（仅M300 RTK 支持）\n- 支持毫米波雷达（仅M300 RTK 支持）\n支持UpgradeManager，固件升级管理类，可通过此类获取可升级模块的固件信息。\n支持RadarManager，雷达管理类，用于开启、关闭毫米波雷达避障开关，获取障碍物测距数据。\n支持setVirtualStickAdvancedModeEnabled，虚拟摇杆高级模式，支持设置坐标系，倾角控制模式，偏航控制模式，垂直油门控制模式。\n支持UASRemoteIDManager美国无人机远程识别（RID）功能。\n更多功能查看发布日志."</string>
+
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/zh-cn/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/ doc/mobile-sdk-tutorial/cn/</string>

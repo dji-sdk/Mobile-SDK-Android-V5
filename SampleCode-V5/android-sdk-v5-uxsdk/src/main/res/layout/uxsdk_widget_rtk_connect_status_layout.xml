@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/uxsdk_23_dp"
             android:text="@string/uxsdk_rtk_problem_detection"
-            android:textColor="@color/white"
+            android:textColor="@color/uxsdk_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_rtk_signal_selected_title" />
 
@@ -82,7 +82,7 @@
             android:id="@+id/rl_rtk_signal_searching_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/uxsdk_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_rtk_signal_searching" />

@@ -42,7 +42,7 @@
                 android:layout_marginLeft="@dimen/uxsdk_2_dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="0"
-                android:textColor="@color/white"
+                android:textColor="@color/uxsdk_white"
                 android:textSize="@dimen/uxsdk_9_dp"
                 android:textStyle="bold" />
 

@@ -385,7 +385,7 @@ class Popover(val builder: Builder) {
         var topScreenMargin: Int = 0
         var bottomScreenMargin: Int = 0
         var arrowColor: Int = backgroundColor
-        var textColor: Int = R.color.black
+        var textColor: Int = R.color.uxsdk_black
 
         init {
             dropShadow = DropShadow(

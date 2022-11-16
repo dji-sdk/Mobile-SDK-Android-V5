@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:background="@android:color/black"
+    tools:background="@android:color/uxsdk_black"
     android:layout_height="@dimen/uxsdk_60_dp">
 
     <ImageView
@@ -20,7 +20,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/uxsdk_4_dp"
         android:gravity="center_vertical"
-        android:textColor="@color/white"
+        android:textColor="@color/uxsdk_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/connect_status_iv"
         app:layout_constraintTop_toTopOf="parent" />

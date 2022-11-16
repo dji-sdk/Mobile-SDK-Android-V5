@@ -61,7 +61,7 @@ open class DescSpinnerCell @kotlin.jvm.JvmOverloads constructor(
 
                     }
                     if (mSelectedPosition == position) {
-                        view.setTextColor(ContextCompat.getColor(context, R.color.white))
+                        view.setTextColor(ContextCompat.getColor(context, R.color.uxsdk_white))
                     } else {
                         view.setTextColor(ContextCompat.getColor(context, R.color.uxsdk_white_75_percent))
                     }

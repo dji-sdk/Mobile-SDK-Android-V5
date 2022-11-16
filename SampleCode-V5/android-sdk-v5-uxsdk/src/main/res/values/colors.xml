@@ -167,6 +167,7 @@
     <color name="uxsdk_pfd_hsi_main_color">#CC99FFAA</color>
     <color name="uxsdk_pfd_hsi_radar_main_color">#99009919</color>
     <color name="uxsdk_pfd_barrier_color">#EE2B2A</color>
+    <color name="uxsdk_pfd_waypoint_color">#1ABDE3</color>
     <color name="uxsdk_pfd_hsi_barrier_color">#CCEE7877</color>
     <color name="uxsdk_pfd_hsi_radar_barrier_color">#99991C1B</color>
     <color name="uxsdk_pfd_avoidance_color">#FFC003</color>

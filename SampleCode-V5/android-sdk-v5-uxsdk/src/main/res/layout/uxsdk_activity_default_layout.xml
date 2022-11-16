@@ -341,4 +341,15 @@
         app:layout_constraintWidth_percent="0.95"
         app:uxsdk_titleBarBackgroundColor="@color/uxsdk_black" />
 
+
+    <dji.v5.ux.map.MapWidget
+        android:id="@+id/widget_map"
+        android:layout_width="@dimen/uxsdk_150_dp"
+        android:layout_height="@dimen/uxsdk_100_dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:uxsdk_djiMap_mapType="normal" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

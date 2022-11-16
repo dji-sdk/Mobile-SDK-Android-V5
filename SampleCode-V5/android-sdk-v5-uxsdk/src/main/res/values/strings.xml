@@ -465,7 +465,7 @@
     <string name="uxsdk_speed_display_widget_title">Speed Display Widget</string>
     <string name="uxsdk_attitude_display_widget_title">Attitude Display Widget</string>
     <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
-    <string name="uxsdk_exposure_meter_widget_title">Exposure Metering Widget</string>
+    <string name="uxsdk_exposure_meter_widget_title">Exposure Meter Widget</string>
     <string name="uxsdk_focal_zoom_widget_title">Focal Zoom Widget</string>
 
     <!-- Simulator Widget -->
@@ -744,5 +744,5 @@
     <string name="uxsdk_abnormal">Abnormal</string>
     <string name="uxsdk_normal">Normal</string>
 
-
+    <string name="uxsdk_map_provider_init_failed">Map Loading failed , depend Map lib not found!</string>
 </resources>

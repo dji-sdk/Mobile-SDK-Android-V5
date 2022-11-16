@@ -17,7 +17,7 @@
             android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_blue_solid"
             android:gravity="center"
             android:text="1"
-            android:textColor="@color/white" />
+            android:textColor="@color/uxsdk_white" />
 
         <ImageView
             android:id="@+id/rtk_guidance_step_first_image"
@@ -50,7 +50,7 @@
             android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_gray"
             android:gravity="center"
             android:text="2"
-            android:textColor="@color/black" />
+            android:textColor="@color/uxsdk_black" />
 
         <ImageView
             android:id="@+id/rtk_guidance_step_second_image"
@@ -79,6 +79,6 @@
         android:background="@drawable/uxsdk_bg_rtk_guidance_step_oval_gray"
         android:gravity="center"
         android:text="3"
-        android:textColor="@color/black" />
+        android:textColor="@color/uxsdk_black" />
 
 </LinearLayout>

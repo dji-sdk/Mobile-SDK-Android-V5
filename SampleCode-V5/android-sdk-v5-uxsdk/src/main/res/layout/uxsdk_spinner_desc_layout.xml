@@ -6,7 +6,7 @@
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="vertical"
-    tools:background="@color/black">
+    tools:background="@color/uxsdk_black">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:maxLines="1"
-            android:textColor="@color/white"
+            android:textColor="@color/uxsdk_white"
             android:textSize="@dimen/uxsdk_text_size_normal_medium"
             android:visibility="gone"
             android:text="RTK 服务类型"

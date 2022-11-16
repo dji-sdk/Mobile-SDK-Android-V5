@@ -399,11 +399,13 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
             radarObstacleDataBuilder.clear()
             radarObstacleDataBuilder.apply {
                 radarObstacleData?.apply {
-                    append("\n").append("ObstacleDataForRadar:").append("\n")
-                    append("horizontalObstacleDistance:$horizontalObstacleDistance").append("\n")
-                    append("upwardObstacleDistance:$upwardObstacleDistance").append("\n")
-                    append("horizontalAngleInterval:$horizontalAngleInterval").append("\n")
-
+                    //65535为没有起飞的无效数据，直接过滤掉
+                    if (upwardObstacleDistance != 65535) {
+                        append("\n").append("ObstacleDataForRadar:").append("\n")
+                        append("horizontalObstacleDistance:$horizontalObstacleDistance").append("\n")
+                        append("upwardObstacleDistance:$upwardObstacleDistance").append("\n")
+                        append("horizontalAngleInterval:$horizontalAngleInterval").append("\n")
+                    }
                 }
             }
 

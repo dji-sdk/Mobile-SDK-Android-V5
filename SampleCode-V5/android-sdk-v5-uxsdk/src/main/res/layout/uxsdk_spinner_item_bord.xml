@@ -7,7 +7,7 @@
           android:paddingTop="4dp"
           android:paddingBottom="4dp"
           android:textSize="@dimen/uxsdk_text_size_normal_medium"
-          android:textColor="@color/white"
+          android:textColor="@color/uxsdk_white"
           android:gravity="center"
           android:drawableRight="@drawable/uxsdk_ic_spinner_cell_expand">
 

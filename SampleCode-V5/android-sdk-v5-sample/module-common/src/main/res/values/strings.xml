@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="news_title">MSDK 5.0.0</string>
-    <string name="news_description">DJI Mobile SDK V5 has a series of APIs to control the software and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.</string>
+    <string name="news_title">MSDK 5.1.0</string>
+    <string name="news_description">- Added supported aircraft and devices:\n- DJI Mavic 3E\n- DJI Mavic 3T\n- Zenmuse H20N (Only supported by M300 RTK)\n- Millimeter wave radar (Only supported by M300 RTK)\nSupported UpgradeManager. Class to manage the firmware upgrade, which is used to get the latest firmware version and the release note.\nSupported RadarManager. Class to manager radar, which is used to turn on/off the radar obstacle avoidance switch and obtain the obstacle ranging data.\nSupported setVirtualStickAdvancedModeEnabled, virtual stick advanced mode, which supports configuring the coordinate system, roll pitch control mode, yaw control mode, and vertical throttle control mode.\nSupport USA\nremote identification\n(RID) function in UASRemoteIDManager.\nmore refer to the release notes. </string>
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/en-us/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/en/</string>

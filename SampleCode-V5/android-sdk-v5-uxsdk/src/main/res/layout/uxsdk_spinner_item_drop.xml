@@ -3,7 +3,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:padding="@dimen/uxsdk_12_dp"
-          android:textColor="@color/white"
+          android:textColor="@color/uxsdk_white"
           android:layout_gravity="center_vertical"
           android:gravity="center"
           android:drawableRight="@drawable/uxsdk_ic_spinner_cell_collapse"

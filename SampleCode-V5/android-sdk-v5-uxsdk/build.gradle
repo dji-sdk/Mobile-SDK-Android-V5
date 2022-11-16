@@ -57,8 +57,4 @@ dependencies {
     compileOnly deps.aircraftProvided
     compileOnly deps.aircraft
 
-    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Amap.aar")
-    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Core.aar")
-    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Maplibre.aar")
-    api files("../android-sdk-v5-as/libs/map/DJI-Mapkit-Google.aar")
 }

@@ -1,10 +1,10 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.1.01
+# DJI Mobile SDK for Android V5 Latest Version 5.1.1
 
 [中文版](README_CN.md)
 
 ## Dear Developer
 
-Since we have released the DJI Mobile SDK V5.1.0 Version, we have received lots of valuable feedback from our developers. Now we wish to collect the evaluation of this version from you. Your feedback will affect the roadmap of MSDK.
+Since we have released the DJI Mobile SDK V5.1.1 Version, we have received lots of valuable feedback from our developers. Now we wish to collect the evaluation of this version from you. Your feedback will affect the roadmap of MSDK.
 Please take your time to complete our survey: [MSDK V5.1.0 version release survey](https://docs.google.com/forms/d/e/1FAIpQLSfv1-gzmwoA8xOm1x8pC40TU3Kwi01DbNqN4d7fTnhZMAhbvA/viewform)
 
 ## What is DJI Mobile SDK V5?
@@ -108,7 +108,7 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.1.0
+> **Notice:** sdkVersion = 5.1.1
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

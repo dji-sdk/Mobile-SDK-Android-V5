@@ -24,7 +24,7 @@ ext {
     deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
     deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.8.1'
     deps.bugly = 'com.tencent.bugly:crashreport:4.0.4'
-    deps.rx2Java = 'io.reactivex.rxjava2:rxjava:2.2.4'
+    deps.rx2Java = 'io.reactivex.rxjava2:rxjava:2.2.4' // 目前在CSDK升级模块中使用rxjava2
     deps.maplibreAnotation = 'org.maplibre.gl:android-plugin-annotation-v9:1.0.0'
     deps.maplibreTurf =  'org.maplibre.gl:android-sdk-turf:5.9.0'
     deps.maplibreSdk = 'org.maplibre.gl:android-sdk:9.4.2'

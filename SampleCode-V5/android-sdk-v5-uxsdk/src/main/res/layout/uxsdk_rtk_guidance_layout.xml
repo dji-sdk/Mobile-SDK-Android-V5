@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/uxsdk_white">
 
     <ImageView
         android:id="@+id/rtk_guidance_close"
@@ -44,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha="0.8"
-        android:background="@color/white"
+        android:background="@color/uxsdk_white"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/rtk_guidance_lottie_animation"
         app:layout_constraintEnd_toEndOf="@id/rtk_guidance_lottie_animation"
@@ -152,7 +152,7 @@
         android:layout_marginTop="@dimen/uxsdk_19_dp"
         android:background="@drawable/uxsdk_bg_rtk_guidance_step_next"
         android:text="@string/uxsdk_rtk_guidance_btn_next"
-        android:textColor="@color/white"
+        android:textColor="@color/uxsdk_white"
         android:textSize="@dimen/uxsdk_text_size_15sp"
         app:layout_constraintEnd_toEndOf="@id/rtk_guidance_step_title"
         app:layout_constraintStart_toEndOf="@id/rtk_guidance_step_previous"

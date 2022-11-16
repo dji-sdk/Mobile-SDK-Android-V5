@@ -123,8 +123,9 @@ class WayPointV3VM : DJIViewModel() {
     fun cancelListenFlightControlState() {
         KeyManager.getInstance().cancelListen(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this)
     }
-    fun getAvailableWaylineIDs(missionPath: String) : List<Int> {
-        return WaypointMissionManager.getInstance().getAvailableWaylineIDs(missionPath)
+
+    fun getAvaliableWaylineIDs(missionPath: String) : List<Int> {
+        return WaypointMissionManager.getInstance().getAvaliableWaylineIDs(missionPath)
     }
 
     private fun refreshFlightControlState() {

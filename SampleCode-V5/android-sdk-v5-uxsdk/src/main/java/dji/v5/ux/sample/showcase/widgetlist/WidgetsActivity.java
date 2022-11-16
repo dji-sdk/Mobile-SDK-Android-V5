@@ -56,7 +56,7 @@ import dji.v5.ux.cameracore.widget.cameracontrols.exposuresettingsindicator.Expo
 import dji.v5.ux.cameracore.widget.cameracontrols.photovideoswitch.PhotoVideoSwitchWidget;
 import dji.v5.ux.cameracore.widget.focusexposureswitch.FocusExposureSwitchWidget;
 import dji.v5.ux.cameracore.widget.focusmode.FocusModeWidget;
-import dji.v5.ux.cameracore.widget.fpvinteraction.ExposureMeteringWidget;
+import dji.v5.ux.cameracore.widget.fpvinteraction.ExposureMeterWidget;
 import dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget;
 import dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget;
 import dji.v5.ux.core.panel.telemetry.TelemetryPanelWidget;
@@ -83,7 +83,7 @@ import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
 import dji.v5.ux.core.widget.useraccount.UserAccountLoginWidget;
 import dji.v5.ux.core.widget.verticalvelocity.VerticalVelocityWidget;
 import dji.v5.ux.core.widget.videosignal.VideoSignalWidget;
-import dji.v5.ux.core.widget.perception.PerceptionStateWidget;
+import dji.v5.ux.core.widget.vision.VisionWidget;
 import dji.v5.ux.core.widget.vps.VPSWidget;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
 import dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget;
@@ -128,6 +128,7 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
                 RTKStartServiceHelper.INSTANCE.startRtkService();
             }
         });
+        ToastUtils.INSTANCE.init(this);
     }
 
     private void populateList() {
@@ -204,7 +205,7 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_user_account_login_widget_title, new WidgetViewHolder(UserAccountLoginWidget.class,
                 240, 60)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_vertical_velocity_widget_title, new WidgetViewHolder(VerticalVelocityWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.uxsdk_vision_widget_title, new WidgetViewHolder(PerceptionStateWidget.class)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_vision_widget_title, new WidgetViewHolder(VisionWidget.class)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_video_signal_widget_title, new WidgetViewHolder(VideoSignalWidget.class, 86, 50)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_vps_widget_title, new WidgetViewHolder(VPSWidget.class)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_setting_panel_title, new WidgetViewHolder(ExposureSettingsPanel.class, 211,
@@ -228,7 +229,7 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_speed_display_widget_title, new WidgetViewHolder(SpeedDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_attitude_display_widget_title, new WidgetViewHolder(AttitudeDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_primary_flight_display_widget_title, new WidgetViewHolder(PrimaryFlightDisplayWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
-        widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_meter_widget_title, new WidgetViewHolder(ExposureMeteringWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_meter_widget_title, new WidgetViewHolder(ExposureMeterWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_focal_zoom_widget_title, new WidgetViewHolder(FocalZoomWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)));
     }
 
@@ -242,6 +243,13 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ToastUtils.INSTANCE.destroy();
 
     }
 }

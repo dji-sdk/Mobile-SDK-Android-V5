@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <FrameLayout
-        android:id="@+id/wp_map"
+    <dji.v5.ux.map.MapWidget
+        android:id="@+id/map_widget"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.85"></FrameLayout>
+        app:layout_constraintWidth_percent="0.85"></dji.v5.ux.map.MapWidget>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/waypoint_button_list"
@@ -128,10 +128,21 @@
         android:entries="@array/maps_array_all"
         android:spinnerMode="dropdown"
         android:textColor="@color/white"
+        android:visibility="gone"
         android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/kmz_btn"
         app:layout_constraintStart_toEndOf="@+id/kmz_btn"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_editKmz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit KMZ"
+        android:visibility="gone"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sp_map_switch" />
     <TextView
         android:id="@+id/mission_execute_state_tv"
         android:layout_width="wrap_content"
@@ -190,7 +201,7 @@
         android:src="@mipmap/ic_map_osd_locate"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/wp_map"
+        app:layout_constraintEnd_toEndOf="@+id/map_widget"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

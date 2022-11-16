@@ -26,20 +26,7 @@ import java.io.File
 import java.util.*
 
 
-import com.dji.mapkit.amap.provider.AMapProvider
-import com.dji.mapkit.core.Mapkit
-import com.dji.mapkit.core.MapkitOptions
-import com.dji.mapkit.core.camera.DJICameraUpdate
-import com.dji.mapkit.core.camera.DJICameraUpdateFactory
-import com.dji.mapkit.core.maps.DJIMap
-import com.dji.mapkit.core.maps.DJIMapView
-import com.dji.mapkit.core.maps.DJIMapView.OnDJIMapReadyCallback
-import com.dji.mapkit.core.models.DJIBitmapDescriptor
-import com.dji.mapkit.core.models.DJIBitmapDescriptorFactory
-import com.dji.mapkit.core.models.DJICameraPosition
-import com.dji.mapkit.core.models.DJILatLng
-import com.dji.mapkit.google.provider.GoogleProvider
-import com.dji.mapkit.maplibre.provider.MapLibreProvider
+
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.manager.aircraft.waypoint3.model.WaypointMissionExecuteState
 import java.io.IOException
@@ -51,10 +38,38 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
-import com.dji.mapkit.core.models.annotations.*
+import android.widget.Toast
+import dji.sampleV5.modulecommon.BuildConfig
+
+
 import dji.sdk.wpmz.jni.JNIWPMZManager
 import dji.sdk.wpmz.value.mission.WaylineExecuteWaypoint
+
 import dji.v5.ux.core.util.AndUtil
+import dji.v5.ux.map.MapWidget
+import dji.v5.ux.mapkit.amap.provider.AMapProvider
+import dji.v5.ux.mapkit.core.Mapkit
+import dji.v5.ux.mapkit.core.MapkitOptions
+import dji.v5.ux.mapkit.core.camera.DJICameraUpdate
+import dji.v5.ux.mapkit.core.camera.DJICameraUpdateFactory
+import dji.v5.ux.mapkit.core.maps.DJIMap
+import dji.v5.ux.mapkit.core.maps.DJIMapView
+import dji.v5.ux.mapkit.core.models.DJIBitmapDescriptor
+import dji.v5.ux.mapkit.core.models.DJIBitmapDescriptorFactory
+import dji.v5.ux.mapkit.core.models.DJICameraPosition
+import dji.v5.ux.mapkit.core.models.DJILatLng
+import dji.v5.ux.mapkit.core.models.annotations.DJIMarker
+import dji.v5.ux.mapkit.core.models.annotations.DJIMarkerOptions
+import dji.v5.ux.mapkit.core.models.annotations.DJIPolyline
+import dji.v5.ux.mapkit.core.models.annotations.DJIPolylineOptions
+import dji.v5.ux.mapkit.gmap.provider.GoogleProvider
+import dji.v5.ux.mapkit.maplibre.provider.MaplibreProvider
+import dji.v5.ux.sample.showcase.map.MapWidgetActivity
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 /**
@@ -69,25 +84,20 @@ class WayPointV3Fragment : DJIFragment() {
     private val WAYPOINT_SAMPLE_FILE_DIR: String = "waypoint/"
     private val WAYPOINT_SAMPLE_FILE_CACHE_DIR: String = "waypoint/cache/"
     private val WAYPOINT_FILE_TAG = ".kmz"
+    private var unzipChildDir = "temp/"
+    private var unzipDir = "wpmz/"
+    private var mDisposable : Disposable ?= null
 
-    var mapView: DJIMapView? = null
-    var map: DJIMap? = null
-    var mapkitOptions: MapkitOptions? = null
-    var droneBitmap: DJIBitmapDescriptor? = null
-    var waypointBitmap: DJIBitmapDescriptor? = null
-    var homePointBitMap: DJIBitmapDescriptor? = null
-    var mAircraftMarker: DJIMarker? = null
-    var homePointMarKer: DJIMarker? = null
+
     var curMissionPath: String = DiskUtil.getExternalCacheDirPath(
         ContextUtil.getContext(),
         WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME
     )
+    val rootDir = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR)
     var validLenth: Int = 2
     var curMissionExecuteState: WaypointMissionExecuteState? = null
     var selectWaylines: ArrayList<Int> = ArrayList()
-    var homeLine: DJIPolyline? = null
-    var AircraftPos: DJILatLng? = null
-    var isNeedToCenter: Boolean = true
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,9 +115,8 @@ class WayPointV3Fragment : DJIFragment() {
     }
 
     private fun prepareMissionData() {
-        val dirName =
-            DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR)
-        val dir = File(dirName)
+
+        val dir = File(rootDir)
         if (!dir.exists()) {
             dir.mkdirs()
         }
@@ -119,7 +128,7 @@ class WayPointV3Fragment : DJIFragment() {
         if (!cachedir.exists()) {
             cachedir.mkdirs()
         }
-        val destPath = dirName + WAYPOINT_SAMPLE_FILE_NAME
+        val destPath = rootDir + WAYPOINT_SAMPLE_FILE_NAME
         if (!File(destPath).exists()) {
             FileUtils.copyAssetsFile(
                 ContextUtil.getContext(),
@@ -144,10 +153,7 @@ class WayPointV3Fragment : DJIFragment() {
         }
 
         btn_mission_upload?.setOnClickListener {
-
-            //  var missionPath  = curMissionPath?:DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR + WAYPOINT_SAMPLE_FILE_NAME)
             val waypointFile = File(curMissionPath)
-
             if (waypointFile.exists()) {
                 wayPointV3VM.pushKMZFileToAircraft(curMissionPath)
             } else {
@@ -158,12 +164,16 @@ class WayPointV3Fragment : DJIFragment() {
 
         wayPointV3VM.missionUploadState.observe(viewLifecycleOwner) {
             it?.let {
-                if (it.error != null) {
-                    mission_upload_state_tv?.text = "Upload State: error:${getErroMsg(it.error)} "
-                } else if (it.tips.isNotEmpty()) {
-                    mission_upload_state_tv?.text = it.tips
-                } else {
-                    mission_upload_state_tv?.text = "Upload State: progress:${it.updateProgress} "
+                when {
+                    it.error != null -> {
+                        mission_upload_state_tv?.text = "Upload State: error:${getErroMsg(it.error)} "
+                    }
+                    it.tips.isNotEmpty() -> {
+                        mission_upload_state_tv?.text = it.tips
+                    }
+                    else -> {
+                        mission_upload_state_tv?.text = "Upload State: progress:${it.updateProgress} "
+                    }
                 }
 
             }
@@ -218,7 +228,7 @@ class WayPointV3Fragment : DJIFragment() {
                 return@setOnClickListener
             }
             selectWaylines.clear()
-            var waylineids = wayPointV3VM.getAvailableWaylineIDs(curMissionPath)
+            var waylineids = wayPointV3VM.getAvaliableWaylineIDs(curMissionPath)
             showMultiChoiceDialog(waylineids)
         }
 
@@ -232,23 +242,11 @@ class WayPointV3Fragment : DJIFragment() {
         }
 
         map_locate.setOnClickListener {
-            isNeedToCenter = true
-            AircraftPos?.let {
-                moveToCenter(map?.getCameraPosition()!!.zoom, AircraftPos!!)
-            }
+            map_widget.setMapCenterLock(MapWidget.MapCenterLock.AIRCRAFT)
         }
 
         sp_map_switch.setSelection(wayPointV3VM.getMapType(context))
-        sp_map_switch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
-                mapSwitch(pos)
-                wayPointV3VM.saveMapType(context, pos)
-            }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                // donothing
-            }
-        }
         btn_mission_stop.setOnClickListener {
             if (curMissionExecuteState == WaypointMissionExecuteState.READY) {
                 ToastUtils.showToast("Mission not start")
@@ -267,13 +265,13 @@ class WayPointV3Fragment : DJIFragment() {
                 })
         }
 
-        mapView?.onCreate(savedInstanceState)
-        droneBitmap = DJIBitmapDescriptorFactory.fromResource(R.mipmap.aircraft)
-        waypointBitmap = DJIBitmapDescriptorFactory.fromResource(R.mipmap.waypoint_position)
-        homePointBitMap = DJIBitmapDescriptorFactory.fromResource(R.mipmap.home_point)
 
+        createMapView(savedInstanceState)
 
     }
+
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -340,69 +338,10 @@ class WayPointV3Fragment : DJIFragment() {
                 wayline_aircraft_height?.text = String.format("Aircraft Height: %.2f", it.height)
                 wayline_aircraft_distance?.text =
                     String.format("Aircraft Distance: %.2f", it.distance)
-                updateAircraftLocation(it.latitude, it.longtitude, it.head, it.homeLocation)
             }
         }
     }
 
-    private fun updateAircraftLocation(
-        aircraftLat: Double,
-        aircraftLng: Double,
-        aircraftHead: Float,
-        homePoint: LocationCoordinate2D,
-    ) {
-        if (map == null) {
-            return
-        }
-        AircraftPos = DJILatLng(aircraftLat, aircraftLng)
-        val zoomLevel = map?.getCameraPosition()!!.zoom
-
-
-        val markerOptions = DJIMarkerOptions()
-        markerOptions.position(AircraftPos)
-        markerOptions.icon(droneBitmap)
-        markerOptions.zIndex(1)
-        markerOptions.anchor(0.5f, 0.5f)
-
-        val marOptionHomePoint = DJIMarkerOptions()
-        var homeCoordinate = DJILatLng(homePoint.latitude, homePoint.longitude)
-        marOptionHomePoint.position(homeCoordinate)
-        marOptionHomePoint.icon(homePointBitMap)
-        marOptionHomePoint.anchor(0.5f, 0.5f)
-
-        if (isLocationValid(homePoint.latitude, homePoint.longitude)) {
-            if (homePointMarKer == null) {
-                homePointMarKer = map?.addMarker(marOptionHomePoint)
-            } else {
-                homePointMarKer?.position = DJILatLng(homePoint.latitude, homePoint.longitude)
-            }
-        }
-
-        if (isLocationValid(aircraftLat, aircraftLng)) {
-            if (mAircraftMarker != null) {
-                // mAircraftMarker!!.remove()
-                mAircraftMarker?.position = AircraftPos
-            } else {
-                mAircraftMarker = map?.addMarker(markerOptions)
-            }
-
-            mAircraftMarker!!.rotation = (aircraftHead - map!!.getCameraPosition().bearing)
-            moveToCenter(zoomLevel, AircraftPos)
-
-        }
-        updateHomeLine(mAircraftMarker!!, homeCoordinate)
-    }
-
-    fun moveToCenter(zoomLevel: Float, pos: DJILatLng?) {
-        if (isNeedToCenter) {
-            val cameraPosition = DJICameraPosition.Builder()
-                .target(pos)
-                .zoom(if (wayPointV3VM.getMapType(context) == MapProvider.MAPLIBRE_PROVIDER) -1.0f else zoomLevel)
-                .build()
-            val cu: DJICameraUpdate = DJICameraUpdateFactory.newCameraPosition(cameraPosition)
-            map!!.animateCamera(cu)
-        }
-    }
 
 
     @IntDef(
@@ -420,78 +359,36 @@ class WayPointV3Fragment : DJIFragment() {
         }
     }
 
-    fun createMapView(@MapProvider type: Int) {
-        // 初始化MapKit
-        Mapkit.inHongKong(wayPointV3VM.isHongKong())
-        Mapkit.inMacau(wayPointV3VM.isMacau())
-        Mapkit.inMainlandChina(wayPointV3VM.isInMainlandChina())
+    fun createMapView(savedInstanceState: Bundle?) {
 
+        val onMapReadyListener = MapWidget.OnMapReadyListener { map ->
+            map.setMapType(DJIMap.MapType.NORMAL)
+        }
         val useAmap = wayPointV3VM.isInMainlandChina();
-        val builder = MapkitOptions.Builder()
-
-        builder.addMapProvider(
-            if (type == MapProvider.AMAP_PROVIDER) {
-                AMapProvider().providerType
-            } else if (type == MapProvider.MAPLIBRE_PROVIDER) {
-                MapLibreProvider().providerType
-            } else if (type == MapProvider.GOOGLE_PROVIDER) {
-                GoogleProvider().providerType
-            } else {
-                if (useAmap) AMapProvider().providerType else MapLibreProvider().providerType
-            }
-        )
-        mapkitOptions = builder.build()
-        mapView = DJIMapView(activity, builder.build())
-        mapView?.getDJIMapAsync(OnDJIMapReadyCallback {
-            map = it
-            resetMarker()
-            map?.addOnCameraChangeListener {
-                isNeedToCenter = false
-            }
-
-        })
-        wp_map.addView(mapView)
-    }
-
-    fun resetMarker() {
-        homePointMarKer = null
-        mAircraftMarker = null
-    }
-
-    fun mapSwitch(@MapProvider type: Int) {
-        //销毁
-        mapView?.apply {
-            onPause()
-            onStop()
-            onDestroy()
-            wp_map.removeView(this)
+        if (useAmap ) {
+            map_widget.initAMap(onMapReadyListener)
+        } else {
+            map_widget.initMapLibreMap(BuildConfig.MAPLIBRE_TOKEN, onMapReadyListener)
         }
-        //重建
-        createMapView(type)
-        mapView?.apply {
-            onCreate(null)
-            onStart()
-            onResume()
-        }
+        map_widget.onCreate(savedInstanceState) //需要再init后调用否则Amap无法显示
+
     }
 
-    fun isLocationValid(latitude: Double, longitude: Double): Boolean {
-        return latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180 && latitude != 0.0 && longitude != 0.0
-    }
+
 
     override fun onPause() {
         super.onPause()
-        mapView?.onPause()
+        map_widget.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        mapView?.onResume()
+        map_widget.onResume()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mapView?.onDestroy()
+        map_widget.onDestroy()
     }
 
     override fun onDestroy() {
@@ -499,7 +396,12 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.cancelListenFlightControlState()
         wayPointV3VM.removeAllMissionStateListener()
         wayPointV3VM.clearAllWaylineExecutingInfoListener()
-        map?.removeAllOnCameraChangeListeners()
+
+        mDisposable?.let {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
     }
 
     fun getErroMsg(error: IDJIError): String {
@@ -558,7 +460,7 @@ class WayPointV3Fragment : DJIFragment() {
         markOptions.icon(getMarkerRes(waypointIndex, 0f))
         markOptions.title(waypointIndex.toString())
         markOptions.isInfoWindowEnable = true
-        map?.addMarker(markOptions)
+        map_widget.map?.addMarker(markOptions)
     }
 
     fun markLine(waypoints: List<WaylineExecuteWaypoint>) {
@@ -572,27 +474,10 @@ class WayPointV3Fragment : DJIFragment() {
         lineOptions.width(5f)
         lineOptions.color(Color.GREEN)
         lineOptions.addAll(djiwaypoints)
-        map?.addPolyline(lineOptions)
+        map_widget.map?.addPolyline(lineOptions)
     }
 
-    fun updateHomeLine(aircraftMarker: DJIMarker, homeCoordinate: DJILatLng) {
 
-        if (homeLine != null) {
-            val points: MutableList<DJILatLng> = java.util.ArrayList()
-            points.add(aircraftMarker.getPosition())
-            points.add(homeCoordinate)
-            homeLine!!.setPoints(points)
-        } else {
-            //create new line
-            val homeLineOptions = DJIPolylineOptions().add(aircraftMarker.getPosition())
-                .add(homeCoordinate)
-                .color(Color.WHITE)
-                .width(5f)
-
-            //draw new line
-            homeLine = map!!.addPolyline(homeLineOptions)
-        }
-    }
 
     /**
      * Convert view to bitmap

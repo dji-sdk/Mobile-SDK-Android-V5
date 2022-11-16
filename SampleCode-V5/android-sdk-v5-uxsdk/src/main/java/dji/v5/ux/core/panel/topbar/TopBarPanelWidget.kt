@@ -39,11 +39,12 @@ import dji.v5.ux.core.widget.battery.BatteryWidget
 import dji.v5.ux.core.widget.connection.ConnectionWidget
 import dji.v5.ux.core.widget.flightmode.FlightModeWidget
 import dji.v5.ux.core.widget.gpssignal.GpsSignalWidget
+import dji.v5.ux.core.widget.gpssignal.GpsSignalWidgetModel
 import dji.v5.ux.core.widget.remotecontrollersignal.RemoteControllerSignalWidget
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget
 import dji.v5.ux.core.widget.videosignal.VideoSignalWidget
-import dji.v5.ux.core.widget.perception.PerceptionStateWidget
+import dji.v5.ux.core.widget.vision.VisionWidget
 import java.util.*
 
 /**
@@ -55,7 +56,7 @@ import java.util.*
  * - [SimulatorIndicatorWidget]
  * - [AirSenseWidget]
  * - [GPSSignalWidget]
- * - [PerceptionStateWidget]
+ * - [VisionWidget]
  * - [RemoteControllerSignalWidget]
  * - [VideoSignalWidget]
  * - [BatteryWidget]
@@ -108,9 +109,9 @@ open class TopBarPanelWidget @JvmOverloads constructor(
     @get:JvmName("getGPSSignalWidget")
     val gpsSignalWidget: GpsSignalWidget?
     /**
-     * Getter for [PerceptionStateWidget]. Null when excluded from the bar panel.
+     * Getter for [VisionWidget]. Null when excluded from the bar panel.
      */
-    val visionWidget: PerceptionStateWidget?
+    val visionWidget: VisionWidget?
     /**
      * Getter for [RemoteControllerSignalWidget]. Null when excluded from the bar panel.
      */
@@ -175,7 +176,7 @@ open class TopBarPanelWidget @JvmOverloads constructor(
             gpsSignalWidget = null
         }
         if (!WidgetValue.VISION.isItemExcluded(excludedItemsValue)) {
-            visionWidget = PerceptionStateWidget(context, attrs)
+            visionWidget = VisionWidget(context, attrs)
             rightPanelItems.add(PanelItem(visionWidget))
         } else {
             visionWidget = null

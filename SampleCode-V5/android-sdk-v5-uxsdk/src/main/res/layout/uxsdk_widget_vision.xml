@@ -26,7 +26,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:parentTag="dji.v5.ux.core.widget.perception.PerceptionStateWidget">
+    tools:parentTag="dji.v5.ux.core.widget.vision.VisionWidget">
 
     <ImageView
         android:id="@+id/imageview_vision_icon"
