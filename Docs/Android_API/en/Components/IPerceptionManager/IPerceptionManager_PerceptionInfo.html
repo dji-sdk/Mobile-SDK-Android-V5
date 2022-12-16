@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -388,6 +396,54 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IMegaphoneManager/IMegaphoneManager.html" class="sub-toggle">IMegaphoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_FileInfo.html">FileInfo</a>
@@ -468,129 +524,174 @@
       <div class="site-main">
         <div class="article"><div class="article"><h1><font color="#AAA">class </font>PerceptionInfo</h1></div>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerceptionInfo</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
 <h5 id="description">Description:</h5>
 <p><font color="#666">perception information，includes the switch status of obstacle avoidance, braking distance and warning distance.
 <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="class-members">Class Members:</h5>
 <h4 id="members">Members</h4>
-<div class="api-row" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline">isOverallObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">method </font>isOverallObstacleAvoidanceEnabled</h6></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getupwardobstacleavoidanceworking_inline">getUpwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getUpwardObstacleAvoidanceWorking</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">isOverallObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getUpwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
 <h5 id="description-v2">Description:</h5>
-<p><font color="#666">Get whether the main switch of obstacle avoidance is turned on.</font></p>
+<p><font color="#666">Get whether the upward vision obstacle avoidance sensor is working.</font></p>
 <h5 id="return">Return:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Return whether the main switch of obstacle avoidance is turned on.</i></font></td></tr></table></html></div>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>Return whether the upward vision obstacle avoidance sensor is working.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getdownwardobstacleavoidanceworking_inline">getDownwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getDownwardObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getDownwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v3">Description:</h5>
+<p><font color="#666">Get whether the downward vision obstacle avoidance sensor is working.</font></p>
+<h5 id="return-v2">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>Return whether the downward vision obstacle avoidance sensor is working.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getleftsideobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getleftsideobstacleavoidanceworking_inline">getLeftSideObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getleftsideobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getLeftSideObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getLeftSideObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v4">Description:</h5>
+<p><font color="#666">Get whether the left side vision obstacle avoidance sensor is working.</font></p>
+<h5 id="return-v3">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>Return whether the left side vision obstacle avoidance sensor is working.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getrightsideobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getrightsideobstacleavoidanceworking_inline">getRightSideObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getrightsideobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getRightSideObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getRightSideObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v5">Description:</h5>
+<p><font color="#666">Get whether the right side vision obstacle avoidance sensor is working.</font></p>
+<h5 id="return-v4">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>Return whether the right side vision obstacle avoidance sensor is working.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getforwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getforwardobstacleavoidanceworking_inline">getForwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getforwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getForwardObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getForwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v6">Description:</h5>
+<p><font color="#666">Get whether the forward vision obstacle avoidance sensor is working.</font></p>
+<h5 id="return-v5">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>Return whether the forward vision obstacle avoidance sensor is working.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getbackwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getbackwardobstacleavoidanceworking_inline">getBackwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getbackwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getBackwardObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getBackwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v7">Description:</h5>
+<p><font color="#666">Get whether the backward vision obstacle avoidance sensor is working.</font></p>
+<h5 id="return-v6">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>Return whether the backward vision obstacle avoidance sensor is working.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isupwardobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isupwardobstacleavoidanceenabled_inline">isUpwardObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isupwardobstacleavoidanceenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isUpwardObstacleAvoidanceEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isUpwardObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v3">Description:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v8">Description:</h5>
 <p><font color="#666">Get whether the upward vision switch of obstacle avoidance is turned on.</font></p>
-<h5 id="return-v2">Return:</h5>
+<h5 id="return-v7">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Return whether the upward vision switch of obstacle avoidance is turned on.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isdownwardobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isdownwardobstacleavoidanceenabled_inline">isDownwardObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isdownwardobstacleavoidanceenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isDownwardObstacleAvoidanceEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isDownwardObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v4">Description:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v9">Description:</h5>
 <p><font color="#666">Get whether the downward vision switch of obstacle avoidance is turned on.</font></p>
-<h5 id="return-v3">Return:</h5>
+<h5 id="return-v8">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Return whether the downward vision switch of obstacle avoidance is turned on.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_ishorizontalobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_ishorizontalobstacleavoidanceenabled_inline">isHorizontalObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_ishorizontalobstacleavoidanceenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isHorizontalObstacleAvoidanceEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isHorizontalObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v5">Description:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v10">Description:</h5>
 <p><font color="#666">Get whether the horizontal vision switch of obstacle avoidance is turned on.</font></p>
-<h5 id="return-v4">Return:</h5>
+<h5 id="return-v9">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Return whether the horizontal vision switch of obstacle avoidance is turned on.</i></font></td></tr></table></html></div>
-<div class="api-row" id="iperceptionmanager_perceptioninfo_getobstacleavoidancetype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getobstacleavoidancetype_inline">getObstacleAvoidanceType</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getobstacleavoidancetype_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">method </font>getObstacleAvoidanceType</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">ObstacleAvoidanceType <span class="title">getObstacleAvoidanceType</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v6">Description:</h5>
-<p><font color="#666">Get type of obstacle avoidance.</font></p>
-<h5 id="return-v5">Return:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_obstacleavoidancetype">ObstacleAvoidanceType</a></font></td><td><font color="#666"><i>Return the type of obstacle avoidance.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getupwardobstacleavoidancewarningdistance_inline">getUpwardObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancewarningdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getUpwardObstacleAvoidanceWarningDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getUpwardObstacleAvoidanceWarningDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v7">Description:</h5>
-<p><font color="#666">Get upward vision warning distance of obstacle avoidance.</font></p>
-<h5 id="return-v6">Return:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v11">Description:</h5>
+<p><font color="#666">Get upward vision warning distance of obstacle avoidance. Unit: meter.</font></p>
+<h5 id="return-v10">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>Return upward vision warning distance of obstacle avoidance.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancewarningdistance_inline">getDownwardObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancewarningdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getDownwardObstacleAvoidanceWarningDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getDownwardObstacleAvoidanceWarningDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v8">Description:</h5>
-<p><font color="#666">Get downward vision warning distance of obstacle avoidance.</font></p>
-<h5 id="return-v7">Return:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v12">Description:</h5>
+<p><font color="#666">Get downward vision warning distance of obstacle avoidance. Unit: meter.</font></p>
+<h5 id="return-v11">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>Return downward vision warning distance of obstacle avoidance.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancewarningdistance_inline">getHorizontalObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancewarningdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getHorizontalObstacleAvoidanceWarningDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getHorizontalObstacleAvoidanceWarningDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v9">Description:</h5>
-<p><font color="#666">Get horizontal vision warning distance of obstacle avoidance.</font></p>
-<h5 id="return-v8">Return:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v13">Description:</h5>
+<p><font color="#666">Get horizontal vision warning distance of obstacle avoidance. Unit: meter.</font></p>
+<h5 id="return-v12">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>Return horizontal vision warning distance of obstacle avoidance.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getupwardobstacleavoidancebrakingdistance_inline">getUpwardObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancebrakingdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getUpwardObstacleAvoidanceBrakingDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getUpwardObstacleAvoidanceBrakingDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v10">Description:</h5>
-<p><font color="#666">Get upward vision warning distance of braking avoidance.</font></p>
-<h5 id="return-v9">Return:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v14">Description:</h5>
+<p><font color="#666">Get upward vision warning distance of braking avoidance. Unit: meter.</font></p>
+<h5 id="return-v13">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>Return upward vision warning distance of braking avoidance.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancebrakingdistance_inline">getDownwardObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancebrakingdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getDownwardObstacleAvoidanceBrakingDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getDownwardObstacleAvoidanceBrakingDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v11">Description:</h5>
-<p><font color="#666">Get downward vision warning distance of braking avoidance.</font></p>
-<h5 id="return-v10">Return:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v15">Description:</h5>
+<p><font color="#666">Get downward vision warning distance of braking avoidance. Unit: meter.</font></p>
+<h5 id="return-v14">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>Return downward vision warning distance of braking avoidance.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancebrakingdistance_inline">getHorizontalObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancebrakingdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getHorizontalObstacleAvoidanceBrakingDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getHorizontalObstacleAvoidanceBrakingDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v12">Description:</h5>
-<p><font color="#666">Get horizontal vision warning distance of braking avoidance.</font></p>
-<h5 id="return-v11">Return:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v16">Description:</h5>
+<p><font color="#666">Get horizontal vision warning distance of braking avoidance. Unit: meter.</font></p>
+<h5 id="return-v15">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>Return horizontal vision warning distance of braking avoidance.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isvisionpositioningenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isvisionpositioningenabled_inline">isVisionPositioningEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isvisionpositioningenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isVisionPositioningEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isVisionPositioningEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v13">Description:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v17">Description:</h5>
 <p><font color="#666">Get whether the vision positioning is opened.</font></p>
-<h5 id="return-v12">Return:</h5>
+<h5 id="return-v16">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Return whether the vision positioning is opened.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isprecisionlandingenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isprecisionlandingenabled_inline">isPrecisionLandingEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isprecisionlandingenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isPrecisionLandingEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isPrecisionLandingEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="description-v14">Description:</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v18">Description:</h5>
 <p><font color="#666">Get whether the precise positioning is opened.</font></p>
-<h5 id="return-v13">Return:</h5>
+<h5 id="return-v17">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Return whether the precise positioning is opened.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline">isOverallObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>isOverallObstacleAvoidanceEnabled</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">isOverallObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="description-v19">Description:</h5>
+<p><font color="#666">Get whether the main switch of obstacle avoidance is turned on. <br><br><b>Note: This interface has been deprecated since MSDK 5.1.0. Please call <code><a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_getobstacleavoidancetype">getObstacleAvoidanceType</a></code> to get whether the obstacle avoidance switch is enabled. For millimeter wave radar accessories, you need to call <code><a href="../../Components/IPerceptionManager/IRadarManager.html#iradarmanager_getobstacleavoidanceenabled">getObstacleAvoidanceEnabled</a></code> to get whether the obstacle avoidance switch is enabled.</b></font></p>
+<h5 id="return-v18">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Return whether the main switch of obstacle avoidance is turned on.</i></font></td></tr></table></html></div>
 
         </div>
       </div>

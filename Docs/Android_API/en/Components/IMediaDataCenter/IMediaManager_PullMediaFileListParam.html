@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -388,6 +396,54 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IMegaphoneManager/IMegaphoneManager.html" class="sub-toggle">IMegaphoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_FileInfo.html">FileInfo</a>
@@ -481,6 +537,24 @@
 <p><font color="#666">Get filter of pulling media file list. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="return">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafilefilter">MediaFileFilter</a></font></td><td><font color="#666"><i>Return filter of pulling media file list.</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_pullmediafilelistparam_getmediafileindex"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_pullmediafilelistparam_getmediafileindex_inline">getMediaFileIndex</a></div></div><div class="inline-doc" id="imediamanager_pullmediafilelistparam_getmediafileindex_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getMediaFileIndex</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getMediaFileIndex</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
+<h5 id="description-v3">Description:</h5>
+<p><font color="#666">Gets the media file index. Indicates that the media file is pulled from the media file index, if this value is set to &quot;-1&quot; or no parameter is set, it means that the first media file in the storage location is pulled. You can set the count of files to be pulled through &quot;Count&quot;, if &quot;Count&quot; is set to &quot;-1&quot; or no parameter is set, it means that all media files are pulled. <br><br><code><i>Supported since MSDK 5.2.0</i></code></font></p>
+<h5 id="return-v2">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int</font></td><td><font color="#666"><i>Return media file index.</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_pullmediafilelistparam_getcount"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_pullmediafilelistparam_getcount_inline">getCount</a></div></div><div class="inline-doc" id="imediamanager_pullmediafilelistparam_getcount_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getCount</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
+<h5 id="description-v4">Description:</h5>
+<p><font color="#666">Gets the count of media files. Indicates the count of files to be pulled. If the value is set to &quot;-1&quot; or no parameter is set, it means that all media files are pulled. <br><br><code><i>Supported since MSDK 5.2.0</i></code></font></p>
+<h5 id="return-v3">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int</font></td><td><font color="#666"><i>Return the count of media files to be pulled.</i></font></td></tr></table></html></div>
 
         </div>
       </div>

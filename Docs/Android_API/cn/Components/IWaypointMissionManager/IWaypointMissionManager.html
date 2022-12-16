@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -385,6 +393,54 @@
                             <dd><a href="../IRTKCenter/IRTKCenter_RTKSystemStateListener.html">RTKSystemStateListener</a>
                             </dd>
                             <dd><a href="../IRTKCenter/IRTKCenter_RTKBaseListener.html">RTKBaseListener&lt;T&gt;</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
                             </dd>
                     </ul>
                   </dd>
@@ -598,7 +654,7 @@
 <h5 id="描述：-v15">描述：</h5>
 <p><font color="#666">航线任务执行状态。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_disconnected_inline"></a>DISCONNECTED</font></td><td><font color="#666">飞行器断开连接。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_not_suppored_inline"></a>NOT_SUPPORED</font></td><td><font color="#666">此机型不支持航线任务3.0。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_ready_inline"></a>READY</font></td><td><font color="#666">航线任务准备状态,此状态下可上传航线任务文件,也可执行已上传的航线任务。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_uploading_inline"></a>UPLOADING</font></td><td><font color="#666">航线任务文件上传中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_executing_pre_praring_inline"></a>EXECUTING_PRE_PRARING</font></td><td><font color="#666">航线任务执行准备中。调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_startmission">startMission</a></code>启动执行航线任务后，飞行器在准备执行航线任务中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_enter_wayline_inline"></a>ENTER_WAYLINE</font></td><td><font color="#666">进入航线飞行,飞往第一个航线的第一个航点。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_interrupted_inline"></a>INTERRUPTED</font></td><td><font color="#666">航线任务执行中断，表示用户调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_pausemission">pauseMission</a></code>暂停航线或者飞控异常。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_recovering_inline"></a>RECOVERING</font></td><td><font color="#666">航线任务恢复中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_finished_inline"></a>FINISHED</font></td><td><font color="#666">航线任务完成。表示航线任务执行完成或者调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_stopmission">stopMission</a></code>停止执行航线任务。</font></td></tr></table></html>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_idle_inline"></a>IDLE</font></td><td><font color="#666">初始化状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_not_supported_inline"></a>NOT_SUPPORTED</font></td><td><font color="#666">此机型不支持航线任务3.0。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_ready_inline"></a>READY</font></td><td><font color="#666">航线任务准备状态,此状态下可上传航线任务文件,也可执行已上传的航线任务。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_uploading_inline"></a>UPLOADING</font></td><td><font color="#666">航线任务文件上传中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_preparing_inline"></a>PREPARING</font></td><td><font color="#666">航线任务执行准备中。调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_startmission">startMission</a></code>启动执行航线任务后，飞行器在准备执行航线任务中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_enter_wayline_inline"></a>ENTER_WAYLINE</font></td><td><font color="#666">进入航线飞行,飞往指定航线的第一个航点。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_executing_inline"></a>EXECUTING</font></td><td><font color="#666">航线任务执行中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_interrupted_inline"></a>INTERRUPTED</font></td><td><font color="#666">航线任务执行中断，表示用户调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_pausemission">pauseMission</a></code>暂停航线或者飞控异常。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_recovering_inline"></a>RECOVERING</font></td><td><font color="#666">航线任务恢复中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_finished_inline"></a>FINISHED</font></td><td><font color="#666">航线任务完成。表示航线任务执行完成或者调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_stopmission">stopMission</a></code>停止执行航线任务。</font></td></tr></table></html>
 <h5 id="class-members">Class Members:</h5>
 </div>
 <div class="api-row" id="iwaypointmissionmanager_waylineexecutinginfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a></div></div>

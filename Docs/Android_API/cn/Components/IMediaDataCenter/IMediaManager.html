@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -385,6 +393,54 @@
                             <dd><a href="../IRTKCenter/IRTKCenter_RTKSystemStateListener.html">RTKSystemStateListener</a>
                             </dd>
                             <dd><a href="../IRTKCenter/IRTKCenter_RTKBaseListener.html">RTKBaseListener&lt;T&gt;</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
                             </dd>
                     </ul>
                   </dd>
@@ -682,7 +738,7 @@
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_idle_inline"></a>IDLE</font></td><td><font color="#666">空闲状态。未开启多媒体文件播放功能，可以调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_playvideo">playVideo</a></code>进行多媒体文件播放。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_playing_inline"></a>PLAYING</font></td><td><font color="#666">播放中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_ended_inline"></a>ENDED</font></td><td><font color="#666">播放结束。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_stopped_inline"></a>STOPPED</font></td><td><font color="#666">停止播放。当调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_stopvideo">stopVideo</a></code>接口成功停止播放多媒体文件后会回调此状态。</font></td></tr></table></html>
 <h5 id="class-members-v3">Class Members:</h5>
 </div>
-<div class="api-row" id="imediamanager_videoplaystatus"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a></div></div><div class="api-row" id="imediamanager_videoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a></div></div>
+<div class="api-row" id="imediamanager_videoplaystatus"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a></div></div><div class="api-row" id="imediamanager_videoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a></div></div><div class="api-row" id="imediamanager_mediafiledownloadlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a></div></div>
 
         </div>
       </div>

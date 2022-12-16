@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -388,6 +396,54 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IMegaphoneManager/IMegaphoneManager.html" class="sub-toggle">IMegaphoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_FileInfo.html">FileInfo</a>
@@ -505,36 +561,14 @@
 <h5 id="description-v5">Description:</h5>
 <p><font color="#666"><b>Parameter:</b>Double<br><br> Get the yaw angle of the gimbal relative to the nose of the aircraft. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
-<div class="api-row" id="key_gimbal_pitchadjustdegree"><div class="api-col left">Offset Value</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_pitchadjustdegree_inline">KeyFineTunePitchTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_pitchadjustdegree_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyFineTunePitchTotalDegree</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTunePitchTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTunePitchTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"PitchAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v6">Description:</h5>
-<p><font color="#666"><b>Parameter: </b>Double<br><br> Get total offset value of gimbal pitch axis. Fine-tune can be done through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunepitchindegrees">KeyFineTunePitchInDegrees</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-</div>
-<div class="api-row" id="key_gimbal_yawadjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_yawadjustdegree_inline">KeyFineTuneYawTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_yawadjustdegree_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneYawTotalDegree</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneYawTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneYawTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"YawAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v7">Description:</h5>
-<p><font color="#666"><b>Parameter: </b>Double<br><br> Get total offset value of gimbal yaw axis. Fine-tune can be done through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetuneyawindegrees">KeyFineTuneYawInDegrees</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-</div>
-<div class="api-row" id="key_gimbal_rolladjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_rolladjustdegree_inline">KeyFineTuneRollTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_rolladjustdegree_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneRollTotalDegree</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneRollTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneRollTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"RollAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v8">Description:</h5>
-<p><font color="#666"><b>Parameter: </b>Double<br><br> Get total offset value of gimbal roll axis. Fine-tune can be done through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunerollindegrees">KeyFineTuneRollInDegrees</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-</div>
+<html><p><br></p></html>
+<h4 id="basic-operation">Basic Operation</h4>
 <div class="api-row" id="key_gimbal_gimbalmode"><div class="api-col left">Mode</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_gimbalmode_inline">KeyGimbalMode</a></div></div><div class="inline-doc" id="key_gimbal_gimbalmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyGimbalMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;GimbalMode&gt; KeyGimbalMode = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"GimbalMode"</span>, <span class="keyword">new</span> SingleValueConverter&lt;&gt;(GimbalMode<span class="class">.<span class="keyword">class</span>,<span class="title">GimbalModeMsg</span>.<span class="title">class</span>)).<span class="title">canGet</span>(<span class="title">true</span>).<span class="title">canSet</span>(<span class="title">true</span>).<span class="title">canListen</span>(<span class="title">true</span>).<span class="title">canPerformAction</span>(<span class="title">false</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v9">Description:</h5>
+<h5 id="description-v6">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/DJIValue.html#value_gimbal_enum_gimbalmode">GimbalMode</a></code><br><br> Set gimbal mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_rotatebyangle"><div class="api-col left">Rotation</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_rotatebyangle_inline">KeyRotateByAngle</a></div></div><div class="inline-doc" id="key_gimbal_rotatebyangle_inline" <blockquote>
@@ -542,7 +576,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;GimbalAngleRotation,EmptyMsg&gt; KeyRotateByAngle = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"RotateByAngle"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(GimbalAngleRotation<span class="class">.<span class="keyword">class</span>),<span class="title">EmptyValueConverter</span>.<span class="title">converter</span>).<span class="title">canGet</span>(<span class="title">false</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">false</span>).<span class="title">canPerformAction</span>(<span class="title">true</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v10">Description:</h5>
+<h5 id="description-v7">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_Gimbal_Struct_GimbalAngleRotation.html#value_gimbal_struct_gimbalanglerotation">GimbalAngleRotation</a></code><br><br> Rotate the pitch angle, roll angle and yaw angle of the gimbal in angle mode. Relative angle mode and absolute angle mode are supported. <br><b>Note:<br>Different gimbal payloads have different controllable angles. The following provides a method to obtain the maximum and minimum limit angles of the gimbal: Please use the remote controller's gimbal dial to control the pitch, roll and yaw of gimbal to the maximum and minimum limit, and then call <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_gimbalattitude">KeyGimbalAttitude</a></code> to get the adjustable limit angle of the gimbal. </b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_rotatebyspeed"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_rotatebyspeed_inline">KeyRotateBySpeed</a></div></div><div class="inline-doc" id="key_gimbal_rotatebyspeed_inline" <blockquote>
@@ -550,7 +584,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;GimbalSpeedRotation,EmptyMsg&gt; KeyRotateBySpeed = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"RotateBySpeed"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(GimbalSpeedRotation<span class="class">.<span class="keyword">class</span>),<span class="title">EmptyValueConverter</span>.<span class="title">converter</span>).<span class="title">canGet</span>(<span class="title">false</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">false</span>).<span class="title">canPerformAction</span>(<span class="title">true</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v11">Description:</h5>
+<h5 id="description-v8">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_Gimbal_Struct_GimbalSpeedRotation.html#value_gimbal_struct_gimbalspeedrotation">GimbalSpeedRotation</a></code><br><br> Rotate the pitch angle, roll angle and yaw angle of the gimbal in speed mode. Unit: 0.1 degree/second, range: [-359.9, 359.9]. The greater value you set, the greater the rotating speed. Both the frequency of this method call and the signal strength of the airlink will influence the final gimbal attitude which may cause some offset. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_resetgimbal"><div class="api-col left">Reset</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_resetgimbal_inline">KeyGimbalReset</a></div></div><div class="inline-doc" id="key_gimbal_resetgimbal_inline" <blockquote>
@@ -558,7 +592,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;GimbalResetType,EmptyMsg&gt; KeyGimbalReset = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"GimbalReset", new SingleValueConverter&lt;&gt;(GimbalResetType.class,GimbalResetCommandMsg.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("ResetGimbal")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v12">Description:</h5>
+<h5 id="description-v9">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/DJIValue.html#value_gimbal_enum_gimbalresetcommand">GimbalResetType</a></code><br><br> Gimbal reset. The pitch axis, roll axis and yaw axis can be centered or moved down through the setting <code><a href="../../Components/IKeyManager/DJIValue.html#value_gimbal_enum_gimbalresetcommand">GimbalResetType</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_finetunepitchindegrees"><div class="api-col left">Fine-tune</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_finetunepitchindegrees_inline">KeyFineTunePitchInDegrees</a></div></div><div class="inline-doc" id="key_gimbal_finetunepitchindegrees_inline" <blockquote>
@@ -566,7 +600,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;Double,EmptyMsg&gt; KeyFineTunePitchInDegrees = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTunePitchInDegrees"</span>, SingleValueConverter.DoubleConverter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v13">Description:</h5>
+<h5 id="description-v10">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Double<br><br> Gimbal pitch axis can be fine-tuned through custom offset value. If there still have small angle offset after gimbal centering back, this function can be used to gimbal leveling. Single Fine-tune range is [-2.0, 2.0], unit: degree. Total fine-tuned range is [-10.0, 10.0], unit:degree. If the offset value is negative, the gimbal will fine-tune a specified number of degrees in the counterclockwise direction. The total offset value of fine-tuning can be obtained through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_pitchadjustdegree">KeyFineTunePitchTotalDegree</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_finetuneyawindegrees"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_finetuneyawindegrees_inline">KeyFineTuneYawInDegrees</a></div></div><div class="inline-doc" id="key_gimbal_finetuneyawindegrees_inline" <blockquote>
@@ -574,7 +608,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;Double,EmptyMsg&gt; KeyFineTuneYawInDegrees = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneYawInDegrees"</span>, SingleValueConverter.DoubleConverter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v14">Description:</h5>
+<h5 id="description-v11">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Double<br><br> Gimbal yaw axis can be fine-tuned through custom offset value. If there still have small angle offset after gimbal centering back, this function can be used to gimbal leveling. Single Fine-tune range is [-2.0, 2.0], unit: degree. Total fine-tuned range is [-10.0, 10.0], unit:degree. If offset value is negative, the gimbal will fine-tune a specified number of degrees in the counterclockwise direction. Total offset value of fine-tuning can be obtained through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_yawadjustdegree">KeyFineTuneYawTotalDegree</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_finetunerollindegrees"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_finetunerollindegrees_inline">KeyFineTuneRollInDegrees</a></div></div><div class="inline-doc" id="key_gimbal_finetunerollindegrees_inline" <blockquote>
@@ -582,8 +616,32 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;Double,EmptyMsg&gt; KeyFineTuneRollInDegrees = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneRollInDegrees"</span>, SingleValueConverter.DoubleConverter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v15">Description:</h5>
+<h5 id="description-v12">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Double<br><br> Gimbal roll axis can be fine-tuned through custom offset value. If there still have small angle offset after gimbal centering back, this function can be used to gimbal leveling. Single Fine-tune range is [-2.0, 2.0], unit: degree. Total fine-tuned range is [-10.0, 10.0], unit:degree. If offset value is negative, the gimbal will fine-tune a specified number of degrees in the counterclockwise direction. Total offset value of fine-tuning can be obtained through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_rolladjustdegree">KeyFineTuneRollTotalDegree</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+</div>
+<div class="api-row" id="key_gimbal_pitchadjustdegree"><div class="api-col left">Offset Value</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_pitchadjustdegree_inline">KeyFineTunePitchTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_pitchadjustdegree_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyFineTunePitchTotalDegree</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTunePitchTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTunePitchTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"PitchAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="description-v13">Description:</h5>
+<p><font color="#666"><b>Parameter: </b>Double<br><br> Get total offset value of gimbal pitch axis. Fine-tune can be done through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunepitchindegrees">KeyFineTunePitchInDegrees</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+</div>
+<div class="api-row" id="key_gimbal_yawadjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_yawadjustdegree_inline">KeyFineTuneYawTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_yawadjustdegree_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneYawTotalDegree</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneYawTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneYawTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"YawAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="description-v14">Description:</h5>
+<p><font color="#666"><b>Parameter: </b>Double<br><br> Get total offset value of gimbal yaw axis. Fine-tune can be done through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetuneyawindegrees">KeyFineTuneYawInDegrees</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+</div>
+<div class="api-row" id="key_gimbal_rolladjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_rolladjustdegree_inline">KeyFineTuneRollTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_rolladjustdegree_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneRollTotalDegree</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneRollTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneRollTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"RollAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="description-v15">Description:</h5>
+<p><font color="#666"><b>Parameter: </b>Double<br><br> Get total offset value of gimbal roll axis. Fine-tune can be done through <code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunerollindegrees">KeyFineTuneRollInDegrees</a></code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_calibrategimbal"><div class="api-col left">Calibration</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_calibrategimbal_inline">KeyGimbalCalibrate</a></div></div><div class="inline-doc" id="key_gimbal_calibrategimbal_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyGimbalCalibrate</h6></div>
@@ -610,7 +668,7 @@
 <p><font color="#666">Restore gimbal parameter to fatory setting. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <html><p><br></p></html>
-<h4 id="basic-setting">Basic setting</h4>
+<h4 id="basic-setting">Basic Setting</h4>
 <div class="api-row" id="key_gimbal_pitchrangeextensionenabled"><div class="api-col left">Pitch Limit Extension</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_pitchrangeextensionenabled_inline">KeyPitchRangeExtensionEnabled</a></div></div><div class="inline-doc" id="key_gimbal_pitchrangeextensionenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyPitchRangeExtensionEnabled</h6></div>
 
@@ -627,9 +685,7 @@
 <h5 id="description-v20">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Integer<br><br> Set maximum spped of gimbal pitch control. This value is a percentage, the range is [1,100]. The larger the value, the faster the speed. 100% means that gimbal is controlled by maximum physical speed it can reached. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
-<html><p><br></p></html>
-<h4 id="basic-setting-v2">Basic Setting</h4>
-<div class="api-row" id="key_gimbal_yawcontrollermaxspeed"><div class="api-col left">Maximum Speed Percentage</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_yawcontrollermaxspeed_inline">KeyYawControlMaxSpeed</a></div></div><div class="inline-doc" id="key_gimbal_yawcontrollermaxspeed_inline" <blockquote>
+<div class="api-row" id="key_gimbal_yawcontrollermaxspeed"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_yawcontrollermaxspeed_inline">KeyYawControlMaxSpeed</a></div></div><div class="inline-doc" id="key_gimbal_yawcontrollermaxspeed_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyYawControlMaxSpeed</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Integer&gt; KeyYawControlMaxSpeed = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"YawControlMaxSpeed"</span>, SingleValueConverter.IntegerConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">true</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"YawControllerMaxSpeed"</span>)</span><br></pre></td></tr></table></figure>

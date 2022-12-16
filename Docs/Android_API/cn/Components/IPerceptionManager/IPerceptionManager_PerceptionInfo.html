@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -388,6 +396,54 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IMegaphoneManager/IMegaphoneManager.html" class="sub-toggle">IMegaphoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_FileInfo.html">FileInfo</a>
@@ -468,129 +524,174 @@
       <div class="site-main">
         <div class="article"><div class="article"><h1><font color="#AAA">class </font>PerceptionInfo</h1></div>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PerceptionInfo</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
 <h5 id="描述：">描述：</h5>
 <p><font color="#666">感知信息，包括感知避障开关状态、避障刹停距离和避障告警距离。
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="类成员">类成员:</h5>
 <h4 id="members">Members</h4>
-<div class="api-row" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline">isOverallObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">method </font>isOverallObstacleAvoidanceEnabled</h6></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getupwardobstacleavoidanceworking_inline">getUpwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getUpwardObstacleAvoidanceWorking</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">isOverallObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getUpwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
 <h5 id="描述：-v2">描述：</h5>
-<p><font color="#666">获取是否开启感知避障总开关。</font></p>
+<p><font color="#666">获取感知避障上视传感器是否正在工作。</font></p>
 <h5 id="返回值：">返回值：</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>返回是否开启感知避障总开关。</i></font></td></tr></table></html></div>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>返回感知避障上视传感器是否正在工作。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getdownwardobstacleavoidanceworking_inline">getDownwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getDownwardObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getDownwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v3">描述：</h5>
+<p><font color="#666">获取感知避障下视传感器是否正在工作。</font></p>
+<h5 id="返回值：-v2">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>返回感知避障下视传感器是否正在工作。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getleftsideobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getleftsideobstacleavoidanceworking_inline">getLeftSideObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getleftsideobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getLeftSideObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getLeftSideObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v4">描述：</h5>
+<p><font color="#666">获取感知避障左视传感器是否正在工作。</font></p>
+<h5 id="返回值：-v3">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>返回感知避障左视传感器是否正在工作。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getrightsideobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getrightsideobstacleavoidanceworking_inline">getRightSideObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getrightsideobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getRightSideObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getRightSideObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v5">描述：</h5>
+<p><font color="#666">获取感知避障右视传感器是否正在工作。</font></p>
+<h5 id="返回值：-v4">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>返回感知避障右视传感器是否正在工作。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getforwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getforwardobstacleavoidanceworking_inline">getForwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getforwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getForwardObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getForwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v6">描述：</h5>
+<p><font color="#666">获取感知避障前视传感器是否正在工作。</font></p>
+<h5 id="返回值：-v5">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>返回感知避障前视传感器是否正在工作。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_getbackwardobstacleavoidanceworking"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getbackwardobstacleavoidanceworking_inline">getBackwardObstacleAvoidanceWorking</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getbackwardobstacleavoidanceworking_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getBackwardObstacleAvoidanceWorking</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Boolean <span class="title">getBackwardObstacleAvoidanceWorking</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v7">描述：</h5>
+<p><font color="#666">获取感知避障后视传感器是否正在工作。</font></p>
+<h5 id="返回值：-v6">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Boolean</font></td><td><font color="#666"><i>返回感知避障后视传感器是否正在工作。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isupwardobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isupwardobstacleavoidanceenabled_inline">isUpwardObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isupwardobstacleavoidanceenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isUpwardObstacleAvoidanceEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isUpwardObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v3">描述：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v8">描述：</h5>
 <p><font color="#666">获取是否开启感知避障上视开关。</font></p>
-<h5 id="返回值：-v2">返回值：</h5>
+<h5 id="返回值：-v7">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>返回是否开启感知避障上视开关。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isdownwardobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isdownwardobstacleavoidanceenabled_inline">isDownwardObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isdownwardobstacleavoidanceenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isDownwardObstacleAvoidanceEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isDownwardObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v4">描述：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v9">描述：</h5>
 <p><font color="#666">获取是否开启感知避障下视开关。</font></p>
-<h5 id="返回值：-v3">返回值：</h5>
+<h5 id="返回值：-v8">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>返回是否开启感知避障下视开关。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_ishorizontalobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_ishorizontalobstacleavoidanceenabled_inline">isHorizontalObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_ishorizontalobstacleavoidanceenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isHorizontalObstacleAvoidanceEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isHorizontalObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v5">描述：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v10">描述：</h5>
 <p><font color="#666">获取是否开启感知避障水平四向开关。</font></p>
-<h5 id="返回值：-v4">返回值：</h5>
+<h5 id="返回值：-v9">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>返回是否开启感知避障水平四向开关。</i></font></td></tr></table></html></div>
-<div class="api-row" id="iperceptionmanager_perceptioninfo_getobstacleavoidancetype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getobstacleavoidancetype_inline">getObstacleAvoidanceType</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getobstacleavoidancetype_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">method </font>getObstacleAvoidanceType</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">ObstacleAvoidanceType <span class="title">getObstacleAvoidanceType</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v6">描述：</h5>
-<p><font color="#666">获取感知避障类型。</font></p>
-<h5 id="返回值：-v5">返回值：</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_obstacleavoidancetype">ObstacleAvoidanceType</a></font></td><td><font color="#666"><i>返回感知避障类型。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getupwardobstacleavoidancewarningdistance_inline">getUpwardObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancewarningdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getUpwardObstacleAvoidanceWarningDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getUpwardObstacleAvoidanceWarningDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v7">描述：</h5>
-<p><font color="#666">获取感知避障上视告警距离。</font></p>
-<h5 id="返回值：-v6">返回值：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v11">描述：</h5>
+<p><font color="#666">获取感知避障上视告警距离，单位：米。</font></p>
+<h5 id="返回值：-v10">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回感知避障上视告警距离。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancewarningdistance_inline">getDownwardObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancewarningdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getDownwardObstacleAvoidanceWarningDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getDownwardObstacleAvoidanceWarningDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
-<p><font color="#666">获取感知避障下视告警距离。</font></p>
-<h5 id="返回值：-v7">返回值：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v12">描述：</h5>
+<p><font color="#666">获取感知避障下视告警距离，单位：米。</font></p>
+<h5 id="返回值：-v11">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回感知避障下视告警距离。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancewarningdistance_inline">getHorizontalObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancewarningdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getHorizontalObstacleAvoidanceWarningDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getHorizontalObstacleAvoidanceWarningDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v9">描述：</h5>
-<p><font color="#666">获取感知避障水平四向告警距离。</font></p>
-<h5 id="返回值：-v8">返回值：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v13">描述：</h5>
+<p><font color="#666">获取感知避障水平四向告警距离，单位：米。</font></p>
+<h5 id="返回值：-v12">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回感知避障水平四向告警距离。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getupwardobstacleavoidancebrakingdistance_inline">getUpwardObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getupwardobstacleavoidancebrakingdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getUpwardObstacleAvoidanceBrakingDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getUpwardObstacleAvoidanceBrakingDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v10">描述：</h5>
-<p><font color="#666">获取感知避障上视刹停距离。</font></p>
-<h5 id="返回值：-v9">返回值：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v14">描述：</h5>
+<p><font color="#666">获取感知避障上视刹停距离，单位：米。</font></p>
+<h5 id="返回值：-v13">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回感知避障上视刹停距离。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancebrakingdistance_inline">getDownwardObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_getdownwardobstacleavoidancebrakingdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getDownwardObstacleAvoidanceBrakingDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getDownwardObstacleAvoidanceBrakingDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v11">描述：</h5>
-<p><font color="#666">获取感知避障下视刹停距离。</font></p>
-<h5 id="返回值：-v10">返回值：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v15">描述：</h5>
+<p><font color="#666">获取感知避障下视刹停距离，单位：米。</font></p>
+<h5 id="返回值：-v14">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回感知避障下视刹停距离。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancebrakingdistance_inline">getHorizontalObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_gethorizontalobstacleavoidancebrakingdistance_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getHorizontalObstacleAvoidanceBrakingDistance</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getHorizontalObstacleAvoidanceBrakingDistance</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v12">描述：</h5>
-<p><font color="#666">获取感知避障水平四向刹停距离。</font></p>
-<h5 id="返回值：-v11">返回值：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v16">描述：</h5>
+<p><font color="#666">获取感知避障水平四向刹停距离，单位：米。</font></p>
+<h5 id="返回值：-v15">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回感知避障水平四向刹停距离。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isvisionpositioningenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isvisionpositioningenabled_inline">isVisionPositioningEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isvisionpositioningenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isVisionPositioningEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isVisionPositioningEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v13">描述：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v17">描述：</h5>
 <p><font color="#666">获取是否开启视觉定位。</font></p>
-<h5 id="返回值：-v12">返回值：</h5>
+<h5 id="返回值：-v16">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>返回是否开启视觉定位。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_perceptioninfo_isprecisionlandingenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isprecisionlandingenabled_inline">isPrecisionLandingEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isprecisionlandingenabled_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>isPrecisionLandingEnabled</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isPrecisionLandingEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
-<h5 id="描述：-v14">描述：</h5>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v18">描述：</h5>
 <p><font color="#666">获取是否开启精准降落。</font></p>
-<h5 id="返回值：-v13">返回值：</h5>
+<h5 id="返回值：-v17">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>返回是否开启精准降落。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline">isOverallObstacleAvoidanceEnabled</a></div></div><div class="inline-doc" id="iperceptionmanager_perceptioninfo_isoverallobstacleavoidanceenabled_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>isOverallObstacleAvoidanceEnabled</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">isOverallObstacleAvoidanceEnabled</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception.data</font></td></tr></table></html>
+<h5 id="描述：-v19">描述：</h5>
+<p><font color="#666">获取是否开启感知避障总开关。 <br><b>注意：<br> 该接口从MSDK 5.1.0版本开始废弃。请调用<code><a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_getobstacleavoidancetype">getObstacleAvoidanceType</a></code>来获取是否开启避障开关。对于毫米波雷达配件，需要调用<code><a href="../../Components/IPerceptionManager/IRadarManager.html#iradarmanager_getobstacleavoidanceenabled">getObstacleAvoidanceEnabled</a></code>来获取是否开启避障开关。 </b></font></p>
+<h5 id="返回值：-v18">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>返回是否开启感知避障总开关。</i></font></td></tr></table></html></div>
 
         </div>
       </div>

@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -385,6 +393,54 @@
                             <dd><a href="../IRTKCenter/IRTKCenter_RTKSystemStateListener.html">RTKSystemStateListener</a>
                             </dd>
                             <dd><a href="../IRTKCenter/IRTKCenter_RTKBaseListener.html">RTKBaseListener&lt;T&gt;</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
                             </dd>
                     </ul>
                   </dd>
@@ -933,6 +989,32 @@ To set the maximum flight distance of the aircraft. Unit: meter. This value is t
 <code>true</code> means the aircraft has reached the maximum flight distance.
 <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
+<div class="api-row" id="key_flightcontroller_startmultigimbalsynccontrol"><div class="api-col left">Multi Gimbal Synchronization Control</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_startmultigimbalsynccontrol_inline">KeyStartMultiGimbalSyncControl</a></div></div><div class="inline-doc" id="key_flightcontroller_startmultigimbalsynccontrol_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyStartMultiGimbalSyncControl</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;MultiGimbalSyncControlInfo,EmptyMsg&gt; KeyStartMultiGimbalSyncControl = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"StartMultiGimbalSyncControl"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(MultiGimbalSyncControlInfo<span class="class">.<span class="keyword">class</span>),<span class="title">EmptyValueConverter</span>.<span class="title">converter</span>).<span class="title">canGet</span>(<span class="title">false</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">false</span>).<span class="title">canPerformAction</span>(<span class="title">true</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="description-v57">Description:</h5>
+<p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_MultiGimbalSyncControlMsg.html#value_flightcontroller_struct_multigimbalsynccontrolmsg">MultiGimbalSyncControlInfo</a></code><br><br> Enable multi-gimbal Synchronization control. Multiple gimbals can be controlled at the same time through one remote controller. Please make sure that the set gimbals have been mounted on the aircraft. This interface is suitable for aircraft that can mount multiple gimbals, such as M300 RTK. <br><br><code><i>Supported since MSDK 5.2.0</i></code></font></p>
+</div>
+<div class="api-row" id="key_flightcontroller_stopmultigimbalsynccontrol"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_stopmultigimbalsynccontrol_inline">KeyStopMultiGimbalSyncControl</a></div></div><div class="inline-doc" id="key_flightcontroller_stopmultigimbalsynccontrol_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyStopMultiGimbalSyncControl</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;EmptyMsg,EmptyMsg&gt; KeyStopMultiGimbalSyncControl = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"StopMultiGimbalSyncControl"</span>, EmptyValueConverter.converter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="description-v58">Description:</h5>
+<p><font color="#666">Disable multi-gimbal Synchronization control. <br><br><code><i>Supported since MSDK 5.2.0</i></code></font></p>
+</div>
+<div class="api-row" id="key_flightcontroller_multigimbalsyncstatus"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_multigimbalsyncstatus_inline">KeyMultiGimbalSyncStatus</a></div></div><div class="inline-doc" id="key_flightcontroller_multigimbalsyncstatus_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyMultiGimbalSyncStatus</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;MultiGimbalSyncStatus&gt; KeyMultiGimbalSyncStatus = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"MultiGimbalSyncStatus"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(MultiGimbalSyncStatus<span class="class">.<span class="keyword">class</span>)).<span class="title">canGet</span>(<span class="title">true</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">true</span>).<span class="title">canPerformAction</span>(<span class="title">false</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="description-v59">Description:</h5>
+<p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_MultiGimbalSyncStatus.html#value_flightcontroller_struct_multigimbalsyncstatus">MultiGimbalSyncStatus</a></code><br><br>
+Gets multi-gimbal Synchronization control status.
+<br><br><code><i>Supported since MSDK 5.2.0</i></code></font></p>
+</div>
 <html><p><br></p></html>
 <h4 id="return-to-home-function">Return-to-Home Function</h4>
 <div class="api-row" id="key_flightcontroller_ishomelocationset"><div class="api-col left">Intelligent Return-to-Home</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_ishomelocationset_inline">KeyIsHomeLocationSet</a></div></div><div class="inline-doc" id="key_flightcontroller_ishomelocationset_inline" <blockquote>
@@ -940,7 +1022,7 @@ To set the maximum flight distance of the aircraft. Unit: meter. This value is t
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Boolean&gt; KeyIsHomeLocationSet = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"IsHomeLocationSet"</span>, SingleValueConverter.BooleanConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v57">Description:</h5>
+<h5 id="description-v60">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Boolean<br><br> <code>true</code> means home point has been set. When the GPS signal is good, the aircraft will automatically set the current position as home point. <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_ishomelocationset">KeyIsHomeLocationSet</a></code> will return <code>true</code>. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_homelocation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_homelocation_inline">KeyHomeLocation</a></div></div><div class="inline-doc" id="key_flightcontroller_homelocation_inline" <blockquote>
@@ -948,7 +1030,7 @@ To set the maximum flight distance of the aircraft. Unit: meter. This value is t
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;LocationCoordinate2D&gt; KeyHomeLocation = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"HomeLocation"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(LocationCoordinate2D<span class="class">.<span class="keyword">class</span>)).<span class="title">canGet</span>(<span class="title">true</span>).<span class="title">canSet</span>(<span class="title">true</span>).<span class="title">canListen</span>(<span class="title">true</span>).<span class="title">canPerformAction</span>(<span class="title">false</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v58">Description:</h5>
+<h5 id="description-v61">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_Common_Struct_LocationCoordinate2D.html#value_common_struct_locationcoordinate2d">LocationCoordinate2D</a></code><br><br>
 To set and get current home point location, including longitude and latitude. When GPS signal is good, aircraft will automatically set current position as home point. This key can also be used to change home point location.
 <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
@@ -958,7 +1040,7 @@ To set and get current home point location, including longitude and latitude. Wh
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Integer&gt; KeyGoHomeHeight = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"GoHomeHeight"</span>, SingleValueConverter.IntegerConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">true</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v59">Description:</h5>
+<h5 id="description-v62">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Integer<br><br>
 To set and get relative altitude when returning home. Unit: meter. This value is related to the altitude when taking off. <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_gohomeheightrange">KeyGoHomeHeightRange</a></code> can be used to get return-to-home height setting range.
 If the horizontal distance between aircraft and home point is within 50 meters, the aircraft will ignore the set return-to-home altitude and return at current altitude. If the forward vision system does not work properly, the aircraft will climb to the set altitude and return.
@@ -969,7 +1051,7 @@ If the horizontal distance between aircraft and home point is within 50 meters, 
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;IntMinMax&gt; KeyGoHomeHeightRange = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"GoHomeHeightRange"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(IntMinMax<span class="class">.<span class="keyword">class</span>)).<span class="title">canGet</span>(<span class="title">true</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">true</span>).<span class="title">canPerformAction</span>(<span class="title">false</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v60">Description:</h5>
+<h5 id="description-v63">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_Common_Struct_IntValueConfig.html#value_common_struct_intvalueconfig">IntMinMax</a></code><br><br>
 To get the setting range of the return-to-home altitude. Unit: meter.
 <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
@@ -979,7 +1061,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;EmptyMsg,EmptyMsg&gt; KeyHomeLocationUsingCurrentAircraftLocation = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"HomeLocationUsingCurrentAircraftLocation"</span>, EmptyValueConverter.converter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v61">Description:</h5>
+<h5 id="description-v64">Description:</h5>
 <p><font color="#666">To set current aircraft location as home point location. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_startgohome"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_startgohome_inline">KeyStartGoHome</a></div></div><div class="inline-doc" id="key_flightcontroller_startgohome_inline" <blockquote>
@@ -987,7 +1069,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;EmptyMsg,EmptyMsg&gt; KeyStartGoHome = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"StartGoHome"</span>, EmptyValueConverter.converter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v62">Description:</h5>
+<h5 id="description-v65">Description:</h5>
 <p><font color="#666">To start intelligent return-to-home. When the GPS signal is not good, intelligent return-to-home can not be started. Intelligent return-to-home can also be started by the smart return-to-home button on the remote controller. During the return-to-home home process, the user can control the altitude of the aircraft with the throttle stick and control the speed of the aircraft with the pitch stick to avoid obstacles. During the return-to-home process, the user can regain control of the aircraft after exiting the intelligent return-to-home home via the intelligent return-to-home button or by calling <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_stopgohome">KeyStopGoHome</a></code>. <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_gohomestatus">KeyGoHomeStatus</a></code> can be used to get intelligent return-to-home status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_stopgohome"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_stopgohome_inline">KeyStopGoHome</a></div></div><div class="inline-doc" id="key_flightcontroller_stopgohome_inline" <blockquote>
@@ -995,7 +1077,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;EmptyMsg,EmptyMsg&gt; KeyStopGoHome = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"StopGoHome"</span>, EmptyValueConverter.converter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v63">Description:</h5>
+<h5 id="description-v66">Description:</h5>
 <p><font color="#666">To stop intelligent return-to-home. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_gohomestatus"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_gohomestatus_inline">KeyGoHomeStatus</a></div></div><div class="inline-doc" id="key_flightcontroller_gohomestatus_inline" <blockquote>
@@ -1003,7 +1085,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;GoHomeState&gt; KeyGoHomeStatus = <span class="keyword">new</span> KeyGoHomeStatus().canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v64">Description:</h5>
+<h5 id="description-v67">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_gohomestate">GoHomeState</a></code><br><br> To get intelligent return-to-home status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_smartbatteryrthenabled"><div class="api-col left">Low Battery Return-to-Home</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_smartbatteryrthenabled_inline">KeyLowBatteryRTHEnabled</a></div></div><div class="inline-doc" id="key_flightcontroller_smartbatteryrthenabled_inline" <blockquote>
@@ -1011,7 +1093,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Boolean&gt; KeyLowBatteryRTHEnabled = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"LowBatteryRTHEnabled"</span>, SingleValueConverter.BooleanConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">true</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"SmartBatteryRTHEnabled"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v65">Description:</h5>
+<h5 id="description-v68">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Boolean<br><br> <code>true</code> means intelligent low battery return-to-home function is opened. To avoid unnecessary dangers dangerous due to the low battery, aircraft will intelligently judge whether the current battery is sufficient according to the flight position information. If current battery power is only enough to complete the return-to-home process, MSDK will prompt whether operate the return-to-home process. If the user does not make a selection within 10s, MSDK will automatically return-to-home after 10s. During the returning process, you can short press the smart return-to-home button on the remote control to cancel the return-to-home process. Smart low battery return-to-home only occurs once during one flight. If the user cancels the low-battery return-to-home reminder and continues to fly, the aircraft may be forced to land due to insufficient power when returning, resulting in the aircraft being lost or crashed. For security reasons, it is not recommended to turn this function off. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_gohomeassessment"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_gohomeassessment_inline">KeyLowBatteryRTHInfo</a></div></div><div class="inline-doc" id="key_flightcontroller_gohomeassessment_inline" <blockquote>
@@ -1019,7 +1101,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIKeyInfo&lt;LowBatteryRTHInfo&gt; KeyLowBatteryRTHInfo = new DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"LowBatteryRTHInfo", new DJIValueConverter&lt;&gt;(LowBatteryRTHInfo.class)).canGet(true).canSet(false).canListen(true).canPerformAction(false).setIsEvent(false).setInnerIdentifier("GoHomeAssessment")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v66">Description:</h5>
+<h5 id="description-v69">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html#value_flightcontroller_struct_gohomeassessment">LowBatteryRTHInfo</a></code><br><br> To get related information of the intelligent low battery power. This function is only valid when <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_smartbatteryrthenabled">KeyLowBatteryRTHEnabled</a></code> is enabled. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <html><p><br></p></html>
@@ -1029,7 +1111,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIKeyInfo&lt;List&lt;AccessLockerDeviceStatus&gt;&gt; KeyAccessLockerAllDeviceStatus = new DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerAllDeviceStatus", new SingleValueConverter&lt;&gt;((Class)List.class,AccessLockerV1AllDeviceStates.class)).canGet(true).canSet(false).canListen(true).canPerformAction(false).setIsEvent(false).setInnerIdentifier("AccessLockerV1AllDeviceStates")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v67">Description:</h5>
+<h5 id="description-v70">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>List&lt;<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1DeviceState.html#value_flightcontroller_struct_accesslockerv1devicestate">AccessLockerDeviceStatus</a></code>&gt;<br><br> Get the security code status of the storage device. Through this interface, you can obtain whether the storage device on the aircraft supports the security code function, whether the security code function is enabled, and whether the security code needs to be verified. <br>Security code is to keep your media data safe. After the security code is set, the MSDK App needs to perform password verification after connecting to the aircraft. After the verification is passed, it can take photos, record videos and read and write media data in the storage device. <br><li><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html#value_flightcontroller_struct_accesslockerv1encryptionstate_getisfeaturesupported">getIsFeatureSupported</a></code> is <code>true</code>, indicating that the storage device supports the security code function. You can call <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1setupuseraccount">KeyAccessLockerSetSecurityCode</a></code> to set the security code. </li> <li><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html#value_flightcontroller_struct_accesslockerv1encryptionstate_getisfeatureenabled">getIsFeatureEnabled</a></code> is <code>true</code>, indicating that the security code function of the storage device is enabled. You can call <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1modifyuseraccount">KeyAccessLockerModifySecurityCode</a></code> for security code modification. If you forget the security code, you can call <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1resetuseraccount">KeyAccessLockerResetSecurityCode</a></code> to reset the security code. </li> <li><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html#value_flightcontroller_struct_accesslockerv1encryptionstate_getisfeatureneedtobeverified">getIsFeatureNeedToBeVerified</a></code> is <code>true</code>, indicating that the storage device needs to verify the security code. Please call <code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1verifyuseraccount">KeyAccessLockerVerifySecurityCode</a></code> for security code verification, otherwise, you will not be able to take photos and record videos, and you will not be able to read and write media data in the storage device. The security code is usually required to be verified when the aircraft is restarted or the storage device is inserted. </li> <li>Security code is neither saved on device nor accessible by DJI. </li> <li>It is not possible to reset security code. If security code is lost, format SD card to delete code. </li> <li>Security code settings only available for Zenmuse H20 and Matrice 30 series cameras. Zenmuse P1, Zenmuse L1, and third-party payloads currently not supported. <br><br><code><i>Supported since MSDK 5.1.0</i></code></li></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_accesslockerv1setupuseraccount"><div class="api-col left">Set Security Code</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_accesslockerv1setupuseraccount_inline">KeyAccessLockerSetSecurityCode</a></div></div><div class="inline-doc" id="key_flightcontroller_accesslockerv1setupuseraccount_inline" <blockquote>
@@ -1037,7 +1119,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerSetSecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerSetSecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerSetSecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerSetSecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1SetupUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v68">Description:</h5>
+<h5 id="description-v71">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1setupuseraccountinfo">AccessLockerSetSecurityCodeInfo</a></code><br><br> Set a security code. The device and storage type can be selected for security code setting through this interface.</font></p>
  <li>The storage device will be formatted after setting the security code, please make sure the media data has been backed up. </li>
  <li>Please keep the security code in a safe place. If you lose it, you will not be able to retrieve it. You can only unlock the storage device by formatting it. </li>
@@ -1049,7 +1131,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerVerifySecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerVerifySecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerVerifySecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerVerifySecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1VerifyUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v69">Description:</h5>
+<h5 id="description-v72">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1VerifyUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1verifyuseraccountinfo">AccessLockerVerifySecurityCodeInfo</a></code><br><br> Verify the security code. The security code can be verified through this interface. After the verification is passed, you can take photos, record videos and read and write media data in the storage device.
 <br><br><code><i>Supported since MSDK 5.1.0</i></code></font></p>
 </div>
@@ -1058,7 +1140,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerModifySecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerModifySecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerModifySecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerModifySecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1ModifyUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v70">Description:</h5>
+<h5 id="description-v73">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1ModifyUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1modifyuseraccountinfo">AccessLockerModifySecurityCodeInfo</a></code><br><br> Modify the security code. <br><br><code><i>Supported since MSDK 5.1.0</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_accesslockerv1resetuseraccount"><div class="api-col left">Reset Security Code</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_accesslockerv1resetuseraccount_inline">KeyAccessLockerResetSecurityCode</a></div></div><div class="inline-doc" id="key_flightcontroller_accesslockerv1resetuseraccount_inline" <blockquote>
@@ -1066,7 +1148,7 @@ To get the setting range of the return-to-home altitude. Unit: meter.
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerResetSecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerResetSecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerResetSecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerResetSecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1ResetUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="description-v71">Description:</h5>
+<h5 id="description-v74">Description:</h5>
 <p><font color="#666"><b>Parameter: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1ResetUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1resetuseraccountinfo">AccessLockerResetSecurityCodeInfo</a></code><br><br> Reset the security code. Reset the security security code will format the storage device, please make sure the media data is backed up. <br><br><code><i>Supported since MSDK 5.1.0</i></code></font></p>
 </div>
 

@@ -1,11 +1,6 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.1.1
+# DJI Mobile SDK for Android V5 Latest Version 5.2.0
 
 [中文版](README_CN.md)
-
-## Dear Developer 
-
-Since we have released the DJI Mobile SDK V5.1.1 Version, we have received lots of valuable feedback from our developers. Now we wish to collect the evaluation of this version from you. Your feedback will affect the roadmap of MSDK.
-Please take your time to complete our survey: [MSDK V5.1.0 version release survey](https://docs.google.com/forms/d/e/1FAIpQLSfv1-gzmwoA8xOm1x8pC40TU3Kwi01DbNqN4d7fTnhZMAhbvA/viewform)
 
 ## What is DJI Mobile SDK V5?
 
@@ -22,29 +17,12 @@ Supported Product:
 ```
 ├── Docs
 │   ├── API-Diff
-│   │   ├── 5.0.0_5.1.0_android_diff.html
-│   │   ├── 5.0.0_beta2_5.0.0_beta3_android_diff.html
-│   │   └── 5.0.0_beta3_5.0.0_android_diff.html
 │   └── Android_API
-│       ├── cn
-│       └── en
 ├── LICENSE.txt
 ├── README.md
 ├── README_CN.md
 └── SampleCode-V5
     ├── android-sdk-v5-as
-    │   ├── build
-    │   ├── build.gradle
-    │   ├── dependencies.gradle
-    │   ├── gradle
-    │   ├── gradle.properties
-    │   ├── gradlew
-    │   ├── gradlew.bat
-    │   ├── libs
-    │   ├── local.properties
-    │   ├── msdkkeystore.jks
-    │   ├── proguard-relative
-    │   └── settings.gradle
     ├── android-sdk-v5-sample
     │   ├── app-aircraft
     │   ├── app-all
@@ -53,14 +31,10 @@ Supported Product:
     │   ├── module-common
     │   └── module-handheld
     └── android-sdk-v5-uxsdk
-        ├── build
-        ├── build.gradle
-        └── src
-
-
 ```
 
 ### API Difference
+- [5.1.0_5.2.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.1.0_5.2.0_android_diff.html)
 - [5.0.0_5.1.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_5.1.0_android_diff.html)
 - [5.0.0_beta3_5.0.0_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta3_5.0.0_android_diff.html)
 - [5.0.0_beta2_5.0.0_beta3_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta2_5.0.0_beta3_android_diff.html)
@@ -108,7 +82,7 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.1.1
+> **Notice:** sdkVersion = 5.2.0
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |
@@ -150,10 +124,3 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 You can get support from DJI with the following method:
 
 - Post questions in DJI Developer Forums: [**DEVELOPER SUPPORT**](https://djisdksupport.zendesk.com/hc/en-us/community/topics)
-
-## Join Us
-
-DJI is looking for all kinds of Software Engineers to continue building the Future of Possible. Available positions in Shenzhen, China and around the world. If you are interested, please:
-* send your resume to <software-sz@dji.com>.
-
-For more details, and list of all our global offices, please check <https://we.dji.com/jobs_en.html>.

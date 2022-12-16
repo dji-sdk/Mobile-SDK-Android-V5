@@ -1,10 +1,6 @@
-# DJI Mobile SDK for Android V5 最新版本 V5.1.1
+# DJI Mobile SDK for Android V5 最新版本 V5.2.0
 
 [English Version](README.md)
-
-## 尊敬的开发者
-自从我们发布了DJI Mobile SDK V5.1.1版本以来，我们从开发者那里收到了很多宝贵的反馈。为了提升您对MSDK的使用体验以及我们的服务质量，希望您抽出5分钟的宝贵时间，将真实的使用体验告诉我们，您的意见将影响未来MSDK的版本规划。
-[点击此处](https://www.wjx.cn/vm/PN67ouy.aspx)
 
 ## DJI Mobile SDK V5 是什么?
 
@@ -21,29 +17,12 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 ```
 ├── Docs
 │   ├── API-Diff
-│   │   ├── 5.0.0_5.1.0_android_diff.html
-│   │   ├── 5.0.0_beta2_5.0.0_beta3_android_diff.html
-│   │   └── 5.0.0_beta3_5.0.0_android_diff.html
 │   └── Android_API
-│       ├── cn
-│       └── en
 ├── LICENSE.txt
 ├── README.md
 ├── README_CN.md
 └── SampleCode-V5
     ├── android-sdk-v5-as
-    │   ├── build
-    │   ├── build.gradle
-    │   ├── dependencies.gradle
-    │   ├── gradle
-    │   ├── gradle.properties
-    │   ├── gradlew
-    │   ├── gradlew.bat
-    │   ├── libs
-    │   ├── local.properties
-    │   ├── msdkkeystore.jks
-    │   ├── proguard-relative
-    │   └── settings.gradle
     ├── android-sdk-v5-sample
     │   ├── app-aircraft
     │   ├── app-all
@@ -52,12 +31,10 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
     │   ├── module-common
     │   └── module-handheld
     └── android-sdk-v5-uxsdk
-        ├── build
-        ├── build.gradle
-        └── src
 ```
 
 ### API 差异
+- [5.1.0_5.2.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.1.0_5.2.0_android_diff.html)
 - [5.0.0_5.1.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_5.1.0_android_diff.html)
 - [5.0.0_beta3_5.0.0_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta3_5.0.0_android_diff.html)
 - [5.0.0_beta2_5.0.0_beta3_android_diff](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.0.0_beta2_5.0.0_beta3_android_diff.html)
@@ -105,7 +82,7 @@ App模块：
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.1.1
+> **注意：** sdkVersion = 5.2.0
 
 | SDK包  <div style="width: 150pt">  | 说明  <div style="width: 200pt">   | 使用方式 <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |
@@ -145,10 +122,3 @@ App模块：
 您可以 [填写表单](https://djisdksupport.zendesk.com/hc/zh-cn/community/topics) 以获得DJI的技术支持。
 
 
-## 加入我们
-
-DJI 招聘软件工程师，based在深圳。如果你想和我们一起把DJI产品做得更好，请：
-- 发送简历到 <software-sz@dji.com>
-- 提交您的简历：[https://we.dji.com/zh-CN/position/detail?positionId=1382258951346253824](https://we.dji.com/zh-CN/position/detail?positionId=1382258951346253824)
-
-更多岗位详情请浏览 <https://we.dji.com/zh-CN/social>。

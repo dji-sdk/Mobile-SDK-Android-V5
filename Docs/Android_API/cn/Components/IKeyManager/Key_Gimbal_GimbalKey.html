@@ -90,7 +90,9 @@
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
-                                      <dd><a href="Value_Camera_Struct_CameraStreamSettingsMsg.html">CameraStreamSettingsInfo</a>
+                                      <dd><a href="Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -148,7 +150,11 @@
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
                                       </dd>
+                                      <dd><a href="Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
                                       <dd><a href="Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
                                       </dd>
                                       <dd><a href="Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
                                       </dd>
@@ -255,6 +261,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -388,6 +396,54 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IMegaphoneManager/IMegaphoneManager.html" class="sub-toggle">IMegaphoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_FileInfo.html">FileInfo</a>
@@ -506,30 +562,6 @@
 <h5 id="描述：-v5">描述：</h5>
 <p><font color="#666"><b>参数: </b>Double<br><br> 获取云台相对于飞行器机头朝向的偏航角度。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
-<div class="api-row" id="key_gimbal_pitchadjustdegree"><div class="api-col left">偏移量</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_pitchadjustdegree_inline">KeyFineTunePitchTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_pitchadjustdegree_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyFineTunePitchTotalDegree</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTunePitchTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTunePitchTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"PitchAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v6">描述：</h5>
-<p><font color="#666"><b>参数: </b>Double<br><br> 获取云台俯仰轴总偏移量。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunepitchindegrees">KeyFineTunePitchInDegrees</a></code>进行微调。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-</div>
-<div class="api-row" id="key_gimbal_yawadjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_yawadjustdegree_inline">KeyFineTuneYawTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_yawadjustdegree_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneYawTotalDegree</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneYawTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneYawTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"YawAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v7">描述：</h5>
-<p><font color="#666"><b>参数: </b>Double<br><br> 获取云台偏航轴总偏移量。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetuneyawindegrees">KeyFineTuneYawInDegrees</a></code>进行微调。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-</div>
-<div class="api-row" id="key_gimbal_rolladjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_rolladjustdegree_inline">KeyFineTuneRollTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_rolladjustdegree_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneRollTotalDegree</h6></div>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneRollTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneRollTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"RollAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
-<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
-<p><font color="#666"><b>参数: </b>Double<br><br> 获取云台横滚轴总偏移量。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunerollindegrees">KeyFineTuneRollInDegrees</a></code>进行微调。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-</div>
 <html><p><br></p></html>
 <h4 id="基本操作">基本操作</h4>
 <div class="api-row" id="key_gimbal_gimbalmode"><div class="api-col left">模式</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_gimbalmode_inline">KeyGimbalMode</a></div></div><div class="inline-doc" id="key_gimbal_gimbalmode_inline" <blockquote>
@@ -537,7 +569,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;GimbalMode&gt; KeyGimbalMode = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"GimbalMode"</span>, <span class="keyword">new</span> SingleValueConverter&lt;&gt;(GimbalMode<span class="class">.<span class="keyword">class</span>,<span class="title">GimbalModeMsg</span>.<span class="title">class</span>)).<span class="title">canGet</span>(<span class="title">true</span>).<span class="title">canSet</span>(<span class="title">true</span>).<span class="title">canListen</span>(<span class="title">true</span>).<span class="title">canPerformAction</span>(<span class="title">false</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v9">描述：</h5>
+<h5 id="描述：-v6">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/DJIValue.html#value_gimbal_enum_gimbalmode">GimbalMode</a></code><br><br> 设置云台模式。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_rotatebyangle"><div class="api-col left">旋转</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_rotatebyangle_inline">KeyRotateByAngle</a></div></div><div class="inline-doc" id="key_gimbal_rotatebyangle_inline" <blockquote>
@@ -545,7 +577,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;GimbalAngleRotation,EmptyMsg&gt; KeyRotateByAngle = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"RotateByAngle"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(GimbalAngleRotation<span class="class">.<span class="keyword">class</span>),<span class="title">EmptyValueConverter</span>.<span class="title">converter</span>).<span class="title">canGet</span>(<span class="title">false</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">false</span>).<span class="title">canPerformAction</span>(<span class="title">true</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v10">描述：</h5>
+<h5 id="描述：-v7">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_Gimbal_Struct_GimbalAngleRotation.html#value_gimbal_struct_gimbalanglerotation">GimbalAngleRotation</a></code><br><br> 用角度模式旋转云台的俯仰角度、横滚角度和偏航角度。支持相对角度模式和绝对角度模式。
 <br><b>注意：<br>不同的云台负载的可控制角度不一样，以下提供了一种方法获取云台的最大最小限位角度：请通过遥控器的滚轮控制云台到俯仰，横滚和偏航的最大最小限位，然后调用<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_gimbalattitude">KeyGimbalAttitude</a></code>即可获取到该云台的可调限位角度。</b>
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -555,7 +587,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;GimbalSpeedRotation,EmptyMsg&gt; KeyRotateBySpeed = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"RotateBySpeed"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(GimbalSpeedRotation<span class="class">.<span class="keyword">class</span>),<span class="title">EmptyValueConverter</span>.<span class="title">converter</span>).<span class="title">canGet</span>(<span class="title">false</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">false</span>).<span class="title">canPerformAction</span>(<span class="title">true</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v11">描述：</h5>
+<h5 id="描述：-v8">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_Gimbal_Struct_GimbalSpeedRotation.html#value_gimbal_struct_gimbalspeedrotation">GimbalSpeedRotation</a></code><br><br> 用速度模式旋转云台的俯仰角度、横滚角度和偏航角度。单位：0.1度/秒，范围：[-359.9, 359.9]。设置的值越大，单位时间转动的角度越大，设置频率和链路信号强弱会对最终转动角度造成偏差。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_resetgimbal"><div class="api-col left">重置</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_resetgimbal_inline">KeyGimbalReset</a></div></div><div class="inline-doc" id="key_gimbal_resetgimbal_inline" <blockquote>
@@ -563,7 +595,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;GimbalResetType,EmptyMsg&gt; KeyGimbalReset = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"GimbalReset", new SingleValueConverter&lt;&gt;(GimbalResetType.class,GimbalResetCommandMsg.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("ResetGimbal")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v12">描述：</h5>
+<h5 id="描述：-v9">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/DJIValue.html#value_gimbal_enum_gimbalresetcommand">GimbalResetType</a></code><br><br> 云台重置，可以通过设置<code><a href="../../Components/IKeyManager/DJIValue.html#value_gimbal_enum_gimbalresetcommand">GimbalResetType</a></code>让俯仰轴，偏航轴和横滚轴回中或者朝下。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_finetunepitchindegrees"><div class="api-col left">微调</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_finetunepitchindegrees_inline">KeyFineTunePitchInDegrees</a></div></div><div class="inline-doc" id="key_gimbal_finetunepitchindegrees_inline" <blockquote>
@@ -571,7 +603,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;Double,EmptyMsg&gt; KeyFineTunePitchInDegrees = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTunePitchInDegrees"</span>, SingleValueConverter.DoubleConverter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v13">描述：</h5>
+<h5 id="描述：-v10">描述：</h5>
 <p><font color="#666"><b>参数: </b>Double<br><br> 云台俯仰轴可以通过自定义偏移量进行微调。当云台回中后仍然有小角度偏移，可用此功能进行云台调平。单次可微调的范围是[-2.0, 2.0]，单位：度，总共可微调的范围是[-10.0, 10.0]，单位：度， 如果偏移量为负数，云台将在逆时针方向微调指定的度数。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_pitchadjustdegree">KeyFineTunePitchTotalDegree</a></code>获取总共微调的偏移量。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_finetuneyawindegrees"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_finetuneyawindegrees_inline">KeyFineTuneYawInDegrees</a></div></div><div class="inline-doc" id="key_gimbal_finetuneyawindegrees_inline" <blockquote>
@@ -579,7 +611,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;Double,EmptyMsg&gt; KeyFineTuneYawInDegrees = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneYawInDegrees"</span>, SingleValueConverter.DoubleConverter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v14">描述：</h5>
+<h5 id="描述：-v11">描述：</h5>
 <p><font color="#666"><b>参数: </b>Double<br><br> 云台偏航轴可以通过自定义偏移量进行微调。当云台回中后仍然有小角度偏移，可用此功能进行云台微调，使得云台水平居中。单次可微调的范围是[-2.0, 2.0]，单位：度，总共可微调的范围是[-10.0, 10.0]，单位：度， 如果偏移量为负数，云台将在逆时针方向微调指定的度数。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_yawadjustdegree">KeyFineTuneYawTotalDegree</a></code>获取总共微调的偏移量。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_finetunerollindegrees"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_finetunerollindegrees_inline">KeyFineTuneRollInDegrees</a></div></div><div class="inline-doc" id="key_gimbal_finetunerollindegrees_inline" <blockquote>
@@ -587,8 +619,32 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;Double,EmptyMsg&gt; KeyFineTuneRollInDegrees = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneRollInDegrees"</span>, SingleValueConverter.DoubleConverter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v15">描述：</h5>
+<h5 id="描述：-v12">描述：</h5>
 <p><font color="#666"><b>参数: </b>Double<br><br> 云台横滚轴可以通过自定义偏移量进行微调。当云台回中后仍然有小角度偏移，可用此功能进行云台调平，使得云台水平居中。单次可微调的范围是[-2.0, 2.0]，单位：度，总共可微调的范围是[-10.0, 10.0]，单位：度， 如果偏移量为负数，云台将在逆时针方向微调指定的度数。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_rolladjustdegree">KeyFineTuneRollTotalDegree</a></code>获取总共微调的偏移量。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+</div>
+<div class="api-row" id="key_gimbal_pitchadjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_pitchadjustdegree_inline">KeyFineTunePitchTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_pitchadjustdegree_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyFineTunePitchTotalDegree</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTunePitchTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTunePitchTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"PitchAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="描述：-v13">描述：</h5>
+<p><font color="#666"><b>参数: </b>Double<br><br> 获取云台俯仰轴总偏移量。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunepitchindegrees">KeyFineTunePitchInDegrees</a></code>进行微调。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+</div>
+<div class="api-row" id="key_gimbal_yawadjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_yawadjustdegree_inline">KeyFineTuneYawTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_yawadjustdegree_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneYawTotalDegree</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneYawTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneYawTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"YawAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="描述：-v14">描述：</h5>
+<p><font color="#666"><b>参数: </b>Double<br><br> 获取云台偏航轴总偏移量。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetuneyawindegrees">KeyFineTuneYawInDegrees</a></code>进行微调。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+</div>
+<div class="api-row" id="key_gimbal_rolladjustdegree"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_rolladjustdegree_inline">KeyFineTuneRollTotalDegree</a></div></div><div class="inline-doc" id="key_gimbal_rolladjustdegree_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyFineTuneRollTotalDegree</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyFineTuneRollTotalDegree = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"FineTuneRollTotalDegree"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"RollAdjustDegree"</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="描述：-v15">描述：</h5>
+<p><font color="#666"><b>参数: </b>Double<br><br> 获取云台横滚轴总偏移量。可通过<code><a href="../../Components/IKeyManager/Key_Gimbal_GimbalKey.html#key_gimbal_finetunerollindegrees">KeyFineTuneRollInDegrees</a></code>进行微调。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_gimbal_calibrategimbal"><div class="api-col left">校准</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_gimbal_calibrategimbal_inline">KeyGimbalCalibrate</a></div></div><div class="inline-doc" id="key_gimbal_calibrategimbal_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyGimbalCalibrate</h6></div>
