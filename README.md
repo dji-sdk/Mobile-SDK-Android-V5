@@ -7,6 +7,7 @@
 DJI Mobile SDK V5 has a series of APIs to control the software and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.
 
 Supported Product:
+* [DJI Mavic 3M](https://ag.dji.com/cn/mavic-3-m?site=brandsite&from=nav)
 * [DJI Mavic 3 Enterprise Series](https://www.dji.com/cn/mavic-3-enterprise)
 * [M30 Series](https://www.dji.com/matrice-30?site=brandsite&from=nav)
 * [M300 RTK](https://www.dji.com/matrice-300?site=brandsite&from=nav)
