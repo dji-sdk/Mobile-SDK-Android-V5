@@ -31,10 +31,10 @@ import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
  * in terms of capture count
  */
 public abstract class CameraPhotoStorageState {
-    private CameraStorageLocation storageLocation;
-    private long availableCaptureCount;
+    private final CameraStorageLocation storageLocation;
+    private final long availableCaptureCount;
 
-    public CameraPhotoStorageState(CameraStorageLocation storageLocation, long availableCaptureCount) {
+    protected CameraPhotoStorageState(CameraStorageLocation storageLocation, long availableCaptureCount) {
         this.storageLocation = storageLocation;
         this.availableCaptureCount = availableCaptureCount;
     }

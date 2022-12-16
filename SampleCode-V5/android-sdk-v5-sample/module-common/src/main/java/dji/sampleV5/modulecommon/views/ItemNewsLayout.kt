@@ -22,10 +22,10 @@ class ItemNewsLayout @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
-        initView(context, attrs, defStyleAttr)
+        initView(context)
     }
 
-    private fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
+    private fun initView(context: Context) {
         View.inflate(context, R.layout.item_news, this)
     }
 

@@ -98,8 +98,8 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     val lidarKeyList: List<KeyItem<*, *>> = ArrayList()
     var keyValuesharedPreferences: SharedPreferences? = null
     val selectMode = false
-    var totalKeyCount : Int ?= null
-    var capabilityKeyCount : Int ?= null
+    var totalKeyCount: Int? = null
+    var capabilityKeyCount: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -151,7 +151,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             iv_capability.isEnabled = it.productType != ProductType.UNRECOGNIZED
             setDataWithCapability(iv_capability.isChecked)
             Schedulers.single().scheduleDirect {
-                if (totalKeyCount == null || capabilityKeyCount == null ) {
+                if (totalKeyCount == null || capabilityKeyCount == null) {
                     totalKeyCount = KeyItemDataUtil.getAllKeyListCount();
                     capabilityKeyCount = CapabilityManager.getInstance().getCapabilityKeyCount(it.productType.name)
                 }
@@ -169,9 +169,9 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         }
         iv_capability.setOnCheckedChangeListener { _, enable ->
             if (enable) {
-                capabilityKeyCount?.let {  showToast( tv_capablity?.text.toString() + " count:$it")}
+                capabilityKeyCount?.let { showToast(tv_capablity?.text.toString() + " count:$it") }
             } else {
-                totalKeyCount?.let {   showToast( tv_capablity?.text.toString() + " count:$it")}
+                totalKeyCount?.let { showToast(tv_capablity?.text.toString() + " count:$it") }
             }
             setDataWithCapability(enable)
         }
@@ -203,21 +203,10 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     }
 
     private fun initRemoteData() {
-        recyclerView!!.layoutManager = LinearLayoutManager(getActivity())
+        recyclerView!!.layoutManager = LinearLayoutManager(activity)
         recyclerView!!.adapter = cameraParamsAdapter
         tv_tip!!.movementMethod = ScrollingMovementMethod.getInstance()
         tv_result!!.movementMethod = ScrollingMovementMethod.getInstance()
-    }
-
-    private fun setSPColor(sp: Spinner?) {
-        sp?.let {
-            (it.selectedView as TextView).setTextColor(Color.WHITE)
-            (it.selectedView as TextView).gravity = Gravity.RIGHT
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 
     override fun onResume() {
@@ -240,11 +229,10 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         }
     }
 
-
     /**
      * key操作结果回调
      */
-    val keyItemOperateCallBack: KeyItemActionListener<Any> =
+    private val keyItemOperateCallBack: KeyItemActionListener<Any> =
         KeyItemActionListener<Any> { t -> //  processListenLogic();
             t?.let {
                 tv_result.text = appendLogMessageRecord(t.toString())
@@ -252,7 +240,6 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             }
 
         }
-
 
     private fun scrollToBottom() {
         val scrollOffset = (tv_result!!.layout.getLineTop(tv_result!!.lineCount)
@@ -620,7 +607,16 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 logMessage.delete(0, logMessage.length)
             }
             R.id.iv_question_mark -> {
-                KeyValueDialogUtil.showNormalDialog(getActivity(), "提示")
+                // KeyValueDialogUtil.showNormalDialog(getActivity(), "提示")
+                val cameraType = KeyManager.getInstance().getValue(
+                    KeyTools.createKey(
+                        CameraKey.KeyCameraType,
+                        CapabilityManager.getInstance().componentIndex
+                    )
+                )
+                CapabilityKeyChecker.check( msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
+               // CapabilityKeyChecker.generateAllEnumList(msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
+
             }
         }
     }
@@ -657,30 +653,23 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         }
         KeyValueDialogUtil.showChannelFilterListWindow(
             tv_operate_title,
-            showChannelList,
-            object :
-                KeyItemActionListener<ChannelType?> {
-                override fun actionChange(channelType: ChannelType?) {
-                    currentChannelType = channelType
-                    currentKeyItem = null
-                    processChannelInfo()
-                    processListenLogic()
-                }
-            })
+            showChannelList
+        ) { channelType ->
+            currentChannelType = channelType
+            currentKeyItem = null
+            processChannelInfo()
+            processListenLogic()
+        }
     }
 
 
     private fun getCameraSubIndex(lensName: String): Int {
-
-        return when (lensName) {
-            CameraLensType.CAMERA_LENS_DEFAULT.name -> CameraLensType.CAMERA_LENS_DEFAULT.value()
-            CameraLensType.CAMERA_LENS_ZOOM.name -> CameraLensType.CAMERA_LENS_ZOOM.value()
-            CameraLensType.CAMERA_LENS_THERMAL.name -> CameraLensType.CAMERA_LENS_THERMAL.value()
-            CameraLensType.CAMERA_LENS_WIDE.name -> CameraLensType.CAMERA_LENS_WIDE.value()
-            else -> {
-                CameraLensType.UNKNOWN.value()
+        CameraLensType.values().forEach {
+            if (lensName == it.name) {
+               return it.value()
             }
         }
+        return CameraLensType.UNKNOWN.value()
     }
 
     private fun getComponentIndex(compentName: String): Int {
@@ -771,7 +760,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             showToast("not support set")
             return
         }
-        if(currentKeyItem!!.param is BoolMsg) {
+        if (currentKeyItem!!.param is BoolMsg) {
             processBoolMsgDlg(currentKeyItem!!)
             return
         }
@@ -807,7 +796,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         }
     }
 
-    private fun processBoolMsgDlg( keyitem :KeyItem<*, *>) {
+    private fun processBoolMsgDlg(keyitem: KeyItem<*, *>) {
         val boolValueList: MutableList<String> = java.util.ArrayList()
         boolValueList.add("false")
         boolValueList.add("true")
@@ -823,6 +812,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 }
             })
     }
+
     /**
      * 动作操作
      */

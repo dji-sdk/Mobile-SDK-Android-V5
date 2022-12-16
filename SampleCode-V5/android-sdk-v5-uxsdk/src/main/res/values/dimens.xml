@@ -88,6 +88,9 @@
     <dimen name="uxsdk_telemetry_view_margin">2dp</dimen>
     <dimen name="uxsdk_telemetry_column_margin">6dp</dimen>
 
+    <dimen name="uxsdk_0_6_dp">0.6dp</dimen>
+    <dimen name="uxsdk_0_5_dp">0.5dp</dimen>
+
     <dimen name="uxsdk_1000_dp">1000dp</dimen>
     <dimen name="uxsdk_100_dp">100dp</dimen>
     <dimen name="uxsdk_101_dp">101dp</dimen>

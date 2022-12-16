@@ -48,7 +48,7 @@ public class PopupNumberPickerDouble extends PopupWindow {
     public PopupNumberPickerDouble(Context context, 
 				List<String> item_strings1,	Map<Integer, List<Integer>> ImagesMap1,  ///第一个picker 的数据
 				List<String> item_strings2,	Map<Integer, List<Integer>> ImagesMap2,	 //第二个picker 的数据;
-			PickerValueChangeListener itemClickEvent, int w, int h, int pos) {
+			PickerValueChangeListener itemClickEvent, PopupNumberPickerPosition position) {
 
 		super(context);
 
@@ -63,8 +63,8 @@ public class PopupNumberPickerDouble extends PopupWindow {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.numpicker_continue_shot, null);
 		this.setContentView(view);
-		this.setWidth(DensityUtil.dip2px(context, w));
-		this.setHeight(DensityUtil.dip2px(context, h));
+		this.setWidth(DensityUtil.dip2px(context, position.width));
+		this.setHeight(DensityUtil.dip2px(context, position.height));
 		this.setFocusable(true);//
 		// this.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.pickerbackground_singl));
 
@@ -87,26 +87,22 @@ public class PopupNumberPickerDouble extends PopupWindow {
 		Wheelpicker1 = (WheelView) view.findViewById(R.id.id_numberPicker1);
 		Wheelpicker1.addScrollingListener(onWheelScrollListener1);
 		Wheelpicker1.addClickingListener(onWheelClickedListener1);
-		Wheelpicker1.setViewAdapter(new TypeTextAdapter(context, Wheelpicker1,strItemValue1));
+		Wheelpicker1.setViewAdapter(new TypeTextAdapter(context,strItemValue1));
 		
-		Wheelpicker1.setCurrentItem(pos);
+		Wheelpicker1.setCurrentItem(position.pos);
 
 		Wheelpicker2 = (WheelView) view.findViewById(R.id.id_numberPicker2);
 		Wheelpicker2.addScrollingListener(onWheelScrollListener2);
 		Wheelpicker2.addClickingListener(onWheelClickedListener2);
-		Wheelpicker2.setViewAdapter(new TypeTextAdapter(context, Wheelpicker2,strItemValue2));
+		Wheelpicker2.setViewAdapter(new TypeTextAdapter(context,strItemValue2));
 		
-		Wheelpicker2.setCurrentItem(pos);
+		Wheelpicker2.setCurrentItem(position.pos);
 		
 		ImageButton select_button = (ImageButton) view.findViewById(R.id.id_select_imageButton1);
-		select_button.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				valueChangeListen.onValueChange(picker_currentPos1, picker_currentPos2);
-				
-			}
+		select_button.setOnClickListener(v -> {
+			// TODO Auto-generated method stub
+			valueChangeListen.onValueChange(picker_currentPos1, picker_currentPos2);
+
 		});
 
 	}
@@ -115,12 +111,13 @@ public class PopupNumberPickerDouble extends PopupWindow {
 	class TypeTextAdapter extends AbstractWheelTextAdapter {
 
 		String[] strItemValue;
-		protected TypeTextAdapter(Context context, WheelView wheelView,String[] strItemValue2) {
+		protected TypeTextAdapter(Context context,String[] strItemValue2) {
 			// super(context, R.layout.type_layout, R.id.type_name, isSelected);
 			super(context, R.layout.numpicker_type_layout, R.id.type_name);
 			strItemValue = strItemValue2;
 		}
 
+		@Override
 		public int getItemsCount() {
 			return strItemValue.length;
 		}
@@ -143,12 +140,13 @@ public class PopupNumberPickerDouble extends PopupWindow {
 	class TypeImageAdapter extends AbstractWheelTextAdapter {
 
 		List<Integer> imagelist;
-		protected TypeImageAdapter(Context context, WheelView wheelView,List<Integer> imagelis) {
+		protected TypeImageAdapter(Context context, List<Integer> imagelis) {
 			// super(context, R.layout.type_layout, R.id.type_name, isSelected);
 			super(context, R.layout.numpicker_type_layout, R.id.type_name);
 			imagelist = imagelis;
 		}
 
+		@Override
 		public int getItemsCount() {
 			return imagelist.size();
 		}
@@ -178,12 +176,13 @@ public class PopupNumberPickerDouble extends PopupWindow {
 	class ItemAdapter extends AbstractWheelTextAdapter {
 
 		List<Integer> imagelist;
-		protected ItemAdapter(Context context, WheelView wheelView,List<Integer> imagelis) {
+		protected ItemAdapter(Context context,List<Integer> imagelis) {
 			// super(context, R.layout.type_layout, R.id.type_name, isSelected);
 			super(context, R.layout.numpicker_type_layout, R.id.type_name);
 			imagelist = imagelis;
 		}
 
+		@Override
 		public int getItemsCount() {
 			return imagelist.size();
 		}
@@ -210,10 +209,12 @@ public class PopupNumberPickerDouble extends PopupWindow {
 	}
 	
 	OnWheelScrollListener onWheelScrollListener1 = new OnWheelScrollListener() {
+		@Override
 		public void onScrollingStarted(WheelView wheel) {
 			//select_type = type[wheelView.getCurrentItem()];
 		}
 
+		@Override
 		public void onScrollingFinished(WheelView wheel) {
 			int pos = wheel.getCurrentItem();
 			picker_currentPos1 = pos;
@@ -222,20 +223,19 @@ public class PopupNumberPickerDouble extends PopupWindow {
 		}
 	};
 
-	OnWheelClickedListener onWheelClickedListener1 = new OnWheelClickedListener() {
+	OnWheelClickedListener onWheelClickedListener1 = (wheel, itemIndex) -> {
+		picker_currentPos1 = itemIndex;
 
-		public void onItemClicked(WheelView wheel, int itemIndex) {
-			picker_currentPos1 = itemIndex;
-			
-			wheel.setCurrentItem(itemIndex);
-		}
+		wheel.setCurrentItem(itemIndex);
 	};
 	
 	OnWheelScrollListener onWheelScrollListener2 = new OnWheelScrollListener() {
+		@Override
 		public void onScrollingStarted(WheelView wheel) {
 			//select_type = type[wheelView.getCurrentItem()];
 		}
 
+		@Override
 		public void onScrollingFinished(WheelView wheel) {
 			int pos = wheel.getCurrentItem();
 			picker_currentPos2 = pos;
@@ -244,13 +244,10 @@ public class PopupNumberPickerDouble extends PopupWindow {
 		}
 	};
 
-	OnWheelClickedListener onWheelClickedListener2 = new OnWheelClickedListener() {
+	OnWheelClickedListener onWheelClickedListener2 = (wheel, itemIndex) -> {
+		wheel.setCurrentItem(itemIndex);
+		picker_currentPos2 = itemIndex;
 
-		public void onItemClicked(WheelView wheel, int itemIndex) {
-			wheel.setCurrentItem(itemIndex);
-			picker_currentPos2 = itemIndex;
-			
-		}
 	};
 
 }

@@ -45,7 +45,7 @@ class PayLoadVM : DJIViewModel() {
     }
 
     fun receiveFromPayLoadSdk() {
-        KeyManager.getInstance().listen(KeyTools.createKey(PayloadKey.KeyDataFromPayload, ComponentIndexType.UP), this) { oldValue, newValue ->
+        KeyManager.getInstance().listen(KeyTools.createKey(PayloadKey.KeyDataFromPayload, ComponentIndexType.UP), this) { _, newValue ->
             var result = "接收时间：${getTimeNow()}"
             newValue?.let {
                 var newValueString = String(newValue)

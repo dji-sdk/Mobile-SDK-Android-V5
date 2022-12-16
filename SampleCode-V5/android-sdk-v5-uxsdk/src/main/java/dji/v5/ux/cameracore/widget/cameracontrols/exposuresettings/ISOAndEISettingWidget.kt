@@ -44,10 +44,7 @@ open class ISOAndEISettingWidget @JvmOverloads constructor(
     private var isISOSeekBarEnabled = false
     private val isISOLocked = false
     private var isSeekBarTracking = false
-
     private var uiCameraISO = 0
-    private var eiValue = 0
-    private var eiRecommendedValue = 0
 
     //去掉auto
     private var uiIsoValueArray: Array<CameraISO?> = arrayOf()
@@ -313,42 +310,6 @@ open class ISOAndEISettingWidget @JvmOverloads constructor(
         val iso = CameraUtil.convertIntToISO(isoValue)
         for (i in array.indices) {
             if (iso == array[i]) {
-                index = i
-                break
-            }
-        }
-        return index
-    }
-
-    private fun updateEIRangeUI(array: IntArray) {
-        // Workaround where ISO range updates to single value in AUTO mode
-        if (array.isNotEmpty()) {
-            seekbar_ei.max = array.size - 1
-            seekbar_ei.setMinValueText(array[0].toString())
-            seekbar_ei.setMaxValueText(array[array.size - 1].toString())
-            updateEIValue(array, eiValue)
-            updateEIBaseline(array, eiRecommendedValue)
-        }
-    }
-
-    private fun updateEIValue(array: IntArray, eiValue: Int) {
-        seekbar_ei.progress = getEIIndex(array, eiValue)
-    }
-
-    private fun updateEIBaseline(array: IntArray, eiRecommendedValue: Int) {
-        val progress: Int = getEIIndex(array, eiRecommendedValue)
-        if (progress >= 0) {
-            seekbar_ei.baselineProgress = progress
-            seekbar_ei.isBaselineVisibility = true
-        } else {
-            seekbar_ei.isBaselineVisibility = false
-        }
-    }
-
-    private fun getEIIndex(array: IntArray, eiValue: Int): Int {
-        var index = -1
-        for (i in array.indices) {
-            if (array[i] == eiValue) {
                 index = i
                 break
             }

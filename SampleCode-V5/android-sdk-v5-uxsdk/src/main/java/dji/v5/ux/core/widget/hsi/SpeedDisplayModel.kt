@@ -6,6 +6,7 @@ import dji.sdk.keyvalue.value.common.Velocity3D
 import dji.sdk.keyvalue.value.flightcontroller.WindDirection
 import dji.sdk.keyvalue.value.flightcontroller.WindWarning
 import dji.sdk.keyvalue.key.KeyTools
+import dji.v5.manager.KeyManager
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
@@ -41,6 +42,6 @@ open class SpeedDisplayModel constructor(
     }
 
     override fun inCleanup() {
-//        LogUtils.d(tag,"TODO Method not implemented yet")
+        KeyManager.getInstance().cancelListen(this)
     }
 }

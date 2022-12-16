@@ -54,7 +54,7 @@ import dji.v5.ux.core.util.RxUtil;
  * Widget can be used to shoot photo and record video. It reacts to change in {@link CameraMode}
  * It encloses {@link ShootPhotoWidget} and {@link RecordVideoWidget} for respective modes
  */
-public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICameraIndex {
+public class CameraCaptureWidget extends ConstraintLayoutWidget<Object> implements ICameraIndex {
 
     //region Fields
     private static final String TAG = "CameraCaptureWidget";
@@ -78,7 +78,6 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
     @Override
     protected void initView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         widgetMap = new HashMap<>();
-
         if (!isInEditMode()) {
             addViewByMode(CameraMode.PHOTO_NORMAL, new ShootPhotoWidget(context));
             addViewByMode(CameraMode.VIDEO_NORMAL, new RecordVideoWidget(context));
@@ -134,12 +133,12 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget implements ICame
     public void updateCameraSource(@NonNull ComponentIndexType cameraIndex, @NonNull CameraLensType lensType) {
         widgetModel.updateCameraSource(cameraIndex, lensType);
         ShootPhotoWidget shootPhotoWidget = getShootPhotoWidget();
-        if (shootPhotoWidget != null){
-            shootPhotoWidget.updateCameraSource(cameraIndex,lensType);
+        if (shootPhotoWidget != null) {
+            shootPhotoWidget.updateCameraSource(cameraIndex, lensType);
         }
         RecordVideoWidget recordVideoWidget = getRecordVideoWidget();
-        if (recordVideoWidget != null){
-            recordVideoWidget.updateCameraSource(cameraIndex,lensType);
+        if (recordVideoWidget != null) {
+            recordVideoWidget.updateCameraSource(cameraIndex, lensType);
         }
     }
 

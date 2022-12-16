@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import dji.v5.manager.aircraft.rtk.RTKCenter
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import dji.v5.ux.accessory.RTKEnabledWidgetModel
 import dji.v5.ux.core.base.DJISDKModel
@@ -30,7 +31,7 @@ class GpsSignalWidget @JvmOverloads constructor(
     private val ivSatelliteIcon: ImageView = findViewById(R.id.iv_satellite_icon)
     private val tvSatelliteCount: TextView = findViewById(R.id.tv_satellite_count)
     private var rtkOverView: GpsSignalWidgetModel.RtkOverview = GpsSignalWidgetModel.RtkOverview()
-    private val rootView:ConstraintLayout=findViewById(R.id.root_view)
+    private val rootView: ConstraintLayout = findViewById(R.id.root_view)
 
     private val rtkEnabledWidgetModel by lazy {
         RTKEnabledWidgetModel(
@@ -86,8 +87,17 @@ class GpsSignalWidget @JvmOverloads constructor(
             rtkOverView = it
             updateRtkIcon(it)
         })
+
         addReaction(gpsSignalWidgetModel.gpsSatelliteCount.observeOn(SchedulerProvider.ui()).subscribe {
+            if (!rtkOverView.rtkHealthy) {
+                LogUtils.d(tag, "rtk is  not healthy,use gpsSatelliteCount")
+                tvSatelliteCount.text = it.toString()
+            }
+        })
+
+        addReaction(gpsSignalWidgetModel.rtkSatelliteCount.observeOn(SchedulerProvider.ui()).subscribe {
             if (rtkOverView.rtkHealthy) {
+                LogUtils.d(tag, "rtk is healthy,use rtkSatelliteCount")
                 tvSatelliteCount.text = it.toString()
             }
         })

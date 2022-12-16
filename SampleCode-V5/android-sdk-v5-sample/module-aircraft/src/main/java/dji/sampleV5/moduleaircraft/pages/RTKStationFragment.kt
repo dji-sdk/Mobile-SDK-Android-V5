@@ -337,13 +337,6 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
         }
     }
 
-    private fun Boolean.processResult(positiveMsg: String, negativeMsg: String) {
-        if (this) {
-            ToastUtils.showToast(positiveMsg)
-        } else {
-            ToastUtils.showToast(negativeMsg)
-        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()

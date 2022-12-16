@@ -44,7 +44,7 @@ open class LensControlWidget @JvmOverloads constructor(
     }
 
     override fun reactToModelChanges() {
-        addReaction(widgetModel.cameraVideoStreamSourceRangeProcessor.toFlowable().observeOn(ui()).subscribe {
+        addReaction(widgetModel.properCameraVideoStreamSourceRangeProcessor.toFlowable().observeOn(ui()).subscribe {
             updateBtnView()
         })
         addReaction(widgetModel.cameraVideoStreamSourceProcessor.toFlowable().observeOn(ui()).subscribe {
@@ -99,7 +99,7 @@ open class LensControlWidget @JvmOverloads constructor(
     }
 
     private fun updateBtnView() {
-        val videoSourceRange = widgetModel.cameraVideoStreamSourceRangeProcessor.value
+        val videoSourceRange = widgetModel.properCameraVideoStreamSourceRangeProcessor.value
         //单源
         if (videoSourceRange.size <= 1) {
             this.visibility = GONE
@@ -129,6 +129,8 @@ open class LensControlWidget @JvmOverloads constructor(
             CameraVideoStreamSourceType.WIDE_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_wide)
             CameraVideoStreamSourceType.ZOOM_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_zoom)
             CameraVideoStreamSourceType.INFRARED_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_ir)
+            CameraVideoStreamSourceType.NDVI_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_ndvi)
+            CameraVideoStreamSourceType.RGB_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_rgb)
             else -> ""
         }
     }

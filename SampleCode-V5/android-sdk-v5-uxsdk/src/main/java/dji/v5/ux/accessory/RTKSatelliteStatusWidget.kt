@@ -20,6 +20,7 @@ import dji.sdk.keyvalue.value.rtkmobilestation.RTKPositioningSolution
 import dji.v5.manager.aircraft.rtk.RTKCenter
 import dji.v5.manager.aircraft.rtk.RTKLocationInfo
 import dji.v5.manager.aircraft.rtk.RTKSystemState
+import dji.v5.utils.common.DisplayUtil
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 
@@ -29,7 +30,6 @@ import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.UnitConversionUtil
 import java.util.*
 

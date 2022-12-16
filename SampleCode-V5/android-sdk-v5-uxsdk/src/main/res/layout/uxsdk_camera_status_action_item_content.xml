@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/uxsdk_3_dp"
+    android:paddingEnd="@dimen/uxsdk_3_dp"
+    android:id="@+id/stream_selector_root_view"
+    android:stateListAnimator="@animator/uxsdk_pressed_alpha_040">
+
+    <dji.v5.ux.core.ui.component.StrokeTextView
+        android:id="@+id/tv_content"
+        style="@style/CameraStatusActionBarItem_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="@dimen/uxsdk_14_dp"
+        android:text=""/>
+
+</FrameLayout>

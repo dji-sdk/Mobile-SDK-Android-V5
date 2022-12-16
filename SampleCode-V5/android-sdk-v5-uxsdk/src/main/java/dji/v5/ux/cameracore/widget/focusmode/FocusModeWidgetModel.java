@@ -54,7 +54,6 @@ import io.reactivex.rxjava3.core.Flowable;
 public class FocusModeWidgetModel extends WidgetModel implements ICameraIndex {
 
     //region Fields
-    private static final String TAG = "FocusModeWidgetModel";
     private final DataProcessor<Boolean> isFocusModeSupportedDataProcessor;
     private final DataProcessor<CameraFocusMode> focusModeDataProcessor;
     private final DataProcessor<Boolean> isAFCSupportedProcessor;
@@ -63,7 +62,7 @@ public class FocusModeWidgetModel extends WidgetModel implements ICameraIndex {
     private final DataProcessor<SettingDefinitions.ControlMode> controlModeProcessor;
     private final ObservableInMemoryKeyedStore keyedStore;
     private final GlobalPreferencesInterface preferencesManager;
-    private DJIKey focusModeKey;
+    private DJIKey<CameraFocusMode> focusModeKey;
     private UXKey controlModeKey;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.CAMERA_LENS_ZOOM;
@@ -99,6 +98,7 @@ public class FocusModeWidgetModel extends WidgetModel implements ICameraIndex {
         controlModeKey = UXKeys.create(GlobalPreferenceKeys.CONTROL_MODE);
         bindDataProcessor(controlModeKey, controlModeProcessor);
 
+        focusModeKey = KeyTools.createCameraKey(CameraKey.KeyCameraFocusMode,cameraIndex,lensType);
         if (preferencesManager != null) {
             preferencesManager.setUpListener();
         }
@@ -223,21 +223,21 @@ public class FocusModeWidgetModel extends WidgetModel implements ICameraIndex {
                 addDisposable(keyedStore.setValue(controlModeKey, SettingDefinitions.ControlMode.AUTO_FOCUS)
                         .subscribe(() -> {
                             //do nothing
-                        }, RxUtil.logErrorConsumer(TAG, "setControlModeAutoFocus: ")));
+                        }, RxUtil.logErrorConsumer(tag, "setControlModeAutoFocus: ")));
                 break;
             case AFC:
                 preferencesManager.setControlMode(SettingDefinitions.ControlMode.AUTO_FOCUS_CONTINUE);
                 addDisposable(keyedStore.setValue(controlModeKey, SettingDefinitions.ControlMode.AUTO_FOCUS_CONTINUE)
                         .subscribe(() -> {
                             //do nothing
-                        }, RxUtil.logErrorConsumer(TAG, "setControlModeAutoFocusContinuous: ")));
+                        }, RxUtil.logErrorConsumer(tag, "setControlModeAutoFocusContinuous: ")));
                 break;
             case MANUAL:
                 preferencesManager.setControlMode(SettingDefinitions.ControlMode.MANUAL_FOCUS);
                 addDisposable(keyedStore.setValue(controlModeKey, SettingDefinitions.ControlMode.MANUAL_FOCUS)
                         .subscribe(() -> {
                             //do nothing
-                        }, RxUtil.logErrorConsumer(TAG, "setControlModeManualFocus: ")));
+                        }, RxUtil.logErrorConsumer(tag, "setControlModeManualFocus: ")));
                 break;
             default:
                 break;

@@ -90,12 +90,22 @@ public class VerticalSeekBar extends View {
         ta.recycle();
     }
 
+    public VerticalSeekBar(Context context, AttributeSet attrs, int defStyleAttr) {
+        this(context, attrs);
+    }
+
+    public VerticalSeekBar(Context context) {
+        this(context, null);
+    }
+
     public void setOnChangeListener(final OnVSBChangeListener listener) {
         mOnChangedListener = listener;
     }
 
     public void setProgressDrawable(Drawable d) {
-        d = tileify(d, false, 0);
+        if (!isInEditMode()){
+            d = tileify(d, false, 0);
+        }
         boolean needUpdate;
         if (mProgressDrawable != null && d != mProgressDrawable) {
             mProgressDrawable.setCallback(null);

@@ -8,14 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.moduleaircraft.R
-import dji.sampleV5.moduleaircraft.models.PayLoadVM
+import dji.sampleV5.moduleaircraft.models.PayLoadDataVM
+import dji.v5.manager.aircraft.payload.PayloadIndexType
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_flight_record_page.*
-import kotlinx.android.synthetic.main.frag_payload_page.*
+import kotlinx.android.synthetic.main.frag_payload_data_page.*
+import kotlinx.android.synthetic.main.frag_payload_data_page.tv_payload_title
+import kotlinx.android.synthetic.main.frag_payload_widget_page.*
 
 
 /**
@@ -28,16 +32,14 @@ import kotlinx.android.synthetic.main.frag_payload_page.*
  */
 class PayLoadDataFragment : DJIFragment() {
     companion object {
-        const val TAG = "PayLoadDataTestFragment"
+        const val TAG = "PayLoadDataFragment"
         const val MAX_LENGTH_OF_SEND_DATA = 255
-
     }
 
+    private var payloadIndexType: PayloadIndexType = PayloadIndexType.UNKNOWN
     private var messageList = ArrayList<String>()
     private lateinit var payLoadAdapter: ArrayAdapter<String>
-    private val payLoadVM by lazy {
-        ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(PayLoadVM::class.java)
-    }
+    private val payLoadDataVM: PayLoadDataVM by viewModels()
     private val onKeyListener: View.OnKeyListener = object : View.OnKeyListener {
         override
         fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
@@ -55,23 +57,26 @@ class PayLoadDataFragment : DJIFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.frag_payload_page, container, false)
+        return inflater.inflate(R.layout.frag_payload_data_page, container, false)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        initBtnListener()
+        initListener()
 
     }
 
     private fun initView() {
+        arguments?.run {
+            payloadIndexType = PayloadIndexType.find(getInt(PayloadCenterFragment.KEY_PAYLOAD_INDEX_TYPE, PayloadIndexType.UP.value()))
+        }
         payLoadAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, messageList)
         message_listview.adapter = payLoadAdapter
 
 
-        payLoadVM.receiveMessageLiveData.observe(viewLifecycleOwner, { t ->
+        payLoadDataVM.receiveMessageLiveData.observe(viewLifecycleOwner, { t ->
             LogUtils.i(TAG, t)
             messageList.add(t)
             payLoadAdapter.notifyDataSetChanged()
@@ -79,11 +84,15 @@ class PayLoadDataFragment : DJIFragment() {
         })
 
 
+
+        tv_payload_title.text = "This is ${payloadIndexType.name.lowercase()} payloadManager data page!"
+
+
     }
 
 
-    private fun initBtnListener() {
-
+    private fun initListener() {
+        payLoadDataVM.initPayloadDataListener(payloadIndexType)
         ed_data.setOnKeyListener(onKeyListener)
 
         btn_send_data_to_payload.setOnClickListener {
@@ -98,25 +107,9 @@ class PayLoadDataFragment : DJIFragment() {
                 )
                 return@setOnClickListener
             }
-            payLoadVM.sendMessageToPayLoadSdk(sendByteArray)
+            payLoadDataVM.sendMessageToPayLoadSdk(sendByteArray)
             LogUtils.i(TAG, sendText)
             ToastUtils.showToast(sendText)
-        }
-
-        btn_receive_data_from_payload.setOnClickListener {
-            LogUtils.i(TAG, "------------------------Start receiving PSDK data----------------------------")
-            ToastUtils.showToast("Start receiving PSDK data")
-            payLoadVM.receiveFromPayLoadSdk()
-
-        }
-
-        btn_get_payload_product_name.setOnClickListener {
-            LogUtils.i(
-                TAG,
-                "------------------------Start Receive PayLoad_Product_Name----------------------------"
-            )
-            ToastUtils.showToast("Start getting PayLoad_Product_Name")
-            payLoadVM.getProductName()
         }
 
     }

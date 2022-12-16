@@ -119,7 +119,7 @@ open class RTKTypeSwitchWidget @JvmOverloads constructor(
             }
         }
         //读取默认的配置，并启动RTK
-        LogUtils.i(TAG,"RTKTypeSwitchWidget init,startRtkService now!(Thread.currentThread().name=${Thread.currentThread().name})")
+        LogUtils.i(TAG, "RTKTypeSwitchWidget init,startRtkService now!(Thread.currentThread().name=${Thread.currentThread().name})")
         RTKStartServiceHelper.startRtkService()
     }
 
@@ -267,14 +267,16 @@ open class RTKTypeSwitchWidget @JvmOverloads constructor(
     private fun getReferenceStationSourceNames(list: List<RTKReferenceStationSource>): List<String> {
         return list.map {
             val res = when (it) {
-                RTKReferenceStationSource.NONE ->
-                    R.string.uxsdk_rtk_setting_menu_type_rtk_none
                 RTKReferenceStationSource.BASE_STATION ->
                     R.string.uxsdk_rtk_setting_menu_type_rtk_station
                 RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE ->
                     R.string.uxsdk_rtk_setting_menu_type_custom_rtk
+                RTKReferenceStationSource.QX_NETWORK_SERVICE ->
+                    R.string.uxsdk_rtk_setting_menu_type_qx_rtk
+                RTKReferenceStationSource.NTRIP_NETWORK_SERVICE ->
+                    R.string.uxsdk_rtk_setting_menu_type_cmcc_rtk
                 else ->
-                    R.string.uxsdk_rtk_setting_menu_type_nrtk
+                    R.string.uxsdk_rtk_setting_menu_type_rtk_none
             }
             StringUtils.getResStr(res)
         }
@@ -398,7 +400,7 @@ open class RTKTypeSwitchWidget @JvmOverloads constructor(
         rtkSetting.password = pw
         rtkSetting.mountPoint = mountPint
         RTKUtil.saveRtkCustomNetworkSetting(rtkSetting)
-        LogUtils.i(TAG,"rtkSetting=$rtkSetting,startRtkCustomNetwork now!(Thread.currentThread().name${Thread.currentThread().name})")
+        LogUtils.i(TAG, "rtkSetting=$rtkSetting,startRtkCustomNetwork now!(Thread.currentThread().name${Thread.currentThread().name})")
         RTKStartServiceHelper.startRtkService()
     }
 

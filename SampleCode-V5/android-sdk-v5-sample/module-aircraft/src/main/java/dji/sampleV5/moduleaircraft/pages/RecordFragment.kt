@@ -64,7 +64,7 @@ class RecordFragment:DJIFragment() {
             }
         }
 
-        cb_play.setOnCheckedChangeListener { buttonView, isChecked ->
+        cb_play.setOnCheckedChangeListener { _, isChecked ->
             megaphoneVM.isQuickPlay = isChecked
         }
     }

@@ -18,7 +18,7 @@ import dji.v5.utils.common.LogUtils;
 
 public class KeyValueDB extends SQLiteOpenHelper {
 
-    private static final String TAG = KeyValueDB.class.getSimpleName();
+    private static final String TAG = LogUtils.getTag(KeyValueDB.class.getSimpleName());
     private static Context sContext;
     private static KeyValueDB sInstance;
 

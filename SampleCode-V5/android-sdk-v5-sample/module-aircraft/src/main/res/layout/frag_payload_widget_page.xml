@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/uxsdk_white">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_payload_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/uxsdk_20_dp"
+                android:textStyle="bold"
+                tools:text="演示标题" />
+
+            <TextView
+                android:id="@+id/tv_payload_basic_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_payload_title"
+                tools:text="PayloadBasicInfo" />
+
+
+            <TextView
+                android:id="@+id/tv_payload_other_widget_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_payload_basic_info"
+                android:layout_marginTop="5dp"
+                tools:text="PayloadWidgetInfo" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/payload_main_widget_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_payload_other_widget_info"
+                android:layout_marginTop="@dimen/uxsdk_10_dp" />
+
+            <Button
+                android:id="@+id/bt_set_widget_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/payload_main_widget_list"
+                android:layout_marginTop="@dimen/uxsdk_10_dp"
+                android:text="Set Widget Value" />
+
+
+            <Button
+                android:id="@+id/bt_re_pull_widget_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bt_set_widget_value"
+                android:text="pullWidgetInfoFromPayload" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

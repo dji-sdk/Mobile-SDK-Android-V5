@@ -75,7 +75,7 @@ class SimulatorControlWidgetModel(
      * @return Completable to determine status of the action
      */
     fun startSimulator(initializationData: SimulatorInitializationSettings): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStartSimulator), initializationData)
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartSimulator), initializationData)
     }
 
     /**
@@ -84,7 +84,7 @@ class SimulatorControlWidgetModel(
      * @return Completable to determine status of the action
      */
     fun stopSimulator(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStopSimulator))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStopSimulator))
     }
 
     /**

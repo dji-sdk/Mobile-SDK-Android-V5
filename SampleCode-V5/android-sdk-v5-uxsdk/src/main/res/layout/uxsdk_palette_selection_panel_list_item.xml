@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:layout_width="@dimen/uxsdk_64_dp"
+    tools:layout_height="wrap_content"
+    tools:background="@color/uxsdk_black_40_percent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/uxsdk_56_dp"
+        android:layout_height="@dimen/uxsdk_42_dp"
+        app:cardCornerRadius="@dimen/uxsdk_2_dp"
+        android:layout_gravity="center"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/uxsdk_transparent">
+        <ImageView
+            android:id="@+id/iv_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/uxsdk_thermal_palette_blue_green_red"
+            android:foreground="@drawable/uxsdk_selector_palette_border"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_palette_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Caption2"
+        android:layout_marginTop="@dimen/uxsdk_8_dp"
+        android:singleLine="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/uxsdk_selector_palette_text_color"
+        android:textStyle="normal"
+        android:text="White Hot"/>
+
+</LinearLayout>

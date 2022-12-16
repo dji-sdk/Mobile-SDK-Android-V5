@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 
@@ -42,12 +41,12 @@ public class PopupNumberPicker extends PopupWindow {
 	}
 	@SuppressLint("InflateParams")
 	public PopupNumberPicker(Context context, List<String> item_strings,
-							 PickerValueChangeListener itemClickEvent, int w, int h, int pos) {
-		this(context, item_strings, itemClickEvent, w, h, pos, false, false);
+							 PickerValueChangeListener itemClickEvent, PopupNumberPickerPosition position) {
+		this(context, item_strings, itemClickEvent, position, false, false);
 	}
 
     public PopupNumberPicker(Context context, List<String> item_strings,
-			PickerValueChangeListener itemClickEvent, int w, int h, int pos, boolean selectable, boolean isSingle) {
+			PickerValueChangeListener itemClickEvent, PopupNumberPickerPosition position , boolean selectable, boolean isSingle) {
 		super(context);
 		isSingleSelected = isSingle;
 		item_texts = item_strings;
@@ -57,8 +56,8 @@ public class PopupNumberPicker extends PopupWindow {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		view = inflater.inflate(R.layout.numpicker, null);
 		this.setContentView(view);
-		this.setWidth(DensityUtil.dip2px(context, w));
-		this.setHeight(DensityUtil.dip2px(context, h));
+		this.setWidth(DensityUtil.dip2px(context, position.width));
+		this.setHeight(DensityUtil.dip2px(context, position.height));
 		this.setFocusable(true);//
 
 		ColorDrawable dw = new ColorDrawable(Color.TRANSPARENT);
@@ -75,28 +74,22 @@ public class PopupNumberPicker extends PopupWindow {
 
 		if (selectable) {
 			boolean[] isSelected = new boolean[item_strings.size()];
-			typeTextAdapter = new TypeTextAdapter(context, wheelPicker, isSelected);
+			typeTextAdapter = new TypeTextAdapter(context, isSelected);
 		} else {
-			typeTextAdapter = new TypeTextAdapter(context, wheelPicker);
+			typeTextAdapter = new TypeTextAdapter(context);
 		}
 		
 		//typeTextAdapter.init(0);
 		wheelPicker.setViewAdapter(typeTextAdapter);
 		//放到setViewAdapter 之后
-		wheelPicker.setCurrentItem(pos);
+		wheelPicker.setCurrentItem(position.pos);
 		
 
 		ImageButton select_button = (ImageButton) view.findViewById(R.id.id_select_imageButton1);
 		
-		pickerToSelectPos = pos;
+		pickerToSelectPos = position.pos;
 		
-		select_button.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				onCallBack.onValueChange(pickerToSelectPos, -1);
-			}
-		});
+		select_button.setOnClickListener(v -> onCallBack.onValueChange(pickerToSelectPos, -1));
 	}
 
 	public int getPickerSelectedPos() {
@@ -110,48 +103,17 @@ public class PopupNumberPicker extends PopupWindow {
 		}
 	}
 
-	public PopupNumberPicker(Context context, List<String> item_strings,
-							 PickerValueChangeListener itemClickEvent, int otherActionName, PickerOtherActionListener otherAction, int w, int h, int pos) {
-		this(context, item_strings, itemClickEvent, w, h, pos, true, true);
-		this.otherAction = otherAction;
-		final Button other_button = (Button) view.findViewById(R.id.id_select_otherActionButton);
-		other_button.setText(otherActionName);
-		other_button.setVisibility(View.VISIBLE);
-		other_button.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				PopupNumberPicker.this.otherAction.onOtherAction();
-			}
-		});
-	}
-
-	public PopupNumberPicker(Context context, List<String> item_strings,
-							 PickerValueChangeListener itemClickEvent, int otherActionName, PickerOtherActionListener otherAction, int w, int h, int pos, boolean isSingle) {
-		this(context, item_strings, itemClickEvent, w, h, pos, true, isSingle);
-		this.otherAction = otherAction;
-		final Button other_button = (Button) view.findViewById(R.id.id_select_otherActionButton);
-		other_button.setText(otherActionName);
-		other_button.setVisibility(View.VISIBLE);
-		other_button.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				PopupNumberPicker.this.otherAction.onOtherAction();
-			}
-		});
-	}
-
 	class TypeTextAdapter extends AbstractWheelTextAdapter {
 
-		protected TypeTextAdapter(Context context, WheelView wheelView) {
+		protected TypeTextAdapter(Context context) {
 			// super(context, R.layout.type_layout, R.id.type_name, isSelected);
 			super(context, R.layout.numpicker_type_layout, R.id.type_name);
 		}
 
-		protected TypeTextAdapter(Context context, WheelView wheelView, boolean[] isSelected) {
+		protected TypeTextAdapter(Context context, boolean[] isSelected) {
 			super(context, R.layout.numpicker_type_layout, R.id.type_name, isSelected);
 		}
+		@Override
 		public int getItemsCount() {
 			return strItemValue.length;
 		}
@@ -164,8 +126,7 @@ public class PopupNumberPicker extends PopupWindow {
 
 		@Override
 		public View getItem(int index, View convertView, ViewGroup parent) {
-			View view = super.getItem(index, convertView, parent);
-			return view;
+			return super.getItem(index, convertView, parent);
 		}
 
 		@Override
@@ -185,21 +146,20 @@ public class PopupNumberPicker extends PopupWindow {
 	}
 	
 	OnWheelScrollListener onWheelScrollListener = new OnWheelScrollListener() {
+		@Override
 		public void onScrollingStarted(WheelView wheel) {
 			//select_type = type[wheelView.getCurrentItem()];
 		}
 
+		@Override
 		public void onScrollingFinished(WheelView wheel) {
 			pickerToSelectPos = wheel.getCurrentItem();
 		}
 	};
 
-	OnWheelClickedListener onWheelClickedListener = new OnWheelClickedListener() {
-
-		public void onItemClicked(WheelView wheel, int itemIndex) {
-			wheel.setCurrentItem(itemIndex);
-			pickerToSelectPos = itemIndex;
-		}
+	OnWheelClickedListener onWheelClickedListener = (wheel, itemIndex) -> {
+		wheel.setCurrentItem(itemIndex);
+		pickerToSelectPos = itemIndex;
 	};
 
 }

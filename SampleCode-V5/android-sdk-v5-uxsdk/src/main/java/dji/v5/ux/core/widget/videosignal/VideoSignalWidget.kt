@@ -37,6 +37,7 @@ import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.core.content.res.use
 import dji.sdk.keyvalue.value.airlink.FrequencyBand
+import dji.v5.utils.common.DisplayUtil
 import dji.v5.utils.common.SDRLinkHelper
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -47,7 +48,6 @@ import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.widget.videosignal.VideoSignalWidget.ModelState.*
 import dji.v5.ux.core.util.RxUtil
 

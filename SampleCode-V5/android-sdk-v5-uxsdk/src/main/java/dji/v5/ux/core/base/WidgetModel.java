@@ -66,7 +66,7 @@ public abstract class WidgetModel {
     //endregion
 
     //region Default Constructor
-    public WidgetModel(@NonNull DJISDKModel djiSdkModel,
+    protected WidgetModel(@NonNull DJISDKModel djiSdkModel,
                        @NonNull ObservableInMemoryKeyedStore uxKeyManager) {
         this.djiSdkModel = djiSdkModel;
         this.uxKeyManager = uxKeyManager;
@@ -154,13 +154,6 @@ public abstract class WidgetModel {
         if (listener != null) {
             listener.onStatesChanged();
         }
-    }
-
-    /**
-     * Method for view to add Listener for any key changed.
-     */
-    public void addStatesChangeListener(StatesChangeListener listener) {
-        this.statesChangedListener = listener;
     }
 
     private boolean isStarted() {

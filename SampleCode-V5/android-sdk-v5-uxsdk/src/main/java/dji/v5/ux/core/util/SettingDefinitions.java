@@ -227,7 +227,7 @@ public final class SettingDefinitions {
          */
         AMAP(2),
         /**
-         * MAPLIBRE Provider
+         * MapLibre Provider
          */
         MAPLIBRE(3);
 

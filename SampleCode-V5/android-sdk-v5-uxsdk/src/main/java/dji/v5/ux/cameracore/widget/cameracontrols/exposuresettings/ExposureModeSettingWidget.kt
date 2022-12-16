@@ -6,6 +6,7 @@ import android.view.View
 import dji.sdk.keyvalue.value.camera.CameraExposureMode
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.ICameraIndex
@@ -28,7 +29,7 @@ import kotlinx.android.synthetic.main.uxsdk_widget_exposure_mode_setting.view.*
 open class ExposureModeSettingWidget @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : ConstraintLayoutWidget<ExposureModeSettingWidget.ModelState>(context, attrs, defStyleAttr),
     View.OnClickListener, ICameraIndex {
 
@@ -123,8 +124,6 @@ open class ExposureModeSettingWidget @JvmOverloads constructor(
             CameraExposureMode.SHUTTER_PRIORITY -> layout_camera_mode_s.isSelected = true
             CameraExposureMode.APERTURE_PRIORITY -> layout_camera_mode_a.isSelected = true
             CameraExposureMode.MANUAL -> layout_camera_mode_m.isSelected = true
-            else -> {
-            }
         }
     }
 

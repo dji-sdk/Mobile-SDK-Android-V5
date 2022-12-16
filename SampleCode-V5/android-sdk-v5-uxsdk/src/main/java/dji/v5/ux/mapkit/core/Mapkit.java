@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class Mapkit {
 
-     private static final String TAG = Mapkit.class.getSimpleName();
+     private static final String TAG = LogUtils.getTag(Mapkit.class.getSimpleName());
 
     private static final String MAPBOX_TOKEN_KEY = "com.dji.mapkit.maplibre.apikey";
     private static String MAPBOX_ACCESS_TOKEN ;

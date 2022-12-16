@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/uxsdk_camera_config_height"
+    tools:parentTag="dji.v5.ux.visualcamera.VisualCameraPanel">
+
+    <dji.v5.ux.visualcamera.iso.CameraConfigISOAndEIWidget
+        android:id="@+id/widget_camera_config_iso_and_ei"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.v5.ux.visualcamera.shutter.CameraConfigShutterWidget
+        android:id="@+id/widget_camera_config_shutter"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toEndOf="@+id/widget_camera_config_iso_and_ei"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget
+        android:id="@+id/widget_camera_config_aperture"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toEndOf="@+id/widget_camera_config_shutter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.v5.ux.visualcamera.ev.CameraConfigEVWidget
+        android:id="@+id/widget_camera_config_ev"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toEndOf="@+id/widget_camera_config_aperture"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.v5.ux.visualcamera.wb.CameraConfigWBWidget
+        android:id="@+id/widget_camera_config_wb"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toEndOf="@+id/widget_camera_config_ev"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.v5.ux.visualcamera.storage.CameraConfigStorageWidget
+        android:id="@+id/widget_camera_config_storage"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toEndOf="@+id/widget_camera_config_wb"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/uxsdk_camera_config_height"
+    tools:parentTag="dji.v5.ux.visualcamera.NDVICameraPanel">
+
+    <dji.v5.ux.visualcamera.ndvi.NDVIStreamSelectorWidget
+        android:id="@+id/widget_ndvi_stream_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <dji.v5.ux.visualcamera.ndvi.NDVIStreamPaletteBar
+        android:id="@+id/widget_ndvi_stream_palette_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintStart_toEndOf="@+id/widget_ndvi_stream_selector"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <dji.v5.ux.visualcamera.ndvi.SpectralDisplayModeWidget
+        android:id="@+id/widget_spectral_display_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/widget_ndvi_stream_palette_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

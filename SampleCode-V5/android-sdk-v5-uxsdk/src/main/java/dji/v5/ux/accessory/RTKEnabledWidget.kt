@@ -34,6 +34,7 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.annotation.*
 import androidx.core.content.res.use
+import dji.v5.utils.common.DisplayUtil
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import io.reactivex.rxjava3.core.Flowable
@@ -45,7 +46,6 @@ import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.RxUtil
 
 private const val TAG = "RTKEnabledWidget"

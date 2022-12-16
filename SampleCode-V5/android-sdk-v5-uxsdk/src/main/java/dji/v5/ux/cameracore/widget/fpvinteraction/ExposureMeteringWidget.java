@@ -52,12 +52,6 @@ public class ExposureMeteringWidget extends ConstraintLayoutWidget<Object> {
      */
     protected static final float DEFAULT_CENTER_METER_SCALE_Y = 1f;
 
-    private static final int CENTER_WAIT_DURATION = 900;
-    private static final float RATIO_X_LEFT = 0.75f;
-    private static final float RATIO_X_RIGHT = 1.25f;
-    private static final float RATIO_Y_TOP = -0.25f;
-    private static final float RATIO_Y_BOTTOM = 0.25f;
-    private float lastX = -1, lastY = -1;
     private float centerMeterScaleX = DEFAULT_CENTER_METER_SCALE_X;
     private float centerMeterScaleY = DEFAULT_CENTER_METER_SCALE_Y;
     private ExposureMeteringWidgetModel widgetModel;
@@ -175,8 +169,6 @@ public class ExposureMeteringWidget extends ConstraintLayoutWidget<Object> {
                 y -= getHeight() / 2f;
                 setX(x);
                 setY(y);
-                lastX = x;
-                lastY = y;
                 break;
             default:
                 break;
@@ -193,12 +185,7 @@ public class ExposureMeteringWidget extends ConstraintLayoutWidget<Object> {
      * Clears the meter icon.
      */
     public void removeImageBackground() {
-        int sdk = android.os.Build.VERSION.SDK_INT;
-        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            this.setBackgroundDrawable(null);
-        } else {
-            this.setBackground(null);
-        }
+        this.setBackground(null);
     }
 
     /**

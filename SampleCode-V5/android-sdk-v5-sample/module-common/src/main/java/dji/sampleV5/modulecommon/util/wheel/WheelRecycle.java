@@ -66,8 +66,8 @@ public class WheelRecycle
 	public int recycleItems(LinearLayout layout, int firstItem, ItemsRange range)
 	{
 		int index = firstItem;
-		for (int i = 0; i < layout.getChildCount();)
-		{
+        int i = 0;
+		while (i < layout.getChildCount()) {
 			if (!range.contains(index))
 			{
 				recycleView(layout.getChildAt(i), index);
@@ -163,7 +163,6 @@ public class WheelRecycle
 			{
 				index = count + index;
 			}
-			index %= count;
 			items = addView(view, items);
 		}
 	}

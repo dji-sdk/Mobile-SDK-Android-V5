@@ -22,12 +22,13 @@ import dji.v5.utils.common.ToastUtils;
  * KeyItem作为key能力和动作的载体来进行封装
  */
 
-public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyItem<?,?>>{
+public class KeyItem<P, R> extends KeyBaseStructure<P , R> implements  Comparable<KeyItem<?,?>>{
 
     private static final String  TAG = KeyItem.class.getSimpleName();
     public KeyItem(DJIKeyInfo<?> keyInfo) {
         super();
-        this.keyInfo = keyInfo;
+        this.keyInfo = (DJIKeyInfo<R>)keyInfo;
+        this.keyInfoSet = (DJIKeyInfo<P>)keyInfo;
     }
 
     /**
@@ -52,7 +53,10 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
     /**
      * 参数key的能力携带实体
      */
-    protected DJIKeyInfo<?> keyInfo;
+    protected DJIKeyInfo<R> keyInfo;
+
+    protected DJIKeyInfo<P> keyInfoSet;
+
 
     /**
      * 需要调用者注入的回调接口，用于结果通知
@@ -81,8 +85,8 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
         this.name = name;
     }
 
-    public DJIKeyInfo getKeyInfo() {
-        return keyInfo;
+    public DJIKeyInfo<P> getKeyInfo() {
+        return keyInfoSet;
     }
 
 
@@ -160,14 +164,14 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                 public void onSuccess(R data) {
 
                     if (keyOperateCallBack != null && data != null) {
-                        keyOperateCallBack.actionChange(getName()+"【GET】 success result: " + data.toString());
+                        keyOperateCallBack.actionChange(getName()+"【GET】 == success " + data.toString());
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull IDJIError error) {
                     if (keyOperateCallBack != null) {
-                        keyOperateCallBack.actionChange(getName() + "【GET】 GetErrorMsg==" + error.toString());
+                        keyOperateCallBack.actionChange(getName() + "【GET】 GetErrorMsg ==" + error.toString());
                     }
                 }
             });
@@ -200,7 +204,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                 return;
             }
 
-            set(keyInfo, p, new CommonCallbacks.CompletionCallback() {
+            set(keyInfoSet, p, new CommonCallbacks.CompletionCallback() {
                 @Override
                 public void onSuccess() {
                     if (keyOperateCallBack != null) {
@@ -208,7 +212,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                         if (getKeyInfo().getTypeConverter() instanceof DJIValueConverter) {
                             param = p;
                         }
-                        keyOperateCallBack.actionChange("【SET】" + p.getClass().getSimpleName() + " success");
+                        keyOperateCallBack.actionChange(getName() + "【SET】==" +  p.toString() + " | " + " success");
                     }
                     ToastUtils.INSTANCE.showToast("set " + p.getClass().getSimpleName() + " success");
                 }
@@ -216,7 +220,7 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
                 @Override
                 public void onFailure(@NonNull IDJIError error) {
                     if (keyOperateCallBack != null) {
-                        keyOperateCallBack.actionChange("【SET】SetErrorMsg==" + error.toString());
+                        keyOperateCallBack.actionChange(getName() + "【SET】SetErrorMsg== " + p.toString() + "|" + error.toString());
                     }
                 }
             });
@@ -233,28 +237,24 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
      */
     public void doAction(String jsonStr) {
 
-        DJIActionKeyInfo<?,?> actionKeyInfo = (DJIActionKeyInfo<?,?>) keyInfo;
+        DJIActionKeyInfo<P,R> actionKeyInfo = (DJIActionKeyInfo<P,R>) keyInfo;
         P p = null;
         if(jsonStr != null && !jsonStr.isEmpty()){
             p = validPrams(jsonStr);
         }
-        if (p == null ) {
-            if(actionKeyInfo.getTypeConverter()!= EmptyValueConverter.converter){
-                return;
-            }else {
-                p = null;
-            }
+        if (p == null && actionKeyInfo.getTypeConverter()!= EmptyValueConverter.converter) {
+            return;
         }
 
-
+        P pRes = p;
         action(actionKeyInfo, p, new CommonCallbacks.CompletionCallbackWithParam<R>() {
             @Override
             public void onSuccess(Object data) {
                 if (keyOperateCallBack != null) {
                     if (data != null && !(data instanceof EmptyMsg)) {
-                        keyOperateCallBack.actionChange("【ACTION】" + getName() +  " result: success: " + data.toString());
+                        keyOperateCallBack.actionChange(getName() + "【ACTION】== " + getActionTipsStr(pRes) +  "  success: " + data.toString());
                     } else {
-                        keyOperateCallBack.actionChange("【ACTION】"  + getName() + " result: success");
+                        keyOperateCallBack.actionChange(getName() + "【ACTION】== "  +  getActionTipsStr(pRes) +  " result: success");
                     }
                 }
             }
@@ -262,10 +262,14 @@ public class KeyItem<P, R> extends KeyBaseStructure implements  Comparable<KeyIt
             @Override
             public void onFailure(@NonNull IDJIError error) {
                 if (keyOperateCallBack != null) {
-                    keyOperateCallBack.actionChange("【ACTION】 ActionErrorMsg==" + error.toString());
+                    keyOperateCallBack.actionChange(getName() +"【ACTION】 ActionErrorMsg==" + error.toString());
                 }
             }
         });
+    }
+
+    private String getActionTipsStr(P pRes){
+        return   pRes == null ? "" : pRes.toString();
     }
 
     /**

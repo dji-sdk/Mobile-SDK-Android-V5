@@ -37,11 +37,11 @@ import androidx.annotation.NonNull;
  */
 public class UXKey {
     private final String key;
-    private final Class valueType;
+    private final Class<?> valueType;
     private final String keyPath;
     private final UXKeys.UpdateType updateType;
 
-    public UXKey(@NonNull String key, @NonNull Class valueType, @NonNull String keyPath, @NonNull UXKeys.UpdateType updateType) {
+    public UXKey(@NonNull String key, @NonNull Class<?> valueType, @NonNull String keyPath, @NonNull UXKeys.UpdateType updateType) {
         this.key = key;
         this.valueType = valueType;
         this.keyPath = keyPath;
@@ -52,7 +52,7 @@ public class UXKey {
         return key;
     }
 
-    public Class getValueType() {
+    public Class<?> getValueType() {
         return valueType;
     }
 

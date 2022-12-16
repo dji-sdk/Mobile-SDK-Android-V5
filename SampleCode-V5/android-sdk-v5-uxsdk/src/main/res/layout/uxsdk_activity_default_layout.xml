@@ -109,81 +109,25 @@
         app:layout_constraintTop_toBottomOf="@+id/widget_auto_exposure_lock"
         app:layout_constraintVertical_bias="0.95" />
 
-    <View
-        android:id="@+id/camera_config_background"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/uxsdk_dark_gray"
-        android:padding="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
-        app:layout_constraintEnd_toEndOf="@+id/widget_camera_config_wb"
-        app:layout_constraintStart_toStartOf="@+id/widget_camera_config_iso_and_ei"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei"
-        tools:ignore="ContentDescription" />
-
-    <dji.v5.ux.visualcamera.iso.CameraConfigISOAndEIWidget
-        android:id="@+id/widget_camera_config_iso_and_ei"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/uxsdk_camera_config_height"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/widget_camera_config_shutter"
-        app:layout_constraintTop_toBottomOf="@+id/widget_remaining_flight_time" />
-
-    <dji.v5.ux.visualcamera.shutter.CameraConfigShutterWidget
-        android:id="@+id/widget_camera_config_shutter"
+    <dji.v5.ux.visualcamera.NDVICameraPanel
+        android:id="@+id/panel_ndvi_camera"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/uxsdk_camera_config_height"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
-        app:layout_constraintEnd_toStartOf="@+id/widget_camera_config_aperture"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei" />
+        app:layout_constraintBottom_toBottomOf="@+id/widget_focus_exposure_switch"
+        app:layout_constraintEnd_toStartOf="@+id/panel_visual_camera"
+        app:layout_constraintTop_toTopOf="@+id/widget_focus_exposure_switch" />
 
-    <dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget
-        android:id="@+id/widget_camera_config_aperture"
+    <dji.v5.ux.visualcamera.VisualCameraPanel
+        android:id="@+id/panel_visual_camera"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/uxsdk_camera_config_height"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
-        app:layout_constraintEnd_toStartOf="@+id/widget_camera_config_ev"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei" />
-
-    <dji.v5.ux.visualcamera.ev.CameraConfigEVWidget
-        android:id="@+id/widget_camera_config_ev"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/uxsdk_camera_config_height"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
-        app:layout_constraintEnd_toStartOf="@+id/widget_camera_config_wb"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei" />
-
-    <dji.v5.ux.visualcamera.wb.CameraConfigWBWidget
-        android:id="@+id/widget_camera_config_wb"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/uxsdk_camera_config_height"
-        android:layout_marginEnd="8dp"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
-        app:layout_constraintEnd_toStartOf="@+id/widget_camera_config_storage"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei" />
-
-    <dji.v5.ux.visualcamera.storage.CameraConfigStorageWidget
-        android:id="@+id/widget_camera_config_storage"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/uxsdk_camera_config_height"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/uxsdk_dark_gray"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_camera_config_iso_and_ei"
+        app:layout_constraintBottom_toBottomOf="@+id/widget_focus_exposure_switch"
         app:layout_constraintEnd_toStartOf="@+id/widget_auto_exposure_lock"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei" />
+        app:layout_constraintTop_toTopOf="@+id/widget_focus_exposure_switch" />
 
     <dji.v5.ux.cameracore.widget.autoexposurelock.AutoExposureLockWidget
         android:id="@+id/widget_auto_exposure_lock"
@@ -191,8 +135,9 @@
         android:layout_height="@dimen/uxsdk_camera_bar_height"
         android:layout_marginEnd="8dp"
         android:padding="@dimen/uxsdk_camera_bar_padding"
+        app:layout_constraintBottom_toBottomOf="@+id/widget_focus_exposure_switch"
         app:layout_constraintEnd_toStartOf="@+id/widget_focus_mode"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei"
+        app:layout_constraintTop_toTopOf="@+id/widget_focus_exposure_switch"
         tools:ignore="TouchTargetSizeCheck" />
 
     <dji.v5.ux.cameracore.widget.focusmode.FocusModeWidget
@@ -201,9 +146,9 @@
         android:layout_height="@dimen/uxsdk_camera_bar_height"
         android:layout_marginEnd="8dp"
         android:padding="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_auto_exposure_lock"
+        app:layout_constraintBottom_toBottomOf="@+id/widget_focus_exposure_switch"
         app:layout_constraintEnd_toStartOf="@+id/widget_focus_exposure_switch"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei"
+        app:layout_constraintTop_toTopOf="@+id/widget_focus_exposure_switch"
         tools:ignore="TouchTargetSizeCheck" />
 
     <dji.v5.ux.cameracore.widget.focusexposureswitch.FocusExposureSwitchWidget
@@ -212,12 +157,9 @@
         android:layout_height="@dimen/uxsdk_camera_bar_height"
         android:layout_marginEnd="8dp"
         android:padding="@dimen/uxsdk_camera_bar_padding"
-        app:layout_constraintBottom_toBottomOf="@+id/widget_auto_exposure_lock"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/widget_camera_config_iso_and_ei"
+        app:layout_constraintTop_toBottomOf="@+id/widget_remaining_flight_time"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <!-- end camera bar -->
 
     <dji.v5.ux.cameracore.widget.cameracontrols.CameraControlsWidget
         android:id="@+id/widget_camera_controls"
@@ -235,8 +177,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintTop_toBottomOf="@+id/widget_camera_config_iso_and_ei"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintTop_toBottomOf="@+id/widget_focus_exposure_switch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/widget_camera_controls" />
 
@@ -293,16 +235,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-<!--    <dji.ux.beta.accessory.widget.rtk.RTKWidget-->
-<!--        android:id="@+id/widget_rtk"-->
-<!--        android:layout_width="500dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/panel_top_bar" />-->
-
     <dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget
         android:id="@+id/widget_simulator_control"
         android:layout_width="330dp"
@@ -323,6 +255,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <dji.v5.ux.map.MapWidget
+        android:id="@+id/widget_map"
+        android:layout_width="@dimen/uxsdk_150_dp"
+        android:layout_height="@dimen/uxsdk_100_dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:uxsdk_djiMap_mapType="normal" />
+
     <dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget
         android:id="@+id/widget_panel_system_status_list"
         android:layout_width="0dp"
@@ -342,14 +285,5 @@
         app:uxsdk_titleBarBackgroundColor="@color/uxsdk_black" />
 
 
-    <dji.v5.ux.map.MapWidget
-        android:id="@+id/widget_map"
-        android:layout_width="@dimen/uxsdk_150_dp"
-        android:layout_height="@dimen/uxsdk_100_dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:uxsdk_djiMap_mapType="normal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

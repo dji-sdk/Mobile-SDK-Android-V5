@@ -45,7 +45,7 @@ public class WidgetView extends ConstraintLayout {
     protected TextView aspectRatioTextView;
     protected TextView currentSizeTextView;
     //region Fields
-    private WidgetViewHolder widgetViewHolder;
+    private WidgetViewHolder<?> widgetViewHolder;
     private ScaleGestureDetector scaleGestureDetector;
     //endregion
     private int originalHeight;
@@ -73,7 +73,7 @@ public class WidgetView extends ConstraintLayout {
      * @param widgetViewHolder An instance of {@link WidgetViewHolder}.
      * @return The initialized widget.
      */
-    public ViewGroup init(WidgetViewHolder widgetViewHolder) {
+    public ViewGroup init(WidgetViewHolder<?> widgetViewHolder) {
         this.widgetViewHolder = widgetViewHolder;
         scaleGestureDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
         inflate(getContext(), R.layout.uxsdk_view_widget, this);

@@ -41,13 +41,13 @@ import androidx.annotation.StyleRes;
 import dji.sdk.keyvalue.value.camera.CameraISO;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
+import dji.v5.utils.common.DisplayUtil;
 import dji.v5.ux.R;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.ICameraIndex;
 import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
-import dji.v5.ux.core.util.DisplayUtil;
 import dji.v5.ux.core.util.RxUtil;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -55,7 +55,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 /**
  * Shows the camera's current ISO or exposure index setting.
  */
-public class CameraConfigISOAndEIWidget extends ConstraintLayoutWidget implements ICameraIndex {
+public class CameraConfigISOAndEIWidget extends ConstraintLayoutWidget<Object> implements ICameraIndex {
     //region Fields
     private static final String TAG = "ConfigISOAndEIWidget";
     private CameraConfigISOAndEIWidgetModel widgetModel;

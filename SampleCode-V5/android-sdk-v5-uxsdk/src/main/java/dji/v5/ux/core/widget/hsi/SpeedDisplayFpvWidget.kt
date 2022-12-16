@@ -14,12 +14,13 @@ import dji.v5.ux.R
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
 class SpeedDisplayFpvWidget @JvmOverloads constructor(
-    context: Context,
+    ctx: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : SpeedDisplayWidget(context, attrs, defStyleAttr) {
+    defStyleAttr: Int = 0,
+) : SpeedDisplayWidget(ctx, attrs, defStyleAttr) {
 
-    override fun loadLayout(){
+    override fun loadLayout(context: Context) {
         View.inflate(context, R.layout.uxsdk_fpv_pfd_speed_display_widget, this)
     }
+
 }

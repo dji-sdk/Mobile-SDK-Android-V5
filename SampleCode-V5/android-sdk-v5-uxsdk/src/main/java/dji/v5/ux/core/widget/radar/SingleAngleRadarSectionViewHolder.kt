@@ -55,11 +55,6 @@ class SingleAngleRadarSectionViewHolder(
         arrow.visibility = View.GONE
     }
 
-    private fun show() {
-        radarImage.visibility = View.VISIBLE
-        distance.visibility = View.VISIBLE
-        arrow.visibility = View.VISIBLE
-    }
 
     override fun setImages(images: Array<Drawable?>) {
         radarImage.setImageDrawable(images[0])

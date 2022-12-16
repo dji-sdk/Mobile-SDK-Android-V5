@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <dji.v5.ux.core.ui.component.StreamPaletteRangeSeekbar
+        android:id="@+id/seekbar_isotherm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/uxsdk_12_dp"
+        android:paddingBottom="@dimen/uxsdk_16_dp"
+        android:paddingLeft="@dimen/uxsdk_19_dp"
+        android:paddingRight="@dimen/uxsdk_19_dp"
+        app:uxsdk_range_backgroundDrawable="@drawable/uxsdk_isotherm_seekbar_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:uxsdk_range_leftThumbDrawable="@drawable/uxsdk_slider_left"
+        app:uxsdk_range_progressDrawable="@drawable/uxsdk_ic_stream_palette_seekbar"
+        app:uxsdk_range_progressHeight="@dimen/uxsdk_6_dp"
+        app:uxsdk_range_rightThumbDrawable="@drawable/uxsdk_slider_right" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

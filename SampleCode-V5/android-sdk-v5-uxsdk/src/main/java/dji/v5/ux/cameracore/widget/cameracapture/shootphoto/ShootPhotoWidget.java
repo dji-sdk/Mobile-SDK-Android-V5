@@ -49,6 +49,7 @@ import dji.v5.ux.R;
 import dji.v5.ux.cameracore.ui.ProgressRingView;
 import dji.v5.ux.cameracore.util.CameraActionSound;
 import dji.v5.ux.cameracore.util.CameraResource;
+import dji.v5.ux.cameracore.widget.cameracontrols.RemoteControllerButtonDownModel;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.ICameraIndex;
 import dji.v5.ux.core.base.SchedulerProvider;
@@ -67,10 +68,11 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * Widget can be used for shooting photo. The widget displays the current photo mode. It also
  * displays the storage state and errors associated with it.
  */
-public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnClickListener, ICameraIndex {
+public class ShootPhotoWidget extends ConstraintLayoutWidget<Object> implements View.OnClickListener, ICameraIndex {
     //region Fields
     private static final String TAG = "ShootPhotoWidget";
     private ShootPhotoWidgetModel widgetModel;
+    private RemoteControllerButtonDownModel buttonDownModel;
     private ProgressRingView borderProgressRingView;
     private ImageView centerImageView;
     private ImageView storageStatusOverlayImageView;
@@ -113,9 +115,8 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
         cameraActionSound = new CameraActionSound(context);
         if (!isInEditMode()) {
             centerImageView.setOnClickListener(this);
-            widgetModel =
-                    new ShootPhotoWidgetModel(DJISDKModel.getInstance(),
-                            ObservableInMemoryKeyedStore.getInstance());
+            widgetModel = new ShootPhotoWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
+            buttonDownModel = new RemoteControllerButtonDownModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
         }
         initDefaults();
         if (attrs != null) {
@@ -128,6 +129,7 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
         super.onAttachedToWindow();
         if (!isInEditMode()) {
             widgetModel.setup();
+            buttonDownModel.setup();
         }
     }
 
@@ -135,6 +137,7 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
     protected void onDetachedFromWindow() {
         if (!isInEditMode()) {
             widgetModel.cleanup();
+            buttonDownModel.cleanup();
         }
         super.onDetachedFromWindow();
     }
@@ -145,6 +148,13 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
                 .subscribe(this::onIsShootingPhotoChange, RxUtil.logErrorConsumer(TAG, "isShootingPhoto: ")));
         addReaction(reactToCanStartOrStopShootingPhoto());
         addReaction(reactToPhotoStateAndPhotoStorageState());
+        addReaction(buttonDownModel.isShutterButtonDownProcessor().toFlowable()
+                .observeOn(SchedulerProvider.ui())
+                .subscribe(aBoolean -> {
+                    if (aBoolean == Boolean.TRUE) {
+                        actionOnShootingPhoto();
+                    }
+                }));
     }
 
     @NonNull
@@ -174,20 +184,27 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
     @Override
     public void onClick(View v) {
         if (v.equals(centerImageView)) {
-            Single<Boolean> stop = widgetModel.canStopShootingPhoto().firstOrError();
-            Single<Boolean> start = widgetModel.canStartShootingPhoto().firstOrError();
-
-            addDisposable(Single.zip(stop, start, Pair::new).flatMapCompletable(pairs -> {
-                if (pairs.first) {
-                    return widgetModel.stopShootPhoto();
-                } else if (pairs.second) {
-                    return widgetModel.startShootPhoto();
-                }
-                return Completable.complete();
-            }).observeOn(SchedulerProvider.ui())
-                    .subscribe(() -> {
-                    }, RxUtil.logErrorConsumer(TAG, "Start Stop Shoot Photo")));
+            actionOnShootingPhoto();
         }
+    }
+
+    private void actionOnShootingPhoto() {
+        if (!widgetModel.isPhotoMode()) {
+            return;
+        }
+        Single<Boolean> stop = widgetModel.canStopShootingPhoto().firstOrError();
+        Single<Boolean> start = widgetModel.canStartShootingPhoto().firstOrError();
+
+        addDisposable(Single.zip(stop, start, Pair::new).flatMapCompletable(pairs -> {
+                    if (pairs.first) {
+                        return widgetModel.stopShootPhoto();
+                    } else if (pairs.second) {
+                        return widgetModel.startShootPhoto();
+                    }
+                    return Completable.complete();
+                }).observeOn(SchedulerProvider.ui())
+                .subscribe(() -> {
+                }, RxUtil.logErrorConsumer(TAG, "Start Stop Shoot Photo")));
     }
     //endregion
 
@@ -288,8 +305,8 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
     private void checkAndUpdatePhotoStateAndPhotoStorageState() {
         if (!isInEditMode()) {
             addDisposable(Flowable.combineLatest(widgetModel.getCameraPhotoState(),
-                    widgetModel.getCameraStorageState(),
-                    Pair::new)
+                            widgetModel.getCameraStorageState(),
+                            Pair::new)
                     .firstOrError()
                     .observeOn(SchedulerProvider.ui())
                     .subscribe(values -> updateCameraForegroundResource(values.first, values.second),
@@ -300,9 +317,9 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget implements View.OnC
     private void checkAndUpdateCanStartOrStopShootingPhoto() {
         if (!isInEditMode()) {
             addDisposable(Flowable.combineLatest(
-                    widgetModel.canStartShootingPhoto(),
-                    widgetModel.canStopShootingPhoto(),
-                    Pair::new)
+                            widgetModel.canStartShootingPhoto(),
+                            widgetModel.canStopShootingPhoto(),
+                            Pair::new)
                     .firstOrError()
                     .observeOn(SchedulerProvider.ui())
                     .subscribe(values -> updateImages(values.first, values.second),

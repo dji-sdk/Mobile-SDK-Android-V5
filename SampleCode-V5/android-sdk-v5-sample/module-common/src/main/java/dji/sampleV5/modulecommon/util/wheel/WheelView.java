@@ -107,7 +107,7 @@ public class WheelView extends View
 	public WheelView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
-		initData(context);
+		initData();
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class WheelView extends View
 	public WheelView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
-		initData(context);
+		initData();
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class WheelView extends View
 	public WheelView(Context context)
 	{
 		super(context);
-		initData(context);
+		initData();
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class WheelView extends View
 	 * @param context
 	 *            the context
 	 */
-	private void initData(Context context)
+	private void initData()
 	{
 		scroller = new WheelScroller(getContext(), scrollingListener);
 	}
@@ -782,8 +782,8 @@ public class WheelView extends View
 	{
 		scrollingOffset += delta;
 
-		int itemHeight = getItemHeight();
-		int count = scrollingOffset / itemHeight;
+		int itemHeights = getItemHeight();
+		int count = scrollingOffset / itemHeights;
 
 		int pos = currentItem - count;
 		int itemCount = viewAdapter.getItemsCount();

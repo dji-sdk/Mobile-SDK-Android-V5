@@ -28,7 +28,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
-import dji.v5.manager.aircraft.perception.PerceptionInfo
+import dji.v5.manager.aircraft.perception.data.PerceptionInfo
 import dji.v5.manager.aircraft.perception.PerceptionManager
 import dji.v5.ux.R
 import dji.v5.ux.core.base.DJISDKModel

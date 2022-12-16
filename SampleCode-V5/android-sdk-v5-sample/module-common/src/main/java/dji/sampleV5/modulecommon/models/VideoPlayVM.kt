@@ -26,7 +26,6 @@ class VideoPlayVM : DJIViewModel(){
 
 
     fun removeAllListener(){
-
         videoPlayStatus.postValue(VideoPlayStatus.Builder().build())
         MediaDataCenter.getInstance().mediaManager.removeAllVideoPlayStateListener()
     }

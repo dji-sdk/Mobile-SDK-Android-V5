@@ -52,6 +52,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.res.use
 import dji.sdk.keyvalue.value.flightcontroller.AirSenseWarningLevel
+import dji.v5.utils.common.DisplayUtil
 import dji.v5.ux.R
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.base.SchedulerProvider
@@ -62,7 +63,6 @@ import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.ViewUtil
 import dji.v5.ux.core.widget.airsense.AirSenseWidget.ModelState
 import dji.v5.ux.core.widget.airsense.AirSenseWidget.ModelState.*

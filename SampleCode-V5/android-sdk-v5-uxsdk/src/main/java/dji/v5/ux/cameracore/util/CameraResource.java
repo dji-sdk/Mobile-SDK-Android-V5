@@ -132,4 +132,8 @@ public class CameraResource {
             return R.drawable.uxsdk_ic_photo_mode_pano_180;
         }
     }
+
+    private CameraResource() {
+
+    }
 }

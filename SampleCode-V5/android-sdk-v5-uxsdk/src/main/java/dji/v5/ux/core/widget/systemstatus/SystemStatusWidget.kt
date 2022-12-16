@@ -39,6 +39,7 @@ import androidx.annotation.StyleRes
 import androidx.core.content.res.use
 import dji.v5.manager.diagnostic.DJIDeviceStatus
 import dji.v5.manager.diagnostic.WarningLevel
+import dji.v5.utils.common.DisplayUtil
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.Consumer
@@ -52,7 +53,6 @@ import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.communication.OnStateChangeCallback
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.core.util.UnitConversionUtil
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget.ModelState

@@ -9,7 +9,7 @@ import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 import dji.v5.ux.R
 import dji.v5.ux.core.ui.VerticalSeekBar
-import dji.v5.ux.core.util.AndUtil
+import dji.v5.utils.common.AndUtil
 import kotlin.math.max
 
 class ExposeVSeekBar @JvmOverloads constructor(

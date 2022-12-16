@@ -1,6 +1,9 @@
 package dji.sampleV5.aircraft
 
 import dji.sampleV5.modulecommon.DJIMainActivity
+import dji.v5.common.utils.GeoidManager
+import dji.v5.utils.common.DJIExecutor
+import dji.v5.utils.common.DiskUtil
 import dji.v5.ux.core.communication.DefaultGlobalPreferences
 import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.util.UxSharedPreferencesUtil
@@ -20,6 +23,8 @@ class DJIAircraftMainActivity : DJIMainActivity() {
     override fun prepareUxActivity() {
         UxSharedPreferencesUtil.initialize(this)
         GlobalPreferencesManager.initialize(DefaultGlobalPreferences(this))
+        GeoidManager.getInstance().init(this)
+
         enableDefaultLayout(DefaultLayoutActivity::class.java)
         enableWidgetList(WidgetsActivity::class.java)
     }

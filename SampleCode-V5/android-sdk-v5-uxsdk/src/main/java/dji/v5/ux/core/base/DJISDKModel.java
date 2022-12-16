@@ -29,21 +29,14 @@ import androidx.annotation.Nullable;
 import dji.sdk.keyvalue.key.DJIKey;
 import dji.v5.common.utils.RxUtil;
 import dji.v5.manager.KeyManager;
-import dji.v5.utils.common.LogUtils;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 
 /**
  * Encapsulates communication with SDK KeyManager for SDKKeys.
  */
 public class DJISDKModel {
-
-    //region Fields
-    private final String TAG = LogUtils.getTag(this);
-    private static final int MAX_COMPONENT_INDEX = 10;
-    //endregion
 
     private DJISDKModel() {
     }
@@ -117,14 +110,14 @@ public class DJISDKModel {
      * @return A completable indicating success/error performing the action.
      */
     @NonNull
-    public <Param, Result> Completable performAction(@NonNull final DJIKey.ActionKey<Param, Result> key,
-                                                     final Param argument) {
-        return RxUtil.performAction(key, argument);
+    public <Param, Result> Completable performActionWithOutResult(@NonNull final DJIKey.ActionKey<Param, Result> key,
+                                                                  final Param argument) {
+        return RxUtil.performActionWithOutResult(key, argument);
     }
 
     @NonNull
-    public <Param, Result> Completable performAction(@NonNull final DJIKey.ActionKey<Param, Result> key) {
-        return performAction(key, null);
+    public <Param, Result> Completable performActionWithOutResult(@NonNull final DJIKey.ActionKey<Param, Result> key) {
+        return performActionWithOutResult(key, null);
     }
 
     /**

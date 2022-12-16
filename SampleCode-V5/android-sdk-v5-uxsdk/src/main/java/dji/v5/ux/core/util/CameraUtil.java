@@ -278,7 +278,7 @@ public final class CameraUtil {
         }
     }
 
-    private static CameraISO convertInt2ISO(int isoValue){
+    private static CameraISO convertInt2ISO(int isoValue) {
         if (isoValue >= 1600 && isoValue < 3200) {
             return CameraISO.ISO_1600;
         } else if (isoValue >= 3200 && isoValue < 6400) {
@@ -310,15 +310,6 @@ public final class CameraUtil {
         }
     }
 
-    public static int getLensIndex(CameraVideoStreamSourceType streamSource, String cameraName) {
-        if (streamSource == CameraVideoStreamSourceType.WIDE_CAMERA) {
-            return CameraLensType.CAMERA_LENS_WIDE.value();
-        } else if (streamSource == CameraVideoStreamSourceType.INFRARED_CAMERA) {
-            return CameraLensType.CAMERA_LENS_THERMAL.value();
-        } else {
-            return CameraLensType.CAMERA_LENS_ZOOM.value();
-        }
-    }
 
     public static ComponentIndexType getCameraIndex(@Nullable PhysicalDevicePosition devicePosition) {
         if (devicePosition == null) {
@@ -354,5 +345,13 @@ public final class CameraUtil {
     public static boolean isAutoISOSupportedByProduct() {
         return true;
 //        return (!ProductUtil.isMavicAir()) && (!ProductUtil.isMavicPro() && (!ProductUtil.isMavicMini()));
+    }
+
+    public static boolean isSupportForNDVI(CameraLensType lensType) {
+        return lensType == CameraLensType.CAMERA_LENS_MS_G ||
+                lensType == CameraLensType.CAMERA_LENS_MS_R ||
+                lensType == CameraLensType.CAMERA_LENS_MS_RE ||
+                lensType == CameraLensType.CAMERA_LENS_MS_NIR ||
+                lensType == CameraLensType.CAMERA_LENS_MS_NDVI;
     }
 }

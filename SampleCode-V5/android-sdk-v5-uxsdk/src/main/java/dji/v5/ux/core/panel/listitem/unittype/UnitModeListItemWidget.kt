@@ -44,6 +44,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.res.use
+import dji.v5.utils.common.DisplayUtil
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.R
 import dji.v5.ux.core.base.DJISDKModel
@@ -57,7 +58,6 @@ import dji.v5.ux.core.extension.*
 import dji.v5.ux.core.panel.listitem.unittype.UnitModeListItemWidget.ModelState
 import dji.v5.ux.core.panel.listitem.unittype.UnitModeListItemWidget.ModelState.*
 import dji.v5.ux.core.panel.listitem.unittype.UnitModeListItemWidgetModel.UnitTypeState
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.UnitConversionUtil.UnitType
 
 /**

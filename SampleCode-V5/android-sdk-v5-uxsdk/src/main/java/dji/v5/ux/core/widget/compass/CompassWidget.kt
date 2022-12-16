@@ -339,9 +339,6 @@ open class CompassWidget @JvmOverloads constructor(
     }
 
     init {
-        if (!isInEditMode) {
-            widgetModel.mobileGPSLocationUtil = MobileGPSLocationUtil(context, widgetModel)
-        }
         attrs?.let { initAttributes(context, it) }
     }
     //endregion

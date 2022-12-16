@@ -18,5 +18,4 @@ open class DJIViewModel : ViewModel() {
 
     val logTag = LogUtils.getTag(this)
 
-
 }

@@ -66,13 +66,30 @@
                   />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_refresh_file_list"
+            <EditText
+                android:id="@+id/mediaIndex"
+                android:hint="file index"
+                android:inputType="numberSigned"
                 style="@style/main_fragment_btn"
-                android:text="获取文件列表"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sp_choose_component_lyt" />
+            <EditText
+                android:id="@+id/fetchCount"
+                style="@style/main_fragment_btn"
+                android:hint="fetch count"
+                android:inputType="numberSigned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mediaIndex" />
+
+            <Button
+                android:id="@+id/btn_refresh_file_list"
+                style="@style/main_fragment_btn"
+                android:text="@string/fetch_files_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fetchCount" />
 
             <Button
                 android:id="@+id/btn_select"
@@ -90,6 +107,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_select" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

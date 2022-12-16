@@ -55,7 +55,6 @@ import io.reactivex.rxjava3.core.Flowable;
 public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICameraIndex {
 
     //region Fields
-    private final String TAG = LogUtils.getTag(this);
     private final DataProcessor<Boolean> isFocusModeSupportedDataProcessor;
     private final DataProcessor<CameraFocusMode> focusModeDataProcessor;
     private final DataProcessor<CameraMeteringMode> meteringModeDataProcessor;
@@ -191,7 +190,7 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
                             addDisposable(keyedStore.setValue(controlModeKey, ControlMode.SPOT_METER)
                                     .subscribe(() -> {
                                         //do nothing
-                                    }, RxUtil.logErrorConsumer(TAG, "setMeteringMode: ")));
+                                    }, RxUtil.logErrorConsumer(tag, "setMeteringMode: ")));
                         }).doOnError(
                         error -> {
                             setFocusMode();
@@ -203,7 +202,7 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
         if (controlModeKey == null || preferencesManager == null) {
             return Completable.complete();
         }
-        LogUtils.d(TAG, "In setFocusMode ControlModeKey Value Type " + controlModeKey.getValueType());
+        LogUtils.d(tag, "In setFocusMode ControlModeKey Value Type " + controlModeKey.getValueType());
         if (focusModeDataProcessor.getValue() == CameraFocusMode.MANUAL) {
             preferencesManager.setControlMode(ControlMode.MANUAL_FOCUS);
             return keyedStore.setValue(controlModeKey, ControlMode.MANUAL_FOCUS);

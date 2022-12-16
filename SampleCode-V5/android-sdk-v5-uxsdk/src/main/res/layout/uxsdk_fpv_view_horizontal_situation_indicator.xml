@@ -1,57 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/uxsdk_350_dp"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal"
-    tools:parentTag="dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget">
+    android:orientation="horizontal">
+
+    <Space
+        android:id="@+id/anchor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
 
     <dji.v5.ux.core.widget.hsi.SpeedDisplayWidget
         android:id="@+id/pfd_hsi_speed_display"
-        android:layout_marginTop="@dimen/uxsdk_4_dp"
-        android:layout_marginEnd="@dimen/uxsdk_n8_dp"
-        android:layout_alignParentStart="true"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/uxsdk_96_dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/uxsdk_30_dp"
+        android:layout_marginEnd="@dimen/uxsdk_50_dp"
+        android:layout_toStartOf="@id/anchor"
+        android:paddingTop="@dimen/uxsdk_11_dp"
+        android:textColor="@color/uxsdk_white" />
 
     <dji.v5.ux.core.ui.hsi.HSIView
         android:id="@+id/pfd_hsi_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/uxsdk_141_dp"
-        app:uxsdk_hsi_max_perception_stroke_width="@dimen/uxsdk_3_dp"
-        app:uxsdk_hsi_radar_max_perception_stroke_width="@dimen/uxsdk_5_dp"
-        app:uxsdk_hsi_aircraft_indicator_size="@dimen/uxsdk_13_dp"
-        app:uxsdk_hsi_bitmap_offset="@dimen/uxsdk_2_dp"
-        app:uxsdk_hsi_degree_indicator_height="@dimen/uxsdk_4_dp"
-        app:uxsdk_hsi_degree_indicator_text_size="@dimen/uxsdk_text_size_small"
-        app:uxsdk_hsi_degree_indicator_width="@dimen/uxsdk_9_dp"
-        app:uxsdk_hsi_gimbal_indicator_max_scope="@dimen/uxsdk_11_dp"
-        app:uxsdk_hsi_gimbal_indicator_size="@dimen/uxsdk_6_dp"
-        app:uxsdk_hsi_marker_indicator_text_size="@dimen/uxsdk_text_size_medium"
-        app:uxsdk_hsi_rng_point_marker_size="@dimen/uxsdk_13_dp"
-        app:uxsdk_hsi_smart_track_point_marker_size="@dimen/uxsdk_13_dp"
-        app:uxsdk_hsi_marker_margin_horizontal="@dimen/uxsdk_2_dp"
-        app:uxsdk_hsi_marker_margin_vertical="@dimen/uxsdk_2_dp"
-        app:uxsdk_hsi_marker_indicator_height="@dimen/uxsdk_26_dp"
-        app:uxsdk_hsi_marker_indicator_width="@dimen/uxsdk_30_dp"
-        app:uxsdk_hsi_heading_line_width="@dimen/uxsdk_1_dp"
-        app:uxsdk_hsi_pin_point_marker_size="@dimen/uxsdk_13_dp"
-        app:uxsdk_hsi_home_point_marker_size="@dimen/uxsdk_13_dp" />
+        android:layout_height="@dimen/uxsdk_116_dp"
+        android:layout_marginTop="@dimen/uxsdk_5_dp"
+        android:layout_marginBottom="@dimen/uxsdk_5_dp"
+        app:uxsdk_hsi_aircraft_indicator_size="@dimen/uxsdk_12_dp"
+        app:uxsdk_hsi_degree_indicator_height="@dimen/uxsdk_10_dp"
+        app:uxsdk_hsi_degree_indicator_text_height="@dimen/uxsdk_13_dp"
+        app:uxsdk_hsi_degree_indicator_text_size="@dimen/uxsdk_11_dp"
+        app:uxsdk_hsi_gimbal_indicator_max_scope="10dp"
+        app:uxsdk_hsi_heading_line_width="1.2dp"
+        app:uxsdk_hsi_marker_indicator_text_max_width="@dimen/uxsdk_108_dp"
+        app:uxsdk_hsi_marker_indicator_text_size="@dimen/uxsdk_10_dp"
+        app:uxsdk_hsi_marker_margin_horizontal="@dimen/uxsdk_5_dp"
+        app:uxsdk_hsi_marker_margin_vertical="0dp"
+        app:uxsdk_hsi_max_perception_stroke_width="1.2dp"
+        app:uxsdk_hsi_pin_point_marker_size="@dimen/uxsdk_11_dp"
+        app:uxsdk_hsi_radar_max_perception_stroke_width="@dimen/uxsdk_3_dp"
+        app:uxsdk_hsi_rng_point_marker_size="@dimen/uxsdk_11_dp"
+        app:uxsdk_hsi_smart_track_point_marker_size="11dp" />
+
+    <dji.v5.ux.core.widget.hsi.GimbalPitchBarWidget
+        android:id="@+id/pfd_hsi_gimbal_pitch_display"
+        android:layout_width="@dimen/uxsdk_60_dp"
+        android:layout_height="@dimen/uxsdk_68_dp"
+        android:layout_alignEnd="@id/pfd_hsi_speed_display"
+        android:layout_centerVertical="true"
+        android:paddingTop="@dimen/uxsdk_17_dp"
+        android:paddingBottom="@dimen/uxsdk_4_dp"
+        app:uxsdk_gpb_bar_color="#26ffffff"
+        app:uxsdk_gpb_bar_max_value="120"
+        app:uxsdk_gpb_bar_min_value="-120"
+        app:uxsdk_gpb_bar_origin_padding="2dp"
+        app:uxsdk_gpb_bar_stroke_color="@color/uxsdk_black_50_percent"
+        app:uxsdk_gpb_bar_stroke_width="0.2dp"
+        app:uxsdk_gpb_bar_text="0°"
+        app:uxsdk_gpb_bar_text_size="@dimen/uxsdk_11_dp"
+        app:uxsdk_gpb_bar_value="0"
+        app:uxsdk_gpb_bar_width="3.84dp"
+        app:uxsdk_gpb_highlight_color="@color/uxsdk_white"
+        app:uxsdk_gpb_highlight_width="1.2dp"
+        app:uxsdk_gpb_indicator_drawable="@drawable/uxsdk_fpv_hsi_pitch_guide_gimbal_3"
+        app:uxsdk_gpb_origin_length="@dimen/uxsdk_7_dp"
+        app:uxsdk_gpb_origin_width="1.2dp" />
 
     <dji.v5.ux.core.widget.hsi.AttitudeDisplayWidget
         android:id="@+id/pfd_hsi_attitude_display"
-        android:layout_marginTop="@dimen/uxsdk_4_dp"
-        android:layout_marginStart="@dimen/uxsdk_n8_dp"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/uxsdk_96_dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-</merge>
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/uxsdk_50_dp"
+        android:layout_toEndOf="@id/anchor"
+        android:paddingTop="@dimen/uxsdk_13_dp" />
+</RelativeLayout>

@@ -6,7 +6,7 @@ import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.key.ProductKey
 import dji.sdk.keyvalue.value.product.ProductType
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
-import dji.v5.common.utils.ProductUtil
+import dji.sdk.keyvalue.utils.ProductUtil
 import dji.v5.common.utils.RxUtil
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.rtk.RTKSystemStateListener
@@ -167,6 +167,7 @@ class RTKTypeSwitchWidgetModel(
                 RTKReferenceStationSource.NONE,
                 RTKReferenceStationSource.BASE_STATION,
                 RTKReferenceStationSource.QX_NETWORK_SERVICE,
+                RTKReferenceStationSource.NTRIP_NETWORK_SERVICE,
                 RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE
             )
         } else {

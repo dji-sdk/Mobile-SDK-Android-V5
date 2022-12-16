@@ -51,6 +51,7 @@ import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.ux.R;
 import dji.v5.ux.cameracore.util.CameraActionSound;
 import dji.v5.ux.cameracore.widget.cameracapture.recordvideo.RecordVideoWidgetModel.RecordingState;
+import dji.v5.ux.cameracore.widget.cameracontrols.RemoteControllerButtonDownModel;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.ICameraIndex;
 import dji.v5.ux.core.base.SchedulerProvider;
@@ -67,11 +68,12 @@ import io.reactivex.rxjava3.core.Completable;
  * Widget can be used for recording video. The widget displays the current video mode. It also
  * displays the storage state and errors associated with it.
  */
-public class RecordVideoWidget extends ConstraintLayoutWidget implements OnClickListener, ICameraIndex {
+public class RecordVideoWidget extends ConstraintLayoutWidget<Object> implements OnClickListener, ICameraIndex {
 
     //region Fields
     private static final String TAG = "RecordVideoWidget";
     private RecordVideoWidgetModel widgetModel;
+    private RemoteControllerButtonDownModel buttonDownModel;
     private ImageView centerImageView;
     private TextView videoTimerTextView;
     private ImageView storageStatusOverlayImageView;
@@ -111,6 +113,7 @@ public class RecordVideoWidget extends ConstraintLayoutWidget implements OnClick
         cameraActionSound = new CameraActionSound(context);
         if (!isInEditMode()) {
             widgetModel = new RecordVideoWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
+            buttonDownModel = new RemoteControllerButtonDownModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
         }
         initDefaults();
         if (attrs != null) {
@@ -123,6 +126,7 @@ public class RecordVideoWidget extends ConstraintLayoutWidget implements OnClick
         super.onAttachedToWindow();
         if (!isInEditMode()) {
             widgetModel.setup();
+            buttonDownModel.setup();
         }
     }
 
@@ -130,6 +134,7 @@ public class RecordVideoWidget extends ConstraintLayoutWidget implements OnClick
     protected void onDetachedFromWindow() {
         if (!isInEditMode()) {
             widgetModel.cleanup();
+            buttonDownModel.cleanup();
         }
         super.onDetachedFromWindow();
     }
@@ -145,6 +150,13 @@ public class RecordVideoWidget extends ConstraintLayoutWidget implements OnClick
         addReaction(widgetModel.getCameraVideoStorageState()
                 .observeOn(SchedulerProvider.ui())
                 .subscribe(this::updateCameraForegroundResource, RxUtil.logErrorConsumer(TAG, "camera storage update: ")));
+        addReaction(buttonDownModel.isRecordButtonDownProcessor().toFlowable()
+                .observeOn(SchedulerProvider.ui())
+                .subscribe(aBoolean -> {
+                    if (aBoolean == Boolean.TRUE) {
+                        actionOnRecording();
+                    }
+                }));
     }
 
     @NonNull
@@ -174,19 +186,25 @@ public class RecordVideoWidget extends ConstraintLayoutWidget implements OnClick
     @Override
     public void onClick(View v) {
         if (v.equals(centerImageView)) {
-            addDisposable(widgetModel.getRecordingState().firstOrError().flatMapCompletable(recordingState -> {
-                if (recordingState == RecordingState.RECORDING_IN_PROGRESS) {
-                    return widgetModel.stopRecordVideo();
-                } else if (recordingState == RecordingState.RECORDING_STOPPED) {
-                    return widgetModel.startRecordVideo();
-                } else {
-                    return Completable.complete();
-                }
-            }).observeOn(SchedulerProvider.ui()).subscribe(() -> {
-            }, RxUtil.logErrorConsumer(TAG, "START STOP VIDEO")));
+            actionOnRecording();
         }
     }
-    //endregion
+
+    private void actionOnRecording() {
+        if (!widgetModel.isVideoMode()) {
+            return;
+        }
+        widgetModel.getRecordingState().firstOrError().flatMapCompletable(recordingState -> {
+            if (recordingState == RecordingState.RECORDING_IN_PROGRESS) {
+                return widgetModel.stopRecordVideo();
+            } else if (recordingState == RecordingState.RECORDING_STOPPED) {
+                return widgetModel.startRecordVideo();
+            } else {
+                return Completable.complete();
+            }
+        }).observeOn(SchedulerProvider.ui()).subscribe(() -> {
+        }, RxUtil.logErrorConsumer(TAG, "START STOP VIDEO"));
+    }
 
     //region private helpers
     private void initDefaults() {
@@ -613,7 +631,7 @@ public class RecordVideoWidget extends ConstraintLayoutWidget implements OnClick
      *
      * @return Drawable being used
      */
-    public Drawable getForegroundIconBackground(@DrawableRes int resourceId) {
+    public Drawable getForegroundIconBackground() {
         return storageStatusOverlayImageView.getBackground();
     }
 

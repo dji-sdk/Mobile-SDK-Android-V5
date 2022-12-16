@@ -2,7 +2,7 @@ package dji.sampleV5.all
 
 import dji.sampleV5.modulecommon.TestingToolsActivity
 import dji.sampleV5.modulecommon.data.CommonFragmentPageInfoFactory
-import dji.sampleV5.modulecommon.data.FragmentPageInfo
+import dji.sampleV5.modulecommon.data.FragmentPageItemList
 import dji.sampleV5.moduleaircraft.data.AircraftFragmentPageInfoFactory
 import dji.sampleV5.modulehandheld.data.HandheldFragmentPageInfoFactory
 import java.util.*
@@ -18,7 +18,7 @@ import java.util.*
 class AllTestingToolsActivity : TestingToolsActivity() {
     override fun loadPages() {
         msdkCommonOperateVm.apply {
-            val itemList = LinkedHashSet<FragmentPageInfo>().also {
+            val itemList = LinkedHashSet<FragmentPageItemList>().also {
                 it.add(CommonFragmentPageInfoFactory().createPageInfo())
                 it.add(AircraftFragmentPageInfoFactory().createPageInfo())
                 it.add(HandheldFragmentPageInfoFactory().createPageInfo())

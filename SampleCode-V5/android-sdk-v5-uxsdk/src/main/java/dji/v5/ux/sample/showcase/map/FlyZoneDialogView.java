@@ -47,12 +47,12 @@ public class FlyZoneDialogView extends ScrollView {
     //region Lifecycle
     public FlyZoneDialogView(Context context) {
         super(context);
-        inflate(context, R.layout.dialog_fly_zone, this);
+        inflate(context, R.layout.uxsdk_dialog_fly_zone, this);
     }
 
     public FlyZoneDialogView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        inflate(context, R.layout.dialog_fly_zone, this);
+        inflate(context, R.layout.uxsdk_dialog_fly_zone, this);
     }
 //
 //    /**

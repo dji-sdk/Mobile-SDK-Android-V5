@@ -7,6 +7,10 @@ import dji.sdk.keyvalue.key.RadarKey
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.perception.*
+import dji.v5.manager.aircraft.perception.data.ObstacleAvoidanceType
+import dji.v5.manager.aircraft.perception.data.ObstacleData
+import dji.v5.manager.aircraft.perception.data.PerceptionDirection
+import dji.v5.manager.aircraft.perception.data.PerceptionInfo
 import dji.v5.manager.aircraft.perception.radar.RadarInformation
 import dji.v5.utils.common.LogUtils
 

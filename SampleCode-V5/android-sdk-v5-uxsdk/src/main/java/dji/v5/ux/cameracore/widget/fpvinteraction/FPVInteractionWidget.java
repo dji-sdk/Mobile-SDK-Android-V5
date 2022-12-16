@@ -76,7 +76,7 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
     private final Handler handler = new Handler();
     //region Fields
     private FocusTargetView focusTargetView;
-    private ExposureMeterWidget exposureMeterView;
+    private ExposureMeteringWidget exposureMeterView;
     private GimbalControlView gimbalControlView;
     private FPVInteractionWidgetModel widgetModel;
     private int relativeViewHeight, relativeViewWidth;
@@ -462,9 +462,9 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
         int focusTargetDuration = typedArray.getInt(R.styleable.FPVInteractionWidget_uxsdk_focusTargetDuration, FocusTargetView.DEFAULT_FOCUS_TARGET_DURATION);
         setFocusTargetDuration(focusTargetDuration);
 
-        float centerMeterScaleX = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleX, ExposureMeterWidget.DEFAULT_CENTER_METER_SCALE_X);
+        float centerMeterScaleX = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleX, ExposureMeteringWidget.DEFAULT_CENTER_METER_SCALE_X);
         setCenterMeterScaleX(centerMeterScaleX);
-        float centerMeterScaleY = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleY, ExposureMeterWidget.DEFAULT_CENTER_METER_SCALE_Y);
+        float centerMeterScaleY = typedArray.getFloat(R.styleable.FPVInteractionWidget_uxsdk_centerMeterScaleY, ExposureMeteringWidget.DEFAULT_CENTER_METER_SCALE_Y);
         setCenterMeterScaleY(centerMeterScaleY);
 
         Drawable gimbalPointIcon = typedArray.getDrawable(R.styleable.FPVInteractionWidget_uxsdk_gimbalPointIcon);

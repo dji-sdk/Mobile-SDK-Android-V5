@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018-2020 DJI
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <CheckBox
+            android:id="@+id/all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uxsdk_all"
+            android:textColor="@color/uxsdk_dark_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/auth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uxsdk_auth"
+            android:textColor="@color/uxsdk_dark_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/all" />
+
+        <Button
+            android:id="@+id/auth_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/uxsdk_zone_authorization"
+            android:text="@string/uxsdk_new_color"
+            app:layout_constraintBottom_toBottomOf="@+id/auth"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/auth" />
+
+        <CheckBox
+            android:id="@+id/warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uxsdk_warning"
+            android:textColor="@color/uxsdk_dark_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/auth" />
+
+        <Button
+            android:id="@+id/warning_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/uxsdk_zone_warning"
+            android:text="@string/uxsdk_new_color"
+            app:layout_constraintBottom_toBottomOf="@+id/warning"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/warning" />
+
+        <CheckBox
+            android:id="@+id/enhanced_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uxsdk_enhanced_warning"
+            android:textColor="@color/uxsdk_dark_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/warning" />
+
+        <Button
+            android:id="@+id/enhanced_warning_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/uxsdk_zone_warning_enhanced"
+            android:text="@string/uxsdk_new_color"
+            app:layout_constraintBottom_toBottomOf="@+id/enhanced_warning"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/enhanced_warning" />
+
+        <CheckBox
+            android:id="@+id/restricted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uxsdk_restricted"
+            android:textColor="@color/uxsdk_dark_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enhanced_warning" />
+
+        <Button
+            android:id="@+id/restricted_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/uxsdk_zone_restricted"
+            android:text="@string/uxsdk_new_color"
+            app:layout_constraintBottom_toBottomOf="@+id/restricted"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/restricted" />
+
+        <TextView
+            android:id="@+id/max_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/uxsdk_maximum_height"
+            android:textColor="@color/uxsdk_zone_altitude"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restricted" />
+
+        <Button
+            android:id="@+id/max_height_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/uxsdk_black"
+            android:text="@string/uxsdk_new_color"
+            app:layout_constraintBottom_toBottomOf="@+id/max_height"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/max_height" />
+
+        <TextView
+            android:id="@+id/self_unlocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/uxsdk_self_unlocked"
+            android:textColor="@color/uxsdk_dark_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/max_height" />
+
+        <Button
+            android:id="@+id/self_unlock_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/uxsdk_unlocked_border"
+            android:text="@string/uxsdk_new_color"
+            app:layout_constraintBottom_toBottomOf="@+id/self_unlocked"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/self_unlocked" />
+
+        <View
+            android:id="@+id/custom_unlock_separator"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="5dp"
+            android:background="@color/uxsdk_colorAccent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/self_unlocked" />
+
+        <Switch
+            android:id="@+id/custom_unlock_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/uxsdk_custom_unlocked"
+            android:textColor="@color/uxsdk_dark_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_unlock_separator" />
+
+        <Button
+            android:id="@+id/custom_unlock_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/uxsdk_light_gray"
+            android:enabled="false"
+            android:text="@string/uxsdk_new_color"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_unlock_switch" />
+
+        <Button
+            android:id="@+id/custom_unlock_sync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@color/uxsdk_light_gray"
+            android:enabled="false"
+            android:text="@string/uxsdk_sync"
+            app:layout_constraintRight_toLeftOf="@+id/custom_unlock_color"
+            app:layout_constraintTop_toBottomOf="@+id/custom_unlock_switch" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="5dp"
+            android:background="@color/uxsdk_colorAccent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_unlock_color" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>

@@ -45,6 +45,9 @@ class MSDKInfoVm : DJIViewModel() {
         msdkInfo.value?.buildVer = msdkInfoModel.getBuildVersion()
         msdkInfo.value?.isDebug = msdkInfoModel.isDebug()
         msdkInfo.value?.packageProductCategory = msdkInfoModel.getPackageProductCategory()
+        msdkInfo.value?.isLDMEnabled = LDMManager.getInstance().isLDMEnabled.toString()
+        msdkInfo.value?.isLDMLicenseLoaded = LDMManager.getInstance().isLDMLicenseLoaded.toString()
+
 
         areaCodeChangeListener = AreaCodeChangeListener { _, changed ->
             LogUtils.i(logTag, "areaCodeData", changed)

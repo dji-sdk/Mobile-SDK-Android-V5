@@ -125,7 +125,7 @@ class TakeOffWidgetModel(
      * Performs take off action
      */
     fun performTakeOffAction(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff))
             .onErrorResumeNext { error: Throwable ->
                 if (areMotorsOnDataProcessor.value) {
                     return@onErrorResumeNext Completable.complete()
@@ -140,7 +140,7 @@ class TakeOffWidgetModel(
      */
     fun performPrecisionTakeOffAction(): Completable {
         //TODO KeyPrecisionStartTakeoff存在问题，csdk那边修复时间未知，这里先换成takeoff
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff))
             .onErrorResumeNext { error: Throwable? ->
                 if (areMotorsOnDataProcessor.value) {
                     return@onErrorResumeNext Completable.complete()
@@ -154,14 +154,14 @@ class TakeOffWidgetModel(
      * Performs landing action
      */
     fun performLandingAction(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStartAutoLanding))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartAutoLanding))
     }
 
     /**
      * Performs cancel landing action
      */
     fun performCancelLandingAction(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStopAutoLanding))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStopAutoLanding))
     }
 
     /**
@@ -169,7 +169,7 @@ class TakeOffWidgetModel(
      * landing confirmation is received.
      */
     fun performLandingConfirmationAction(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyConfirmLanding))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyConfirmLanding))
     }
 
     //endregion

@@ -186,7 +186,6 @@ open class TravelModeListItemWidget @JvmOverloads constructor(
                         TravelModeState.Active -> {
                             exitTravelMode()
                         }
-                        else -> {}
                     }
                 }, { }))
     }

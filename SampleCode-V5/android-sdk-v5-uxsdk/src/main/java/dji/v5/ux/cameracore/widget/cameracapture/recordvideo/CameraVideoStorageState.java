@@ -31,10 +31,10 @@ import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
  * in terms of duration in seconds
  */
 public abstract class CameraVideoStorageState {
-    private CameraStorageLocation storageLocation;
-    private int availableRecordingTimeInSeconds;
+    private final CameraStorageLocation storageLocation;
+    private final int availableRecordingTimeInSeconds;
 
-    public CameraVideoStorageState(CameraStorageLocation storageLocation, int availableRecordingTimeInSeconds) {
+    protected CameraVideoStorageState(CameraStorageLocation storageLocation, int availableRecordingTimeInSeconds) {
         this.storageLocation = storageLocation;
         this.availableRecordingTimeInSeconds = availableRecordingTimeInSeconds;
     }

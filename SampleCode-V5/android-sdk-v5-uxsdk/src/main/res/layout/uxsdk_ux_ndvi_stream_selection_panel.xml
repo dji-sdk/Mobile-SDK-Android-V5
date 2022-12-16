@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+        <dji.v5.ux.core.ui.component.MaxHeightScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/uxsdk_transparent"
+            app:elevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/stream_vegetation_index_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/uxsdk_stream_ndvi_vegetation_index"
+                    android:textColor="@color/uxsdk_white"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="@dimen/uxsdk_8_dp"
+                    android:layout_marginTop="@dimen/uxsdk_8_dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <dji.v5.ux.core.ui.component.UXRecyclerView
+                    android:id="@+id/vegetation_index_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/stream_vegetation_index_tv"
+                    android:layout_marginTop="@dimen/uxsdk_8_dp"
+                    android:fadeScrollbars="false"
+                    android:fadingEdge="vertical"
+                    android:fadingEdgeLength="@dimen/uxsdk_32_dp"
+                    android:requiresFadingEdge="vertical"
+                    android:scrollbarThumbVertical="@drawable/uxsdk_common_scrollbar_in_dark"
+                    android:scrollbars="vertical"
+                    app:uxsdk_fadingEdgeColor="@color/uxsdk_fpv_popover_content_background_color"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stream_vegetation_index_tv"
+                    tools:itemCount="12"
+                    tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    tools:listitem="@layout/uxsdk_palette_selection_panel_list_item"
+                    tools:spanCount="4" />
+
+                <TextView
+                    android:id="@+id/narrow_band_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vegetation_index_list"
+                    android:layout_marginTop="@dimen/uxsdk_8_dp"
+                    android:layout_marginLeft="@dimen/uxsdk_8_dp"
+                    android:text="@string/uxsdk_stream_ms_lens"
+                    android:textColor="@color/uxsdk_white"
+                    android:textStyle="normal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vegetation_index_list" />
+
+                <dji.v5.ux.core.ui.component.UXRecyclerView
+                    android:id="@+id/narrow_band_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/narrow_band_tv"
+                    android:fadeScrollbars="false"
+                    android:fadingEdge="vertical"
+                    android:layout_marginTop="@dimen/uxsdk_8_dp"
+                    android:fadingEdgeLength="@dimen/uxsdk_32_dp"
+                    android:requiresFadingEdge="vertical"
+                    android:scrollbarThumbVertical="@drawable/uxsdk_common_scrollbar_in_dark"
+                    android:scrollbars="vertical"
+                    app:uxsdk_fadingEdgeColor="@color/uxsdk_fpv_popover_content_background_color"
+                    tools:itemCount="12"
+                    tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    tools:listitem="@layout/uxsdk_palette_selection_panel_list_item"
+                    tools:spanCount="4" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </dji.v5.ux.core.ui.component.MaxHeightScrollView>
+
+</merge>

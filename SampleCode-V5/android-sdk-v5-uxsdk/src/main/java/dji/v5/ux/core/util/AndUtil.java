@@ -57,12 +57,12 @@ import dji.v5.utils.common.LogUtils;
  */
 
 public class AndUtil {
+    public static final String TAG = LogUtils.getTag("AndUtil");
     // 香港跟台北可以用GoogleMap
     private static final Set<String> CHINA_TIME_ZONE = new HashSet<String>();
     public static final int MIX_PIXEL = 60;
     private static final String DEF_TYPE = "string";
     private static final String UTF_8 = "UTF-8";
-    private static final String TAG = LogUtils.getTag("AndUtil");
 
     static {
         CHINA_TIME_ZONE.add("Asia/Chongqing");  // 重庆
@@ -84,24 +84,11 @@ public class AndUtil {
         int screenWidth;
         int screenHeight;
 
-        if (Build.VERSION.SDK_INT < 17) {
-            DisplayMetrics metrics = new DisplayMetrics();
-            windowManager.getDefaultDisplay().getMetrics(metrics);
-            screenWidth = metrics.widthPixels;
-            screenHeight = metrics.heightPixels;
-
-            if (screenWidth < screenHeight) {
-                int tmp = screenWidth;
-                screenWidth = screenHeight;
-                screenHeight = tmp;
-            }
-        } else {
-            Display display = windowManager.getDefaultDisplay();
-            Point outSize = new Point();
-            display.getRealSize(outSize);
-            screenWidth = outSize.x > outSize.y ? outSize.x : outSize.y;
-            screenHeight = outSize.x > outSize.y ? outSize.y : outSize.x;
-        }
+        Display display = windowManager.getDefaultDisplay();
+        Point outSize = new Point();
+        display.getRealSize(outSize);
+        screenWidth = Math.max(outSize.x, outSize.y);
+        screenHeight = Math.min(outSize.x, outSize.y);
 
         return new Size(screenWidth, screenHeight);
     }
@@ -207,7 +194,7 @@ public class AndUtil {
         return "";
     }
 
-    public static String getFormatResString(Context context, @StringRes int resId, Object... formatArgs) {
+    public static String getFormatResString(@StringRes int resId, Object... formatArgs) {
         return getFormatResString(Locale.US, resId, formatArgs);
     }
 
@@ -323,21 +310,18 @@ public class AndUtil {
         return cores;
     }
 
-    private static final FileFilter CPU_FILTER = new FileFilter() {
-        @Override
-        public boolean accept(File pathname) {
-            String path = pathname.getName();
-            //regex is slow, so checking char by char.
-            if (path.startsWith("cpu")) {
-                for (int i = 3; i < path.length(); i++) {
-                    if (path.charAt(i) < '0' || path.charAt(i) > '9') {
-                        return false;
-                    }
+    private static final FileFilter CPU_FILTER = pathname -> {
+        String path = pathname.getName();
+        //regex is slow, so checking char by char.
+        if (path.startsWith("cpu")) {
+            for (int i = 3; i < path.length(); i++) {
+                if (path.charAt(i) < '0' || path.charAt(i) > '9') {
+                    return false;
                 }
-                return true;
             }
-            return false;
+            return true;
         }
+        return false;
     };
 
     public static float getItemHeight(Context context) {
@@ -460,10 +444,8 @@ public class AndUtil {
             PackageManager packageManager = ctx.getPackageManager();
             if (packageManager != null) {
                 ApplicationInfo applicationInfo = packageManager.getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
-                if (applicationInfo != null) {
-                    if (applicationInfo.metaData != null) {
-                        resultData = applicationInfo.metaData.getString("com.dji.sdk.API_KEY");
-                    }
+                if (applicationInfo.metaData != null) {
+                    resultData = applicationInfo.metaData.getString("com.dji.sdk.API_KEY");
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -541,6 +523,7 @@ public class AndUtil {
             Method get = c.getMethod("get", String.class, String.class);
             value = (String) (get.invoke(c, key, defaultValue));
         } catch (Exception e) {
+            LogUtils.e(TAG,e.getMessage());
         }
         return value;
     }
@@ -555,8 +538,12 @@ public class AndUtil {
         try {
             enabled = Settings.System.getInt(context.getContentResolver(), Settings.System.SOUND_EFFECTS_ENABLED) != 0;
         } catch (Settings.SettingNotFoundException e) {
-
+            LogUtils.e(TAG,e.getMessage());
         }
         return enabled;
+    }
+
+    private AndUtil() {
+
     }
 }

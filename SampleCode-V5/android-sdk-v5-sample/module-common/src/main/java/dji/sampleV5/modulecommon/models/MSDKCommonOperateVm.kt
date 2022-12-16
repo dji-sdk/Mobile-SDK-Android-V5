@@ -2,7 +2,7 @@ package dji.sampleV5.modulecommon.models
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import dji.sampleV5.modulecommon.data.FragmentPageInfo
+import dji.sampleV5.modulecommon.data.FragmentPageItemList
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.ldm.LDMExemptModule
 import dji.v5.manager.SDKManager
@@ -19,14 +19,10 @@ import dji.v5.manager.ldm.LDMManager
  */
 class MSDKCommonOperateVm : DJIViewModel() {
 
-    val mainPageInfoList = MutableLiveData<LinkedHashSet<FragmentPageInfo>>()
+    val mainPageInfoList = MutableLiveData<LinkedHashSet<FragmentPageItemList>>()
 
-    fun loaderItem(itemList: LinkedHashSet<FragmentPageInfo>) {
-        if (mainPageInfoList.value == null) {
-            mainPageInfoList.value = LinkedHashSet<FragmentPageInfo>()
-        }
-        mainPageInfoList.value?.addAll(itemList)
-        mainPageInfoList.postValue(mainPageInfoList.value)
+    fun loaderItem(itemList: LinkedHashSet<FragmentPageItemList>) {
+        mainPageInfoList.postValue(itemList)
     }
 
     fun initMSDK(context: Context, callback: SDKManagerCallback) {

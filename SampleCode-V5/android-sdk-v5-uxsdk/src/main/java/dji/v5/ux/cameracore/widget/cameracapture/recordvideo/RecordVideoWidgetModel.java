@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
+import dji.sdk.keyvalue.value.camera.CameraSDCardState;
 import dji.sdk.keyvalue.value.camera.CameraStorageInfo;
 import dji.sdk.keyvalue.value.camera.CameraStorageInfos;
-import dji.sdk.keyvalue.value.camera.CameraSDCardState;
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
 import dji.sdk.keyvalue.value.camera.CameraType;
 import dji.sdk.keyvalue.value.camera.SSDOperationState;
@@ -43,6 +43,7 @@ import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.ICameraIndex;
 import dji.v5.ux.core.base.WidgetModel;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
+import dji.v5.ux.core.module.FlatCameraModule;
 import dji.v5.ux.core.util.DataProcessor;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
@@ -74,6 +75,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
     private final DataProcessor<SSDOperationState> ssdState;
     private final DataProcessor<CameraStorageInfos> cameraStorageInfos;
     private final DataProcessor<RecordingState> recordingStateProcessor;
+    private final FlatCameraModule flatCameraModule;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.CAMERA_LENS_ZOOM;
     //endregion
@@ -104,6 +106,8 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         ssdState = DataProcessor.create(SSDOperationState.UNKNOWN);
         cameraStorageInfos = DataProcessor.create(new CameraStorageInfos(CameraStorageLocation.UNKNOWN, new ArrayList<>()));
         recordingStateProcessor = DataProcessor.create(RecordingState.UNKNOWN);
+        flatCameraModule = new FlatCameraModule();
+        addModule(flatCameraModule);
     }
     //endregion
 
@@ -151,10 +155,9 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         }
     }
 
-    //endregion
-
-    //region Data
-
+    public boolean isVideoMode(){
+        return flatCameraModule.getCameraModeDataProcessor().getValue().isVideoMode();
+    }
     /**
      * Get the current camera video storage state
      *
@@ -221,7 +224,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         if (isRecording.getValue()) {
             return Completable.complete();
         }
-        return djiSdkModel.performAction(KeyTools.createKey(CameraKey.KeyStartRecord, cameraIndex));
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(CameraKey.KeyStartRecord, cameraIndex));
     }
 
     /**
@@ -234,7 +237,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
             return Completable.complete();
         }
 
-        return djiSdkModel.performAction(KeyTools.createKey(CameraKey.KeyStopRecord, cameraIndex));
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(CameraKey.KeyStopRecord, cameraIndex));
     }
     //endregion
 

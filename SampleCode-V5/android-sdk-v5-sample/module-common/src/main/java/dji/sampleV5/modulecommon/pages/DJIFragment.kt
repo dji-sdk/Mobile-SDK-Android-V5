@@ -14,6 +14,7 @@ import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MAIN_FRAGMENT_PAGE_TITLE
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
 import dji.sampleV5.modulecommon.util.wheel.PopupNumberPicker
+import dji.sampleV5.modulecommon.util.wheel.PopupNumberPickerPosition
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
 import java.util.*
@@ -48,14 +49,15 @@ open class DJIFragment : Fragment() {
 
     fun initPopupNumberPicker(list: ArrayList<String>, r: Runnable) {
         var popupNumberPicker: PopupNumberPicker? = null
+        var positon = PopupNumberPickerPosition(250 ,200 ,0)
         popupNumberPicker = PopupNumberPicker(
             context, list,
-            { pos1, pos2 ->
+            { pos1, _ ->
                 popupNumberPicker?.dismiss()
                 popupNumberPicker = null
                 indexChosen[0] = pos1
                 mainHandler.post(r)
-            }, 250, 200, 0
+            }, positon
         )
         popupNumberPicker?.showAtLocation(
             view, Gravity.CENTER, 0, 0

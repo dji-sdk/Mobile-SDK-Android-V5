@@ -39,7 +39,7 @@ dependencies {
     implementation deps.media
     implementation deps.kotlinLib
     implementation deps.ktxCore
-    implementation deps.rx3Android
+    api deps.rx3Android
     implementation deps.lottie
     implementation deps.cardview
 

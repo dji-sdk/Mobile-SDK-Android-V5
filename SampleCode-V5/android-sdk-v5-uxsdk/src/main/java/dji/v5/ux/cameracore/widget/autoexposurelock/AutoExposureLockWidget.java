@@ -55,7 +55,7 @@ import dji.v5.ux.core.util.ViewUtil;
  * When locked the exposure of the camera will remain constant.
  * Changing the exposure parameters manually will release the lock.
  */
-public class AutoExposureLockWidget extends ConstraintLayoutWidget implements View.OnClickListener, ICameraIndex {
+public class AutoExposureLockWidget extends ConstraintLayoutWidget<Object> implements View.OnClickListener, ICameraIndex {
 
     //region Fields
     private static final String TAG = "AutoExposureLockWidget";

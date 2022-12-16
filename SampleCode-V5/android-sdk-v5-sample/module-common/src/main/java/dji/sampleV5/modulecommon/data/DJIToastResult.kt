@@ -9,11 +9,11 @@ package dji.sampleV5.modulecommon.data
  *
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
-class DJIToastResult(var isSuccess: Boolean, var msg: String?=null) {
+class DJIToastResult(var isSuccess: Boolean, var msg: String? = null) {
 
     companion object {
-        fun success(msg: String?=null): DJIToastResult {
-            return DJIToastResult(true, msg)
+        fun success(msg: String? = null): DJIToastResult {
+            return DJIToastResult(true, msg ?: "success")
         }
 
         fun failed(msg: String): DJIToastResult {

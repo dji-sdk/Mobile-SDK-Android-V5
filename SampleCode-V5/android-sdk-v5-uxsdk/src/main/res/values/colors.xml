@@ -40,6 +40,7 @@
     <color name="uxsdk_black_10_percent">#1A000000</color>
 
     <color name="uxsdk_white">#FFFFFF</color>
+    <color name="uxsdk_white_95_percent">#F2FFFFFF</color>
     <color name="uxsdk_white_85_percent">#D9FFFFFF</color>
     <color name="uxsdk_white_80_percent">#CCFFFFFF</color>
     <color name="uxsdk_white_75_percent">#C0FFFFFF</color>
@@ -54,6 +55,7 @@
     <color name="uxsdk_white_20_percent">#33FFFFFF</color>
     <color name="uxsdk_white_10_percent">#1AFFFFFF</color>
     <color name="uxsdk_white_0_percent">#00FFFFFF</color>
+
 
     <color name="uxsdk_gray_material_300">#E0E0E0</color>
     <color name="uxsdk_gray_100">#FF888888</color>
@@ -100,6 +102,8 @@
     <color name="uxsdk_yellow_500">#ffcc00</color>
 
     <color name="uxsdk_green_in_dark">#FF00EE8B</color>
+    <color name="uxsdk_green_in_dark_045">#7300EE8B</color>
+    <color name="uxsdk_green_in_dark_050">#8000EE8B</color>
     <color name="uxsdk_green">#ff3fc14d</color>
     <color name="uxsdk_green_material_400">#61BD17</color>
     <color name="uxsdk_green_material_400_transparent">#0061BD17</color>
@@ -163,6 +167,7 @@
     <color name="uxsdk_light_gray">#B3FFFFFF</color>
     <color name="uxsdk_dark_gray">#80000000</color>
 
+    <!--hsi-->
     <color name="uxsdk_pfd_main_color">#99FFAA</color>
     <color name="uxsdk_pfd_hsi_main_color">#CC99FFAA</color>
     <color name="uxsdk_pfd_hsi_radar_main_color">#99009919</color>
@@ -174,6 +179,9 @@
     <color name="uxsdk_pfd_hsi_avoidance_color">#CCFFDF80</color>
     <color name="uxsdk_pfd_hsi_radar_avoidance_color">#99997302</color>
     <color name="uxsdk_pfd_hsi_perception_disabled_stroke_color">#4CFF0000</color>
+
+
+
 
     <color name="uxsdk_gimbal_mark_1">#00CFFF</color>
     <color name="uxsdk_gimbal_mark_2">#FFDB05</color>
@@ -257,4 +265,12 @@
     <color name="uxsdk_zoom_slider_background_shadow">#33000000</color>
     <color name="uxsdk_zoom_slider_dot_color">#4DFFFFFF</color>
     <color name="uxsdk_zoom_slider_color">#1FA3F6</color>
+
+
+
+    <!--hsi -->
+    <color name="uxsdk_yellow_in_light">#FFFFCC00</color>
+    <color name="uxsdk_yellow_in_light_040">#68FFCC00</color>
+    <color name="uxsdk_yellow_in_light_050">#80FFCC00</color>
+    <color name="uxsdk_yellow_in_dark">#FFFFD707</color>
 </resources>

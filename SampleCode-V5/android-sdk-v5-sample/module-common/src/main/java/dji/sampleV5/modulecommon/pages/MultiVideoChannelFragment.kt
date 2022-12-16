@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,13 +29,6 @@ class MultiVideoChannelFragment : DJIFragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.frag_multi_video_channel_page, container, false)
         primaryFragmentView = view.findViewById(R.id.primary_video_channel_fragment)
         secondaryFragmentView = view.findViewById(R.id.secondary_video_channel_fragment)
-        val fab = view.findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener(this)
-        fabResetAllVideoChannel =
-            view.findViewById(R.id.fab_reset_all_video_channel) as FloatingActionButton
-        fabResetAllVideoChannel.setOnClickListener(this)
-        fabGetAllVideoChannel = view.findViewById(R.id.fab_get_all_channels) as FloatingActionButton
-        fabGetAllVideoChannel.setOnClickListener(this)
         return view
     }
 

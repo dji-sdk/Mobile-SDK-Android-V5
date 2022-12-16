@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <objectAnimator android:duration="100"
+            android:valueTo="0.4"
+            android:valueType="floatType"
+            android:propertyName="alpha"/>
+    </item>
+    <item android:state_enabled="true">
+        <objectAnimator android:duration="100"
+            android:valueTo="1"
+            android:valueType="floatType"
+            android:propertyName="alpha"/>
+    </item>
+</selector>

@@ -44,6 +44,7 @@ import dji.v5.common.video.decoder.VideoDecoder
 import dji.v5.common.video.interfaces.IVideoDecoder
 import dji.v5.common.video.stream.PhysicalDevicePosition
 import dji.v5.common.video.stream.StreamSource
+import dji.v5.utils.common.DisplayUtil
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
@@ -55,16 +56,13 @@ import dji.v5.ux.core.extension.*
 import dji.v5.ux.core.module.FlatCameraModule
 import dji.v5.ux.core.ui.CenterPointView
 import dji.v5.ux.core.ui.GridLineView
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.core.widget.fpv.FPVWidget.ModelState
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.functions.Consumer
 
 private const val TAG = "FPVWidget"
-private const val ADJUST_ASPECT_RATIO_DELAY = 300
 private const val ORIGINAL_SCALE = 1f
-private const val PORTRAIT_ROTATION_ANGLE = 270
 private const val LANDSCAPE_ROTATION_ANGLE = 0
 
 /**

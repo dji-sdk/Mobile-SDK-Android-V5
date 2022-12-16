@@ -7,9 +7,7 @@ import android.widget.CompoundButton
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.Switch
-import androidx.annotation.ColorRes
 import dji.v5.manager.aircraft.rtk.RTKCenter
-import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import dji.v5.ux.accessory.RTKEnabledWidgetModel
@@ -21,7 +19,7 @@ import dji.v5.ux.core.base.widget.FrameLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.getString
 import dji.v5.ux.core.extension.showLongToast
-import dji.v5.ux.core.util.AndUtil
+import dji.v5.utils.common.AndUtil
 import dji.v5.ux.core.util.RxUtil
 
 class GpsSignalPopoverView @JvmOverloads constructor(

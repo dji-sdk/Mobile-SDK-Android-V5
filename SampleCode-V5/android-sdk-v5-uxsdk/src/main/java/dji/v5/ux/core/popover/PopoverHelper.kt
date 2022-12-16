@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import dji.v5.ux.R
-import dji.v5.ux.core.util.AndUtil
+import dji.v5.utils.common.AndUtil
 
 
 object PopoverHelper {

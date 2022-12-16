@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 
@@ -17,16 +19,23 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.ColorUtils;
+
 import dji.sdk.keyvalue.value.flightcontroller.FCFlightMode;
+import dji.sdk.keyvalue.value.product.ProductType;
+import dji.v5.manager.aircraft.perception.data.ObstacleAvoidanceType;
+import dji.v5.manager.aircraft.perception.data.PerceptionInfo;
+import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
+import dji.v5.ux.core.ui.hsi.config.IOmniAbility;
+import dji.v5.ux.core.ui.hsi.dashboard.FpvStrokeConfig;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
-import io.reactivex.rxjava3.subjects.PublishSubject;
 
 public class HSIPerceptionLayer implements HSIContract.HSILayer {
 
@@ -35,20 +44,12 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     private static final String PERCEPTION_DISABLED = "NA";
 
     private static final String PERCEPTION_TOF_ONLY = "TOF";
-
-    private static final int CHECK_RADAR_STATUS = 0;
+    private static final String PERCEPTION_USER_DISABLE = "OFF";
 
     /**
      * 雷达路径操作超时
      */
     private static final int RADAR_PATH_OP_TIMEOUT = 500;
-
-    /**
-     * 障碍物最远感知距离
-     */
-    private static final int DEFAULT_MAX_PERCEPTION_DISTANCE_IN_METER = 45;
-
-    private static final int DEFAULT_PERCEPTION_BLIND_AREA_ANGLE = 16;
 
     private static final int DEFAULT_PERCEPTION_BLIND_AREA_COUNT = 4;
 
@@ -56,10 +57,13 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
 
     private static final int DEFAULT_RADAR_START_ANGLE_OFFSET = -15;
 
+    public static final int WARN_COLOR_ALPHA_CENTER = 0x14;
+    public static final int WARN_COLOR_ALPHA_OUTER = 0x40;
+
     /**
      * 分多少个区块
      */
-    private static final int SECTOR_COUNT = 36;
+    private static final int PERCEPTION_GROUP_SIZE = 5;
 
     @NonNull
     private final Path mPath = new Path();
@@ -70,41 +74,29 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     private final int[] mPerceptionLevelColor = new int[3];
 
     private final int[] mRadarLevelColor = new int[3];
+    private final FpvStrokeConfig mStrokeConfig;
 
     private List<Integer> mRadarHorizontalDistances = new ArrayList<>();
 
-    private List<Integer> mPerceptionHorizontalDistances = new ArrayList<>();
-
-    private List<Integer> mToFHorizontalDistances = new ArrayList<>();
 
     @NonNull
     private final GradientDrawable mPerceptionAreaDrawable;
-
     @NonNull
-    private final PublishSubject<List<Integer>> mPerceptionPublisher = PublishSubject.create();
-    @NonNull
-    private final BehaviorSubject<List<Integer>> mToFPublisher = BehaviorSubject.createDefault(new ArrayList<>());
-    @NonNull
-    private final PublishSubject<List<Integer>> mRadarPublisher = PublishSubject.create();
+    private final GradientDrawable mTofDrawable;
+    private final GradientDrawable mNaDrawable;
 
-//    @NonNull
-//    private final PublishSubject<Shape> mPathRecycler = PublishSubject.create();
 
-    private final int mPerceptionDisabledColor;
-    private final int mPerceptionDisabledStrokeColor;
-    private final int mPerceptionDisabledTextColor;
     private final int mPerceptionDisabledTextSize;
 
     private final int mMaxPerceptionStrokeWidth;
     private final int mRadarMaxPerceptionStrokeWidth;
 
-    private boolean mIsRadarConnected;
 
     private HSIContract.HSIContainer mHSIContainer;
 
-    private double mHorizontalBarrierAvoidanceDistance;
+    private float mHorizontalBarrierAvoidanceDistance;
 
-    private double mHorizontalPerceptionDistance;
+    private float mHorizontalPerceptionDistance;
 
     private int mCompassSize;
 
@@ -112,9 +104,11 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
 
     private boolean mShowRadarPerceptionInfo;
 
-    private boolean mInSportMode = false;
+    private boolean mPerceptionNotWorkMode = false;
 
-    private FCFlightMode mFlightMode = null;
+    private boolean isHidePerceptionBg = false;
+
+    private FCFlightMode mFlightMode = FCFlightMode.UNKNOWN;
 
     private boolean mIsMultiModeOpen = false;
 
@@ -124,11 +118,10 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     @NonNull
     private final List<Shape> mRadarShapeList = new ArrayList<>();
 
-    @NonNull
-    private CompositeDisposable mDisposable = new CompositeDisposable();
+    @Nullable
+    private CompositeDisposable mDisposable;
 
-    @NonNull
-    private HSIWidgetModel widgetModel;
+    IOmniAbility mOmniAbility;
 
     /**
      * 前、右、后、左四个方向的视觉感知是否正常工作
@@ -142,10 +135,22 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
     @NonNull
     private final boolean[] mToFPerceptionEnableState = new boolean[]{true, true, true, true};
 
-    private final PathPool mPathPool = new PathPool(128);
-    private final PathPool mRadarPathPool = new PathPool(128);
+    /**
+     * 机型不支持 TOF，如：M3E系列
+     */
+    private boolean mSupportTof = true;
+    private final static PathPool mPathPool = new PathPool(128);
+    private final static PathPool mRadarPathPool = new PathPool(128);
+    private Shader mTofShader;
+    private Shader mNaShader;
+    private final int mWarnColor;
+    private final int mDangerColor;
+    @NonNull
+    private HSIWidgetModel widgetModel;
 
-    public HSIPerceptionLayer(@NonNull Context context, @Nullable AttributeSet attrs, HSIContract.HSIContainer container, HSIWidgetModel widgetModel) {
+
+    public HSIPerceptionLayer(@NonNull Context context, @Nullable AttributeSet attrs, HSIContract.HSIContainer container,
+                              HSIWidgetModel widgetModel) {
         mHSIContainer = container;
         this.widgetModel = widgetModel;
 
@@ -157,8 +162,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         mPerceptionLevelColor[0] = typedArray.getColor(R.styleable.HSIView_uxsdk_hsi_max_perception_area_color,
                 context.getResources().getColor(R.color.uxsdk_pfd_hsi_main_color));
         mMaxPerceptionStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_max_perception_stroke_width,
-                context.getResources().getDimensionPixelSize(R.dimen.uxsdk_3_dp));
-
+                context.getResources().getDimensionPixelSize(R.dimen.uxsdk_2_dp));
 
         mRadarLevelColor[2] = typedArray.getColor(R.styleable.HSIView_uxsdk_hsi_radar_avoidance_setting_area_color,
                 context.getResources().getColor(R.color.uxsdk_pfd_hsi_radar_barrier_color));
@@ -167,106 +171,81 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         mRadarLevelColor[0] = typedArray.getColor(R.styleable.HSIView_uxsdk_hsi_radar_max_perception_area_color,
                 context.getResources().getColor(R.color.uxsdk_pfd_hsi_radar_main_color));
         mRadarMaxPerceptionStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_radar_max_perception_stroke_width,
-                context.getResources().getDimensionPixelSize(R.dimen.uxsdk_5_dp));
+                context.getResources().getDimensionPixelSize(R.dimen.uxsdk_4_dp));
         typedArray.recycle();
 
-        mPerceptionDisabledColor = context.getResources().getColor(R.color.uxsdk_black_30_percent);
-        mPerceptionDisabledStrokeColor = context.getResources().getColor(R.color.uxsdk_pfd_hsi_perception_disabled_stroke_color);
-        mPerceptionDisabledTextColor = context.getResources().getColor(R.color.uxsdk_white);
-        mPerceptionDisabledTextSize = context.getResources().getDimensionPixelSize(R.dimen.uxsdk_text_size_normal);
+        mPerceptionDisabledTextSize = context.getResources().getDimensionPixelSize(R.dimen.uxsdk_6_dp);
 
         mPerceptionAreaDrawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
                 new int[]{
-                        Color.parseColor("#26FFFFFF"),
+                        Color.parseColor("#29FFFFFF"),
                         Color.parseColor("#0CFFFFFF")
                 });
         mPerceptionAreaDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         mPerceptionAreaDrawable.setShape(GradientDrawable.RECTANGLE);
+
+        mWarnColor = context.getResources().getColor(R.color.uxsdk_pfd_avoidance_color);
+        mDangerColor = context.getResources().getColor(R.color.uxsdk_pfd_barrier_color);
+        mTofDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.BOTTOM_TOP,
+                new int[]{
+                        ColorUtils.setAlphaComponent(mWarnColor, WARN_COLOR_ALPHA_OUTER),
+                        ColorUtils.setAlphaComponent(mWarnColor, WARN_COLOR_ALPHA_CENTER)
+                }
+        );
+        mTofDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        mTofDrawable.setShape(GradientDrawable.RECTANGLE);
+
+        mNaDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.BOTTOM_TOP,
+                new int[]{
+                        ColorUtils.setAlphaComponent(mDangerColor, WARN_COLOR_ALPHA_OUTER),
+                        ColorUtils.setAlphaComponent(mDangerColor, WARN_COLOR_ALPHA_CENTER)
+                }
+        );
+        mNaDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        mNaDrawable.setShape(GradientDrawable.RECTANGLE);
+
+        mStrokeConfig = new FpvStrokeConfig(context);
+
+        mOmniAbility = IOmniAbility.Companion.getCurrent();
+
     }
 
     @Override
     public void onStart() {
         mDisposable = new CompositeDisposable();
 
-        mDisposable.add(widgetModel.getPerceptionTOFDistanceProcessor().toFlowable()
-                .subscribe(status -> mToFPublisher.onNext(status.getDists())));
+        mDisposable.add(widgetModel.getProductTypeDataProcessor().toFlowable()
+                .subscribe(productType -> {
+                    boolean isM3Serirs = productType == ProductType.DJI_MAVIC_3_ENTERPRISE_SERIES;
+                    isHidePerceptionBg = isM3Serirs;
+                    mSupportTof = !isM3Serirs;
+                }));
 
-        mDisposable.add(widgetModel.getObstacleAvoidanceSensorStateProcessor().toFlowable().subscribe(omniAvoidanceState -> {
-            mVisionPerceptionEnableState[0] = omniAvoidanceState.getIsFrontObstacleAvoidanceEnable();
-            mVisionPerceptionEnableState[1] = omniAvoidanceState.getIsRightObstacleAvoidanceEnable();
-            mVisionPerceptionEnableState[2] = omniAvoidanceState.getIsBackObstacleAvoidanceEnable();
-            mVisionPerceptionEnableState[3] = omniAvoidanceState.getIsLeftObstacleAvoidanceEnable();
+        mDisposable.add(widgetModel.getPerceptionInformationDataProcessor().toFlowable().subscribe(new Consumer<PerceptionInfo>() {
+            @Override
+            public void accept(PerceptionInfo perceptionInfo) throws Throwable {
+                mShowVisualPerceptionInfo =
+                        perceptionInfo.isHorizontalObstacleAvoidanceEnabled() || perceptionInfo.getObstacleAvoidanceType() == ObstacleAvoidanceType.BYPASS;
+                mHorizontalBarrierAvoidanceDistance = (float) perceptionInfo.getHorizontalObstacleAvoidanceBrakingDistance();
+                mHorizontalPerceptionDistance = (float) perceptionInfo.getHorizontalObstacleAvoidanceWarningDistance();
+
+                mVisionPerceptionEnableState[0] = perceptionInfo.getForwardObstacleAvoidanceWorking();
+                mVisionPerceptionEnableState[1] = perceptionInfo.getRightSideObstacleAvoidanceWorking();
+                mVisionPerceptionEnableState[2] = perceptionInfo.getBackwardObstacleAvoidanceWorking();
+                mVisionPerceptionEnableState[3] = perceptionInfo.getLeftSideObstacleAvoidanceWorking();
+            }
         }));
 
-        mDisposable.add(
-                Flowable.combineLatest(
-                        widgetModel.getOmniHorizontalAvoidanceEnabledProcessor().toFlowable(),
-                        widgetModel.getPerceptionFullDistanceProcessor().toFlowable(),
-                        widgetModel.getOmniHorizontalRadarDistanceProcessor().toFlowable(),
-                        widgetModel.getHorizontalAvoidanceDistanceProcessor().toFlowable(),
-                        (avoidanceEnabled, radarStatus, radarDistance, avoidanceDistance) -> {
-                            mHorizontalPerceptionDistance = radarDistance;
-                            mHorizontalBarrierAvoidanceDistance = avoidanceDistance;
-
-                            mShowVisualPerceptionInfo = avoidanceEnabled;
-                            if (mShowVisualPerceptionInfo) {
-                                mPerceptionPublisher.onNext(radarStatus.getDists());
-                            } else {
-                                mPerceptionPublisher.onNext(new ArrayList<>());
-                            }
-                            return true;
-                        }).subscribe()
-        );
-
-        mDisposable.add(
-                Flowable.combineLatest(
-                        widgetModel.getRadarConnectionProcessor().toFlowable(),
-                        widgetModel.getRadarHorizontalObstacleAvoidanceEnabledProcessor().toFlowable(),
-                        widgetModel.getRadarObstacleAvoidanceStateProcessor().toFlowable(),
-                        (isRadarConnected, radarEnable, avoidanceState) -> {
-                            mIsRadarConnected = isRadarConnected;
-                            mShowRadarPerceptionInfo = radarEnable;
-                            if (!mShowRadarPerceptionInfo || !mIsRadarConnected) {
-                                mRadarPublisher.onNext(new ArrayList<>());
-                            } else {
-                                mRadarPublisher.onNext(avoidanceState.getEveryAngleDistance());
-                            }
-                            return true;
-                        }
-                ).subscribe()
-        );
-
-        mDisposable.add(Flowable.combineLatest(
-                widgetModel.getFlightModeProcessor().toFlowable(),
-                widgetModel.getMultipleFlightModeEnabledProcessor().toFlowable(),
-                (fcFlightMode, isMultiModeOpen) -> {
-                    mFlightMode = fcFlightMode;
-                    mIsMultiModeOpen = isMultiModeOpen;
-                    mInSportMode = mIsMultiModeOpen && mFlightMode == FCFlightMode.GPS_SPORT;
-                    Arrays.fill(mToFPerceptionEnableState, !mInSportMode);
-                    return true;
-                }).subscribe()
-        );
-
-        doDisposableAdd();
-
-        //radar推送用RxJava debonounce操作会导致雷达显示时隐时现, 改成自定义的定时器
-        mDisposable.add(mRadarPublisher.subscribe(distances -> mRadarHorizontalDistances = distances));
-        mDisposable.add(getRadarDisposable());
-    }
-
-    private void doDisposableAdd() {
-        mDisposable.add(mPerceptionPublisher.subscribe(distances -> mPerceptionHorizontalDistances = distances));
-
-        mDisposable.add(mToFPublisher.subscribe(distances -> mToFHorizontalDistances = distances));
-
-        mDisposable.add(Observable.interval(HSIView.INVALIDATE_INTERVAL_TIME, TimeUnit.MILLISECONDS)
-                .map(aLong -> {
-                    return performDisposableMap();
-                })
+        mDisposable.add(widgetModel.getRadarInformationDataProcessor().toFlowable().subscribe(information -> {
+            mShowRadarPerceptionInfo = information.isHorizontalObstacleAvoidanceEnabled();
+        }));
+        mDisposable.add(widgetModel.getPerceptionObstacleDataProcessor().toFlowable()
+                .throttleLast(200, TimeUnit.MILLISECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread()) //shape 计算要在mainthread，不然有可能会导致native内存使用错误
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(data -> updatePerceptionDrawShape(optimizationData(data)))
+                .map(data -> updatePerceptionDrawShape(getOptimizationDataIfNeed(data.getHorizontalObstacleDistance())))
                 .subscribe(list -> {
                     mShapeList.clear();
                     mShapeList.addAll(list);
@@ -274,51 +253,109 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                         mHSIContainer.updateWidget();
                     }
                 }));
+
+        mDisposable.add(widgetModel.getRadarObstacleDataProcessor().toFlowable().subscribe(data -> mRadarHorizontalDistances =
+                data.getHorizontalObstacleDistance()));
+
+
+        mDisposable.add(Flowable.combineLatest(
+                widgetModel.getFlightModeProcessor().toFlowable(),
+                widgetModel.getMultipleFlightModeEnabledProcessor().toFlowable(),
+                (fcFlightMode, isMultiModeOpen) -> {
+                    mFlightMode = fcFlightMode;
+                    mIsMultiModeOpen = isMultiModeOpen;
+                    mPerceptionNotWorkMode = mIsMultiModeOpen && (mFlightMode == FCFlightMode.GPS_SPORT || mFlightMode == FCFlightMode.ATTI);
+                    Arrays.fill(mToFPerceptionEnableState, !mPerceptionNotWorkMode);
+                    return true;
+                }).subscribe()
+        );
+
+        mDisposable.add(getRadarDisposable());
     }
 
-    private List<Integer> performDisposableMap() {
-        List<Integer> perception = mPerceptionHorizontalDistances;
-        List<Integer> tof = mToFHorizontalDistances;
-        if (tof.size() == 0 || perception.size() == 0) {
-            return perception;
-        }
 
-        // 如果视觉不可用了就把tof的融合进去
-        int perceptionAngleTotal = 360 - DEFAULT_PERCEPTION_BLIND_AREA_COUNT * DEFAULT_PERCEPTION_BLIND_AREA_ANGLE;
-        int rotationOffset = 360 / perception.size();
-        int perceptionAngleEach = perceptionAngleTotal / DEFAULT_PERCEPTION_AREA_COUNT / rotationOffset;
-        int arrayLength = perception.size();
-
-        int srcPos = -perceptionAngleEach / 2;
-        if (!mVisionPerceptionEnableState[0]) {
-            int fromIndex = arrayLength + srcPos;
-            int toIndex = fromIndex + perceptionAngleEach / 2;
-            for (int i = fromIndex; i < toIndex && i < perception.size(); i++) {
-                perception.set(i, tof.get(0));
-            }
-            fromIndex = srcPos + perceptionAngleEach / 2;
-            toIndex = fromIndex + perceptionAngleEach / 2;
-            for (int i = fromIndex; i < toIndex && i < perception.size(); i++) {
-                perception.set(i, tof.get(0));
-            }
+    /**
+     * 针对数据进行分组，每组使用其中最小值
+     * 数据分组可避免显示非常细的障碍图
+     */
+    @NonNull
+    private List<Integer> getOptimizationDataIfNeed(List<Integer> data) {
+        int size = data.size();
+        if (size == 0) {
+            return data;
         }
-        for (int i = 1; i < 4; i++) {
-            srcPos += (perceptionAngleEach + DEFAULT_PERCEPTION_BLIND_AREA_ANGLE);
-            if (!mVisionPerceptionEnableState[i]) {
-                for (int j = srcPos; j < srcPos + perceptionAngleEach; j++) {
-                    perception.set(j, tof.get(i));
-                }
+        int sectorLength = PERCEPTION_GROUP_SIZE;
+        int sectorCount = size / sectorLength;
+        float singleDataAngle = 360f / size;
+        for (int i = 0; i < sectorCount; i++) {
+            int srcPos = sectorLength * i;
+            if (posInBlind(srcPos, sectorLength, singleDataAngle)) {
+                continue;
             }
+            int result = minInList(data, srcPos, sectorLength);
+            fillList(data, srcPos, sectorLength, result);
         }
+        return data;
+    }
 
-        return perception;
+    /**
+     * 判断数据起止位置是否落在盲区
+     */
+    private boolean posInBlind(int srcPos, int sectorLength, float singleDataAngle) {
+        float startAngle = srcPos * singleDataAngle;
+        float sweepAngle = sectorLength * singleDataAngle;
+        return posInBlind(startAngle) || posInBlind(startAngle + sweepAngle);
+    }
+
+    /**
+     * 数据是否落在盲区
+     */
+    private boolean posInBlind(float angle) {
+        return Math.abs(angle % 90 - 45) < mOmniAbility.getPerceptionBlindAreaAngle() / 2f;
+    }
+
+    /**
+     * @param data   数据集
+     * @param offset 数据开始的索引
+     * @param size   需要计算的数据量
+     * @return
+     * @throws IndexOutOfBoundsException offset 必须小于 date 大小
+     */
+    private int minInList(List<Integer> data, int offset, int size) {
+        if (offset >= data.size() || offset < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        int last = Math.min(offset + size, data.size());
+        int result = data.get(last - 1);
+        for (int i = last - 2; i >= offset; i--) {
+            result = Math.min(result, data.get(i));
+        }
+        return result;
+    }
+
+    /**
+     * @param data   数据集
+     * @param offset 数据开始的索引
+     * @param size   需要填充的大小
+     * @return
+     * @throws IndexOutOfBoundsException offset 必须小于 date 大小
+     */
+    private void fillList(List<Integer> data, int offset, int size, int value) {
+        if (offset >= data.size() || offset < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        int last = Math.min(offset + size, data.size());
+        for (int i = last - 1; i >= offset; i--) {
+            data.set(i, value);
+        }
     }
 
     @Override
     public void onStop() {
-        mDisposable.dispose();
-        mPathPool.clear();
-        mRadarPathPool.clear();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+
         mHSIContainer = null;
     }
 
@@ -346,69 +383,29 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         mCompassSize = compassSize;
         canvas.save();
         canvas.translate(0, (float) compassSize / 2);
-        drawPerception(canvas, paint, compassSize);
         drawRadarBarrier(canvas, paint, compassSize);
         drawBarrier(canvas, paint, compassSize);
+        drawPerception(canvas, paint, compassSize);
         canvas.restore();
     }
 
-
-    private List<Integer> optimizationData(List<Integer> horizontalBarrierDistance) {
-
-        if (horizontalBarrierDistance.size() == 0) {
-            return horizontalBarrierDistance;
-        }
-
-        int sectorLength = horizontalBarrierDistance.size() / SECTOR_COUNT;
-        List<Integer> sector = new ArrayList<>(sectorLength);
-
-        for (int i = 0; i < SECTOR_COUNT; i++) {
-            // 每一个扇形区的数据，排序
-            int srcPos = sectorLength * i;
-            for (int j = 0; j < sectorLength; j++) {
-                sector.add(j, horizontalBarrierDistance.get(srcPos + j));
-            }
-
-            calculateSector(sectorLength, sector, i, horizontalBarrierDistance);
-        }
-        return horizontalBarrierDistance;
+    boolean isUserDisable() {
+        return !mShowVisualPerceptionInfo && !mShowRadarPerceptionInfo;
     }
 
-    private void calculateSector(int sectorLength, List<Integer> sector, int i, List<Integer> horizontalBarrierDistance) {
-        float sum = 0;
-        for (int j = 0; j < sectorLength; j++) {
-            sum += sector.get(j);
-        }
-        float avg = sum / sectorLength;
-
-        sum = 0;
-        for (int j = 0; j < sectorLength; j++) {
-            sum += (sector.get(j) - avg) * (sector.get(j) - avg);
-        }
-        double standardDeviation = Math.sqrt(sum / sectorLength);
-
-        int divider = 0;
-        sum = 0;
-        for (int j = 0; j < sectorLength; j++) {
-            if (sector.get(j) <= avg + standardDeviation && sector.get(j) >= avg - standardDeviation) {
-                sum += sector.get(j);
-                divider += 1;
-            }
-        }
-
-        if (divider >= 2) {
-            avg = sum / divider;
-            for (int j = sectorLength * i; j < sectorLength * (i + 1); j++) {
-                horizontalBarrierDistance.set(j, Integer.parseInt(String.valueOf((int) avg)));
-            }
-        }
-    }
-
+    /**
+     * 绘制 HSI 中障碍检测范围背景
+     *
+     * @param compassSize 罗盘半径
+     */
     private void drawPerception(Canvas canvas, Paint paint, int compassSize) {
-        if (mHSIContainer == null) return;
+        if (mHSIContainer == null) {
+            return;
+        }
+        fixAlpha(paint);
         canvas.save();
 
-        int perceptionAngleTotal = 360 - DEFAULT_PERCEPTION_BLIND_AREA_COUNT * DEFAULT_PERCEPTION_BLIND_AREA_ANGLE;
+        int perceptionAngleTotal = 360 - DEFAULT_PERCEPTION_BLIND_AREA_COUNT * mOmniAbility.getPerceptionBlindAreaAngle();
         int perceptionAngleEach = perceptionAngleTotal / DEFAULT_PERCEPTION_AREA_COUNT;
 
         paint.setStyle(Paint.Style.FILL);
@@ -428,41 +425,114 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         // 按照前、右、后、左的顺序绘制
         for (int i = 0; i < DEFAULT_PERCEPTION_AREA_COUNT; i++) {
             canvas.save();
-            if (!mInSportMode && (mVisionPerceptionEnableState[i] || !mShowVisualPerceptionInfo)) {
-                canvas.clipPath(mPath);
-                mPerceptionAreaDrawable.setBounds((int) -radius, (int) -radius, (int) radius, 0);
-                mPerceptionAreaDrawable.draw(canvas);
-            } else {
-                paint.setColor(mPerceptionDisabledColor);
-                paint.setStyle(Paint.Style.FILL);
-                canvas.drawArc(mRect, 270 - (float) perceptionAngleEach / 2, perceptionAngleEach, true, paint);
-                paint.setColor(mPerceptionDisabledStrokeColor);
-                paint.setStyle(Paint.Style.STROKE);
-                canvas.drawArc(mRect, 270 - (float) perceptionAngleEach / 2, perceptionAngleEach, true, paint);
-
-                paint.setStyle(Paint.Style.FILL);
-                paint.setColor(mPerceptionDisabledTextColor);
+            boolean visionEnable = mVisionPerceptionEnableState[i];
+            if (!isHidePerceptionBg) {
+                drawPerceptionBg(canvas, paint, i, visionEnable, radius, perceptionAngleEach);
+            }
+            if (isUserDisable() || mPerceptionNotWorkMode || (!visionEnable && mShowVisualPerceptionInfo)) {
+                boolean isTof = mToFPerceptionEnableState[i];
+                // 绘制文字
                 paint.setTextSize(mPerceptionDisabledTextSize);
                 paint.setTextAlign(Paint.Align.CENTER);
-                String text = mToFPerceptionEnableState[i] ? PERCEPTION_TOF_ONLY : PERCEPTION_DISABLED;
+                String text = getPerceptionStatusText(isTof);
                 paint.getTextBounds(text, 0, text.length(), HSIView.RECT);
                 Paint.FontMetrics fontMetrics = paint.getFontMetrics();
                 float baselineOffsetY = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
                 canvas.save();
                 canvas.translate(0, -(radius + mHSIContainer.getAircraftSize()) / 2);
-                canvas.rotate(-90 * (float) i);
-                canvas.drawText(text, 0, baselineOffsetY, paint);
+                canvas.rotate(-90f * i);
+                int textColor = getPerceptionTextColor(isTof);
+                drawTextWithStroke(canvas, text, baselineOffsetY, mStrokeConfig.getStrokeBoldWidth(), mStrokeConfig.getStrokeDeepColor(), textColor
+                        , paint);
                 canvas.restore();
             }
             canvas.restore();
-            canvas.rotate((float) perceptionAngleEach + DEFAULT_PERCEPTION_BLIND_AREA_ANGLE);
+            canvas.rotate(perceptionAngleEach + mOmniAbility.getPerceptionBlindAreaAngle() * 1f);
         }
 
         canvas.restore();
     }
 
+    private void drawPerceptionBg(Canvas canvas, Paint paint, int index, boolean visionEnable, float radius, int perceptionAngleEach) {
+        if (isUserDisable() || (!mPerceptionNotWorkMode && (visionEnable || !mShowVisualPerceptionInfo))) {
+            canvas.clipPath(mPath);
+            mPerceptionAreaDrawable.setBounds((int) -radius, (int) -radius, (int) radius, 0);
+            mPerceptionAreaDrawable.draw(canvas);
+        } else {
+            // 用户关闭开关
+            boolean isTof = mToFPerceptionEnableState[index];
+            paint.setStyle(Paint.Style.FILL);
+            paint.setShader(getPerceptionDisabledShader(radius, isTof));
+            canvas.drawArc(mRect, 270 - (float) perceptionAngleEach / 2, perceptionAngleEach, true, paint);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setShader(null);
+        }
+    }
+
+    /**
+     * 画笔设置透明度颜色之后，画笔透明度需要修复
+     */
+    private void fixAlpha(Paint paint) {
+        paint.setAlpha(255);
+    }
+
+    private int getPerceptionTextColor(boolean isTof) {
+        if (!isUserDisable() && isTof && mSupportTof) {
+            return mWarnColor;
+        } else {
+            return mDangerColor;
+        }
+    }
+
+    @NonNull
+    private String getPerceptionStatusText(boolean isTof) {
+        if (isUserDisable()) {
+            return PERCEPTION_USER_DISABLE;
+        } else if (isTof && mSupportTof) {
+            return PERCEPTION_TOF_ONLY;
+        } else {
+            return PERCEPTION_DISABLED;
+        }
+    }
+
+    protected void drawTextWithStroke(Canvas canvas, String text, float baseline, float strokeWidth, int strokeColor, int textColor, Paint paint) {
+        paint.setStrokeWidth(strokeWidth);
+        paint.setColor(strokeColor);
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawText(text, 0, baseline, paint);
+
+        paint.setColor(textColor);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawText(text, 0, baseline, paint);
+    }
+
+    public Shader getPerceptionDisabledShader(float radius, boolean isTof) {
+        Shader result;
+        if (isTof && mSupportTof) {
+            if (mTofShader == null) {
+                mTofShader = createLinearShader(radius, mWarnColor);
+            }
+            result = mTofShader;
+        } else {
+            if (mNaShader == null) {
+                mNaShader = createLinearShader(radius, mDangerColor);
+            }
+            result = mNaShader;
+        }
+        return result;
+    }
+
+    @NonNull
+    private LinearGradient createLinearShader(float radius, int warnColor) {
+        int centerColor = ColorUtils.setAlphaComponent(warnColor, WARN_COLOR_ALPHA_CENTER);
+        int outerColor = ColorUtils.setAlphaComponent(warnColor, WARN_COLOR_ALPHA_OUTER);
+        return new LinearGradient(0, 0, 0, -radius, centerColor, outerColor, Shader.TileMode.CLAMP);
+    }
+
     private void drawBarrier(Canvas canvas, Paint paint, int compassSize) {
-        if (mHSIContainer == null) return;
+        if (mHSIContainer == null) {
+            return;
+        }
 
         if (mShapeList.isEmpty()) {
             return;
@@ -476,7 +546,11 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         for (Shape shape : mShapeList) {
             canvas.save();
             // 判断该方向的感知系统是否正常工作
-            boolean skip = judgeSkip(shape, perceptionAngleEach);
+            int fromAngle = shape.mFromAngle;
+            boolean skip = mPerceptionNotWorkMode;
+            if (!skip) {
+                skip = calcSkip(perceptionAngleEach, fromAngle);
+            }
             if (!skip) {
                 if (shape instanceof PathShape) {
                     canvas.rotate(shape.mFromAngle);
@@ -491,8 +565,8 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                     float lastStrokeWidth = paint.getStrokeWidth();
                     paint.setStrokeWidth(mMaxPerceptionStrokeWidth);
                     float arcRadius = radius - (float) mMaxPerceptionStrokeWidth / 2;
-                    canvas.drawArc(-arcRadius, -arcRadius, arcRadius, arcRadius, 270,
-                            ((ArcShape) shape).mToAngle - (float) shape.mFromAngle, false, paint);
+                    canvas.drawArc(-arcRadius, -arcRadius, arcRadius, arcRadius, 270f,
+                            ((ArcShape) shape).mToAngle * 1f - shape.mFromAngle * 1f, false, paint);
                     paint.setStrokeWidth(lastStrokeWidth);
                 }
             }
@@ -500,17 +574,16 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         }
     }
 
-    private boolean judgeSkip(Shape shape, int perceptionAngleEach) {
-        int fromAngle = shape.mFromAngle;
-        boolean skip = mInSportMode;
+    private boolean calcSkip(int perceptionAngleEach, int fromAngle) {
+        boolean skip = false;
         if (fromAngle > perceptionAngleEach * 7 / 2 || fromAngle < perceptionAngleEach / 2) {
-            skip |= !mVisionPerceptionEnableState[0] && !mToFPerceptionEnableState[0];
+            skip = !mVisionPerceptionEnableState[0] && !mToFPerceptionEnableState[0];
         } else if (fromAngle > perceptionAngleEach / 2 && fromAngle < perceptionAngleEach * 3 / 2) {
-            skip |= !mVisionPerceptionEnableState[1] && !mToFPerceptionEnableState[1];
+            skip = !mVisionPerceptionEnableState[1] && !mToFPerceptionEnableState[1];
         } else if (fromAngle > perceptionAngleEach * 3 / 2 && fromAngle < perceptionAngleEach * 5 / 2) {
-            skip |= !mVisionPerceptionEnableState[2] && !mToFPerceptionEnableState[2];
+            skip = !mVisionPerceptionEnableState[2] && !mToFPerceptionEnableState[2];
         } else if (fromAngle > perceptionAngleEach * 5 / 2 && fromAngle < perceptionAngleEach * 7 / 2) {
-            skip |= !mVisionPerceptionEnableState[3] && !mToFPerceptionEnableState[3];
+            skip = !mVisionPerceptionEnableState[3] && !mToFPerceptionEnableState[3];
         }
         return skip;
     }
@@ -531,20 +604,20 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
             for (Shape shape : mRadarShapeList) {
                 canvas.save();
                 if (shape instanceof PathShape) {
-                    canvas.rotate((float) shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET);
+                    canvas.rotate(shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET * 1f);
                     paint.setStyle(Paint.Style.FILL);
                     paint.setColor(shape.mColor);
                     canvas.drawPath(((PathShape) shape).mPath, paint);
                     mRadarPathPool.recycle(((PathShape) shape).mPath);
                 } else if (shape instanceof ArcShape) {
-                    canvas.rotate((float) shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET);
+                    canvas.rotate(shape.mFromAngle + DEFAULT_RADAR_START_ANGLE_OFFSET * 1f);
                     paint.setColor(shape.mColor);
                     paint.setStyle(Paint.Style.STROKE);
                     float lastStrokeWidth = paint.getStrokeWidth();
                     paint.setStrokeWidth(mRadarMaxPerceptionStrokeWidth);
                     float arcRadius = radius - (float) mRadarMaxPerceptionStrokeWidth / 2;
-                    canvas.drawArc(-arcRadius, -arcRadius, arcRadius, arcRadius, 270,
-                            ((ArcShape) shape).mToAngle - (float) shape.mFromAngle, false, paint);
+                    canvas.drawArc(-arcRadius, -arcRadius, arcRadius, arcRadius, 270f,
+                            ((ArcShape) shape).mToAngle - shape.mFromAngle * 1f, false, paint);
                     paint.setStrokeWidth(lastStrokeWidth);
                 }
                 canvas.restore();
@@ -556,7 +629,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         if (horizontalBarrierDistance.size() == 0) {
             return new ArrayList<>();
         }
-        int perceptionAngleTotal = 360 - DEFAULT_PERCEPTION_BLIND_AREA_COUNT * DEFAULT_PERCEPTION_BLIND_AREA_ANGLE;
+        int perceptionAngleTotal = 360 - DEFAULT_PERCEPTION_BLIND_AREA_COUNT * mOmniAbility.getPerceptionBlindAreaAngle();
         int perceptionAngleEach = perceptionAngleTotal / DEFAULT_PERCEPTION_AREA_COUNT;
         int rotationOffset = 360 / horizontalBarrierDistance.size();
         int startOffset = -perceptionAngleEach / rotationOffset / 2;
@@ -569,8 +642,11 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
             return new ArrayList<>();
         }
         Thread currentThread = Thread.currentThread();
+        LogUtils.d(TAG,
+                "updateRadarDrawShape " + horizontalBarrierDistance.get(0) + ". Current thread is " + currentThread.getName() + " " + currentThread.getId());
         long preTime = System.currentTimeMillis();
         List<Shape> result = updateDrawShape2(horizontalBarrierDistance, 0, mRadarLevelColor);
+        LogUtils.d(TAG, "updateRadarDrawShape take " + (System.currentTimeMillis() - preTime));
         return result;
     }
 
@@ -600,7 +676,18 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
             angle = angle < 0 ? angle + horizontalBarrierDistance.size() : angle;
             float distanceInMeter = (float) horizontalBarrierDistance.get(angle) / 1000;
             if (distanceInMeter >= visibleDistanceInHsi) {
-                doShape(distanceInMeter, levelColor, angle, rotationOffset, shapeList);
+                if (distanceInMeter <= mOmniAbility.getHorizontalDetectionCapability()) {
+                    int color;
+                    if (distanceInMeter > mHorizontalPerceptionDistance) {
+                        color = levelColor[0];
+                    } else {
+                        color = levelColor[1];
+                    }
+                    ArcShape shape = new ArcShape(angle * rotationOffset);
+                    shape.mColor = color;
+                    shape.mToAngle += rotationOffset;
+                    shapeList.add(shape);
+                }
             } else {
                 float c = offset + distanceInMeter / visibleDistanceInHsi * (radius - offset);
                 if (barrierRotation == 0) {
@@ -618,19 +705,28 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                     minDistanceInMeter = distanceInMeter;
                 }
             }
-            if (needShape(distanceInMeter, visibleDistanceInHsi, i, horizontalBarrierDistance, path1, lastShape) && lastShape != null) {
+            if ((distanceInMeter >= visibleDistanceInHsi || i == horizontalBarrierDistance.size() - 1)
+                    && !path1.isEmpty() && lastShape != null) {
                 path1.close();
                 path2 = mRadarPathPool.acquire();
                 path2.reset();
-                path2.lineTo(0, -radius);
-                float offsetX = (float) (Math.sin(Math.PI * barrierRotation / 180) * radius);
-                float offsetY = (float) (Math.cos(Math.PI * barrierRotation / 180) * radius);
-                path2.lineTo(offsetX, -offsetY);
-                path2.close();
                 path2.addArc(-radius, -radius, radius, radius, 270, barrierRotation);
-                //必须重构path的布尔操作算法，怀疑是雷达传递数据有问题，导致方法卡死
+                path2.lineTo(0, 0);
+                path2.close();
+                LogUtils.d(TAG, "updateRadar2 op 1 size=" + shapeList.size() + " " + minDistanceInMeter);
+                //todo：必须重构path的布尔操作算法，怀疑是雷达传递数据有问题，导致方法卡死
                 path2.op(path1, Path.Op.DIFFERENCE);
-                int areaColor = getAreaColor(minDistanceInMeter, levelColor);
+                LogUtils.d(TAG, "updateRadar2 op 2");
+
+                int areaColor;
+                if (minDistanceInMeter > mHorizontalPerceptionDistance) {
+                    areaColor = levelColor[0];//
+                } else if (minDistanceInMeter > mHorizontalBarrierAvoidanceDistance + 2) {
+                    // feature HYAPP-10551 避障变红由【刹停距离】改为【刹停距离+2m】
+                    areaColor = levelColor[1];
+                } else {
+                    areaColor = levelColor[2];
+                }
                 PathShape pathShape = lastShape;
                 pathShape.mColor = areaColor;
                 pathShape.mPath = path2;
@@ -645,30 +741,12 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         return shapeList;
     }
 
-    private boolean needShape(float distanceInMeter, int visibleDistanceInHsi, int i, List<Integer> horizontalBarrierDistance, Path path1, PathShape lastShape) {
-        return (distanceInMeter >= visibleDistanceInHsi || i == horizontalBarrierDistance.size() - 1)
-                && !path1.isEmpty() && lastShape != null;
-    }
-
-    private void doShape(float distanceInMeter, int[] levelColor, int angle, int rotationOffset, List<Shape> shapeList) {
-        if (distanceInMeter <= DEFAULT_MAX_PERCEPTION_DISTANCE_IN_METER) {
-            int color;
-            if (distanceInMeter > mHorizontalPerceptionDistance) {
-                color = levelColor[0];
-            } else {
-                color = levelColor[1];
-            }
-            ArcShape shape = new ArcShape(angle * rotationOffset);
-            shape.mColor = color;
-            shape.mToAngle += rotationOffset;
-            shapeList.add(shape);
-        }
-    }
-
     private List<Shape> updateDrawShape(List<Integer> horizontalBarrierDistance, int startOffset, int[] levelColor) {
         List<Shape> shapeList = new ArrayList<>();
 
-        if (mHSIContainer == null) return shapeList;
+        if (mHSIContainer == null) {
+            return shapeList;
+        }
 
 
         int rotationOffset = 360 / horizontalBarrierDistance.size();
@@ -689,7 +767,18 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
             angle = angle < 0 ? angle + horizontalBarrierDistance.size() : angle;
             float distanceInMeter = (float) horizontalBarrierDistance.get(angle) / 1000;
             if (distanceInMeter >= visibleDistanceInHsi) {
-                performDistanceInMeter(distanceInMeter, levelColor, angle, rotationOffset, shapeList);
+                if (distanceInMeter <= mOmniAbility.getHorizontalDetectionCapability()) {
+                    int color;
+                    if (distanceInMeter > mHorizontalPerceptionDistance) {
+                        color = levelColor[0];
+                    } else {
+                        color = levelColor[1];
+                    }
+                    ArcShape shape = new ArcShape(angle * rotationOffset);
+                    shape.mColor = color;
+                    shape.mToAngle += rotationOffset;
+                    shapeList.add(shape);
+                }
             } else {
                 float c = offset + distanceInMeter / visibleDistanceInHsi * (radius - offset);
                 if (barrierRotation == 0) {
@@ -707,22 +796,28 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                     minDistanceInMeter = distanceInMeter;
                 }
             }
-            if (judgeDistanceInMeter(distanceInMeter, visibleDistanceInHsi, i, horizontalBarrierDistance, path1, lastShape) && lastShape != null) {
+            if ((distanceInMeter >= visibleDistanceInHsi || i == horizontalBarrierDistance.size() - 1)
+                    && !path1.isEmpty() && lastShape instanceof PathShape) {
                 path1.close();
                 path2 = mPathPool.acquire();
                 path2.reset();
-                path2.lineTo(0, -radius);
-                float offsetX = (float) (Math.sin(Math.PI * barrierRotation / 180) * radius);
-                float offsetY = (float) (Math.cos(Math.PI * barrierRotation / 180) * radius);
-                path2.lineTo(offsetX, -offsetY);
-                path2.close();
                 path2.addArc(-radius, -radius, radius, radius, 270, barrierRotation);
-//                DJILog.d(TAG, "updateRadar op 1 size=" + shapeList.size() + " " + minDistanceInMeter);
-//                sendRadarMsg();
+                path2.lineTo(0, 0);
+                path2.close();
+                //                LogUtils.d(TAG, "updateRadar op 1 size=" + shapeList.size() + " " + minDistanceInMeter);
+                //                sendRadarMsg();
                 path2.op(path1, Path.Op.DIFFERENCE);
-//                DJILog.d(TAG, "updateRadar op 2");
-//                removeRadarMsg();
-                int areaColor = getAreaColor(minDistanceInMeter, levelColor);
+                //                LogUtils.d(TAG, "updateRadar op 2");
+                //                removeRadarMsg();
+                int areaColor;
+                if (minDistanceInMeter > mHorizontalPerceptionDistance) {
+                    areaColor = levelColor[0];//
+                } else if (minDistanceInMeter > mHorizontalBarrierAvoidanceDistance + 2) {
+                    // feature HYAPP-10551 避障变红由【刹停距离】改为【刹停距离+2m】
+                    areaColor = levelColor[1];
+                } else {
+                    areaColor = levelColor[2];
+                }
                 PathShape pathShape = (PathShape) lastShape;
                 pathShape.mColor = areaColor;
                 pathShape.mPath = path2;
@@ -735,39 +830,6 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
         }
         mPathPool.recycle(path1);
         return shapeList;
-    }
-
-    private boolean judgeDistanceInMeter(float distanceInMeter, int visibleDistanceInHsi, int i, List<Integer> horizontalBarrierDistance, Path path1, Shape lastShape) {
-        return (distanceInMeter >= visibleDistanceInHsi || i == horizontalBarrierDistance.size() - 1)
-                && !path1.isEmpty() && lastShape instanceof PathShape;
-    }
-
-    private int getAreaColor(float minDistanceInMeter, int[] levelColor) {
-        int areaColor;
-        if (minDistanceInMeter > mHorizontalPerceptionDistance) {
-            areaColor = levelColor[0];//
-        } else if (minDistanceInMeter > mHorizontalBarrierAvoidanceDistance + 2) {
-            // feature HYAPP-10551 避障变红由【刹停距离】改为【刹停距离+2m】
-            areaColor = levelColor[1];
-        } else {
-            areaColor = levelColor[2];
-        }
-        return areaColor;
-    }
-
-    private void performDistanceInMeter(float distanceInMeter, int[] levelColor, int angle, int rotationOffset, List<Shape> shapeList) {
-        if (distanceInMeter <= DEFAULT_MAX_PERCEPTION_DISTANCE_IN_METER) {
-            int color;
-            if (distanceInMeter > mHorizontalPerceptionDistance) {
-                color = levelColor[0];
-            } else {
-                color = levelColor[1];
-            }
-            ArcShape shape = new ArcShape(angle * rotationOffset);
-            shape.mColor = color;
-            shape.mToAngle += rotationOffset;
-            shapeList.add(shape);
-        }
     }
 
     private static class Shape {

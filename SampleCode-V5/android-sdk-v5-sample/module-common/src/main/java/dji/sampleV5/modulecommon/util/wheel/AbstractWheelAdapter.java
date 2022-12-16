@@ -14,10 +14,12 @@ public abstract class AbstractWheelAdapter implements WheelViewAdapter {
 	// Observers
 	private List<DataSetObserver> datasetObservers;
 
+	@Override
 	public View getEmptyItem(View convertView, ViewGroup parent) {
 		return null;
 	}
 
+	@Override
 	public void registerDataSetObserver(DataSetObserver observer) {
 		if (datasetObservers == null) {
 			datasetObservers = new LinkedList<DataSetObserver>();
@@ -25,6 +27,7 @@ public abstract class AbstractWheelAdapter implements WheelViewAdapter {
 		datasetObservers.add(observer);
 	}
 
+	@Override
 	public void unregisterDataSetObserver(DataSetObserver observer) {
 		if (datasetObservers != null) {
 			datasetObservers.remove(observer);

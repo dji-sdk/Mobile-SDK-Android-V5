@@ -467,7 +467,7 @@
     <string name="uxsdk_speed_display_widget_title">Speed Display Widget</string>
     <string name="uxsdk_attitude_display_widget_title">Attitude Display Widget</string>
     <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
-    <string name="uxsdk_exposure_meter_widget_title">Exposure Meter Widget</string>
+    <string name="uxsdk_exposure_meter_widget_title">Exposure Metering Widget</string>
     <string name="uxsdk_focal_zoom_widget_title">Focal Zoom Widget</string>
 
     <!-- Simulator Widget -->
@@ -683,8 +683,9 @@
     <string name="uxsdk_rtk_setting_menu_type_nrtk">网络RTK</string>
     <string name="uxsdk_rtk_setting_menu_type_custom_rtk">自定义网络RTK</string>
     <string name="uxsdk_rtk_setting_menu_type_rtk_station">D-RTK 2 移动站</string>
+    <string name="uxsdk_rtk_setting_menu_type_cmcc_rtk">CMCC RTK</string>
     <string name="uxsdk_rtk_setting_menu_type_rtk_station_selected">选取 D-RTK 2 移动站</string>
-    <string name="uxsdk_rtk_setting_menu_type_nrtk_desc">千寻网络RTK</string>
+    <string name="uxsdk_rtk_setting_menu_type_qx_rtk">千寻网络RTK</string>
     <string name="uxsdk_rtk_channel_b_not_support_net_rtk">B控不支持网络RTK</string>
     <string name="uxsdk_rtk_channel_b_not_support_net_custom_rtk">B控不支持自定义网络RTK</string>
     <string name="uxsdk_rtk_setting_menu_esc_beeping_tip">当前电机已起转，请停转电机再试。</string>
@@ -700,6 +701,8 @@
     <string name="uxsdk_lens_type_wide">广角</string>
     <string name="uxsdk_lens_type_zoom">变焦</string>
     <string name="uxsdk_lens_type_ir">红外</string>
+    <string name="uxsdk_lens_type_ndvi">多光谱</string>
+    <string name="uxsdk_lens_type_rgb">可见光</string>
 
     <!--RTK Connect Widget-->
     <string name="uxsdk_rtk_problem_detection">请检测以下问题</string>
@@ -728,7 +731,6 @@
     <string name="uxsdk_rtk_guidance_step2_tip">连续点击可连续切换</string>
     <string name="uxsdk_rtk_guidance_five_mode">模式灯一组五次闪烁即为广播模式</string>
 
-
     <!--GpsSignalWidget-->
     <string name="uxsdk_fpv_top_bar_rtk_title">RTK 定位</string>
     <string name="uxsdk_setting_menu_rtk_state_disconnect">未连接</string>
@@ -747,6 +749,14 @@
     <string name="uxsdk_abnormal">异常</string>
     <string name="uxsdk_normal">正常</string>
 
+    <!--MapView-->
+    <string name="uxsdk_map_provider_init_failed">地图加载失败，对应地图库未找到</string>
+
+    <!--NVDI 系列 Widget-->
+    <string name="uxsdk_stream_switcher_sbs">分屏</string>
+    <string name="uxsdk_stream_ndvi_vegetation_index">植被指数</string>
+    <string name="uxsdk_stream_ms_lens">多光谱镜头</string>
+    <string name="uxsdk_switch_stream_unsupported">当前拍照模式下不支持切换植被指数及多光谱镜头</string>
 
 </resources>
 

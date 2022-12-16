@@ -107,9 +107,9 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
                                  @NonNull ObservableInMemoryKeyedStore keyedStore) {
         super(djiSdkModel, keyedStore);
         defaultIntervalSettings = new PhotoIntervalShootSettings();
-        CameraPhotoState cameraPhotoState = new CameraPhotoState(CameraShootPhotoMode.UNKNOWN);
+        CameraPhotoState photoState = new CameraPhotoState(CameraShootPhotoMode.UNKNOWN);
 
-        this.cameraPhotoState = DataProcessor.create(cameraPhotoState);
+        this.cameraPhotoState = DataProcessor.create(photoState);
         CameraSDPhotoStorageState cameraSDStorageState = new CameraSDPhotoStorageState(
                 CameraStorageLocation.SDCARD, 0, SDCardLoadState.NOT_INSERTED);
         cameraStorageState = DataProcessor.create(cameraSDStorageState);
@@ -241,7 +241,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
         if (!canStartShootingPhoto.getValue()) {
             return Completable.complete();
         }
-        return djiSdkModel.performAction(KeyTools.createKey(CameraKey.KeyStartShootPhoto, cameraIndex));
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(CameraKey.KeyStartShootPhoto, cameraIndex));
     }
 
     /**
@@ -253,7 +253,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
         if (!canStopShootingPhoto.getValue()) {
             return Completable.complete();
         }
-        return djiSdkModel.performAction(KeyTools.createKey(CameraKey.KeyStopShootPhoto, cameraIndex));
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(CameraKey.KeyStopShootPhoto, cameraIndex));
     }
     //endregion
 
@@ -267,16 +267,16 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyAEBSettings, cameraIndex), aebSettings, photoAEBSettings -> {
             aebCount.onNext(photoAEBSettings.getCount());
         });
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyPhotoBurstCount,cameraIndex), burstCount);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyRawBurstCount,cameraIndex), rawBurstCount);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyPhotoIntervalShootSettings,cameraIndex), timeIntervalSettings);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyPhotoPanoramaMode,cameraIndex), panoramaMode);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyPhotoBurstCount, cameraIndex), burstCount);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyRawBurstCount, cameraIndex), rawBurstCount);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyPhotoIntervalShootSettings, cameraIndex), timeIntervalSettings);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyPhotoPanoramaMode, cameraIndex), panoramaMode);
 
         // Is shooting photo state
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingPhoto,cameraIndex), isShootingPhoto);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingPhoto, cameraIndex), isShootingPhoto);
 
         // Is storing photo state
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraStoringFile,cameraIndex), isStoringPhoto);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraStoringFile, cameraIndex), isStoringPhoto);
 
         // Can start shooting photo
         // can't take photo when product is not connected
@@ -323,30 +323,33 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
         updateCameraPhotoState();
         updateCameraStorageState();
     }
-    //endregion
+
+    public boolean isPhotoMode(){
+        return flatCameraModule.getCameraModeDataProcessor().getValue().isPhotoMode();
+    }
 
     //region Helpers
     private void updateCameraPhotoState() {
-        CameraPhotoState cameraPhotoState = null;
+        CameraPhotoState state = null;
         CameraShootPhotoMode shootPhotoMode = flatCameraModule.getShootPhotoModeProcessor().getValue();
         switch (shootPhotoMode) {
             case NORMAL:
             case HDR:
             case HYPER_LIGHT:
-            //case SHALLOW_FOCUS:
+                //case SHALLOW_FOCUS:
             case EHDR:
-                cameraPhotoState = new CameraPhotoState(shootPhotoMode);
+                state = new CameraPhotoState(shootPhotoMode);
                 break;
             case BURST:
                 if (!PhotoBurstCount.UNKNOWN.equals(burstCount.getValue())) {
-                    cameraPhotoState = new CameraBurstPhotoState(
+                    state = new CameraBurstPhotoState(
                             shootPhotoMode,
                             burstCount.getValue());
                 }
                 break;
             case RAW_BURST:
                 if (!PhotoBurstCount.UNKNOWN.equals(rawBurstCount.getValue())) {
-                    cameraPhotoState = new CameraBurstPhotoState(
+                    state = new CameraBurstPhotoState(
                             shootPhotoMode,
                             rawBurstCount.getValue()
                     );
@@ -354,7 +357,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
                 break;
             case AEB:
                 if (!PhotoAEBPhotoCount.UNKNOWN.equals(aebCount.getValue())) {
-                    cameraPhotoState = new CameraAEBPhotoState(
+                    state = new CameraAEBPhotoState(
                             shootPhotoMode,
                             aebCount.getValue()
                     );
@@ -363,7 +366,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
             case INTERVAL:
                 PhotoIntervalShootSettings intervalSettings = timeIntervalSettings.getValue();
                 if (!defaultIntervalSettings.equals(timeIntervalSettings.getValue())) {
-                    cameraPhotoState = new CameraIntervalPhotoState(
+                    state = new CameraIntervalPhotoState(
                             shootPhotoMode,
                             intervalSettings.getCount(),
                             intervalSettings.getInterval().intValue()
@@ -372,7 +375,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
                 break;
             case PANO_APP:
                 if (!PhotoPanoramaMode.UNKNOWN.equals(panoramaMode.getValue())) {
-                    cameraPhotoState = new CameraPanoramaPhotoState(
+                    state = new CameraPanoramaPhotoState(
                             shootPhotoMode,
                             panoramaMode.getValue()
                     );
@@ -382,8 +385,8 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
                 break;
         }
 
-        if (cameraPhotoState != null) {
-            this.cameraPhotoState.onNext(cameraPhotoState);
+        if (state != null) {
+            this.cameraPhotoState.onNext(state);
         }
     }
 

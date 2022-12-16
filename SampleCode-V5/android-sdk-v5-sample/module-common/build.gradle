@@ -50,8 +50,8 @@ dependencies {
     api deps.legacySupport
     api deps.lifecycleViewModel
     api deps.lifecycleLiveData
-    implementation deps.leakcanary
     implementation deps.bugly
+    implementation deps.leakcanary
     api deps.glide
     kapt deps.glidecompiler
     api deps.dynamicanimation

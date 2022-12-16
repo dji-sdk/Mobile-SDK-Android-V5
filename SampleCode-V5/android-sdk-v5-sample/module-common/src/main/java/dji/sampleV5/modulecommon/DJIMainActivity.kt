@@ -3,7 +3,6 @@ package dji.sampleV5.modulecommon
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,7 +10,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import dji.sampleV5.modulecommon.models.BaseMainActivityVm
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
 import dji.sampleV5.modulecommon.util.Helper
@@ -19,6 +17,7 @@ import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
 import dji.v5.manager.interfaces.SDKManagerCallback
 import dji.v5.utils.common.LogUtils
+import dji.v5.utils.common.PermissionUtil
 import dji.v5.utils.common.StringUtils
 import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -62,7 +61,24 @@ abstract class DJIMainActivity : AppCompatActivity() {
         }
 
         initMSDKInfoView()
-        checkPermission()
+        checkPermissionAndRequest()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (checkPermission()) {
+            handleAfterPermissionPermitted()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (checkPermission()) {
+            handleAfterPermissionPermitted()
+        }
+    }
+
+    private fun handleAfterPermissionPermitted() {
         registerApp()
         prepareTestingToolsActivity()
     }
@@ -98,6 +114,11 @@ abstract class DJIMainActivity : AppCompatActivity() {
         icon_tech_support.setOnClickListener {
             Helper.startBrowser(this, StringUtils.getResStr(R.string.tech_support_url))
         }
+        view_base_info.setOnClickListener {
+            baseMainActivityVm.doPairing {
+                ToastUtils.showToast(it)
+            }
+        }
     }
 
     private fun registerApp() {
@@ -105,7 +126,9 @@ abstract class DJIMainActivity : AppCompatActivity() {
             override fun onRegisterSuccess() {
                 ToastUtils.showToast("Register Success")
                 msdkInfoVm.initListener()
-                handler.postDelayed({ prepareUxActivity() }, 1500)
+                handler.postDelayed({
+                    prepareUxActivity()
+                }, 1500)
             }
 
             override fun onRegisterFailure(error: IDJIError?) {
@@ -134,6 +157,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
         })
     }
 
+
     fun <T> enableDefaultLayout(cl: Class<T>) {
         enableShowCaseButton(default_layout_button, cl)
     }
@@ -155,13 +179,22 @@ abstract class DJIMainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkPermission() {
+    private fun checkPermissionAndRequest() {
         for (i in permissionArray.indices) {
-            if (!isPermissionGranted(permissionArray[i])) {
+            if (!PermissionUtil.isPermissionGranted(this, permissionArray[i])) {
                 requestPermission()
                 break
             }
         }
+    }
+
+    private fun checkPermission(): Boolean {
+        for (i in permissionArray.indices) {
+            if (PermissionUtil.isPermissionGranted(this, permissionArray[i])) {
+                return true
+            }
+        }
+        return false
     }
 
     private val requestPermissionLauncher =
@@ -179,11 +212,6 @@ abstract class DJIMainActivity : AppCompatActivity() {
     private fun requestPermission() {
         requestPermissionLauncher.launch(permissionArray)
     }
-
-    private fun isPermissionGranted(permission: String): Boolean {
-        return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

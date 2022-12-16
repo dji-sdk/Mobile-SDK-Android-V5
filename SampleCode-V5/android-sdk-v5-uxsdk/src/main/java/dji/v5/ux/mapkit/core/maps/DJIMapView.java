@@ -46,7 +46,7 @@ import java.util.List;
  */
 public class DJIMapView extends FrameLayout {
 
-    private static final String TAG = DJIMapView.class.getSimpleName();
+    private static final String TAG = LogUtils.getTag(DJIMapView.class.getSimpleName());
     private DJIMapViewInternal internalMapView;
     // private static final int MAP_PROVIDER_GOOGLEMAP = 0x1;
     private static final int MAP_PROVIDER_AMAP = 0x2;

@@ -101,7 +101,7 @@ class LiveStreamVM : DJIViewModel() {
     }
 
     fun setLiveVideoBitRate(bitrate: Int) {
-        streamManager.setLiveVideoBitrate(bitrate)
+        streamManager.liveVideoBitrate = bitrate
     }
 
     fun getLiveVideoBitRate():Int{

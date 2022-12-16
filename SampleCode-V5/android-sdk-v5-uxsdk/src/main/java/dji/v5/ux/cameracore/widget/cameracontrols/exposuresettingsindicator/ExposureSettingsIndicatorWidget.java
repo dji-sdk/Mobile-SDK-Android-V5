@@ -45,21 +45,19 @@ import dji.v5.ux.core.base.ICameraIndex;
 import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.base.widget.FrameLayoutWidget;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
-import dji.v5.ux.core.communication.OnStateChangeCallback;
 import dji.v5.ux.core.util.RxUtil;
 
 /**
  * Widget indicates the current exposure mode.
  * Tapping on the widget can be linked to open exposure settings
  */
-public class ExposureSettingsIndicatorWidget extends FrameLayoutWidget implements View.OnClickListener, ICameraIndex {
+public class ExposureSettingsIndicatorWidget extends FrameLayoutWidget<Object> implements View.OnClickListener, ICameraIndex {
 
     //region Fields
     private static final String TAG = "ExposureSetIndicWidget";
     private ImageView foregroundImageView;
     private ExposureSettingsIndicatorWidgetModel widgetModel;
     private Map<CameraExposureMode, Drawable> exposureModeDrawableHashMap;
-    private OnStateChangeCallback<Object> stateChangeCallback = null;
     private int stateChangeResourceId;
     //endregion
 
@@ -119,7 +117,6 @@ public class ExposureSettingsIndicatorWidget extends FrameLayoutWidget implement
 
     @Override
     protected void onDetachedFromWindow() {
-        destroyListener();
         if (!isInEditMode()) {
             widgetModel.cleanup();
         }
@@ -140,17 +137,13 @@ public class ExposureSettingsIndicatorWidget extends FrameLayoutWidget implement
     private void updateViewState() {
         if (stateChangeResourceId != INVALID_RESOURCE && this.getRootView() != null) {
             View view = this.getRootView().findViewById(stateChangeResourceId);
-            if (view.isShown()) {
-                view.setVisibility(View.GONE);
-            } else {
-                view.setVisibility(View.VISIBLE);
+            if (view == null) {
+                return;
             }
+            view.setVisibility(view.isShown() ? View.GONE : View.VISIBLE);
         }
     }
 
-    private void destroyListener() {
-        stateChangeCallback = null;
-    }
 
     private void initDefaults() {
         exposureModeDrawableHashMap = new HashMap<>();
@@ -227,6 +220,7 @@ public class ExposureSettingsIndicatorWidget extends FrameLayoutWidget implement
      *
      * @return instance of {@link ComponentIndexType}
      */
+    @Override
     @NonNull
     public ComponentIndexType getCameraIndex() {
         return widgetModel.getCameraIndex();
@@ -237,6 +231,7 @@ public class ExposureSettingsIndicatorWidget extends FrameLayoutWidget implement
      *
      * @return current lens type
      */
+    @Override
     @NonNull
     public CameraLensType getLensType() {
         return widgetModel.getLensType();
@@ -299,16 +294,6 @@ public class ExposureSettingsIndicatorWidget extends FrameLayoutWidget implement
      */
     public void setIconBackground(@Nullable Drawable drawable) {
         foregroundImageView.setBackground(drawable);
-    }
-
-    /**
-     * Set callback for when the widget is tapped.
-     * This can be used to link the widget to //TODO exposure settings panel
-     *
-     * @param stateChangeCallback listener to handheld callback
-     */
-    public void setStateChangeCallback(@NonNull OnStateChangeCallback<Object> stateChangeCallback) {
-        this.stateChangeCallback = stateChangeCallback;
     }
 
     public void setStateChangeResourceId(int stateChangeResourceId) {

@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <dji.v5.ux.cameracore.widget.fpvinteraction.ExposureMeterWidget
+    <dji.v5.ux.cameracore.widget.fpvinteraction.ExposureMeteringWidget
         android:id="@+id/view_exposure_meter"
         android:layout_gravity="center"
         android:layout_width="wrap_content"

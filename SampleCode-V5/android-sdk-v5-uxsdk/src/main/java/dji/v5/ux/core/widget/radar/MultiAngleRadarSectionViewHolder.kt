@@ -57,11 +57,6 @@ class MultiAngleRadarSectionViewHolder(
         sectorImages.forEach { it?.visibility = View.GONE }
     }
 
-    private fun show() {
-        distance.visibility = View.VISIBLE
-        arrow.visibility = View.VISIBLE
-        sectorImages.forEach { it?.visibility = View.VISIBLE }
-    }
 
     override fun setImages(images: Array<Drawable?>) {
         sectorImages.forEachIndexed { index: Int, image: ImageView? ->

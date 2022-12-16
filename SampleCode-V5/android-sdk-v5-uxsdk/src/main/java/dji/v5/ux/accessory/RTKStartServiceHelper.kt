@@ -2,6 +2,7 @@ package dji.v5.ux.accessory
 
 import android.os.Handler
 import android.text.TextUtils
+import dji.rtk.CoordinateSystem
 import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.product.ProductType
 import dji.sdk.keyvalue.value.remotecontroller.RCMode
@@ -64,7 +65,7 @@ object RTKStartServiceHelper {
     private fun observerRTKNoduleAvailable() {
         RxUtil.addListener(KeyTools.createKey(ProductKey.KeyProductType), this).subscribe {
             if (it != ProductType.UNRECOGNIZED && productType != it) {
-                LogUtils.d(TAG, "productType=$it")
+                LogUtils.i(TAG, "productType=$it")
                 productType = it
                 updateData()
             }
@@ -72,7 +73,7 @@ object RTKStartServiceHelper {
         }
         RxUtil.addListener(KeyTools.createKey(RtkMobileStationKey.KeyIsRTKDongleConnect), this).subscribe {
             if (rtkDongleConnection != it) {
-                LogUtils.d(TAG, "rtkDongleConnection=$it")
+                LogUtils.i(TAG, "rtkDongleConnection=$it")
                 rtkDongleConnection = it
                 updateData()
             }
@@ -81,7 +82,7 @@ object RTKStartServiceHelper {
 
         RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyConnection), this).subscribe {
             if (fcConnected != it) {
-                LogUtils.d(TAG, "fcConnected=$it")
+                LogUtils.i(TAG, "fcConnected=$it")
                 fcConnected = it
                 updateData()
             }
@@ -108,7 +109,7 @@ object RTKStartServiceHelper {
 
     @Synchronized
     fun startRtkService() {
-        LogUtils.d(TAG, "startRtkService")
+        LogUtils.i(TAG, "startRtkService")
         if (!rtkModuleAvailableProcessor.value) {
             LogUtils.e(TAG, "rtkModule is unAvailable,startRtkServiceIfNeed fail!")
             return
@@ -117,6 +118,7 @@ object RTKStartServiceHelper {
             LogUtils.e(TAG, "don not need start rtk Service!")
             return
         }
+        LogUtils.i(TAG, "rtkSource=$rtkSource")
         when (rtkSource) {
             RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE -> startRtkCustomNetworkService()
             RTKReferenceStationSource.QX_NETWORK_SERVICE -> startQxRtkService()
@@ -133,23 +135,23 @@ object RTKStartServiceHelper {
 
     @Synchronized
     private fun startCMCCRtkService() {
-        LogUtils.d(TAG, "startCMCCRtkService")
+        LogUtils.i(TAG, "startCMCCRtkService")
         setStartRTKState(true)
         isHasStartRTK.set(false)
         val rtkNetworkCoordinateSystem = RTKUtil.getNetRTKCoordinateSystem(RTKReferenceStationSource.NTRIP_NETWORK_SERVICE)
         rtkNetworkCoordinateSystem?.let {
-            LogUtils.d(TAG, "startCMCCRtkService,coordinateName=$rtkNetworkCoordinateSystem")
+            LogUtils.i(TAG, "startCMCCRtkService,coordinateName=$rtkNetworkCoordinateSystem")
             qxRTKManager.stopNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     customManager.startNetworkRTKService(rtkNetworkCoordinateSystem, object : CommonCallbacks.CompletionCallback {
                         override fun onSuccess() {
-                            LogUtils.d(TAG, "startCMCCRtkService success")
+                            LogUtils.i(TAG, "startCMCCRtkService success")
                             setStartRTKState(false)
                             isHasStartRTK.set(true)
                         }
 
                         override fun onFailure(error: IDJIError) {
-                            LogUtils.e(TAG, "startCMCCRtkService fail:$error")
+                            LogUtils.e(TAG, "startCMCCRtkService fail:rtkNetworkCoordinateSystem=$rtkNetworkCoordinateSystem,error=$error")
                             setStartRTKState(false)
                             isHasStartRTK.set(false)
                             ToastUtils.showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
@@ -177,45 +179,58 @@ object RTKStartServiceHelper {
      */
     @Synchronized
     private fun startQxRtkService() {
-        val rtkNetworkCoordinateSystem = RTKUtil.getNetRTKCoordinateSystem(RTKReferenceStationSource.QX_NETWORK_SERVICE)
-        rtkNetworkCoordinateSystem?.let {
-            LogUtils.d(TAG, "startQxRtkService,rtkNetworkCoordinateSystem=$rtkNetworkCoordinateSystem")
-            setStartRTKState(true)
-            isHasStartRTK.set(false)
-
-            qxRTKManager.stopNetworkRTKService(object : CommonCallbacks.CompletionCallback {
-                override fun onSuccess() {
-                    qxRTKManager.startNetworkRTKService(it, object : CommonCallbacks.CompletionCallback {
-                        override fun onSuccess() {
-                            LogUtils.d(TAG, "startQxRtkService success")
-                            setStartRTKState(false)
-                            isHasStartRTK.set(true)
-
-                        }
-
-                        override fun onFailure(error: IDJIError) {
-                            LogUtils.e(TAG, "startQxRtkService fail:$error")
-                            ToastUtils.showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
-                            setStartRTKState(false)
-                            isHasStartRTK.set(false)
-
-
-                        }
-                    })
+        var rtkNetworkCoordinateSystem = RTKUtil.getNetRTKCoordinateSystem(RTKReferenceStationSource.QX_NETWORK_SERVICE)
+        if (rtkNetworkCoordinateSystem != null) {
+            startQxRtkService(rtkNetworkCoordinateSystem)
+        } else {
+            RTKCenter.getInstance().qxrtkManager.getNetworkRTKCoordinateSystem(object :
+                CommonCallbacks.CompletionCallbackWithParam<CoordinateSystem> {
+                override fun onSuccess(t: CoordinateSystem?) {
+                    t?.let { startQxRtkService(it) }
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    LogUtils.e(TAG, "stopNetworkRTKService fail:$error")
-                    isHasStartRTK.set(false)
-                    setStartRTKState(false)
-
-
+                    //未实现
                 }
-
             })
         }
+    }
+
+    private fun startQxRtkService(coordinateSystem: CoordinateSystem) {
+        LogUtils.i(TAG, "startQxRtkService,rtkNetworkCoordinateSystem=$coordinateSystem")
+        setStartRTKState(true)
+        isHasStartRTK.set(false)
+
+        qxRTKManager.stopNetworkRTKService(object : CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                qxRTKManager.startNetworkRTKService(coordinateSystem, object : CommonCallbacks.CompletionCallback {
+                    override fun onSuccess() {
+                        LogUtils.i(TAG, "startQxRtkService success")
+                        setStartRTKState(false)
+                        isHasStartRTK.set(true)
+
+                    }
+
+                    override fun onFailure(error: IDJIError) {
+                        LogUtils.e(TAG, "startQxRtkService fail:$error")
+                        ToastUtils.showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                        setStartRTKState(false)
+                        isHasStartRTK.set(false)
 
 
+                    }
+                })
+            }
+
+            override fun onFailure(error: IDJIError) {
+                LogUtils.e(TAG, "stopNetworkRTKService fail:$error")
+                isHasStartRTK.set(false)
+                setStartRTKState(false)
+
+
+            }
+
+        })
     }
 
 
@@ -226,17 +241,16 @@ object RTKStartServiceHelper {
     private fun startRtkCustomNetworkService() {
         isHasStartRTK.set(false)
         setStartRTKState(true)
-        LogUtils.d(TAG, "startRtkCustomNetworkService")
+        LogUtils.i(TAG, "startRtkCustomNetworkService")
         val rtkCustomNetworkSetting: RTKCustomNetworkSetting? = RTKUtil.getRtkCustomNetworkSetting()
         rtkCustomNetworkSetting?.let {
             LogUtils.i(TAG, "rtkCustomNetworkSetting=$it")
             customManager.stopNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     customManager.customNetworkRTKSettings = it
-                    //自动重启不关注启动结果
                     customManager.startNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                         override fun onSuccess() {
-                            LogUtils.d(TAG, "startRtkCustomNetworkService success")
+                            LogUtils.i(TAG, "startRtkCustomNetworkService success")
                             setStartRTKState(false)
                             isHasStartRTK.set(true)
 

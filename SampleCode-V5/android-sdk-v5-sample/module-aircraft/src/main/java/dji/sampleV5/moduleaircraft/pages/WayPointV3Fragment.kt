@@ -36,26 +36,39 @@ import android.content.DialogInterface
 import android.content.DialogInterface.OnMultiChoiceClickListener
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.os.Build
+import android.os.storage.StorageManager
+import android.os.storage.StorageVolume
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import com.dji.industry.mission.DocumentsUtils
+
 import dji.sampleV5.modulecommon.BuildConfig
 
 
+import dji.sampleV5.modulecommon.util.DialogUtil
 import dji.sdk.wpmz.jni.JNIWPMZManager
 import dji.sdk.wpmz.value.mission.WaylineExecuteWaypoint
-
-import dji.v5.ux.core.util.AndUtil
+import dji.v5.manager.aircraft.waypoint3.WPMZParserManager
+import dji.v5.utils.common.DeviceInfoUtil.getPackageName
 import dji.v5.ux.map.MapWidget
+
 import dji.v5.ux.mapkit.core.maps.DJIMap
+
 import dji.v5.ux.mapkit.core.models.DJIBitmapDescriptor
 import dji.v5.ux.mapkit.core.models.DJIBitmapDescriptorFactory
+
 import dji.v5.ux.mapkit.core.models.DJILatLng
 
 import dji.v5.ux.mapkit.core.models.annotations.DJIMarkerOptions
 
 import dji.v5.ux.mapkit.core.models.annotations.DJIPolylineOptions
 
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 /**
@@ -70,8 +83,11 @@ class WayPointV3Fragment : DJIFragment() {
     private val WAYPOINT_SAMPLE_FILE_DIR: String = "waypoint/"
     private val WAYPOINT_SAMPLE_FILE_CACHE_DIR: String = "waypoint/cache/"
     private val WAYPOINT_FILE_TAG = ".kmz"
-
-
+    private var unzipChildDir = "temp/"
+    private var unzipDir = "wpmz/"
+    private var mDisposable : Disposable ?= null
+    private val OPEN_FILE_CHOOSER = 0
+    private val OPEN_DOCUMENT_TREE = 1
 
     var curMissionPath: String = DiskUtil.getExternalCacheDirPath(
         ContextUtil.getContext(),
@@ -132,7 +148,7 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.addWaylineExecutingInfoListener() {
             wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
                     "WaypointIndex:${it.currentWaypointIndex} \n" +
-                    "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionID}"
+                    "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionFileName}"
 
         }
 
@@ -212,7 +228,7 @@ class WayPointV3Fragment : DJIFragment() {
                 return@setOnClickListener
             }
             selectWaylines.clear()
-            var waylineids = wayPointV3VM.getAvaliableWaylineIDs(curMissionPath)
+            var waylineids = wayPointV3VM.getAvailableWaylineIDs(curMissionPath)
             showMultiChoiceDialog(waylineids)
         }
 
@@ -221,7 +237,7 @@ class WayPointV3Fragment : DJIFragment() {
             intent.type = "*/*"
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             startActivityForResult(
-                Intent.createChooser(intent, "Select KMZ File"), 0
+                Intent.createChooser(intent, "Select KMZ File"), OPEN_FILE_CHOOSER
             )
         }
 
@@ -248,27 +264,121 @@ class WayPointV3Fragment : DJIFragment() {
                     }
                 })
         }
-
+        btn_editKmz.setOnClickListener {
+            showEditDialog()
+        }
 
         createMapView(savedInstanceState)
 
     }
 
+    private fun showEditDialog() {
+        val waypointFile = File(curMissionPath)
+        if (!waypointFile.exists()) {
+            ToastUtils.showToast("Please upload kmz file")
+            return
+        }
 
+        val unzipFolder = File(rootDir, unzipChildDir)
+        // 解压后的waylines路径
+        val templateFile = File(rootDir + unzipChildDir + unzipDir, WPMZParserManager.TEMPLATE_FILE)
+        val waylineFile = File(rootDir + unzipChildDir + unzipDir, WPMZParserManager.WAYLINE_FILE)
+
+        mDisposable = Single.fromCallable {
+            //在cache 目录创建一个wmpz文件夹，并将template.kml 与 waylines.wpml 拷贝进wpmz ，然后压缩wpmz文件夹
+            WPMZParserManager.unZipFolder(ContextUtil.getContext(), curMissionPath, unzipFolder.path, false)
+            FileUtils.readFile(waylineFile.path , null)
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { wpmlContent: String? ->
+                    DialogUtil.showInputDialog(requireActivity() ,"",wpmlContent , "", false , object :CommonCallbacks.CompletionCallbackWithParam<String> {
+                        override fun onSuccess(newContent: String?) {
+                            newContent?.let {
+                                updateWPML(it)
+                            }
+                        }
+                        override fun onFailure(error: IDJIError) {
+                            LogUtils.e(logTag , "show input Dialog Failed ${error.description()} ")
+                        }
+
+                    })
+                }
+            ) { throwable: Throwable ->
+                LogUtils.e(logTag , "show input Dialog Failed ${throwable.message} ")
+            }
+    }
+
+    private fun updateWPML(newContent: String) {
+        val waylineFile = File(rootDir + unzipChildDir + unzipDir, WPMZParserManager.WAYLINE_FILE)
+
+        Single.fromCallable {
+            FileUtils.writeFile(waylineFile.path, newContent, false)
+            //将修改后的waylines.wpml重新压缩打包成 kmz
+            val zipFiles = mutableListOf<String>()
+            val cacheFolder = File(rootDir, unzipChildDir + unzipDir)
+            var zipFile = File(rootDir + unzipChildDir + "waypoint.kmz")
+            if (waylineFile.exists()) {
+                zipFiles.add(cacheFolder.path)
+                zipFile.createNewFile()
+                WPMZParserManager.zipFiles(ContextUtil.getContext(), zipFiles, zipFile.path)
+            }
+            //将用户选择的kmz用修改的后的覆盖
+            FileUtils.copyFileByChannel(zipFile.path, curMissionPath)
+        }.subscribeOn(Schedulers.io()).subscribe()
+
+    }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        data?.apply {
-            getData()?.let {
-                curMissionPath = getPath(context, it)
-                if (curMissionPath?.contains(".kmz") == false) {
-                    ToastUtils.showToast("Please choose KMZ file")
-                } else {
-                    ToastUtils.showToast("KMZ file path:${curMissionPath}")
+        if (requestCode == OPEN_FILE_CHOOSER) {
+            data?.apply {
+                getData()?.let {
+                    curMissionPath = getPath(context, it)
+
+                    if (curMissionPath?.contains(".kmz") == false) {
+                        ToastUtils.showToast("Please choose KMZ file")
+                    } else {
+
+                        // Choose a directory using the system's file picker.
+                        showPermisssionDucument()
+                        ToastUtils.showToast("KMZ file path:${curMissionPath}")
+                    }
                 }
             }
+
         }
+
+        if (requestCode == OPEN_DOCUMENT_TREE) {
+            grantUriPermission(  data)
+        }
+
+    }
+
+    fun showPermisssionDucument() {
+        val canWrite: Boolean =
+            DocumentsUtils.checkWritableRootPath(context, curMissionPath)
+        if (!canWrite && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val storageManager =
+                requireActivity().getSystemService(Context.STORAGE_SERVICE) as StorageManager
+            val volume: StorageVolume? =
+                storageManager.getStorageVolume(File(curMissionPath))
+            if (volume != null) {
+                val intent = volume.createOpenDocumentTreeIntent()
+                startActivityForResult(intent, OPEN_DOCUMENT_TREE)
+                return
+            }
+        }
+    }
+    fun grantUriPermission(data: Intent?) {
+
+        val uri = data!!.data
+        requireActivity().grantUriPermission(getPackageName(), uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+                Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        val takeFlags = data.flags and (Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+                Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        requireActivity().getContentResolver().takePersistableUriPermission(uri!!, takeFlags)
     }
 
     fun getPath(context: Context?, uri: Uri?): String {
@@ -381,6 +491,11 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.removeAllMissionStateListener()
         wayPointV3VM.clearAllWaylineExecutingInfoListener()
 
+        mDisposable?.let {
+            if (!it.isDisposed) {
+                it.dispose()
+            }
+        }
     }
 
     fun getErroMsg(error: IDJIError): String {

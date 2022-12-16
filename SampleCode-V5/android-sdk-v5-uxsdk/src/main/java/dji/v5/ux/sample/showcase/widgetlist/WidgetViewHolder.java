@@ -32,30 +32,30 @@ import java.lang.reflect.InvocationTargetException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import dji.v5.utils.common.DisplayUtil;
 import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
 import dji.v5.ux.core.base.widget.FrameLayoutWidget;
-import dji.v5.ux.core.util.DisplayUtil;
 
 /**
  * A view holder for a single widget.
  */
-public class WidgetViewHolder {
+public class WidgetViewHolder<T> {
 
     //region Fields
     private static final String TAG = "WidgetViewHolder";
     private ViewGroup widget;
-    private Class clazz;
-    private int layoutWidthDp;
-    private int layoutHeightDp;
+    private final Class<T> clazz;
+    private final int layoutWidthDp;
+    private final int layoutHeightDp;
     //endregion
 
     //region Lifecycle
-    public WidgetViewHolder(Class clazz) {
+    public WidgetViewHolder(Class<T> clazz) {
         this(clazz, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    public WidgetViewHolder(Class clazz, int layoutWidthDp, int layoutHeightDp) {
+    public WidgetViewHolder(Class<T> clazz, int layoutWidthDp, int layoutHeightDp) {
         this.clazz = clazz;
         this.layoutWidthDp = layoutWidthDp;
         this.layoutHeightDp = layoutHeightDp;

@@ -83,7 +83,7 @@ class RTKEnabledWidgetModel(
     }
 
     override fun inCleanup() {
-        // do nothing
+        KeyManager.getInstance().cancelListen(this)
     }
 
     /**

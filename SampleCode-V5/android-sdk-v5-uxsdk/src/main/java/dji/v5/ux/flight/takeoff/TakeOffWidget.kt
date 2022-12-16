@@ -35,6 +35,7 @@ import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
 import androidx.core.content.res.use
+import dji.v5.utils.common.DisplayUtil
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.base.SchedulerProvider
 import io.reactivex.rxjava3.disposables.Disposable
@@ -47,7 +48,6 @@ import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.*
 import dji.v5.ux.core.ui.SlidingDialog
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.core.util.UnitConversionUtil
 import dji.v5.ux.R
@@ -660,8 +660,6 @@ open class TakeOffWidget @JvmOverloads constructor(
             TakeOffLandingState.WAITING_FOR_LANDING_CONFIRMATION -> showLandingConfirmationDialog()
             TakeOffLandingState.READY_TO_TAKE_OFF,
             TakeOffLandingState.TAKE_OFF_DISABLED -> slidingDialog?.dismiss()
-            else -> {
-            }
         }
     }
 

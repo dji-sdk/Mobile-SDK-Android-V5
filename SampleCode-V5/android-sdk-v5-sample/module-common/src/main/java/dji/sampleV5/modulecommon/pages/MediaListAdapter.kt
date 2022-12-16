@@ -2,18 +2,14 @@ package dji.sampleV5.modulecommon.pages
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.LruCache
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.recyclerview.widget.RecyclerView
 
 import dji.sampleV5.modulecommon.R
-import dji.sampleV5.modulecommon.data.FragmentPageInfoItem
 import dji.sampleV5.modulecommon.util.AnimationUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -86,7 +82,7 @@ class MediaListAdapter(
         }
 
 
-        holder.textView.text = mediaFile.fileName.toString()
+        holder.textView.text = mediaFile.fileName.toString() + ":${mediaFile.fileIndex}"
         holder.updateSelection(selectionMode, mSelectedItems.contains(mediaFile))
     }
 

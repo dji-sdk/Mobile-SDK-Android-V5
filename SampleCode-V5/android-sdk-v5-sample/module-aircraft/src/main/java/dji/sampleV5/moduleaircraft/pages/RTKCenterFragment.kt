@@ -23,7 +23,6 @@ import dji.v5.utils.common.StringUtils
 import dji.v5.utils.common.ToastUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
-
 import kotlinx.android.synthetic.main.frag_rtk_center_page.*
 
 

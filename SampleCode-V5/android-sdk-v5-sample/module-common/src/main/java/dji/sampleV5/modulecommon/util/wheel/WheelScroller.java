@@ -200,6 +200,7 @@ public class WheelScroller {
     
     // animation handler
     private Handler animationHandler = new Handler() {
+        @Override
         public void handleMessage(Message msg) {
             scroller.computeScrollOffset();
             int currY = scroller.getCurrY();
@@ -212,7 +213,7 @@ public class WheelScroller {
             // scrolling is not finished when it comes to final Y
             // so, finish it manually 
             if (Math.abs(currY - scroller.getFinalY()) < MIN_DELTA_FOR_SCROLLING) {
-                currY = scroller.getFinalY();
+
                 scroller.forceFinished(true);
             }
             if (!scroller.isFinished()) {

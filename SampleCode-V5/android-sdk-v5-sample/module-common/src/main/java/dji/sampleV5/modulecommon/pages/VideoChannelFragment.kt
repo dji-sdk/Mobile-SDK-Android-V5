@@ -24,10 +24,7 @@ import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.common.video.decoder.*
 import dji.v5.common.video.interfaces.*
 import dji.v5.common.video.stream.StreamSource
-import dji.v5.utils.common.ContextUtil
-import dji.v5.utils.common.DiskUtil
-import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.v5.utils.common.*
 import kotlinx.android.synthetic.main.video_channel_horizontal_scrollview.*
 import kotlinx.android.synthetic.main.video_channel_page.*
 import java.io.*
@@ -119,7 +116,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.video_channel_page, container, false)
         surfaceView = view.findViewById(R.id.surface_view)
@@ -146,7 +143,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         init()
     }
 
-    private fun init(){
+    private fun init() {
         multiVideoChannelVM.videoStreamSources.observe(viewLifecycleOwner) {
             streamSources = it
         }
@@ -340,8 +337,8 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                 items?.set(i, streamSources!![i].toString())
             }
             if (!items.isNullOrEmpty()) {
-                dialog = this@VideoChannelFragment.requireContext().let {
-                    AlertDialog.Builder(it, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
+                dialog = this@VideoChannelFragment.requireContext().let { context ->
+                    AlertDialog.Builder(context, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
                         .setIcon(android.R.drawable.ic_menu_camera)
                         .setTitle(R.string.select_stream_source)
                         .setCancelable(false)
@@ -354,10 +351,8 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
                             )
                         }.setPositiveButton(R.string.confirm) { dialog, _ ->
                             run {
-                                val streamSource = streamSources?.get(checkedItem)
-                                if (streamSource != null) {
-                                    startChannel(streamSource)
-                                }
+                                val streamSource = streamSources?.getOrNull(checkedItem)
+                                streamSource?.let { startChannel(it) }
                                 dialog.dismiss()
                             }
                         }

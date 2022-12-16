@@ -3,25 +3,35 @@ package dji.v5.ux.core.ui.hsi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewDebug;
 
 import java.lang.ref.WeakReference;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import dji.sdk.keyvalue.value.product.ProductType;
+import dji.v5.manager.aircraft.perception.data.ObstacleAvoidanceType;
+import dji.v5.manager.aircraft.perception.data.PerceptionInfo;
+import dji.v5.utils.common.DisplayUtil;
 import dji.v5.ux.R;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
+import dji.v5.ux.core.ui.hsi.dashboard.FpvStrokeConfig;
+import dji.v5.utils.common.AndUtil;
+import dji.v5.ux.core.util.DrawUtils;
 import dji.v5.ux.core.util.MatrixUtils;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
@@ -30,6 +40,7 @@ import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HSIView extends View implements HSIContract.HSIContainer {
@@ -55,10 +66,17 @@ public class HSIView extends View implements HSIContract.HSIContainer {
      */
     public static final int INVALIDATE_INTERVAL_TIME = 200;
     private static final int MSG_INVALIDATE = 0x01;
+    public static final String VIEW_DEBUG_CATEGORY_DJI = "dji";
+    public static final String VIEW_DEBUG_PREFIX_MARKER = "hsi_marker_";
+    public static final String VIEW_DEBUG_PREFIX_PERCEPTION = "hsi_perception_";
+
+    private final static String APAS_TEXT = "APAS";
+
     @NonNull
     private final Handler.Callback mCallback = msg -> {
         if (msg.what == MSG_INVALIDATE) {
-            invalidate();
+            //            invalidate();
+            postInvalidate();
             return true;
         }
         return false;
@@ -70,37 +88,64 @@ public class HSIView extends View implements HSIContract.HSIContainer {
     /**
      * 当前飞机罗盘的角度
      */
+    @ViewDebug.ExportedProperty(category = "hsi")
     private float mCurrentDegree;
+    private String mCurrentDegreeText;
 
-    private final boolean[] mGimbalConnected = new boolean[3];
-    private final float[] mGimbalCurrentDegree = new float[3];
+    private boolean[] mGimbalConnected = new boolean[3];
+    private float[] mGimbalCurrentDegree = new float[3];
 
     private boolean mIsRadarConnected;
 
     private boolean mIsRadarAvailable;
 
+    private boolean isHideGimbalDrawable = false;
+
     private float mAircraftHeadingOffsetDistanceX;
 
     private float mAircraftHeadingOffsetDistanceY;
 
-    private final int mGimbalIndicatorSize;
+    /**
+     * 云台指示器圆环最大宽度，内部为避障区域
+     */
+    @ViewDebug.ExportedProperty(category = "hsi")
     private final int mGimbalIndicatorMaxScope;
+    @ViewDebug.ExportedProperty(category = "hsi")
     private final int mAircraftIndicatorSize;
+    @ViewDebug.ExportedProperty(category = "hsi")
     private final int mDegreeIndicatorTextSize;
-    private final int mDegreeIndicatorWidth;
+    @ViewDebug.ExportedProperty(category = "hsi")
+    private final int mDegreeIndicatorTextHeight;
+    @ViewDebug.ExportedProperty(category = "hsi")
+    private final int mCompassMargin;
+
+    /**
+     * 角度指示
+     */
+    @ViewDebug.ExportedProperty(category = "hsi")
     private final int mDegreeIndicatorHeight;
+    @ViewDebug.ExportedProperty(category = "hsi")
+    private final float mDegreeIndicatorHeightInCompass;
+    @ViewDebug.ExportedProperty(category = "hsi")
+    private final float mDegreeIndicatorWidth;
+    @ViewDebug.ExportedProperty(category = "hsi", formatToHexString = true)
     private final int mDegreeIndicatorColor;
-    private final int mGimbal1IndicatorColor;
-    private final int mGimbal2IndicatorColor;
-    private final int mGimbal3IndicatorColor;
+    @ViewDebug.ExportedProperty(category = "hsi")
     private final int mHeadingLineWidth;
 
+
+    @ViewDebug.ExportedProperty(category = "hsi")
     private float mYaw;
+    @ViewDebug.ExportedProperty(category = "hsi", formatToHexString = true)
     private float mRoll;
+    @ViewDebug.ExportedProperty(category = "hsi", formatToHexString = true)
     private float mPitch;
 
+    @ViewDebug.ExportedProperty(category = "hsi", formatToHexString = true)
     private float mSpeedX;
+    @ViewDebug.ExportedProperty(category = "hsi", formatToHexString = true)
     private float mSpeedY;
+    @ViewDebug.ExportedProperty(category = "hsi", formatToHexString = true)
     private float mSpeedZ;
 
     /**
@@ -127,20 +172,37 @@ public class HSIView extends View implements HSIContract.HSIContainer {
     private final GradientDrawable mAircraftHeadingLineDrawable;
 
     @NonNull
+    @ViewDebug.ExportedProperty(category = VIEW_DEBUG_CATEGORY_DJI, prefix = VIEW_DEBUG_PREFIX_MARKER, deepExport = true)
     private final HSIContract.HSILayer mMarkerLayer;
 
     @NonNull
+    @ViewDebug.ExportedProperty(category = VIEW_DEBUG_CATEGORY_DJI, prefix = VIEW_DEBUG_PREFIX_PERCEPTION, deepExport = true)
     private final HSIContract.HSILayer mPerceptionLayer;
+
+    FpvStrokeConfig mStrokeConfig;
+
+    private boolean isApasMode = false;
+    private float mApasTextLength = 0;
+    private float mApasTextHeight = 0;
+    private float mApasTextSize = AndUtil.getDimension(R.dimen.uxsdk_6_dp);
+    private float mApasTextStrokeWith = AndUtil.getDimension(R.dimen.uxsdk_1_dp);
+    private int mApasTextColor = AndUtil.getResColor(R.color.uxsdk_white);
+    private int mApasTextStrokeColor = AndUtil.getResColor(R.color.uxsdk_black_60_percent);
+
 
     @Nullable
     private Disposable mDisposable;
 
+    private HSIWidgetModel widgetModel;
+
+
     @Nullable
     private OnAircraftAttitudeChangeListener mListener;
 
-    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
-    private HSIWidgetModel widgetModel;
+
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
+
 
     public HSIView(Context context) {
         this(context, null);
@@ -152,44 +214,43 @@ public class HSIView extends View implements HSIContract.HSIContainer {
 
     public HSIView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         if (!isInEditMode()) {
             widgetModel = new HSIWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
         }
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.HSIView);
-        mBitmapOffset = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_bitmap_offset,
-                getResources().getDimensionPixelSize(R.dimen.uxsdk_2_dp));
+        mBitmapOffset = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_bitmap_offset, 0);
         mAircraftIndicatorSize = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_aircraft_indicator_size,
                 getResources().getDimensionPixelSize(R.dimen.uxsdk_10_dp));
-        mGimbalIndicatorSize = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_gimbal_indicator_size,
-                getResources().getDimensionPixelSize(R.dimen.uxsdk_5_dp));
         mGimbalIndicatorMaxScope = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_gimbal_indicator_max_scope,
                 getResources().getDimensionPixelSize(R.dimen.uxsdk_10_dp));
-        mDegreeIndicatorWidth = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_degree_indicator_width,
-                getResources().getDimensionPixelSize(R.dimen.uxsdk_7_dp));
-        mDegreeIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_degree_indicator_height,
-                getResources().getDimensionPixelSize(R.dimen.uxsdk_3_dp));
+        mDegreeIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_degree_indicator_width,
+                getResources().getDimensionPixelSize(R.dimen.uxsdk_5_dp));
         mDegreeIndicatorTextSize = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_degree_indicator_text_size,
                 getResources().getDimensionPixelSize(R.dimen.uxsdk_text_size_normal));
+        mDegreeIndicatorTextHeight = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_degree_indicator_height,
+                getResources().getDimensionPixelSize(R.dimen.uxsdk_11_dp));
+        mCompassMargin = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_compass_margin,
+                getResources().getDimensionPixelSize(R.dimen.uxsdk_5_dp));
         mDegreeIndicatorColor = typedArray.getColor(R.styleable.HSIView_uxsdk_hsi_degree_indicator_color,
-                getResources().getColor(R.color.uxsdk_pfd_main_color));
+                getResources().getColor(R.color.uxsdk_green_in_dark));
         mAircraftHeadingOffsetDistanceX = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_aircraft_heading_offset_x, 0);
         mAircraftHeadingOffsetDistanceY = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_aircraft_heading_offset_y, 0);
         mHeadingLineWidth = typedArray.getDimensionPixelSize(R.styleable.HSIView_uxsdk_hsi_heading_line_width,
                 getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp));
         typedArray.recycle();
-
-        mGimbal1IndicatorColor = getResources().getColor(R.color.uxsdk_gimbal_mark_1);
-        mGimbal2IndicatorColor = getResources().getColor(R.color.uxsdk_gimbal_mark_2);
-        mGimbal3IndicatorColor = getResources().getColor(R.color.uxsdk_gimbal_mark_3);
+        mDegreeIndicatorHeightInCompass = getResources().getDimension(R.dimen.uxsdk_1_dp);
+        mDegreeIndicatorWidth = DisplayUtil.dip2px(context, 1.4f);
 
         mPaint = new Paint(Paint.DITHER_FLAG | Paint.ANTI_ALIAS_FLAG);
         mPaint.setStrokeWidth(getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp));
-        mCompassBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.uxsdk_hsi_compass);
-        mAircraftBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.uxsdk_hsiview_aircraft);
-        mRadarAvailableBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.uxsdk_hsiview_aircraft_radar_available);
-        mRadarUnavailableBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.uxsdk_hsiview_aircraft_radar_unavailable);
+        Typeface typeface = Typeface.create("sans-serif-condensed", Typeface.BOLD);
+        mPaint.setTypeface(typeface);
+        // 屏幕相比视觉稿放大 1.2 倍，使用 3 倍图尺寸最后会导致模糊
+        mCompassBitmap = getBitmap(R.drawable.uxsdk_fpv_hsi_compass_list);
+        mAircraftBitmap = getBitmap(R.drawable.uxsdk_fpv_hsi_aircraft);
+        mRadarAvailableBitmap = getBitmap(R.drawable.uxsdk_hsi_aircraft_radar_normal);
+        mRadarUnavailableBitmap = getBitmap(R.drawable.uxsdk_hsi_aircraft_radar_disable);
         mAircraftHeadingLineDrawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
                 new int[]{
                         getResources().getColor(R.color.uxsdk_white_30_percent),
@@ -201,6 +262,24 @@ public class HSIView extends View implements HSIContract.HSIContainer {
 
         mMarkerLayer = new HSIMarkerLayer(context, attrs, this, widgetModel);
         mPerceptionLayer = new HSIPerceptionLayer(context, attrs, this, widgetModel);
+
+        mStrokeConfig = new FpvStrokeConfig(getContext());
+        initApasParam();
+    }
+
+    private void initApasParam() {
+        mPaint.setTextSize(getContext().getResources().getDimension(R.dimen.uxsdk_6_dp));
+        mApasTextLength = mPaint.measureText(APAS_TEXT);
+        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
+        mApasTextHeight = fontMetrics.bottom - fontMetrics.top;
+    }
+
+    private Bitmap getBitmap(int resId) {
+        if (isInEditMode()) {
+            return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        } else {
+            return DrawUtils.drawableRes2Bitmap(resId);
+        }
     }
 
     @Override
@@ -210,19 +289,28 @@ public class HSIView extends View implements HSIContract.HSIContainer {
             return;
         }
         widgetModel.setup();
+
         mHandler = new Handler(Looper.getMainLooper(), mCallback);
 
         mMarkerLayer.onStart();
         mPerceptionLayer.onStart();
 
-        mCompositeDisposable.add(widgetModel.getRadarConnectionProcessor().toFlowable().subscribe(aBoolean -> {
-            mIsRadarConnected = aBoolean;
+        mCompositeDisposable.add(widgetModel.getProductTypeDataProcessor().toFlowable()
+                .subscribe(productType -> isHideGimbalDrawable = productType == ProductType.DJI_MAVIC_3_ENTERPRISE_SERIES));
+
+        mCompositeDisposable.add(widgetModel.getRadarInformationDataProcessor().toFlowable().subscribe(info -> {
+            mIsRadarConnected = info.isConnected();
+            mIsRadarAvailable = info.isHorizontalObstacleAvoidanceEnabled();
             updateWidget();
         }));
-        mCompositeDisposable.add(widgetModel.getRadarHorizontalObstacleAvoidanceEnabledProcessor().toFlowable().subscribe(aBoolean -> {
-            mIsRadarAvailable = aBoolean;
-            updateWidget();
+
+        mCompositeDisposable.add(widgetModel.getPerceptionInformationDataProcessor().toFlowable().subscribe(new Consumer<PerceptionInfo>() {
+            @Override
+            public void accept(PerceptionInfo info) throws Throwable {
+                isApasMode = info.getObstacleAvoidanceType() == ObstacleAvoidanceType.BYPASS;
+            }
         }));
+
         mDisposable = Observable.create(new ObservableSource(this))
                 .observeOn(Schedulers.computation())
                 .map(data -> updateSpeedVectorMark(data[0], data[1], data[2], data[3], data[4], data[5]))
@@ -233,6 +321,7 @@ public class HSIView extends View implements HSIContract.HSIContainer {
                     updateWidget();
                 });
 
+
         mCompositeDisposable.add(widgetModel.getVelocityProcessor().toFlowable().subscribe(velocity3D -> {
             mSpeedX = velocity3D.getX().floatValue();
             mSpeedY = velocity3D.getY().floatValue();
@@ -240,27 +329,33 @@ public class HSIView extends View implements HSIContract.HSIContainer {
             recalculateAndInvalidate();
         }));
 
+        //获取飞机角度
         mCompositeDisposable.add(widgetModel.getAircraftAttitudeProcessor().toFlowable().subscribe(attitude -> {
             mYaw = attitude.getYaw().floatValue();
             mCurrentDegree = mYaw + (mYaw < 0 ? 359f : 0);
+            mCurrentDegreeText = String.format(Locale.ENGLISH, "%03.0f", mCurrentDegree);
             mRoll = attitude.getRoll().floatValue();
             mPitch = attitude.getPitch().floatValue();
             recalculateAndInvalidate();
         }));
 
+        //云台Yaw夹角
         mCompositeDisposable.add(Flowable.fromArray(new Integer[]{0, 1, 2})
-                .flatMap(index -> Flowable.combineLatest(
+                .flatMap(cameraIndex -> Flowable.combineLatest(
                         //云台连接状态
-                        widgetModel.getGimbalConnectionProcessorList().get(index).toFlowable(),
+                        widgetModel.getGimbalConnectionProcessorList().get(cameraIndex).toFlowable(),
                         //云台相对机身的Yaw夹角
-                        widgetModel.getGimbalAttitudeInDegreesProcessorList().get(index).toFlowable(),
-
-                        ((isConnected, attitude) -> {
-                            mGimbalConnected[index] = isConnected;
-                            mGimbalCurrentDegree[index] = attitude.getYaw().floatValue();
+                        widgetModel.getGimbalYawInDegreesProcessorList().get(cameraIndex).toFlowable(),
+                        ((isConnected, yaw) -> {
+                            mGimbalConnected[cameraIndex] = isConnected;
+                            mGimbalCurrentDegree[cameraIndex] = yaw.floatValue();
                             return true;
                         })
-                )).subscribe(aBoolean -> updateWidget()));
+                ))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(aBoolean -> updateWidget()));
+
+
     }
 
     @Override
@@ -279,23 +374,57 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         widgetModel.cleanup();
     }
 
+    public void enterFpvMode(boolean fpv) {
+        mMarkerLayer.enterFpvMode(fpv);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.translate((float) getWidth() / 2, 0);
-        int compassSize = drawDegreeIndicator(canvas);
-        int degreeIndicatorTextHeight = RECT.height();
-        int compassStartY = degreeIndicatorTextHeight + mDegreeIndicatorHeight;
+        // 画布中心移动到 HSI (0.5, 0) 位置
+        canvas.translate(getWidth() / 2f, 0);
+
+        // 计算罗盘尺寸
+        int textHeight = mDegreeIndicatorTextHeight;
+        int compassHeight = getHeight() - textHeight - mCompassMargin * 2;
+        int compassWidth = getWidth() - mCompassMargin * 2;
+        int compassSize = Math.min(compassWidth, compassHeight);
+
+        drawDegreeIndicator(canvas);
+
+        int compassStartY = textHeight + mCompassMargin;
+        // 画布中心移动到罗盘（0.5, 0）位置
         canvas.translate(0, compassStartY);
         drawCompass(canvas, compassSize);
+        drawDegreeLine(canvas);
         drawGimbalIndicators(canvas, compassSize);
-
-        mPerceptionLayer.draw(canvas, mPaint, compassSize);
-        mMarkerLayer.draw(canvas, mPaint, compassSize);
 
         drawAircraftHeadingLine(canvas, compassSize,
                 mAircraftHeadingOffsetDistanceX, mAircraftHeadingOffsetDistanceY);
         drawAircraftIndicator(canvas, compassSize);
+        drawApasModeText(canvas, compassSize);
+
+        mPerceptionLayer.draw(canvas, mPaint, compassSize);
+        mMarkerLayer.draw(canvas, mPaint, compassSize);
+    }
+
+    private void drawDegreeLine(Canvas canvas) {
+        mPaint.setColor(getResources().getColor(R.color.uxsdk_green_in_dark));
+        float width = mDegreeIndicatorWidth;
+        mPaint.setStrokeWidth(width);
+        mPaint.setStyle(Paint.Style.FILL);
+        float top = -mDegreeIndicatorHeight + mDegreeIndicatorHeightInCompass;
+        canvas.drawLine(0, top, 0, mDegreeIndicatorHeight + top, mPaint);
+
+
+        float strokeWidth = mStrokeConfig.getStrokeThinWidth();
+        mPaint.setStrokeWidth(strokeWidth);
+        mPaint.setColor(mStrokeConfig.getStrokeShallowColor());
+        mPaint.setStyle(Paint.Style.STROKE);
+        float halfWidth = width / 2;
+        float halfStrokeWidth = strokeWidth / 2;
+        float bottom = top + mDegreeIndicatorHeight + halfStrokeWidth;
+        canvas.drawRect(-halfWidth - halfStrokeWidth, top - halfStrokeWidth, halfStrokeWidth + halfWidth, bottom, mPaint);
     }
 
     /**
@@ -304,31 +433,20 @@ public class HSIView extends View implements HSIContract.HSIContainer {
      * @param canvas
      * @return
      */
-    private int drawDegreeIndicator(Canvas canvas) {
+    private void drawDegreeIndicator(Canvas canvas) {
+        if (mCurrentDegreeText == null) {
+            return;
+        }
         canvas.save();
         mPaint.setTextSize(mDegreeIndicatorTextSize);
-        mPaint.setColor(mDegreeIndicatorColor);
-        String degree = String.format(Locale.ENGLISH, "%03.0f", mCurrentDegree);
+        String degree = mCurrentDegreeText;
         mPaint.getTextBounds(degree, 0, degree.length(), RECT);
         Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-        float baseline = (float) (RECT.height() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
+        float baseline = (mDegreeIndicatorTextHeight - fontMetrics.bottom + fontMetrics.top) / 2f - fontMetrics.top;
         mPaint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText(degree, -(float) RECT.width() / 2, baseline, mPaint);
-        canvas.translate(0, (float) RECT.height() + mBitmapOffset);
-        mPath.reset();
-        mPath.rMoveTo(-(float) mDegreeIndicatorWidth / 2, 0);
-        mPath.rLineTo(mDegreeIndicatorWidth, 0);
-        mPath.rLineTo(-(float) mDegreeIndicatorWidth / 2, mDegreeIndicatorHeight);
-        mPath.close();
-        mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawPath(mPath, mPaint);
-
-        int compassWidth = getWidth() - mDegreeIndicatorHeight * 2;
-        int compassHeight = getHeight() - RECT.height() - mDegreeIndicatorHeight * 2;
-        int compassSize = Math.min(compassWidth, compassHeight);
-
+        drawTextWithStroke(canvas, degree, -(float) RECT.width() / 2, baseline, mStrokeConfig.getStrokeBoldWidth(),
+                mStrokeConfig.getStrokeDeepColor(), mDegreeIndicatorColor);
         canvas.restore();
-        return compassSize;
     }
 
     /**
@@ -343,17 +461,21 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         }
         int flag = mPaint.getFlags();
         mPaint.setFlags(flag | Paint.FILTER_BITMAP_FLAG);
+        // save 1
         canvas.save();
-        canvas.translate((float) -compassSize / 2, 0);
+        canvas.translate(-compassSize / 2f, 0);
         RECT.set(0, 0, mCompassBitmap.getWidth(), mCompassBitmap.getHeight());
         RECT2.set(0, 0, compassSize, compassSize);
+        // save 2
         canvas.save();
-        canvas.translate((float) compassSize / 2, (float) compassSize / 2);
+        canvas.translate(compassSize / 2f, compassSize / 2f);
         canvas.rotate(-mCurrentDegree);
-        canvas.translate((float) -compassSize / 2, (float) -compassSize / 2);
+        canvas.translate(-compassSize / 2f, -compassSize / 2f);
         canvas.drawBitmap(mCompassBitmap, RECT, RECT2, mPaint);
+        // restore 2
         canvas.restore();
         mPaint.setFlags(flag);
+        // restore 1
         canvas.restore();
     }
 
@@ -379,6 +501,26 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         canvas.restore();
     }
 
+    private void drawApasModeText(Canvas canvas, int compassSize) {
+        if (!isApasMode) {
+            return;
+        }
+
+        mPaint.setColor(mApasTextStrokeColor);
+        mPaint.setTextSize(mApasTextSize);
+        mPaint.setStrokeWidth(mApasTextStrokeWith);
+
+        float offX = -mApasTextLength / 2;
+        float offY = compassSize / 2f + mAircraftIndicatorSize / 2f + mApasTextHeight;
+
+        mPaint.setStyle(Paint.Style.STROKE);
+        canvas.drawText(APAS_TEXT, offX, offY, mPaint);
+
+        mPaint.setColor(mApasTextColor);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawText(APAS_TEXT, offX, offY, mPaint);
+    }
+
     /**
      * 绘制各个云台的指示图
      *
@@ -386,17 +528,21 @@ public class HSIView extends View implements HSIContract.HSIContainer {
      * @param compassSize
      */
     private void drawGimbalIndicators(Canvas canvas, int compassSize) {
+        if (isHideGimbalDrawable) {
+            return;
+        }
         canvas.save();
         canvas.translate(0, 0);
-        float gimbalPadding = (float) (mGimbalIndicatorMaxScope - mGimbalIndicatorSize) / (MAX_GIMBAL_COUNT - 1);
+        Drawable drawable = DrawUtils.getDrawable(R.drawable.uxsdk_fpv_hsi_outer_guide_gimbal_3);
+        float gimbalPadding = (float) (mGimbalIndicatorMaxScope - drawable.getMinimumHeight()) / (MAX_GIMBAL_COUNT - 1);
         drawEachGimbalIndicator(canvas, getGimbalYawDegreeWithAircraft(mGimbalCurrentDegree[0], mYaw),
-                mGimbal1IndicatorColor, mGimbalConnected[0], compassSize / 2f, mBitmapOffset);
+                mGimbalConnected[0], compassSize / 2f, mBitmapOffset, R.drawable.uxsdk_fpv_hsi_outer_guide_gimbal_3);
         drawEachGimbalIndicator(canvas, getGimbalYawDegreeWithAircraft(mGimbalCurrentDegree[1], mYaw),
-                mGimbal2IndicatorColor, mGimbalConnected[1], compassSize / 2f,
-                mBitmapOffset + gimbalPadding);
+                mGimbalConnected[1], compassSize / 2f,
+                mBitmapOffset + gimbalPadding, R.drawable.uxsdk_fpv_hsi_outer_guide_gimbal_1);
         drawEachGimbalIndicator(canvas, getGimbalYawDegreeWithAircraft(mGimbalCurrentDegree[2], mYaw),
-                mGimbal3IndicatorColor, mGimbalConnected[2], compassSize / 2f,
-                mBitmapOffset + gimbalPadding * 2);
+                mGimbalConnected[2], compassSize / 2f,
+                mBitmapOffset + gimbalPadding * 2, R.drawable.uxsdk_fpv_hsi_outer_guide_gimbal_2);
         canvas.restore();
     }
 
@@ -404,45 +550,31 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         return gimbalYaw - aircraftYaw;
     }
 
-    /**
-     * 绘制单个云台的指示图
-     *
-     * @param canvas
-     * @param yawDegree
-     * @param color
-     * @param isConnected
-     * @param centerY
-     * @param offsetY
-     */
-    private void drawEachGimbalIndicator(Canvas canvas, float yawDegree, int color,
-                                         boolean isConnected, float centerY, float offsetY) {
-        if (isInEditMode() || isConnected) {
-            canvas.save();
-            canvas.translate(0, centerY);
-            canvas.rotate(yawDegree);
-            canvas.translate(0, offsetY - centerY);
-            drawGimbalIndicator(canvas, color);
-            canvas.restore();
-        }
-    }
 
     /**
      * 绘制单个云台的指示图
      *
      * @param canvas
-     * @param color
+     * @param yawDegree
+     * @param isConnected
+     * @param centerY
+     * @param offsetY
      */
-    private void drawGimbalIndicator(Canvas canvas, int color) {
-        mPaint.setColor(color);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPath.reset();
-        float indicatorSize = mGimbalIndicatorSize;
-        mPath.rLineTo(indicatorSize / 2, indicatorSize / 3);
-        mPath.rLineTo(0, indicatorSize / 3 * 2);
-        mPath.rLineTo(-indicatorSize, 0);
-        mPath.rLineTo(0, -indicatorSize / 3 * 2);
-        mPath.close();
-        canvas.drawPath(mPath, mPaint);
+    private void drawEachGimbalIndicator(Canvas canvas, float yawDegree,
+                                         boolean isConnected, float centerY, float offsetY, int gimbalDrawable) {
+        if (isInEditMode() || isConnected) {
+            canvas.save();
+            canvas.translate(0, centerY);
+            canvas.rotate(yawDegree);
+            Drawable drawable = DrawUtils.getDrawable(gimbalDrawable);
+            int width = drawable.getMinimumWidth();
+            int height = drawable.getMinimumHeight();
+            float halfWidth = width / 2f;
+            canvas.translate(-halfWidth, offsetY - centerY);
+            drawable.setBounds(0, 0, width, height);
+            drawable.draw(canvas);
+            canvas.restore();
+        }
     }
 
     /**
@@ -471,18 +603,9 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         }
         canvas.translate(0, compassSize / 2f);
         canvas.rotate(angle);
-        mAircraftHeadingLineDrawable.setSize(mHeadingLineWidth, lineHeight);
-        int lineWidth = mAircraftHeadingLineDrawable.getIntrinsicWidth();
-        mAircraftHeadingLineDrawable.setBounds(-lineWidth / 2,
-                -mAircraftHeadingLineDrawable.getIntrinsicHeight(), lineWidth / 2, 0);
-        mAircraftHeadingLineDrawable.draw(canvas);
-        canvas.restore();
-    }
-
-    private void drawMarker(Canvas canvas, Path path, Paint paint, float offsetX, float offsetY) {
-        canvas.save();
-        canvas.translate(offsetX, offsetY);
-        canvas.drawPath(path, paint);
+        mPaint.setColor(Color.WHITE);
+        mPaint.setStrokeWidth(mHeadingLineWidth);
+        canvas.drawLine(0, -lineHeight, 0, 0, mPaint);
         canvas.restore();
     }
 
@@ -497,6 +620,18 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         canvas.drawBitmap(marker, RECT, RECT2, paint);
         canvas.restore();
         paint.setFlags(flag);
+    }
+
+    protected void drawTextWithStroke(Canvas canvas, String currentValueString, float textOffset, float baseline, float strokeWidth,
+                                      int strokeColor, int textColor) {
+        mPaint.setStrokeWidth(strokeWidth);
+        mPaint.setColor(strokeColor);
+        mPaint.setStyle(Paint.Style.STROKE);
+        canvas.drawText(currentValueString, textOffset, baseline, mPaint);
+
+        mPaint.setColor(textColor);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawText(currentValueString, textOffset, baseline, mPaint);
     }
 
     private void setListener(@Nullable OnAircraftAttitudeChangeListener listener) {
@@ -551,9 +686,6 @@ public class HSIView extends View implements HSIContract.HSIContainer {
         return this;
     }
 
-    public void onEventUnitChanged(Integer unit) {
-        updateWidget();
-    }
 
     private static final class ObservableSource implements ObservableOnSubscribe<float[]> {
 

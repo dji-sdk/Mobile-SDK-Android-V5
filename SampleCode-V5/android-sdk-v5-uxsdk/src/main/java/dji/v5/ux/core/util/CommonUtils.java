@@ -41,4 +41,8 @@ public class CommonUtils {
                 return SettingDefinitions.GimbalIndex.UNKONWN;
         }
     }
+
+    private CommonUtils() {
+
+    }
 }

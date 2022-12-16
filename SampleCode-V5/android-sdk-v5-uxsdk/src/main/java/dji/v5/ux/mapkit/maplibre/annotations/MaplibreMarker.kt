@@ -224,7 +224,7 @@ class MaplibreMarker(private val context: Context,
     private fun setUpMarkerIcon(style: Style, icon: DJIBitmapDescriptor?) {
         descriptor = icon
         if (descriptor == null) {
-            descriptor = DJIBitmapDescriptorFactory.fromResource(R.drawable.ic_bird)
+            descriptor = DJIBitmapDescriptorFactory.fromResource(R.drawable.uxsdk_ic_bird)
         }
         fromDJIBitmapDescriptor(context, descriptor)?.let { bitmap ->
             markerIconWidth = bitmap.width

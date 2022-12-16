@@ -27,7 +27,7 @@ class MediaVM : DJIViewModel() {
                 mediaFileListData.postValue(data)
             }
         }
-        pullMediaFileListFromCamera()
+        pullMediaFileListFromCamera(-1, -1)
 
     }
 
@@ -36,9 +36,9 @@ class MediaVM : DJIViewModel() {
         MediaDataCenter.getInstance().mediaManager.release()
     }
 
-    fun pullMediaFileListFromCamera( ){
+    fun pullMediaFileListFromCamera(  mediaFileIndex:Int , count : Int){
         var currentTime  = System.currentTimeMillis()
-        MediaDataCenter.getInstance().mediaManager.pullMediaFileListFromCamera(PullMediaFileListParam.Builder().build(), object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.pullMediaFileListFromCamera(PullMediaFileListParam.Builder().mediaFileIndex(mediaFileIndex).count(count).build(), object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 ToastUtils.showToast("Spend time:${(System.currentTimeMillis() - currentTime)/1000}s")
                 LogUtils.i(TAG, "fetch success")

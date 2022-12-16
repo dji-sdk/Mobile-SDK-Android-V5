@@ -47,7 +47,6 @@ import dji.v5.ux.R;
  */
 public class RulerView extends View {
 
-    private static final String TAG = "RulerView";
 
     protected final static int DEFAULT_INTERVAL = 10; // Default scale interval value
     protected final static int DEFAULT_NUMBER = 13;

@@ -24,10 +24,7 @@
 package dji.v5.ux.sample.showcase.defaultlayout;
 
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -62,17 +59,15 @@ import dji.v5.ux.core.util.CameraUtil;
 import dji.v5.ux.core.util.CommonUtils;
 import dji.v5.ux.core.util.DataProcessor;
 import dji.v5.ux.core.widget.fpv.FPVWidget;
+import dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget;
 import dji.v5.ux.core.widget.hsi.PrimaryFlightDisplayWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
 import dji.v5.ux.map.MapWidget;
+import dji.v5.ux.mapkit.core.maps.DJIUiSettings;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
-import dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget;
-import dji.v5.ux.visualcamera.ev.CameraConfigEVWidget;
-import dji.v5.ux.visualcamera.iso.CameraConfigISOAndEIWidget;
-import dji.v5.ux.visualcamera.shutter.CameraConfigShutterWidget;
-import dji.v5.ux.visualcamera.storage.CameraConfigStorageWidget;
-import dji.v5.ux.visualcamera.wb.CameraConfigWBWidget;
+import dji.v5.ux.visualcamera.NDVICameraPanel;
+import dji.v5.ux.visualcamera.VisualCameraPanel;
 import dji.v5.ux.visualcamera.zoom.FocalZoomWidget;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -91,29 +86,19 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected ConstraintLayout parentView;
     protected SystemStatusListPanelWidget systemStatusListPanelWidget;
     protected SimulatorControlWidget simulatorControlWidget;
-    protected CameraConfigISOAndEIWidget cameraConfigISOAndEIWidget;
     protected LensControlWidget lensControlWidget;
-    protected CameraConfigShutterWidget cameraConfigShutterWidget;
-    protected CameraConfigApertureWidget cameraConfigApertureWidget;
-    protected CameraConfigEVWidget cameraConfigEVWidget;
-    protected CameraConfigWBWidget cameraConfigWBWidget;
-    protected CameraConfigStorageWidget cameraConfigStorageWidget;
     protected AutoExposureLockWidget autoExposureLockWidget;
     protected FocusModeWidget focusModeWidget;
     protected FocusExposureSwitchWidget focusExposureSwitchWidget;
     protected CameraControlsWidget cameraControlsWidget;
+    protected HorizontalSituationIndicatorWidget horizontalSituationIndicatorWidget;
     protected ExposureSettingsPanel exposureSettingsPanel;
     protected PrimaryFlightDisplayWidget pfvFlightDisplayWidget;
+    protected NDVICameraPanel ndviCameraPanel;
+    protected VisualCameraPanel visualCameraPanel;
     protected FocalZoomWidget focalZoomWidget;
-    protected View cameraConfigBackground;
+    protected MapWidget mapWidget;
 
-    private int widgetHeight;
-    private int widgetWidth;
-    private int widgetMargin;
-    private int deviceWidth;
-    private int deviceHeight;
-	
-	protected MapWidget mapWidget;
     private CompositeDisposable compositeDisposable;
     private final DataProcessor<CameraSource> cameraSourceProcessor = DataProcessor.create(new CameraSource(PhysicalDevicePosition.UNKNOWN, CameraLensType.UNKNOWN));
     private VideoChannelStateChangeListener primaryChannelStateListener = null;
@@ -125,14 +110,6 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.uxsdk_activity_default_layout);
-
-        widgetHeight = (int) getResources().getDimension(R.dimen.uxsdk_mini_map_height);
-        widgetWidth = (int) getResources().getDimension(R.dimen.uxsdk_mini_map_width);
-        widgetMargin = (int) getResources().getDimension(R.dimen.uxsdk_mini_map_margin);
-
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        deviceHeight = displayMetrics.heightPixels;
-        deviceWidth = displayMetrics.widthPixels;
 
         // Setup top bar state callbacks
         TopBarPanelWidget topBarPanel = findViewById(R.id.panel_top_bar);
@@ -152,22 +129,18 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         parentView = findViewById(R.id.root_view);
         systemStatusListPanelWidget = findViewById(R.id.widget_panel_system_status_list);
         simulatorControlWidget = findViewById(R.id.widget_simulator_control);
-        cameraConfigISOAndEIWidget = findViewById(R.id.widget_camera_config_iso_and_ei);
         lensControlWidget = findViewById(R.id.widget_lens_control);
-        cameraConfigShutterWidget = findViewById(R.id.widget_camera_config_shutter);
-        cameraConfigApertureWidget = findViewById(R.id.widget_camera_config_aperture);
-        cameraConfigEVWidget = findViewById(R.id.widget_camera_config_ev);
-        cameraConfigWBWidget = findViewById(R.id.widget_camera_config_wb);
-        cameraConfigStorageWidget = findViewById(R.id.widget_camera_config_storage);
+        ndviCameraPanel = findViewById(R.id.panel_ndvi_camera);
+        visualCameraPanel = findViewById(R.id.panel_visual_camera);
         autoExposureLockWidget = findViewById(R.id.widget_auto_exposure_lock);
         focusModeWidget = findViewById(R.id.widget_focus_mode);
         focusExposureSwitchWidget = findViewById(R.id.widget_focus_exposure_switch);
         exposureSettingsPanel = findViewById(R.id.panel_camera_controls_exposure_settings);
         pfvFlightDisplayWidget = findViewById(R.id.widget_fpv_flight_display_widget);
-        cameraConfigBackground = findViewById(R.id.camera_config_background);
         focalZoomWidget = findViewById(R.id.widget_focal_zoom);
         cameraControlsWidget = findViewById(R.id.widget_camera_controls);
-		mapWidget = findViewById(R.id.widget_map);
+        horizontalSituationIndicatorWidget = findViewById(R.id.widget_horizontal_situation_indicator);
+        mapWidget = findViewById(R.id.widget_map);
         cameraControlsWidget.getExposureSettingsIndicatorWidget().setStateChangeResourceId(R.id.panel_camera_controls_exposure_settings);
 
         initClickListener();
@@ -182,6 +155,10 @@ public class DefaultLayoutActivity extends AppCompatActivity {
 
         mapWidget.initAMap(map -> {
             // map.setOnMapClickListener(latLng -> onViewClick(mapWidget));
+            DJIUiSettings uiSetting = map.getUiSettings();
+            if (uiSetting != null ) {
+                uiSetting.setZoomControlsEnabled(false);//hide zoom widget
+            }
         });
         mapWidget.onCreate(savedInstanceState);
     }
@@ -308,64 +285,44 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     private void onCameraSourceUpdated(PhysicalDevicePosition devicePosition, CameraLensType lensType) {
         LogUtils.i(TAG, "onCameraSourceUpdated", devicePosition, lensType);
         ComponentIndexType cameraIndex = CameraUtil.getCameraIndex(devicePosition);
-        cameraConfigISOAndEIWidget.updateCameraSource(cameraIndex, lensType);
         fpvInteractionWidget.updateCameraSource(cameraIndex, lensType);
         fpvInteractionWidget.updateGimbalIndex(CommonUtils.getGimbalIndex(devicePosition));
         lensControlWidget.updateCameraSource(cameraIndex, lensType);
-        cameraConfigShutterWidget.updateCameraSource(cameraIndex, lensType);
-        cameraConfigEVWidget.updateCameraSource(cameraIndex, lensType);
-        cameraConfigWBWidget.updateCameraSource(cameraIndex, lensType);
-        cameraConfigStorageWidget.updateCameraSource(cameraIndex, lensType);
-        cameraConfigApertureWidget.updateCameraSource(cameraIndex, lensType);
+        ndviCameraPanel.updateCameraSource(cameraIndex, lensType);
+        visualCameraPanel.updateCameraSource(cameraIndex, lensType);
         autoExposureLockWidget.updateCameraSource(cameraIndex, lensType);
         focusModeWidget.updateCameraSource(cameraIndex, lensType);
         focusExposureSwitchWidget.updateCameraSource(cameraIndex, lensType);
         cameraControlsWidget.updateCameraSource(cameraIndex, lensType);
         exposureSettingsPanel.updateCameraSource(cameraIndex, lensType);
-        focalZoomWidget.updateCameraSource(cameraIndex,lensType);
-        updateViewVisibility(devicePosition);
+        focalZoomWidget.updateCameraSource(cameraIndex, lensType);
+        horizontalSituationIndicatorWidget.updateCameraSource(cameraIndex, lensType);
+        updateViewVisibility(devicePosition, lensType);
         updateInteractionEnabled();
     }
 
-    private void updateViewVisibility(PhysicalDevicePosition devicePosition) {
+    private void updateViewVisibility(PhysicalDevicePosition devicePosition, CameraLensType lensType) {
         //只在fpv下显示
         pfvFlightDisplayWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.VISIBLE : View.INVISIBLE);
 
         //fpv下不显示
-        cameraConfigISOAndEIWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         lensControlWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
-        cameraConfigShutterWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
-        cameraConfigEVWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
-        cameraConfigWBWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
-        cameraConfigStorageWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
-        cameraConfigApertureWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        ndviCameraPanel.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        visualCameraPanel.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         autoExposureLockWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         focusModeWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         focusExposureSwitchWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         cameraControlsWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
-        cameraConfigBackground.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
         focalZoomWidget.setVisibility(devicePosition == PhysicalDevicePosition.NOSE ? View.INVISIBLE : View.VISIBLE);
+        horizontalSituationIndicatorWidget.setSimpleModeEnable(devicePosition != PhysicalDevicePosition.NOSE);
 
         //有其他的显示逻辑，这里确保fpv下不显示
         if (devicePosition == PhysicalDevicePosition.NOSE) {
             exposureSettingsPanel.setVisibility(View.GONE);
         }
-    }
 
-    /**
-     * Helper method to resize the FPV and Map Widgets.
-     *
-     * @param viewToEnlarge The view that needs to be enlarged to full screen.
-     * @param viewToShrink  The view that needs to be shrunk to a thumbnail.
-     */
-    private void resizeViews(View viewToEnlarge, View viewToShrink) {
-        //enlarge first widget
-        ResizeAnimation enlargeAnimation = new ResizeAnimation(viewToEnlarge, widgetWidth, widgetHeight, deviceWidth, deviceHeight, 0);
-        viewToEnlarge.startAnimation(enlargeAnimation);
-
-        //shrink second widget
-        ResizeAnimation shrinkAnimation = new ResizeAnimation(viewToShrink, deviceWidth, deviceHeight, widgetWidth, widgetHeight, widgetMargin);
-        viewToShrink.startAnimation(shrinkAnimation);
+        //只在部分len下显示
+        ndviCameraPanel.setVisibility(CameraUtil.isSupportForNDVI(lensType) ? View.VISIBLE : View.INVISIBLE);
     }
 
     /**
@@ -391,43 +348,6 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Animation to change the size of a view.
-     */
-    private static class ResizeAnimation extends Animation {
-
-        private static final int DURATION = 300;
-
-        private final View view;
-        private final int toHeight;
-        private final int fromHeight;
-        private final int toWidth;
-        private final int fromWidth;
-        private final int margin;
-
-        private ResizeAnimation(View v, int fromWidth, int fromHeight, int toWidth, int toHeight, int margin) {
-            this.toHeight = toHeight;
-            this.toWidth = toWidth;
-            this.fromHeight = fromHeight;
-            this.fromWidth = fromWidth;
-            view = v;
-            this.margin = margin;
-            setDuration(DURATION);
-        }
-
-        @Override
-        protected void applyTransformation(float interpolatedTime, Transformation t) {
-            float height = (toHeight - fromHeight) * interpolatedTime + fromHeight;
-            float width = (toWidth - fromWidth) * interpolatedTime + fromWidth;
-            ConstraintLayout.LayoutParams p = (ConstraintLayout.LayoutParams) view.getLayoutParams();
-            p.height = (int) height;
-            p.width = (int) width;
-            p.rightMargin = margin;
-            p.bottomMargin = margin;
-            view.requestLayout();
-        }
-    }
-
     private static class CameraSource {
         PhysicalDevicePosition devicePosition;
         CameraLensType lensType;
@@ -437,4 +357,6 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             this.lensType = lensType;
         }
     }
+
+
 }

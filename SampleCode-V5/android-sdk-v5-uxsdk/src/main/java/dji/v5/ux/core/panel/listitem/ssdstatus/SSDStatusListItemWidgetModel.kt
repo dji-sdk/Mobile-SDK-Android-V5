@@ -32,7 +32,6 @@ import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.util.DataProcessor
-import dji.v5.ux.core.util.SettingDefinitions
 import io.reactivex.rxjava3.core.Completable
 
 /**
@@ -90,7 +89,7 @@ class SSDStatusListItemWidgetModel(
      * Format SSD
      */
     fun formatSSD(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(CameraKey.KeyFormatStorage, cameraIndex))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(CameraKey.KeyFormatStorage, cameraIndex))
     }
 
 

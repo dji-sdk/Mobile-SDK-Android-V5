@@ -96,7 +96,7 @@ public class WidgetFragment extends Fragment {
             rootView.addView(widgetView0);
             rootView.addView(widgetView1);
         } else {
-            for (WidgetViewHolder widgetViewHolder : widgetListItem.getWidgetViewHolders()) {
+            for (WidgetViewHolder<?> widgetViewHolder : widgetListItem.getWidgetViewHolders()) {
                 WidgetView widgetView = new WidgetView(getContext());
                 widgetView.init(widgetViewHolder);
                 rootView.addView(widgetView);

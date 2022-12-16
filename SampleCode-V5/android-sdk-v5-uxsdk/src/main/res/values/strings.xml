@@ -465,7 +465,7 @@
     <string name="uxsdk_speed_display_widget_title">Speed Display Widget</string>
     <string name="uxsdk_attitude_display_widget_title">Attitude Display Widget</string>
     <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
-    <string name="uxsdk_exposure_meter_widget_title">Exposure Meter Widget</string>
+    <string name="uxsdk_exposure_meter_widget_title">Exposure Metering Widget</string>
     <string name="uxsdk_focal_zoom_widget_title">Focal Zoom Widget</string>
 
     <!-- Simulator Widget -->
@@ -679,8 +679,9 @@
     <string name="uxsdk_rtk_setting_menu_type_nrtk">Network RTK</string>
     <string name="uxsdk_rtk_setting_menu_type_rtk_station">D-RTK2 Mobile Station</string>
     <string name="uxsdk_rtk_setting_menu_type_custom_rtk">Custom Network RTK</string>
+    <string name="uxsdk_rtk_setting_menu_type_cmcc_rtk">CMCC RTK</string>
     <string name="uxsdk_rtk_setting_menu_type_rtk_station_selected">Select D-RTK 2 Mobile Station</string>
-    <string name="uxsdk_rtk_setting_menu_type_nrtk_desc">Qianxun Network RTK</string>
+    <string name="uxsdk_rtk_setting_menu_type_qx_rtk">Qianxun Network RTK</string>
     <string name="uxsdk_rtk_channel_b_not_support_net_rtk">Network RTK not supported by Controller B</string>
     <string name="uxsdk_rtk_channel_b_not_support_net_custom_rtk">Custom network RTK not supported by Controller B</string>
     <string name="uxsdk_rtk_setting_menu_esc_beeping_tip">Motors are running. Stop them and try again.</string>
@@ -697,6 +698,8 @@
     <string name="uxsdk_lens_type_wide">WIDE</string>
     <string name="uxsdk_lens_type_zoom">ZOOM</string>
     <string name="uxsdk_lens_type_ir">IR</string>
+    <string name="uxsdk_lens_type_ndvi">NDVI</string>
+    <string name="uxsdk_lens_type_rgb">RGB</string>
 
     <!--RTK Connect Widget-->
     <string name="uxsdk_rtk_problem_detection">Check the following</string>
@@ -744,5 +747,13 @@
     <string name="uxsdk_abnormal">Abnormal</string>
     <string name="uxsdk_normal">Normal</string>
 
+    <!--MapView-->
     <string name="uxsdk_map_provider_init_failed">Map Loading failed , depend Map lib not found!</string>
+
+    <!--NVDI 系列 Widget-->
+    <string name="uxsdk_stream_switcher_sbs">SBS</string>
+    <string name="uxsdk_stream_ndvi_vegetation_index">VI</string>
+    <string name="uxsdk_stream_ms_lens">Multi Spectral Camera</string>
+    <string name="uxsdk_switch_stream_unsupported">Unable to switch VI or multi spectral lens in current shooting mode</string>
+
 </resources>

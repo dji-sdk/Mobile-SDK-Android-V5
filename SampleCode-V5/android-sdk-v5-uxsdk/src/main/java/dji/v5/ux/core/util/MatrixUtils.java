@@ -93,4 +93,8 @@ public class MatrixUtils {
         }
         return matrix;
     }
+
+    private MatrixUtils() {
+
+    }
 }

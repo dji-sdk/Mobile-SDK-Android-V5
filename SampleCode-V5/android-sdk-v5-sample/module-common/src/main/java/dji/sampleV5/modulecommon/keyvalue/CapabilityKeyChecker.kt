@@ -1,14 +1,15 @@
 package dji.sampleV5.modulecommon.keyvalue
 
-import android.util.Log
-import dji.sampleV5.modulecommon.data.KeyCheckInfo
+
 import dji.sdk.keyvalue.key.ComponentType
-import dji.sdk.keyvalue.key.SubComponentType
-import dji.sdk.keyvalue.value.common.ComponentIndexType
-import dji.v5.common.callback.CommonCallbacks
-import dji.v5.common.error.DJICommonError
 import dji.v5.manager.capability.CapabilityManager
+import dji.v5.manager.capability.CapabilityParser
 import dji.v5.utils.common.*
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.CompletableObserver
+import io.reactivex.rxjava3.disposables.Disposable
+import java.lang.Exception
 import java.lang.StringBuilder
 import java.lang.Thread.sleep
 
@@ -18,72 +19,153 @@ import java.lang.Thread.sleep
  * @description: 能力集key 测试,结果中只展示未通过的key
  * 结果存储在包目录/keycheck/result.txt
  */
- object CapabilityKeyChecker  {
+object CapabilityKeyChecker {
 
-    private val INTERVAL_TIME = 100L;
-    private val TAG_GET = "【GET】"
-    private val TAG_ERROR = "GetErrorMsg"
-    private val TAG_EQUAL = "=="
+
     private val TAG = LogUtils.getTag(this)
 
 
-    fun check(productType: String , callback:CommonCallbacks.CompletionCallback){
-        var unPassedCount  = 0;
+    /**
+     * 根据key名称从能力集获取测试用例json集合 每个对象可反序列化为key的参数对象
+     */
+    fun getKeyParamList(keyName: String): MutableList<String> {
+        return CapabilityParser.getInstance().getValueParamList(keyName)
+    }
+
+
+    fun getKeyItem(keyName: String): KeyItem<*, *>? {
+        val allList: MutableList<KeyItem<*, *>> = ArrayList()
+        var item: KeyItem<*, *>? = null
+        KeyItemDataUtil.getAllKeyList(allList)
+        allList.forEach {
+            if (it.toString().equals(keyName)) {
+                item = it;
+            }
+        }
+
+        return item
+    }
+
+    data class ItemDecoder(
+        var componetIndex: Int = 0, // LEFT_OR_MAIN
+        var subComponetType: Int = 65534, // DEFAULT
+        var subComponetIndex: Int = 0,
+        var jsonString: String
+    )
+
+    /**
+     *  获取枚举对应的Json list字符串
+     *  eg:CameraMode 对象 obj cameramodeMsg  field[obj] CameraMode
+     */
+    fun getDJIValueBeanStr(item: KeyItem<*, *>): String {
+        var tagBegin = "{\"valueParamList\": ["
+        var tagEnd = "]}"
+        try {
+            val pFields = item.param?.javaClass?.declaredFields
+            if (pFields != null) {
+                for (field in pFields) {
+
+                    field.isAccessible = true
+                    val clazz = field.type
+                    if (clazz.isEnum) {
+                        val itemList =
+                            (item.subItemMap as Map<String?, List<EnumItem>>)[clazz.canonicalName]!!
+                        var jsonList = StringBuilder(tagBegin)
+                        itemList.forEach {
+                            field[item.param] = KeyItemHelper.getEnumData(
+                                clazz as Class<Enum<*>>,
+                                it.getName().toString()
+                            )
+                            var jsonString =
+                                "\"" + item.param.toString().replace("\"", "\\\"") + "\""
+
+                            var result = jsonString + ","
+                            if (!result.contains("65535")) {//过滤unknown
+                                jsonList.append(result)
+                            }
+                        }
+                        jsonList.deleteAt(jsonList.lastIndex)
+                        jsonList.append(tagEnd)
+                        return jsonList.toString()
+
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            LogUtils.e(KeyItemHelper.TAG, e.message)
+        }
+        return ""
+    }
+
+    /**
+     * 根据item生成 枚举类型的json文件
+     */
+    fun generateAllEnumList(productType: String) {
         val allList: MutableList<KeyItem<*, *>> = ArrayList()
         DJIExecutor.getExecutorFor(DJIExecutor.Purpose.IO).execute {
             KeyItemDataUtil.getAllKeyList(allList)
-            val capabilityKeyCount = CapabilityManager.getInstance().getCapabilityKeyCount(productType)
-            val result : StringBuilder = StringBuilder(" ----- begin check -----\n\n")
-            LogUtils.i(TAG, "begin check $capabilityKeyCount")
             allList
                 .filter {
                     val keyName = "Key$it"
-                    it.canGet()
-                       && CapabilityManager.getInstance().isKeySupported(productType, "", ComponentType.find(it.getKeyInfo().componentType), keyName)
+                    it.canSet()
+                            && CapabilityManager.getInstance().isKeySupported(
+                        productType,
+                        "",
+                        ComponentType.find(it.getKeyInfo().componentType),
+                        keyName
+                    )
 
                 }
-                .forEach(){ item ->
-                    item.setComponetIndex(ComponentIndexType.LEFT_OR_MAIN.value())
-                    item.setSubComponetType(SubComponentType.IGNORE.value())
-                    item.setSubComponetIndex(0)
-                    item.setKeyOperateCallBack {
-                        val resStr = it.toString()
-                        val keyNameIndex = resStr.indexOf(TAG_GET)
-                        val keyName = resStr.substring(0 , keyNameIndex)
-                        val isPassed: Boolean
-                        val failedReson = if (resStr.contains(TAG_ERROR)) {
-                            isPassed = false
-                            resStr.substring(resStr.indexOf(TAG_EQUAL))
-                        } else {
-                            isPassed = true
-                            "N/A"
-                        }
-                        if (!isPassed) {
-                            result.append("${++unPassedCount} KeyName :${keyName} - ${ComponentType.find(item.getKeyInfo().componentType)}\n")
-                                .append("IsPassed:${isPassed}\n")
-                                .append("FailedReason:${failedReson}\n")
-                                .append("\n ----------------------- \n")
-                        }
+                .forEach() { item ->
+                    val jsonStr = getDJIValueBeanStr(item)
+                    if (jsonStr.isNotEmpty()) {
+                        var filePath = DiskUtil.getExternalCacheDirPath(
+                            ContextUtil.getContext(),
+                            "keycheck/$item.json"
+                        )
+                        FileUtils.writeFile(filePath, jsonStr, false)
                     }
-                    item.doGet()
-                    sleep(INTERVAL_TIME)
                 }
-            result.append(" --------finish---------\n")
-                .append("UnPassed Key Count:${unPassedCount}")
-            Log.e(TAG, "check finish!"  )
-            if (unPassedCount > 0){
-                callback.onFailure(DJICommonError.FACTORY.build("unpassed count:${unPassedCount}"));
-            } else {
-                callback.onSuccess()
-            }
-            saveResult(result.toString())
         }
     }
 
-    fun saveResult( content : String) {
-        var filePath = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext() , "keycheck/result.txt")
-        FileUtils.writeFile(filePath, content, false)
+    private fun checkOneType(
+        productType: String,
+        componentTypeName: String,
+        keyCheckType : KeyCheckType
+    ): Completable {
+
+      var keyOperatorCommand =   when(keyCheckType) {
+            KeyCheckType.SET -> KeySetCommand(productType , componentTypeName)
+            KeyCheckType.ACTION -> KeyActionCommand(productType ,componentTypeName)
+            KeyCheckType.GET -> KeyGetCommand(productType , componentTypeName)
+        }
+        return keyOperatorCommand.execute()
     }
 
+    fun check(
+        productType: String,
+        componentTypeName: String,
+    ) {
+        checkOneType(productType ,componentTypeName ,KeyCheckType.SET)
+//            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.SET))
+//            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.ACTION))
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : CompletableObserver{
+               override fun onSubscribe(d: Disposable) {
+                   LogUtils.e(TAG , "begin check")
+                   ToastUtils.showToast("begin check")
+               }
 
+               override fun onComplete() {
+                   LogUtils.e(TAG , "check finish")
+               }
+
+               override fun onError(e: Throwable) {
+                   LogUtils.e(TAG , "check error${e.message}")
+               }
+
+           })
+
+    }
 }

@@ -47,12 +47,11 @@ import dji.v5.ux.core.communication.OnStateChangeCallback;
  * The widget is part of the {@link CameraControlsWidget}.
  * Tapping the widget can be used to open the camera settings panel
  */
-public class CameraSettingsMenuIndicatorWidget extends FrameLayoutWidget implements View.OnClickListener {
+public class CameraSettingsMenuIndicatorWidget extends FrameLayoutWidget<Object> implements View.OnClickListener {
 
     //region Fields
     private TextView foregroundTextView;
     private OnStateChangeCallback<Object> stateChangeCallback = null;
-    private int stateChangeResourceId;
     //endregion
 
     //region Lifecycle
@@ -123,8 +122,6 @@ public class CameraSettingsMenuIndicatorWidget extends FrameLayoutWidget impleme
 
     private void initAttributes(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CameraSettingsMenuIndicatorWidget);
-        stateChangeResourceId =
-                typedArray.getResourceId(R.styleable.CameraSettingsMenuIndicatorWidget_uxsdk_onStateChange, INVALID_RESOURCE);
 
         setLabelTextSize(typedArray.getDimension(R.styleable.CameraSettingsMenuIndicatorWidget_uxsdk_settingsTextSize, 12));
         setLabelTextColor(typedArray.getColor(R.styleable.CameraSettingsMenuIndicatorWidget_uxsdk_settingsTextColor, Color.WHITE));

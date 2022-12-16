@@ -101,7 +101,7 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
             }
 
             R.id.image -> {
-                if (mediaFile?.fileType == MediaFileType.MP4) {
+                if (mediaFile?.fileType == MediaFileType.MP4 || mediaFile?.fileType == MediaFileType.MOV) {
                     enterVideoPage()
                 }
             }
@@ -139,13 +139,14 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
 
         val filepath = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), mediaFileDir + "/" + mediaFile?.fileName)
         val file: File = File(filepath)
+        var offset : Long = 0L
         if (file.exists()) {
-            file.delete()
+            offset = file.length();
         }
-        val outputStream = FileOutputStream(file)
+        val outputStream = FileOutputStream(file,true)
         val bos = BufferedOutputStream(outputStream)
         var beginTime = System.currentTimeMillis()
-        mediaFile?.pullOriginalMediaFileFromCamera(0 , object :MediaFileDownloadListener {
+        mediaFile?.pullOriginalMediaFileFromCamera(offset , object :MediaFileDownloadListener {
             override fun onStart() {
                 showProgress()
             }
@@ -156,7 +157,7 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
 
             override fun onRealtimeDataUpdate(data: ByteArray, position: Long) {
                 try {
-                    bos.write(data, 0, data.size)
+                    bos.write(data)
                     bos.flush()
                 } catch (e: IOException) {
                     LogUtils.e("MediaFile" , "write error" + e.message)

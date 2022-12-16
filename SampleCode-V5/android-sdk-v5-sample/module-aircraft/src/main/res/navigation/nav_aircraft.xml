@@ -29,6 +29,7 @@
         android:label="network_rtk_page"
         android:layout="@layout/frag_network_rtk_page" />
 
+
     <fragment
         android:id="@+id/flight_upgrade_page"
         android:name="dji.sampleV5.moduleaircraft.pages.UpgradeFragment"
@@ -50,7 +51,29 @@
         android:id="@+id/psdk_data_page"
         android:name="dji.sampleV5.moduleaircraft.pages.PayLoadDataFragment"
         android:label="psdk_data_page"
-        android:layout="@layout/frag_payload_test_page" />
+        android:layout="@layout/frag_payload_data_page" />
+
+    <fragment
+        android:id="@+id/psdk_widget_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.PayloadWidgetFragment"
+        android:label="psdk_widget_page"
+        android:layout="@layout/frag_payload_widget_page" />
+
+    <fragment
+        android:id="@+id/psdk_center_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.PayloadCenterFragment"
+        android:label="psdk_center_page"
+        android:layout="@layout/frag_payload_center_page">
+        <action
+            android:id="@+id/action_open_payload_data_page"
+            app:destination="@id/psdk_data_page" />
+
+        <action
+            android:id="@+id/action_open_payload_widget_page"
+            app:destination="@id/psdk_widget_page" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/waypoint_v3_page"
         android:name="dji.sampleV5.moduleaircraft.pages.WayPointV3Fragment"

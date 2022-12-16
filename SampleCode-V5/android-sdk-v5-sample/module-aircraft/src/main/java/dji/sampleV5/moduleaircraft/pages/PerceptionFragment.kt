@@ -6,17 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.PerceptionVM
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.Helper
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
-import dji.v5.manager.aircraft.perception.ObstacleAvoidanceType
-import dji.v5.manager.aircraft.perception.PerceptionDirection
-import dji.v5.manager.aircraft.perception.PerceptionInfo
-import dji.v5.manager.aircraft.perception.ObstacleData
+import dji.v5.manager.aircraft.perception.data.ObstacleAvoidanceType
+import dji.v5.manager.aircraft.perception.data.PerceptionDirection
+import dji.v5.manager.aircraft.perception.data.PerceptionInfo
+import dji.v5.manager.aircraft.perception.data.ObstacleData
 import dji.v5.manager.aircraft.perception.radar.RadarInformation
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.ToastUtils
@@ -399,13 +398,11 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
             radarObstacleDataBuilder.clear()
             radarObstacleDataBuilder.apply {
                 radarObstacleData?.apply {
-                    //65535为没有起飞的无效数据，直接过滤掉
-                    if (upwardObstacleDistance != 65535) {
-                        append("\n").append("ObstacleDataForRadar:").append("\n")
-                        append("horizontalObstacleDistance:$horizontalObstacleDistance").append("\n")
-                        append("upwardObstacleDistance:$upwardObstacleDistance").append("\n")
-                        append("horizontalAngleInterval:$horizontalAngleInterval").append("\n")
-                    }
+                    append("\n").append("ObstacleDataForRadar:").append("\n")
+                    append("horizontalObstacleDistance:$horizontalObstacleDistance").append("\n")
+                    append("upwardObstacleDistance:$upwardObstacleDistance").append("\n")
+                    append("horizontalAngleInterval:$horizontalAngleInterval").append("\n")
+
                 }
             }
 

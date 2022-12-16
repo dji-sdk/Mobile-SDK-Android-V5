@@ -60,7 +60,6 @@ class FPVWidgetModel(
     private val flatCameraModule: FlatCameraModule,
 ) : WidgetModel(djiSdkModel, keyedStore), ICameraIndex {
 
-    private val tag = LogUtils.getTag(this)
     private var currentLensType = CameraLensType.CAMERA_LENS_DEFAULT
     val streamSourceCameraTypeProcessor = DataProcessor.create(CameraVideoStreamSourceType.UNKNOWN)
     val orientationProcessor: DataProcessor<CameraOrientation> = DataProcessor.create(CameraOrientation.UNKNOWN)
@@ -116,11 +115,17 @@ class FPVWidgetModel(
             currentCameraIndex = CameraUtil.getCameraIndex(source.physicalDevicePosition)
             val videoViewChangedConsumer = { _: Any -> videoViewChangedProcessor.onNext(true) }
             bindDataProcessor(CameraKey.KeyCameraOrientation.create(currentCameraIndex), orientationProcessor, videoViewChangedConsumer)
-            bindDataProcessor(CameraKey.KeyLiveViewCameraSource.create(currentCameraIndex), streamSourceCameraTypeProcessor) {
+            bindDataProcessor(CameraKey.KeyCameraVideoStreamSource.create(currentCameraIndex), streamSourceCameraTypeProcessor) {
                 currentLensType = when (it) {
                     CameraVideoStreamSourceType.WIDE_CAMERA -> CameraLensType.CAMERA_LENS_WIDE
                     CameraVideoStreamSourceType.ZOOM_CAMERA -> CameraLensType.CAMERA_LENS_ZOOM
                     CameraVideoStreamSourceType.INFRARED_CAMERA -> CameraLensType.CAMERA_LENS_THERMAL
+                    CameraVideoStreamSourceType.NDVI_CAMERA -> CameraLensType.CAMERA_LENS_MS_NDVI
+                    CameraVideoStreamSourceType.MS_G_CAMERA -> CameraLensType.CAMERA_LENS_MS_G
+                    CameraVideoStreamSourceType.MS_R_CAMERA -> CameraLensType.CAMERA_LENS_MS_R
+                    CameraVideoStreamSourceType.MS_RE_CAMERA -> CameraLensType.CAMERA_LENS_MS_RE
+                    CameraVideoStreamSourceType.MS_NIR_CAMERA -> CameraLensType.CAMERA_LENS_MS_NIR
+                    CameraVideoStreamSourceType.RGB_CAMERA -> CameraLensType.CAMERA_LENS_RGB
                     else -> CameraLensType.CAMERA_LENS_DEFAULT
                 }
                 sourceUpdate()

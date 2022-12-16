@@ -1,144 +1,140 @@
 package dji.v5.ux.core.widget.hsi
 
 import android.content.Context
+
+import dji.v5.ux.core.ui.hsi.FlashTimer.removeListener
+
+import dji.v5.ux.core.ui.hsi.FlashTimer.addListener
+import kotlin.jvm.JvmOverloads
+import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
+import android.view.ViewDebug.ExportedProperty
+import android.widget.TextView
+import dji.v5.ux.core.ui.hsi.dashboard.SpeedDashBoard
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import dji.v5.ux.core.base.DJISDKModel
+import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
+import dji.v5.ux.R
+import dji.v5.ux.core.ui.hsi.FlashTimer
+import io.reactivex.rxjava3.core.Flowable
+import dji.v5.common.utils.UnitUtils
+import android.graphics.Color
 import android.util.AttributeSet
-import android.view.View
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
+import dji.sdk.keyvalue.value.common.Attitude
 import dji.sdk.keyvalue.value.flightcontroller.WindDirection
 import dji.sdk.keyvalue.value.flightcontroller.WindWarning
 import dji.v5.utils.common.LogUtils
-import dji.v5.ux.R
-import dji.v5.ux.core.base.DJISDKModel
-import dji.v5.ux.core.base.SchedulerProvider
-import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
-import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
-import dji.v5.common.utils.UnitUtils
-import kotlinx.android.synthetic.main.uxsdk_liveview_pfd_speed_display_widget.view.*
 import java.util.*
 
-/**
- * Class Description
- *
- * @author Hoker
- * @date 2021/11/25
- *
- * Copyright (c) 2021, DJI All Rights Reserved.
- */
-open class SpeedDisplayWidget @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : ConstraintLayoutWidget<SpeedDisplayWidget.ModelState>(context, attrs, defStyleAttr) {
-    private val tag = LogUtils.getTag("SpeedDisplayWidget")
-    private val widgetModel by lazy {
-        SpeedDisplayModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance())
+open class SpeedDisplayWidget @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    ConstraintLayoutWidget<Boolean?>(context, attrs, defStyleAttr) {
+    @ExportedProperty(category = "dji", formatToHexString = true)
+    private val mWindTextColor: Int
+    private var mTvWsValue: TextView? = null
+    private var mIsAnimating = false
+    var mSpeedDashBoard: SpeedDashBoard? = null
+    private val mCompositeDisposable = CompositeDisposable()
+    private var mListener: FlashTimer.Listener? = null
+    private val widgetModel = SpeedDisplayModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance())
+    override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
+        loadLayout(context)
+        mSpeedDashBoard = findViewById(R.id.pfd_speed_dash_board)
+        mTvWsValue = findViewById(R.id.pfd_ws_value)
     }
 
-    private var mAnimation: Animation? = null
+    protected open fun loadLayout(context: Context) {
+        inflate(context, R.layout.uxsdk_liveview_pfd_speed_display_widget, this)
+    }
 
-    private var mIsAnimating = false
-
-    override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
-
-        loadLayout()
-
-        mAnimation = AlphaAnimation(1f, 0f)
-        mAnimation?.apply {
-            repeatMode = Animation.REVERSE
-            repeatCount = -1
-            interpolator = AccelerateInterpolator()
-            duration = 1000
-            setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {
-                    mIsAnimating = true
-                }
-
-                override fun onAnimationEnd(animation: Animation) {
-                    mIsAnimating = false
-                }
-
-                override fun onAnimationRepeat(animation: Animation) {
-//                    LogUtils.d(tag,"TODO Method not implemented yet")
-                }
-            })
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (!isInEditMode) {
+            mSpeedDashBoard?.setModel(widgetModel)
+            widgetModel.setup()
+        }
+        mListener = FlashTimer.Listener { show: Boolean ->
+            val visible: Int = if (mIsAnimating && !show) {
+                INVISIBLE
+            } else {
+                VISIBLE
+            }
+            if (mTvWsValue?.visibility != visible) {
+                postTvWsVisibility(visible)
+            }
         }
     }
 
-    open fun loadLayout() {
-        View.inflate(context, R.layout.uxsdk_liveview_pfd_speed_display_widget, this)
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        mCompositeDisposable.dispose()
+        // 当 View 在闪烁时，需要移除掉回调
+        removeListener(mListener)
+        if (!isInEditMode) {
+            widgetModel.cleanup()
+        }
     }
 
     override fun reactToModelChanges() {
-        addDisposable(widgetModel.windSpeedProcessor.toFlowable().observeOn(SchedulerProvider.ui()).subscribe {
-            updateWindStatus(it.toFloat() / 10, widgetModel.windDirectionProcessor.value, widgetModel.windWarningProcessor.value, getAircraftDegree())
-        })
-        addDisposable(widgetModel.windDirectionProcessor.toFlowable().observeOn(SchedulerProvider.ui()).subscribe {
-            updateWindStatus(widgetModel.windSpeedProcessor.value.toFloat() / 10, it, widgetModel.windWarningProcessor.value, getAircraftDegree())
-        })
-        addDisposable(widgetModel.windWarningProcessor.toFlowable().observeOn(SchedulerProvider.ui()).subscribe {
-            updateWindStatus(widgetModel.windSpeedProcessor.value.toFloat() / 10, widgetModel.windDirectionProcessor.value, it, getAircraftDegree())
-        })
-        addDisposable(widgetModel.aircraftAttitudeProcessor.toFlowable().observeOn(SchedulerProvider.ui()).subscribe {
-            updateWindStatus(widgetModel.windSpeedProcessor.value.toFloat() / 10, widgetModel.windDirectionProcessor.value, widgetModel.windWarningProcessor.value, getAircraftDegree())
-        })
-    }
-
-    private fun getAircraftDegree(): Float {
-        return widgetModel.aircraftAttitudeProcessor.value.yaw.toFloat() + if (widgetModel.aircraftAttitudeProcessor.value.yaw.toFloat() < 0) 359F else 0F
+        mCompositeDisposable.add(
+            Flowable.combineLatest(
+                widgetModel.windSpeedProcessor.toFlowable(),
+                widgetModel.windDirectionProcessor.toFlowable(),
+                widgetModel.windWarningProcessor.toFlowable(),
+                widgetModel.aircraftAttitudeProcessor.toFlowable(),
+                { windSpeed: Int, fcWindDirectionStatus: WindDirection, fcWindWarning: WindWarning, attitude: Attitude ->
+                    val yaw = attitude.yaw.toFloat()
+                    val aircraftDegree: Float = yaw + if (yaw < 0) 359f else 0f
+                    updateWindStatus(windSpeed.toFloat() / 10, fcWindDirectionStatus, fcWindWarning, aircraftDegree)
+                    true
+                }
+            ).subscribe()
+        )
     }
 
     override fun getIdealDimensionRatioString(): String? {
         return null
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        if (!isInEditMode) {
-            pfd_speed_dash_board.setModel(widgetModel)
-            widgetModel.setup()
-        }
+    private fun postTvWsVisibility(visible: Int) {
+        mTvWsValue?.post { mTvWsValue?.visibility = visible }
     }
 
-    override fun onDetachedFromWindow() {
-        if (!isInEditMode) {
-            widgetModel.cleanup()
+    private fun updateWindStatus(windSpeed: Float, fcWindDirectionStatus: WindDirection, fcWindWarning: WindWarning, aircraftDegree: Float) {
+        LogUtils.d(TAG, "windSpeed :" + windSpeed + " Direction:" + fcWindDirectionStatus.name + " waring:" + fcWindWarning.name + " " +
+                "aircraftDegree:" + aircraftDegree)
+        val value = UnitUtils.transFormSpeedIntoDifferentUnit(windSpeed)
+        val textStr = String.format(Locale.ENGLISH, "WS %04.1f %s", value, getWindDirectionText(fcWindDirectionStatus, aircraftDegree))
+        if (textStr != mTvWsValue?.text.toString()) {
+            mTvWsValue!!.text = textStr
         }
-        super.onDetachedFromWindow()
-    }
-
-    private fun updateWindStatus(windSpeed: Float, windDirection: WindDirection, windWarning: WindWarning, aircraftDegree: Float) {
-        val value: Float = UnitUtils.transFormSpeedIntoDifferentUnit(windSpeed)
-        val textStr = String.format(Locale.ENGLISH, "WS %04.1f %s", value, getWindDirectionText(windDirection, aircraftDegree))
-        if (textStr != pfd_ws_value.text.toString()) {
-            pfd_ws_value.text = textStr
+        if (fcWindWarning == WindWarning.LEVEL_2) {
+            mTvWsValue!!.setTextColor(resources.getColor(R.color.uxsdk_pfd_barrier_color))
+        } else if (fcWindWarning == WindWarning.LEVEL_1) {
+            mTvWsValue?.setTextColor(resources.getColor(R.color.uxsdk_pfd_avoidance_color))
+        } else {
+            mTvWsValue?.setTextColor(mWindTextColor)
         }
-
-        when (windWarning) {
-            WindWarning.LEVEL_1 -> pfd_ws_value.setTextColor(resources.getColor(R.color.uxsdk_pfd_avoidance_color))
-            WindWarning.LEVEL_2 -> pfd_ws_value.setTextColor(resources.getColor(R.color.uxsdk_pfd_barrier_color))
-            else -> pfd_ws_value.setTextColor(resources.getColor(R.color.uxsdk_pfd_main_color))
-        }
-
-        val shouldBlink = windWarning === WindWarning.LEVEL_2
+        val shouldBlink = fcWindWarning == WindWarning.LEVEL_2
         // 红色需要持续闪烁
         if (shouldBlink && !mIsAnimating) {
-            pfd_ws_value.startAnimation(mAnimation)
+            mIsAnimating = true
+            addListener(mListener)
         } else if (!shouldBlink && mIsAnimating) {
-            pfd_ws_value.clearAnimation()
+            mIsAnimating = false
+            removeListener(mListener)
+            // 使用 post，避免消息队列还存在隐藏的消息
+            postTvWsVisibility(VISIBLE)
         }
     }
 
-    private fun getWindDirectionText(windDirection: WindDirection, aircraftDegree: Float): String? {
-        if (windDirection === WindDirection.WINDLESS) {
+    private fun getWindDirectionText(fcWindDirectionStatus: WindDirection, aircraftDegree: Float): String {
+        if (fcWindDirectionStatus == WindDirection.WINDLESS) {
             return " "
         }
         var toAircraft: WindDirection? = null
-        var delta = getWindDegree(windDirection) - aircraftDegree
-        delta += if (delta >= 0) 0F else 360F
-        var start = 22.5F
-        val offset = 45F
+        var delta = getWindDegree(fcWindDirectionStatus) - aircraftDegree
+        delta += if (delta >= 0) 0f else 360.toFloat()
+        var start = 22.5f
+        val offset = 45f
         for (i in 2..8) {
             if (delta >= start && delta < start + offset) {
                 toAircraft = WindDirection.find(i)
@@ -152,7 +148,7 @@ open class SpeedDisplayWidget @JvmOverloads constructor(
         return getWindDirectionText(toAircraft)
     }
 
-    private fun getWindDirectionText(windDirection: WindDirection?): String {
+    private fun getWindDirectionText(windDirection: WindDirection): String {
         return when (windDirection) {
             WindDirection.EAST -> "←"
             WindDirection.WEST -> "→"
@@ -168,7 +164,9 @@ open class SpeedDisplayWidget @JvmOverloads constructor(
     }
 
     private fun getWindDegree(fcWindDirectionStatus: WindDirection?): Int {
-        return when (fcWindDirectionStatus) {
+        return if (fcWindDirectionStatus == null) {
+            0
+        } else when (fcWindDirectionStatus) {
             WindDirection.EAST -> 90
             WindDirection.WEST -> 270
             WindDirection.SOUTH -> 180
@@ -181,6 +179,13 @@ open class SpeedDisplayWidget @JvmOverloads constructor(
         }
     }
 
+    companion object {
+        private val TAG = SpeedDisplayWidget::class.java.simpleName
+    }
 
-    sealed class ModelState
+    init {
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.SpeedDisplayWidget)
+        mWindTextColor = typedArray.getColor(R.styleable.SpeedDisplayWidget_android_textColor, Color.WHITE)
+        typedArray.recycle()
+    }
 }

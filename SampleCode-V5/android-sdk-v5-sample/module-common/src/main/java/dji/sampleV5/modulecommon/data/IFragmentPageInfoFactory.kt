@@ -9,5 +9,5 @@ package dji.sampleV5.modulecommon.data
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
 interface IFragmentPageInfoFactory {
-    fun createPageInfo(): FragmentPageInfo
+    fun createPageInfo(): FragmentPageItemList
 }

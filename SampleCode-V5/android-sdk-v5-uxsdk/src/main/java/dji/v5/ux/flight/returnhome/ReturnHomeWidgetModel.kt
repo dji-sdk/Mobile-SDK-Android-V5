@@ -150,14 +150,14 @@ class ReturnHomeWidgetModel(
      * Performs return to home action
      */
     fun performReturnHomeAction(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStartGoHome))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartGoHome))
     }
 
     /**
      * Performs cancel return to home action
      */
     fun performCancelReturnHomeAction(): Completable {
-        return djiSdkModel.performAction(KeyTools.createKey(FlightControllerKey.KeyStopGoHome))
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStopGoHome))
     }
 
     //endregion

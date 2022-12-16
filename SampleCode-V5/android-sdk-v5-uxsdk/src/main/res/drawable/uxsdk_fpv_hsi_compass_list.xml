@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/uxsdk_fpv_hsi_compass" />
+    <item
+        android:width="180px"
+        android:height="180px"
+        android:drawable="@drawable/uxsdk_fpv_hsi_compass_tips"
+        android:gravity="center"/>
+</layer-list>

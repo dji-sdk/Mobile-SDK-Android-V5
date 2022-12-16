@@ -14,7 +14,6 @@ import dji.v5.et.create
 import dji.v5.et.listen
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.video.StreamSourceListener
-import dji.v5.utils.common.LogUtils
 
 class MultiVideoChannelVM : DJIViewModel() {
     val videoStreamSources = MutableLiveData<MutableList<StreamSource>>()

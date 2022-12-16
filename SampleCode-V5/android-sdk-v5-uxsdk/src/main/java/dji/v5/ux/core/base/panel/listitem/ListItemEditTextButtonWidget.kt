@@ -389,7 +389,7 @@ abstract class ListItemEditTextButtonWidget<T> @JvmOverloads constructor(
         listItemEditTextView.background = getDrawable(R.drawable.uxsdk_system_status_edit_background_selector)
         listItemEditTextView.textColorStateList = resources.getColorStateList(R.color.uxsdk_selector_edit_text_color)
         listItemEditTextView.setOnClickListener(this)
-        listItemEditTextView.setOnEditorActionListener { p0, p1, p2 ->
+        listItemEditTextView.setOnEditorActionListener { _, p1, p2 ->
             if (isDoneActionClicked(p1, p2)) {
                 uiUpdateStateProcessor.onNext(UIState.EditFinished)
                 listItemEditTextView.isCursorVisible = false

@@ -44,9 +44,9 @@ import dji.v5.utils.common.LogUtils;
 public class UXKeys {
     private static final String TAG = "UXKeys";
     private final static int DEFAULT_INDEX = 0;
-    private static Map<String, UXKey> keysPathMap = new ConcurrentHashMap<>();
-    private static Map<String, Class> keyValueMap = new ConcurrentHashMap<>();
-    private static Map<String, UpdateType> keyUpdateTypeMap = new ConcurrentHashMap<>();
+    private static final Map<String, UXKey> keysPathMap = new ConcurrentHashMap<>();
+    private static final Map<String, Class<?>> keyValueMap = new ConcurrentHashMap<>();
+    private static final Map<String, UpdateType> keyUpdateTypeMap = new ConcurrentHashMap<>();
 
     protected UXKeys() {
         //Do Nothing
@@ -61,8 +61,10 @@ public class UXKeys {
                 try {
                     String paramKey = (String) field.get(null);
                     UXParamKey paramKeyAnnotation = field.getAnnotation(UXParamKey.class);
-                    addKeyValueTypeToMap(paramKey, paramKeyAnnotation.type());
-                    addKeyUpdateTypeToMap(paramKey, paramKeyAnnotation.updateType());
+                    if (paramKey != null && paramKeyAnnotation != null) {
+                        addKeyValueTypeToMap(paramKey, paramKeyAnnotation.type());
+                        addKeyUpdateTypeToMap(paramKey, paramKeyAnnotation.updateType());
+                    }
                 } catch (Exception e) {
                     LogUtils.e(TAG, e.getMessage());
                 }
@@ -101,7 +103,7 @@ public class UXKeys {
         String keyPath = producePathFromElements(key, index);
         UXKey uxKey = getCache(keyPath);
         if (uxKey == null) {
-            Class valueType = keyValueMap.get(key);
+            Class<?> valueType = keyValueMap.get(key);
             UpdateType updateType = keyUpdateTypeMap.get(key);
             if (valueType != null && updateType != null) {
                 uxKey = new UXKey(key, valueType, keyPath, updateType);
@@ -117,16 +119,12 @@ public class UXKeys {
      * @param key       String key with UXParamKey annotation to be initialized
      * @param valueType Non-primitive class value-type of the key to be initialized (eg. Integer, Boolean etc)
      */
-    private static void addKeyValueTypeToMap(@NonNull String key, @NonNull Class valueType) {
-        if (!keyValueMap.containsKey(key)) {
-            keyValueMap.put(key, valueType);
-        }
+    private static void addKeyValueTypeToMap(@NonNull String key, @NonNull Class<?> valueType) {
+        keyValueMap.put(key, valueType);
     }
 
     private static void addKeyUpdateTypeToMap(@NonNull String key, @NonNull UpdateType updateType) {
-        if (!keyUpdateTypeMap.containsKey(key)) {
-            keyUpdateTypeMap.put(key, updateType);
-        }
+        keyUpdateTypeMap.put(key, updateType);
     }
 
     private static String producePathFromElements(@NonNull String param, int index) {
@@ -142,7 +140,7 @@ public class UXKeys {
     }
 
     private static void putCache(String keyStr, UXKey key) {
-        if (keyStr != null && key != null && !keysPathMap.containsKey(keyStr)) {
+        if (keyStr != null && key != null) {
             keysPathMap.put(keyStr, key);
         }
     }
@@ -171,7 +169,7 @@ public class UXKeys {
          *
          * @return The class type of the param
          */
-        @NonNull Class type();
+        @NonNull Class<?> type();
 
         /**
          * The update type of this key.

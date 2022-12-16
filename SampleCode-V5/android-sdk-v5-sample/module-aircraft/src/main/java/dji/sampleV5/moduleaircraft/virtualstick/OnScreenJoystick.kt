@@ -30,7 +30,7 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
     private var mJoystickListener: OnScreenJoystickListener? = null
     private var isAutoCentering = true
 
-    private fun initGraphics(attrs: AttributeSet) {
+    private fun initGraphics() {
         val res = context.resources
         mJoystick = BitmapFactory.decodeResource(res, R.mipmap.joystick)
     }
@@ -171,6 +171,7 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
                         doDraw(canvas)
                     }
                 } catch (e: Exception) {
+                    LogUtils.e("drawColor", e.message)
                 } finally {
                     if (canvas != null) {
                         mHolder.unlockCanvasAndPost(canvas)
@@ -181,7 +182,7 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
     }
 
     init {
-        initGraphics(attrs)
+        initGraphics()
         init()
     }
 }

@@ -115,7 +115,7 @@ abstract class FrameLayoutWidget<T> @JvmOverloads constructor(
      *
      * @return dimension ratio string.
      */
-    abstract fun getIdealDimensionRatioString(): String?
+    open fun getIdealDimensionRatioString(): String? = null
 
     /**
      * Ideal widget size.

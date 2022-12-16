@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="news_title">MSDK 5.1.0</string>
-    <string name="news_description">- Added supported aircraft and devices:\n- DJI Mavic 3E\n- DJI Mavic 3T\n- Zenmuse H20N (Only supported by M300 RTK)\n- Millimeter wave radar (Only supported by M300 RTK)\nSupported UpgradeManager. Class to manage the firmware upgrade, which is used to get the latest firmware version and the release note.\nSupported RadarManager. Class to manager radar, which is used to turn on/off the radar obstacle avoidance switch and obtain the obstacle ranging data.\nSupported setVirtualStickAdvancedModeEnabled, virtual stick advanced mode, which supports configuring the coordinate system, roll pitch control mode, yaw control mode, and vertical throttle control mode.\nSupport USA\nremote identification\n(RID) function in UASRemoteIDManager.\nmore refer to the release notes. </string>
+    <string name="news_title">MSDK 5.2.0</string>
+    <string name="news_description">"- Added supported aircraft and devices: DJI Mavic 3M.
+- Supported PayloadCenter. Class to provides functions such as getting the PayloadManager instance list of the payload supported by the aircraft.
+- Supported PayloadManager. Class to provides functions such as get payload information, get and set widget information, and data receiving and sending.
+- Supported PullMediaFileListFromCamera to set MediaFileIndex and Count to pull part of media files.
+- Supported PerceptionInfo to get the working state of the sensing sensor.
 
+More refer to the release notes." </string>
+    <string name="news_date">2022–12–16</string>
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/en-us/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/en/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/en-us/requests/new</string>
@@ -76,6 +82,8 @@
     <string name="btn_get_flight_record_path">Get Flight Record Path</string>
     <string name="btn_get_fly_compressed_path">Get Fly Compressed Log Path</string>
 
+    <string name="start_pairing">Start Pairing</string>
+    <string name="stop_pairing">Stop Pairing</string>
 
     <string name="n_a">N/A</string>
     <string name="video_stream_manager">Video Stream Manager</string>
@@ -393,4 +401,14 @@
     <string name="delete_files">delete file</string>
     <string name="select_files">select file</string>
     <string name="unselect_files"> unselect file</string>
+    <string name="fetch_files_list">fetch media file list</string>
+    <string name="take_photo">take photo</string>
+
+    <!-- LTE -->
+    <string name="btn_update_lte_authentication_info">Update LTE Authentication Info</string>
+    <string name="btn_get_lte_authentication_verification_code">Get LTE Authentication Verification Code</string>
+    <string name="btn_start_lte_authentication">Start LTE Authentication</string>
+    <string name="btn_set_lte_enhanced_transmission_type">Set LTE Enhanced Transmission Type</string>
+    <string name="btn_get_lte_enhanced_transmission_type">Get LTE Enhanced Transmission Type</string>
+
 </resources>

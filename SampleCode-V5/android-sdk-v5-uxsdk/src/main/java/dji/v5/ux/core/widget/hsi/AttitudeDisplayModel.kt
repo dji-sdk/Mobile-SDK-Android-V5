@@ -1,15 +1,26 @@
 package dji.v5.ux.core.widget.hsi
 
-import dji.sdk.keyvalue.key.FlightAssistantKey
-import dji.sdk.keyvalue.key.FlightControllerKey
-import dji.sdk.keyvalue.key.RadarKey
-import dji.sdk.keyvalue.key.RtkMobileStationKey
+import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.common.Velocity3D
 import dji.sdk.keyvalue.value.flightassistant.PerceptionInformation
 import dji.sdk.keyvalue.value.flightassistant.PerceptionPushOmnidirectionalRadarStatus
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKTakeoffAltitudeInfo
-import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.flightassistant.OmnidirectionalObstacleAvoidanceStatus
+import dji.sdk.keyvalue.value.product.ProductType
+import dji.sdk.wpmz.value.mission.WaylineWaylinesParseInfo
+import dji.v5.manager.KeyManager
+import dji.v5.manager.aircraft.perception.PerceptionManager
+import dji.v5.manager.aircraft.perception.data.ObstacleData
+import dji.v5.manager.aircraft.perception.data.PerceptionInfo
+import dji.v5.manager.aircraft.perception.listener.ObstacleDataListener
+import dji.v5.manager.aircraft.perception.listener.PerceptionInformationListener
+import dji.v5.manager.aircraft.perception.radar.RadarInformation
+import dji.v5.manager.aircraft.perception.radar.RadarInformationListener
+import dji.v5.manager.aircraft.waypoint3.WPMZParserManager
+import dji.v5.manager.aircraft.waypoint3.WPMZParserManager.getCurrentKmzInfo
+import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
+import dji.v5.manager.aircraft.waypoint3.WaypointMissionManager
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
@@ -26,46 +37,61 @@ import dji.v5.ux.core.util.DataProcessor
  */
 open class AttitudeDisplayModel constructor(
     djiSdkModel: DJISDKModel,
-    keyedStore: ObservableInMemoryKeyedStore
+    keyedStore: ObservableInMemoryKeyedStore,
 ) : WidgetModel(djiSdkModel, keyedStore) {
-    private val tag = LogUtils.getTag("AttitudeDisplayModel")
-    val omniPerceptionRadarUpDistanceProcessor = DataProcessor.create(PerceptionPushOmnidirectionalRadarStatus())
-    val omniPerceptionRadarDownDistanceProcessor = DataProcessor.create(PerceptionPushOmnidirectionalRadarStatus())
-    val upwardsAvoidanceDistanceProcessor = DataProcessor.create(0.0)
-    val downwardsAvoidanceDistanceProcessor = DataProcessor.create(0)
-    val omniUpRadarDistanceProcessor = DataProcessor.create(0.0)
-    val omniDownRadarDistanceProcessor = DataProcessor.create(0.0)
-    val omniUpwardsObstacleAvoidanceEnabledProcessor = DataProcessor.create(false)
+    private val perceptionManager = PerceptionManager.getInstance()
     val velocityProcessor = DataProcessor.create(Velocity3D())
     val altitudeProcessor = DataProcessor.create(0.0)
     val goHomeHeightProcessor: DataProcessor<Int> = DataProcessor.create(0)
     val limitMaxFlightHeightInMeterProcessor = DataProcessor.create(0)
-    val landingProtectionEnabledProcessor = DataProcessor.create(false)
-    val radarUpwardsObstacleAvoidanceEnabledProcessor = DataProcessor.create(false)
-    val radarObstacleAvoidanceStateProcessor = DataProcessor.create(PerceptionInformation())
     val rtkTakeoffAltitudeInfoProcessor = DataProcessor.create(RTKTakeoffAltitudeInfo())
+
     val aircraftLocationDataProcessor = DataProcessor.create(LocationCoordinate2D(Double.NaN, Double.NaN))
+    val perceptionInfoProcessor = DataProcessor.create(PerceptionInfo())
+    val radarInfoProcessor = DataProcessor.create(RadarInformation())
+    val perceptionObstacleDataProcessor = DataProcessor.create(ObstacleData())
+    val radarObstacleDataProcessor = DataProcessor.create(ObstacleData())
+
+    private val perceptionInformationListener = PerceptionInformationListener {
+        perceptionInfoProcessor.onNext(it)
+    }
+
+    private val perceptionObstacleDataListener = ObstacleDataListener {
+        perceptionObstacleDataProcessor.onNext(it)
+    }
+
+    private val radarObstacleDataListener = ObstacleDataListener {
+        radarObstacleDataProcessor.onNext(it)
+    }
+    private val radarInformationListener = RadarInformationListener {
+        radarInfoProcessor.onNext(it)
+    }
+
+
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyOmniPerceptionRadarUpDistance), omniPerceptionRadarUpDistanceProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyOmniPerceptionRadarDownDistance), omniPerceptionRadarUpDistanceProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyUpwardsAvoidanceDistance), upwardsAvoidanceDistanceProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyDownwardsAvoidanceDistance), downwardsAvoidanceDistanceProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyOmniUpRadarDistance), omniUpRadarDistanceProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyOmniDownRadarDistance), omniDownRadarDistanceProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyOmniUpwardsObstacleAvoidanceEnabled), omniUpwardsObstacleAvoidanceEnabledProcessor)
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity), velocityProcessor)
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAltitude), altitudeProcessor)
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyGoHomeHeight), goHomeHeightProcessor)
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHeightLimit), limitMaxFlightHeightInMeterProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyLandingProtectionEnabled), landingProtectionEnabledProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyRadarUpwardsObstacleAvoidanceEnabled), radarUpwardsObstacleAvoidanceEnabledProcessor)
-        bindDataProcessor(KeyTools.createKey(RadarKey.KeyRadarObstacleAvoidanceState), radarObstacleAvoidanceStateProcessor)
+
         bindDataProcessor(KeyTools.createKey(RtkMobileStationKey.KeyRTKTakeoffAltitudeInfo), rtkTakeoffAltitudeInfoProcessor)
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), aircraftLocationDataProcessor)
+
+
+        perceptionManager.addPerceptionInformationListener(perceptionInformationListener)
+        perceptionManager.addObstacleDataListener(perceptionObstacleDataListener)
+        perceptionManager.radarManager.addRadarInformationListener(radarInformationListener)
+        perceptionManager.radarManager.addObstacleDataListener(radarObstacleDataListener)
+
     }
 
     override fun inCleanup() {
-//        LogUtils.d(tag,"TODO Method not implemented yet")
+        perceptionManager.removePerceptionInformationListener(perceptionInformationListener)
+        perceptionManager.removeObstacleDataListener(perceptionObstacleDataListener)
+        perceptionManager.radarManager.removeRadarInformationListener(radarInformationListener)
+        perceptionManager.radarManager.removeObstacleDataListener(radarObstacleDataListener)
+        KeyManager.getInstance().cancelListen(this)
+
     }
 }

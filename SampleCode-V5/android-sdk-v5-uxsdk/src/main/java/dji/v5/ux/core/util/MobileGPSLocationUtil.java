@@ -24,10 +24,15 @@
 package dji.v5.ux.core.util;
 
 import android.content.Context;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+
+import dji.v5.utils.common.ContextUtil;
 import dji.v5.utils.common.LogUtils;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -44,25 +49,61 @@ public class MobileGPSLocationUtil {
     private static final long MIN_TIME_BW_UPDATES = 1000;
 
     private static final String TAG = "MobileGPSLocationUtil";
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private Context activityContext;
+    private final List<LocationListener> locationListeners = new ArrayList<>();
 
-    //endregion
+    private final LocationListener locationManagerListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            for (LocationListener listener : locationListeners) {
+                listener.onLocationChanged(location);
+            }
+        }
 
-    //region public methods
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            for (LocationListener listener : locationListeners) {
+                listener.onStatusChanged(provider, status, extras);
+            }
+        }
 
-    /**
-     * Creates a MobileGPSLocationUtil instance
-     *
-     * @param context  A {@link Context} object used to retrieve the location manager
-     * @param listener A {@link LocationListener} whose
-     *                 {@link LocationListener#onLocationChanged} method will be called for
-     *                 each location update
-     */
-    public MobileGPSLocationUtil(@Nullable Context context, @Nullable LocationListener listener) {
-        activityContext = context;
-        locationListener = listener;
+        @Override
+        public void onProviderEnabled(String provider) {
+            for (LocationListener listener : locationListeners) {
+                listener.onProviderEnabled(provider);
+            }
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            for (LocationListener listener : locationListeners) {
+                listener.onProviderDisabled(provider);
+            }
+        }
+    };
+
+    private static class LazyHolder {
+        private static final MobileGPSLocationUtil INSTANCE = new MobileGPSLocationUtil();
+    }
+
+    public static MobileGPSLocationUtil getInstance() {
+        return MobileGPSLocationUtil.LazyHolder.INSTANCE;
+    }
+
+    private MobileGPSLocationUtil() {
+    }
+
+    public void addLocationListener(LocationListener listener) {
+        if (listener != null) {
+            locationListeners.add(listener);
+        }
+    }
+
+    public void removeLocationListener(LocationListener listener) {
+        locationListeners.remove(listener);
+    }
+
+    public void clearAllLocationListener() {
+        locationListeners.clear();
     }
 
     /**
@@ -70,40 +111,28 @@ public class MobileGPSLocationUtil {
      */
     @SuppressWarnings("MissingPermission")
     public void startUpdateLocation() {
-        if (activityContext == null || locationListener == null) {
+        Context context = ContextUtil.getContext();
+        if (context == null) {
             return;
         }
-
         try {
-            locationManager = (LocationManager) activityContext.getSystemService(LOCATION_SERVICE);
+            LocationManager locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
+            if (locationManager == null){
+                return;
+            }
 
             // getting GPS status
             boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
             // if GPS Enabled get lat/long using GPS Services
             if (isGPSEnabled) {
+                locationManager.removeUpdates(locationManagerListener);
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                         MIN_TIME_BW_UPDATES,
                         MIN_DISTANCE_CHANGE_FOR_UPDATES,
-                        locationListener);
+                        locationManagerListener);
             }
         } catch (SecurityException e) {
             LogUtils.e(TAG, e.getMessage());
         }
     }
-
-    /**
-     * Stop receiving updates from the location manager
-     */
-    @SuppressWarnings("MissingPermission")
-    public void stopUpdateLocation() {
-        if (locationManager != null) {
-            try {
-                locationManager.removeUpdates(locationListener);
-            } catch (SecurityException e) {
-                LogUtils.e(TAG, e.getMessage());
-            }
-        }
-    }
-    //endregion
 }

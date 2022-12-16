@@ -61,13 +61,13 @@ typealias WidgetID = String
  *
  */
 open class TelemetryPanelWidget @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0,
-        configuration: PanelWidgetConfiguration = PanelWidgetConfiguration(
-                context = context,
-                panelWidgetType = PanelWidgetType.FREE_FORM),
-        private var widgetTheme: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    configuration: PanelWidgetConfiguration = PanelWidgetConfiguration(
+        context = context,
+        panelWidgetType = PanelWidgetType.FREE_FORM),
+    private var widgetTheme: Int = 0,
 ) : FreeFormPanelWidget<Any>(context, attrs, defStyleAttr, configuration) {
 
     //region fields
@@ -158,9 +158,9 @@ open class TelemetryPanelWidget @JvmOverloads constructor(
     private fun getExcludeListSet(excludeListValue: Int?): Set<WidgetID> {
         return if (excludeListValue != null) {
             TelemetryPanelItem.values
-                    .filter { it.isItemExcluded(excludeListValue) }
-                    .map { it.widgetID }
-                    .toSet()
+                .filter { it.isItemExcluded(excludeListValue) }
+                .map { it.widgetID }
+                .toSet()
         } else {
             emptySet()
         }
@@ -169,65 +169,71 @@ open class TelemetryPanelWidget @JvmOverloads constructor(
     private fun addWidgetsToPanel() {
         val widgetMargin = getDimension(R.dimen.uxsdk_telemetry_column_margin).toInt()
 
-        setPane(TelemetryPanelItem.AMSL_ALTITUDE, amslAltitudeWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    AMSLAltitudeWidget(context, widgetTheme = widgetTheme)
-                })
+        setPane(Pane(TelemetryPanelItem.AMSL_ALTITUDE, amslAltitudeWidgetPaneID, ViewAlignment.LEFT), createWidgetBlock = {
+            AMSLAltitudeWidget(context, widgetTheme = widgetTheme)
+        })
 
-        setPane(TelemetryPanelItem.AGL_ALTITUDE, aglAltitudeWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    AGLAltitudeWidget(context, widgetTheme = widgetTheme)
-                }, rightMargin = widgetMargin)
+        setPane(
+            Pane(TelemetryPanelItem.AGL_ALTITUDE, aglAltitudeWidgetPaneID, ViewAlignment.LEFT, rightMargin = widgetMargin),
+            createWidgetBlock = {
+                AGLAltitudeWidget(context, widgetTheme = widgetTheme)
+            },
+        )
 
-        setPane(TelemetryPanelItem.HORIZONTAL_VELOCITY, horizontalVelocityWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    HorizontalVelocityWidget(context, widgetTheme = widgetTheme)
-                }, leftMargin = widgetMargin, rightMargin = widgetMargin)
+        setPane(Pane(TelemetryPanelItem.HORIZONTAL_VELOCITY, horizontalVelocityWidgetPaneID, ViewAlignment.LEFT, leftMargin = widgetMargin,
+            rightMargin = widgetMargin), createWidgetBlock = {
+            HorizontalVelocityWidget(context, widgetTheme = widgetTheme)
+        })
 
-        setPane(TelemetryPanelItem.DISTANCE_RC, distanceRCWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    DistanceRCWidget(context, widgetTheme = widgetTheme)
-                }, leftMargin = widgetMargin)
+        setPane(Pane(TelemetryPanelItem.DISTANCE_RC, distanceRCWidgetPaneID, ViewAlignment.LEFT, leftMargin = widgetMargin),
+            createWidgetBlock = {
+                DistanceRCWidget(context, widgetTheme = widgetTheme)
+            })
 
-        setPane(TelemetryPanelItem.DISTANCE_HOME, distanceHomeWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    DistanceHomeWidget(context, widgetTheme = widgetTheme)
-                }, rightMargin = widgetMargin)
+        setPane(Pane(TelemetryPanelItem.DISTANCE_HOME, distanceHomeWidgetPaneID, ViewAlignment.LEFT, rightMargin = widgetMargin),
+            createWidgetBlock = {
+                DistanceHomeWidget(context, widgetTheme = widgetTheme)
+            })
 
-        setPane(TelemetryPanelItem.VERTICAL_VELOCITY, verticalVelocityWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    VerticalVelocityWidget(context, widgetTheme = widgetTheme)
-                }, leftMargin = widgetMargin, rightMargin = widgetMargin)
+        setPane(Pane(TelemetryPanelItem.VERTICAL_VELOCITY, verticalVelocityWidgetPaneID, ViewAlignment.LEFT, leftMargin = widgetMargin,
+            rightMargin = widgetMargin), createWidgetBlock = {
+            VerticalVelocityWidget(context, widgetTheme = widgetTheme)
+        })
 
-        setPane(TelemetryPanelItem.VPS, vpsWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    VPSWidget(context, widgetTheme = widgetTheme)
-                }, leftMargin = widgetMargin)
+        setPane(Pane(TelemetryPanelItem.VPS, vpsWidgetPaneID, ViewAlignment.LEFT, leftMargin = widgetMargin),
+            createWidgetBlock = {
+                VPSWidget(context, widgetTheme = widgetTheme)
+            })
 
-        setPane(TelemetryPanelItem.LOCATION, locationWidgetPaneID, ViewAlignment.LEFT,
-                createWidgetBlock = {
-                    LocationWidget(context, widgetTheme = widgetTheme)
-                })
+        setPane(Pane(TelemetryPanelItem.LOCATION, locationWidgetPaneID, ViewAlignment.LEFT),
+            createWidgetBlock = {
+                LocationWidget(context, widgetTheme = widgetTheme)
+            })
     }
 
     private inline fun <R : View> setPane(
-            panelItem: TelemetryPanelItem,
-            paneID: Int,
-            position: ViewAlignment = ViewAlignment.CENTER,
-            leftMargin: Int = 0,
-            topMargin: Int = 0,
-            rightMargin: Int = 0,
-            bottomMargin: Int = 0,
-            createWidgetBlock: () -> R
+        pane: Pane,
+        createWidgetBlock: () -> R,
     ) {
-        if (excludedItemSet.contains(panelItem.widgetID)) {
+        val paneID = pane.paneID
+        if (excludedItemSet.contains(pane.panelItem.widgetID)) {
             setPaneVisibility(paneID, false)
         } else {
             val widget = createWidgetBlock()
-            addView(paneID, widget, position, leftMargin, topMargin, rightMargin, bottomMargin)
+            addView(paneID, widget, pane.position, pane.leftMargin, pane.topMargin, pane.rightMargin, pane.bottomMargin)
             setPaneVisibility(paneID, true)
         }
     }
+
+    private data class Pane(
+        val panelItem: TelemetryPanelItem,
+        val paneID: Int,
+        val position: ViewAlignment = ViewAlignment.CENTER,
+        val leftMargin: Int = 0,
+        val topMargin: Int = 0,
+        val rightMargin: Int = 0,
+        val bottomMargin: Int = 0,
+    )
     //endregion
 
     //region lifecycle
@@ -306,14 +312,14 @@ open class TelemetryPanelWidget @JvmOverloads constructor(
              */
             @JvmStatic
             fun from(widgetID: WidgetID): TelemetryPanelItem? =
-                    values.find { it.widgetID == widgetID }
+                values.find { it.widgetID == widgetID }
 
             /**
              * Create a [TelemetryPanelItem] from an int value.
              */
             @JvmStatic
             fun from(value: Int): TelemetryPanelItem? =
-                    values.find { it.value == value }
+                values.find { it.value == value }
         }
     }
 }

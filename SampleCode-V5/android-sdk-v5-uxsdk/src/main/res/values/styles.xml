@@ -289,6 +289,59 @@
         <item name="android:textColor">#A5000000</item>
     </style>
 
+    <!-- 带描边的TextView默认样式-->
+    <style name="Widget.StrokeTextView" parent="Widget.AppCompat.TextView">
+        <item name="uxsdk_textStrokeWidth">@dimen/uxsdk_1_dp</item>
+        <item name="uxsdk_textStrokeColor">@color/uxsdk_black_30_percent</item>
+    </style>
 
+    <style name="Widget.TextView.Pfd" parent="">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/uxsdk_10_dp</item>
+        <item name="android:textColor">@color/uxsdk_green_in_dark</item>
+        <item name="uxsdk_textStrokeColor">@color/uxsdk_black_60_percent</item>
+        <item name="uxsdk_textStrokeWidth">@dimen/uxsdk_0_5_dp</item>
+    </style>
+
+    <style name="Widget.TextView.Hsi" parent="Widget.TextView.Pfd">
+        <item name="android:textSize">@dimen/uxsdk_8_dp</item>
+        <item name="android:textColor">@color/uxsdk_white</item>
+    </style>
+
+    <style name="CameraStatusActionBarItem_TextView">
+        <item name="uxsdk_textStrokeColor">@color/uxsdk_black_30_percent</item>
+        <item name="uxsdk_textStrokeWidth">@dimen/uxsdk_1_dp</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/uxsdk_10_dp</item>
+        <item name="android:textColor">@color/uxsdk_white_95_percent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <declare-styleable name="SegmentedButtonGroup">
+        <attr name="uxsdk_checkedItemBackgroundColor" format="color|reference"/>
+    </declare-styleable>
+
+    <!-- Segmented Button默认样式 -->
+    <style name="SegmentedButtonGroup" parent="">
+        <item name="android:background">#262626</item>
+        <item name="uxsdk_checkedItemBackgroundColor">#434343</item>
+    </style>
+
+    <declare-styleable name="RangeSeekBar">
+        <attr name="uxsdk_range_progressDrawable" format="reference" />
+        <attr name="uxsdk_range_backgroundDrawable" format="reference" />
+        <attr name="uxsdk_range_leftThumbDrawable" format="reference" />
+        <attr name="uxsdk_range_rightThumbDrawable" format="reference" />
+        <attr name="uxsdk_range_progressHeight" format="dimension|reference" />
+        <attr name="uxsdk_range_thumbSize" format="dimension|reference" />
+    </declare-styleable>
+
+    <style name="TextAppearance.Caption2" parent="">
+        <item name="android:textColor">@color/uxsdk_white_95_percent</item>
+        <item name="android:textSize">@dimen/uxsdk_10_dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">@dimen/uxsdk_14_dp</item>
+    </style>
 
 </resources>

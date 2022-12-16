@@ -59,7 +59,7 @@ class CompassWidgetModel(
     djiSdkModel: DJISDKModel,
     keyedStore: ObservableInMemoryKeyedStore,
     private val sensorManager: SensorManager?,
-    private val windowManager: WindowManager?
+    private val windowManager: WindowManager?,
 ) : WidgetModel(djiSdkModel, keyedStore), SensorEventListener, LocationListener {
 
     private val homeLocationProcessor = DataProcessor.create(LocationCoordinate2D(Double.NaN, Double.NaN))
@@ -98,12 +98,6 @@ class CompassWidgetModel(
     private val rotations = FloatArray(9)
 
     /**
-     * The MobileGPSLocationUtil class that has the `startUpdateLocation()`
-     * and `stopUpdateLocation()` functions for the mobile device's location
-     */
-    var mobileGPSLocationUtil: MobileGPSLocationUtil? = null
-
-    /**
      * The state of the compass widget
      */
     val compassWidgetState: Flowable<CompassWidgetState>
@@ -136,14 +130,15 @@ class CompassWidgetModel(
         registerMobileDeviceSensorListener()
 
         // Start mobile device's location updates if available
-        mobileGPSLocationUtil?.startUpdateLocation()
+        MobileGPSLocationUtil.getInstance().addLocationListener(this)
+        MobileGPSLocationUtil.getInstance().startUpdateLocation()
     }
 
     override fun inCleanup() {
         unregisterMobileDeviceSensorListener()
 
         // Stop mobile device's location updates if available
-        mobileGPSLocationUtil?.stopUpdateLocation()
+        MobileGPSLocationUtil.getInstance()?.removeLocationListener(this)
     }
     //endregion
 
@@ -247,7 +242,7 @@ class CompassWidgetModel(
             rcOrMobileLongitude = data.location.longitude
 
             // Stop updating mobile device location once RC location is received
-            mobileGPSLocationUtil?.stopUpdateLocation()
+            MobileGPSLocationUtil.getInstance()?.removeLocationListener(this)
             updateCalculations()
         }
     }
@@ -272,18 +267,19 @@ class CompassWidgetModel(
                 latestAircraftState.distance = tempCalculatedLocation[1]
                 aircraftStateProcessor.onNext(latestAircraftState)
             }
-        } else if (centerTypeProcessor.value == CenterType.RC_MOBILE_GPS) {
-            if (LocationUtil.checkLatitude(rcOrMobileLatitude) && LocationUtil.checkLongitude(rcOrMobileLongitude)) {
-                tempCalculatedLocation = LocationUtil.calculateAngleAndDistance(
-                    rcOrMobileLatitude,
-                    rcOrMobileLongitude,
-                    aircraftLocationProcessor.value.latitude,
-                    aircraftLocationProcessor.value.longitude
-                )
-                latestAircraftState.angle = tempCalculatedLocation[0]
-                latestAircraftState.distance = tempCalculatedLocation[1]
-                aircraftStateProcessor.onNext(latestAircraftState)
-            }
+        } else if (centerTypeProcessor.value == CenterType.RC_MOBILE_GPS && LocationUtil.checkLatitude(rcOrMobileLatitude) && LocationUtil.checkLongitude(
+                rcOrMobileLongitude)
+        ) {
+            tempCalculatedLocation = LocationUtil.calculateAngleAndDistance(
+                rcOrMobileLatitude,
+                rcOrMobileLongitude,
+                aircraftLocationProcessor.value.latitude,
+                aircraftLocationProcessor.value.longitude
+            )
+            latestAircraftState.angle = tempCalculatedLocation[0]
+            latestAircraftState.distance = tempCalculatedLocation[1]
+            aircraftStateProcessor.onNext(latestAircraftState)
+
         }
     }
 
@@ -378,7 +374,7 @@ class CompassWidgetModel(
         var aircraftState: AircraftState,
         var currentLocationState: CurrentLocationState,
         var gimbalHeading: Float,
-        var centerType: CenterType
+        var centerType: CenterType,
     )
     //endregion
 }

@@ -54,7 +54,7 @@ import dji.v5.ux.core.util.SettingDefinitions.ControlMode;
  * When in focus mode the {@link FPVInteractionWidget} will help change the focus point
  * When in exposure mode the {@link FPVInteractionWidget} will help change exposure/metering
  */
-public class FocusExposureSwitchWidget extends FrameLayoutWidget implements OnClickListener, ICameraIndex {
+public class FocusExposureSwitchWidget extends FrameLayoutWidget<Object> implements OnClickListener, ICameraIndex {
 
     //region Fields
     private static final String TAG = "FocusExpoSwitchWidget";

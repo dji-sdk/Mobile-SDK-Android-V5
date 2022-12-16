@@ -6,6 +6,7 @@ import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.common.ComponentIndexType
+import dji.v5.ux.core.base.CameraWidgetModel
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.ICameraIndex
 import dji.v5.ux.core.base.WidgetModel
@@ -25,16 +26,11 @@ import io.reactivex.rxjava3.core.Completable
 open class LensControlModel constructor(
     djiSdkModel: DJISDKModel,
     keyedStore: ObservableInMemoryKeyedStore
-) : WidgetModel(djiSdkModel, keyedStore), ICameraIndex {
-
-    private var cameraIndex = ComponentIndexType.LEFT_OR_MAIN
+) : CameraWidgetModel(djiSdkModel, keyedStore), ICameraIndex {
 
     val cameraVideoStreamSourceProcessor: DataProcessor<CameraVideoStreamSourceType> = DataProcessor.create(CameraVideoStreamSourceType.UNKNOWN)
-    val cameraVideoStreamSourceRangeProcessor: DataProcessor<List<CameraVideoStreamSourceType>> = DataProcessor.create(listOf())
-
-    override fun getCameraIndex() = cameraIndex
-
-    override fun getLensType() = CameraLensType.UNKNOWN
+    private val cameraVideoStreamSourceRangeProcessor: DataProcessor<List<CameraVideoStreamSourceType>> = DataProcessor.create(listOf())
+    val properCameraVideoStreamSourceRangeProcessor: DataProcessor<List<CameraVideoStreamSourceType>> = DataProcessor.create(listOf())
 
     override fun updateCameraSource(cameraIndex: ComponentIndexType, lensType: CameraLensType) {
         if (this.cameraIndex == cameraIndex){
@@ -45,8 +41,15 @@ open class LensControlModel constructor(
     }
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyLiveViewCameraSource,cameraIndex),cameraVideoStreamSourceProcessor)
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraVideoStreamSourceRange, cameraIndex),cameraVideoStreamSourceRangeProcessor)
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraVideoStreamSource,cameraIndex),cameraVideoStreamSourceProcessor)
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraVideoStreamSourceRange, cameraIndex),cameraVideoStreamSourceRangeProcessor){
+            //部分镜头不在该控件显示
+            it.remove(CameraVideoStreamSourceType.MS_NIR_CAMERA)
+            it.remove(CameraVideoStreamSourceType.MS_G_CAMERA)
+            it.remove(CameraVideoStreamSourceType.MS_RE_CAMERA)
+            it.remove(CameraVideoStreamSourceType.MS_R_CAMERA)
+            properCameraVideoStreamSourceRangeProcessor.onNext(it)
+        }
     }
 
     override fun inCleanup() {
@@ -54,6 +57,6 @@ open class LensControlModel constructor(
     }
 
     fun setCameraVideoStreamSource(source: CameraVideoStreamSourceType): Completable {
-        return djiSdkModel.setValue(KeyTools.createKey(CameraKey.KeyLiveViewCameraSource,cameraIndex), source)
+        return djiSdkModel.setValue(KeyTools.createKey(CameraKey.KeyCameraVideoStreamSource,cameraIndex), source)
     }
 }

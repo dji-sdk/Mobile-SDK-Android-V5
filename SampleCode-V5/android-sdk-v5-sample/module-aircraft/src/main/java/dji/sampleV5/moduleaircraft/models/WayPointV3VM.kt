@@ -13,6 +13,7 @@ import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.common.utils.RxUtil
 import dji.v5.et.create
 import dji.v5.et.get
 import dji.v5.manager.KeyManager
@@ -23,6 +24,10 @@ import dji.v5.manager.areacode.AreaCode
 import dji.v5.manager.areacode.AreaCodeManager
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DjiSharedPreferencesManager
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.disposables.Disposable
+
 
 /**
  * @author feel.feng
@@ -103,42 +108,44 @@ class WayPointV3VM : DJIViewModel() {
         WaypointMissionManager.getInstance().clearAllWaylineExecutingInfoListener()
     }
 
-    fun listenFlightControlState() {
-        val homelocation : LocationCoordinate2D ?= KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyHomeLocation))
-        homelocation?.let {
-            KeyManager.getInstance().listen(
-                KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this
-            ) { _, newValue ->
-                newValue?.let {
-                    val height = getHeight()
-                    val distance = calculateDistance(homelocation.latitude , homelocation.longitude , it.latitude , it.longitude)
-                    val heading = getHeading()
-                    flightControlState.value = FlightControlState(it.longitude, it.latitude , distance = distance , height = height , head = heading , homeLocation = homelocation)
-                    refreshFlightControlState()
+    fun listenFlightControlState() : Disposable {
+        return Flowable.combineLatest( RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyHomeLocation), this).observeOn(AndroidSchedulers.mainThread()),
+                 RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this).observeOn(AndroidSchedulers.mainThread()),
+            { homelocation: LocationCoordinate2D?, aircraftLocation: LocationCoordinate2D? ->
+                if (homelocation == null || aircraftLocation == null) {
+                    return@combineLatest
                 }
+                val height = getHeight()
+                val distance = calculateDistance(homelocation.latitude , homelocation.longitude , aircraftLocation.latitude , aircraftLocation.longitude)
+                val heading = getHeading()
+                flightControlState.value = FlightControlState(aircraftLocation.longitude, aircraftLocation.latitude , distance = distance , height = height , head = heading , homeLocation = homelocation)
+                refreshFlightControlState()
             }
-        }
+        ).subscribe()
+    }
+
+    fun isLocationValid(latitude: Double, longitude: Double): Boolean {
+        return latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180 && latitude != 0.0 && longitude != 0.0
     }
 
     fun cancelListenFlightControlState() {
-        KeyManager.getInstance().cancelListen(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this)
+        KeyManager.getInstance().cancelListen(this)
     }
-
-    fun getAvaliableWaylineIDs(missionPath: String) : List<Int> {
-        return WaypointMissionManager.getInstance().getAvaliableWaylineIDs(missionPath)
+    fun getAvailableWaylineIDs(missionPath: String) : List<Int> {
+        return WaypointMissionManager.getInstance().getAvailableWaylineIDs(missionPath)
     }
 
     private fun refreshFlightControlState() {
         flightControlState.postValue(flightControlState.value)
     }
 
-    private fun convertToAngle( mCoordinate:Double):Double = mCoordinate* RadToDeg
+
 
     fun calculateDistance(
         latA: Double,
         lngA: Double,
         latB: Double,
-        lngB: Double
+        lngB: Double,
     ): Double {
         val earthR = 6371000.0
         val x =

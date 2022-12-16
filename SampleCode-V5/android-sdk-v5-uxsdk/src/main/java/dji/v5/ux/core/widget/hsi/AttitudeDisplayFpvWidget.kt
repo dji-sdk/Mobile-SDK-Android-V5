@@ -19,7 +19,7 @@ class AttitudeDisplayFpvWidget @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : AttitudeDisplayWidget(context, attrs, defStyleAttr) {
 
-    override fun loadLayout(){
+    override fun loadLayout(context: Context) {
         View.inflate(context, R.layout.uxsdk_fpv_pfd_attitude_display_widget, this)
     }
 }

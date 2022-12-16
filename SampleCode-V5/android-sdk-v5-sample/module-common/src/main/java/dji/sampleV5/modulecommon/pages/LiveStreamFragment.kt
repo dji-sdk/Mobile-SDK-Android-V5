@@ -1,6 +1,5 @@
 package dji.sampleV5.modulecommon.pages
 
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
@@ -608,7 +607,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         .setPositiveButton("确认") { dialog, _ ->
                             kotlin.run {
                                 if (liveStreamVM.getVideoChannel() != liveStreamChannelTypes[checkedItem]) {
-                                    judgeChannel(it,liveStreamChannelTypes[checkedItem])
+                                    judgeChannel(liveStreamChannelTypes[checkedItem])
                                 }else{
                                     ToastUtils.showToast(
                                         "Chanel is same"
@@ -630,7 +629,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         }
     }
 
-    private fun judgeChannel(context:Context,videoChannel:VideoChannelType){
+    private fun judgeChannel(videoChannel: VideoChannelType){
         if (liveStreamVM.getChannelStatus(videoChannel) == VideoChannelState.ON) {
             setVideChannel(videoChannel)
         }else{

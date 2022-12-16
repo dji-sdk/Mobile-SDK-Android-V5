@@ -47,6 +47,7 @@ import dji.sdk.keyvalue.value.camera.CameraStorageLocation;
 import dji.sdk.keyvalue.value.camera.SDCardLoadState;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
+import dji.v5.utils.common.DisplayUtil;
 import dji.v5.utils.common.StringUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.core.base.DJISDKModel;
@@ -55,14 +56,13 @@ import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
 import dji.v5.ux.core.util.CameraUtil;
-import dji.v5.ux.core.util.DisplayUtil;
 import dji.v5.ux.core.util.RxUtil;
 
 /**
  * Shows the camera's current capacity and other information for internal and SD card storage
  * locations.
  */
-public class CameraConfigStorageWidget extends ConstraintLayoutWidget implements ICameraIndex {
+public class CameraConfigStorageWidget extends ConstraintLayoutWidget<Object> implements ICameraIndex {
     //region Fields
     private static final String TAG = "ConfigStorageWidget";
     private CameraConfigStorageWidgetModel widgetModel;

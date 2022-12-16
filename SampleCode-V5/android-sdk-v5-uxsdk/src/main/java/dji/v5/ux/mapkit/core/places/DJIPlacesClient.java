@@ -20,7 +20,7 @@ import java.util.List;
 public class DJIPlacesClient {
 
     // private static final int AMAP_SEARCH_SUCCESS_CODE = 1000;
-    private static final String TAG = DJIPlacesClient.class.getSimpleName();
+    private static final String TAG = LogUtils.getTag(DJIPlacesClient.class.getSimpleName());
     /**
      * poi的搜索半径，单位是米
      */

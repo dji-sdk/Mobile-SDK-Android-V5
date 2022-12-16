@@ -1,6 +1,7 @@
 package dji.sampleV5.modulecommon.pages
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -112,11 +113,24 @@ class MediaFragment : DJIFragment(){
 
         }
         btn_refresh_file_list.setOnClickListener(){
-           mediaVM.pullMediaFileListFromCamera()
+            var fetchCount = if (TextUtils.isEmpty(fetchCount.text.toString())) {
+                -1  //all
+            } else {
+                fetchCount.text.toString().toInt()
+            }
+
+            var mediaFileIndex = if (TextUtils.isEmpty(mediaIndex.text.toString())) {
+                -1 //start fetch index
+            } else {
+                mediaIndex.text.toString().toInt()
+            }
+            mediaVM.pullMediaFileListFromCamera(mediaFileIndex , fetchCount)
         }
 
         btn_select.setOnClickListener() {
-
+            if (adapter == null) {
+                return@setOnClickListener
+            }
             adapter?.selectionMode = !adapter?.selectionMode!!
             clearSelectFiles()
             btn_select.setText(

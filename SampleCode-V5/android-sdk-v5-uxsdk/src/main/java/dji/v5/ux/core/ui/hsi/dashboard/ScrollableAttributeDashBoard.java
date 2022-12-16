@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -14,17 +15,22 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewDebug;
 
-import java.util.Locale;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+
+
+import dji.v5.utils.common.DJIExecutor;
+import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
+import dji.v5.utils.common.AndUtil;
+import dji.v5.ux.core.util.FontUtils;
 
-public class ScrollableAttributeDashBoard extends View {
-
+public abstract class ScrollableAttributeDashBoard extends View {
+    public static final String TAG = "ScrollableAttributeDashBoard";
     protected static final Rect RECT = new Rect();
 
     private static final Path PATH = new Path();
@@ -34,130 +40,220 @@ public class ScrollableAttributeDashBoard extends View {
     /**
      * 最多显示多少个刻度
      */
-    private static final int DEFAULT_VISIBLE_CALIBRATION_UNIT_COUNT = 18;
+    private static final int DEFAULT_VISIBLE_CALIBRATION_UNIT_COUNT = 20;
 
     private static final int SMALL_CALIBRATION_UNIT_COUNT_BETWEEN_TWO_BIG_CALIBRATION_UNIT = 5;
 
+    /**
+     * 文字在左侧
+     */
     private static final int DASH_BOARD_ALIGN_LEFT = 0;
 
+    /**
+     * 文字在右侧
+     */
     private static final int DASH_BOARD_ALIGN_RIGHT = 1;
 
     private static final int DEFAULT_DASH_BOARD_ALIGN = DASH_BOARD_ALIGN_LEFT;
+    public static final String VIEW_PROPERTY_CATEGORY_DJI = "dji";
 
     /**
      * 属性名称
      */
-    private String mAttributeName;
+    private final String mAttributeName;
 
-    /**
-     * 属性单位
-     */
-    private String mAttributeUnit;
+    private float mAttributePadding;
 
     /**
      * 每个小刻度的偏移值
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     protected final float mAttributeOffsetPerUnit;
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
+    private boolean mShowBorder;
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
+    private float mBorderRadius;
+    private int mBorderColor;
+    private float mBorderWidth;
 
     /**
      * 刻度的字体大小
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mAttributeCalibrationTextSize;
 
     /**
      * 当前刻度的字体大小
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mAttributeCurrentCalibrationTextSize;
 
     /**
      * 当前属性单位字体大小
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mAttributeUnitTextSize;
 
     /**
      * 当前属性名称的字体大小
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mAttributeNameTextSize;
 
     /**
      * 最大值
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final float mAttributeMaxValue;
 
     /**
      * 最小值
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final float mAttributeMinValue;
 
     /**
      * 仪表盘的朝向（左/右）
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI, prefix = "hsi_", mapping = {
+            @ViewDebug.IntToString(from = DASH_BOARD_ALIGN_LEFT, to = "left"),
+            @ViewDebug.IntToString(from = DASH_BOARD_ALIGN_RIGHT, to = "right")
+    })
     private final int mAttributeDashBoardAlign;
 
     /**
      * 属性的当前值
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI, prefix = "hsi_")
     private float mCurrentValue;
+
+    /**
+     * 属性当前值颜色
+     */
+    private int mCurrentValueColor;
+
+    /**
+     * 属性值内边距
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI, prefix = "hsi_")
+    private float mCurrentValuePadding;
+
+    private int mAttributePropertyColor;
+
 
     /**
      * 仪表盘中可视的刻度数量
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     protected int mVisibleCalibrationUnitCount;
 
     /**
      * dashboard框架线条的宽度
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     protected int mFrameworkStrokeWidth;
+
+    /**
+     * dashboard框架线条的主色
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI, formatToHexString = true)
+    protected int mFrameworkPrimaryColor;
+
+    /**
+     * dashboard框架线条的次要色
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI, formatToHexString = true)
+    protected int mFrameworkSecondaryColor;
+
+    /**
+     * dashboard主刻度的颜色
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI, formatToHexString = true)
+    protected int mFrameworkFrameValueColor;
+
+    /**
+     * dashboard框架线条的描边色
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI, formatToHexString = true)
+    protected int mFrameworkStrokeColor;
 
     /**
      * 是否显示dashboard框架
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final boolean mShowFramework;
 
     /**
      * dashboard框架的宽度
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mFrameworkWidth;
 
     /**
      * dashboard框架的高度
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mFrameworkHeight;
 
     /**
      * dashboard指针的高度
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mPointerHeight;
 
     /**
      * dashboard指针的宽度
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     private final int mPointerWidth;
 
     /**
      * 框架相对于起始位置的距离
      */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     protected final int mFrameworkPaddingStart;
 
+    /**
+     * 框架垂直方向间距，避免刻度文字被截
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
+    protected int mFrameworkPaddingVercital;
+
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
+    /**
+     * 1. 当前值指示线，刻度内侧
+     * 2. 短刻度线在内侧占据宽度，超过线宽部分左右为 margin
+     */
     protected final int mPointerLineInnerWidth;
 
+    /**
+     * 当前值指示线，刻度外侧
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     protected final int mPointerLineOuterWidth;
-    protected final int mPointerTriangleWidth;
+    /**
+     * 当前值离框架额外边距
+     */
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
+    protected final int mTextPadding;
 
-    private final int mDegreeLineLongWidth;
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
+    protected final int mDegreeLineLongWidth;
 
+    @ViewDebug.ExportedProperty(category = VIEW_PROPERTY_CATEGORY_DJI)
     protected final int mDegreeLineShortWidth;
 
-    private final int mPointerDividerTopWidth;
-
-    private final int mPointerDividerBottomWidth;
-
     protected Paint mPaint;
+    protected Paint mStrokePaint;
 
-    private Drawable mSpeedIcon;
-    private Drawable mAltitudeIcon;
-    private float mSpeedValue;
-    private float mAltitudeValue;
+    protected Drawable mWaypointIcon;
+
+    private float mCalibrationTextPadding;
+
+    protected float mWaypointIconPadding;
+
+    private final Object mDisplayValueLock = new Object();
+    protected DisplayValue mDisplayValue;
 
     /**
      * 100ms，减少性能压力
@@ -176,75 +272,160 @@ public class ScrollableAttributeDashBoard extends View {
     @Nullable
     private Handler mHandler;
 
-    public ScrollableAttributeDashBoard(Context context) {
+
+    //    @NonNull
+    //    private final Object mRxObject = new Object() {
+    //        @Subscribe(thread = EventThread.MAIN_THREAD, tags = {
+    //                @Tag(BusAction.TAG_ON_UNIT_CHANGED)
+    //        })
+    //        @SuppressWarnings("unused")
+    //        public void onEventUnitChanged(Integer unit) {
+    //            // 单位变化后，更新一下显示的值
+    //            setCurrentValue(mCurrentValue);
+    //            updateWidget();
+    //        }
+    //    };
+    protected FpvStrokeConfig mStrokeConfig;
+    private Typeface mDefaultTypeface;
+    private Typeface mCalibrationTextTypeface;
+    private final int mStrokeColor = AndUtil.getResColor(R.color.uxsdk_black_30_percent);
+    private final float mCalibrationLineStrokeWidth = (float) getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp) / 2;
+    private final int mTextColor = AndUtil.getResColor(R.color.uxsdk_green_in_dark);
+
+    protected Handler mDataHandler;
+
+    protected ScrollableAttributeDashBoard(Context context) {
         this(context, null);
     }
 
-    public ScrollableAttributeDashBoard(Context context, @Nullable AttributeSet attrs) {
+    protected ScrollableAttributeDashBoard(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ScrollableAttributeDashBoard(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    protected ScrollableAttributeDashBoard(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
+        if (!isInEditMode()) {
+            mDataHandler = new Handler(DJIExecutor.getLooper());
+        }
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ScrollableAttributeDashBoard);
         mAttributeName = typedArray.getString(R.styleable.ScrollableAttributeDashBoard_uxsdk_name);
-        mAttributeName = (mAttributeName == null ? "" : mAttributeName);
         mAttributeCalibrationTextSize = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_calibration_text_size,
                 getResources().getDimensionPixelOffset(R.dimen.uxsdk_text_size_normal_medium));
         mPointerWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_78_dp));
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_65_dp));
         mPointerHeight = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_height,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_25_dp));
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_21_dp));
         mFrameworkWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_30_dp));
-        mFrameworkHeight = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_height,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_140_dp));
-        mFrameworkStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_stroke_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_1_dp));
-        mPointerLineInnerWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_line_inner_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_7_dp));
-        mPointerLineOuterWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_line_outer_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_7_dp));
-        mPointerTriangleWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_triangle_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_4_dp));
-        mPointerDividerBottomWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_divider_bottom_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_28_dp));
-        mPointerDividerTopWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_divider_top_width,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_35_dp));
-        mFrameworkPaddingStart = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_calibration_framework_padding_start,
                 getResources().getDimensionPixelOffset(R.dimen.uxsdk_25_dp));
-        mDegreeLineLongWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_degree_line_long,
-                getResources().getDimensionPixelOffset(R.dimen.uxsdk_9_dp));
-        mDegreeLineShortWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_degree_line_short,
+        mFrameworkHeight = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_height,
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_117_dp));
+        mFrameworkStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_stroke_width,
+                getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp));
+        mFrameworkPrimaryColor = typedArray.getColor(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_primary_color,
+                getResources().getColor(R.color.uxsdk_green_in_dark));
+        mFrameworkSecondaryColor = typedArray.getColor(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_secondary_color,
+                getResources().getColor(R.color.uxsdk_green_in_dark_045));
+        mFrameworkStrokeColor = typedArray.getColor(R.styleable.ScrollableAttributeDashBoard_uxsdk_framework_stroke_color,
+                getResources().getColor(R.color.uxsdk_black_30_percent));
+        mPointerLineInnerWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_line_inner_width, 0);
+        mPointerLineOuterWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_line_outer_width,
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_6_dp));
+        mTextPadding = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_pointer_text_padding,
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_2_dp));
+        mFrameworkPaddingStart = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_calibration_framework_padding_start,
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_21_dp));
+        mFrameworkPaddingVercital =
+                typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_calibration_framework_padding_vertical,
                 getResources().getDimensionPixelOffset(R.dimen.uxsdk_3_dp));
+        mDegreeLineLongWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_degree_line_long,
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_8_dp));
+        mDegreeLineShortWidth = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_degree_line_short,
+                getResources().getDimensionPixelOffset(R.dimen.uxsdk_6_dp));
         mAttributeUnitTextSize = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_unit_text_size,
                 getResources().getDimensionPixelOffset(R.dimen.uxsdk_text_size_small));
         mAttributeNameTextSize = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_name_text_size,
                 getResources().getDimensionPixelOffset(R.dimen.uxsdk_text_size_normal));
-        mAttributeCurrentCalibrationTextSize = typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_current_calibration_text_size,
+        mAttributeCurrentCalibrationTextSize =
+                typedArray.getDimensionPixelSize(R.styleable.ScrollableAttributeDashBoard_uxsdk_current_calibration_text_size,
                 getResources().getDimensionPixelOffset(R.dimen.uxsdk_text_size_medium_large));
-        mAttributeUnit = typedArray.getString(R.styleable.ScrollableAttributeDashBoard_uxsdk_unit);
+        mAttributePadding = typedArray.getDimension(R.styleable.ScrollableAttributeDashBoard_uxsdk_padding,
+                getResources().getDimension(R.dimen.uxsdk_2_dp));
         mAttributeMaxValue = typedArray.getFloat(R.styleable.ScrollableAttributeDashBoard_uxsdk_max_value, Float.MAX_VALUE);
         mAttributeMinValue = typedArray.getFloat(R.styleable.ScrollableAttributeDashBoard_uxsdk_min_value, -Float.MAX_VALUE);
         mAttributeOffsetPerUnit = typedArray.getFloat(R.styleable.ScrollableAttributeDashBoard_uxsdk_offset_per_unit, DEFAULT_OFFSET_PER_UNIT);
+        mCalibrationTextPadding = typedArray.getDimension(R.styleable.ScrollableAttributeDashBoard_uxsdk_calibration_text_padding,
+                getResources().getDimension(R.dimen.uxsdk_2_dp));
+        mShowBorder = typedArray.getBoolean(R.styleable.ScrollableAttributeDashBoard_uxsdk_show_border, false);
+        mBorderColor = typedArray.getColor(R.styleable.ScrollableAttributeDashBoard_uxsdk_border_color,
+                getResources().getColor(R.color.uxsdk_green_in_dark));
+        mBorderWidth = typedArray.getDimension(R.styleable.ScrollableAttributeDashBoard_uxsdk_border_width,
+                getResources().getDimension(R.dimen.uxsdk_0_6_dp));
+        mBorderRadius = typedArray.getDimension(R.styleable.ScrollableAttributeDashBoard_uxsdk_border_radius,
+                getResources().getDimension(R.dimen.uxsdk_2_dp));
         float currentValue = typedArray.getFloat(R.styleable.ScrollableAttributeDashBoard_uxsdk_current_value, 0);
+        mCurrentValueColor = typedArray.getColor(R.styleable.ScrollableAttributeDashBoard_uxsdk_current_value_color, Color.WHITE);
+        mCurrentValuePadding = typedArray.getDimension(R.styleable.ScrollableAttributeDashBoard_uxsdk_current_value_padding,
+                getResources().getDimension(R.dimen.uxsdk_2_dp));
+        mAttributePropertyColor = typedArray.getColor(R.styleable.ScrollableAttributeDashBoard_uxsdk_property_color, Color.WHITE);
         mAttributeDashBoardAlign = typedArray.getInt(R.styleable.ScrollableAttributeDashBoard_uxsdk_dash_board_align, DEFAULT_DASH_BOARD_ALIGN);
-        mVisibleCalibrationUnitCount = typedArray.getInt(R.styleable.ScrollableAttributeDashBoard_attribute_visible_calibration_unit_count,
+        mVisibleCalibrationUnitCount = typedArray.getInt(R.styleable.ScrollableAttributeDashBoard_uxsdk_visible_calibration_unit_count,
                 DEFAULT_VISIBLE_CALIBRATION_UNIT_COUNT);
         mShowFramework = typedArray.getBoolean(R.styleable.ScrollableAttributeDashBoard_uxsdk_show_calibration_framework, true);
         typedArray.recycle();
 
+        mDefaultTypeface = Typeface.create("sans-serif-condensed", Typeface.BOLD);
+        mCalibrationTextTypeface = Typeface.create("sans-serif-condensed", Typeface.NORMAL);
         mPaint = new Paint(Paint.DITHER_FLAG | Paint.ANTI_ALIAS_FLAG);
+        mStrokePaint = new Paint(Paint.DITHER_FLAG | Paint.ANTI_ALIAS_FLAG);
+        restoreTypeface();
 
-        mSpeedIcon = ContextCompat.getDrawable(getContext(), R.drawable.uxsdk_ic_attr_speed);
-        mSpeedIcon.setBounds(0, 0, mSpeedIcon.getIntrinsicWidth(), mSpeedIcon.getIntrinsicHeight());
+        mWaypointIconPadding = getResources().getDimension(R.dimen.uxsdk_1_dp);
 
-        mAltitudeIcon = ContextCompat.getDrawable(getContext(), R.drawable.uxsdk_ic_attr_altitude);
-        mAltitudeIcon.setBounds(0, 0, mAltitudeIcon.getIntrinsicWidth(), mAltitudeIcon.getIntrinsicHeight());
-
+        mFrameworkFrameValueColor = mFrameworkPrimaryColor;
         setCurrentValue(currentValue);
+
+        mDisplayValue = new DisplayValue();
+        mStrokeConfig = new FpvStrokeConfig(context);
     }
+
+    private void restoreTypeface() {
+        mPaint.setTypeface(mDefaultTypeface);
+        mStrokePaint.setTypeface(mDefaultTypeface);
+    }
+
+    private void setCalibrationTypeface() {
+        mPaint.setTypeface(mCalibrationTextTypeface);
+        mStrokePaint.setTypeface(mCalibrationTextTypeface);
+    }
+
+    /**
+     * 线条描边宽度
+     */
+    protected float getShadowLineStrokeWidth() {
+        return mStrokeConfig.getStrokeThinWidth();
+    }
+
+    /**
+     * 文字描边宽度
+     */
+    protected float getShadowTextStrokeWidth() {
+        return mStrokeConfig.getStrokeBoldWidth();
+    }
+
+    /**
+     * 线条描边颜色
+     */
+    protected int getShadowLineStrokeColor() {
+        return mStrokeConfig.getStrokeShallowColor();
+    }
+
+    /**
+     * 文字描边颜色
+     */
+    protected int getShadowTextStrokeColor() {
+        return mStrokeConfig.getStrokeDeepColor();
+    }
+
 
     @Override
     protected void onAttachedToWindow() {
@@ -259,25 +440,27 @@ public class ScrollableAttributeDashBoard extends View {
             mHandler.removeCallbacksAndMessages(null);
             mHandler = null;
         }
+        if (mDataHandler != null) {
+            mDataHandler.removeCallbacksAndMessages(null);
+        }
     }
 
     @MainThread
     public void setCurrentValue(float currentValue) {
+        if (isInEditMode()){
+            return;
+        }
         if (currentValue > mAttributeMaxValue) {
             currentValue = mAttributeMaxValue;
         } else if (currentValue < mAttributeMinValue) {
             currentValue = mAttributeMinValue;
         }
         mCurrentValue = currentValue;
-        updateWidget();
-    }
-
-    public void setSpeed(int speed) {
-        mSpeedValue = speed;
-    }
-
-    public void setAltitude(int altitude) {
-        mAltitudeValue = altitude;
+        final float value = currentValue;
+        mDataHandler.post(() -> {
+            calcDisplayValue(value);
+            updateWidget();
+        });
     }
 
     protected void updateWidget() {
@@ -315,14 +498,14 @@ public class ScrollableAttributeDashBoard extends View {
 
     protected int getMinHeight() {
         if (mShowFramework) {
-            return mFrameworkHeight;
+            return mFrameworkHeight + mFrameworkPaddingVercital * 2;
         } else {
             return mPointerHeight + mFrameworkStrokeWidth * 2;
         }
     }
 
     protected int getMinWidth() {
-        return mPointerWidth + mFrameworkPaddingStart + mPointerLineInnerWidth + mPointerTriangleWidth / 2 + mFrameworkStrokeWidth;
+        return mPointerWidth + mFrameworkPaddingStart + mPointerLineInnerWidth + mTextPadding + mFrameworkStrokeWidth;
     }
 
     protected int getFrameworkHeight() {
@@ -334,11 +517,11 @@ public class ScrollableAttributeDashBoard extends View {
         super.onDraw(canvas);
         drawCurrentValue(canvas);
         clipPointerArea(canvas);
+        LogUtils.d(TAG,"mShowFramework="+mShowFramework);
         if (mShowFramework) {
-            drawCalibrationFramework(canvas);
             drawCalibration(canvas);
+            drawCalibrationFramework(canvas);
         }
-        drawWaypointAttr(canvas);
     }
 
     protected float getCurrentValue() {
@@ -349,60 +532,83 @@ public class ScrollableAttributeDashBoard extends View {
         return mShowFramework;
     }
 
+    /**
+     * 裁切中间文本部分，避免和刻度重合
+     *
+     * @see #drawCurrentBackground(Canvas, int, int)
+     */
     private void clipPointerArea(Canvas canvas) {
-        int width = getWidth();
-        int height = getHeight();
-        if (mAttributeDashBoardAlign == DASH_BOARD_ALIGN_LEFT) {
-            float x = mFrameworkPaddingStart + mPointerLineInnerWidth + (float) mPointerTriangleWidth / 2;
-            float y = (float) height / 2 - (float) mPointerHeight / 2;
-            PATH.reset();
-            PATH.moveTo(x, y);
-            PATH.rLineTo(mPointerWidth, 0);
-            PATH.rLineTo(0, mPointerHeight);
-            PATH.rLineTo(-mPointerWidth, 0);
-            PATH.rLineTo(0, -(float) (mPointerHeight - mPointerTriangleWidth) / 2);
-            PATH.rLineTo(-(float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.rLineTo((float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.close();
-        } else {
-            float x = width - mFrameworkPaddingStart - mPointerLineInnerWidth - (float) mPointerTriangleWidth / 2;
-            float y = (float) height / 2 - (float) mPointerHeight / 2;
-            PATH.reset();
-            PATH.moveTo(x, y);
-            PATH.rLineTo(-mPointerWidth, 0);
-            PATH.rLineTo(0, mPointerHeight);
-            PATH.rLineTo(mPointerWidth, 0);
-            PATH.rLineTo(0, -(float) (mPointerHeight - mPointerTriangleWidth) / 2);
-            PATH.rLineTo((float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.rLineTo(-(float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.close();
+        LogUtils.d(TAG,"mPointerHeight="+mPointerHeight);
+        int currentAreaOffsetX = mFrameworkPaddingStart + mPointerLineInnerWidth + mTextPadding;
+        boolean alginLeft = isAlginLeft();
+        if (!alginLeft) {
+            currentAreaOffsetX = getWidth() - currentAreaOffsetX;
         }
+        float currentAreaOffsetY = (getHeight() - mPointerHeight) / 2f;
+        PATH.reset();
+        PATH.addRoundRect(0, 0, alginLeft ? mPointerWidth : -mPointerWidth, mPointerHeight, mBorderRadius, mBorderRadius, Path.Direction.CW);
+        PATH.offset(currentAreaOffsetX, currentAreaOffsetY);
         canvas.clipPath(PATH, Region.Op.DIFFERENCE);
     }
 
+
+    private Path tmpPath = new Path();
+
     /**
+     * 绘制左边框架
+     *
      * @param canvas
      */
     private void drawCalibrationFramework(Canvas canvas) {
-        mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
+        RectF rect = new RectF();
+        mPaint.setColor(mFrameworkPrimaryColor);
         mPaint.setStrokeWidth(mFrameworkStrokeWidth);
+        mPaint.setStyle(Paint.Style.STROKE);
         int width = getWidth();
-        int height = getHeight();
-        float topMargin = (float) (height - mFrameworkHeight) / 2;
-        canvas.save();
-        if (mAttributeDashBoardAlign == DASH_BOARD_ALIGN_LEFT) {
-            canvas.translate(mFrameworkPaddingStart, 0);
-            canvas.drawLine(0, topMargin + mPaint.getStrokeWidth() / 2, mFrameworkWidth, topMargin + mPaint.getStrokeWidth() / 2, mPaint);
-            canvas.drawLine(0, topMargin + mFrameworkHeight - mPaint.getStrokeWidth() / 2, mFrameworkWidth, topMargin + mFrameworkHeight - mPaint.getStrokeWidth() / 2, mPaint);
-            canvas.drawLine(0, topMargin, 0, topMargin + mFrameworkHeight, mPaint);
-        } else {
-            canvas.translate((float) (width - mFrameworkPaddingStart - mFrameworkWidth), 0);
-            canvas.drawLine(0, topMargin + mPaint.getStrokeWidth() / 2, mFrameworkWidth, topMargin + mPaint.getStrokeWidth() / 2, mPaint);
-            canvas.drawLine(0, topMargin + mFrameworkHeight - mPaint.getStrokeWidth() / 2, mFrameworkWidth, topMargin + mFrameworkHeight - mPaint.getStrokeWidth() / 2, mPaint);
-            canvas.translate(mFrameworkWidth, 0);
-            canvas.drawLine(0, topMargin, 0, topMargin + mFrameworkHeight, mPaint);
-        }
-        canvas.restore();
+        boolean alginLeft = isAlginLeft();
+        tmpPath.reset();
+
+        float strokeWidth = mFrameworkStrokeWidth;
+        float halfStrokeWidth = mFrameworkStrokeWidth / 2f;
+        float shadowStrokeWidth = getShadowLineStrokeWidth();
+        float halfShadowWidth = shadowStrokeWidth / 2;
+
+        int offsetX = alginLeft ? mFrameworkPaddingStart : width - mFrameworkPaddingStart;
+        float fw = alginLeft ? mFrameworkWidth : -mFrameworkWidth;
+        // 设置坐标框架的四个点
+        float top = (getHeight() - mFrameworkHeight) / 2f;
+        rect.set(offsetX, top, offsetX + fw, top + mFrameworkHeight);
+        // 获取框架的四个点坐标
+        tmpPath.moveTo(rect.right, rect.top);
+        tmpPath.lineTo(rect.left, rect.top);
+        tmpPath.lineTo(rect.left, rect.bottom);
+        tmpPath.lineTo(rect.right, rect.bottom);
+
+        // 绘制框架
+        mPaint.setColor(mFrameworkPrimaryColor);
+        mPaint.setStrokeWidth(mFrameworkStrokeWidth);
+        canvas.drawPath(tmpPath, mPaint);
+
+        // 获取描边外框四点坐标
+        rect.inset(-halfShadowWidth - halfStrokeWidth, -halfShadowWidth - halfStrokeWidth);
+        tmpPath.reset();
+        tmpPath.moveTo(rect.right, rect.top);
+        tmpPath.lineTo(rect.left, rect.top);
+        tmpPath.lineTo(rect.left, rect.bottom);
+        tmpPath.lineTo(rect.right, rect.bottom);
+        // 获取描边内框四个点坐标
+        rect.inset(shadowStrokeWidth + strokeWidth, shadowStrokeWidth + strokeWidth);
+        tmpPath.lineTo(rect.right, rect.bottom);
+        tmpPath.lineTo(rect.left, rect.bottom);
+        tmpPath.lineTo(rect.left, rect.top);
+        tmpPath.lineTo(rect.right, rect.top);
+        tmpPath.close();
+
+        // 绘制框架描边
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setColor(mFrameworkStrokeColor);
+        mPaint.setStrokeWidth(getShadowLineStrokeWidth());
+        canvas.drawPath(tmpPath, mPaint);
     }
 
     /**
@@ -411,291 +617,306 @@ public class ScrollableAttributeDashBoard extends View {
     private void drawCalibration(Canvas canvas) {
         int width = getWidth();
         int height = getHeight();
-        float calibrationHorizontalMargin = (float) (mPointerLineInnerWidth - mDegreeLineShortWidth) / 2;
+        float centerY = height / 2f;
+        float calibrationHorizontalMargin = (mPointerLineInnerWidth - mDegreeLineShortWidth) / 2f;
         float offsetMargin = (float) mFrameworkHeight / mVisibleCalibrationUnitCount;
         float currentPerUnitValue = mCurrentValue / mAttributeOffsetPerUnit;
         int currentPerUnitCount = (int) currentPerUnitValue;
         float currentValueOffset = (currentPerUnitValue - currentPerUnitCount) * offsetMargin;
-        canvas.save();
-        canvas.translate(0, currentValueOffset + (float) height / 2);
-        mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
-        mPaint.setStrokeWidth((float) getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp) / 2);
-        if (mAttributeDashBoardAlign == DASH_BOARD_ALIGN_LEFT) {
-            // 画出刻度
-            canvas.translate(mFrameworkPaddingStart, 0);
-            for (int i = -mVisibleCalibrationUnitCount / 2; i <= mVisibleCalibrationUnitCount / 2; i++) {
-                int currentCalibrationUnit = currentPerUnitCount - i;
-                float y = i * offsetMargin;
-                float calibrationValue = currentCalibrationUnit * mAttributeOffsetPerUnit;
-                if (calibrationValue > mAttributeMaxValue || calibrationValue < mAttributeMinValue) {
-                    continue;
-                }
-                //drawWaypointAltitudeIcon(canvas, calibrationHorizontalMargin, y, calibrationValue);
-                // 如果是0，则画长的刻度线，以及标上刻度，否则只画小的刻度线
-                if (currentCalibrationUnit % SMALL_CALIBRATION_UNIT_COUNT_BETWEEN_TWO_BIG_CALIBRATION_UNIT == 0) {
-                    // 画刻度线
-                    canvas.drawLine(calibrationHorizontalMargin, y, calibrationHorizontalMargin + mDegreeLineLongWidth, y, mPaint);
-                    // 标上刻度
-                    mPaint.setTextAlign(Paint.Align.LEFT);
-                    mPaint.setTextSize(mAttributeCalibrationTextSize);
-                    String currentValueString = String.format(Locale.ENGLISH, "%02.0f", getDisplayValue(calibrationValue));
-                    mPaint.getTextBounds(currentValueString, 0, currentValueString.length(), RECT);
-                    Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-                    float baseline = (offsetMargin - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-                    canvas.drawText(currentValueString, 2 * calibrationHorizontalMargin + mDegreeLineLongWidth,
-                            baseline + y - offsetMargin / 2, mPaint);
-                } else {
-                    // 画刻度线
-                    canvas.drawLine(calibrationHorizontalMargin, y, calibrationHorizontalMargin + mDegreeLineShortWidth, y, mPaint);
-                }
-            }
-        } else {
-            doCanvasTranslate(canvas, width, currentPerUnitCount, offsetMargin, calibrationHorizontalMargin);
-        }
-        canvas.restore();
-    }
 
-    private void doCanvasTranslate(Canvas canvas, int width, int currentPerUnitCount, float offsetMargin, float calibrationHorizontalMargin) {
-        // 画出刻度
-        canvas.translate((float) width - (mFrameworkPaddingStart), 0);
+        canvas.save();
+        setCalibrationTypeface();
+
+        float offsetY = currentValueOffset + centerY;
+        mStrokePaint.setColor(mStrokeColor);
+        mStrokePaint.setStrokeWidth(getShadowLineStrokeWidth());
+        mStrokePaint.setStyle(Paint.Style.STROKE);
+        boolean alignLeft = isAlginLeft();
+        int offsetX = alignLeft ? mFrameworkPaddingStart : width - (mFrameworkPaddingStart);
+        canvas.translate(offsetX, 0);
         for (int i = -mVisibleCalibrationUnitCount / 2; i <= mVisibleCalibrationUnitCount / 2; i++) {
             int currentCalibrationUnit = currentPerUnitCount - i;
             float y = i * offsetMargin;
             float calibrationValue = currentCalibrationUnit * mAttributeOffsetPerUnit;
-            //LogUtil.saveLog(TAG,"calibrationValue:"+calibrationValue);
-            // 超过最大值最小值，不作处理
-            if (calibrationValue > mAttributeMaxValue || calibrationValue < mAttributeMinValue) {
+            if (needDrawValue(calibrationValue)) {
                 continue;
             }
-            //drawWaypointSpeedIcon(canvas, (int) calibrationHorizontalMargin, y, calibrationValue);
+            mPaint.setColor(mFrameworkSecondaryColor);
+            mPaint.setStrokeWidth(mCalibrationLineStrokeWidth);
+            mPaint.setStyle(Paint.Style.FILL);
+            mStrokePaint.setColor(mStrokeColor);
+            mStrokePaint.setStrokeWidth(getShadowLineStrokeWidth());
+            mStrokePaint.setStyle(Paint.Style.STROKE);
+
             // 如果是0，则画长的刻度线，以及标上刻度，否则只画小的刻度线
-            if (currentCalibrationUnit % SMALL_CALIBRATION_UNIT_COUNT_BETWEEN_TWO_BIG_CALIBRATION_UNIT == 0) {
-                // 画刻度线
-                canvas.drawLine(-calibrationHorizontalMargin, y, -(calibrationHorizontalMargin + mDegreeLineLongWidth), y, mPaint);
-                // 标上刻度
-                mPaint.setTextAlign(Paint.Align.LEFT);
-                mPaint.setTextSize(mAttributeCalibrationTextSize);
-                String currentValueString = String.format(Locale.ENGLISH, "%02.0f", getDisplayValue(calibrationValue));
-                mPaint.getTextBounds(currentValueString, 0, currentValueString.length(), RECT);
-                Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-                float baseline = (offsetMargin - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-                canvas.drawText(currentValueString, -(2 * calibrationHorizontalMargin + mDegreeLineLongWidth + RECT.width()),
-                        baseline + y - offsetMargin / 2, mPaint);
-            } else {
-                // 画刻度线
-                canvas.drawLine(-calibrationHorizontalMargin, y, -(calibrationHorizontalMargin + mDegreeLineShortWidth), y, mPaint);
+            int drawDirect = alignLeft ? 1 : -1;
+            float calibrationStartX = calibrationHorizontalMargin * drawDirect;
+            boolean drawText = currentCalibrationUnit % SMALL_CALIBRATION_UNIT_COUNT_BETWEEN_TWO_BIG_CALIBRATION_UNIT == 0;
+            int lineLength = drawDirect * (drawText ? mDegreeLineLongWidth : mDegreeLineShortWidth);
+            float lineOffsetY = y + offsetY;
+            if (lineInFramework(centerY, lineOffsetY)) {
+                // 绘制范围超出框架高度范围
+                continue;
+            }
+            drawCalibrationHorizontal(canvas, calibrationStartX, lineOffsetY, lineLength, drawText);
+            if (drawText) {
+                // 主要刻度文字
+                float textStartX = 2 * calibrationStartX + lineLength + (alignLeft ? mCalibrationTextPadding : -mCalibrationTextPadding);
+                drawCalibrationText(canvas, offsetMargin, lineOffsetY, calibrationValue, textStartX, alignLeft);
             }
         }
+        restoreTypeface();
+        canvas.restore();
     }
 
-//    private void drawWaypointSpeedIcon(Canvas canvas,
-//                                       int calibrationHorizontalMargin,
-//                                       float y,
-//                                       float calibrationValue) {
-//        // 只在航线执行过程中显示
-//        MissionExecutePointInfo pointInfo = MissionManagerDelegate.INSTANCE.getExecutePointInfo();
-//        if (!MissionManagerDelegate.INSTANCE.isRunningMission() || pointInfo == null) {
-//            return;
-//        }
-//        mSpeedValue = pointInfo.getSpeed();
-//        if (Math.abs(mSpeedValue - calibrationValue) <= 0.1) {
-//            // 当前航线速度值与某个刻度值绝对值相差0.1认为相等
-//            int left = calibrationHorizontalMargin;
-//            int top = (int) Math.ceil(y - mSpeedIcon.getIntrinsicHeight() / 2.0);
-//            drawSpeedIcon(canvas,left,top);
-//        }
-//    }
-
-//    private void drawWaypointAltitudeIcon(Canvas canvas,
-//                                          float calibrationHorizontalMargin,
-//                                          float y,
-//                                          float calibrationValue) {
-//        // 只在航线执行过程中显示
-//        MissionExecutePointInfo pointInfo = MissionManagerDelegate.INSTANCE.getExecutePointInfo();
-//        if (!MissionManagerDelegate.INSTANCE.isRunningMission() || pointInfo == null) {
-//            return;
-//        }
-//        mAltitudeValue = pointInfo.getAltitude();
-//        if (Math.abs(mAltitudeValue - calibrationValue) <= 0.1) {
-//            // 当前航线设置高度与某个刻度值绝对值相差0.1认为相等
-//            int left = (int) Math.floor(calibrationHorizontalMargin - mAltitudeIcon.getIntrinsicWidth() - AndUtil.dip2px(getContext(), 3));
-//            int top = (int) Math.ceil(y - mAltitudeIcon.getIntrinsicHeight() / 2.0);
-//            drawAltitudeIcon(canvas,left,top);
-//        }
-//    }
-
-    private void drawSpeedIcon(Canvas canvas,int left,int top) {
-        int right = left + mSpeedIcon.getIntrinsicWidth();
-        int bottom = top + mSpeedIcon.getIntrinsicHeight();
-        mSpeedIcon.setBounds(left,top,right,bottom);
-        mSpeedIcon.draw(canvas);
+    private boolean needDrawValue(float calibrationValue) {
+        return calibrationValue > mAttributeMaxValue || calibrationValue < mAttributeMinValue;
     }
 
-    private void drawAltitudeIcon(Canvas canvas, int left, int top) {
-        int right = left + mAltitudeIcon.getIntrinsicWidth();
-        int bottom = top + mAltitudeIcon.getIntrinsicHeight();
-        mAltitudeIcon.setBounds(left,top,right,bottom);
-        mAltitudeIcon.draw(canvas);
+    private boolean lineInFramework(float centerY, float lineOffsetY) {
+        return lineOffsetY > centerY + mFrameworkHeight / 2f || lineOffsetY < centerY - mFrameworkHeight / 2f;
     }
 
     /**
+     * 绘制刻度文字
+     */
+    private void drawCalibrationText(Canvas canvas, float offsetMargin, float y, float calibrationValue, float textStartX, boolean alignLeft) {
+        mPaint.setTextAlign(Paint.Align.LEFT);
+        mPaint.setTextSize(mAttributeCalibrationTextSize);
+        int value = Math.round(calibrationValue);
+        String currentValueString;
+        if (value < 0) {
+            currentValueString = value > -10 ? "-0" + value : "" + value;
+        } else {
+            currentValueString = value < 10 ? "0" + value : "" + value;
+        }
+        mPaint.getTextBounds(currentValueString, 0, currentValueString.length(), RECT);
+        Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
+        float baseline = (offsetMargin - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
+        drawTextWithStroke(canvas, currentValueString, alignLeft ? textStartX : textStartX - RECT.width(), baseline + y - offsetMargin / 2,
+                getShadowLineStrokeWidth(), mStrokeColor, mTextColor);
+    }
+
+    /**
+     * 绘制小刻度线
+     */
+    private void drawCalibrationHorizontal(Canvas canvas, float x, float y, int length, boolean needText) {
+        float width = mPaint.getStrokeWidth();
+        // 绘制区域，刻度线不与框架相交
+        if (y - width / 2f < (getHeight() - mFrameworkHeight) / 2f - mFrameworkStrokeWidth / 2f || y + width / 2 > (getHeight() + mFrameworkHeight) / 2f - mFrameworkStrokeWidth / 2f) {
+            return;
+        }
+        mPaint.setColor(needText ? mFrameworkFrameValueColor : mFrameworkSecondaryColor);
+        canvas.drawLine(x, y, x + length, y, mPaint);
+        canvas.drawRect(x, y - width, x + length, y + width, mStrokePaint);
+    }
+
+    protected int getIndicatorLineLength() {
+        return 0;
+    }
+
+    /**
+     * 绘制当前值区域
+     *
      * @param canvas
      */
     private void drawCurrentValue(Canvas canvas) {
         int width = getWidth();
         int height = getHeight();
-        String currentValueString = String.format(Locale.ENGLISH, getCurrentValueDisplayFormat(), getDisplayValue(mCurrentValue));
-        //当数值字符串超过5位时，需要增加偏移量，避免数值与边线过紧。
-        int textOffset = currentValueString.length() > 5 ? getResources().getDimensionPixelSize(R.dimen.uxsdk_3_dp) : 0;
-        String unit = String.format(Locale.ENGLISH, "(%s)", getAttributeUnit());
-        int background = getContext().getResources().getColor(R.color.uxsdk_black_20_percent);
-        canvas.save();
-        if (mAttributeDashBoardAlign == DASH_BOARD_ALIGN_LEFT) {
-            canvas.translate(mFrameworkPaddingStart, 0);
-            canvas.translate(mPointerLineInnerWidth, 0);
-            canvas.translate(0, (float) height / 2);
-            canvas.save();
-            // 画背景颜色
-            canvas.translate((float) mPointerTriangleWidth / 2, -(float) mPointerHeight / 2);
-            PATH.reset();
-            PATH.moveTo(0, 0);
-            PATH.rLineTo(mPointerWidth, 0);
-            PATH.rLineTo(0, mPointerHeight);
-            PATH.rLineTo(-mPointerWidth, 0);
-            PATH.rLineTo(0, -(float) (mPointerHeight - mPointerTriangleWidth) / 2);
-            PATH.rLineTo(-(float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.rLineTo((float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.close();
-            mPaint.setColor(background);
-            mPaint.setStyle(Paint.Style.FILL);
-            canvas.drawPath(PATH, mPaint);
-            mPaint.setStyle(Paint.Style.STROKE);
-            mPaint.setStrokeWidth(getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp));
-            mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
-            canvas.drawPath(PATH, mPaint);
-            // 画出当前值
-            mPaint.setStyle(Paint.Style.FILL);
-            mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
-            mPaint.setTextAlign(Paint.Align.LEFT);
-            mPaint.setTextSize(mAttributeCurrentCalibrationTextSize);
-            mPaint.setTypeface(Typeface.DEFAULT_BOLD);
-            mPaint.getTextBounds(currentValueString, 0, currentValueString.length(), RECT);
-            Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-            float baseline = (float) (mPointerHeight - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-            float valueUnitDivider = (float)(mPointerWidth - mPointerDividerTopWidth);
-            canvas.drawText(currentValueString, (valueUnitDivider - (float) RECT.width()) / 2 + textOffset, baseline, mPaint);
-            // 画出属性名称和属性单位的背景
-            canvas.translate(valueUnitDivider, 0);
-            PATH.reset();
-            PATH.moveTo(0, 0);
-            PATH.rLineTo(mPointerWidth - valueUnitDivider, 0);
-            PATH.rLineTo(0, mPointerHeight);
-            PATH.rLineTo(-mPointerDividerBottomWidth, 0);
-            PATH.close();
-            mPaint.setColor(background);
-            canvas.drawPath(PATH, mPaint);
-            // 画出属性名称
-            canvas.translate((float)(mPointerDividerTopWidth - mPointerDividerBottomWidth), 0);
-            mPaint.setTextSize(mAttributeNameTextSize);
-            mPaint.setColor(Color.WHITE);
-            mPaint.getTextBounds(mAttributeName, 0, mAttributeName.length(), RECT);
-            // 让属性名称紧贴底部
-            canvas.drawText(mAttributeName, (float) (mPointerDividerBottomWidth - RECT.width()) / 2, (float) mPointerHeight / 2, mPaint);
-            // 画出属性单位
-            mPaint.setTypeface(Typeface.DEFAULT);
-            mPaint.setTextSize(mAttributeUnitTextSize);
-            mPaint.getTextBounds(unit, 0, unit.length(), RECT);
-            fontMetrics = mPaint.getFontMetricsInt();
-            // 让属性单位紧贴顶部
-            canvas.drawText(unit, (float) (mPointerDividerBottomWidth - RECT.width()) / 2, (float) mPointerHeight / 2 - fontMetrics.top, mPaint);
-            // 画出指针的线段
-            canvas.restore();
-            mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
-            mPaint.setStrokeWidth(getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp));
-            canvas.drawLine(-(mPointerLineInnerWidth + mPointerLineOuterWidth), 0, 0, 0, mPaint);
-        } else {
-            canvas.translate((float)(width - mFrameworkPaddingStart), 0);
-            canvas.translate(-mPointerLineInnerWidth, 0);
-            canvas.translate(0, (float) height / 2);
-            canvas.save();
-            // 画背景颜色
-            canvas.translate(-(float) mPointerTriangleWidth / 2, -(float) mPointerHeight / 2);
-            mPaint.setColor(background);
-            mPaint.setStyle(Paint.Style.FILL);
-            PATH.reset();
-            PATH.moveTo(0, 0);
-            PATH.rLineTo(-mPointerWidth, 0);
-            PATH.rLineTo(0, mPointerHeight);
-            PATH.rLineTo(mPointerWidth, 0);
-            PATH.rLineTo(0, -(float) (mPointerHeight - mPointerTriangleWidth) / 2);
-            PATH.rLineTo((float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.rLineTo(-(float) mPointerTriangleWidth / 2, -(float) mPointerTriangleWidth / 2);
-            PATH.close();
-            mPaint.setColor(background);
-            mPaint.setStyle(Paint.Style.FILL);
-            canvas.drawPath(PATH, mPaint);
-            mPaint.setStyle(Paint.Style.STROKE);
-            mPaint.setStrokeWidth(getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp));
-            mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
-            canvas.drawPath(PATH, mPaint);
-            // 画出当前值
-            mPaint.setStyle(Paint.Style.FILL);
-            mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
-            mPaint.setTextAlign(Paint.Align.LEFT);
-            mPaint.setTextSize(mAttributeCurrentCalibrationTextSize);
-            mPaint.setTypeface(Typeface.DEFAULT_BOLD);
-            mPaint.getTextBounds(currentValueString, 0, currentValueString.length(), RECT);
-            Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
-            float baseline = (float) (mPointerHeight - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-            float valueUnitDivider = (float)(mPointerWidth - mPointerDividerTopWidth);
-            canvas.translate(-valueUnitDivider, 0);
-            canvas.drawText(currentValueString, (valueUnitDivider - (float) RECT.width()) / 2 - textOffset, baseline, mPaint);
-            // 画出属性名称和属性单位的背景
-            PATH.reset();
-            PATH.moveTo(0, 0);
-            PATH.rLineTo(-(mPointerWidth - valueUnitDivider), 0);
-            PATH.rLineTo(0, mPointerHeight);
-            PATH.rLineTo(mPointerDividerBottomWidth, 0);
-            PATH.close();
-            mPaint.setColor(background);
-            canvas.drawPath(PATH, mPaint);
-            // 画出属性名称
-            canvas.translate(-(mPointerDividerTopWidth - mPointerDividerBottomWidth), 0);
-            mPaint.setTextSize(mAttributeNameTextSize);
-            mPaint.setColor(Color.WHITE);
-            mPaint.getTextBounds(mAttributeName, 0, mAttributeName.length(), RECT);
-            // 让属性名称紧贴底部
-            canvas.drawText(mAttributeName, -(float) (mPointerDividerBottomWidth - RECT.width()) / 2 - RECT.width(), (float) mPointerHeight / 2, mPaint);
-            // 画出属性单位
-            mPaint.setTypeface(Typeface.DEFAULT);
-            mPaint.setTextSize(mAttributeUnitTextSize);
-            mPaint.getTextBounds(unit, 0, unit.length(), RECT);
-            fontMetrics = mPaint.getFontMetricsInt();
-            // 让属性单位紧贴顶部
-            canvas.drawText(unit, -(float) (mPointerDividerBottomWidth - RECT.width()) / 2 - RECT.width(), (float) mPointerHeight / 2 - fontMetrics.top, mPaint);
-            // 画出指针的线段
-            canvas.restore();
-            mPaint.setColor(getResources().getColor(R.color.uxsdk_pfd_main_color));
-            mPaint.setStrokeWidth(getResources().getDimensionPixelSize(R.dimen.uxsdk_1_dp));
-            canvas.drawLine(0, 0, (float)(mPointerLineInnerWidth + mPointerLineOuterWidth), 0, mPaint);
+        DisplayValue displayValue;
+        synchronized (mDisplayValueLock) {
+            displayValue = mDisplayValue;
         }
-        canvas.restore();
+        if (displayValue == null || displayValue.mDisplayValue == null || displayValue.mDisplayUnit == null) {
+            return;
+        }
+        String currentValueString = displayValue.mDisplayValue;
+        int canvasMark = canvas.save();
+
+        boolean alginLeft = isAlginLeft();
+        int alginDirect = alginLeft ? 1 : -1;
+
+        // 移动画布到当前值绘制区域，向左时为左上点，向右时为右上点
+        int currentAreaOffsetX = mFrameworkPaddingStart + mPointerLineInnerWidth + mTextPadding;
+        if (!alginLeft) {
+            currentAreaOffsetX = width - currentAreaOffsetX;
+        }
+        float currentAreaOffsetY = (height - mPointerHeight) / 2f;
+        canvas.translate(currentAreaOffsetX, currentAreaOffsetY);
+
+        int currentWidth = mPointerWidth * alginDirect;
+        if (mShowBorder) {
+            drawCurrentValueLine(canvas, mPointerHeight, alginLeft);
+            drawCurrentBackground(canvas, currentWidth, mPointerHeight);
+        }
+        LogUtils.d(TAG,"mShowBorder="+mShowBorder);
+        drawCurrentText(canvas, currentValueString, alginLeft);
+        drawCurrentName(canvas, mAttributeName, alginLeft);
+        drawCurrentUnit(canvas, displayValue.mDisplayUnit, alginLeft);
+
+        canvas.restoreToCount(canvasMark);
     }
 
-    private void drawWaypointAttr(Canvas canvas) {
-//        LogUtils.d(LogUtils.getTag(this), "drawWaypointAttr");
+    private void drawCurrentValueLine(Canvas canvas, int pointerHeight, boolean alginLeft) {
+        int lineLength = mPointerLineInnerWidth + mTextPadding;
+        float left;
+        float top;
+        float right;
+        float bottom;
+        if (alginLeft) {
+            left = -lineLength;
+            right = 0;
+        } else {
+            left = 0;
+            right = lineLength;
+        }
+        Paint backgroundPaint = getBackgroundPaint();
+        float lineWidth = backgroundPaint.getStrokeWidth();
+        float centerY = pointerHeight / 2f;
+        top = centerY - lineWidth / 2;
+        bottom = centerY + lineWidth / 2;
+        float lineY = centerY;
+        canvas.drawLine(left, lineY, right, lineY, backgroundPaint);
+        float strokeWidth = getShadowLineStrokeWidth();
+        mStrokePaint.setColor(getShadowLineStrokeColor());
+        mStrokePaint.setStrokeWidth(strokeWidth);
+        mStrokePaint.setStyle(Paint.Style.STROKE);
+        lineY = top - strokeWidth / 2;
+        canvas.drawLine(left, lineY, right, lineY, backgroundPaint);
+        lineY = bottom + strokeWidth / 2;
+        canvas.drawLine(left, lineY, right, lineY, backgroundPaint);
     }
 
-    protected String getCurrentValueDisplayFormat() {
-        return "%02.1f";
+    protected DisplayValue calcDisplayValue(float currentValue) {
+        float displayValue = getDisplayValue(currentValue);
+        // 数字比较添加 0.5 是为了避免出现 999.95 显示成 1000.0
+        boolean shorthand = displayValue + 0.05f > 1000;
+        final String unit = getAttributeUnit();
+        final String value = String.format(getCurrentValueDisplayFormat(shorthand), displayValue);
+        synchronized (mDisplayValueLock) {
+            if (mDisplayValue == null) {
+                mDisplayValue = new DisplayValue();
+            }
+            mDisplayValue.set(value, unit);
+        }
+        return mDisplayValue;
     }
 
-    protected String getAttributeUnit() {
-        return mAttributeUnit;
+    private boolean isAlginLeft() {
+        return mAttributeDashBoardAlign == DASH_BOARD_ALIGN_LEFT;
     }
 
-    protected float getDisplayValue(float value) {
-        return value;
+    /**
+     * 绘制当前值单位
+     */
+    private void drawCurrentUnit(Canvas canvas, String text, boolean alignLeft) {
+        Paint paint = getUnitPaint();
+        float len = paint.measureText(text);
+        // 让属性单位紧贴顶部
+        float unitTextOffset;
+        if (alignLeft) {
+            unitTextOffset = mPointerWidth - len - mAttributePadding;
+        } else {
+            unitTextOffset = -mPointerWidth + mAttributePadding;
+        }
+        float unitTextBaseline = FontUtils.getDigitalBaselineFromTop(paint, mPointerHeight / 2f) + 1;
+        drawTextWithStroke(canvas, text, unitTextOffset, unitTextBaseline, getShadowTextStrokeWidth(), getShadowTextStrokeColor(),
+                mAttributePropertyColor);
+    }
+
+    private Paint getUnitPaint() {
+        // 画出属性单位
+        mPaint.setTextSize(mAttributeUnitTextSize);
+        return mPaint;
+    }
+
+    /**
+     * 绘制当前值名称
+     */
+    private void drawCurrentName(Canvas canvas, String text, boolean alginLeft) {
+        Paint paint = getCurrentNamePaint();
+        float len = paint.measureText(text);
+        float attrTextOffset;
+        if (alginLeft) {
+            attrTextOffset = mPointerWidth - len - mAttributePadding;
+        } else {
+            attrTextOffset = -mPointerWidth + mAttributePadding;
+        }
+        float baseline = FontUtils.getDigitalBaselineFromBottom(mPaint, mPointerHeight / 2f) - 1;
+        drawTextWithStroke(canvas, text, attrTextOffset, baseline, getShadowTextStrokeWidth(), getShadowTextStrokeColor(), mAttributePropertyColor);
+    }
+
+    private Paint getCurrentNamePaint() {
+        mPaint.setTextSize(mAttributeNameTextSize);
+        mPaint.setColor(Color.WHITE);
+        return mPaint;
+    }
+
+    /**
+     * 绘制当前值文字
+     * 当前文字为数字和小数点，行高通过 ascent 和 descent 计算，避免 top 和 bottom 过多留白导致的整体偏离过远
+     */
+    private void drawCurrentText(Canvas canvas, String text, boolean alginLeft) {
+        Paint paint = getCurrentPaint();
+        float len = paint.measureText(text);
+        Paint.FontMetrics fontMetrics = paint.getFontMetrics();
+        float top = fontMetrics.ascent;
+        float bottom = fontMetrics.descent;
+
+        float baseline = ((float) mPointerHeight - bottom + top) / 2 - top;
+        float textStart = alginLeft ? mCurrentValuePadding : -mCurrentValuePadding - len;
+        drawTextWithStroke(canvas, text, textStart, baseline, mStrokeConfig.getStrokeBoldWidth(), getShadowTextStrokeColor(), mCurrentValueColor);
+    }
+
+    private Paint getCurrentPaint() {
+        Paint paint = mPaint;
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextSize(mAttributeCurrentCalibrationTextSize);
+        return paint;
+    }
+
+    /**
+     * 绘制中间文字部分背景，后续会对这一部分区域进行裁切，避免覆盖/重叠
+     *
+     * @see #clipPointerArea(Canvas)
+     */
+    private void drawCurrentBackground(Canvas canvas, int width, int height) {
+        Paint backgroundPaint = getBackgroundPaint();
+        canvas.drawRoundRect(0, 0, width, height, mBorderRadius, mBorderRadius, backgroundPaint);
+    }
+
+    private Paint getBackgroundPaint() {
+        mPaint.setColor(mBorderColor);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(mBorderWidth);
+        return mPaint;
+    }
+
+    protected void drawTextWithStroke(Canvas canvas, String currentValueString, float textOffset, float baseline, float strokeWidth,
+                                      int strokeColor, int textColor) {
+        mPaint.setStrokeWidth(strokeWidth);
+        mPaint.setColor(strokeColor);
+        mPaint.setStyle(Paint.Style.STROKE);
+        canvas.drawText(currentValueString, textOffset, baseline, mPaint);
+        mPaint.setColor(textColor);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawText(currentValueString, textOffset, baseline, mPaint);
+    }
+
+    protected abstract String getCurrentValueDisplayFormat(boolean shorthand);
+
+    protected abstract String getAttributeUnit();
+
+    protected abstract float getDisplayValue(float value);
+
+    protected static class DisplayValue {
+        String mDisplayValue;
+        String mDisplayUnit;
+
+        public void set(String displayValue, String displayUnit) {
+            mDisplayValue = displayValue;
+            mDisplayUnit = displayUnit;
+        }
     }
 
 }

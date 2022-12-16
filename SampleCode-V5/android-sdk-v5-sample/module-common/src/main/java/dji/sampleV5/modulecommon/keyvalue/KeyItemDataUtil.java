@@ -41,6 +41,7 @@ import dji.v5.utils.common.LogUtils;
 public class KeyItemDataUtil {
     private static final String TAG = KeyItemDataUtil.class.getSimpleName();
     private static final String KEY_RREFIX = "Key";
+    private static final List<KeyItem<?, ?>> allKeyList = new ArrayList<>();
 
     private KeyItemDataUtil(){
         //dosomething
@@ -182,7 +183,7 @@ public class KeyItemDataUtil {
                 if (fieldClass.equals(DJIKeyInfo.class) || fieldClass.equals(DJIActionKeyInfo.class)) {
                     DJIKeyInfo<?> keyInfo = (DJIKeyInfo<?>) fieldValue;
 
-                    KeyItem<?, ?> item = new KeyItem<DJIValue, DJIValue>(keyInfo);
+                    KeyItem<DJIValue, DJIValue> item = new KeyItem<>(keyInfo);
                     genericItem( item , keyInfo , keyName);
 
                     if (keylist != null) {
@@ -198,7 +199,7 @@ public class KeyItemDataUtil {
         }
     }
 
-    public static void genericItem( KeyItem<?, ?> item , DJIKeyInfo<?> keyInfo , String keyName){
+    public static <P extends DJIValue , R extends DJIValue>void genericItem(KeyItem<P, R> item , DJIKeyInfo<?> keyInfo , String keyName){
 
         Class<?> tdClazz;
         Field field = null;
@@ -207,7 +208,7 @@ public class KeyItemDataUtil {
             if (keyInfo.getIdentifier().isEmpty()) {
                 item.setName(keyName.contains(KEY_RREFIX) ? keyName.substring(KEY_RREFIX.length()) : keyName);
             }
-            IDJIValueConverter<?, ?> clazzConvert = keyInfo.getTypeConverter();
+            IDJIValueConverter<P, R> clazzConvert = keyInfo.getTypeConverter();
             if (clazzConvert instanceof SingleValueConverter) {
                 field = clazzConvert.getClass().getDeclaredField("dClass");
                 Field tmp = clazzConvert.getClass().getDeclaredField("isDJIValue");
@@ -221,8 +222,8 @@ public class KeyItemDataUtil {
              if (field != null) {
                  field.setAccessible(true);
                  tdClazz = (Class<?>) field.get(clazzConvert);
-                 item.param = tdClazz.newInstance();
-                 item.result = tdClazz.newInstance();
+                 item.param = (P)tdClazz.newInstance();
+                 item.result = (R)tdClazz.newInstance();
                  item.setSingleDJIValue(isDjiValue);
                  item.initGenericInstance();
              }
@@ -236,7 +237,11 @@ public class KeyItemDataUtil {
         getAllKeyList(allKeyList);
         return  allKeyList.size();
     }
-    public static void getAllKeyList(List<KeyItem<?, ?>>  allKeyList) {
+    public static void getAllKeyList(List<KeyItem<?, ?>>  keylist) {
+        if (!allKeyList.isEmpty()) {
+            keylist.addAll(allKeyList);
+            return;
+        }
         List<KeyItem<?, ?>> keyList = new ArrayList<>();
         initBatteryKeyList(keyList);
         allKeyList.addAll(keyList);

@@ -282,7 +282,7 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
      * @return Completable representing the success/failure of the set action.
      */
     public Completable rotateGimbalBySpeed(double yaw, double pitch) {
-        return djiSdkModel.performAction(KeyTools.createKey(GimbalKey.KeyRotateBySpeed, gimbalIndex),
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(GimbalKey.KeyRotateBySpeed, gimbalIndex),
                 new GimbalSpeedRotation(pitch, yaw, 0.0, new CtrlInfo()));
     }
     //endregion

@@ -42,12 +42,11 @@ import io.reactivex.rxjava3.processors.PublishProcessor;
  * corresponding subclass objects. It implements the ObservableKeyedStore interface.
  */
 public class ObservableInMemoryKeyedStore implements ObservableKeyedStore {
-    private static final String TAG = "KeyedStore";
     private static final int INITIAL_CAPACITY = 100;
-    private ConcurrentHashMap<String, PublishProcessor<BroadcastValues>> keyStringProcessorMap;
-    private FlatStore store;
+    private final ConcurrentHashMap<String, PublishProcessor<BroadcastValues>> keyStringProcessorMap;
+    private final FlatStore store;
 
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     private ObservableInMemoryKeyedStore() {
         keyStringProcessorMap = new ConcurrentHashMap<>(INITIAL_CAPACITY);
@@ -109,7 +108,9 @@ public class ObservableInMemoryKeyedStore implements ObservableKeyedStore {
         lock.lock();
         try {
             PublishProcessor<BroadcastValues> removedProcessor = keyStringProcessorMap.remove(key.getKeyPath());
-            removedProcessor.onComplete();
+            if (removedProcessor != null){
+                removedProcessor.onComplete();
+            }
         } finally {
             lock.unlock();
         }
@@ -179,7 +180,9 @@ public class ObservableInMemoryKeyedStore implements ObservableKeyedStore {
                         store.setModelValue(currentValue, key.getKeyPath());
                         if (keyStringProcessorMap.containsKey(key.getKeyPath())) {
                             PublishProcessor<BroadcastValues> processor = keyStringProcessorMap.get(key.getKeyPath());
-                            processor.onNext(new BroadcastValues(previousValue, currentValue));
+                            if (processor != null){
+                                processor.onNext(new BroadcastValues(previousValue, currentValue));
+                            }
                         }
                     }
                     emitter.onComplete();
@@ -193,6 +196,6 @@ public class ObservableInMemoryKeyedStore implements ObservableKeyedStore {
     }
 
     private static class SingletonHolder {
-        private static ObservableInMemoryKeyedStore instance = new ObservableInMemoryKeyedStore();
+        private static final ObservableInMemoryKeyedStore instance = new ObservableInMemoryKeyedStore();
     }
 }

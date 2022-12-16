@@ -33,7 +33,7 @@ public class WidgetListItem {
     //region Fields
     @StringRes
     private final int titleId;
-    private final WidgetViewHolder[] widgetViewHolders;
+    private final WidgetViewHolder<?>[] widgetViewHolders;
     //endregion
 
     /**
@@ -42,7 +42,7 @@ public class WidgetListItem {
      * @param titleId A resource ID of the title to display within the widget list.
      * @param widgetViewHolders An array of {@link WidgetViewHolder} objects to display.
      */
-    public WidgetListItem(@StringRes int titleId, WidgetViewHolder... widgetViewHolders) {
+    public WidgetListItem(@StringRes int titleId, WidgetViewHolder<?>... widgetViewHolders) {
         this.titleId = titleId;
         this.widgetViewHolders = widgetViewHolders;
     }
@@ -62,7 +62,7 @@ public class WidgetListItem {
      *
      * @return An array of {@link WidgetViewHolder} objects to display
      */
-    public WidgetViewHolder[] getWidgetViewHolders() {
+    public WidgetViewHolder<?>[] getWidgetViewHolders() {
         return widgetViewHolders;
     }
 }

@@ -45,7 +45,7 @@ import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
  * <p>
  * The widget gives access to all the child widgets.
  */
-public class CameraControlsWidget extends ConstraintLayoutWidget implements ICameraIndex {
+public class CameraControlsWidget extends ConstraintLayoutWidget<Object> implements ICameraIndex {
 
     //region Fields
     private CameraSettingsMenuIndicatorWidget cameraSettingsMenuIndicatorWidget;
@@ -218,6 +218,4 @@ public class CameraControlsWidget extends ConstraintLayoutWidget implements ICam
     public boolean isExposureSettingsIndicatorWidgetVisible() {
         return exposureSettingsIndicatorWidget.getVisibility() == VISIBLE;
     }
-
-    //endregion
 }

@@ -37,6 +37,12 @@ public interface HSIContract {
 
         void draw(Canvas canvas, Paint paint, int compassSize);
 
+        /**
+         * 飞机当前模式
+         * @param fpv true: fpv ，false: liveview
+         */
+        default void enterFpvMode(boolean fpv){}
+
         //boolean transformValue(DJIKey key, Object value);
     }
 

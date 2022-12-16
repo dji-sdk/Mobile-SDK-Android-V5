@@ -37,12 +37,12 @@ import androidx.annotation.*
 import androidx.annotation.IntRange
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.res.use
+import dji.v5.utils.common.DisplayUtil
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.processors.PublishProcessor
 import dji.v5.ux.R
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.ViewIDGenerator
 import dji.v5.ux.core.util.ViewUtil
 

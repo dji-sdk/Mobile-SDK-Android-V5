@@ -10,8 +10,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import dji.sampleV5.modulecommon.MainFragmentListAdapter
 import dji.sampleV5.modulecommon.R
-import dji.sampleV5.modulecommon.data.FragmentPageInfo
-import dji.sampleV5.modulecommon.data.FragmentPageInfoItem
+import dji.sampleV5.modulecommon.data.FragmentPageItem
+import dji.sampleV5.modulecommon.data.FragmentPageItemList
 import dji.sampleV5.modulecommon.data.MAIN_FRAGMENT_PAGE_TITLE
 import dji.sampleV5.modulecommon.models.MSDKCommonOperateVm
 import dji.v5.common.callback.CommonCallbacks
@@ -19,7 +19,6 @@ import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.interfaces.SDKManagerCallback
-import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.StringUtils
 import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_main_page.*
@@ -35,7 +34,6 @@ import kotlinx.android.synthetic.main.frag_main_page.*
 class MainFragment : DJIFragment() {
 
     private val msdkCommonOperateVm: MSDKCommonOperateVm by activityViewModels()
-    private val fragmentPageInfoIds: MutableList<Int> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,40 +54,22 @@ class MainFragment : DJIFragment() {
         msdkInfoVm.mainTitle.value = StringUtils.getResStr(context, R.string.testing_tools)
     }
 
-    override fun onDestroyView() {
-        fragmentPageInfoIds.clear()
-        super.onDestroyView()
-    }
-
     private fun initMainList() {
         val adapter = MainFragmentListAdapter { item -> adapterOnItemClick(item) }
         view_list.adapter = adapter
         view_list.layoutManager = LinearLayoutManager(context)
         msdkCommonOperateVm.mainPageInfoList.observe(viewLifecycleOwner) {
             it?.let {
-                val itemList = LinkedHashSet<FragmentPageInfoItem>()
-                for (info: FragmentPageInfo in it) {
-                    itemList.addAll(info.items)
-                    addDestination(info.vavGraphId)
+                val itemSet = LinkedHashSet<FragmentPageItem>()
+                for (itemList: FragmentPageItemList in it) {
+                    itemSet.addAll(itemList.items)
                 }
-                adapter.submitList(itemList.toList())
+                adapter.submitList(itemSet.toList())
             }
         }
     }
 
-    private fun addDestination(id: Int) {
-        //过滤调重复id，减少刷新频率
-        if (fragmentPageInfoIds.contains(id)) {
-            return
-        }
-        fragmentPageInfoIds.add(id)
-        view?.let {
-            val v = Navigation.findNavController(it).navInflater.inflate(id)
-            Navigation.findNavController(it).graph.addAll(v)
-        }
-    }
-
-    private fun adapterOnItemClick(item: FragmentPageInfoItem) {
+    private fun adapterOnItemClick(item: FragmentPageItem) {
         view?.let {
             Navigation.findNavController(it)
                 .navigate(item.id, bundleOf(MAIN_FRAGMENT_PAGE_TITLE to item.title))
@@ -132,10 +112,8 @@ class MainFragment : DJIFragment() {
                     msdkInfoVm.updateLDMStatus()
                     ToastUtils.showToast("LDM disabled failed:$error");
                 }
-
             })
         }
-
     }
 
     private fun initMSDK() {

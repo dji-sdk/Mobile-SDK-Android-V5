@@ -40,6 +40,7 @@ import androidx.core.content.res.use
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.flightcontroller.SimulatorInitializationSettings
 import dji.sdk.keyvalue.value.flightcontroller.SimulatorState
+import dji.v5.utils.common.DisplayUtil
 import dji.v5.utils.common.LogUtils
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.functions.Consumer
@@ -52,7 +53,6 @@ import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.communication.OnStateChangeCallback
 import dji.v5.ux.core.extension.*
 import dji.v5.ux.core.ui.HorizontalSeekBar
-import dji.v5.ux.core.util.DisplayUtil
 import dji.v5.ux.core.util.EditTextNumberInputFilter
 import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.R
@@ -837,15 +837,6 @@ open class SimulatorControlWidget @JvmOverloads constructor(
 //                })
     }
 
-    private fun checkAndUpdateWind() {
-//        if (!isInEditMode) {
-//            addDisposable(widgetModel.simulatorWindData
-//                    .lastOrError()
-//                    .observeOn(SchedulerProvider.ui())
-//                    .subscribe(Consumer { simulatorWindData -> updateWindValues(simulatorWindData) },
-//                            RxUtil.logErrorConsumer(TAG, "Update wind")))
-//        }
-    }
 
     private fun updateSatelliteCount(satelliteCount: Int) {
         satelliteTextView.text = satelliteCount.toString()
@@ -880,7 +871,7 @@ open class SimulatorControlWidget @JvmOverloads constructor(
         longitudeEditText.filters = arrayOf<InputFilter>(EditTextNumberInputFilter("-180", "180"))
         loadPresetTextView.setOnClickListener(this)
         savePresetTextView.setOnClickListener(this)
-        simulatorSwitch.setOnCheckedChangeListener { buttonView: CompoundButton?, isChecked: Boolean -> handleSwitchChange(isChecked) }
+        simulatorSwitch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean -> handleSwitchChange(isChecked) }
         valueTextColor = getColor(R.color.uxsdk_blue)
         titleTextColor = getColor(R.color.uxsdk_white)
         headerTextColor = getColor(R.color.uxsdk_white)
@@ -918,10 +909,6 @@ open class SimulatorControlWidget @JvmOverloads constructor(
 
     private fun normalizeWindValue(progress: Int): Int {
         return progress - SIMULATION_MAX_WIND_SPEED
-    }
-
-    private fun deNormalizeWindValue(progress: Int): Int {
-        return progress + SIMULATION_MAX_WIND_SPEED
     }
 
     private fun handleSwitchChange(isChecked: Boolean) {

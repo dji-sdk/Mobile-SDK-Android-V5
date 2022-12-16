@@ -23,8 +23,8 @@
 
 package dji.v5.ux.core.widget.perception
 
-import dji.v5.manager.aircraft.perception.PerceptionInfo
-import dji.v5.manager.aircraft.perception.PerceptionInformationListener
+import dji.v5.manager.aircraft.perception.data.PerceptionInfo
+import dji.v5.manager.aircraft.perception.listener.PerceptionInformationListener
 import dji.v5.manager.interfaces.IPerceptionManager
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel

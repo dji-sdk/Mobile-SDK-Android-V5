@@ -55,15 +55,16 @@ import kotlin.random.Random
  *
  */
 abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0,
-        configuration: PanelWidgetConfiguration
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    configuration: PanelWidgetConfiguration,
 ) : PanelWidget<PanelItem, T>(
-        context,
-        attrs,
-        defStyleAttr,
-        configuration) {
+    context,
+    attrs,
+    defStyleAttr,
+    configuration) {
+
 
     //region Fields
     private val paneMap: HashMap<Int, Pane> = hashMapOf()
@@ -126,27 +127,27 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
 
     @Throws(UnsupportedOperationException::class)
     override fun getWidget(index: Int): PanelItem? =
-            throw UnsupportedOperationException("Try findViewPane instead")
+        throw UnsupportedOperationException("Try findViewPane instead")
 
     @Throws(UnsupportedOperationException::class)
     override fun addWidgets(items: Array<PanelItem>) =
-            throw UnsupportedOperationException(("This call is not supported."))
+        throw UnsupportedOperationException(("This call is not supported."))
 
     @Throws(UnsupportedOperationException::class)
     override fun size(): Int =
-            throw UnsupportedOperationException(("This call is not supported."))
+        throw UnsupportedOperationException(("This call is not supported."))
 
     @Throws(UnsupportedOperationException::class)
     override fun addWidget(index: Int, item: PanelItem) =
-            throw UnsupportedOperationException("Try addView instead")
+        throw UnsupportedOperationException("Try addView instead")
 
     @Throws(UnsupportedOperationException::class)
     override fun removeWidget(index: Int): PanelItem? =
-            throw UnsupportedOperationException("Try remove view instead")
+        throw UnsupportedOperationException("Try remove view instead")
 
     @Throws(UnsupportedOperationException::class)
     override fun updateUI() =
-            throw UnsupportedOperationException(("This call is not supported."))
+        throw UnsupportedOperationException(("This call is not supported."))
 
     override fun removeAllWidgets() {
         for ((_, pane) in paneMap) {
@@ -229,20 +230,20 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
 
         if (splitType == SplitType.HORIZONTAL) {
             set.createHorizontalChain(paneId,
-                    ConstraintSet.LEFT,
-                    paneId,
-                    ConstraintSet.RIGHT,
-                    childrenIdList,
-                    weights,
-                    ConstraintSet.CHAIN_SPREAD)
+                ConstraintSet.LEFT,
+                paneId,
+                ConstraintSet.RIGHT,
+                childrenIdList,
+                weights,
+                ConstraintSet.CHAIN_SPREAD)
         } else {
             set.createVerticalChain(paneId,
-                    ConstraintSet.TOP,
-                    paneId,
-                    ConstraintSet.BOTTOM,
-                    childrenIdList,
-                    weights,
-                    ConstraintSet.CHAIN_SPREAD)
+                ConstraintSet.TOP,
+                paneId,
+                ConstraintSet.BOTTOM,
+                childrenIdList,
+                weights,
+                ConstraintSet.CHAIN_SPREAD)
         }
         set.applyTo(this)
 
@@ -271,8 +272,10 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
      * @param rightMargin - Optional right margin for the widget or view. Defaults to 0.
      * @param bottomMargin - Optional bottom margin for the widget or view. Defaults to 0.
      */
-    fun addView(paneId: Int, widgetView: View, position: ViewAlignment = ViewAlignment.CENTER,
-                leftMargin: Int = 0, topMargin: Int = 0, rightMargin: Int = 0, bottomMargin: Int = 0) {
+    fun addView(
+        paneId: Int, widgetView: View, position: ViewAlignment = ViewAlignment.CENTER,
+        leftMargin: Int = 0, topMargin: Int = 0, rightMargin: Int = 0, bottomMargin: Int = 0,
+    ) {
         val pane = paneMap[paneId] ?: return
         removeView(paneId)
         if (widgetView.id == -1) {
@@ -357,8 +360,10 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
      * @param textBackgroundColor - This optional parameter sets the UIColor to use as the
      *                              background color of the text label. Defaults to black.
      */
-    fun enablePaneDebug(enableLabelAssist: Boolean, enableBackgroundAssist: Boolean = false,
-                        @ColorInt textColor: Int = INVALID_COLOR, @ColorInt textBackgroundColor: Int = INVALID_COLOR) {
+    fun enablePaneDebug(
+        enableLabelAssist: Boolean, enableBackgroundAssist: Boolean = false,
+        @ColorInt textColor: Int = INVALID_COLOR, @ColorInt textBackgroundColor: Int = INVALID_COLOR,
+    ) {
         if (textColor != INVALID_COLOR) {
             debugTextColor = textColor
         }
@@ -412,9 +417,11 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
      * @param rightMargin - Optional right margin for the widget or view. Defaults to 0.
      * @param bottomMargin
      */
-    fun setPanePosition(paneId: Int, position: ViewAlignment,
-                        leftMargin: Int = 0, topMargin: Int = 0,
-                        rightMargin: Int = 0, bottomMargin: Int = 0) {
+    fun setPanePosition(
+        paneId: Int, position: ViewAlignment,
+        leftMargin: Int = 0, topMargin: Int = 0,
+        rightMargin: Int = 0, bottomMargin: Int = 0,
+    ) {
         val pane = paneMap[paneId] ?: return
         val widgetView = pane.view ?: return
         pane.position = position
@@ -451,8 +458,10 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
     //endregion
 
     //region Helpers
-    private fun setViewAlignment(paneId: Int, widgetView: View, position: ViewAlignment,
-                                 leftMargin: Int, topMargin: Int, rightMargin: Int, bottomMargin: Int) {
+    private fun setViewAlignment(
+        paneId: Int, widgetView: View, position: ViewAlignment,
+        leftMargin: Int, topMargin: Int, rightMargin: Int, bottomMargin: Int,
+    ) {
         val set = ConstraintSet()
         set.clone(this)
         set.clear(widgetView.id)
@@ -557,34 +566,35 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
         pane.isSplit = false
     }
 
-    private fun addDebugViews(isLabelAssist: Boolean = false,
-                              isBackgroundAssist: Boolean = false) {
+    private fun addDebugViews(
+        isLabelAssist: Boolean = false,
+        isBackgroundAssist: Boolean = false,
+    ) {
         val visiblePaneMap = paneMap.filter { !it.value.isSplit }
         for ((_, pane) in visiblePaneMap) {
             // If background assist is enabled apply random color to view background
             if (isBackgroundAssist) {
                 val color: Int = Color.argb(255,
-                        Random.nextInt(256),
-                        Random.nextInt(256),
-                        Random.nextInt(256))
+                    Random.nextInt(256),
+                    Random.nextInt(256),
+                    Random.nextInt(256))
                 pane.background.setBackgroundColor(color)
             }
             // If label assist is enabled add debug label to text view
-            if (isLabelAssist) {
-                if (pane.debugTextView == null) {
-                    val debugTextView = TextView(context)
-                    debugTextView.id = ViewIDGenerator.generateViewId()
-                    debugTextView.text = pane.id.toString()
-                    debugTextView.setTextColor(debugTextColor)
-                    debugTextView.setBackgroundColor(debugTextBackgroundColor)
-                    addView(debugTextView, childCount)
-                    val set = ConstraintSet()
-                    set.clone(this)
-                    set.connect(debugTextView.id, ConstraintSet.LEFT, pane.background.id, ConstraintSet.LEFT)
-                    set.connect(debugTextView.id, ConstraintSet.TOP, pane.background.id, ConstraintSet.TOP)
-                    set.applyTo(this)
-                    pane.debugTextView = debugTextView
-                }
+            if (isLabelAssist && pane.debugTextView == null) {
+                val debugTextView = TextView(context)
+                debugTextView.id = ViewIDGenerator.generateViewId()
+                debugTextView.text = pane.id.toString()
+                debugTextView.setTextColor(debugTextColor)
+                debugTextView.setBackgroundColor(debugTextBackgroundColor)
+                addView(debugTextView, childCount)
+                val set = ConstraintSet()
+                set.clone(this)
+                set.connect(debugTextView.id, ConstraintSet.LEFT, pane.background.id, ConstraintSet.LEFT)
+                set.connect(debugTextView.id, ConstraintSet.TOP, pane.background.id, ConstraintSet.TOP)
+                set.applyTo(this)
+                pane.debugTextView = debugTextView
+
             }
         }
     }
@@ -671,16 +681,18 @@ abstract class FreeFormPanelWidget<T> @JvmOverloads constructor(
      * Pane class for caching pane data.
      *
      */
-    private data class Pane(val id: Int,
-                            val parentId: Int,
-                            val background: View,
-                            var backgroundColor: Int = INVALID_COLOR,
-                            var isSplit: Boolean = false,
-                            var view: View? = null,
-                            var position: ViewAlignment? = null,
-                            var childrenIdList: List<Int> = emptyList(),
-                            var siblingIdList: List<Int> = emptyList(),
-                            var debugTextView: TextView? = null)
+    private data class Pane(
+        val id: Int,
+        val parentId: Int,
+        val background: View,
+        var backgroundColor: Int = INVALID_COLOR,
+        var isSplit: Boolean = false,
+        var view: View? = null,
+        var position: ViewAlignment? = null,
+        var childrenIdList: List<Int> = emptyList(),
+        var siblingIdList: List<Int> = emptyList(),
+        var debugTextView: TextView? = null,
+    )
 
     /**
      * Enum to define types of split.

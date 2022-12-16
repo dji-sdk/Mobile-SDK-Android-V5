@@ -705,7 +705,7 @@ class SlidingDialog @JvmOverloads constructor(
      * @param color The color of the cancel text
      */
     fun setCancelTextColor(@ColorInt color: Int): SlidingDialog {
-        actionTextView.setTextColor(color)
+        cancelTextView.setTextColor(color)
         return this
     }
 
@@ -715,7 +715,7 @@ class SlidingDialog @JvmOverloads constructor(
      * @param textSize The size of the cancel text
      */
     fun setCancelTextSize(@Dimension textSize: Float): SlidingDialog {
-        actionTextView.textSize = textSize
+        cancelTextView.textSize = textSize
         return this
     }
 
@@ -725,7 +725,7 @@ class SlidingDialog @JvmOverloads constructor(
      * @param drawable The background of the cancel button
      */
     fun setCancelBackground(drawable: Drawable?): SlidingDialog {
-        actionTextView.background = drawable
+        cancelTextView.background = drawable
         return this
     }
 
@@ -735,7 +735,7 @@ class SlidingDialog @JvmOverloads constructor(
      * @param textAppearance The text appearance of the cancel button
      */
     fun setCancelTextAppearance(@StyleRes textAppearance: Int): SlidingDialog {
-        actionTextView.setTextAppearance(context, textAppearance)
+        cancelTextView.setTextAppearance(context, textAppearance)
         return this
     }
     //endregion

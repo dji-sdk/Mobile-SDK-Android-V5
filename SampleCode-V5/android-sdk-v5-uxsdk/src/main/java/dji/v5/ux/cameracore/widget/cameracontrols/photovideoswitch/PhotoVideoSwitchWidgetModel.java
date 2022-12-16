@@ -57,7 +57,7 @@ public class PhotoVideoSwitchWidgetModel extends WidgetModel implements ICameraI
     private final DataProcessor<Boolean> isEnabledDataProcessor;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.UNKNOWN;
-    private FlatCameraModule flatCameraModule;
+    private final FlatCameraModule flatCameraModule;
     //endregion
 
     //region Lifecycle
@@ -78,13 +78,13 @@ public class PhotoVideoSwitchWidgetModel extends WidgetModel implements ICameraI
 
     @Override
     protected void inSetup() {
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyConnection,cameraIndex), isCameraConnectedDataProcessor);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsRecording,cameraIndex), isRecordingDataProcessor);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingPhoto,cameraIndex), isShootingDataProcessor);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraShootingContinuousPhotos,cameraIndex), isShootingIntervalDataProcessor);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingBurstPhoto,cameraIndex), isShootingBurstDataProcessor);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingRAWBurstPhoto,cameraIndex), isShootingRawBurstDataProcessor);
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingPhotoPanorama,cameraIndex), isShootingPanoramaDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyConnection, cameraIndex), isCameraConnectedDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsRecording, cameraIndex), isRecordingDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingPhoto, cameraIndex), isShootingDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraShootingContinuousPhotos, cameraIndex), isShootingIntervalDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingBurstPhoto, cameraIndex), isShootingBurstDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingRAWBurstPhoto, cameraIndex), isShootingRawBurstDataProcessor);
+        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsShootingPhotoPanorama, cameraIndex), isShootingPanoramaDataProcessor);
     }
 
     @Override
@@ -142,6 +142,22 @@ public class PhotoVideoSwitchWidgetModel extends WidgetModel implements ICameraI
         }
     }
 
+    public void changeToPhotoMode() {
+        CameraMode currentMode = flatCameraModule.getCameraModeDataProcessor().getValue();
+        if (currentMode.isPhotoMode()){
+            return;
+        }
+        flatCameraModule.setCameraMode(djiSdkModel, CameraMode.PHOTO_NORMAL).subscribe();
+    }
+
+    public void changeToVideoMode() {
+        CameraMode currentMode = flatCameraModule.getCameraModeDataProcessor().getValue();
+        if (currentMode.isVideoMode()){
+            return;
+        }
+        flatCameraModule.setCameraMode(djiSdkModel, CameraMode.VIDEO_NORMAL).subscribe();
+    }
+
     @NonNull
     public ComponentIndexType getCameraIndex() {
         return cameraIndex;
@@ -158,7 +174,7 @@ public class PhotoVideoSwitchWidgetModel extends WidgetModel implements ICameraI
     public void updateCameraSource(@NonNull ComponentIndexType cameraIndex, @NonNull CameraLensType lensType) {
         this.cameraIndex = cameraIndex;
         this.lensType = lensType;
-        flatCameraModule.updateCameraSource(cameraIndex,lensType);
+        flatCameraModule.updateCameraSource(cameraIndex, lensType);
         restart();
     }
 }

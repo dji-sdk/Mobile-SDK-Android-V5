@@ -160,39 +160,6 @@ class BatteryWidgetModel(
         // No Code
     }
 
-    private fun calculateAggregateBatteryStatus(): BatteryStatus {
-        // Default to returning a normal status.
-        var priorityStatus = BatteryStatus.NORMAL
-
-        // Check for aggregate state.
-        if (isAnyBatteryDisconnectedProcessor.value
-            || isCellDamagedDisconnectedProcessor.value
-            || isFirmwareDifferenceDetectedProcessor.value
-            || isVoltageDifferenceDetectedProcessor.value
-            || isLowCellVoltageDetectedProcessor.value) {
-            priorityStatus = BatteryStatus.ERROR
-        }
-
-        // Iterate through all active batteries to find highest priority status.
-
-        for (i in batteryOverviewsProcessor.value.indices) {
-            val currentBatteryStatus = calculateBatteryStatus(
-                batteryWarningRecordProcessor1.value,
-                batteryThresholdBehaviorProcessor.value,
-                batteryOverviewsProcessor.value[i].chargeRemainingInPercent,
-                batteryNeededToGoHomeProcessor.value,
-                isAircraftFlyingDataProcessor.value,
-                batteryVoltageProcessor1.value[i].toFloat()
-            )
-
-            if (currentBatteryStatus > priorityStatus) {
-                priorityStatus = currentBatteryStatus
-            }
-        }
-
-        return priorityStatus
-    }
-
     private fun calculateAverageVoltage(cellVoltages: List<Int>?): Float {
         return if (cellVoltages != null && cellVoltages.isNotEmpty()) {
             cellVoltages.average().toFloat().milliVoltsToVolts()
