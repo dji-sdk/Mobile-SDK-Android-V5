@@ -7,7 +7,7 @@
 - 支持LTEManager，LTE管理类，用于增强图传认证，开启和关闭，以及LTE信号等级和LTE状态获取。该功能目前只在中国大陆支持。
 
 更多功能查看发布日志。"</string>
-    <string name="news_date">2022–12–16</string>
+    <string name="news_date">2022–12–15</string>
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/zh-cn/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/ doc/mobile-sdk-tutorial/cn/</string>

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.view_title_bar.*
  *
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
-class MSDKInfoFragment : DJIFragment() {
+open class MSDKInfoFragment : DJIFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <dji.v5.ux.core.ui.setting.taplayout.VerticalTabLayout
+        android:id="@+id/setting_vertical_tabLayout"
+        android:layout_width="@dimen/uxsdk_48_dp"
+        android:layout_height="match_parent"
+        app:uxsdk_indicator_color="@android:color/transparent"
+        app:uxsdk_indicator_gravity="fill"
+        app:uxsdk_indicator_width="0dp"
+        app:uxsdk_tab_height="@dimen/uxsdk_65_dp"
+        app:uxsdk_tab_margin="1dp"
+        app:uxsdk_tab_mode="fixed" />
+
+    <View
+        android:layout_width="@dimen/uxsdk_1_dp"
+        android:layout_height="match_parent"
+        android:background="@color/uxsdk_dic_color_c20_divider" />
+
+    <dji.v5.ux.core.ui.setting.taplayout.TabViewPager
+        android:id="@+id/setting_viewpager"
+        android:layout_width="459dp"
+        android:layout_height="match_parent"
+        android:descendantFocusability="afterDescendants" />
+</LinearLayout>

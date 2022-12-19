@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dji.v5.ux.core.widget.setting.SettingPanelWidget xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/manual_right_nav_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="@color/uxsdk_fpv_popover_content_background_color"
+    android:descendantFocusability="afterDescendants">
+
+</dji.v5.ux.core.widget.setting.SettingPanelWidget>

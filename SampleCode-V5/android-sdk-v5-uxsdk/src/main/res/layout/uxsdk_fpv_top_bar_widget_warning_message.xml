@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/uxsdk_150_dp"
+    android:layout_height="match_parent"
+    tools:background="@color/uxsdk_black_95_percent"
+    android:id="@+id/warning_message_root_view"
+    tools:layout_height="@dimen/uxsdk_38_dp">
+
+    <LinearLayout
+        android:id="@+id/warning_message_count_wrapper"
+        android:layout_width="@dimen/uxsdk_15_dp"
+        android:layout_height="@dimen/uxsdk_24_dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <dji.v5.ux.core.ui.component.StrokeTextView
+            android:id="@+id/tv_level3_count"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/uxsdk_red_in_dark"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="1"
+            android:textStyle="bold"
+            android:textColor="@color/uxsdk_white"
+            android:textSize="@dimen/uxsdk_8_dp" />
+
+        <dji.v5.ux.core.ui.component.StrokeTextView
+            android:id="@+id/tv_level2_count"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/uxsdk_orange_in_dark"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="3"
+            android:textStyle="bold"
+            android:textColor="@color/uxsdk_white"
+            android:textSize="@dimen/uxsdk_8_dp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/cardview_warning_message"
+        android:layout_width="@dimen/uxsdk_176_dp"
+        android:layout_height="@dimen/uxsdk_24_dp"
+        android:layout_marginStart="@dimen/uxsdk_4_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/warning_message_count_wrapper"
+        app:layout_constraintTop_toTopOf="parent">
+        <dji.v5.ux.core.ui.component.MarqueeTextView
+            android:id="@+id/tv_warning_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/uxsdk_white"
+            android:textStyle="bold"
+            android:textSize="@dimen/uxsdk_10_dp"
+            android:paddingStart="@dimen/uxsdk_12_dp"
+            android:paddingEnd="@dimen/uxsdk_12_dp"
+            android:singleLine="true"
+            android:text="无法起飞:电池固件版本错误，请更换电池或将电池升级到最新版本"/>
+        <dji.v5.ux.core.ui.component.MarqueeTextView
+            android:id="@+id/tv_warning_no_message"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/uxsdk_white_70_percent"
+            android:textSize="@dimen/uxsdk_10_dp"
+            android:paddingStart="@dimen/uxsdk_12_dp"
+            android:paddingEnd="@dimen/uxsdk_12_dp"
+            android:singleLine="true"
+            android:text="@string/uxsdk_fpv_message_box_empty_content_v2"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

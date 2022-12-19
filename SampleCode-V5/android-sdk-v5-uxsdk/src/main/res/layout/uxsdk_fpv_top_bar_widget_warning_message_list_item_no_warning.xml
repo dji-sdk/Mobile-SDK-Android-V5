@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/uxsdk_black_50_percent">
+
+    <ImageView
+        android:id="@+id/iv_no_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_16_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_fpv_topbar_img_empty_fpv_message" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_no_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_5_dp"
+        android:layout_marginBottom="@dimen/uxsdk_12_dp"
+        android:layout_marginLeft="@dimen/uxsdk_8_dp"
+        android:layout_marginRight="@dimen/uxsdk_8_dp"
+        android:text="@string/uxsdk_fpv_message_box_empty_content_v2"
+        android:textColor="@color/uxsdk_white_50_percent"
+        android:textSize="@dimen/uxsdk_10_dp"
+        android:lines="1"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_no_message"
+        app:autoSizeMaxTextSize="@dimen/uxsdk_10_dp"
+        app:autoSizeMinTextSize="@dimen/uxsdk_5_dp"
+        app:autoSizeTextType="uniform"/>
+
+    <View
+        android:id="@+id/split_line"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:background="@color/uxsdk_white_10_percent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -469,6 +469,9 @@
     <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
     <string name="uxsdk_exposure_meter_widget_title">Exposure Metering Widget</string>
     <string name="uxsdk_focal_zoom_widget_title">Focal Zoom Widget</string>
+    <string name="uxsdk_camera_ndvi_panel_widget_title">Camera NDVI Panel Widget</string>
+    <string name="uxsdk_camera_visible_panel_widget_title">Camera Visible Panel Widget</string>
+    <string name="uxsdk_device_health_and_status_widget_title">Device Health and Status Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>
@@ -731,6 +734,7 @@
     <string name="uxsdk_rtk_guidance_step2_tip">连续点击可连续切换</string>
     <string name="uxsdk_rtk_guidance_five_mode">模式灯一组五次闪烁即为广播模式</string>
 
+
     <!--GpsSignalWidget-->
     <string name="uxsdk_fpv_top_bar_rtk_title">RTK 定位</string>
     <string name="uxsdk_setting_menu_rtk_state_disconnect">未连接</string>
@@ -749,6 +753,78 @@
     <string name="uxsdk_abnormal">异常</string>
     <string name="uxsdk_normal">正常</string>
 
+    <!-- MasterSlaver-->
+    <string name="uxsdk_rc_master_connecting">连接</string>
+    <string name="uxsdk_rc_master_connected">已连接</string>
+    <string name="uxsdk_rc_master_id">主机ID：%1$s</string>
+    <string name="uxsdk_rc_slaver_id">从机ID：%1$s</string>
+    <string name="uxsdk_rc_conn_status">连接状态：%1$s</string>
+    <string name="uxsdk_rc_fre_point">频点：%1$s</string>
+    <string name="uxsdk_rc_riss_num">RISS：%1$s</string>
+    <string name="uxsdk_rc_send_speed">发送频率：%1$s</string>
+    <string name="uxsdk_rc_recv_speed">接收频率：%1$s</string>
+    <string name="uxsdk_rc_auth_code_tips">授权码：</string>
+    <string name="uxsdk_rc_auth_code">授权码：%1$s</string>
+    <string name="uxsdk_rc_master_slaver_title">主从机功能</string>
+    <string name="uxsdk_rc_master_slaver_v3_title">主辅控功能</string>
+    <string name="uxsdk_rc_master_slaver_v4_title">双控功能</string>
+    <string name="uxsdk_rc_setting_mode">设置遥控器状态</string>
+    <string name="uxsdk_rc_search_master">搜索主机</string>
+    <string name="uxsdk_rc_master_tip">主机遥控器</string>
+    <string name="uxsdk_rc_scan_tip">扫描</string>
+    <string name="uxsdk_rc_detail_tile">主从机详细信息</string>
+    <string name="uxsdk_rc_input_auth_code">请输入主机(%1$s)的授权码</string>
+    <string name="uxsdk_rc_input_auth_code_empty">输入的授权码为空，请重新输入</string>
+    <string name="uxsdk_rc_connected_to_master_success">连接成功</string>
+    <string name="uxsdk_rc_connected_to_master_failure">连接失败</string>
+    <string name="uxsdk_rc_connected_to_master_timeout">连接超时，请检查授权码是否正确</string>
+    <string name="uxsdk_rc_search_master_title">搜索主机</string>
+    <string name="uxsdk_rc_setting_confirm_title">设置</string>
+    <string name="uxsdk_rc_setting_confirm_content">是否修改遥控器功能？</string>
+    <string name="uxsdk_dialog_message_rc_cannot_setting_motorup">飞行器飞行中，无法切换遥控器状态</string>
+    <string name="uxsdk_rc_setting_success">设置成功</string>
+    <string name="uxsdk_rc_setting_failure">设置失败，请重试</string>
+    <string name="uxsdk_rc_auth_code_length_warning">必须输入6位数字</string>
+    <string name="uxsdk_rc_get_master_slaver_info_error">主从机详细错误信息</string>
+    <string name="uxsdk_rc_request_gibal_control">请求云台控制权</string>
+    <string name="uxsdk_rc_release_gibal_control">释放云台控制</string>
+    <string name="uxsdk_rc_request_timeout">响应超时</string>
+    <string name="uxsdk_rc_has_permission">已经拥有控制权</string>
+    <string name="uxsdk_rc_request_success">请求控制权成功</string>
+    <string name="uxsdk_rc_request_failure">请求控制权失败</string>
+    <string name="uxsdk_rc_release_success">释放控制权成功</string>
+    <string name="uxsdk_rc_release_failure">释放控制权失败</string>
+    <string name="uxsdk_rc_host_refuse">主机拒绝加入</string>
+    <string name="uxsdk_rc_slaver_request_gimbal_control_title">从机请求获取云台控制权</string>
+    <string name="uxsdk_rc_slaver_request_gimbal_control_content">从机名：%1$s</string>
+    <string name="uxsdk_rc_master_name">遥控器名称</string>
+    <string name="uxsdk_rc_master_password">连接密码</string>
+    <string name="uxsdk_rc_pass_word_length_warning">密码必须为4位数</string>
+    <string name="uxsdk_rc_request_refuse">主机拒绝加入</string>
+    <string name="uxsdk_rc_input_psw_code">请输入主机(%1$s)的密码</string>
+    <string name="uxsdk_rc_has_gimbal_control">已经拥有控制权</string>
+    <string name="uxsdk_rc_master_name_length">遥控器名称长度必须少于6个字节</string>
+    <string name="uxsdk_rc_master_slaver_no_gimbal_control">没有云台控制权，请在遥控器设置中开启云台控制权</string>
+    <string name="uxsdk_rc_master_slaver_no_flyc_control">飞行器的控制权已被锁定，此控将不可对飞控相关信息进行操作！</string>
+    <string name="uxsdk_rc_master_slaver_no_rtk_control">飞行器的控制权已被锁定，此控将不可对RTK相关信息进行操作！</string>
+    <string name="uxsdk_rc_master_slaver_no_battery_control">飞行器的控制权已被锁定，此控将不可对低电量的相关信息进行操作！</string>
+    <string name="uxsdk_rc_master_slaver_no_perception_control">飞行器的控制权已被锁定，此控将不可对飞行器避障的相关信息进行操作！</string>
+    <string name="uxsdk_rc_master_slaver_no_control_permission">飞行控制权已被锁定，不可操作！</string>
+    <!-- MasterSlaver-->
+
+    <!--Setting menu title-->
+    <string name="uxsdk_setting_menu_title_flyc">飞控参数设置</string>
+    <string name="uxsdk_setting_menu_title_perception">感知避障设置</string>
+    <string name="uxsdk_setting_menu_title_rc">遥控器设置</string>
+    <string name="uxsdk_setting_menu_title_hd">图传设置</string>
+    <string name="uxsdk_setting_menu_title_battery">智能电池信息</string>
+    <string name="uxsdk_setting_menu_title_gimbal">云台设置</string>
+    <string name="uxsdk_setting_menu_title_rtk">RTK</string>
+    <string name="uxsdk_setting_menu_title_common">通用设置</string>
+    <string name="uxsdk_payload_setting_title">Payload 设置</string>
+
+
+    <string name="uxsdk_dialog_loading">正在加载中...</string>
     <!--MapView-->
     <string name="uxsdk_map_provider_init_failed">地图加载失败，对应地图库未找到</string>
 
@@ -757,6 +833,10 @@
     <string name="uxsdk_stream_ndvi_vegetation_index">植被指数</string>
     <string name="uxsdk_stream_ms_lens">多光谱镜头</string>
     <string name="uxsdk_switch_stream_unsupported">当前拍照模式下不支持切换植被指数及多光谱镜头</string>
+
+    <!--FpvWarningMessageWidget-->
+    <string name="uxsdk_fpv_message_box_empty_content_v2">当前正常</string>
+    <string name="uxsdk_fpv_tip_remote_disconnect">飞行器未连接</string>
 
 </resources>
 

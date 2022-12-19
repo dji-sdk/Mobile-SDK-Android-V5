@@ -9,8 +9,6 @@ ext {
     deps.allProvided = "com.dji:dji-sdk-v5-all-provided:5.2.0"
     deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.2.0"
 
-    //DJI三方库
-    deps.networkRtkHelper = "com.dji:library-networkrtk-helper:2.0.2"
 
     //三方依赖库
     deps.gson = 'com.google.code.gson:gson:2.9.1'
@@ -30,6 +28,13 @@ ext {
     deps.maplibreSdk = 'org.maplibre.gl:android-sdk:9.4.2'
     deps.lottie = 'com.airbnb.android:lottie:3.3.1'//RTK扫描页中使用，用于实现动画效果
     deps.cardview = 'androidx.cardview:cardview:1.0.0'//PopoverView中使用
+    /*RTK设置页面使用-start*/
+    deps.mikepenzCommunityMaterial = "com.mikepenz:community-material-typeface:3.5.95.1-kotlin@aar"
+    deps.mikepenzGoogleMaterial = 'com.mikepenz:google-material-typeface:3.0.1.4.original-kotlin@aar'
+    deps.mikepenzIconicsViews = 'com.mikepenz:iconics-views:4.0.2@aar'
+    deps.mikepenzIconicsCore = 'com.mikepenz:iconics-core:4.0.2@aar'
+    deps.mikepenzIonicons = 'com.mikepenz:ionicons-typeface:2.0.1.5-kotlin@aar'
+    /*RTK设置页面使用-end*/
 
     //google map
     deps.playservicesplaces = 'com.google.android.gms:play-services-places:16.0.0'

@@ -123,7 +123,7 @@ class GpsSignalPopoverView @JvmOverloads constructor(
                     //黄
                     tvRtkState.value =
                         AndUtil.getResString(R.string.uxsdk_setting_menu_rtk_state_disconnect)
-                    tvRtkState.setValueTextColor(AndUtil.getResColor(R.color.uxsdk_danger_in_dark))
+                    tvRtkState.setValueTextColor(AndUtil.getResColor(R.color.uxsdk_red_in_dark))
                 }
 
                 GpsSignalWidgetModel.RtkState.CONVERGING -> {
@@ -143,7 +143,7 @@ class GpsSignalPopoverView @JvmOverloads constructor(
                 GpsSignalWidgetModel.RtkState.ERROR -> {
                     //红
                     tvRtkState.value = AndUtil.getResString(R.string.uxsdk_abnormal)
-                    tvRtkState.setValueTextColor(AndUtil.getResColor(R.color.uxsdk_danger_in_dark))
+                    tvRtkState.setValueTextColor(AndUtil.getResColor(R.color.uxsdk_red_in_dark))
                 }
             }
         }

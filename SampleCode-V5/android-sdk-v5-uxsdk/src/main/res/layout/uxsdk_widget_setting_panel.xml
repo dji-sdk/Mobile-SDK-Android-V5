@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/manual_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ViewStub
+        android:id="@+id/manual_right_nav_setting_stub"
+        android:layout_width="@dimen/uxsdk_510_dp"
+        android:layout_height="match_parent"
+        android:layout="@layout/uxsdk_viewstub_layout_manual_right_nav_setting" />
+
+</FrameLayout>

@@ -25,6 +25,7 @@ abstract class TestingToolsActivity : AppCompatActivity() {
     protected val msdkCommonOperateVm: MSDKCommonOperateVm by viewModels()
 
     private val testToolsVM: TestToolsVM by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_testing_tools)
@@ -47,9 +48,7 @@ abstract class TestingToolsActivity : AppCompatActivity() {
             }
         }
 
-        supportFragmentManager.commit {
-            replace(R.id.main_info_fragment_container, MSDKInfoFragment())
-        }
+        loadTitleView()
 
         DJIToastUtil.dJIToastLD = testToolsVM.djiToastResult
         testToolsVM.djiToastResult.observe(this) { result ->
@@ -75,10 +74,15 @@ abstract class TestingToolsActivity : AppCompatActivity() {
         Navigation.findNavController(nav_host_fragment_container).graph.addAll(v)
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         DJIToastUtil.dJIToastLD = null
+    }
+
+    open fun loadTitleView() {
+        supportFragmentManager.commit {
+            replace(R.id.main_info_fragment_container, MSDKInfoFragment())
+        }
     }
 
     abstract fun loadPages()

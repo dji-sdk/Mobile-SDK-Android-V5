@@ -467,6 +467,9 @@
     <string name="uxsdk_primary_flight_display_widget_title">Primary Flight Display Widget</string>
     <string name="uxsdk_exposure_meter_widget_title">Exposure Metering Widget</string>
     <string name="uxsdk_focal_zoom_widget_title">Focal Zoom Widget</string>
+    <string name="uxsdk_camera_ndvi_panel_widget_title">Camera NDVI Panel Widget</string>
+    <string name="uxsdk_camera_visible_panel_widget_title">Camera Visible Panel Widget</string>
+    <string name="uxsdk_device_health_and_status_widget_title">Device Health and Status Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>
@@ -728,7 +731,6 @@
     <string name="uxsdk_rtk_guidance_step2_tip">Tap to switch modes</string>
     <string name="uxsdk_rtk_guidance_five_mode">Broadcast mode is indicated by the indicator blinking five times in a row</string>
 
-
     <!--GpsSignalWidget-->
     <string name="uxsdk_fpv_top_bar_rtk_title">RTK Positioning</string>
     <string name="uxsdk_fpv_top_bar_rtk_state_title">RTK Status</string>
@@ -747,6 +749,79 @@
     <string name="uxsdk_abnormal">Abnormal</string>
     <string name="uxsdk_normal">Normal</string>
 
+    <!-- MasterSlaver-->
+    <string name="uxsdk_rc_master_connecting">Connect</string>
+    <string name="uxsdk_rc_master_connected">Connected</string>
+    <string name="uxsdk_rc_master_id">Master ID: %1$s</string>
+    <string name="uxsdk_rc_slaver_id">Slave ID: %1$s</string>
+    <string name="uxsdk_rc_conn_status">Connection Status: %1$s</string>
+    <string name="uxsdk_rc_fre_point">Frequency: %1$s</string>
+    <string name="uxsdk_rc_riss_num">RISS: %1$s</string>
+    <string name="uxsdk_rc_send_speed">Transmitting Rate: %1$s</string>
+    <string name="uxsdk_rc_recv_speed">Receiving Rate: %1$s</string>
+    <string name="uxsdk_rc_auth_code_tips">Authorization Code:</string>
+    <string name="uxsdk_rc_auth_code">Authorization Code: %1$s</string>
+    <string name="uxsdk_rc_master_slaver_title">Master and Slave</string>
+    <string name="uxsdk_rc_master_slaver_v3_title">Master and Assistant</string>
+    <string name="uxsdk_rc_master_slaver_v4_title">Remote Controller Channel(s)</string>
+    <string name="uxsdk_rc_setting_mode">Set Remote Controller Status</string>
+    <string name="uxsdk_rc_search_master">Search Master</string>
+    <string name="uxsdk_rc_master_tip">Master Remote Controller</string>
+    <string name="uxsdk_rc_scan_tip">Scan</string>
+    <string name="uxsdk_rc_detail_tile">Master and Slave Information</string>
+    <string name="uxsdk_rc_input_auth_code">Please enter master (%1$s) authorization code.</string>
+    <string name="uxsdk_rc_input_auth_code_empty">Authorization code not entered, please enter again.</string>
+    <string name="uxsdk_rc_connected_to_master_success">Connection successful.</string>
+    <string name="uxsdk_rc_connected_to_master_failure">Failed to connect.</string>
+    <string name="uxsdk_rc_connected_to_master_timeout">Connection error, please check that the authorization code is correct.</string>
+    <string name="uxsdk_rc_search_master_title">Search Master</string>
+    <string name="uxsdk_rc_setting_confirm_title">Settings</string>
+    <string name="uxsdk_rc_setting_confirm_content">Change remote controller function?</string>
+    <string name="uxsdk_dialog_message_rc_cannot_setting_motorup">Aircraft in flight. Unable to switch remote controller status</string>
+    <string name="uxsdk_rc_setting_success">Set successfully.</string>
+    <string name="uxsdk_rc_setting_failure">Failed to set, please try again.</string>
+    <string name="uxsdk_rc_auth_code_length_warning">Input 6 digits</string>
+    <string name="uxsdk_rc_get_master_slaver_info_error">Master and slave information error.</string>
+    <string name="uxsdk_rc_request_gibal_control">Request Gimbal Control</string>
+    <string name="uxsdk_rc_release_gibal_control">Release Gimbal Control</string>
+    <string name="uxsdk_rc_request_timeout">Response Timeout</string>
+    <string name="uxsdk_rc_has_permission">Current controller already has gimbal control.</string>
+    <string name="uxsdk_rc_request_success">Requested gimbal control successfully.</string>
+    <string name="uxsdk_rc_request_failure">Failed to request gimbal control.</string>
+    <string name="uxsdk_rc_release_success">Released gimbal control successfully.</string>
+    <string name="uxsdk_rc_release_failure">Failed to release gimbal control.</string>
+    <string name="uxsdk_rc_host_refuse">Master Refused</string>
+    <string name="uxsdk_rc_slaver_request_gimbal_control_title">Slave Requests Gimbal Control</string>
+    <string name="uxsdk_rc_slaver_request_gimbal_control_content">Slave Name：%1$s</string>
+    <string name="uxsdk_rc_master_name">Remote Controller Name</string>
+    <string name="uxsdk_rc_master_password">Password</string>
+    <string name="uxsdk_rc_pass_word_length_warning">Password must be 4 digits in length.</string>
+    <string name="uxsdk_rc_request_refuse">Master Refused</string>
+    <string name="uxsdk_rc_input_psw_code">Please enter master (%1$s) password.</string>
+    <string name="uxsdk_rc_has_gimbal_control">Current controller already has gimbal control.</string>
+    <string name="uxsdk_rc_master_name_length">Remote controller name must be less than 6 characters in length.</string>
+    <string name="uxsdk_rc_master_slaver_no_gimbal_control">Please turn on gimbal control in remote controller settings.</string>
+    <string name="uxsdk_rc_master_slaver_no_flyc_control">Aircraft flight control locked companion controller. Current RC does not have permissions for modifying flight controller settings</string>
+    <string name="uxsdk_rc_master_slaver_no_rtk_control">Aircraft flight control locked by companion controller. Current RC does not have permissions for modifying RTK settings</string>
+    <string name="uxsdk_rc_master_slaver_no_battery_control">Aircraft flight control locked by companion controller. Current RC does not have permissions for modifying low battery settings</string>
+    <string name="uxsdk_rc_master_slaver_no_perception_control">Aircraft flight control locked by companion controller. Current RC does not have permissions for modifying obstacle avoidance settings.</string>
+    <string name="uxsdk_rc_master_slaver_no_control_permission">Aircraft flight control locked by companion controller. Unable to modify settings</string>
+
+    <!--Setting menu title-->
+    <string name="uxsdk_setting_menu_title_flyc">Flight Controller Settings</string>
+    <string name="uxsdk_setting_menu_title_perception">Obstacle Sensing Settings</string>
+    <string name="uxsdk_setting_menu_title_gimbal">Gimbal Settings</string>
+    <string name="uxsdk_setting_menu_title_rtk">RTK</string>
+    <string name="uxsdk_setting_menu_title_common">Common Settings</string>
+    <string name="uxsdk_setting_menu_title_rc">Remote Controller Settings</string>
+    <string name="uxsdk_setting_menu_title_hd">Image Transmission Settings</string>
+    <string name="uxsdk_setting_menu_title_battery">Aircraft Battery</string>
+    <string name="uxsdk_payload_setting_title">Payload Settings</string>
+
+
+
+    <string name="uxsdk_dialog_loading">Loading...</string>
+
     <!--MapView-->
     <string name="uxsdk_map_provider_init_failed">Map Loading failed , depend Map lib not found!</string>
 
@@ -755,5 +830,9 @@
     <string name="uxsdk_stream_ndvi_vegetation_index">VI</string>
     <string name="uxsdk_stream_ms_lens">Multi Spectral Camera</string>
     <string name="uxsdk_switch_stream_unsupported">Unable to switch VI or multi spectral lens in current shooting mode</string>
+
+    <!--FpvWarningMessageWidget-->
+    <string name="uxsdk_fpv_message_box_empty_content_v2">Normal</string>
+    <string name="uxsdk_fpv_tip_remote_disconnect">Aircraft not connected</string>
 
 </resources>

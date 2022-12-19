@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:descendantFocusability="afterDescendants"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/fragment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/uxsdk_22_dp"
+        android:layout_marginTop="@dimen/uxsdk_22_dp"
+        android:layout_marginEnd="@dimen/uxsdk_20_dp"
+        android:layout_marginBottom="@dimen/uxsdk_18_dp"
+        app:layout_constraintBottom_toTopOf="@id/fragment_waring_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/setting_menu_header_back"
+            android:layout_width="@dimen/uxsdk_42_dp"
+            android:layout_height="@dimen/uxsdk_42_dp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/uxsdk_10_dp"
+            android:background="@drawable/uxsdk_selector_blue_oval_mask"
+            android:scaleType="center"
+            android:src="@drawable/uxsdk_ic_navigation_arrow"
+            android:visibility="invisible" />
+
+
+        <TextView
+            android:id="@+id/setting_menu_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:textColor="@color/uxsdk_dic_color_c8_white"
+            android:textSize="@dimen/uxsdk_text_size_normal_medium" />
+
+        <com.mikepenz.iconics.view.IconicsImageView
+            android:id="@+id/setting_menu_header_close"
+            android:layout_width="@dimen/uxsdk_42_dp"
+            android:layout_height="@dimen/uxsdk_42_dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/uxsdk_selector_blue_oval_mask"
+            android:padding="12dp"
+            android:scaleType="centerCrop"
+            app:iiv_color="@color/uxsdk_dic_color_c8_white"
+            app:iiv_icon="gmd-close" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/fragment_waring_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/uxsdk_black"
+        android:paddingStart="@dimen/uxsdk_22_dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="@dimen/uxsdk_20_dp"
+        android:paddingBottom="16dp"
+        android:text="@string/uxsdk_rc_master_slaver_no_flyc_control"
+        android:textColor="@color/uxsdk_message_error"
+        android:textSize="@dimen/uxsdk_text_size_normal_medium"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:drawableEnd="@drawable/uxsdk_navigation_close"
+        app:layout_constraintBottom_toTopOf="@id/fragment_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_title" />
+
+    <FrameLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:descendantFocusability="afterDescendants"
+        android:paddingStart="@dimen/uxsdk_22_dp"
+        android:paddingEnd="@dimen/uxsdk_20_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_waring_bar" />
+
+    <View
+        android:id="@+id/fragment_mask"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/uxsdk_black_40_percent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_waring_bar" />
+
+    <ImageView
+        android:id="@+id/setting_menu_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        android:src="@drawable/uxsdk_rotate_progress_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

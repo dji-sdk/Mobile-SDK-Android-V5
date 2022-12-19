@@ -684,7 +684,8 @@
         <!-- E.g., app:excludeItem="flight_mode|simulator_indicator" -->
         <attr name="uxsdk_excludeTopBarItem">
             <flag name="system_status" value="1" />
-            <flag name="flight_mode" value="2" />
+            <flag name="device_health" value="2" />
+            <flag name="flight_mode" value="3" />
             <flag name="simulator_indicator" value="4" />
             <flag name="air_sense" value="8" />
             <flag name="gps_signal" value="16" />
@@ -767,9 +768,9 @@
         <attr name="uxsdk_framework_stroke_width" format="dimension" />
         <attr name="uxsdk_framework_width" format="dimension" />
         <attr name="uxsdk_framework_height" format="dimension" />
-        <attr name="uxsdk_framework_primary_color" format="color"/>
-        <attr name="uxsdk_framework_secondary_color" format="color"/>
-        <attr name="uxsdk_framework_stroke_color" format="color"/>
+        <attr name="uxsdk_framework_primary_color" format="color" />
+        <attr name="uxsdk_framework_secondary_color" format="color" />
+        <attr name="uxsdk_framework_stroke_color" format="color" />
         <attr name="uxsdk_degree_line_short" format="dimension" />
         <attr name="uxsdk_degree_line_long" format="dimension" />
         <attr name="uxsdk_pointer_divider_top_width" format="dimension" />
@@ -781,17 +782,17 @@
         <attr name="uxsdk_pointer_line_inner_width" format="dimension" />
         <attr name="uxsdk_pointer_line_outer_width" format="dimension" />
         <attr name="uxsdk_pointer_triangle_width" format="dimension" />
-        <attr name="uxsdk_pointer_text_padding" format="dimension"/>
+        <attr name="uxsdk_pointer_text_padding" format="dimension" />
         <attr name="uxsdk_padding" format="dimension" />
         <attr name="uxsdk_show_border" format="boolean" />
         <attr name="uxsdk_border_radius" format="dimension" />
         <attr name="uxsdk_border_color" format="color" />
-        <attr name="uxsdk_border_width" format="dimension"/>
+        <attr name="uxsdk_border_width" format="dimension" />
         <attr name="uxsdk_current_value_color" format="color" />
         <attr name="uxsdk_current_value_padding" format="dimension" />
         <attr name="uxsdk_property_color" format="color" />
-        <attr name="uxsdk_calibration_text_padding" format="dimension"/>
-        <attr name="uxsdk_calibration_framework_padding_vertical" format="dimension"/>
+        <attr name="uxsdk_calibration_text_padding" format="dimension" />
+        <attr name="uxsdk_calibration_framework_padding_vertical" format="dimension" />
 
 
         <attr name="uxsdk_dash_board_align">
@@ -803,30 +804,30 @@
 
 
     <declare-styleable name="AttitudeDashBoard">
-        <attr name="uxsdk_distance_predict_line_width" format="dimension"/>
-        <attr name="uxsdk_avoidance_max_height" format="dimension"/>
+        <attr name="uxsdk_distance_predict_line_width" format="dimension" />
+        <attr name="uxsdk_avoidance_max_height" format="dimension" />
 
-        <attr name="uxsdk_barrier_distance" format="integer"/>
-        <attr name="uxsdk_barrier_indicator_color" format="color"/>
-        <attr name="uxsdk_barrier_drawable_up" format="reference"/>
-        <attr name="uxsdk_barrier_drawable_down" format="reference"/>
-        <attr name="uxsdk_avoidance_indicator_color" format="color"/>
-        <attr name="uxsdk_barrier_distance_text_size" format="dimension"/>
-        <attr name="uxsdk_barrier_indicator_height" format="dimension"/>
-        <attr name="uxsdk_avoidance_indicator_width" format="dimension"/>
-        <attr name="uxsdk_avoidance_indicator_stroke_width" format="dimension"/>
-        <attr name="uxsdk_return_to_home_indicator_color" format="color"/>
-        <attr name="uxsdk_return_to_home_indicator_text_size" format="dimension"/>
-        <attr name="uxsdk_max_flight_height_indicator_color" format="color"/>
-        <attr name="uxsdk_waypoint_height_indicator_color" format="color"/>
-        <attr name="uxsdk_return_to_home_indicator_width" format="dimension"/>
+        <attr name="uxsdk_barrier_distance" format="integer" />
+        <attr name="uxsdk_barrier_indicator_color" format="color" />
+        <attr name="uxsdk_barrier_drawable_up" format="reference" />
+        <attr name="uxsdk_barrier_drawable_down" format="reference" />
+        <attr name="uxsdk_avoidance_indicator_color" format="color" />
+        <attr name="uxsdk_barrier_distance_text_size" format="dimension" />
+        <attr name="uxsdk_barrier_indicator_height" format="dimension" />
+        <attr name="uxsdk_avoidance_indicator_width" format="dimension" />
+        <attr name="uxsdk_avoidance_indicator_stroke_width" format="dimension" />
+        <attr name="uxsdk_return_to_home_indicator_color" format="color" />
+        <attr name="uxsdk_return_to_home_indicator_text_size" format="dimension" />
+        <attr name="uxsdk_max_flight_height_indicator_color" format="color" />
+        <attr name="uxsdk_waypoint_height_indicator_color" format="color" />
+        <attr name="uxsdk_return_to_home_indicator_width" format="dimension" />
 
     </declare-styleable>
 
     <declare-styleable name="HSIView">
         <attr name="uxsdk_hsi_degree_indicator_width" format="dimension" />
         <attr name="uxsdk_hsi_degree_indicator_height" format="dimension" />
-        <attr name="uxsdk_hsi_compass_margin" format="dimension"/>
+        <attr name="uxsdk_hsi_compass_margin" format="dimension" />
         <attr name="uxsdk_hsi_degree_indicator_text_size" format="dimension" />
         <attr name="uxsdk_hsi_degree_indicator_color" format="color" />
         <attr name="uxsdk_hsi_aircraft_indicator_size" format="dimension" />
@@ -861,7 +862,7 @@
         <attr name="uxsdk_hsi_avoidance_setting_area_color" format="color" />
         <attr name="uxsdk_hsi_perception_setting_area_color" format="color" />
         <attr name="uxsdk_hsi_max_perception_area_color" format="color" />
-        <attr name="uxsdk_hsi_marker_name_inset" format="dimension"/>
+        <attr name="uxsdk_hsi_marker_name_inset" format="dimension" />
 
         <attr name="uxsdk_hsi_max_perception_stroke_width" format="dimension" />
         <attr name="uxsdk_hsi_radar_avoidance_setting_area_color" format="color" />
@@ -869,11 +870,11 @@
         <attr name="uxsdk_hsi_radar_max_perception_area_color" format="color" />
         <attr name="uxsdk_hsi_radar_max_perception_stroke_width" format="dimension" />
         <attr name="uxsdk_hsi_bitmap_offset" format="dimension" />
-        <attr name="uxsdk_hsi_degree_indicator_text_height" format="dimension"/>
-        <attr name="uxsdk_hsi_marker_indicator_text_max_width" format="dimension"/>
-        <attr name="uxsdk_hsi_break_marker" format="reference"/>
-        <attr name="uxsdk_hsi_smart_track_enable" format="boolean"/>
-        <attr name="uxsdk_hsi_remote_control_point_marker" format="reference"/>
+        <attr name="uxsdk_hsi_degree_indicator_text_height" format="dimension" />
+        <attr name="uxsdk_hsi_marker_indicator_text_max_width" format="dimension" />
+        <attr name="uxsdk_hsi_break_marker" format="reference" />
+        <attr name="uxsdk_hsi_smart_track_enable" format="boolean" />
+        <attr name="uxsdk_hsi_remote_control_point_marker" format="reference" />
 
     </declare-styleable>
 
@@ -1386,9 +1387,9 @@
     </style>
 
     <declare-styleable name="FpvTitleValueCell">
-        <attr name="uxsdk_title" format="string|reference"/>
-        <attr name="uxsdk_value" format="string|reference"/>
-        <attr name="uxsdk_layout" format="reference"/>
+        <attr name="uxsdk_title" format="string|reference" />
+        <attr name="uxsdk_value" format="string|reference" />
+        <attr name="uxsdk_layout" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="DJIMapView">
@@ -1409,43 +1410,59 @@
     </declare-styleable>
 
     <declare-styleable name="StrokeTextView">
-        <attr name="uxsdk_textStrokeWidth" format="dimension"/>
-        <attr name="uxsdk_textStrokeColor" format="color"/>
+        <attr name="uxsdk_textStrokeWidth" format="dimension" />
+        <attr name="uxsdk_textStrokeColor" format="color" />
     </declare-styleable>
-
 
 
     <declare-styleable name="SpeedDisplayWidget">
-        <attr name="android:textColor"/>
+        <attr name="android:textColor" />
     </declare-styleable>
 
     <declare-styleable name="GimbalPitchBarV2">
-        <attr name="uxsdk_gpb_bar_width" format="dimension"/>
-        <attr name="uxsdk_gpb_bar_value" format="integer"/>
-        <attr name="uxsdk_gpb_bar_text" format="string"/>
-        <attr name="uxsdk_gpb_bar_text_size" format="dimension"/>
-        <attr name="uxsdk_gpb_bar_text_padding" format="dimension"/>
-        <attr name="uxsdk_gpb_bar_text_on_top" format="boolean"/>
-        <attr name="uxsdk_gpb_bar_max_value" format="integer"/>
-        <attr name="uxsdk_gpb_bar_min_value" format="integer"/>
-        <attr name="uxsdk_gpb_bar_color" format="color"/>
-        <attr name="uxsdk_gpb_bar_stroke_width" format="dimension"/>
-        <attr name="uxsdk_gpb_bar_stroke_color" format="color"/>
-        <attr name="uxsdk_gpb_bar_origin_padding" format="dimension"/>
-        <attr name="uxsdk_gpb_inner_width" format="dimension"/>
-        <attr name="uxsdk_gpb_inner_value" format="integer"/>
-        <attr name="uxsdk_gpb_inner_max_value" format="integer"/>
-        <attr name="uxsdk_gpb_on_bar_max_value" format="integer"/>
-        <attr name="uxsdk_gpb_on_bar_values" format="reference"/>
-        <attr name="uxsdk_gpb_on_bar_colors" format="reference"/>
-        <attr name="uxsdk_gpb_origin_width" format="dimension"/>
-        <attr name="uxsdk_gpb_origin_length" format="dimension"/>
-        <attr name="uxsdk_gpb_highlight_values" format="reference"/>
-        <attr name="uxsdk_gpb_highlight_color" format="color"/>
-        <attr name="uxsdk_gpb_highlight_width" format="dimension"/>
-        <attr name="uxsdk_gpb_indicator_drawable" format="reference"/>
+        <attr name="uxsdk_gpb_bar_width" format="dimension" />
+        <attr name="uxsdk_gpb_bar_value" format="integer" />
+        <attr name="uxsdk_gpb_bar_text" format="string" />
+        <attr name="uxsdk_gpb_bar_text_size" format="dimension" />
+        <attr name="uxsdk_gpb_bar_text_padding" format="dimension" />
+        <attr name="uxsdk_gpb_bar_text_on_top" format="boolean" />
+        <attr name="uxsdk_gpb_bar_max_value" format="integer" />
+        <attr name="uxsdk_gpb_bar_min_value" format="integer" />
+        <attr name="uxsdk_gpb_bar_color" format="color" />
+        <attr name="uxsdk_gpb_bar_stroke_width" format="dimension" />
+        <attr name="uxsdk_gpb_bar_stroke_color" format="color" />
+        <attr name="uxsdk_gpb_bar_origin_padding" format="dimension" />
+        <attr name="uxsdk_gpb_inner_width" format="dimension" />
+        <attr name="uxsdk_gpb_inner_value" format="integer" />
+        <attr name="uxsdk_gpb_inner_max_value" format="integer" />
+        <attr name="uxsdk_gpb_on_bar_max_value" format="integer" />
+        <attr name="uxsdk_gpb_on_bar_values" format="reference" />
+        <attr name="uxsdk_gpb_on_bar_colors" format="reference" />
+        <attr name="uxsdk_gpb_origin_width" format="dimension" />
+        <attr name="uxsdk_gpb_origin_length" format="dimension" />
+        <attr name="uxsdk_gpb_highlight_values" format="reference" />
+        <attr name="uxsdk_gpb_highlight_color" format="color" />
+        <attr name="uxsdk_gpb_highlight_width" format="dimension" />
+        <attr name="uxsdk_gpb_indicator_drawable" format="reference" />
         <attr name="uxsdk_gpb_indicator_drawable_factor" format="float" />
-        <attr name="uxsdk_gpb_align_left" format="boolean"/>
+        <attr name="uxsdk_gpb_align_left" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="VerticalTabLayout">
+        <attr name="uxsdk_indicator_color" format="color" />
+        <attr name="uxsdk_indicator_width" format="dimension" />
+        <attr name="uxsdk_indicator_corners" format="dimension" />
+        <attr name="uxsdk_indicator_gravity" format="enum">
+            <enum name="left" value="3" />
+            <enum name="right" value="5" />
+            <enum name="fill" value="119" />
+        </attr>
+        <attr name="uxsdk_tab_margin" format="dimension" />
+        <attr name="uxsdk_tab_mode" format="enum">
+            <enum name="fixed" value="10" />
+            <enum name="scrollable" value="11" />
+        </attr>
+        <attr name="uxsdk_tab_height" format="dimension"></attr>
     </declare-styleable>
 
     <attr name="uxsdk_fadingEdgeColor" format="color"/>

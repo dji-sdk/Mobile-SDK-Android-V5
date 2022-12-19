@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/uxsdk_196_dp"
+    android:layout_height="match_parent"
+    android:background="@color/uxsdk_fpv_popover_content_background_color">
+
+    <dji.v5.ux.core.ui.component.UXRecyclerView
+        android:id="@+id/rv_warning_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_8_dp"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="@dimen/uxsdk_32_dp"
+        android:requiresFadingEdge="vertical"
+        android:scrollbarThumbVertical="@drawable/uxsdk_common_scrollbar_in_dark"
+        android:scrollbars="vertical"
+        app:uxsdk_fadingEdgeColor="@color/uxsdk_fpv_popover_content_background_color"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/uxsdk_fpv_top_bar_widget_warning_message_list_item"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

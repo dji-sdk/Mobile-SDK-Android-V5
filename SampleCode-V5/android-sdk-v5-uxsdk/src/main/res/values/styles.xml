@@ -309,6 +309,14 @@
         <item name="android:textColor">@color/uxsdk_white</item>
     </style>
 
+    <style name="SimpleProgressDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorAccent">@color/uxsdk_dic_color_c9_blue</item>
+    </style>
+
+
     <style name="CameraStatusActionBarItem_TextView">
         <item name="uxsdk_textStrokeColor">@color/uxsdk_black_30_percent</item>
         <item name="uxsdk_textStrokeWidth">@dimen/uxsdk_1_dp</item>

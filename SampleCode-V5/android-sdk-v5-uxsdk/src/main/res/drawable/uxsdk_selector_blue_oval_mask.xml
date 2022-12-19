@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+          android:enterFadeDuration="@android:integer/config_shortAnimTime"
+          android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/uxsdk_white_10_percent" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/uxsdk_dic_color_c0_transparent" />
+        </shape>
+    </item>
+</selector>

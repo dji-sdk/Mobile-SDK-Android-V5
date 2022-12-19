@@ -148,7 +148,10 @@
     <color name="uxsdk_fpv_text_background">#991c2831</color>
     <color name="uxsdk_fpv_popover_content_background_color">#F2141414</color>
     <color name="uxsdk_fpv_popover_title_background_color">#F21F1F1F</color>
-    <color name="uxsdk_danger_in_dark">#E41F29</color>
+    <color name="uxsdk_red_in_dark">#E41F29</color>
+    <color name="uxsdk_red_in_dark_050">#80F5222D</color>
+    <color name="uxsdk_orange_in_dark">#FFEE8815</color>
+    <color name="uxsdk_orange_in_dark_050">#FFEE8815</color>
     <color name="uxsdk_fpv_live_view_btn_color">#991F1F1F</color>
     <color name="uxsdk_fpv_live_view_btn_press_color">#CC1F1F1F</color>
     <color name="uxsdk_fpv_live_view_btn_color_indark">#393939</color>
@@ -237,6 +240,19 @@
     <color name="uxsdk_dic_color_c27_yellow">#ff9d00</color>
     <color name="uxsdk_dic_color_c13_red">#e70102</color>
 
+    <color name="uxsdk_dic_color_c18_divider">#b4b4b4</color>
+    <color name="uxsdk_dic_color_c20_divider">#34b4b4b4</color>
+    <color name="uxsdk_dic_color_c5_deepGray">#9b9b9b</color>
+    <color name="uxsdk_dic_color_c6_gray">#d8d8d8</color>
+    <color name="uxsdk_dic_color_c7_lightGray">#f2f2f2</color>
+    <color name="uxsdk_dic_color_c8_white">#ffffff</color>
+    <color name="uxsdk_dic_color_c24_white_Transparent6">#99ffffff</color>
+    <color name="uxsdk_dic_color_c24_white_Transparent7">#B2ffffff</color>
+    <color name="uxsdk_dic_color_c30_default_shadow">#88757575</color>
+    <color name="uxsdk_dic_color_c31">#585858</color>
+    <color name="uxsdk_dic_color_c32">#4a4a4a</color>
+    <color name="uxsdk_dic_color_c33">#26000000</color>
+
     <color name="uxsdk_dic_color_c0_transparent">#00000000</color>
     <color name="uxsdk_dic_color_c1_primary">#273035</color>
     <color name="uxsdk_dic_color_c2_primaryDark">#1b272f</color>
@@ -252,7 +268,7 @@
 
 
     <!-- 错误提示 -->
-    <color name="uxsdk_tips_danger_in_dark">@color/uxsdk_danger_in_dark</color>
+    <color name="uxsdk_tips_danger_in_dark">@color/uxsdk_red_in_dark</color>
     <!-- 警告提示-->
     <color name="uxsdk_tips_caution_in_dark">@color/uxsdk_zone_warning_enhanced</color>
     <!-- 成功提示-->
@@ -266,6 +282,9 @@
     <color name="uxsdk_zoom_slider_dot_color">#4DFFFFFF</color>
     <color name="uxsdk_zoom_slider_color">#1FA3F6</color>
 
+    <color name="uxsdk_message_info">#FF1FA3F6</color>    <!-- 普通消息 -->
+    <color name="uxsdk_message_error">#FFE70102</color>   <!-- 错误消息 -->
+    <color name="uxsdk_common_divider">#FFD8D8D8</color>  <!-- 分割线颜色 -->
 
 
     <!--hsi -->

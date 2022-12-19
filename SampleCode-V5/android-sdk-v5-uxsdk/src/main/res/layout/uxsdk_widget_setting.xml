@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/uxsdk_black">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/uxsdk_1_dp"
+        android:layout_height="match_parent"
+        android:background="@color/uxsdk_white_0_percent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_fpv_top_bar_setting"
+        android:layout_width="@dimen/uxsdk_40_dp"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:stateListAnimator="@animator/uxsdk_pressed_alpha_040"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/uxsdk_ic_fpv_top_setting" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

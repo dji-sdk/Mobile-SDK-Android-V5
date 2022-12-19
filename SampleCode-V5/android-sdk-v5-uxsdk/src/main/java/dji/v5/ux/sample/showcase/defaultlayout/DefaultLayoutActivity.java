@@ -25,13 +25,16 @@ package dji.v5.ux.sample.showcase.defaultlayout;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.common.video.channel.VideoChannelState;
@@ -55,19 +58,21 @@ import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.extension.ViewExtensions;
 import dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget;
 import dji.v5.ux.core.panel.topbar.TopBarPanelWidget;
+import dji.v5.ux.core.widget.setting.SettingPanelWidget;
 import dji.v5.ux.core.util.CameraUtil;
 import dji.v5.ux.core.util.CommonUtils;
 import dji.v5.ux.core.util.DataProcessor;
 import dji.v5.ux.core.widget.fpv.FPVWidget;
 import dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget;
 import dji.v5.ux.core.widget.hsi.PrimaryFlightDisplayWidget;
+import dji.v5.ux.core.widget.setting.SettingWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
 import dji.v5.ux.map.MapWidget;
 import dji.v5.ux.mapkit.core.maps.DJIUiSettings;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
-import dji.v5.ux.visualcamera.NDVICameraPanel;
-import dji.v5.ux.visualcamera.VisualCameraPanel;
+import dji.v5.ux.visualcamera.CameraNDVIPanelWidget;
+import dji.v5.ux.visualcamera.CameraVisiblePanelWidget;
 import dji.v5.ux.visualcamera.zoom.FocalZoomWidget;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -83,7 +88,6 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected FPVWidget primaryFpvWidget;
     protected FPVInteractionWidget fpvInteractionWidget;
     protected FPVWidget secondaryFPVWidget;
-    protected ConstraintLayout parentView;
     protected SystemStatusListPanelWidget systemStatusListPanelWidget;
     protected SimulatorControlWidget simulatorControlWidget;
     protected LensControlWidget lensControlWidget;
@@ -94,13 +98,18 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected HorizontalSituationIndicatorWidget horizontalSituationIndicatorWidget;
     protected ExposureSettingsPanel exposureSettingsPanel;
     protected PrimaryFlightDisplayWidget pfvFlightDisplayWidget;
-    protected NDVICameraPanel ndviCameraPanel;
-    protected VisualCameraPanel visualCameraPanel;
+    protected CameraNDVIPanelWidget ndviCameraPanel;
+    protected CameraVisiblePanelWidget visualCameraPanel;
     protected FocalZoomWidget focalZoomWidget;
+    protected SettingWidget settingWidget;
     protected MapWidget mapWidget;
+    private SettingPanelWidget mSettingPanelWidget;
+    private DrawerLayout mDrawerLayout;
+
 
     private CompositeDisposable compositeDisposable;
-    private final DataProcessor<CameraSource> cameraSourceProcessor = DataProcessor.create(new CameraSource(PhysicalDevicePosition.UNKNOWN, CameraLensType.UNKNOWN));
+    private final DataProcessor<CameraSource> cameraSourceProcessor = DataProcessor.create(new CameraSource(PhysicalDevicePosition.UNKNOWN,
+            CameraLensType.UNKNOWN));
     private VideoChannelStateChangeListener primaryChannelStateListener = null;
     private VideoChannelStateChangeListener secondaryChannelStateListener = null;
     //endregion
@@ -122,11 +131,11 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         if (simulatorIndicatorWidget != null) {
             simulatorIndicatorWidget.setStateChangeCallback(findViewById(R.id.widget_simulator_control));
         }
-
+        mDrawerLayout = findViewById(R.id.root_view);
+        settingWidget = topBarPanel.getSettingWidget();
         primaryFpvWidget = findViewById(R.id.widget_primary_fpv);
         fpvInteractionWidget = findViewById(R.id.widget_fpv_interaction);
         secondaryFPVWidget = findViewById(R.id.widget_secondary_fpv);
-        parentView = findViewById(R.id.root_view);
         systemStatusListPanelWidget = findViewById(R.id.widget_panel_system_status_list);
         simulatorControlWidget = findViewById(R.id.widget_simulator_control);
         lensControlWidget = findViewById(R.id.widget_lens_control);
@@ -140,6 +149,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         focalZoomWidget = findViewById(R.id.widget_focal_zoom);
         cameraControlsWidget = findViewById(R.id.widget_camera_controls);
         horizontalSituationIndicatorWidget = findViewById(R.id.widget_horizontal_situation_indicator);
+
         mapWidget = findViewById(R.id.widget_map);
         cameraControlsWidget.getExposureSettingsIndicatorWidget().setStateChangeResourceId(R.id.panel_camera_controls_exposure_settings);
 
@@ -156,7 +166,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         mapWidget.initAMap(map -> {
             // map.setOnMapClickListener(latLng -> onViewClick(mapWidget));
             DJIUiSettings uiSetting = map.getUiSettings();
-            if (uiSetting != null ) {
+            if (uiSetting != null) {
                 uiSetting.setZoomControlsEnabled(false);//hide zoom widget
             }
         });
@@ -166,7 +176,25 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     private void initClickListener() {
         secondaryFPVWidget.setOnClickListener(v -> swapVideoSource());
         initChannelStateListener();
+
+        if (settingWidget != null) {
+            settingWidget.setOnClickListener(v -> toggleRightDrawer());
+        }
     }
+
+    private void toggleRightDrawer() {
+        if (mSettingPanelWidget == null) {
+            ViewStub stub = findViewById(R.id.manual_right_nav_setting_stub);
+            if (stub != null) {
+                mSettingPanelWidget = (SettingPanelWidget) stub.inflate();
+            } else {
+                mSettingPanelWidget = findViewById(R.id.manual_right_nav_setting);
+            }
+        }
+        mDrawerLayout.openDrawer(GravityCompat.END);
+
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -249,8 +277,10 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     }
 
     private void initChannelStateListener() {
-        IVideoChannel primaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL);
-        IVideoChannel secondaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL);
+        IVideoChannel primaryChannel =
+                MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL);
+        IVideoChannel secondaryChannel =
+                MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL);
         if (primaryChannel != null) {
             primaryChannelStateListener = (from, to) -> {
                 StreamSource primaryStreamSource = primaryChannel.getStreamSource();
@@ -272,8 +302,10 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     }
 
     private void removeChannelStateListener() {
-        IVideoChannel primaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL);
-        IVideoChannel secondaryChannel = MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL);
+        IVideoChannel primaryChannel =
+                MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL);
+        IVideoChannel secondaryChannel =
+                MediaDataCenter.getInstance().getVideoStreamManager().getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL);
         if (primaryChannel != null) {
             primaryChannel.removeVideoChannelStateChangeListener(primaryChannelStateListener);
         }
@@ -358,5 +390,12 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
+            mDrawerLayout.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

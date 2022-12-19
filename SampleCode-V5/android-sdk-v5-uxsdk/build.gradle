@@ -39,9 +39,14 @@ dependencies {
     implementation deps.media
     implementation deps.kotlinLib
     implementation deps.ktxCore
-    api deps.rx3Android
+    implementation deps.rx3Android
     implementation deps.lottie
     implementation deps.cardview
+    implementation deps.mikepenzCommunityMaterial
+    implementation deps.mikepenzGoogleMaterial
+    implementation deps.mikepenzIconicsViews
+    implementation deps.mikepenzIconicsCore
+    implementation deps.mikepenzIonicons
 
     api deps.maplibreAnotation
     api deps.maplibreTurf

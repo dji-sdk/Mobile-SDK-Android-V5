@@ -28,6 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/main_title_layout">
 
         <HorizontalScrollView
+            android:id="@+id/title_msg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="3dp"
@@ -72,9 +73,7 @@
                     android:layout_weight="0.5"
                     android:text="Second"
                     android:textColor="@color/white_half"/>
-
             </LinearLayout>
-
         </HorizontalScrollView>
 
         <dji.sampleV5.modulecommon.views.RoundImageView

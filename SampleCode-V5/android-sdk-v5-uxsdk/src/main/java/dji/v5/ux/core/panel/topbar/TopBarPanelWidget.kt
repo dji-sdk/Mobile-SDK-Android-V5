@@ -27,6 +27,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.core.content.res.use
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import dji.v5.ux.core.base.WidgetSizeDescription
 import dji.v5.ux.core.base.panel.BarPanelWidget
@@ -44,6 +45,8 @@ import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget
 import dji.v5.ux.core.widget.videosignal.VideoSignalWidget
 import dji.v5.ux.core.widget.perception.PerceptionStateWidget
+import dji.v5.ux.warning.DeviceHealthAndStatusWidget
+import dji.v5.ux.core.widget.setting.SettingWidget
 import java.util.*
 
 /**
@@ -79,54 +82,71 @@ import java.util.*
  * individual's widget documentation for more customization options.
  */
 open class TopBarPanelWidget @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0,
-        barPanelWidgetOrientation: BarPanelWidgetOrientation = BarPanelWidgetOrientation.HORIZONTAL
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    barPanelWidgetOrientation: BarPanelWidgetOrientation = BarPanelWidgetOrientation.HORIZONTAL
 ) : BarPanelWidget<Any>(context, attrs, defStyleAttr, barPanelWidgetOrientation) {
 
     //region Widgets Properties
+
+    //region Widgets Properties
+    val deviceHealthAndStatusWidget: DeviceHealthAndStatusWidget?
+
     /**
      * Getter for [SystemStatusWidget]. Null when excluded from the bar panel.
      */
     val systemStatusWidget: SystemStatusWidget?
+
     /**
      * Getter for [FlightModeWidget]. Null when excluded from the bar panel.
      */
     val flightModeWidget: FlightModeWidget?
+
     /**
      * Getter for [SimulatorIndicatorWidget]. Null when excluded from the bar panel.
      */
     val simulatorIndicatorWidget: SimulatorIndicatorWidget?
+
     /**
      * Getter for [AirSenseWidget]. Null when excluded from the bar panel.
      */
     val airSenseWidget: AirSenseWidget?
+
     /**
      * Getter for [GPSSignalWidget]. Null when excluded from the bar panel.
      */
-    @get:JvmName("getGPSSignalWidget")
     val gpsSignalWidget: GpsSignalWidget?
+
     /**
      * Getter for [PerceptionStateWidget]. Null when excluded from the bar panel.
      */
     val visionWidget: PerceptionStateWidget?
+
     /**
      * Getter for [RemoteControllerSignalWidget]. Null when excluded from the bar panel.
      */
     val remoteControllerSignalWidget: RemoteControllerSignalWidget?
+
     /**
      * Getter for [VideoSignalWidget]. Null when excluded from the bar panel.
      */
     val videoSignalWidget: VideoSignalWidget?
+
     /**
      * Getter for [BatteryWidget]. Null when excluded from the bar panel.
      */
     val batteryWidget: BatteryWidget?
+
+    /**
+     * Getter for [SettingWidget]. Null when excluded from the bar panel.
+     */
+    val settingWidget: SettingWidget?
+
     /**
      * Getter for [ConnectionWidget]. Null when excluded from the bar panel.
      */
-    val connectionWidget: ConnectionWidget?
+//    val connectionWidget: ConnectionWidget?
     //endregion
 
     //region Private properties
@@ -150,6 +170,18 @@ open class TopBarPanelWidget @JvmOverloads constructor(
         addLeftWidgets(leftPanelItems.toTypedArray())
 
         val rightPanelItems = ArrayList<PanelItem>()
+        if (!WidgetValue.DEVICE_HEALTH.isItemExcluded(excludedItemsValue)) {
+            deviceHealthAndStatusWidget = DeviceHealthAndStatusWidget(context, attrs)
+            rightPanelItems.add(PanelItem(deviceHealthAndStatusWidget))
+        } else {
+            deviceHealthAndStatusWidget = null
+        }
+        if (!WidgetValue.GPS_SIGNAL.isItemExcluded(excludedItemsValue)) {
+            gpsSignalWidget = GpsSignalWidget(context, attrs)
+            rightPanelItems.add(PanelItem(gpsSignalWidget))
+        } else {
+            gpsSignalWidget = null
+        }
         if (!WidgetValue.FLIGHT_MODE.isItemExcluded(excludedItemsValue)) {
             flightModeWidget = FlightModeWidget(context, attrs)
             rightPanelItems.add(PanelItem(flightModeWidget))
@@ -167,12 +199,6 @@ open class TopBarPanelWidget @JvmOverloads constructor(
             rightPanelItems.add(PanelItem(airSenseWidget))
         } else {
             airSenseWidget = null
-        }
-        if (!WidgetValue.GPS_SIGNAL.isItemExcluded(excludedItemsValue)) {
-            gpsSignalWidget = GpsSignalWidget(context, attrs)
-            rightPanelItems.add(PanelItem(gpsSignalWidget as GpsSignalWidget))
-        } else {
-            gpsSignalWidget = null
         }
         if (!WidgetValue.VISION.isItemExcluded(excludedItemsValue)) {
             visionWidget = PerceptionStateWidget(context, attrs)
@@ -198,18 +224,19 @@ open class TopBarPanelWidget @JvmOverloads constructor(
         } else {
             batteryWidget = null
         }
-        if (!WidgetValue.CONNECTION.isItemExcluded(excludedItemsValue)) {
-            connectionWidget = ConnectionWidget(context, attrs)
-            rightPanelItems.add(PanelItem(connectionWidget))
+
+        if (!WidgetValue.SETTING.isItemExcluded(excludedItemsValue)) {
+            settingWidget = SettingWidget(context, attrs)
+            rightPanelItems.add(PanelItem(settingWidget))
         } else {
-            connectionWidget = null
+            settingWidget = null
         }
         addRightWidgets(rightPanelItems.toTypedArray())
     }
 
     @SuppressLint("Recycle")
     override fun initAttributes(attrs: AttributeSet) {
-        guidelinePercent = 0.3f
+        guidelinePercent = 0.25f
         itemsMarginTop = getDimension(R.dimen.uxsdk_bar_panel_margin).toInt()
         itemsMarginBottom = getDimension(R.dimen.uxsdk_bar_panel_margin).toInt()
 
@@ -231,15 +258,17 @@ open class TopBarPanelWidget @JvmOverloads constructor(
     override fun getIdealDimensionRatioString(): String? = null
 
     override val widgetSizeDescription: WidgetSizeDescription =
-            WidgetSizeDescription(
-                    WidgetSizeDescription.SizeType.OTHER,
-                    widthDimension = WidgetSizeDescription.Dimension.EXPAND,
-                    heightDimension = WidgetSizeDescription.Dimension.EXPAND)
+        WidgetSizeDescription(
+            WidgetSizeDescription.SizeType.OTHER,
+            widthDimension = WidgetSizeDescription.Dimension.EXPAND,
+            heightDimension = WidgetSizeDescription.Dimension.EXPAND
+        )
     //endregion
 
     private enum class WidgetValue(val value: Int) {
         SYSTEM_STATUS(1),
-        FLIGHT_MODE(2),
+        DEVICE_HEALTH(2),
+        FLIGHT_MODE(3),
         SIMULATOR_INDICATOR(4),
         AIR_SENSE(8),
         GPS_SIGNAL(16),
@@ -247,7 +276,8 @@ open class TopBarPanelWidget @JvmOverloads constructor(
         RC_SIGNAL(64),
         VIDEO_SIGNAL(128),
         BATTERY(256),
-        CONNECTION(512);
+        SETTING(512),
+        CONNECTION(1024);
 
         fun isItemExcluded(excludeItems: Int): Boolean {
             return excludeItems and this.value == this.value

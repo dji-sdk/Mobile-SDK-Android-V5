@@ -31,6 +31,8 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import dji.v5.utils.common.ContextUtil;
 import dji.v5.utils.common.LogUtils;
 import dji.v5.utils.common.NetworkUtils;
 import dji.v5.ux.R;
@@ -77,6 +79,7 @@ import dji.v5.ux.core.widget.hsi.SpeedDisplayWidget;
 import dji.v5.ux.core.widget.perception.PerceptionStateWidget;
 import dji.v5.ux.core.widget.remainingflighttime.RemainingFlightTimeWidget;
 import dji.v5.ux.core.widget.remotecontrollersignal.RemoteControllerSignalWidget;
+import dji.v5.ux.core.widget.setting.SettingWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
 import dji.v5.ux.core.widget.useraccount.UserAccountLoginWidget;
@@ -84,6 +87,8 @@ import dji.v5.ux.core.widget.verticalvelocity.VerticalVelocityWidget;
 import dji.v5.ux.core.widget.videosignal.VideoSignalWidget;
 import dji.v5.ux.core.widget.vps.VPSWidget;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
+import dji.v5.ux.visualcamera.CameraNDVIPanelWidget;
+import dji.v5.ux.visualcamera.CameraVisiblePanelWidget;
 import dji.v5.ux.visualcamera.aperture.CameraConfigApertureWidget;
 import dji.v5.ux.visualcamera.ev.CameraConfigEVWidget;
 import dji.v5.ux.visualcamera.iso.CameraConfigISOAndEIWidget;
@@ -92,6 +97,7 @@ import dji.v5.ux.visualcamera.ssd.CameraConfigSSDWidget;
 import dji.v5.ux.visualcamera.storage.CameraConfigStorageWidget;
 import dji.v5.ux.visualcamera.wb.CameraConfigWBWidget;
 import dji.v5.ux.visualcamera.zoom.FocalZoomWidget;
+import dji.v5.ux.warning.DeviceHealthAndStatusWidget;
 
 /**
  * Displays a list of widget names. Clicking on a widget name will show that widget in a separate
@@ -227,7 +233,7 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_attitude_display_widget_title, new WidgetViewHolder<>(AttitudeDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_primary_flight_display_widget_title, new WidgetViewHolder<>(PrimaryFlightDisplayWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_meter_widget_title, new WidgetViewHolder<>(ExposureMeteringWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
-        widgetListItems.add(new WidgetListItem(R.string.uxsdk_focal_zoom_widget_title, new WidgetViewHolder<>(FocalZoomWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_focal_zoom_widget_title, new WidgetViewHolder<>(FocalZoomWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_setting_panel_title, new WidgetViewHolder<>(ExposureSettingsPanel.class, 211, 316)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_mode_setting_widget_title, new WidgetViewHolder<>(ExposureModeSettingWidget.class, 160, 30)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_iso_and_ei_setting_widget_title, new WidgetViewHolder<>(ISOAndEISettingWidget.class, 211, 60)));
@@ -236,7 +242,10 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_attitude_display_widget_title, new WidgetViewHolder<>(AttitudeDisplayWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_primary_flight_display_widget_title, new WidgetViewHolder<>(PrimaryFlightDisplayWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_meter_widget_title, new WidgetViewHolder<>(ExposureMeteringWidget.class, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)));
-        widgetListItems.add(new WidgetListItem(R.string.uxsdk_focal_zoom_widget_title, new WidgetViewHolder<>(FocalZoomWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_focal_zoom_widget_title, new WidgetViewHolder<>(FocalZoomWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_ndvi_panel_widget_title, new WidgetViewHolder<>(CameraNDVIPanelWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 35)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_visible_panel_widget_title, new WidgetViewHolder<>(CameraVisiblePanelWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 35)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_device_health_and_status_widget_title, new WidgetViewHolder<>(DeviceHealthAndStatusWidget.class, 195, 38)));
     }
 
     @Override
@@ -249,6 +258,5 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         transaction.replace(R.id.fragment_container, newFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-
     }
 }

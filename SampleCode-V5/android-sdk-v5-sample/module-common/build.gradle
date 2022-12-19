@@ -50,6 +50,7 @@ dependencies {
     api deps.legacySupport
     api deps.lifecycleViewModel
     api deps.lifecycleLiveData
+    api deps.rx3Android
     implementation deps.bugly
     implementation deps.leakcanary
     api deps.glide

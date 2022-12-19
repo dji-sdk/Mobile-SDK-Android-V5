@@ -8,7 +8,7 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 
 
 当前版本支持机型：
-* [DJI Mavic 3M](https://ag.dji.com/cn/mavic-3-m?site=brandsite&from=nav)
+* [DJI Mavic 3 多光谱版](https://ag.dji.com/cn/mavic-3-m?site=brandsite&from=nav)
 * [DJI Mavic 3 行业系列](https://www.dji.com/cn/mavic-3-enterprise)
 * [经纬 M30 系列](https://www.dji.com/cn/matrice-30?site=brandsite&from=nav)
 * [经纬 M300 RTK](https://www.dji.com/cn/matrice-300?site=brandsite&from=nav)

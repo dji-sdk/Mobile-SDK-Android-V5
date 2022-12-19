@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/uxsdk_camera_config_height"
-    tools:parentTag="dji.v5.ux.visualcamera.VisualCameraPanel">
+    tools:parentTag="dji.v5.ux.visualcamera.CameraVisiblePanelWidget">
 
     <dji.v5.ux.visualcamera.iso.CameraConfigISOAndEIWidget
         android:id="@+id/widget_camera_config_iso_and_ei"
