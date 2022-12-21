@@ -4,11 +4,11 @@
 
 ##  Alpha Version Announcement
 
-1. To improve the problem-solving efficiency of developers' feedback, we will fix the serious problems first. And we will release the fixed version immediately after the regression test.
-2. For letting developers experience and test the MSDK functions that have been developed but not officially released, we will also release the fixed version immediately after the product acceptance test and functional test.
-3. The Alpha version is not strictly tested before the release. There might exist some unstable problems. Please judge and choose whether to use this version according to the release note. If you have other problems, please contact us immediately.
-4. All changes in the Alpha version will be merged into the official version and will be strictly tested before the release.
-5. It is not suggested that developers directly merge the MSDK Alpha version and released it as an official version.
+1. To improve the problem-solving efficiency of developers' feedback, we will fix the serious problems first. And we will release the alpha version immediately after the regression test.
+2. For letting developers experience and test the MSDK functions that have been developed but not officially released, we will also release the alpha version immediately after the product acceptance test and functional test. 
+3. The alpha version is not strictly tested before the release. There might exist some unstable problems. Please judge and choose whether to use this version according to the release note. If you have other problems, please contact us immediately.
+4. All changes in the alpha version will be merged into the official version and will be strictly tested before the release.
+5. It is not suggested that developers directly merge the MSDK alpha version and released it as an official version.
 
 ## Release Date
 
