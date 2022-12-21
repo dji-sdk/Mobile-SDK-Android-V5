@@ -16,7 +16,7 @@
 
 ## Release Notes
 
-- **Calling `setRTKReferenceStationSource` to set the RTK reference station source as `QX_NETWORK_SERVICE` will crash:** Fixed
+- **Calling `setRTKReferenceStationSource` to set the RTK reference station source as `QX_NETWORK_SERVICE`, then start QX network RTK service will crash:** Fixed
 
 ## Offline Documentation
 

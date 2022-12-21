@@ -16,7 +16,7 @@
 
 ## 发布记录
 
-- **调用`setRTKReferenceStationSource`设置数据源为`QX_NETWORK_SERVICE`时会崩溃:** 已修复
+- **调用`setRTKReferenceStationSource`设置数据源为`QX_NETWORK_SERVICE`后，开启千寻网络RTK服务时会崩溃:** 已修复
 
 ## 离线文档
 
