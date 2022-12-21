@@ -1,14 +1,13 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.2.0"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.2.0"
-    deps.handheld = "com.dji:dji-sdk-v5-handheld:5.2.0"
-    deps.handheldProvided = "com.dji:dji-sdk-v5-handheld-provided:5.2.0"
-    deps.all = "com.dji:dji-sdk-v5-all:5.2.0"
-    deps.allProvided = "com.dji:dji-sdk-v5-all-provided:5.2.0"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.2.0"
-
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft-alpha:5.3.0-a1"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided-alpha:5.3.0-a1"
+    deps.handheld = "com.dji:dji-sdk-v5-handheld-alpha:5.3.0-a1"
+    deps.handheldProvided = "com.dji:dji-sdk-v5-handheld-provided-alpha:5.3.0-a1"
+    deps.all = "com.dji:dji-sdk-v5-all-alpha:5.3.0-a1"
+    deps.allProvided = "com.dji:dji-sdk-v5-all-provided-alpha:5.3.0-a1"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp-alpha:5.3.0-a1"
 
     //三方依赖库
     deps.gson = 'com.google.code.gson:gson:2.9.1'
