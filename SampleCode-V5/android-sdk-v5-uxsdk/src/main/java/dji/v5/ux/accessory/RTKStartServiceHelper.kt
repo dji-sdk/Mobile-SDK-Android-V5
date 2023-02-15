@@ -36,6 +36,7 @@ object RTKStartServiceHelper {
     private val rtkCenter = RTKCenter.getInstance()
     private val qxRTKManager = RTKCenter.getInstance().qxrtkManager
     private val customManager = RTKCenter.getInstance().customRTKManager
+    private val cmccRtkManager = RTKCenter.getInstance().cmccrtkManager
 
     private var productType: ProductType = ProductType.UNKNOWN
     private var rtkDongleConnection = false
@@ -135,15 +136,20 @@ object RTKStartServiceHelper {
 
     @Synchronized
     private fun startCMCCRtkService() {
-        LogUtils.i(TAG, "startCMCCRtkService")
+        val rtkNetworkCoordinateSystem = RTKUtil.getNetRTKCoordinateSystem(RTKReferenceStationSource.NTRIP_NETWORK_SERVICE)
         setStartRTKState(true)
         isHasStartRTK.set(false)
-        val rtkNetworkCoordinateSystem = RTKUtil.getNetRTKCoordinateSystem(RTKReferenceStationSource.NTRIP_NETWORK_SERVICE)
-        rtkNetworkCoordinateSystem?.let {
+        LogUtils.i(TAG, "startCMCCRtkService,rtkNetworkCoordinateSystem=$rtkNetworkCoordinateSystem")
+        if (rtkNetworkCoordinateSystem == null) {
+            setStartRTKState(false)
+            LogUtils.e(TAG, "getCMCCRtk CoordinateSystem == null，startCMCCRtkService finish！")
+            return
+        }
+        rtkNetworkCoordinateSystem.let {
             LogUtils.i(TAG, "startCMCCRtkService,coordinateName=$rtkNetworkCoordinateSystem")
-            qxRTKManager.stopNetworkRTKService(object : CommonCallbacks.CompletionCallback {
+            cmccRtkManager.stopNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
-                    customManager.startNetworkRTKService(rtkNetworkCoordinateSystem, object : CommonCallbacks.CompletionCallback {
+                    cmccRtkManager.startNetworkRTKService(rtkNetworkCoordinateSystem, object : CommonCallbacks.CompletionCallback {
                         override fun onSuccess() {
                             LogUtils.i(TAG, "startCMCCRtkService success")
                             setStartRTKState(false)
@@ -180,6 +186,7 @@ object RTKStartServiceHelper {
     @Synchronized
     private fun startQxRtkService() {
         var rtkNetworkCoordinateSystem = RTKUtil.getNetRTKCoordinateSystem(RTKReferenceStationSource.QX_NETWORK_SERVICE)
+        LogUtils.i(TAG,"startQxRtkService rtkNetworkCoordinateSystem=$rtkNetworkCoordinateSystem")
         if (rtkNetworkCoordinateSystem != null) {
             startQxRtkService(rtkNetworkCoordinateSystem)
         } else {
@@ -197,7 +204,6 @@ object RTKStartServiceHelper {
     }
 
     private fun startQxRtkService(coordinateSystem: CoordinateSystem) {
-        LogUtils.i(TAG, "startQxRtkService,rtkNetworkCoordinateSystem=$coordinateSystem")
         setStartRTKState(true)
         isHasStartRTK.set(false)
 
@@ -243,7 +249,12 @@ object RTKStartServiceHelper {
         setStartRTKState(true)
         LogUtils.i(TAG, "startRtkCustomNetworkService")
         val rtkCustomNetworkSetting: RTKCustomNetworkSetting? = RTKUtil.getRtkCustomNetworkSetting()
-        rtkCustomNetworkSetting?.let {
+        if (rtkCustomNetworkSetting == null) {
+            setStartRTKState(false)
+            LogUtils.e(TAG, "get rtkCustomNetworkSetting == null，startRtkCustomNetworkService finish！")
+            return
+        }
+        rtkCustomNetworkSetting.let {
             LogUtils.i(TAG, "rtkCustomNetworkSetting=$it")
             customManager.stopNetworkRTKService(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {

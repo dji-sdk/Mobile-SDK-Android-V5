@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 最新Alpha版本 5.3.0-a1
+# DJI Mobile SDK for Android V5 最新Alpha版本 5.3.0-a2
 
 [English Version](README.md)
 
@@ -12,11 +12,19 @@
 
 ## 发布日期
 
-2022.12.21
+2023.2.14
 
 ## 发布记录
 
-- **调用`setRTKReferenceStationSource`设置数据源为`QX_NETWORK_SERVICE`后，开启千寻网络RTK服务时会崩溃:** 已修复
+- 支持调用接口（无UI）进行DJI账号登录。
+- 支持限飞解禁：IFlyZoneManager。
+
+
+- **`calcPerByteSum`接口报`ArrayIndexOutOfBoundsException`错误:** 已修复
+- **`InnerVideoEncoder`接口崩溃:** 已修复
+- **调用`addDJIDeviceHealthInfoChangeListener`接口会崩溃:** 已修复
+- **MSDK Sample在切换App前后台后，虚拟摇杆会消失:** 已修复
+- **在M300 RTK上，`WaylineExecutingInfoListener`和`WaypointMissionExecuteStateListener`回调信息不准确:** 已修复
 
 ## 离线文档
 
@@ -24,7 +32,7 @@
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.3.0-a1
+> **注意：** sdkVersion = 5.3.0-a2
 
 | SDK包  <div style="width: 150pt">  | 说明  <div style="width: 200pt">   | 使用方式 <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

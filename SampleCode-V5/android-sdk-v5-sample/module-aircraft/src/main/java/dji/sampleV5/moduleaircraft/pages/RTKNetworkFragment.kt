@@ -121,14 +121,14 @@ class RTKNetworkFragment : DJIFragment() {
             })
         }
         btn_set_custom_network_rtk_settings.setOnClickListener {
-            val currentCustomNetworkRTKSettingCache = rtkNetworkVM.getCurrentCustomNetworkRTKSettingCache(context)
+            val currentCustomNetworkRTKSettingCache = rtkNetworkVM.getCurrentCustomNetworkRTKSettingCache()
             openInputDialog(currentCustomNetworkRTKSettingCache, "Set custom network RTK account information") {
                 val setting = JsonUtil.toBean(it, RTKCustomNetworkSetting::class.java)
                 if (setting == null) {
                     ToastUtils.showToast("数据解析失败，请重试")
                     return@openInputDialog
                 }
-                rtkNetworkVM.setCustomNetworkRTKSettings(context, setting)
+                rtkNetworkVM.setCustomNetworkRTKSettings( setting)
             }
         }
         /**

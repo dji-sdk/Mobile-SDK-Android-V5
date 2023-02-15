@@ -10,7 +10,7 @@
     <string name="news_date">2022–12–15</string>
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/zh-cn/community/topics</string>
-    <string name="release_node_url">https://developer.dji.com/ doc/mobile-sdk-tutorial/cn/</string>
+    <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/cn/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/zh-cn/requests/new</string>
 
     <string name="app_name_all">MSDK全部功能</string>
@@ -49,6 +49,9 @@
 
     <string name="item_lte_title">LTE</string>
     <string name="item_lte_description">演示如何使用LTE相关功能</string>
+
+    <string name="item_fly_safe_title">限飞</string>
+    <string name="item_fly_safe_description">演示如何使用限飞相关功能</string>
 
     <string name="item_simulator_title">模拟器</string>
     <string name="item_simulator_description">演示如何使用RTK相关功能</string>
@@ -240,12 +243,14 @@
     <string name="btn_mission_stop">结束任务</string>
 
     <!--登录-->
-    <string name="btn_login_account">登录账户 </string>
+    <string name="btn_login_account">带UI的账户登录 </string>
+    <string name="btn_user_login">不带UI的账户登录(支持手机号码或者邮箱登录)</string>
     <string name="btn_logout_account">登出账户 </string>
     <string name="btn_get_login_info">获取已登录的用户信息 </string>
     <string name="tv_login_state">当前登录状态: </string>
     <string name="tv_login_account">当前登录用户名: </string>
     <string name="tv_login_error">登录模块错误: </string>
+    <string name="tv_verification_code">验证码: </string>
     <string name="item_login_account_title">登录账号</string>
     <string name="item_login_account_description">演示DJI账户登录相关功能</string>
 
@@ -411,5 +416,17 @@
     <string name="btn_start_lte_authentication">开始LTE认证</string>
     <string name="btn_set_lte_enhanced_transmission_type">设置LTE增强传输类型</string>
     <string name="btn_get_lte_enhanced_transmission_type">读取LTE增强传输类型</string>
+
+    <!-- Fly Safe -->
+    <string name="btn_btn_hide_or_show_all_fly_zone_info">隐藏/显示FlyZone信息</string>
+    <string name="btn_get_fly_zones_in_surrounding_area">读取附近(50000M)限飞区信息</string>
+    <string name="btn_download_fly_zone_licenses_from_server">下载服务器限飞证书</string>
+    <string name="btn_push_fly_zone_licenses_to_aircraft">推送限飞证书到飞机</string>
+    <string name="btn_pull_fly_zone_licenses_from_aircraft">读取飞机上的限飞证书</string>
+    <string name="btn_delete_fly_zone_licenses_from_aircraft">删除飞机上的限飞证书</string>
+    <string name="btn_set_fly_zone_licenses_enabled">启用/停用限飞证书</string>
+    <string name="btn_unlock_authorization_fly_zone">解禁授权区</string>
+    <string name="btn_unlock_enhanced_warning_fly_zone">解禁加强警告区</string>
+    <string name="btn_unlock_all_enhanced_warning_fly_zone">解禁全部加强警告区</string>
 
 </resources>

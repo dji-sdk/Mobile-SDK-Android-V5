@@ -5,7 +5,6 @@ import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.os.Bundle;
 import android.os.Looper;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -17,7 +16,6 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import dji.v5.utils.common.AndUtil;
 import dji.v5.ux.R;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -170,7 +168,7 @@ public class BaseDialog extends Dialog {
             }
             super.dismiss();
         } catch (Exception ex) {
-            ex.printStackTrace();
+//            ex.printStackTrace();
         }
     }
 

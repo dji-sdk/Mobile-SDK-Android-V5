@@ -196,13 +196,4 @@ class PayloadWidgetFragment : DJIFragment() {
             }
         }
     }
-
-
-    private fun showDialog(title: String, msg: String = "", callback: KeyItemActionListener<String>) {
-        KeyValueDialogUtil.showInputDialog(
-            activity, title, msg, "", true
-        ) {
-            callback.actionChange(it)
-        }
-    }
 }

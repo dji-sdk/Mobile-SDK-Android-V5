@@ -26,6 +26,7 @@ package dji.v5.ux.map;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import dji.v5.manager.aircraft.flysafe.info.FlyZoneLicenseInfo;
 
 /**
  * Interaction between fly zone views and {@link MapWidget}
@@ -49,7 +50,7 @@ public interface FlyZoneActionListener {
      *
      * @param customUnlockZone instance
      */
-//    void requestEnableFlyZone(@NonNull CustomUnlockZone customUnlockZone);
+    void requestEnableFlyZone(@NonNull FlyZoneLicenseInfo customUnlockZone);
 
     /**
      * Request to disable custom unlock zone

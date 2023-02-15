@@ -2,9 +2,9 @@ package dji.sampleV5.moduleaircraft.models
 
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
+import dji.v5.manager.aircraft.uas.AreaStrategy
 import dji.v5.manager.aircraft.uas.UASRemoteIDManager
 import dji.v5.manager.aircraft.uas.UASRemoteIDStatus
-import dji.v5.manager.areacode.AreaCode
 import dji.v5.utils.common.ToastUtils
 
 /**
@@ -19,7 +19,7 @@ class UASUAVM : DJIViewModel() {
     val uasRemoteIDStatus = MutableLiveData<UASRemoteIDStatus>()
 
     init {
-        val error = UASRemoteIDManager.getInstance().setAreaCode(AreaCode.UNITED_STATES_OF_AMERICA)
+        val error = UASRemoteIDManager.getInstance().setUASRemoteIDAreaStrategy(AreaStrategy.US_STRATEGY)
         error?.apply {
             ToastUtils.showToast(toString())
         }

@@ -38,5 +38,18 @@ class LoginVM : DJIViewModel() {
         return userAccountManager.loginInfo
     }
 
+    fun userLogin(
+        userName: String,
+        password: String,
+        verificationCode: String? = null,
+        callbacks: CommonCallbacks.CompletionCallback,
+    ) {
+        userAccountManager.logInDJIUserAccount(userName, password, verificationCode, callbacks)
+    }
+
+    fun getVerificationCodeImageURL(): String {
+        return userAccountManager.verificationCodeImageURL
+    }
+
 
 }

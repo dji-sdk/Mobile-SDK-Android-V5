@@ -36,12 +36,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:id="@+id/btn_user_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/btn_user_login"
+                app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+
+            <Button
                 android:id="@+id/btn_logout"
                 style="@style/main_fragment_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_logout_account"
-                app:layout_constraintTop_toBottomOf="@id/btn_login" />
+                app:layout_constraintTop_toBottomOf="@id/btn_user_login" />
 
             <Button
                 android:id="@+id/btn_get_login_info"
@@ -98,13 +106,35 @@
             tools:ignore="MissingConstraints"
             tools:text="Login" />
 
+
+        <TextView
+            android:id="@+id/tv_verification_code_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:text="@string/tv_verification_code"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_state"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/iv_verification_code_image_info"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_verification_code_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_login_state"
+            tools:ignore="MissingConstraints" />
+
+
         <TextView
             android:id="@+id/tv_login_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/tv_login_error"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_state"
+            app:layout_constraintTop_toBottomOf="@id/tv_verification_code_image"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -114,8 +144,9 @@
             android:layout_marginTop="10dp"
             android:text="null"
             app:layout_constraintLeft_toRightOf="@+id/tv_login_error"
-            app:layout_constraintTop_toBottomOf="@id/tv_login_state"
+            app:layout_constraintTop_toBottomOf="@id/tv_verification_code_image"
             tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

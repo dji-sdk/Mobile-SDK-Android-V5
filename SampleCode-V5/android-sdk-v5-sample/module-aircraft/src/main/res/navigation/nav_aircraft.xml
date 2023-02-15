@@ -145,6 +145,13 @@
         android:name="dji.sampleV5.moduleaircraft.pages.LTEFragment"
         android:label="lte_page"
         android:layout="@layout/frag_lte_page" />
+
+    <fragment
+        android:id="@+id/fly_safe_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.FlySafeFragment"
+        android:label="fly_safe_page"
+        android:layout="@layout/frag_fly_safe_page" />
+
     <fragment
         android:id="@+id/security_code_page"
         android:name="dji.sampleV5.moduleaircraft.pages.SecurityCodeFragment"

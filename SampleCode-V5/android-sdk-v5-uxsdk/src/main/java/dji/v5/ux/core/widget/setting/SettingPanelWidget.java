@@ -14,10 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import dji.sdk.keyvalue.utils.ProductUtil;
 import dji.sdk.keyvalue.value.product.ProductType;
 import dji.sdk.keyvalue.value.remotecontroller.RCMode;
 import dji.v5.utils.common.LogUtils;
-import dji.v5.utils.dpad.DpadProductManager;
 import dji.v5.ux.R;
 import dji.v5.ux.accessory.RTKStartServiceHelper;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
@@ -336,7 +337,7 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
     //辅控不支持RTK
     private boolean isSupportAdvRtk(Boolean isRTKModuleAvailable) {
-        return !isSlaverRcMode(mCurrentRcMode) && isRTKModuleAvailable || DpadProductManager.getInstance().isDjiRcPlus() || DpadProductManager.getInstance().isSmartController();
+        return !isSlaverRcMode(mCurrentRcMode) && isRTKModuleAvailable || ProductUtil.isM300Product() || ProductUtil.isM30Product()||ProductUtil.isM3EProduct();
     }
 
     @Override

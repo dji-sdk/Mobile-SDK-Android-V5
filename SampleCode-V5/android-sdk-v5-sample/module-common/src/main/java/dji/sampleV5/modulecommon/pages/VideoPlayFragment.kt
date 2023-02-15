@@ -15,6 +15,7 @@ import dji.v5.common.video.interfaces.*
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.manager.datacenter.media.VideoPlayState
+import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.video_play_page.*
 
@@ -25,7 +26,10 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     private lateinit var surfaceView: SurfaceView
     private var videoDecoder: IVideoDecoder? = null
     var mediaFile: MediaFile? = null
+    private val TAG = LogUtils.getTag(this)
+    private var enterPlaybackSuccess = false
     var videoPlayState:VideoPlayState = VideoPlayState.IDLE
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +45,38 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        enterPlayback()
+    }
+
+    private fun enterPlayback() {
+        MediaDataCenter.getInstance().mediaManager.enable(object :CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                enterPlaybackSuccess = true
+                LogUtils.e(TAG , "enter success");
+            }
+
+            override fun onFailure(error: IDJIError) {
+                enterPlaybackSuccess = false
+                LogUtils.e(TAG , "enter failed" + error.description());
+            }
+
+        })
+    }
+
+    private fun exitPlayback(){
+
+        MediaDataCenter.getInstance().mediaManager.disable(object :CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                enterPlaybackSuccess = false
+                LogUtils.e(TAG , "exit success");
+            }
+
+            override fun onFailure(error: IDJIError) {
+                enterPlaybackSuccess = false
+                LogUtils.e(TAG , "enter failed" + error.description());
+            }
+
+        })
     }
 
     private fun initView() {
@@ -91,6 +127,8 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
         }
         videoPlayVM.stop()
         videoPlayVM.removeAllListener()
+        enterPlaybackSuccess = false
+        exitPlayback()
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
@@ -139,6 +177,10 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
         )
     }
     private fun play(){
+        if (!enterPlaybackSuccess) {
+            ToastUtils.showToast("Please retry")
+            return
+        }
         MediaDataCenter.getInstance().mediaManager.playVideo(mediaFile , object :CommonCallbacks.CompletionCallbackWithParam<IVideoFrame>{
             override fun onSuccess(data: IVideoFrame?) {
                 videoDecoder?.queueInFrame(data!!)

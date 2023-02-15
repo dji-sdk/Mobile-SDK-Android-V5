@@ -10,8 +10,6 @@ import dji.sampleV5.moduleaircraft.models.LTEVM
 import dji.sampleV5.modulecommon.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.Helper
-import dji.sdk.keyvalue.value.flightcontroller.VirtualStickFlightControlParam
-import dji.v5.manager.aircraft.lte.LTELinkInfo
 import dji.v5.manager.aircraft.lte.LTELinkType
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.ToastUtils
@@ -63,7 +61,7 @@ class LTEFragment : DJIFragment() {
         }
         btn_get_lte_authentication_verification_code.setOnClickListener {
             KeyValueDialogUtil.showInputDialog(
-                activity, "(PhoneAreacode,PhoneNumber))",
+                activity, "(PhoneAreacode,PhoneNumber)",
                 "86,12345678900", "", false
             ) {
                 it?.split(",")?.apply {
@@ -77,7 +75,7 @@ class LTEFragment : DJIFragment() {
         }
         btn_start_lte_authentication.setOnClickListener {
             KeyValueDialogUtil.showInputDialog(
-                activity, "(PhoneAreacode,PhoneNumber,VerificationCode))",
+                activity, "(PhoneAreacode,PhoneNumber,VerificationCode)",
                 "86,12345678900,123456", "", false
             ) {
                 it?.split(",")?.apply {

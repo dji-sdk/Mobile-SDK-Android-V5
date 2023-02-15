@@ -5,10 +5,10 @@ import dji.sampleV5.modulecommon.data.DJIToastResult
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.manager.aircraft.uas.AreaStrategy
 import dji.v5.manager.aircraft.uas.UARegistrationNumberStatus
 import dji.v5.manager.aircraft.uas.UASRemoteIDManager
 import dji.v5.manager.aircraft.uas.UASRemoteIDStatus
-import dji.v5.manager.areacode.AreaCode
 import dji.v5.utils.common.ToastUtils
 
 /**
@@ -26,7 +26,7 @@ class UASJapanVM : DJIViewModel() {
     val uaRegistrationNumber = MutableLiveData<String?>()
 
     init {
-        val error = instance.setAreaCode(AreaCode.JAPAN)
+        val error = instance.setUASRemoteIDAreaStrategy(AreaStrategy.JAPAN_STRATEGY)
         error?.apply {
             ToastUtils.showToast(toString())
         }

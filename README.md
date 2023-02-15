@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Alpha Version 5.3.0-a1
+# DJI Mobile SDK for Android V5 Latest Alpha Version 5.3.0-a2
 
 [中文版](README_CN.md)
 
@@ -12,11 +12,19 @@
 
 ## Release Date
 
-2022.12.21
+2023.2.15
 
 ## Release Notes
 
-- **Calling `setRTKReferenceStationSource` to set the RTK reference station source as `QX_NETWORK_SERVICE`, then start QX network RTK service will crash:** Fixed
+- Support call interface (no UI) for DJI account login.
+- Support unlock fly zone: IFlyZoneManager.
+
+- **`calcPerByteSum` interface reports `ArrayIndexOutOfBoundsException` error:** Fixed
+- **`InnerVideoEncoder` interface crash:** Fixed
+- **Calling `addDJIDeviceHealthInfoChangeListener` interface will crash:** Fixed
+- **MSDK Sample, after switching the front and back of the App, the virtual joystick will disappear:** Fixed
+- **On M300 RTK, `WaylineExecutingInfoListener` and `WaypointMissionExecuteStateListener` callback information was inaccurate:** Fixed
+
 
 ## Offline Documentation
 
@@ -24,7 +32,7 @@
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.3.0-a1
+> **Notice:** sdkVersion = 5.3.0-a2
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

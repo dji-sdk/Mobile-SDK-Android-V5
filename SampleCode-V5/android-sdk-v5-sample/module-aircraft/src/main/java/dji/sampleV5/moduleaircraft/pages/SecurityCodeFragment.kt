@@ -83,13 +83,6 @@ class SecurityCodeFragment : DJIFragment() {
 
     }
 
-    private fun showDialog(title: String, msg: String = "", callback: KeyItemActionListener<String>) {
-        KeyValueDialogUtil.showInputDialog(
-            activity, title, msg, "", true
-        ) {
-            callback.actionChange(it)
-        }
-    }
 
     private fun showErrorMsg() {
         ToastUtils.showToast("ToBean fail,please try again later!")

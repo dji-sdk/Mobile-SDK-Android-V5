@@ -58,23 +58,17 @@ class MediaFragment : DJIFragment(){
 
 
     private fun initData() {
-        MediaDataCenter.getInstance().mediaManager.enable(  object :CommonCallbacks.CompletionCallback{
-            override fun onSuccess() {
-                if (!isload) {
-                    mediaVM.init()
-                    isload = true
-                }
-                adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!! , context , ::onItemClick )
-                media_recycle_list.adapter = adapter
-                mediaVM.mediaFileListData.observe(viewLifecycleOwner){
-                    adapter!!.notifyDataSetChanged()
-                    tv_list_count.text = "Count:${it.data.size}"
-                }
-            }
-            override fun onFailure(error: IDJIError) {
-                LogUtils.e(TAG , "enter failed" + error.description());
-            }
-        })
+
+        if (!isload) {
+            mediaVM.init()
+            isload = true
+        }
+        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!! , context , ::onItemClick )
+        media_recycle_list.adapter = adapter
+        mediaVM.mediaFileListData.observe(viewLifecycleOwner){
+            adapter!!.notifyDataSetChanged()
+            tv_list_count.text = "Count:${it.data.size}"
+        }
 
 
         mediaVM.fileListState.observe(viewLifecycleOwner) {
@@ -185,15 +179,7 @@ class MediaFragment : DJIFragment(){
 
     override fun onDestroy() {
         super.onDestroy()
-        MediaDataCenter.getInstance().mediaManager.disable( object :CommonCallbacks.CompletionCallback{
-            override fun onSuccess() {
-                LogUtils.i(TAG , "exit success");
-            }
-            override fun onFailure(error: IDJIError) {
-                LogUtils.e(TAG , "exit failed " + error.description());
-            }
 
-        })
         mediaVM.destroy()
     }
 

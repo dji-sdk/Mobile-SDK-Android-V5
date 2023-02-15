@@ -36,9 +36,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D;
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D;
+import dji.v5.manager.aircraft.flysafe.info.FlyZoneInformation;
+import dji.v5.manager.aircraft.flysafe.info.FlyZoneLicenseInfo;
 import dji.v5.manager.areacode.AreaCode;
 import dji.v5.manager.areacode.AreaCodeManager;
 import dji.v5.utils.common.LogUtils;
@@ -51,12 +59,11 @@ import dji.v5.ux.core.util.MathUtil;
 import dji.v5.ux.core.util.RxUtil;
 import dji.v5.ux.core.util.SettingDefinitions;
 import dji.v5.ux.core.util.ViewUtil;
-import dji.v5.ux.mapkit.core.maps.DJIMap;
-
 import dji.v5.ux.mapkit.amap.provider.AMapProvider;
 import dji.v5.ux.mapkit.core.Mapkit;
 import dji.v5.ux.mapkit.core.camera.DJICameraUpdate;
 import dji.v5.ux.mapkit.core.camera.DJICameraUpdateFactory;
+import dji.v5.ux.mapkit.core.maps.DJIMap;
 import dji.v5.ux.mapkit.core.maps.DJIMapViewInternal;
 import dji.v5.ux.mapkit.core.models.DJIBitmapDescriptorFactory;
 import dji.v5.ux.mapkit.core.models.DJICameraPosition;
@@ -66,17 +73,6 @@ import dji.v5.ux.mapkit.core.models.annotations.DJIMarker;
 import dji.v5.ux.mapkit.core.models.annotations.DJIMarkerOptions;
 import dji.v5.ux.mapkit.core.models.annotations.DJIPolyline;
 import dji.v5.ux.mapkit.core.models.annotations.DJIPolylineOptions;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.IntRange;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.Group;
-
 import dji.v5.ux.mapkit.gmap.provider.GoogleProvider;
 import dji.v5.ux.mapkit.maplibre.provider.MaplibreProvider;
 import io.reactivex.rxjava3.core.Flowable;
@@ -88,7 +84,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  * includes aircraft location, home location, aircraft trail path, aircraft
  * heading, and No Fly Zones. It also provides the user with options to unlock some Fly Zones.
  */
-public class MapWidget extends ConstraintLayoutWidget<Object> implements View.OnTouchListener {
+public class MapWidget extends ConstraintLayoutWidget<Object> implements View.OnTouchListener, FlyZoneActionListener {
 
     //region  Constants
     private static final int COUNTER_REFRESH_THRESHOLD = 200;
@@ -107,7 +103,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
     //endregion
 
     //region map  fields
-    private Group legendGroup;
     private boolean isTouching = false;
     private int centerRefreshCounter = 201;
     private MapWidgetModel widgetModel;
@@ -116,6 +111,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
     private MapCenterLock mapCenterLockMode = MapCenterLock.AIRCRAFT;
     private boolean isAutoFrameMapBounds = false;
     private DJIMap.MapType mapType;
+    private FlyZoneMapHelper flyZoneHelper;
 
     private DJIMap.OnMarkerClickListener onMarkerClickListener;
 
@@ -164,7 +160,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
     //endregion
 
 
-
     //region Lifecycle
     public MapWidget(@NonNull Context context) {
         super(context);
@@ -181,13 +176,11 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
     @Override
     protected void initView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         inflate(context, R.layout.uxsdk_widget_map, this);
-        legendGroup = findViewById(R.id.constraint_group_legend);
-
 
         if (!isInEditMode()) {
             widgetModel = new MapWidgetModel(DJISDKModel.getInstance(),
                     ObservableInMemoryKeyedStore.getInstance());
-
+            flyZoneHelper = new FlyZoneMapHelper(context, this);
         }
 
         initDefaults();
@@ -209,6 +202,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
                         .subscribe(this::updateAircraftLocation));
             }
         }));
+        addReaction(widgetModel.flyZoneInformationDataProcessor.toFlowable().observeOn(SchedulerProvider.ui()).subscribe(this::onFlyZoneListUpdate));
     }
 
     @Override
@@ -310,13 +304,11 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
     }
 
 
-
-
     //endregion
 
     //region private methods
 
-    private  void initMap(String mapBoxAccessToken , TypedArray typedArray ){
+    private void initMap(String mapBoxAccessToken, TypedArray typedArray) {
         int mapProviderInt = typedArray.getInt(R.styleable.MapWidget_uxsdk_mapProvider, -1);
         if (mapProviderInt >= 0 && (mapProviderInt != 3 || mapBoxAccessToken != null)) {
             setMapProvider(SettingDefinitions.MapProvider.find(mapProviderInt), mapBoxAccessToken);
@@ -329,9 +321,9 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MapWidget);
         String mapBoxAccessToken = typedArray.getString(R.styleable.MapWidget_uxsdk_mapBoxToken);
         if (!isInEditMode()) {
-            initMap(mapBoxAccessToken ,typedArray);
+            initMap(mapBoxAccessToken, typedArray);
             int color;
-             color = typedArray.getColor(R.styleable.MapWidget_uxsdk_homeDirectionColor, INVALID_COLOR);
+            color = typedArray.getColor(R.styleable.MapWidget_uxsdk_homeDirectionColor, INVALID_COLOR);
             if (color != INVALID_COLOR) {
                 setDirectionToHomeColor(color);
             }
@@ -373,7 +365,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         mapCenterLockMode = MapCenterLock.find(typedArray.getInt(R.styleable.MapWidget_uxsdk_mapCenterLock,
                 MapCenterLock.AIRCRAFT.getIndex()));
         isAutoFrameMapBounds = typedArray.getBoolean(R.styleable.MapWidget_uxsdk_autoFrameMap, false);
-        setFlyZoneLegendEnabled(typedArray.getBoolean(R.styleable.MapWidget_uxsdk_flyZoneLegendEnabled, false));
 
         typedArray.recycle();
     }
@@ -406,7 +397,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
 
     private Disposable reactToHeadingChanges() {
         return Flowable.combineLatest(widgetModel.getAircraftHeading(),
-                widgetModel.getGimbalHeading(), Pair::create)
+                        widgetModel.getGimbalHeading(), Pair::create)
                 .observeOn(SchedulerProvider.ui())
                 .subscribe(values -> {
                     updateAircraftHeading(values.first.floatValue());
@@ -418,9 +409,9 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
      * Updates location in Mapkit so adjustments can be made for certain countries.
      */
     private void updateHomeCountry() {
-        Mapkit.inMacau(AreaCodeManager.getInstance().getAreaCode().getAreaCodeEnum()== AreaCode.MACAU);
-        Mapkit.inHongKong(AreaCodeManager.getInstance().getAreaCode().getAreaCodeEnum()==AreaCode.HONG_KONG);
-        Mapkit.inMainlandChina(AreaCodeManager.getInstance().getAreaCode().getAreaCodeEnum()==AreaCode.CHINA);
+        Mapkit.inMacau(AreaCodeManager.getInstance().getAreaCode().getAreaCodeEnum() == AreaCode.MACAU);
+        Mapkit.inHongKong(AreaCodeManager.getInstance().getAreaCode().getAreaCodeEnum() == AreaCode.HONG_KONG);
+        Mapkit.inMainlandChina(AreaCodeManager.getInstance().getAreaCode().getAreaCodeEnum() == AreaCode.CHINA);
     }
 
     private void initDefaults() {
@@ -428,7 +419,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         homeIcon = getResources().getDrawable(R.drawable.uxsdk_ic_home);
         gimbalYawIcon = getResources().getDrawable(R.drawable.uxsdk_ic_map_gimbal_yaw);
     }
-
 
     /**
      * Initializes the marker for home location
@@ -507,8 +497,29 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
 
     }
 
+    private void onFlyZoneListUpdate(List<FlyZoneInformation> flyZoneInformationList) {
+        flyZoneHelper.onFlyZoneListUpdate(flyZoneInformationList);
+    }
 
+    @Override
+    public void requestSelfUnlock(@NonNull ArrayList<Integer> arrayList) {
+        // do nothing
+    }
 
+    @Override
+    public void requestFlyZoneList() {
+        // do nothing
+    }
+
+    @Override
+    public void requestEnableFlyZone(@NonNull FlyZoneLicenseInfo customUnlockZone) {
+        // do nothing
+    }
+
+    @Override
+    public void requestDisableFlyZone() {
+        // do nothing
+    }
 
     private void updateAircraftHeading(float aircraftHeading) {
         if (((aircraftHeading >= 0 && aircraftMarkerHeading >= 0) ||
@@ -693,7 +704,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
             }
             DJICameraUpdate cameraUpdate = null;
             float rotation = map.getCameraPosition().getBearing();
-            DJICameraPosition cameraPosition = getCameraPosition(mapCenterLock , rotation , zoomLevel);
+            DJICameraPosition cameraPosition = getCameraPosition(mapCenterLock, rotation, zoomLevel);
 
             if (cameraPosition != null) {
                 cameraUpdate = DJICameraUpdateFactory.newCameraPosition(cameraPosition);
@@ -709,7 +720,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         }
     }
 
-    private DJICameraPosition getCameraPosition(MapCenterLock mapCenterLock , float rotation, float zoomLevel) {
+    private DJICameraPosition getCameraPosition(MapCenterLock mapCenterLock, float rotation, float zoomLevel) {
         DJICameraPosition cameraPosition = null;
         switch (mapCenterLock) {
             case AIRCRAFT:
@@ -789,13 +800,13 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
             latLngList.add(dummyLocation);
         } else if (mapCenterLockMode == MapCenterLock.NONE) {
 
-            latLngList.add(getAdjustPostion(aircraftLat , aircraftLng ,homeLat , homeLng , delta , true));
-            latLngList.add(getAdjustPostion(aircraftLat , aircraftLng ,homeLat , homeLng , delta , false));
+            latLngList.add(getAdjustPostion(aircraftLat, aircraftLng, homeLat, homeLng, delta, true));
+            latLngList.add(getAdjustPostion(aircraftLat, aircraftLng, homeLat, homeLng, delta, false));
         }
     }
 
 
-    private DJILatLng getAdjustPostion(double aircraftLat , double aircraftLng , double homeLat , double homeLng , double delta , boolean isAircraft) {
+    private DJILatLng getAdjustPostion(double aircraftLat, double aircraftLng, double homeLat, double homeLng, double delta, boolean isAircraft) {
         double adjustedAircraftLat;
         double adjustedAircraftLng;
         double adjustedHomeLat;
@@ -819,14 +830,13 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         if (isAircraft) {
             return new DJILatLng(adjustedAircraftLat, adjustedAircraftLng);
         } else {
-            return  new DJILatLng(adjustedHomeLat, adjustedHomeLng);
+            return new DJILatLng(adjustedHomeLat, adjustedHomeLng);
         }
 
     }
     //endregion
 
     //region map initializations
-
 
 
     /**
@@ -847,7 +857,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         mapView.getDJIMapAsync(map -> {
             MapWidget.this.map = map;
             postInit(listener);
-
+            flyZoneHelper.initializeMap(map);
         });
     }
 
@@ -863,7 +873,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         mapView.getDJIMapAsync(map -> {
             MapWidget.this.map = map;
             postInit(listener);
-
+            flyZoneHelper.initializeMap(map);
         });
     }
 
@@ -911,7 +921,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
                     && !AIRCRAFT_MARKER.equals(title)
                     && !HOME_MARKER.equals(title)
                     && MathUtil.isInteger(title)) {
-               //do something
+                //do something
             } else {
                 emitMarkerClickEvent(marker);
             }
@@ -978,7 +988,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
             }
         }
     }
-
 
 
     //endregion
@@ -1360,31 +1369,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         isAutoFrameMapBounds = isEnabled;
         autoFrameMapBounds();
     }
-
-
-
-
-
-    /**
-     * Check if FlyZone legend is enabled
-     *
-     * @return true - legend is visible false - legend is hidden
-     */
-    public boolean isFlyZoneLegendEnabled() {
-        return legendGroup.getVisibility() == VISIBLE;
-    }
-
-    /**
-     * Show/Hide FlyZone legend
-     *
-     * @param isEnabled true - flyZone legend visible false - flyZone legend not visible
-     */
-    public void setFlyZoneLegendEnabled(boolean isEnabled) {
-        legendGroup.setVisibility(isEnabled ? VISIBLE : GONE);
-    }
-
-    //endregion
-
     /**
      * Map Centering Options.
      */

@@ -347,13 +347,6 @@ class RTKStationFragment : DJIFragment(), RtkStationScanAdapter.OnItemClickListe
     }
 
 
-    private fun showDialog(title: String, msg: String = "", callback: KeyItemActionListener<String>) {
-        KeyValueDialogUtil.showInputDialog(
-            activity, title, msg, "", true
-        ) {
-            callback.actionChange(it)
-        }
-    }
 
     private fun showToJsonErrorMsg() {
         ToastUtils.showToast("数据解析失败，请重试")

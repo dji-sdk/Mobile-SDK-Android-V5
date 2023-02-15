@@ -24,19 +24,30 @@
 package dji.v5.ux.map;
 
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import androidx.annotation.NonNull;
-
 import dji.sdk.keyvalue.key.FlightControllerKey;
 import dji.sdk.keyvalue.key.GimbalKey;
 import dji.sdk.keyvalue.key.KeyTools;
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D;
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D;
+import dji.v5.common.callback.CommonCallbacks;
+import dji.v5.common.error.IDJIError;
+import dji.v5.manager.KeyManager;
+import dji.v5.manager.aircraft.flysafe.FlySafeNotificationListener;
+import dji.v5.manager.aircraft.flysafe.FlyZoneManager;
+import dji.v5.manager.aircraft.flysafe.info.FlySafeReturnToHomeInformation;
+import dji.v5.manager.aircraft.flysafe.info.FlySafeSeriousWarningInformation;
+import dji.v5.manager.aircraft.flysafe.info.FlySafeTipInformation;
+import dji.v5.manager.aircraft.flysafe.info.FlySafeWarningInformation;
+import dji.v5.manager.aircraft.flysafe.info.FlyZoneInformation;
+import dji.v5.manager.aircraft.flysafe.info.FlyZoneLicenseInfo;
 import dji.v5.ux.core.base.DJISDKModel;
-
+import dji.v5.ux.core.base.WidgetModel;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
 import dji.v5.ux.core.util.DataProcessor;
-import dji.v5.ux.core.base.WidgetModel;
 import io.reactivex.rxjava3.core.Flowable;
 
 /**
@@ -51,13 +62,38 @@ public class MapWidgetModel extends WidgetModel {
 
 
     private final DataProcessor<LocationCoordinate3D> aircraftLocationDataProcessor;
-
     private final DataProcessor<LocationCoordinate2D> homeLocationDataProcessor;
     private final DataProcessor<Double> gimbalYawDataProcessor;
     private final DataProcessor<Double> aircraftHeadingDataProcessor;
     private final DataProcessor<String> flightControllerSerialNumberDataProcessor;
+    public final DataProcessor<List<FlyZoneInformation>> flyZoneInformationDataProcessor;
 
+    private final FlySafeNotificationListener flySafeNotificationListener = new FlySafeNotificationListener() {
+        @Override
+        public void onWarningNotificationUpdate(@NonNull FlySafeWarningInformation info) {
+            // No code
+        }
 
+        @Override
+        public void onSeriousWarningNotificationUpdate(@NonNull FlySafeSeriousWarningInformation info) {
+            // No code
+        }
+
+        @Override
+        public void onReturnToHomeNotificationUpdate(@NonNull FlySafeReturnToHomeInformation info) {
+            // No code
+        }
+
+        @Override
+        public void onTipNotificationUpdate(@NonNull FlySafeTipInformation info) {
+            // No code
+        }
+
+        @Override
+        public void onSurroundingFlyZonesUpdate(@NonNull List<FlyZoneInformation> infos) {
+            flyZoneInformationDataProcessor.onNext(infos);
+        }
+    };
 
     public MapWidgetModel(@NonNull DJISDKModel djiSdkModel,
                           @NonNull ObservableInMemoryKeyedStore keyedStore) {
@@ -70,21 +106,27 @@ public class MapWidgetModel extends WidgetModel {
         gimbalYawDataProcessor = DataProcessor.create(0.0d);
         aircraftHeadingDataProcessor = DataProcessor.create(0.0d);
         flightControllerSerialNumberDataProcessor = DataProcessor.create("");
-
+        flyZoneInformationDataProcessor = DataProcessor.create(new CopyOnWriteArrayList<>());
+        KeyManager.getInstance().listen(KeyTools.createKey(FlightControllerKey.KeyConnection), this, (oldValue, newValue) -> {
+            if (newValue == Boolean.TRUE) {
+                updateFlyZoneInformation();
+            }
+        });
     }
 
     @Override
     protected void inSetup() {
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation3D), aircraftLocationDataProcessor);
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHomeLocation) , homeLocationDataProcessor);
+        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHomeLocation), homeLocationDataProcessor);
         bindDataProcessor(KeyTools.createKey(GimbalKey.KeyYawRelativeToAircraftHeading), gimbalYawDataProcessor);
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeySerialNumber), flightControllerSerialNumberDataProcessor);
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyCompassHeading), aircraftHeadingDataProcessor);
+        FlyZoneManager.getInstance().addFlySafeNotificationListener(flySafeNotificationListener);
     }
 
     @Override
     protected void inCleanup() {
-        // No code
+        FlyZoneManager.getInstance().removeFlySafeNotificationListener(flySafeNotificationListener);
     }
 
     @Override
@@ -92,6 +134,31 @@ public class MapWidgetModel extends WidgetModel {
         // No code
     }
 
+    private void updateFlyZoneInformation() {
+        LocationCoordinate2D location = KeyManager.getInstance().getValue(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation));
+        if (location == null) {
+            return;
+        }
+        FlyZoneManager.getInstance().getFlyZonesInSurroundingArea(location, new CommonCallbacks.CompletionCallbackWithParam<List<FlyZoneInformation>>() {
+            @Override
+            public void onSuccess(List<FlyZoneInformation> flyZoneInformation) {
+                flyZoneInformationDataProcessor.onNext(flyZoneInformation);
+            }
+
+            @Override
+            public void onFailure(@NonNull IDJIError error) {
+                //do nothing
+            }
+        });
+    }
+
+    public void setFlyZoneLicensesEnabled(FlyZoneLicenseInfo info, boolean isEnable, CommonCallbacks.CompletionCallback callback) {
+        FlyZoneManager.getInstance().setFlyZoneLicensesEnabled(info, isEnable, callback);
+    }
+
+    public void unlockAuthorizationFlyZone(int flyZoneID, CommonCallbacks.CompletionCallback callback) {
+        FlyZoneManager.getInstance().unlockAuthorizationFlyZone(flyZoneID, callback);
+    }
 
     /**
      * Get aircraft location data including latitude, longitude, altitude
@@ -128,7 +195,4 @@ public class MapWidgetModel extends WidgetModel {
     public Flowable<Double> getAircraftHeading() {
         return aircraftHeadingDataProcessor.toFlowable();
     }
-
-
-    //endregion
 }

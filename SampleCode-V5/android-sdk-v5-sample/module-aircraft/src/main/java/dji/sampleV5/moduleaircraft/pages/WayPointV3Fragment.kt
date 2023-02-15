@@ -453,22 +453,18 @@ class WayPointV3Fragment : DJIFragment() {
         }
     }
 
-    fun createMapView(savedInstanceState: Bundle?) {
-
+    private fun createMapView(savedInstanceState: Bundle?) {
         val onMapReadyListener = MapWidget.OnMapReadyListener { map ->
             map.setMapType(DJIMap.MapType.NORMAL)
         }
         val useAmap = wayPointV3VM.isInMainlandChina();
-        if (useAmap ) {
+        if (useAmap) {
             map_widget.initAMap(onMapReadyListener)
         } else {
             map_widget.initMapLibreMap(BuildConfig.MAPLIBRE_TOKEN, onMapReadyListener)
         }
         map_widget.onCreate(savedInstanceState) //需要再init后调用否则Amap无法显示
-
     }
-
-
 
     override fun onPause() {
         super.onPause()

@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.85"></dji.v5.ux.map.MapWidget>
+        app:layout_constraintWidth_percent="0.85">
+    </dji.v5.ux.map.MapWidget>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/waypoint_button_list"
