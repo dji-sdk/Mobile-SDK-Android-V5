@@ -172,6 +172,15 @@
         app:layout_constraintTop_toBottomOf="@+id/mission_upload_state_tv"></TextView>
 
     <TextView
+        android:id="@+id/waypint_action_state_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waypoint Action State:"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
+        app:layout_constraintTop_toBottomOf="@+id/wayline_execute_state_tv"></TextView>
+
+    <TextView
         android:id="@+id/wayline_aircraft_height"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -179,7 +188,7 @@
         android:layout_marginTop="30dp"
         android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
-        app:layout_constraintTop_toBottomOf="@+id/wayline_execute_state_tv"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/waypint_action_state_tv"></TextView>
 
     <TextView
         android:id="@+id/wayline_aircraft_distance"

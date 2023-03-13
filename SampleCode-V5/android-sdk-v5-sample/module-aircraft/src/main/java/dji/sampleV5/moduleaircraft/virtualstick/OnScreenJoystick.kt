@@ -75,17 +75,15 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
 
     override fun surfaceDestroyed(arg0: SurfaceHolder) {
         mThread?.setRunning(false)
-        DJIExecutor.getExecutor().run {
-            var retry = true
-            while (retry) {
-                try {
-                    // code to kill Thread
-                    mThread?.join()
-                    retry = false
-                } catch (e: InterruptedException) {
-                    Thread.currentThread().interrupt()
-                    LogUtils.e(tag, e.message)
-                }
+        var retry = true
+        while (retry) {
+            try {
+                // code to kill Thread
+                mThread?.join()
+                retry = false
+            } catch (e: InterruptedException) {
+                Thread.currentThread().interrupt()
+                LogUtils.e(tag, e.message)
             }
         }
     }

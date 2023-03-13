@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 最新Alpha版本 5.3.0-a2
+# DJI Mobile SDK for Android V5 最新Alpha版本 5.3.0-a3
 
 [English Version](README.md)
 
@@ -12,19 +12,22 @@
 
 ## 发布日期
 
-2023.2.15
+2023.3.13
 
 ## 发布记录
 
-- 支持调用接口（无UI）进行DJI账号登录。
-- 支持限飞解禁：IFlyZoneManager。
+- 支持固件离线升级：`startOfflineUpgrade`。支持机型：M3E系列。
+- 支持MOP：`PipelineManager`。支持机型：Matrice 300 RTK，Matrice 30 Series。M3E系列固件暂不支持此功能。
+- MSDK日志输出优化。
 
-
-- **`calcPerByteSum`接口报`ArrayIndexOutOfBoundsException`错误:** 已修复
-- **`InnerVideoEncoder`接口崩溃:** 已修复
-- **调用`addDJIDeviceHealthInfoChangeListener`接口会崩溃:** 已修复
-- **MSDK Sample在切换App前后台后，虚拟摇杆会消失:** 已修复
-- **在M300 RTK上，`WaylineExecutingInfoListener`和`WaypointMissionExecuteStateListener`回调信息不准确:** 已修复
+### Bug修复
+- **调用`PerceptionInformationListener`报空指针错误。:** 已修复
+- **`payloadManager`获取的`subItemsList`为空:** 已修复
+- **调用`setLTEEnhancedTransmissionType`设置`OCU_SYNC_LTE`，提示开启LTE失败:** 已修复
+- **`RTKCenter`报`ConcurrentModificationException`错误:** 已修复
+- **`KeyCameraStorageInfos`无法获取到PSDK负载的存储信息:** 已修复
+- **PSDK负载相机从媒体回放退出来以后视频流无法打开:** 已修复
+- **Mavic 3E执行完航线任务后执行返航，`WaypointMissionExecuteState`变成`Unknown`:** 已修复
 
 ## 离线文档
 
@@ -32,7 +35,7 @@
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.3.0-a2
+> **注意：** sdkVersion = 5.3.0-a3
 
 | SDK包  <div style="width: 150pt">  | 说明  <div style="width: 200pt">   | 使用方式 <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

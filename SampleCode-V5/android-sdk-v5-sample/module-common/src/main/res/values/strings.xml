@@ -59,6 +59,10 @@ More refer to the release notes." </string>
     <string name="btn_register_app">Register app</string>
     <string name="btn_enable_ldm">Enable LDM</string>
     <string name="btn_disable_ldm">Disable LDM</string>
+    <string name="tip_ldn_choice_title" >Please select the LDM exempt module</string>
+    <string name="tip_ldn_choice_confirm" >Confirm</string>
+    <string name="tip_ldn_choice_cancel" >Cancel</string>
+
 
     <string name="btn_enable_virtual_stick">Enable Virtual Stick</string>
     <string name="btn_disable_virtual_stick">Disable Virtual Stick</string>
@@ -273,6 +277,12 @@ More refer to the release notes." </string>
     <string name="bt_set_obstacle_avoidance_type">Set obstacle avoidance type</string>
     <string name="bt_set_obstacle_avoidance_warning_distance">Set the alarm distance in a specific direction</string>
     <string name="bt_set_obstacle_avoidance_braking_distance">Set the stopping distance in a specific direction</string>
+
+    <!--MOP-->
+    <string name="item_mop_title">MOP</string>
+    <string name="item_mop_description">Demonstrate how to use the related functions of MOP</string>
+    <string name="btn_connect" >Connect the MOP link</string>
+    <string name="btn_disconnect" >Disconnect the MOP link</string>
 
     <!--Security Code-->
     <string name="item_security_code_title">Security Password</string>

@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Alpha Version 5.3.0-a2
+# DJI Mobile SDK for Android V5 Latest Alpha Version 5.3.0-a3
 
 [中文版](README_CN.md)
 
@@ -12,18 +12,23 @@
 
 ## Release Date
 
-2023.2.15
+2023.3.13
 
 ## Release Notes
 
-- Support call interface (no UI) for DJI account login.
-- Support unlock fly zone: IFlyZoneManager.
+- Support offline firmware upgrade: `startOfflineUpgrade`.Supported Aircraft: M3E series.
+- Support MOP: `PipelineManager`. Supported Aircraft: Matrice 300 RTK, Matrice 30 Series. M3E series firmware does not support this function.
+- MSDK log output optimization.
 
-- **`calcPerByteSum` interface reports `ArrayIndexOutOfBoundsException` error:** Fixed
-- **`InnerVideoEncoder` interface crash:** Fixed
-- **Calling `addDJIDeviceHealthInfoChangeListener` interface will crash:** Fixed
-- **MSDK Sample, after switching the front and back of the App, the virtual joystick will disappear:** Fixed
-- **On M300 RTK, `WaylineExecutingInfoListener` and `WaypointMissionExecuteStateListener` callback information was inaccurate:** Fixed
+
+### Bug Fixes
+- **Call `PerceptionInformationListener` to report null pointer error:** Fixed
+- **The `subItemsList` obtained by `payloadManager` is empty:** Fixed
+- **Call `setLTEEnhancedTransmissionType` to set `OCU_ SYNC_ LTE`, prompt opening LTE failed:** Fixed
+- **`RTKCenter` reported `ConcurrentModificationException` error:** Fixed
+- **`KeyCameraStorageInfos` failed to obtain the storage information of the PSDK payload:** Fixed
+- **The video stream cannot be opened after the PSDK load camera has backed out from media playback:** Fixed
+- **Mavic 3E performs Return-To-Home after completing the waypoint mission, and the `WaypointMissionExecuteState` changes to `Unknown`:** Fixed
 
 
 ## Offline Documentation
@@ -32,7 +37,7 @@
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.3.0-a2
+> **Notice:** sdkVersion = 5.3.0-a3
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

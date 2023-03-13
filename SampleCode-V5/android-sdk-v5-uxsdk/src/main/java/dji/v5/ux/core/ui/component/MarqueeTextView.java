@@ -37,6 +37,12 @@ public class MarqueeTextView extends TextView {
 
     @Override
     public void setText(CharSequence text, BufferType type) {
+        //这里text会为null，导致SmartController遥控器必现出现空指针问题：（其他遥控器没有问题，猜测跟Android版本有关）
+        // Android NullPointerException at android.text.BoringLayout.isBoring，必须加上该过滤逻辑。
+        if (TextUtils.isEmpty(text)) {
+            super.setText("", type);
+            return;
+        }
         if (!Objects.equals(text, getText())) {
             super.setText(text, type);
             requestFocus();

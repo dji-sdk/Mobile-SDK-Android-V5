@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/bg_border_gray"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:padding="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="pipeline title" />
+
+    <EditText
+        android:id="@+id/et_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_edit_common"
+        android:hint="filename"
+        android:text="test.mp4"
+        app:layout_constraintLeft_toLeftOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/bg_selector_common"
+        android:text="download"
+        app:layout_constraintBottom_toBottomOf="@id/et_file_name"
+        app:layout_constraintLeft_toRightOf="@id/et_file_name"
+        app:layout_constraintTop_toTopOf="@id/et_file_name" />
+
+    <TextView
+        android:id="@+id/tv_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/bg_selector_common"
+        android:text="upload"
+        app:layout_constraintBottom_toBottomOf="@id/tv_download"
+        app:layout_constraintLeft_toRightOf="@id/tv_download"
+        app:layout_constraintTop_toTopOf="@id/tv_download" />
+
+    <TextView
+        android:id="@+id/tv_disconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/bg_selector_common"
+        android:text="disconnect"
+        app:layout_constraintBottom_toBottomOf="@id/tv_upload"
+        app:layout_constraintLeft_toRightOf="@id/tv_upload"
+        app:layout_constraintTop_toTopOf="@id/tv_upload" />
+
+    <Switch
+        android:id="@+id/switch_auto_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/bg_selector_common"
+        android:text="Auto download"
+        android:thumbTextPadding="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_upload"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_upload" />
+
+    <View
+        android:id="@+id/view_border"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_border_gray_dotted"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_upload" />
+
+    <TextView
+        android:id="@+id/tv_download_log"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:maxWidth="100dp"
+        android:maxLines="10"
+        android:paddingLeft="5dp"
+        android:textColor="@color/red"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_border"
+        tools:text="read data" />
+
+    <TextView
+        android:id="@+id/tv_upload_log"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:maxLines="10"
+        android:paddingLeft="5dp"
+        android:textColor="@color/blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_download_log"
+        tools:text="write data" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

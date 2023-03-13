@@ -64,6 +64,9 @@
     <string name="btn_register_app">激活 App</string>
     <string name="btn_enable_ldm">开启LDM</string>
     <string name="btn_disable_ldm">关闭LDM</string>
+    <string name="tip_ldn_choice_title" >请选择LDM例外模块</string>
+    <string name="tip_ldn_choice_confirm" >确定</string>
+    <string name="tip_ldn_choice_cancel" >取消</string>
 
     <string name="btn_enable_virtual_stick">开启虚拟摇杆</string>
     <string name="btn_disable_virtual_stick">关闭虚拟摇杆</string>
@@ -160,7 +163,7 @@
     <!--PSDK-->
     <string name="item_psdk_title">PSDK</string>
     <string name="item_psdk_description">演示如何使用PSDK相关功能</string>
-    <string name="btn_send_data_to_psdk">发送数据到psdk</string>
+    <string name="btn_send_data_to_psdk">发送数据到opsdk</string>
     <string name="btn_get_data_from_psdk">从psdk接收数据</string>
     <string name="tv_send_data_to_psdk_hint">请输入发送给PSDK的数据</string>
     <string name="btn_get_payload_product_name">获取PayLoad产品名称 </string>
@@ -272,6 +275,13 @@
     <string name="bt_set_obstacle_avoidance_warning_distance">设置特定方向的告警距离</string>
     <string name="bt_set_obstacle_avoidance_braking_distance">设置特定方向的刹停距离</string>
 
+
+
+    <!--MOP-->
+    <string name="item_mop_title">MOP</string>
+    <string name="item_mop_description">演示如何使用MOP相关功能</string>
+    <string name="btn_connect" >连接MOP链路</string>
+    <string name="btn_disconnect" >断开MOP链路</string>
 
     <!--机载数据安全-->
     <string name="item_security_code_title">安全密码</string>

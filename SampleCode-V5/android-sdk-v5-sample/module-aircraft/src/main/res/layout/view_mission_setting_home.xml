@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dji.sampleV5.moduleaircraft.pages.view.MissionSettingHomeView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@color/mission_edit_panel_container_bg"
+    android:padding="@dimen/uxsdk_10_dp"
+    android:scrollbars="none"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+
+            android:text="航线字段编辑"/>
+
+
+        <com.tomlonghurst.expandablehinttext.ExpandableHintText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text1"
+            app:imageColor="@color/uxsdk_colorPrimary"
+            android:inputType="text"
+            android:lines="1"
+            android:hint="flytoWaylineMode"
+            android:text=" "
+            app:textBoxColor="@android:color/white"
+            android:textColor="@color/uxsdk_colorPrimary"
+            app:floatingLabelColor="@android:color/white"
+            />
+        <com.tomlonghurst.expandablehinttext.ExpandableHintText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text2"
+            app:imageColor="@color/uxsdk_colorPrimary"
+            android:inputType="text"
+            android:lines="1"
+            android:hint="goHome"
+            app:textBoxColor="@android:color/white"
+            android:textColor="@color/uxsdk_colorPrimary"
+            app:floatingLabelColor="@android:color/white"
+            />
+
+        <com.tomlonghurst.expandablehinttext.ExpandableHintText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text3"
+            app:imageColor="@color/uxsdk_colorPrimary"
+            android:inputType="text"
+            android:lines="1"
+            android:hint="exitOnRcLost"
+            app:textBoxColor="@android:color/white"
+            android:textColor="@color/uxsdk_colorPrimary"
+            app:floatingLabelColor="@android:color/white"
+            />
+
+        <com.tomlonghurst.expandablehinttext.ExpandableHintText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text4"
+            app:imageColor="@color/uxsdk_colorPrimary"
+            android:inputType="text"
+            android:lines="1"
+            android:hint="takeOffSecurityHeight"
+            app:textBoxColor="@android:color/white"
+            android:textColor="@color/uxsdk_colorPrimary"
+            app:floatingLabelColor="@android:color/white"
+            />
+
+        <com.tomlonghurst.expandablehinttext.ExpandableHintText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text5"
+            app:imageColor="@color/uxsdk_colorPrimary"
+            android:inputType="number"
+            android:lines="1"
+            android:hint="globalTransitionalSpeed"
+            app:textBoxColor="@android:color/white"
+            android:textColor="@color/uxsdk_colorPrimary"
+            app:floatingLabelColor="@android:color/white"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:inputType="number"/>
+    </LinearLayout>
+
+</dji.sampleV5.moduleaircraft.pages.view.MissionSettingHomeView>

@@ -157,4 +157,30 @@
         android:name="dji.sampleV5.moduleaircraft.pages.SecurityCodeFragment"
         android:label="security_code_page"
         tools:layout="@layout/frag_security_code_page" />
+
+
+    <fragment
+        android:id="@+id/mop_center_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.MOPCenterFragment"
+        android:label="mop_center_page"
+        tools:layout="@layout/frag_mop_center_page">
+        <action
+            android:id="@+id/action_open_mop_interface_page"
+            app:destination="@id/mop_interface_page" />
+
+        <action
+            android:id="@+id/action_open_down_page"
+            app:destination="@id/mop_down_page" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mop_interface_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.MopInterfaceFragment"
+        android:label="mop_interface_page"
+        tools:layout="@layout/frag_mop_interface_page" />
+    <fragment
+        android:id="@+id/mop_down_page"
+        android:name="dji.sampleV5.moduleaircraft.pages.MopDownFragment"
+        android:label="mop_down_page"
+        tools:layout="@layout/frag_mop_down_page" />
 </navigation>

@@ -56,6 +56,7 @@ dependencies {
     api deps.glide
     kapt deps.glidecompiler
     api deps.dynamicanimation
+    api deps.expandedit
 
     //sdk依赖项（common下是通用功能，其他包也可以）
     compileOnly deps.allProvided

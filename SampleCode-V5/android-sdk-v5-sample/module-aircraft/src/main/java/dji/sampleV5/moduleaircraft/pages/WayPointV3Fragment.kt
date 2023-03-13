@@ -50,6 +50,7 @@ import dji.sampleV5.modulecommon.util.DialogUtil
 import dji.sdk.wpmz.jni.JNIWPMZManager
 import dji.sdk.wpmz.value.mission.WaylineExecuteWaypoint
 import dji.v5.manager.aircraft.waypoint3.WPMZParserManager
+import dji.v5.manager.aircraft.waypoint3.WaypointActionListener
 import dji.v5.utils.common.DeviceInfoUtil.getPackageName
 import dji.v5.ux.map.MapWidget
 
@@ -151,6 +152,16 @@ class WayPointV3Fragment : DJIFragment() {
                     "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionFileName}"
 
         }
+        wayPointV3VM.addWaypointActionListener(object :WaypointActionListener{
+            override fun onExecutionStart(actionId: Int) {
+               waypint_action_state_tv?.text = "onExecutionStart: ${actionId} "
+            }
+
+            override fun onExecutionFinish(actionId: Int, error: IDJIError?) {
+                waypint_action_state_tv?.text = "onExecutionFinish: ${actionId}  error ${error?.toString()}"
+            }
+
+        })
 
         btn_mission_upload?.setOnClickListener {
             val waypointFile = File(curMissionPath)

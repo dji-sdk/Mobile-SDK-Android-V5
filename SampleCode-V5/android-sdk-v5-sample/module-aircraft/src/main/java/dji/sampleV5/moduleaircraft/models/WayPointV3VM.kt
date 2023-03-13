@@ -18,6 +18,7 @@ import dji.v5.et.create
 import dji.v5.et.get
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.waypoint3.WaylineExecutingInfoListener
+import dji.v5.manager.aircraft.waypoint3.WaypointActionListener
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionManager
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
 import dji.v5.manager.areacode.AreaCode
@@ -106,6 +107,14 @@ class WayPointV3VM : DJIViewModel() {
 
     fun clearAllWaylineExecutingInfoListener() {
         WaypointMissionManager.getInstance().clearAllWaylineExecutingInfoListener()
+    }
+
+    fun addWaypointActionListener(listener:WaypointActionListener){
+        WaypointMissionManager.getInstance().addWaypointActionListener(listener)
+    }
+
+    fun  clearAllWaypointActionListener(){
+        WaypointMissionManager.getInstance().clearAllWaypointActionListener()
     }
 
     fun listenFlightControlState() : Disposable {

@@ -168,7 +168,6 @@ class VirtualStickFragment : DJIFragment() {
     private fun initStickListener() {
         left_stick_view.setJoystickListener(object : OnScreenJoystickListener {
             override fun onTouch(joystick: OnScreenJoystick?, pX: Float, pY: Float) {
-                LogUtils.i(logTag, pX, pY)
                 var leftPx = 0F
                 var leftPy = 0F
 
@@ -188,7 +187,6 @@ class VirtualStickFragment : DJIFragment() {
         })
         right_stick_view.setJoystickListener(object : OnScreenJoystickListener {
             override fun onTouch(joystick: OnScreenJoystick?, pX: Float, pY: Float) {
-                LogUtils.i(logTag, pX, pY)
                 var rightPx = 0F
                 var rightPy = 0F
 

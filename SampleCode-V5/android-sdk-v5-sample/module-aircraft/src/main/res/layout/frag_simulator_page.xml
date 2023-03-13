@@ -73,7 +73,7 @@
             android:digits="0123456789.-"
             android:hint="Latitude"
             android:inputType="numberDecimal|numberSigned"
-            android:text="22.5428129999" />
+            android:text="22.5797650" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
             android:digits="0123456789.-"
             android:hint="Longitude"
             android:inputType="numberDecimal|numberSigned"
-            android:text="113.958902" />
+            android:text="113.941171" />
 
 
         <TextView

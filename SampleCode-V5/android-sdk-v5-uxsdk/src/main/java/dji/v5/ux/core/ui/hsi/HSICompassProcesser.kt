@@ -71,7 +71,7 @@ internal class HSICompassProcesser(context: Context, listener: CompassListener) 
         notifyDisposable?.dispose()
     }
 
-     fun updateScreenOrientation() {
+    fun updateScreenOrientation() {
         screenOrientation = mDefaultDisplay.rotation * 90
     }
 
@@ -96,6 +96,7 @@ internal class HSICompassProcesser(context: Context, listener: CompassListener) 
             Sensor.TYPE_MAGNETIC_FIELD -> mMagneticStatus = accuracy
         }
     }
+
     /**
      * 监测设备朝向
      */
@@ -110,9 +111,10 @@ internal class HSICompassProcesser(context: Context, listener: CompassListener) 
     init {
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         mDefaultDisplay = wm.defaultDisplay
-        val mAccelerometerSensor = mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        val mMagneticSensor = mSensorMgr.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-        mRegisterManager = RegisterManager(mSensorMgr,
+        val mAccelerometerSensor: Sensor? = mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        val mMagneticSensor: Sensor? = mSensorMgr.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+        mRegisterManager = RegisterManager(
+            mSensorMgr,
             mAccelerometerSensor,
             mMagneticSensor,
             HSICompassSensorEventListener(WeakReference(this)),
@@ -121,21 +123,35 @@ internal class HSICompassProcesser(context: Context, listener: CompassListener) 
         mListener = listener
     }
 
-    private class RegisterManager(private val sensorManager: SensorManager,
-                          private val mAccelerometerSensor : Sensor,
-                          private val mMagneticSensor : Sensor,
-                          private val mRcOriListener: SensorEventListener,
-                          private val orientationEventListener: OrientationEventListener) {
+    private class RegisterManager(
+        private val sensorManager: SensorManager,
+        private val mAccelerometerSensor: Sensor?,
+        private val mMagneticSensor: Sensor?,
+        private val mRcOriListener: SensorEventListener,
+        private val orientationEventListener: OrientationEventListener,
+    ) {
         // 在自己的线程上进行计算
         private val handler: Handler = Handler(DJIExecutor.getLooper())
 
         fun registerSensorListener() {
-            handler.post {
-                //耗时操作，需要放在子线程处理
-                sensorManager.registerListener(mRcOriListener, mAccelerometerSensor, SAMPLING_PERIOD_US, SensorManager.SENSOR_DELAY_NORMAL, handler)
-                sensorManager.registerListener(mRcOriListener, mMagneticSensor, SAMPLING_PERIOD_US, SensorManager.SENSOR_DELAY_NORMAL, handler)
-                if (orientationEventListener.canDetectOrientation()) {
-                    orientationEventListener.enable()
+            mAccelerometerSensor?.let {
+                mMagneticSensor?.let {
+                    handler.post {
+                        //耗时操作，需要放在子线程处理
+                        sensorManager.registerListener(mRcOriListener,
+                            mAccelerometerSensor,
+                            SAMPLING_PERIOD_US,
+                            SensorManager.SENSOR_DELAY_NORMAL,
+                            handler)
+                        sensorManager.registerListener(mRcOriListener,
+                            mMagneticSensor,
+                            SAMPLING_PERIOD_US,
+                            SensorManager.SENSOR_DELAY_NORMAL,
+                            handler)
+                        if (orientationEventListener.canDetectOrientation()) {
+                            orientationEventListener.enable()
+                        }
+                    }
                 }
             }
         }
@@ -157,12 +173,14 @@ internal class HSICompassProcesser(context: Context, listener: CompassListener) 
         }
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-           weakRefHSICompassProcesser.get()?.onAccuracyChanged(sensor, accuracy)
+            weakRefHSICompassProcesser.get()?.onAccuracyChanged(sensor, accuracy)
         }
     }
 
-    private class HSICompassSensorOrientationEventListener(private val weakRefHSICompassProcesser: WeakReference<HSICompassProcesser>,
-                                                        context: Context) : OrientationEventListener(context) {
+    private class HSICompassSensorOrientationEventListener(
+        private val weakRefHSICompassProcesser: WeakReference<HSICompassProcesser>,
+        context: Context,
+    ) : OrientationEventListener(context) {
         override fun onOrientationChanged(orientation: Int) {
             weakRefHSICompassProcesser.get()?.updateScreenOrientation()
         }

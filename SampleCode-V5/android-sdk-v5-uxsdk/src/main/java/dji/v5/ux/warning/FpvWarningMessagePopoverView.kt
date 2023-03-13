@@ -143,14 +143,10 @@ class FpvWarningMessagePopoverView @JvmOverloads constructor(
         }
 
         fun bind(item: DeviceHealthAndStatusWidgetModel.DeviceMessage, alphaValue: Float) {
-            levelView.setBackgroundResource(DeviceHealthAndStatusWidget.colorResId(item.warningLevel))
+            levelView.setBackgroundResource(DeviceHealthAndStatusWidget.popColorResId(item.warningLevel))
 
             tvMessageTime.visibility = GONE
-            if (item.warningLevel == WarningLevel.WARNING) {
-                wrapper.setBackgroundResource(R.color.uxsdk_red_in_dark_050)
-            } else {
-                wrapper.setBackgroundResource(R.color.uxsdk_orange_in_dark_050)
-            }
+            wrapper.setBackgroundResource(DeviceHealthAndStatusWidget.popColorResId(item.warningLevel))
 
             if (item.warningLevel == WarningLevel.WARNING) {
                 levelView.alpha = alphaValue
@@ -158,7 +154,7 @@ class FpvWarningMessagePopoverView @JvmOverloads constructor(
                 levelView.alpha = 1F
             }
 
-            tvMessage.text = item.description
+            tvMessage.text = item.validDescription()
 
             setClickListener()
         }
