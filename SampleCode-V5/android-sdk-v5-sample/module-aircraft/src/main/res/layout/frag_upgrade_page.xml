@@ -33,29 +33,115 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <Button
-                android:id="@+id/btn_addlistener_test"
+                android:id="@+id/btn_show_offline"
                 style="@style/main_fragment_btn"
-                android:text="add listener test"
-                android:visibility="gone"
+                android:text="show offline upgrade"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_get_upgrade_state" />
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/upgrade_state_info_tv"
+    <LinearLayout
+        android:id="@+id/upgradeinfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="upgradeable component info:"
-        android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/upgrade_button_list"
-        tools:layout_editor_absoluteY="43dp">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">>
 
-    </TextView>
+        <TextView
+            android:id="@+id/upgrade_state_info_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="upgradeable component info:"
+            android:textSize="13dp">
+
+        </TextView>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lyt_offline"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/upgrade_button_list"
+        app:layout_constraintTop_toBottomOf="@+id/upgradeinfo">
+        <TextView
+            android:id="@+id/offline_upgrade_progress_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:text="upgrade progress:"
+            android:textSize="18sp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:text="Aircraft"
+            android:textColor="@color/uxsdk_colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+        <RadioGroup
+            android:id="@+id/rg_component_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:buttonTint="@color/blue"
+                android:text="Aricraft"
+                android:id="@+id/rb_aircraft"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:padding="5dp" />
+                android:textColor="@color/black" />
+            <RadioButton
+                android:buttonTint="@color/blue"
+                android:text="RemoteController"
+                android:id="@+id/rb_rc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:padding="5dp" />
+                android:textColor="@color/black" />
+        </RadioGroup>
+
+        <include
+            android:id="@+id/offline_component_aircraft"
+            layout="@layout/firmware_offline_upgrade_item" />
+
+
+
+        <TextView
+            android:id="@+id/offline_start_upgrade"
+            android:layout_width="164dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#1088F2"
+            android:gravity="center"
+            android:text="Offline Upgrade"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="visible"
+
+            />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

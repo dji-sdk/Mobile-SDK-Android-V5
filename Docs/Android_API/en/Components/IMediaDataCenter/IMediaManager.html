@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -596,7 +636,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pullMediaFileListFromCamera</span><span class="params">(@NonNull PullMediaFileListParam param, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="description-v9">Description:</h5>
-<p><font color="#666">Pull the media file list from camera. When the media file list status <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code> is <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_idle">IDLE</a></code>, this method should be called to pull full data. When the media file list status <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code> changes to <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_up_to_date">UP_TO_DATE</a></code>, it means that the process of pulling media file list is finished. Please call the <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code> to get media file list data. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">Pull the media file list from camera. When the media file list status <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code> is <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_idle">IDLE</a></code>, this method should be called to pull full data. When new media files are generated, MSDK will automatically pull the latest media file list from the camera. When the media file list status <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code> changes to <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_up_to_date">UP_TO_DATE</a></code>, it means that the process of pulling media file list is finished. Please call the <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code> to get media file list data. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters-v6">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMediaDataCenter/IMediaManager_PullMediaFileListParam.html#imediamanager_pullmediafilelistparam">PullMediaFileListParam</a> <font color="#000">param</font></font></td><td><font color="#666"><i>Parameters of media file list.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_stoppullmediafilelistfromcamera"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_stoppullmediafilelistfromcamera_inline">stopPullMediaFileListFromCamera</a></div></div><div class="inline-doc" id="imediamanager_stoppullmediafilelistfromcamera_inline" <blockquote>

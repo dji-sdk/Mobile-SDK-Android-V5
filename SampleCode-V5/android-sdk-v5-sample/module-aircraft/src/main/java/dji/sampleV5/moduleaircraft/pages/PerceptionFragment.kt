@@ -60,6 +60,8 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tb_set_vision_positioning_enable_switch.setOnCheckedChangeListener(this)
+        tv_radar_obstacle_avoidance_up_switch.setOnCheckedChangeListener(this)
+        tv_radar_obstacle_avoidance_horizontal_switch.setOnCheckedChangeListener(this)
         tb_set_precision_landing_enable_switch.setOnCheckedChangeListener(this)
         tv_obstacle_avoidance_up_switch.setOnCheckedChangeListener(this)
         tv_obstacle_avoidance_down_switch.setOnCheckedChangeListener(this)
@@ -244,6 +246,7 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
 
     private val buttonCompletionCallback = object : CommonCallbacks.CompletionCallback {
         override fun onSuccess() {
+            updatePerceptionInfo()
             ToastUtils.showToast("Successful operation")
             updateCurrentErrorMsg(isSuccess = true)
         }

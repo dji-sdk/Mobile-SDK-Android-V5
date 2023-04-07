@@ -84,4 +84,9 @@
     <dimen name="mission_waypoint_index_text_large_size">11px</dimen>
     <dimen name="mission_waypoint_index_text_medium_size">9px</dimen>
     <dimen name="mission_waypoint_index_text_small_size">6px</dimen>
+
+
+    <dimen name="mission_edit_panel_width">336dp</dimen>
+    <dimen name="mission_edit_expand_btn_width">32dp</dimen>
+    <dimen name="mission_edit_expand_btn_height">50dp</dimen>
 </resources>

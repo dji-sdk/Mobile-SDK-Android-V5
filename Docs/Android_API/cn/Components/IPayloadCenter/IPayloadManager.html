@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -631,7 +671,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setWidgetValue</span><span class="params">(@NonNull WidgetValue value, @NonNull <span class="keyword">final</span> CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v12">描述：</h5>
-<p><font color="#666">设置负载中不同控件类型的值。 <br><br><code><i>MSDK 5.2.0开始支持</i></code></font></p>
+<p><font color="#666">设置负载中不同类型控件的值。 <br><br><code><i>MSDK 5.2.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v8">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IPayloadCenter/Value_Payload_Struct_WidgetValue.html#value_payload_struct_widgetvalue">WidgetValue</a> <font color="#000">value</font></font></td><td><font color="#666"><i>需要设置的控件值。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull final <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ipayloadmanager_senddatatopayload"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ipayloadmanager_senddatatopayload_inline">sendDataToPayload</a></div></div><div class="inline-doc" id="ipayloadmanager_senddatatopayload_inline" <blockquote>
@@ -652,7 +692,7 @@
 <h5 id="描述：-v14">描述：</h5>
 <p><font color="#666">负载控件类型。 <br><br><code><i>MSDK 5.2.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_button_inline"></a>BUTTON</font></td><td><font color="#666">按钮控件，通常默认值为0，当按下按钮时，控件值将更改为1。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_switch_inline"></a>SWITCH</font></td><td><font color="#666">开关控件，当开关状态为“ON”时，控件值将更改为1，当开关状态变为“OFF”时，控件值会更改为0。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_range_inline"></a>RANGE</font></td><td><font color="#666">范围控件，可以返回范围在[0,100]的控件值。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_list_inline"></a>LIST</font></td><td><font color="#666">列表控件，可以返回范围在[0,N]的int值，N由第三方负载设备制造商的固件决定，PayloadWidget中getSubItems方法返回的子项个数将为N+1。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_input_inline"></a>INPUT</font></td><td><font color="#666">输入控件，可以设置为任何int值，默认值由负载设备制造商的固件确定。</font></td></tr></table></html>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_button_inline"></a>BUTTON</font></td><td><font color="#666">按钮控件，通常默认值为0，当按下按钮时，控件值将更改为1。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_switch_inline"></a>SWITCH</font></td><td><font color="#666">开关控件，当开关状态为“ON”时，控件值将更改为1，当开关状态变为“OFF”时，控件值会更改为0。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_range_inline"></a>RANGE</font></td><td><font color="#666">范围控件，可以返回范围在[0,100]的控件值。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_list_inline"></a>LIST</font></td><td><font color="#666">列表控件，可以返回范围在[0,N]的int值，N由第三方负载设备制造商的固件决定，PayloadWidget中getSubItems方法返回的子项个数将为N+1。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_payload_enum_widgettype_input_inline"></a>INPUT</font></td><td><font color="#666">输入控件，可以设置为任何int值，默认值由第三方负载设备制造商的固件确定。</font></td></tr></table></html>
 <h5 id="class-members">Class Members:</h5>
 </div>
 <div class="api-row" id="value_payload_struct_widgetvalue"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a></div></div><div class="api-row" id="value_payload_enum_payloadtype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_payload_enum_payloadtype_inline">PayloadType</a></div></div><div class="inline-doc" id="value_payload_enum_payloadtype_inline" <blockquote>

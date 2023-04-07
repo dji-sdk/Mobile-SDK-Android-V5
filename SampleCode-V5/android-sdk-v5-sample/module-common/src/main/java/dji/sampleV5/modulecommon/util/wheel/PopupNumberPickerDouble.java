@@ -20,8 +20,7 @@ import dji.sampleV5.modulecommon.util.DensityUtil;
 public class PopupNumberPickerDouble extends PopupWindow {
 	
 	private List<String> item_texts1 = null;
-	Map<Integer, List<Integer>> item_image1;
-	
+
 	private List<String> item_texts2 = null;
 	Map<Integer, List<Integer>> item_image2;
 	
@@ -46,18 +45,15 @@ public class PopupNumberPickerDouble extends PopupWindow {
 	}
 	@SuppressLint("InflateParams")
     public PopupNumberPickerDouble(Context context, 
-				List<String> item_strings1,	Map<Integer, List<Integer>> ImagesMap1,  ///第一个picker 的数据
-				List<String> item_strings2,	Map<Integer, List<Integer>> ImagesMap2,	 //第二个picker 的数据;
+				List<String> item_strings1, //第一个picker 的数据
+				List<String> item_strings2, //第二个picker 的数据;
 			PickerValueChangeListener itemClickEvent, PopupNumberPickerPosition position) {
 
 		super(context);
 
-		//pos = 1;
-		item_texts1 = item_strings1;   
-		item_image1 = ImagesMap1;
-		item_texts2 = item_strings2;   
-		item_image2= ImagesMap2;
-		
+		item_texts1 = item_strings1;
+		item_texts2 = item_strings2;
+
 		valueChangeListen = itemClickEvent;
 		
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -66,7 +62,6 @@ public class PopupNumberPickerDouble extends PopupWindow {
 		this.setWidth(DensityUtil.dip2px(context, position.width));
 		this.setHeight(DensityUtil.dip2px(context, position.height));
 		this.setFocusable(true);//
-		// this.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.pickerbackground_singl));
 
 		ColorDrawable dw = new ColorDrawable(-00000);
 		this.setBackgroundDrawable(dw);

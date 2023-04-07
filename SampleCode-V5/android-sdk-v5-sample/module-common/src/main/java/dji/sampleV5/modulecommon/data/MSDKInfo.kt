@@ -2,6 +2,7 @@ package dji.sampleV5.modulecommon.data
 
 import dji.sdk.keyvalue.value.product.ProductType
 import dji.v5.common.register.PackageProductCategory
+import dji.v5.utils.inner.SDKConfig
 
 /**
  * Class Description
@@ -22,4 +23,5 @@ data class MSDKInfo(val SDKVersion: String = DEFAULT_STR) {
     var firmwareVer: String = DEFAULT_STR
     var isLDMLicenseLoaded: String = DEFAULT_STR
     var isLDMEnabled: String = DEFAULT_STR
+    var coreInfo: SDKConfig.CoreInfo? = null
 }

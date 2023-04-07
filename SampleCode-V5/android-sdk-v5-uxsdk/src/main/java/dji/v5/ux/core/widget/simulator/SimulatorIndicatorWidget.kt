@@ -32,6 +32,7 @@ import android.util.Pair
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.content.res.use
+import dji.v5.utils.common.LogUtils
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.Consumer
@@ -91,12 +92,6 @@ open class SimulatorIndicatorWidget @JvmOverloads constructor(
             checkAndUpdateIcon()
         }
 
-    /**
-     * Call back for when the widget is tapped.
-     * This can be used to link the widget to SimulatorControlWidget
-     */
-    var stateChangeCallback: OnStateChangeCallback<Any>? = null
-
     //endregion
 
     //region Lifecycle
@@ -124,20 +119,13 @@ open class SimulatorIndicatorWidget @JvmOverloads constructor(
         if (!isInEditMode) {
             widgetModel.setup()
         }
-        initializeListener()
     }
 
     override fun onDetachedFromWindow() {
-        destroyListener()
         if (!isInEditMode) {
             widgetModel.cleanup()
         }
         super.onDetachedFromWindow()
-    }
-
-    override fun onClick(view: View?) {
-        super.onClick(view)
-        stateChangeCallback?.onStateChange(null)
     }
 
     override fun checkAndUpdateIconColor() {
@@ -181,19 +169,6 @@ open class SimulatorIndicatorWidget @JvmOverloads constructor(
         if (!isInEditMode) {
             addDisposable(reactToSimulatorStateChange())
         }
-    }
-
-    private fun initializeListener() {
-        if (stateChangeResourceId != INVALID_RESOURCE && this.rootView != null) {
-            val widgetView = this.rootView.findViewById<View>(stateChangeResourceId)
-            if (widgetView is OnStateChangeCallback<*>?) {
-                stateChangeCallback = widgetView as OnStateChangeCallback<Any>?
-            }
-        }
-    }
-
-    private fun destroyListener() {
-        stateChangeCallback = null
     }
 
     @SuppressLint("Recycle")

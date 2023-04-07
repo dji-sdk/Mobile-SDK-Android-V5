@@ -18,6 +18,7 @@ import dji.v5.et.create
 import dji.v5.et.get
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.waypoint3.WaylineExecutingInfoListener
+import dji.v5.manager.aircraft.waypoint3.WaypointActionListener
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionManager
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
 import dji.v5.manager.areacode.AreaCode
@@ -108,20 +109,27 @@ class WayPointV3VM : DJIViewModel() {
         WaypointMissionManager.getInstance().clearAllWaylineExecutingInfoListener()
     }
 
+    fun addWaypointActionListener(listener:WaypointActionListener){
+        WaypointMissionManager.getInstance().addWaypointActionListener(listener)
+    }
+
+    fun  clearAllWaypointActionListener(){
+        WaypointMissionManager.getInstance().clearAllWaypointActionListener()
+    }
+
     fun listenFlightControlState() : Disposable {
         return Flowable.combineLatest( RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyHomeLocation), this).observeOn(AndroidSchedulers.mainThread()),
-                 RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this).observeOn(AndroidSchedulers.mainThread()),
-            { homelocation: LocationCoordinate2D?, aircraftLocation: LocationCoordinate2D? ->
-                if (homelocation == null || aircraftLocation == null) {
-                    return@combineLatest
-                }
-                val height = getHeight()
-                val distance = calculateDistance(homelocation.latitude , homelocation.longitude , aircraftLocation.latitude , aircraftLocation.longitude)
-                val heading = getHeading()
-                flightControlState.value = FlightControlState(aircraftLocation.longitude, aircraftLocation.latitude , distance = distance , height = height , head = heading , homeLocation = homelocation)
-                refreshFlightControlState()
+                 RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this).observeOn(AndroidSchedulers.mainThread())
+        ) { homelocation: LocationCoordinate2D?, aircraftLocation: LocationCoordinate2D? ->
+            if (homelocation == null || aircraftLocation == null) {
+                return@combineLatest
             }
-        ).subscribe()
+            val height = getHeight()
+            val distance = calculateDistance(homelocation.latitude, homelocation.longitude, aircraftLocation.latitude, aircraftLocation.longitude)
+            val heading = getHeading()
+            flightControlState.value = FlightControlState(aircraftLocation.longitude, aircraftLocation.latitude, distance = distance, height = height, head = heading, homeLocation = homelocation)
+            refreshFlightControlState()
+        }.subscribe()
     }
 
     fun isLocationValid(latitude: Double, longitude: Double): Boolean {

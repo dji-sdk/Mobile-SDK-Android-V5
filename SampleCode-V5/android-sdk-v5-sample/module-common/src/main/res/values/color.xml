@@ -84,4 +84,7 @@
     
     <color name="half_transparent">#80FFFFFF</color>
 
+    <color name="mission_edit_panel_container_bg">#FF111610</color>
+    <color name="white_alpha_016">#29FFFFFF</color>
+
 </resources>

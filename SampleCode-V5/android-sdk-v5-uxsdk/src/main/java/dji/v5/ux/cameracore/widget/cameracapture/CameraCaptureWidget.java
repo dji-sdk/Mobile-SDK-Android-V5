@@ -145,7 +145,7 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget<Object> implemen
     //region private helpers
     private void onCameraModeChange(CameraMode cameraMode) {
         for (View view : widgetMap.values()) {
-            if (view != null) view.setVisibility(GONE);
+            if (view != null) view.setVisibility(INVISIBLE);
         }
         View currentView = widgetMap.get(cameraMode);
         if (currentView != null) {
@@ -167,7 +167,7 @@ public class CameraCaptureWidget extends ConstraintLayoutWidget<Object> implemen
             removeView(widgetMap.get(cameraMode));
         }
         widgetMap.put(cameraMode, view);
-        view.setVisibility(GONE);
+        view.setVisibility(INVISIBLE);
         addView(view);
         ConstraintLayout.LayoutParams lp = new Constraints.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(lp);

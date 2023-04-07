@@ -20,6 +20,7 @@ import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.virtualstick.Stick
 import dji.v5.utils.common.JsonUtil
+import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_virtual_stick_page.*
 import kotlin.math.abs
@@ -129,9 +130,11 @@ class VirtualStickFragment : DJIFragment() {
         }
         btn_use_rc_stick.setOnClickListener {
             virtualStickVM.useRcStick.value = virtualStickVM.useRcStick.value != true
-            if (virtualStickVM.useRcStick.value == true){
-                ToastUtils.showToast("After it is turned on," +
-                        "the joystick value of the RC will be used as the left/ right stick value")
+            if (virtualStickVM.useRcStick.value == true) {
+                ToastUtils.showToast(
+                    "After it is turned on," +
+                            "the joystick value of the RC will be used as the left/ right stick value"
+                )
             }
         }
         btn_set_virtual_stick_advanced_param.setOnClickListener {

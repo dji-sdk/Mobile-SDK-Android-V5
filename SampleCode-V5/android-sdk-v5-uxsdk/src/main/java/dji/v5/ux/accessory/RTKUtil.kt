@@ -100,12 +100,18 @@ object RTKUtil {
     }
 
     fun getRtkCustomNetworkSetting(): RTKCustomNetworkSetting? {
-        val customNetworkRTKSettings = RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings
-        val string = DjiSharedPreferencesManager.getString(ContextUtil.getContext(), USER_RTK_NETWORK_SERVICE_SETTINGS, "")
-        val rtkCustomNetworkSetting =
-            if (!TextUtils.isEmpty(string)) JsonUtil.toBean(string, RTKCustomNetworkSetting::class.java) else customNetworkRTKSettings
-        LogUtils.i(TAG, "getRtkCustomNetworkSetting:$rtkCustomNetworkSetting")
-        return rtkCustomNetworkSetting
+        val localSetting = DjiSharedPreferencesManager.getString(ContextUtil.getContext(), USER_RTK_NETWORK_SERVICE_SETTINGS, "")
+        return if (!TextUtils.isEmpty(localSetting)) {
+            JsonUtil.toBean(localSetting, RTKCustomNetworkSetting::class.java)
+        } else RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings
+            ?: RTKCustomNetworkSetting(
+                "",
+                0,
+                "",
+                "",
+                ""
+            )
+
     }
 
     private fun getCoordinateName(value: String): CoordinateSystem {

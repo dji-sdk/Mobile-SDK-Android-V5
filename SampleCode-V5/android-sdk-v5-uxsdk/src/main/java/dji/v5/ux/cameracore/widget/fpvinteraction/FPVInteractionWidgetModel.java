@@ -174,10 +174,10 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
      * @param gimbalIndex index of the gimbal.
      */
     public void setGimbalIndex(@Nullable SettingDefinitions.GimbalIndex gimbalIndex) {
-        if (gimbalIndex != null) {
+        if (gimbalIndex != null && this.gimbalIndex != gimbalIndex.getIndex()) {
             this.gimbalIndex = gimbalIndex.getIndex();
+            restart();
         }
-        restart();
     }
 
     /**

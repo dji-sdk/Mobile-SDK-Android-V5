@@ -179,7 +179,7 @@
             android:id="@+id/widget_focal_zoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/widget_camera_controls"
             app:layout_constraintTop_toBottomOf="@+id/widget_focus_exposure_switch"
@@ -190,7 +190,7 @@
             android:layout_width="180dp"
             android:layout_height="263dp"
             android:gravity="center"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="@string/uxsdk_widget_camera_controls_ratio"
             app:layout_constraintEnd_toStartOf="@id/widget_camera_controls"
@@ -242,7 +242,7 @@
             android:id="@+id/widget_simulator_control"
             android:layout_width="330dp"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -252,7 +252,7 @@
             android:id="@+id/widget_fpv_flight_display_widget"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -280,7 +280,7 @@
             android:paddingLeft="@dimen/uxsdk_spacing_normal"
             android:paddingEnd="@dimen/uxsdk_spacing_normal"
             android:paddingRight="@dimen/uxsdk_spacing_normal"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -289,16 +289,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:layout_width="@dimen/uxsdk_510_dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end">
+<!--    <FrameLayout-->
+<!--        android:layout_width="@dimen/uxsdk_510_dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="end">-->
 
-        <ViewStub
-            android:id="@+id/manual_right_nav_setting_stub"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout="@layout/uxsdk_viewstub_layout_manual_right_nav_setting" />
-    </FrameLayout>
+<!--        <ViewStub-->
+<!--            android:id="@+id/manual_right_nav_setting_stub"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout="@layout/uxsdk_viewstub_layout_manual_right_nav_setting" />-->
+<!--    </FrameLayout>-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

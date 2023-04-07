@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="news_title">MSDK 5.2.0</string>
-    <string name="news_description">"- Added supported aircraft and devices: DJI Mavic 3M.
-- Supported PayloadCenter. Class to provides functions such as getting the PayloadManager instance list of the payload supported by the aircraft.
-- Supported PayloadManager. Class to provides functions such as get payload information, get and set widget information, and data receiving and sending.
-- Supported PullMediaFileListFromCamera to set MediaFileIndex and Count to pull part of media files.
-- Supported PerceptionInfo to get the working state of the sensing sensor.
+    <string name="news_title">MSDK 5.3.0</string>
+    <string name="news_description">"- Added supported aircraft: DJI Mini 3,DJI Mini 3 Pro.
+- Supported FlyZoneManager.Manage to unlock fly zones, providing features such as unlocking the authorization fly zone and the restricted fly zone, etc.
+- Supported PipelineManager.Manage SDK interconnection pipelines, establishing connections between MSDK and PSDK devices for data transmission.
 
 More refer to the release notes." </string>
-    <string name="news_date">2022–12–15</string>
+    <string name="news_date">2023–4–7</string>
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/en-us/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/en/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/en-us/requests/new</string>
@@ -51,11 +49,18 @@ More refer to the release notes." </string>
     <string name="item_lte_title">LTE</string>
     <string name="item_lte_description">Demonstrate how to use the LTE function</string>
 
+    <string name="item_fly_safe_title">Fly Safe</string>
+    <string name="item_fly_safe_description">Demonstrate how to use the Fly Safe function</string>
+
     <string name="btn_init_msdk">Init MSDK</string>
     <string name="btn_unInit_msdk">UnInit MSDK</string>
     <string name="btn_register_app">Register app</string>
     <string name="btn_enable_ldm">Enable LDM</string>
     <string name="btn_disable_ldm">Disable LDM</string>
+    <string name="tip_ldn_choice_title" >Please select the LDM exempt module</string>
+    <string name="tip_ldn_choice_confirm" >Confirm</string>
+    <string name="tip_ldn_choice_cancel" >Cancel</string>
+
 
     <string name="btn_enable_virtual_stick">Enable Virtual Stick</string>
     <string name="btn_disable_virtual_stick">Disable Virtual Stick</string>
@@ -242,12 +247,14 @@ More refer to the release notes." </string>
     <string name="tv_rtk_station">The number of satellites searched by the RTK: </string>
 
     <!--Login-->
-    <string name="btn_login_account">Login account </string>
+    <string name="btn_login_account">Account login with UI</string>
     <string name="btn_logout_account">Logout account</string>
+    <string name="btn_user_login">Account login without UI(Only Support email login)</string>
     <string name="btn_get_login_info">Get logged info </string>
     <string name="tv_login_state">Current login status: </string>
     <string name="tv_login_account">Current login account: </string>
     <string name="tv_login_error">Login error: </string>
+    <string name="tv_verification_code">Verification_code: </string>
     <string name="item_login_account_title">Login Account </string>
     <string name="item_login_account_description">Demonstrate DJI account login related functions</string>
 
@@ -268,6 +275,12 @@ More refer to the release notes." </string>
     <string name="bt_set_obstacle_avoidance_type">Set obstacle avoidance type</string>
     <string name="bt_set_obstacle_avoidance_warning_distance">Set the alarm distance in a specific direction</string>
     <string name="bt_set_obstacle_avoidance_braking_distance">Set the stopping distance in a specific direction</string>
+
+    <!--MOP-->
+    <string name="item_mop_title">MOP</string>
+    <string name="item_mop_description">Demonstrate how to use the related functions of MOP</string>
+    <string name="btn_connect" >Connect the MOP link</string>
+    <string name="btn_disconnect" >Disconnect the MOP link</string>
 
     <!--Security Code-->
     <string name="item_security_code_title">Security Password</string>
@@ -410,5 +423,17 @@ More refer to the release notes." </string>
     <string name="btn_start_lte_authentication">Start LTE Authentication</string>
     <string name="btn_set_lte_enhanced_transmission_type">Set LTE Enhanced Transmission Type</string>
     <string name="btn_get_lte_enhanced_transmission_type">Get LTE Enhanced Transmission Type</string>
+
+    <!-- Fly Safe -->
+    <string name="btn_btn_hide_or_show_all_fly_zone_info">Hide/Show Fly Zones Info</string>
+    <string name="btn_get_fly_zones_in_surrounding_area">Get Fly Zones In Surrounding Area(50000M)</string>
+    <string name="btn_download_fly_zone_licenses_from_server">Download Fly Zone Licenses From Server</string>
+    <string name="btn_push_fly_zone_licenses_to_aircraft">Push Fly Zone Licenses To Aircraft</string>
+    <string name="btn_pull_fly_zone_licenses_from_aircraft">Pull Fly Zone Licenses From Aircraft</string>
+    <string name="btn_delete_fly_zone_licenses_from_aircraft">Delete Fly Zone Licenses From Aircraft</string>
+    <string name="btn_set_fly_zone_licenses_enabled">Set Fly Zone Licenses Enabled</string>
+    <string name="btn_unlock_authorization_fly_zone">Unlock Authorization Fly Zone</string>
+    <string name="btn_unlock_enhanced_warning_fly_zone">Unlock Enhanced Warning Fly Zone</string>
+    <string name="btn_unlock_all_enhanced_warning_fly_zone">Unlock All Enhanced Warning Fly Zone</string>
 
 </resources>

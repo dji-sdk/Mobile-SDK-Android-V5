@@ -14,8 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
-        >
+        app:layout_constraintVertical_bias="0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,36 +32,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/init_msdk_btn"
-                style="@style/main_fragment_text"
-                android:text="@string/btn_init_msdk"
-                android:elevation="10dp"
-                android:foreground="?selectableItemBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/enableLDM_btn" />
-
-            <TextView
-                android:id="@+id/register_app_btn"
-                style="@style/main_fragment_text"
-                android:text="@string/btn_register_app"
-                android:elevation="10dp"
-                android:foreground="?selectableItemBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/init_msdk_btn" />
-
-            <TextView
-                android:id="@+id/unInit_msdk_btn"
-                style="@style/main_fragment_text"
-                android:text="@string/btn_unInit_msdk"
-                android:elevation="10dp"
-                android:foreground="?selectableItemBackground"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/register_app_btn" />
 
             <TextView
                 android:id="@+id/disableLDM_btn"
@@ -72,7 +41,7 @@
                 android:foreground="?selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/unInit_msdk_btn" />
+                app:layout_constraintTop_toBottomOf="@id/enableLDM_btn" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

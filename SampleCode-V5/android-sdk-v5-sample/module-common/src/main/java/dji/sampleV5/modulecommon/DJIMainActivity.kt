@@ -91,6 +91,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
             text_view_product_name.text = StringUtils.getResStr(R.string.product_name, it.productType.name)
             text_view_package_product_category.text = StringUtils.getResStr(R.string.package_product_category, it.packageProductCategory)
             text_view_is_debug.text = StringUtils.getResStr(R.string.is_sdk_debug, it.isDebug)
+            text_core_info.text = it.coreInfo.toString()
         }
         baseMainActivityVm.registerState.observe(this) {
             text_view_registered.text = StringUtils.getResStr(R.string.registration_status, it)
@@ -128,7 +129,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
                 msdkInfoVm.initListener()
                 handler.postDelayed({
                     prepareUxActivity()
-                }, 1500)
+                }, 5000)
             }
 
             override fun onRegisterFailure(error: IDJIError?) {

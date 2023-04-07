@@ -284,7 +284,7 @@ public class ShootPhotoWidget extends ConstraintLayoutWidget<Object> implements 
     private void onIsShootingPhotoChange(boolean isShootingPhoto) {
         borderProgressRingView.setIndeterminate(isShootingPhoto);
         if (isShootingPhoto) {
-            addDisposable(cameraActionSound.playCapturePhoto());
+            cameraActionSound.playCapturePhoto();
         }
     }
 

@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -627,7 +667,7 @@
 <h5 id="描述：-v10">描述：</h5>
 <p><font color="#666">可设置的相机模式。</font></p>
 <h5 id="enum-members-v9">Enum Members:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_normal_inline"></a>PHOTO_NORMAL</font></td><td><font color="#666">相机模式设置为单拍模式。M30相机，会默认会拍摄两张照片，分别是广角照片和变焦照片。 M30T相机，会默认会拍摄三张照片，分别是广角照片、变焦照片和红外照片。你可以通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_msdkcapturecamerastreamsettings">KeyCaptureCameraStreamSettings</a></code>选择只存储需要照片。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_video_normal_inline"></a>VIDEO_NORMAL</font></td><td><font color="#666">相机模式设置为普通录像模式。M30相机，会默认会录制两个视频，分别是广角视频和变焦视频。 M30T相机，会默认会拍摄三个视频，分别是广角视频、变焦视频和红外视频。你可以通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_msdkrecordcamerastreamsettings">KeyRecordCameraStreamSettings</a></code>选择只存储需要视频。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_hyper_light_inline"></a>PHOTO_HYPER_LIGHT</font></td><td><font color="#666">相机模式设置为低光智能模式。在光线较暗的环境下，相机会自动模拟长曝光进行拍摄，可以把物体拍摄的更加清晰，仅在变焦镜头在5倍变焦以上生效。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_interval_inline"></a>PHOTO_INTERVAL</font></td><td><font color="#666">相机模式设置为定时拍照模式。设置相机以设定的时间间隔连续拍摄一张照片。你可以通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_photointervalshootsettings">KeyPhotoIntervalShootSettings</a></code>设置定时拍照参数，其中<code><a href="../../Components/IKeyManager/Value_Camera_Struct_PhotoIntervalShootSettings.html#value_camera_struct_photointervalshootsettings_setcount">setCount</a></code>用于设置总共拍摄的张数，<code><a href="../../Components/IKeyManager/Value_Camera_Struct_PhotoIntervalShootSettings.html#value_camera_struct_photointervalshootsettings_setinterval">setInterval</a></code>用于设置拍照的时间间隔，由于相机拍照需要响应时间，最小拍照间隔时间需要设置为2秒以上。设置此模式后，你需要调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_startshootphoto">KeyStartShootPhoto</a></code> 进行定时拍照。在定时拍照过程中，你可以调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_stopshootphoto">KeyStopShootPhoto</a></code>停止定时拍照。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_super_resolution_inline"></a>PHOTO_SUPER_RESOLUTION</font></td><td><font color="#666">相机模式设置为超清矩阵拍照模式。在此模式下，在广角视图中拖动选择一个区域，云台将自动移动，并通过变焦相机以当前缩放比例对选定区域拍摄一系列20MP的照片。所有照片和生成的HTML文件都将保存在microSD卡的同一文件夹中。要查看全局照片和局部特写照片，请在PC上使用浏览器打开HTML文件进行查看。如果你想在应用程序中查看全局照片和局部特写照片，请使用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_superresolutioncapturearea">KeySuperResolutionCaptureArea</a></code>设置超清矩阵拍照区域。使用 <code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_superresolutionstate">KeySuperResolutionInfo</a></code>监听超清矩阵拍照状态。设置此模式后，你需要调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_startshootphoto">KeyStartShootPhoto</a></code> 进行超清矩阵拍照，在拍照过程中，你可以调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_stopshootphoto">KeyStopShootPhoto</a></code>停止定时超清矩阵拍照。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_panorama_inline"></a>PHOTO_PANORAMA</font></td><td><font color="#666">相机模式设置为全景拍照模式。飞行器拍摄了一系列不同云台角度和飞行器航向的照片。这组照片可以用第三方库拼接成全景照片。可通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_visionphotopanoramamode">KeyPhotoPanoramaMode</a></code>设置全景拍照模式,通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_isshootingvisionpanoramaphoto">KeyIsShootingPhotoPanorama</a></code>判断是否处于全景拍照模式，通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_panoramaphotocaptureprogress">KeyPhotoPanoramaProgress</a></code>获取全景拍照的进度。设置此模式后，你需要调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_startshootphoto">KeyStartShootPhoto</a></code> 进行全景拍照。在拍照过程中，你可以调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_stopshootphoto">KeyStopShootPhoto</a></code>停止全景拍照。 <br><b>注意：<br> 全景拍照模式必须在飞行器起飞后才能启动。</b></font></td></tr></table></html>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_normal_inline"></a>PHOTO_NORMAL</font></td><td><font color="#666">相机模式设置为单拍模式。M30相机，会默认会拍摄两张照片，分别是广角照片和变焦照片。 M30T相机，会默认会拍摄三张照片，分别是广角照片、变焦照片和红外照片。你可以通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_msdkcapturecamerastreamsettings">KeyCaptureCameraStreamSettings</a></code>选择只存储需要照片。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_video_normal_inline"></a>VIDEO_NORMAL</font></td><td><font color="#666">相机模式设置为普通录像模式。M30相机，会默认会录制两个视频，分别是广角视频和变焦视频。 M30T相机，会默认会拍摄三个视频，分别是广角视频、变焦视频和红外视频。你可以通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_msdkrecordcamerastreamsettings">KeyRecordCameraStreamSettings</a></code>选择只存储需要视频。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_hyper_light_inline"></a>PHOTO_HYPER_LIGHT</font></td><td><font color="#666">相机模式设置为低光智能模式。在光线较暗的环境下，相机会自动模拟长曝光进行拍摄，可以把物体拍摄的更加清晰，仅在变焦镜头在5倍变焦以上生效。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_aeb_inline"></a>PHOTO_AEB</font></td><td><font color="#666">相机模式设置为AEB自动包围曝光模式，通过对同一对象拍摄曝光量不同的多张照片包围在一起，以获得正确曝光照片的模式。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_burst_inline"></a>PHOTO_BURST</font></td><td><font color="#666">相机模式设置为BURST模式，在此模式下一次可以拍摄多张照片。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_high_resolution_inline"></a>PHOTO_HIGH_RESOLUTION</font></td><td><font color="#666">相机设置为高分辨率模式。在此模式下相机将拍摄分辨率为48MP的照片。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_interval_inline"></a>PHOTO_INTERVAL</font></td><td><font color="#666">相机模式设置为定时拍照模式。设置相机以设定的时间间隔连续拍摄一张照片。你可以通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_photointervalshootsettings">KeyPhotoIntervalShootSettings</a></code>设置定时拍照参数，其中<code><a href="../../Components/IKeyManager/Value_Camera_Struct_PhotoIntervalShootSettings.html#value_camera_struct_photointervalshootsettings_setcount">setCount</a></code>用于设置总共拍摄的张数，<code><a href="../../Components/IKeyManager/Value_Camera_Struct_PhotoIntervalShootSettings.html#value_camera_struct_photointervalshootsettings_setinterval">setInterval</a></code>用于设置拍照的时间间隔，由于相机拍照需要响应时间，最小拍照间隔时间需要设置为2秒以上。设置此模式后，你需要调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_startshootphoto">KeyStartShootPhoto</a></code> 进行定时拍照。在定时拍照过程中，你可以调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_stopshootphoto">KeyStopShootPhoto</a></code>停止定时拍照。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_super_resolution_inline"></a>PHOTO_SUPER_RESOLUTION</font></td><td><font color="#666">相机模式设置为超清矩阵拍照模式。在此模式下，在广角视图中拖动选择一个区域，云台将自动移动，并通过变焦相机以当前缩放比例对选定区域拍摄一系列20MP的照片。所有照片和生成的HTML文件都将保存在microSD卡的同一文件夹中。要查看全局照片和局部特写照片，请在PC上使用浏览器打开HTML文件进行查看。如果你想在应用程序中查看全局照片和局部特写照片，请使用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_superresolutioncapturearea">KeySuperResolutionCaptureArea</a></code>设置超清矩阵拍照区域。使用 <code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_superresolutionstate">KeySuperResolutionInfo</a></code>监听超清矩阵拍照状态。设置此模式后，你需要调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_startshootphoto">KeyStartShootPhoto</a></code> 进行超清矩阵拍照，在拍照过程中，你可以调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_stopshootphoto">KeyStopShootPhoto</a></code>停止定时超清矩阵拍照。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameramode_photo_panorama_inline"></a>PHOTO_PANORAMA</font></td><td><font color="#666">相机模式设置为全景拍照模式。飞行器拍摄了一系列不同云台角度和飞行器航向的照片。这组照片可以用第三方库拼接成全景照片。可通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_visionphotopanoramamode">KeyPhotoPanoramaMode</a></code>设置全景拍照模式,通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_isshootingvisionpanoramaphoto">KeyIsShootingPhotoPanorama</a></code>判断是否处于全景拍照模式，通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_panoramaphotocaptureprogress">KeyPhotoPanoramaProgress</a></code>获取全景拍照的进度。设置此模式后，你需要调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_startshootphoto">KeyStartShootPhoto</a></code> 进行全景拍照。在拍照过程中，你可以调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_stopshootphoto">KeyStopShootPhoto</a></code>停止全景拍照。 <br><b>注意：<br> 全景拍照模式必须在飞行器起飞后才能启动。</b></font></td></tr></table></html>
 <h5 id="class-members-v9">Class Members:</h5>
 </div>
 <div class="api-row" id="value_camera_enum_camerastoragelocation"><div class="api-col left">存储信息</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_camerastoragelocation_inline">CameraStorageLocation</a></div></div><div class="inline-doc" id="value_camera_enum_camerastoragelocation_inline" <blockquote>
@@ -740,7 +780,7 @@
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_mediafiletype_jpeg_inline"></a>JPEG</font></td><td><font color="#666">媒体文件类型为JPEG照片。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_mediafiletype_dng_inline"></a>DNG</font></td><td><font color="#666">媒体文件类型为DNG照片。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_mediafiletype_mov_inline"></a>MOV</font></td><td><font color="#666">媒体文件类型为MOV视频。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_mediafiletype_mp4_inline"></a>MP4</font></td><td><font color="#666">媒体文件类型为MP4视频。</font></td></tr></table></html>
 <h5 id="class-members-v19">Class Members:</h5>
 </div>
-<div class="api-row" id="value_camera_struct_generatedmediafileinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_GeneratedMediaFileInfo.html">GeneratedMediaFileInfo</a></div></div><div class="api-row" id="value_camera_enum_photostorageformat"><div class="api-col left">照片格式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_photostorageformat_inline">PhotoFileFormat</a></div></div><div class="inline-doc" id="value_camera_enum_photostorageformat_inline" <blockquote>
+<div class="api-row" id="value_camera_struct_generatedmediafileinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_GeneratedMediaFileInfo.html">GeneratedMediaFileInfo</a></div></div><div class="api-row" id="value_camera_struct_msdkzoomratiosrange"><div class="api-col left">变焦倍率</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a></div></div><div class="api-row" id="value_camera_enum_photostorageformat"><div class="api-col left">照片格式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_photostorageformat_inline">PhotoFileFormat</a></div></div><div class="inline-doc" id="value_camera_enum_photostorageformat_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>PhotoFileFormat</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> PhotoFileFormat implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
@@ -872,82 +912,104 @@
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_5p0ev_inline"></a>NEG_5P0EV</font></td><td><font color="#666">曝光补偿设置为-5.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_4p7ev_inline"></a>NEG_4P7EV</font></td><td><font color="#666">曝光补偿设置为-4.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_4p3ev_inline"></a>NEG_4P3EV</font></td><td><font color="#666">曝光补偿设置为-4.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_4p0ev_inline"></a>NEG_4P0EV</font></td><td><font color="#666">曝光补偿设置为-4.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_3p7ev_inline"></a>NEG_3P7EV</font></td><td><font color="#666">曝光补偿设置为-3.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_3p3ev_inline"></a>NEG_3P3EV</font></td><td><font color="#666">曝光补偿设置为-3.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_3p0ev_inline"></a>NEG_3P0EV</font></td><td><font color="#666">曝光补偿设置为-3.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_2p7ev_inline"></a>NEG_2P7EV</font></td><td><font color="#666">曝光补偿设置为-2.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_2p3ev_inline"></a>NEG_2P3EV</font></td><td><font color="#666">曝光补偿设置为-2.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_2p0ev_inline"></a>NEG_2P0EV</font></td><td><font color="#666">曝光补偿设置为-2.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_1p7ev_inline"></a>NEG_1P7EV</font></td><td><font color="#666">曝光补偿设置为-1.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_1p3ev_inline"></a>NEG_1P3EV</font></td><td><font color="#666">曝光补偿设置为-1.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_1p0ev_inline"></a>NEG_1P0EV</font></td><td><font color="#666">曝光补偿设置为-1.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_0p7ev_inline"></a>NEG_0P7EV</font></td><td><font color="#666">曝光补偿设置为-0.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_0p3ev_inline"></a>NEG_0P3EV</font></td><td><font color="#666">曝光补偿设置为-0.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_neg_0ev_inline"></a>NEG_0EV</font></td><td><font color="#666">曝光补偿设置为0.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_0p3ev_inline"></a>POS_0P3EV</font></td><td><font color="#666">曝光补偿设置为+0.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_0p7ev_inline"></a>POS_0P7EV</font></td><td><font color="#666">曝光补偿设置为+0.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_1p0ev_inline"></a>POS_1P0EV</font></td><td><font color="#666">曝光补偿设置为+1.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_1p3ev_inline"></a>POS_1P3EV</font></td><td><font color="#666">曝光补偿设置为+1.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_1p7ev_inline"></a>POS_1P7EV</font></td><td><font color="#666">曝光补偿设置为+1.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_2p0ev_inline"></a>POS_2P0EV</font></td><td><font color="#666">曝光补偿设置为+2.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_2p3ev_inline"></a>POS_2P3EV</font></td><td><font color="#666">曝光补偿设置为+2.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_2p7ev_inline"></a>POS_2P7EV</font></td><td><font color="#666">曝光补偿设置为+2.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_3p0ev_inline"></a>POS_3P0EV</font></td><td><font color="#666">曝光补偿设置为+3.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_3p3ev_inline"></a>POS_3P3EV</font></td><td><font color="#666">曝光补偿设置为+3.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_3p7ev_inline"></a>POS_3P7EV</font></td><td><font color="#666">曝光补偿设置为+3.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_4p0ev_inline"></a>POS_4P0EV</font></td><td><font color="#666">曝光补偿设置为+4.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_4p3ev_inline"></a>POS_4P3EV</font></td><td><font color="#666">曝光补偿设置为+4.3ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_4p7ev_inline"></a>POS_4P7EV</font></td><td><font color="#666">曝光补偿设置为+4.7ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_pos_5p0ev_inline"></a>POS_5P0EV</font></td><td><font color="#666">曝光补偿设置为+5.0ev。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraexposurecompensation_fixed_inline"></a>FIXED</font></td><td><font color="#666">曝光补偿设置为FIXED。相机镜头的曝光补偿由相机设置为固定值。</font></td></tr></table></html>
 <h5 id="class-members-v31">Class Members:</h5>
 </div>
-<div class="api-row" id="value_camera_enum_camerathermalffcmode"><div class="api-col left">FFC校准模式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_camerathermalffcmode_inline">ThermalFFCMode</a></div></div><div class="inline-doc" id="value_camera_enum_camerathermalffcmode_inline" <blockquote>
+<div class="api-row" id="value_camera_enum_camerawhitebalancemode"><div class="api-col left">白平衡</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_camerawhitebalancemode_inline">CameraWhiteBalanceMode</a></div></div><div class="inline-doc" id="value_camera_enum_camerawhitebalancemode_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>CameraWhiteBalanceMode</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> CameraWhiteBalanceMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
+<h5 id="描述：-v33">描述：</h5>
+<p><font color="#666">白平衡模式。</font></p>
+<h5 id="enum-members-v32">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_auto_inline"></a>AUTO</font></td><td><font color="#666">自动。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_sunny_inline"></a>SUNNY</font></td><td><font color="#666">晴天。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_cloudy_inline"></a>CLOUDY</font></td><td><font color="#666">阴天。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_water_surface_inline"></a>WATER_SURFACE</font></td><td><font color="#666">水面。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_underwater_inline"></a>UNDERWATER</font></td><td><font color="#666">水下。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_indoor_incandescent_inline"></a>INDOOR_INCANDESCENT</font></td><td><font color="#666">室内(白炽灯)。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_indoor_fluorescent_inline"></a>INDOOR_FLUORESCENT</font></td><td><font color="#666">室内(荧光灯)。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_natural_inline"></a>NATURAL</font></td><td><font color="#666">自然。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerawhitebalancemode_manual_inline"></a>MANUAL</font></td><td><font color="#666">手动。当设置为手动模式后，可通过<code><a href="../../Components/IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html#value_camera_struct_camerawhitebalance_setcolortemperature">setColorTemperature</a></code>设置色温。</font></td></tr></table></html>
+<h5 id="class-members-v32">Class Members:</h5>
+</div>
+<div class="api-row" id="value_camera_struct_camerawhitebalance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a></div></div><div class="api-row" id="value_camera_enum_camerathermalffcmode"><div class="api-col left">FFC校准模式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_camerathermalffcmode_inline">ThermalFFCMode</a></div></div><div class="inline-doc" id="value_camera_enum_camerathermalffcmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>ThermalFFCMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ThermalFFCMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
-<h5 id="描述：-v33">描述：</h5>
+<h5 id="描述：-v34">描述：</h5>
 <p><font color="#666">FFC模式。可选择自动或者手动FFC校准。</font></p>
-<h5 id="enum-members-v32">Enum Members:</h5>
+<h5 id="enum-members-v33">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerathermalffcmode_auto_inline"></a>AUTO</font></td><td><font color="#666">自动FFC校准。设置为自动FFC校准后，红外镜头每隔一段时间将进行自动校准。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerathermalffcmode_manual_inline"></a>MANUAL</font></td><td><font color="#666">手动FFC校准。设置为手动FFC校准后，可调用<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_thermaltriggerffc">KeyThermalTriggerFFC</a></code>进行手动FFC校准。</font></td></tr></table></html>
-<h5 id="class-members-v32">Class Members:</h5>
+<h5 id="class-members-v33">Class Members:</h5>
+</div>
+<div class="api-row" id="value_camera_enum_cameraantiflicker"><div class="api-col left">抗闪烁</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_cameraantiflicker_inline">CameraAntiFlicker</a></div></div><div class="inline-doc" id="value_camera_enum_cameraantiflicker_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>CameraAntiFlicker</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> CameraAntiFlicker implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
+<h5 id="描述：-v35">描述：</h5>
+<p><font color="#666">抗闪烁设置类型。</font></p>
+<h5 id="enum-members-v34">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraantiflicker_anti_flicker_auto_inline"></a>ANTI_FLICKER_AUTO</font></td><td><font color="#666">自动。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraantiflicker_anti_flicker_60hz_inline"></a>ANTI_FLICKER_60HZ</font></td><td><font color="#666">60HZ。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraantiflicker_anti_flicker_50hz_inline"></a>ANTI_FLICKER_50HZ</font></td><td><font color="#666">50HZ。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_cameraantiflicker_anti_flicker_off_inline"></a>ANTI_FLICKER_OFF</font></td><td><font color="#666">关闭。</font></td></tr></table></html>
+<h5 id="class-members-v34">Class Members:</h5>
 </div>
 <div class="api-row" id="value_camera_struct_camerawatermarksettings"><div class="api-col left">水印</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a></div></div><div class="api-row" id="value_camera_struct_watermarkdisplaycontentsettings"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_WatermarkDisplayContentSettings.html">WatermarkDisplayContentSettings</a></div></div><div class="api-row" id="value_camera_struct_customexpandnamesettings"><div class="api-col left">自定义名称</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_CustomExpandNameSettings.html">CustomExpandNameSettings</a></div></div><div class="api-row" id="value_camera_enum_videoframerate"><div class="api-col left">视频帧率</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_videoframerate_inline">VideoFrameRate</a></div></div><div class="inline-doc" id="value_camera_enum_videoframerate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>VideoFrameRate</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> VideoFrameRate implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
-<h5 id="描述：-v34">描述：</h5>
+<h5 id="描述：-v36">描述：</h5>
 <p><font color="#666">视频帧率。</font></p>
-<h5 id="enum-members-v33">Enum Members:</h5>
+<h5 id="enum-members-v35">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_videoframerate_rate_30fps_inline"></a>RATE_30FPS</font></td><td><font color="#666">视频帧率为30fps。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_videoframerate_rate_60fps_inline"></a>RATE_60FPS</font></td><td><font color="#666">视频帧率为60fps。</font></td></tr></table></html>
-<h5 id="class-members-v33">Class Members:</h5>
+<h5 id="class-members-v35">Class Members:</h5>
 </div>
 <div class="api-row" id="value_camera_struct_thermalgainmodetemperaturerangemsg"><div class="api-col left">区域测温</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_ThermalGainModeTemperatureRangeMsg.html">ThermalGainModeTemperatureRange</a></div></div><div class="api-row" id="value_camera_struct_thermalareatemperatureaggregationsmsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_ThermalAreaTemperatureAggregationsMsg.html">ThermalAreaMetersureTemperature</a></div></div><div class="api-row" id="value_camera_enum_camerathermalisothermunit"><div class="api-col left">等温线</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_camerathermalisothermunit_inline">ThermalIsothermUnit</a></div></div><div class="inline-doc" id="value_camera_enum_camerathermalisothermunit_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>ThermalIsothermUnit</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ThermalIsothermUnit implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
-<h5 id="描述：-v35">描述：</h5>
+<h5 id="描述：-v37">描述：</h5>
 <p><font color="#666">等温线单位。</font></p>
-<h5 id="enum-members-v34">Enum Members:</h5>
+<h5 id="enum-members-v36">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerathermalisothermunit_percentage_inline"></a>PERCENTAGE</font></td><td><font color="#666">百分比。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerathermalisothermunit_celsius_inline"></a>CELSIUS</font></td><td><font color="#666">摄氏度。</font></td></tr></table></html>
-<h5 id="class-members-v34">Class Members:</h5>
+<h5 id="class-members-v36">Class Members:</h5>
 </div>
 <div class="api-row" id="value_camera_enum_camerafocusmode"><div class="api-col left">对焦模式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_camerafocusmode_inline">CameraFocusMode</a></div></div><div class="inline-doc" id="value_camera_enum_camerafocusmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>CameraFocusMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> CameraFocusMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
-<h5 id="描述：-v36">描述：</h5>
+<h5 id="描述：-v38">描述：</h5>
 <p><font color="#666">相机对焦模式。</font></p>
-<h5 id="enum-members-v35">Enum Members:</h5>
+<h5 id="enum-members-v37">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerafocusmode_manual_inline"></a>MANUAL</font></td><td><font color="#666">手动对焦。在此模式下，用户通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_camerafocusringvalue">KeyCameraFocusRingValue</a></code>设置对焦环值来调整焦距，对焦目标为屏幕中心点。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerafocusmode_af_inline"></a>AF</font></td><td><font color="#666">自动对焦。在此模式下，用户可以通过<code><a href="../../Components/IKeyManager/Key_Camera_CameraKey.html#key_camera_camerafocustarget">KeyCameraFocusTarget</a></code>设置对焦目标进行自动对焦。该模式在Pilot中显示为AFS。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerafocusmode_afc_inline"></a>AFC</font></td><td><font color="#666">连续自动对焦。在此模式下，相机会以屏幕中心点为对焦目标，当被摄物体移动时，自动对焦系统能够实时根据焦点的变化调节镜头，让被摄物体一直保持清晰状态。</font></td></tr></table></html>
-<h5 id="class-members-v35">Class Members:</h5>
+<h5 id="class-members-v37">Class Members:</h5>
 </div>
 <div class="api-row" id="value_camera_enum_camerameteringmode"><div class="api-col left">测光模式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_camerameteringmode_inline">CameraMeteringMode</a></div></div><div class="inline-doc" id="value_camera_enum_camerameteringmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>CameraMeteringMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> CameraMeteringMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
-<h5 id="描述：-v37">描述：</h5>
+<h5 id="描述：-v39">描述：</h5>
 <p><font color="#666">相机镜头的测光模式。</font></p>
-<h5 id="enum-members-v36">Enum Members:</h5>
+<h5 id="enum-members-v38">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerameteringmode_center_inline"></a>CENTER</font></td><td><font color="#666">中心点测光。在此模式下，相机会以屏幕中心点亮度进行测光。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerameteringmode_average_inline"></a>AVERAGE</font></td><td><font color="#666">平均测光。在此模式下，相机会以屏幕平均亮度进行测光。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_camerameteringmode_spot_inline"></a>REGION</font></td><td><font color="#666">区域测光（包括点测光）。在此模式下，相机会以用户设置的区域亮度进行测光。</font></td></tr></table></html>
-<h5 id="class-members-v36">Class Members:</h5>
+<h5 id="class-members-v38">Class Members:</h5>
 </div>
 <div class="api-row" id="value_camera_struct_photointervalshootsettings"><div class="api-col left">定时拍照</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Camera_Struct_PhotoIntervalShootSettings.html">PhotoIntervalShootSettings</a></div></div><div class="api-row" id="value_camera_enum_photoratio"><div class="api-col left">照片比例</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_photoratio_inline">PhotoRatio</a></div></div><div class="inline-doc" id="value_camera_enum_photoratio_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>PhotoRatio</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> PhotoRatio implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
-<h5 id="描述：-v38">描述：</h5>
+<h5 id="描述：-v40">描述：</h5>
 <p><font color="#666">照片比例类型。</font></p>
-<h5 id="enum-members-v37">Enum Members:</h5>
+<h5 id="enum-members-v39">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_photoratio_ratio_4colon3_inline"></a>RATIO_4COLON3</font></td><td><font color="#666">照片比例设置为4:3。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_photoratio_ratio_16colon9_inline"></a>RATIO_16COLON9</font></td><td><font color="#666">照片比例设置为16:9。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_photoratio_ratio_3colon2_inline"></a>RATIO_3COLON2</font></td><td><font color="#666">照片比例设置为3:2。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_photoratio_ratio_square_inline"></a>RATIO_SQUARE</font></td><td><font color="#666">照片比例设置为1:1。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_photoratio_ratio_18colon9_inline"></a>RATIO_18COLON9</font></td><td><font color="#666">照片比例设置为18:9。</font></td></tr></table></html>
-<h5 id="class-members-v37">Class Members:</h5>
+<h5 id="class-members-v39">Class Members:</h5>
 </div>
 <div class="api-row" id="value_camera_enum_thermaldigitalzoomfactor"><div class="api-col left">红外变焦</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_camera_enum_thermaldigitalzoomfactor_inline">ThermalDigitalZoomFactor</a></div></div><div class="inline-doc" id="value_camera_enum_thermaldigitalzoomfactor_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>ThermalDigitalZoomFactor</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ThermalDigitalZoomFactor implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
-<h5 id="描述：-v39">描述：</h5>
+<h5 id="描述：-v41">描述：</h5>
 <p><font color="#666">红外变焦倍率。</font></p>
-<h5 id="enum-members-v38">Enum Members:</h5>
+<h5 id="enum-members-v40">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_thermaldigitalzoomfactor_factor_x1_inline"></a>FACTOR_X1</font></td><td><font color="#666">1X。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_thermaldigitalzoomfactor_factor_x2_inline"></a>FACTOR_X2</font></td><td><font color="#666">2X。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_thermaldigitalzoomfactor_factor_x4_inline"></a>FACTOR_X4</font></td><td><font color="#666">4X。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_camera_enum_thermaldigitalzoomfactor_factor_x8_inline"></a>FACTOR_X8</font></td><td><font color="#666">8X。</font></td></tr></table></html>
-<h5 id="class-members-v38">Class Members:</h5>
+<h5 id="class-members-v40">Class Members:</h5>
 </div>
 <html><p><br></p></html>
 <h4 id="common">Common</h4>
@@ -956,33 +1018,33 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ControlLocation implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.common</font></td></tr></table></html>
-<h5 id="描述：-v40">描述：</h5>
+<h5 id="描述：-v42">描述：</h5>
 <p><font color="#666">屏幕位置。</font></p>
-<h5 id="enum-members-v39">Enum Members:</h5>
+<h5 id="enum-members-v41">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_controllocation_left_top_inline"></a>LEFT_TOP</font></td><td><font color="#666">左上。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_controllocation_left_bottom_inline"></a>LEFT_BOTTOM</font></td><td><font color="#666">左下。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_controllocation_right_top_inline"></a>RIGHT_TOP</font></td><td><font color="#666">右上。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_controllocation_right_bottom_inline"></a>RIGHT_BOTTOM</font></td><td><font color="#666">右上。</font></td></tr></table></html>
-<h5 id="class-members-v39">Class Members:</h5>
+<h5 id="class-members-v41">Class Members:</h5>
 </div>
 <div class="api-row" id="value_common_struct_velocity3d"><div class="api-col left">三维速度</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a></div></div><div class="api-row" id="value_common_struct_intvalueconfig"><div class="api-col left">整形数据的范围</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_IntValueConfig.html">IntMinMax</a></div></div><div class="api-row" id="value_common_struct_attitude"><div class="api-col left">姿态数据</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_Attitude.html">Attitude</a></div></div><div class="api-row" id="value_common_enum_lengthunit"><div class="api-col left">长度单位</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_common_enum_lengthunit_inline">LengthUnit</a></div></div><div class="inline-doc" id="value_common_enum_lengthunit_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>LengthUnit</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> LengthUnit implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.common</font></td></tr></table></html>
-<h5 id="描述：-v41">描述：</h5>
+<h5 id="描述：-v43">描述：</h5>
 <p><font color="#666">高度和长度的显示单位。</font></p>
-<h5 id="enum-members-v40">Enum Members:</h5>
+<h5 id="enum-members-v42">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_lengthunit_meter_inline"></a>METER</font></td><td><font color="#666">公制单位：米。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_lengthunit_foot_inline"></a>FOOT</font></td><td><font color="#666">英制单位：英尺。</font></td></tr></table></html>
-<h5 id="class-members-v40">Class Members:</h5>
+<h5 id="class-members-v42">Class Members:</h5>
 </div>
 <div class="api-row" id="value_common_struct_doubleminmax"><div class="api-col left">浮点数据的范围</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_DoubleMinMax.html">DoubleMinMax</a></div></div><div class="api-row" id="value_common_struct_locationcoordinate3d"><div class="api-col left">三维位置坐标</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_LocationCoordinate3D.html">LocationCoordinate3D</a></div></div><div class="api-row" id="value_common_enum_lonlatformat"><div class="api-col left">经纬度格式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_common_enum_lonlatformat_inline">LonLatFormat</a></div></div><div class="inline-doc" id="value_common_enum_lonlatformat_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>LonLatFormat</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> LonLatFormat implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.common</font></td></tr></table></html>
-<h5 id="描述：-v42">描述：</h5>
+<h5 id="描述：-v44">描述：</h5>
 <p><font color="#666">经纬度显示格式。</font></p>
-<h5 id="enum-members-v41">Enum Members:</h5>
+<h5 id="enum-members-v43">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_lonlatformat_decimal_degree_inline"></a>DECIMAL_DEGREE</font></td><td><font color="#666">度格式，dd.ddddd°。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_lonlatformat_degrees_decimal_minutes_inline"></a>DEGREES_DECIMAL_MINUTES</font></td><td><font color="#666">度分格式，dd°mm.mmm'。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_lonlatformat_sexagesimal_degree_inline"></a>SEXAGESIMAL_DEGREE</font></td><td><font color="#666">度分秒格式，dd°mm'ss''。</font></td></tr></table></html>
-<h5 id="class-members-v41">Class Members:</h5>
+<h5 id="class-members-v43">Class Members:</h5>
 </div>
 <div class="api-row" id="value_common_struct_doublepoint2d"><div class="api-col left">二维浮点数据</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_DoublePoint2D.html">DoublePoint2D</a></div></div><div class="api-row" id="value_common_struct_locationcoordinate2d"><div class="api-col left">二维位置坐标</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_LocationCoordinate2D.html">LocationCoordinate2D</a></div></div><html><p><br></p></html>
 <h4 id="product">product</h4>
@@ -991,11 +1053,11 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ProductType implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.product</font></td></tr></table></html>
-<h5 id="描述：-v43">描述：</h5>
+<h5 id="描述：-v45">描述：</h5>
 <p><font color="#666">产品类型。</font></p>
-<h5 id="enum-members-v42">Enum Members:</h5>
+<h5 id="enum-members-v44">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_wm265_inline"></a>DJI_MAVIC_3_ENTERPRISE_SERIES</font></td><td><font color="#666">M3行业版系列。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_pm320_inline"></a>M30_SERIES</font></td><td><font color="#666">M30系列。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_pm430_inline"></a>M300_RTK</font></td><td><font color="#666">M300 RTK。</font></td></tr></table></html>
-<h5 id="class-members-v42">Class Members:</h5>
+<h5 id="class-members-v44">Class Members:</h5>
 </div>
 <html><p><br></p></html>
 <h4 id="remote-controller">Remote Controller</h4>
@@ -1004,55 +1066,55 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MultiControlAuthorityType implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.common</font></td></tr></table></html>
-<h5 id="描述：-v44">描述：</h5>
+<h5 id="描述：-v46">描述：</h5>
 <p><font color="#666">可获取的控制权类型，包括飞行和云台控制权。</font></p>
-<h5 id="enum-members-v43">Enum Members:</h5>
+<h5 id="enum-members-v45">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_rcauthoritymode_flight_control_auth_inline"></a>FLIGHT_CONTROL_AUTHORITY</font></td><td><font color="#666">飞行控制权。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_rcauthoritymode_gimbal1_control_auth_inline"></a>GIMBAL_LEFT_CONTROL_AUTHORITY</font></td><td><font color="#666">左云台控制权。如果只有一个云台，这个类型则为主云台控制权。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_rcauthoritymode_gimbal2_control_auth_inline"></a>GIMBAL_RIGHT_CONTROL_AUTHORITY</font></td><td><font color="#666">右云台控制权。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_rcauthoritymode_gimbal3_control_auth_inline"></a>GIMBAL_UP_CONTROL_AUTHORITY</font></td><td><font color="#666">上云台控制权。</font></td></tr></table></html>
-<h5 id="class-members-v43">Class Members:</h5>
+<h5 id="class-members-v45">Class Members:</h5>
 </div>
 <div class="api-row" id="value_common_struct_rcauthoritymodemsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_RCAuthorityModeMsg.html">MultiControlAuthorityTypeInfo</a></div></div><div class="api-row" id="value_common_struct_rcauthoritylockcontrolmsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Common_Struct_RCAuthorityLockControlMsg.html">MultiControlLockAuthorityInfo</a></div></div><div class="api-row" id="value_remotecontroller_struct_rcparamchargeremaininginfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RcParamChargeRemainingInfo.html">BatteryInfo</a></div></div><div class="api-row" id="value_common_enum_rcmodechannel"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_common_enum_rcmodechannel_inline">MultiControlChannel</a></div></div><div class="inline-doc" id="value_common_enum_rcmodechannel_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>MultiControlChannel</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MultiControlChannel implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.common</font></td></tr></table></html>
-<h5 id="描述：-v45">描述：</h5>
+<h5 id="描述：-v47">描述：</h5>
 <p><font color="#666">遥控器多控频道类型。如果要实现双控功能，需要把不同的遥控器设置为不同的频道，然后跟飞行器对频。<br>注意事项：如果已经有遥控器A设置为A控频道，然后把遥控器B设置为A控跟飞行器对频，遥控器A会跟飞行器断开连接，需要重新进行对频才能跟飞行器连接。</font></p>
-<h5 id="enum-members-v44">Enum Members:</h5>
+<h5 id="enum-members-v46">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_rcmodechannel_channel_a_inline"></a>CHANNEL_A</font></td><td><font color="#666">A控。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_common_enum_rcmodechannel_channel_b_inline"></a>CHANNEL_B</font></td><td><font color="#666">B控。</font></td></tr></table></html>
-<h5 id="class-members-v44">Class Members:</h5>
+<h5 id="class-members-v46">Class Members:</h5>
 </div>
 <div class="api-row" id="value_remotecontroller_struct_rcmultistatusmsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RcMultiStatusMsg.html">MultiControlStatusInfo</a></div></div><div class="api-row" id="value_remotecontroller_enum_remotecontrollertype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_remotecontroller_enum_remotecontrollertype_inline">RemoteControllerType</a></div></div><div class="inline-doc" id="value_remotecontroller_enum_remotecontrollertype_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>RemoteControllerType</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> RemoteControllerType implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.remotecontroller</font></td></tr></table></html>
-<h5 id="描述：-v46">描述：</h5>
+<h5 id="描述：-v48">描述：</h5>
 <p><font color="#666">遥控器类型。</font></p>
-<h5 id="enum-members-v45">Enum Members:</h5>
+<h5 id="enum-members-v47">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_remotecontrollertype_rm700_inline"></a>DJI_RC_PLUS</font></td><td><font color="#666">DJI RC PLUS遥控器。采用O3 Pro高清图传技术，可与支持该图传技术的飞行器搭配使用，并实时传输高清画面。配合遥控器完备的功能按键，可完成飞行器与相机的操作与设置。支持M30系列飞行器。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_remotecontrollertype_pm430_pro_rtk_inline"></a>M300_RTK_RC</font></td><td><font color="#666">M300 RTK遥控器。</font></td></tr></table></html>
-<h5 id="class-members-v45">Class Members:</h5>
+<h5 id="class-members-v47">Class Members:</h5>
 </div>
 <div class="api-row" id="value_remotecontroller_struct_rcauthoritylostpushmsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RCAuthorityLostPushMsg.html">MultiControlLostControlInfo</a></div></div><div class="api-row" id="value_remotecontroller_enum_rccontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_remotecontroller_enum_rccontrolmode_inline">ControlMode</a></div></div><div class="inline-doc" id="value_remotecontroller_enum_rccontrolmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>ControlMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ControlMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.remotecontroller</font></td></tr></table></html>
-<h5 id="描述：-v47">描述：</h5>
+<h5 id="描述：-v49">描述：</h5>
 <p><font color="#666">遥控器控制模式。</font></p>
-<h5 id="enum-members-v46">Enum Members:</h5>
+<h5 id="enum-members-v48">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_rccontrolmode_jp_inline"></a>JP</font></td><td><font color="#666">日本手。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_rccontrolmode_usa_inline"></a>USA</font></td><td><font color="#666">美国手。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_rccontrolmode_ch_inline"></a>CH</font></td><td><font color="#666">中国手。</font></td></tr></table></html>
-<h5 id="class-members-v46">Class Members:</h5>
+<h5 id="class-members-v48">Class Members:</h5>
 </div>
 <div class="api-row" id="value_remotecontroller_enum_rcpairingstate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_remotecontroller_enum_rcpairingstate_inline">PairingState</a></div></div><div class="inline-doc" id="value_remotecontroller_enum_rcpairingstate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>PairingState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> PairingState implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.remotecontroller</font></td></tr></table></html>
-<h5 id="描述：-v48">描述：</h5>
+<h5 id="描述：-v50">描述：</h5>
 <p><font color="#666">遥控器对频状态。</font></p>
-<h5 id="enum-members-v47">Enum Members:</h5>
+<h5 id="enum-members-v49">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_rcpairingstate_unpaired_inline"></a>UNPAIRED</font></td><td><font color="#666">遥控器没有在对频状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_rcpairingstate_pairing_inline"></a>PAIRING</font></td><td><font color="#666">遥控器在对频中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_remotecontroller_enum_rcpairingstate_paired_inline"></a>PAIRED</font></td><td><font color="#666">遥控器已成功对频。</font></td></tr></table></html>
-<h5 id="class-members-v47">Class Members:</h5>
+<h5 id="class-members-v49">Class Members:</h5>
 </div>
 <div class="api-row" id="value_remotecontroller_struct_multircflightcontrolauthownermsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_RemoteController_Struct_MultiRCFlightControlAuthOwnerMsg.html">MultiControlFlightControlAuthorityOwnerInfo</a></div></div><div class="api-row" id="value_remotecontroller_struct_rcmodechanneltypemsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RCModeChannelTypeMsg.html">MultiControlChannelInfo</a></div></div><div class="api-row" id="value_remotecontroller_struct_rcfivedimensionpressedstatus"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a></div></div><div class="api-row" id="value_airlink_struct_frequencyinterference"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Airlink_Struct_FrequencyInterference.html">FrequencyInterferenceInfo</a></div></div><html><p><br></p></html>
 <h4 id="flightcontroller">FlightController</h4>
@@ -1061,177 +1123,177 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> IMUCalibrationOrientation implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v49">描述：</h5>
+<h5 id="描述：-v51">描述：</h5>
 <p><font color="#666">IMU校准的飞机方向。以下图示以M30为例。</font></p>
-<h5 id="enum-members-v48">Enum Members:</h5>
+<h5 id="enum-members-v50">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationorientation_nose_down_inline"></a>NOSE_DOWN</font></td><td><font color="#666">飞机前部/机头应朝下。 <br><img src="https://terra-1-g.djicdn.com/71a7d383e71a4fb8887a310eb746b47f/msdk/API-DOC/imu_front.jpg"></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationorientation_tail_down_inline"></a>TAIL_DOWN</font></td><td><font color="#666">飞机的后部/尾部应朝下。 <br><img src="https://terra-1-g.djicdn.com/71a7d383e71a4fb8887a310eb746b47f/msdk/API-DOC/imu_behind.jpg"></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationorientation_right_down_inline"></a>RIGHT_DOWN</font></td><td><font color="#666">飞机右边/右舷应朝下。 <br><img src="https://terra-1-g.djicdn.com/71a7d383e71a4fb8887a310eb746b47f/msdk/API-DOC/imu_right.jpg"></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationorientation_left_down_inline"></a>LEFT_DOWN</font></td><td><font color="#666">飞机左边/左舷应朝下。 <br><img src="https://terra-1-g.djicdn.com/71a7d383e71a4fb8887a310eb746b47f/msdk/API-DOC/imu_left.jpg"></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationorientation_bottom_down_inline"></a>BOTTOM_DOWN</font></td><td><font color="#666">飞机底部/腹部应朝下。
  <br><img src="https://terra-1-g.djicdn.com/71a7d383e71a4fb8887a310eb746b47f/msdk/API-DOC/imu_bottom.jpg"></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationorientation_top_down_inline"></a>TOP_DOWN</font></td><td><font color="#666">飞机顶部应朝下。</font></td></tr></table></html>
-<h5 id="class-members-v48">Class Members:</h5>
+<h5 id="class-members-v50">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_imucalibrationstate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_imucalibrationstate_inline">IMUCalibrationState</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_imucalibrationstate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>IMUCalibrationState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> IMUCalibrationState implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v50">描述：</h5>
+<h5 id="描述：-v52">描述：</h5>
 <p><font color="#666">IMU校准状态。</font></p>
-<h5 id="enum-members-v49">Enum Members:</h5>
+<h5 id="enum-members-v51">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationstate_calibrating_inline"></a>CALIBRATING</font></td><td><font color="#666">IMU校准中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationstate_successful_inline"></a>SUCCESSFUL</font></td><td><font color="#666">IMU校准成功。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imucalibrationstate_failed_inline"></a>FAILED</font></td><td><font color="#666">IMU校准失败。</font></td></tr></table></html>
-<h5 id="class-members-v49">Class Members:</h5>
+<h5 id="class-members-v51">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_struct_imucalibrationhint"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a></div></div><div class="api-row" id="value_flightcontroller_enum_imuorientationcalibrationstate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_imuorientationcalibrationstate_inline">IMUOrientationCalibrationState</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_imuorientationcalibrationstate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>IMUOrientationCalibrationState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> IMUOrientationCalibrationState implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v51">描述：</h5>
+<h5 id="描述：-v53">描述：</h5>
 <p><font color="#666">当前飞机方向的IMU校准状态。</font></p>
-<h5 id="enum-members-v50">Enum Members:</h5>
+<h5 id="enum-members-v52">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imuorientationcalibrationstate_calibrating_inline"></a>CALIBRATING</font></td><td><font color="#666">当前飞机方向的IMU校准中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_imuorientationcalibrationstate_completed_inline"></a>SUCCESSFUL</font></td><td><font color="#666">当前飞机方向的IMU校准成功。</font></td></tr></table></html>
-<h5 id="class-members-v50">Class Members:</h5>
+<h5 id="class-members-v52">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_smartrthstate"><div class="api-col left">智能低电量返航</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_smartrthstate_inline">LowBatteryRTHState</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_smartrthstate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>LowBatteryRTHState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> LowBatteryRTHState implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v52">描述：</h5>
+<h5 id="描述：-v54">描述：</h5>
 <p><font color="#666">智能低电量返航状态。</font></p>
-<h5 id="enum-members-v51">Enum Members:</h5>
+<h5 id="enum-members-v53">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_smartrthstate_idle_inline"></a>IDLE</font></td><td><font color="#666">未触发智能低电量返航。飞行器返航着陆后会把状态重置为这个状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_smartrthstate_counting_down_inline"></a>COUNTING_DOWN</font></td><td><font color="#666">触发智能低电量返航，飞行器正在倒计时。如果在10秒内没有收到用户取消返航请求，飞行器将执行智能返航操作，状态会变成<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_smartrthstate_executed">EXECUTED</a></code>，如果用户取消了返航请求，状态会变成<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_smartrthstate_cancelled">CANCELLED</a></code>。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_smartrthstate_executed_inline"></a>EXECUTED</font></td><td><font color="#666">执行智能低电量返航。直到飞行器返航着陆或者被中途取消返航，该状态才会被重置。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_smartrthstate_cancelled_inline"></a>CANCELLED</font></td><td><font color="#666">智能低电量返航被取消。直到飞行器着陆，该状态才会被重置。</font></td></tr></table></html>
-<h5 id="class-members-v51">Class Members:</h5>
+<h5 id="class-members-v53">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_struct_gohomeassessment"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a></div></div><div class="api-row" id="value_flightcontroller_enum_fccompasscalibrationstate"><div class="api-col left">指南针校准</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_fccompasscalibrationstate_inline">CompassCalibrationState</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_fccompasscalibrationstate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>CompassCalibrationState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> CompassCalibrationState implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v53">描述：</h5>
+<h5 id="描述：-v55">描述：</h5>
 <p><font color="#666">指南针校准状态。</font></p>
-<h5 id="enum-members-v52">Enum Members:</h5>
+<h5 id="enum-members-v54">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fccompasscalibrationstate_idle_inline"></a>IDLE</font></td><td><font color="#666">正常状态，指南针未校准。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fccompasscalibrationstate_horizontal_inline"></a>HORIZONTAL</font></td><td><font color="#666">指南针水平校准，水平旋转飞行器360度。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fccompasscalibrationstate_vertical_inline"></a>VERTICAL</font></td><td><font color="#666">指南针垂直校准，垂直旋转飞行器360度。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fccompasscalibrationstate_succeeded_inline"></a>SUCCEEDED</font></td><td><font color="#666">指南针校准成功。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fccompasscalibrationstate_failed_inline"></a>FAILED</font></td><td><font color="#666">指南针校准失败。确保飞行器附近没有磁铁或金属物体，然后重试。</font></td></tr></table></html>
-<h5 id="class-members-v52">Class Members:</h5>
+<h5 id="class-members-v54">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_gohomestate"><div class="api-col left">智能返航</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_gohomestate_inline">GoHomeState</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_gohomestate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>GoHomeState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> GoHomeState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v54">描述：</h5>
+<h5 id="描述：-v56">描述：</h5>
 <p><font color="#666">智能返航状态。</font></p>
-<h5 id="enum-members-v53">Enum Members:</h5>
+<h5 id="enum-members-v55">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_gohomestate_idle_inline"></a>IDLE</font></td><td><font color="#666">未触发智能返航。飞行器返航着陆后也会把状态重置为这个状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_gohomestate_returning_to_home_inline"></a>RETURNING_TO_HOME</font></td><td><font color="#666">返航中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_gohomestate_landing_inline"></a>LANDING</font></td><td><font color="#666">返航下降中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_gohomestate_completed_inline"></a>COMPLETED</font></td><td><font color="#666">返航完成。</font></td></tr></table></html>
-<h5 id="class-members-v53">Class Members:</h5>
+<h5 id="class-members-v55">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_navigationsatellitesystem"><div class="api-col left">卫星定位系统</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_navigationsatellitesystem_inline">NavigationSatelliteSystem</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_navigationsatellitesystem_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>NavigationSatelliteSystem</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> NavigationSatelliteSystem implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v55">描述：</h5>
+<h5 id="描述：-v57">描述：</h5>
 <p><font color="#666">可设置的卫星定位系统的类型。</font></p>
-<h5 id="enum-members-v54">Enum Members:</h5>
+<h5 id="enum-members-v56">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_navigationsatellitesystem_gps_glonass_inline"></a>GPS_GLONASS</font></td><td><font color="#666">使用GPS和GLONASS卫星定位系统。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_navigationsatellitesystem_beidou_inline"></a>BEIDOU</font></td><td><font color="#666">只使用北斗卫星导航系统。</font></td></tr></table></html>
-<h5 id="class-members-v54">Class Members:</h5>
+<h5 id="class-members-v56">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_flightcoordinatesystem"><div class="api-col left">飞行坐标系</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_flightcoordinatesystem_inline">FlightCoordinateSystem</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_flightcoordinatesystem_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>FlightCoordinateSystem</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlightCoordinateSystem implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v56">描述：</h5>
+<h5 id="描述：-v58">描述：</h5>
 <p><font color="#666">飞行器的飞行坐标系。关于坐标系的详细定义，请参阅<a href="https://developer.dji.com/doc/mobile-sdk-tutorial/cn/basic-introduction/basic-concepts/flight-control.html#body%E5%9D%90%E6%A0%87%E7%B3%BB" target="_blank" rel="noopener">坐标系</a></font></p>
-<h5 id="enum-members-v55">Enum Members:</h5>
+<h5 id="enum-members-v57">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcoordinatesystem_ground_inline"></a>GROUND</font></td><td><font color="#666">大地坐标系。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcoordinatesystem_body_inline"></a>BODY</font></td><td><font color="#666">Body坐标系。</font></td></tr></table></html>
-<h5 id="class-members-v55">Class Members:</h5>
+<h5 id="class-members-v57">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_fcgpssignallevel"><div class="api-col left">GPS信号等级</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_fcgpssignallevel_inline">GPSSignalLevel</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_fcgpssignallevel_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>GPSSignalLevel</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> GPSSignalLevel implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v57">描述：</h5>
+<h5 id="描述：-v59">描述：</h5>
 <p><font color="#666">GPS信号等级。</font></p>
-<h5 id="enum-members-v56">Enum Members:</h5>
+<h5 id="enum-members-v58">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_0_inline"></a>LEVEL_0</font></td><td><font color="#666">等级0，GPS几乎没有信号。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_1_inline"></a>LEVEL_1</font></td><td><font color="#666">等级1，GPS信号很弱。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_2_inline"></a>LEVEL_2</font></td><td><font color="#666">等级2，GPS信号很弱。从这个级别开始，飞行器的返航功能可以工作。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_3_inline"></a>LEVEL_3</font></td><td><font color="#666">等级3，GPS信号良好。在这个级别上，飞行器可以在空中悬停。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_4_inline"></a>LEVEL_4</font></td><td><font color="#666">等级4，GPS信号很好。在这个级别上，飞行器可以记录返航点。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_5_inline"></a>LEVEL_5</font></td><td><font color="#666">等级5，GPS信号很强。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_10_inline"></a>LEVEL_10</font></td><td><font color="#666">等级10，GPS融合了RTK信息。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcgpssignallevel_level_none_inline"></a>LEVEL_NONE</font></td><td><font color="#666">没有GPS信号。</font></td></tr></table></html>
-<h5 id="class-members-v56">Class Members:</h5>
+<h5 id="class-members-v58">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_remotecontrollerflightmode"><div class="api-col left">遥控器档位模式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_remotecontrollerflightmode_inline">RemoteControllerFlightMode</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_remotecontrollerflightmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>RemoteControllerFlightMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> RemoteControllerFlightMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v58">描述：</h5>
+<h5 id="描述：-v60">描述：</h5>
 <p><font color="#666">遥控器档位模式。</font></p>
-<h5 id="enum-members-v57">Enum Members:</h5>
+<h5 id="enum-members-v59">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_remotecontrollerflightmode_f_inline"></a>F</font></td><td><font color="#666">功能模式，简称为“F模式”。表现与P模式相同，并启用任务和智能方向控制等智能功能。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_remotecontrollerflightmode_a_inline"></a>A</font></td><td><font color="#666">姿态模式，简称为“A模式”。在该模式下，不使用GPS模块和视觉系统进行定位，飞行器仅提供姿态増稳。实际操作中，飞行器会明显的出现漂移，无法悬停，需要飞手通过遥控器来不断修正飞行器的位置。姿态模式考验的是飞手对于飞行器的操控性。在一些紧急情况下，需要切换姿态模式。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_remotecontrollerflightmode_s_inline"></a>S</font></td><td><font color="#666">运动模式，简称为“S模式”。使用GPS模块和视觉系统以实现精准悬停，该模式下飞行器的感度值被适当调高，务必格外谨慎飞行。飞行器最大水平速度可达20米/秒。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_remotecontrollerflightmode_p_inline"></a>P</font></td><td><font color="#666">定位模式，简称为“P模式”，也叫“N模式”。GPS模块和视觉系统（如果可用）将用于飞行器定位。对于没有F模式的产品，可以在P模式下执行任务和智能方向控制等智能功能。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_remotecontrollerflightmode_m_inline"></a>M</font></td><td><font color="#666">手动模式，简称为“M模式”。在该模式下，飞行器的所有动作包括稳定姿态和稳定高度都需要飞手通过遥控器来控制，新手操作的话，比较危险。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_remotecontrollerflightmode_t_inline"></a>T</font></td><td><font color="#666">三角架模式，简称为“T模式”。在此模式下，飞行器飞行速度和转动灵敏度都将显著降低，可以更精准的控制画面，获得更加稳定的拍摄效果。</font></td></tr></table></html>
-<h5 id="class-members-v57">Class Members:</h5>
+<h5 id="class-members-v59">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_fcwindwarning"><div class="api-col left">风速</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_fcwindwarning_inline">WindWarning</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_fcwindwarning_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>WindWarning</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WindWarning implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v59">描述：</h5>
+<h5 id="描述：-v61">描述：</h5>
 <p><font color="#666">飞行器所处环境的风速等级。</font></p>
-<h5 id="enum-members-v58">Enum Members:</h5>
+<h5 id="enum-members-v60">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwindwarning_level_0_inline"></a>LEVEL_0</font></td><td><font color="#666">等级0，表示当前无风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwindwarning_level_1_inline"></a>LEVEL_1</font></td><td><font color="#666">等级1，表示当前风速很快。请小心飞行，确保飞行器保持在视线范围内。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwindwarning_level_2_inline"></a>LEVEL_2</font></td><td><font color="#666">等级2，表示当前风速非常快。请小心飞行，确保飞行器保持在视线范围内。</font></td></tr></table></html>
-<h5 id="class-members-v58">Class Members:</h5>
+<h5 id="class-members-v60">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_fcwinddirectionstatus"><div class="api-col left">风向</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_fcwinddirectionstatus_inline">WindDirection</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_fcwinddirectionstatus_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>WindDirection</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WindDirection implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v60">描述：</h5>
+<h5 id="描述：-v62">描述：</h5>
 <p><font color="#666">飞行器所处环境的风向，采用世界坐标系。</font></p>
-<h5 id="enum-members-v59">Enum Members:</h5>
+<h5 id="enum-members-v61">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_windless_inline"></a>WINDLESS</font></td><td><font color="#666">当前无风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_north_inline"></a>NORTH</font></td><td><font color="#666">北风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_north_east_inline"></a>NORTH_EAST</font></td><td><font color="#666">东北风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_east_inline"></a>EAST</font></td><td><font color="#666">东风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_south_east_inline"></a>SOUTH_EAST</font></td><td><font color="#666">东南风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_south_inline"></a>SOUTH</font></td><td><font color="#666">南风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_south_west_inline"></a>SOUTH_WEST</font></td><td><font color="#666">西南风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_west_inline"></a>WEST</font></td><td><font color="#666">西风。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcwinddirectionstatus_north_west_inline"></a>NORTH_WEST</font></td><td><font color="#666">西北风。</font></td></tr></table></html>
-<h5 id="class-members-v59">Class Members:</h5>
+<h5 id="class-members-v61">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_fcfailsafeaction"><div class="api-col left">失控保护</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_fcfailsafeaction_inline">FailsafeAction</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_fcfailsafeaction_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>FailsafeAction</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FailsafeAction implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v61">描述：</h5>
+<h5 id="描述：-v63">描述：</h5>
 <p><font color="#666">飞行器的失控行为类型。</font></p>
-<h5 id="enum-members-v60">Enum Members:</h5>
+<h5 id="enum-members-v62">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcfailsafeaction_hover_inline"></a>HOVER</font></td><td><font color="#666">悬停。当遥控器和飞行器失去连接的时候，飞行器将悬停。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcfailsafeaction_landing_inline"></a>LANDING</font></td><td><font color="#666">降落。当遥控器和飞行器失去连接的时候，飞行器将原地降落着陆。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_fcfailsafeaction_gohome_inline"></a>GOHOME</font></td><td><font color="#666">返航。如果飞行器已经成功记录返航点（<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_homelocation">KeyHomeLocation</a></code>），并且GPS信号良好的情况下，当飞行器和遥控器之间失去了通讯信号时，飞行器将自动返回返航点并且降落，以防止发生意外。自动返航过程中，如果前视视觉系统开启并且环境条件允许，当机头前方遇到障碍物时，飞行器将自动爬升躲避障碍物。为确保机头朝向，此过程中用户无法调整机头朝向，以及无法控制飞行器向左、右飞行。</font></td></tr></table></html>
-<h5 id="class-members-v60">Class Members:</h5>
+<h5 id="class-members-v62">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_enum_flightmode"><div class="api-col left">飞行模式</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_flightmode_inline">FlightMode</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_flightmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>FlightMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlightMode</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v62">描述：</h5>
+<h5 id="描述：-v64">描述：</h5>
 <p><font color="#666">飞行器的飞行模式。</font></p>
-<h5 id="enum-members-v61">Enum Members:</h5>
+<h5 id="enum-members-v63">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_manual_inline"></a>MANUAL</font></td><td><font color="#666">手动模式，简称为“M模式”。在该模式下，飞行器的所有动作包括稳定姿态和稳定高度都需要飞手通过遥控器来控制，新手操作的话，比较危险。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_atti_inline"></a>ATTI</font></td><td><font color="#666">姿态模式，简称为“A模式”。在该模式下，不使用GPS模块和视觉系统进行定位，飞行器仅提供姿态増稳。实际操作中，飞行器会明显的出现漂移，无法悬停，需要飞手通过遥控器来不断修正飞行器的位置。姿态模式考验的是飞手对于飞行器的操控性。在一些紧急情况下，需要切换姿态模式。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_gps_normal_inline"></a>GPS_NORMAL</font></td><td><font color="#666">GPS普通模式，简称为“N模式”，也叫“P模式”。GPS模块和视觉系统（如果可用）将用于飞行器定位。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_gps_sport_inline"></a>GPS_SPORT</font></td><td><font color="#666">GPS运动模式，简称为“S模式”。使用GPS模块和视觉系统以实现精准悬停，该模式下飞行器的感度值被适当调高，务必格外谨慎飞行。飞行器最大水平速度可达20米/秒。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_gps_tripod_inline"></a>GPS_TRIPOD</font></td><td><font color="#666">GPS三角架模式，简称为“T模式”。在此模式下，飞行器飞行速度和转动灵敏度都将显著降低，可以更精准的控制画面，获得更加稳定的拍摄效果。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_motor_start_inline"></a>MOTOR_START</font></td><td><font color="#666">电机起转。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_take_off_ready_inline"></a>TAKE_OFF_READY</font></td><td><font color="#666">起飞准备。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_auto_take_off_inline"></a>AUTO_TAKE_OFF</font></td><td><font color="#666">自主起飞。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_auto_landing_inline"></a>AUTO_LANDING</font></td><td><font color="#666">自动降落。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_force_landing_inline"></a>FORCE_LANDING</font></td><td><font color="#666">强制降落。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_go_home_inline"></a>GO_HOME</font></td><td><font color="#666">返航。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_waypoint_inline"></a>WAYPOINT</font></td><td><font color="#666">航线飞行。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_virtual_stick_inline"></a>VIRTUAL_STICK</font></td><td><font color="#666">虚拟摇杆。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_smart_fly_inline"></a>SMART_FLY</font></td><td><font color="#666">智能飞行。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_poi_inline"></a>POI</font></td><td><font color="#666">兴趣点环绕(POI)。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_pano_inline"></a>PANO</font></td><td><font color="#666">全景。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_auto_avoidance_inline"></a>AUTO_AVOIDANCE</font></td><td><font color="#666">自动避障。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightmode_apas_inline"></a>APAS</font></td><td><font color="#666">高级辅助飞行(APAS)。</font></td></tr></table></html>
-<h5 id="class-members-v61">Class Members:</h5>
+<h5 id="class-members-v63">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_struct_ledssettings"><div class="api-col left">LED</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_LEDsSettings.html">LEDsSettings</a></div></div><div class="api-row" id="value_flightcontroller_struct_accesslockerv1verifyuseraccountinfo"><div class="api-col left">安全密码</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1VerifyUserAccountInfo.html">AccessLockerVerifySecurityCodeInfo</a></div></div><div class="api-row" id="value_flightcontroller_enum_accesslockerv1featurepoint"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_accesslockerv1featurepoint_inline">AccessLockerStorageType</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_accesslockerv1featurepoint_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>AccessLockerStorageType</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AccessLockerStorageType implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v63">描述：</h5>
+<h5 id="描述：-v65">描述：</h5>
 <p><font color="#666">存储类型。</font></p>
-<h5 id="enum-members-v62">Enum Members:</h5>
+<h5 id="enum-members-v64">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1featurepoint_sd_card_inline"></a>SD_CARD</font></td><td><font color="#666">SD卡。</font></td></tr></table></html>
-<h5 id="class-members-v62">Class Members:</h5>
+<h5 id="class-members-v64">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_struct_accesslockerv1encryptionstate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html">AccessLockerEncryptionStatus</a></div></div><div class="api-row" id="value_flightcontroller_struct_accesslockerv1modifyuseraccountinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1ModifyUserAccountInfo.html">AccessLockerModifySecurityCodeInfo</a></div></div><div class="api-row" id="value_flightcontroller_struct_accesslockerv1resetuseraccountinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1ResetUserAccountInfo.html">AccessLockerResetSecurityCodeInfo</a></div></div><div class="api-row" id="value_flightcontroller_struct_accesslockerv1setupuseraccountinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a></div></div><div class="api-row" id="value_flightcontroller_enum_accesslockerv1deviceid"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_accesslockerv1deviceid_inline">AccessLockerDeviceType</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_accesslockerv1deviceid_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>AccessLockerDeviceType</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AccessLockerDeviceType implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="描述：-v64">描述：</h5>
+<h5 id="描述：-v66">描述：</h5>
 <p><font color="#666">设备类型。</font></p>
-<h5 id="enum-members-v63">Enum Members:</h5>
+<h5 id="enum-members-v65">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_master_inline"></a>MASTER</font></td><td><font color="#666">主设备，通常为飞行器。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_slave_1_inline"></a>SLAVE_1</font></td><td><font color="#666">从设备1，通常为飞行器的左舷侧（主）负载。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_slave_2_inline"></a>SLAVE_2</font></td><td><font color="#666">从设备2，通常为飞行器的右舷侧负载。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_slave_3_inline"></a>SLAVE_3</font></td><td><font color="#666">从设备3，通常为飞行器的上侧负载。</font></td></tr></table></html>
-<h5 id="class-members-v63">Class Members:</h5>
+<h5 id="class-members-v65">Class Members:</h5>
 </div>
 <div class="api-row" id="value_flightcontroller_struct_accesslockerv1devicestate"><div class="api-col left">安全密码状态</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1DeviceState.html">AccessLockerDeviceStatus</a></div></div><html><p><br></p></html>
 <h4 id="battery">Battery</h4>
@@ -1242,11 +1304,11 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AudioStorageLocation implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.accessory</font></td></tr></table></html>
-<h5 id="描述：-v65">描述：</h5>
+<h5 id="描述：-v67">描述：</h5>
 <p><font color="#666">keyvalue_value_accessory_AudioStorageLocation</font></p>
-<h5 id="enum-members-v64">Enum Members:</h5>
+<h5 id="enum-members-v66">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_accessory_enum_audiostoragelocation_tmeporary_inline"></a>TMEPORARY</font></td><td><font color="#666">keyvalue_value_accessory_AudioStorageLocation_MEPORARY</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_accessory_enum_audiostoragelocation_permanent_inline"></a>PERMANENT</font></td><td><font color="#666">keyvalue_value_accessory_AudioStorageLocation_PERMANENT</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_accessory_enum_audiostoragelocation_unknown_inline"></a>UNKNOWN</font></td><td><font color="#666">keyvalue_value_accessory_AudioStorageLocation_UNKNOWN</font></td></tr></table></html>
-<h5 id="class-members-v64">Class Members:</h5>
+<h5 id="class-members-v66">Class Members:</h5>
 </div>
 <div class="api-row" id="value_accessory_struct_playingaudiofileinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a></div></div><html><p><br></p></html>
 <h4 id="air-link">Air Link</h4>
@@ -1255,66 +1317,66 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> Bandwidth implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v66">描述：</h5>
+<h5 id="描述：-v68">描述：</h5>
 <p><font color="#666">下行信道带宽设置。设置较小的带宽将会降低数据速率，但会使连接更加健壮。</font></p>
-<h5 id="enum-members-v65">Enum Members:</h5>
+<h5 id="enum-members-v67">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkbandwidth_bandwidth_10mhz_inline"></a>BANDWIDTH_10MHZ</font></td><td><font color="#666">10MHz（速率高达23Mbps）。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkbandwidth_bandwidth_20mhz_inline"></a>BANDWIDTH_20MHZ</font></td><td><font color="#666">20MHz（速率高达46Mbps）。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkbandwidth_bandwidth_40mhz_inline"></a>BANDWIDTH_40MHZ</font></td><td><font color="#666">40MHz（速率高达80Mbps）。</font></td></tr></table></html>
-<h5 id="class-members-v65">Class Members:</h5>
+<h5 id="class-members-v67">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_enum_airlinktype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_airlinktype_inline">AirLinkType</a></div></div><div class="inline-doc" id="value_airlink_enum_airlinktype_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>AirLinkType</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AirLinkType implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v67">描述：</h5>
+<h5 id="描述：-v69">描述：</h5>
 <p><font color="#666">图传类型。</font></p>
-<h5 id="enum-members-v66">Enum Members:</h5>
+<h5 id="enum-members-v68">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinktype_wifi_inline"></a>WIFI</font></td><td><font color="#666">WiFi类型。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinktype_light_bridge_inline"></a>LIGHT_BRIDGE</font></td><td><font color="#666">Light bridge类型。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinktype_ocu_sync_inline"></a>OCU_SYNC</font></td><td><font color="#666">OcuSync类型。</font></td></tr></table></html>
-<h5 id="class-members-v66">Class Members:</h5>
+<h5 id="class-members-v68">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_enum_channelselectionmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_channelselectionmode_inline">ChannelSelectionMode</a></div></div><div class="inline-doc" id="value_airlink_enum_channelselectionmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>ChannelSelectionMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ChannelSelectionMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v68">描述：</h5>
+<h5 id="描述：-v70">描述：</h5>
 <p><font color="#666">图传信道模式，支持自动选择和自定义模式。</font></p>
-<h5 id="enum-members-v67">Enum Members:</h5>
+<h5 id="enum-members-v69">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_channelselectionmode_auto_inline"></a>AUTO</font></td><td><font color="#666">自动选择模式，图传系统将根据信号环境自动选择最佳信道。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_channelselectionmode_manual_inline"></a>MANUAL</font></td><td><font color="#666">自定义模式，手动选择信道通道。</font></td></tr></table></html>
-<h5 id="class-members-v67">Class Members:</h5>
+<h5 id="class-members-v69">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_enum_airlinkfrequencyband"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_airlinkfrequencyband_inline">FrequencyBand</a></div></div><div class="inline-doc" id="value_airlink_enum_airlinkfrequencyband_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>FrequencyBand</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FrequencyBand implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v69">描述：</h5>
+<h5 id="描述：-v71">描述：</h5>
 <p><font color="#666">图传工作频段类型。</font></p>
-<h5 id="enum-members-v68">Enum Members:</h5>
+<h5 id="enum-members-v70">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkfrequencyband_band_dual_inline"></a>BAND_DUAL</font></td><td><font color="#666">双频段模式。频段可以是2.4GHz或5.8GHz。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkfrequencyband_band_2_dot_4g_inline"></a>BAND_2_DOT_4G</font></td><td><font color="#666">2.4GHz。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkfrequencyband_band_5_dot_8g_inline"></a>BAND_5_DOT_8G</font></td><td><font color="#666">5.8GHz。</font></td></tr></table></html>
-<h5 id="class-members-v68">Class Members:</h5>
+<h5 id="class-members-v70">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_struct_wlmlinkqualitymsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmLinkQualityMsg.html">WlmLinkQualityLevelInfo</a></div></div><div class="api-row" id="value_airlink_struct_wlmdonglestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmDongleState.html">WlmDongleInfo</a></div></div><div class="api-row" id="value_airlink_enum_wlmdongleworkstate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_wlmdongleworkstate_inline">WlmDongleWorkState</a></div></div><div class="inline-doc" id="value_airlink_enum_wlmdongleworkstate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>WlmDongleWorkState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WlmDongleWorkState implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v70">描述：</h5>
+<h5 id="描述：-v72">描述：</h5>
 <p><font color="#666">TLE Dongle工作状态。</font></p>
-<h5 id="enum-members-v69">Enum Members:</h5>
+<h5 id="enum-members-v71">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_not_register_no_search_inline"></a>NOT_REGISTER_NO_SEARCH</font></td><td><font color="#666">Sim卡未注册，未搜网。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_not_register_searching_inline"></a>NOT_REGISTER_SEARCHING</font></td><td><font color="#666">Sim卡未注册，搜网中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_register_home_network_inline"></a>REGISTER_HOME_NETWORK</font></td><td><font color="#666">Sim卡已注册，归属地网络使用中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_register_roaming_inline"></a>REGISTER_ROAMING</font></td><td><font color="#666">Sim卡已注册，漫游中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_register_denied_inline"></a>REGISTER_DENIED</font></td><td><font color="#666">Sim卡注册被拒绝。</font></td></tr></table></html>
-<h5 id="class-members-v69">Class Members:</h5>
+<h5 id="class-members-v71">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_struct_wlmdongleinfomsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmDongleInfoMsg.html">WlmDongleListInfo</a></div></div><div class="api-row" id="value_airlink_enum_wlmlinkquality"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_wlmlinkquality_inline">WlmLinkQualityLevel</a></div></div><div class="inline-doc" id="value_airlink_enum_wlmlinkquality_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>WlmLinkQualityLevel</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WlmLinkQualityLevel implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v71">描述：</h5>
+<h5 id="描述：-v73">描述：</h5>
 <p><font color="#666">无线链路管理信号质量等级。</font></p>
-<h5 id="enum-members-v70">Enum Members:</h5>
+<h5 id="enum-members-v72">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_no_signal_inline"></a>NO_SIGNAL</font></td><td><font color="#666">没有信号。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_1_inline"></a>LEVEL_1</font></td><td><font color="#666">等级一，信号弱。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_2_inline"></a>LEVEL_2</font></td><td><font color="#666">等级二，信号较弱。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_3_inline"></a>LEVEL_3</font></td><td><font color="#666">等级三，信号一般。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_4_inline"></a>LEVEL_4</font></td><td><font color="#666">等级四，信号较强。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_5_inline"></a>LEVEL_5</font></td><td><font color="#666">等级五，信号强。</font></td></tr></table></html>
-<h5 id="class-members-v70">Class Members:</h5>
+<h5 id="class-members-v72">Class Members:</h5>
 </div>
 
         </div>

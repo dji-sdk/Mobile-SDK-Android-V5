@@ -197,7 +197,7 @@ public class RecordVideoWidget extends ConstraintLayoutWidget<Object> implements
         widgetModel.getRecordingState().firstOrError().flatMapCompletable(recordingState -> {
             if (recordingState == RecordingState.RECORDING_IN_PROGRESS) {
                 return widgetModel.stopRecordVideo();
-            } else if (recordingState == RecordingState.RECORDING_STOPPED) {
+            } else if (recordingState == RecordingState.RECORDING_STOPPED || recordingState == RecordingState.RECORDING_NOT_STARED) {
                 return widgetModel.startRecordVideo();
             } else {
                 return Completable.complete();
@@ -365,9 +365,9 @@ public class RecordVideoWidget extends ConstraintLayoutWidget<Object> implements
         storageStatusOverlayImageView.setVisibility(isRecordingVideo ? View.GONE : View.VISIBLE);
         if (playSound) {
             if (recordingState == RecordingState.RECORDING_IN_PROGRESS) {
-                addDisposable(cameraActionSound.playStartRecordVideo());
+                cameraActionSound.playStartRecordVideo();
             } else if (recordingState == RecordingState.RECORDING_STOPPED) {
-                addDisposable(cameraActionSound.playStopRecordVideo());
+                cameraActionSound.playStopRecordVideo();
             }
         }
     }

@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -580,32 +620,58 @@
 <h5 id="描述：-v7">描述：</h5>
 <p><font color="#666">移除所有航线信息的监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
+<div class="api-row" id="iwaypointmissionmanager_addwaypointactionlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_addwaypointactionlistener_inline">addWaypointActionListener</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_addwaypointactionlistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>addWaypointActionListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addWaypointActionListener</span><span class="params">(WaypointActionListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v8">描述：</h5>
+<p><font color="#666">设置航线动作的监听器。包括航线动作开始执行状态和结束执行状态。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v5">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html#iwaypointmissionmanager_waypointactionlistener">WaypointActionListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>航线动作的监听器。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iwaypointmissionmanager_removewaypointactionlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_removewaypointactionlistener_inline">removeWaypointActionListener</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_removewaypointactionlistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>removeWaypointActionListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeWaypointActionListener</span><span class="params">(WaypointActionListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v9">描述：</h5>
+<p><font color="#666">移除航线动作的监听器。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v6">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html#iwaypointmissionmanager_waypointactionlistener">WaypointActionListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>航线动作的监听器。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iwaypointmissionmanager_clearallwaypointactionlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_clearallwaypointactionlistener_inline">clearAllWaypointActionListener</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_clearallwaypointactionlistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>clearAllWaypointActionListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearAllWaypointActionListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v10">描述：</h5>
+<p><font color="#666">移除所有航线动作的监听器。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+</div>
 <div class="api-row" id="iwaypointmissionmanager_pushkmzfiletoaircraft"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_pushkmzfiletoaircraft_inline">pushKMZFileToAircraft</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_pushkmzfiletoaircraft_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>pushKMZFileToAircraft</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushKMZFileToAircraft</span><span class="params">(String missionFilePath, CommonCallbacks.CompletionCallbackWithProgress&lt;Double&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
+<h5 id="描述：-v11">描述：</h5>
 <p><font color="#666">上传航线任务。 <li>航线任务定义在KMZ文件中，KMZ文件采用DJI自定义的航线文件格式（WPML）进行编写。WPML格式遵循XML和KML规范，更详细信息请参阅：<a href="https://developer.dji.com/doc/cloud-api-tutorial/cn/specification/dji-wpml/overview.html#wpml-%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E8%AE%B0%E5%BD%95" target="_blank" rel="noopener">航线文件格式</a>。</li> <li>用户可根据DJI Pilot 2中提供的模板生成航线文件，也可使用DJI WPML格式根据业务需要自定义waylines.wpml中的内容，并将该文件压缩为KMZ文件后上传。</li> <li>你可以多次调用此接口上传多个航线任务KMZ文件，如果上传相同的文件名的KMZ文件，将会覆盖上一次上传的同名文件。</li> <li>你可以通过设置航线任务KMZ文件名来选择航线任务的执行<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_startmission">startMission</a></code>和停止<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_stopmission">stopMission</a></code>。</li> <li>一个KMZ文件包括一个航线任务，一个航线任务里面可以包含多个航线。</li> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v5">输入参数：</h5>
+<h5 id="输入参数：-v7">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String <font color="#000">missionFilePath</font></font></td><td><font color="#666"><i>航线任务KMZ文件路径。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithProgress&lt;Double&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。返回KMZ文件上传状态，包括上传进度和错误信息。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iwaypointmissionmanager_startmission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_startmission_inline">startMission</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_startmission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startMission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startMission</span><span class="params">(String missionFileName, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v9">描述：</h5>
+<h5 id="描述：-v12">描述：</h5>
 <p><font color="#666">开始执行航线任务。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v6">输入参数：</h5>
+<h5 id="输入参数：-v8">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String <font color="#000">missionFileName</font></font></td><td><font color="#666"><i>需要执行的航线任务文件名。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iwaypointmissionmanager_getavailablewaylineids"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_getavailablewaylineids_inline">getAvailableWaylineIDs</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_getavailablewaylineids_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getAvailableWaylineIDs</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">List&lt;Integer&gt; <span class="title">getAvailableWaylineIDs</span><span class="params">(String missionFileName)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v10">描述：</h5>
+<h5 id="描述：-v13">描述：</h5>
 <p><font color="#666">返回指定的航线任务文件中可用的航线ID列表。获取到这个ID列表以后可以选择需要执行的航线ID，作为参数传入到<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_startmissionwaylineids">startMission</a></code>执行航线任务。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v7">输入参数：</h5>
+<h5 id="输入参数：-v9">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String <font color="#000">missionFileName</font></font></td><td><font color="#666"><i>指定的航线任务文件名。</i></font></td></tr></table></html>
 <h5 id="返回值：">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">List&lt;Integer&gt;</font></td><td><font color="#666"><i>获取指定的航线任务文件中可用的航线ID列表。</i></font></td></tr></table></html></div>
@@ -614,44 +680,44 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startMission</span><span class="params">(String missionFileName, List&lt;Integer&gt; waylineIDs, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v11">描述：</h5>
+<h5 id="描述：-v14">描述：</h5>
 <p><font color="#666">开始执行指定的航线ID列表的航线任务。可通过<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_getavailablewaylineids">getAvailableWaylineIDs</a></code>获取到可用的航线ID列表。获取到这个航线ID列表以后可以选择需要执行的航线ID作为参数传入到此接口，飞行器将按照航线ID列表的顺序依次执行航线任务。如果航线ID列表参数传空或者航线ID列表长度为0，飞行器将执行航线任务中的所有航线。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v8">输入参数：</h5>
+<h5 id="输入参数：-v10">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String <font color="#000">missionFileName</font></font></td><td><font color="#666"><i>需要执行的航线任务文件名。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">List&lt;Integer&gt; <font color="#000">waylineIDs</font></font></td><td><font color="#666"><i>需要执行的航线ID列表。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iwaypointmissionmanager_pausemission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_pausemission_inline">pauseMission</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_pausemission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>pauseMission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pauseMission</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v12">描述：</h5>
+<h5 id="描述：-v15">描述：</h5>
 <p><font color="#666">暂停执行航线任务。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v9">输入参数：</h5>
+<h5 id="输入参数：-v11">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iwaypointmissionmanager_resumemission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_resumemission_inline">resumeMission</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_resumemission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>resumeMission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resumeMission</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v13">描述：</h5>
+<h5 id="描述：-v16">描述：</h5>
 <p><font color="#666">从暂停处恢复执行航线任务。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v10">输入参数：</h5>
+<h5 id="输入参数：-v12">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iwaypointmissionmanager_stopmission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_stopmission_inline">stopMission</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_stopmission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>stopMission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stopMission</span><span class="params">(String missionFileName, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v14">描述：</h5>
+<h5 id="描述：-v17">描述：</h5>
 <p><font color="#666">停止执行航线任务。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v11">输入参数：</h5>
+<h5 id="输入参数：-v13">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String <font color="#000">missionFileName</font></font></td><td><font color="#666"><i>需要停止的航线任务文件名。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <h5 id="related">Related:</h5>
-<div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointMissionExecuteStateListener.html">WaypointMissionExecuteStateListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waylineexecutinginfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointmissionexecutestate_inline">WaypointMissionExecuteState</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointmissionexecutestate_inline" <blockquote>
+<div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointMissionExecuteStateListener.html">WaypointMissionExecuteStateListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waylineexecutinginfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waypointactionlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointmissionexecutestate_inline">WaypointMissionExecuteState</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointmissionexecutestate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>WaypointMissionExecuteState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WaypointMissionExecuteState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.waypoint3.model</font></td></tr></table></html>
-<h5 id="描述：-v15">描述：</h5>
+<h5 id="描述：-v18">描述：</h5>
 <p><font color="#666">航线任务执行状态。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_idle_inline"></a>IDLE</font></td><td><font color="#666">初始化状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_not_supported_inline"></a>NOT_SUPPORTED</font></td><td><font color="#666">此机型不支持航线任务3.0。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_ready_inline"></a>READY</font></td><td><font color="#666">航线任务准备状态,此状态下可上传航线任务文件,也可执行已上传的航线任务。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_uploading_inline"></a>UPLOADING</font></td><td><font color="#666">航线任务文件上传中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_preparing_inline"></a>PREPARING</font></td><td><font color="#666">航线任务执行准备中。调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_startmission">startMission</a></code>启动执行航线任务后，飞行器在准备执行航线任务中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_enter_wayline_inline"></a>ENTER_WAYLINE</font></td><td><font color="#666">进入航线飞行,飞往指定航线的第一个航点。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_executing_inline"></a>EXECUTING</font></td><td><font color="#666">航线任务执行中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_interrupted_inline"></a>INTERRUPTED</font></td><td><font color="#666">航线任务执行中断，表示用户调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_pausemission">pauseMission</a></code>暂停航线或者飞控异常。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_recovering_inline"></a>RECOVERING</font></td><td><font color="#666">航线任务恢复中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_finished_inline"></a>FINISHED</font></td><td><font color="#666">航线任务完成。表示航线任务执行完成或者调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_stopmission">stopMission</a></code>停止执行航线任务。</font></td></tr></table></html>

@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -534,7 +574,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enableVirtualStick</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="description-v2">Description:</h5>
-<p><font color="#666">Open the virtual stick mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">Open the virtual stick mode. <br><b>Note: <br> For flight safety, when the aircraft is close(about 30 meters) to the restricted flight zone or restricted distance, the remote controller will get the control of the aircraft, and the virtual stick cannot be used.</b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="ivirtualstickmanager_disablevirtualstick"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_disablevirtualstick_inline">disableVirtualStick</a></div></div><div class="inline-doc" id="ivirtualstickmanager_disablevirtualstick_inline" <blockquote>
@@ -628,7 +668,7 @@
 <h5 id="description-v12">Description:</h5>
 <p><font color="#666">Flight control authority change reason. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_msdk_request_inline"></a>MSDK_REQUEST</font></td><td><font color="#666">MSDK got the flight control authority.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_osdk_request_inline"></a>OSDK_REQUEST</font></td><td><font color="#666">OSDK got the flight control authority.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_lost_inline"></a>RC_LOST</font></td><td><font color="#666">Remote controller lost contact, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_not_p_mode_inline"></a>RC_NOT_P_MODE</font></td><td><font color="#666">The flight mode of the aircraft is not P mode, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_switch_inline"></a>RC_SWITCH</font></td><td><font color="#666">The flight mode of the aircraft is switched, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_pause_stop_inline"></a>RC_PAUSE_STOP</font></td><td><font color="#666">The pause button is pressed, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_one_key_go_home_inline"></a>RC_ONE_KEY_GO_HOME</font></td><td><font color="#666">The aircraft is going home, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_battery_low_go_home_inline"></a>BATTERY_LOW_GO_HOME</font></td><td><font color="#666">The aircraft is going home because of the low battery, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_battery_super_low_landing_inline"></a>BATTERY_SUPER_LOW_LANDING</font></td><td><font color="#666">The aircraft is landing because of the low battery, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_osdk_lost_inline"></a>OSDK_LOST</font></td><td><font color="#666">OSDK lost contact, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_near_boundary_inline"></a>NEAR_BOUNDARY</font></td><td><font color="#666">The aircraft is nearby the flyzone, reset flight control authority to the remote controller.</font></td></tr></table></html>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_msdk_request_inline"></a>MSDK_REQUEST</font></td><td><font color="#666">MSDK got the flight control authority.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_osdk_request_inline"></a>OSDK_REQUEST</font></td><td><font color="#666">OSDK got the flight control authority.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_lost_inline"></a>RC_LOST</font></td><td><font color="#666">Remote controller lost contact, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_not_p_mode_inline"></a>RC_NOT_P_MODE</font></td><td><font color="#666">The flight mode of the aircraft is not P mode, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_switch_inline"></a>RC_SWITCH</font></td><td><font color="#666">The flight mode of the aircraft is switched, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_pause_stop_inline"></a>RC_PAUSE_STOP</font></td><td><font color="#666">The pause button is pressed, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_rc_one_key_go_home_inline"></a>RC_ONE_KEY_GO_HOME</font></td><td><font color="#666">The aircraft is going home, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_battery_low_go_home_inline"></a>BATTERY_LOW_GO_HOME</font></td><td><font color="#666">The aircraft is going home because of the low battery, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_battery_super_low_landing_inline"></a>BATTERY_SUPER_LOW_LANDING</font></td><td><font color="#666">The aircraft is landing because of the low battery, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_osdk_lost_inline"></a>OSDK_LOST</font></td><td><font color="#666">OSDK lost contact, reset flight control authority to the remote controller.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_flightcontrolauthoritychangereason_near_boundary_inline"></a>NEAR_BOUNDARY</font></td><td><font color="#666">The aircraft is nearby the fly zone or restricted distance, reset flight control authority to the remote controller.</font></td></tr></table></html>
 <h5 id="class-members-v3">Class Members:</h5>
 </div>
 

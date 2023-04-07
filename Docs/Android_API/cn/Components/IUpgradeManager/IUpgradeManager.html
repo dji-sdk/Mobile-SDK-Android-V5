@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -526,7 +566,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IUpgradeManager</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：">描述：</h5>
-<p><font color="#666">固件升级管理类，可通过此类获取可升级模块的固件信息。目前MSDK还不支持固件升级功能，当获取到可升级提示后，你需要打开DJI官方App进行固件升级。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
+<p><font color="#666">固件升级管理类，可通过此类获取可升级模块的固件信息。当获取到可升级提示后，你可以打开DJI官方App进行固件在线升级，也可以调用<code><a href="../../Components/IUpgradeManager/IUpgradeManager.html#iupgrademanager_startofflineupgrade">startOfflineUpgrade</a></code>固件离线升级接口进行升级。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 <h5 id="类成员">类成员:</h5>
 <div class="api-row" id="iupgrademanager_addupgradeablecomponentlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iupgrademanager_addupgradeablecomponentlistener_inline">addUpgradeableComponentListener</a></div></div><div class="inline-doc" id="iupgrademanager_addupgradeablecomponentlistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>addUpgradeableComponentListener</h6></div>
@@ -572,13 +612,48 @@
 <p><font color="#666">刷新可升级模块信息。调用这个接口会从服务器上更新最新的可升级信息。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v3">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IUpgradeManager/IUpgradeManager.html#iupgrademanager_componenttype">ComponentType</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iupgrademanager_startofflineupgrade"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iupgrademanager_startofflineupgrade_inline">startOfflineUpgrade</a></div></div><div class="inline-doc" id="iupgrademanager_startofflineupgrade_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>startOfflineUpgrade</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startOfflineUpgrade</span><span class="params">(ComponentType type , String offlineFirmwareFilePath ,</span></span></span><br><span class="line"><span class="function"><span class="params">                            CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v7">描述：</h5>
+<p><font color="#666">开始离线升级。离线升级包可从DJI官网相应产品的下载页面获取。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v4">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IUpgradeManager/IUpgradeManager.html#iupgrademanager_componenttype">ComponentType</a> <font color="#000">type</font></font></td><td><font color="#666"><i>需要升级模块的类型。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">String <font color="#000">offlineFirmwareFilePath</font></font></td><td><font color="#666"><i>升级模块对应的离线升级包路径。离线升级包可从DJI官网相应产品的下载页面获取。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iupgrademanager_addupgradeinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iupgrademanager_addupgradeinfolistener_inline">addUpgradeInfoListener</a></div></div><div class="inline-doc" id="iupgrademanager_addupgradeinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>addUpgradeInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addUpgradeInfoListener</span><span class="params">(UpgradeInfoListener listener )</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v8">描述：</h5>
+<p><font color="#666">添加升级进度信息的监听器。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v5">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html#iupgrademanager_upgradeinfolistener">UpgradeInfoListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>升级进度信息的监听器</i></font></td></tr></table></html></div>
+<div class="api-row" id="iupgrademanager_removeupgradeinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iupgrademanager_removeupgradeinfolistener_inline">removeUpgradeInfoListener</a></div></div><div class="inline-doc" id="iupgrademanager_removeupgradeinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>removeUpgradeInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeUpgradeInfoListener</span><span class="params">(UpgradeInfoListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v9">描述：</h5>
+<p><font color="#666">移除升级进度信息的监听器。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v6">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html#iupgrademanager_upgradeinfolistener">UpgradeInfoListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>升级进度信息的监听器</i></font></td></tr></table></html></div>
+<div class="api-row" id="iupgrademanager_removeallupgradeinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iupgrademanager_removeallupgradeinfolistener_inline">removeAllUpgradeInfoListener</a></div></div><div class="inline-doc" id="iupgrademanager_removeallupgradeinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>removeAllUpgradeInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAllUpgradeInfoListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v10">描述：</h5>
+<p><font color="#666">移除所有升级进度的监听器。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+</div>
 <h5 id="related">Related:</h5>
 <div class="api-row" id="iupgrademanager_componenttype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iupgrademanager_componenttype_inline">ComponentType</a></div></div><div class="inline-doc" id="iupgrademanager_componenttype_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>ComponentType</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ComponentType</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.upgrade.model</font></td></tr></table></html>
-<h5 id="描述：-v7">描述：</h5>
+<h5 id="描述：-v11">描述：</h5>
 <p><font color="#666">可升级模块类型，包括飞行器和遥控器。
 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
@@ -590,14 +665,26 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> UpgradeableComponentState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.upgrade.model</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
+<h5 id="描述：-v12">描述：</h5>
 <p><font color="#666">可升级模块状态。
 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeablecomponentstate_idle_inline"></a>IDLE</font></td><td><font color="#666">空闲，初始化状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeablecomponentstate_checking_inline"></a>CHECKING</font></td><td><font color="#666">检测更新中，从服务器上拉取最新的固件信息。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeablecomponentstate_up_to_date_inline"></a>UP_TO_DATE</font></td><td><font color="#666">当前固件是最新版本，无需升级。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeablecomponentstate_upgrade_available_inline"></a>UPGRADE_AVAILABLE</font></td><td><font color="#666">当前固件需要升级。</font></td></tr></table></html>
 <h5 id="class-members-v2">Class Members:</h5>
 </div>
-<div class="api-row" id="iupgrademanager_upgradeablecomponentlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a></div></div>
+<div class="api-row" id="iupgrademanager_upgradeinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a></div></div><div class="api-row" id="iupgrademanager_upgradeprogressstate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iupgrademanager_upgradeprogressstate_inline">UpgradeProgressState</a></div></div><div class="inline-doc" id="iupgrademanager_upgradeprogressstate_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>UpgradeProgressState</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> UpgradeProgressState</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.upgrade</font></td></tr></table></html>
+<h5 id="描述：-v13">描述：</h5>
+<p><font color="#666">升级进度状态。
+<br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<h5 id="enum-members-v3">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeprogressstate_initializing_inline"></a>INITIALIZING</font></td><td><font color="#666">升级初始化。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeprogressstate_transferring_inline"></a>TRANSFERRING</font></td><td><font color="#666">固件传输中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeprogressstate_transfer_failed_inline"></a>TRANSFER_FAILED</font></td><td><font color="#666">固件传输失败。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeprogressstate_transfer_success_inline"></a>TRANSFER_SUCCESS</font></td><td><font color="#666">固件传输成功。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeprogressstate_upgrading_inline"></a>UPGRADING</font></td><td><font color="#666">固件升级中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeprogressstate_upgrade_failed_inline"></a>UPGRADE_FAILED</font></td><td><font color="#666">固件升级失败。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iupgrademanager_upgradeprogressstate_upgrade_success_inline"></a>UPGRADE_SUCCESS</font></td><td><font color="#666">固件升级成功。</font></td></tr></table></html>
+<h5 id="class-members-v3">Class Members:</h5>
+</div>
+<div class="api-row" id="iupgrademanager_upgradeablecomponentlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a></div></div><div class="api-row" id="iupgrademanager_upgradeinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a></div></div>
 
         </div>
       </div>

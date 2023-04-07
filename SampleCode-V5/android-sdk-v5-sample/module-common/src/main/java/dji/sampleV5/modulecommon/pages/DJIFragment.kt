@@ -12,8 +12,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MAIN_FRAGMENT_PAGE_TITLE
+import dji.sampleV5.modulecommon.keyvalue.KeyItemActionListener
+import dji.sampleV5.modulecommon.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
 import dji.sampleV5.modulecommon.util.wheel.PopupNumberPicker
+import dji.sampleV5.modulecommon.util.wheel.PopupNumberPickerDouble
 import dji.sampleV5.modulecommon.util.wheel.PopupNumberPickerPosition
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
@@ -49,7 +52,7 @@ open class DJIFragment : Fragment() {
 
     fun initPopupNumberPicker(list: ArrayList<String>, r: Runnable) {
         var popupNumberPicker: PopupNumberPicker? = null
-        var positon = PopupNumberPickerPosition(250 ,200 ,0)
+        val position = PopupNumberPickerPosition(250, 200, 0)
         popupNumberPicker = PopupNumberPicker(
             context, list,
             { pos1, _ ->
@@ -57,18 +60,32 @@ open class DJIFragment : Fragment() {
                 popupNumberPicker = null
                 indexChosen[0] = pos1
                 mainHandler.post(r)
-            }, positon
+            }, position
         )
-        popupNumberPicker?.showAtLocation(
-            view, Gravity.CENTER, 0, 0
+        popupNumberPicker?.showAtLocation(view, Gravity.CENTER, 0, 0)
+    }
+
+    fun initPopupNumberPicker(list1: ArrayList<String>, list2: ArrayList<String>, r: Runnable) {
+        var mPopupDoubleNumberPicker: PopupNumberPickerDouble? = null
+        val position = PopupNumberPickerPosition(500, 200, 0)
+        mPopupDoubleNumberPicker = PopupNumberPickerDouble(
+            context, list1, list2,
+            { pos1, pos2 ->
+                mPopupDoubleNumberPicker?.dismiss()
+                indexChosen[0] = pos1
+                indexChosen[1] = pos2
+                mainHandler.post(r)
+            }, position
         )
+        mPopupDoubleNumberPicker.showAtLocation(view, Gravity.CENTER, 0, 0)
     }
 
     fun resetIndex() {
         indexChosen = intArrayOf(-1, -1, -1)
     }
-    fun isFragmentShow():Boolean {
-       return lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED)
+
+    fun isFragmentShow(): Boolean {
+        return lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED)
     }
 
     fun openInputDialog(text: String, title: String, onStrInput: (str: String) -> Unit) {
@@ -80,6 +97,14 @@ open class DJIFragment : Fragment() {
             "OK"
         ) { _, _ -> onStrInput(inputServer.text.toString()) }
         builder.show()
+    }
+
+    fun showDialog(title: String, msg: String = "", callback: KeyItemActionListener<String>) {
+        KeyValueDialogUtil.showInputDialog(
+            activity, title, msg, "", true
+        ) {
+            callback.actionChange(it)
+        }
     }
 
 }

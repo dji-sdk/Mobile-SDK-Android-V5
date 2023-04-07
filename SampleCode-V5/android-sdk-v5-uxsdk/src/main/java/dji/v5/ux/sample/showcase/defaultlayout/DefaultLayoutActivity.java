@@ -25,16 +25,12 @@ package dji.v5.ux.sample.showcase.defaultlayout;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewStub;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.common.video.channel.VideoChannelState;
@@ -58,7 +54,6 @@ import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.extension.ViewExtensions;
 import dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget;
 import dji.v5.ux.core.panel.topbar.TopBarPanelWidget;
-import dji.v5.ux.core.widget.setting.SettingPanelWidget;
 import dji.v5.ux.core.util.CameraUtil;
 import dji.v5.ux.core.util.CommonUtils;
 import dji.v5.ux.core.util.DataProcessor;
@@ -103,8 +98,9 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected FocalZoomWidget focalZoomWidget;
     protected SettingWidget settingWidget;
     protected MapWidget mapWidget;
-    private SettingPanelWidget mSettingPanelWidget;
-    private DrawerLayout mDrawerLayout;
+    protected TopBarPanelWidget topBarPanel;
+//    private SettingPanelWidget mSettingPanelWidget;
+//    private DrawerLayout mDrawerLayout;
 
 
     private CompositeDisposable compositeDisposable;
@@ -120,19 +116,9 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.uxsdk_activity_default_layout);
 
-        // Setup top bar state callbacks
-        TopBarPanelWidget topBarPanel = findViewById(R.id.panel_top_bar);
-        SystemStatusWidget systemStatusWidget = topBarPanel.getSystemStatusWidget();
-        if (systemStatusWidget != null) {
-            systemStatusWidget.setStateChangeCallback(findViewById(R.id.widget_panel_system_status_list));
-        }
-
-        SimulatorIndicatorWidget simulatorIndicatorWidget = topBarPanel.getSimulatorIndicatorWidget();
-        if (simulatorIndicatorWidget != null) {
-            simulatorIndicatorWidget.setStateChangeCallback(findViewById(R.id.widget_simulator_control));
-        }
-        mDrawerLayout = findViewById(R.id.root_view);
-        settingWidget = topBarPanel.getSettingWidget();
+//        mDrawerLayout = findViewById(R.id.root_view);
+        topBarPanel = findViewById(R.id.panel_top_bar);
+//        settingWidget = topBarPanel.getSettingWidget();
         primaryFpvWidget = findViewById(R.id.widget_primary_fpv);
         fpvInteractionWidget = findViewById(R.id.widget_fpv_interaction);
         secondaryFPVWidget = findViewById(R.id.widget_secondary_fpv);
@@ -153,12 +139,17 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         mapWidget = findViewById(R.id.widget_map);
         cameraControlsWidget.getExposureSettingsIndicatorWidget().setStateChangeResourceId(R.id.panel_camera_controls_exposure_settings);
 
+//        ViewStub stub = findViewById(R.id.manual_right_nav_setting_stub);
+//        if (stub != null) {
+//            mSettingPanelWidget = (SettingPanelWidget) stub.inflate();
+//        }
+
         initClickListener();
         MediaDataCenter.getInstance().getVideoStreamManager().addStreamSourcesListener(sources -> runOnUiThread(() -> updateFPVWidgetSource(sources)));
         primaryFpvWidget.setOnFPVStreamSourceListener((devicePosition, lensType) -> {
-            LogUtils.i(TAG, devicePosition, lensType);
             cameraSourceProcessor.onNext(new CameraSource(devicePosition, lensType));
         });
+
         //小surfaceView放置在顶部，避免被大的遮挡
         secondaryFPVWidget.setSurfaceViewZOrderOnTop(true);
         secondaryFPVWidget.setSurfaceViewZOrderMediaOverlay(true);
@@ -180,19 +171,21 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         if (settingWidget != null) {
             settingWidget.setOnClickListener(v -> toggleRightDrawer());
         }
+
+        // Setup top bar state callbacks
+        SystemStatusWidget systemStatusWidget = topBarPanel.getSystemStatusWidget();
+        if (systemStatusWidget != null) {
+            systemStatusWidget.setOnClickListener(v -> ViewExtensions.toggleVisibility(systemStatusListPanelWidget));
+        }
+
+        SimulatorIndicatorWidget simulatorIndicatorWidget = topBarPanel.getSimulatorIndicatorWidget();
+        if (simulatorIndicatorWidget != null) {
+            simulatorIndicatorWidget.setOnClickListener(v -> ViewExtensions.toggleVisibility(simulatorControlWidget));
+        }
     }
 
     private void toggleRightDrawer() {
-        if (mSettingPanelWidget == null) {
-            ViewStub stub = findViewById(R.id.manual_right_nav_setting_stub);
-            if (stub != null) {
-                mSettingPanelWidget = (SettingPanelWidget) stub.inflate();
-            } else {
-                mSettingPanelWidget = findViewById(R.id.manual_right_nav_setting);
-            }
-        }
-        mDrawerLayout.openDrawer(GravityCompat.END);
-
+//        mDrawerLayout.openDrawer(GravityCompat.END);
     }
 
 
@@ -226,8 +219,9 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                     }
                 }));
         compositeDisposable.add(cameraSourceProcessor.toFlowable()
-                .observeOn(SchedulerProvider.computation())
+                .observeOn(SchedulerProvider.io())
                 .throttleLast(500, TimeUnit.MILLISECONDS)
+                .subscribeOn(SchedulerProvider.io())
                 .subscribe(result -> runOnUiThread(() -> onCameraSourceUpdated(result.devicePosition, result.lensType)))
         );
     }
@@ -315,22 +309,45 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     }
 
     private void onCameraSourceUpdated(PhysicalDevicePosition devicePosition, CameraLensType lensType) {
-        LogUtils.i(TAG, "onCameraSourceUpdated", devicePosition, lensType);
+        LogUtils.i(TAG, devicePosition, lensType);
         ComponentIndexType cameraIndex = CameraUtil.getCameraIndex(devicePosition);
-        fpvInteractionWidget.updateCameraSource(cameraIndex, lensType);
-        fpvInteractionWidget.updateGimbalIndex(CommonUtils.getGimbalIndex(devicePosition));
-        lensControlWidget.updateCameraSource(cameraIndex, lensType);
-        ndviCameraPanel.updateCameraSource(cameraIndex, lensType);
-        visualCameraPanel.updateCameraSource(cameraIndex, lensType);
-        autoExposureLockWidget.updateCameraSource(cameraIndex, lensType);
-        focusModeWidget.updateCameraSource(cameraIndex, lensType);
-        focusExposureSwitchWidget.updateCameraSource(cameraIndex, lensType);
-        cameraControlsWidget.updateCameraSource(cameraIndex, lensType);
-        exposureSettingsPanel.updateCameraSource(cameraIndex, lensType);
-        focalZoomWidget.updateCameraSource(cameraIndex, lensType);
-        horizontalSituationIndicatorWidget.updateCameraSource(cameraIndex, lensType);
         updateViewVisibility(devicePosition, lensType);
         updateInteractionEnabled();
+        //如果无需使能或者显示的，也就没有必要切换了。
+        if (fpvInteractionWidget.isInteractionEnabled()) {
+            fpvInteractionWidget.updateCameraSource(cameraIndex, lensType);
+            fpvInteractionWidget.updateGimbalIndex(CommonUtils.getGimbalIndex(devicePosition));
+        }
+        if (lensControlWidget.getVisibility() == View.VISIBLE) {
+            lensControlWidget.updateCameraSource(cameraIndex, lensType);
+        }
+        if (ndviCameraPanel.getVisibility() == View.VISIBLE) {
+            ndviCameraPanel.updateCameraSource(cameraIndex, lensType);
+        }
+        if (visualCameraPanel.getVisibility() == View.VISIBLE) {
+            visualCameraPanel.updateCameraSource(cameraIndex, lensType);
+        }
+        if (autoExposureLockWidget.getVisibility() == View.VISIBLE) {
+            autoExposureLockWidget.updateCameraSource(cameraIndex, lensType);
+        }
+        if (focusModeWidget.getVisibility() == View.VISIBLE) {
+            focusModeWidget.updateCameraSource(cameraIndex, lensType);
+        }
+        if (focusExposureSwitchWidget.getVisibility() == View.VISIBLE) {
+            focusExposureSwitchWidget.updateCameraSource(cameraIndex, lensType);
+        }
+        if (cameraControlsWidget.getVisibility() == View.VISIBLE) {
+            cameraControlsWidget.updateCameraSource(cameraIndex, lensType);
+        }
+        if (exposureSettingsPanel.getVisibility() == View.VISIBLE) {
+            exposureSettingsPanel.updateCameraSource(cameraIndex, lensType);
+        }
+        if (focalZoomWidget.getVisibility() == View.VISIBLE) {
+            focalZoomWidget.updateCameraSource(cameraIndex, lensType);
+        }
+        if (horizontalSituationIndicatorWidget.getVisibility() == View.VISIBLE) {
+            horizontalSituationIndicatorWidget.updateCameraSource(cameraIndex, lensType);
+        }
     }
 
     private void updateViewVisibility(PhysicalDevicePosition devicePosition, CameraLensType lensType) {
@@ -350,7 +367,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
 
         //有其他的显示逻辑，这里确保fpv下不显示
         if (devicePosition == PhysicalDevicePosition.NOSE) {
-            exposureSettingsPanel.setVisibility(View.GONE);
+            exposureSettingsPanel.setVisibility(View.INVISIBLE);
         }
 
         //只在部分len下显示
@@ -389,13 +406,13 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             this.lensType = lensType;
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
-            mDrawerLayout.closeDrawers();
-        } else {
-            super.onBackPressed();
-        }
-    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
+//            mDrawerLayout.closeDrawers();
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 }

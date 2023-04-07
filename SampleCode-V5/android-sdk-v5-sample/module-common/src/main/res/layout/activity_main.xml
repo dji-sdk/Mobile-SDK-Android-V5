@@ -178,7 +178,6 @@
                     android:text="@string/testing_tools"
                     android:textColor="@color/selector_enable_button" />
             </LinearLayout>
-
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -346,5 +345,15 @@
             app:layout_constraintStart_toStartOf="@+id/guide_2"
             app:layout_constraintTop_toBottomOf="@+id/icon_tech_support" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/text_core_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="test test"
+        android:textColor="@color/green"
+        android:textSize="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

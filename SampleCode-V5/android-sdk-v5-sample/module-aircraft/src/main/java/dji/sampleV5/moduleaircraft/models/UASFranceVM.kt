@@ -3,9 +3,9 @@ package dji.sampleV5.moduleaircraft.models
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.v5.common.callback.CommonCallbacks
+import dji.v5.manager.aircraft.uas.AreaStrategy
 import dji.v5.manager.aircraft.uas.ElectronicIDStatus
 import dji.v5.manager.aircraft.uas.UASRemoteIDManager
-import dji.v5.manager.areacode.AreaCode
 import dji.v5.utils.common.ToastUtils
 
 /**
@@ -22,7 +22,7 @@ class UASFranceVM : DJIViewModel() {
 
 
     init {
-        val error = uasRemoteIDManager.setAreaCode(AreaCode.FRANCE)
+        val error = uasRemoteIDManager.setUASRemoteIDAreaStrategy(AreaStrategy.FRANCE_STRATEGY)
         error?.apply {
             ToastUtils.showToast(toString())
         }

@@ -28,11 +28,12 @@ import dji.v5.ux.core.ui.hsi.dashboard.FpvStrokeConfig;
 import dji.v5.ux.core.util.FontUtils;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * 云台Pitch角度展示Widget
+ *
+ * 注意：GimbalPitchBarWidget必须关联到相机，所以只能使用在主界面，比如DefaultLayoutActivity中
  */
 public class GimbalPitchBarWidget extends FrameLayoutWidget<Boolean> implements ICameraIndex {
     protected int mMinValue = -120;

@@ -122,7 +122,7 @@ open class DeviceHealthAndStatusWidget @JvmOverloads constructor(
     private fun updateDisplayMessage() {
         widgetModel.deviceMessageProcessor.value.let {
             if (it.isNotEmpty()) {
-                tvWarningMessage.text = it[0].description
+                tvWarningMessage.text = it[0].validDescription()
                 cardViewWarningWrapper.setBackgroundColor(AndUtil.getResColor(colorResId(it[0].warningLevel)))
                 tvNoMessage.visibility = GONE
                 tvWarningMessage.visibility = VISIBLE
@@ -195,10 +195,24 @@ open class DeviceHealthAndStatusWidget @JvmOverloads constructor(
     companion object {
         fun colorResId(warningLevel: WarningLevel): Int {
             return when (warningLevel) {
+                WarningLevel.NORMAL -> R.color.uxsdk_green_material_400
                 WarningLevel.NOTICE -> R.color.uxsdk_orange_in_dark
                 WarningLevel.CAUTION -> R.color.uxsdk_orange_in_dark
                 WarningLevel.WARNING -> R.color.uxsdk_red_in_dark
                 WarningLevel.SERIOUS_WARNING -> R.color.uxsdk_red_in_dark
+                else -> {
+                    R.color.uxsdk_orange_in_dark
+                }
+            }
+        }
+
+        fun popColorResId(warningLevel: WarningLevel): Int {
+            return when (warningLevel) {
+                WarningLevel.NORMAL -> R.color.uxsdk_green_material_800_67_percent
+                WarningLevel.NOTICE -> R.color.uxsdk_orange_in_dark_050
+                WarningLevel.CAUTION -> R.color.uxsdk_orange_in_dark_050
+                WarningLevel.WARNING -> R.color.uxsdk_red_in_dark_050
+                WarningLevel.SERIOUS_WARNING -> R.color.uxsdk_red_in_dark_050
                 else -> {
                     R.color.uxsdk_orange_in_dark
                 }

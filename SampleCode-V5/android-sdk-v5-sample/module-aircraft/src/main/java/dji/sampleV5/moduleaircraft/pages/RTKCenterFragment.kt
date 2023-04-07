@@ -110,21 +110,11 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
 
     private fun showRTKSystemStateInfo(rtkSystemState: RTKSystemState?) {
         rtkSystemState?.run {
-            rtkConnected?.let {
-                tv_tv_rtk_connect_info.text = if (rtkConnected) {
-                    "Connected"
-                } else {
-                    "Disconnected"
-                }
+            tv_rtk_healthy_info.text = if (rtkHealthy) {
+                "healthy"
+            } else {
+                "unhealthy"
             }
-            rtkHealthy?.let {
-                tv_rtk_healthy_info.text = if (rtkHealthy) {
-                    "healthy"
-                } else {
-                    "unhealthy"
-                }
-            }
-
 
             tv_rtk_error_info.text = error?.toString()
             //展示卫星数

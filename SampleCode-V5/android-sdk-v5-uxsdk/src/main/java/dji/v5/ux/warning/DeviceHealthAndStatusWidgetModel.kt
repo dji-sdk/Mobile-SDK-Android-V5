@@ -71,5 +71,12 @@ class DeviceHealthAndStatusWidgetModel constructor(
             result = 31 * result + code.hashCode()
             return result
         }
+
+        fun validDescription(): String {
+            description.ifEmpty {
+                return code
+            }
+            return description
+        }
     }
 }

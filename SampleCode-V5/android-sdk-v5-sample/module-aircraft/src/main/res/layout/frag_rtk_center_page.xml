@@ -345,30 +345,12 @@
                             android:text="@string/tv_rtk_systemState_info_hint"
                             android:textSize="15sp" />
 
-                        <TextView
-                            android:id="@+id/tv_rtk_connect"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_rtk_systemState_info_hint"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/tv_rtk_connect"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tv_tv_rtk_connect_info"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_rtk_systemState_info_hint"
-                            android:layout_marginTop="5dp"
-                            android:layout_toRightOf="@id/tv_rtk_connect"
-                            android:text="null" />
-
 
                         <TextView
                             android:id="@+id/tv_rtk_healthy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_rtk_connect"
+                            android:layout_below="@id/tv_rtk_systemState_info_hint"
                             android:layout_marginTop="5dp"
                             android:text="@string/tv_rtk_healthy"
                             android:textStyle="bold" />
@@ -377,7 +359,7 @@
                             android:id="@+id/tv_rtk_healthy_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_tv_rtk_connect_info"
+                            android:layout_below="@id/tv_rtk_systemState_info_hint"
                             android:layout_marginTop="5dp"
                             android:layout_toRightOf="@id/tv_rtk_healthy"
                             android:text="null" />

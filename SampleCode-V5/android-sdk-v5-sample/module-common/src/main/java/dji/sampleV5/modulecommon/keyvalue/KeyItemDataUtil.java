@@ -2,9 +2,7 @@ package dji.sampleV5.modulecommon.keyvalue;
 
 
 import java.lang.reflect.Field;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import dji.sdk.keyvalue.converter.DJIValueConverter;
@@ -14,7 +12,6 @@ import dji.sdk.keyvalue.key.AirLinkKey;
 import dji.sdk.keyvalue.key.BatteryKey;
 import dji.sdk.keyvalue.key.BleKey;
 import dji.sdk.keyvalue.key.CameraKey;
-import dji.sdk.keyvalue.key.DJIActionKeyInfo;
 import dji.sdk.keyvalue.key.DJIKeyInfo;
 import dji.sdk.keyvalue.key.FlightAssistantKey;
 import dji.sdk.keyvalue.key.FlightControllerKey;
@@ -40,204 +37,139 @@ import dji.v5.utils.common.LogUtils;
  */
 public class KeyItemDataUtil {
     private static final String TAG = KeyItemDataUtil.class.getSimpleName();
-    private static final String KEY_RREFIX = "Key";
     private static final List<KeyItem<?, ?>> allKeyList = new ArrayList<>();
 
-    private KeyItemDataUtil(){
-        //dosomething
-    }
-    public static void initBatteryKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , BatteryKey.class);
-
-    }
-    public static void initAirlinkKeyList(List<KeyItem<? ,?>> keylist) {
-
-        initList(keylist , AirLinkKey.class);
+    private KeyItemDataUtil() {
+        //do something
     }
 
-    public static void initGimbalKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , GimbalKey.class);
+    public static void initBatteryKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, BatteryKey.getKeyList());
     }
 
-    public static void initCameraKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , CameraKey.class);
+    public static void initAirlinkKeyList(List<KeyItem<?, ?>> keylist) {
+        initList(keylist, AirLinkKey.getKeyList());
     }
 
-    public static void initWiFiKeyList(List<KeyItem<? ,?>> keyList) {
-
-//        initList(keyList , WiFiKey.class);
+    public static void initGimbalKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, GimbalKey.getKeyList());
     }
 
-    public static void initFlightAssistantKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , FlightAssistantKey.class);
+    public static void initCameraKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, CameraKey.getKeyList());
     }
 
-    public static void initFlightControllerKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , FlightControllerKey.class);
+    public static void initWiFiKeyList(List<KeyItem<?, ?>> keyList) {
+//        initList(keyList , WiFiKey.getKeyList());
     }
 
-    public static void initRemoteControllerKeyList(List<KeyItem<?,?>> keyList) {
-
-        initList(keyList , RemoteControllerKey.class);
+    public static void initFlightAssistantKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, FlightAssistantKey.getKeyList());
     }
 
-    public static void initBleKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , BleKey.class);
+    public static void initFlightControllerKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, FlightControllerKey.getKeyList());
     }
 
-    public static void initProductKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , ProductKey.class);
+    public static void initRemoteControllerKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, RemoteControllerKey.getKeyList());
     }
 
-    public static void initRtkBaseStationKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , RtkBaseStationKey.class);
+    public static void initBleKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, BleKey.getKeyList());
     }
 
-    public static void initRtkMobileStationKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , RtkMobileStationKey.class);
+    public static void initProductKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, ProductKey.getKeyList());
     }
 
-    public static void initOcuSyncKeyList(List<KeyItem<?,?>> keyList) {
-
-        initList(keyList , OcuSyncKey.class);
+    public static void initRtkBaseStationKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, RtkBaseStationKey.getKeyList());
     }
 
-    public static void initRadarKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList, RadarKey.class);
+    public static void initRtkMobileStationKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, RtkMobileStationKey.getKeyList());
     }
 
-    public static void initAppKeyList(List<KeyItem<?,?>> keyList) {
-
-//        initList(keyList , AppKey.class);
+    public static void initOcuSyncKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, OcuSyncKey.getKeyList());
     }
 
-    public static void initMobileNetworkKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , MobileNetworkKey.class);
+    public static void initRadarKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, RadarKey.getKeyList());
     }
 
-    public static void initMobileNetworkLinkRCKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , MobileNetworkLinkRCKey.class);
+    public static void initAppKeyList(List<KeyItem<?, ?>> keyList) {
+//        initList(keyList , AppKey.getKeyList());
     }
 
-    public static void initOnboardKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , OnboardKey.class);
+    public static void initMobileNetworkKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, MobileNetworkKey.getKeyList());
     }
 
-    public static void initPayloadKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList , PayloadKey.class);
+    public static void initMobileNetworkLinkRCKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, MobileNetworkLinkRCKey.getKeyList());
     }
 
-    public static void initLidarKeyList(List<KeyItem<? ,?>> keyList) {
-
-        initList(keyList, LidarKey.class);
+    public static void initOnboardKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, OnboardKey.getKeyList());
     }
 
-
-    /**
-     * 获取本类及其父类的属性的方法
-     * @param clazz 当前类对象
-     * @return 字段数组
-     */
-    private static Field[] getAllFields(Class<?> clazz) {
-        List<Field> fieldList = new ArrayList<>();
-        while (clazz != null){
-            fieldList.addAll(new ArrayList<>(Arrays.asList(clazz.getDeclaredFields())));
-            clazz = clazz.getSuperclass();
-        }
-        Field[] fields = new Field[fieldList.size()];
-        return fieldList.toArray(fields);
+    public static void initPayloadKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, PayloadKey.getKeyList());
     }
 
-
-
-
-    public static boolean checkList(List<KeyItem<? ,?>> keyList){
-        return keyList != null && !keyList.isEmpty();
+    public static void initLidarKeyList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, LidarKey.getKeyList());
     }
 
-    private static void initList(List<KeyItem<? ,?>> keylist , Class<?> clazz){
-        if (checkList(keylist)) {
+    private static void initList(List<KeyItem<?, ?>> keyList, List<DJIKeyInfo<?>> keyInfoList) {
+        if (keyList == null || !keyList.isEmpty()){
             return;
         }
-        Field[] fields = getAllFields(clazz);
-        for (Field field : fields) {
-            try {
-                Object fieldValue = field.get(null);
-                Class<?> fieldClass = field.getType();
-                String keyName = field.getName();
-
-                if (fieldClass.equals(DJIKeyInfo.class) || fieldClass.equals(DJIActionKeyInfo.class)) {
-                    DJIKeyInfo<?> keyInfo = (DJIKeyInfo<?>) fieldValue;
-
-                    KeyItem<DJIValue, DJIValue> item = new KeyItem<>(keyInfo);
-                    genericItem( item , keyInfo , keyName);
-
-                    if (keylist != null) {
-                        keylist.add(item);
-                    }
-
-                }
-
-            } catch (Exception e) {
-                LogUtils.e(TAG, e.getMessage());
-            }
-
+        for (DJIKeyInfo<?> info : keyInfoList) {
+            KeyItem<DJIValue, DJIValue> item = new KeyItem<>(info);
+            genericItem(item, info);
+            keyList.add(item);
         }
     }
 
-    public static <P extends DJIValue , R extends DJIValue>void genericItem(KeyItem<P, R> item , DJIKeyInfo<?> keyInfo , String keyName){
+    public static <P extends DJIValue, R extends DJIValue> void genericItem(KeyItem<P, R> item, DJIKeyInfo<?> keyInfo) {
 
         Class<?> tdClazz;
         Field field = null;
         boolean isDjiValue = false;
         try {
-            if (keyInfo.getIdentifier().isEmpty()) {
-                item.setName(keyName.contains(KEY_RREFIX) ? keyName.substring(KEY_RREFIX.length()) : keyName);
-            }
             IDJIValueConverter<P, R> clazzConvert = keyInfo.getTypeConverter();
             if (clazzConvert instanceof SingleValueConverter) {
                 field = clazzConvert.getClass().getDeclaredField("dClass");
                 Field tmp = clazzConvert.getClass().getDeclaredField("isDJIValue");
                 tmp.setAccessible(true);
                 isDjiValue = tmp.getBoolean(clazzConvert);
-            }
-             else if (clazzConvert instanceof DJIValueConverter) {
-                field  = clazzConvert.getClass().getDeclaredField("tClass");
+            } else if (clazzConvert instanceof DJIValueConverter) {
+                field = clazzConvert.getClass().getDeclaredField("tClass");
             }
 
-             if (field != null) {
-                 field.setAccessible(true);
-                 tdClazz = (Class<?>) field.get(clazzConvert);
-                 item.param = (P)tdClazz.newInstance();
-                 item.result = (R)tdClazz.newInstance();
-                 item.setSingleDJIValue(isDjiValue);
-                 item.initGenericInstance();
-             }
+            if (field != null) {
+                field.setAccessible(true);
+                tdClazz = (Class<?>) field.get(clazzConvert);
+                item.param = (P) tdClazz.newInstance();
+                item.result = (R) tdClazz.newInstance();
+                item.setSingleDJIValue(isDjiValue);
+                item.initGenericInstance();
+            }
         } catch (Exception e) {
             LogUtils.e(TAG, e.getMessage());
         }
-
     }
-    public static int getAllKeyListCount(){
+
+    public static int getAllKeyListCount() {
         List<KeyItem<?, ?>> allKeyList = new ArrayList<>();
         getAllKeyList(allKeyList);
-        return  allKeyList.size();
+        return allKeyList.size();
     }
-    public static void getAllKeyList(List<KeyItem<?, ?>>  keylist) {
+
+    public static void getAllKeyList(List<KeyItem<?, ?>> keylist) {
         if (!allKeyList.isEmpty()) {
             keylist.addAll(allKeyList);
             return;
@@ -314,6 +246,5 @@ public class KeyItemDataUtil {
         initLidarKeyList(keyList);
         allKeyList.addAll(keyList);
         keyList.clear();
-
     }
 }

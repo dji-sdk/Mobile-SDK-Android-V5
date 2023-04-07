@@ -29,13 +29,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import dji.v5.ux.R;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
-import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
+import dji.v5.ux.R;
 
 /**
  * A fragment that shows a single widget or a set of coupled widgets.
@@ -87,12 +84,7 @@ public class WidgetFragment extends Fragment {
         if (widgetListItem.getWidgetViewHolders().length == 2) {
             // coupled widgets: set state callback of first widget to second widget
             WidgetView widgetView0 = new WidgetView(getContext());
-            ViewGroup widget0 = widgetView0.init(widgetListItem.getWidgetViewHolders()[0]);
             WidgetView widgetView1 = new WidgetView(getContext());
-            ViewGroup widget1 = widgetView1.init(widgetListItem.getWidgetViewHolders()[1]);
-            if (widget0 instanceof SimulatorIndicatorWidget) {
-                ((SimulatorIndicatorWidget) widget0).setStateChangeCallback((SimulatorControlWidget) widget1);
-            }
             rootView.addView(widgetView0);
             rootView.addView(widgetView1);
         } else {

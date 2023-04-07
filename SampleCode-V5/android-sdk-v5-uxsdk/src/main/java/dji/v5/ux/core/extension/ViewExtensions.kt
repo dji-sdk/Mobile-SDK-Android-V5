@@ -39,6 +39,7 @@ import android.widget.Toast
 import androidx.annotation.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
 import dji.v5.ux.R
 import dji.v5.ux.core.util.UnitConversionUtil.UnitType

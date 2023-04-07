@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -561,12 +601,20 @@
 <h5 id="描述：-v5">描述：</h5>
 <p><font color="#666">该值为垂直控制模式为位置模式时可设置的最大高度。</font></p>
 </div>
+<div class="api-row" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_min_velocity"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_roll_pitch_control_min_velocity_inline">ROLL_PITCH_CONTROL_MIN_VELOCITY</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_min_velocity_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>ROLL_PITCH_CONTROL_MIN_VELOCITY</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> ROLL_PITCH_CONTROL_MIN_VELOCITY = -<span class="number">23</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
+<h5 id="描述：-v6">描述：</h5>
+<p><font color="#666">该值为横滚轴和俯仰轴的控制模式为速度模式时可设置的最小速度。</font></p>
+</div>
 <div class="api-row" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_max_velocity"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_roll_pitch_control_max_velocity_inline">ROLL_PITCH_CONTROL_MAX_VELOCITY</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_max_velocity_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>ROLL_PITCH_CONTROL_MAX_VELOCITY</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> ROLL_PITCH_CONTROL_MAX_VELOCITY = <span class="number">23</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
-<h5 id="描述：-v6">描述：</h5>
+<h5 id="描述：-v7">描述：</h5>
 <p><font color="#666">该值为横滚轴和俯仰轴的控制模式为速度模式时可设置的最大速度。</font></p>
 </div>
 <div class="api-row" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_min_angle"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_roll_pitch_control_min_angle_inline">ROLL_PITCH_CONTROL_MIN_ANGLE</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_min_angle_inline" <blockquote>
@@ -574,7 +622,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> ROLL_PITCH_CONTROL_MIN_ANGLE = -<span class="number">30</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
-<h5 id="描述：-v7">描述：</h5>
+<h5 id="描述：-v8">描述：</h5>
 <p><font color="#666">该值为横滚轴和俯仰轴的控制模式为角度模式时可设置的最小角度。</font></p>
 </div>
 <div class="api-row" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_max_angle"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_roll_pitch_control_max_angle_inline">ROLL_PITCH_CONTROL_MAX_ANGLE</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_roll_pitch_control_max_angle_inline" <blockquote>
@@ -582,7 +630,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> ROLL_PITCH_CONTROL_MAX_ANGLE = <span class="number">30</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
+<h5 id="描述：-v9">描述：</h5>
 <p><font color="#666">该值为横滚轴和俯仰轴的控制模式为角度模式时可设置的最大角度。</font></p>
 </div>
 <div class="api-row" id="ivirtualstickmanager_virtualstickrange_yaw_control_min_angle"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_yaw_control_min_angle_inline">YAW_CONTROL_MIN_ANGLE</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_yaw_control_min_angle_inline" <blockquote>
@@ -590,7 +638,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> YAW_CONTROL_MIN_ANGLE = -<span class="number">180</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
-<h5 id="描述：-v9">描述：</h5>
+<h5 id="描述：-v10">描述：</h5>
 <p><font color="#666">该值为偏航轴的控制模式为角度模式时可设置的最小角度。</font></p>
 </div>
 <div class="api-row" id="ivirtualstickmanager_virtualstickrange_yaw_control_max_angle"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_yaw_control_max_angle_inline">YAW_CONTROL_MAX_ANGLE</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_yaw_control_max_angle_inline" <blockquote>
@@ -598,7 +646,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> YAW_CONTROL_MAX_ANGLE = <span class="number">180</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
-<h5 id="描述：-v10">描述：</h5>
+<h5 id="描述：-v11">描述：</h5>
 <p><font color="#666">该值为偏航轴的控制模式为角度模式时可设置的最大角度。</font></p>
 </div>
 <div class="api-row" id="ivirtualstickmanager_virtualstickrange_yaw_control_min_angular_velocity"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_yaw_control_min_angular_velocity_inline">YAW_CONTROL_MIN_ANGULAR_VELOCITY</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_yaw_control_min_angular_velocity_inline" <blockquote>
@@ -606,7 +654,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> YAW_CONTROL_MIN_ANGULAR_VELOCITY = -<span class="number">100</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
-<h5 id="描述：-v11">描述：</h5>
+<h5 id="描述：-v12">描述：</h5>
 <p><font color="#666">该值为偏航轴的控制模式为角速度模式时可设置的最小角速度。</font></p>
 </div>
 <div class="api-row" id="ivirtualstickmanager_virtualstickrange_yaw_control_max_angular_velocity"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_virtualstickrange_yaw_control_max_angular_velocity_inline">YAW_CONTROL_MAX_ANGULAR_VELOCITY</a></div></div><div class="inline-doc" id="ivirtualstickmanager_virtualstickrange_yaw_control_max_angular_velocity_inline" <blockquote>
@@ -614,7 +662,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> YAW_CONTROL_MAX_ANGULAR_VELOCITY = <span class="number">100</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.virtualstick</font></td></tr></table></html>
-<h5 id="描述：-v12">描述：</h5>
+<h5 id="描述：-v13">描述：</h5>
 <p><font color="#666">该值为偏航轴的控制模式为角速度模式时可设置的最大角速度。</font></p>
 </div>
 

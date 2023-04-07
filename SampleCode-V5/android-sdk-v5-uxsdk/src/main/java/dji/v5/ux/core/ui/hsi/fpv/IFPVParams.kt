@@ -42,7 +42,7 @@ interface IFPVParams {
             if (type == ProductType.M300_RTK) {
                 return M300FpvParams
             } else if (type == ProductType.M30_SERIES) {
-                return M300FpvParams
+                return M30FpvParams
             }
             if (DpadProductManager.getInstance().isSmartController) {
                 return M300FpvParams

@@ -61,7 +61,7 @@ public final class AudioUtil {
      * @param resID          The resource ID of the sound to play.
      * @param ignoreWhenBusy If set to true, will do nothing if a sound is already being played.
      */
-    public static void playSound(Context context, int resID, boolean ignoreWhenBusy) {
+    public synchronized static void playSound(Context context, int resID, boolean ignoreWhenBusy) {
         try {
             if (player != null) {
                 if (player.isPlaying()) {

@@ -64,4 +64,32 @@
         <item>UP</item>
     </string-array>
 
+    <string-array name="wayline_aircraft">
+        <item>Matrice 30</item>
+        <item>Matrice 30T</item>
+        <item>Matrice 300 RTK</item>
+        <item>DJI Mavic 3 Serials</item>
+        <item>DJI Mavic 3 Thermal</item>
+    </string-array>
+
+    <string-array name="wayline_yaw_mode">
+        <item>Along to wayline</item>
+        <item>Manual control</item>
+        <item>Lock current yaw angle</item>
+    </string-array>
+
+
+    <string-array name="wayline_waypoint_type">
+        <item>Straight route. Aircraft stops</item>
+        <item>Curved route. Aircraft stops</item>
+        <item>Curved route. Aircraft continues</item>
+        <item>Coordinated turn. Skips waypoint</item>
+    </string-array>
+
+    <string-array name="wayline_finish_action">
+        <item>自动返航</item>
+        <item>原地降落</item>
+        <item>返回航线起始点悬停</item>
+        <item>退出航线模式</item>
+    </string-array>
 </resources>

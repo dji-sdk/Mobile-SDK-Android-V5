@@ -36,7 +36,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
-import dji.sdk.keyvalue.value.camera.CameraWhiteBalance;
+
+import dji.sdk.keyvalue.value.camera.CameraWhiteBalanceInfo;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.utils.common.DisplayUtil;
@@ -121,8 +122,8 @@ public class CameraConfigWBWidget extends ConstraintLayoutWidget<Object> impleme
     //endregion
 
     //region Reactions to model
-    private void updateUI(@NonNull CameraWhiteBalance whiteBalance) {
-        int wbPresetValue = whiteBalance.getMode().value();
+    private void updateUI(@NonNull CameraWhiteBalanceInfo whiteBalance) {
+        int wbPresetValue = whiteBalance.getWhiteBalanceMode().value();
         if (wbPresetValue < wbNameArray.length) {
             wbTitleTextView.setText(getResources().getString(R.string.uxsdk_white_balance_title,
                     wbNameArray[wbPresetValue]));

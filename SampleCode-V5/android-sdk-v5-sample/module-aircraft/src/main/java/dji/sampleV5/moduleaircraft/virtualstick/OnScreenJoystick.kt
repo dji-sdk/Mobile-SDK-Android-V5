@@ -9,6 +9,7 @@ import android.view.SurfaceView
 import android.view.View
 import android.view.View.OnTouchListener
 import dji.sampleV5.moduleaircraft.R
+import dji.v5.utils.common.DJIExecutor
 import dji.v5.utils.common.LogUtils
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.math.cos
@@ -18,6 +19,7 @@ import kotlin.math.sin
 
 class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(context, attrs),
     SurfaceHolder.Callback, OnTouchListener {
+    private var tag = LogUtils.getTag(this)
     private var mJoystick: Bitmap? = null
     private lateinit var mHolder: SurfaceHolder
     private var mKnobBounds: Rect? = null
@@ -47,7 +49,6 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
     private fun init() {
         mHolder = holder
         mHolder.addCallback(this)
-        mThread = JoystickThread()
         setZOrderOnTop(true)
         mHolder.setFormat(PixelFormat.TRANSPARENT)
         setOnTouchListener(this)
@@ -55,20 +56,17 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
         isAutoCentering = true
     }
 
-    fun setJoystickListener(pJoystickListener: OnScreenJoystickListener?
+    fun setJoystickListener(
+        pJoystickListener: OnScreenJoystickListener?
     ) {
         mJoystickListener = pJoystickListener
     }
 
     override fun surfaceCreated(arg0: SurfaceHolder) {
-        if (!mThread!!.isRunning()) {
-            try {
-                LogUtils.e("OnScreenJoystick","surfaceCreated","mThread!!.start()",mThread == null)
-                mThread!!.start()
-            }catch (e :Exception){
-                LogUtils.e("OnScreenJoystick","surfaceCreated",e.message,e.cause)
-            }
-        }
+        mThread?.setRunning(false)
+        mThread = JoystickThread()
+        mThread?.setRunning(true)
+        mThread?.start()
     }
 
     override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
@@ -76,27 +74,37 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
     }
 
     override fun surfaceDestroyed(arg0: SurfaceHolder) {
-        LogUtils.e("OnScreenJoystick", "surfaceDestroyed")
+        mThread?.setRunning(false)
         var retry = true
-        mThread!!.setRunning(false)
         while (retry) {
             try {
                 // code to kill Thread
-                mThread!!.join()
+                mThread?.join()
                 retry = false
             } catch (e: InterruptedException) {
                 Thread.currentThread().interrupt()
-                LogUtils.e("surfaceDestroyed", e.message)
+                LogUtils.e(tag, e.message)
             }
         }
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        mThread?.setRunning(false)
+    }
+
     fun doDraw(pCanvas: Canvas?) {
+        if (pCanvas == null) {
+            return
+        }
+        // reset canvas
+        pCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+
         if (mKnobBounds == null) {
             initBounds(pCanvas)
         }
         mKnobBounds!![mKnobX, mKnobY, mKnobX + mKnobSize] = mKnobY + mKnobSize
-        pCanvas!!.drawBitmap(mJoystick!!, null, mKnobBounds!!, null)
+        pCanvas.drawBitmap(mJoystick!!, null, mKnobBounds!!, null)
     }
 
     override fun onTouch(arg0: View, pEvent: MotionEvent): Boolean {
@@ -126,8 +134,7 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
     }
 
     private fun checkBounds(pX: Float, pY: Float): Boolean {
-        return (mRadius - pX).toDouble().pow(2.0) + (mRadius - pY).toDouble().pow(2.0) <= Math
-            .pow((mRadius - mKnobSize * 0.5f).toDouble(), 2.0)
+        return (mRadius - pX).toDouble().pow(2.0) + (mRadius - pY).toDouble().pow(2.0) <= (mRadius - mKnobSize * 0.5f).toDouble().pow(2.0)
     }
 
     private fun pushTouchEvent() {
@@ -142,13 +149,6 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
 
     private inner class JoystickThread : Thread() {
         private val running = AtomicBoolean(false)
-
-        @Synchronized
-        override fun start() {
-            if (running.compareAndSet(false, true)) {
-                super.start()
-            }
-        }
 
         fun isRunning(): Boolean {
             return running.get()
@@ -165,13 +165,10 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
                 try {
                     canvas = mHolder.lockCanvas(null)
                     synchronized(mHolder) {
-
-                        // reset canvas
-                        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
                         doDraw(canvas)
                     }
                 } catch (e: Exception) {
-                    LogUtils.e("drawColor", e.message)
+                    LogUtils.e(tag, e.message)
                 } finally {
                     if (canvas != null) {
                         mHolder.unlockCanvasAndPost(canvas)

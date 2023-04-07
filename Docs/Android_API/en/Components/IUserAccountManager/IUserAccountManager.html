@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -314,6 +318,8 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
                     </ul>
@@ -396,6 +402,26 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
@@ -452,13 +478,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -543,42 +583,60 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">logInDJIUserAccount</span><span class="params">(FragmentActivity fragmentActivity, <span class="keyword">boolean</span> isFullScreen, @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="description-v3">Description:</h5>
-<p><font color="#666">Login the DJI account. When the  <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate">LoginState</a></code> is <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate_not_logged_in">NOT_LOGGED_IN</a></code> or <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate_token_out_of_date">TOKEN_OUT_OF_DATE</a></code>, this interface should be called to login account. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">Login the DJI account by calling the login UI. When the <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate">LoginState</a></code> is <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate_not_logged_in">NOT_LOGGED_IN</a></code> or <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate_token_out_of_date">TOKEN_OUT_OF_DATE</a></code>, this interface should be called to login account. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">FragmentActivity <font color="#000">fragmentActivity</font></font></td><td><font color="#666"><i>fragmentActivity</i></font></td></tr><tr valign="top"><td><font color="#70BF41">boolean <font color="#000">isFullScreen</font></font></td><td><font color="#666"><i><code>true</code> means that display the login box in full screen.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iuseraccountmanager_logindjiuseraccountwithinterface"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iuseraccountmanager_logindjiuseraccountwithinterface_inline">logInDJIUserAccount</a></div></div><div class="inline-doc" id="iuseraccountmanager_logindjiuseraccountwithinterface_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>logInDJIUserAccount</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">logInDJIUserAccount</span><span class="params">(@NonNull String userName, @NonNull String password, @Nullable String verificationCode,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="description-v4">Description:</h5>
+<p><font color="#666">Login the DJI account by calling interface. This interface can be used in unmanned scenarios, such as nest applications. When the <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate">LoginState</a></code> is <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate_not_logged_in">NOT_LOGGED_IN</a></code> or <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_loginstate_token_out_of_date">TOKEN_OUT_OF_DATE</a></code>, this interface should be called to login account. <br><b>Note: <br> After the login fails, if the callback of this interface returns an error of <code>Login</code>, it means that the verification code needs to be entered when you login again. Please call <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_getverificationcodeimageurl">getVerificationCodeImageURL</a></code> to get the image verification code.</b> <br><br><code><i>Supported since MSDK 5.3.0</i></code></font></p>
+<h5 id="input-parameters-v2">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">userName</font></font></td><td><font color="#666"><i>Login user name</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">password</font></font></td><td><font color="#666"><i>Login password</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable String <font color="#000">verificationCode</font></font></td><td><font color="#666"><i>Login verification code</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iuseraccountmanager_getverificationcodeimageurl"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iuseraccountmanager_getverificationcodeimageurl_inline">getVerificationCodeImageURL</a></div></div><div class="inline-doc" id="iuseraccountmanager_getverificationcodeimageurl_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getVerificationCodeImageURL</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">getVerificationCodeImageURL</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="description-v5">Description:</h5>
+<p><font color="#666">Get the webpage link of the image verification code, you can visit this link to get the image verification code. <br><br><code><i>Supported since MSDK 5.3.0</i></code></font></p>
+<h5 id="return-v2">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String</font></td><td><font color="#666"><i>Returns the link to the webpage where the verification code is obtained.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iuseraccountmanager_logoutdjiuseraccount"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iuseraccountmanager_logoutdjiuseraccount_inline">logOutDJIUserAccount</a></div></div><div class="inline-doc" id="iuseraccountmanager_logoutdjiuseraccount_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>logOutDJIUserAccount</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">logOutDJIUserAccount</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v4">Description:</h5>
+<h5 id="description-v6">Description:</h5>
 <p><font color="#666">Logout the DJI account. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v2">Input Parameters:</h5>
+<h5 id="input-parameters-v3">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iuseraccountmanager_addlogininfoupdatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iuseraccountmanager_addlogininfoupdatelistener_inline">addLoginInfoUpdateListener</a></div></div><div class="inline-doc" id="iuseraccountmanager_addlogininfoupdatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>addLoginInfoUpdateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addLoginInfoUpdateListener</span><span class="params">(@NonNull LoginInfoUpdateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v5">Description:</h5>
+<h5 id="description-v7">Description:</h5>
 <p><font color="#666">Add the listener of login information. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v3">Input Parameters:</h5>
+<h5 id="input-parameters-v4">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IUserAccountManager/IUserAccountManager_LoginInfoUpdateListener.html#iuseraccountmanager_logininfoupdatelistener">LoginInfoUpdateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Listener of login information.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iuseraccountmanager_removelogininfoupdatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iuseraccountmanager_removelogininfoupdatelistener_inline">removeLoginInfoUpdateListener</a></div></div><div class="inline-doc" id="iuseraccountmanager_removelogininfoupdatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeLoginInfoUpdateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeLoginInfoUpdateListener</span><span class="params">(@NonNull LoginInfoUpdateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v6">Description:</h5>
+<h5 id="description-v8">Description:</h5>
 <p><font color="#666">Remove the listener of login information. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v4">Input Parameters:</h5>
+<h5 id="input-parameters-v5">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IUserAccountManager/IUserAccountManager_LoginInfoUpdateListener.html#iuseraccountmanager_logininfoupdatelistener">LoginInfoUpdateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Listener of login information.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iuseraccountmanager_clearalllogininfoupdatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iuseraccountmanager_clearalllogininfoupdatelistener_inline">clearAllLoginInfoUpdateListener</a></div></div><div class="inline-doc" id="iuseraccountmanager_clearalllogininfoupdatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>clearAllLoginInfoUpdateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearAllLoginInfoUpdateListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v7">Description:</h5>
+<h5 id="description-v9">Description:</h5>
 <p><font color="#666">Remove all the listener of login information. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <h5 id="related">Related:</h5>
@@ -587,7 +645,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> LoginState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.account</font></td></tr></table></html>
-<h5 id="description-v8">Description:</h5>
+<h5 id="description-v10">Description:</h5>
 <p><font color="#666">Login status.
 <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>

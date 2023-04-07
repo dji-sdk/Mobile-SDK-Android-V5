@@ -143,11 +143,11 @@ public class FocusModeWidget extends FrameLayoutWidget<Object> implements OnClic
 
     @Override
     public void onClick(View v) {
-        addDisposable(widgetModel.toggleFocusMode()
+        widgetModel.toggleFocusMode()
                 .observeOn(SchedulerProvider.ui())
                 .subscribe(() -> {
                     // Do nothing
-                }, RxUtil.logErrorConsumer(TAG, "switch focus mode: ")));
+                }, RxUtil.logErrorConsumer(TAG, "switch focus mode: ")).dispose();
     }
 
     //endregion

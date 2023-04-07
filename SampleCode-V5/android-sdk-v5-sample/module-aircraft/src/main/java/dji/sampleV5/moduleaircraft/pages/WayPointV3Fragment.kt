@@ -43,6 +43,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.dji.industry.mission.DocumentsUtils
 
+
 import dji.sampleV5.modulecommon.BuildConfig
 
 
@@ -50,6 +51,9 @@ import dji.sampleV5.modulecommon.util.DialogUtil
 import dji.sdk.wpmz.jni.JNIWPMZManager
 import dji.sdk.wpmz.value.mission.WaylineExecuteWaypoint
 import dji.v5.manager.aircraft.waypoint3.WPMZParserManager
+import dji.v5.manager.aircraft.waypoint3.WaylineExecutingInfoListener
+import dji.v5.manager.aircraft.waypoint3.WaypointActionListener
+import dji.v5.manager.aircraft.waypoint3.model.WaylineExecutingInfo
 import dji.v5.utils.common.DeviceInfoUtil.getPackageName
 import dji.v5.ux.map.MapWidget
 
@@ -69,6 +73,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.android.synthetic.main.view_mission_setting_home.*
 
 
 /**
@@ -88,6 +93,7 @@ class WayPointV3Fragment : DJIFragment() {
     private var mDisposable : Disposable ?= null
     private val OPEN_FILE_CHOOSER = 0
     private val OPEN_DOCUMENT_TREE = 1
+
 
     var curMissionPath: String = DiskUtil.getExternalCacheDirPath(
         ContextUtil.getContext(),
@@ -145,12 +151,32 @@ class WayPointV3Fragment : DJIFragment() {
             btn_mission_upload.isEnabled = it == WaypointMissionExecuteState.READY
             curMissionExecuteState = it
         }
-        wayPointV3VM.addWaylineExecutingInfoListener() {
-            wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
-                    "WaypointIndex:${it.currentWaypointIndex} \n" +
-                    "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionFileName}"
+        wayPointV3VM.addWaylineExecutingInfoListener(object :WaylineExecutingInfoListener {
+            override fun onWaylineExecutingInfoUpdate(it: WaylineExecutingInfo) {
+                wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
+                        "WaypointIndex:${it.currentWaypointIndex} \n" +
+                        "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionFileName}"
+            }
 
-        }
+            override fun onWaylineExecutingInterruptReasonUpdate(error: IDJIError?) {
+                if (error != null) {
+                    LogUtils.e(logTag , "interrupt error${error.description()}")
+                }
+            }
+
+        });
+
+
+        wayPointV3VM.addWaypointActionListener(object :WaypointActionListener{
+            override fun onExecutionStart(actionId: Int) {
+               waypint_action_state_tv?.text = "onExecutionStart: ${actionId} "
+            }
+
+            override fun onExecutionFinish(actionId: Int, error: IDJIError?) {
+                waypint_action_state_tv?.text = "onExecutionFinish: ${actionId}  error ${error?.toString()}"
+            }
+
+        })
 
         btn_mission_upload?.setOnClickListener {
             val waypointFile = File(curMissionPath)
@@ -268,9 +294,12 @@ class WayPointV3Fragment : DJIFragment() {
             showEditDialog()
         }
 
+
         createMapView(savedInstanceState)
 
     }
+
+
 
     private fun showEditDialog() {
         val waypointFile = File(curMissionPath)
@@ -453,22 +482,19 @@ class WayPointV3Fragment : DJIFragment() {
         }
     }
 
-    fun createMapView(savedInstanceState: Bundle?) {
-
+    private fun createMapView(savedInstanceState: Bundle?) {
         val onMapReadyListener = MapWidget.OnMapReadyListener { map ->
             map.setMapType(DJIMap.MapType.NORMAL)
         }
         val useAmap = wayPointV3VM.isInMainlandChina();
-        if (useAmap ) {
+        if (useAmap) {
             map_widget.initAMap(onMapReadyListener)
         } else {
             map_widget.initMapLibreMap(BuildConfig.MAPLIBRE_TOKEN, onMapReadyListener)
         }
+
         map_widget.onCreate(savedInstanceState) //需要再init后调用否则Amap无法显示
-
     }
-
-
 
     override fun onPause() {
         super.onPause()
@@ -490,6 +516,7 @@ class WayPointV3Fragment : DJIFragment() {
         wayPointV3VM.cancelListenFlightControlState()
         wayPointV3VM.removeAllMissionStateListener()
         wayPointV3VM.clearAllWaylineExecutingInfoListener()
+        wayPointV3VM.clearAllWaypointActionListener()
 
         mDisposable?.let {
             if (!it.isDisposed) {
@@ -614,5 +641,9 @@ class WayPointV3Fragment : DJIFragment() {
             getMarkerBitmap(index + 1, rotation)
         )
     }
+
+
+
+
 
 }

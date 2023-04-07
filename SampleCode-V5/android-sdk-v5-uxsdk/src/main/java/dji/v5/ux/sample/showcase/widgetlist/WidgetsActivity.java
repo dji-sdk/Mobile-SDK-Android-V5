@@ -128,7 +128,7 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         //实现RTK监测网络，并自动重连机制
         NetworkUtils.registerNetworkCallback(this, isNetworkAvailable -> {
             if (isNetworkAvailable) {
-                LogUtils.d(TAG, "isNetworkAvailable=" + true + ",Thread.name=" + Thread.currentThread().getName());
+                LogUtils.d(TAG, "isNetworkAvailable=" + true);
                 RTKStartServiceHelper.INSTANCE.startRtkService();
             }
         });

@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.data.FragmentPageItemList
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.ldm.LDMExemptModule
-import dji.v5.manager.SDKManager
-import dji.v5.manager.interfaces.SDKManagerCallback
 import dji.v5.manager.ldm.LDMManager
 
 /**
@@ -25,20 +23,8 @@ class MSDKCommonOperateVm : DJIViewModel() {
         mainPageInfoList.postValue(itemList)
     }
 
-    fun initMSDK(context: Context, callback: SDKManagerCallback) {
-        SDKManager.getInstance().init(context, callback)
-    }
-
-    fun unInitSDK(){
-        SDKManager.getInstance().destroy()
-    }
-
-    fun registerApp() {
-        SDKManager.getInstance().registerApp()
-    }
-
-    fun enableLDM(context: Context, callback: CommonCallbacks.CompletionCallback) {
-        LDMManager.getInstance().enableLDM(context, callback, LDMExemptModule.MSDK_INIT_AND_REGISTRATION)
+    fun enableLDM(context: Context, callback: CommonCallbacks.CompletionCallback, ldmExemptModuleList: Array<LDMExemptModule?>) {
+        LDMManager.getInstance().enableLDM(context, callback, * ldmExemptModuleList)
     }
 
     fun disableLDM(callback: CommonCallbacks.CompletionCallback) {

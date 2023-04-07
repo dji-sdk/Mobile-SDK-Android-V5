@@ -69,13 +69,11 @@ class VirtualStickVM : DJIViewModel() {
     }
 
     fun setLeftPosition(horizontal: Int, vertical: Int) {
-        LogUtils.i(logTag, "horizontal:$horizontal,vertical:$vertical")
         VirtualStickManager.getInstance().leftStick.horizontalPosition = horizontal
         VirtualStickManager.getInstance().leftStick.verticalPosition = vertical
     }
 
     fun setRightPosition(horizontal: Int, vertical: Int) {
-        LogUtils.i(logTag, "horizontal:$horizontal,vertical:$vertical")
         VirtualStickManager.getInstance().rightStick.horizontalPosition = horizontal
         VirtualStickManager.getInstance().rightStick.verticalPosition = vertical
     }

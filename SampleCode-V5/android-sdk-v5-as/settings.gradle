@@ -2,19 +2,14 @@
 //sample 配置
 //共分了3个app，分别是只有飞机、只有手持、全支持。
 include ':sample-app-aircraft'
-include ':sample-app-handheld'
-include ':sample-app-all'
+
 //3个module，用于存放各类产品的功能view，供app部分组合使用。
 include ':sample-module-common'//通用view。
 include ':sample-module-aircraft'//飞机特有view。
-include ':sample-module-handheld'//手持特有view。
 
 project(':sample-app-aircraft').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-sample/app-aircraft')
-project(':sample-app-handheld').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-sample/app-handheld')
-project(':sample-app-all').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-sample/app-all')
 project(':sample-module-common').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-sample/module-common')
 project(':sample-module-aircraft').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-sample/module-aircraft')
-project(':sample-module-handheld').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-sample/module-handheld')
 
 include ':uxsdk'// uxsdk模块
 project(':uxsdk').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-uxsdk')

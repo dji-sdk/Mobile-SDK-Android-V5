@@ -25,7 +25,7 @@
             android:background="@color/uxsdk_red_in_dark"
             android:gravity="center"
             android:singleLine="true"
-            android:text="1"
+            tools:text="1"
             android:textStyle="bold"
             android:textColor="@color/uxsdk_white"
             android:textSize="@dimen/uxsdk_8_dp" />
@@ -38,7 +38,7 @@
             android:background="@color/uxsdk_orange_in_dark"
             android:gravity="center"
             android:singleLine="true"
-            android:text="3"
+            tools:text="3"
             android:textStyle="bold"
             android:textColor="@color/uxsdk_white"
             android:textSize="@dimen/uxsdk_8_dp" />
@@ -63,7 +63,7 @@
             android:paddingStart="@dimen/uxsdk_12_dp"
             android:paddingEnd="@dimen/uxsdk_12_dp"
             android:singleLine="true"
-            android:text="无法起飞:电池固件版本错误，请更换电池或将电池升级到最新版本"/>
+            tools:text="无法起飞:电池固件版本错误，请更换电池或将电池升级到最新版本"/>
         <dji.v5.ux.core.ui.component.MarqueeTextView
             android:id="@+id/tv_warning_no_message"
             android:layout_width="wrap_content"

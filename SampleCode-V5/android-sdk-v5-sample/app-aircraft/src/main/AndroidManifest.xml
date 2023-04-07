@@ -27,12 +27,11 @@
             android:name="com.dji.sdk.API_KEY"
             android:value="${API_KEY}"/>
 
-
-
         <activity
             android:name="dji.sampleV5.aircraft.DJIAircraftMainActivity"
             android:theme="@style/full_screen_theme"
             android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:exported="true">
 
             <intent-filter>

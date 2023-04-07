@@ -88,12 +88,12 @@ class PayloadWidgetFragment : DJIFragment() {
         //注意：List类型的Widget没有widget.iconFilePath为空，所以只拿subItemsList的IconFilePath
         for (subItem in widget.subItemsList) {
             val selectDesc =
-                "subItemSelectIcon=name:${widget.widgetName},index:${widget.widgetIndex},value:${widget.widgetValue},type:${widget.widgetType},subItemsName=${subItem?.subItemsName},hitMsg:${widget.hintMessage}"
+                "subItemSelectIcon=name:${widget.widgetName},index:${widget.widgetIndex},value:${widget.widgetValue},type:${widget.widgetType}(${widget.widgetType.value()})},subItemsName=${subItem?.subItemsName},hitMsg:${widget.hintMessage}"
             val mainSelectIconPath = subItem?.subItemsIconFilePath?.selectedIconPath
 
 
             val unselectDesc =
-                "subItemSelectIcon=name:${widget.widgetName},index:${widget.widgetIndex},value:${widget.widgetValue},type:${widget.widgetType},subItemsName=${subItem?.subItemsName},hitMsg:${widget.hintMessage}"
+                "subItemUnSelectIcon=name:${widget.widgetName},index:${widget.widgetIndex},value:${widget.widgetValue},type:${widget.widgetType}(${widget.widgetType.value()}),subItemsName=${subItem?.subItemsName},hitMsg:${widget.hintMessage}"
             val mainUnSelectIconPath = subItem?.subItemsIconFilePath?.unSelectedIconPath
 
             data.add(PayloadWidgetItem(selectDesc, mainSelectIconPath))
@@ -194,15 +194,6 @@ class PayloadWidgetFragment : DJIFragment() {
                     payloadVM.setWidgetValue(fromJson)
                 }
             }
-        }
-    }
-
-
-    private fun showDialog(title: String, msg: String = "", callback: KeyItemActionListener<String>) {
-        KeyValueDialogUtil.showInputDialog(
-            activity, title, msg, "", true
-        ) {
-            callback.actionChange(it)
         }
     }
 }

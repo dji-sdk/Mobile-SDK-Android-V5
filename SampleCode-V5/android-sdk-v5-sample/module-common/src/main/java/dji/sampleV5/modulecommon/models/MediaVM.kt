@@ -27,12 +27,33 @@ class MediaVM : DJIViewModel() {
                 mediaFileListData.postValue(data)
             }
         }
-        pullMediaFileListFromCamera(-1, -1)
+
+        MediaDataCenter.getInstance().mediaManager.enable(object :CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                pullMediaFileListFromCamera(-1, -1)
+            }
+
+            override fun onFailure(error: IDJIError) {
+                LogUtils.e(logTag , "error is ${error.description()}")
+            }
+
+        })
+
 
     }
 
     fun destroy(){
         removeAllFileListStateListener()
+        MediaDataCenter.getInstance().mediaManager.disable(object :CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                LogUtils.e(logTag , "exit playback success")
+            }
+
+            override fun onFailure(error: IDJIError) {
+                LogUtils.e(logTag , "error is ${error.description()}")
+            }
+
+        })
         MediaDataCenter.getInstance().mediaManager.release()
     }
 

@@ -797,6 +797,7 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
                 getString(R.string.uxsdk_rtk_state_coordinate_fialed)
             RTKServiceState.RTCM_CONNECTING,
             RTKServiceState.READY,
+            RTKServiceState.RTK_START_PROCESSING,
             -> rtkStatusStr = getString(R.string.uxsdk_rtk_state_connecting)
             RTKServiceState.ACCOUNT_ERROR -> rtkStatusStr = getString(R.string.uxsdk_rtk_nrtk_account_error)
             RTKServiceState.CONNECTING -> rtkStatusStr = getString(R.string.uxsdk_rtk_nrtk_connecting)
