@@ -2,13 +2,13 @@ package dji.sampleV5.aircraft
 
 import dji.sampleV5.modulecommon.DJIMainActivity
 import dji.v5.common.utils.GeoidManager
-import dji.v5.utils.common.DJIExecutor
-import dji.v5.utils.common.DiskUtil
+import dji.v5.manager.KeyManager
 import dji.v5.ux.core.communication.DefaultGlobalPreferences
 import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.util.UxSharedPreferencesUtil
 import dji.v5.ux.sample.showcase.defaultlayout.DefaultLayoutActivity
 import dji.v5.ux.sample.showcase.widgetlist.WidgetsActivity
+
 
 /**
  * Class Description
@@ -25,11 +25,14 @@ class DJIAircraftMainActivity : DJIMainActivity() {
         GlobalPreferencesManager.initialize(DefaultGlobalPreferences(this))
         GeoidManager.getInstance().init(this)
 
-        enableDefaultLayout(DefaultLayoutActivity::class.java)
+        enableDefaultLayout(DefaultLayoutActivity::class.java) // important
         enableWidgetList(WidgetsActivity::class.java)
+        val router = TelemetryRouter()
+
     }
 
     override fun prepareTestingToolsActivity() {
         enableTestingTools(AircraftTestingToolsActivity::class.java)
     }
 }
+
