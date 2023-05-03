@@ -1,5 +1,7 @@
 package dji.sampleV5.aircraft
 
+import dji.sampleV5.aircraft.telemetry.PachKeyManager
+import dji.sampleV5.aircraft.telemetry.TelemetryRouter
 import dji.sampleV5.modulecommon.DJIMainActivity
 import dji.v5.common.utils.GeoidManager
 import dji.v5.manager.KeyManager
@@ -27,7 +29,7 @@ class DJIAircraftMainActivity : DJIMainActivity() {
 
         enableDefaultLayout(DefaultLayoutActivity::class.java) // important
         enableWidgetList(WidgetsActivity::class.java)
-        val router = TelemetryRouter()
+        val router = PachKeyManager()
 
     }
 
