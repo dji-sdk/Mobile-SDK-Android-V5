@@ -103,4 +103,6 @@ dependencies {
     implementation project(':sample-module-aircraft')
     compileOnly deps.aircraftProvided
     implementation deps.aircraft
+    implementation deps.retrofit
+    implementation deps.gson
 }

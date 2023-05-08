@@ -38,17 +38,36 @@ import io.reactivex.rxjava3.core.Flowable;
 import dji.v5.common.utils.RxUtil
 import dji.v5.manager.KeyManager
 import io.reactivex.rxjava3.functions.Consumer
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TelemetryRouter {
-
+    val keyManager = KeyManager.getInstance()
+    private val telemService = TuskService()
 
     init {
+        // Setup Retrofit
+        val mockTelem = TuskTelemetry(0.0, 0.0, 0.0, 0, 0, 0.0, 0.0, 0.0)
+        send_telemetry(mockTelem)
 
-        }
 
+        // Setup PachKeyManager
+    }
+
+fun send_telemetry(telemetry: TuskTelemetry) = runBlocking{
+    launch {
+        telemService.postTelemetry(telemetry)
+    }
 }
 
-// DJIKeyManagerListener
+
+
+}
+// PachKeyManager
 // We'll setup all the listeners and convert into Rx.Flowable
 
 // TelemetryService

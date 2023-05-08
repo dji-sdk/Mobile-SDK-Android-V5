@@ -198,14 +198,14 @@ class PachKeyManager {
         keyDisposables?.add(
             RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude), this)
                 .subscribe({ value ->
-                    Log.v("DJIMainActivity", "Aircraft Attitude: $value")
+                    Log.v("PachKeyManager", "Aircraft Attitude: $value")
                 }, { error ->
-                    Log.e("DJIMainActivity", "Aircraft Attitude Error: $error")
+                    Log.e("PachKeyManager", "Aircraft Attitude Error: $error")
                 })
-
-
 //                .doOnNext(batteryDataProcessor)
         )
+
+
     }
 
     // Create functions to act on received actions or key sets
@@ -239,11 +239,11 @@ class PachKeyManager {
             ),
             object : CommonCallbacks.CompletionCallbackWithParam<EmptyMsg> {
                 override fun onSuccess(t: EmptyMsg?) {
-                    Log.v("DJIMainActivity", "Gimbal Rotated")
+                    Log.v("PachKeyManager", "Gimbal Rotated")
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    Log.e("DJIMainActivity", "Gimbal Rotation Error: ,$error")
+                    Log.e("PachKeyManager", "Gimbal Rotation Error: ,$error")
                 }
             }
         )

@@ -29,7 +29,7 @@ class DJIAircraftMainActivity : DJIMainActivity() {
 
         enableDefaultLayout(DefaultLayoutActivity::class.java) // important
         enableWidgetList(WidgetsActivity::class.java)
-        val router = PachKeyManager()
+        val router = TelemetryRouter()
 
     }
 
