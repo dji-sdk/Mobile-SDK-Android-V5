@@ -1,9 +1,7 @@
 package dji.sampleV5.aircraft.telemetry
 
 import android.util.Log
-import dji.sdk.keyvalue.key.FlightControllerKey
-import dji.sdk.keyvalue.key.GimbalKey
-import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.common.EmptyMsg
 import dji.sdk.keyvalue.value.gimbal.GimbalAngleRotation
 import dji.sdk.keyvalue.value.gimbal.GimbalAngleRotationMode
@@ -13,11 +11,14 @@ import dji.v5.common.utils.RxUtil
 import dji.v5.manager.KeyManager
 import dji.v5.ux.core.util.DataProcessor
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.functions.Consumer
 
 class PachKeyManager {
     // Create variables here
     private var keyDisposables: CompositeDisposable? = null
     private var batteryDataProcessor = DataProcessor.create(0)
+    private var gpsDataProcessor = DataProcessor.create(0)
+    private var attitudeDataProcessor = DataProcessor.create(0)
     init {
 
         // Init flowables that are required
@@ -49,47 +50,8 @@ class PachKeyManager {
 ////                                Log.v("DJIMainActivity", "Battery Level: $batteryLevel")
 ////                            }
 ////                        })
-//                    val batPercentKey = KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent)
-//                    KeyManager.getInstance().listen(batPercentKey, this) { oldValue, newValue ->
-//                        run {
-//                            Log.v(
-//                                "DJIMainActivity",
-//                                "Battery Level Changed from $oldValue to $newValue"
-//                            )
-//                        }
-//                    }
 //
 //
-//                    // GPS Signal Level
-//                    KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel)
-//                    object : CommonCallbacks.CompletionCallbackWithParam<GPSSignalLevel> {
-//                        override fun onSuccess(value: GPSSignalLevel?) {
-//                            Log.v("DJIMainActivity", "GPS Signal Level: ,$value")
-//                        }
-//
-//                        override fun onFailure(error: IDJIError) {
-//                            Log.e("DJIMainActivity", "GPS Signal Level Error: ,$error")
-//                        }
-//                    }
-//
-//                    // Pulling aircraft Location
-//                    val aircraftLoc = KeyTools.createKey(FlightControllerKey.KeyAircraftLocation3D)
-//                    KeyManager.getInstance().listen(aircraftLoc, this) { oldValue, newValue ->
-//                        run {
-//                            Log.v(
-//                                "DJIMainActivity",
-//                                "Aircraft Location Changed from $oldValue to $newValue"
-//                            )
-//                        }
-//                    }
-//                    // Get aircraft attitude
-//                    val aircraftAttitude =
-//                        KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude)
-//                    KeyManager.getInstance().listen(aircraftAttitude, this) { oldValue, newValue ->
-//                        run {
-//                            Log.v("DJIMainActivity", "Aircraft Attitude: $newValue")
-//                        }
-//                    }
 //
 //                    // Pulling aircraft flight status
 //                    val aircraftStatus = KeyTools.createKey(FlightControllerKey.KeyIsFlying)
@@ -204,6 +166,15 @@ class PachKeyManager {
                 })
 //                .doOnNext(batteryDataProcessor)
         )
+        keyDisposables?.add(
+            RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this)
+                .subscribe({ value ->
+                    Log.v("PachKeyManager", "Aircraft Location: $value")
+                }, { error ->
+                    Log.e("PachKeyManager", "Aircraft Location Error: $error")
+                })
+        )
+
 
 
     }
@@ -218,6 +189,16 @@ class PachKeyManager {
 
     // land now
 
+    fun <T> registerKey(
+        djiKey: DJIKey<T>,
+        consumer: Consumer<T>,
+    ): CompositeDisposable? {
+        keyDisposables?.add(
+            RxUtil.addListener(djiKey, this)
+            .subscribe(consumer)
+        )
+        return keyDisposables
+    }
 
     // Make a function to rotate the gimbal by a certain angle
     fun rotateGimbal(angle: Double) {

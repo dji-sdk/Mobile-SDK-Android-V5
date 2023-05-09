@@ -2,9 +2,7 @@ package dji.sampleV5.aircraft.telemetry
 
 
 import android.util.Log
-import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
-import dji.sdk.keyvalue.value.common.Attitude
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,49 +14,72 @@ import retrofit2.http.*
 
 class TuskService{
     private val retrofit = RetrofitHelper.buildService(TuskApi::class.java)
-    suspend fun getActions() : Response<TuskTelemetry> {
+    suspend fun getActions() : Response<TuskAircraftState> {
         retrofit.getActions().isSuccessful
         (
-            object : Callback<TuskTelemetry> {
+            object : Callback<TuskAircraftState> {
                 override fun onResponse(
-                    call: Call<TuskTelemetry>,
-                    response: Response<TuskTelemetry>
+                    call: Call<TuskAircraftState>,
+                    response: Response<TuskAircraftState>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("TuskTelemetry", "Success")
+                        Log.d("TuskService", "Get Actions Success")
                     } else {
-                        Log.d("TuskTelemetry", "Failure")
+                        Log.d("TuskService", "Get Actions Failure")
                     }
                 }
 
-                override fun onFailure(call: Call<TuskTelemetry>, t: Throwable) {
-                    Log.d("TuskTelemetry", "Failure")
+                override fun onFailure(call: Call<TuskAircraftState>, t: Throwable) {
+                    Log.d("TuskService", "Get Actions Failure")
                 }
             }
         )
         return retrofit.getActions()
     }
 
-    suspend fun postTelemetry(mockTelem: TuskTelemetry) {
-        retrofit.postTelemetry(mockTelem).enqueue(
-            object : Callback<TuskTelemetry> {
+    suspend fun postState(state: TuskAircraftState) {
+        retrofit.postState(state).enqueue(
+            object : Callback<TuskAircraftState> {
                 override fun onResponse(
-                    call: Call<TuskTelemetry>,
-                    response: Response<TuskTelemetry>
+                    call: Call<TuskAircraftState>,
+                    response: Response<TuskAircraftState>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("TuskTelemetry", "Success")
+                        Log.d("TuskService", "Post State Success")
                     } else {
-                        Log.d("TuskTelemetry", "Failure")
+                        Log.d("TuskService", "Post State Failure")
                     }
                 }
 
-                override fun onFailure(call: Call<TuskTelemetry>, t: Throwable) {
-                    Log.d("TuskTelemetry", "Failure")
+                override fun onFailure(call: Call<TuskAircraftState>, t: Throwable) {
+                    Log.d("TuskService", "Post State Failure")
                 }
             }
         )
     }
+
+    suspend fun postStatus(status: TuskAircraftStatus) {
+        retrofit.postStatus(status).enqueue(
+            object : Callback<TuskAircraftStatus> {
+                override fun onResponse(
+                    call: Call<TuskAircraftStatus>,
+                    response: Response<TuskAircraftStatus>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("TuskService", "Post Status Success")
+                    } else {
+                        Log.d("TuskService", "Post Status Failure")
+                    }
+                }
+
+                override fun onFailure(call: Call<TuskAircraftStatus>, t: Throwable) {
+                    Log.d("TuskService", "Post Status Failure")
+                }
+            }
+        )
+    }
+
+
 }
 
 object RetrofitHelper {
@@ -83,21 +104,60 @@ interface TuskApi {
     // Use hardcoded static IP as host, we'll create a LAN network using hotspot
     // Assume the endpoint we want to have
     @GET("/actions")
-    suspend fun getActions() : Response<TuskTelemetry>
+    suspend fun getActions() : Response<TuskAircraftState>
 
     @Headers("Content-Type: application/json")
-    @POST("/telemetry_store")
-    suspend fun postTelemetry(@Body tuskTelemetry: TuskTelemetry) : Call<TuskTelemetry>
+    @POST("/aircraft_state")
+    suspend fun postState(@Body tuskAircraftState: TuskAircraftState) : Call<TuskAircraftState>
+
+    @Headers("Content-Type: application/json")
+    @POST("/aircraft_status")
+    suspend fun postStatus(@Body tuskAircraftStatus: TuskAircraftStatus) : Call<TuskAircraftStatus>
+
+    @Headers("Content-Type: application/json")
+    @POST("/controller_status")
+    suspend fun postControlStatus(@Body tuskControllerStatus: TuskControllerStatus) : Call<TuskControllerStatus>
 }
 
-// Data class for telemetry creates a structure that enables the storage of all relevant information
-data class TuskTelemetry(
+// Classes for storing all data.
+// Aircraft state is anything related to the physical aircraft's position, velocity, and attitude
+data class TuskAircraftState(
     @SerializedName("latitude") val latitude: Double?,
     @SerializedName("longitude") val longitude: Double?,
     @SerializedName("altitude") val altitude: Double?,
-    @SerializedName("battery") val battery: Int?,
-    @SerializedName("gps") val gps: Int?,
     @SerializedName("roll") val roll: Double?,
     @SerializedName("pitch") val pitch: Double?,
     @SerializedName("yaw") val yaw: Double?,
+    @SerializedName("velocityX") val velocityX: Double?,
+    @SerializedName("velocityY") val velocityY: Double?,
+    @SerializedName("velocityZ") val velocityZ: Double?,
+    @SerializedName("windSpeed") val windSpeed: Int?,
+    @SerializedName("windDirection") val windDirection: String?,
+    @SerializedName("isFlying") val isFlying: Boolean?,
+)
+
+// Aircraft Status is anything related to the aircraft's hardware and connectivity
+data class TuskAircraftStatus(
+    @SerializedName("connected") val connected: Boolean?,
+    @SerializedName("battery") val battery: Int?,
+    @SerializedName("gps") val gps: Int?,
+    @SerializedName("signalQuality") val signalQuality: Int?,
+    @SerializedName("goHomeState") val goHomeState: String?,
+//    https://developer.dji.com/api-reference-v5/android-api/Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_gohomestate_inline
+    @SerializedName("flightMode") val flightMode: String?,
+//    https://developer.dji.com/api-reference-v5/android-api/Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_flightmode_inline
+    @SerializedName("motorsOn") val motorsOn: Boolean?,
+    @SerializedName("homeLocationLat") val homeLocationLat: Double?,
+    @SerializedName("homeLocationLong") val homeLocationLong: Double?,
+    @SerializedName("gimbalAngle") val gimbalAngle: Double?,
+)
+
+data class TuskControllerStatus(
+    @SerializedName("battery") val battery: Int?,
+    @SerializedName("pauseButton") val pauseButton: Boolean?,
+    @SerializedName("homeButton") val homeButton: Boolean?,
+    @SerializedName("leftStickX") val leftStickX: Int?,
+    @SerializedName("leftStickY") val leftStickY: Int?,
+    @SerializedName("rightStickX") val rightStickX: Int?,
+    @SerializedName("rightStickY") val rightStickY: Int?,
 )
