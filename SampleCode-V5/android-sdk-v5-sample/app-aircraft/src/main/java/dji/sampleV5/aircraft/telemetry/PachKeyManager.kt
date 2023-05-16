@@ -33,26 +33,6 @@ class PachKeyManager {
 //            run {
 //                Log.v("DJIMainActivity", "Connection: $newValue")
 //                if (newValue == true) {
-////                    // Use RxUtil.addListener() to get continuous GPS signal level
-////                    gpsFlowable = RxUtil.addListener(
-////                        KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel),
-////                        object : Consumer<GPSSignalLevel> {
-////                            override fun accept(signalLevel: GPSSignalLevel) {
-////                                Log.v("DJIMainActivity", "GPS Signal Level: $signalLevel")
-////                            }
-////                        })
-//
-////                    // Use RxUtil.addListener() to get continuous battery level
-////                    batteryFlowable = RxUtil.addListener(
-////                        KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent),
-////                        object : Consumer<Int> {
-////                            override fun accept(batteryLevel: Int) {
-////                                Log.v("DJIMainActivity", "Battery Level: $batteryLevel")
-////                            }
-////                        })
-//
-//
-//
 //                    // Pulling aircraft flight status
 //                    val aircraftStatus = KeyTools.createKey(FlightControllerKey.KeyIsFlying)
 //
@@ -156,24 +136,24 @@ class PachKeyManager {
 //
 //        }
         keyDisposables = CompositeDisposable()
-
-        keyDisposables?.add(
-            RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude), this)
-                .subscribe({ value ->
-                    Log.v("PachKeyManager", "Aircraft Attitude: $value")
-                }, { error ->
-                    Log.e("PachKeyManager", "Aircraft Attitude Error: $error")
-                })
-//                .doOnNext(batteryDataProcessor)
-        )
-        keyDisposables?.add(
-            RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this)
-                .subscribe({ value ->
-                    Log.v("PachKeyManager", "Aircraft Location: $value")
-                }, { error ->
-                    Log.e("PachKeyManager", "Aircraft Location Error: $error")
-                })
-        )
+//
+//        keyDisposables?.add(
+//            RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude), this)
+//                .subscribe({ value ->
+//                    Log.v("PachKeyManager", "Aircraft Attitude: $value")
+//                }, { error ->
+//                    Log.e("PachKeyManager", "Aircraft Attitude Error: $error")
+//                })
+////                .doOnNext(batteryDataProcessor)
+//        )
+//        keyDisposables?.add(
+//            RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), this)
+//                .subscribe({ value ->
+//                    Log.v("PachKeyManager", "Aircraft Location: $value")
+//                }, { error ->
+//                    Log.e("PachKeyManager", "Aircraft Location Error: $error")
+//                })
+//        )
 
 
 
@@ -195,7 +175,10 @@ class PachKeyManager {
     ): CompositeDisposable? {
         keyDisposables?.add(
             RxUtil.addListener(djiKey, this)
-            .subscribe(consumer)
+                .subscribe(consumer) { error ->
+                    Log.e("PachKeyManager", "Error: $error")
+                }
+
         )
         return keyDisposables
     }

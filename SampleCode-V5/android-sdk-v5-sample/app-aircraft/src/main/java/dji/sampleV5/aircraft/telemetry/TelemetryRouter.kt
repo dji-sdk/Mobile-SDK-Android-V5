@@ -69,7 +69,9 @@ class TelemetryRouter {
             Consumer {
                 stateData = stateData.copy(latitude = it.latitude, longitude = it.longitude, altitude = it.altitude)
                 sendState(stateData)
-                Log.d("PachKeyManager", "KeyAircraftLocation $it") }
+                Log.d("PachKeyManager", "KeyAircraftLocation $it")
+            }
+
         )
 
         pachKeyManager.registerKey(
@@ -113,11 +115,11 @@ class TelemetryRouter {
         )
 
         pachKeyManager.registerKey(
-            KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel),
+            KeyTools.createKey(FlightControllerKey.KeyConnection),
             Consumer {
-                statusData = statusData.copy(gps = it.value())
+                statusData = statusData.copy(connected = it)
                 sendStatus(statusData)
-                Log.d("PachKeyManager", "GPSSignalLevel $it") }
+                Log.d("PachKeyManager", "Connection $it") }
         )
 
         pachKeyManager.registerKey(
@@ -128,6 +130,61 @@ class TelemetryRouter {
                 Log.d("PachKeyManager", "Battery Level $it") }
         )
 
+        pachKeyManager.registerKey(
+            KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel),
+            Consumer {
+                statusData = statusData.copy(gps = it.value())
+                sendStatus(statusData)
+                Log.d("PachKeyManager", "GPSSignalLevel $it") }
+        )
+
+        pachKeyManager.registerKey(
+            KeyTools.createKey(AirLinkKey.KeySignalQuality),
+            Consumer {
+                statusData = statusData.copy(signalQuality = it)
+                sendStatus(statusData)
+                Log.d("PachKeyManager", "SignalQuality $it") }
+        )
+
+        pachKeyManager.registerKey(
+            KeyTools.createKey(FlightControllerKey.KeyGoHomeState),
+            Consumer {
+                statusData = statusData.copy(goHomeState = it.toString())
+                sendStatus(statusData)
+                Log.d("PachKeyManager", "GoHomeState $it") }
+        )
+
+        pachKeyManager.registerKey(
+            KeyTools.createKey(FlightControllerKey.KeyFlightModeString),
+            Consumer {
+                statusData = statusData.copy(flightMode = it)
+                sendStatus(statusData)
+                Log.d("PachKeyManager", "FlightMode $it") }
+        )
+
+        pachKeyManager.registerKey(
+            KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn),
+            Consumer {
+                statusData = statusData.copy(motorsOn = it)
+                sendStatus(statusData)
+                Log.d("PachKeyManager", "MotorsOn $it") }
+        )
+
+        pachKeyManager.registerKey(
+            KeyTools.createKey(FlightControllerKey.KeyHomeLocation),
+            Consumer {
+                statusData = statusData.copy(homeLocationLat = it.latitude, homeLocationLong = it.longitude)
+                sendStatus(statusData)
+                Log.d("PachKeyManager", "HomeLocation $it") }
+        )
+
+        pachKeyManager.registerKey(
+            KeyTools.createKey(GimbalKey.KeyGimbalAttitude),
+            Consumer {
+                statusData = statusData.copy(gimbalAngle = it.pitch)
+                sendStatus(statusData)
+                Log.d("PachKeyManager", "GimbalPitch $it") }
+        )
         // Continue to do this for the other required keys...
     }
 
