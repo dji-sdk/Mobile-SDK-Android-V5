@@ -36,6 +36,12 @@ import java.util.*
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
 class FlySafeFragment : DJIFragment() {
+    companion object {
+        private const val EVENT_TYPE = "Event type :"
+        private const val LIMIT_HEIGHT = "Limit height :"
+        private const val DESCRIPTION = "Description :"
+        private const val COUNT_DOWN = "Count Down :"
+    }
 
     private val flySafeVm: FlySafeVM by viewModels()
     private val notificationBuilder = StringBuilder()
@@ -50,30 +56,30 @@ class FlySafeFragment : DJIFragment() {
         flySafeVm.initListener()
         flySafeVm.flySafeWarningInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Limit height :").append(it.heightLimit).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(LIMIT_HEIGHT).append(it.heightLimit).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flySafeSeriousWarningInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Limit height :").append(it.heightLimit).append("\n")
-                builder.append("Count Down :").append(it.countdown).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(LIMIT_HEIGHT).append(it.heightLimit).append("\n")
+                builder.append(COUNT_DOWN).append(it.countdown).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flySafeReturnToHomeInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flySafeTipInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Limit height :").append(it.heightLimit).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(LIMIT_HEIGHT).append(it.heightLimit).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flyZoneInformation.observe(viewLifecycleOwner) {

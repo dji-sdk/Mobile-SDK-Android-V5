@@ -148,6 +148,8 @@
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RCAuthorityLostPushMsg.html">MultiControlLostControlInfo</a>
                                       </dd>
+                                      <dd><a href="Value_RemoteController_Struct_RcFirmwareInfo.html">RcFirmwareInfo</a>
+                                      </dd>
                                       <dd><a href="Value_RemoteController_Struct_MultiRCFlightControlAuthOwnerMsg.html">MultiControlFlightControlAuthorityOwnerInfo</a>
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RCModeChannelTypeMsg.html">MultiControlChannelInfo</a>
@@ -575,7 +577,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isContinuous</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.camera</font></td></tr></table></html>
 <h5 id="description-v2">Description:</h5>
-<p><font color="#666">Gets whether the zoom ratio range is continuous. If it is not continuous, it means that only the value in the key gear can be set. If continuous, it means that any value between the minimum value and maximum value in the key gear can be set.</font></p>
+<p><font color="#666">Gets whether the zoom ratio range is continuous. If it is not continuous, it means that only the value in the key gear can be set. If continuous, it means that any value between the minimum value and maximum value in the key gear can be set. <br>Take M3T as an example: isContinuous is <code>TRUE</code>, and the key gears are: [1,2,4,7,28,56], which means that any value of [1,56] can be set.</font></p>
 <h5 id="return">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean</font></td><td><font color="#666"><i>Returns whether the zoom ratio range is continuous.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_camera_struct_msdkzoomratiosrange_getgears"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_camera_struct_msdkzoomratiosrange_getgears_inline">getGears</a></div></div><div class="inline-doc" id="value_camera_struct_msdkzoomratiosrange_getgears_inline" <blockquote>

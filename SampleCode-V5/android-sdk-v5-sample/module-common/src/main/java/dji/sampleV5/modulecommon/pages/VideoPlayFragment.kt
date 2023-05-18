@@ -10,8 +10,11 @@ import dji.sampleV5.modulecommon.models.VideoPlayVM
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.video.channel.VideoChannelType
-import dji.v5.common.video.decoder.*
-import dji.v5.common.video.interfaces.*
+import dji.v5.common.video.decoder.DecoderOutputMode
+import dji.v5.common.video.decoder.DecoderState
+import dji.v5.common.video.decoder.VideoDecoder
+import dji.v5.common.video.interfaces.IVideoDecoder
+import dji.v5.common.video.interfaces.IVideoFrame
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.manager.datacenter.media.VideoPlayState
@@ -155,7 +158,7 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     private fun createVideoDecoder():IVideoDecoder{
       return  VideoDecoder(
             this@VideoPlayFragment.context,
-            VideoChannelType.PRIMARY_STREAM_CHANNEL,
+            VideoChannelType.EXTENDED_STREAM_CHANNEL,
             DecoderOutputMode.SURFACE_MODE,
             surfaceView.holder
         )

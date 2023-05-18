@@ -148,6 +148,8 @@
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RCAuthorityLostPushMsg.html">MultiControlLostControlInfo</a>
                                       </dd>
+                                      <dd><a href="Value_RemoteController_Struct_RcFirmwareInfo.html">RcFirmwareInfo</a>
+                                      </dd>
                                       <dd><a href="Value_RemoteController_Struct_MultiRCFlightControlAuthOwnerMsg.html">MultiControlFlightControlAuthorityOwnerInfo</a>
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RCModeChannelTypeMsg.html">MultiControlChannelInfo</a>
@@ -601,10 +603,10 @@
 <h5 id="description-v5">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Integer<br><br> Get the percentage of remaining battery power. If you need to get the total power percentage of all batteries, you can get all the remaining battery power and battery capacity by setting different componentIndex for calculation. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
-<div class="api-row" id="key_battery_batteryhighvoltagestoragesec"><div class="api-col left">Store at High Battery Level</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_battery_batteryhighvoltagestoragesec_inline">KeyBatteryHighVoltageStorageSec</a></div></div><div class="inline-doc" id="key_battery_batteryhighvoltagestoragesec_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyBatteryHighVoltageStorageSec</h6></div>
+<div class="api-row" id="key_battery_batteryhighvoltagestoragesec"><div class="api-col left">Store at High Battery Level</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_battery_batteryhighvoltagestoragesec_inline">KeyBatteryHighVoltageStorageTime</a></div></div><div class="inline-doc" id="key_battery_batteryhighvoltagestoragesec_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyBatteryHighVoltageStorageTime</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Long&gt; KeyBatteryHighVoltageStorageSec = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"BatteryHighVoltageStorageSec"</span>, SingleValueConverter.LongConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Long&gt; KeyBatteryHighVoltageStorageTime = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"BatteryHighVoltageStorageTime"</span>, SingleValueConverter.LongConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"BatteryHighVoltageStorageSec"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
 <h5 id="description-v6">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Long<br><br> Store at High Battery Level means storing battery when it has 90% or higher battery level. If high battery level storage time in total is less than 120 days in 12 months, battery can be charged for up to 400 cycles. Change Time to Battery Self-Discharge to adjust time of battery storage at high level. <br><br><code><i>Supported since MSDK 5.3.0</i></code></font></p>

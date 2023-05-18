@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.3.0
+# DJI Mobile SDK for Android V5 Latest Version 5.4.0
 
 [中文版](README_CN.md)
 
@@ -12,6 +12,8 @@ Supported Product:
 * [Mavic 3 Enterprise Series](https://www.dji.com/cn/mavic-3-enterprise)
 * [M30 Series](https://www.dji.com/matrice-30?site=brandsite&from=nav)
 * [M300 RTK](https://www.dji.com/matrice-300?site=brandsite&from=nav)
+* [Matrice 350 RTK](https://enterprise.dji.com/cn/matrice-350-rtk)
+
 
 
 ## Project Directory Introduction
@@ -82,7 +84,7 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.3.0
+> **Notice:** sdkVersion = 5.4.0
 
 | SDK package | Explanation | How to use|
 | :---------------: | :-----------------:  | :---------------: |

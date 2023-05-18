@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="news_title">MSDK 5.3.0</string>
-    <string name="news_description">"- 新增支持机型：DJI Mini 3，DJI Mini 3 Pro。
-- 支持 FlyZoneManager，限飞区解禁管理类，提供授权区和禁飞区解禁等功能。
-- 支持 PipelineManager，SDK 互联互通管理类。可通过此类建立 MSDK 和 PSDK 设备之间连接的管道，用于 MSDK 和 PSDK 设备之间传输数据。
+    <string name="news_title">MSDK 5.4.0</string>
+    <string name="news_description">"- 新增支持机型：Matrice 350 RTK。
+- Matric 300 RTK新增支持DJI RC Plus遥控器。
 
 更多功能查看发布日志。"</string>
-    <string name="news_date">2023–4–7</string>
+    <string name="news_date">2023–5–18</string>
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/zh-cn/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/cn/</string>

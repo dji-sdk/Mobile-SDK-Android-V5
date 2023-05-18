@@ -146,38 +146,8 @@ class WayPointV3Fragment : DJIFragment() {
 
     private fun initView(savedInstanceState: Bundle?) {
         sp_map_switch.adapter = wayPointV3VM.getMapSpinnerAdapter()
-        wayPointV3VM.addMissionStateListener() {
-            mission_execute_state_tv?.text = "Mission Execute State : ${it.name}"
-            btn_mission_upload.isEnabled = it == WaypointMissionExecuteState.READY
-            curMissionExecuteState = it
-        }
-        wayPointV3VM.addWaylineExecutingInfoListener(object :WaylineExecutingInfoListener {
-            override fun onWaylineExecutingInfoUpdate(it: WaylineExecutingInfo) {
-                wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
-                        "WaypointIndex:${it.currentWaypointIndex} \n" +
-                        "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionFileName}"
-            }
 
-            override fun onWaylineExecutingInterruptReasonUpdate(error: IDJIError?) {
-                if (error != null) {
-                    LogUtils.e(logTag , "interrupt error${error.description()}")
-                }
-            }
-
-        });
-
-
-        wayPointV3VM.addWaypointActionListener(object :WaypointActionListener{
-            override fun onExecutionStart(actionId: Int) {
-               waypint_action_state_tv?.text = "onExecutionStart: ${actionId} "
-            }
-
-            override fun onExecutionFinish(actionId: Int, error: IDJIError?) {
-                waypint_action_state_tv?.text = "onExecutionFinish: ${actionId}  error ${error?.toString()}"
-            }
-
-        })
-
+        addListener()
         btn_mission_upload?.setOnClickListener {
             val waypointFile = File(curMissionPath)
             if (waypointFile.exists()) {
@@ -299,7 +269,43 @@ class WayPointV3Fragment : DJIFragment() {
 
     }
 
+    private fun addListener(){
+        wayPointV3VM.addMissionStateListener() {
+            mission_execute_state_tv?.text = "Mission Execute State : ${it.name}"
+            btn_mission_upload.isEnabled = it == WaypointMissionExecuteState.READY
+            curMissionExecuteState = it
+            if (it == WaypointMissionExecuteState.FINISHED) {
+                ToastUtils.showToast("Mission Finished")
+            }
+            LogUtils.i(logTag , "State is ${it.name}")
+        }
+        wayPointV3VM.addWaylineExecutingInfoListener(object :WaylineExecutingInfoListener {
+            override fun onWaylineExecutingInfoUpdate(it: WaylineExecutingInfo) {
+                wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
+                        "WaypointIndex:${it.currentWaypointIndex} \n" +
+                        "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionFileName}"
+            }
 
+            override fun onWaylineExecutingInterruptReasonUpdate(error: IDJIError?) {
+                if (error != null) {
+                    LogUtils.e(logTag , "interrupt error${error.description()}")
+                }
+            }
+
+        });
+
+
+        wayPointV3VM.addWaypointActionListener(object :WaypointActionListener{
+            override fun onExecutionStart(actionId: Int) {
+                waypint_action_state_tv?.text = "onExecutionStart: ${actionId} "
+            }
+
+            override fun onExecutionFinish(actionId: Int, error: IDJIError?) {
+                waypint_action_state_tv?.text = "onExecutionFinish: ${actionId}  error ${error?.toString()}"
+            }
+
+        })
+    }
 
     private fun showEditDialog() {
         val waypointFile = File(curMissionPath)

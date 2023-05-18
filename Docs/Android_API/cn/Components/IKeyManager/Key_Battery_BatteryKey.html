@@ -148,6 +148,8 @@
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RCAuthorityLostPushMsg.html">MultiControlLostControlInfo</a>
                                       </dd>
+                                      <dd><a href="Value_RemoteController_Struct_RcFirmwareInfo.html">RcFirmwareInfo</a>
+                                      </dd>
                                       <dd><a href="Value_RemoteController_Struct_MultiRCFlightControlAuthOwnerMsg.html">MultiControlFlightControlAuthorityOwnerInfo</a>
                                       </dd>
                                       <dd><a href="Value_RemoteController_Struct_RCModeChannelTypeMsg.html">MultiControlChannelInfo</a>
@@ -602,10 +604,10 @@
 <h5 id="描述：-v5">描述：</h5>
 <p><font color="#666"><b>参数: </b>Integer<br><br> 获取电池剩余电量百分比。如果你需要获取所有电池的总电量百分比，可以通过设置不同的componentIndex获取到所有的电池剩余电量和电池容量进行计算获取。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
-<div class="api-row" id="key_battery_batteryhighvoltagestoragesec"><div class="api-col left">高电压存储</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_battery_batteryhighvoltagestoragesec_inline">KeyBatteryHighVoltageStorageSec</a></div></div><div class="inline-doc" id="key_battery_batteryhighvoltagestoragesec_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyBatteryHighVoltageStorageSec</h6></div>
+<div class="api-row" id="key_battery_batteryhighvoltagestoragesec"><div class="api-col left">高电压存储</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_battery_batteryhighvoltagestoragesec_inline">KeyBatteryHighVoltageStorageTime</a></div></div><div class="inline-doc" id="key_battery_batteryhighvoltagestoragesec_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyBatteryHighVoltageStorageTime</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Long&gt; KeyBatteryHighVoltageStorageSec = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"BatteryHighVoltageStorageSec"</span>, SingleValueConverter.LongConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Long&gt; KeyBatteryHighVoltageStorageTime = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"BatteryHighVoltageStorageTime"</span>, SingleValueConverter.LongConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"BatteryHighVoltageStorageSec"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
 <h5 id="描述：-v6">描述：</h5>
 <p><font color="#666"><b>参数: </b>Long<br><br> 获取高电压存储时间。单位：秒。电池电量90%（含）以上状态存储时间。12个月内，电池高电压存储累计时间少于120天，其循环次数可达400次。可通过修改电池自放电天数调整高电压存储时间。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
