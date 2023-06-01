@@ -1,5 +1,4 @@
 # DJI Mobile SDK for Android V5 最新版本 V5.4.0
-
 [English Version](README.md)
 
 ## DJI Mobile SDK V5 是什么?
@@ -52,7 +51,7 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 
 ### 软件证书
 
-DJI Android SDK 与基于<a href=https://www.gnu.org/licenses/lgpl-3.0.html.en>LGPLv3.0</a>协议的<a href=http://ffmpeg.org>FFmpeg</a>库是动态连接的。[Github](https://github.com/dji-sdk/FFmpeg)中提供了FFmpeg 库的源码、编译的指导与 LGPL v3.0的证书。而Mobile SDK V5的样例代码的实现是基于MIT协议。
+DJI Android SDK 与基于<a href=https://www.gnu.org/licenses/lgpl-2.1.html.en>LGPLv2.1</a>协议的<a href=http://ffmpeg.org>FFmpeg</a>库是动态连接的。[Github](https://github.com/dji-sdk/FFmpeg)中提供了FFmpeg 库的源码、编译的指导与 LGPL v2.1的证书。而Mobile SDK V5的样例代码的实现是基于MIT协议。
 
 ### Sample说明
 
