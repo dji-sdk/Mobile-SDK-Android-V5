@@ -68,7 +68,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyAircraftLocation3D),
             Consumer {
                 stateData = stateData.copy(latitude = it.latitude, longitude = it.longitude, altitude = it.altitude)
-                sendState(stateData)
+//                sendState(stateData)
                 Log.d("PachKeyManager", "KeyAircraftLocation $it")
             }
 
@@ -78,7 +78,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude),
             Consumer {
                 stateData = stateData.copy(roll = it.roll, pitch = it.pitch, yaw = it.yaw)
-                sendState(stateData)
+//                sendState(stateData)
                 Log.d("PachKeyManager", "KeyAircraftAttitude $it") }
         )
 
@@ -86,7 +86,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity),
             Consumer {
                 stateData = stateData.copy(velocityX = it.x, velocityY = it.y, velocityZ = it.z)
-                sendState(stateData)
+//                sendState(stateData)
                 Log.d("PachKeyManager", "AircraftVelocity $it") }
         )
 
@@ -94,7 +94,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyWindSpeed),
             Consumer {
                 stateData = stateData.copy(windSpeed = it)
-                sendState(stateData)
+//                sendState(stateData)
                 Log.d("PachKeyManager", "WindSpeed $it") }
         )
 
@@ -102,7 +102,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyWindDirection),
             Consumer {
                 stateData = stateData.copy(windDirection = it.toString())
-                sendState(stateData)
+//                sendState(stateData)
                 Log.d("PachKeyManager", "WindDirection $it") }
         )
 
@@ -110,7 +110,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyIsFlying),
             Consumer {
                 stateData = stateData.copy(isFlying = it)
-                sendState(stateData)
+//                sendState(stateData)
                 Log.d("PachKeyManager", "IsFlying $it") }
         )
 
@@ -118,7 +118,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyConnection),
             Consumer {
                 statusData = statusData.copy(connected = it)
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "Connection $it") }
         )
 
@@ -126,7 +126,7 @@ class TelemetryRouter {
             KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent),
             Consumer {
                 statusData = statusData.copy(battery = it)
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "Battery Level $it") }
         )
 
@@ -134,7 +134,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel),
             Consumer {
                 statusData = statusData.copy(gps = it.value())
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "GPSSignalLevel $it") }
         )
 
@@ -142,7 +142,7 @@ class TelemetryRouter {
             KeyTools.createKey(AirLinkKey.KeySignalQuality),
             Consumer {
                 statusData = statusData.copy(signalQuality = it)
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "SignalQuality $it") }
         )
 
@@ -150,7 +150,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyGoHomeState),
             Consumer {
                 statusData = statusData.copy(goHomeState = it.toString())
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "GoHomeState $it") }
         )
 
@@ -158,7 +158,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyFlightModeString),
             Consumer {
                 statusData = statusData.copy(flightMode = it)
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "FlightMode $it") }
         )
 
@@ -166,7 +166,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn),
             Consumer {
                 statusData = statusData.copy(motorsOn = it)
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "MotorsOn $it") }
         )
 
@@ -174,7 +174,7 @@ class TelemetryRouter {
             KeyTools.createKey(FlightControllerKey.KeyHomeLocation),
             Consumer {
                 statusData = statusData.copy(homeLocationLat = it.latitude, homeLocationLong = it.longitude)
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "HomeLocation $it") }
         )
 
@@ -182,7 +182,7 @@ class TelemetryRouter {
             KeyTools.createKey(GimbalKey.KeyGimbalAttitude),
             Consumer {
                 statusData = statusData.copy(gimbalAngle = it.pitch)
-                sendStatus(statusData)
+//                sendStatus(statusData)
                 Log.d("PachKeyManager", "GimbalPitch $it") }
         )
         // Continue to do this for the other required keys...
