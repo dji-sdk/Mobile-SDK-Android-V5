@@ -122,22 +122,22 @@ class VirtualStickControl{
     }
 
     fun endVirtualStick(){
-//        virtualStickVM.disableVirtualStick(object : CommonCallbacks.CompletionCallback{
-//            override fun onSuccess() {
-//                ToastUtils.showToast("disableVirtualStick success.")
-//                Log.v("VirtualStickControl", "disableVirtualStick success.")
-//            }
-//
-//            override fun onFailure(error: IDJIError) {
-//                ToastUtils.showToast("disableVirtualStick error: $error")
-//                Log.v("VirtualStickControl", "disableVirtualStick error: $error")
-//            }
-//
-//        }
-//
-//
-//        )
-        virtualStickVM.disableVirtualStickAdvancedMode()
+        virtualStickVM.disableVirtualStick(object : CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                ToastUtils.showToast("disableVirtualStick success.")
+                Log.v("VirtualStickControl", "disableVirtualStick success.")
+            }
+
+            override fun onFailure(error: IDJIError) {
+                ToastUtils.showToast("disableVirtualStick error: $error")
+                Log.v("VirtualStickControl", "disableVirtualStick error: $error")
+            }
+
+        }
+
+
+        )
+//        virtualStickVM.disableVirtualStickAdvancedMode()
 
     }
 

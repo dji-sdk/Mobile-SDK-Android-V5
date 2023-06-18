@@ -2,7 +2,6 @@ package dji.sampleV5.aircraft.telemetry
 
 
 import android.util.Log
-import com.google.gson.annotations.SerializedName
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.*
@@ -11,7 +10,7 @@ import retrofit2.http.*
 import java.lang.reflect.Type
 
 
-class TuskService{
+class TuskServiceRetrofit{
     private val retrofit = RetrofitHelper.buildService(TuskApi::class.java)
     suspend fun getActions() : Response<TuskAircraftState> {
         retrofit.getActions().isSuccessful
@@ -122,46 +121,3 @@ interface TuskApi {
     @POST("/controller_status")
     suspend fun postControlStatus(@Body tuskControllerStatus: TuskControllerStatus) : Call<TuskControllerStatus>
 }
-
-// Classes for storing all data.
-// Aircraft state is anything related to the physical aircraft's position, velocity, and attitude
-data class TuskAircraftState(
-    @SerializedName("latitude") val latitude: Double?,
-    @SerializedName("longitude") val longitude: Double?,
-    @SerializedName("altitude") val altitude: Double?,
-    @SerializedName("roll") val roll: Double?,
-    @SerializedName("pitch") val pitch: Double?,
-    @SerializedName("yaw") val yaw: Double?,
-    @SerializedName("velocityX") val velocityX: Double?,
-    @SerializedName("velocityY") val velocityY: Double?,
-    @SerializedName("velocityZ") val velocityZ: Double?,
-    @SerializedName("windSpeed") val windSpeed: Int?,
-    @SerializedName("windDirection") val windDirection: String?,
-    @SerializedName("isFlying") val isFlying: Boolean?,
-)
-
-// Aircraft Status is anything related to the aircraft's hardware and connectivity
-data class TuskAircraftStatus(
-    @SerializedName("connected") val connected: Boolean?,
-    @SerializedName("battery") val battery: Int?,
-    @SerializedName("gps") val gps: Int?,
-    @SerializedName("signalQuality") val signalQuality: Int?,
-    @SerializedName("goHomeState") val goHomeState: String?,
-//    https://developer.dji.com/api-reference-v5/android-api/Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_gohomestate_inline
-    @SerializedName("flightMode") val flightMode: String?,
-//    https://developer.dji.com/api-reference-v5/android-api/Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_flightmode_inline
-    @SerializedName("motorsOn") val motorsOn: Boolean?,
-    @SerializedName("homeLocationLat") val homeLocationLat: Double?,
-    @SerializedName("homeLocationLong") val homeLocationLong: Double?,
-    @SerializedName("gimbalAngle") val gimbalAngle: Double?,
-)
-
-data class TuskControllerStatus(
-    @SerializedName("battery") val battery: Int?,
-    @SerializedName("pauseButton") val pauseButton: Boolean?,
-    @SerializedName("homeButton") val homeButton: Boolean?,
-    @SerializedName("leftStickX") val leftStickX: Int?,
-    @SerializedName("leftStickY") val leftStickY: Int?,
-    @SerializedName("rightStickX") val rightStickX: Int?,
-    @SerializedName("rightStickY") val rightStickY: Int?,
-)
