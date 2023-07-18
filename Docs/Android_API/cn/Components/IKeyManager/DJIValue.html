@@ -178,6 +178,10 @@
                                       </dd>
                                       <dd><a href="Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a>
                                       </dd>
+                                      <dd><a href="Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a>
+                                      </dd>
+                                      <dd><a href="Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a>
+                                      </dd>
                                       <dd><a href="Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a>
                                       </dd>
                                       <dd><a href="Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a>
@@ -1058,7 +1062,7 @@
 <h5 id="描述：-v45">描述：</h5>
 <p><font color="#666">产品类型。</font></p>
 <h5 id="enum-members-v44">Enum Members:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_wm265_inline"></a>DJI_MAVIC_3_ENTERPRISE_SERIES</font></td><td><font color="#666">M3行业版系列。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_pm320_inline"></a>M30_SERIES</font></td><td><font color="#666">M30系列。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_pm430_inline"></a>M300_RTK</font></td><td><font color="#666">M300 RTK。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_wm163_inline"></a>DJI_MINI_3</font></td><td><font color="#666">DJI Mini 3。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_wm162_inline"></a>DJI_MINI_3_PRO</font></td><td><font color="#666">DJI Mini 3 Pro。</font></td></tr></table></html>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_wm265_inline"></a>DJI_MAVIC_3_ENTERPRISE_SERIES</font></td><td><font color="#666">M3行业版系列。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_pm320_inline"></a>M30_SERIES</font></td><td><font color="#666">M30系列。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_pm430_inline"></a>M300_RTK</font></td><td><font color="#666">M300 RTK。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_pm431_inline"></a>M350_RTK</font></td><td><font color="#666">M350 RTK。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_wm163_inline"></a>DJI_MINI_3</font></td><td><font color="#666">DJI Mini 3。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_product_enum_producttype_wm162_inline"></a>DJI_MINI_3_PRO</font></td><td><font color="#666">DJI Mini 3 Pro。</font></td></tr></table></html>
 <h5 id="class-members-v44">Class Members:</h5>
 </div>
 <html><p><br></p></html>
@@ -1308,7 +1312,29 @@
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_master_inline"></a>MASTER</font></td><td><font color="#666">主设备，通常为飞行器。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_slave_1_inline"></a>SLAVE_1</font></td><td><font color="#666">从设备1，通常为飞行器的左舷侧（主）负载。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_slave_2_inline"></a>SLAVE_2</font></td><td><font color="#666">从设备2，通常为飞行器的右舷侧负载。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_accesslockerv1deviceid_slave_3_inline"></a>SLAVE_3</font></td><td><font color="#666">从设备3，通常为飞行器的上侧负载。</font></td></tr></table></html>
 <h5 id="class-members-v66">Class Members:</h5>
 </div>
-<div class="api-row" id="value_flightcontroller_struct_accesslockerv1devicestate"><div class="api-col left">安全密码状态</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1DeviceState.html">AccessLockerDeviceStatus</a></div></div><html><p><br></p></html>
+<div class="api-row" id="value_flightcontroller_struct_accesslockerv1devicestate"><div class="api-col left">安全密码状态</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1DeviceState.html">AccessLockerDeviceStatus</a></div></div><div class="api-row" id="value_flightcontroller_enum_airsensewarninglevel"><div class="api-col left">警告等级</div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_airsensewarninglevel_inline">AirSenseWarningLevel</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_airsensewarninglevel_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>AirSenseWarningLevel</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AirSenseWarningLevel implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
+<h5 id="描述：-v68">描述：</h5>
+<p><font color="#666">AirSense系统警告等级。警告等级根据飞机与大疆飞行器之间的距离和飞机的航向而定。</font></p>
+<h5 id="enum-members-v67">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensewarninglevel_level_0_inline"></a>LEVEL_0</font></td><td><font color="#666">等级0，表示AirSense系统检测到飞机，但大疆飞行器距离飞机较远或与飞机航向相反。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensewarninglevel_level_1_inline"></a>LEVEL_1</font></td><td><font color="#666">等级1，表示AirSense系统检测到飞机。但是飞机通过大疆飞行器位置的概率很低。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensewarninglevel_level_2_inline"></a>LEVEL_2</font></td><td><font color="#666">等级2，表示AirSense系统检测到飞机。飞机通过DJI飞行器位置的概率是中等的。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensewarninglevel_level_3_inline"></a>LEVEL_3</font></td><td><font color="#666">等级3，表示AirSense系统检测到飞机。飞机通过DJI飞行器位置的概率很高的。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensewarninglevel_level_4_inline"></a>LEVEL_4</font></td><td><font color="#666">等级4，表示AirSense系统检测到飞机。飞机通过DJI飞行器位置的概率非常大。</font></td></tr></table></html>
+<h5 id="class-members-v67">Class Members:</h5>
+</div>
+<div class="api-row" id="value_flightcontroller_enum_airsensedirection"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_airsensedirection_inline">AirSenseDirection</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_airsensedirection_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>AirSenseDirection</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AirSenseDirection implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
+<h5 id="描述：-v69">描述：</h5>
+<p><font color="#666">飞机相对于大疆飞行器的方向。</font></p>
+<h5 id="enum-members-v68">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_north_inline"></a>NORTH</font></td><td><font color="#666">北。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_north_east_inline"></a>NORTH_EAST</font></td><td><font color="#666">东北。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_east_inline"></a>EAST</font></td><td><font color="#666">东。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_south_east_inline"></a>SOUTH_EAST</font></td><td><font color="#666">东南。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_south_inline"></a>SOUTH</font></td><td><font color="#666">南。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_south_west_inline"></a>SOUTH_WEST</font></td><td><font color="#666">西南。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_west_inline"></a>WEST</font></td><td><font color="#666">西。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_airsensedirection_north_west_inline"></a>NORTH_WEST</font></td><td><font color="#666">南北。</font></td></tr></table></html>
+<h5 id="class-members-v68">Class Members:</h5>
+</div>
+<div class="api-row" id="value_flightcontroller_struct_airsenseairplanestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a></div></div><div class="api-row" id="value_flightcontroller_struct_airsensesysteminformation"><div class="api-col left">AirSense</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a></div></div><html><p><br></p></html>
 <h4 id="battery">Battery</h4>
 <div class="api-row" id="value_battery_struct_batteryledscontrolmsg"><div class="api-col left">电池LED</div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a></div></div><html><p><br></p></html>
 <h4 id="accessory">Accessory</h4>
@@ -1317,11 +1343,11 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AudioStorageLocation implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.accessory</font></td></tr></table></html>
-<h5 id="描述：-v68">描述：</h5>
+<h5 id="描述：-v70">描述：</h5>
 <p><font color="#666">keyvalue_value_accessory_AudioStorageLocation</font></p>
-<h5 id="enum-members-v67">Enum Members:</h5>
+<h5 id="enum-members-v69">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_accessory_enum_audiostoragelocation_tmeporary_inline"></a>TMEPORARY</font></td><td><font color="#666">keyvalue_value_accessory_AudioStorageLocation_MEPORARY</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_accessory_enum_audiostoragelocation_permanent_inline"></a>PERMANENT</font></td><td><font color="#666">keyvalue_value_accessory_AudioStorageLocation_PERMANENT</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_accessory_enum_audiostoragelocation_unknown_inline"></a>UNKNOWN</font></td><td><font color="#666">keyvalue_value_accessory_AudioStorageLocation_UNKNOWN</font></td></tr></table></html>
-<h5 id="class-members-v67">Class Members:</h5>
+<h5 id="class-members-v69">Class Members:</h5>
 </div>
 <div class="api-row" id="value_accessory_struct_playingaudiofileinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a></div></div><html><p><br></p></html>
 <h4 id="air-link">Air Link</h4>
@@ -1330,66 +1356,66 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> Bandwidth implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v69">描述：</h5>
+<h5 id="描述：-v71">描述：</h5>
 <p><font color="#666">下行信道带宽设置。设置较小的带宽将会降低数据速率，但会使连接更加健壮。</font></p>
-<h5 id="enum-members-v68">Enum Members:</h5>
+<h5 id="enum-members-v70">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkbandwidth_bandwidth_10mhz_inline"></a>BANDWIDTH_10MHZ</font></td><td><font color="#666">10MHz（速率高达23Mbps）。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkbandwidth_bandwidth_20mhz_inline"></a>BANDWIDTH_20MHZ</font></td><td><font color="#666">20MHz（速率高达46Mbps）。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkbandwidth_bandwidth_40mhz_inline"></a>BANDWIDTH_40MHZ</font></td><td><font color="#666">40MHz（速率高达80Mbps）。</font></td></tr></table></html>
-<h5 id="class-members-v68">Class Members:</h5>
+<h5 id="class-members-v70">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_enum_airlinktype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_airlinktype_inline">AirLinkType</a></div></div><div class="inline-doc" id="value_airlink_enum_airlinktype_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>AirLinkType</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> AirLinkType implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v70">描述：</h5>
+<h5 id="描述：-v72">描述：</h5>
 <p><font color="#666">图传类型。</font></p>
-<h5 id="enum-members-v69">Enum Members:</h5>
+<h5 id="enum-members-v71">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinktype_wifi_inline"></a>WIFI</font></td><td><font color="#666">WiFi类型。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinktype_light_bridge_inline"></a>LIGHT_BRIDGE</font></td><td><font color="#666">Light bridge类型。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinktype_ocu_sync_inline"></a>OCU_SYNC</font></td><td><font color="#666">OcuSync类型。</font></td></tr></table></html>
-<h5 id="class-members-v69">Class Members:</h5>
+<h5 id="class-members-v71">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_enum_channelselectionmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_channelselectionmode_inline">ChannelSelectionMode</a></div></div><div class="inline-doc" id="value_airlink_enum_channelselectionmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>ChannelSelectionMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> ChannelSelectionMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v71">描述：</h5>
+<h5 id="描述：-v73">描述：</h5>
 <p><font color="#666">图传信道模式，支持自动选择和自定义模式。</font></p>
-<h5 id="enum-members-v70">Enum Members:</h5>
+<h5 id="enum-members-v72">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_channelselectionmode_auto_inline"></a>AUTO</font></td><td><font color="#666">自动选择模式，图传系统将根据信号环境自动选择最佳信道。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_channelselectionmode_manual_inline"></a>MANUAL</font></td><td><font color="#666">自定义模式，手动选择信道通道。</font></td></tr></table></html>
-<h5 id="class-members-v70">Class Members:</h5>
+<h5 id="class-members-v72">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_enum_airlinkfrequencyband"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_airlinkfrequencyband_inline">FrequencyBand</a></div></div><div class="inline-doc" id="value_airlink_enum_airlinkfrequencyband_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>FrequencyBand</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FrequencyBand implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v72">描述：</h5>
+<h5 id="描述：-v74">描述：</h5>
 <p><font color="#666">图传工作频段类型。</font></p>
-<h5 id="enum-members-v71">Enum Members:</h5>
+<h5 id="enum-members-v73">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkfrequencyband_band_dual_inline"></a>BAND_DUAL</font></td><td><font color="#666">双频段模式。频段可以是2.4GHz或5.8GHz。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkfrequencyband_band_2_dot_4g_inline"></a>BAND_2_DOT_4G</font></td><td><font color="#666">2.4GHz。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_airlinkfrequencyband_band_5_dot_8g_inline"></a>BAND_5_DOT_8G</font></td><td><font color="#666">5.8GHz。</font></td></tr></table></html>
-<h5 id="class-members-v71">Class Members:</h5>
+<h5 id="class-members-v73">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_struct_wlmlinkqualitymsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmLinkQualityMsg.html">WlmLinkQualityLevelInfo</a></div></div><div class="api-row" id="value_airlink_struct_wlmdonglestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmDongleState.html">WlmDongleInfo</a></div></div><div class="api-row" id="value_airlink_enum_wlmdongleworkstate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_wlmdongleworkstate_inline">WlmDongleWorkState</a></div></div><div class="inline-doc" id="value_airlink_enum_wlmdongleworkstate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>WlmDongleWorkState</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WlmDongleWorkState implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v73">描述：</h5>
+<h5 id="描述：-v75">描述：</h5>
 <p><font color="#666">TLE Dongle工作状态。</font></p>
-<h5 id="enum-members-v72">Enum Members:</h5>
+<h5 id="enum-members-v74">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_not_register_no_search_inline"></a>NOT_REGISTER_NO_SEARCH</font></td><td><font color="#666">Sim卡未注册，未搜网。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_not_register_searching_inline"></a>NOT_REGISTER_SEARCHING</font></td><td><font color="#666">Sim卡未注册，搜网中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_register_home_network_inline"></a>REGISTER_HOME_NETWORK</font></td><td><font color="#666">Sim卡已注册，归属地网络使用中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_register_roaming_inline"></a>REGISTER_ROAMING</font></td><td><font color="#666">Sim卡已注册，漫游中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmdongleworkstate_register_denied_inline"></a>REGISTER_DENIED</font></td><td><font color="#666">Sim卡注册被拒绝。</font></td></tr></table></html>
-<h5 id="class-members-v72">Class Members:</h5>
+<h5 id="class-members-v74">Class Members:</h5>
 </div>
 <div class="api-row" id="value_airlink_struct_wlmdongleinfomsg"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmDongleInfoMsg.html">WlmDongleListInfo</a></div></div><div class="api-row" id="value_airlink_enum_wlmlinkquality"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_airlink_enum_wlmlinkquality_inline">WlmLinkQualityLevel</a></div></div><div class="inline-doc" id="value_airlink_enum_wlmlinkquality_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>WlmLinkQualityLevel</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WlmLinkQualityLevel implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.airlink</font></td></tr></table></html>
-<h5 id="描述：-v74">描述：</h5>
+<h5 id="描述：-v76">描述：</h5>
 <p><font color="#666">无线链路管理信号质量等级。</font></p>
-<h5 id="enum-members-v73">Enum Members:</h5>
+<h5 id="enum-members-v75">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_no_signal_inline"></a>NO_SIGNAL</font></td><td><font color="#666">没有信号。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_1_inline"></a>LEVEL_1</font></td><td><font color="#666">等级一，信号弱。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_2_inline"></a>LEVEL_2</font></td><td><font color="#666">等级二，信号较弱。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_3_inline"></a>LEVEL_3</font></td><td><font color="#666">等级三，信号一般。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_4_inline"></a>LEVEL_4</font></td><td><font color="#666">等级四，信号较强。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_airlink_enum_wlmlinkquality_level_5_inline"></a>LEVEL_5</font></td><td><font color="#666">等级五，信号强。</font></td></tr></table></html>
-<h5 id="class-members-v73">Class Members:</h5>
+<h5 id="class-members-v75">Class Members:</h5>
 </div>
 
         </div>

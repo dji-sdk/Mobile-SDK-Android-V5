@@ -206,16 +206,14 @@ class CompassWidgetModel(
         // Do nothing
     }
 
-    override fun onLocationChanged(location: Location?) {
-        if (location != null) {
-            // Update the center type to be the RC/Mobile device type
-            centerTypeProcessor.onNext(CenterType.RC_MOBILE_GPS)
-            // Update location using received location of the mobile device
-            rcOrMobileLatitude = location.latitude
-            rcOrMobileLongitude = location.longitude
-            updateCalculations()
-            updateStates()
-        }
+    override fun onLocationChanged(location: Location) {
+        // Update the center type to be the RC/Mobile device type
+        centerTypeProcessor.onNext(CenterType.RC_MOBILE_GPS)
+        // Update location using received location of the mobile device
+        rcOrMobileLatitude = location.latitude
+        rcOrMobileLongitude = location.longitude
+        updateCalculations()
+        updateStates()
     }
 
     override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {

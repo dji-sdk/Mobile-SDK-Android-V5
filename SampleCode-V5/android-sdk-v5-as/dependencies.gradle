@@ -1,22 +1,23 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.4.0"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.4.0"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.4.0"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.5.0"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.5.0"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.5.0"
 
 
     //三方依赖库
     deps.gson = 'com.google.code.gson:gson:2.9.1'
     deps.okio = 'com.squareup.okio:okio:1.17.2'
     deps.rx3Android = 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    deps.rx3Kt = 'io.reactivex.rxjava3:rxkotlin:3.0.0'
     deps.sqlcipher = 'net.zetetic:android-database-sqlcipher:4.5.0'
     deps.wire = 'com.squareup.wire:wire-runtime:2.2.0'
     deps.websocket = 'org.java-websocket:Java-WebSocket:1.5.1'
     deps.amap3DMap = 'com.amap.api:3dmap:7.3.0'
     deps.amapSearch = 'com.amap.api:search:7.3.0'
     deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
-    deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+    deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.11'
     deps.bugly = 'com.tencent.bugly:crashreport:4.0.4'
     deps.rx2Java = 'io.reactivex.rxjava2:rxjava:2.2.4' // 目前在CSDK升级模块中使用rxjava2
     deps.maplibreAnotation = 'org.maplibre.gl:android-plugin-annotation-v9:1.0.0'
@@ -44,7 +45,7 @@ ext {
     deps.aacRuntime = 'androidx.arch.core:core-runtime:2.1.0'
     deps.annotation = 'androidx.annotation:annotation:1.1.0'
     deps.appcompat = 'androidx.appcompat:appcompat:1.3.1'
-    deps.constraintLayout = 'androidx.constraintlayout:constraintlayout:1.1.3'
+    deps.constraintLayout = 'androidx.constraintlayout:constraintlayout:2.1.4'
     deps.multidex = 'androidx.multidex:multidex:2.0.1'
     deps.recyclerview = 'androidx.recyclerview:recyclerview:1.1.0'
     deps.lifecycleJava8 = 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
@@ -60,8 +61,8 @@ ext {
     deps.dynamicanimation = 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     deps.ktxCore = "androidx.core:core-ktx:1.3.2"
     deps.ktxFrag = "androidx.fragment:fragment-ktx:1.3.3"
-    deps.ktxNavigation = "androidx.navigation:navigation-fragment-ktx:2.2.1"
-    deps.ktxNavigationUi = "androidx.navigation:navigation-ui-ktx:2.2.1"
+    deps.ktxNavigation = "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    deps.ktxNavigationUi = "androidx.navigation:navigation-ui-ktx:2.5.3"
     deps.documentfile = 'androidx.documentfile:documentfile:1.0.1'
 
     //kotlin
@@ -77,10 +78,10 @@ ext {
 
     //测试
     deps.junit4 = "junit:junit:4.12"
-    deps.jnitCore = 'androidx.test:core:1.0.0'
-    deps.testRunner = 'androidx.test:runner:1.4.0'
-    deps.junitExt = 'androidx.test.ext:junit:1.1.2'
-    deps.espressoCore = 'androidx.test.espresso:espresso-core:3.3.0'
+    deps.jnitCore = 'androidx.test:core:1.5.0'
+    deps.testRunner = 'androidx.test:runner:1.5.0'
+    deps.junitExt = 'androidx.test.ext:junit:1.1.5'
+    deps.espressoCore = 'androidx.test.espresso:espresso-core:3.5.1'
 
     //aspectJ
     deps.aspectj_tools = 'org.aspectj:aspectjtools:1.9.6'

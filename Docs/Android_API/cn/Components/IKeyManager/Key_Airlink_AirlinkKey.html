@@ -178,6 +178,10 @@
                                       </dd>
                                       <dd><a href="Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a>
                                       </dd>
+                                      <dd><a href="Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a>
+                                      </dd>
+                                      <dd><a href="Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a>
+                                      </dd>
                                       <dd><a href="Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a>
                                       </dd>
                                       <dd><a href="Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a>
@@ -600,10 +604,10 @@
 获取图传信号质量，单位：百分比。如果获取到的信号质量小于40%，则表示当前信号质量差；如果获取到的信号质量在40%和60%之间，则表示当前信号质量普通；如果获取到的信号质量大于60%，则表示当前的信号质量好。
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
-<div class="api-row" id="key_airlink_dynamicdatarate"><div class="api-col left">图传码率</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_airlink_dynamicdatarate_inline">KeyVideoDataRate</a></div></div><div class="inline-doc" id="key_airlink_dynamicdatarate_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyVideoDataRate</h6></div>
+<div class="api-row" id="key_airlink_dynamicdatarate"><div class="api-col left">图传码率</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_airlink_dynamicdatarate_inline">KeyDynamicDataRate</a></div></div><div class="inline-doc" id="key_airlink_dynamicdatarate_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyDynamicDataRate</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyVideoDataRate = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"VideoDataRate"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"DynamicDataRate"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyDynamicDataRate = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"DynamicDataRate"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
 <h5 id="描述：-v5">描述：</h5>
 <p><font color="#666"><b>参数: </b>Double<br><br>

@@ -178,6 +178,10 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a>
@@ -576,7 +580,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context, @NonNull SDKManagerCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="description-v2">Description:</h5>
-<p><font color="#666">MSDK is initialized, and the MSDK internal module initialization operation is performed. After the initialization is completed, <code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_registerapp">registerApp</a></code> needs to be called to perform the MSDK registration operation. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">MSDK is initialized, and the MSDK internal module initialization operation is performed. After the initialization is completed, <code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_registerapp">registerApp</a></code> needs to be called to perform the MSDK registration operation. <br><b>Note: <br> MSDK will always hold a strong reference to the <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a></code> object, please do not let <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a></code> to hold objects with a short life cycle in the program, such as Activity and Fragment, otherwise there will be memory leaks.</b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Context <font color="#000">context</font></font></td><td><font color="#666"><i>Context instance applied.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>return callback of the execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="isdkmanager_isregistered"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#isdkmanager_isregistered_inline">isRegistered</a></div></div><div class="inline-doc" id="isdkmanager_isregistered_inline" <blockquote>

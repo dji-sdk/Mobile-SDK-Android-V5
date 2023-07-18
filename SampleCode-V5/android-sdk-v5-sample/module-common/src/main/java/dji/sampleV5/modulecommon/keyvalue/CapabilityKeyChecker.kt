@@ -147,9 +147,9 @@ object CapabilityKeyChecker {
         productType: String,
         componentTypeName: String,
     ) {
-        checkOneType(productType ,componentTypeName ,KeyCheckType.SET)
-//            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.SET))
-//            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.ACTION))
+        checkOneType(productType ,componentTypeName ,KeyCheckType.GET)
+            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.SET))
+            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.ACTION))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : CompletableObserver{
                override fun onSubscribe(d: Disposable) {
@@ -158,7 +158,7 @@ object CapabilityKeyChecker {
                }
 
                override fun onComplete() {
-                   LogUtils.e(TAG , "check finish")
+                   LogUtils.e(TAG , "-check finish-")
                }
 
                override fun onError(e: Throwable) {

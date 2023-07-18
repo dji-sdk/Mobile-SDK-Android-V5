@@ -12,6 +12,7 @@ import dji.v5.manager.aircraft.perception.data.ObstacleData
 import dji.v5.manager.aircraft.perception.data.PerceptionDirection
 import dji.v5.manager.aircraft.perception.data.PerceptionInfo
 import dji.v5.manager.aircraft.perception.radar.RadarInformation
+import dji.v5.manager.aircraft.virtualstick.VirtualStickManager
 import dji.v5.utils.common.LogUtils
 
 /**
@@ -56,7 +57,9 @@ class PerceptionVM : DJIViewModel() {
         }
     }
 
-
+    override fun onCleared() {
+        KeyManager.getInstance().cancelListen(this)
+    }
 
     fun setObstacleAvoidanceEnabled(isEnabled: Boolean, direction: PerceptionDirection, callback: CommonCallbacks.CompletionCallback) {
         perceptionManager.setObstacleAvoidanceEnabled(isEnabled, direction, callback)

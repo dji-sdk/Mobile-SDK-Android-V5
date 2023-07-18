@@ -109,11 +109,37 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_select" />
 
 
+            <Button
+                android:id="@+id/btn_enable_playback"
+                style="@style/main_fragment_btn"
+                android:text="enable"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_delete" />
+
+            <Button
+                android:id="@+id/btn_disable_playback"
+                style="@style/main_fragment_btn"
+                android:text="disable"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_enable_playback" />
+
+
+            <Button
+                android:id="@+id/btn_take_photo"
+                style="@style/main_fragment_btn"
+                android:text="@string/take_photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_disable_playback" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/group_layout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -128,8 +154,13 @@
             android:layout_height="match_parent"
             android:dividerHeight="1dp" />
 
+        <TextView
+            android:id="@+id/tv_playback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NA"/>
 
-    </LinearLayout>
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/fetch_progress"

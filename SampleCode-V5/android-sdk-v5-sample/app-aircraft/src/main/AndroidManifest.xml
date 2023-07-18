@@ -3,9 +3,16 @@
     package="dji.sampleV5.aircraft">
 
     <!-- Sample permission requirement -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
 
     <uses-feature
         android:name="android.hardware.usb.host"
@@ -32,6 +39,7 @@
             android:theme="@style/full_screen_theme"
             android:screenOrientation="landscape"
             android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true">
 
             <intent-filter>
@@ -48,16 +56,19 @@
         <activity android:name="dji.v5.ux.sample.showcase.defaultlayout.DefaultLayoutActivity"
             android:theme="@style/full_screen_theme"
             android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false"/>
 
         <activity android:name="dji.v5.ux.sample.showcase.widgetlist.WidgetsActivity"
             android:theme="@style/full_screen_theme"
             android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false"/>
 
         <activity android:name="dji.sampleV5.aircraft.AircraftTestingToolsActivity"
             android:theme="@style/full_screen_theme"
             android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="false"/>
     </application>
 

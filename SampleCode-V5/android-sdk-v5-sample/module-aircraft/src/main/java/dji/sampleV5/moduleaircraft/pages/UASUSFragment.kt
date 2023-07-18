@@ -32,4 +32,9 @@ class UASUSFragment : DJIFragment() {
             tv_ua_rid_status.text = "RemoteIdStatus:${it}"
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        uas.clearRemoteIdStatusListener()
+    }
 }

@@ -25,6 +25,7 @@ package dji.v5.ux.cameracore.widget.focusexposureswitch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
 import dji.sdk.keyvalue.value.camera.CameraFocusMode;
@@ -59,7 +60,6 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
     private final DataProcessor<CameraFocusMode> focusModeDataProcessor;
     private final DataProcessor<CameraMeteringMode> meteringModeDataProcessor;
     private final DataProcessor<ControlMode> controlModeDataProcessor;
-    private final ObservableInMemoryKeyedStore keyedStore;
     private final GlobalPreferencesInterface preferencesManager;
     private UXKey controlModeKey;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
@@ -79,14 +79,13 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
             controlModeDataProcessor.onNext(preferencesManager.getControlMode());
         }
         this.preferencesManager = preferencesManager;
-        this.keyedStore = keyedStore;
     }
 
 
     @Override
     protected void inSetup() {
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyCameraFocusMode,cameraIndex, lensType), focusModeDataProcessor);
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode,cameraIndex, lensType), meteringModeDataProcessor);
+        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyCameraFocusMode, cameraIndex, lensType), focusModeDataProcessor);
+        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode, cameraIndex, lensType), meteringModeDataProcessor);
 
         controlModeKey = UXKeys.create(GlobalPreferenceKeys.CONTROL_MODE);
         bindDataProcessor(controlModeKey, controlModeDataProcessor);
@@ -183,16 +182,26 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
     }
 
     private Completable setMeteringMode() {
-        return djiSdkModel.setValue(KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode,cameraIndex, lensType), CameraMeteringMode.REGION)
+        if (djiSdkModel.getCacheValue(KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode, cameraIndex, lensType)) == CameraMeteringMode.REGION) {
+            return Completable.fromAction(() -> {
+                preferencesManager.setControlMode(ControlMode.SPOT_METER);
+                addDisposable(uxKeyManager.setValue(controlModeKey, ControlMode.SPOT_METER)
+                        .subscribe(() -> {
+                            //do nothing
+                        }, RxUtil.logErrorConsumer(tag, "setMeteringMode: ")));
+            });
+        }
+        return djiSdkModel.setValue(KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode, cameraIndex, lensType), CameraMeteringMode.REGION)
                 .doOnComplete(
                         () -> {
                             preferencesManager.setControlMode(ControlMode.SPOT_METER);
-                            addDisposable(keyedStore.setValue(controlModeKey, ControlMode.SPOT_METER)
+                            addDisposable(uxKeyManager.setValue(controlModeKey, ControlMode.SPOT_METER)
                                     .subscribe(() -> {
                                         //do nothing
                                     }, RxUtil.logErrorConsumer(tag, "setMeteringMode: ")));
                         }).doOnError(
                         error -> {
+                            // 对焦模式为MF时 + 测光模式为REGION时，继续设置测光模式为REGION会返回失败（已反馈固件）
                             setFocusMode();
                         }
                 );
@@ -205,13 +214,13 @@ public class FocusExposureSwitchWidgetModel extends WidgetModel implements ICame
         LogUtils.d(tag, "In setFocusMode ControlModeKey Value Type " + controlModeKey.getValueType());
         if (focusModeDataProcessor.getValue() == CameraFocusMode.MANUAL) {
             preferencesManager.setControlMode(ControlMode.MANUAL_FOCUS);
-            return keyedStore.setValue(controlModeKey, ControlMode.MANUAL_FOCUS);
+            return uxKeyManager.setValue(controlModeKey, ControlMode.MANUAL_FOCUS);
         } else if (focusModeDataProcessor.getValue() == CameraFocusMode.AFC) {
             preferencesManager.setControlMode(ControlMode.AUTO_FOCUS_CONTINUE);
-            return keyedStore.setValue(controlModeKey, ControlMode.AUTO_FOCUS_CONTINUE);
+            return uxKeyManager.setValue(controlModeKey, ControlMode.AUTO_FOCUS_CONTINUE);
         } else {
             preferencesManager.setControlMode(ControlMode.AUTO_FOCUS);
-            return keyedStore.setValue(controlModeKey, ControlMode.AUTO_FOCUS);
+            return uxKeyManager.setValue(controlModeKey, ControlMode.AUTO_FOCUS);
         }
     }
     //endregion

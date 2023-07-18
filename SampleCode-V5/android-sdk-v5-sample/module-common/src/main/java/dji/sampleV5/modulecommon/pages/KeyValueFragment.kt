@@ -179,7 +179,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
 
     private fun initViewAndListener(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
-        tv_operate_title.setOnClickListener {
+        tv_operate_title_lyt.setOnClickListener {
             channelTypeFilterOperate()
         }
         ll_filter_container.setOnClickListener {
@@ -614,7 +614,10 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                         CapabilityManager.getInstance().componentIndex
                     )
                 )
-                CapabilityKeyChecker.check( msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
+                    cameraType?.name?.let {
+                        CapabilityKeyChecker.check( msdkInfoVm.msdkInfo.value?.productType?.name!! ,
+                            it)
+                    }
                // CapabilityKeyChecker.generateAllEnumList(msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
 
             }

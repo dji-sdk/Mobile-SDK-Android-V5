@@ -93,6 +93,7 @@ class WayPointV3Fragment : DJIFragment() {
     private var mDisposable : Disposable ?= null
     private val OPEN_FILE_CHOOSER = 0
     private val OPEN_DOCUMENT_TREE = 1
+    private val OPEN_MANAGE_EXTERNAL_STORAGE  = 2
 
 
     var curMissionPath: String = DiskUtil.getExternalCacheDirPath(
@@ -229,12 +230,12 @@ class WayPointV3Fragment : DJIFragment() {
         }
 
         kmz_btn.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "*/*"
-            intent.addCategory(Intent.CATEGORY_OPENABLE)
-            startActivityForResult(
-                Intent.createChooser(intent, "Select KMZ File"), OPEN_FILE_CHOOSER
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                var intent = Intent("android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION")
+                startActivityForResult(intent , OPEN_MANAGE_EXTERNAL_STORAGE)
+            } else {
+                showFileChooser()
+            }
         }
 
         map_locate.setOnClickListener {
@@ -389,12 +390,19 @@ class WayPointV3Fragment : DJIFragment() {
             grantUriPermission(  data)
         }
 
+
+        if (requestCode == OPEN_MANAGE_EXTERNAL_STORAGE
+             && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager()) {
+            showFileChooser()
+        }
+
+
     }
 
     fun showPermisssionDucument() {
         val canWrite: Boolean =
             DocumentsUtils.checkWritableRootPath(context, curMissionPath)
-        if (!canWrite && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (!canWrite && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             val storageManager =
                 requireActivity().getSystemService(Context.STORAGE_SERVICE) as StorageManager
             val volume: StorageVolume? =
@@ -405,6 +413,15 @@ class WayPointV3Fragment : DJIFragment() {
                 return
             }
         }
+    }
+
+    fun showFileChooser(){
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(
+            Intent.createChooser(intent, "Select KMZ File"), OPEN_FILE_CHOOSER
+        )
     }
     fun grantUriPermission(data: Intent?) {
 

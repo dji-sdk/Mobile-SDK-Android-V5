@@ -31,6 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.common.video.channel.VideoChannelState;
@@ -99,6 +101,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected SettingWidget settingWidget;
     protected MapWidget mapWidget;
     protected TopBarPanelWidget topBarPanel;
+    protected ConstraintLayout fpvParentView;
 //    private SettingPanelWidget mSettingPanelWidget;
 //    private DrawerLayout mDrawerLayout;
 
@@ -115,7 +118,8 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.uxsdk_activity_default_layout);
-
+        fpvParentView = findViewById(R.id.fpv_holder);
+        fpvParentView.setLayerType(View.LAYER_TYPE_NONE , null);
 //        mDrawerLayout = findViewById(R.id.root_view);
         topBarPanel = findViewById(R.id.panel_top_bar);
 //        settingWidget = topBarPanel.getSettingWidget();

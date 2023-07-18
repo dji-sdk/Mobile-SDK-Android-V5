@@ -178,6 +178,10 @@
                                       </dd>
                                       <dd><a href="Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a>
                                       </dd>
+                                      <dd><a href="Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a>
+                                      </dd>
+                                      <dd><a href="Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a>
+                                      </dd>
                                       <dd><a href="Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a>
                                       </dd>
                                       <dd><a href="Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a>
@@ -598,10 +602,10 @@ get the tpye of airlink.
 <h5 id="description-v4">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Integer<br><br> Get the signal quality of the airlink. Unit: percentage. If the signal quality is below 40%, that means the signal quality is bad. If the signal quality is between 40% and 60%, that means the signal quality is normal. If the signal quality is above 60%, then means the signal quality is good. <br><br><code><i>MSDK 5.0.0 start support</i></code></font></p>
 </div>
-<div class="api-row" id="key_airlink_dynamicdatarate"><div class="api-col left">Airlink Data Rate</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_airlink_dynamicdatarate_inline">KeyVideoDataRate</a></div></div><div class="inline-doc" id="key_airlink_dynamicdatarate_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyVideoDataRate</h6></div>
+<div class="api-row" id="key_airlink_dynamicdatarate"><div class="api-col left">Airlink Data Rate</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_airlink_dynamicdatarate_inline">KeyDynamicDataRate</a></div></div><div class="inline-doc" id="key_airlink_dynamicdatarate_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyDynamicDataRate</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyVideoDataRate = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"VideoDataRate"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"DynamicDataRate"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Double&gt; KeyDynamicDataRate = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"DynamicDataRate"</span>, SingleValueConverter.DoubleConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
 <h5 id="description-v5">Description:</h5>
 <p><font color="#666"><b>Parameter: </b>Double<br><br>

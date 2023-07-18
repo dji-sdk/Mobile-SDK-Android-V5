@@ -1,9 +1,18 @@
 package dji.sampleV5.modulecommon.models
 
 import androidx.lifecycle.MutableLiveData
+import dji.sdk.keyvalue.key.CameraKey
+import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.key.KeyTools.createKey
+
+import dji.sdk.keyvalue.value.camera.CameraMode
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
+import dji.v5.common.error.RxError
+import dji.v5.common.utils.CallbackUtils
+import dji.v5.common.utils.RxUtil
+import dji.v5.manager.KeyManager
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.*
 import dji.v5.utils.common.LogUtils
@@ -18,6 +27,7 @@ class MediaVM : DJIViewModel() {
     val TAG: String = LogUtils.getTag(this)
     var mediaFileListData = MutableLiveData<MediaFileListData>()
     var fileListState = MutableLiveData<MediaFileListState>()
+    var isPlayBack = MutableLiveData<Boolean?>()
     fun init(){
         addMediaFileListStateListener()
         mediaFileListData.value = MediaDataCenter.getInstance().mediaManager.mediaFileListData
@@ -28,32 +38,12 @@ class MediaVM : DJIViewModel() {
             }
         }
 
-        MediaDataCenter.getInstance().mediaManager.enable(object :CommonCallbacks.CompletionCallback{
-            override fun onSuccess() {
-                pullMediaFileListFromCamera(-1, -1)
-            }
-
-            override fun onFailure(error: IDJIError) {
-                LogUtils.e(logTag , "error is ${error.description()}")
-            }
-
-        })
-
-
     }
 
     fun destroy(){
+        KeyManager.getInstance().cancelListen(this);
         removeAllFileListStateListener()
-        MediaDataCenter.getInstance().mediaManager.disable(object :CommonCallbacks.CompletionCallback{
-            override fun onSuccess() {
-                LogUtils.e(logTag , "exit playback success")
-            }
 
-            override fun onFailure(error: IDJIError) {
-                LogUtils.e(logTag , "error is ${error.description()}")
-            }
-
-        })
         MediaDataCenter.getInstance().mediaManager.release()
     }
 
@@ -88,7 +78,49 @@ class MediaVM : DJIViewModel() {
     }
 
      fun  setComponentIndex(index: ComponentIndexType) {
+         KeyManager.getInstance().cancelListen(this)
+         KeyManager.getInstance().listen(KeyTools.createKey(CameraKey.KeyIsPlayingBack , index), this) { _, newValue ->
+             isPlayBack.postValue(newValue)
+         }
         val mediaSource = MediaFileListDataSource.Builder().setIndexType(index).build()
         MediaDataCenter.getInstance().mediaManager.setMediaFileDataSource(mediaSource)
+    }
+
+
+    fun enable(){
+        MediaDataCenter.getInstance().mediaManager.enable(object :CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                LogUtils.e(logTag , "enable playback success")
+            }
+
+            override fun onFailure(error: IDJIError) {
+                LogUtils.e(logTag , "error is ${error.description()}")
+            }
+
+        })
+    }
+
+    fun disable(){
+        MediaDataCenter.getInstance().mediaManager.disable(object :CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                LogUtils.e(logTag , "exit playback success")
+            }
+
+            override fun onFailure(error: IDJIError) {
+                LogUtils.e(logTag , "error is ${error.description()}")
+            }
+
+        })
+    }
+
+    fun takePhoto(callback: CommonCallbacks.CompletionCallback){
+        RxUtil.setValue(createKey<CameraMode>(CameraKey.KeyCameraMode), CameraMode.PHOTO_NORMAL)
+            .andThen(RxUtil.performActionWithOutResult(createKey(CameraKey.KeyStartShootPhoto)))
+            .subscribe({ CallbackUtils.onSuccess(callback) }
+            ) { throwable: Throwable ->
+                CallbackUtils.onFailure(callback,
+                    (throwable as RxError).djiError)
+            }
+
     }
 }

@@ -308,7 +308,7 @@ open class FPVWidget @JvmOverloads constructor(
             .subscribe { delayCalculator() })
     }
 
-    override fun surfaceCreated(holder: SurfaceHolder?) {
+    override fun surfaceCreated(holder: SurfaceHolder) {
         LogUtils.i(logTag, "surfaceCreated", videoChannelType, videoDecoder == null)
         if (videoDecoder == null) {
             videoDecoder = VideoDecoder(
@@ -325,7 +325,7 @@ open class FPVWidget @JvmOverloads constructor(
         }
     }
 
-    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         if (videoDecoder == null) {
             videoDecoder = VideoDecoder(
                 context,
@@ -342,7 +342,7 @@ open class FPVWidget @JvmOverloads constructor(
         LogUtils.i(logTag, "surfaceChanged", videoChannelType, videoDecoder?.videoWidth, videoDecoder?.videoHeight)
     }
 
-    override fun surfaceDestroyed(holder: SurfaceHolder?) {
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
         videoDecoder?.onPause()
     }
 

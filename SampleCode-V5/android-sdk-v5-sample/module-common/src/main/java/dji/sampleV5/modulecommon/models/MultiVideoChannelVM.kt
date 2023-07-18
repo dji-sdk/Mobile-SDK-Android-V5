@@ -14,28 +14,30 @@ import dji.v5.et.create
 import dji.v5.et.listen
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.video.StreamSourceListener
+import java.util.concurrent.CopyOnWriteArrayList
 
 class MultiVideoChannelVM : DJIViewModel() {
-    val videoStreamSources = MutableLiveData<MutableList<StreamSource>>()
-    val availableVideoStreamSources = MutableLiveData<MutableList<StreamSource>>()
+    val videoStreamSources = MutableLiveData<CopyOnWriteArrayList<StreamSource>>()
+    val availableVideoStreamSources = MutableLiveData<CopyOnWriteArrayList<StreamSource>>()
     val handler = Handler(Looper.getMainLooper())
     val DELAY_TIME = 4000L
     var primaryChannel = MediaDataCenter.getInstance().videoStreamManager.getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL)
     var secondaryChannel = MediaDataCenter.getInstance().videoStreamManager.getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL)
+    var curPrimarySource: StreamSource? = null
+    var curSecondarySource:StreamSource? = null
     val primaryChannelStateListener = object : VideoChannelStateChangeListener {
         override fun onUpdate(from: VideoChannelState?, to: VideoChannelState?) {
             if (VideoChannelState.ON == to) {
                 primaryChannel?.let { it ->
                     it.streamSource?.let {
                         removeStreamSource(it)
+                        curPrimarySource = it
                     }
                 }
             }
             if (VideoChannelState.CLOSE == to) {
-                primaryChannel?.let { it ->
-                    it.streamSource?.let {
-                        addStreamSource(it)
-                    }
+                primaryChannel?.let { _ ->
+                    curPrimarySource?.let { it1 -> addStreamSource(it1) }
                 }
             }
         }
@@ -46,33 +48,36 @@ class MultiVideoChannelVM : DJIViewModel() {
                 secondaryChannel?.let { it ->
                     it.streamSource?.let {
                         removeStreamSource(it)
+                        curSecondarySource = it
                     }
                 }
             }
             if (VideoChannelState.CLOSE == to) {
-                secondaryChannel?.let { it ->
-                    it.streamSource?.let {
-                        addStreamSource(it)
-                    }
+                //在这里close的时候streamSource会被清空，在vm中可以先暂存
+                secondaryChannel?.let { _ ->
+                    curSecondarySource?.let { it1 -> addStreamSource(it1) }
                 }
             }
         }
     }
     private val streamSourcesListener = StreamSourceListener {
         it?.let {
-            availableVideoStreamSources.value = it.toMutableList()
-            videoStreamSources.value = it.toMutableList()
+            availableVideoStreamSources.value = CopyOnWriteArrayList(it.toMutableList())
+            videoStreamSources.value = CopyOnWriteArrayList(it.toMutableList())
             handler.postDelayed({
-                for (i in 0 until (getAllVideoChannels()?.size ?: 0)) {
-                    if (getAllVideoChannels()?.get(i)?.videoChannelStatus == VideoChannelState.ON) {
-                        /**
-                         * 更换相机时重新组织videoStreamSources，去除掉channel已经开启的部分
-                         */
-                        val iterator = videoStreamSources.value!!.iterator()
-                        while (iterator.hasNext()) {
-                            val streamSource = iterator.next()
-                            if (streamSource.streamId == getAllVideoChannels()?.get(i)?.streamSource?.streamId) {
-                                iterator.remove()
+                val allChannels = getAllVideoChannels()
+                allChannels?.let {
+                    it.forEach {
+                        if (it.videoChannelStatus == VideoChannelState.ON){
+                            /**
+                             * 更换相机时重新组织videoStreamSources，去除掉channel已经开启的部分
+                             */
+                            videoStreamSources.value!!.forEach { v ->
+                                run {
+                                    if (v.streamId == it?.streamSource?.streamId) {
+                                        videoStreamSources.value!!.remove(v)
+                                    }
+                                }
                             }
                         }
                     }
@@ -121,12 +126,9 @@ class MultiVideoChannelVM : DJIViewModel() {
     }
 
     fun removeStreamSource(source:StreamSource){
-        val iterator = videoStreamSources.value!!.iterator()
-        while (iterator.hasNext()) {
-            val streamSource = iterator.next()
-            if (streamSource.streamId == source.streamId) {
-                iterator.remove()
-            }
+        val targetSource = videoStreamSources.value!!.find { it.streamId == source.streamId}
+        targetSource?.let {
+            videoStreamSources.value!!.remove(it)
         }
         videoStreamSources.postValue(videoStreamSources.value)
     }

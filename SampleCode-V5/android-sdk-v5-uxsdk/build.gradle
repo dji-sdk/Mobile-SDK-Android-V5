@@ -21,6 +21,7 @@ android {
 
     kotlinOptions{
         jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
     }
 }
 
@@ -40,6 +41,7 @@ dependencies {
     implementation deps.kotlinLib
     implementation deps.ktxCore
     implementation deps.rx3Android
+    implementation deps.rx3Kt
     implementation deps.lottie
     implementation deps.cardview
     implementation deps.mikepenzCommunityMaterial

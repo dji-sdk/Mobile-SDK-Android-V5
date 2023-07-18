@@ -69,8 +69,8 @@ class OnScreenJoystick(context: Context?, attrs: AttributeSet) : SurfaceView(con
         mThread?.start()
     }
 
-    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
-        //暂时实现
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+        //暂无实现
     }
 
     override fun surfaceDestroyed(arg0: SurfaceHolder) {

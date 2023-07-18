@@ -178,6 +178,10 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a>
@@ -576,7 +580,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context, @NonNull SDKManagerCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v2">描述：</h5>
-<p><font color="#666">MSDK初始化，进行MSDK内部模块初始化操作，初始化完成以后，需要调用<code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_registerapp">registerApp</a></code>进行MSDK注册操作。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">MSDK初始化，进行MSDK内部模块初始化操作，初始化完成以后， 需要调用<code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_registerapp">registerApp</a></code>进行MSDK注册操作。 <br><b>注意：<br> MSDK会一直持有<code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a></code>对象的强引用，请勿让<code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a></code>去持有程序中短生命周期的对象，比如Activity和Fragment，否则会存在内存泄露问题。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="输入参数：">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Context <font color="#000">context</font></font></td><td><font color="#666"><i>应用的Context实例。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="isdkmanager_isregistered"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#isdkmanager_isregistered_inline">isRegistered</a></div></div><div class="inline-doc" id="isdkmanager_isregistered_inline" <blockquote>

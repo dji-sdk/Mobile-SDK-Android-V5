@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.models.LiveStreamVM
 import dji.v5.common.callback.CommonCallbacks
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.frag_live_stream_page.*
  * Copyright : ©2022 DJI All Rights Reserved.
  */
 class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callback{
-    private val liveStreamVM:LiveStreamVM by activityViewModels()
+    private val liveStreamVM:LiveStreamVM by viewModels()
     private var videoDecoder: IVideoDecoder? = null
     private lateinit var surfaceView: SurfaceView
     private lateinit var dialog: AlertDialog
@@ -66,6 +67,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.setLayerType(View.LAYER_TYPE_NONE , null)
         initView(view)
         initListener()
         initLiveStreamInfo()
@@ -131,6 +133,18 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         tv_live_stream_info.text = liveStreamInfo
     }
 
+    private fun clearLiveStreamInfo() {
+        fps = -1
+        vbps = -1
+        isStreaming = false
+        resolution_w = -1
+        resolution_h = -1
+        packet_loss = -1
+        packet_cache_len = -1
+        rtt = -1
+        tv_live_stream_info.text = getString(R.string.n_a)
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_set_live_stream_config -> {
@@ -160,20 +174,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
             }
 
             R.id.btn_stop_live_stream -> {
-                liveStreamVM.stopStream(object:CommonCallbacks.CompletionCallback{
-                    override fun onSuccess() {
-                        ToastUtils.showToast(StringUtils.getResStr(R.string.msg_stop_live_stream_success))
-                    }
-
-                    override fun onFailure(error: IDJIError) {
-                        ToastUtils.showToast(
-                            StringUtils.getResStr(
-                                R.string.msg_stop_live_stream_failed,
-                                error.description()
-                            )
-                        )
-                    }
-                })
+                stopStream()
             }
 
             R.id.btn_set_live_stream_channel_type -> {
@@ -217,6 +218,24 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                 liveStreamVM.setLiveAudioEnabled(false)
             }
         }
+    }
+
+    private fun stopStream() {
+        liveStreamVM.stopStream(object:CommonCallbacks.CompletionCallback{
+            override fun onSuccess() {
+                ToastUtils.showToast(StringUtils.getResStr(R.string.msg_stop_live_stream_success))
+                clearLiveStreamInfo()
+            }
+
+            override fun onFailure(error: IDJIError) {
+                ToastUtils.showToast(
+                    StringUtils.getResStr(
+                        R.string.msg_stop_live_stream_failed,
+                        error.description()
+                    )
+                )
+            }
+        })
     }
 
     private fun showSetLiveStreamRtmpConfigDialog(){
@@ -725,7 +744,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         }
     }
 
-    override fun surfaceCreated(holder: SurfaceHolder?) {
+    override fun surfaceCreated(holder: SurfaceHolder) {
         //重新创建的时候销毁openGL
 //        videoDecoder?.let {
 //            it.destory()
@@ -759,7 +778,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         curHeight = surfaceView.height
     }
 
-    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         if (videoDecoder == null) {
             videoDecoder = VideoDecoder(
                 this@LiveStreamFragment.context,
@@ -777,7 +796,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         curHeight = height
     }
 
-    override fun surfaceDestroyed(holder: SurfaceHolder?) {
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
         videoDecoder?.let {
             videoDecoder?.onPause()
         }
@@ -787,6 +806,9 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
         super.onDestroyView()
         videoDecoder?.let {
             it.destroy()
+        }
+        if (isStreaming) {
+            stopStream()
         }
     }
 }

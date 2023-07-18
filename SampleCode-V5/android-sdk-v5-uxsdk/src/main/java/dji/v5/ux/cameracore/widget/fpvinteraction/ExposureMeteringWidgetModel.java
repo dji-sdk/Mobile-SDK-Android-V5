@@ -27,6 +27,7 @@ import io.reactivex.rxjava3.core.Completable;
 public class ExposureMeteringWidgetModel extends WidgetModel implements ICameraIndex {
 
     public final DataProcessor<List<CameraExposureCompensation>> compensationRangeProcessor = DataProcessor.create(new ArrayList<>());
+    public final DataProcessor<CameraExposureCompensation> exposureCompensationProcessor = DataProcessor.create(CameraExposureCompensation.NEG_0EV);
 
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.CAMERA_LENS_ZOOM;
@@ -46,6 +47,7 @@ public class ExposureMeteringWidgetModel extends WidgetModel implements ICameraI
     @Override
     protected void inSetup() {
         bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyExposureCompensationRange, cameraIndex, lensType), compensationRangeProcessor);
+        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyExposureCompensation, cameraIndex, lensType), exposureCompensationProcessor);
     }
 
     @Override

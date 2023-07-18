@@ -5,6 +5,7 @@ import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.v5.manager.aircraft.uas.AreaStrategy
 import dji.v5.manager.aircraft.uas.UASRemoteIDManager
 import dji.v5.manager.aircraft.uas.UASRemoteIDStatus
+import dji.v5.manager.aircraft.uas.UASRemoteIDStatusListener
 import dji.v5.utils.common.ToastUtils
 
 /**
@@ -18,6 +19,10 @@ import dji.v5.utils.common.ToastUtils
 class UASUAVM : DJIViewModel() {
     val uasRemoteIDStatus = MutableLiveData<UASRemoteIDStatus>()
 
+    private val uasRemoteIDStatusListener = UASRemoteIDStatusListener {
+        uasRemoteIDStatus.postValue(it)
+    }
+
     init {
         val error = UASRemoteIDManager.getInstance().setUASRemoteIDAreaStrategy(AreaStrategy.US_STRATEGY)
         error?.apply {
@@ -26,8 +31,10 @@ class UASUAVM : DJIViewModel() {
     }
 
     fun addRemoteIdStatusListener() {
-        UASRemoteIDManager.getInstance().addUASRemoteIDStatusListener {
-            uasRemoteIDStatus.postValue(it)
-        }
+        UASRemoteIDManager.getInstance().addUASRemoteIDStatusListener(uasRemoteIDStatusListener)
+    }
+
+    fun clearRemoteIdStatusListener() {
+        UASRemoteIDManager.getInstance().clearUASRemoteIDStatusListener()
     }
 }

@@ -31,10 +31,9 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
-import dji.v5.utils.common.ContextUtil;
+import dji.v5.network.DJINetworkManager;
+import dji.v5.network.IDJINetworkStatusListener;
 import dji.v5.utils.common.LogUtils;
-import dji.v5.utils.common.NetworkUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.accessory.RTKEnabledWidget;
 import dji.v5.ux.accessory.RTKKeepStatusWidget;
@@ -79,7 +78,6 @@ import dji.v5.ux.core.widget.hsi.SpeedDisplayWidget;
 import dji.v5.ux.core.widget.perception.PerceptionStateWidget;
 import dji.v5.ux.core.widget.remainingflighttime.RemainingFlightTimeWidget;
 import dji.v5.ux.core.widget.remotecontrollersignal.RemoteControllerSignalWidget;
-import dji.v5.ux.core.widget.setting.SettingWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
 import dji.v5.ux.core.widget.useraccount.UserAccountLoginWidget;
@@ -106,6 +104,12 @@ import dji.v5.ux.warning.DeviceHealthAndStatusWidget;
 public class WidgetsActivity extends AppCompatActivity implements WidgetListFragment.OnWidgetItemSelectedListener {
     public static final String TAG = LogUtils.getTag("WidgetsActivity");
     protected ArrayList<WidgetListItem> widgetListItems;
+    private final IDJINetworkStatusListener networkStatusListener = isNetworkAvailable -> {
+        if (isNetworkAvailable) {
+            LogUtils.d(TAG, "isNetworkAvailable=" + true);
+            RTKStartServiceHelper.INSTANCE.startRtkService();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,12 +130,13 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
 
 
         //实现RTK监测网络，并自动重连机制
-        NetworkUtils.registerNetworkCallback(this, isNetworkAvailable -> {
-            if (isNetworkAvailable) {
-                LogUtils.d(TAG, "isNetworkAvailable=" + true);
-                RTKStartServiceHelper.INSTANCE.startRtkService();
-            }
-        });
+        DJINetworkManager.getInstance().addNetworkStatusListener(networkStatusListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DJINetworkManager.getInstance().removeNetworkStatusListener(networkStatusListener);
     }
 
     private void populateList() {

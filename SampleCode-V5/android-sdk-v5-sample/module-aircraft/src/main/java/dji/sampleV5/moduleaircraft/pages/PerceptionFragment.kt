@@ -91,7 +91,7 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
         }
 
         bt_set_obstacle_avoidance_braking_distance.setOnClickListener {
-            val distance = doubleArrayOf(2.0, 3.5, 5.6, 8.9, 10.0, 20.0)
+            val distance = doubleArrayOf(1.8, 2.0, 3.5, 5.6, 8.9, 10.0, 20.0)
             val direction = PerceptionDirection.values()
 
             initPopupNumberPicker(Helper.makeList(distance)) {

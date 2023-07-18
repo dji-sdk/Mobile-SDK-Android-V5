@@ -81,6 +81,10 @@ class MediaFragment : DJIFragment(){
             tv_get_list_state?.setText("State:\n ${it.name}")
         }
 
+        mediaVM.isPlayBack.observe(viewLifecycleOwner){
+            tv_playback.setText("isPlayingBack : ${it}")
+        }
+
     }
 
 
@@ -148,6 +152,27 @@ class MediaFragment : DJIFragment(){
             }
         }
 
+        btn_enable_playback.setOnClickListener {
+            mediaVM.enable()
+        }
+
+        btn_disable_playback.setOnClickListener {
+            mediaVM.disable()
+        }
+
+        btn_take_photo.setOnClickListener {
+            mediaVM.takePhoto(object :CommonCallbacks.CompletionCallback{
+                override fun onSuccess() {
+                   ToastUtils.showToast("take photo success")
+                }
+
+                override fun onFailure(error: IDJIError) {
+                    ToastUtils.showToast("take photo failed")
+                }
+
+            })
+        }
+
     }
     private fun updateDeleteBtn(enable: Boolean) {
         btn_delete.isEnabled = enable
@@ -179,8 +204,8 @@ class MediaFragment : DJIFragment(){
 
     override fun onDestroy() {
         super.onDestroy()
-
         mediaVM.destroy()
+        adapter = null
     }
 
 
