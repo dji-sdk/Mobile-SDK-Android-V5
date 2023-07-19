@@ -5,7 +5,6 @@ import dji.sampleV5.aircraft.telemetry.Coordinate
 import dji.sampleV5.aircraft.telemetry.TuskAircraftState
 import dji.sampleV5.aircraft.telemetry.TuskAircraftStatus
 import dji.sampleV5.aircraft.telemetry.TuskControllerStatus
-import dji.sampleV5.aircraft.telemetry.TuskServiceRetrofit
 import dji.sampleV5.aircraft.telemetry.TuskServiceWebsocket
 import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
@@ -38,14 +37,14 @@ class PachKeyManager {
         leftStickX = 0,leftStickY=0,rightStickX=0,rightStickY=0, fiveDUp = false, fiveDDown = false,
         fiveDRight = false, fiveDLeft = false, fiveDPress = false)
 
-    var backyard_coordinates_single_alt = listOf(
+    var backyardCoordinatesSingleAlt = listOf(
         Coordinate(40.010457220936324, -105.24444971137794, 200.0),
         Coordinate(40.011165499597105, -105.24412041426442, 200.0),
         Coordinate(40.01110330957, -105.24382269358645, 200.0),
         Coordinate(40.01045031086439, -105.24401215219972, 200.0)
     )
 
-    var backyard_coordinates_increasing_alt = listOf(
+    var backyardCoordinatesIncreasingAlt = listOf(
         Coordinate(40.010457220936324, -105.24444971137794, 200.0),
         Coordinate(40.011165499597105, -105.24412041426442, 250.0),
         Coordinate(40.01110330957, -105.24382269358645, 300.0),
@@ -89,6 +88,9 @@ class PachKeyManager {
                 if (fiveDDown){
                     controller.startLanding()
                     controller.endVirtualStick()
+                }
+                if (fiveDPress){
+                    followWaypoints(backyardCoordinatesSingleAlt)
                 }
             }
         }
@@ -514,9 +516,8 @@ class PachKeyManager {
             // What if the operator takes control of the aircraft?
     }
 
-    fun followWaypoints(wpList: Triple<Double, Double, Double>){
+    fun followWaypoints(wpList: List<Coordinate>){
         // When called, this function will make the aircraft follow a list of waypoints
-
     }
 }
 
