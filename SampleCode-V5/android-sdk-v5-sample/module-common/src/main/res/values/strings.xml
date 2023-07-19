@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="news_title">MSDK 5.4.0</string>
-    <string name="news_description">"- Added supported aircraft: Matrice 350 RTK.
-- Matrice 300 RTK added support for DJI RC Plus remote controller.
+    <string name="news_title">MSDK 5.5.0</string>
+    <string name="news_description">"- Adapted to Android 13.
+- Added several functional keys.
 
 More refer to the release notes." </string>
-    <string name="news_date">2023–5–18</string>
+    <string name="news_date">2023–7–18</string>
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/en-us/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/en/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/en-us/requests/new</string>
