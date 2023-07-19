@@ -50,3 +50,5 @@ data class TuskControllerStatus(
     @SerializedName("fiveDRight") val fiveDRight: Boolean?,
     @SerializedName("fiveDPress") val fiveDPress: Boolean?,
 )
+
+data class Coordinate(val x: Double, val y: Double, val z: Double)

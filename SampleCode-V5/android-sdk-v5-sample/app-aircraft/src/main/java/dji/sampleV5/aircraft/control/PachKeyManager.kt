@@ -1,10 +1,12 @@
 package dji.sampleV5.aircraft.control
 
 import android.util.Log
+import dji.sampleV5.aircraft.telemetry.Coordinate
 import dji.sampleV5.aircraft.telemetry.TuskAircraftState
 import dji.sampleV5.aircraft.telemetry.TuskAircraftStatus
 import dji.sampleV5.aircraft.telemetry.TuskControllerStatus
 import dji.sampleV5.aircraft.telemetry.TuskServiceRetrofit
+import dji.sampleV5.aircraft.telemetry.TuskServiceWebsocket
 import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.camera.ThermalAreaMetersureTemperature
@@ -25,7 +27,7 @@ import kotlinx.coroutines.runBlocking
 
 class PachKeyManager {
     // Initialize necessary classes
-    private val telemService = TuskServiceRetrofit()
+    private val telemService = TuskServiceWebsocket()
     private var controller = VirtualStickControl()
     var stateData = TuskAircraftState( 0.0, 0.0, 0.0, 0.0, 0.0,
         0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
@@ -36,6 +38,19 @@ class PachKeyManager {
         leftStickX = 0,leftStickY=0,rightStickX=0,rightStickY=0, fiveDUp = false, fiveDDown = false,
         fiveDRight = false, fiveDLeft = false, fiveDPress = false)
 
+    var backyard_coordinates_single_alt = listOf(
+        Coordinate(40.010457220936324, -105.24444971137794, 200.0),
+        Coordinate(40.011165499597105, -105.24412041426442, 200.0),
+        Coordinate(40.01110330957, -105.24382269358645, 200.0),
+        Coordinate(40.01045031086439, -105.24401215219972, 200.0)
+    )
+
+    var backyard_coordinates_increasing_alt = listOf(
+        Coordinate(40.010457220936324, -105.24444971137794, 200.0),
+        Coordinate(40.011165499597105, -105.24412041426442, 250.0),
+        Coordinate(40.01110330957, -105.24382269358645, 300.0),
+        Coordinate(40.01045031086439, -105.24401215219972, 350.0)
+    )
     // Create variables here
     private var keyDisposables: CompositeDisposable? = null
 
@@ -48,8 +63,11 @@ class PachKeyManager {
     var fiveDPress = false
 
     init {
+        telemService.connectWebSocket()
         initializeFlightParameters()
+        keyDisposables = CompositeDisposable()
         registerKeys()
+
 
         KeyManager.getInstance().listen(fiveDKey, this) { _, newValue ->
             run {
@@ -94,9 +112,16 @@ class PachKeyManager {
         }
     }
 
+    fun sendControllerStatus(status: TuskControllerStatus) = runBlocking {
+        launch {
+            telemService.postControllerStatus(status)
+        }
+    }
+
     // Holder function that registers all necessary keys and handles their operation during changes
     private fun registerKeys(){
         // Setup PachKeyManager and define the keys that we want to listen to
+        Log.v("PachKeyManager", "Registering Keys")
         registerKey(
             KeyTools.createKey(FlightControllerKey.KeyAircraftLocation3D)
         ) {
@@ -105,15 +130,15 @@ class PachKeyManager {
                 longitude = it.longitude,
                 altitude = it.altitude
             )
-//                sendState(stateData)
-            Log.d("PachKeyManager", "KeyAircraftLocation $it")
+            sendState(stateData)
+            Log.v("PachKeyManager", "KeyAircraftLocation $it")
         }
 
         registerKey(
             KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude)
         ) {
             stateData = stateData.copy(roll = it.roll, pitch = it.pitch, yaw = it.yaw)
-//                sendState(stateData)
+            sendState(stateData)
             Log.d("PachKeyManager", "KeyAircraftAttitude $it")
         }
 
@@ -121,7 +146,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity)
         ) {
             stateData = stateData.copy(velocityX = it.x, velocityY = it.y, velocityZ = it.z)
-//                sendState(stateData)
+            sendState(stateData)
             Log.d("PachKeyManager", "AircraftVelocity $it")
         }
 
@@ -129,7 +154,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyWindSpeed)
         ) {
             stateData = stateData.copy(windSpeed = it)
-//                sendState(stateData)
+            sendState(stateData)
             Log.d("PachKeyManager", "WindSpeed $it")
         }
 
@@ -137,7 +162,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyWindDirection)
         ) {
             stateData = stateData.copy(windDirection = it.toString())
-//                sendState(stateData)
+            sendState(stateData)
             Log.d("PachKeyManager", "WindDirection $it")
         }
 
@@ -145,7 +170,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyIsFlying)
         ) {
             stateData = stateData.copy(isFlying = it)
-//                sendState(stateData)
+            sendState(stateData)
             Log.d("PachKeyManager", "IsFlying $it")
         }
 
@@ -153,7 +178,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyConnection)
         ) {
             statusData = statusData.copy(connected = it)
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "Connection $it")
         }
 
@@ -161,7 +186,7 @@ class PachKeyManager {
             KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent)
         ) {
             statusData = statusData.copy(battery = it)
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "Battery Level $it")
         }
 
@@ -169,7 +194,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel)
         ) {
             statusData = statusData.copy(gps = it.value())
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "GPSSignalLevel $it")
         }
 
@@ -177,7 +202,7 @@ class PachKeyManager {
             KeyTools.createKey(AirLinkKey.KeySignalQuality)
         ) {
             statusData = statusData.copy(signalQuality = it)
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "SignalQuality $it")
         }
 
@@ -185,7 +210,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyGoHomeState)
         ) {
             statusData = statusData.copy(goHomeState = it.toString())
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "GoHomeState $it")
         }
 
@@ -193,7 +218,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyFlightModeString)
         ) {
             statusData = statusData.copy(flightMode = it)
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "FlightMode $it")
         }
 
@@ -201,7 +226,7 @@ class PachKeyManager {
             KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn)
         ) {
             statusData = statusData.copy(motorsOn = it)
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "MotorsOn $it")
         }
 
@@ -210,7 +235,7 @@ class PachKeyManager {
         ) {
             statusData =
                 statusData.copy(homeLocationLat = it.latitude, homeLocationLong = it.longitude)
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "HomeLocation $it")
         }
 
@@ -218,7 +243,7 @@ class PachKeyManager {
             KeyTools.createKey(GimbalKey.KeyGimbalAttitude)
         ) {
             statusData = statusData.copy(gimbalAngle = it.pitch)
-//                sendStatus(statusData)
+            sendStatus(statusData)
             Log.d("PachKeyManager", "GimbalPitch $it")
         }
 
@@ -227,6 +252,7 @@ class PachKeyManager {
             KeyTools.createKey(RemoteControllerKey.KeyBatteryInfo)
         ) {
             controllerStatus = controllerStatus.copy(battery = it.batteryPercent)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "ControllerBattery $it")
         }
 
@@ -234,6 +260,7 @@ class PachKeyManager {
             KeyTools.createKey(RemoteControllerKey.KeyPauseButtonDown)
         ){
             controllerStatus = controllerStatus.copy(pauseButton = it)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "PauseButton $it")
         }
 
@@ -241,6 +268,7 @@ class PachKeyManager {
             KeyTools.createKey(RemoteControllerKey.KeyGoHomeButtonDown)
         ){
             controllerStatus = controllerStatus.copy(goHomeButton = it)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "GoHomeButton $it")
         }
 
@@ -248,6 +276,7 @@ class PachKeyManager {
             KeyTools.createKey(RemoteControllerKey.KeyStickLeftHorizontal)
         ){
             controllerStatus = controllerStatus.copy(leftStickX = it)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "StickLeftHorizontal $it")
         }
 
@@ -255,6 +284,7 @@ class PachKeyManager {
             KeyTools.createKey(RemoteControllerKey.KeyStickLeftVertical)
         ){
             controllerStatus = controllerStatus.copy(leftStickY = it)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "StickLeftVertical $it")
         }
 
@@ -262,6 +292,7 @@ class PachKeyManager {
             KeyTools.createKey(RemoteControllerKey.KeyStickRightHorizontal)
         ){
             controllerStatus = controllerStatus.copy(rightStickX = it)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "StickRightHorizontal $it")
         }
 
@@ -269,6 +300,7 @@ class PachKeyManager {
             KeyTools.createKey(RemoteControllerKey.KeyStickLeftVertical)
         ){
             controllerStatus = controllerStatus.copy(rightStickY = it)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "StickRightVertical $it")
         }
 
@@ -281,6 +313,7 @@ class PachKeyManager {
                 fiveDLeft = it.leftwards,
                 fiveDRight = it.rightwards,
                 fiveDPress = it.middlePressed)
+            sendControllerStatus(controllerStatus)
             Log.d("PachKeyManager", "FiveDButton $it")
         }
         // Continue to do this for the other required keys...

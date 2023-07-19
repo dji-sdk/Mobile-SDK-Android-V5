@@ -105,4 +105,5 @@ dependencies {
     implementation deps.aircraft
     implementation deps.retrofit
     implementation deps.gson
+    implementation deps.websocket
 }

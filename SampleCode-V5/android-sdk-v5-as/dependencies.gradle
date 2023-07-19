@@ -92,6 +92,9 @@ ext {
 
     // GSON
     deps.gson = 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Websocket
+    deps.websocket =  'org.java-websocket:Java-WebSocket:1.5.3'
 //    // coroutine
 //    deps.coroutine = 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
 //    deps.coroutineAndroid = 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
