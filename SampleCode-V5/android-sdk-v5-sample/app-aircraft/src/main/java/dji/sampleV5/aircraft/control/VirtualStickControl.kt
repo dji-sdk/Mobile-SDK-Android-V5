@@ -3,9 +3,6 @@ package dji.sampleV5.aircraft.control
 import android.util.Log
 import dji.sampleV5.moduleaircraft.models.BasicAircraftControlVM
 import dji.sampleV5.moduleaircraft.models.VirtualStickVM
-import dji.sampleV5.aircraft.telemetry.TuskAircraftState
-import dji.sampleV5.aircraft.telemetry.TuskAircraftStatus
-import dji.sampleV5.aircraft.telemetry.TuskControllerStatus
 import dji.sdk.keyvalue.value.common.EmptyMsg
 import dji.sdk.keyvalue.value.flightcontroller.FlightCoordinateSystem
 import dji.sdk.keyvalue.value.flightcontroller.RollPitchControlMode
@@ -15,8 +12,6 @@ import dji.sdk.keyvalue.value.flightcontroller.YawControlMode
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.ToastUtils
-import dji.v5.utils.common.JsonUtil
-import org.json.JSONArray
 
 
 /**
@@ -30,6 +25,9 @@ class VirtualStickControl{
     private val virtualStickVM = VirtualStickVM()
     private val basicAircraftControl = BasicAircraftControlVM()
     private val virtualStickFlightControlParam = VirtualStickFlightControlParam()
+    val virtualStickState = VirtualStickVM.VirtualStickStateInfo().state
+        //VirtualStickStateListener.isVirtualStickEnable()
+
     init {
         virtualStickVM.listenRCStick()
         virtualStickVM.enableVirtualStickAdvancedMode()
@@ -37,7 +35,7 @@ class VirtualStickControl{
 
     }
 
-    private fun enableVirtualStick(){
+    fun enableVirtualStick(){
         virtualStickVM.enableVirtualStick(object : CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
                 ToastUtils.showToast("enableVirtualStick success.")
@@ -51,7 +49,7 @@ class VirtualStickControl{
         })
     }
 
-    private fun enableVirtualStickAdvancedMode(){
+    fun enableVirtualStickAdvancedMode(){
         virtualStickVM.enableVirtualStickAdvancedMode()
     }
 
@@ -136,20 +134,17 @@ class VirtualStickControl{
                 ToastUtils.showToast("disableVirtualStick error: $error")
                 Log.v("VirtualStickControl", "disableVirtualStick error: $error")
             }
-
         }
-
-
         )
 //        virtualStickVM.disableVirtualStickAdvancedMode()
-
     }
 
-    fun sendyaw(yaw: Double){ // MIGHT NOT BE POSSIBLE
-        virtualStickFlightControlParam.setYaw(yaw)
+    fun sendYawAlt(yaw: Double, alt: Double){
+        sendAdvancedVirtualStickData(0.0, 0.0, yaw, "ANGLE", "GROUND", "POSITION", alt, "ANGLE")
     }
-    fun sendxvel(vel: Double){ // MIGHT NOT BE POSSIBLE
-        virtualStickFlightControlParam.setRoll(vel) // roll velocity - x direction
+
+    fun sendForwardVel(vel: Double){
+        sendAdvancedVirtualStickData(vel, 0.0, 0.0, "VELOCITY", "BODY", "POSITION", 0.0, "ANGLE")
     }
 
 }

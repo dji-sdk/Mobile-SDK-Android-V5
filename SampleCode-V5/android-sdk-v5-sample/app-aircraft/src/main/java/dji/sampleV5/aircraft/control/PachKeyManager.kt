@@ -53,6 +53,8 @@ class PachKeyManager {
             Coordinate(40.01110330957, -105.24382269358645, 300.0),
             Coordinate(40.01045031086439, -105.24401215219972, 350.0)
     )
+
+    var backyardSingleCoordinate = Coordinate(40.010457220936324, -105.24444971137794, 200.0)
     // Create variables here
     private var keyDisposables: CompositeDisposable? = null
 
@@ -128,35 +130,41 @@ class PachKeyManager {
         // Setup PachKeyManager and define the keys that we want to listen to
         Log.v("PachKeyManager", "Registering Keys")
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyAircraftLocation3D)
+            KeyTools.createKey(FlightControllerKey.KeyAircraftLocation3D)
         ) {
             stateData = stateData.copy(
-                    latitude = it.latitude,
-                    longitude = it.longitude,
-                    altitude = it.altitude
+                latitude = it.latitude,
+                longitude = it.longitude,
+                altitude = it.altitude
             )
             sendState(stateData)
             Log.v("PachKeyManager", "KeyAircraftLocation $it")
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude)
+            KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude)
         ) {
-            stateData = stateData.copy(roll = it.roll, pitch = it.pitch, yaw = it.yaw)
+            stateData = stateData.copy(
+                roll = it.roll,
+                pitch = it.pitch,
+                yaw = it.yaw)
             sendState(stateData)
             Log.d("PachKeyManager", "KeyAircraftAttitude $it")
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity)
+            KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity)
         ) {
-            stateData = stateData.copy(velocityX = it.x, velocityY = it.y, velocityZ = it.z)
+            stateData = stateData.copy(
+                velocityX = it.x,
+                velocityY = it.y,
+                velocityZ = it.z)
             sendState(stateData)
             Log.d("PachKeyManager", "AircraftVelocity $it")
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyWindSpeed)
+            KeyTools.createKey(FlightControllerKey.KeyWindSpeed)
         ) {
             stateData = stateData.copy(windSpeed = it)
             sendState(stateData)
@@ -164,7 +172,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyWindDirection)
+            KeyTools.createKey(FlightControllerKey.KeyWindDirection)
         ) {
             stateData = stateData.copy(windDirection = it.toString())
             sendState(stateData)
@@ -172,7 +180,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyIsFlying)
+            KeyTools.createKey(FlightControllerKey.KeyIsFlying)
         ) {
             stateData = stateData.copy(isFlying = it)
             sendState(stateData)
@@ -180,7 +188,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyConnection)
+            KeyTools.createKey(FlightControllerKey.KeyConnection)
         ) {
             statusData = statusData.copy(connected = it)
             sendStatus(statusData)
@@ -188,7 +196,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent)
+            KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent)
         ) {
             statusData = statusData.copy(battery = it)
             sendStatus(statusData)
@@ -196,7 +204,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel)
+            KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel)
         ) {
             statusData = statusData.copy(gps = it.value())
             sendStatus(statusData)
@@ -204,7 +212,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(AirLinkKey.KeySignalQuality)
+            KeyTools.createKey(AirLinkKey.KeySignalQuality)
         ) {
             statusData = statusData.copy(signalQuality = it)
             sendStatus(statusData)
@@ -212,7 +220,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyGoHomeState)
+            KeyTools.createKey(FlightControllerKey.KeyGoHomeState)
         ) {
             statusData = statusData.copy(goHomeState = it.toString())
             sendStatus(statusData)
@@ -220,7 +228,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyFlightModeString)
+            KeyTools.createKey(FlightControllerKey.KeyFlightModeString)
         ) {
             statusData = statusData.copy(flightMode = it)
             sendStatus(statusData)
@@ -228,7 +236,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn)
+            KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn)
         ) {
             statusData = statusData.copy(motorsOn = it)
             sendStatus(statusData)
@@ -236,16 +244,18 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(FlightControllerKey.KeyHomeLocation)
+            KeyTools.createKey(FlightControllerKey.KeyHomeLocation)
         ) {
             statusData =
-                    statusData.copy(homeLocationLat = it.latitude, homeLocationLong = it.longitude)
+                statusData.copy(
+                    homeLocationLat = it.latitude,
+                    homeLocationLong = it.longitude)
             sendStatus(statusData)
             Log.d("PachKeyManager", "HomeLocation $it")
         }
 
         registerKey(
-                KeyTools.createKey(GimbalKey.KeyGimbalAttitude)
+            KeyTools.createKey(GimbalKey.KeyGimbalAttitude)
         ) {
             statusData = statusData.copy(gimbalAngle = it.pitch)
             sendStatus(statusData)
@@ -254,7 +264,7 @@ class PachKeyManager {
 
         // TuskControllerKeys Setup
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyBatteryInfo)
+            KeyTools.createKey(RemoteControllerKey.KeyBatteryInfo)
         ) {
             controllerStatus = controllerStatus.copy(battery = it.batteryPercent)
             sendControllerStatus(controllerStatus)
@@ -262,7 +272,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyPauseButtonDown)
+            KeyTools.createKey(RemoteControllerKey.KeyPauseButtonDown)
         ){
             controllerStatus = controllerStatus.copy(pauseButton = it)
             sendControllerStatus(controllerStatus)
@@ -270,7 +280,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyGoHomeButtonDown)
+            KeyTools.createKey(RemoteControllerKey.KeyGoHomeButtonDown)
         ){
             controllerStatus = controllerStatus.copy(goHomeButton = it)
             sendControllerStatus(controllerStatus)
@@ -278,7 +288,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyStickLeftHorizontal)
+            KeyTools.createKey(RemoteControllerKey.KeyStickLeftHorizontal)
         ){
             controllerStatus = controllerStatus.copy(leftStickX = it)
             sendControllerStatus(controllerStatus)
@@ -286,7 +296,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyStickLeftVertical)
+            KeyTools.createKey(RemoteControllerKey.KeyStickLeftVertical)
         ){
             controllerStatus = controllerStatus.copy(leftStickY = it)
             sendControllerStatus(controllerStatus)
@@ -294,7 +304,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyStickRightHorizontal)
+            KeyTools.createKey(RemoteControllerKey.KeyStickRightHorizontal)
         ){
             controllerStatus = controllerStatus.copy(rightStickX = it)
             sendControllerStatus(controllerStatus)
@@ -302,7 +312,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyStickLeftVertical)
+            KeyTools.createKey(RemoteControllerKey.KeyStickLeftVertical)
         ){
             controllerStatus = controllerStatus.copy(rightStickY = it)
             sendControllerStatus(controllerStatus)
@@ -310,7 +320,7 @@ class PachKeyManager {
         }
 
         registerKey(
-                KeyTools.createKey(RemoteControllerKey.KeyFiveDimensionPressedStatus)
+            KeyTools.createKey(RemoteControllerKey.KeyFiveDimensionPressedStatus)
         ){
             controllerStatus = controllerStatus.copy(
                     fiveDUp = it.upwards,
@@ -351,14 +361,14 @@ class PachKeyManager {
     // land now
 
     private fun <T> registerKey(
-            djiKey: DJIKey<T>,
-            consumer: Consumer<T>,
-    ): CompositeDisposable? {
+        djiKey: DJIKey<T>,
+        consumer: Consumer<T>,
+        ): CompositeDisposable? {
         keyDisposables?.add(
-                RxUtil.addListener(djiKey, this)
-                        .subscribe(consumer) { error ->
-                            Log.e("PachKeyManager", "Error: $error")
-                        }
+            RxUtil.addListener(djiKey, this)
+                .subscribe(consumer) { error ->
+                    Log.e("PachKeyManager", "Error: $error")
+                }
 
         )
         return keyDisposables
@@ -400,78 +410,78 @@ class PachKeyManager {
         // Set camera to thermal mode first by calling KeyCameraVideoStreamSource --> INFRARED_CAMERA
         val cameraSourceKey = KeyTools.createKey(CameraKey.KeyCameraVideoStreamSource)
         KeyManager.getInstance().setValue(cameraSourceKey,
-                CameraVideoStreamSourceType.INFRARED_CAMERA,
-                object : CommonCallbacks.CompletionCallback {
-                    override fun onSuccess() {
-                        Log.v("PachKeyManager", "Camera Source Set to Thermal")
-                        val thermalMeasureMode =
-                                KeyTools.createKey(CameraKey.KeyThermalTemperatureMeasureMode)
-                        object : CommonCallbacks.CompletionCallbackWithParam<Boolean> {
-                            override fun onSuccess(value: Boolean?) {
-                                Log.v(
-                                        "PachKeyManager",
-                                        "Thermal Measurement Mode: ,$value"
-                                )
-                            }
-                            override fun onFailure(error: IDJIError) {
-                                Log.e(
-                                        "PachKeyManager",
-                                        "Thermal Measurement Mode: ,$error"
-                                )
-                            }
+            CameraVideoStreamSourceType.INFRARED_CAMERA,
+            object : CommonCallbacks.CompletionCallback {
+                override fun onSuccess() {
+                    Log.v("PachKeyManager", "Camera Source Set to Thermal")
+                    val thermalMeasureMode =
+                            KeyTools.createKey(CameraKey.KeyThermalTemperatureMeasureMode)
+                    object : CommonCallbacks.CompletionCallbackWithParam<Boolean> {
+                        override fun onSuccess(value: Boolean?) {
+                            Log.v(
+                                    "PachKeyManager",
+                                    "Thermal Measurement Mode: ,$value"
+                            )
                         }
-
-                        //                                    KeyTools.createKey(CameraKey.KeyThermalTemperatureMeasureMode)
-                        KeyManager.getInstance().setValue(thermalMeasureMode,
-                                ThermalTemperatureMeasureMode.REGION,
-                                object : CommonCallbacks.CompletionCallback {
-                                    override fun onSuccess() {
-                                        Log.v(
-                                                "PachKeyManager",
-                                                "Thermal Measure Mode Set to REGION"
-                                        )
-                                    }
-
-                                    override fun onFailure(error: IDJIError) {
-                                        Log.v(
-                                                "PachKeyManager",
-                                                "Thermal Measure Mode Error: ,$error"
-                                        )
-                                    }
-                                }
-                        )
-                        // Set CameraLensType to CAMERA_LENS_THERMAL
-                        val thermalLensTypeKey = KeyTools.createCameraKey(
-                                CameraKey.KeyThermalRegionMetersureTemperature,
-                                ComponentIndexType.FPV,
-                                CameraLensType.CAMERA_LENS_THERMAL
-                        )
-                        //                    CameraLensType.CAMERA_LENS_THERMAL
-                        KeyManager.getInstance().getValue(thermalLensTypeKey,
-                                object :
-                                        CommonCallbacks.CompletionCallbackWithParam<ThermalAreaMetersureTemperature> {
-                                    // Call KeyThermalTemperatureMeasureMode to set ThermalTemperatureMeasureMode to REGION
-                                    override fun onSuccess(t: ThermalAreaMetersureTemperature?) {
-                                        Log.v(
-                                                "PachKeyManager",
-                                                "Thermal Area Measure Mode Set to REGION"
-                                        )
-                                    }
-
-                                    override fun onFailure(error: IDJIError) {
-                                        Log.v(
-                                                "PachKeyManager",
-                                                "Thermal Area Measure Mode Error: ,$error"
-                                        )
-                                    }
-                                }
-                        )
+                        override fun onFailure(error: IDJIError) {
+                            Log.e(
+                                    "PachKeyManager",
+                                    "Thermal Measurement Mode: ,$error"
+                            )
+                        }
                     }
 
-                    override fun onFailure(error: IDJIError) {
-                        Log.v("PachKeyManager", "Camera Source Set to Thermal")
-                    }
+                    //                                    KeyTools.createKey(CameraKey.KeyThermalTemperatureMeasureMode)
+                    KeyManager.getInstance().setValue(thermalMeasureMode,
+                            ThermalTemperatureMeasureMode.REGION,
+                            object : CommonCallbacks.CompletionCallback {
+                                override fun onSuccess() {
+                                    Log.v(
+                                            "PachKeyManager",
+                                            "Thermal Measure Mode Set to REGION"
+                                    )
+                                }
+
+                                override fun onFailure(error: IDJIError) {
+                                    Log.v(
+                                            "PachKeyManager",
+                                            "Thermal Measure Mode Error: ,$error"
+                                    )
+                                }
+                            }
+                    )
+                    // Set CameraLensType to CAMERA_LENS_THERMAL
+                    val thermalLensTypeKey = KeyTools.createCameraKey(
+                            CameraKey.KeyThermalRegionMetersureTemperature,
+                            ComponentIndexType.FPV,
+                            CameraLensType.CAMERA_LENS_THERMAL
+                    )
+                    //                    CameraLensType.CAMERA_LENS_THERMAL
+                    KeyManager.getInstance().getValue(thermalLensTypeKey,
+                            object :
+                                    CommonCallbacks.CompletionCallbackWithParam<ThermalAreaMetersureTemperature> {
+                                // Call KeyThermalTemperatureMeasureMode to set ThermalTemperatureMeasureMode to REGION
+                                override fun onSuccess(t: ThermalAreaMetersureTemperature?) {
+                                    Log.v(
+                                            "PachKeyManager",
+                                            "Thermal Area Measure Mode Set to REGION"
+                                    )
+                                }
+
+                                override fun onFailure(error: IDJIError) {
+                                    Log.v(
+                                            "PachKeyManager",
+                                            "Thermal Area Measure Mode Error: ,$error"
+                                    )
+                                }
+                            }
+                    )
                 }
+
+                override fun onFailure(error: IDJIError) {
+                    Log.v("PachKeyManager", "Camera Source Set to Thermal")
+                }
+            }
         )
     }
 
@@ -505,6 +515,29 @@ class PachKeyManager {
                 })
     }
 
+    private fun safetyChecks(): Boolean {
+        // Function checks all safety information before returning a boolean for proceeding.
+        // Checks:
+        // 1. Is the aircraft flying?
+        if (!stateData.isFlying!!){
+            Log.v("PachKeyManager", "Aircraft is not flying")
+            return false
+        }
+        if (controllerStatus.goHomeButton!!){
+            Log.v("PachKeyManager", "Go Home Button is pressed")
+            return false
+        }
+        if (controllerStatus.pauseButton!!){
+            Log.v("PachKeyManager", "Pause Button is pressed")
+            return false
+        }
+        if (statusData.gps!! <3){
+            Log.v("PachKeyManager", "GPS Signal is weak")
+            return false
+        }
+
+        return true
+    }
     fun go2Altitude(alt: Double){
         // When called, this function will make the aircraft go to a certain altitude
     }
@@ -522,18 +555,32 @@ class PachKeyManager {
         // compute yaw angle based on current location and target location
         val yawAngle = computeYawAngle(lat, lon)
 
-        // command yaw angle to drone
-        controller.sendyaw(yawAngle)
+        // command yaw and altitude angle to drone
+        while (((stateData.yaw?.minus(yawAngle)!! > pidController.tolerance) &&
+                    (stateData.altitude?.minus(alt)!! > pidController.tolerance))) {
+            if (safetyChecks()) {
+                controller.sendYawAlt(yawAngle, alt)
+            } else{
+                Log.v("PachKeyManager", "Safety Check Failed")
+                break
+            }
+        }
 
         pidController.setSetpoint(lat)
-        while ((stateData.latitude?.minus(lat))!! > pidController.tolerance) {
+        while (((stateData.latitude?.minus(lat))!! > pidController.tolerance) &&
+            ((stateData.longitude?.minus(lon))!! > pidController.tolerance)) {
+            //What if we overshoot the target location? Will the aircraft back up or turn around?
             val xvel = pidController.getControl(stateData.latitude!!)
             xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
 
             // command drone x velocity to move to target location
-            controller.sendxvel(xvel)
+            if (safetyChecks()) {
+                controller.sendForwardVel(xvel)
+            } else{
+                Log.v("PachKeyManager", "Safety Check Failed")
+                break
+            }
         }
-
     }
 
     private fun computeYawAngle(lat: Double, lon: Double)
@@ -547,9 +594,29 @@ class PachKeyManager {
         // When called, this function will make the aircraft follow a list of waypoints
         // Figure out if the latest state is given
 
-        for (wp in wpList){
-            go2Location(wp.lat, wp.lon, wp.alt)
+        // If drone is not flying, then takeoff
+        if (stateData.isFlying!=true){
+            controller.startTakeOff()
         }
+
+        // Check to see that virtual stick is enabled
+        if (!controller.virtualStickState.isVirtualStickEnable){
+            controller.enableVirtualStick()
+        }
+        if (!controller.virtualStickState.isVirtualStickAdvancedModeEnabled){
+            controller.enableVirtualStickAdvancedMode()
+        }
+
+        for (wp in wpList){
+            if (safetyChecks()) {
+                go2Location(wp.lat, wp.lon, wp.alt)
+            } else{
+                Log.v("PachKeyManager", "Safety Check Failed")
+                break
+            }
+        }
+
+        controller.endVirtualStick()
     }
 }
 
