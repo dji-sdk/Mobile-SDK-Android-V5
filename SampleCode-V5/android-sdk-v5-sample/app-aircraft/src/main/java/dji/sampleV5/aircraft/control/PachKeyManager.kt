@@ -24,6 +24,8 @@ import io.reactivex.rxjava3.functions.Consumer
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.math.atan2
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class PachKeyManager {
     // Initialize necessary classes
@@ -566,12 +568,15 @@ class PachKeyManager {
             }
         }
 
-        pidController.setSetpoint(lat)
-        while (((stateData.latitude?.minus(lat))!! > pidController.tolerance) &&
-            ((stateData.longitude?.minus(lon))!! > pidController.tolerance)) {
+        // compute distance to target location using lat and lon
+        val distance = computeDistance(lat, lon)
+        pidController.setSetpoint(distance)
+        while (distance > pidController.tolerance) {
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             val xvel = pidController.getControl(stateData.latitude!!)
             xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
+
+            val distance = computeDistance(lat, lon)
 
             // command drone x velocity to move to target location
             if (safetyChecks()) {
@@ -581,6 +586,14 @@ class PachKeyManager {
                 break
             }
         }
+    }
+
+    // compute distance to target location using lat and lon
+    fun computeDistance(lat: Double, lon: Double)
+            : Double {
+        val latdiff = lat - stateData.latitude!!
+        val londiff = lon - stateData.longitude!!
+        return sqrt(latdiff.pow(2) + londiff.pow(2))
     }
 
     private fun computeYawAngle(lat: Double, lon: Double)
