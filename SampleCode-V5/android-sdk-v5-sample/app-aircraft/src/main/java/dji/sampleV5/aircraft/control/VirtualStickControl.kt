@@ -3,6 +3,9 @@ package dji.sampleV5.aircraft.control
 import android.util.Log
 import dji.sampleV5.moduleaircraft.models.BasicAircraftControlVM
 import dji.sampleV5.moduleaircraft.models.VirtualStickVM
+import dji.sampleV5.aircraft.telemetry.TuskAircraftState
+import dji.sampleV5.aircraft.telemetry.TuskAircraftStatus
+import dji.sampleV5.aircraft.telemetry.TuskControllerStatus
 import dji.sdk.keyvalue.value.common.EmptyMsg
 import dji.sdk.keyvalue.value.flightcontroller.FlightCoordinateSystem
 import dji.sdk.keyvalue.value.flightcontroller.RollPitchControlMode
@@ -14,6 +17,7 @@ import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.ToastUtils
 import dji.v5.utils.common.JsonUtil
 import org.json.JSONArray
+
 
 /**
  * Class Description
@@ -83,14 +87,14 @@ class VirtualStickControl{
                                      rollPitchControl: String, rollPitchCoordinate: String, verticalControlMode: String = "POSITION",
                                      verticalThrottle: Double, yawControl: String = "ANGLE"){
         /**
-         Documentation available: https://developer.dji.com/doc/mobile-sdk-tutorial/en/basic-introduction/basic-concepts/flight-controller.html#virtual-sticks
-         API Documentation: https://developer.dji.com/api-reference-v5/android-api/Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html
-         Roll Pitch Control Options: ANGLE, VELOCITY
-         Roll Pitch Coordinate System Options: BODY, GROUND
-         Vertical Control Mode Options: VELOCITY, POSITION
-         Yaw Control Options: ANGLE, ANGULAR_VELOCITY
+        Documentation available: https://developer.dji.com/doc/mobile-sdk-tutorial/en/basic-introduction/basic-concepts/flight-controller.html#virtual-sticks
+        API Documentation: https://developer.dji.com/api-reference-v5/android-api/Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html
+        Roll Pitch Control Options: ANGLE, VELOCITY
+        Roll Pitch Coordinate System Options: BODY, GROUND
+        Vertical Control Mode Options: VELOCITY, POSITION
+        Yaw Control Options: ANGLE, ANGULAR_VELOCITY
 
-        **/
+         **/
         virtualStickFlightControlParam.setRoll(roll)
         virtualStickFlightControlParam.setPitch(pitch)
         virtualStickFlightControlParam.setYaw(yaw)
@@ -139,6 +143,13 @@ class VirtualStickControl{
         )
 //        virtualStickVM.disableVirtualStickAdvancedMode()
 
+    }
+
+    fun sendyaw(yaw: Double){ // MIGHT NOT BE POSSIBLE
+        virtualStickFlightControlParam.setYaw(yaw)
+    }
+    fun sendxvel(vel: Double){ // MIGHT NOT BE POSSIBLE
+        virtualStickFlightControlParam.setRoll(vel) // roll velocity - x direction
     }
 
 }
