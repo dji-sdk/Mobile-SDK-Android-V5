@@ -21,8 +21,11 @@ import dji.v5.common.utils.RxUtil
 import dji.v5.manager.KeyManager
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.functions.Consumer
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -56,7 +59,7 @@ class PachKeyManager {
             Coordinate(40.01045031086439, -105.24401215219972, 350.0)
     )
 
-    var backyardSingleCoordinate = Coordinate(40.010457220936324, -105.24444971137794, 200.0)
+    var backyardSingleCoordinate = listOf(Coordinate(40.010457220936324, -105.24444971137794, 30.0))
     // Create variables here
     private var keyDisposables: CompositeDisposable? = null
 
@@ -97,7 +100,7 @@ class PachKeyManager {
                     controller.endVirtualStick()
                 }
                 if (fiveDPress){
-                    followWaypoints(backyardCoordinatesSingleAlt)
+                    followWaypoints(backyardSingleCoordinate)
                 }
             }
         }
@@ -140,7 +143,7 @@ class PachKeyManager {
                 altitude = it.altitude
             )
             sendState(stateData)
-            Log.v("PachKeyManager", "KeyAircraftLocation $it")
+            Log.v("PachTelemetry", "KeyAircraftLocation $it")
         }
 
         registerKey(
@@ -151,7 +154,7 @@ class PachKeyManager {
                 pitch = it.pitch,
                 yaw = it.yaw)
             sendState(stateData)
-            Log.d("PachKeyManager", "KeyAircraftAttitude $it")
+            Log.d("PachTelemetry", "KeyAircraftAttitude $it")
         }
 
         registerKey(
@@ -162,7 +165,7 @@ class PachKeyManager {
                 velocityY = it.y,
                 velocityZ = it.z)
             sendState(stateData)
-            Log.d("PachKeyManager", "AircraftVelocity $it")
+            Log.d("PachTelemetry", "AircraftVelocity $it")
         }
 
         registerKey(
@@ -170,7 +173,7 @@ class PachKeyManager {
         ) {
             stateData = stateData.copy(windSpeed = it)
             sendState(stateData)
-            Log.d("PachKeyManager", "WindSpeed $it")
+            Log.d("PachTelemetry", "WindSpeed $it")
         }
 
         registerKey(
@@ -178,7 +181,7 @@ class PachKeyManager {
         ) {
             stateData = stateData.copy(windDirection = it.toString())
             sendState(stateData)
-            Log.d("PachKeyManager", "WindDirection $it")
+            Log.d("PachTelemetry", "WindDirection $it")
         }
 
         registerKey(
@@ -186,7 +189,7 @@ class PachKeyManager {
         ) {
             stateData = stateData.copy(isFlying = it)
             sendState(stateData)
-            Log.d("PachKeyManager", "IsFlying $it")
+            Log.d("PachTelemetry", "IsFlying $it")
         }
 
         registerKey(
@@ -194,7 +197,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(connected = it)
             sendStatus(statusData)
-            Log.d("PachKeyManager", "Connection $it")
+            Log.d("PachTelemetry", "Connection $it")
         }
 
         registerKey(
@@ -202,7 +205,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(battery = it)
             sendStatus(statusData)
-            Log.d("PachKeyManager", "Battery Level $it")
+            Log.d("PachTelemetry", "Battery Level $it")
         }
 
         registerKey(
@@ -210,7 +213,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(gps = it.value())
             sendStatus(statusData)
-            Log.d("PachKeyManager", "GPSSignalLevel $it")
+            Log.d("PachTelemetry", "GPSSignalLevel $it")
         }
 
         registerKey(
@@ -218,7 +221,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(signalQuality = it)
             sendStatus(statusData)
-            Log.d("PachKeyManager", "SignalQuality $it")
+            Log.d("PachTelemetry", "SignalQuality $it")
         }
 
         registerKey(
@@ -226,7 +229,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(goHomeState = it.toString())
             sendStatus(statusData)
-            Log.d("PachKeyManager", "GoHomeState $it")
+            Log.d("PachTelemetry", "GoHomeState $it")
         }
 
         registerKey(
@@ -234,7 +237,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(flightMode = it)
             sendStatus(statusData)
-            Log.d("PachKeyManager", "FlightMode $it")
+            Log.d("PachTelemetry", "FlightMode $it")
         }
 
         registerKey(
@@ -242,7 +245,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(motorsOn = it)
             sendStatus(statusData)
-            Log.d("PachKeyManager", "MotorsOn $it")
+            Log.d("PachTelemetry", "MotorsOn $it")
         }
 
         registerKey(
@@ -253,7 +256,7 @@ class PachKeyManager {
                     homeLocationLat = it.latitude,
                     homeLocationLong = it.longitude)
             sendStatus(statusData)
-            Log.d("PachKeyManager", "HomeLocation $it")
+            Log.d("PachTelemetry", "HomeLocation $it")
         }
 
         registerKey(
@@ -261,7 +264,7 @@ class PachKeyManager {
         ) {
             statusData = statusData.copy(gimbalAngle = it.pitch)
             sendStatus(statusData)
-            Log.d("PachKeyManager", "GimbalPitch $it")
+            Log.d("PachTelemetry", "GimbalPitch $it")
         }
 
         // TuskControllerKeys Setup
@@ -270,7 +273,7 @@ class PachKeyManager {
         ) {
             controllerStatus = controllerStatus.copy(battery = it.batteryPercent)
             sendControllerStatus(controllerStatus)
-            Log.d("PachKeyManager", "ControllerBattery $it")
+            Log.d("PachTelemetry", "ControllerBattery $it")
         }
 
         registerKey(
@@ -278,7 +281,7 @@ class PachKeyManager {
         ){
             controllerStatus = controllerStatus.copy(pauseButton = it)
             sendControllerStatus(controllerStatus)
-            Log.d("PachKeyManager", "PauseButton $it")
+            Log.d("PachTelemetry", "PauseButton $it")
         }
 
         registerKey(
@@ -286,7 +289,7 @@ class PachKeyManager {
         ){
             controllerStatus = controllerStatus.copy(goHomeButton = it)
             sendControllerStatus(controllerStatus)
-            Log.d("PachKeyManager", "GoHomeButton $it")
+            Log.d("PachTelemetry", "GoHomeButton $it")
         }
 
         registerKey(
@@ -294,7 +297,7 @@ class PachKeyManager {
         ){
             controllerStatus = controllerStatus.copy(leftStickX = it)
             sendControllerStatus(controllerStatus)
-            Log.d("PachKeyManager", "StickLeftHorizontal $it")
+            Log.d("PachTelemetry", "StickLeftHorizontal $it")
         }
 
         registerKey(
@@ -302,7 +305,7 @@ class PachKeyManager {
         ){
             controllerStatus = controllerStatus.copy(leftStickY = it)
             sendControllerStatus(controllerStatus)
-            Log.d("PachKeyManager", "StickLeftVertical $it")
+            Log.d("PachTelemetry", "StickLeftVertical $it")
         }
 
         registerKey(
@@ -310,7 +313,7 @@ class PachKeyManager {
         ){
             controllerStatus = controllerStatus.copy(rightStickX = it)
             sendControllerStatus(controllerStatus)
-            Log.d("PachKeyManager", "StickRightHorizontal $it")
+            Log.d("PachTelemetry", "StickRightHorizontal $it")
         }
 
         registerKey(
@@ -318,7 +321,7 @@ class PachKeyManager {
         ){
             controllerStatus = controllerStatus.copy(rightStickY = it)
             sendControllerStatus(controllerStatus)
-            Log.d("PachKeyManager", "StickRightVertical $it")
+            Log.d("PachTelemetry", "StickRightVertical $it")
         }
 
         registerKey(
@@ -521,30 +524,33 @@ class PachKeyManager {
         // Function checks all safety information before returning a boolean for proceeding.
         // Checks:
         // 1. Is the aircraft flying?
+
+        Log.v("SafetyChecks", "In Safety Check Function")
+
         if (!stateData.isFlying!!){
-            Log.v("PachKeyManager", "Aircraft is not flying")
+            Log.v("SafetyChecks", "Aircraft is not flying")
             return false
         }
         if (controllerStatus.goHomeButton!!){
-            Log.v("PachKeyManager", "Go Home Button is pressed")
+            Log.v("SafetyChecks", "Go Home Button is pressed")
             return false
         }
         if (controllerStatus.pauseButton!!){
-            Log.v("PachKeyManager", "Pause Button is pressed")
+            Log.v("SafetyChecks", "Pause Button is pressed")
             return false
         }
         if (statusData.gps!! <3){
-            Log.v("PachKeyManager", "GPS Signal is weak")
+            Log.v("SafetyChecks", "GPS Signal is weak")
             return false
         }
-
+        // Add check to see if it's in GOHOME State
         return true
     }
     fun go2Altitude(alt: Double){
         // When called, this function will make the aircraft go to a certain altitude
     }
 
-    fun go2Location(lat: Double, lon: Double, alt: Double){
+    suspend fun go2Location(lat: Double, lon: Double, alt: Double){
         // When called, this function will make the aircraft go to a certain location
         // Edge Cases:
         // What if drone is already flying?
@@ -556,27 +562,56 @@ class PachKeyManager {
 
         // compute yaw angle based on current location and target location
         val yawAngle = computeYawAngle(lat, lon)
+        Log.v("PachKeyManager", "Yaw Offset: $yawAngle")
+//        // command yaw and altitude angle to drone
+//        while (((abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance) &&
+//                    (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance))) {
+//            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle")
+//            Log.v("PachKeyManager", "Commanded Altitude: $alt")
+//            if (safetyChecks()) {
+//                controller.sendYawAlt(yawAngle, alt)
+//
+//            } else{
+//                Log.v("PachKeyManager", "Safety Check Failed")
+//                break
+//            }
+//            delay(500L)
+//        }
 
-        // command yaw and altitude angle to drone
-        while (((stateData.yaw?.minus(yawAngle)!! > pidController.tolerance) &&
-                    (stateData.altitude?.minus(alt)!! > pidController.tolerance))) {
+        while (abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance){
+            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle")
+
             if (safetyChecks()) {
-                controller.sendYawAlt(yawAngle, alt)
+                controller.sendYaw(yawAngle)
+
             } else{
                 Log.v("PachKeyManager", "Safety Check Failed")
                 break
             }
+            delay(500L)
+        }
+
+        while (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance){
+            Log.v("PachKeyManager", "Commanded Altitude: $alt")
+            if (safetyChecks()) {
+                controller.setAlt(alt)
+            } else{
+                Log.v("PachKeyManager", "Safety Check Failed")
+                break
+            }
+            delay(500L)
         }
 
         // compute distance to target location using lat and lon
-        val distance = computeDistance(lat, lon)
+        var distance = computeDistance(lat, lon)
         pidController.setSetpoint(distance)
-        while (distance > pidController.tolerance) {
+        while (distance > pidController.posTolerance) {
             //What if we overshoot the target location? Will the aircraft back up or turn around?
+            Log.v("PachKeyManager", "Distance: $distance")
             val xvel = pidController.getControl(stateData.latitude!!)
             xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
 
-            val distance = computeDistance(lat, lon)
+            distance = computeDistance(lat, lon)
 
             // command drone x velocity to move to target location
             if (safetyChecks()) {
@@ -585,6 +620,7 @@ class PachKeyManager {
                 Log.v("PachKeyManager", "Safety Check Failed")
                 break
             }
+            delay(500L)
         }
     }
 
@@ -600,10 +636,10 @@ class PachKeyManager {
             : Double {
         val latdiff = lat - stateData.latitude!!
         val londiff = lon - stateData.longitude!!
-        return atan2(londiff, latdiff)
+        return atan2(londiff, latdiff)*(180/PI)
     }
 
-    fun followWaypoints(wpList: List<Coordinate>){
+    fun followWaypoints(wpList: List<Coordinate>)= runBlocking{
         // When called, this function will make the aircraft follow a list of waypoints
         // Figure out if the latest state is given
 
@@ -624,12 +660,12 @@ class PachKeyManager {
             if (safetyChecks()) {
                 go2Location(wp.lat, wp.lon, wp.alt)
             } else{
-                Log.v("PachKeyManager", "Safety Check Failed")
+                Log.v("SafetyChecks", "Safety Check Failed")
                 break
             }
         }
 
-        controller.endVirtualStick()
+//        controller.endVirtualStick()
     }
 }
 

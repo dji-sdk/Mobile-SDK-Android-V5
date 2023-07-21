@@ -143,8 +143,16 @@ class VirtualStickControl{
         sendAdvancedVirtualStickData(0.0, 0.0, yaw, "ANGLE", "GROUND", "POSITION", alt, "ANGLE")
     }
 
+    fun setAlt(alt: Double){
+        sendAdvancedVirtualStickData(0.0, 0.0, 0.0, "ANGLE", "GROUND", "POSITION", alt, "ANGULAR_VELOCITY")
+    }
+
+    fun sendYaw(yaw: Double){
+        sendAdvancedVirtualStickData(0.0, 0.0, yaw, "ANGLE", "GROUND", "VELOCITY", 0.0, "ANGLE")
+    }
+
     fun sendForwardVel(vel: Double){
-        sendAdvancedVirtualStickData(vel, 0.0, 0.0, "VELOCITY", "BODY", "POSITION", 0.0, "ANGLE")
+        sendAdvancedVirtualStickData(vel, 0.0, 0.0, "VELOCITY", "BODY", "VELOCITY", 0.0, "ANGLE")
     }
 
 }
