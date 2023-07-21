@@ -8,6 +8,11 @@ import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.util.UxSharedPreferencesUtil
 import dji.v5.ux.sample.showcase.defaultlayout.DefaultLayoutActivity
 import dji.v5.ux.sample.showcase.widgetlist.WidgetsActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 /**
@@ -26,7 +31,10 @@ class DJIAircraftMainActivity : DJIMainActivity() {
 
         enableDefaultLayout(DefaultLayoutActivity::class.java) // important
         enableWidgetList(WidgetsActivity::class.java)
+
         val TuskManager = PachKeyManager()
+        TuskManager.runTesting()
+//
 
 
     }

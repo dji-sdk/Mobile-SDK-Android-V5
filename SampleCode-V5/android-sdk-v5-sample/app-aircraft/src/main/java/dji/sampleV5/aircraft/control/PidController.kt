@@ -5,10 +5,12 @@ class PidController(private val kp: Float, private val ki: Float, private val kd
     private var derivative: Double = 0.0
     private var integral: Double = 0.0
     private var setpoint: Double = 0.0
-    val maxVelocity: Double = 2.0 // m/s
-    val posTolerance: Double = 0.005 // m ##TODO need to convert to meters
+    val maxVelocity: Double = 1.0 // m/s
+    val posTolerance: Double = 1.0 // m
     val yawTolerance: Double = 1.0 // degrees
-    val altTolerance: Double = 10.0 // feet
+    val altTolerance: Double = 10.0 // meters
+    val velTolerance: Double = 0.5 // m/s
+
 
     fun getControl(currentval: Double): Double {
         val error = calculateError(currentval)

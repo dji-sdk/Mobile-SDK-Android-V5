@@ -13,7 +13,6 @@ import dji.sdk.keyvalue.value.camera.ThermalTemperatureMeasureMode
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.common.EmptyMsg
-import dji.sdk.keyvalue.value.flightcontroller.GoHomeState
 import dji.sdk.keyvalue.value.gimbal.GimbalAngleRotation
 import dji.sdk.keyvalue.value.gimbal.GimbalAngleRotationMode
 import dji.v5.common.callback.CommonCallbacks
@@ -22,20 +21,26 @@ import dji.v5.common.utils.RxUtil
 import dji.v5.manager.KeyManager
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.functions.Consumer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.atan
 import kotlin.math.atan2
+import kotlin.math.cos
 import kotlin.math.pow
+import kotlin.math.sin
 import kotlin.math.sqrt
 
-class PachKeyManager {
+class PachKeyManager() {
     // Initialize necessary classes
     private val telemService = TuskServiceWebsocket()
     private var controller = VirtualStickControl()
     private var pidController = PidController(0.4f, 0.05f, 0.9f)
+    val mainScope = CoroutineScope(Dispatchers.Main)
 
     var stateData = TuskAircraftState( 0.0, 0.0, 0.0, 0.0, 0.0,
             0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
@@ -60,7 +65,7 @@ class PachKeyManager {
             Coordinate(40.01045031086439, -105.24401215219972, 350.0)
     )
 
-    var backyardSingleCoordinate = listOf(Coordinate(40.010457220936324, -105.24444971137794, 30.0))
+    var backyardSingleCoordinate = listOf(Coordinate(40.010819889488076, -105.244268000203, 30.0))
     // Create variables here
     private var keyDisposables: CompositeDisposable? = null
 
@@ -76,11 +81,12 @@ class PachKeyManager {
         telemService.connectWebSocket()
         initializeFlightParameters()
         keyDisposables = CompositeDisposable()
-        registerKeys()
 
+    }
 
+    fun runTesting() {
         KeyManager.getInstance().listen(fiveDKey, this) { _, newValue ->
-            run {
+            mainScope.launch {
                 Log.v("PachKeyManager", "FiveD: $newValue")
                 if (newValue != null) {
                     fiveDUp = newValue.upwards
@@ -96,27 +102,28 @@ class PachKeyManager {
 
                 }
 
-                if (fiveDDown){
+                if (fiveDDown) {
                     controller.startLanding()
                     controller.endVirtualStick()
                 }
-                if (fiveDPress){
+                if (fiveDPress) {
+                    Log.v("PachKeyManager", "FiveD Pressed")
                     followWaypoints(backyardSingleCoordinate)
+
                 }
             }
+
         }
+        registerKeys()
+
     }
 
-    private fun sendState(telemetry: TuskAircraftState) = runBlocking {
-        launch {
-            telemService.postState(telemetry)
-        }
+    private fun sendState(telemetry: TuskAircraftState) {
+        telemService.postState(telemetry)
     }
 
-    private fun sendStatus(status: TuskAircraftStatus) = runBlocking {
-        launch {
-            telemService.postStatus(status)
-        }
+    private fun sendStatus(status: TuskAircraftStatus) {
+        telemService.postStatus(status)
     }
 
     fun getActions() = runBlocking {
@@ -144,6 +151,7 @@ class PachKeyManager {
                 altitude = it.altitude
             )
             sendState(stateData)
+
             Log.v("PachTelemetry", "KeyAircraftLocation $it")
         }
 
@@ -533,14 +541,12 @@ class PachKeyManager {
         // Checks:
         // 1. Is the aircraft flying?
 
-        Log.v("SafetyChecks", "In Safety Check Function")
-
         if (!stateData.isFlying!!){
-            Log.v("SafetyChecks", "Aircraft is not flying")
+            Log.v("PachKeyManager", "Aircraft is not flying")
             return false
         }
         if (controllerStatus.goHomeButton!!){
-            Log.v("SafetyChecks", "Go Home Button is pressed")
+            Log.v("PachKeyManager", "Go Home Button is pressed")
             return false
         }
         if (controllerStatus.pauseButton!!){
@@ -548,12 +554,12 @@ class PachKeyManager {
             return false
         }
         if (statusData.gps!! <3){
-            Log.v("SafetyChecks", "GPS Signal is weak")
+            Log.v("PachKeyManager", "GPS Signal is weak")
             return false
         }
         // Add check to see if it's in IDLE State
         if (statusData.goHomeStatus != "IDLE"){
-            Log.v("SafetyChecks", "Aircraft is IDLE")
+            Log.v("PachKeyManager", "Aircraft is IDLE")
             return false
         }
 
@@ -601,7 +607,7 @@ class PachKeyManager {
                 Log.v("PachKeyManager", "Safety Check Failed")
                 break
             }
-            delay(500L)
+            delay(100L)
         }
 
         while (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance){
@@ -612,19 +618,20 @@ class PachKeyManager {
                 Log.v("PachKeyManager", "Safety Check Failed")
                 break
             }
-            delay(500L)
+            delay(100L)
         }
 
         // compute distance to target location using lat and lon
-        var distance = computeDistance(lat, lon)
+        var distance = computeLatLonDistance(lat, lon)
         pidController.setSetpoint(distance)
-        while (distance > pidController.posTolerance) {
+        while (distance > pidController.posTolerance) { // add check for velocity tolerance: if velocity too high, keep going
+            // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             Log.v("PachKeyManager", "Distance: $distance")
-            val xvel = pidController.getControl(stateData.latitude!!)
-            xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
-
-            distance = computeDistance(lat, lon)
+            var xvel = pidController.getControl(stateData.latitude!!)
+            xvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
+            Log.v("PachKeyManager", "Commanded X Velocity: $xvel")
+            distance = computeLatLonDistance(lat, lon)
 
             // command drone x velocity to move to target location
             if (safetyChecks()) {
@@ -633,7 +640,7 @@ class PachKeyManager {
                 Log.v("PachKeyManager", "Safety Check Failed")
                 break
             }
-            delay(500L)
+            delay(100L)
         }
     }
 
@@ -645,14 +652,33 @@ class PachKeyManager {
         return sqrt(latdiff.pow(2) + londiff.pow(2))
     }
 
-    private fun computeYawAngle(lat: Double, lon: Double)
-            : Double {
-        val latdiff = lat - stateData.latitude!!
-        val londiff = lon - stateData.longitude!!
-        return atan2(londiff, latdiff)*(180/PI)
+    fun computeLatLonDistance(lat1 : Double, lon1: Double): Double {  // generally used geo measurement function
+        val lat2 = stateData.latitude!!
+        val lon2 = stateData.longitude!!
+        val R = 6378.137 // Radius of earth in KM
+        val dLat = lat2 * Math.PI / 180.0 - lat1 * Math.PI / 180.0;
+        val dLon = lon2 * Math.PI / 180.0 - lon1 * Math.PI / 180.0
+        val a = sin(dLat/2) * sin(dLat/2) +
+                cos(lat1 * Math.PI / 180) * cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2)
+        val c = 2.0 * atan2(Math.sqrt(a), sqrt(1-a))
+        val d = R * c
+        return d * 1000.0 // meters
     }
 
-    fun followWaypoints(wpList: List<Coordinate>)= runBlocking{
+    private fun computeYawAngle(lat: Double, lon: Double)
+            : Double {
+        val yDiff = lat - stateData.latitude!!
+        val xDiff = lon - stateData.longitude!!
+        val res = atan2(yDiff, xDiff) *(180 / PI)
+        if ((yDiff<0.0) && (xDiff<0.0)) {
+            return -(270.0+res)
+        }else{
+            return 90-res
+        }
+    }
+
+    suspend fun followWaypoints(wpList: List<Coordinate>){
         // When called, this function will make the aircraft follow a list of waypoints
         // Figure out if the latest state is given
 
@@ -672,6 +698,8 @@ class PachKeyManager {
         for (wp in wpList){
             if (safetyChecks()) {
                 go2Location(wp.lat, wp.lon, wp.alt)
+
+
             } else{
                 Log.v("SafetyChecks", "Safety Check Failed")
                 break
