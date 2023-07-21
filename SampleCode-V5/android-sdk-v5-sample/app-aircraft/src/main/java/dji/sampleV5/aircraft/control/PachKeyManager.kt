@@ -13,6 +13,7 @@ import dji.sdk.keyvalue.value.camera.ThermalTemperatureMeasureMode
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.common.EmptyMsg
+import dji.sdk.keyvalue.value.flightcontroller.GoHomeState
 import dji.sdk.keyvalue.value.gimbal.GimbalAngleRotation
 import dji.sdk.keyvalue.value.gimbal.GimbalAngleRotationMode
 import dji.v5.common.callback.CommonCallbacks
@@ -40,7 +41,7 @@ class PachKeyManager {
             0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
     var statusData = TuskAircraftStatus( connected = false, battery = 0, gps = 0, signalQuality =  0,
             goHomeState = null, flightMode = null, motorsOn = false, homeLocationLat = null,
-            homeLocationLong = null, gimbalAngle = 0.0)
+            homeLocationLong = null, gimbalAngle = 0.0, goHomeStatus = null)
     var controllerStatus = TuskControllerStatus( battery = 0, pauseButton = false, goHomeButton = false,
             leftStickX = 0,leftStickY=0,rightStickX=0,rightStickY=0, fiveDUp = false, fiveDDown = false,
             fiveDRight = false, fiveDLeft = false, fiveDPress = false)
@@ -265,6 +266,13 @@ class PachKeyManager {
             statusData = statusData.copy(gimbalAngle = it.pitch)
             sendStatus(statusData)
             Log.d("PachTelemetry", "GimbalPitch $it")
+        }
+        registerKey(
+                KeyTools.createKey(FlightControllerKey.KeyGoHomeState)
+        ){
+            statusData = statusData.copy(goHomeStatus = it.toString())
+            sendStatus(statusData)
+            Log.d("PachTelemetry", "GoHomeStatus $it")
         }
 
         // TuskControllerKeys Setup
@@ -543,7 +551,12 @@ class PachKeyManager {
             Log.v("SafetyChecks", "GPS Signal is weak")
             return false
         }
-        // Add check to see if it's in GOHOME State
+        // Add check to see if it's in IDLE State
+        if (statusData.goHomeStatus != "IDLE"){
+            Log.v("SafetyChecks", "Aircraft is IDLE")
+            return false
+        }
+
         return true
     }
     fun go2Altitude(alt: Double){
