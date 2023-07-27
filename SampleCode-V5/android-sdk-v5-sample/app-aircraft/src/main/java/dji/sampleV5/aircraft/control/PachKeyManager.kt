@@ -25,10 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlin.math.PI
-import kotlin.math.abs
-import kotlin.math.atan
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.pow
@@ -66,6 +63,8 @@ class PachKeyManager() {
     )
 
     var backyardSingleCoordinate = listOf(Coordinate(40.010819889488076, -105.244268000203, 30.0))
+
+    var HIPPOWaypoints = listOf<Coordinate>()
     // Create variables here
     private var keyDisposables: CompositeDisposable? = null
 
@@ -108,8 +107,9 @@ class PachKeyManager() {
                 }
                 if (fiveDPress) {
                     Log.v("PachKeyManager", "FiveD Pressed")
-                    followWaypoints(backyardCoordinatesIncreasingAlt)
-
+//                    followWaypoints(backyardCoordinatesIncreasingAlt)
+                    HIPPOWaypoints = telemService.waypointList
+                    followWaypoints(HIPPOWaypoints)
                 }
             }
 
@@ -126,16 +126,12 @@ class PachKeyManager() {
         telemService.postStatus(status)
     }
 
-    fun getActions() = runBlocking {
-        launch {
-            telemService.getActions()
-        }
+    fun getActions() {
+        telemService.getActions()
     }
 
-    fun sendControllerStatus(status: TuskControllerStatus) = runBlocking {
-        launch {
-            telemService.postControllerStatus(status)
-        }
+    fun sendControllerStatus(status: TuskControllerStatus) {
+        telemService.postControllerStatus(status)
     }
 
     // Holder function that registers all necessary keys and handles their operation during changes
@@ -381,7 +377,7 @@ class PachKeyManager() {
 
     // land now
 
-    private fun <T> registerKey(
+    private fun <T : Any> registerKey(
         djiKey: DJIKey<T>,
         consumer: Consumer<T>,
         ): CompositeDisposable? {
@@ -653,20 +649,21 @@ class PachKeyManager() {
         // compute distance to target location using lat and lon
         var distance = computeLatLonDistance(lat, lon)
         var yawAngle = computeYawAngle(lat, lon)
+        var xVel = pidController.getControl(distance)
         pidController.setSetpoint(distance)
         while (distance > pidController.posTolerance) { // add check for velocity tolerance: if velocity too high, keep going
             // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             Log.v("PachKeyManager", "Distance: $distance")
-            val xvel = pidController.getControl(distance)
-            val clippedXvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
-            Log.v("PachKeyManager", "Commanded X Velocity: $xvel, Clipped Velocity  $clippedXvel")
+            xVel = pidController.getControl(distance)
+            val clippedXvel = xVel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
+            Log.v("PachKeyManager", "Commanded X Velocity: $xVel, Clipped Velocity  $clippedXvel")
             distance = computeLatLonDistance(lat, lon)
 
             // Update Yaw
             yawAngle = computeYawAngle(lat, lon)
 
-            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle | Commanded Altitude: $alt | xvel: $xvel | clippedXvel: $clippedXvel")
+            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle | Commanded Altitude: $alt | xvel: $xVel | clippedXvel: $clippedXvel")
 
             // command drone x velocity to move to target location
             if (safetyChecks()) {
@@ -715,7 +712,7 @@ class PachKeyManager() {
         }
     }
 
-    suspend fun followWaypoints(wpList: List<Coordinate>){
+    private suspend fun followWaypoints(wpList: List<Coordinate>){
         // When called, this function will make the aircraft follow a list of waypoints
         // Figure out if the latest state is given
 

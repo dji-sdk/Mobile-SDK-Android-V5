@@ -10,6 +10,8 @@ class TuskServiceWebsocket {
     private lateinit var webSocket: WebSocket
     private val gson: Gson = Gson()
 
+    var waypointList =  listOf<Coordinate>()
+
     // Establish WebSocket connection
     fun connectWebSocket() {
         val request = Request.Builder().url("ws://192.168.0.100:8084").build()
@@ -47,13 +49,13 @@ class TuskServiceWebsocket {
             when (action) {
                 "AllAircraftStatus" -> handleGetAllAircraftStatus(args)
                 "NewControllerStatus" -> handleNewControllerStatus(args)
+                "FollowWaypoints" -> handleWaypointSet(args)
                 else -> Log.d("TuskService", "Unknown action: $action")
             }
         } catch (e: Exception) {
             Log.e("TuskService", "Failed to parse WebSocket message: ${e.message}")
         }
     }
-
     // Send WebSocket message
     private fun sendWebSocketMessage(action: String, args: Any) {
         Log.v("TuskService", "Sending Websocket Message $action $args")
@@ -82,14 +84,21 @@ class TuskServiceWebsocket {
     }
 
     // Reponse Handler:
-    private fun handleNewControllerStatus(args: Any) {
+    private fun handleNewControllerStatus(args: Any?) {
         // Handle the action here
         Log.d("TuskService", "Handling NewControllerStatus action")
     }
 
-    private fun handleGetAllAircraftStatus(args: Any) {
+    private fun handleGetAllAircraftStatus(args: Any?) {
         // Handle the action here
         Log.d("TuskService", "Handling GetAllAircraftStatus action")
+    }
+
+    private fun handleWaypointSet(args: Any?) {
+        // Handle the action for processing a set of waypoints
+        // Updates a local variable that will be checked upon execution by PachKeyManager
+        waypointList = gson.fromJson(args.toString(), Array<Coordinate>::class.java).toList()
+        Log.d("TuskService", "Handling WaypointSet action $args")
     }
 
     fun getActions() {
