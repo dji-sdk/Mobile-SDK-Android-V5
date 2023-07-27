@@ -628,7 +628,7 @@ class PachKeyManager() {
             // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             Log.v("PachKeyManager", "Distance: $distance")
-            var xvel = pidController.getControl(stateData.latitude!!)
+            var xvel = pidController.getControl(distance)
             xvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
             Log.v("PachKeyManager", "Commanded X Velocity: $xvel")
             distance = computeLatLonDistance(lat, lon)

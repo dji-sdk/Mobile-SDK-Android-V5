@@ -13,7 +13,8 @@ class PidController(private val kp: Float, private val ki: Float, private val kd
 
 
     fun getControl(currentval: Double): Double {
-        val error = calculateError(currentval)
+        //val error = calculateError(currentval)
+        val error = currentval
         integral += error
         derivative = error - lastError
         lastError = error
