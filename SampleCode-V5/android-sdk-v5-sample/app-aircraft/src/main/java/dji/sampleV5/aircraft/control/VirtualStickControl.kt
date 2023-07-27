@@ -152,7 +152,7 @@ class VirtualStickControl{
     }
 
     fun sendForwardVel(vel: Double){
-        sendAdvancedVirtualStickData(vel, 0.0, 0.0, "VELOCITY", "BODY", "VELOCITY", 0.0, "ANGLE")
+        sendAdvancedVirtualStickData(vel, 0.0, 0.0, "VELOCITY", "BODY", "VELOCITY", 0.0, "ANGULAR_VELOCITY")
     }
 
 }

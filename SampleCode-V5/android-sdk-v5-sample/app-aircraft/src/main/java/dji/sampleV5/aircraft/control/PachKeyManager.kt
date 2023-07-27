@@ -59,10 +59,10 @@ class PachKeyManager() {
     )
 
     var backyardCoordinatesIncreasingAlt = listOf(
-            Coordinate(40.010457220936324, -105.24444971137794, 200.0),
-            Coordinate(40.011165499597105, -105.24412041426442, 250.0),
-            Coordinate(40.01110330957, -105.24382269358645, 300.0),
-            Coordinate(40.01045031086439, -105.24401215219972, 350.0)
+            Coordinate(40.01079, -105.24426, 30.0),
+            Coordinate(40.01114, -105.24407, 40.0),
+            Coordinate(40.01103, -105.24356, 45.0),
+            Coordinate(40.01061, -105.24414, 50.0)
     )
 
     var backyardSingleCoordinate = listOf(Coordinate(40.010819889488076, -105.244268000203, 30.0))
@@ -108,7 +108,7 @@ class PachKeyManager() {
                 }
                 if (fiveDPress) {
                     Log.v("PachKeyManager", "FiveD Pressed")
-                    followWaypoints(backyardSingleCoordinate)
+                    followWaypoints(backyardCoordinatesIncreasingAlt)
 
                 }
             }
@@ -550,7 +550,7 @@ class PachKeyManager() {
             return false
         }
         if (controllerStatus.pauseButton!!){
-            Log.v("SafetyChecks", "Pause Button is pressed")
+            Log.v("PachKeyManager", "Pause Button is pressed")
             return false
         }
         if (statusData.gps!! <3){
@@ -629,13 +629,13 @@ class PachKeyManager() {
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             Log.v("PachKeyManager", "Distance: $distance")
             var xvel = pidController.getControl(distance)
-            xvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
-            Log.v("PachKeyManager", "Commanded X Velocity: $xvel")
+            var clippedXvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
+            Log.v("PachKeyManager", "Commanded X Velocity: $xvel, Clipped Velocity  $clippedXvel")
             distance = computeLatLonDistance(lat, lon)
 
             // command drone x velocity to move to target location
             if (safetyChecks()) {
-                controller.sendForwardVel(xvel)
+                controller.sendForwardVel(clippedXvel)
             } else{
                 Log.v("PachKeyManager", "Safety Check Failed")
                 break
