@@ -111,6 +111,10 @@ class VirtualStickControl{
         sendAdvancedVirtualStickData(north, east, yaw, "VELOCITY", "GROUND","POSITION", alt, "ANGLE")
     }
 
+    fun sendVirtualStickVelocityBody(forwardVel: Double, roll: Double, yaw: Double, alt: Double){
+        // Simplified implementation with coordinate frame information taken into account
+        sendAdvancedVirtualStickData(forwardVel, roll, yaw, "VELOCITY", "BODY","POSITION", alt, "ANGLE")
+    }
     fun changeRightPosition(hor:Int,vert:Int){
         enableVirtualStick()
         virtualStickVM.setRightPosition(hor,vert)

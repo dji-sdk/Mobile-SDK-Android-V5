@@ -580,8 +580,8 @@ class PachKeyManager() {
 
 
         // compute yaw angle based on current location and target location
-        val yawAngle = computeYawAngle(lat, lon)
-        Log.v("PachKeyManager", "Yaw Offset: $yawAngle")
+        //val yawAngle = computeYawAngle(lat, lon)
+        //Log.v("PachKeyManager", "Yaw Offset: $yawAngle")
 //        // command yaw and altitude angle to drone
 //        while (((abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance) &&
 //                    (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance))) {
@@ -597,51 +597,88 @@ class PachKeyManager() {
 //            delay(500L)
 //        }
 
-        while (abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance){
-            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle")
-
-            if (safetyChecks()) {
-                controller.sendYaw(yawAngle)
-
-            } else{
-                Log.v("PachKeyManager", "Safety Check Failed")
-                break
-            }
-            delay(100L)
-        }
-
-        while (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance){
-            Log.v("PachKeyManager", "Commanded Altitude: $alt")
-            if (safetyChecks()) {
-                controller.setAlt(alt)
-            } else{
-                Log.v("PachKeyManager", "Safety Check Failed")
-                break
-            }
-            delay(100L)
-        }
-
+//        yawtol = abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance
+//        disttol = distance > pidController.posTolerance
+//        tolnotmet = [yawtol, disttol]
+//        while any tolnotmet{
+//
+//        }
+//
+//        while (abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance){
+//            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle")
+//
+//            if (safetyChecks()) {
+//                controller.sendYaw(yawAngle)
+//
+//            } else{
+//                Log.v("PachKeyManager", "Safety Check Failed")
+//                break
+//            }
+//            delay(100L)
+//        }
+//
+//        while (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance){
+//            Log.v("PachKeyManager", "Commanded Altitude: $alt")
+//            if (safetyChecks()) {
+//                controller.setAlt(alt)
+//            } else{
+//                Log.v("PachKeyManager", "Safety Check Failed")
+//                break
+//            }
+//            delay(100L)
+//        }
+//
+//        // compute distance to target location using lat and lon
+//        var distance = computeLatLonDistance(lat, lon)
+//        pidController.setSetpoint(distance)
+//        while (distance > pidController.posTolerance) { // add check for velocity tolerance: if velocity too high, keep going
+//            // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
+//            //What if we overshoot the target location? Will the aircraft back up or turn around?
+//            Log.v("PachKeyManager", "Distance: $distance")
+//            val xvel = pidController.getControl(distance)
+//            val clippedXvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
+//            Log.v("PachKeyManager", "Commanded X Velocity: $xvel, Clipped Velocity  $clippedXvel")
+//            distance = computeLatLonDistance(lat, lon)
+//
+//            // command drone x velocity to move to target location
+//            if (safetyChecks()) {
+//                controller.sendForwardVel(clippedXvel)
+//            } else{
+//                Log.v("PachKeyManager", "Safety Check Failed")
+//                break
+//            }
+//            delay(100L)
+//        }
+        ///////////////////////////////////////////////////////////////////////
         // compute distance to target location using lat and lon
         var distance = computeLatLonDistance(lat, lon)
+        var yawAngle = computeYawAngle(lat, lon)
         pidController.setSetpoint(distance)
         while (distance > pidController.posTolerance) { // add check for velocity tolerance: if velocity too high, keep going
             // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             Log.v("PachKeyManager", "Distance: $distance")
-            var xvel = pidController.getControl(distance)
-            var clippedXvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
+            val xvel = pidController.getControl(distance)
+            val clippedXvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
             Log.v("PachKeyManager", "Commanded X Velocity: $xvel, Clipped Velocity  $clippedXvel")
             distance = computeLatLonDistance(lat, lon)
 
+            // Update Yaw
+            yawAngle = computeYawAngle(lat, lon)
+
+            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle | Commanded Altitude: $alt | xvel: $xvel | clippedXvel: $clippedXvel")
+
             // command drone x velocity to move to target location
             if (safetyChecks()) {
-                controller.sendForwardVel(clippedXvel)
+                controller.sendVirtualStickVelocityBody(clippedXvel, 0.0, yawAngle, alt)
             } else{
                 Log.v("PachKeyManager", "Safety Check Failed")
                 break
             }
             delay(100L)
         }
+        ///////////////////////////////////////////////////////////////////////
+
     }
 
     // compute distance to target location using lat and lon
