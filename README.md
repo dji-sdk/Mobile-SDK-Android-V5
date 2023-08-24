@@ -55,17 +55,6 @@
 	- `Common Device Name Widget` supports device name display and renaming function.
 	- `Common About Widget` supports firmware version information display.
 
-
-### Bug Fixes
-- **Call `PerceptionInformationListener` to report null pointer error:** Fixed
-- **The `subItemsList` obtained by `payloadManager` is empty:** Fixed
-- **Call `setLTEEnhancedTransmissionType` to set `OCU_ SYNC_ LTE`, prompt opening LTE failed:** Fixed
-- **`RTKCenter` reported `ConcurrentModificationException` error:** Fixed
-- **`KeyCameraStorageInfos` failed to obtain the storage information of the PSDK payload:** Fixed
-- **The video stream cannot be opened after the PSDK load camera has backed out from media playback:** Fixed
-- **Mavic 3E performs Return-To-Home after completing the waypoint mission, and the `WaypointMissionExecuteState` changes to `Unknown`:** Fixed
-
-
 ## Offline Documentation
 
 - /Docs/Android_API/en/index.html
@@ -78,28 +67,12 @@
 | :---------------: | :-----------------:  | :---------------: |
 |     dji-sdk-v5-aircraft-alpha      | Aircraft main package, which provides support for MSDK to control the aircraft. | implementation 'com.dji:dji-sdk-v5-aircraft-alpha:{sdkVersion}' |
 | dji-sdk-v5-aircraft-provided-alpha | Aircraft compilation package, which provides interfaces related to the aircraft package. | compileOnly 'com.dji:dji-sdk-v5-aircraft-provided-alpha:{sdkVersion}' |
-| dji-sdk-v5-handheld-alpha<br/>(Not official released version) | Handheld main package, which provides support for MSDK to control handheld product. | implementation 'com.dji:dji-sdk-v5-handheld-alpha:{sdkVersion}' |
-| dji-sdk-v5-handheld-provided-alpha<br/>(Not official released version) |     Handheld compilation package, which provides interfaces related to handheld package.             | compileOnly 'com.dji:dji-sdk-v5-handheld-provided-alpha:{sdkVersion}' |
-| dji-sdk-v5-all-alpha<br/>(Not official released version) | Main package of all product, which provides support for MSDK to control aircraft and handheld product. | implementation 'com.dji:dji-sdk-v5-all-alpha:{sdkVersion}' |
-| dji-sdk-v5-all-provided-alpha<br/>(Not official released version) |    Compilation package of all product, which provides interfaces related to all product.          | compileOnly 'com.dji:dji-sdk-v5-all-provided-alpha:{sdkVersion}' |
 | dji-sdk-v5-networkImp-alpha | Network library package, which provides network connection ability for MSDK. Without this dependency, all network functions of MSDK will not work, but the interfaces of hardware control can be used normally. | runtimeOnly 'com.dji:dji-sdk-v5-networkImp-alpha:{sdkVersion}' |
 
 - If only the aircraft product is in need to support, please use:
   ```groovy
   implementation 'com.dji:dji-sdk-v5-aircraft-alpha:{sdkVersion}'
   compileOnly 'com.dji:dji-sdk-v5-aircraft-provided-alpha:{sdkVersion}'
-  ```
-
-- If only the handheld product is in need to support, please use:
-  ```groovy
-  implementation 'com.dji:dji-sdk-v5-handheld-alpha:{sdkVersion}'
-  compileOnly 'com.dji:dji-sdk-v5-handheld-provided-alpha:{sdkVersion}'
-  ```
-  
-- If the aircraft and handheld product are in need to support, please use:
-  ```groovy
-  implementation 'com.dji:dji-sdk-v5-all-alpha:{sdkVersion}'
-  compileOnly 'com.dji:dji-sdk-v5-all-provided-alpha:{sdkVersion}'
   ```
   
 - If the MSDK have to use network(required by default), please use:
