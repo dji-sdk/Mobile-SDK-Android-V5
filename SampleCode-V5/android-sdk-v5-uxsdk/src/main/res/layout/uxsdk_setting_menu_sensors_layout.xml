@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="afterDescendants">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:descendantFocusability="afterDescendants">
+        
+        <dji.v5.ux.core.base.TabGroupWidget
+            android:id="@+id/setting_menu_sensors_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/uxsdk_vertical_margin_medium"
+            app:uxsdk_tabsPadding="@dimen/speaker_fpv_tab_padding"
+            app:uxsdk_coverStyle="white"
+            app:uxsdk_textColor="@color/uxsdk_white"
+            app:uxsdk_textBold="true"
+            app:uxsdk_tabs="@array/uxsdk_flyc_sensors"
+            app:uxsdk_select="0"
+            app:uxsdk_fixedSize="true"
+            app:uxsdk_textSize="12sp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <dji.v5.ux.core.base.ImuStatusWidget
+                android:id="@+id/setting_menu_sensors_imu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <dji.v5.ux.core.base.CompassStatusWidget
+                android:id="@+id/setting_menu_sensors_compass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </FrameLayout>
+    </LinearLayout>
+</ScrollView>

@@ -11,7 +11,7 @@ import dji.sampleV5.moduleaircraft.models.UASFranceVM
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.frag_uas_france_page.*
 
 /**

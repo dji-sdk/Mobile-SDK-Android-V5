@@ -20,13 +20,11 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
     }
 }
 
 dependencies {
     api project(':sample-module-common')
-
-    api project(':uxsdk')
-
     compileOnly deps.aircraftProvided
 }

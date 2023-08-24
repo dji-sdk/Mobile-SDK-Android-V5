@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/setting_menu_battery_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="@dimen/uxsdk_5_dp"
+        android:layout_marginTop="@dimen/uxsdk_10_dp"
+        android:layout_marginEnd="@dimen/uxsdk_5_dp"
+        android:background="@color/uxsdk_white_alpha_03" />
+
+    <TextView
+        android:id="@+id/setting_menu_battery_sn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setting_menu_battery_divider"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/uxsdk_16_dp"
+        android:layout_marginBottom="@dimen/uxsdk_16_dp"
+        android:maxLines="1"
+        android:text="@string/setting_ui_battery_serial_number"
+        android:textColor="@color/uxsdk_dic_color_c5_deepGray"
+        android:textSize="@dimen/uxsdk_14_dp" />
+
+    <TextView
+        android:id="@+id/setting_menu_battery_production_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setting_menu_battery_divider"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/uxsdk_16_dp"
+        android:layout_marginBottom="@dimen/uxsdk_16_dp"
+        android:maxLines="1"
+        android:text="@string/setting_ui_battery_product_date"
+        android:textColor="@color/uxsdk_dic_color_c5_deepGray"
+        android:textSize="@dimen/uxsdk_14_dp"
+        android:visibility="gone"
+        />
+
+
+</RelativeLayout>

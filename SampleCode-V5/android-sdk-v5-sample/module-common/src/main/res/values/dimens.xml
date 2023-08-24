@@ -89,4 +89,14 @@
     <dimen name="mission_edit_panel_width">336dp</dimen>
     <dimen name="mission_edit_expand_btn_width">32dp</dimen>
     <dimen name="mission_edit_expand_btn_height">50dp</dimen>
+
+    <!-- left button list -->
+    <dimen name="left_button_list_button_width">150dp</dimen>
+    <dimen name="left_button_list_button_height">45dp</dimen>
+    <dimen name="left_button_list_button_padding_left">5dp</dimen>
+    <dimen name="left_button_list_button_padding_right">5dp</dimen>
+    <dimen name="left_button_list_button_margin_left">10dp</dimen>
+    <dimen name="left_button_list_button_margin_top">10dp</dimen>
+    <dimen name="left_button_list_button_text_size">14sp</dimen>
+    <dimen name="test_log_textsize">17sp</dimen>
 </resources>

@@ -31,8 +31,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.KeyEvent;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -43,6 +46,8 @@ import androidx.core.widget.ImageViewCompat;
  * Utility class for converting and applying changes to Views.
  */
 public final class ViewUtil {
+
+    private static final Handler UI_Handler = new Handler(Looper.getMainLooper());
 
     private ViewUtil() {
         // Util class
@@ -95,33 +100,40 @@ public final class ViewUtil {
 
         return bitmap;
     }
-//
-//    /**
-//     * Shows a toast, or logs an error if a BadTokenException is thrown.
-//     *
-//     * @param context  An android context object
-//     * @param resId    The resource ID of the string to display
-//     * @param duration How long to display the toast.
-//     */
-//    public static void showToast(Context context, int resId, int duration) {
-//        showToast(context, context.getString(resId), duration);
-//    }
-//
-//    /**
-//     * Shows a toast, or logs an error if a BadTokenException is thrown.
-//     *
-//     * @param context  An android context object
-//     * @param message  The string to display
-//     * @param duration How long to display the toast.
-//     */
-//    public static void showToast(Context context, String message, int duration) {
-//        if (android.os.Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
-//            ToastCompat.makeText(context, message, duration)
-//                    .setBadTokenListener(toast -> DJILog.e("failed toast", message)).show();
-//        } else {
-//            Toast.makeText(context, message, duration).show();
-//        }
-//    }
+
+    /**
+     * Shows a toast, or logs an error if a BadTokenException is thrown.
+     *
+     * @param context  An android context object
+     * @param resId    The resource ID of the string to display
+     * @param duration How long to display the toast.
+     */
+    public static void showToast(Context context, int resId, int duration) {
+        showToast(context, context.getString(resId), duration);
+    }
+
+    /**
+     * Shows a toast, or logs an error if a BadTokenException is thrown.
+     *
+     * @param context  An android context object
+     * @param message  The string to display
+     * @param duration How long to display the toast.
+     */
+    public static void showToast(Context context, String message, int duration) {
+        if (context == null) {
+            return;
+        }
+        Runnable runnable = () -> Toast.makeText(context, message, duration).show();
+        if (UI_Handler.getLooper().isCurrentThread()) {
+            runnable.run();
+        } else {
+            UI_Handler.post(runnable);
+        }
+    }
+
+    public static void showToast(Context context, String message) {
+        showToast(context, message, Toast.LENGTH_SHORT);
+    }
 
     public static boolean dispatchKeyEvent(Context context, KeyEvent keyEvent) {
         Activity activity = contextToActivity(context);
@@ -134,13 +146,13 @@ public final class ViewUtil {
     }
 
     public static Activity contextToActivity(Context context) {
-        if(context == null){
+        if (context == null) {
             return null;
         }
         if (context instanceof Activity) {
             return (Activity) context;
         } else if (context instanceof ContextWrapper) {
-            Context context2 = ((ContextWrapper)context).getBaseContext();
+            Context context2 = ((ContextWrapper) context).getBaseContext();
             if (context2 instanceof Activity) {
                 return (Activity) context2;
             }

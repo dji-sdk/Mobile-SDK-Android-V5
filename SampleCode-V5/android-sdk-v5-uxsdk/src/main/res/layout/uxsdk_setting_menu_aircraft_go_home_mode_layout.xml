@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:tag="setting:multi_rc:flyc">
+
+    <dji.v5.ux.core.base.TabSelectCell
+        android:id="@+id/setting_menu_aircraft_go_home_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:uxsdk_bottomDividerEnable="false"
+        app:uxsdk_select="0"
+        app:uxsdk_summary="@string/setting_menu_flyc_rth_mode"
+        app:uxsdk_tabs="@array/uxsdk_aircraft_go_home_mode_array" />
+
+    <TextView
+        android:id="@+id/setting_menu_aircraft_go_home_mode_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_medium"
+        android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/uxsdk_setting_ui_go_home_mode_height_fixed"
+        android:drawablePadding="@dimen/uxsdk_setting_flyc_fly_mode_desc_margin_start"
+        android:gravity="center_vertical"
+        android:text="@string/setting_menu_flyc_smart_rth_set_altitude"
+        android:textColor="@color/uxsdk_dic_color_c5_deepGray"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:background="@color/uxsdk_dic_color_c20_divider" />
+
+</merge>

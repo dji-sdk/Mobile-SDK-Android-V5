@@ -2,6 +2,7 @@ package dji.sampleV5.moduleaircraft.models
 
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.models.DJIViewModel
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sdk.keyvalue.value.mop.PipelineDeviceType
 import dji.sdk.keyvalue.value.mop.TransmissionControlType
 import dji.v5.common.error.DJIPipeLineError
@@ -11,7 +12,6 @@ import dji.v5.manager.mop.Pipeline
 import dji.v5.manager.mop.PipelineManager
 import dji.v5.utils.common.DJIExecutor
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable

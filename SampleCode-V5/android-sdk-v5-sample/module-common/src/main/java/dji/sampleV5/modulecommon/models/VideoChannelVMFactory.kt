@@ -8,7 +8,7 @@ class VideoChannelVMFactory (channelType: VideoChannelType): ViewModelProvider.F
     private var videoChannelType: VideoChannelType = channelType
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(p0: Class<T>): T {
+    override fun <T : ViewModel> create(p0: Class<T>): T {
         return VideoChannelVM(videoChannelType) as T
     }
 }

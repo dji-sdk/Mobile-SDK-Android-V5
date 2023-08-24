@@ -38,11 +38,11 @@ open class CameraVisiblePanelWidget @JvmOverloads constructor(
         widget_camera_config_storage.updateCameraSource(cameraIndex,lensType)
 
         //NDVI镜头下不支持这类操作
-        widget_camera_config_iso_and_ei.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) GONE else VISIBLE
-        widget_camera_config_shutter.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) GONE else VISIBLE
-        widget_camera_config_aperture.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) GONE else VISIBLE
-        widget_camera_config_ev.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) GONE else VISIBLE
-        widget_camera_config_wb.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) GONE else VISIBLE
+        widget_camera_config_iso_and_ei.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) INVISIBLE else VISIBLE
+        widget_camera_config_shutter.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) INVISIBLE else VISIBLE
+        widget_camera_config_aperture.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) INVISIBLE else VISIBLE
+        widget_camera_config_ev.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) INVISIBLE else VISIBLE
+        widget_camera_config_wb.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) INVISIBLE else VISIBLE
     }
 
     override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MEDIA_FILE_DETAILS_STR
 import dji.sampleV5.modulecommon.models.MediaVM
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -25,7 +26,6 @@ import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.manager.datacenter.media.MediaFileListState
 import dji.v5.manager.datacenter.media.MediaManager
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_media_page.*
 import java.util.ArrayList
 
@@ -63,7 +63,7 @@ class MediaFragment : DJIFragment(){
             mediaVM.init()
             isload = true
         }
-        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!! , context , ::onItemClick )
+        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!!, ::onItemClick)
         media_recycle_list.adapter = adapter
         mediaVM.mediaFileListData.observe(viewLifecycleOwner){
             adapter!!.notifyDataSetChanged()
@@ -79,6 +79,10 @@ class MediaFragment : DJIFragment(){
             }
 
             tv_get_list_state?.setText("State:\n ${it.name}")
+        }
+
+        mediaVM.isPlayBack.observe(viewLifecycleOwner){
+            tv_playback.setText("isPlayingBack : ${it}")
         }
 
     }
@@ -148,6 +152,27 @@ class MediaFragment : DJIFragment(){
             }
         }
 
+        btn_enable_playback.setOnClickListener {
+            mediaVM.enable()
+        }
+
+        btn_disable_playback.setOnClickListener {
+            mediaVM.disable()
+        }
+
+        btn_take_photo.setOnClickListener {
+            mediaVM.takePhoto(object :CommonCallbacks.CompletionCallback{
+                override fun onSuccess() {
+                   ToastUtils.showToast("take photo success")
+                }
+
+                override fun onFailure(error: IDJIError) {
+                    ToastUtils.showToast("take photo failed")
+                }
+
+            })
+        }
+
     }
     private fun updateDeleteBtn(enable: Boolean) {
         btn_delete.isEnabled = enable
@@ -179,8 +204,8 @@ class MediaFragment : DJIFragment(){
 
     override fun onDestroy() {
         super.onDestroy()
-
         mediaVM.destroy()
+        adapter = null
     }
 
 

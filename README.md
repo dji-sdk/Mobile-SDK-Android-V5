@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Alpha Version 5.3.0-a3
+# DJI Mobile SDK for Android V5 Latest Alpha Version 5.7.0-a1
 
 [中文版](README_CN.md)
 
@@ -12,13 +12,48 @@
 
 ## Release Date
 
-2023.3.13
+2023.8.24
 
 ## Release Notes
 
-- Support offline firmware upgrade: `startOfflineUpgrade`.Supported Aircraft: M3E series.
-- Support MOP: `PipelineManager`. Supported Aircraft: Matrice 300 RTK, Matrice 30 Series. M3E series firmware does not support this function.
-- MSDK log output optimization.
+- Add Sample Widget:
+- Flight Controller
+	- `FC Home Point Widget` supports home point setting.
+	- `FC Flight Mode Widget` supports flight mode setting.
+	- `FC Return Home Mode Widget` supports return home mode setting.
+	- `FC Distance Height Limit Widget` supports height and distance limit setting.
+	- `FC IMU Status Widget` supports IMU status display and IMU calibration function.
+	- `FC Compass Status Widget` supports compass status display and compass calibration function.
+	- `FC Lost Action Widget` supports signal lost behavior setting.
+
+- Perception
+	- `Perception Avoidance Type Widget` supports obstacle sensing behavior type setting.
+	- `Perception Vision Widget` supports vision positioning setting.
+
+- Remote controller
+	- `RC Pairing Widget` supports remote controller pairing setting.
+	- `RC Calibration Widget` supports remote controller calibration function.
+
+- Image transmission
+	- `HD Frequency Mode Widget` supports video transmission working frequency mode setting.
+	- `HD SDR Info Widget` supports video transmission signal status display.
+	- `HD SDR Channel Mode Widget` supports video transmission channel mode setting.
+	- `HD SDR Frequency Widget` supports video transmission channel setting.
+	- `HD SDR Band Width Select Widget` supports image transmission downlink bandwidth setting.
+	- `HD SDR Band Width Widget` supports image transmission downlink bandwidth display.
+	- `HD SDR Video Rate Widget` supports image transmission code rate display.
+
+- Battery
+	- `Battery Info Widget` supports battery information display.
+	- `Battery Alert Widget` supports battery warning setting.
+
+- Gimbal
+	- `Gimbal Fine Tune Widget` supports gimbal adjust setting.
+	- `Gimbal Setting Widget` supports reset gimbal parameters and gimbal calibration function.
+
+- Common
+	- `Common Device Name Widget` supports device name display and renaming function.
+	- `Common About Widget` supports firmware version information display.
 
 
 ### Bug Fixes
@@ -37,7 +72,7 @@
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.3.0-a3
+> **Notice:** sdkVersion = 5.7.0-a1
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

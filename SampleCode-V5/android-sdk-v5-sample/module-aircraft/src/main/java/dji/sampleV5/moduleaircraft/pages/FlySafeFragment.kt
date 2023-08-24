@@ -20,7 +20,7 @@ import dji.v5.manager.areacode.AreaCode
 import dji.v5.manager.areacode.AreaCodeManager
 import dji.v5.utils.common.DateUtils
 import dji.v5.utils.common.JsonUtil
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.ux.map.MapWidget
 import dji.v5.ux.mapkit.core.maps.DJIMap
 import kotlinx.android.synthetic.main.frag_fly_safe_page.*
@@ -36,6 +36,12 @@ import java.util.*
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
 class FlySafeFragment : DJIFragment() {
+    companion object {
+        private const val EVENT_TYPE = "Event type :"
+        private const val LIMIT_HEIGHT = "Limit height :"
+        private const val DESCRIPTION = "Description :"
+        private const val COUNT_DOWN = "Count Down :"
+    }
 
     private val flySafeVm: FlySafeVM by viewModels()
     private val notificationBuilder = StringBuilder()
@@ -50,30 +56,30 @@ class FlySafeFragment : DJIFragment() {
         flySafeVm.initListener()
         flySafeVm.flySafeWarningInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Limit height :").append(it.heightLimit).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(LIMIT_HEIGHT).append(it.heightLimit).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flySafeSeriousWarningInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Limit height :").append(it.heightLimit).append("\n")
-                builder.append("Count Down :").append(it.countdown).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(LIMIT_HEIGHT).append(it.heightLimit).append("\n")
+                builder.append(COUNT_DOWN).append(it.countdown).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flySafeReturnToHomeInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flySafeTipInformation.observe(viewLifecycleOwner) {
             showFlySafeNotification { builder ->
-                builder.append("Event type :").append(it.event).append("\n")
-                builder.append("Limit height :").append(it.heightLimit).append("\n")
-                builder.append("Description :").append(it.description).append("\n")
+                builder.append(EVENT_TYPE).append(it.event).append("\n")
+                builder.append(LIMIT_HEIGHT).append(it.heightLimit).append("\n")
+                builder.append(DESCRIPTION).append(it.description).append("\n")
             }
         }
         flySafeVm.flyZoneInformation.observe(viewLifecycleOwner) {
@@ -166,7 +172,12 @@ class FlySafeFragment : DJIFragment() {
             flySafeVm.deleteFlyZoneLicensesFromAircraft()
         }
         btn_set_fly_zone_licenses_enabled.setOnClickListener {
-            flySafeVm.aircraftFlyZoneLicenseInfo.value?.let { licenses ->
+            val info = flySafeVm.aircraftFlyZoneLicenseInfo.value
+            if (info == null || info.isEmpty()) {
+                ToastUtils.showToast("Please download licenses and push to aircraft first.")
+                return@setOnClickListener
+            }
+            info.let { licenses ->
                 val enables = arrayListOf(true, false)
                 val licenseIDs = arrayListOf<Int>().apply {
                     licenses.forEach {
@@ -178,8 +189,6 @@ class FlySafeFragment : DJIFragment() {
                     resetIndex()
                 }
                 return@let
-            } ?: let {
-                ToastUtils.showToast("Please download licenses and push to aircraft first.")
             }
         }
         btn_unlock_authorization_fly_zone.setOnClickListener {

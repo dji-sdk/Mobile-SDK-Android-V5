@@ -18,7 +18,7 @@ import dji.v5.common.error.IDJIError
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.megaphone.*
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.frag_megaphone_page.*
 
 /**

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape>
+            <corners
+                android:bottomRightRadius="@dimen/tab_border_radius"
+                android:topRightRadius="@dimen/tab_border_radius"/>
+            <solid
+                android:color="@color/uxsdk_dic_color_c9_blue"/>
+            <stroke
+                android:width="@dimen/tab_border_width"
+                android:color="@color/uxsdk_dic_color_c9_blue"/>
+        </shape>
+    </item>
+
+    <item android:state_checked="true">
+        <shape>
+            <corners
+                android:bottomRightRadius="@dimen/tab_border_radius"
+                android:topRightRadius="@dimen/tab_border_radius"/>
+            <solid
+                android:color="@color/uxsdk_dic_color_c9_blue"/>
+            <stroke
+                android:width="@dimen/tab_border_width"
+                android:color="@color/uxsdk_dic_color_c9_blue"/>
+        </shape>
+    </item>
+
+    <item>
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/uxsdk_transparent"/>
+                </shape>
+            </item>
+            <item
+                android:bottom="0dp"
+                android:left="-2dp"
+                android:right="0dp"
+                android:top="0dp">
+                <shape>
+                    <corners
+                        android:bottomRightRadius="@dimen/tab_border_radius"
+                        android:topRightRadius="@dimen/tab_border_radius"/>
+                    <stroke
+                        android:width="@dimen/tab_border_width"
+                        android:color="@color/uxsdk_dic_color_c9_blue"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

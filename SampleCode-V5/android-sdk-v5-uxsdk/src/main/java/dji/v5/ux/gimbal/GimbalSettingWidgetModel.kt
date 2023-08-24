@@ -1,0 +1,71 @@
+package dji.v5.ux.gimbal
+
+import dji.sdk.keyvalue.key.FlightControllerKey
+import dji.sdk.keyvalue.key.GimbalKey
+import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.common.EmptyMsg
+import dji.sdk.keyvalue.value.gimbal.GimbalCalibrationState
+import dji.sdk.keyvalue.value.gimbal.GimbalCalibrationStatusInfo
+import dji.v5.ux.core.base.DJISDKModel
+import dji.v5.ux.core.base.IGimbalIndex
+import dji.v5.ux.core.base.WidgetModel
+import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
+import dji.v5.ux.core.util.DataProcessor
+import dji.v5.ux.core.util.SettingDefinitions.GimbalIndex
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
+
+open class GimbalSettingWidgetModel constructor(
+    djiSdkModel: DJISDKModel,
+    uxKeyManager: ObservableInMemoryKeyedStore
+) : WidgetModel(djiSdkModel, uxKeyManager), IGimbalIndex {
+
+    private var gimbalIndex = GimbalIndex.PORT
+
+    private val calibrationStatusProcessor: DataProcessor<GimbalCalibrationStatusInfo> =
+        DataProcessor.create(GimbalCalibrationStatusInfo(GimbalCalibrationState.IDLE, 0))
+
+    private val areMotorsOnProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
+
+    override fun inSetup() {
+        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyGimbalCalibrationStatus, gimbalIndex.index), calibrationStatusProcessor)
+        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), areMotorsOnProcessor)
+    }
+
+    override fun inCleanup() {
+        //Nothing to cleanup
+    }
+
+    fun resetGimbal(): Completable {
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(GimbalKey.KeyRestoreFactorySettings, gimbalIndex.index),
+            EmptyMsg()
+        )
+    }
+
+    fun calibrateGimbal(): Completable {
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(GimbalKey.KeyGimbalCalibrate, gimbalIndex.index),
+            EmptyMsg()
+        )
+    }
+
+    fun calibrationStatus(): Flowable<GimbalCalibrationStatusInfo> {
+        return calibrationStatusProcessor.toFlowableOnUI()
+    }
+
+    fun areMotorsOn(): Flowable<Boolean> {
+        return areMotorsOnProcessor.toFlowableOnUI()
+    }
+
+    override fun getGimbalIndex(): GimbalIndex {
+        return gimbalIndex
+    }
+
+    override fun updateGimbalIndex(gimbalIndex: GimbalIndex) {
+        if (this.gimbalIndex != gimbalIndex) {
+            this.gimbalIndex = gimbalIndex
+            restart()
+        }
+    }
+}

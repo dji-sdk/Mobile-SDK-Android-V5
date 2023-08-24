@@ -8,7 +8,6 @@ import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.payload.PayloadCenter
 import dji.v5.manager.aircraft.payload.PayloadIndexType
 import dji.v5.manager.aircraft.payload.listener.PayloadDataListener
-import dji.v5.utils.common.LogUtils
 import java.text.SimpleDateFormat
 
 /**

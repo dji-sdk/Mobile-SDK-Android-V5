@@ -32,6 +32,7 @@ android {
 
     kotlinOptions{
         jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
     }
 }
 
@@ -50,17 +51,19 @@ dependencies {
     api deps.legacySupport
     api deps.lifecycleViewModel
     api deps.lifecycleLiveData
-    api deps.rx3Android
     implementation deps.bugly
     implementation deps.leakcanary
     api deps.glide
     kapt deps.glidecompiler
     api deps.dynamicanimation
     api deps.expandedit
+    api deps.rx3Kt
+    api deps.rx3Android
+    api deps.dom
+    api project(':uxsdk')
 
     //sdk依赖项（common下是通用功能，其他包也可以）
-    compileOnly deps.allProvided
-    compileOnly deps.all
+    compileOnly deps.aircraftProvided
 
     //网络库的依赖项
     runtimeOnly deps.networkImp

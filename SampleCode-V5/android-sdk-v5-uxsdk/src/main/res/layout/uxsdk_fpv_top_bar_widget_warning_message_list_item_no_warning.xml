@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_fpv_topbar_img_empty_fpv_message" />
+        app:srcCompat="@drawable/uxsdk_ic_fpv_topbar_img_empty_fpv_message" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_no_message"

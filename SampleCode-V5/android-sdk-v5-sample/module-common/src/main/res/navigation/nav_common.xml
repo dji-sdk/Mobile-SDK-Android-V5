@@ -12,10 +12,16 @@
         tools:layout="@layout/frag_key_value_page"/>
 
     <fragment
-        android:id="@+id/multi_video_decoding_page"
+        android:id="@+id/key_multi_video_decoding_page"
         android:name="dji.sampleV5.modulecommon.pages.MultiVideoChannelFragment"
         android:label="multi_video_decoding_page"
         tools:layout="@layout/frag_multi_video_channel_page"/>
+
+    <fragment
+        android:id="@+id/key_data_protection_page"
+        android:name="dji.sampleV5.modulecommon.pages.DataProtectionFragment"
+        android:label="data_protection"
+        tools:layout="@layout/frag_data_protection_page"/>
 
     <fragment
         android:id="@+id/key_diagnostic_page"
@@ -28,7 +34,6 @@
         android:name="dji.sampleV5.modulecommon.pages.LiveStreamFragment"
         android:label="live_stream_page"
         tools:layout="@layout/frag_live_stream_page"/>
-
 
     <fragment
         android:id="@+id/key_login_account_page"
@@ -71,7 +76,7 @@
 
 
     <fragment
-        android:id="@+id/media_playback_page"
+        android:id="@+id/key_media_playback_page"
         android:name="dji.sampleV5.modulecommon.pages.MediaFragment"
         android:label="media_playback"
         tools:layout="@layout/frag_media_page">

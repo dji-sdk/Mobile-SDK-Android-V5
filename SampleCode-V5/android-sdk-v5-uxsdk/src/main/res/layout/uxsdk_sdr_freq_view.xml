@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/sdr_custom_alert_tip"
+        style="@style/uxsdk_setting_ui_item_txt"
+        android:text="@string/setting_ui_hd_sdr_custom_selected_tip"
+        android:gravity="top"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp"
+        android:textColor="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/sdr_y_axis_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sdr_custom_alert_tip"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="@dimen/uxsdk_15_dp"
+        android:text="dBm/MHz"/>
+
+    <dji.v5.ux.core.widget.hd.frequency.RectCenterTextView
+        android:id="@+id/sdr_rect_average_value"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_20_dp"
+        android:layout_below="@id/sdr_y_axis_unit"/>
+    
+    <dji.v5.ux.core.widget.hd.frequency.ChartLeftYAxisView
+        android:id="@+id/sdr_y_axis_number"
+        android:layout_width="@dimen/uxsdk_30_dp"
+        android:layout_height="@dimen/uxsdk_160_dp"
+        android:layout_below="@id/sdr_rect_average_value"/>
+
+    <dji.v5.ux.core.widget.hd.frequency.ChartRightYAxisView
+        android:id="@+id/sdr_quality_value"
+        android:layout_width="@dimen/uxsdk_35_dp"
+        android:layout_height="@dimen/uxsdk_160_dp"
+        android:layout_below="@id/sdr_rect_average_value"
+        android:layout_alignParentRight="true"/>
+
+    <RelativeLayout
+        android:id="@+id/sdr_chart_ly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/sdr_y_axis_number"
+        android:layout_toLeftOf="@id/sdr_quality_value"
+        android:layout_below="@id/sdr_rect_average_value">
+
+        <dji.v5.ux.core.widget.hd.frequency.DistanceLineView
+            android:id="@+id/sdr_quality_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_140_dp"
+        />
+
+        <dji.v5.ux.core.base.charts.view.LineChartView
+            android:id="@+id/sdr_snr_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_140_dp"
+            android:background="@color/uxsdk_black_47_percent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <dji.v5.ux.core.widget.hd.frequency.FreqRangeRectView
+            android:id="@+id/sdr_snr_freq_range_rect"
+            android:layout_width="50dp"
+            android:layout_height="@dimen/uxsdk_140_dp"
+            android:background="@drawable/uxsdk_freq_range_rect">
+
+            <ImageView
+                android:id="@+id/sdr_snr_freq_range_center_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/uxsdk_range_center_down"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/sdr_snr_freq_range_center_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/uxsdk_range_center_up"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ProgressBar
+                android:id="@+id/sdr_snr_freq_rect_pgb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:indeterminate="false"
+                android:max="100"
+                android:padding="0dp"
+                android:progress="30"
+                android:progressDrawable="@drawable/uxsdk_sdr_freq_rect_pgb_bg"/>
+
+        </dji.v5.ux.core.widget.hd.frequency.FreqRangeRectView>
+
+    </RelativeLayout>
+
+    <dji.v5.ux.core.widget.hd.frequency.FreqRangeTextView
+        android:id="@+id/sdr_freq_range_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_20_dp"
+        android:layout_below="@id/sdr_chart_ly"/>
+
+    <LinearLayout
+        android:id="@+id/sdr_quality_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/uxsdk_20_dp"
+        android:layout_below="@id/sdr_freq_range_tv"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"
+            android:text="@string/setting_ui_hd_sdr_mincolor_desc"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/uxsdk_15_dp"
+            android:layout_marginRight="@dimen/uxsdk_15_dp"
+            android:src="@drawable/uxsdk_freq_value_range_line"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"
+            android:text="@string/setting_ui_hd_sdr_maxcolor_desc"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_ui_hd_sdr_channel_select_tip"
+        android:layout_marginTop="@dimen/uxsdk_15_dp"
+        android:layout_below="@id/sdr_quality_tip"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"/>
+
+</RelativeLayout>

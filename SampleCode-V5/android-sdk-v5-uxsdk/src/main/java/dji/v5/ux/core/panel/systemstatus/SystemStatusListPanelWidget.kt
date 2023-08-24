@@ -27,6 +27,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.core.content.res.use
+import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
 import dji.v5.ux.core.base.panel.ListPanelWidget
 import dji.v5.ux.core.base.panel.PanelWidgetConfiguration
@@ -89,16 +90,17 @@ import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget
  * <code>android:theme="@style/UXSDKSystemStatusListTheme"</code
  */
 class SystemStatusListPanelWidget @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0,
-        configuration: PanelWidgetConfiguration = PanelWidgetConfiguration(
-                context,
-                PanelWidgetType.LIST,
-                showTitleBar = true,
-                panelTitle = context.getString(R.string.uxsdk_system_status_list_title),
-                hasCloseButton = true)
-) : ListPanelWidget<Any>(context, attrs, defStyleAttr, configuration), OnStateChangeCallback<Any?> {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    configuration: PanelWidgetConfiguration = PanelWidgetConfiguration(
+        context,
+        PanelWidgetType.LIST,
+        showTitleBar = true,
+        panelTitle = context.getString(R.string.uxsdk_system_status_list_title),
+        hasCloseButton = true
+    )
+) : ListPanelWidget<Any>(context, attrs, defStyleAttr, configuration) {
 
     //region Lifecycle
     override fun initPanelWidget(context: Context, attrs: AttributeSet?, defStyleAttr: Int, widgetConfiguration: PanelWidgetConfiguration?) {
@@ -121,11 +123,6 @@ class SystemStatusListPanelWidget @JvmOverloads constructor(
         // Nothing to do
     }
 
-    override fun onStateChange(state: Any?) {
-        toggleVisibility()
-    }
-    //endregion
-
     //region Customizations
     @SuppressLint("Recycle")
     private fun initAttributes(context: Context, attrs: AttributeSet): Int {
@@ -142,9 +139,9 @@ class SystemStatusListPanelWidget @JvmOverloads constructor(
     private fun getExcludedItems(excludedItemsValue: Int?): Set<WidgetID>? {
         return if (excludedItemsValue != null) {
             SystemStatusSmartListModel.SystemStatusListItem.values
-                    .filter { it.isItemExcluded(excludedItemsValue) }
-                    .map { it.widgetID }
-                    .toSet()
+                .filter { it.isItemExcluded(excludedItemsValue) }
+                .map { it.widgetID }
+                .toSet()
         } else {
             null
         }

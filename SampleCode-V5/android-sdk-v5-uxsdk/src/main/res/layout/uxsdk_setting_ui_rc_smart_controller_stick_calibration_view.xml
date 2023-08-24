@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dji.v5.ux.remotecontroller.calibration.stick.StickCalibrationView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_rc_smart_controller"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <dji.v5.ux.remotecontroller.calibration.stick.HallStickCalibrationView
+            android:id="@+id/mavic_rc_calibration_left_joystick_square"
+            android:layout_width="@dimen/uxsdk_200_dp"
+            android:layout_height="@dimen/uxsdk_200_dp"
+            android:layout_marginLeft="@dimen/uxsdk_50_dp"
+            android:layout_marginRight="@dimen/uxsdk_15_dp" />
+
+        <dji.v5.ux.remotecontroller.calibration.stick.HallStickCalibrationView
+            android:id="@+id/mavic_rc_calibration_right_joystick_square"
+            android:layout_width="@dimen/uxsdk_200_dp"
+            android:layout_height="@dimen/uxsdk_200_dp"
+            android:layout_marginLeft="@dimen/uxsdk_15_dp"
+            android:layout_marginRight="@dimen/uxsdk_50_dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_rc_puls"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <dji.v5.ux.remotecontroller.calibration.stick.RcCalibrationRollView
+            android:id="@+id/rc_plus_calibration_left_joystick_square"
+            android:layout_width="@dimen/uxsdk_200_dp"
+            android:layout_height="@dimen/uxsdk_200_dp"
+            android:layout_marginLeft="@dimen/uxsdk_50_dp"
+            android:layout_marginRight="@dimen/uxsdk_15_dp" />
+
+        <dji.v5.ux.remotecontroller.calibration.stick.RcCalibrationRollView
+            android:id="@+id/rc_plus_calibration_right_joystick_square"
+            android:layout_width="@dimen/uxsdk_200_dp"
+            android:layout_height="@dimen/uxsdk_200_dp"
+            android:layout_marginLeft="@dimen/uxsdk_15_dp"
+            android:layout_marginRight="@dimen/uxsdk_50_dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_rc_calibration_des"
+        style="@style/setting_ui_txt_gray"
+        android:layout_marginLeft="@dimen/uxsdk_30_dp"
+        android:layout_marginRight="@dimen/uxsdk_30_dp"
+        android:layout_marginBottom="@dimen/uxsdk_20_dp"
+        android:text="@string/setting_ui_rc_calibration_stick_desc" />
+</dji.v5.ux.remotecontroller.calibration.stick.StickCalibrationView>

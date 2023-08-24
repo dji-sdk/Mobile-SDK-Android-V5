@@ -78,6 +78,7 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
     private final FlatCameraModule flatCameraModule;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.CAMERA_LENS_ZOOM;
+    private boolean lastIsRecording = false;
     //endregion
 
     //region Constructor
@@ -115,11 +116,18 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
     @Override
     protected void inSetup() {
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsRecording, cameraIndex), isRecording, newValue -> {
-            if (newValue) {
+            if (newValue == null) {
+                recordingStateProcessor.onNext(RecordingState.UNKNOWN);
+                return;
+            }
+            if (lastIsRecording && !newValue) { //只有从ture变化为false时，才发stopped
+                recordingStateProcessor.onNext(RecordingState.RECORDING_STOPPED);
+            } else if (newValue) {
                 recordingStateProcessor.onNext(RecordingState.RECORDING_IN_PROGRESS);
             } else {
-                recordingStateProcessor.onNext(RecordingState.RECORDING_STOPPED);
+                recordingStateProcessor.onNext(RecordingState.RECORDING_NOT_STARED);
             }
+            lastIsRecording = newValue;
         });
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyRecordingTime, cameraIndex), recordingTimeInSeconds);
         bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraType, cameraIndex), cameraType, type -> cameraDisplayName.onNext(type.name()));
@@ -155,9 +163,10 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
         }
     }
 
-    public boolean isVideoMode(){
+    public boolean isVideoMode() {
         return flatCameraModule.getCameraModeDataProcessor().getValue().isVideoMode();
     }
+
     /**
      * Get the current camera video storage state
      *
@@ -301,6 +310,9 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
          * No product is connected, or the recording state is unknown.
          */
         UNKNOWN,
+
+        RECORDING_NOT_STARED,
+
         /**
          * The camera is recording video.
          */
@@ -310,6 +322,8 @@ public class RecordVideoWidgetModel extends WidgetModel implements ICameraIndex 
          * The camera is not recording video.
          */
         RECORDING_STOPPED
+
+
     }
     //endregion
 }

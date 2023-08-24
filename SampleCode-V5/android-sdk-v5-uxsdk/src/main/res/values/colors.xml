@@ -211,6 +211,8 @@
     <color name="uxsdk_setting_menu_rtk_web_net_err_background">#F8F8F8</color>
     <color name="uxsdk_setting_menu_rtk_web_net_err_msg">#55222222</color>
     <color name="uxsdk_setting_menu_rtk_lat_text">#9B9B9B</color>
+    <color name="uxsdk_setting_ui_item_divider_color">#77979797</color>
+    <color name="uxsdk_setting_ui_hd_sdr_rect_pg">#33ffffff</color>
     <color name="uxsdk_rtk_purchase_back_ground">#F2F2F2</color>
 
 
@@ -235,6 +237,7 @@
     <color name="uxsdk_dic_color_c10_sea_blue_6">#991fa3f6</color>
     <color name="uxsdk_dic_color_c10_sea_blue_8">#211fa3f6</color>
     <color name="uxsdk_dic_color_c10_sea_blue_4">#771fa3f6</color>
+    <color name="uxsdk_dic_color_c10_sea_blue_3">#4d1fa3f6</color>
     <color name="uxsdk_dic_color_c11_green">#0aee8b</color>
     <color name="uxsdk_dic_color_c12_yellow">#ffcc00</color>
     <color name="uxsdk_dic_color_c27_yellow">#ff9d00</color>
@@ -252,6 +255,8 @@
     <color name="uxsdk_dic_color_c31">#585858</color>
     <color name="uxsdk_dic_color_c32">#4a4a4a</color>
     <color name="uxsdk_dic_color_c33">#26000000</color>
+    <color name="uxsdk_dic_color_black_80p">#cc000000</color>
+
 
     <color name="uxsdk_dic_color_c0_transparent">#00000000</color>
     <color name="uxsdk_dic_color_c1_primary">#273035</color>
@@ -292,4 +297,46 @@
     <color name="uxsdk_yellow_in_light_040">#68FFCC00</color>
     <color name="uxsdk_yellow_in_light_050">#80FFCC00</color>
     <color name="uxsdk_yellow_in_dark">#FFFFD707</color>
+
+    <!--GimbalFineTune-->
+    <color name="uxsdk_setting_ui_btn_hover">#ff1FA3F6</color>
+    <color name="uxsdk_fpv_white_50">#80ffffff</color>
+    <color name="uxsdk_fpv_black_90">#e6000000</color>
+    <color name="uxsdk_fpv_black_80">#cd000000</color>
+    <color name="uxsdk_fpv_black_40">#66000000</color>
+    <color name="uxsdk_fpv_white_30">#4dffffff</color>
+    <color name="uxsdk_fpv_white_20">#33ffffff</color>
+    <color name="uxsdk_btn_solid_rect_grey">#E6E6E6</color>
+
+    <!-- battery -->
+    <color name="uxsdk_setting_ui_battery_red">#ffee2b2a</color>
+    <color name="uxsdk_setting_ui_battery_green">#ff0aee8b</color>
+    <color name="uxsdk_setting_ui_battery_gray">#555555</color>
+    <color name="uxsdk_setting_ui_battery_yellow">#fffec300</color>
+    <color name="uxsdk_setting_ui_battery_txt_gray">#72ffffff</color>
+    <color name="uxsdk_list_item_title">#FF212121</color>
+    <color name="uxsdk_list_item_tips">#FF9B9B9B</color>
+    <color name="uxsdk_list_item_right_iiv">#FFBCBCBC</color>
+    <color name="uxsdk_fh_status_green">#FF0AEE8B</color>
+    <color name="uxsdk_fh_status_red">#E70102</color>
+    <color name="uxsdk_danger_state_color">#FFE41F29</color>
+    <color name="uxsdk_warning_state_color">#FFFF9F0A</color>
+    <color name="uxsdk_normal_state_color">#FF00EE8B</color>
+    <color name="uxsdk_white_alpha_005">#0CFFFFFF</color>
+    <color name="uxsdk_white_alpha_03">#4DFFFFFF</color>
+    <color name="uxsdk_white_alpha_01">#1AFFFFFF</color>
+
+    <color name="uxsdk_checklist_warning_text_color">#E9AF00</color>
+    <color name="uxsdk_checklist_seekbar_gray_color">#D9D9D9</color>
+    <color name="uxsdk_checklist_seekbar_red_color">#E41F29</color>
+    <color name="uxsdk_checklist_warning_bg_color">#F29709</color>
+
+    <!-- hd -->
+    <color name="uxsdk_theme_light_text_tertiary">#73000000</color>
+
+
+    <color name="uxsdk_edit_cell_text_color">#FF199FFF</color>
+    <color name="uxsdk_white_50">#7FFFFFFF</color>
+
+    <color name="uxsdk_theme_fpv_dark_main">#F2141414</color>
 </resources>

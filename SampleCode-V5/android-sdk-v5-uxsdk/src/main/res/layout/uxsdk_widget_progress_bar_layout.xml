@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/status_widget_value"
+            android:layout_width="wrap_content"
+            android:minWidth="@dimen/setting_progress_value_text_width"
+            android:layout_marginRight="2dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textSize="@dimen/uxsdk_dic_text_size_14sp"
+            android:textColor="@color/uxsdk_white"/>
+
+        <ProgressBar
+            android:id="@+id/status_widget_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/uxsdk_setting_ui_status_pgb_green" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/status_widget_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/uxsdk_dic_text_size_14sp"
+        android:layout_marginLeft="46dp"
+        android:textColor="@color/uxsdk_white"
+        android:visibility="gone" />
+
+</LinearLayout>

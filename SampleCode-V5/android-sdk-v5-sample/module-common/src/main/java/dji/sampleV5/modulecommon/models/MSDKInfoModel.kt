@@ -18,11 +18,15 @@ class MSDKInfoModel {
         return SDKConfig.getInstance().packageProductCategory
     }
 
-    fun getSDKVersion() : String {
+    fun getSDKVersion(): String {
         return SDKConfig.getInstance().registrationSDKVersion
     }
 
-    fun getBuildVersion() : String {
+    fun getBuildVersion(): String {
         return SDKConfig.getInstance().buildVersion
+    }
+
+    fun getCoreInfo(): SDKConfig.CoreInfo {
+        return SDKConfig.getInstance().coreInfo
     }
 }

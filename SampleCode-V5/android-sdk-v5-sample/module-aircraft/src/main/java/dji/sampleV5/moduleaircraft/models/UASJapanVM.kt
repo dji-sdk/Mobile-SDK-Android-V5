@@ -9,7 +9,7 @@ import dji.v5.manager.aircraft.uas.AreaStrategy
 import dji.v5.manager.aircraft.uas.UARegistrationNumberStatus
 import dji.v5.manager.aircraft.uas.UASRemoteIDManager
 import dji.v5.manager.aircraft.uas.UASRemoteIDStatus
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 /**
  * Description :日本无人机远程识别VM
@@ -50,8 +50,9 @@ class UASJapanVM : DJIViewModel() {
     }
 
     fun getUARegistrationNumber() {
-        instance.getUARegistrationNumber(object :CommonCallbacks.CompletionCallbackWithParam<String>{
+        instance.getUARegistrationNumber(object : CommonCallbacks.CompletionCallbackWithParam<String> {
             override fun onSuccess(t: String?) {
+                toastResult?.postValue(DJIToastResult.success("getUARegistrationNumber success"))
                 uaRegistrationNumber.postValue(t)
             }
 
@@ -63,7 +64,7 @@ class UASJapanVM : DJIViewModel() {
     }
 
     fun addUASRemoteIDStatusListener() {
-        instance.addUASRemoteIDStatusListener{
+        instance.addUASRemoteIDStatusListener {
             uasRemoteIDStatus.postValue(it)
         }
     }

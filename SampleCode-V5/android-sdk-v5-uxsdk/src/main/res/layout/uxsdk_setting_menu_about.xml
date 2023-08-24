@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/uxsdk_16_dp"
+        android:paddingEnd="@dimen/uxsdk_16_dp">
+
+        <dji.v5.ux.core.base.TextCell
+            android:id="@+id/common_menu_fc_version"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            app:uxsdk_text_cell_title="@string/setting_menu_common_aircraft_version" />
+
+        <dji.v5.ux.core.base.TextCell
+            android:id="@+id/common_menu_rc_version"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            app:uxsdk_text_cell_title="@string/setting_menu_common_rc_version" />
+
+
+        <LinearLayout
+            android:id="@+id/common_menu_gimbal_version_ly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/common_menu_camera_version_ly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <dji.v5.ux.core.base.TextCell
+            android:id="@+id/common_menu_camera1_sn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            android:visibility="gone" />
+
+        <dji.v5.ux.core.base.TextCell
+            android:id="@+id/common_menu_camera2_sn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            android:visibility="gone" />
+
+        <dji.v5.ux.core.base.TextCell
+            android:id="@+id/common_menu_camera3_sn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/common_menu_battery_version_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+
+        <dji.v5.ux.core.base.SerialNumberTextCell
+            android:id="@+id/common_menu_flyc_serial"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            app:uxsdk_text_cell_title="@string/setting_menu_common_flyc_serial" />
+
+        <dji.v5.ux.core.base.TextCell
+            android:id="@+id/common_menu_rc_serial"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            app:uxsdk_text_cell_content="@string/not_a_num"
+            app:uxsdk_text_cell_title="@string/setting_menu_common_rc_serial" />
+
+        <dji.v5.ux.core.base.TextCell
+            android:id="@+id/common_menu_rtk_serial"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_58_dp"
+            android:visibility="gone"
+            app:uxsdk_text_cell_title="@string/setting_menu_common_rtk_module_serial" />
+    </LinearLayout>
+</ScrollView>

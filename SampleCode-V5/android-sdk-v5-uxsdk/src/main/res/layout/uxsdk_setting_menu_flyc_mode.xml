@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/setting_ui_flyc_mode_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="setting:multi_rc:toast"
+        app:uxsdk_bottomDividerEnable="false"
+        app:uxsdk_summary="@string/uxsdk_setting_menu_flyc_fpa" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="setting:multi_rc:toast"
+        android:orientation="vertical">
+        <dji.v5.ux.core.base.TabSelectCell
+            android:id="@+id/setting_ui_flyc_mode_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:uxsdk_bottomDividerEnable="false"
+            app:uxsdk_select="0"
+            app:uxsdk_summary="@string/uxsdk_checklist_manual_flight_mode_title"
+            app:uxsdk_tabs="@array/uxsdk_flight_mode" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/setting_ui_flyc_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp"
+        android:text="@string/uxsdk_setting_menu_flyc_mode_nosport"
+        android:drawableLeft="@drawable/uxsdk_setting_ui_flyc_mode_asp"
+        android:drawablePadding="@dimen/uxsdk_setting_flyc_fly_mode_desc_margin_start"
+        android:layout_marginBottom="34dp"/>
+
+    <View
+        android:id="@+id/setting_ui_flyc_mode_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:background="@color/uxsdk_dic_color_c20_divider" />
+</merge>

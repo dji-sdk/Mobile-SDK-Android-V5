@@ -15,7 +15,7 @@ import dji.sampleV5.moduleaircraft.R
 import dji.sampleV5.moduleaircraft.models.PayLoadDataVM
 import dji.v5.manager.aircraft.payload.PayloadIndexType
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.frag_flight_record_page.*
 import kotlinx.android.synthetic.main.frag_payload_data_page.*
 import kotlinx.android.synthetic.main.frag_payload_data_page.tv_payload_title

@@ -19,7 +19,7 @@ import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.frag_network_rtk_page.*
 import kotlinx.android.synthetic.main.frag_network_rtk_page.btn_start_cmcc_rtk_service
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <dji.v5.ux.core.base.TextCell
+        android:id="@+id/tc_setting_menu_sdr_video_rate_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_2_dp"
+        app:uxsdk_text_cell_title="@string/setting_menu_title_hd_data_rate"
+        app:uxsdk_text_cell_content="@string/not_a_num"
+        app:uxsdk_text_cell_titleColor="@color/uxsdk_white_95_percent"
+        app:uxsdk_text_cell_titleTextSize="@dimen/uxsdk_16_dp"/>
+</merge>

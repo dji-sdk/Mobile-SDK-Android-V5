@@ -14,10 +14,10 @@ import dji.sampleV5.modulecommon.keyvalue.KeyItemActionListener
 import dji.sampleV5.modulecommon.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.Helper
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sdk.keyvalue.value.flightcontroller.AccessLockerDeviceType
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.StringUtils
-import dji.v5.utils.common.ToastUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
 import kotlinx.android.synthetic.main.frag_security_code_page.*

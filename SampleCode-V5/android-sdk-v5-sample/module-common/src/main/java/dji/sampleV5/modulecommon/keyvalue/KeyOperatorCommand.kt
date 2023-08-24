@@ -38,6 +38,19 @@ abstract class KeyOperatorCommand(
     private lateinit var curCheckType: KeyCheckType
     private var keyCount = 0
 
+    private var whiteList = mutableListOf<String>("GimbalCalibrationStatus",
+        "IsShootingPhotoPanorama",
+        "PhotoPanoramaMode",
+        "PhotoPanoramaProgress",
+        "ThermalContrast",
+        "ThermalDDE",
+        "ThermalRegionMetersureTemperature",
+        "ThermalBrightness",
+        "ThermalGainModeTemperatureRange",
+        "AircraftLocation3D",
+        "PhotoRatio"
+    )
+
     /**
      * 过滤Key类型条件
      */
@@ -78,7 +91,7 @@ abstract class KeyOperatorCommand(
 
 
             allList.filter { item ->
-                filter(item) &&  CapabilityManager.getInstance().isKeySupported(productType, componentTypeName
+                filter(item) && (item.toString() !in whiteList) &&  CapabilityManager.getInstance().isKeySupported(productType, componentTypeName
                        , ComponentType.find(item.getKeyInfo().componentType), "Key$item")
                 }
                 .forEach() { item ->

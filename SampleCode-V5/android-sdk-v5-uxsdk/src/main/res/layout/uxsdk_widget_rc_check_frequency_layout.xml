@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/setting_menu_rc_check_frequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_12_dp"
+        android:background="@drawable/uxsdk_selector_blue_rect_mask"
+        android:gravity="center"
+        android:paddingTop="@dimen/uxsdk_12_dp"
+        android:paddingBottom="@dimen/uxsdk_12_dp"
+        android:text="@string/setting_menu_title_rc_check_frequency"
+        android:textAllCaps="false"
+        android:textColor="@color/uxsdk_dic_color_c10_sea_blue"
+        android:textSize="@dimen/uxsdk_dic_text_size_18sp" />
+
+    <View
+        android:id="@+id/setting_menu_rc_check_frequency_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:layout_marginTop="@dimen/uxsdk_12_dp"
+        android:background="@color/uxsdk_dic_color_c20_divider" />
+
+</LinearLayout>

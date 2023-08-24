@@ -18,7 +18,7 @@ import dji.v5.manager.aircraft.perception.data.PerceptionInfo
 import dji.v5.manager.aircraft.perception.data.ObstacleData
 import dji.v5.manager.aircraft.perception.radar.RadarInformation
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
 import kotlinx.android.synthetic.main.frag_perception_page.*
@@ -91,7 +91,7 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
         }
 
         bt_set_obstacle_avoidance_braking_distance.setOnClickListener {
-            val distance = doubleArrayOf(2.0, 3.5, 5.6, 8.9, 10.0, 20.0)
+            val distance = doubleArrayOf(1.8, 2.0, 3.5, 5.6, 8.9, 10.0, 20.0)
             val direction = PerceptionDirection.values()
 
             initPopupNumberPicker(Helper.makeList(distance)) {

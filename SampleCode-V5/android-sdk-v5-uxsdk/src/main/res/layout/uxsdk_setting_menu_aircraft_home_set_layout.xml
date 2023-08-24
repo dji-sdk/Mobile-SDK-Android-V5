@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:tag="setting:multi_rc:flyc">
+
+    <dji.v5.ux.core.base.DividerRelativeLayout
+        android:id="@+id/setting_menu_flyc_home_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:uxsdk_bottomDividerColor = "@color/uxsdk_transparent"
+        android:minHeight="?android:attr/listPreferredItemHeight">
+
+        <TextView
+            android:id="@+id/setting_menu_flyc_home_set_summary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:text="@string/uxsdk_setting_menu_flyc_home_point"
+            android:textColor="@color/uxsdk_dic_color_c8_white"
+            android:textSize="@dimen/uxsdk_dic_text_size_18sp" />
+
+        <LinearLayout
+            android:id="@+id/setting_linear_flyc_view"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/setting_menu_flyc_homepoint_now"
+                android:layout_width="@dimen/uxsdk_setting_flyc_homepoint_btn_width"
+                android:layout_height="@dimen/uxsdk_setting_flyc_homepoint_btn_height"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/uxsdk_flyc_home_point_bg_selector"
+                android:scaleType="fitCenter"
+                android:tag="setting:multi_rc:toast"
+                android:src="@drawable/uxsdk_ic_fpv_setting_return_point" />
+
+            <ImageView
+                android:id="@+id/setting_menu_flyc_homepoint_rc_a"
+                android:layout_width="@dimen/uxsdk_setting_flyc_homepoint_btn_width"
+                android:layout_height="@dimen/uxsdk_setting_flyc_homepoint_btn_height"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/uxsdk_flyc_home_point_bg_selector"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                android:tag="setting:multi_rc:toast"
+                android:src="@drawable/uxsdk_ic_fpv_setting_rc_a"
+                app:tint="@color/uxsdk_white" />
+
+            <ImageView
+                android:id="@+id/setting_menu_flyc_homepoint_rc_b"
+                android:layout_width="@dimen/uxsdk_setting_flyc_homepoint_btn_width"
+                android:layout_height="@dimen/uxsdk_setting_flyc_homepoint_btn_height"
+                android:background="@drawable/uxsdk_flyc_home_point_bg_selector"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                android:tag="setting:multi_rc:toast"
+                android:src="@drawable/uxsdk_ic_fpv_setting_rc_b"
+                app:tint="@color/uxsdk_white" />
+        </LinearLayout>
+    </dji.v5.ux.core.base.DividerRelativeLayout>
+
+</merge>

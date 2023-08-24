@@ -26,7 +26,7 @@ package dji.v5.ux.visualcamera.wb;
 import androidx.annotation.NonNull;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.KeyTools;
-import dji.sdk.keyvalue.value.camera.CameraWhiteBalance;
+import dji.sdk.keyvalue.value.camera.CameraWhiteBalanceInfo;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.ux.core.base.DJISDKModel;
@@ -42,7 +42,7 @@ import io.reactivex.rxjava3.core.Flowable;
  */
 public class CameraConfigWBWidgetModel extends WidgetModel implements ICameraIndex {
     //region Fields
-    private DataProcessor<CameraWhiteBalance> whiteBalanceProcessor;
+    private DataProcessor<CameraWhiteBalanceInfo> whiteBalanceProcessor;
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
     private CameraLensType lensType = CameraLensType.CAMERA_LENS_ZOOM;
     //endregion
@@ -51,7 +51,7 @@ public class CameraConfigWBWidgetModel extends WidgetModel implements ICameraInd
     public CameraConfigWBWidgetModel(@NonNull DJISDKModel djiSdkModel,
                                      @NonNull ObservableInMemoryKeyedStore keyedStore) {
         super(djiSdkModel, keyedStore);
-        whiteBalanceProcessor = DataProcessor.create(new CameraWhiteBalance());
+        whiteBalanceProcessor = DataProcessor.create(new CameraWhiteBalanceInfo());
     }
     //endregion
 
@@ -79,7 +79,7 @@ public class CameraConfigWBWidgetModel extends WidgetModel implements ICameraInd
      *
      * @return Flowable for the DataProcessor that user should subscribe to.
      */
-    public Flowable<CameraWhiteBalance> getWhiteBalance() {
+    public Flowable<CameraWhiteBalanceInfo> getWhiteBalance() {
         return whiteBalanceProcessor.toFlowable();
     }
     //endregion

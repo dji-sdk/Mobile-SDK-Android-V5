@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_serious_low_battery_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fadingEdge="horizontal"
+        android:paddingStart="@dimen/uxsdk_20_dp"
+        android:paddingEnd="@dimen/uxsdk_20_dp"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:textSize="@dimen/uxsdk_12_dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_low_battery_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fadingEdge="horizontal"
+        android:paddingStart="@dimen/uxsdk_20_dp"
+        android:paddingEnd="@dimen/uxsdk_20_dp"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:textSize="@dimen/uxsdk_12_dp"
+        app:layout_constraintStart_toEndOf="@id/tv_serious_low_battery_title"
+        app:layout_constraintTop_toTopOf="@id/tv_serious_low_battery_title" />
+
+    <dji.v5.ux.core.base.widget.BasicRangeSeekBar
+        android:id="@+id/checklist_item_range_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/uxsdk_48_dp"
+        android:layout_gravity="center"
+        app:uxsdk_bar_height="@dimen/uxsdk_2_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_serious_low_battery_title" />
+
+</merge>

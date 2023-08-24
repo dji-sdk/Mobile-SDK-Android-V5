@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@android:color/background_dark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/omni_apas_title"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/uxsdk_35_dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/fpv_setting_safe_obstacle_avoidance_behavior_list"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <dji.v5.ux.obstacle.view.FixedEnableTabLayout
+        android:id="@+id/omni_apas_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/uxsdk_30_dp"
+        android:background="@drawable/uxsdk_edge_white_radius_4dp"
+        android:tag="setting:multi_rc:disable"
+        app:layout_constraintBottom_toBottomOf="@id/omni_apas_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/omni_apas_title"
+        app:tabBackground="@drawable/uxsdk_mission_edit_panel_tab_bg"
+        app:tabIndicatorColor="@color/uxsdk_white_0_percent"
+        app:tabMaxWidth="@dimen/uxsdk_56_dp"
+        app:tabMinWidth="@dimen/uxsdk_56_dp"
+        app:tabSelectedTextColor="@color/uxsdk_black"
+        app:tabTextAppearance="@style/MissionPanelTabStyle"
+        app:tabTextColor="@color/uxsdk_white" />
+
+    <TextView
+        android:id="@+id/omni_apas_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_menu_perception_apas_description"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:textSize="12sp"
+        android:layout_marginTop="@dimen/uxsdk_14_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/omni_apas_title" />
+
+</merge>

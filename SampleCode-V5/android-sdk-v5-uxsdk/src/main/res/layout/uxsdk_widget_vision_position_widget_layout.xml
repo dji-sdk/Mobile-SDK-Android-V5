@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/omni_common_downwards_switcher_cell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_20_dp"
+        android:layout_marginBottom="@dimen/uxsdk_10_dp"
+        android:tag="setting:multi_rc:toast"
+        app:uxsdk_bottomDividerEnable="false"
+        app:uxsdk_summary="@string/setting_menu_summary_omni_perception_downwards" />
+
+    <include layout="@layout/uxsdk_setting_menu_perception_vps_layout" />
+
+</LinearLayout>

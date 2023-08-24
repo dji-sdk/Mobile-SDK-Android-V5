@@ -1,35 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/uxsdk_bg_shape_simple_progress"
-    android:layout_centerInParent="true"
-    android:orientation="vertical">
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="16dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
 
-        <ProgressBar
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_centerInParent="true"/>
+    <ProgressBar
+        android:layout_width="65dp"
+        android:layout_height="65dp" />
 
-    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_load_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="4dp"
-        android:text="@string/uxsdk_dialog_loading"
-        android:minWidth="@dimen/uxsdk_100_dp"
-        android:singleLine="true"
+        android:layout_marginStart="12dp"
         android:ellipsize="marquee"
         android:gravity="center"
-        android:textColor="#9a9b98"
-        android:textSize="12sp"/>
+        android:minWidth="@dimen/uxsdk_100_dp"
+        android:text="@string/uxsdk_dialog_loading"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="12sp" />
 
 </LinearLayout>

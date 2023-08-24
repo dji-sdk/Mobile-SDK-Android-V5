@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    tools:parentTag="dji.v5.ux.core.base.DividerConstraintLayout"
+    android:paddingRight="?android:attr/scrollbarSize">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/summary"
+        app:layout_constraintHorizontal_bias="0"
+        android:singleLine="true"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:ellipsize="marquee"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+        android:layout_marginBottom="@dimen/uxsdk_vertical_margin_minimal"
+        android:fadingEdge="horizontal"/>
+
+        <TextView
+            android:id="@+id/summary"
+            app:layout_constraintTop_toTopOf="@id/tab_group"
+            app:layout_constraintBottom_toBottomOf="@+id/tab_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tab_switcher"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/uxsdk_dic_color_c8_white"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:textSize="@dimen/uxsdk_setting_hd_channel_mode_title_size"
+            android:maxLines="1"/>
+
+        <dji.v5.ux.core.base.TabModeWidget
+            android:id="@+id/tab_switcher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:tag="setting:multi_rc:default"
+            app:layout_constraintStart_toEndOf="@id/summary"
+            app:layout_constraintTop_toTopOf="@id/tab_group"
+            app:layout_constraintBottom_toBottomOf="@+id/tab_group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintWidth_percent="0.8"
+        />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/tab_group"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="tab_switcher,summary"
+        app:layout_constraintBottom_toTopOf="@id/desc"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/summary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:singleLine="true"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:ellipsize="marquee"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+        android:layout_marginBottom="@dimen/uxsdk_vertical_margin_minimal"
+        android:fadingEdge="horizontal"/>
+
+</merge>

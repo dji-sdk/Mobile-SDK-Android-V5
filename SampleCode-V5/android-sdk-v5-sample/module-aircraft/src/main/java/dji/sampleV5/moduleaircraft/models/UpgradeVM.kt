@@ -15,8 +15,8 @@ import dji.v5.manager.aircraft.upgrade.UpgradeableComponent
 import dji.v5.manager.aircraft.upgrade.UpgradeableComponentListener
 import dji.v5.manager.aircraft.upgrade.model.ComponentType
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
-
+import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.v5.manager.aircraft.upgrade.UpgradeProgressState
 /**
  * @author feel.feng
  * @time 2022/01/26 10:56 上午
@@ -24,7 +24,7 @@ import dji.v5.utils.common.ToastUtils
  */
 class UpgradeVM : DJIViewModel() {
 
-    var upgradeStateInfo  = MutableLiveData(UpgradeInfo(0 , FirmwareUpgradingProcessState.INITIALIZING , UpgradeError.NO_ERROR ))
+    var upgradeStateInfo  = MutableLiveData(UpgradeInfo(0 , UpgradeProgressState.INITIALIZING , UpgradeError.NO_ERROR ))
 
     fun addUpgradeableComponentListener(listener: UpgradeableComponentListener) {
         UpgradeManager.getInstance().init()

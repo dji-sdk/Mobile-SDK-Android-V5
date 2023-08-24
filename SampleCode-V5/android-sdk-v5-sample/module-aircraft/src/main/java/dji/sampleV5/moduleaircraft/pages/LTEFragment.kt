@@ -10,9 +10,12 @@ import dji.sampleV5.moduleaircraft.models.LTEVM
 import dji.sampleV5.modulecommon.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.modulecommon.pages.DJIFragment
 import dji.sampleV5.modulecommon.util.Helper
+import dji.sdk.keyvalue.value.airlink.LTEPrivatizationServerMsg
+import dji.sdk.keyvalue.value.airlink.WlmDeviceType
 import dji.v5.manager.aircraft.lte.LTELinkType
+import dji.v5.manager.aircraft.lte.LTEPrivatizationServerInfo
 import dji.v5.utils.common.JsonUtil
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.frag_lte_page.*
 
 /**
@@ -96,31 +99,68 @@ class LTEFragment : DJIFragment() {
         btn_get_lte_enhanced_transmission_type.setOnClickListener {
             lteVm.getLTEEnhancedTransmissionType()
         }
+        btn_set_lte_ac_privatization_server_info.setOnClickListener {
+            KeyValueDialogUtil.showInputDialog(
+                activity, "AC Privatization Server Info",
+                JsonUtil.toJson(lteVm.lteLinkInfo.value?.aircraftPrivatizationServerInfo), "", false
+            ) {
+                it?.let {
+                    val info = JsonUtil.toBean(it, LTEPrivatizationServerInfo::class.java)
+                    if (info == null) {
+                        ToastUtils.showToast("Value Parse Error")
+                        return@showInputDialog
+                    }
+                    lteVm.setLTEAcPrivatizationServerMsg(info)
+                }
+            }
+        }
+        btn_set_lte_rc_privatization_server_info.setOnClickListener {
+            KeyValueDialogUtil.showInputDialog(
+                activity, "RC Privatization Server Info",
+                JsonUtil.toJson(lteVm.lteLinkInfo.value?.remoteControllerPrivatizationServerInfo), "", false
+            ) {
+                it?.let {
+                    val info = JsonUtil.toBean(it, LTEPrivatizationServerInfo::class.java)
+                    if (info == null) {
+                        ToastUtils.showToast("Value Parse Error")
+                        return@showInputDialog
+                    }
+                    lteVm.setLTERcPrivatizationServerMsg(info)
+                }
+            }
+        }
+        btn_clear_ac_lte_privatization_server_info.setOnClickListener {
+            lteVm.clearLTEAcPrivatizationServerMsg()
+        }
+
+        btn_clear_rc_lte_privatization_server_info.setOnClickListener {
+            lteVm.clearLTERcPrivatizationServerMsg()
+        }
     }
 
     private fun updateLteMsg() {
         lteMsgBuilder.setLength(0)
 
         lteMsgBuilder.append("LTEAuthenticationInfo:").append("\n")
-        lteVm.lteAuthenticationInfo.value.let {
+        lteVm.lteAuthenticationInfo.value?.let {
             lteMsgBuilder.append(JsonUtil.toJson(it))
         }
         lteMsgBuilder.append("\n<---------------------------------------------------->\n")
 
         lteMsgBuilder.append("LTELinkInfo:").append("\n")
-        lteVm.lteLinkInfo.value.let {
+        lteVm.lteLinkInfo.value?.let {
             lteMsgBuilder.append(JsonUtil.toJson(it))
         }
         lteMsgBuilder.append("\n<---------------------------------------------------->\n")
 
         lteMsgBuilder.append("AcWlmDongleInfo:").append("\n")
-        lteVm.acWlmDongleInfo.value.let {
+        lteVm.acWlmDongleInfo.value?.let {
             lteMsgBuilder.append(JsonUtil.toJson(it))
         }
         lteMsgBuilder.append("\n<---------------------------------------------------->\n")
 
         lteMsgBuilder.append("RcWlmDongleInfo:").append("\n")
-        lteVm.rcWlmDongleInfo.value.let {
+        lteVm.rcWlmDongleInfo.value?.let {
             lteMsgBuilder.append(JsonUtil.toJson(it))
         }
 

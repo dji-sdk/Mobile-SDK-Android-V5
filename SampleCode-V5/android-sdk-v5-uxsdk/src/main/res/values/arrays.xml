@@ -165,4 +165,55 @@
         <item>@string/uxsdk_rtk_guidance_step3_content</item>
     </string-array>
 
+    <array name="uxsdk_aircraft_go_home_mode_array">
+        <item>@string/uxsdk_setting_menu_flyc_set_altitude_rth</item>
+        <item>@string/uxsdk_setting_menu_flyc_smart_rth</item>
+    </array>
+
+
+    <string-array name="uxsdk_fail_safe">
+        <item>@string/uxsdk_setting_ui_flyc_fs_hover</item>
+        <item>@string/uxsdk_setting_ui_flyc_fs_landing</item>
+        <item>@string/uxsdk_setting_ui_flyc_fs_gohome</item>
+    </string-array>
+
+    <array name="uxsdk_sdr_frequency_names">
+        <item>@string/link_frequency_band_dual</item>
+        <item>@string/link_frequency_band_2_dot_4</item>
+        <item>@string/link_frequency_band_5</item>
+        <item>@string/link_frequency_band_1_dot_4</item>
+        <item>@string/link_frequency_band_5_dot_7</item>
+        <item>@string/link_frequency_band_three</item>
+    </array>
+
+    <string-array name="uxsdk_hd_channel_mode">
+        <item>@string/setting_ui_hd_channel_auto</item>
+        <item>@string/setting_ui_hd_channel_custom</item>
+    </string-array>
+
+    <array name="uxsdk_hdmi_system_setting_modes">
+        <item>@string/hdmi_system_setting_mode_same</item>
+        <item>@string/hdmi_system_setting_mode_fpv</item>
+    </array>
+
+    <string-array name="uxsdk_flyc_sensors">
+        <item>@string/uxsdk_checklist_manual_imu_title</item>
+        <item>@string/uxsdk_checklist_manual_compass_title</item>
+    </string-array>
+
+    <string-array name="uxsdk_flight_mode_rc510">
+        <item>@string/uxsdk_setting_ui_flyc_mode_tns</item>
+        <item>@string/uxsdk_setting_ui_flyc_mode_ans</item>
+    </string-array>
+
+    <string-array name="uxsdk_flight_mode">
+        <item>@string/uxsdk_setting_ui_flyc_mode_spt</item>
+        <item>@string/uxsdk_setting_ui_flyc_mode_spa</item>
+    </string-array>
+
+    <string-array name="uxsdk_flight_mode_smart_controller">
+        <item>@string/uxsdk_setting_ui_flyc_mode_snt</item>
+        <item>@string/uxsdk_setting_ui_flyc_mode_sna</item>
+    </string-array>
+
 </resources>

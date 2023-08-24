@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/omni_common_landing_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/omni_common_precision_landing"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_20_dp"
+        android:layout_marginTop="@dimen/uxsdk_setting_perception_switcher_margin_top"
+        android:tag="setting:multi_rc:toast"
+        app:uxsdk_bottomDividerEnable="false"
+        app:uxsdk_summary="@string/setting_menu_summary_perception_precision_landing" />
+
+    <include
+        android:id="@+id/omni_common_precision_landing_desc"
+        layout="@layout/uxsdk_setting_menu_perception_precision_landing_layout" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_1_dp"
+        android:layout_marginTop="@dimen/uxsdk_12_dp"
+        android:background="@color/uxsdk_dic_color_c20_divider" />
+
+
+</LinearLayout>

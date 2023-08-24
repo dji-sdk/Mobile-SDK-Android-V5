@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:background="@color/uxsdk_colorPrimaryDark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/uxsdk_dic_color_c8_white"
+            android:textSize="@dimen/uxsdk_dic_text_size_20sp"
+            android:layout_centerInParent="true"
+            android:text="@string/setting_ui_imu_title"/>
+
+        <com.mikepenz.iconics.view.IconicsImageView
+            android:id="@+id/imu_cal_close_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:padding="12dp"
+            android:background="@drawable/uxsdk_selector_blue_oval_mask"
+            android:scaleType="centerCrop"
+            app:iiv_color="@color/uxsdk_dic_color_c8_white"
+            app:iiv_icon="gmd-close"
+        />
+
+    </RelativeLayout>
+
+    <View style="@style/uxsdk_horizontal_divider_medium"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/imu_cal_process_ly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0">
+
+                <LinearLayout
+                    android:id="@+id/imu_cal_left_botom_ly"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_alignParentBottom="true"
+                    android:baselineAligned="false"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imu_cal_left_content_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/imu_cal_left_botom_ly"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/uxsdk_setting_ui_imu_bg"
+                    android:scaleType="centerInside"
+                    tools:src="@drawable/uxsdk_setting_ui_imu_ready"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.0"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/imu_cal_right_desc_ly1"
+                        layout="@layout/uxsdk_setting_ui_imucal_desc_item"/>
+
+                    <include
+                        android:id="@+id/imu_cal_right_desc_ly2"
+                        layout="@layout/uxsdk_setting_ui_imucal_desc_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"/>
+
+                    <include
+                        android:id="@+id/imu_cal_right_desc_ly3"
+                        layout="@layout/uxsdk_setting_ui_imucal_desc_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"/>
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/imu_cal_pgb"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:maxHeight="4dp"
+                    android:minHeight="4dp"
+                    android:padding="0dp"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/uxsdk_setting_ui_progress"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/imu_cal_pgb_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/setting_ui_imu_calibrating"
+                    android:textColor="@color/uxsdk_white"
+                    android:visibility="gone"
+                    android:textSize="12dp"/>
+
+                <TextView
+                    android:id="@+id/imu_cal_start_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/horizontal_margin_maximal"
+                    android:paddingRight="@dimen/horizontal_margin_maximal"
+                    android:minWidth="200dp"
+                    android:background="@drawable/uxsdk_selector_white_round_rect"
+                    android:textColor="@color/uxsdk_white"
+                    android:textSize="14dp"
+                    android:text="@string/setting_ui_imu_start"
+                />
+
+                <TextView
+                    android:id="@+id/imu_cal_page_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical|right"
+                    android:visibility="invisible"
+                    android:text="@string/setting_ui_imu_calibrating"
+                    android:textColor="@color/uxsdk_dic_color_c10_sea_blue"
+                    android:textSize="12dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/imu_cal_status_ly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="24dp"
+            android:visibility="gone">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/imu_cal_status_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/uxsdk_setting_ui_success"
+              />
+
+            <TextView
+                android:id="@+id/imu_cal_status_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:lineSpacingExtra="15dp"
+                android:text="@string/setting_ui_imu_success"
+                android:textColor="@color/uxsdk_white"
+                android:textSize="14dp"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/imu_cal_status_opt_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:gravity="center"
+                android:paddingLeft="@dimen/horizontal_margin_maximal"
+                android:paddingRight="@dimen/horizontal_margin_maximal"
+                android:background="@drawable/uxsdk_selector_white_round_rect"
+                android:textColor="@color/uxsdk_dic_color_c8_white"
+                android:textSize="14dp"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="10dp"
+                android:minWidth="220dp"
+                android:paddingTop="10dp"
+                android:text="@string/setting_ui_imu_back"/>
+
+            <TextView
+                android:id="@+id/imu_cal_status_restart_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="30dp"
+                android:gravity="center"
+                android:paddingLeft="@dimen/horizontal_margin_maximal"
+                android:paddingRight="@dimen/horizontal_margin_maximal"
+                android:background="@drawable/uxsdk_selector_white_round_rect"
+                android:textColor="@color/uxsdk_dic_color_c8_white"
+                android:textSize="14dp"
+                android:layout_marginTop="16dp"
+                android:minWidth="220dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/setting_ui_imu_restart"/>
+
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

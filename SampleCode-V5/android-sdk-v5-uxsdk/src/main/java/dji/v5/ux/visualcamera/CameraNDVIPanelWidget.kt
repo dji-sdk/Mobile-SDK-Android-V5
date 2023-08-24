@@ -41,7 +41,7 @@ open class CameraNDVIPanelWidget @JvmOverloads constructor(
         widget_ndvi_stream_selector.updateCameraSource(cameraIndex, lensType)
         widget_spectral_display_mode.updateCameraSource(cameraIndex, lensType)
         widget_ndvi_stream_palette_bar.updateCameraSource(cameraIndex, lensType)
-        widget_ndvi_stream_palette_bar.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) VISIBLE else GONE
+        widget_ndvi_stream_palette_bar.visibility = if (lensType == CameraLensType.CAMERA_LENS_MS_NDVI) VISIBLE else INVISIBLE
     }
 
     override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {

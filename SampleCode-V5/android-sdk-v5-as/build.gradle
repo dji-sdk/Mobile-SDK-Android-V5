@@ -38,12 +38,11 @@ allprojects {
         maven { url JITPACK_MAVEN_URL }
         repositories {
             flatDir {
-                dirs new File(rootProject.projectDir.getAbsolutePath() + '/libs')
+                dirs new File(rootProject.projectDir.getAbsolutePath() + '/libs/samplelib')
+            }
+            flatDir {
+                dirs new File(rootProject.projectDir.getAbsolutePath() + '/libs/sdklib')
             }
         }
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

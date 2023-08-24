@@ -23,6 +23,7 @@
 
 package dji.v5.ux.cameracore.widget.focusmode;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -141,12 +142,12 @@ public class FocusModeWidget extends FrameLayoutWidget<Object> implements OnClic
         return getResources().getString(R.string.uxsdk_widget_default_ratio);
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onClick(View v) {
-        addDisposable(widgetModel.toggleFocusMode()
+        addReaction(widgetModel.toggleFocusMode()
                 .observeOn(SchedulerProvider.ui())
                 .subscribe(() -> {
-                    // Do nothing
                 }, RxUtil.logErrorConsumer(TAG, "switch focus mode: ")));
     }
 

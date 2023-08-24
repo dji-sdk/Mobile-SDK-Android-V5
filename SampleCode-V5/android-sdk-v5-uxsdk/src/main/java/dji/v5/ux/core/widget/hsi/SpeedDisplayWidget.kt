@@ -23,6 +23,7 @@ import dji.sdk.keyvalue.value.common.Attitude
 import dji.sdk.keyvalue.value.flightcontroller.WindDirection
 import dji.sdk.keyvalue.value.flightcontroller.WindWarning
 import dji.v5.utils.common.LogUtils
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import java.util.*
 
 open class SpeedDisplayWidget @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
@@ -83,7 +84,9 @@ open class SpeedDisplayWidget @JvmOverloads constructor(context: Context, attrs:
                 { windSpeed: Int, fcWindDirectionStatus: WindDirection, fcWindWarning: WindWarning, attitude: Attitude ->
                     val yaw = attitude.yaw.toFloat()
                     val aircraftDegree: Float = yaw + if (yaw < 0) 359f else 0f
-                    updateWindStatus(windSpeed.toFloat() / 10, fcWindDirectionStatus, fcWindWarning, aircraftDegree)
+                    AndroidSchedulers.mainThread().scheduleDirect {
+                        updateWindStatus(windSpeed.toFloat() / 10, fcWindDirectionStatus, fcWindWarning, aircraftDegree)
+                    }
                     true
                 }
             ).subscribe()

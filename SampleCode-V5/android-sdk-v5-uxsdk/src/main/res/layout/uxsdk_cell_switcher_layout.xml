@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+    tools:background="@color/uxsdk_black_60_percent"
+    tools:layout_height="@dimen/uxsdk_40_dp"
+       android:minHeight="?android:attr/listPreferredItemHeight"
+       tools:parentTag="dji.v5.ux.core.base.DividerConstraintLayout"
+       android:paddingRight="?android:attr/scrollbarSize">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+        android:layout_marginBottom="@dimen/uxsdk_vertical_margin_minimal"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:singleLine="true"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/top_barrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        tools:visibility="gone"
+        tools:text="title" />
+
+    <ImageView
+        android:id="@+id/info_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="8dp"
+        android:clickable="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintLeft_toRightOf="@+id/summary"
+        app:layout_constraintTop_toTopOf="@+id/summary"
+        app:layout_constraintBottom_toBottomOf="@+id/summary"
+        android:src="@drawable/uxsdk_ic_hint1" />
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintBottom_toTopOf="@id/desc"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constrainedWidth="true"
+            android:gravity="center_vertical"
+            tools:text="Summary"
+            android:minHeight="@dimen/uxsdk_20_dp"
+            android:textColor="@color/uxsdk_dic_color_c8_white"
+            android:textSize="@dimen/uxsdk_dic_text_size_18sp"
+            android:maxLines="1"/>
+
+        <ToggleButton
+            android:id="@+id/toggle_switcher"
+            android:layout_width="@dimen/uxsdk_36_dp"
+            android:layout_height="@dimen/uxsdk_20_dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/summary"
+            app:layout_constraintBottom_toBottomOf="@+id/summary"
+            android:textOn=""
+            android:textOff=""
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/uxsdk_toggle_green_selector"
+        />
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/summary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constrainedWidth="true"
+        android:textSize="@dimen/uxsdk_dic_text_size_16sp"
+        tools:text="desc"
+        android:visibility="visible"
+        android:fadingEdge="horizontal"
+        android:layout_marginBottom="@dimen/uxsdk_16_dp"
+        android:layout_marginTop="@dimen/uxsdk_16_dp"
+        tools:visibility="gone" />
+
+    <View
+        android:id="@+id/disable_hint_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</merge>

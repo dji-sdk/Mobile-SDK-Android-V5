@@ -1,6 +1,5 @@
 package dji.v5.ux.core.ui.setting.ui;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,34 +7,26 @@ import android.view.ViewGroup;
 
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import dji.v5.ux.R;
-import dji.v5.ux.core.ui.setting.dialog.CommonLoadingDialog;
 
+import dji.v5.ux.R;
+
+
+/*
+ * Copyright (c) 2014, DJI All Rights Reserved.
+ */
 
 /**
- * Description : 设置界面所有Fragment的基类Fragment，封装了一些基础能力
- *
- * @author: Byte.Cai
- * date : 2022/11/18
- * <p>
- * Copyright (c) 2022, DJI All Rights Reserved.
+ * <p>Created by luca on 2017/1/15.</p>
  */
-public abstract class MenuFragment extends Fragment {
+
+public abstract class MenuFragment extends AppFragment {
 
     private Loader initLoader;
-    protected View mFragmentRoot;
-    protected CommonLoadingDialog mLoadingDialog;
-
-
     protected abstract String getPreferencesTitle();
 
-
-
-    //region fragment operation
     protected static void addFragment(FragmentManager fm, MenuFragment menuFragment) {
         addFragment(fm, menuFragment, false);
     }
@@ -48,65 +39,33 @@ public abstract class MenuFragment extends Fragment {
         if (isAnimated) {
             transaction.setCustomAnimations(R.anim.uxsdk_push_right_in, R.anim.uxsdk_fade_out, R.anim.uxsdk_fade_in, R.anim.uxsdk_push_right_out);
         }
+        // TODO
+        // transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_right_exit);
         transaction.replace(R.id.fragment_content, menuFragment);
         transaction.addToBackStack(menuFragment.getPreferencesTitle());
         transaction.commitAllowingStateLoss();
     }
 
-    //添加fragment
-    protected void addChildFragment(int containerViewId, Fragment fragment) {
-        if (null != fragment) {
-            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-            transaction.replace(containerViewId, fragment, fragment.getClass().getSimpleName());
-            transaction.addToBackStack(fragment.getClass().getSimpleName());
-            transaction.commitAllowingStateLoss();
-        }
-    }
-
-
-    protected static void clearBackStack(FragmentManager fragmentManager) {
-        if (fragmentManager.getBackStackEntryCount() > 0) {
-            FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(0);
-            fragmentManager.popBackStack(entry.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-    }
-
-    protected static void replaceFragment(FragmentManager fm, int containerViewId, Fragment fragment) {
-        if (fm == null || fragment == null) {
-            return;
-        }
-        FragmentTransaction transaction = fm.beginTransaction();
-        // TODO Animation
-        transaction.replace(containerViewId, fragment);
-        transaction.commitAllowingStateLoss();
-    }
-    //endregion
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mFragmentRoot = inflater.inflate(getLayoutId(), container, false);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
         initLoader = Loader.createLoader();
         initLoader.setListener(new Loader.LoaderListener() {
             @Override
             public void onCreateView() {
                 onPrepareView();
             }
-
             @Override
             public void onCreateData() {
                 onPrepareDataInBackground();
             }
-
             @Override
             public void onRefreshView() {
                 onRefreshDataOnView();
             }
         }).start();
-        return mFragmentRoot;
+        return view;
     }
-
-    //region childFragment use
     /**
      * UI 控件初始化
      */
@@ -114,7 +73,6 @@ public abstract class MenuFragment extends Fragment {
     protected void onPrepareView() {
 
     }
-
     /**
      * 在工作线程中准备初始化页面时需要的数据，不包含UI控件
      */
@@ -131,44 +89,41 @@ public abstract class MenuFragment extends Fragment {
 
     }
 
-    /**
-     * 子类实现具体布局
-     */
-    protected abstract int getLayoutId();
-    //endregion
-
-
-
-
-
-    //region dialog
-    /**
-     * 进度对话框是否正在显示
-     * @return true 正在显示
-     */
-    public boolean isShowLoadingDialog() {
-        return mLoadingDialog != null && mLoadingDialog.isShowing();
-    }
-
-    protected void showLoadingDialog() {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new CommonLoadingDialog(getActivity());
-            mLoadingDialog.setCancelable(true);
-            mLoadingDialog.setCanceledOnTouchOutside(true);
-        }
-        if (!mLoadingDialog.isShowing()) {
-            mLoadingDialog.show();
+    protected static void popBackFragmentStack(FragmentManager fm) {
+        if (fm.getBackStackEntryCount() > 1) {
+            fm.popBackStackImmediate();
         }
     }
 
-    protected void hideLoadingDialog() {
-        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
-        }
-    }
-    //endregion
-
-
+//    protected void handleCheckChanged(final String tag, final boolean checked) {
+//        Single.create(new SingleOnSubscribe<Boolean>() {
+//            @Override
+//            public void subscribe(SingleEmitter<Boolean> e) throws Exception {
+//                PreferencesUtil.putBoolean(tag, checked);
+//                new SimpleEvent<Boolean>(tag, checked).send();
+//            }
+//        }).subscribeOn(Schedulers.io()).subscribe();
+//    }
+//
+//    protected void handleItemSelected(final String tag, final int position) {
+//        Single.create(new SingleOnSubscribe<Boolean>() {
+//            @Override
+//            public void subscribe(SingleEmitter<Boolean> e) throws Exception {
+//                PreferencesUtil.putInt(tag, position);
+//                new SimpleEvent<Integer>(tag, position).send();
+//            }
+//        }).subscribeOn(Schedulers.io()).subscribe();
+//    }
+//
+//    protected void handleValueChanged(final String tag, final int value) {
+//        Single.create(new SingleOnSubscribe<Boolean>() {
+//            @Override
+//            public void subscribe(SingleEmitter<Boolean> e) throws Exception {
+//                PreferencesUtil.putInt(tag, value);
+//                new SimpleEvent<Integer>(tag, value).send();
+//            }
+//        }).subscribeOn(Schedulers.io()).subscribe();
+//    }
 
     @Override
     public void onDestroyView() {
@@ -177,9 +132,9 @@ public abstract class MenuFragment extends Fragment {
             initLoader.cancel();
             initLoader = null;
         }
-        mFragmentRoot = null;
     }
 
+    @Override
     public boolean onBackPressed() {
         return false;
     }

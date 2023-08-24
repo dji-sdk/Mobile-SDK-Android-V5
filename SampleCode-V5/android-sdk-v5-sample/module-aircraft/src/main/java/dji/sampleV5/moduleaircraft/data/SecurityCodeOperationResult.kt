@@ -6,7 +6,7 @@ import dji.sdk.errorcode.DJIErrorCode
 import dji.v5.utils.common.StringUtils
 
 enum class SecurityCodeOperationResult(val resultCode: Int, @param:StringRes val desResId: Int) {
-    NO_ERR(0, R.string.securitycode_operation_result_no_err),
+    NO_ERR(0, R.string.securitycode_operation_result_success),
     BUSY(DJIErrorCode.ACCESS_LOCKER_V1_BUSY.value(), R.string.securitycode_operation_result_busy),
     SET_FAILED(DJIErrorCode.ACCESS_LOCKER_V1_PW_SET_FAILED.value(), R.string.securitycode_operation_result_set_failed),
     VERIFY_FAILED(DJIErrorCode.ACCESS_LOCKER_V1_PW_VERIFY_FAILED.value(), R.string.securitycode_operation_result_verify_failed),

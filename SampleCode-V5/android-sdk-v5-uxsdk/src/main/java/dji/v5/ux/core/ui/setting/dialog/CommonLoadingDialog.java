@@ -30,7 +30,7 @@ public class CommonLoadingDialog extends BaseDialog {
 
     protected void initialize() {
         rootView = getLayoutInflater().inflate(R.layout.uxsdk_dialog_common_loading_layout, null);
-        mLoadText = (TextView) rootView.findViewById(R.id.tv_load_dialog);
+        mLoadText = rootView.findViewById(R.id.tv_load_dialog);
     }
 
     @Override

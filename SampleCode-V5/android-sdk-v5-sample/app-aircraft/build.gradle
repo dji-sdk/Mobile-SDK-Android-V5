@@ -59,6 +59,7 @@ android {
 
     kotlinOptions{
         jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
     }
 
     //关闭lint

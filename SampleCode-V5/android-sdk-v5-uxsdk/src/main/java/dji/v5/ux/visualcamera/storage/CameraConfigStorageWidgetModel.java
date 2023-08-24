@@ -166,16 +166,16 @@ public class CameraConfigStorageWidgetModel extends WidgetModel implements ICame
             if (internalInfo != null) {
                 innerStorageState.onNext(internalInfo.getStorageState());
                 availableCapacity.onNext(internalInfo.getStorageLeftCapacity());
-                sdAvailableCaptureCount.onNext(internalInfo.getAvailablePhotoCount());
-                sdCardRecordingTime.onNext(internalInfo.getAvailableVideoDuration());
+                innerStorageAvailableCaptureCount.onNext(internalInfo.getAvailablePhotoCount());
+                innerStorageRecordingTime.onNext(internalInfo.getAvailableVideoDuration());
             }
 
             CameraStorageInfo sdcardInfo = cameraStorageInfos.getCameraStorageInfoByLocation(CameraStorageLocation.SDCARD);
             if (sdcardInfo != null) {
                 sdCardState.onNext(sdcardInfo.getStorageState());
                 availableCapacity.onNext(sdcardInfo.getStorageLeftCapacity());
-                innerStorageAvailableCaptureCount.onNext(sdcardInfo.getAvailablePhotoCount());
-                innerStorageRecordingTime.onNext(sdcardInfo.getAvailableVideoDuration());
+                sdAvailableCaptureCount.onNext(sdcardInfo.getAvailablePhotoCount());
+                sdCardRecordingTime.onNext(sdcardInfo.getAvailableVideoDuration());
             }
         });
         bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyVideoResolutionFrameRate, cameraIndex, lensType), resolutionAndFrameRateProcessor);

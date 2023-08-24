@@ -102,20 +102,21 @@ open class LensControlWidget @JvmOverloads constructor(
         val videoSourceRange = widgetModel.properCameraVideoStreamSourceRangeProcessor.value
         //单源
         if (videoSourceRange.size <= 1) {
-            this.visibility = GONE
+            first_len_btn.visibility = INVISIBLE
+            second_len_btn.visibility = INVISIBLE
             return
         }
+        first_len_btn.visibility = VISIBLE
         //双源
         if (videoSourceRange.size == 2) {
             updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange,widgetModel.cameraVideoStreamSourceProcessor.value).also {
                 firstBtnSource = it
             })
-            second_len_btn.visibility = GONE
+            second_len_btn.visibility = INVISIBLE
             return
         }
         //超过2个源
-        second_len_btn.visibility = visibility
-        this.visibility = VISIBLE
+        second_len_btn.visibility = VISIBLE
         updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange, secondBtnSource).also {
             firstBtnSource = it
         })

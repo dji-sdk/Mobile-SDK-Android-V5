@@ -65,6 +65,38 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_set_lte_enhanced_transmission_type" />
 
+            <Button
+                android:id="@+id/btn_set_lte_ac_privatization_server_info"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_lte_ac_privatization_server_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_get_lte_enhanced_transmission_type" />
+
+            <Button
+                android:id="@+id/btn_set_lte_rc_privatization_server_info"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_lte_rc_privatization_server_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_lte_ac_privatization_server_info" />
+
+            <Button
+                android:id="@+id/btn_clear_ac_lte_privatization_server_info"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_clear_lte_ac_privatization_server_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_lte_rc_privatization_server_info" />
+
+            <Button
+                android:id="@+id/btn_clear_rc_lte_privatization_server_info"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_clear_lte_rc_privatization_server_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_clear_ac_lte_privatization_server_info" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -92,15 +92,15 @@ class RTKNetworkVM : DJIViewModel() {
 
     fun setCustomNetworkRTKSettings(settings: RTKCustomNetworkSetting) {
         RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings = settings
-        currentCustomNetworkRTKSettings.postValue(RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings)
-        RTKUtil.saveRtkCustomNetworkSetting(RTKCenter.getInstance().customRTKManager.customNetworkRTKSettings)
+        currentCustomNetworkRTKSettings.postValue(settings)
+        RTKUtil.saveRtkCustomNetworkSetting(settings)
     }
 
 
     //qx network
     fun startQXNetworkRTKService(coordinateSystem: CoordinateSystem, callback: CommonCallbacks.CompletionCallback) {
         RTKCenter.getInstance().qxrtkManager.startNetworkRTKService(coordinateSystem, callback)
-        RTKUtil.saveRTKCoordinateSystem(RTKReferenceStationSource.QX_NETWORK_SERVICE,coordinateSystem)
+        RTKUtil.saveRTKCoordinateSystem(RTKReferenceStationSource.QX_NETWORK_SERVICE, coordinateSystem)
     }
 
     fun stopQXNetworkRTKService(callback: CommonCallbacks.CompletionCallback) {
@@ -121,6 +121,7 @@ class RTKNetworkVM : DJIViewModel() {
             }
         })
     }
+
     //cmcc rtk
     fun startCMCCRTKService(coordinateSystem: CoordinateSystem, callback: CommonCallbacks.CompletionCallback) {
         RTKCenter.getInstance().cmccrtkManager.startNetworkRTKService(coordinateSystem, callback)

@@ -35,6 +35,7 @@ import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 /**
  * @author feel.feng
@@ -152,7 +153,7 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
             }
 
             override fun onProgress(total: Long, current: Long) {
-                updateProgress(current , total)
+                updateProgress(offset , current , total)
             }
 
             override fun onRealtimeDataUpdate(data: ByteArray, position: Long) {
@@ -208,17 +209,17 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
 
     }
 
-    fun updateProgress(currentsize:Long , total:Long){
-
-        progressBar.setMax(total.toInt())
-        progressBar.setProgress(currentsize.toInt())
-        val data: Double = StringUtils.formatDouble((currentsize.toDouble() / total.toDouble()))
+    fun updateProgress(offset : Long , currentsize:Long , total:Long){
+        var fullSize = offset + total;
+        var downloadedSize = offset + currentsize
+        progressBar.setMax(fullSize.toInt())
+        progressBar.setProgress(downloadedSize.toInt())
+        val data: Double = StringUtils.formatDouble((downloadedSize.toDouble() / fullSize.toDouble()))
         val result: String = StringUtils.formatDouble(data * 100, "#0").toString() + "%"
         progressInfo.setText(result)
     }
 
     fun hideProgress(){
-        updateProgress(0 ,0)
         progressContainer.setVisibility(View.GONE)
     }
 

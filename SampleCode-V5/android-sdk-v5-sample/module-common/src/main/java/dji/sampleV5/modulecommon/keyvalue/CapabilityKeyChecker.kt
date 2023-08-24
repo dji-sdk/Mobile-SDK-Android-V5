@@ -12,6 +12,7 @@ import io.reactivex.rxjava3.disposables.Disposable
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.lang.Thread.sleep
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 /**
  * @author feel.feng
@@ -147,9 +148,9 @@ object CapabilityKeyChecker {
         productType: String,
         componentTypeName: String,
     ) {
-        checkOneType(productType ,componentTypeName ,KeyCheckType.SET)
-//            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.SET))
-//            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.ACTION))
+        checkOneType(productType ,componentTypeName ,KeyCheckType.GET)
+            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.SET))
+            .andThen(checkOneType(productType ,componentTypeName ,KeyCheckType.ACTION))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : CompletableObserver{
                override fun onSubscribe(d: Disposable) {
@@ -158,7 +159,7 @@ object CapabilityKeyChecker {
                }
 
                override fun onComplete() {
-                   LogUtils.e(TAG , "check finish")
+                   LogUtils.e(TAG , "-check finish-")
                }
 
                override fun onError(e: Throwable) {
