@@ -43,7 +43,7 @@ class PachKeyManager() {
             0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
     var statusData = TuskAircraftStatus( connected = false, battery = 0, gps = 0, signalQuality =  0,
             goHomeState = null, flightMode = null, motorsOn = false, homeLocationLat = null,
-            homeLocationLong = null, gimbalAngle = 0.0, goHomeStatus = null)
+            homeLocationLong = null, gimbalAngle = 0.0, goHomeStatus = null, takeoffAltitude = null)
     var controllerStatus = TuskControllerStatus( battery = 0, pauseButton = false, goHomeButton = false,
             leftStickX = 0,leftStickY=0,rightStickX=0,rightStickY=0, fiveDUp = false, fiveDDown = false,
             fiveDRight = false, fiveDLeft = false, fiveDPress = false)
@@ -60,6 +60,17 @@ class PachKeyManager() {
             Coordinate(40.01114, -105.24407, 40.0),
             Coordinate(40.01103, -105.24356, 45.0),
             Coordinate(40.01061, -105.24414, 50.0)
+    )
+
+    var backyardCoordinatesComplexChangingAlt = listOf(
+        Coordinate(40.01079, -105.24426, 30.0),
+        Coordinate(40.01114, -105.24407, 40.0),
+        Coordinate(40.01103, -105.24356, 45.0),
+        Coordinate(40.01061, -105.24414, 40.0),
+        Coordinate(40.01114, -105.24407, 40.0),
+        Coordinate(40.01173, -105.24352, 45.0),
+        Coordinate(40.01174, -105.24273, 50.0),
+        Coordinate(40.01046, -105.24427, 15.0)
     )
 
     var backyardSingleCoordinate = listOf(Coordinate(40.010819889488076, -105.244268000203, 30.0))
@@ -80,7 +91,12 @@ class PachKeyManager() {
         telemService.connectWebSocket()
         initializeFlightParameters()
         keyDisposables = CompositeDisposable()
+        startLiveStream()
 
+    }
+
+    private fun startLiveStream() {
+        TODO("Not yet implemented")
     }
 
     fun runTesting() {
@@ -107,9 +123,10 @@ class PachKeyManager() {
                 }
                 if (fiveDPress) {
                     Log.v("PachKeyManager", "FiveD Pressed")
-//                    followWaypoints(backyardCoordinatesIncreasingAlt)
+//                    followWaypoints(backyardCoordinatesComplexChangingAlt)
                     HIPPOWaypoints = telemService.waypointList
                     followWaypoints(HIPPOWaypoints)
+                    Log.v("PachKeyManager", "Following Waypoint List: $HIPPOWaypoints")
                 }
             }
 
@@ -277,6 +294,14 @@ class PachKeyManager() {
             statusData = statusData.copy(goHomeStatus = it.toString())
             sendStatus(statusData)
             Log.d("PachTelemetry", "GoHomeStatus $it")
+        }
+
+        registerKey(
+                KeyTools.createKey(FlightControllerKey.KeyTakeoffLocationAltitude)
+        ){
+            statusData = statusData.copy(takeoffAltitude = it)
+            sendStatus(statusData)
+            Log.d("PachTelemetry", "TakeoffAltitude $it")
         }
 
         // TuskControllerKeys Setup
