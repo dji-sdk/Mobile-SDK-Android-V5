@@ -14,7 +14,7 @@ class TuskServiceWebsocket {
 
     // Establish WebSocket connection
     fun connectWebSocket() {
-        val request = Request.Builder().url("ws://192.168.0.100:8084").build()
+        val request = Request.Builder().url("ws://192.168.20.169:8084").build()
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 Log.d("TuskService", "WebSocket connection opened")
@@ -49,7 +49,7 @@ class TuskServiceWebsocket {
             when (action) {
                 "AllAircraftStatus" -> handleGetAllAircraftStatus(args)
                 "NewControllerStatus" -> handleNewControllerStatus(args)
-                "FollowWaypoints" -> handleWaypointSet(args)
+                "FollowWaypoints" -> handleWaypointSet(args as JSONObject?)
                 else -> Log.d("TuskService", "Unknown action: $action")
             }
         } catch (e: Exception) {
@@ -95,10 +95,29 @@ class TuskServiceWebsocket {
     }
 
     private fun handleWaypointSet(args: Any?) {
-        // Handle the action for processing a set of waypoints
-        // Updates a local variable that will be checked upon execution by PachKeyManager
-        waypointList = gson.fromJson(args.toString(), Array<Coordinate>::class.java).toList()
-        Log.d("TuskService", "Handling WaypointSet action $args")
+        try {
+            if (args is JSONObject) {
+                val flightPathArray = args.optJSONArray("flightPath")
+                if (flightPathArray != null) {
+                    for (i in 0 until flightPathArray.length()) {
+                        val waypointArray = flightPathArray.optJSONArray(i)
+                        if (waypointArray != null && waypointArray.length() >= 2) {
+                            val lat = waypointArray.optDouble(0)
+                            val long = waypointArray.optDouble(1)
+                            val alt = waypointArray.optDouble(2)
+                            Log.d("WaypointService", "Waypoint $i - Latitude: $lat, Longitude: $long,  Altitude: $alt")
+                            // Add the waypoint to the waypoint list
+                            waypointList += Coordinate(lat, long, 50.0)
+                        }
+
+                    }
+                }
+            } else {
+                Log.d("TuskService", "Invalid args format for FollowWaypoints action")
+            }
+        } catch (e: Exception) {
+            Log.e("TuskService", "Failed to handle FollowWaypoints action: ${e.message}")
+        }
     }
 
     fun getActions() {
