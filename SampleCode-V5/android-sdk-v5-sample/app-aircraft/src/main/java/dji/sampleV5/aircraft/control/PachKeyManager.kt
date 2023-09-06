@@ -6,6 +6,7 @@ import dji.sampleV5.aircraft.telemetry.TuskAircraftState
 import dji.sampleV5.aircraft.telemetry.TuskAircraftStatus
 import dji.sampleV5.aircraft.telemetry.TuskControllerStatus
 import dji.sampleV5.aircraft.telemetry.TuskServiceWebsocket
+import dji.sampleV5.aircraft.video.StreamManager
 import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.camera.ThermalAreaMetersureTemperature
@@ -38,7 +39,7 @@ class PachKeyManager() {
     private var controller = VirtualStickControl()
     private var pidController = PidController(0.4f, 0.05f, 0.9f)
     val mainScope = CoroutineScope(Dispatchers.Main)
-
+    val streamer = StreamManager()
     var stateData = TuskAircraftState( 0.0, 0.0, 0.0, 0.0, 0.0,
             0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
     var statusData = TuskAircraftStatus( connected = false, battery = 0, gps = 0, signalQuality =  0,
@@ -91,13 +92,9 @@ class PachKeyManager() {
         telemService.connectWebSocket()
         initializeFlightParameters()
         keyDisposables = CompositeDisposable()
-        startLiveStream()
-
+        streamer.startStream()
     }
 
-    private fun startLiveStream() {
-        TODO("Not yet implemented")
-    }
 
     fun runTesting() {
         KeyManager.getInstance().listen(fiveDKey, this) { _, newValue ->
