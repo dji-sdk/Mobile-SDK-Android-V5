@@ -11,6 +11,7 @@ import dji.sampleV5.modulecommon.models.DJIViewModel
 import dji.sampleV5.moduleaircraft.data.MissionUploadStateInfo
 import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
+import dji.sdk.keyvalue.value.common.Velocity3D
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.utils.RxUtil
@@ -21,6 +22,7 @@ import dji.v5.manager.aircraft.waypoint3.WaylineExecutingInfoListener
 import dji.v5.manager.aircraft.waypoint3.WaypointActionListener
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionManager
 import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
+import dji.v5.manager.aircraft.waypoint3.model.BreakPointInfo
 import dji.v5.manager.areacode.AreaCode
 import dji.v5.manager.areacode.AreaCodeManager
 import dji.v5.utils.common.ContextUtil
@@ -28,6 +30,7 @@ import dji.v5.utils.common.DjiSharedPreferencesManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.android.synthetic.main.frag_waypointv3_page.*
 
 
 /**
@@ -42,6 +45,7 @@ class WayPointV3VM : DJIViewModel() {
     val flightControlState = MutableLiveData<FlightControlState>()
     var compassHeadKey : DJIKey<Double> = FlightControllerKey.KeyCompassHeading.create()
     var altitudeKey :DJIKey<Double> = FlightControllerKey.KeyAltitude.create()
+    var flightSpeed : DJIKey<Velocity3D> = FlightControllerKey.KeyAircraftVelocity.create()
 
 
     fun pushKMZFileToAircraft( missionPath: String) {
@@ -73,12 +77,20 @@ class WayPointV3VM : DJIViewModel() {
         WaypointMissionManager.getInstance().startMission(missionId, waylineIDs ,callback)
     }
 
+    fun startMission(missionId: String, breakPointInfo: BreakPointInfo, callback: CommonCallbacks.CompletionCallback) {
+        WaypointMissionManager.getInstance().startMission(missionId , breakPointInfo , callback)
+    }
+
     fun pauseMission(callback: CommonCallbacks.CompletionCallback) {
         WaypointMissionManager.getInstance().pauseMission(callback)
     }
 
     fun resumeMission(callback: CommonCallbacks.CompletionCallback) {
         WaypointMissionManager.getInstance().resumeMission(callback)
+    }
+
+    fun resumeMission(breakPointInfo: BreakPointInfo ,callback: CommonCallbacks.CompletionCallback) {
+        WaypointMissionManager.getInstance().resumeMission(breakPointInfo , callback)
     }
 
     fun stopMission(missionID: String, callback: CommonCallbacks.CompletionCallback) {
@@ -127,7 +139,11 @@ class WayPointV3VM : DJIViewModel() {
             val height = getHeight()
             val distance = calculateDistance(homelocation.latitude, homelocation.longitude, aircraftLocation.latitude, aircraftLocation.longitude)
             val heading = getHeading()
-            flightControlState.value = FlightControlState(aircraftLocation.longitude, aircraftLocation.latitude, distance = distance, height = height, head = heading, homeLocation = homelocation)
+            val speed3D = getSpeed()
+            val x = speed3D.getX()
+            val y = speed3D.getY()
+            val speed = Math.sqrt((x * x + y * y))
+            flightControlState.value = FlightControlState(aircraftLocation.longitude, aircraftLocation.latitude, distance = distance, height = height, head = heading, speed = speed, homeLocation = homelocation)
             refreshFlightControlState()
         }.subscribe()
     }
@@ -178,6 +194,8 @@ class WayPointV3VM : DJIViewModel() {
     private fun getHeading() = (compassHeadKey.get(0.0)).toFloat()
 
     private fun getHeight(): Double = (altitudeKey.get(0.0))
+
+    private fun getSpeed():Velocity3D = flightSpeed.get(Velocity3D(0.0 ,0.0,0.0))
 
     fun isInMainlandChina(): Boolean {
         return AreaCodeManager.getInstance().areaCode.areaCodeEnum==AreaCode.CHINA

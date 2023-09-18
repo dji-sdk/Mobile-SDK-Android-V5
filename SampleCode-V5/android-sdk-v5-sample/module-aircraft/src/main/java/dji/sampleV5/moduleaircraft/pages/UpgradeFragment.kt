@@ -21,7 +21,7 @@ import dji.v5.manager.aircraft.upgrade.UpgradeProgressState
 import dji.v5.manager.aircraft.upgrade.UpgradeableComponent
 import dji.v5.manager.aircraft.upgrade.model.ComponentType
 import dji.v5.utils.common.DocumentUtil
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.firmware_offline_upgrade_item.*
 import kotlinx.android.synthetic.main.firmware_offline_upgrade_item.view.*
 import kotlinx.android.synthetic.main.frag_upgrade_page.*
@@ -80,7 +80,7 @@ class UpgradeFragment : DJIFragment(){
                     .append("\n")
 
         }
-        upgrade_state_info_tv.setText(sb.toString())
+        upgrade_state_info_tv?.setText(sb.toString())
         sb.delete(0, sb.length)
 
 

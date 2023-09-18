@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -536,6 +542,8 @@
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
                   </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IDeviceStatusManager/IDeviceStatusManager_DJIDeviceStatusChangeListener.html">DJIDeviceStatusChangeListener</a>
@@ -628,77 +636,95 @@
 <p><font color="#666">Gets the yaw axis control parameters.</font></p>
 <h5 id="return-v3">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Double</font></td><td><font color="#666"><i>Returns the pitch axis control parameters.</i></font></td></tr></table></html></div>
+<div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setverticalthrottle"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_setverticalthrottle_inline">setVerticalThrottle</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setverticalthrottle_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>setVerticalThrottle</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setVerticalThrottle</span><span class="params">(Double verticalThrottle)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
+<h5 id="description-v8">Description:</h5>
+<p><font color="#666">Sets the vertical throttle axis control parameters.</font></p>
+<h5 id="input-parameters-v4">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Double <font color="#000">verticalThrottle</font></font></td><td><font color="#666"><i>Vertical throttle axis control parameters.</i></font></td></tr></table></html></div>
+<div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getverticalthrottle"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_getverticalthrottle_inline">getVerticalThrottle</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getverticalthrottle_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getVerticalThrottle</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Double <span class="title">getVerticalThrottle</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
+<h5 id="description-v9">Description:</h5>
+<p><font color="#666">Gets the vertical throttle axis control parameters.</font></p>
+<h5 id="return-v4">Return:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Double</font></td><td><font color="#666"><i>Returns the vertical throttle axis control parameters.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setrollpitchcontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_setrollpitchcontrolmode_inline">setRollPitchControlMode</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setrollpitchcontrolmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setRollPitchControlMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setRollPitchControlMode</span><span class="params">(RollPitchControlMode rollPitchControlMode)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v8">Description:</h5>
+<h5 id="description-v10">Description:</h5>
 <p><font color="#666">Sets the roll and pitch Control Modes.</font></p>
-<h5 id="input-parameters-v4">Input Parameters:</h5>
+<h5 id="input-parameters-v5">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html#value_flightcontroller_enum_rollpitchcontrolmode">RollPitchControlMode</a> <font color="#000">rollPitchControlMode</font></font></td><td><font color="#666"><i>Roll and pitch Control Modes.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getrollpitchcontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_getrollpitchcontrolmode_inline">getRollPitchControlMode</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getrollpitchcontrolmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getRollPitchControlMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">RollPitchControlMode <span class="title">getRollPitchControlMode</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v9">Description:</h5>
+<h5 id="description-v11">Description:</h5>
 <p><font color="#666">Gets the roll and pitch Control Modes.</font></p>
-<h5 id="return-v4">Return:</h5>
+<h5 id="return-v5">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html#value_flightcontroller_enum_rollpitchcontrolmode">RollPitchControlMode</a></font></td><td><font color="#666"><i>Returns the roll and pitch Control Modes.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setrollpitchcoordinatesystem"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_setrollpitchcoordinatesystem_inline">setRollPitchCoordinateSystem</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setrollpitchcoordinatesystem_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setRollPitchCoordinateSystem</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setRollPitchCoordinateSystem</span><span class="params">(FlightCoordinateSystem rollPitchCoordinateSystem)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v10">Description:</h5>
+<h5 id="description-v12">Description:</h5>
 <p><font color="#666">Sets the coordinate system. This coordinate system only acts on the roll and pitch in the advanced mode of the virtual stick.</font></p>
-<h5 id="input-parameters-v5">Input Parameters:</h5>
+<h5 id="input-parameters-v6">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_flightcoordinatesystem">FlightCoordinateSystem</a> <font color="#000">rollPitchCoordinateSystem</font></font></td><td><font color="#666"><i>Coordinate system.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getrollpitchcoordinatesystem"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_getrollpitchcoordinatesystem_inline">getRollPitchCoordinateSystem</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getrollpitchcoordinatesystem_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getRollPitchCoordinateSystem</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">FlightCoordinateSystem <span class="title">getRollPitchCoordinateSystem</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v11">Description:</h5>
+<h5 id="description-v13">Description:</h5>
 <p><font color="#666">Gets the coordinate system. This coordinate system only acts on the roll and pitch in the advanced mode of the virtual stick.</font></p>
-<h5 id="return-v5">Return:</h5>
+<h5 id="return-v6">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_flightcoordinatesystem">FlightCoordinateSystem</a></font></td><td><font color="#666"><i>Returns the coordinate system.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setyawcontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_setyawcontrolmode_inline">setYawControlMode</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setyawcontrolmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setYawControlMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setYawControlMode</span><span class="params">(YawControlMode yawControlMode)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v12">Description:</h5>
+<h5 id="description-v14">Description:</h5>
 <p><font color="#666">Sets the yaw Control Mode.</font></p>
-<h5 id="input-parameters-v6">Input Parameters:</h5>
+<h5 id="input-parameters-v7">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html#value_flightcontroller_enum_yawcontrolmode">YawControlMode</a> <font color="#000">yawControlMode</font></font></td><td><font color="#666"><i>Yaw control mode.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getyawcontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_getyawcontrolmode_inline">getYawControlMode</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getyawcontrolmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getYawControlMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">YawControlMode <span class="title">getYawControlMode</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v13">Description:</h5>
+<h5 id="description-v15">Description:</h5>
 <p><font color="#666">Gets the yaw Control Mode.</font></p>
-<h5 id="return-v6">Return:</h5>
+<h5 id="return-v7">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html#value_flightcontroller_enum_yawcontrolmode">YawControlMode</a></font></td><td><font color="#666"><i>Returns the yaw Control Mode.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setverticalcontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_setverticalcontrolmode_inline">setVerticalControlMode</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_setverticalcontrolmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setVerticalControlMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setVerticalControlMode</span><span class="params">(VerticalControlMode verticalControlMode)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v14">Description:</h5>
+<h5 id="description-v16">Description:</h5>
 <p><font color="#666">Sets the vertical Control Mode.</font></p>
-<h5 id="input-parameters-v7">Input Parameters:</h5>
+<h5 id="input-parameters-v8">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html#value_flightcontroller_enum_verticalcontrolmode">VerticalControlMode</a> <font color="#000">verticalControlMode</font></font></td><td><font color="#666"><i>Vertical control mode.</i></font></td></tr></table></html></div>
 <div class="api-row" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getverticalcontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_struct_virtualstickflightcontrolparam_getverticalcontrolmode_inline">getVerticalControlMode</a></div></div><div class="inline-doc" id="value_flightcontroller_struct_virtualstickflightcontrolparam_getverticalcontrolmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getVerticalControlMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">VerticalControlMode <span class="title">getVerticalControlMode</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v15">Description:</h5>
+<h5 id="description-v17">Description:</h5>
 <p><font color="#666">Gets the vertical Control Mode.</font></p>
-<h5 id="return-v7">Return:</h5>
+<h5 id="return-v8">Return:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html#value_flightcontroller_enum_verticalcontrolmode">VerticalControlMode</a></font></td><td><font color="#666"><i>Retruns the vertical Control Mode.</i></font></td></tr></table></html></div>
 <h5 id="related">Related:</h5>
 <div class="api-row" id="value_flightcontroller_enum_rollpitchcontrolmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#value_flightcontroller_enum_rollpitchcontrolmode_inline">RollPitchControlMode</a></div></div><div class="inline-doc" id="value_flightcontroller_enum_rollpitchcontrolmode_inline" <blockquote>
@@ -706,7 +732,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> RollPitchControlMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v16">Description:</h5>
+<h5 id="description-v18">Description:</h5>
 <p><font color="#666">The control mode of the roll and pitch in the advanced mode of the virtual stick.</font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_rollpitchcontrolmode_angle_inline"></a>ANGLE</font></td><td><font color="#666">Angle mode.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_rollpitchcontrolmode_velocity_inline"></a>VELOCITY</font></td><td><font color="#666">Velocity mode.</font></td></tr></table></html>
@@ -717,7 +743,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> YawControlMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v17">Description:</h5>
+<h5 id="description-v19">Description:</h5>
 <p><font color="#666">The control mode of the yaw in the advanced mode of the virtual stick.</font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_yawcontrolmode_angle_inline"></a>ANGLE</font></td><td><font color="#666">Angle mode.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_yawcontrolmode_angular_velocity_inline"></a>ANGULAR_VELOCITY</font></td><td><font color="#666">Angular velocity mode.</font></td></tr></table></html>
@@ -728,7 +754,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> VerticalControlMode implements JNIProguardKeepTag</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.value.flightcontroller</font></td></tr></table></html>
-<h5 id="description-v18">Description:</h5>
+<h5 id="description-v20">Description:</h5>
 <p><font color="#666">The control mode of the vertical in the advanced mode of the virtual stick.</font></p>
 <h5 id="enum-members-v3">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_verticalcontrolmode_velocity_inline"></a>VELOCITY</font></td><td><font color="#666">Velocity mode.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#value_flightcontroller_enum_verticalcontrolmode_position_inline"></a>POSITION</font></td><td><font color="#666">Position mode.</font></td></tr></table></html>

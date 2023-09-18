@@ -13,5 +13,6 @@ data class FlightControlState(
     , val head : Float = 0.0f
     , val height : Double = 0.0
     , val distance: Double= 0.0
+    , val speed :Double = 0.0
     , val homeLocation: LocationCoordinate2D
 )

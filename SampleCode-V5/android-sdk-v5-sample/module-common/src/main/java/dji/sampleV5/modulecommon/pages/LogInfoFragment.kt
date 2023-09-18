@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.models.MSDKLogVM
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.frag_log_info_page.*
 
 /**

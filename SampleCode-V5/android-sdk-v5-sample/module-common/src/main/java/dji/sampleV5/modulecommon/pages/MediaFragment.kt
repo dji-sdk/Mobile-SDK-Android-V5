@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MEDIA_FILE_DETAILS_STR
 import dji.sampleV5.modulecommon.models.MediaVM
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -25,7 +26,6 @@ import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.manager.datacenter.media.MediaFileListState
 import dji.v5.manager.datacenter.media.MediaManager
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_media_page.*
 import java.util.ArrayList
 
@@ -63,7 +63,7 @@ class MediaFragment : DJIFragment(){
             mediaVM.init()
             isload = true
         }
-        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!! , context , ::onItemClick )
+        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!!  , ::onItemClick )
         media_recycle_list.adapter = adapter
         mediaVM.mediaFileListData.observe(viewLifecycleOwner){
             adapter!!.notifyDataSetChanged()
@@ -185,9 +185,7 @@ class MediaFragment : DJIFragment(){
 
     private fun onItemClick(mediaFile: MediaFile , view: View){
 
-        var imageView =  view.findViewById(R.id.iv_thumbnail) as ImageView
         ViewCompat.setTransitionName(view, mediaFile.fileName );
-
         val extra = FragmentNavigatorExtras(
             view to "tansitionImage"
         )

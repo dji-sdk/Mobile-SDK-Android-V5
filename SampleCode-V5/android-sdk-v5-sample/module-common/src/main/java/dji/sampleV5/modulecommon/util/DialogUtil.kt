@@ -2,10 +2,15 @@ package dji.sampleV5.modulecommon.util
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
 import android.text.method.ScrollingMovementMethod
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDialog
 import dji.sampleV5.modulecommon.R
 import dji.v5.common.callback.CommonCallbacks
 
@@ -53,5 +58,40 @@ object DialogUtil {
             }
         }
         dialog.show()
+    }
+
+    fun showTwoButtonDialog(
+        context: Context,
+        content: String,
+        left: String, leftClick: () -> Unit,
+        right: String, rightClick: () -> Unit
+    ): Dialog {
+        val dialog = AppCompatDialog(context, R.style.MSDKDialog)
+        val contentView = LayoutInflater.from(context).inflate(R.layout.dialog_two_button, FrameLayout(context), false).apply {
+
+            findViewById<TextView>(R.id.tv_left).apply {
+                text = left
+                setOnClickListener {
+                    if (dialog.isShowing) {
+                        dialog.dismiss()
+                    }
+                    leftClick()
+                }
+            }
+            findViewById<TextView>(R.id.tv_right).apply {
+                text = right
+                setOnClickListener {
+                    if (dialog.isShowing) {
+                        dialog.dismiss()
+                    }
+                    rightClick()
+                }
+            }
+            findViewById<TextView>(R.id.tv_comment).text = content
+        }
+        dialog.setContentView(contentView)
+        dialog.show()
+
+        return dialog
     }
 }

@@ -14,7 +14,7 @@ import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.simulator.*
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.frag_simulator_page.*
 
 /**

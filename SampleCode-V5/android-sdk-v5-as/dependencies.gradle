@@ -1,9 +1,9 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.5.0"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.5.0"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.5.0"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.6.0"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.6.0"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.6.0"
 
 
     //三方依赖库
@@ -64,6 +64,8 @@ ext {
     deps.ktxNavigation = "androidx.navigation:navigation-fragment-ktx:2.5.3"
     deps.ktxNavigationUi = "androidx.navigation:navigation-ui-ktx:2.5.3"
     deps.documentfile = 'androidx.documentfile:documentfile:1.0.1'
+    //解析xml
+    deps.dom = 'org.dom4j:dom4j:2.1.1'
 
     //kotlin
     deps.kotlinLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
@@ -73,6 +75,9 @@ ext {
     deps.glidecompiler = 'com.github.bumptech.glide:compiler:4.9.0'
 
 
+    //wpmz 航线文件解析
+    //本地依赖验证时将该aar放到主工程目录sdklib 并将sdk中aircraft 的gradle添加为本地依赖方式 api (name:"djisdkwpmz", ext:'aar')
+    deps.wpmzSdk = 'com.dji:wpmzsdk:1.0.1.0'
     //sample 扩展EditText
     deps.expandedit = "com.github.thomhurst:ExpandableHintText:1.0.7"
 

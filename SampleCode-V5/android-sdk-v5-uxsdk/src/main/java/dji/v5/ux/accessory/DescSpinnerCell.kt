@@ -170,6 +170,14 @@ open class DescSpinnerCell @kotlin.jvm.JvmOverloads constructor(
 
     }
 
+    open fun getDescText():TextView?{
+        return mDesc
+    }
+
+    open fun getSelectPosition() :Int{
+        return mSelectedPosition;
+    }
+
     open fun setEntries(entries: List<String?>) {
         mAdapter?.clear()
         mAdapter?.addAll(entries)

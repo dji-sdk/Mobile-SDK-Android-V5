@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import dji.sampleV5.moduleaircraft.R
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.sdk.keyvalue.value.rtkbasestation.RTKStationConnetState
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
 
 /**
  * Description :基站RTK的Adapter，展示扫码到的基站情况

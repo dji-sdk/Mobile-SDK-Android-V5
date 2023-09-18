@@ -9,7 +9,7 @@ import dji.v5.manager.aircraft.uas.AreaStrategy
 import dji.v5.manager.aircraft.uas.UARegistrationNumberStatus
 import dji.v5.manager.aircraft.uas.UASRemoteIDManager
 import dji.v5.manager.aircraft.uas.UASRemoteIDStatus
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 /**
  * Description :日本无人机远程识别VM

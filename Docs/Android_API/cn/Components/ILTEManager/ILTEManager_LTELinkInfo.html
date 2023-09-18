@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href class="active">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -536,6 +542,8 @@
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
                   </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IDeviceStatusManager/IDeviceStatusManager_DJIDeviceStatusChangeListener.html">DJIDeviceStatusChangeListener</a>
@@ -572,7 +580,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">LTELinkInfo</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.lte</font></td></tr></table></html>
 <h5 id="描述：">描述：</h5>
-<p><font color="#666">LTE链路信息，包括链路类型和链路信号强度。
+<p><font color="#666">LTE 链路信息，包括链路类型和链路信号强度。
 <br><br><code><i>MSDK 5.2.0开始支持</i></code></font></p>
 <h5 id="类成员">类成员:</h5>
 <div class="api-row" id="iltemanager_ltelinkinfo_getltelinktype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_ltelinkinfo_getltelinktype_inline">getLTELinkType</a></div></div><div class="inline-doc" id="iltemanager_ltelinkinfo_getltelinktype_inline" <blockquote>
@@ -581,18 +589,36 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">LTELinkType <span class="title">getLTELinkType</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.lte</font></td></tr></table></html>
 <h5 id="描述：-v2">描述：</h5>
-<p><font color="#666">获取LTE链路类型。</font></p>
+<p><font color="#666">获取 LTE 链路类型。</font></p>
 <h5 id="返回值：">返回值：</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_ltelinktype">LTELinkType</a></font></td><td><font color="#666"><i>返回LTE链路类型。</i></font></td></tr></table></html></div>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_ltelinktype">LTELinkType</a></font></td><td><font color="#666"><i>返回 LTE 链路类型。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iltemanager_ltelinkinfo_getlinkqualitylevel"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_ltelinkinfo_getlinkqualitylevel_inline">getLinkQualityLevel</a></div></div><div class="inline-doc" id="iltemanager_ltelinkinfo_getlinkqualitylevel_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getLinkQualityLevel</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">WlmLinkQualityLevelInfo <span class="title">getLinkQualityLevel</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.lte</font></td></tr></table></html>
 <h5 id="描述：-v3">描述：</h5>
-<p><font color="#666">获取LET链路信号等级。</font></p>
+<p><font color="#666">获取 LET 链路信号等级。</font></p>
 <h5 id="返回值：-v2">返回值：</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmLinkQualityMsg.html#value_airlink_struct_wlmlinkqualitymsg">WlmLinkQualityLevelInfo</a></font></td><td><font color="#666"><i>返回LTE链路信号等级。</i></font></td></tr></table></html></div>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IKeyManager/Value_Airlink_Struct_WlmLinkQualityMsg.html#value_airlink_struct_wlmlinkqualitymsg">WlmLinkQualityLevelInfo</a></font></td><td><font color="#666"><i>返回 LTE 链路信号等级。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iltemanager_ltelinkinfo_getaircraftprivatizationserverinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_ltelinkinfo_getaircraftprivatizationserverinfo_inline">getAircraftPrivatizationServerInfo</a></div></div><div class="inline-doc" id="iltemanager_ltelinkinfo_getaircraftprivatizationserverinfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getAircraftPrivatizationServerInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">LTEPrivatizationServerInfo <span class="title">getAircraftPrivatizationServerInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.lte</font></td></tr></table></html>
+<h5 id="描述：-v4">描述：</h5>
+<p><font color="#666">获取设置的飞行器 LTE 私有化服务器地址。如果获取到的IP地址为空，可以调用<code><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_setlteaircraftprivatizationserverinfo">setLTEAircraftPrivatizationServerInfo</a></code>进行设置。</font></p>
+<h5 id="返回值：-v3">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html#iltemanager_lteprivatizationserverinfo">LTEPrivatizationServerInfo</a></font></td><td><font color="#666"><i>返回设置的飞行器 LTE 私有化服务器地址。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iltemanager_ltelinkinfo_getremotecontrollerprivatizationserverinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_ltelinkinfo_getremotecontrollerprivatizationserverinfo_inline">getRemoteControllerPrivatizationServerInfo</a></div></div><div class="inline-doc" id="iltemanager_ltelinkinfo_getremotecontrollerprivatizationserverinfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getRemoteControllerPrivatizationServerInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">LTEPrivatizationServerInfo <span class="title">getRemoteControllerPrivatizationServerInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.lte</font></td></tr></table></html>
+<h5 id="描述：-v5">描述：</h5>
+<p><font color="#666">获取设置的遥控器 LTE 私有化服务器地址。如果获取到的IP地址为空，可以调用<code><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_setlteremotecontrollerprivatizationserverinfo">setLTERemoteControllerPrivatizationServerInfo</a></code>进行设置。</font></p>
+<h5 id="返回值：-v4">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html#iltemanager_lteprivatizationserverinfo">LTEPrivatizationServerInfo</a></font></td><td><font color="#666"><i>返回设置的遥控器 LTE 私有化服务器地址。</i></font></td></tr></table></html></div>
 
         </div>
       </div>

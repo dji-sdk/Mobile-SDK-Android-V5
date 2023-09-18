@@ -1,6 +1,6 @@
-
 //sample 配置
-//共分了3个app，分别是只有飞机、只有手持、全支持。
+
+//当前1个app，只有飞机。
 include ':sample-app-aircraft'
 
 //3个module，用于存放各类产品的功能view，供app部分组合使用。

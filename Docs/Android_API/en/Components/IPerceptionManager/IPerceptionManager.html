@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -536,6 +542,8 @@
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
                   </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IDeviceStatusManager/IDeviceStatusManager_DJIDeviceStatusChangeListener.html">DJIDeviceStatusChangeListener</a>
@@ -634,7 +642,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setObstacleAvoidanceWarningDistance</span><span class="params">(<span class="keyword">double</span> distance, @NonNull PerceptionDirection direction,</span></span></span><br><span class="line"><span class="function"><span class="params">                                          CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
 <h5 id="description-v8">Description:</h5>
-<p><font color="#666">Set distance of obstacle avoidance. Unit: meter. <li>Horizontal warning distance range: [1.1, 33.0]. </li> <li>Upward warning distance range: [1.1, 33.0]. </li> <li>Downward warning distance range: [0.6, 33.0]. </li> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">Set distance of obstacle avoidance. Unit: meter. <li>Take the M30 Series as an example: (For other Aircraft, please refer to the range of DJI Pilot 2)</li> <li>Horizontal warning distance range: [1.1, 33.0]. </li> <li>Upward warning distance range: [1.1, 33.0]. </li> <li>Downward warning distance range: [0.6, 33.0]. </li> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters-v7">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double <font color="#000">distance</font></font></td><td><font color="#666"><i>Warning distance of obstacle avoidance.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_perceptiondirection">PerceptionDirection</a> <font color="#000">direction</font></font></td><td><font color="#666"><i>Direction of obstacle avoidance.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_getobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_getobstacleavoidancewarningdistance_inline">getObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_getobstacleavoidancewarningdistance_inline" <blockquote>
@@ -652,7 +660,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setObstacleAvoidanceBrakingDistance</span><span class="params">(<span class="keyword">double</span> distance, @NonNull PerceptionDirection direction,</span></span></span><br><span class="line"><span class="function"><span class="params">                                          CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
 <h5 id="description-v10">Description:</h5>
-<p><font color="#666">Set the braking distance of obstacle avoidance. Unit:meter. <li>Horizontal braking distance range:[1.0, 10.0]. </li> <li>Upward braking distance range:[1.0, 10.0]. </li> <li>Downward braking distance range:[0.5, 3.0]. </li> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">Set the braking distance of obstacle avoidance. Unit:meter. <li>Take the M30 Series as an example: (For other Aircraft, please refer to the range of DJI Pilot 2)</li> <li>Horizontal braking distance range:[1.0, 10.0]. </li> <li>Upward braking distance range:[1.0, 10.0]. </li> <li>Downward braking distance range:[0.5, 3.0]. </li> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters-v9">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double <font color="#000">distance</font></font></td><td><font color="#666"><i>Braking distance of obstacle avoidance.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_perceptiondirection">PerceptionDirection</a> <font color="#000">direction</font></font></td><td><font color="#666"><i>Direction of obstacle avoidance.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_getobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_getobstacleavoidancebrakingdistance_inline">getObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_getobstacleavoidancebrakingdistance_inline" <blockquote>

@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href="ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -535,6 +541,8 @@
                     </ul>
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
+                  </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
                   </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
@@ -697,20 +705,56 @@
 <h5 id="描述：-v15">描述：</h5>
 <p><font color="#666">移除所有LTE链路信息的监听器。 <br><br><code><i>MSDK 5.2.0开始支持</i></code></font></p>
 </div>
+<div class="api-row" id="iltemanager_setlteaircraftprivatizationserverinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_setlteaircraftprivatizationserverinfo_inline">setLTEAircraftPrivatizationServerInfo</a></div></div><div class="inline-doc" id="iltemanager_setlteaircraftprivatizationserverinfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>setLTEAircraftPrivatizationServerInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setLTEAircraftPrivatizationServerInfo</span><span class="params">(@NonNull LTEPrivatizationServerInfo serverInfo, @NonNull CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v16">描述：</h5>
+<p><font color="#666">设置飞行器 LTE 私有化服务器地址。你可以调用<code><a href="../../Components/ILTEManager/ILTEManager_LTELinkInfo.html#iltemanager_ltelinkinfo_getaircraftprivatizationserverinfo">getAircraftPrivatizationServerInfo</a></code>监听已设置的飞行器 LTE 私有化服务器地址。 <br><br><code><i>MSDK 5.6.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v12">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html#iltemanager_lteprivatizationserverinfo">LTEPrivatizationServerInfo</a> <font color="#000">serverInfo</font></font></td><td><font color="#666"><i>需要设置的 LTE 私有化服务器地址信息。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iltemanager_clearlteaircraftprivatizationserver"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_clearlteaircraftprivatizationserver_inline">clearLTEAircraftPrivatizationServer</a></div></div><div class="inline-doc" id="iltemanager_clearlteaircraftprivatizationserver_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>clearLTEAircraftPrivatizationServer</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearLTEAircraftPrivatizationServer</span><span class="params">(@NonNull CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v17">描述：</h5>
+<p><font color="#666">清除飞行器 LTE 私有化服务器地址。 <br><br><code><i>MSDK 5.6.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v13">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iltemanager_setlteremotecontrollerprivatizationserverinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_setlteremotecontrollerprivatizationserverinfo_inline">setLTERemoteControllerPrivatizationServerInfo</a></div></div><div class="inline-doc" id="iltemanager_setlteremotecontrollerprivatizationserverinfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>setLTERemoteControllerPrivatizationServerInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setLTERemoteControllerPrivatizationServerInfo</span><span class="params">(@NonNull LTEPrivatizationServerInfo serverInfo, @NonNull CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v18">描述：</h5>
+<p><font color="#666">设置遥控器 LTE 私有化服务器地址。你可以调用<code><a href="../../Components/ILTEManager/ILTEManager_LTELinkInfo.html#iltemanager_ltelinkinfo_getremotecontrollerprivatizationserverinfo">getRemoteControllerPrivatizationServerInfo</a></code>监听已设置的飞行器 LTE 私有化服务器地址。 <br><br><code><i>MSDK 5.6.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v14">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html#iltemanager_lteprivatizationserverinfo">LTEPrivatizationServerInfo</a> <font color="#000">serverInfo</font></font></td><td><font color="#666"><i>需要设置的 LTE 私有化服务器地址信息。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iltemanager_clearlteremotecontrollerprivatizationserver"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iltemanager_clearlteremotecontrollerprivatizationserver_inline">clearLTERemoteControllerPrivatizationServer</a></div></div><div class="inline-doc" id="iltemanager_clearlteremotecontrollerprivatizationserver_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>clearLTERemoteControllerPrivatizationServer</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearLTERemoteControllerPrivatizationServer</span><span class="params">(@NonNull CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v19">描述：</h5>
+<p><font color="#666">清除遥控器 LTE 私有化服务器地址。 <br><br><code><i>MSDK 5.6.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v15">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <h5 id="related">Related:</h5>
 <div class="api-row" id="iltemanager_lteauthenticationinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a></div></div><div class="api-row" id="iltemanager_ltelinktype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iltemanager_ltelinktype_inline">LTELinkType</a></div></div><div class="inline-doc" id="iltemanager_ltelinktype_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>LTELinkType</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"> <span class="keyword">enum</span> LTELinkType</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.lte</font></td></tr></table></html>
-<h5 id="描述：-v16">描述：</h5>
-<p><font color="#666">LTE链路类型。<code><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_ltelinktype_ocu_sync_lte">OCU_SYNC_LTE</a></code>表示开启增强图传功能，<code><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_ltelinktype_ocu_sync">OCU_SYNC</a></code>则表示关闭增强图传功能，使用OCUSYNC图传。
+<h5 id="描述：-v20">描述：</h5>
+<p><font color="#666">LTE 链路类型。<code><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_ltelinktype_ocu_sync_lte">OCU_SYNC_LTE</a></code>表示开启增强图传功能，<code><a href="../../Components/ILTEManager/ILTEManager.html#iltemanager_ltelinktype_ocu_sync">OCU_SYNC</a></code>则表示关闭增强图传功能，使用 OCUSYNC 图传。
 <br><br><code><i>MSDK 5.2.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iltemanager_ltelinktype_ocu_sync_inline"></a>OCU_SYNC</font></td><td><font color="#666">Ocusync图传。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iltemanager_ltelinktype_ocu_sync_lte_inline"></a>OCU_SYNC_LTE</font></td><td><font color="#666">LTE增强图传。</font></td></tr></table></html>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iltemanager_ltelinktype_ocu_sync_inline"></a>OCU_SYNC</font></td><td><font color="#666">Ocusync 图传。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iltemanager_ltelinktype_ocu_sync_lte_inline"></a>OCU_SYNC_LTE</font></td><td><font color="#666">LTE 增强图传。</font></td></tr></table></html>
 <h5 id="class-members">Class Members:</h5>
 </div>
-<div class="api-row" id="iltemanager_ltelinkinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a></div></div><div class="api-row" id="iltemanager_lteauthenticationinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a></div></div><div class="api-row" id="iltemanager_ltelinkinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a></div></div><div class="api-row" id="iltemanager_ltedongleinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a></div></div>
+<div class="api-row" id="iltemanager_ltelinkinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a></div></div><div class="api-row" id="iltemanager_lteprivatizationserverinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a></div></div><div class="api-row" id="iltemanager_lteauthenticationinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a></div></div><div class="api-row" id="iltemanager_ltelinkinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a></div></div><div class="api-row" id="iltemanager_ltedongleinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a></div></div>
 
         </div>
       </div>

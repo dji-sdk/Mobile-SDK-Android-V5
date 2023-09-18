@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -536,6 +542,8 @@
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
                   </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IDeviceStatusManager/IDeviceStatusManager_DJIDeviceStatusChangeListener.html">DJIDeviceStatusChangeListener</a>
@@ -631,18 +639,18 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unlockAuthorizationFlyZone</span><span class="params">(<span class="keyword">int</span> flyZoneID, @NonNull CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v7">描述：</h5>
-<p><font color="#666">解锁授权区。解锁授权区后，飞行器将可以在授权区正常起飞，重启飞行器后授权区将继续禁飞。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<p><font color="#666">解锁授权区。解锁授权区后，飞行器将可以在授权区正常起飞。 <br><b>注意：<br> M300 RTK，M350 RTK，M30系列，M3E系列等行业类机型，可直接传入flyZoneID进行授权区解禁，重启飞行器后授权区将继续禁飞。<br> DJI Mini 3和DJI Mini 3 Pro等消费类机型，需要参考禁飞区解禁流程，在DJI限飞官网申请解禁后， 调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_downloadflyzonelicensesfromserver">downloadFlyZoneLicensesFromServer</a></code>和<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_pushflyzonelicensestoaircraft">pushFlyZoneLicensesToAircraft</a></code>进行授权区解禁。 </b> <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v5">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int <font color="#000">flyZoneID</font></font></td><td><font color="#666"><i>授权区ID。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <html><p><br></p></html>
-<h4 id="限飞区">限飞区</h4>
+<h4 id="禁飞区">禁飞区</h4>
 <div class="api-row" id="iflyzonemanager_downloadflyzonelicensesfromserver"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_downloadflyzonelicensesfromserver_inline">downloadFlyZoneLicensesFromServer</a></div></div><div class="inline-doc" id="iflyzonemanager_downloadflyzonelicensesfromserver_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>downloadFlyZoneLicensesFromServer</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">downloadFlyZoneLicensesFromServer</span><span class="params">(@NonNull CommonCallbacks.CompletionCallbackWithParam&lt;List&lt;FlyZoneLicenseInfo&gt;&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v8">描述：</h5>
-<p><font color="#666">从服务器获取限飞区解禁证书。请先调用<code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_logindjiuseraccountwithinterface">logInDJIUserAccount</a></code>登陆DJI账号，才能获取相关账号申请的解禁证书。 <br><b>注意：<br> 如果你希望在地图上绘制解禁证书中的限飞区，请将限飞区中的areaID传入<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_getflyzonesbyareaid">getFlyZonesByAreaID</a></code>后就可以获取该areaID的限飞区信息进行绘制。</b> <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<p><font color="#666">从服务器获取禁飞区解禁证书。请先调用<code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_logindjiuseraccountwithinterface">logInDJIUserAccount</a></code>登陆DJI账号，才能获取相关账号申请的解禁证书。 <br><b>注意：<br> 如果你希望在地图上绘制解禁证书中的限飞区，请将限飞区中的areaID传入<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_getflyzonesbyareaid">getFlyZonesByAreaID</a></code>后就可以获取该areaID的限飞区信息进行绘制。</b> <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v6">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;List&lt;<a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html#iflyzonemanager_flyzonelicenseinfo">FlyZoneLicenseInfo</a>&gt;&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iflyzonemanager_getflyzonesbyareaid"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_getflyzonesbyareaid_inline">getFlyZonesByAreaID</a></div></div><div class="inline-doc" id="iflyzonemanager_getflyzonesbyareaid_inline" <blockquote>

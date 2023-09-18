@@ -16,7 +16,7 @@ import dji.v5.manager.KeyManager
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.*
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 /**
  * @author feel.feng

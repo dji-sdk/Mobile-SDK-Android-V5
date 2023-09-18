@@ -21,7 +21,8 @@ import dji.v5.manager.datacenter.livestream.LiveStreamType
 import dji.v5.manager.datacenter.livestream.LiveVideoBitrateMode
 import dji.v5.manager.datacenter.livestream.StreamQuality
 import dji.v5.utils.common.StringUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.v5.ux.core.extension.disableHardwareAccelerated
 import kotlinx.android.synthetic.main.frag_live_stream_page.*
 
 /**
@@ -67,7 +68,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.setLayerType(View.LAYER_TYPE_NONE , null)
+        view.disableHardwareAccelerated()
         initView(view)
         initListener()
         initLiveStreamInfo()
@@ -549,8 +550,10 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         }
                         .setPositiveButton(R.string.ad_confirm) { dialog, _ ->
                             kotlin.run {
-                                liveStreamQuality = liveStreamQualities[checkedItem]
-                                liveStreamVM.setLiveStreamQuality(liveStreamQuality)
+                                if (checkedItem >= 0) {
+                                    liveStreamQuality = liveStreamQualities[checkedItem]
+                                    liveStreamVM.setLiveStreamQuality(liveStreamQuality)
+                                }
                                 dialog.dismiss()
                             }
                         }
@@ -587,8 +590,10 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         }
                         .setPositiveButton("确认") { dialog, _ ->
                             kotlin.run {
-                                liveStreamBitrateMode = liveStreamBitrateModes[checkedItem]
-                                liveStreamVM.setLiveVideoBitRateMode(liveStreamBitrateMode)
+                                if (checkedItem >= 0) {
+                                    liveStreamBitrateMode = liveStreamBitrateModes[checkedItem]
+                                    liveStreamVM.setLiveVideoBitRateMode(liveStreamBitrateMode)
+                                }
                                 dialog.dismiss()
                             }
                         }
@@ -618,14 +623,16 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         .setTitle(R.string.ad_select_live_stream_channel_type)
                         .setCancelable(false)
                         .setSingleChoiceItems(items, checkedItem) { _, i ->
-                            checkedItem = i
-                            ToastUtils.showToast(
-                                "选择使用所使用的channel： " + (items[i] ?: "选择使用所使用的channel为null"),
-                            )
+                            if (i < items.size) {
+                                checkedItem = i
+                                ToastUtils.showToast(
+                                    "选择使用所使用的channel： " + (items[i] ?: "选择使用所使用的channel为null"),
+                                )
+                            }
                         }
                         .setPositiveButton("确认") { dialog, _ ->
                             kotlin.run {
-                                if (liveStreamVM.getVideoChannel() != liveStreamChannelTypes[checkedItem]) {
+                                if (checkedItem >= 0 && liveStreamVM.getVideoChannel() != liveStreamChannelTypes[checkedItem]) {
                                     judgeChannel(liveStreamChannelTypes[checkedItem])
                                 }else{
                                     ToastUtils.showToast(
@@ -704,7 +711,7 @@ class LiveStreamFragment:DJIFragment(), View.OnClickListener,SurfaceHolder.Callb
                         }
                         .setPositiveButton("确认") { dialog, _ ->
                             kotlin.run {
-                                if(isConfigSelected){
+                                if (checkedItem >= 0 && isConfigSelected){
                                     liveStreamType = liveStreamTypes[checkedItem]
                                     setLiveStreamConfig(liveStreamType)
                                 }

@@ -92,4 +92,17 @@
         <item>返回航线起始点悬停</item>
         <item>退出航线模式</item>
     </string-array>
+
+    <string-array name="wayline_action">
+        <item>Take Photo</item>
+        <item>Start Record</item>
+        <item>Stop Record</item>
+        <item>Gimbal Pitch</item>
+    </string-array>
+
+    <string-array name="kml_heigh_mode">
+        <item>WGS84</item>
+        <item>EGM96</item>
+        <item>RELATIVE</item>
+    </string-array>
 </resources>

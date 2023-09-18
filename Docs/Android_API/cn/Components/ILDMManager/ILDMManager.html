@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -536,6 +542,8 @@
                   </dd>
                   <dd><a href class="active">ILDMManager</a>
                   </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IDeviceStatusManager/IDeviceStatusManager_DJIDeviceStatusChangeListener.html">DJIDeviceStatusChangeListener</a>
@@ -631,7 +639,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enableLDM</span><span class="params">(Context context, CommonCallbacks.CompletionCallback callback, LDMExemptModule... modules)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v7">描述：</h5>
-<p><font color="#666">开启LDM模式接口，调用此接口时可以传入多个LDMExemptModule参数，代表LDM开启后任然允许联网的例外模块，举例：调用接口时modules参数包含RTK和FLY_SAFE，则表示LDM开启后，RTK和限飞模块仍然可以访问网络。<br> <b>注意：<br> 1.用此接口开启LDM模式, 需要在<code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_init">init</a></code>方法之前调用,如果没有离线的证书文件，则必须传入如下参数：<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_ldmexemptmodule_msdk_init_and_registration">MSDK_INIT_AND_REGISTRATION</a></code>，以便让MSDK注册模块可以进行一次联网完成注册流程。<br> 2.使用离线证书文件激活LDM时，需要确保离线的LDM证书文件（license_app包名.txt）已经存放到指定目录，可通过<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_getlocalldmlicensepath">getLocalLDMLicensePath</a></code>获取指定目录。<br> 3.除了把离线的LDM证书文件存放到指定目录的方式外，你也可以调用<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_loadlocalldmlicensecontent">loadLocalLDMLicenseContent</a></code>把Lincese文件的内容加载到LDM模块中。<br> 4.如果没有离线的证书文件，第一次调用本方法时会访问DJI的LDM服务器拉取证书文件信息并保存到本地，之后调用此接口时会首先读取本地保存的信息。<br> 5.想使用LDM离线模式的证书文件，需要去DJI SDK开发者官网<a href="https://developer.dji.com" target="_blank" rel="noopener">https://developer.dji.com</a>登录个人账号后申请。<br> <br><br><code><i>MSDK 5.0.0开始支持</i></code></b></font></p>
+<p><font color="#666">开启LDM模式接口，调用此接口时可以传入多个LDMExemptModule参数，代表LDM开启后任然允许联网的例外模块，举例：调用接口时modules参数包含RTK和FLY_SAFE，则表示LDM开启后，RTK和限飞模块仍然可以访问网络。<br> <b>注意：<br> 1.用此接口开启LDM模式, 需要在<code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_init">init</a></code>方法之后调用,如果没有离线的证书文件，则必须传入如下参数：<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_ldmexemptmodule_msdk_init_and_registration">MSDK_INIT_AND_REGISTRATION</a></code>，以便让MSDK注册模块可以进行一次联网完成注册流程。<br> 2.使用离线证书文件激活LDM时，需要确保离线的LDM证书文件（license_app包名.txt）已经存放到指定目录，可通过<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_getlocalldmlicensepath">getLocalLDMLicensePath</a></code>获取指定目录。<br> 3.除了把离线的LDM证书文件存放到指定目录的方式外，你也可以调用<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_loadlocalldmlicensecontent">loadLocalLDMLicenseContent</a></code>把Lincese文件的内容加载到LDM模块中。<br> 4.如果没有离线的证书文件，第一次调用本方法时会访问DJI的LDM服务器拉取证书文件信息并保存到本地，之后调用此接口时会首先读取本地保存的信息。<br> 5.想使用LDM离线模式的证书文件，需要去DJI SDK开发者官网<a href="https://developer.dji.com" target="_blank" rel="noopener">https://developer.dji.com</a>登录个人账号后申请。<br> <br><br><code><i>MSDK 5.0.0开始支持</i></code></b></font></p>
 <h5 id="输入参数：-v4">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">Context <font color="#000">context</font></font></td><td><font color="#666"><i>传入一个Application的Context.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_ldmexemptmodule">LDMExemptModule</a>... <font color="#000">modules</font></font></td><td><font color="#666"><i>如果希望某几个模块在LDM开启时作为例外模块，仍然可以访问网络，则在modules中设置此模块。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ildmmanager_disableldm"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ildmmanager_disableldm_inline">disableLDM</a></div></div><div class="inline-doc" id="ildmmanager_disableldm_inline" <blockquote>

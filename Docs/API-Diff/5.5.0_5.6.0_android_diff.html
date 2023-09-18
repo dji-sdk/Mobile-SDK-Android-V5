@@ -1,0 +1,50 @@
+<html>
+<style>
+  table, th, td {
+     border: 1px solid rgb(200,200,200);
+     border-collapse: collapse;
+     }
+  table {
+     table-layout: fixed;
+     width: 1900px;
+     }
+  td {
+     overflow-x: auto;
+     }
+  th, td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    }
+  .comments {
+    color: #292;
+    }
+  .source-code {
+    color: #22F;
+    }
+  .interface-parent {
+    color: #AAA;
+    }
+  .interface-name {
+    color: #000;
+    }
+  .check-mark {
+    text-align: center;
+    }
+</style>
+<body>
+<br>
+
+<h1>DJI Mobile SDK V5 5.5.0 to 5.6.0 Differences</h1>
+
+<br>
+
+<h2>APIs removed from 5.5.0</h2>
+
+<table class="diff-table"><tr valign="top"><td width=15%><font color="#000">Parent and Name</font></td><td width=15%><font color="#000">Code</font></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IWaypointMissionManager.</span><span class="interface-name">queryBreakPointInfoFromAircraft</span></td><td width=15%><span class="source-code">    void queryBreakPointInfoFromAircraft(String missionFileName ,CommonCallbacks.CompletionCallbackWithParam&lt;BreakPointInfo&gt; callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IWaypointMissionManager.</span><span class="interface-name">resumeMission</span></td><td width=15%><span class="source-code">    void resumeMission(int waylineId, PointInfo breakPointInfo, CommonCallbacks.CompletionCallback callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IWaypointMissionManager.</span><span class="interface-name">startMission</span></td><td width=15%><span class="source-code">    void startMission(String missionFileName , BreakPointInfo breakPointInfo , CommonCallbacks.CompletionCallback callback)</span></td></tr></table><br>
+
+<h2>APIs added to 5.6.0</h2>
+
+<table class="diff-table"><tr valign="top"><td width=15%><font color="#000">Parent and Name</font></td><td width=15%><font color="#000">Code</font></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IDataProtectionManager.</span><span class="interface-name">agreeToProductImprovement</span></td><td width=15%><span class="source-code">    void agreeToProductImprovement(boolean isAgree)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IDataProtectionManager.</span><span class="interface-name">isAgreeToProductImprovement</span></td><td width=15%><span class="source-code">    boolean isAgreeToProductImprovement()</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.</span><span class="interface-name">IDataProtectionManager</span></td><td width=15%><span class="source-code">interface IDataProtectionManager </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.lte.LTELinkInfo.</span><span class="interface-name">getAircraftPrivatizationServerInfo</span></td><td width=15%><span class="source-code">LTEPrivatizationServerInfo getAircraftPrivatizationServerInfo() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.lte.LTELinkInfo.</span><span class="interface-name">getRemoteControllerPrivatizationServerInfo</span></td><td width=15%><span class="source-code">LTEPrivatizationServerInfo getRemoteControllerPrivatizationServerInfo() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.lte.</span><span class="interface-name">LTEPrivatizationServerInfo</span></td><td width=15%><span class="source-code">class LTEPrivatizationServerInfo </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.lte.LTEPrivatizationServerInfo.</span><span class="interface-name">getIp</span></td><td width=15%><span class="source-code">String getIp() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.lte.LTEPrivatizationServerInfo.</span><span class="interface-name">getPort</span></td><td width=15%><span class="source-code">int getPort() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.lte.LTEPrivatizationServerInfo.</span><span class="interface-name">setIp</span></td><td width=15%><span class="source-code">LTEPrivatizationServerInfo setIp(String ip) </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.lte.LTEPrivatizationServerInfo.</span><span class="interface-name">setPort</span></td><td width=15%><span class="source-code">LTEPrivatizationServerInfo setPort(int port) </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.ILTEManager.</span><span class="interface-name">clearLTEAircraftPrivatizationServer</span></td><td width=15%><span class="source-code">    void clearLTEAircraftPrivatizationServer(@NonNull CommonCallbacks.CompletionCallback callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.ILTEManager.</span><span class="interface-name">clearLTERemoteControllerPrivatizationServer</span></td><td width=15%><span class="source-code">    void clearLTERemoteControllerPrivatizationServer(@NonNull CommonCallbacks.CompletionCallback callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.ILTEManager.</span><span class="interface-name">setLTEAircraftPrivatizationServerInfo</span></td><td width=15%><span class="source-code">    void setLTEAircraftPrivatizationServerInfo(@NonNull LTEPrivatizationServerInfo serverInfo, @NonNull CommonCallbacks.CompletionCallback callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.ILTEManager.</span><span class="interface-name">setLTERemoteControllerPrivatizationServerInfo</span></td><td width=15%><span class="source-code">    void setLTERemoteControllerPrivatizationServerInfo(@NonNull LTEPrivatizationServerInfo serverInfo, @NonNull CommonCallbacks.CompletionCallback callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.model.</span><span class="interface-name">BreakPointInfo</span></td><td width=15%><span class="source-code">class BreakPointInfo </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.model.BreakPointInfo.</span><span class="interface-name">getSegmentProgress</span></td><td width=15%><span class="source-code">Double getSegmentProgress() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.model.BreakPointInfo.</span><span class="interface-name">getWaylineID</span></td><td width=15%><span class="source-code">Integer getWaylineID() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.model.BreakPointInfo.</span><span class="interface-name">getWaypointID</span></td><td width=15%><span class="source-code">Integer getWaypointID() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.model.BreakPointInfo.</span><span class="interface-name">setSegmentProgress</span></td><td width=15%><span class="source-code">void setSegmentProgress(Double progress) </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.model.BreakPointInfo.</span><span class="interface-name">setWaylineID</span></td><td width=15%><span class="source-code">void setWaylineID(Integer waylineID) </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.model.BreakPointInfo.</span><span class="interface-name">setWaypointID</span></td><td width=15%><span class="source-code">void setWaypointID(Integer waypointID) </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IWaypointMissionManager.</span><span class="interface-name">queryBreakPointInfoFromAircraft</span></td><td width=15%><span class="source-code">    void queryBreakPointInfoFromAircraft(String missionFileName ,CommonCallbacks.CompletionCallbackWithParam&lt;BreakPointInfo&gt; callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IWaypointMissionManager.</span><span class="interface-name">resumeMission</span></td><td width=15%><span class="source-code">    void resumeMission(BreakPointInfo breakPointInfo, CommonCallbacks.CompletionCallback callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IWaypointMissionManager.</span><span class="interface-name">startMission</span></td><td width=15%><span class="source-code">    void startMission(String missionFileName , BreakPointInfo breakPointInfo , CommonCallbacks.CompletionCallback callback)</span></td></tr></table><p style="font-size:50%; color:white">--android --android </p></body>
+</html>
+

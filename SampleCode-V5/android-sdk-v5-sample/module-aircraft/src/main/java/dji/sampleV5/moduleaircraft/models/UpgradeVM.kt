@@ -15,7 +15,7 @@ import dji.v5.manager.aircraft.upgrade.UpgradeableComponent
 import dji.v5.manager.aircraft.upgrade.UpgradeableComponentListener
 import dji.v5.manager.aircraft.upgrade.model.ComponentType
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.manager.aircraft.upgrade.UpgradeProgressState
 /**
  * @author feel.feng

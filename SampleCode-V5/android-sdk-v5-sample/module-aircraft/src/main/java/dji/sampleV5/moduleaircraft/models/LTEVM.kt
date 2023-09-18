@@ -3,6 +3,8 @@ package dji.sampleV5.moduleaircraft.models
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.modulecommon.data.DJIToastResult
 import dji.sampleV5.modulecommon.models.DJIViewModel
+import dji.sdk.keyvalue.value.airlink.LTEPrivatizationServerMsg
+import dji.sdk.keyvalue.value.airlink.WlmDeviceType
 import dji.sdk.keyvalue.value.airlink.WlmDongleInfo
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -109,6 +111,58 @@ class LTEVM : DJIViewModel() {
             CommonCallbacks.CompletionCallbackWithParam<LTELinkType> {
             override fun onSuccess(lteLinkType: LTELinkType) {
                 toastResult?.postValue(DJIToastResult.success(lteLinkType.name))
+            }
+
+            override fun onFailure(error: IDJIError) {
+                toastResult?.postValue(DJIToastResult.failed(error.toString()))
+            }
+        })
+    }
+
+    fun setLTEAcPrivatizationServerMsg(serverInfo: LTEPrivatizationServerInfo) {
+        LTEManager.getInstance().setLTEAircraftPrivatizationServerInfo(serverInfo, object :
+            CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                toastResult?.postValue(DJIToastResult.success())
+            }
+
+            override fun onFailure(error: IDJIError) {
+                toastResult?.postValue(DJIToastResult.failed("$error"))
+            }
+        })
+    }
+
+    fun setLTERcPrivatizationServerMsg(serverInfo: LTEPrivatizationServerInfo) {
+        LTEManager.getInstance().setLTERemoteControllerPrivatizationServerInfo(serverInfo, object :
+            CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                toastResult?.postValue(DJIToastResult.success())
+            }
+
+            override fun onFailure(error: IDJIError) {
+                toastResult?.postValue(DJIToastResult.failed("$error"))
+            }
+        })
+    }
+
+    fun clearLTEAcPrivatizationServerMsg() {
+        LTEManager.getInstance().clearLTEAircraftPrivatizationServer(object :
+            CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                toastResult?.postValue(DJIToastResult.success())
+            }
+
+            override fun onFailure(error: IDJIError) {
+                toastResult?.postValue(DJIToastResult.failed(error.toString()))
+            }
+        })
+    }
+
+    fun clearLTERcPrivatizationServerMsg() {
+        LTEManager.getInstance().clearLTERemoteControllerPrivatizationServer(object :
+            CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                toastResult?.postValue(DJIToastResult.success())
             }
 
             override fun onFailure(error: IDJIError) {

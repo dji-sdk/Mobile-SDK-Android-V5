@@ -20,7 +20,7 @@ import dji.v5.manager.areacode.AreaCode
 import dji.v5.manager.areacode.AreaCodeManager
 import dji.v5.utils.common.DateUtils
 import dji.v5.utils.common.JsonUtil
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.ux.map.MapWidget
 import dji.v5.ux.mapkit.core.maps.DJIMap
 import kotlinx.android.synthetic.main.frag_fly_safe_page.*

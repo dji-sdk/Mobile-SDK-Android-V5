@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="news_title">MSDK 5.5.0</string>
-    <string name="news_description">"- Adapted to Android 13.
-- Added several functional keys.
+    <string name="news_title">MSDK 5.4.0</string>
+    <string name="news_description">"- Added supported aircraft: Matrice 350 RTK.
+- Matrice 300 RTK added support for DJI RC Plus remote controller.
 
 More refer to the release notes." </string>
-    <string name="news_date">2023–7–18</string>
+    <string name="news_date">2023–5–18</string>
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/en-us/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/en/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/en-us/requests/new</string>
+
+    <string name="news_dialog_content_tips">MSDK has a new version update, click for details.</string>
+    <string name="news_dialog_btn_left">Details</string>
+    <string name="news_dialog_btn_right">Exit</string>
+    <string name="release_note_tile_latest">Latest version of MSDK: %s</string>
+    <string name="release_note_tile_current">Current version of MSDK: %s</string>
+    <string name="release_note_loading">loading…</string>
 
     <string name="app_name_all">MSDK ALL</string>
     <string name="app_name_aircraft">MSDK Aircraft</string>
@@ -50,6 +57,9 @@ More refer to the release notes." </string>
 
     <string name="item_fly_safe_title">Fly Safe</string>
     <string name="item_fly_safe_description">Demonstrate how to use the Fly Safe function</string>
+
+    <string name="item_data_protection_title">Data Protection</string>
+    <string name="item_data_protection_description">Demonstrate how to use the Data Protection function</string>
 
     <string name="btn_init_msdk">Init MSDK</string>
     <string name="btn_unInit_msdk">UnInit MSDK</string>
@@ -120,6 +130,11 @@ More refer to the release notes." </string>
     <string name="release_nodes">Release Nodes</string>
     <string name="tech_support">Tech Support</string>
 
+    <!-- Data Protection -->
+    <string name="switch_product_improvement">Product Improvement Project</string>
+    <string name="switch_product_improvement_on">Agree</string>
+    <string name="switch_product_improvement_off">Disagree</string>
+
     <!--Megaphone-->
     <string name="btn_start_audio_mode">Audio Record</string>
     <string name="btn_start_tts_mode">TTS</string>
@@ -173,6 +188,7 @@ More refer to the release notes." </string>
     <string name="btn_mission_resume">Resume Mission</string>
     <string name="btn_mission_stop">Stop Mission</string>
     <string name="btn_mission_wayline_select">Select Wayline ID</string>
+    <string name="btn_mission_breakinfo_resume">Resume From BreakPoint</string>
     <string name="btn_get_payload_product_name">Get Payload Product Name </string>
 
     <!-- StationRTK   -->
@@ -297,7 +313,7 @@ More refer to the release notes." </string>
     <string name="tip_has_set_password_already">The current device SD has been set with a password and cannot continue to set the password. You can choose to change your password or reset your password</string>
     <string name="tip_device_type">MASTER means aircraft, SLAVE1 means left gimbal, SLAVE2 means right gimbal, SLAVE3 means upper gimbal</string>
 
-    <string name="securitycode_operation_result_no_err">Operation success</string>
+    <string name="securitycode_operation_result_success">Operation success</string>
     <string name="securitycode_operation_result_running">System busy. Try again later</string>
     <string name="securitycode_operation_result_busy">System busy. Try again later</string>
     <string name="securitycode_operation_result_set_failed">Setting security code failed. Try again</string>
@@ -422,6 +438,10 @@ More refer to the release notes." </string>
     <string name="btn_start_lte_authentication">Start LTE Authentication</string>
     <string name="btn_set_lte_enhanced_transmission_type">Set LTE Enhanced Transmission Type</string>
     <string name="btn_get_lte_enhanced_transmission_type">Get LTE Enhanced Transmission Type</string>
+    <string name="btn_set_lte_ac_privatization_server_info">Set LTE Aircraft Privatization Server Info</string>
+    <string name="btn_set_lte_rc_privatization_server_info">Set LTE RemoteController Privatization Server Info</string>
+    <string name="btn_clear_lte_ac_privatization_server_info">Clear LTE Aircraft Privatization Server Info</string>
+    <string name="btn_clear_lte_rc_privatization_server_info">Clear LTE RemoteController Privatization Server Info</string>
 
     <!-- Fly Safe -->
     <string name="btn_btn_hide_or_show_all_fly_zone_info">Hide/Show Fly Zones Info</string>

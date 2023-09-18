@@ -20,7 +20,7 @@ import dji.v5.manager.aircraft.rtk.RTKLocationInfo
 import dji.v5.manager.aircraft.rtk.RTKSystemState
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
 import kotlinx.android.synthetic.main.frag_rtk_center_page.*

@@ -119,7 +119,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.uxsdk_activity_default_layout);
         fpvParentView = findViewById(R.id.fpv_holder);
-        fpvParentView.setLayerType(View.LAYER_TYPE_NONE , null);
+        ViewExtensions.disableHardwareAccelerated(fpvParentView);
 //        mDrawerLayout = findViewById(R.id.root_view);
         topBarPanel = findViewById(R.id.panel_top_bar);
 //        settingWidget = topBarPanel.getSettingWidget();

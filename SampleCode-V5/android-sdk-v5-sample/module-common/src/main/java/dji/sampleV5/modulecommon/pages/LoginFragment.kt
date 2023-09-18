@@ -16,7 +16,7 @@ import dji.v5.common.error.IDJIError
 import dji.v5.manager.account.LoginInfo
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.frag_login_account_page.*
 

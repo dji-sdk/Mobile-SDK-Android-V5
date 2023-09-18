@@ -40,4 +40,12 @@ class ItemNewsLayout @JvmOverloads constructor(
     fun setDescription(description : String){
         item_description.text = description
     }
+
+    fun showAlert(isShow: Boolean) {
+        if (isShow) {
+            view_alert.visibility = View.VISIBLE
+        } else {
+            view_alert.visibility = View.GONE
+        }
+    }
 }

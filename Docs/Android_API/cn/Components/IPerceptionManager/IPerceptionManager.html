@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -536,6 +542,8 @@
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
                   </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IDeviceStatusManager/IDeviceStatusManager_DJIDeviceStatusChangeListener.html">DJIDeviceStatusChangeListener</a>
@@ -634,7 +642,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setObstacleAvoidanceWarningDistance</span><span class="params">(<span class="keyword">double</span> distance, @NonNull PerceptionDirection direction,</span></span></span><br><span class="line"><span class="function"><span class="params">                                          CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
 <h5 id="描述：-v8">描述：</h5>
-<p><font color="#666">设置避障告警距离,单位：米。 <li>水平告警距离范围：[1.1, 33.0]。</li> <li>上方告警距离范围：[1.1, 33.0]。</li> <li>下方告警距离范围：[0.6, 33.0]。</li> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">设置避障告警距离,单位：米。 <li>以M30系列机型为例：（其他机型请参考DJI Pilot 2的范围）</li> <li>水平告警距离范围：[1.1, 33.0]。</li> <li>上方告警距离范围：[1.1, 33.0]。</li> <li>下方告警距离范围：[0.6, 33.0]。</li> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v7">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double <font color="#000">distance</font></font></td><td><font color="#666"><i>感知避障告警距离。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_perceptiondirection">PerceptionDirection</a> <font color="#000">direction</font></font></td><td><font color="#666"><i>感知避障方向。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_getobstacleavoidancewarningdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_getobstacleavoidancewarningdistance_inline">getObstacleAvoidanceWarningDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_getobstacleavoidancewarningdistance_inline" <blockquote>
@@ -652,7 +660,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setObstacleAvoidanceBrakingDistance</span><span class="params">(<span class="keyword">double</span> distance, @NonNull PerceptionDirection direction,</span></span></span><br><span class="line"><span class="function"><span class="params">                                          CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.perception</font></td></tr></table></html>
 <h5 id="描述：-v10">描述：</h5>
-<p><font color="#666">设置避障刹停距离,单位：米。 <li>水平刹停距离范围：[1.0, 10.0]。</li> <li>上方刹停距离范围：[1.0, 10.0]。</li> <li>下方刹停距离范围：[0.5, 3.0]。</li> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">设置避障刹停距离,单位：米。 <li>以M30系列机型为例：（其他机型请参考DJI Pilot 2的范围）</li> <li>水平刹停距离范围：[1.0, 10.0]。</li> <li>上方刹停距离范围：[1.0, 10.0]。</li> <li>下方刹停距离范围：[0.5, 3.0]。</li> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v9">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double <font color="#000">distance</font></font></td><td><font color="#666"><i>感知避障刹停距离。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IPerceptionManager/IPerceptionManager.html#iperceptionmanager_perceptiondirection">PerceptionDirection</a> <font color="#000">direction</font></font></td><td><font color="#666"><i>感知避障方向。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iperceptionmanager_getobstacleavoidancebrakingdistance"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iperceptionmanager_getobstacleavoidancebrakingdistance_inline">getObstacleAvoidanceBrakingDistance</a></div></div><div class="inline-doc" id="iperceptionmanager_getobstacleavoidancebrakingdistance_inline" <blockquote>

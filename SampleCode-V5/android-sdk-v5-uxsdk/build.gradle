@@ -41,6 +41,7 @@ dependencies {
     implementation deps.kotlinLib
     implementation deps.ktxCore
     implementation deps.rx3Android
+    implementation deps.wpmzSdk
     implementation deps.rx3Kt
     implementation deps.lottie
     implementation deps.cardview

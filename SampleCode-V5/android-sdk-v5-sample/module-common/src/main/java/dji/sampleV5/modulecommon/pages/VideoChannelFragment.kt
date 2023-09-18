@@ -25,9 +25,11 @@ import dji.v5.common.video.decoder.*
 import dji.v5.common.video.interfaces.*
 import dji.v5.common.video.stream.StreamSource
 import dji.v5.utils.common.*
+import dji.v5.ux.core.extension.disableHardwareAccelerated
 import kotlinx.android.synthetic.main.video_channel_horizontal_scrollview.*
 import kotlinx.android.synthetic.main.video_channel_page.*
 import java.io.*
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.Callback,
     YuvDataListener {
@@ -119,7 +121,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
         savedInstanceState: Bundle?,
     ): View? {
         val view = inflater.inflate(R.layout.video_channel_page, container, false)
-        view.setLayerType(View.LAYER_TYPE_NONE , null)
+        view.disableHardwareAccelerated()
         surfaceView = view.findViewById(R.id.surface_view)
         surfaceView.holder.addCallback(this)
         view.findViewById<Button>(R.id.startChannel).setOnClickListener(this)

@@ -7,22 +7,20 @@ import androidx.fragment.app.activityViewModels
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MEDIA_FILE_DETAILS_STR
 import dji.sampleV5.modulecommon.models.VideoPlayVM
-import dji.sdk.keyvalue.key.CameraKey
-import dji.sdk.keyvalue.key.KeyTools
-import dji.sdk.keyvalue.utils.CameraUtil
-import dji.sdk.keyvalue.value.camera.CameraType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.video.channel.VideoChannelType
-import dji.v5.common.video.decoder.*
-import dji.v5.common.video.interfaces.*
-import dji.v5.manager.KeyManager
+import dji.v5.common.video.decoder.DecoderOutputMode
+import dji.v5.common.video.decoder.DecoderState
+import dji.v5.common.video.decoder.VideoDecoder
+import dji.v5.common.video.interfaces.IVideoDecoder
+import dji.v5.common.video.interfaces.IVideoFrame
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.manager.datacenter.media.VideoPlayState
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.video_play_page.*
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 
 class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickListener {
@@ -92,10 +90,6 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
                     seekBar?.progress = currentIntPosition
                     playingtime?.setText(videoPlayVM.showTime(currentIntPosition))
                     operate?.visibility = View.GONE
-                }
-                VideoPlayState.PAUSED -> {
-                    operate?.visibility = View.VISIBLE
-                    operate?.setImageResource(R.drawable.video_pause)
                 }
 
                 else -> {
@@ -206,6 +200,4 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
             }
         })
     }
-
-
 }

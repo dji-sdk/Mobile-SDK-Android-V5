@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="news_title">MSDK 5.5.0</string>
-    <string name="news_description">"- 适配Android 13。
-- 新增多个功能 Key。
+    <string name="news_title">MSDK 5.4.0</string>
+    <string name="news_description">"- 新增支持机型：Matrice 350 RTK。
+- Matric 300 RTK新增支持DJI RC Plus遥控器。
 
 更多功能查看发布日志。"</string>
-    <string name="news_date">2023–7–18</string>
+    <string name="news_date">2023–5–18</string>
 
     <string name="sdk_forum_url">https://sdk-forum.dji.net/hc/zh-cn/community/topics</string>
     <string name="release_node_url">https://developer.dji.com/doc/mobile-sdk-tutorial/cn/</string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/zh-cn/requests/new</string>
+
+    <string name="news_dialog_content_tips">MSDK有新版本更新，点击“查看”了解详情。</string>
+    <string name="news_dialog_btn_left">查看详情</string>
+    <string name="news_dialog_btn_right">退出</string>
+
+    <string name="release_note_tile_latest">MSDK最新版本：%s</string>
+    <string name="release_note_tile_current">MSDK当前版本：%s</string>
+    <string name="release_note_loading">加载中...</string>
 
     <string name="app_name_all">MSDK全部功能</string>
     <string name="app_name_aircraft">MSDK飞机功能</string>
@@ -50,6 +58,9 @@
 
     <string name="item_fly_safe_title">限飞</string>
     <string name="item_fly_safe_description">演示如何使用限飞相关功能</string>
+
+    <string name="item_data_protection_title">隐私保护</string>
+    <string name="item_data_protection_description">演示如何使用隐私保护相关功能</string>
 
     <string name="item_simulator_title">模拟器</string>
     <string name="item_simulator_description">演示如何使用RTK相关功能</string>
@@ -124,6 +135,11 @@
     <string name="sdk_forum">SDK 论坛</string>
     <string name="release_nodes">发布日志</string>
     <string name="tech_support">技术支持</string>
+
+    <!-- Data Protection -->
+    <string name="switch_product_improvement">用户体验改进计划</string>
+    <string name="switch_product_improvement_on">同意</string>
+    <string name="switch_product_improvement_off">不同意</string>
 
     <!--Megaphone-->
     <string name="btn_start_audio_mode">TTS</string>
@@ -241,6 +257,7 @@
     <string name="btn_mission_pause">暂停任务</string>
     <string name="btn_mission_resume">恢复任务</string>
     <string name="btn_mission_wayline_select">选择航线ID</string>
+    <string name="btn_mission_breakinfo_resume">断点续飞</string>
     <string name="btn_mission_stop">结束任务</string>
 
     <!--登录-->
@@ -297,7 +314,7 @@
     <string name="tip_modify_password_not_support">当前设备SD还未设置密码，请先设置密码</string>
     <string name="tip_device_type">MASTER表示飞机，SLAVE1表示左云台，SLAVE2表示右云台，SLAVE3表示上云台</string>
 
-    <string name="securitycode_operation_result_no_err">操作成功</string>
+    <string name="securitycode_operation_result_success">操作成功</string>
     <string name="securitycode_operation_result_running">系统繁忙，请稍后再试</string>
     <string name="securitycode_operation_result_busy">系统繁忙，请稍后再试</string>
     <string name="securitycode_operation_result_set_failed">密码设置失败，请重试</string>
@@ -424,6 +441,10 @@
     <string name="btn_start_lte_authentication">开始LTE认证</string>
     <string name="btn_set_lte_enhanced_transmission_type">设置LTE增强传输类型</string>
     <string name="btn_get_lte_enhanced_transmission_type">读取LTE增强传输类型</string>
+    <string name="btn_set_lte_ac_privatization_server_info">设置飞机私有化信息</string>
+    <string name="btn_set_lte_rc_privatization_server_info">设置遥控私有化信息</string>
+    <string name="btn_clear_lte_ac_privatization_server_info">清除飞机私有化信息</string>
+    <string name="btn_clear_lte_rc_privatization_server_info">清除遥控私有化信息</string>
 
     <!-- Fly Safe -->
     <string name="btn_btn_hide_or_show_all_fly_zone_info">隐藏/显示FlyZone信息</string>

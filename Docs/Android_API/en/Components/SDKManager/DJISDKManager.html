@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -328,6 +328,10 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -434,6 +438,8 @@
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -536,6 +542,8 @@
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
                   </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IDeviceStatusManager/IDeviceStatusManager_DJIDeviceStatusChangeListener.html">DJIDeviceStatusChangeListener</a>
@@ -598,7 +606,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">registerApp</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="description-v4">Description:</h5>
-<p><font color="#666">MSDK registration, MSDK connects to the DJI server through the Internet to verify the App KEY applied by the developer on the official website. This method needs to be called after the <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback_djisdkinitevent_initialize_complete">INITIALIZE_COMPLETE</a></code> event is returned in the <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback_oninitprocess">onInitProcess</a></code> method. Whether the registration is successful or the registration fails, it will be returned in <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a></code>. After successful registration, MSDK will automatically start to connect to the hardware product. If the hardware product connection is successful, the <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback_onproductconnect">onProductConnect</a></code> method will be called back. <br><b>Notice: <br>1. If the developer uses the offline license file method to open LDM before <code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_init">init</a></code>, the registration operation can be completed without connecting to the Internet. <br>2. If you use the method of downloading the license file from the Internet to enable LDM, you need to pass in <code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_ldmexemptmodule_msdk_init_and_registration">MSDK_INIT_AND_REGISTRATION</a></code> to <code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_enableldm">enableLDM</a></code>, in order to connect to the DJI server through the Internet to verify the App KEY and complete the registration process. <br>3. After MSDK is successfully registered, the registration information will be cached locally. When MSDK is started again, MSDK will verify the locally cached information to complete the registration process without connecting to the Internet. It is not necessary to perform online registration again until the application is reinstalled to complete the registration process.</b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">MSDK registration, MSDK connects to the DJI server through the Internet to verify the App KEY applied by the developer on the official website. This method needs to be called after the <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback_djisdkinitevent_initialize_complete">INITIALIZE_COMPLETE</a></code> event is returned in the <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback_oninitprocess">onInitProcess</a></code> method. Whether the registration is successful or the registration fails, it will be returned in <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback">SDKManagerCallback</a></code>. After successful registration, MSDK will automatically start to connect to the hardware product. If the hardware product connection is successful, the <code><a href="../../Components/SDKManager/ISDKManager_SDKManagerCallback.html#isdkmanager_sdkmanagercallback_onproductconnect">onProductConnect</a></code> method will be called back. <br><b>Notice: <br>1. If the developer uses the offline license file method to open LDM before <code><a href="../../Components/SDKManager/DJISDKManager.html#isdkmanager_registerapp">registerApp</a></code>, the registration operation can be completed without connecting to the Internet. <br>2. If you use the method of downloading the license file from the Internet to enable LDM, you need to pass in <code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_ldmexemptmodule_msdk_init_and_registration">MSDK_INIT_AND_REGISTRATION</a></code> to <code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_enableldm">enableLDM</a></code>, in order to connect to the DJI server through the Internet to verify the App KEY and complete the registration process. <br>3. After MSDK is successfully registered, the registration information will be cached locally. When MSDK is started again, MSDK will verify the locally cached information to complete the registration process without connecting to the Internet. It is not necessary to perform online registration again until the application is reinstalled to complete the registration process.</b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="isdkmanager_getsdkversion"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#isdkmanager_getsdkversion_inline">getSDKVersion</a></div></div><div class="inline-doc" id="isdkmanager_getsdkversion_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getSDKVersion</h6></div>

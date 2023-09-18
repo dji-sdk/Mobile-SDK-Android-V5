@@ -83,6 +83,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_mission_upload" />
 
+            <dji.v5.ux.accessory.DescSpinnerCell
+                android:id="@+id/heightmode"
+                android:layout_width="100dp"
+                android:background="@color/gray"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                app:uxsdk_entries="@array/kml_heigh_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_mission_stop" />
+
+            <EditText
+                android:id = "@+id/wp_break_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heightmode"
+                android:hint = "point index"/>
+
+            <EditText
+                android:id = "@+id/wp_break_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number|numberDecimal "
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text = "0.0"
+                app:layout_constraintTop_toBottomOf="@+id/wp_break_index"
+                android:hint = "break progress"/>
+            <Button
+                android:id="@+id/btn_breakpoint_resume"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_mission_breakinfo_resume"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/wp_break_progress" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -149,7 +188,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="save"
-        android:visibility="gone"
         android:enabled="false"
         android:layout_marginLeft="3dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -161,10 +199,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="clear"
-        android:visibility="gone"
         android:layout_marginLeft="3dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf ="@+id/kmz_save" />
+
+    <ToggleButton
+        android:id="@+id/waypoint_add"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="CLOSE ADD"
+        android:textOff= "Add Point"
+        android:background="@drawable/toggle_selector"
+        android:layout_marginLeft="3dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf ="@+id/waypoints_clear" />
+
+
+
 
     <TextView
         android:id="@+id/mission_execute_state_tv"
@@ -222,6 +274,15 @@
         app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
         app:layout_constraintTop_toBottomOf="@+id/wayline_aircraft_height"></TextView>
 
+    <TextView
+        android:id="@+id/wayline_aircraft_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aircraft distance:"
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/waypoint_button_list"
+        app:layout_constraintTop_toBottomOf="@+id/wayline_aircraft_distance"></TextView>
+
     <ImageButton
         android:id="@+id/map_locate"
         android:padding="10dp"
@@ -236,7 +297,40 @@
         app:layout_constraintEnd_toEndOf="@+id/map_widget"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mission_panel_container"
+        android:layout_width="@dimen/mission_edit_panel_width"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/mission_edit_panel_container_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
+        <View
+            android:id="@+id/split_line"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white_alpha_016"
+            app:layout_constraintEnd_toEndOf="@id/mission_panel_container"
+            />
 
+        <include layout="@layout/view_mission_setting_home"
+            android:id="@+id/mission_setting_home_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ToggleButton
+        android:id="@+id/panel_expand_btn"
+        android:layout_width="@dimen/mission_edit_expand_btn_width"
+        android:layout_height="@dimen/mission_edit_expand_btn_height"
+        android:background="@drawable/mission_edit_panel_toggle_btn_bg"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintEnd_toStartOf="@id/mission_panel_container"
+        app:layout_constraintTop_toTopOf="@id/mission_execute_state_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

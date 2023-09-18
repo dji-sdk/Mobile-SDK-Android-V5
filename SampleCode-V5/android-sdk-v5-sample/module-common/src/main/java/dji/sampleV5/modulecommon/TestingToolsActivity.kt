@@ -9,7 +9,7 @@ import androidx.navigation.Navigation
 import dji.sampleV5.modulecommon.models.MSDKCommonOperateVm
 import dji.sampleV5.modulecommon.util.DJIToastUtil
 import dji.sampleV5.modulecommon.views.MSDKInfoFragment
-import dji.v5.utils.common.ToastUtils
+import dji.sampleV5.modulecommon.util.ToastUtils
 import kotlinx.android.synthetic.main.activity_testing_tools.*
 
 /**

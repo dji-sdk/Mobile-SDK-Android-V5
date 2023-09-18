@@ -20,9 +20,8 @@ import dji.v5.common.error.IDJIError
 import dji.v5.common.ldm.LDMExemptModule
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
-import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.frag_main_page.*
-import java.util.concurrent.CopyOnWriteArrayList
+import dji.sampleV5.modulecommon.util.ToastUtils
 
 /**
  * Class Description

@@ -27,7 +27,6 @@ import java.util.ArrayList
  */
 class MediaListAdapter(
     val data: List<MediaFile>,
-    val context: Context?,
     private val onClick: (MediaFile, View) -> Unit
 ) :
     RecyclerView.Adapter<MediaListAdapter.ViewHolder>() {

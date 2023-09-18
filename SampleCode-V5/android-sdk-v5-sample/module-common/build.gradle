@@ -52,13 +52,24 @@ dependencies {
     api deps.lifecycleViewModel
     api deps.lifecycleLiveData
     api deps.rx3Android
+    api deps.wpmzSdk
     implementation deps.bugly
     implementation deps.leakcanary
     api deps.glide
     kapt deps.glidecompiler
     api deps.dynamicanimation
     api deps.expandedit
+    
+    implementation deps.rx3Kt
+    api deps.dom
+    api project(':uxsdk')
 
+    
+    
+    
+    
+    
+    
     //sdk依赖项（common下是通用功能，其他包也可以）
     compileOnly deps.aircraftProvided
     compileOnly deps.aircraft
