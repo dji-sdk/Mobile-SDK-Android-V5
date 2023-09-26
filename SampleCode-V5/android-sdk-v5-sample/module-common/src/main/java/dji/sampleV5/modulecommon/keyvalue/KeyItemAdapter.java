@@ -16,20 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import dji.sampleV5.modulecommon.R;
 
 
-public class KeyItemAdapter  extends RecyclerView.Adapter<KeyItemAdapter.ComViewHolder>  implements Filterable {
+public class KeyItemAdapter extends RecyclerView.Adapter<KeyItemAdapter.ComViewHolder> implements Filterable {
 
-    private KeyItemActionListener<KeyItem<? , ?>> callback;
+    private KeyItemActionListener<KeyItem<?, ?>> callback;
 
-    protected List<KeyItem<? ,?>> dataList;
-    protected List<KeyItem<? , ?>> mFilterList;
+    protected List<KeyItem<?, ?>> dataList;
+    protected List<KeyItem<?, ?>> mFilterList;
     protected Context context;
 
 
-    public KeyItemAdapter(Context context, List<KeyItem<?,?>> dataList, KeyItemActionListener<KeyItem<? ,?>> callback) {
+    public KeyItemAdapter(Context context, List<KeyItem<?, ?>> dataList, KeyItemActionListener<KeyItem<?, ?>> callback) {
         this.context = context;
         this.dataList = dataList;
         this.mFilterList = dataList;
@@ -53,9 +54,7 @@ public class KeyItemAdapter  extends RecyclerView.Adapter<KeyItemAdapter.ComView
     }
 
 
-
-
-    public void convert(ComViewHolder viewHolder, final KeyItem<?,?> keyItem) {
+    public void convert(ComViewHolder viewHolder, final KeyItem<?, ?> keyItem) {
         if (viewHolder == null || keyItem == null) {
             return;
         }
@@ -74,20 +73,26 @@ public class KeyItemAdapter  extends RecyclerView.Adapter<KeyItemAdapter.ComView
     }
 
 
-
     @Override
     public Filter getFilter() {
-        return  new Filter() {
+        return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
                     mFilterList = dataList;
                 } else {
-                    List<KeyItem<?,?>> filteredList = new ArrayList<>();
-                    for (KeyItem<?,?> item : dataList) {
-                        if (((KeyItem<?,?>)item).getName().toLowerCase().contains(charString) ||
-                                ((KeyItem<?,?>)item).getKeyInfo().getIdentifier().contains(charString)){
+                    List<KeyItem<?, ?>> filteredList = new ArrayList<>();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0, length = charSequence.length(); i < length; i++) {
+                        if (stringBuilder.length() > 0) {
+                            stringBuilder.append("+.*");
+                        }
+                        stringBuilder.append(charSequence.charAt(i));
+                    }
+                    Pattern pattern = Pattern.compile(stringBuilder.toString(), Pattern.CASE_INSENSITIVE);
+                    for (KeyItem<?, ?> item : dataList) {
+                        if (pattern.matcher(item.keyInfo.getIdentifier()).find()) {
                             filteredList.add(item);
                         }
 
@@ -102,7 +107,7 @@ public class KeyItemAdapter  extends RecyclerView.Adapter<KeyItemAdapter.ComView
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilterList = (ArrayList<KeyItem<?,?>>) filterResults.values;
+                mFilterList = (ArrayList<KeyItem<?, ?>>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

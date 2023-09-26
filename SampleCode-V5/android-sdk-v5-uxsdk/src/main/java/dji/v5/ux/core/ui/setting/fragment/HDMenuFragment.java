@@ -1,5 +1,11 @@
 package dji.v5.ux.core.ui.setting.fragment;
 
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import dji.v5.utils.common.ContextUtil;
 import dji.v5.utils.common.StringUtils;
 import dji.v5.ux.R;
@@ -22,6 +28,16 @@ public class HDMenuFragment extends MenuFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.uxsdk_fragment_not_yet_implement;
+        return R.layout.uxsdk_setting_menu_hd_layout;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+       view.findViewById(R.id.tc_setting_menu_sdr_info_text).setOnClickListener(view1 -> {
+           ChannelSelectFragment fragment = new ChannelSelectFragment();
+           addFragment(getFragmentManager(), fragment, true);
+       });
     }
 }

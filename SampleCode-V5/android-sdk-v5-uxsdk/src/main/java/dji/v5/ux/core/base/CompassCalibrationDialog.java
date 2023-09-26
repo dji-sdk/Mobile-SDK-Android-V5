@@ -30,6 +30,7 @@ import dji.v5.ux.core.ui.setting.dialog.BaseDialog;
 
 import dji.v5.ux.core.util.ViewUtil;
 
+
 /**
  * Compass校准弹窗
  *
@@ -40,6 +41,7 @@ public class CompassCalibrationDialog extends BaseDialog implements View.OnClick
     private View rootView;
 
     private boolean isCalibrating = true;
+
     private CompassCalibrationState mLastState = CompassCalibrationState.UNKNOWN;
     /**
      * 指南针校准是否正常结束
@@ -67,7 +69,7 @@ public class CompassCalibrationDialog extends BaseDialog implements View.OnClick
 
     private static int[] aircraftCompassIconM30 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_m30, R.drawable.uxsdk_fpv_compass_vertical_m30};
     private static int[] aircraftCompassIconM300 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_m300, R.drawable.uxsdk_fpv_compass_vertical_m300};
-    private static int[] aircraftCompassIconM3 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_wm265, R.drawable.uxsdk_fpv_compass_vertical_wm265};
+    private static int[] aircraftCompassIconM3 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_wm265, R.drawable.uxsdk_fpv_compass_vertical_m3};
 
     public CompassCalibrationDialog(@NonNull Context context) {
         this(context, R.style.NoTitleDialog);
@@ -86,6 +88,7 @@ public class CompassCalibrationDialog extends BaseDialog implements View.OnClick
     private void initialize(Context context) {
         rootView = LayoutInflater.from(context).inflate(R.layout.uxsdk_dialog_compass_calibration, null);
         initView(rootView);
+
         // 初始化先显示水平的图片
         updateNoticeImage(getIllustrationResIdByAircraft(CompassCalibrationState.HORIZONTAL));
     }

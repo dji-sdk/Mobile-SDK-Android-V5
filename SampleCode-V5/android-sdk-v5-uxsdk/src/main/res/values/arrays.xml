@@ -216,4 +216,10 @@
         <item>@string/uxsdk_setting_ui_flyc_mode_sna</item>
     </string-array>
 
+    <array name="uxsdk_common_setting_auxiliary_light_mode">
+        <item>@string/uxsdk_vision_flash_light_auto</item>
+        <item>@string/uxsdk_vision_flash_light_on</item>
+        <item>@string/uxsdk_vision_flash_light_off</item>
+    </array>
+
 </resources>

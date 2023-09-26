@@ -52,7 +52,7 @@ public class CommonDeviceNameWidget extends FrameLayoutWidget<Object> {
 
         saveTv.setOnClickListener(v -> handleSaveAction());
 
-        setBackgroundResource(R.drawable.uxsdk_background_black_rectangle);
+      //  setBackgroundResource(R.drawable.uxsdk_background_black_rectangle);
     }
 
     @Override

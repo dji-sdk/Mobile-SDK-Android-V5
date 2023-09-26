@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -204,6 +205,7 @@ public class FpaView extends LinearLayout implements SwitcherCell.OnCheckedChang
         KeyManager.getInstance().setValue(KeyTools.createKey(FlightControllerKey.KeyCustomFunctionMode), ControlChannelMapping.ATTITUDE_NORMAL, new CommonCallbacks.CompletionCallback() {
             @Override
             public void onSuccess() {
+                ViewUtil.showToast(getContext() , R.string.uxsdk_setting_menu_desc_omni_perception_downwards , Toast.LENGTH_SHORT);
                 updateFlycModeDescView(1);
             }
 

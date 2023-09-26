@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -76,8 +77,12 @@ public class BatteryAlertWidget extends ConstraintLayoutWidget<Object> implement
         addReaction(widgetModel.getConnection().subscribe(isConnected -> {
             mBasicRangeSeekBar.setEnabled(isConnected);
             if (Boolean.TRUE.equals(isConnected)) {
+                mTvLowBattery.setVisibility(View.VISIBLE);
+                mTvSeriousLowBattery.setVisibility(View.VISIBLE);
                 return;
             }
+            mTvLowBattery.setVisibility(View.GONE);
+            mTvSeriousLowBattery.setVisibility(View.GONE);
             lowBatteryValue = -1;
             seriousLowBatteryValue = -1;
             onValuesChanging(0.0f, 0.0f);

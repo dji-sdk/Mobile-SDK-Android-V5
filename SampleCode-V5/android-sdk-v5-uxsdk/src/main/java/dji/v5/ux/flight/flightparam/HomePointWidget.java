@@ -166,15 +166,28 @@ public class HomePointWidget extends ConstraintLayoutWidget<Object> {
             return;
         }
         LocationCoordinate2D location2D = new LocationCoordinate2D(location.getLatitude(), location.getLongitude());
+        if (!GpsUtils.isValid(location2D.getLatitude() , location2D.getLongitude())) {
+            ViewUtil.showToast(getContext(),R.string.uxsdk_fpv_toast_homepoint_setting_failed , Toast.LENGTH_SHORT);
+            return;
+        }
+        widgetModel.setHomeLocation(location2D).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                //do nothing
+            }
 
-        addReaction(widgetModel.setHomeLocation(location2D).subscribe(locationCoordinate2D -> {
-            if (GpsUtils.isValid(locationCoordinate2D.getLatitude() , locationCoordinate2D.getLongitude())) {
-                ViewUtil.showToast(getContext() ,isCurrentRc? R.string.uxsdk_fpv_toast_homepoint_setting_current_rc : R.string.uxsdk_fpv_toast_homepoint_setting_partner_rc, Toast.LENGTH_SHORT);
+            @Override
+            public void onComplete() {
+                ViewUtil.showToast(getContext() ,true? R.string.uxsdk_fpv_toast_homepoint_setting_current_rc : R.string.uxsdk_fpv_toast_homepoint_setting_partner_rc, Toast.LENGTH_SHORT);
 
-            } else {
+            }
+
+            @Override
+            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                 ViewUtil.showToast(getContext(),R.string.uxsdk_fpv_toast_homepoint_setting_failed , Toast.LENGTH_SHORT);
             }
-        }));
+        });
+
 
     }
 

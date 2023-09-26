@@ -30,6 +30,8 @@ class VisionPositionWidget @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : ConstraintLayoutWidget<VisionPositionWidget.ModelState>(context, attrs, defStyleAttr), SwitcherCell.OnCheckedChangedListener {
+    private var listener: SwitchStateListener? = null
+
     private val widgetModel by lazy {
         VisionPositionWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance())
     }
@@ -86,6 +88,7 @@ class VisionPositionWidget @JvmOverloads constructor(
                         //do nothing
                         LogUtils.e(TAG, "setVisionPositioningEnabled onError:$e")
                         updateVisionSwitchCell(!isChecked)
+
                     }
 
                 })
@@ -101,7 +104,13 @@ class VisionPositionWidget @JvmOverloads constructor(
         omni_common_downwards_switcher_cell.setOnCheckedChangedListener(null)
         omni_common_downwards_switcher_cell.isChecked = enable
         omni_common_downwards_switcher_cell.setOnCheckedChangedListener(this)
+        listener?.onUpdate(enable)
     }
+
+    fun setSwitchStateListener(listener: SwitchStateListener) {
+        this.listener = listener
+    }
+
 
     sealed class ModelState
 

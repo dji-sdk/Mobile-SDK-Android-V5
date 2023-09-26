@@ -86,26 +86,35 @@
         android:layout_height="0.5dp"
         android:layout_marginTop="@dimen/uxsdk_45_dp"
         android:background="@color/uxsdk_white_alpha_03"
-        app:layout_constraintBottom_toTopOf="@+id/setting_menu_battery_info_view_layout"
+        app:layout_constraintBottom_toTopOf="@+id/setting_menu_battery_group_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <LinearLayout
-        android:id="@+id/setting_menu_battery_info_view_layout"
+    <dji.v5.ux.core.widget.battery.BatteryGroupWidget
+        android:id="@+id/setting_menu_battery_group_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/uxsdk_10_dp"
-        android:paddingTop="@dimen/uxsdk_16_dp"
-        android:paddingRight="@dimen/uxsdk_10_dp"
-        android:paddingBottom="@dimen/uxsdk_16_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_menu_total_divider" />
+
+    <Button
+        android:id="@+id/setting_menu_battery_info_detail_view"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_48_dp"
+        android:layout_marginBottom="@dimen/uxsdk_8_dp"
+        android:gravity="center"
+        android:text="@string/uxsdk_battery_check_battery_detail_button_txt"
+        android:textAllCaps="false"
+        android:textColor="@color/uxsdk_setting_ui_btn_hover"
+        android:textSize="@dimen/uxsdk_14_dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_menu_total_divider">
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/setting_menu_battery_group_view" />
 </merge>

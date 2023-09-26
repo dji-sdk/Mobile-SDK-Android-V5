@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 最新Alpha版本 5.7.0-a1
+# DJI Mobile SDK for Android V5 最新Alpha版本 5.8.0-a1
 
 [English Version](README.md)
 
@@ -12,11 +12,12 @@
 
 ## 发布日期
 
-2023.8.24
+2023.9.26
 
 ## 发布记录
 
-- 新增 Sample 控件：
+- 默认演示页面新增设置界面。
+- 支持的设置控件列表如下：
 - 飞控
 	- FC Home Point Widget 支持返航点设置。
 	- FC Flight Mode Widget 支持飞行模式设置。
@@ -50,10 +51,13 @@
 - 云台
 	- Gimbal Fine Tune Widget 支持云台微调设置。
 	- Gimbal Setting Widget 支持重置云台参数和云台自动校准功能。
-
+- RTK
+    - RTK Widget 支持RTK功能设置。
 - 通用
+	- Common Led Widget 支持灯光设置功能。
 	- Common Device Name Widget 支持设备名称显示和重命名功能。
 	- Common About Widget 支持固件版本信息显示。
+
 
 ## 离线文档
 
@@ -61,7 +65,7 @@
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.7.0-a1
+> **注意：** sdkVersion = 5.8.0-a1
 
 | SDK包  <div style="width: 150pt">  | 说明  <div style="width: 200pt">   | 使用方式 <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

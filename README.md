@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Alpha Version 5.7.0-a1
+# DJI Mobile SDK for Android V5 Latest Alpha Version 5.8.0-a1
 
 [中文版](README_CN.md)
 
@@ -12,11 +12,12 @@
 
 ## Release Date
 
-2023.8.24
+2023.9.26
 
 ## Release Notes
 
-- Add Sample Widget:
+- Add setting function to the Default layout page.
+- List of supported setting widget:
 - Flight Controller
 	- `FC Home Point Widget` supports home point setting.
 	- `FC Flight Mode Widget` supports flight mode setting.
@@ -51,7 +52,12 @@
 	- `Gimbal Fine Tune Widget` supports gimbal adjust setting.
 	- `Gimbal Setting Widget` supports reset gimbal parameters and gimbal calibration function.
 
+- RTK
+    - `RTK Widget` supports RTK setting.
+
+
 - Common
+	- `Common Led Widget` supports light setting function.
 	- `Common Device Name Widget` supports device name display and renaming function.
 	- `Common About Widget` supports firmware version information display.
 
@@ -61,7 +67,7 @@
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.7.0-a1
+> **Notice:** sdkVersion = 5.8.0-a1
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

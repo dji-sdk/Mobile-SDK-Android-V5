@@ -1,9 +1,9 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft-alpha:5.7.0-a1"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided-alpha:5.7.0-a1"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp-alpha:5.7.0-a1"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft-alpha:5.8.0-a1"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided-alpha:5.8.0-a1"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp-alpha:5.8.0-a1"
 
     //三方依赖库
     deps.gson = 'com.google.code.gson:gson:2.9.1'
@@ -54,9 +54,9 @@ ext {
     deps.lifecycleViewModel = 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
     deps.lifecycleLiveData = 'androidx.lifecycle:lifecycle-livedata:2.3.1'
     deps.lifecycleProcess = 'androidx.lifecycle:lifecycle-process:2.3.1'
-    deps.room = 'androidx.room:room-runtime:2.3.0'
-    deps.room_rxjava = 'androidx.room:room-rxjava3:2.3.0'
-    deps.room_compiler = 'androidx.room:room-compiler:2.3.0'
+    deps.room = 'androidx.room:room-runtime:2.4.1'
+    deps.room_rxjava = 'androidx.room:room-rxjava3:2.4.1'
+    deps.room_compiler = 'androidx.room:room-compiler:2.4.1'
     deps.legacySupport = 'androidx.legacy:legacy-support-v4:1.0.0'
     deps.media = 'androidx.media:media:1.0.0'
     deps.dynamicanimation = 'androidx.dynamicanimation:dynamicanimation:1.0.0'
@@ -77,7 +77,7 @@ ext {
 
 
     //wpmz 航线文件解析
-    deps.wpmzSdk = 'com.dji:wpmzsdk:1.0.0.14'
+    deps.wpmzSdk = 'com.dji:wpmzsdk:1.0.1.1'
     //sample 扩展EditText
     deps.expandedit = "com.github.thomhurst:ExpandableHintText:1.0.7"
 

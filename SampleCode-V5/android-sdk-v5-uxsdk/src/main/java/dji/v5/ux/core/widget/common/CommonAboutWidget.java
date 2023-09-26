@@ -94,7 +94,7 @@ public class CommonAboutWidget extends FrameLayoutWidget<Object> {
 
         textCellHeight = getResources().getDimensionPixelSize(R.dimen.uxsdk_58_dp);
 
-        setBackgroundResource(R.drawable.uxsdk_background_black_rectangle);
+      //  setBackgroundResource(R.drawable.uxsdk_background_black_rectangle);
     }
 
     @Override

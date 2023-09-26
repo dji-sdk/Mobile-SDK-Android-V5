@@ -40,6 +40,7 @@ object RTKStartServiceHelper {
     private val qxRTKManager = RTKCenter.getInstance().qxrtkManager
     private val customManager = RTKCenter.getInstance().customRTKManager
     private val cmccRtkManager = RTKCenter.getInstance().cmccrtkManager
+    private var isStartByUser=false
 
     private var productType: ProductType = ProductType.UNKNOWN
     private var rtkDongleConnection = false
@@ -55,7 +56,10 @@ object RTKStartServiceHelper {
         if (rtkSource != it.rtkReferenceStationSource) {
             rtkSource = it.rtkReferenceStationSource
             LogUtils.i(TAG, "rtkSource change into:$rtkSource")
-            startRtkService()
+            //避免未输入账号信息下去启动导致的失败
+            if (rtkSource != RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE) {
+                startRtkService()
+            }
         }
     }
 
@@ -112,7 +116,8 @@ object RTKStartServiceHelper {
     }
 
     @Synchronized
-    fun startRtkService() {
+    fun startRtkService(isStartByUser:Boolean=false) {
+        this.isStartByUser =isStartByUser
         LogUtils.i(TAG, "startRtkService")
         if (!rtkModuleAvailableProcessor.value) {
             LogUtils.e(TAG, "rtkModule is unAvailable,startRtkServiceIfNeed fail!")
@@ -164,7 +169,9 @@ object RTKStartServiceHelper {
                             LogUtils.e(TAG, "startCMCCRtkService fail:rtkNetworkCoordinateSystem=$rtkNetworkCoordinateSystem,error=$error")
                             setStartRTKState(false)
                             isHasStartRTK.set(false)
-                            showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                            if (isStartByUser) {
+                                showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                            }
 
                         }
 
@@ -228,7 +235,9 @@ object RTKStartServiceHelper {
 
                     override fun onFailure(error: IDJIError) {
                         LogUtils.e(TAG, "startQxRtkService fail:$error")
-                        showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                        if (isStartByUser) {
+                            showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                        }
                         setStartRTKState(false)
                         isHasStartRTK.set(false)
 
@@ -281,13 +290,10 @@ object RTKStartServiceHelper {
                             LogUtils.e(TAG, "startRtkCustomNetworkService fail:$error")
                             setStartRTKState(false)
                             isHasStartRTK.set(false)
-
-                            val errorTip = if (!TextUtils.isEmpty(error.description())) {
-                                error.description()
-                            } else {
-                                StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail)
+                            if (isStartByUser) {
+                                ViewUtil.showToast(ContextUtil.getContext(),R.string.uxsdk_rtk_setting_menu_customer_rtk_save_failed_tips,Toast.LENGTH_SHORT)
                             }
-                            showToast(errorTip)
+
                         }
 
                     })

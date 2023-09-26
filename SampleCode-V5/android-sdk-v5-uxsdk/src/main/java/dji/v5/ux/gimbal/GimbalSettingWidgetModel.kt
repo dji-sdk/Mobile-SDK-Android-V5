@@ -9,7 +9,10 @@ import dji.sdk.keyvalue.value.gimbal.GimbalCalibrationStatusInfo
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.IGimbalIndex
 import dji.v5.ux.core.base.WidgetModel
+import dji.v5.ux.core.communication.GlobalPreferenceKeys
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
+import dji.v5.ux.core.communication.UXKey
+import dji.v5.ux.core.communication.UXKeys
 import dji.v5.ux.core.util.DataProcessor
 import dji.v5.ux.core.util.SettingDefinitions.GimbalIndex
 import io.reactivex.rxjava3.core.Completable
@@ -24,6 +27,8 @@ open class GimbalSettingWidgetModel constructor(
 
     private val calibrationStatusProcessor: DataProcessor<GimbalCalibrationStatusInfo> =
         DataProcessor.create(GimbalCalibrationStatusInfo(GimbalCalibrationState.IDLE, 0))
+
+    val gimbalAdjust : UXKey  = UXKeys.create(GlobalPreferenceKeys.GIMBAL_ADJUST_CLICKED)
 
     private val areMotorsOnProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
 
@@ -56,6 +61,11 @@ open class GimbalSettingWidgetModel constructor(
 
     fun areMotorsOn(): Flowable<Boolean> {
         return areMotorsOnProcessor.toFlowableOnUI()
+    }
+
+
+    fun setGimbalClicked(){
+        ObservableInMemoryKeyedStore.getInstance().setValue(gimbalAdjust , true).subscribe()
     }
 
     override fun getGimbalIndex(): GimbalIndex {

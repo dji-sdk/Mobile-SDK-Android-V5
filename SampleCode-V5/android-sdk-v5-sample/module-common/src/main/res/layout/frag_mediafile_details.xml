@@ -49,16 +49,6 @@
             android:padding="10dp">
 
             <Button
-                android:id="@+id/thumbnail_file"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="缩略图"
-                android:textAllCaps="false"
-                android:visibility="gone"/>
-
-            <Button
                 android:id="@+id/preview_file"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,6 +65,7 @@
                 android:gravity="center"
                 android:text="下载原图"
                 android:textAllCaps="false"/>
+
             <Button
                 android:id="@+id/cancel_download"
                 android:layout_width="0dp"
@@ -86,6 +77,33 @@
                 android:visibility="visible"/>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/pull_xmp_file_data"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="XMP"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/pull_xmp_custom_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="XMP Custom Info"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/download_ll_dcf"
             android:layout_width="match_parent"

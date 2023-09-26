@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setting_menu_battery_info_view_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/uxsdk_10_dp"
+    android:paddingTop="@dimen/uxsdk_16_dp"
+    android:paddingRight="@dimen/uxsdk_10_dp"
+    android:paddingBottom="@dimen/uxsdk_10_dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/setting_menu_total_divider" />

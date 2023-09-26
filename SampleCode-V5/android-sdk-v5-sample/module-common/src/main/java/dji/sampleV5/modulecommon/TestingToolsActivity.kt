@@ -8,9 +8,10 @@ import androidx.fragment.app.commit
 import androidx.navigation.Navigation
 import dji.sampleV5.modulecommon.models.MSDKCommonOperateVm
 import dji.sampleV5.modulecommon.util.DJIToastUtil
-import dji.sampleV5.modulecommon.views.MSDKInfoFragment
 import dji.sampleV5.modulecommon.util.ToastUtils
-import kotlinx.android.synthetic.main.activity_testing_tools.*
+import dji.sampleV5.modulecommon.views.MSDKInfoFragment
+import dji.v5.ux.core.util.ViewUtil
+import kotlinx.android.synthetic.main.activity_testing_tools.nav_host_fragment_container
 
 /**
  * Class Description
@@ -64,6 +65,16 @@ abstract class TestingToolsActivity : AppCompatActivity() {
         }
 
         loadPages()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ViewUtil.setKeepScreen(this, true)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ViewUtil.setKeepScreen(this, false)
     }
 
     /**

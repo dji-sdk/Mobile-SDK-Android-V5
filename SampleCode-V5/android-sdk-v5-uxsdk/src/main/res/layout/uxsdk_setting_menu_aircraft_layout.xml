@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    android:tag="setting:multi_rc:flyc"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="afterDescendants">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:descendantFocusability="afterDescendants">
+
+   <dji.v5.ux.flight.flightparam.HomePointWidget
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/uxsdk_divider_size_medium"
+       android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+       android:background="@color/uxsdk_dic_color_c20_divider" />
+
+  <dji.v5.ux.flight.flightparam.FlightModeWidget
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+  <dji.v5.ux.flight.flightparam.ReturnHomeModeWidget
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+    <dji.v5.ux.flight.flightparam.DistanceLimitWidget
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+     <dji.v5.ux.core.base.TextCell
+            android:id="@+id/setting_flyc_sensors_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="setting:multi_rc:toast"
+            app:uxsdk_text_cell_title="@string/uxsdk_setting_menu_title_sensors_state"
+            app:uxsdk_text_cell_arrow="3"
+            android:background="@drawable/uxsdk_selector_blue_rect_mask"
+            />
+    <dji.v5.ux.flight.flightparam.LostActionWidget
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</ScrollView>

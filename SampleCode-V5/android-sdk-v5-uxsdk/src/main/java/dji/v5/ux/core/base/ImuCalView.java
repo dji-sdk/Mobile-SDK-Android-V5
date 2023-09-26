@@ -50,7 +50,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
     private static final String TAG = ImuCalView.class.getSimpleName();
 
     // title
-     IconicsImageView mCloseImg = null;
+     ImageView mCloseImg = null;
 
     // process
      LinearLayout mProcessLy = null;

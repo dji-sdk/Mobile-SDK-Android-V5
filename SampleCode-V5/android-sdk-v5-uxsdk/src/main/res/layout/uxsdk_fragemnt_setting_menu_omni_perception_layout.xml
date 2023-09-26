@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    android:tag="setting:multi_rc:perception">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <dji.v5.ux.obstacle.AvoidanceShortcutWidget
+            android:id="@+id/omni_apas_widget"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:tag="setting:multi_rc:toast"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/rtk_dialog_separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/uxsdk_12_dp"
+            android:background="@color/uxsdk_dic_color_c20_divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/omni_apas_widget" />
+
+        <dji.v5.ux.obstacle.VisionPositionWidget
+            android:id="@+id/omni_vision_position_widget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rtk_dialog_separator" />
+
+
+        <dji.v5.ux.obstacle.PrecisionLandingWidget
+            android:id="@+id/omni_vision_precision_landing_widget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/omni_vision_position_widget" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

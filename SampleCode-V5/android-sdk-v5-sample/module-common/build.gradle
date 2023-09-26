@@ -61,6 +61,7 @@ dependencies {
     api deps.rx3Android
     api deps.dom
     api project(':uxsdk')
+    api deps.wpmzSdk
 
     //sdk依赖项（common下是通用功能，其他包也可以）
     compileOnly deps.aircraftProvided

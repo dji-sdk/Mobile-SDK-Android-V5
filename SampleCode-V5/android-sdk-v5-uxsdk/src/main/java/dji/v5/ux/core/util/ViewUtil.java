@@ -34,6 +34,8 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -158,6 +160,18 @@ public final class ViewUtil {
             }
         }
         return null;
+    }
+
+    public static void setKeepScreen(Activity activity, boolean isKeep) {
+        Window window = activity.getWindow();
+        if (window == null) {
+            return;
+        }
+        if (isKeep) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
 
 }

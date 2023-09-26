@@ -64,6 +64,7 @@ public class SettingMenuFragment extends Fragment implements FragmentManager.OnB
         fragmentManager = getChildFragmentManager();
         fragmentManager.addOnBackStackChangedListener(this);
         mFragmentTag = getArguments().getString(ARG_PARAM, "");
+
         mLazyInflateTask = this::inflateFunctionFragment;
     }
 

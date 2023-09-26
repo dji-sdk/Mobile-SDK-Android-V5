@@ -10,7 +10,6 @@
         android:id="@+id/omni_common_downwards_switcher_cell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/uxsdk_20_dp"
         android:layout_marginBottom="@dimen/uxsdk_10_dp"
         android:tag="setting:multi_rc:toast"
         app:uxsdk_bottomDividerEnable="false"

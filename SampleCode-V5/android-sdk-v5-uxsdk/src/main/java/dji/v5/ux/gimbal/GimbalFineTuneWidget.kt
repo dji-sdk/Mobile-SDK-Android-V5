@@ -49,7 +49,7 @@ open class GimbalFineTuneWidget @JvmOverloads constructor(
     var rollDegree: Double = 0.0
     var pitchDegree: Double = 0.0
     var yawDegree: Double = 0.0
-    var currentAxis: PostureFineTuneAxis = PostureFineTuneAxis.ROLL_AXIS
+    var currentAxis: PostureFineTuneAxis = PostureFineTuneAxis.PITCH_AXIS
 
     override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
         inflate(context, R.layout.uxsdk_gimbal_fine_tune, this)

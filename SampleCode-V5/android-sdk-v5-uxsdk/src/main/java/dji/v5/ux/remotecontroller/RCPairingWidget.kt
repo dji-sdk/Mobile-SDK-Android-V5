@@ -35,6 +35,8 @@ class RCPairingWidget @JvmOverloads constructor(
     private var connect = false
     private var isMotorOn = false
     private var pairingState = PairingState.UNKNOWN
+    private var isStartPairing = false
+    private var isStopPairing = false
 
     private val widgetModel by lazy {
         RcCheckFrequencyWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance())
@@ -44,7 +46,6 @@ class RCPairingWidget @JvmOverloads constructor(
 
     override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
         inflate(context, R.layout.uxsdk_widget_rc_check_frequency_layout, this)
-        updateCheckFrequencyText(StringUtils.getResStr(R.string.uxsdk_setting_menu_title_rc_check_frequency))
     }
 
     override fun reactToModelChanges() {
@@ -54,18 +55,22 @@ class RCPairingWidget @JvmOverloads constructor(
         addReaction(widgetModel.isMotorOnProcessor.toFlowable()
             .subscribe { isMotorOn = it })
 
-        addReaction(widgetModel.pairingStateProcessor.toFlowable()
+        addReaction(widgetModel.pairingStateProcessor.toFlowableOnUI()
             .subscribe {
-                if (pairingState == it) {
+                if (pairingState == it || it == PairingState.UNKNOWN) {
                     return@subscribe
                 }
-                LogUtils.i(TAG, "pairingState=$it")
-                if (pairingState == PairingState.UNPAIRED && PairingState.PAIRING == it) {
-                    updateCheckFrequencyText(StringUtils.getResStr(R.string.uxsdk_setting_ui_rc_stop_pair))
+                if ((pairingState == PairingState.UNPAIRED) && PairingState.PAIRING == it) {
                     ViewUtil.showToast(context, StringUtils.getResStr(R.string.uxsdk_setting_ui_rc_start_pair))
                 } else if (pairingState == PairingState.PAIRING && PairingState.UNPAIRED == it) {
-                    updateCheckFrequencyText(StringUtils.getResStr(R.string.uxsdk_setting_menu_title_rc_check_frequency))
-                    ViewUtil.showToast(context, StringUtils.getResStr(R.string.uxsdk_setting_ui_rc_stop_pair))
+                    if (isStopPairing) {
+                        ViewUtil.showToast(context, StringUtils.getResStr(R.string.uxsdk_setting_ui_rc_stop_pair))
+                    } else {
+                        ViewUtil.showToast(context, StringUtils.getResStr(R.string.uxsdk_setting_ui_rc_pairing_finish))
+                    }
+                } else if (pairingState == PairingState.PAIRING && PairingState.PAIRED == it) {
+                    ViewUtil.showToast(context, StringUtils.getResStr(R.string.uxsdk_setting_ui_rc_pairing_finish))
+
                 }
                 pairingState = it
 
@@ -76,6 +81,7 @@ class RCPairingWidget @JvmOverloads constructor(
             if (isMotorOn && connect) {
                 ViewUtil.showToast(context, R.string.uxsdk_dialog_message_rc_cannot_frequency_motorup, Toast.LENGTH_SHORT)
             } else if (pairingState == PairingState.PAIRING) {
+                isStopPairing = true
                 widgetModel.stopPairing().subscribe(object : CompletableObserver {
                     override fun onSubscribe(d: Disposable?) {
                         //do nothing
@@ -113,15 +119,6 @@ class RCPairingWidget @JvmOverloads constructor(
 
     }
 
-    private fun updateCheckFrequencyText(content: String) {
-        if (TextUtils.isEmpty(content)) {
-            return
-        }
-
-        AndroidSchedulers.mainThread().scheduleDirect {
-            setting_menu_rc_check_frequency.text = content
-        }
-    }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()

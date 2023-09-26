@@ -229,6 +229,9 @@ public class ImuStatusWidget extends ConstraintLayout  {
     }
 
     private void updateSensorsStatus(List<ProgressStatusWidget> viewList, boolean isGyro) {
+        if (mIMUStateList == null) {
+            return;
+        }
         for (int i = 0; i < mImuCount; ++i) {
             if (i >= mIMUStateList.size()) {
                 break;

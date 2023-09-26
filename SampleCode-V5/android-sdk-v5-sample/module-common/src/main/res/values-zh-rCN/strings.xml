@@ -431,9 +431,12 @@
 
     <string name="delete_files">删除文件</string>
     <string name="select_files">选择文件</string>
+    <string name="set_xmp_custom_info">设置XMP自定义消息</string>
+    <string name="get_xmp_custom_info">读取XMP自定义消息</string>
     <string name="unselect_files">取消选择</string>
     <string name="fetch_files_list">获取文件列表</string>
     <string name="take_photo">拍照</string>
+    <string name="already_download">文件已下载</string>
 
     <!-- LTE -->
     <string name="btn_update_lte_authentication_info">更新LTE认证信息</string>

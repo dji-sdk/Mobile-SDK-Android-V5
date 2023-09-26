@@ -2,7 +2,9 @@ package dji.v5.ux.core.widget.battery;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,9 +26,10 @@ public class BatteryGroupInfoWidget extends ConstraintLayoutWidget<Object> {
 
     protected BatteryGroupInfoWidgetModel widgetModel = new BatteryGroupInfoWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
 
+    protected BatteryGroupWidget batteryGroupWidget;
     protected TextView batteryChargeRemaining;
     protected TextView flightTime;
-    protected ViewGroup container;
+    protected Button batteryDetail;
 
     protected boolean isConnected;
 
@@ -49,9 +52,13 @@ public class BatteryGroupInfoWidget extends ConstraintLayoutWidget<Object> {
 
         batteryChargeRemaining = findViewById(R.id.setting_menu_battery_charge_remain);
         flightTime = findViewById(R.id.setting_menu_battery_fly_time);
-        container = findViewById(R.id.setting_menu_battery_info_view_layout);
+        batteryDetail = findViewById(R.id.setting_menu_battery_info_detail_view);
+        batteryGroupWidget = findViewById(R.id.setting_menu_battery_group_view);
 
         setBackgroundResource(R.drawable.uxsdk_background_fpv_setting_battery_group);
+
+        batteryGroupWidget.setEnableBatteryCells(false);
+        batteryGroupWidget.setEnableSerialNumber(false);
     }
 
     @Override
@@ -59,8 +66,6 @@ public class BatteryGroupInfoWidget extends ConstraintLayoutWidget<Object> {
         addReaction(widgetModel.getBatteryChargeRemaining().subscribe(this::updateBatteryChargeRemaining));
 
         addReaction(widgetModel.getFlightTimeInSeconds().subscribe(this::updateFlightTime));
-
-        addReaction(widgetModel.getBatteryOverview().subscribe(this::updateBatteryWidget));
 
         addReaction(widgetModel.getConnection().subscribe(connection -> {
             if (Boolean.compare(isConnected, connection) == 0) {
@@ -102,32 +107,8 @@ public class BatteryGroupInfoWidget extends ConstraintLayoutWidget<Object> {
         batteryChargeRemaining.setText(getResources().getString(R.string.uxsdk_battery_percent, percent));
     }
 
-    private void updateBatteryWidget(List<BatteryOverviewValue> batteryOverviewList) {
-        List<BatteryOverviewValue> availableList = new ArrayList<>();
-        for (BatteryOverviewValue value : batteryOverviewList) {
-            if (value.getIsConnected().equals(true)) {
-                availableList.add(value);
-            }
-        }
-        int childCount = container.getChildCount();
-        int newCount = availableList.size();
-        if (childCount < newCount) {
-            for (int i = childCount; i < newCount; i++) {
-                BatteryInfoWidget view = new BatteryInfoWidget(getContext());
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.topMargin = getResources().getDimensionPixelSize(R.dimen.uxsdk_15_dp);
-                container.addView(view, params);
-            }
-        } else if (childCount > newCount) {
-            for (int i = childCount - 1; i >= newCount; i--) {
-                container.removeViewAt(i);
-            }
-        }
-
-        for (int i = 0; i < container.getChildCount(); i++) {
-            BatteryInfoWidget view = (BatteryInfoWidget) container.getChildAt(i);
-            view.setBatteryIndex(availableList.get(i).getIndex());
-        }
-
+    public void setOnDetailOnClickListener(@Nullable View.OnClickListener listener) {
+        batteryDetail.setVisibility(listener == null ? GONE : VISIBLE);
+        batteryDetail.setOnClickListener(listener);
     }
 }

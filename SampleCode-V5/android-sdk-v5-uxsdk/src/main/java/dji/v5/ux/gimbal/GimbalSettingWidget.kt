@@ -43,13 +43,13 @@ open class GimbalSettingWidget @JvmOverloads constructor(
 
         val btnReset = findViewById<Button>(R.id.setting_menu_gimbal_reset_param)
         val btnCalibration = findViewById<Button>(R.id.setting_menu_gimbal_calibration)
-        val gimbalFineTuneWidget = findViewById<GimbalFineTuneWidget>(R.id.setting_menu_gimbal_fine_tune)
+        val setting_menu_gimbal_adjust = findViewById<Button>(R.id.setting_menu_gimbal_adjust)
+
 
         btnReset.setOnClickListener(this)
         btnCalibration.setOnClickListener(this)
-        gimbalFineTuneWidget.background = null
+        setting_menu_gimbal_adjust.setOnClickListener(this)
 
-        setBackgroundResource(R.drawable.uxsdk_background_black_rectangle)
     }
 
     override fun reactToModelChanges() {
@@ -103,7 +103,11 @@ open class GimbalSettingWidget @JvmOverloads constructor(
                 ViewUtil.showToast(context, R.string.uxsdk_setting_ui_gimbal_calibration_tip, Toast.LENGTH_SHORT)
                 return
             }
+            ViewUtil.showToast(context, R.string.uxsdk_setting_ui_gimbal_auto_calibration_tip, Toast.LENGTH_SHORT)
             widgetModel.calibrateGimbal().subscribe()
+        }
+        else if (v.id ==R.id.setting_menu_gimbal_adjust) {
+            widgetModel.setGimbalClicked()
         }
     }
 

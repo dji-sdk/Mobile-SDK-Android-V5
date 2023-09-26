@@ -175,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/setting_flyc_sensor_calibrate_tip_margin_top"
+        android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@+id/setting_ui_flyc_compass_3_desc"/>
 
     <View

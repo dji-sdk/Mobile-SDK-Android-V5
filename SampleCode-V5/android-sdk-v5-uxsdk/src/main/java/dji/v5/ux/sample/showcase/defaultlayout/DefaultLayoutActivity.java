@@ -25,6 +25,10 @@ package dji.v5.ux.sample.showcase.defaultlayout;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +36,8 @@ import java.util.concurrent.TimeUnit;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
@@ -42,9 +48,12 @@ import dji.v5.common.video.interfaces.VideoChannelStateChangeListener;
 import dji.v5.common.video.stream.PhysicalDevicePosition;
 import dji.v5.common.video.stream.StreamSource;
 import dji.v5.manager.datacenter.MediaDataCenter;
+import dji.v5.network.DJINetworkManager;
+import dji.v5.network.IDJINetworkStatusListener;
 import dji.v5.utils.common.JsonUtil;
 import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
+import dji.v5.ux.accessory.RTKStartServiceHelper;
 import dji.v5.ux.cameracore.widget.autoexposurelock.AutoExposureLockWidget;
 import dji.v5.ux.cameracore.widget.cameracontrols.CameraControlsWidget;
 import dji.v5.ux.cameracore.widget.cameracontrols.exposuresettings.ExposureSettingsPanel;
@@ -53,18 +62,25 @@ import dji.v5.ux.cameracore.widget.focusexposureswitch.FocusExposureSwitchWidget
 import dji.v5.ux.cameracore.widget.focusmode.FocusModeWidget;
 import dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget;
 import dji.v5.ux.core.base.SchedulerProvider;
+import dji.v5.ux.core.communication.BroadcastValues;
+import dji.v5.ux.core.communication.GlobalPreferenceKeys;
+import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
+import dji.v5.ux.core.communication.UXKeys;
 import dji.v5.ux.core.extension.ViewExtensions;
 import dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget;
 import dji.v5.ux.core.panel.topbar.TopBarPanelWidget;
 import dji.v5.ux.core.util.CameraUtil;
 import dji.v5.ux.core.util.CommonUtils;
 import dji.v5.ux.core.util.DataProcessor;
+import dji.v5.ux.core.util.ViewUtil;
 import dji.v5.ux.core.widget.fpv.FPVWidget;
 import dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget;
 import dji.v5.ux.core.widget.hsi.PrimaryFlightDisplayWidget;
+import dji.v5.ux.core.widget.setting.SettingPanelWidget;
 import dji.v5.ux.core.widget.setting.SettingWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
+import dji.v5.ux.gimbal.GimbalFineTuneWidget;
 import dji.v5.ux.map.MapWidget;
 import dji.v5.ux.mapkit.core.maps.DJIUiSettings;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
@@ -102,8 +118,9 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     protected MapWidget mapWidget;
     protected TopBarPanelWidget topBarPanel;
     protected ConstraintLayout fpvParentView;
-//    private SettingPanelWidget mSettingPanelWidget;
-//    private DrawerLayout mDrawerLayout;
+    private DrawerLayout mDrawerLayout;
+    private TextView gimbalAdjustDone;
+    private GimbalFineTuneWidget gimbalFineTuneWidget;
 
 
     private CompositeDisposable compositeDisposable;
@@ -111,6 +128,13 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             CameraLensType.UNKNOWN));
     private VideoChannelStateChangeListener primaryChannelStateListener = null;
     private VideoChannelStateChangeListener secondaryChannelStateListener = null;
+    private final IDJINetworkStatusListener networkStatusListener = isNetworkAvailable -> {
+        if (isNetworkAvailable) {
+            LogUtils.d(TAG, "isNetworkAvailable=" + true);
+            RTKStartServiceHelper.INSTANCE.startRtkService(false);
+        }
+    };
+
     //endregion
 
     //region Lifecycle
@@ -120,9 +144,9 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         setContentView(R.layout.uxsdk_activity_default_layout);
         fpvParentView = findViewById(R.id.fpv_holder);
         ViewExtensions.disableHardwareAccelerated(fpvParentView);
-//        mDrawerLayout = findViewById(R.id.root_view);
+        mDrawerLayout = findViewById(R.id.root_view);
         topBarPanel = findViewById(R.id.panel_top_bar);
-//        settingWidget = topBarPanel.getSettingWidget();
+        settingWidget = topBarPanel.getSettingWidget();
         primaryFpvWidget = findViewById(R.id.widget_primary_fpv);
         fpvInteractionWidget = findViewById(R.id.widget_fpv_interaction);
         secondaryFPVWidget = findViewById(R.id.widget_secondary_fpv);
@@ -139,14 +163,10 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         focalZoomWidget = findViewById(R.id.widget_focal_zoom);
         cameraControlsWidget = findViewById(R.id.widget_camera_controls);
         horizontalSituationIndicatorWidget = findViewById(R.id.widget_horizontal_situation_indicator);
-
+        gimbalAdjustDone = findViewById(R.id.fpv_gimbal_ok_btn);
+        gimbalFineTuneWidget = findViewById(R.id.setting_menu_gimbal_fine_tune);
         mapWidget = findViewById(R.id.widget_map);
         cameraControlsWidget.getExposureSettingsIndicatorWidget().setStateChangeResourceId(R.id.panel_camera_controls_exposure_settings);
-
-//        ViewStub stub = findViewById(R.id.manual_right_nav_setting_stub);
-//        if (stub != null) {
-//            mSettingPanelWidget = (SettingPanelWidget) stub.inflate();
-//        }
 
         initClickListener();
         MediaDataCenter.getInstance().getVideoStreamManager().addStreamSourcesListener(sources -> runOnUiThread(() -> updateFPVWidgetSource(sources)));
@@ -166,6 +186,22 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             }
         });
         mapWidget.onCreate(savedInstanceState);
+        ObservableInMemoryKeyedStore.getInstance().addObserver(UXKeys.create(GlobalPreferenceKeys.GIMBAL_ADJUST_CLICKED)) .observeOn(SchedulerProvider.ui())
+                .subscribe(this::isGimableAdjustClicked);
+
+        //实现RTK监测网络，并自动重连机制
+        DJINetworkManager.getInstance().addNetworkStatusListener(networkStatusListener);
+
+    }
+
+    private void isGimableAdjustClicked(BroadcastValues broadcastValues) {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
+            mDrawerLayout.closeDrawers();
+        }
+        horizontalSituationIndicatorWidget.setVisibility(View.GONE);
+        if (gimbalFineTuneWidget != null) {
+            gimbalFineTuneWidget.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initClickListener() {
@@ -186,10 +222,17 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         if (simulatorIndicatorWidget != null) {
             simulatorIndicatorWidget.setOnClickListener(v -> ViewExtensions.toggleVisibility(simulatorControlWidget));
         }
+        gimbalAdjustDone.setOnClickListener(view -> {
+            horizontalSituationIndicatorWidget.setVisibility(View.VISIBLE);
+            if (gimbalFineTuneWidget != null) {
+                gimbalFineTuneWidget.setVisibility(View.GONE);
+            }
+
+        });
     }
 
     private void toggleRightDrawer() {
-//        mDrawerLayout.openDrawer(GravityCompat.END);
+        mDrawerLayout.openDrawer(GravityCompat.END);
     }
 
 
@@ -199,6 +242,8 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         mapWidget.onDestroy();
         MediaDataCenter.getInstance().getVideoStreamManager().clearAllStreamSourcesListeners();
         removeChannelStateListener();
+        DJINetworkManager.getInstance().removeNetworkStatusListener(networkStatusListener);
+
     }
 
     @Override
@@ -228,6 +273,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                 .subscribeOn(SchedulerProvider.io())
                 .subscribe(result -> runOnUiThread(() -> onCameraSourceUpdated(result.devicePosition, result.lensType)))
         );
+        ViewUtil.setKeepScreen(this, true);
     }
 
     @Override
@@ -238,6 +284,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         }
         mapWidget.onPause();
         super.onPause();
+        ViewUtil.setKeepScreen(this, false);
     }
     //endregion
 
@@ -410,13 +457,13 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             this.lensType = lensType;
         }
     }
-//
-//    @Override
-//    public void onBackPressed() {
-//        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
-//            mDrawerLayout.closeDrawers();
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.END)) {
+            mDrawerLayout.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

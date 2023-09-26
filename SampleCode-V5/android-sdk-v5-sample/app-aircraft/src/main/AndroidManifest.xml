@@ -38,14 +38,20 @@
             android:name="dji.sampleV5.aircraft.DJIAircraftMainActivity"
             android:theme="@style/full_screen_theme"
             android:screenOrientation="landscape"
-            android:launchMode="singleTask"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".UsbAttachActivity"
+            android:theme="@style/translucent_theme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
             </intent-filter>
 
             <meta-data

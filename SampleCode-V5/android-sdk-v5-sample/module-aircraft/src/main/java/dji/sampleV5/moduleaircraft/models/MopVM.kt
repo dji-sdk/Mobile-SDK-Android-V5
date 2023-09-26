@@ -57,7 +57,7 @@ class MopVM : DJIViewModel() {
                 pipeline = PipelineManager.getInstance().pipelines[id]
                 ToastUtils.showToast("Connect Success")
                 if (!isUseForDown) {
-                    startReadDataTimer()
+                    readData()
                 }
             } else {
                 ToastUtils.showToast("Connect Fail:$error")
@@ -86,6 +86,9 @@ class MopVM : DJIViewModel() {
             if (!isStop && !result.error.errorCode().equals(DJIPipeLineError.TIMEOUT)) {
                 stopMop()
             }
+        }
+        if (!isStop) {
+            readData()
         }
 
     }
@@ -141,19 +144,6 @@ class MopVM : DJIViewModel() {
         LogUtils.d("Stopping read data timer：After Disposing interval disposable: $mReadDataDisposable")
     }
 
-
-    fun startReadDataTimer() {
-        LogUtils.d(logTag, "startReadDataTimer")
-        mReadDataDisposable = Flowable.interval(10,
-            TimeUnit.MILLISECONDS,
-            Schedulers.from(DJIExecutor.getExecutor()))
-            .doOnNext { readData() }
-            .doOnCancel { LogUtils.e(logTag, "OnCancel") }
-            .doOnTerminate { LogUtils.e(logTag, "OnTerminate") }
-            .doOnError { throwable: Throwable -> LogUtils.e(logTag, "OnError:" + throwable.localizedMessage) }
-            .doOnComplete { LogUtils.i(logTag, "OnComplete") }
-            .subscribe()
-    }
 
     fun stopMop() {
         if (!isStop) {

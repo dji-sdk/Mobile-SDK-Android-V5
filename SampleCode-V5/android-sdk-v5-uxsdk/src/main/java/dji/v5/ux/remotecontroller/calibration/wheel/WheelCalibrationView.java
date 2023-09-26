@@ -10,6 +10,7 @@ import dji.v5.ux.remotecontroller.RcCalibrationWidgetModel;
 import dji.v5.ux.remotecontroller.calibration.DJICalProgressBar;
 import dji.v5.ux.remotecontroller.calibration.IRcCalibrationView;
 import dji.v5.ux.remotecontroller.calibration.OnCalibrationListener;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /**
  * Created by richard.liao on 2018/5/30:20:55
@@ -29,7 +30,7 @@ public class WheelCalibrationView extends LinearLayout implements IRcCalibration
 
 
     private OnCalibrationListener mListener = null;
-
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
     public WheelCalibrationView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -91,7 +92,7 @@ public class WheelCalibrationView extends LinearLayout implements IRcCalibration
 
     public void setViewModel(RcCalibrationWidgetModel rcCalibrationWidgetModel) {
         this.rcCalibrationWidgetModel = rcCalibrationWidgetModel;
-        rcCalibrationWidgetModel.calibrationInfoDataProcessor.toFlowableOnUI().subscribe(smartControllerCalibrationInfo -> {
+        mCompositeDisposable.add(rcCalibrationWidgetModel.calibrationInfoDataProcessor.toFlowableOnUI().subscribe(smartControllerCalibrationInfo -> {
             updateWheel(ITEM_LEFT, smartControllerCalibrationInfo.leftGyroValue);
             updateWheel(ITEM_RIGHT, smartControllerCalibrationInfo.rightGyroValue);
 
@@ -107,7 +108,7 @@ public class WheelCalibrationView extends LinearLayout implements IRcCalibration
 
                 updateViewByMode(smartControllerCalibrationInfo.calibrationState);
             }
-        });
+        }));
     }
 
     @Override
@@ -126,6 +127,12 @@ public class WheelCalibrationView extends LinearLayout implements IRcCalibration
     @Override
     public boolean isCalibrated() {
         return mCalibrationModeNow == RcCalibrateState.EXIT;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        mCompositeDisposable.dispose();
+        super.onDetachedFromWindow();
     }
 
 }

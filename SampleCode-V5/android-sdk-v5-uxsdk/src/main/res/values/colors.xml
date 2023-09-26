@@ -339,4 +339,5 @@
     <color name="uxsdk_white_50">#7FFFFFFF</color>
 
     <color name="uxsdk_theme_fpv_dark_main">#F2141414</color>
+    <color name="uxsdk_dialog_divide_line_gray">#EFEFEF</color>
 </resources>

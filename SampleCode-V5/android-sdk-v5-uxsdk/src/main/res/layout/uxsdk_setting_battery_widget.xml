@@ -16,6 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+
+        <View
+            android:id="@+id/rtk_dialog_separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/uxsdk_12_dp"
+            android:background="@color/uxsdk_dic_color_c20_divider" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

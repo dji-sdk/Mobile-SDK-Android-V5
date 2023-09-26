@@ -2,6 +2,7 @@ package dji.v5.ux.core.widget.hd;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +48,7 @@ public class InfoWidget extends ConstraintLayoutWidget<Object> {
     private boolean fcConnected = false;
     private SignalLevel mSignalLevel = SignalLevel.LEVEL_0;
     private TextCell sdrInfoTextCell;
+    private TextView summaryText ;
     private InfoWidgetModel widgetModel = new InfoWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
 
     public InfoWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -81,19 +83,20 @@ public class InfoWidget extends ConstraintLayoutWidget<Object> {
     protected void initView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         inflate(context, R.layout.uxsdk_setting_menu_sdr_info_text_layout, this);
         sdrInfoTextCell = findViewById(R.id.tc_setting_menu_sdr_info_text);
+        summaryText = findViewById(R.id.summaryText);
     }
 
     @Override
     protected void reactToModelChanges() {
         addReaction(widgetModel.getBandwidth().subscribe(value -> {
             mSdrSignal.bandwidth = value;
-            sdrInfoTextCell.setSummary(mSdrSignal.toString());
+            summaryText.setText(mSdrSignal.toString());
         }));
 
         addReaction(widgetModel.getFrequencyInterfaceInfoList().subscribe(value -> {
             mRssis = value;
             updateAverageValue();
-            sdrInfoTextCell.setSummary(mSdrSignal.toString());
+            summaryText.setText(mSdrSignal.toString());
         }));
 
         addReaction(widgetModel.getFrequencyPointIndexRange().subscribe(value -> {
@@ -101,25 +104,25 @@ public class InfoWidget extends ConstraintLayoutWidget<Object> {
             mValidRanges[0] = value.getMin();
             mValidRanges[1] = value.getMax();
             onValidRangeChanged();
-            sdrInfoTextCell.setSummary(mSdrSignal.toString());
+            summaryText.setText(mSdrSignal.toString());
         }));
 
         addReaction(widgetModel.getSdrHdOffsetParamsData().subscribe(value -> {
             mOffsetParams = value;
             updateAverageValue();
-            sdrInfoTextCell.setSummary(mSdrSignal.toString());
+            summaryText.setText(mSdrSignal.toString());
         }));
 
         addReaction(widgetModel.getDynamicDataRate().subscribe(value -> {
             mSdrSignal.dataRate = value.floatValue();
-            sdrInfoTextCell.setSummary(mSdrSignal.toString());
+            summaryText.setText(mSdrSignal.toString());
         }));
 
         addReaction(widgetModel.getFrequencyPointIndex().subscribe(value -> {
             mCurNfIndex = value;
             mLeftNfIndex = (float)mCurNfIndex - mRangeSize;
             updateAverageValue();
-            sdrInfoTextCell.setSummary(mSdrSignal.toString());
+            summaryText.setText(mSdrSignal.toString());
         }));
 
         addReaction(widgetModel.getDownLinkQuality().subscribe(value -> {

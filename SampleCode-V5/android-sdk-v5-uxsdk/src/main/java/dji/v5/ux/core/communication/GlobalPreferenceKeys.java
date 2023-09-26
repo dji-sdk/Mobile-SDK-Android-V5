@@ -48,6 +48,9 @@ public final class GlobalPreferenceKeys extends UXKeys {
     @UXParamKey(type = UnitConversionUtil.TemperatureUnitType.class, updateType = UpdateType.ON_CHANGE)
     public static final String TEMPERATURE_UNIT_TYPE = "TemperatureUnitType";
 
+    @UXParamKey(type = Boolean.class, updateType = UpdateType.ON_EVENT)
+    public static final String GIMBAL_ADJUST_CLICKED = "gimbalAdujustClicled";
+
     private GlobalPreferenceKeys() {
         super();
     }

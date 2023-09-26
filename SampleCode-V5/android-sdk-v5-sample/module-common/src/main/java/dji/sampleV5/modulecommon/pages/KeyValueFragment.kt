@@ -378,11 +378,13 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 tips = Util.getString(R.string.battery)
                 currentKeyItemList.addAll(batteryKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_GIMBAL -> {
                 KeyItemDataUtil.initGimbalKeyList(gimbalKeyList)
                 tips = Util.getString(R.string.gimbal)
                 currentKeyItemList.addAll(gimbalKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_CAMERA -> {
                 KeyItemDataUtil.initCameraKeyList(cameraKeyList)
                 tips = Util.getString(R.string.camera)
@@ -394,46 +396,55 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 KeyItemDataUtil.initFlightAssistantKeyList(flightAssistantKeyList)
                 currentKeyItemList.addAll(flightAssistantKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_FLIGHT_CONTROL -> {
                 tips = Util.getString(R.string.flight_control)
                 KeyItemDataUtil.initFlightControllerKeyList(flightControlKeyList)
                 currentKeyItemList.addAll(flightControlKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_AIRLINK -> {
                 tips = Util.getString(R.string.airlink)
                 KeyItemDataUtil.initAirlinkKeyList(airlinkKeyList)
                 currentKeyItemList.addAll(airlinkKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_REMOTE_CONTROLLER -> {
                 tips = Util.getString(R.string.remote_controller)
                 KeyItemDataUtil.initRemoteControllerKeyList(remoteControllerKeyList)
                 currentKeyItemList.addAll(remoteControllerKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_BLE -> {
                 tips = Util.getString(R.string.ble)
                 KeyItemDataUtil.initBleKeyList(bleList)
                 currentKeyItemList.addAll(bleList)
             }
+
             ChannelType.CHANNEL_TYPE_PRODUCT -> {
                 tips = Util.getString(R.string.product)
                 KeyItemDataUtil.initProductKeyList(productKeyList)
                 currentKeyItemList.addAll(productKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_RTK_BASE_STATION -> {
                 tips = Util.getString(R.string.rtkbase)
                 KeyItemDataUtil.initRtkBaseStationKeyList(rtkBaseKeyList)
                 currentKeyItemList.addAll(rtkBaseKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_RTK_MOBILE_STATION -> {
                 tips = Util.getString(R.string.rtkmobile)
                 KeyItemDataUtil.initRtkMobileStationKeyList(rtkMobileKeyList)
                 currentKeyItemList.addAll(rtkMobileKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_OCU_SYNC -> {
                 tips = Util.getString(R.string.ocusync)
                 KeyItemDataUtil.initOcuSyncKeyList(ocuSyncKeyList)
                 currentKeyItemList.addAll(ocuSyncKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_RADAR -> {
                 tips = Util.getString(R.string.radar)
                 KeyItemDataUtil.initRadarKeyList(radarKeyList)
@@ -453,11 +464,13 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 KeyItemDataUtil.initOnboardKeyList(onBoardKeyList)
                 currentKeyItemList.addAll(onBoardKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_ON_PAYLOAD -> {
                 tips = Util.getString(R.string.payload)
                 KeyItemDataUtil.initPayloadKeyList(payloadKeyList)
                 currentKeyItemList.addAll(payloadKeyList)
             }
+
             ChannelType.CHANNEL_TYPE_LIDAR -> {
                 tips = Util.getString(R.string.lidar)
                 KeyItemDataUtil.initLidarKeyList(lidarKeyList)
@@ -484,6 +497,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         changeCurrentList(enable, showList)
         data.clear()
         data.addAll(showList)
+        data.sortWith { o1, o2 -> o1.name?.compareTo(o2.name) ?: 0 }
         resetSearchFilter()
         setKeyCount(showList.size)
         resetSelected()
@@ -527,28 +541,36 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         when (currentChannelType) {
             ChannelType.CHANNEL_TYPE_CAMERA -> {
                 if (!CapabilityManager.getInstance()
-                        .isCameraKeySupported(type, cameraType?.name, keyName)) {
+                        .isCameraKeySupported(type, cameraType?.name, keyName)
+                ) {
                     isNeedRemove = true
                 }
             }
+
             ChannelType.CHANNEL_TYPE_AIRLINK -> {
                 if (!CapabilityManager.getInstance()
-                        .isKeySupported(type, "", ComponentType.AIRLINK, keyName)) {
+                        .isKeySupported(type, "", ComponentType.AIRLINK, keyName)
+                ) {
                     isNeedRemove = true
                 }
             }
+
             ChannelType.CHANNEL_TYPE_GIMBAL -> {
                 if (!CapabilityManager.getInstance()
-                        .isKeySupported(type, "", ComponentType.GIMBAL, keyName)) {
+                        .isKeySupported(type, "", ComponentType.GIMBAL, keyName)
+                ) {
                     isNeedRemove = true
                 }
             }
+
             ChannelType.CHANNEL_TYPE_REMOTE_CONTROLLER -> {
                 if (!CapabilityManager.getInstance()
-                        .isKeySupported(type, "", ComponentType.REMOTECONTROLLER, keyName)) {
+                        .isKeySupported(type, "", ComponentType.REMOTECONTROLLER, keyName)
+                ) {
                     isNeedRemove = true
                 }
             }
+
             else -> {
                 if (!CapabilityManager.getInstance()
                         .isKeySupported(type, keyName)
@@ -589,22 +611,28 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
             R.id.bt_get -> {
                 get()
             }
+
             R.id.bt_unlistenall -> {
                 unListenAll()
             }
+
             R.id.bt_set -> {
                 set()
             }
+
             R.id.bt_listen -> {
                 listen()
             }
+
             R.id.bt_action -> {
                 action()
             }
+
             R.id.btn_clearlog -> {
                 tv_result?.text = ""
                 logMessage.delete(0, logMessage.length)
             }
+
             R.id.iv_question_mark -> {
 
                 val cameraType = KeyManager.getInstance().getValue(
@@ -614,8 +642,10 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                     )
                 )
                 cameraType?.name?.let {
-                    CapabilityKeyChecker.check( msdkInfoVm.msdkInfo.value?.productType?.name!! ,
-                        it)
+                    CapabilityKeyChecker.check(
+                        msdkInfoVm.msdkInfo.value?.productType?.name!!,
+                        it
+                    )
                 }
                 // KeyValueDialogUtil.showNormalDialog(getActivity(), "提示")
                 //CapabilityKeyChecker.generateAllEnumList(msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
@@ -669,7 +699,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     private fun getCameraSubIndex(lensName: String): Int {
         CameraLensType.values().forEach {
             if (lensName == it.name) {
-               return it.value()
+                return it.value()
             }
         }
         return CameraLensType.UNKNOWN.value()

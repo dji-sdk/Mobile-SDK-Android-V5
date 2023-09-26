@@ -687,8 +687,8 @@
 
     <dimen name="setting_flyc_sensor_calibrate_btn_height">44dp</dimen>
     <dimen name="setting_flyc_sensor_calibrate_desc_min_height">31dp</dimen>
-    <dimen name="setting_flyc_sensor_calibrate_item_margin_top">7dp</dimen>
-    <dimen name="setting_flyc_sensor_calibrate_tip_margin_top">9dp</dimen>
+    <dimen name="setting_flyc_sensor_calibrate_item_margin_top">30dp</dimen>
+    <dimen name="setting_flyc_sensor_calibrate_tip_margin_top">15dp</dimen>
 
     <dimen name="horizontal_margin_12">12dp</dimen>
     <dimen name="horizontal_margin_minimal">8dp</dimen>
@@ -797,6 +797,8 @@
     <dimen name="uxsdk_dialog_img_width">234dp</dimen>
     <dimen name="uxsdk_dialog_img_height">128dp</dimen>
     <dimen name="uxsdk_dialog_common_input_et_height">40dp</dimen>
+
+    <dimen name="uxsdk_setting_common_item_height">56dp</dimen>
 
 
 </resources>

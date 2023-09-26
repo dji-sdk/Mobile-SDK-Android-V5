@@ -26,6 +26,7 @@ package dji.v5.ux.core.panel.listitem.returntohomealtitude
 import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.value.common.IntMinMax
 import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.common.IntValueConfig
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
@@ -56,7 +57,7 @@ class ReturnToHomeAltitudeListItemWidgetModel(
     private val unitTypeProcessor: DataProcessor<UnitType> = DataProcessor.create(UnitType.METRIC)
     private val returnToHomeAltitudeStateProcessor: DataProcessor<ReturnToHomeAltitudeState> = DataProcessor.create(ProductDisconnected)
     private val noviceModeProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
-    private val maxFlightHeightRangeProcessor: DataProcessor<IntMinMax> = DataProcessor.create(IntMinMax())
+    private val maxFlightHeightRangeProcessor: DataProcessor<IntValueConfig> = DataProcessor.create(IntValueConfig())
 
     /**
      * Get the return to home altitude state

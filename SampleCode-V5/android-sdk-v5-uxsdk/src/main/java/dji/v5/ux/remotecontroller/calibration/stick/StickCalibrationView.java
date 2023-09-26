@@ -87,7 +87,7 @@ public class StickCalibrationView extends LinearLayout implements IRcCalibration
     }
 
     private void listenSmartControllerCalibrationState() {
-        rcCalibrationWidgetModel.rcCalibrateStateDataProcessor.toFlowable().subscribeOn(SchedulerProvider.ui()).subscribe(state -> {
+        mCompositeDisposable.add(rcCalibrationWidgetModel.rcCalibrateStateDataProcessor.toFlowable().subscribeOn(SchedulerProvider.ui()).subscribe(state -> {
             if (isDjiRcPlus && state == RcCalibrateState.RECORDCENTER) {
                 mRcPlusLeftJoystick.resetLimit();
                 mRcPlusRightJoystick.resetLimit();
@@ -97,13 +97,13 @@ public class StickCalibrationView extends LinearLayout implements IRcCalibration
             if (state == RcCalibrateState.TIMEOUT_EXIT) {
                 reset();
             }
-        });
+        }));
 
-        rcCalibrationWidgetModel.connectDataProcessor.toFlowable().subscribe(connect -> {
+        mCompositeDisposable.add(rcCalibrationWidgetModel.connectDataProcessor.toFlowable().subscribe(connect -> {
             if (connect != null && !connect) {
                 reset();
             }
-        });
+        }));
 
     }
 

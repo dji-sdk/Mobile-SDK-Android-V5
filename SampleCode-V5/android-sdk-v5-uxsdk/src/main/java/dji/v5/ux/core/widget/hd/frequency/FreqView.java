@@ -267,6 +267,7 @@ public class FreqView extends ConstraintLayoutWidget<Object> {
 
         int rssiValIndex = 0;
         int pointIndex = 0;
+        int size = line.getValues().size();
         for (PointValue value : line.getValues()) {
             /** 对首尾值进行了处理, 理由{@link mNumRssiValues}的注释 */
             float y = 0;
@@ -276,6 +277,10 @@ public class FreqView extends ConstraintLayoutWidget<Object> {
             } else if(pointIndex == values.size() + 1) {
                 y = (float)values.get(pointIndex - 2).getRssi() + 10- NF_BASE_VALUE;
             } else {
+                if (rssiValIndex >= size) {
+                    LogUtils.e(TAG,"Illegal state,rssiValIndex >= line.getValues().size(),");
+                    return;
+                }
                 y = (float)values.get(rssiValIndex++).getRssi() - NF_BASE_VALUE;
             }
 

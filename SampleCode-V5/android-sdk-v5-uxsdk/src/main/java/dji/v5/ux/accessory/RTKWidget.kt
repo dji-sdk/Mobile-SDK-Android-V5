@@ -101,7 +101,6 @@ open class RTKWidget @JvmOverloads constructor(
     //region Constructor
     override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
         inflate(context, R.layout.uxsdk_widget_rtk, this)
-        setBackgroundResource(R.drawable.uxsdk_background_black_rectangle)
     }
 
     init {
@@ -130,24 +129,10 @@ open class RTKWidget @JvmOverloads constructor(
     }
 
     override fun reactToModelChanges() {
-        addReaction(widgetModel.rtkEnabled
-            .observeOn(SchedulerProvider.ui())
-            .subscribe { rtkEnabled: Boolean -> updateUIForRTKEnabled(rtkEnabled) })
+        //do nothing
     }
 
 
-
-    //region Reactions to model
-    private fun updateUIForRTKEnabled(rtkEnabled: Boolean) {
-        if (rtkEnabled) {
-            rtkSatelliteStatusWidget.show()
-            rtkTypeSwitchWidget.show()
-        } else {
-            rtkSatelliteStatusWidget.hide()
-            rtkTypeSwitchWidget.hide()
-        }
-    }
-    //endregion
 
 
     //region Customization

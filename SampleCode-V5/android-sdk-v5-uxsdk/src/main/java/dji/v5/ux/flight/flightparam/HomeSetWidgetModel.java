@@ -110,8 +110,8 @@ public class HomeSetWidgetModel extends WidgetModel {
 
 
 
-    public Flowable<LocationCoordinate2D> setHomeLocation(LocationCoordinate2D locationCoordinate2D){
-        return djiSdkModel.setValue(KeyTools.createKey(FlightControllerKey.KeyHomeLocation)  , locationCoordinate2D).toFlowable();
+    public Completable setHomeLocation(LocationCoordinate2D locationCoordinate2D){
+        return djiSdkModel.setValue(KeyTools.createKey(FlightControllerKey.KeyHomeLocation)  , locationCoordinate2D);
     }
 
 

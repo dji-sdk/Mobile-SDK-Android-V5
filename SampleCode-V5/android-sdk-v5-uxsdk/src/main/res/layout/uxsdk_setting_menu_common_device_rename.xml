@@ -28,6 +28,7 @@
             android:layout_centerVertical="true"
             android:imeOptions="flagNoExtractUi|flagNoFullscreen"
             android:inputType="none"
+            android:maxLength="32"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

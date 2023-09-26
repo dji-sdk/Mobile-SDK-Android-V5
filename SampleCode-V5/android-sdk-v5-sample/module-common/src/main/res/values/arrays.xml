@@ -55,6 +55,7 @@
         <item>6</item>
         <item>7</item>
         <item>8</item>
+        <item>9</item>
     </string-array>
 
 
@@ -62,6 +63,11 @@
         <item>MAIN</item>
         <item>RIGHT</item>
         <item>UP</item>
+    </string-array>
+
+    <string-array name="media_storage_arrays">
+        <item>SDCARD</item>
+        <item>INNER</item>
     </string-array>
 
     <string-array name="wayline_aircraft">
