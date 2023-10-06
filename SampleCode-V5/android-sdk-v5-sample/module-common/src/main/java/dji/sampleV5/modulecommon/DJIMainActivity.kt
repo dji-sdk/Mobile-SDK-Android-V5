@@ -171,6 +171,10 @@ abstract class DJIMainActivity : AppCompatActivity() {
         enableShowCaseButton(testing_tool_button, cl)
     }
 
+    fun <T> enableLiveStreamShortcut(cl: Class<T>){
+        enableShowCaseButton(live_stream_shortcut, cl)
+    }
+
     private fun <T> enableShowCaseButton(view: View, cl: Class<T>) {
         view.isEnabled = true
         view.setOnClickListener {

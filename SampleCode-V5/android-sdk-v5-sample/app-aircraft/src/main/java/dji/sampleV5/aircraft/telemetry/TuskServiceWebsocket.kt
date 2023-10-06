@@ -14,7 +14,8 @@ class TuskServiceWebsocket {
 
     // Establish WebSocket connection
     fun connectWebSocket() {
-        val request = Request.Builder().url("ws://192.168.20.169:8084").build()
+//        val request = Request.Builder().url("ws://192.168.20.169:8084").build()
+        val request = Request.Builder().url("ws://192.168.20.159:8084").build()
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 Log.d("TuskService", "WebSocket connection opened")

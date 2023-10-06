@@ -13,7 +13,7 @@ More refer to the release notes." </string>
     <string name="tech_support_url">https://sdk-forum.dji.net/hc/en-us/requests/new</string>
 
     <string name="app_name_all">MSDK ALL</string>
-    <string name="app_name_aircraft">MSDK Aircraft</string>
+    <string name="app_name_aircraft">RINAO</string>
     <string name="app_name_handheld">MSDK Handheld</string>
 
     <string name="item_key_value_title">Key/Value</string>
@@ -116,6 +116,8 @@ More refer to the release notes." </string>
     <string name="showcase">Showcase &amp; Tools</string>
     <string name="widget_list">Widget List</string>
     <string name="testing_tools">Testing Tools</string>
+    <string name="livestream_shortcut" translatable="false">Livestream Settings</string>
+    <string name="flight_settings" translatable="false">RINAO Configuration Settings</string>
     <string name="default_layout">Default Layout</string>
     <string name="sdk_forum">SDK Forum</string>
     <string name="release_nodes">Release Nodes</string>

@@ -2,6 +2,7 @@ package dji.sampleV5.aircraft
 
 import dji.sampleV5.aircraft.control.PachKeyManager
 import dji.sampleV5.modulecommon.DJIMainActivity
+import dji.sampleV5.modulecommon.pages.LiveStreamFragment
 import dji.v5.common.utils.GeoidManager
 import dji.v5.ux.core.communication.DefaultGlobalPreferences
 import dji.v5.ux.core.communication.GlobalPreferencesManager
@@ -34,6 +35,7 @@ class DJIAircraftMainActivity : DJIMainActivity() {
 
         val TuskManager = PachKeyManager()
         TuskManager.runTesting()
+//        prepareConfigurationTools()
 //
 
 
@@ -42,5 +44,9 @@ class DJIAircraftMainActivity : DJIMainActivity() {
     override fun prepareTestingToolsActivity() {
         enableTestingTools(AircraftTestingToolsActivity::class.java)
     }
+
+//    fun prepareConfigurationTools(){
+//        enableLiveStreamShortcut(LiveStreamFragment::class.java)
+//    }
 }
 

@@ -39,11 +39,11 @@ class PachKeyManager() {
     private var controller = VirtualStickControl()
     private var pidController = PidController(0.4f, 0.05f, 0.9f)
     val mainScope = CoroutineScope(Dispatchers.Main)
-    val streamer = StreamManager()
+//    val streamer = StreamManager()
     var stateData = TuskAircraftState( 0.0, 0.0, 0.0, 0.0, 0.0,
             0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
-    var statusData = TuskAircraftStatus( connected = false, battery = 0, gps = 0, signalQuality =  0,
-            goHomeState = null, flightMode = null, motorsOn = false, homeLocationLat = null,
+    var statusData = TuskAircraftStatus( connected = false, battery = 0, gpsSignal = 0, gps = 0,
+        signalQuality =  0,  goHomeState = null, flightMode = null, motorsOn = false, homeLocationLat = null,
             homeLocationLong = null, gimbalAngle = 0.0, goHomeStatus = null, takeoffAltitude = null)
     var controllerStatus = TuskControllerStatus( battery = 0, pauseButton = false, goHomeButton = false,
             leftStickX = 0,leftStickY=0,rightStickX=0,rightStickY=0, fiveDUp = false, fiveDDown = false,
@@ -92,7 +92,7 @@ class PachKeyManager() {
         telemService.connectWebSocket()
         initializeFlightParameters()
         keyDisposables = CompositeDisposable()
-        streamer.startStream()
+//        streamer.startStream()
     }
 
 
@@ -227,13 +227,23 @@ class PachKeyManager() {
             Log.d("PachTelemetry", "Battery Level $it")
         }
 
+
+        registerKey(
+            KeyTools.createKey(FlightControllerKey.KeyGPSSatelliteCount)
+        )    {
+                statusData = statusData.copy(gps = it)
+                sendStatus(statusData)
+                Log.d("PachTelemetry", "GPSSatelliteCount $it")
+        }
+
         registerKey(
             KeyTools.createKey(FlightControllerKey.KeyGPSSignalLevel)
         ) {
-            statusData = statusData.copy(gps = it.value())
+            statusData = statusData.copy(gpsSignal = it.value())
             sendStatus(statusData)
             Log.d("PachTelemetry", "GPSSignalLevel $it")
         }
+
 
         registerKey(
             KeyTools.createKey(AirLinkKey.KeySignalQuality)

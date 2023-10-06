@@ -194,6 +194,35 @@
         app:layout_constraintTop_toTopOf="@+id/view_info_panel" />
 
     <TextView
+        android:id="@+id/configuration_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/flight_settings"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/msg_panel"
+        app:layout_constraintTop_toTopOf="@+id/msg_panel" />
+
+    <Button
+        android:id="@+id/live_stream_shortcut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:enabled="true"
+        android:foreground="?selectableItemBackground"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/livestream_shortcut"
+        android:textColor="@color/selector_enable_button"
+        app:layout_constrainedWidth="@+id/msg_panel"
+        app:layout_constraintStart_toStartOf="@+id/msg_panel"
+        app:layout_constraintTop_toBottomOf="@+id/configuration_title" />
+    <TextView
         android:id="@+id/text_view_news_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -203,8 +232,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/msg_panel"
-        app:layout_constraintTop_toTopOf="@+id/msg_panel" />
-
+        app:layout_constraintTop_toBottomOf="@+id/live_stream_shortcut" />
     <ScrollView
         android:id="@+id/scroll_news"
         android:layout_width="0dp"
@@ -212,7 +240,7 @@
         android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/panel_icon_msg"
         app:layout_constraintEnd_toEndOf="@+id/msg_panel"
-        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintHeight_percent="0.55"
         app:layout_constraintStart_toStartOf="@+id/msg_panel"
         app:layout_constraintTop_toBottomOf="@+id/text_view_news_title"
         app:layout_constraintVertical_bias="0">

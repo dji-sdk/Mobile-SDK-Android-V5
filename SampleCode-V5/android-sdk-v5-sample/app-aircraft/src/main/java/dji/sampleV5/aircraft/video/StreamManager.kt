@@ -13,8 +13,8 @@ class StreamManager:DJIFragment() {
     private val liveStreamVM: LiveStreamVM by activityViewModels()
     private val manager = MediaDataCenter.getInstance().liveStreamManager
     private val listener = this.manager.addLiveStreamStatusListener(streamer)
-    val RtspUsername = "admin"
-    val RtspPassword = "admin"
+    val RtspUsername = "rinao"
+    val RtspPassword = "unicorn"
     val RtspPort = 8554
     var isStreaming = this.manager.isStreaming
     var streamSettings = this.manager.liveStreamSettings

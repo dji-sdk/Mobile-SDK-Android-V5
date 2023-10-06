@@ -25,6 +25,7 @@ data class TuskAircraftStatus(
     @SerializedName("connected") val connected: Boolean?,
     @SerializedName("battery") val battery: Int?,
     @SerializedName("gps") val gps: Int?,
+    @SerializedName("gpsSignal") val gpsSignal: Int?,
     @SerializedName("signalQuality") val signalQuality: Int?,
     @SerializedName("goHomeState") val goHomeState: String?,
 //    https://developer.dji.com/api-reference-v5/android-api/Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_gohomestate_inline
