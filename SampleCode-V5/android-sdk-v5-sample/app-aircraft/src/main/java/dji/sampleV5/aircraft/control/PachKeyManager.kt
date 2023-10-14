@@ -39,7 +39,7 @@ class PachKeyManager() {
     private var controller = VirtualStickControl()
     private var pidController = PidController(0.4f, 0.05f, 0.9f)
     val mainScope = CoroutineScope(Dispatchers.Main)
-//    val streamer = StreamManager()
+    val streamer = StreamManager()
     var stateData = TuskAircraftState( 0.0, 0.0, 0.0, 0.0, 0.0,
             0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
     var statusData = TuskAircraftStatus( connected = false, battery = 0, gpsSignal = 0, gps = 0,
@@ -111,12 +111,13 @@ class PachKeyManager() {
                 // If motors are on, start mission
                 if (fiveDUp) {
                     controller.startTakeOff()
-
                 }
 
                 if (fiveDDown) {
-                    controller.startLanding()
-                    controller.endVirtualStick()
+                    streamer.startStream()
+//                    streamer.initChannelStateListener()
+//                    controller.startLanding()
+//                    controller.endVirtualStick()
                 }
                 if (fiveDPress) {
                     Log.v("PachKeyManager", "FiveD Pressed")
