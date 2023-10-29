@@ -64,6 +64,8 @@ class StreamManager() {
                             manager.liveStreamSettings?.rtspSettings?.userName + "  " +
                             manager.liveStreamSettings?.rtspSettings?.password + "  " +
                             manager.liveStreamSettings?.rtspSettings?.port)
+                    isStreaming = true;
+                    ToastUtils.showToast("Livestream Started")
                 }
 
                 override fun onFailure(error: IDJIError) {
@@ -75,6 +77,8 @@ class StreamManager() {
             manager.stopStream(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     Log.v("StreamManager", "Stream stopped")
+                    ToastUtils.showToast("Livestream Stopped")
+                    isStreaming = false;
                 }
 
                 override fun onFailure(error: IDJIError) {

@@ -49,7 +49,7 @@
                 android:resource="@xml/accessory_filter" />
         </activity>
 
-        <activity android:name="dji.v5.ux.sample.showcase.defaultlayout.DefaultLayoutActivity"
+        <activity android:name="dji.sampleV5.aircraft.defaultlayout.DefaultLayoutActivity"
             android:theme="@style/full_screen_theme"
             android:screenOrientation="landscape"
             android:exported="false"/>

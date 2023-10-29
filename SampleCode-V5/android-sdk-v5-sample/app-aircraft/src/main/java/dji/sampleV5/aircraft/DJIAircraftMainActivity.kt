@@ -1,19 +1,13 @@
 package dji.sampleV5.aircraft
 
 import dji.sampleV5.aircraft.control.PachKeyManager
+import dji.sampleV5.aircraft.defaultlayout.DefaultLayoutActivity
 import dji.sampleV5.modulecommon.DJIMainActivity
-import dji.sampleV5.modulecommon.pages.LiveStreamFragment
 import dji.v5.common.utils.GeoidManager
 import dji.v5.ux.core.communication.DefaultGlobalPreferences
 import dji.v5.ux.core.communication.GlobalPreferencesManager
 import dji.v5.ux.core.util.UxSharedPreferencesUtil
-import dji.v5.ux.sample.showcase.defaultlayout.DefaultLayoutActivity
 import dji.v5.ux.sample.showcase.widgetlist.WidgetsActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 /**
