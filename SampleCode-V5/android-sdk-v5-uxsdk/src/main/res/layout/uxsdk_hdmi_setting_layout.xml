@@ -1,0 +1,17 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@android:color/background_dark"
+    tools:parentTag="dji.v5.ux.accessory.RTKTypeSwitchWidget">
+
+    <dji.v5.ux.accessory.DescSpinnerCell
+        android:id="@+id/dsc_hdmi_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_58_dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:uxsdk_entries="@array/uxsdk_hdmi_system_setting_modes"
+        app:uxsdk_summary="@string/uxsdk_setting_menu_title_hd_hdmi_system_setting_hdmi_decoder_summary" />
+</merge>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -211,28 +212,34 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         }
     }
 
+
     //RTK源切换
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
-        when (checkedId) {
-            R.id.btn_rtk_source_base_rtk -> {
-                LogUtils.i(TAG, "Turn on switch to base station RTK ")
-                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.BASE_STATION)
-            }
-            R.id.btn_rtk_source_network -> {
-                LogUtils.i(TAG, "Turn on switch to custom network RTK ")
-                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE)
-            }
-            R.id.btn_rtk_source_qx -> {
-                LogUtils.i(TAG, "Turn on switch to custom QX RTK ")
-                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.QX_NETWORK_SERVICE)
-            }
-            R.id.btn_rtk_source_cmcc_rtk -> {
-                LogUtils.i(TAG, "Turn on switch to CMCC RTK ")
-                rtkCenterVM.setRTKReferenceStationSource(RTKReferenceStationSource.NTRIP_NETWORK_SERVICE)
+        val rtkReferenceStationSource = rtkCenterVM.rtkSystemStateLD.value?.rtkReferenceStationSource
+        val selectRTKReferenceStationSource =
+            when (checkedId) {
+                R.id.btn_rtk_source_base_rtk -> {
+                    RTKReferenceStationSource.BASE_STATION
+                }
+                R.id.btn_rtk_source_network -> {
+                    RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE
+                }
+                R.id.btn_rtk_source_qx -> {
+                    RTKReferenceStationSource.QX_NETWORK_SERVICE
+
+                }
+                R.id.btn_rtk_source_cmcc_rtk -> {
+                    RTKReferenceStationSource.NTRIP_NETWORK_SERVICE
+                }
+                else -> RTKReferenceStationSource.UNKNOWN
             }
 
+        if (rtkReferenceStationSource != selectRTKReferenceStationSource) {
+            LogUtils.i(TAG, "Turn on switch to ${selectRTKReferenceStationSource.name}")
+            rtkCenterVM.setRTKReferenceStationSource(selectRTKReferenceStationSource)
+            ToastUtils.showToast(StringUtils.getResStr(R.string.switch_rtk_type_tip))
+
         }
-        ToastUtils.showToast(StringUtils.getResStr(R.string.switch_rtk_type_tip))
     }
 
 
@@ -261,13 +268,13 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
     //用于区分是哪个网络rtk
     private var networkRTKParam = Bundle()
     private fun updateRTKUI(rtkReferenceStationSource: RTKReferenceStationSource?) {
-        rtk_source_radio_group.setOnCheckedChangeListener(null)
+        var checkedRadioButton: RadioButton? = null
         when (rtkReferenceStationSource) {
             RTKReferenceStationSource.BASE_STATION -> {
                 bt_open_rtk_station.show()
                 bt_open_network_rtk.hide()
                 bt_open_cmcc_rtk.hide()
-                btn_rtk_source_base_rtk.isChecked = true
+                checkedRadioButton = btn_rtk_source_base_rtk
                 networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
                 networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, false)
 
@@ -276,7 +283,7 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                 bt_open_network_rtk.show()
                 bt_open_rtk_station.hide()
                 bt_open_cmcc_rtk.hide()
-                btn_rtk_source_network.isChecked = true
+                checkedRadioButton = btn_rtk_source_network
                 networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
                 networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, false)
 
@@ -285,7 +292,7 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                 bt_open_network_rtk.show()
                 bt_open_rtk_station.hide()
                 bt_open_cmcc_rtk.hide()
-                btn_rtk_source_qx.isChecked = true
+                checkedRadioButton = btn_rtk_source_qx
                 networkRTKParam.putBoolean(KEY_IS_QX_RTK, true)
                 networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, false)
 
@@ -294,7 +301,7 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                 bt_open_cmcc_rtk.show()
                 bt_open_rtk_station.hide()
                 bt_open_network_rtk.hide()
-                btn_rtk_source_cmcc_rtk.isChecked = true
+                checkedRadioButton = btn_rtk_source_cmcc_rtk
                 networkRTKParam.putBoolean(KEY_IS_QX_RTK, false)
                 networkRTKParam.putBoolean(KEY_IS_CMCC_RTK, true)
             }
@@ -302,7 +309,15 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
                 ToastUtils.showToast("Current rtk reference station source is:$rtkReferenceStationSource")
             }
         }
-        rtk_source_radio_group.setOnCheckedChangeListener(this)
+
+        checkedRadioButton?.let {
+            rtk_source_radio_group.setOnCheckedChangeListener(null)
+            rtk_source_radio_group.check(it.id)
+            rtk_source_radio_group.setOnCheckedChangeListener(this)
+        }
+
+
+
     }
 
     override fun onDestroy() {

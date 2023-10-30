@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <dji.v5.ux.core.base.DividerConstraintLayout
+        android:id="@+id/setting_menu_common_rename_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/uxsdk_16_dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/setting_common_device_name"
+            android:textColor="@color/uxsdk_white"
+            android:textSize="@dimen/uxsdk_14_dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/setting_menu_common_rename_cell"
+            style="@style/setting_ui_item_edittext"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:imeOptions="flagNoExtractUi|flagNoFullscreen"
+            android:inputType="none"
+            android:maxLength="32"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </dji.v5.ux.core.base.DividerConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/setting_menu_common_save_tv"
+        style="@style/setting_ui_item_btn_big"
+        android:layout_below="@id/setting_menu_common_rename_rl"
+        android:gravity="center"
+        android:paddingTop="@dimen/uxsdk_12_dp"
+        android:paddingBottom="@dimen/uxsdk_12_dp"
+        android:text="@string/setting_common_save" />
+
+</RelativeLayout>

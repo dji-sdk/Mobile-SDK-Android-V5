@@ -166,7 +166,7 @@ class LoginFragment : DJIFragment() {
 
     private fun userLogin(userLogin: UserLogin) {
         loginVM.userLogin(
-            userLogin.userName,
+            userLogin.name,
             userLogin.password,
             userLogin.verificationCode,
             object : CommonCallbacks.CompletionCallback {
@@ -190,7 +190,7 @@ class LoginFragment : DJIFragment() {
 
 
     data class UserLogin(
-        var userName: String = "",
+        var name: String = "",
         var password: String = "",
         var verificationCode: String = "",
     )

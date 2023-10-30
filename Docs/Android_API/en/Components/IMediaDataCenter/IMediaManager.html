@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -124,7 +124,7 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntMinMax</a>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
                                       </dd>
@@ -679,75 +679,93 @@
 <p><font color="#666">Delete the media file in camera. After calling this interface, media file list status <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code> will change to <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_updating">UPDATING</a></code>. After the deletion, the media file list status <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code> is <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_up_to_date">UP_TO_DATE</a></code>, please call <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code> to update media file list data. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters-v7">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">List&lt;<a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_mediafile">MediaFile</a>&gt; <font color="#000">files</font></font></td><td><font color="#666"><i>Media file list that needs to be deleted.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_setmediafilexmpcustominfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_setmediafilexmpcustominfo_inline">setMediaFileXMPCustomInfo</a></div></div><div class="inline-doc" id="imediamanager_setmediafilexmpcustominfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>setMediaFileXMPCustomInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMediaFileXMPCustomInfo</span><span class="params">(@NonNull String information, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="description-v13">Description:</h5>
+<p><font color="#666">Set the XMP custom information. After the setting is successful, each time a photo file is generated, the XMP custom information will be stored in the XMP metadata of the photo file. You can call the <code><a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_imediafile_pullxmpcustominfofromcamera">pullXMPCustomInfoFromCamera</a></code> in the MdeiaFile class to pull the XMP custom information of the specified photo file from the camera. <br><b>Notice:<br> 1. One setting is valid for multiple times. After the camera is reboot, the custom information will be cleared, and it needs to be set again.<br> 2. Currently only supports Zenmuse H20 series cameras, Zenmuse L1 camera, and Zenmuse P1 camera.</b> <br><br><code><i>Supported since MSDK 5.7.0</i></code></font></p>
+<h5 id="input-parameters-v8">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">information</font></font></td><td><font color="#666"><i>XMP custom information that needs to be set. Use UTF-8 encoding and be less than or equal to 31 characters in length.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_getmediafilexmpcustominfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_getmediafilexmpcustominfo_inline">getMediaFileXMPCustomInfo</a></div></div><div class="inline-doc" id="imediamanager_getmediafilexmpcustominfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getMediaFileXMPCustomInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getMediaFileXMPCustomInfo</span><span class="params">(@NonNull <span class="keyword">final</span> CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="description-v14">Description:</h5>
+<p><font color="#666">Get the XMP custom information. <br><b>Notice:<br> Currently only supports Zenmuse H20 series cameras, Zenmuse L1 camera, and Zenmuse P1 camera.</b> <br><br><code><i>Supported since MSDK 5.7.0</i></code></font></p>
+<h5 id="input-parameters-v9">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull final <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;String&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_playvideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_playvideo_inline">playVideo</a></div></div><div class="inline-doc" id="imediamanager_playvideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>playVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">playVideo</span><span class="params">(MediaFile mediaFile, CommonCallbacks.CompletionCallbackWithParam&lt;IVideoFrame&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v13">Description:</h5>
+<h5 id="description-v15">Description:</h5>
 <p><font color="#666">Start to play the set media file. Media file data can be obtained by callback method. <br><li>1. If you want to decode to display the video by yourself, you can call custom decoder to decode the video through the video frame data <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoFrame.html#ivideostreammanager_ivideoframe">IVideoFrame</a></code> obtained from callback.</li> <li>2. You can also use the decoder <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder">IVideoDecoder</a></code> provided by DJI to decode video. Using <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_videochanneltype_extendedstreamchannel">EXTENDED_STREAM_CHANNEL</a></code> to init <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder">IVideoDecoder</a></code>, and then call <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder_setmediafile">setMediaFile</a></code> to set the media file into the decoder. Finally, call <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder_queueinframe">queueInFrame</a></code> to send the video frame data <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoFrame.html#ivideostreammanager_ivideoframe">IVideoFrame</a></code> to decode.</li> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v8">Input Parameters:</h5>
+<h5 id="input-parameters-v10">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_mediafile">MediaFile</a> <font color="#000">mediaFile</font></font></td><td><font color="#666"><i>Media file list that needs to playback.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoFrame.html#ivideostreammanager_ivideoframe">IVideoFrame</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_seekvideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_seekvideo_inline">seekVideo</a></div></div><div class="inline-doc" id="imediamanager_seekvideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>seekVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">seekVideo</span><span class="params">(<span class="keyword">int</span> position, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v14">Description:</h5>
+<h5 id="description-v16">Description:</h5>
 <p><font color="#666">Jump to play media file. You can set a new position to play. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v9">Input Parameters:</h5>
+<h5 id="input-parameters-v11">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int <font color="#000">position</font></font></td><td><font color="#666"><i>The location where you need to jump to play. Unit:second.</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_pausevideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_pausevideo_inline">pauseVideo</a></div></div><div class="inline-doc" id="imediamanager_pausevideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>pauseVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pauseVideo</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v15">Description:</h5>
+<h5 id="description-v17">Description:</h5>
 <p><font color="#666">Pause playing the media file. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v10">Input Parameters:</h5>
+<h5 id="input-parameters-v12">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_resumevideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_resumevideo_inline">resumeVideo</a></div></div><div class="inline-doc" id="imediamanager_resumevideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>resumeVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resumeVideo</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v16">Description:</h5>
+<h5 id="description-v18">Description:</h5>
 <p><font color="#666">Resume to play the media file. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v11">Input Parameters:</h5>
+<h5 id="input-parameters-v13">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_stopvideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_stopvideo_inline">stopVideo</a></div></div><div class="inline-doc" id="imediamanager_stopvideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>stopVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stopVideo</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v17">Description:</h5>
+<h5 id="description-v19">Description:</h5>
 <p><font color="#666">Stop playing the media file. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v12">Input Parameters:</h5>
+<h5 id="input-parameters-v14">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the execution result of callback.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_addvideoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_addvideoplaystatelistener_inline">addVideoPlayStateListener</a></div></div><div class="inline-doc" id="imediamanager_addvideoplaystatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>addVideoPlayStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addVideoPlayStateListener</span><span class="params">(VideoPlayStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v18">Description:</h5>
+<h5 id="description-v20">Description:</h5>
 <p><font color="#666">Set the listener of media file playing status. Through this listener, status of media file playing can be monitored. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v13">Input Parameters:</h5>
+<h5 id="input-parameters-v15">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStateListener.html#imediamanager_videoplaystatelistener">VideoPlayStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Listener of media file playing status.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_removevideoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_removevideoplaystatelistener_inline">removeVideoPlayStateListener</a></div></div><div class="inline-doc" id="imediamanager_removevideoplaystatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeVideoPlayStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeVideoPlayStateListener</span><span class="params">(VideoPlayStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v19">Description:</h5>
+<h5 id="description-v21">Description:</h5>
 <p><font color="#666">Remove listener of media file playing status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v14">Input Parameters:</h5>
+<h5 id="input-parameters-v16">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStateListener.html#imediamanager_videoplaystatelistener">VideoPlayStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Listener of media file playing status.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_removeallvideoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_removeallvideoplaystatelistener_inline">removeAllVideoPlayStateListener</a></div></div><div class="inline-doc" id="imediamanager_removeallvideoplaystatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeAllVideoPlayStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAllVideoPlayStateListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v20">Description:</h5>
+<h5 id="description-v22">Description:</h5>
 <p><font color="#666">Remove listeners of media file playing status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <div class="api-row" id="imediamanager_release"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_release_inline">release</a></div></div><div class="inline-doc" id="imediamanager_release_inline" <blockquote>
@@ -755,7 +773,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v21">Description:</h5>
+<h5 id="description-v23">Description:</h5>
 <p><font color="#666">Resource release. Calling this interface will cancel the media file data downloading, clear the thumbnail cache and clear the media file list data. It is recommended that you call it when the system memory is insufficient. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <h5 id="related">Related:</h5>
@@ -764,7 +782,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MediaFileFilter</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
-<h5 id="description-v22">Description:</h5>
+<h5 id="description-v24">Description:</h5>
 <p><font color="#666">Pulling media file list filter setting class. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafilefilter_video_inline"></a>VIDEO</font></td><td><font color="#666">Video.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafilefilter_photo_inline"></a>PHOTO</font></td><td><font color="#666">Photo.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafilefilter_all_inline"></a>ALL</font></td><td><font color="#666">All media files.</font></td></tr></table></html>
@@ -775,7 +793,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MediaFileListState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
-<h5 id="description-v23">Description:</h5>
+<h5 id="description-v25">Description:</h5>
 <p><font color="#666">Media file list status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafileliststate_idle_inline"></a>IDLE</font></td><td><font color="#666">IDLE status. When the media file list is in IDLE status, <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_pullmediafilelistfromcamera">pullMediaFileListFromCamera</a></code> should be called to pull full data.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafileliststate_up_to_date_inline"></a>UP_TO_DATE</font></td><td><font color="#666">Updated status. When the media file list is in updated status, <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code> should be called to update the media file list data.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafileliststate_updating_inline"></a>UPDATING</font></td><td><font color="#666">Updating status. When the media file list is in updating status, it means that the MSDK is synchronizing with date in camera. After the synchronization, the status will change to <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_up_to_date">UP_TO_DATE</a></code>, <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code> should be called to update the media file list data.</font></td></tr></table></html>
@@ -786,7 +804,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> VideoPlayState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
-<h5 id="description-v24">Description:</h5>
+<h5 id="description-v26">Description:</h5>
 <p><font color="#666">Enum type of media file playing status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v3">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_idle_inline"></a>IDLE</font></td><td><font color="#666">IDEL status. The media file play function is not enabled. <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_playvideo">playVideo</a></code> can be called to play media file.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_playing_inline"></a>PLAYING</font></td><td><font color="#666">Playing.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_ended_inline"></a>ENDED</font></td><td><font color="#666">Play is ended.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_stopped_inline"></a>STOPPED</font></td><td><font color="#666">Play is stopped. When <code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_stopvideo">stopVideo</a></code> is called successfully to stop playing media file, this status will be called back.</font></td></tr></table></html>

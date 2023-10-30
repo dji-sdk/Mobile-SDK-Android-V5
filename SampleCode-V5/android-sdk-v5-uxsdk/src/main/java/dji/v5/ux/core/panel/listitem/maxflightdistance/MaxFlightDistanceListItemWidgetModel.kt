@@ -26,6 +26,7 @@ package dji.v5.ux.core.panel.listitem.maxflightdistance
 import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.value.common.IntMinMax
 import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.common.IntValueConfig
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
@@ -50,7 +51,7 @@ class MaxFlightDistanceListItemWidgetModel(
 
     private val maxFlightDistanceEnabledProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     private val maxFlightDistanceProcessor: DataProcessor<Int> = DataProcessor.create(0)
-    private val maxFlightDistanceRangeProcessor: DataProcessor<IntMinMax> = DataProcessor.create(IntMinMax())
+    private val maxFlightDistanceRangeProcessor: DataProcessor<IntValueConfig> = DataProcessor.create(IntValueConfig())
     private val unitTypeProcessor: DataProcessor<UnitType> = DataProcessor.create(UnitType.METRIC)
     private val maxFlightDistanceStateProcessor: DataProcessor<MaxFlightDistanceState> = DataProcessor.create(ProductDisconnected)
     private val noviceModeProcessor: DataProcessor<Boolean> = DataProcessor.create(false)

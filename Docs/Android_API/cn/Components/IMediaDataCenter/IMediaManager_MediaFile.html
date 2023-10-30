@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -124,7 +124,7 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntMinMax</a>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
                                       </dd>
@@ -577,7 +577,7 @@
       </div>
       <div class="site-main">
         <div class="article"><div class="article"><h1><font color="#AAA">class </font>MediaFile</h1></div>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MediaFile</span>  <span class="keyword">implements</span> <span class="title">Serializable</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MediaFile</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
 <h5 id="描述：">描述：</h5>
 <p><font color="#666">多媒体文件数据类。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -717,6 +717,54 @@
 <p><font color="#666">停止拉取原始的多媒体文件。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v5">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_imediafile_pullxmpfiledatafromcamera"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_imediafile_pullxmpfiledatafromcamera_inline">pullXMPFileDataFromCamera</a></div></div><div class="inline-doc" id="imediamanager_imediafile_pullxmpfiledatafromcamera_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>pullXMPFileDataFromCamera</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pullXMPFileDataFromCamera</span><span class="params">(CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
+<h5 id="描述：-v17">描述：</h5>
+<p><font color="#666">从相机中拉取照片文件中XMP信息。
+<br><b>注意：<br>
+目前只支持Zenmuse H20系列相机，Zenmuse L1相机，Zenmuse P1相机。</b>
+<br><br><code><i>MSDK 5.7.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v6">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;String&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_imediafile_getxmpfiledata"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_imediafile_getxmpfiledata_inline">getXMPFileData</a></div></div><div class="inline-doc" id="imediamanager_imediafile_getxmpfiledata_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getXMPFileData</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">getXMPFileData</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
+<h5 id="描述：-v18">描述：</h5>
+<p><font color="#666">同步获取照片文件中的XMP信息。如果返回为空，请先调用<code><a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_imediafile_pullxmpfiledatafromcamera">pullXMPFileDataFromCamera</a></code>从相机中拉取XMP信息。
+<br><b>注意：<br>
+目前只支持Zenmuse H20系列相机，Zenmuse L1相机，Zenmuse P1相机。</b>
+<br><br><code><i>MSDK 5.7.0开始支持</i></code></font></p>
+<h5 id="返回值：-v11">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String</font></td><td><font color="#666"><i>返回照片文件中的XMP信息。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_imediafile_pullxmpcustominfofromcamera"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_imediafile_pullxmpcustominfofromcamera_inline">pullXMPCustomInfoFromCamera</a></div></div><div class="inline-doc" id="imediamanager_imediafile_pullxmpcustominfofromcamera_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>pullXMPCustomInfoFromCamera</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pullXMPCustomInfoFromCamera</span><span class="params">(CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
+<h5 id="描述：-v19">描述：</h5>
+<p><font color="#666">从相机中拉取照片文件中XMP自定义信息。
+<br><b>注意：<br>
+目前只支持Zenmuse H20系列相机，Zenmuse L1相机，Zenmuse P1相机。</b>
+<br><br><code><i>MSDK 5.7.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v7">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;String&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_imediafile_getxmpcustominfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_imediafile_getxmpcustominfo_inline">getXMPCustomInfo</a></div></div><div class="inline-doc" id="imediamanager_imediafile_getxmpcustominfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getXMPCustomInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">getXMPCustomInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
+<h5 id="描述：-v20">描述：</h5>
+<p><font color="#666">同步获取照片文件中的XMP自定义信息。如果返回为空，请先调用<code><a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_imediafile_pullxmpcustominfofromcamera">pullXMPCustomInfoFromCamera</a></code>从相机中拉取XMP自定义信息。
+<br><b>注意：<br>
+目前只支持Zenmuse H20系列相机，Zenmuse L1相机，Zenmuse P1相机。</b>
+<br><br><code><i>MSDK 5.7.0开始支持</i></code></font></p>
+<h5 id="返回值：-v12">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String</font></td><td><font color="#666"><i>返回照片文件中的XMP自定义信息。</i></font></td></tr></table></html></div>
 
         </div>
       </div>

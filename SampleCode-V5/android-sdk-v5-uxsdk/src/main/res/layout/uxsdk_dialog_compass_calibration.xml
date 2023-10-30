@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/progress_dialog_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/uxsdk_white"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/uxsdk_white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/compass_calibration_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/uxsdk_dialog_margin_left"
+                    android:layout_marginStart="@dimen/uxsdk_dialog_margin_left"
+                    android:layout_marginTop="@dimen/uxsdk_dialog_content_margin_top"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/uxsdk_dialog_line_spacing_extra"
+                    android:text="@string/uxsdk_fpv_checklist_compass_tip_1"
+                    android:textColor="@color/uxsdk_gray"
+                    android:textSize="@dimen/uxsdk_dialog_title_size"/>
+
+                <TextView
+                    android:id="@+id/compass_calibration_step"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/uxsdk_dialog_margin_left"
+                    android:layout_marginStart="@dimen/uxsdk_dialog_margin_left"
+                    android:layout_marginTop="@dimen/uxsdk_dialog_content_margin_top"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/uxsdk_dialog_line_spacing_extra"
+                    android:text="@string/uxsdk_fpv_checklist_compass_tip_1_desc"
+                    android:textColor="@color/uxsdk_blue"
+                    android:textSize="@dimen/uxsdk_dialog_content_size"/>
+
+                <FrameLayout
+                    android:layout_width="@dimen/uxsdk_dialog_img_width"
+                    android:layout_height="@dimen/uxsdk_dialog_img_height"
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/compass_calibration_illustration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        />
+                </FrameLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_dialog_divide_view_height"
+            android:background="@color/uxsdk_gray"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_dialog_btn_height"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/compass_calibration_left_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/uxsdk_selector_blue_rect_mask"
+                android:gravity="center"
+                android:text="@string/uxsdk_fpv_checklist_cancel_cele"
+                android:textColor="@color/uxsdk_gray"
+                android:textSize="@dimen/uxsdk_dialog_btn_size"
+                />
+
+            <View
+                android:id="@+id/compass_calibration_bottom_divider"
+                android:layout_width="@dimen/uxsdk_dialog_divide_line_width"
+                android:layout_height="match_parent"
+                android:background="@color/uxsdk_gray"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/compass_calibration_right_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/uxsdk_selector_blue_rect_mask"
+                android:gravity="center"
+                android:text="@string/uxsdk_setting_ui_imu_retry"
+                android:textColor="@color/uxsdk_blue"
+                android:textSize="@dimen/uxsdk_dialog_btn_size"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

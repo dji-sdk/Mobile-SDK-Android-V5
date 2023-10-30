@@ -1,9 +1,9 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.6.0"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.6.0"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.6.0"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.7.0"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.7.0"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.7.0"
 
 
     //三方依赖库
@@ -25,6 +25,8 @@ ext {
     deps.maplibreSdk = 'org.maplibre.gl:android-sdk:9.4.2'
     deps.lottie = 'com.airbnb.android:lottie:3.3.1'//RTK扫描页中使用，用于实现动画效果
     deps.cardview = 'androidx.cardview:cardview:1.0.0'//PopoverView中使用
+    deps.material = 'com.google.android.material:material:1.0.0'//AvoidanceShortcutWidget使用
+
     /*RTK设置页面使用-start*/
     deps.mikepenzCommunityMaterial = "com.mikepenz:community-material-typeface:3.5.95.1-kotlin@aar"
     deps.mikepenzGoogleMaterial = 'com.mikepenz:google-material-typeface:3.0.1.4.original-kotlin@aar'
@@ -53,9 +55,9 @@ ext {
     deps.lifecycleViewModel = 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
     deps.lifecycleLiveData = 'androidx.lifecycle:lifecycle-livedata:2.3.1'
     deps.lifecycleProcess = 'androidx.lifecycle:lifecycle-process:2.3.1'
-    deps.room = 'androidx.room:room-runtime:2.3.0'
-    deps.room_rxjava = 'androidx.room:room-rxjava3:2.3.0'
-    deps.room_compiler = 'androidx.room:room-compiler:2.3.0'
+    deps.room = 'androidx.room:room-runtime:2.4.1'
+    deps.room_rxjava = 'androidx.room:room-rxjava3:2.4.1'
+    deps.room_compiler = 'androidx.room:room-compiler:2.4.1'
     deps.legacySupport = 'androidx.legacy:legacy-support-v4:1.0.0'
     deps.media = 'androidx.media:media:1.0.0'
     deps.dynamicanimation = 'androidx.dynamicanimation:dynamicanimation:1.0.0'

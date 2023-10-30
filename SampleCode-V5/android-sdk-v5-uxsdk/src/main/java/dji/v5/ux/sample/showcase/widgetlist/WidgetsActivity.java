@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+
 import dji.v5.network.DJINetworkManager;
 import dji.v5.network.IDJINetworkStatusListener;
 import dji.v5.utils.common.LogUtils;
@@ -57,19 +58,32 @@ import dji.v5.ux.cameracore.widget.focusexposureswitch.FocusExposureSwitchWidget
 import dji.v5.ux.cameracore.widget.focusmode.FocusModeWidget;
 import dji.v5.ux.cameracore.widget.fpvinteraction.ExposureMeteringWidget;
 import dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget;
+import dji.v5.ux.core.base.CompassStatusWidget;
+import dji.v5.ux.core.base.ImuStatusWidget;
 import dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget;
 import dji.v5.ux.core.panel.telemetry.TelemetryPanelWidget;
 import dji.v5.ux.core.panel.topbar.TopBarPanelWidget;
 import dji.v5.ux.core.widget.airsense.AirSenseWidget;
 import dji.v5.ux.core.widget.altitude.AGLAltitudeWidget;
+import dji.v5.ux.core.widget.battery.BatteryAlertWidget;
+import dji.v5.ux.core.widget.battery.BatteryInfoWidget;
+import dji.v5.ux.core.widget.battery.BatterySettingWidget;
 import dji.v5.ux.core.widget.battery.BatteryWidget;
 import dji.v5.ux.core.widget.compass.CompassWidget;
 import dji.v5.ux.core.widget.connection.ConnectionWidget;
+import dji.v5.ux.core.widget.common.CommonDeviceNameWidget;
 import dji.v5.ux.core.widget.distancehome.DistanceHomeWidget;
 import dji.v5.ux.core.widget.distancerc.DistanceRCWidget;
-import dji.v5.ux.core.widget.flightmode.FlightModeWidget;
 import dji.v5.ux.core.widget.fpv.FPVWidget;
 import dji.v5.ux.core.widget.gpssignal.GpsSignalWidget;
+import dji.v5.ux.core.widget.hd.ChannelSelectWidget;
+import dji.v5.ux.core.widget.hd.FrequencyTabSelectWidget;
+import dji.v5.ux.core.widget.hd.HdmiSettingWidget;
+import dji.v5.ux.core.widget.hd.BandWidthSelectWidget;
+import dji.v5.ux.core.widget.hd.BandWidthWidget;
+import dji.v5.ux.core.widget.hd.InfoWidget;
+import dji.v5.ux.core.widget.hd.VideoRateTextWidget;
+import dji.v5.ux.core.widget.hd.frequency.FreqView;
 import dji.v5.ux.core.widget.horizontalvelocity.HorizontalVelocityWidget;
 import dji.v5.ux.core.widget.hsi.AttitudeDisplayWidget;
 import dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget;
@@ -78,12 +92,25 @@ import dji.v5.ux.core.widget.hsi.SpeedDisplayWidget;
 import dji.v5.ux.core.widget.perception.PerceptionStateWidget;
 import dji.v5.ux.core.widget.remainingflighttime.RemainingFlightTimeWidget;
 import dji.v5.ux.core.widget.remotecontrollersignal.RemoteControllerSignalWidget;
+import dji.v5.ux.core.widget.common.CommonAboutWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
 import dji.v5.ux.core.widget.useraccount.UserAccountLoginWidget;
 import dji.v5.ux.core.widget.verticalvelocity.VerticalVelocityWidget;
 import dji.v5.ux.core.widget.videosignal.VideoSignalWidget;
 import dji.v5.ux.core.widget.vps.VPSWidget;
+import dji.v5.ux.flight.flightparam.DistanceLimitWidget;
+import dji.v5.ux.flight.flightparam.FlightModeWidget;
+import dji.v5.ux.flight.flightparam.ReturnHomeModeWidget;
+import dji.v5.ux.flight.flightparam.HomePointWidget;
+import dji.v5.ux.flight.flightparam.LostActionWidget;
+import dji.v5.ux.gimbal.GimbalFineTuneWidget;
+import dji.v5.ux.gimbal.GimbalSettingWidget;
+import dji.v5.ux.obstacle.AvoidanceShortcutWidget;
+import dji.v5.ux.obstacle.PrecisionLandingWidget;
+import dji.v5.ux.obstacle.VisionPositionWidget;
+import dji.v5.ux.remotecontroller.RCCalibrationWidget;
+import dji.v5.ux.remotecontroller.RCPairingWidget;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
 import dji.v5.ux.visualcamera.CameraNDVIPanelWidget;
 import dji.v5.ux.visualcamera.CameraVisiblePanelWidget;
@@ -120,6 +147,19 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN |
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int i) {
+                if ((i & View.SYSTEM_UI_FLAG_FULLSCREEN )== 0 ){
+                    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    |  View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN |  View.SYSTEM_UI_FLAG_IMMERSIVE
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                }
+            }
+        });
+        // 防止系统UI获取焦点后进入到非全屏状态
+
 
         WidgetListFragment listFragment = new WidgetListFragment();
         listFragment.setArguments(getIntent().getExtras());
@@ -171,7 +211,7 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_distance_rc_widget_title, new WidgetViewHolder<>(DistanceRCWidget.class)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_exposure_settings_indicator_widget_title,
                 new WidgetViewHolder<>(ExposureSettingsIndicatorWidget.class)));
-        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flight_mode_widget_title, new WidgetViewHolder<>(FlightModeWidget.class,
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flight_mode_widget_title, new WidgetViewHolder<>(dji.v5.ux.core.widget.flightmode.FlightModeWidget.class,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 50)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_focus_exposure_switch_widget_title,
                 new WidgetViewHolder<>(FocusExposureSwitchWidget.class, 35, 35)));
@@ -251,6 +291,40 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_ndvi_panel_widget_title, new WidgetViewHolder<>(CameraNDVIPanelWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 35)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_camera_visible_panel_widget_title, new WidgetViewHolder<>(CameraVisiblePanelWidget.class, ViewGroup.LayoutParams.WRAP_CONTENT, 35)));
         widgetListItems.add(new WidgetListItem(R.string.uxsdk_device_health_and_status_widget_title, new WidgetViewHolder<>(DeviceHealthAndStatusWidget.class, 195, 38)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_gimbal_fine_tune_widget_title, new WidgetViewHolder<>(GimbalFineTuneWidget.class, 300, 150)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_gimbal_setting_widget_title, new WidgetViewHolder<>(GimbalSettingWidget.class, 350,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flyc_gohome_mode_widget_title, new WidgetViewHolder<>(ReturnHomeModeWidget.class, 420,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flyc_lost_action_widget_title, new WidgetViewHolder<>(LostActionWidget.class, 300,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flyc_home_set_widget_title, new WidgetViewHolder<>(HomePointWidget.class, 300,  30)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flyc_home_distance_height_limit_widget_title, new WidgetViewHolder<>(DistanceLimitWidget.class, 420,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flyc_imu_state_widget_title, new WidgetViewHolder<>(ImuStatusWidget.class, 420,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flyc_compass_state_widget_title, new WidgetViewHolder<>(CompassStatusWidget.class, 420,  320)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_flyc_fpa_widget_title, new WidgetViewHolder<>(FlightModeWidget.class, 420,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_gimbal_setting_widget_title, new WidgetViewHolder<>(GimbalSettingWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_battery_info_widget_title, new WidgetViewHolder<>(BatteryInfoWidget.class, 380, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_battery_alert_widget_title, new WidgetViewHolder<>(BatteryAlertWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_battery_setting_widget_title, new WidgetViewHolder<>(BatterySettingWidget.class, 400, ViewGroup.LayoutParams.MATCH_PARENT)));
+
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_battery_info_widget_title, new WidgetViewHolder<>(BatteryInfoWidget.class, 450, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_battery_alert_widget_title, new WidgetViewHolder<>(BatteryAlertWidget.class, 450, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_battery_setting_widget_title, new WidgetViewHolder<>(BatterySettingWidget.class, 450, ViewGroup.LayoutParams.MATCH_PARENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_avoidance_short_widget_title, new WidgetViewHolder<>(AvoidanceShortcutWidget.class,450,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_avoidance_vision_position_widget_title, new WidgetViewHolder<>(VisionPositionWidget.class,450,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_avoidance_precision_landing_widget_title, new WidgetViewHolder<>(PrecisionLandingWidget.class,450,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_common_about_widget_title, new WidgetViewHolder<>(CommonAboutWidget.class,450,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_common_device_name_widget_title, new WidgetViewHolder<>(CommonDeviceNameWidget.class,450,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_frequency_setting_widget_title, new WidgetViewHolder<>(FrequencyTabSelectWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_sdr_info_widget_title, new WidgetViewHolder<>(InfoWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_sdr_channel_mode_title, new WidgetViewHolder<>(ChannelSelectWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_sdr_band_width_select_title, new WidgetViewHolder<>(BandWidthSelectWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_sdr_band_width_title, new WidgetViewHolder<>(BandWidthWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_sdr_video_rate_title, new WidgetViewHolder<>(VideoRateTextWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_sdr_freq_title, new WidgetViewHolder<>(FreqView.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_hdmi_setting_title, new WidgetViewHolder<>(HdmiSettingWidget.class, 350, ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_remote_contorller_check_frequency_widget_title, new WidgetViewHolder<>(RCPairingWidget.class,450,  ViewGroup.LayoutParams.WRAP_CONTENT)));
+        widgetListItems.add(new WidgetListItem(R.string.uxsdk_remote_contorller_calibration_widget_title, new WidgetViewHolder<>(RCCalibrationWidget.class,500,  ViewGroup.LayoutParams.WRAP_CONTENT)));
     }
 
     @Override

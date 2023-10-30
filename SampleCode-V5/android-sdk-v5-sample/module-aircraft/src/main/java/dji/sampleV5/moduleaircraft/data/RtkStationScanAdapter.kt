@@ -97,12 +97,12 @@ class RtkStationScanAdapter(val context: Context, list: List<DJIRTKBaseStationCo
     fun getSignalLevelDrawable(signalLevel: Int): Int {
         LogUtils.i(TAG, "getSignalLevelDrawable,signalLevel=$signalLevel")
         return when (signalLevel) {
-            LEVEL_0 -> R.drawable.ic_topbar_signal_level_0
-            LEVEL_1 -> R.drawable.ic_topbar_signal_level_1
-            LEVEL_2 -> R.drawable.ic_topbar_signal_level_2
-            LEVEL_3 -> R.drawable.ic_topbar_signal_level_3
-            LEVEL_4 -> R.drawable.ic_topbar_signal_level_4
-            else -> R.drawable.ic_topbar_signal_level_5
+            LEVEL_0 -> R.drawable.uxsdk_ic_topbar_signal_level_0
+            LEVEL_1 -> R.drawable.uxsdk_ic_topbar_signal_level_1
+            LEVEL_2 -> R.drawable.uxsdk_ic_topbar_signal_level_2
+            LEVEL_3 -> R.drawable.uxsdk_ic_topbar_signal_level_3
+            LEVEL_4 -> R.drawable.uxsdk_ic_topbar_signal_level_4
+            else -> R.drawable.uxsdk_ic_topbar_signal_level_5
         }
     }
 

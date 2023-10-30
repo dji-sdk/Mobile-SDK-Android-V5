@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dji.v5.ux.core.base.DividerConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/uxsdk_15_dp">
+
+        <ImageView
+            android:id="@+id/setting_menu_perception_pic_1"
+            android:layout_width="@dimen/uxsdk_44_dp"
+            android:layout_height="@dimen/uxsdk_32_dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/uxsdk_pic_visual_setting_vps" />
+
+        <TextView
+            android:id="@+id/setting_menu_desc_perception_downwards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/uxsdk_20_dp"
+            android:layout_toRightOf="@id/setting_menu_perception_pic_1"
+            android:text="@string/setting_menu_desc_perception_downwards"
+            android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+            android:textSize="@dimen/uxsdk_setting_perception_icon_text_size" />
+    </RelativeLayout>
+
+</dji.v5.ux.core.base.DividerConstraintLayout>

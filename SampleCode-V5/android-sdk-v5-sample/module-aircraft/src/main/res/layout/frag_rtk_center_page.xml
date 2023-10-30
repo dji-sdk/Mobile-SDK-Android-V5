@@ -74,7 +74,6 @@
                             android:id="@+id/btn_rtk_source_network"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="false"
                             android:text="@string/btn_rtk_source_network" />
 
                         <RadioButton
@@ -89,7 +88,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
-                            android:checked="false"
                             android:text="@string/btn_rtk_source_base_rtk" />
 
                         <RadioButton
@@ -97,7 +95,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
-                            android:checked="false"
                             android:text="@string/btn_rtk_source_cmcc_rtk" />
                     </RadioGroup>
 

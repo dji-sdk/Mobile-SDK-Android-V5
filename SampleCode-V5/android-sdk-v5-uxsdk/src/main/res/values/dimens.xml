@@ -23,6 +23,9 @@
   -->
 
 <resources>
+    <item name="uxsdk_match_parent" format="integer" type="dimen">-1</item>
+    <item name="uxsdk_wrap_content" format="integer" type="dimen">-2</item>
+
     <dimen name="uxsdk_spacing_micro">2dp</dimen>
     <dimen name="uxsdk_spacing_mini">4dp</dimen>
     <dimen name="uxsdk_spacing_normal">8dp</dimen>
@@ -569,4 +572,231 @@
 
     <!-- Zoom Widget -->
     <dimen name="uxsdk_pixel_benchmark">1.2dp</dimen>
+
+    <dimen name="uxsdk_setting_menu_perception_pic_cac_width">112dp</dimen>
+    <dimen name="uxsdk_setting_menu_perception_pic_cac_height">54dp</dimen>
+
+
+    <dimen name="uxsdk_dic_text_size_10sp">6sp</dimen>
+    <dimen name="uxsdk_dic_text_size_12sp">8sp</dimen>
+    <dimen name="uxsdk_dic_text_size_14sp">10sp</dimen>
+    <dimen name="uxsdk_dic_text_size_16sp">12sp</dimen>
+    <dimen name="uxsdk_dic_text_size_18sp">14sp</dimen>
+    <dimen name="uxsdk_dic_text_size_20sp">16sp</dimen>
+    <dimen name="uxsdk_dic_text_size_22sp">18sp</dimen>
+    <dimen name="uxsdk_dic_text_size_24sp">20sp</dimen>
+
+
+    <!--设置之感知设置-->
+    <dimen name="uxsdk_setting_perception_icon_width">44dp</dimen>
+    <dimen name="uxsdk_setting_perception_icon_height">32dp</dimen>
+    <dimen name="uxsdk_setting_perception_text_margin_left">20dp</dimen>
+    <dimen name="uxsdk_setting_perception_item_margin_top">15dp</dimen>
+    <dimen name="uxsdk_setting_perception_switcher_margin_bottom">20dp</dimen>
+    <dimen name="uxsdk_setting_perception_switcher_margin_top">20dp</dimen>
+    <dimen name="uxsdk_setting_perception_icon_margin_top">19dp</dimen>
+    <dimen name="uxsdk_setting_perception_icon_margin_bottom">20dp</dimen>
+    <dimen name="uxsdk_setting_perception_icon_text_size">12sp</dimen>
+
+
+    <dimen name="uxsdk_vertical_margin_minimal">8dp</dimen>
+    <dimen name="uxsdk_vertical_margin_medium">12dp</dimen>
+    <dimen name="uxsdk_vertical_margin_maximal">24dp</dimen>
+    <dimen name="uxsdk_vertical_margin_minimal_px">16px</dimen>
+    <dimen name="uxsdk_vertical_margin_maximal_dp">64px</dimen>
+    <dimen name="uxsdk_horizontal_margin_medium">24px</dimen>
+
+
+
+    <!--HD config-->
+    <dimen name="uxsdk_setting_hd_channel_mode_title_size">14sp</dimen>
+    <dimen name="uxsdk_setting_hd_channel_mode_width">70dp</dimen>
+    <dimen name="uxsdk_setting_hd_channel_mode_height">30dp</dimen>
+    <dimen name="uxsdk_setting_hd_channel_mode_text_size">12sp</dimen>
+    <dimen name="uxsdk_setting_hd_channel_mode_text_margin_top">6.5dp</dimen>
+    <dimen name="uxsdk_setting_hd_first_item_margin_top">12dp</dimen>
+    <dimen name="uxsdk_setting_hd_item_height">58dp</dimen>
+    <dimen name="uxsdk_setting_hd_item_tab_height">88dp</dimen>
+    <dimen name="uxsdk_setting_hd_dbm_size">10sp</dimen>
+    <dimen name="uxsdk_setting_hd_video_cam_height">42dp</dimen>
+    <dimen name="uxsdk_setting_hd_video_cam_margin_top">12dp</dimen>
+
+    <!--FLYC config-->
+    <dimen name="uxsdk_setting_flyc_homepoint_btn_width">70dp</dimen>
+    <dimen name="uxsdk_setting_flyc_homepoint_btn_height">30dp</dimen>
+    <dimen name="uxsdk_setting_flyc_fly_mode_desc_margin_start">20dp</dimen>
+    <dimen name="uxsdk_setting_flyc_gohome_decs_margin_start">20dp</dimen>
+
+    <!-- SDR HD-->
+    <dimen name="uxsdk_setting_ui_hd_sdr_chart_height">140dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_sdr_chart_y_axis_height">160dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_sdr_chart_left_axis_width">30dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_sdr_chart_right_axis_width">35dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_secondary_camera_width">28dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_secondary_camera_height">17dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_secondary_camera_margin_right">4.1dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_secondary_camera_margin_bottom">4dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_main_camera_width">93.5dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_main_camera_height">52.5dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_main_camera_normal_board_width">1.5dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_camera_selected_board_width">2dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_secondary_camera_normal_board_width">1dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_video_cameras_corner">1dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_video_camera_name_margin_left">20dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_main_camera_margin_top">37dp</dimen>
+    <dimen name="uxsdk_setting_ui_hd_secondary_camera_margin_top">51dp</dimen>
+
+    <dimen name="uxsdk_divider_size_medium">1dp</dimen>
+
+    <dimen name="uxsdk_tab_widget_text_padding_left">10dp</dimen>
+
+    <dimen name="setting_flyc_homepoint_btn_width">70dp</dimen>
+    <dimen name="setting_flyc_homepoint_btn_height">30dp</dimen>
+    <dimen name="setting_flyc_fly_mode_desc_margin_start">20dp</dimen>
+    <dimen name="setting_flyc_gohome_decs_margin_start">20dp</dimen>
+
+    <dimen name="uxsdk_setting_ui_item_text_size">14sp</dimen>
+    <dimen name="speaker_fpv_tab_padding">7dp</dimen>
+    <dimen name="setting_flyc_sensor_content_text_size">12sp</dimen>
+    <dimen name="setting_flyc_sensor_progress_tip_text_size">12sp</dimen>
+    <dimen name="setting_flyc_sensor_imu_calibrate_text_size">14sp</dimen>
+    <dimen name="setting_flyc_sensor_calibrate_btn_width">@dimen/uxsdk_match_parent</dimen>
+    <dimen name="setting_flyc_sensor_interference_margin_start">100dp</dimen>
+    <dimen name="setting_flyc_sensor_interference_margin_top">30dp</dimen>
+    <dimen name="setting_flyc_sensor_compass_margin_start">20dp</dimen>
+    <dimen name="setting_flyc_sensor_compass_progress_start">10dp</dimen>
+    <dimen name="setting_flyc_sensor_compass_progress_end">34dp</dimen>
+    <dimen name="setting_flyc_sensor_calibrate_view_text_drawable_padding">6dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_title_margin_top">16dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_title_sub_space">14dp</dimen>
+    <dimen name="setting_flyc_sensor_tip_view_inuse_margin_end">30dp</dimen>
+    <dimen name="setting_flyc_sensor_tip_view_text_progress_space">10dp</dimen>
+    <dimen name="setting_flyc_sensor_tip_view_text_progress_item_space">20dp</dimen>
+    <dimen name="setting_flyc_sensor_tip_progress_width">20dp</dimen>
+    <dimen name="setting_flyc_sensor_tip_progress_height">8dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_title_margin_start">100dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_title_margin_end">120dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_progress_margin_start">10dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_progress_margin_end">34dp</dimen>
+    <dimen name="setting_flyc_sensor_acc_margin_start">20dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_progress_width">130dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_item_bias_space">20dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_calibrate_margin_top">26dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_item_margin_top">22dp</dimen>
+    <dimen name="setting_flyc_sensor_imu_tip_margin_top">24dp</dimen>
+
+    <dimen name="setting_flyc_sensor_calibrate_btn_height">44dp</dimen>
+    <dimen name="setting_flyc_sensor_calibrate_desc_min_height">31dp</dimen>
+    <dimen name="setting_flyc_sensor_calibrate_item_margin_top">30dp</dimen>
+    <dimen name="setting_flyc_sensor_calibrate_tip_margin_top">15dp</dimen>
+
+    <dimen name="horizontal_margin_12">12dp</dimen>
+    <dimen name="horizontal_margin_minimal">8dp</dimen>
+    <dimen name="horizontal_margin_medium">12dp</dimen>
+    <dimen name="horizontal_margin_maximal">24dp</dimen>
+    <dimen name="horizontal_margin_medium_px">24px</dimen>
+
+    <dimen name="setting_switcher_margin_top">18dp</dimen>
+    <dimen name="setting_switcher_margin_bottom">22dp</dimen>
+    <dimen name="setting_progress_value_text_width">25dp</dimen>
+
+    <dimen name="tab_border_width">1dp</dimen>
+    <dimen name="tab_border_radius">3dp</dimen>
+
+
+
+    <!--setting config-->
+    <dimen name="uxsdk_setting_panel_width">510dp</dimen>
+    <dimen name="uxsdk_setting_panel_tab_width">48dp</dimen>
+    <dimen name="uxsdk_setting_panel_tab_height">65dp</dimen>
+    <dimen name="uxsdk_setting_panel_tab_pager_width">459dp</dimen>
+    <dimen name="uxsdk_setting_panel_fragment_margin_left">22dp</dimen>
+    <dimen name="uxsdk_setting_panel_fragment_margin_right">20dp</dimen>
+    <dimen name="uxsdk_setting_panel_colse_width">42dp</dimen>
+    <dimen name="uxsdk_setting_panel_colse_height">42dp</dimen>
+    <dimen name="uxsdk_setting_panel_back_width">42dp</dimen>
+    <dimen name="uxsdk_setting_panel_back_height">42dp</dimen>
+    <dimen name="uxsdk_setting_panel_toolbar_icon_padding">10dp</dimen>
+    <dimen name="uxsdk_setting_panel_title_size">14sp</dimen>
+    <dimen name="uxsdk_setting_panel_title_margin_top">22dp</dimen>
+    <dimen name="uxsdk_setting_panel_title_margin_bottom">18dp</dimen>
+    <dimen name="uxsdk_setting_panel_title_margin_left">22dp</dimen>
+    <dimen name="uxsdk_setting_panel_title_margin_right">20dp</dimen>
+    <dimen name="uxsdk_setting_panel_icon_side">38dp</dimen>
+    <dimen name="uxsdk_setting_switcher_celll_width">@dimen/uxsdk_36_dp</dimen>
+    <dimen name="uxsdk_setting_switcher_celll_height">@dimen/uxsdk_20_dp</dimen>
+    <dimen name="uxsdk_setting_switcher_celll_width_small">@dimen/uxsdk_32_dp</dimen>
+    <dimen name="uxsdk_setting_switcher_celll_height_small">@dimen/uxsdk_18_dp</dimen>
+    <dimen name="uxsdk_setting_switcher_cell_summary_size">14sp</dimen>
+    <dimen name="uxsdk_setting_spinner_title_size">14sp</dimen>
+    <dimen name="uxsdk_setting_spinner_height">30dp</dimen>
+    <dimen name="uxsdk_setting_textcell_summary_size">14sp</dimen>
+    <dimen name="uxsdk_setting_textcell_enter_width">24dp</dimen>
+    <dimen name="uxsdk_setting_textcell_enter_height">24dp</dimen>
+    <dimen name="uxsdk_setting_switcher_margin_top">18dp</dimen>
+    <dimen name="uxsdk_setting_switcher_margin_bottom">22dp</dimen>
+    <dimen name="uxsdk_setting_progress_value_text_width">25dp</dimen>
+
+
+    <!-- RemoteController -->
+    <dimen name="uxsdk_setting_stop_motor_caption_text_size">14sp</dimen>
+    <dimen name="uxsdk_setting_stop_motor_caption_margin">12dp</dimen>
+    <dimen name="uxsdk_setting_menu_remote_controller_layout_24">15dp</dimen>
+    <dimen name="uxsdk_setting_menu_remote_controller_layout_17">12dp</dimen>
+    <dimen name="uxsdk_setting_ui_rc_pro_custom_btn_img_width">330dp</dimen>
+    <dimen name="uxsdk_rc_pro_btn_map_function_margin_left">20dp</dimen>
+    <dimen name="uxsdk_setting_ui_rc_pro_btn_map_margin">20dp</dimen>
+    <dimen name="uxsdk_home_connect_cameras_img_width">16dp</dimen>
+    <dimen name="uxsdk_home_setting_recycler_width">362dp</dimen>
+    <dimen name="uxsdk_rc_cal_progress_font_padding">10dp</dimen>
+    <dimen name="uxsdk_rc_cal_progress_font">12sp</dimen>
+    <dimen name="uxsdk_rc_cal_progress_line_width">2dp</dimen>
+    <dimen name="uxsdk_rc_calibration_logo_width">60dp</dimen>
+    <dimen name="uxsdk_rc_calibration_logo_height">60dp</dimen>
+    <dimen name="uxsdk_rc_calibration_logo_margin_bottom">10dp</dimen>
+    <dimen name="uxsdk_rc_calibration_stick_width">150dp</dimen>
+    <dimen name="uxsdk_rc_calibration_stick_height">150dp</dimen>
+    <dimen name="uxsdk_rc_calibration_stick_margin_left">20dp</dimen>
+    <dimen name="uxsdk_rc_calibration_stick_margin_right">20dp</dimen>
+    <dimen name="uxsdk_rc_calibration_tips_txt_size">14sp</dimen>
+    <dimen name="uxsdk_rc_calibration_small_tips_txt_size">12sp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_height">70dp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_margin">30dp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_logo_width">24dp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_logo_height">24dp</dimen>
+    <dimen name="uxsdk_rc_calibration_progress_margin">10dp</dimen>
+    <dimen name="uxsdk_rc_calibration_right_wheel_margin_top">15dp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_progress_width">40dp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_progress_height">200dp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_progress_margin_left">10dp</dimen>
+    <dimen name="uxsdk_rc_calibration_wheel_progress_margin_right">30dp</dimen>
+    <dimen name="uxsdk_rc_calibration_status_tips_margin_top">10dp</dimen>
+    <dimen name="uxsdk_rc_calibration_divider_margin_top">10dp</dimen>
+    <dimen name="uxsdk_rc_calibration_mavic_square_height">200dp</dimen>
+    <dimen name="uxsdk_rc_calibration_mavic_square_width">200dp</dimen>
+    <dimen name="uxsdk_rc_calibration_mavic_margin">20dp</dimen>
+    <dimen name="uxsdk_rc_calibration_mavic_wheel_width">260dp</dimen>
+    <dimen name="uxsdk_rc_calibration_mavic_wheel_height">220dp</dimen>
+    <dimen name="uxsdk_rc_combination_listview_subitem_height">65dp</dimen>
+
+    <!--Dialog-->
+    <dimen name="uxsdk_dialog_title_size">16sp</dimen>
+    <dimen name="uxsdk_dialog_content_size">14sp</dimen>
+    <dimen name="uxsdk_dialog_btn_size">14sp</dimen>
+    <dimen name="uxsdk_dialog_divide_view_height">4dp</dimen>
+    <dimen name="uxsdk_dialog_title_margin_top">24dp</dimen>
+    <dimen name="uxsdk_dialog_content_margin_top">16dp</dimen>
+    <dimen name="uxsdk_dialog_divide_line_margin_top">24dp</dimen>
+    <dimen name="uxsdk_dialog_btn_height">44dp</dimen>
+    <dimen name="uxsdk_dialog_margin_left">24dp</dimen>
+    <dimen name="uxsdk_dialog_btn_margin_top">12dp</dimen>
+    <dimen name="uxsdk_dialog_divide_line_width">1dp</dimen>
+    <dimen name="uxsdk_dialog_line_spacing_extra">8dp</dimen>
+    <dimen name="uxsdk_dialog_update_width">420dp</dimen>
+    <dimen name="uxsdk_dialog_middle_width">420dp</dimen>
+    <dimen name="uxsdk_dialog_img_width">234dp</dimen>
+    <dimen name="uxsdk_dialog_img_height">128dp</dimen>
+    <dimen name="uxsdk_dialog_common_input_et_height">40dp</dimen>
+
+
 </resources>

@@ -428,9 +428,12 @@ More refer to the release notes." </string>
 
     <string name="delete_files">delete file</string>
     <string name="select_files">select file</string>
+    <string name="set_xmp_custom_info">set xmp custom info</string>
+    <string name="get_xmp_custom_info">get xmp custom info</string>
     <string name="unselect_files"> unselect file</string>
     <string name="fetch_files_list">fetch media file list</string>
     <string name="take_photo">take photo</string>
+    <string name="already_download">file already download</string>
 
     <!-- LTE -->
     <string name="btn_update_lte_authentication_info">Update LTE Authentication Info</string>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/uxsdk_setting_hd_channel_mode_width"
+    android:layout_height="@dimen/uxsdk_setting_hd_channel_mode_height"
+    android:gravity="center"
+    android:layout_weight="1"
+    android:paddingLeft="@dimen/uxsdk_tab_widget_text_padding_left"
+    android:paddingRight="@dimen/uxsdk_tab_widget_text_padding_left"
+    android:paddingTop="@dimen/uxsdk_setting_hd_channel_mode_text_margin_top"
+    android:paddingBottom="@dimen/uxsdk_setting_hd_channel_mode_text_margin_top"
+    android:textColor="@color/uxsdk_dic_color_c8_white"
+    android:background="@android:color/transparent"
+    android:textSize="@dimen/uxsdk_setting_hd_channel_mode_text_size">
+
+</TextView>

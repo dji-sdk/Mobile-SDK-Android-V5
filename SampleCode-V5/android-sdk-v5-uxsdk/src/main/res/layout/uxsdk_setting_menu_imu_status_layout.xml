@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.63"
+        />
+
+
+    <TextView
+        android:id="@+id/setting_ui_flyc_acc_title"
+        style="@style/uxsdk_setting_ui_item_txt"
+        android:layout_marginTop="@dimen/setting_flyc_sensor_imu_title_margin_top"
+        android:text="@string/uxsdk_setting_ui_redundancy_sensor_imu_acc_label"
+        app:layout_constraintStart_toStartOf="@+id/gl_left"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        style="@style/uxsdk_setting_ui_item_txt"
+        android:text="@string/uxsdk_setting_ui_redundancy_sensor_imu_gryo_label"
+        app:layout_constraintStart_toStartOf="@+id/gl_right"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_title"/>
+
+    <TextView
+        android:id="@+id/setting_ui_flyc_acc_bias"
+        style="@style/uxsdk_setting_ui_desc_txt"
+        android:layout_marginTop="@dimen/setting_flyc_sensor_imu_title_sub_space"
+        android:text="@string/uxsdk_setting_ui_redundancy_sensor_imu_bias"
+        android:textSize="@dimen/setting_flyc_sensor_content_text_size"
+        app:layout_constraintStart_toStartOf="@+id/gl_left"
+        app:layout_constraintTop_toBottomOf="@+id/setting_ui_flyc_acc_title"/>
+
+    <TextView
+        style="@style/uxsdk_setting_ui_desc_txt"
+        android:text="@string/uxsdk_setting_ui_redundancy_sensor_imu_bias"
+        android:textSize="@dimen/setting_flyc_sensor_content_text_size"
+        app:layout_constraintStart_toStartOf="@+id/gl_right"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_bias"/>
+
+    <TextView
+        android:id="@+id/setting_ui_flyc_acc_0_title"
+        style="@style/uxsdk_setting_ui_item_txt"
+        android:layout_marginStart="@dimen/setting_flyc_sensor_acc_margin_start"
+        android:layout_marginTop="@dimen/setting_flyc_sensor_imu_item_margin_top"
+        android:drawableStart="@drawable/uxsdk_setting_ui_flyc_circle"
+        android:drawablePadding="@dimen/setting_flyc_sensor_calibrate_view_text_drawable_padding"
+        android:text="@string/uxsdk_setting_ui_a3sensor_imu0"
+        android:textSize="@dimen/setting_flyc_sensor_content_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/setting_ui_flyc_acc_bias"/>
+
+    <dji.v5.ux.core.base.ProgressStatusWidget
+        android:id="@+id/setting_ui_flyc_imu_acc_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/setting_flyc_sensor_imu_progress_margin_end"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintStart_toStartOf="@+id/gl_left"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_0_title"/>
+
+    <dji.v5.ux.core.base.ProgressStatusWidget
+        android:id="@+id/setting_ui_flyc_imu_gyr_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/setting_flyc_sensor_imu_progress_margin_end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gl_right"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_0_title"/>
+
+    <TextView
+        android:id="@+id/setting_ui_flyc_acc_1_title"
+        style="@style/uxsdk_setting_ui_item_txt"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/setting_flyc_sensor_acc_margin_start"
+        android:layout_marginTop="@dimen/setting_flyc_sensor_imu_item_margin_top"
+        android:drawableStart="@drawable/uxsdk_setting_ui_flyc_circle"
+        android:drawablePadding="@dimen/setting_flyc_sensor_calibrate_view_text_drawable_padding"
+        android:text="@string/uxsdk_setting_ui_a3sensor_imu1"
+        android:textSize="@dimen/setting_flyc_sensor_content_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/setting_ui_flyc_acc_0_title"/>
+
+    <dji.v5.ux.core.base.ProgressStatusWidget
+        android:id="@+id/setting_ui_flyc_imu_acc_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/setting_flyc_sensor_imu_progress_margin_end"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintStart_toStartOf="@+id/gl_left"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_1_title"/>
+
+    <dji.v5.ux.core.base.ProgressStatusWidget
+        android:id="@+id/setting_ui_flyc_imu_gyr_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/setting_flyc_sensor_imu_progress_margin_end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gl_right"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_1_title"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/setting_ui_flyc_imu_ly2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="setting_ui_flyc_acc_1_title,setting_ui_flyc_imu_acc_2,setting_ui_flyc_imu_gyr_2"/>
+
+    <TextView
+        android:id="@+id/setting_ui_flyc_acc_2_title"
+        style="@style/uxsdk_setting_ui_item_txt"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/setting_flyc_sensor_acc_margin_start"
+        android:layout_marginTop="@dimen/setting_flyc_sensor_imu_item_margin_top"
+        android:drawableStart="@drawable/uxsdk_setting_ui_flyc_circle"
+        android:drawablePadding="@dimen/setting_flyc_sensor_calibrate_view_text_drawable_padding"
+        android:text="@string/uxsdk_setting_ui_a3sensor_imu2"
+        android:textSize="@dimen/setting_flyc_sensor_content_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/setting_ui_flyc_acc_1_title"/>
+
+    <dji.v5.ux.core.base.ProgressStatusWidget
+        android:id="@+id/setting_ui_flyc_imu_acc_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/setting_flyc_sensor_imu_progress_margin_end"
+        app:layout_constraintEnd_toStartOf="@id/gl_right"
+        app:layout_constraintStart_toStartOf="@+id/gl_left"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_2_title"/>
+
+    <dji.v5.ux.core.base.ProgressStatusWidget
+        android:id="@+id/setting_ui_flyc_imu_gyr_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/setting_flyc_sensor_imu_progress_margin_end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gl_right"
+        app:layout_constraintTop_toTopOf="@+id/setting_ui_flyc_acc_2_title"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/setting_ui_flyc_imu_ly3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="setting_ui_flyc_acc_2_title,setting_ui_flyc_imu_acc_3,setting_ui_flyc_imu_gyr_3"/>
+
+    <include
+        android:id="@+id/setting_ui_flyc_sensor_progress_tip_layout"
+        layout="@layout/uxsdk_view_setting_flyc_sensor_progress_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/setting_flyc_sensor_imu_tip_margin_top"
+        app:layout_constraintTop_toBottomOf="@+id/setting_ui_flyc_acc_2_title"/>
+
+    <View
+        android:id="@+id/setting_menu_sensor_divider_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:layout_marginTop="@dimen/setting_flyc_sensor_imu_calibrate_margin_top"
+        android:background="@color/uxsdk_dic_color_c20_divider"
+        app:layout_constraintTop_toBottomOf="@+id/setting_ui_flyc_sensor_progress_tip_layout"
+        />
+
+    <Button
+        android:id="@+id/setting_menu_imu_calibrate"
+        android:layout_width="@dimen/setting_flyc_sensor_calibrate_btn_width"
+        android:layout_height="@dimen/setting_flyc_sensor_calibrate_btn_height"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/uxsdk_selector_blue_rect_mask"
+        android:gravity="center"
+        android:text="@string/uxsdk_setting_ui_redundancy_sensor_imu_calc"
+        android:textAllCaps="false"
+        android:textColor="@color/uxsdk_blue_highlight"
+        android:textSize="@dimen/setting_flyc_sensor_imu_calibrate_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/setting_menu_sensor_divider_1"/>
+
+    <View
+        android:id="@+id/setting_menu_sensor_divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:background="@color/uxsdk_dic_color_c20_divider"
+        app:layout_constraintTop_toBottomOf="@+id/setting_menu_imu_calibrate"
+        />
+
+</merge>

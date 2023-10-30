@@ -231,14 +231,13 @@ open class ISOAndEISettingWidget @JvmOverloads constructor(
     }
 
     private fun onExposureModeUpdated(exposureMode: CameraExposureMode) {
-        if (!CameraUtil.isAutoISOSupportedByProduct()) {
-            if (exposureMode != CameraExposureMode.MANUAL) {
-                isISOAutoSelected = true
-                setAutoISO(isISOAutoSelected)
-            } else {
-                isISOAutoSelected = false
-            }
+        if (exposureMode != CameraExposureMode.MANUAL) {
+            isISOAutoSelected = true
+            setAutoISO(isISOAutoSelected)
+        } else {
+            isISOAutoSelected = false
         }
+
     }
 
     private fun updateISORangeValue(array: Array<CameraISO?>) {

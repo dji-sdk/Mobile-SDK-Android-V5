@@ -25,6 +25,8 @@ package dji.v5.ux.sample.showcase.defaultlayout;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -59,6 +61,7 @@ import dji.v5.ux.core.panel.topbar.TopBarPanelWidget;
 import dji.v5.ux.core.util.CameraUtil;
 import dji.v5.ux.core.util.CommonUtils;
 import dji.v5.ux.core.util.DataProcessor;
+import dji.v5.ux.core.util.ViewUtil;
 import dji.v5.ux.core.widget.fpv.FPVWidget;
 import dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget;
 import dji.v5.ux.core.widget.hsi.PrimaryFlightDisplayWidget;
@@ -228,6 +231,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                 .subscribeOn(SchedulerProvider.io())
                 .subscribe(result -> runOnUiThread(() -> onCameraSourceUpdated(result.devicePosition, result.lensType)))
         );
+        ViewUtil.setKeepScreen(this, true);
     }
 
     @Override
@@ -238,6 +242,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         }
         mapWidget.onPause();
         super.onPause();
+        ViewUtil.setKeepScreen(this, false);
     }
     //endregion
 

@@ -28,7 +28,7 @@ class VersionInfoRepository {
 
 
     /**
-     * 用于查看网路模块（DJINetworkManager）是否初始化完成，并不关心网络实际是否有效
+     * 用于观察网路模块（DJINetworkManager）是否初始化完成，并不关心网络实际是否有效
      */
     private val networkInitSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 

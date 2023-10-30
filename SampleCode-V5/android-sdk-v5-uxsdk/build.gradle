@@ -50,6 +50,7 @@ dependencies {
     implementation deps.mikepenzIconicsViews
     implementation deps.mikepenzIconicsCore
     implementation deps.mikepenzIonicons
+    implementation deps.material
 
     api deps.maplibreAnotation
     api deps.maplibreTurf

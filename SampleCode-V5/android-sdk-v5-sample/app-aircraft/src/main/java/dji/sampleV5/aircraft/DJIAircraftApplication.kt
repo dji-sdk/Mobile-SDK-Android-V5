@@ -15,6 +15,8 @@ class DJIAircraftApplication : DJIApplication() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
+        //脚本替换，勿动
+        //secneo helper install
         com.secneo.sdk.Helper.install(this)
     }
 }

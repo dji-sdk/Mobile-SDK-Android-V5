@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <dji.v5.ux.core.base.TabSelectCell
+        android:id="@+id/tsc_setting_menu_hd_frequency_tab_cell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:uxsdk_bottomDividerEnable="false"
+        app:uxsdk_select="0"
+        app:uxsdk_summary="@string/setting_menu_title_hd_frequency"
+        app:uxsdk_tabs="@array/uxsdk_sdr_frequency_names" />
+
+    <TextView
+        android:id="@+id/tv_hd_frequency_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fadingEdge="horizontal"
+        android:paddingStart="@dimen/uxsdk_20_dp"
+        android:paddingEnd="@dimen/uxsdk_20_dp"
+        android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
+        android:textSize="@dimen/uxsdk_12_dp" />
+
+</merge>

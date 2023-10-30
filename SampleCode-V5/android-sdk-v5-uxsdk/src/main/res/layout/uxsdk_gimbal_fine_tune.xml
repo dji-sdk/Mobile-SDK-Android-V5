@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@android:color/background_dark">
+
+    <TextView
+        android:id="@+id/fpv_left_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="@string/uxsdk_fpv_gimbal_pitch_finetune"
+        app:layout_constraintStart_toStartOf="@id/fpv_gimbal_finetune_minus_img"
+        app:layout_constraintEnd_toEndOf="@id/fpv_gimbal_finetune_minus_img"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fpv_middle_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="@string/uxsdk_fpv_gimbal_roll_finetune"
+        app:layout_constraintBottom_toBottomOf="@id/fpv_left_tv"
+        app:layout_constraintEnd_toStartOf="@id/fpv_right_tv"
+        app:layout_constraintStart_toEndOf="@id/fpv_left_tv"
+        app:layout_constraintTop_toTopOf="@id/fpv_left_tv" />
+
+    <TextView
+        android:id="@+id/fpv_right_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="@string/uxsdk_fpv_gimbal_yaw_finetune"
+        app:layout_constraintStart_toStartOf="@id/fpv_gimbal_finetune_plus_img"
+        app:layout_constraintEnd_toEndOf="@id/fpv_gimbal_finetune_plus_img"
+        app:layout_constraintBottom_toBottomOf="@id/fpv_left_tv"
+        app:layout_constraintTop_toTopOf="@id/fpv_left_tv" />
+
+
+    <ImageView
+        android:id="@+id/fpv_gimbal_finetune_minus_img"
+        android:layout_width="@dimen/uxsdk_56_dp"
+        android:layout_height="@dimen/uxsdk_56_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/fpv_gimbal_finetune_value_tv"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fpv_left_tv" />
+
+    <TextView
+        android:id="@+id/fpv_gimbal_finetune_value_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@id/fpv_gimbal_finetune_minus_img"
+        app:layout_constraintEnd_toStartOf="@id/fpv_gimbal_finetune_plus_img"
+        app:layout_constraintStart_toEndOf="@id/fpv_gimbal_finetune_minus_img"
+        app:layout_constraintTop_toTopOf="@id/fpv_gimbal_finetune_minus_img" />
+
+    <ImageView
+        android:id="@+id/fpv_gimbal_finetune_plus_img"
+        android:layout_width="@dimen/uxsdk_56_dp"
+        android:layout_height="@dimen/uxsdk_56_dp"
+        app:layout_constraintBottom_toBottomOf="@id/fpv_gimbal_finetune_minus_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fpv_gimbal_finetune_value_tv"
+        app:layout_constraintTop_toTopOf="@id/fpv_gimbal_finetune_minus_img" />
+
+</merge>

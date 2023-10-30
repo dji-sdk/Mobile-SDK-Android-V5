@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/uxsdk_switch_checked_disabled" android:state_checked="true" android:state_enabled="false" />
+    <item android:drawable="@drawable/uxsdk_switch_checked_undisabled" android:state_checked="true" android:state_enabled="true" />
+    <item android:drawable="@drawable/uxsdk_switch_normal_disabled" android:state_checked="false" android:state_enabled="false" />
+    <item android:drawable="@drawable/uxsdk_switch_normal_undisabled" android:state_checked="false" android:state_enabled="true" />
+</selector>

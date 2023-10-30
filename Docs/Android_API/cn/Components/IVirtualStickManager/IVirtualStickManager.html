@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -124,7 +124,7 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntMinMax</a>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
                                       </dd>
@@ -588,7 +588,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enableVirtualStick</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v2">描述：</h5>
-<p><font color="#666">开启虚拟摇杆模式。 <br><b>注意：<br> 出于飞行安全考虑，飞行器在靠近限飞区或者限远距离30米时，遥控器会夺取飞行器控制权，虚拟摇杆功能无法使用。</b>   <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">开启虚拟摇杆模式。 <br><b>注意：<br> 1. 出于飞行安全考虑，飞行器在靠近限飞区或者限远距离30米时，遥控器会夺取飞行器控制权，虚拟摇杆功能无法使用。<br> 2. 目前只有 M300 RTK，M350 RTK和M30 系列飞行器支持在虚拟摇杆模式下避障。<br> 3. 虚拟摇杆普通模式默认支持避障。<br> 4. 虚拟摇杆高级模式下只有在垂直方向控制模式是速度模式，偏航轴控制模式是角速度并且横滚和俯仰轴控制模式是速度模式的组合下才支持避障。<br> </b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="输入参数：">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ivirtualstickmanager_disablevirtualstick"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_disablevirtualstick_inline">disableVirtualStick</a></div></div><div class="inline-doc" id="ivirtualstickmanager_disablevirtualstick_inline" <blockquote>

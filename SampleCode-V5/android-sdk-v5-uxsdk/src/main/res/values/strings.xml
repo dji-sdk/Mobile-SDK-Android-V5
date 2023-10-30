@@ -28,6 +28,9 @@
     <string name="uxsdk_app_ok">OK</string>
     <string name="uxsdk_app_save">Save</string>
     <string name="uxsdk_app_cancel">Cancel</string>
+    <string name="uxsdk_app_unsetting">Unset</string>
+    <string name="uxsdk_app_skip">Skip</string>
+    <string name="uxsdk_app_ip_limit">Input is empty or invalid. Please retype.</string>
     <string name="uxsdk_error">Error</string>
     <string name="uxsdk_alert">Alert</string>
     <string name="uxsdk_tips">Tips</string>
@@ -470,6 +473,39 @@
     <string name="uxsdk_camera_ndvi_panel_widget_title">Camera NDVI Panel Widget</string>
     <string name="uxsdk_camera_visible_panel_widget_title">Camera Visible Panel Widget</string>
     <string name="uxsdk_device_health_and_status_widget_title">Device Health and Status Widget</string>
+    <string name="uxsdk_gimbal_fine_tune_widget_title">Gimbal Fine Tune Widget</string>
+    <string name="uxsdk_gimbal_setting_widget_title">Gimbal Setting Widget</string>
+    <string name="uxsdk_flyc_gohome_mode_widget_title">FC Return Home Mode Widget</string>
+    <string name="uxsdk_flyc_lost_action_widget_title">FC Lost Action Widget</string>
+    <string name="uxsdk_flyc_home_set_widget_title">FC Home Point  Widget</string>
+    <string name="uxsdk_flyc_home_distance_height_limit_widget_title">FC Distance Height Limit Widget</string>
+    <string name="uxsdk_flyc_imu_state_widget_title">FC IMU Status Widget</string>
+    <string name="uxsdk_flyc_compass_state_widget_title">FC Compass Status Widget</string>
+    <string name="uxsdk_flyc_fpa_widget_title"> FC Flight Mode Widget</string>
+
+    <string name="uxsdk_battery_info_widget_title">Battery Info Widget</string>
+    <string name="uxsdk_battery_setting_widget_title">Battery Setting Widget</string>
+    <string name="uxsdk_battery_alert_widget_title">Battery Alert Widget</string>
+    <string name="uxsdk_frequency_setting_widget_title">HD Frequency Mode Widget</string>
+    <string name="uxsdk_sdr_info_widget_title">HD SDR Info Widget</string>
+    <string name="uxsdk_sdr_band_width_select_title">HD SDR Band Width Select Widget</string>
+    <string name="uxsdk_sdr_band_width_title">HD SDR Band Width Widget</string>
+    <string name="uxsdk_sdr_video_rate_title">HD SDR Video Rate Widget</string>
+    <string name="uxsdk_sdr_channel_mode_title">HD SDR Channel Mode Widget</string>
+    <string name="uxsdk_sdr_freq_title">HD SDR Frequency Widget</string>
+    <string name="uxsdk_hdmi_setting_title">HD HDMI Setting Widget</string>
+    <string name="uxsdk_common_about_widget_title">Common About Widget</string>
+    <string name="uxsdk_common_device_name_widget_title">Common Device Name Widget</string>
+    <string name="uxsdk_gimbal_caling">Gimbal calibration at %1$d%%. Please don\'t move the aircraft.</string>
+    <string name="uxsdk_gimbal_gimbal_reset_params_success">Reset successful</string>
+    <string name="uxsdk_gimbal_gimbal_reset_params_fail">Reset failed</string>
+    <string name="uxsdk_gimbal_cali_success">Calibrated gimbal successfully.</string>
+    <string name="uxsdk_gimbal_cali_fail">Gimbal Calibration Failed</string>
+    <string name="uxsdk_avoidance_short_widget_title">Perception Avoidance Type Widget</string>
+    <string name="uxsdk_avoidance_vision_position_widget_title">Perception Vision Widget</string>
+    <string name="uxsdk_avoidance_precision_landing_widget_title">Perception Precision Landing Widget</string>
+    <string name="uxsdk_remote_contorller_check_frequency_widget_title">RC Pairing Widget</string>
+    <string name="uxsdk_remote_contorller_calibration_widget_title">RC Calibration Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>
@@ -835,4 +871,276 @@
     <string name="uxsdk_fpv_message_box_empty_content_v2">Normal</string>
     <string name="uxsdk_fpv_tip_remote_disconnect">Aircraft not connected</string>
 
+    <string name="uxsdk_setting_menu_flyc_set_altitude_rth">Vorgabe</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth">Optimal</string>
+
+    <string name="uxsdk_setting_ui_flyc_fs_gohome">Return To Home</string>
+    <string name="uxsdk_setting_ui_flyc_fs_landing">Land</string>
+    <string name="uxsdk_setting_ui_flyc_fs_hover">Hover</string>
+
+    <!--HD-->
+    <string name="uxsdk_setting_menu_title_hd_hdmi_system_setting_hdmi_decoder_summary">Video Display Mode</string>
+
+    <string name="uxsdk_setting_ui_flyc_cali_begin">Starting Calibraition</string>
+    <string name="uxsdk_setting_ui_flyc_cali_failed"> Calibraition Failed ,Please retry</string>
+
+    <string name="uxsdk_setting_menu_flyc_smart_rth_preset_altitude_des">When lighting is sufficient and environment is suitable for vision system to work properly, aircraft will automatically fly to open area, ascend to preset altitude, and fly an optimal RTH route</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth_smart_altitude_des">When lighting is sufficient and environment is suitable for vision system to work properly, aircraft will automatically plan an optimal RTH route and altitude. Fly with caution</string>
+
+    <!--RcCheckFrequency Widget-->
+    <string name="uxsdk_setting_ui_rc_stop_pair">StopPairing</string>
+    <string name="uxsdk_setting_ui_rc_start_pair">StartPairing</string>
+
+    <!-- APAS -->
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_list">Obstacle Avoidance</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_off_btn">Off</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_off_description">When enabled, aircraft will not avoid obstacles</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_brake_btn">Brake</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_brake_description">When enabled, aircraft will brake when obstacles are detected</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_detour_btn">Avoid</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_detour_description">When enabled, aircraft will bypass obstacles or hover</string>
+    <string name="uxsdk_setting_menu_perception_break_description">Brake: Aircraft will automatically brake when obstacles are detected. Enable obstacle avoidance in corresponding directions required</string>
+    <string name="uxsdk_setting_menu_perception_apas_description">Avoid: Aircraft will automatically bypass obstacles or hover when in Normal mode</string>
+    <string name="uxsdk_setting_menu_perception_close_description">Off: Aircraft will not automatically bypass obstacles or brake. Alerts still received for detected obstacles. Fly with caution</string>
+    <string name="uxsdk_setting_menu_perception_apas_off_dialog_content">When disabled, horizontal, upward, and downward obstacle avoidance are unavailable. Aircraft will not automatically brake when obstacles are detected. Alerts still received for detected obstacles. Continue?</string>
+    <string name="uxsdk_setting_menu_perception_break_s_mode">Aircraft in %1$s mode. Unable to brake. Switch to N mode</string>
+    <string name="uxsdk_setting_menu_perception_apas_s_mode">Aircraft in %1$s mode. Unable to bypass. Switch to N mode</string>
+
+
+
+
+    <!--General Widget-->
+    <string name="uxsdk_setting_ui_general_battery">Battery</string>
+    <string name="uxsdk_fpv_top_bar_battery_left_battery">Left Battery</string>
+    <string name="uxsdk_fpv_top_bar_battery_right_battery">Right Battery</string>
+    <string name="uxsdk_setting_ui_gimbal_calibration_tip">Stop motor running before gimbal auto calibration.</string>
+    <string name="uxsdk_setting_ui_rc_cele_tip">Center both control sticks before pressing Start. Follow the prompts on screen to calibrate.</string>
+    <string name="uxsdk_setting_menu_title_rc_check_frequency">Link to Aircraft</string>
+    <string name="uxsdk_dialog_message_rc_cannot_frequency_motorup">The remote controller cannot be linked when the aircraft motors are spinning.</string>
+    <string name="uxsdk_setting_ui_omni_perception_desc">Disabling the Vision Positioning System will have the following effects on the aircraft:\n1. Unable to hover in place at low altitude indoors.\n2. Unable to engage obstacle braking indoors.\n3. Unable to engage landing speed protection. Landing at high speed may damage the aircraft. Pay attention to the landing speed.</string>
+
+    <string name="uxsdk_setting_menu_flyc_gohome_altitude_title">RTH Altitude</string>
+    <string name="uxsdk_setting_menu_flyc_max_height_title">Max Altitude</string>
+    <string name="uxsdk_setting_menu_flyc_max_radius_title">Distance Limit</string>
+    <string name="uxsdk_setting_menu_flyc_max_radius_title_limit">Max Flight Distance</string>
+    <string name="uxsdk_setting_menu_setting_success">Saved successfully</string>
+    <string name="uxsdk_setting_menu_setting_fail">Setting failed</string>
+
+    <string name="uxsdk_setting_menu_flyc_gohome_altitude_limit">Failsafe RTH altitude cannot exceed maximum flight altitude.</string>
+    <string name="uxsdk_setting_menu_flyc_flight_altitude_limit">Failed to set. Input the number in the range</string>
+    <string name="uxsdk_setting_menu_flyc_flight_altitude_limit_doi">Failed to set. Input the number in the range</string>
+    <string name="uxsdk_setting_menu_flyc_gohome_altitude_desc">When returning to home from more than 50 m away, the aircraft flies to the pre-set RTH altitude and returns to home. When returning to home from within 50 m of the home point, the aircraft maintains its current altitude and returns to home. If the sensor system is working normally, the aircraft ascends or hovers when obstacles are detected</string>
+    <string name="uxsdk_checklist_manual_flight_mode_title">Flight Mode</string>
+    <string name="uxsdk_setting_menu_flyc_fpa">Enable Multiple Flight Mode</string>
+    <string name="uxsdk_setting_menu_flyc_mode_nosport">P (Positioning) Mode - Satellite and Vision Positioning sensors
+
+        enabled for precise positioning.\n\nA (Attitude) Mode - Satellite and Vision Positioning sensors disabled. Only
+
+        barometer is used for altitude control.\n\nF (Function) Mode - similar to P mode and allows access to
+
+        Intelligent Flight Modes.</string>
+
+    <string name="uxsdk_setting_ui_flyc_mode_spt">T/P/S</string>
+    <string name="uxsdk_setting_ui_flyc_mode_snt">T/S/N</string>
+    <string name="uxsdk_setting_ui_flyc_mode_sna">A/S/N</string>
+    <string name="uxsdk_setting_ui_flyc_mode_tns">T/N/S</string>
+    <string name="uxsdk_setting_ui_flyc_mode_spa">A/P/S</string>
+    <string name="uxsdk_setting_ui_flyc_mode_ans">A/N/S</string>
+
+    <string name="uxsdk_checklist_manual_compass_title">Compass</string>
+    <string name="uxsdk_checklist_manual_imu_title">IMU</string>
+    <string name="uxsdk_setting_menu_flyc_mode">Sport (S) Mode - Aircraft mobility and flight speed increases. Satellite and Vision Positioning systems enabled. \n\nPosition (P) Mode - Satellite and Vision Positioning systems enabled. \n\nTripod (T) Mode - Max flight speed of 1 m/s. Flight maneuverability is reduced to help fine-tune compositions smoothly. GPS and downward vision positioning systems enabled.</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti">Sport (S) Mode - Aircraft mobility and flight speed increases. Satellite and Vision Positioning systems enabled.\nPosition (P) Mode - Satellite and Vision Positioning systems enabled.\nAttitude (A) Mode - Forward and Backward Obstacle Sensing, Satellite and Downward Vision Positioning systems disabled. Precise hovering unavailable.</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_n_mode">Attitude (A) Mode - Forward and Backward Obstacle Sensing, Satellite and Downward Vision Positioning systems disabled. Precise hovering unavailable.\nSport (S) Mode - Aircraft mobility and flight speed increases. Satellite and Vision Positioning systems enabled.\nNormal (N) Mode - Satellite and Vision Positioning systems enabled.</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_n_mode_rc511">Attitude (A) Mode - Forward and Backward Obstacle Sensing, Satellite and Downward Vision Positioning systems disabled. Precise hovering unavailable.\nNormal (N) Mode - Satellite and Vision Positioning systems enabled.\nSport (S) Mode - Aircraft mobility and flight speed increases. Satellite and Vision Positioning systems enabled.</string>
+    <string name="uxsdk_setting_menu_flyc_mode_m300">Tripod (T) Mode: Max flight speed is limited for smoother shooting while maintaining the positioning settings of P mode.\nPosition (P) Mode: Satellite and downward vision positioning systems enabled.\nSport (S) Mode: Aircraft mobility and flight speed increases. Satellite and downward vision positioning systems enabled.</string>
+    <string name="uxsdk_setting_menu_flyc_mode_n">Tripod (T) Mode: Max flight speed is limited for smoother shooting while maintaining the positioning settings of N mode.\n\nSport (S) Mode: Aircraft mobility and flight speed increases. Satellite and downward vision positioning systems enabled.\n\nNormal (N) Mode: Satellite and downward vision positioning systems enabled.</string>
+    <string name="uxsdk_setting_menu_flyc_mode_n_rc511">Tripod (T) Mode: Max flight speed is limited for smoother shooting while maintaining the positioning settings of N mode.\n\nSport (S) Mode: Aircraft mobility and flight speed increases. Satellite and downward vision positioning systems enabled.\n\nNormal (N) Mode: Satellite and downward vision positioning systems enabled.</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title">Flight Mode Configuration Switched to A/P/S</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode_rc511">Flight Mode Configuration Switched to A/N/S</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode">Flight Mode Configuration Switched to A/S/N</string>
+    <string name="uxsdk_setting_menu_title_sensors_state">Sensor Status</string>
+
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_cur_use">In Use</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_good">Excellent</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_normal">Good</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_bad">Poor</string>
+    <string name="uxsdk_setting_ui_redundance_compass_cal_tip">Motors Spinning. Cannot Calibrate Compass.</string>
+    <string name="uxsdk_setting_ui_compass_cal_in_sim_tip">Unable to calibrate compass in simulator</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_calc">Calibrate IMU</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_calc">Calibrate Compass</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_acc_label">Accelerometer</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_gryo_label">Gyroscope</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_bias">Bias</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_vector">Interference</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_remark">Note</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass">Compass</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass1_label">Compass 1</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass2_label">Compass 2</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass3_label">Compass 3</string>
+
+    <string name="uxsdk_setting_ui_a3sensor_imu0">IMU1</string>
+    <string name="uxsdk_setting_ui_a3sensor_imu1">IMU2</string>
+    <string name="uxsdk_setting_ui_a3sensor_imu2">IMU3</string>
+
+    <string name="uxsdk_setting_ui_a3sensor_acc0">ACC1</string>
+    <string name="uxsdk_setting_ui_a3sensor_acc1">ACC2</string>
+    <string name="uxsdk_setting_ui_a3sensor_acc2">ACC3</string>
+
+    <string name="uxsdk_setting_ui_a3sensor_gyro0">GYRO1</string>
+    <string name="uxsdk_setting_ui_a3sensor_gyro1">GYRO2</string>
+    <string name="uxsdk_setting_ui_a3sensor_gyro2">GYRO3</string>
+
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_0">Unknown Status</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_1">Disconnected</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_2">Calibrating…</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_3">Calibration Failed</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_4">Data Error</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_5">Warming Up</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_6">Moving</string>
+
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_0">Unknown Status</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_1">Disconnected</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_2">Calibrating…</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_3">Not Calibrated</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_4">Data Error</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_empty"/>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_8">Calibration Failed</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_9">Direction Error</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_0">Restart Aircraft</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_1">Disconnected</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_3">Calibrate Compass</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_4">Contact DJI Support if the problem persists after restarting.</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_7">Move away from interference or recalibrate the compass.</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_8">Move away from interference or recalibrate the compass.</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_9">Check that the compass is installed in the correct direction or if there is
+
+        electro-magnetic interference.</string>
+    <string name="uxsdk_setting_ui_imu_tip">Motors Spinning. Cannot Calibrate IMU.</string>
+    <string name="uxsdk_app_check_aircraft_connection">Please check if the aircraft is connected.</string>
+    <string name="uxsdk_setting_menu_title_sensors_state_na_info">Aircraft uses visual orientation instead of compass orientation when the ambient light is good (such as daytime). Interference to the
+ compass can be ignored</string>
+    <string name="uxsdk_setting_menu_flyc_failSafe_title">Signal Lost Action</string>
+    <string name="uxsdk_setting_menu_common_gimbal_version">Gimbal %1$s</string>
+    <string name="uxsdk_setting_menu_common_camera_version">%1$s Camera</string>
+    <string name="uxsdk_setting_menu_common_serial">SN</string>
+    <string name="uxsdk_hms_carepage_maintenance_highvoltage_title">Store at High Battery Level</string>
+    <string name="uxsdk_hms_carepage_maintenance_highvoltage_info">Store at High Battery Level means storing battery when it has 90% or higher battery level. If high battery level storage time in total is less than 120 days in 12 months, battery can be charged for up to 400 cycles. Change Time to Battery Self-Discharge to adjust time of battery storage at high level</string>
+    <string name="uxsdk_hms_carepage_maintenance_highvoltage_need_upgrade_info">Aircraft firmware version too early. Failed to obtain high battery level storage time. Firmware update recommended</string>
+    <string name="uxsdk_setting_ui_battery_product_date">Production Date:</string>
+    <string name="uxsdk_setting_ui_battery_serial_number">Serial Number:</string>
+    <string name="uxsdk_setting_ui_battery_discharge_day">%1$d Days</string>
+    <string name="uxsdk_setting_ui_battery_history_normal_status">Connection OK</string>
+    <string name="uxsdk_setting_ui_battery_abnormal_state">Error</string>
+    <string name="uxsdk_setting_ui_battery_history_invalid_status">Invalid Battery</string>
+    <string name="uxsdk_setting_ui_battery_history_exception_status">Battery Connection Broken</string>
+    <string name="uxsdk_setting_ui_battery_history_firstlevel_current">Overcurrent During Discharge</string>
+    <string name="uxsdk_setting_ui_battery_history_secondlevel_current">Overcurrent During Discharge</string>
+    <string name="uxsdk_setting_ui_battery_history_firstlevel_over_temperature">Overheating During Discharge</string>
+    <string name="uxsdk_setting_ui_battery_history_secondlevel_overt_temperature">Overheating During Discharge</string>
+    <string name="uxsdk_setting_ui_battery_history_firstlevel_low_temperature">Low Temperature During Discharge</string>
+    <string name="uxsdk_setting_ui_battery_history_secondlevel_low_temperature">Low Temperature During Discharge</string>
+    <string name="uxsdk_setting_ui_battery_history_short_circuit">Short Circuit During Discharge</string>
+    <string name="uxsdk_setting_ui_battery_history_under_voltage">Low Voltage Protection</string>
+    <string name="uxsdk_setting_ui_battery_history_invalid">Cell Broken</string>
+    <string name="uxsdk_setting_ui_battery_history_discharge">Self-Discharging During Storage</string>
+    <string name="uxsdk_celsius">°C</string>
+    <string name="uxsdk_fahrenheit">°F</string>
+    <string name="uxsdk_kelvins">K</string>
+    <string name="uxsdk_checklist_manual_serious_low_battery_percent">Critically Low: %1$s</string>
+    <string name="uxsdk_checklist_manual_low_battery_percent">Low: %1$s</string>
+    <string name="uxsdk_checklist_manual_avoidance_warning">Alert: %1$s</string>
+    <string name="uxsdk_checklist_manual_avoidance_stop">Brake: %1$s</string>
+    <string name="uxsdk_setting_common_device_name_input_tip">Input DJI Device Name</string>
+    <string name="uxsdk_setting_common_device_name_illegal">Folder name must not contain the following characters: &lt; &gt; : \" / \\ | ? * . _</string>
+    <string name="uxsdk_setting_common_device_name_save_success">Saving successful.</string>
+    <string name="uxsdk_setting_common_device_name_save_fail">Failed to Save</string>
+
+    <string name="uxsdk_setting_ui_hd_sdr_channel_select">Image Transmission Channel</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_select_des">Select no more than two image transmission channels</string>
+    <string name="uxsdk_setting_ui_hd_sdr_signal_good">Good</string>
+    <string name="uxsdk_setting_ui_hd_sdr_signal_normal">Average</string>
+    <string name="uxsdk_setting_ui_hd_sdr_signal_bad">Weak</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_state_title">Signal Strength</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_state_summary">\n\nSignal Strength: %1$s\n\nDownlink Bandwidth: %2$s\n\nImage Transmission Bit Rate: %3$s\n</string>
+    <string name="uxsdk_setting_ui_hd_lb_channel_state_summary">\n\nSignal Strength: %1$s\n\nChannel: %2$s\n\nImage Transmission Bit Rate: %3$s\n</string>
+
+    <string name="uxsdk_setting_ui_hd_sdr_channel_select_title">Image channel selection</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_choose">Please select</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_0">Signal 0</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_1">Signal 1</string>
+
+    <!--region imu calibration -->
+    <string name="uxsdk_setting_ui_imu_title">IMU Calibration</string>
+    <string name="uxsdk_setting_ui_imu_start">Start</string>
+    <string name="uxsdk_setting_ui_imu_prepare_desc1">Dismount Propellers first.</string>
+    <string name="uxsdk_setting_ui_imu_prepare_desc2">Follow the instruction and indication to calibrate. Do not move the aircraft unless to overturn the aircraft as indicated.</string>
+    <string name="uxsdk_setting_ui_imu_prepare_desc3">Ensure the aircraft is powered on. Do not start motor.</string>
+    <string name="uxsdk_setting_ui_imu_process_desc1">Place the aircraft on dry and plain ground as indicated.</string>
+    <string name="uxsdk_setting_ui_imu_process_desc2">Ensure the aircraft is powered on. Do not start motor.</string>
+    <string name="uxsdk_setting_ui_imu_success">IMU Calibration Success</string>
+    <string name="uxsdk_setting_ui_imu_back">Back to Camera View</string>
+    <string name="uxsdk_setting_ui_imu_restart">Restart aircraft</string>
+    <string name="uxsdk_setting_ui_imu_fail">IMU Calibration Failed. Please retry.</string>
+    <string name="uxsdk_setting_ui_imu_fail_reason">No %1$d IMU Calibration error code is %2$d</string>
+    <string name="uxsdk_setting_ui_imu_retry">Retry</string>
+    <string name="uxsdk_setting_ui_imu_exit_tip">IMU Calibrating. Aircraft cannot work now. Exit now?</string>
+    <string name="uxsdk_setting_ui_imu_calibrating">IMU Calibrating. Please wait.</string>
+
+    <!--endregion-->
+
+    <string name="uxsdk_setting_menu_flyc_home_point">GoHome Point Set</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_drone">Aircraft location set as Home Point</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_current_rc">Remote controller location set as Home Point</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_partner_rc">Companion controller location set as Home Point</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_pin">PinPoint set as Home Point</string>
+    <string name="uxsdk_fpv_toast_homepoint_gps_weak">GNSS signal weak. Unable to obtain location info</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_failed">Failed to set Home Point</string>
+
+    <string name="uxsdk_setting_ui_rc_calibration_1">1.Stick Calibration: Move the sticks through their entire range of motion repeatedly.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_2">2.Left Dial Calibration: Turn the left dial up to its limit repeatedly.</string>
+    <string name="uxsdk_setting_ui_rc_pro_calibration_2">2.Dial Calibration: Turn the dials up to their limits repeatedly.</string>
+    <string name="uxsdk_setting_ui_rc_pro_calibration_3">3.Lever Calibration: Turn levers up to their limits repeatedly.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_hint_start">Tap Calibrate and follow instructions.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_status_finish">Remote Controller Calibration Completed</string>
+    <string name="uxsdk_setting_ui_rc_calibration_hint_wheel_calibration">Turn the left dial left or right to the as indicated. Repeat for the right dial.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_status_wheel">Left Dial Calibration</string>
+    <string name="uxsdk_setting_ui_rc_calibration_hint_calibration">Push the stick as indicated. Repeat.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_continue">Next</string>
+    <string name="uxsdk_setting_ui_rc_calibration_tip">Power off the aircraft, then calibrate the remote controller.</string>
+    <string name="uxsdk_setting_ui_rc_cele_in_progress_hint">Follow the instructions to proceed.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_stick_label">Control Sticks</string>
+    <string name="uxsdk_setting_ui_rc_calibration_dial_label">Dial</string>
+    <string name="uxsdk_setting_ui_rc_calibration_left_wheel_label">Left Dial Calibration</string>
+    <string name="uxsdk_setting_ui_rc_calibration_right_wheel_label">Right Dial Calibration</string>
+    <string name="uxsdk_setting_ui_rc_calibration_left_label">Left Dial</string>
+    <string name="uxsdk_setting_ui_rc_calibration_right_label">Right Dial</string>
+    <string name="uxsdk_setting_ui_rc_calibration_stick_desc">Move control sticks gently to fill out the square with the ball\'s trajectories.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_wheel_desc">Turn the left and right dials to the maximum repeatedly.</string>
+    <string name="uxsdk_setting_ui_rc_plus_calibration_1">Slowly move both control sticks through their entire range of motion</string>
+    <string name="uxsdk_setting_ui_rc_cele">Calibrate</string>
+    <string name="uxsdk_setting_ui_rc_calibration_time_out">The last remote controller calibration has been time out, the calibration state will be reset.</string>
+    <string name="uxsdk_setting_ui_setting_fail_disconnect">Setting failed. Check the device connection and retry.</string>
+    <string name="uxsdk_setting_ui_rc_start">Start</string>
+    <string name="uxsdk_setting_ui_rc_finish">Done</string>
+
+
+    <string name="uxsdk_fpv_checklist_calibration_success">Compass Calibrated.</string>
+    <string name="uxsdk_fpv_checklist_calibration_fail">Compass Calibration Failed</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_1">Calibrating compass. Stay clear of magnets or metal objects. Lift the aircraft to about 1.5 m (4.9 ft) above the ground and rotate for 360°.</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_2">Calibrating compass. Stay clear of magnets or metal objects. Lift the aircraft to about 1.5 m (4.9 ft) above the ground and rotate for 360° vertically.</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_1_desc">Rotate the aircraft horizontally for 360°</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_2_desc">Rotate the aircraft 360° vertically</string>
+    <string name="uxsdk_fpv_checklist_compass_820_tip_2_desc">As shown in the figure, hold Arm 3 and 6, and then spin a circle in place.</string>
+    <string name="uxsdk_fpv_checklist_cancel_cele">Cancel Calibration</string>
+    <string name="uxsdk_fpv_compass_adjust_complete">Compass Calibration Complete</string>
+    <string name="uxsdk_fpv_compass_adjust_fail">Intensive electromagnetic interference nearby. Ensure no magnets or metal objects are near the compass and keep the aircraft 1 meter above ground for recalibration.</string>
+    <string name="uxsdk_fpv_low_battery_back_home_tip">The remaining battery is only enough for RTH. Return home now.</string>
+    <string name="uxsdk_setting_ui_compass_tip">Cannot calibrate compass while the motors are rotating.</string>
+
+    <string name="uxsdk_fpv_gimbal_roll_finetune">Horizontal</string>
+    <string name="uxsdk_fpv_gimbal_yaw_finetune">Yaw</string>
+    <string name="uxsdk_fpv_gimbal_pitch_finetune">Tilt</string>
+    <string name="uxsdk_setting_menu_title_gimbal_reset_param">Reset Gimbal Parameters</string>
+    <string name="uxsdk_setting_menu_title_gimbal_calibration">Gimbal Calibration</string>
 </resources>

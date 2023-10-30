@@ -185,7 +185,7 @@ class MegaphoneVM : DJIViewModel() {
         MegaphoneManager.getInstance().startPlay(callback)
     }
 
-    fun stopPlay(callback: CommonCallbacks.CompletionCallback) {
+    fun stopPlay(callback: CommonCallbacks.CompletionCallback?) {
         MegaphoneManager.getInstance().stopPlay(callback)
     }
 
@@ -196,7 +196,7 @@ class MegaphoneVM : DJIViewModel() {
         MegaphoneManager.getInstance().startPushingFileToMegaphone(fileInfo, callback)
     }
 
-    fun stopPushingFile(callback: CommonCallbacks.CompletionCallback) {
+    fun stopPushingFile(callback: CommonCallbacks.CompletionCallback?) {
         MegaphoneManager.getInstance().cancelPushingFileToMegaphone(callback)
     }
 

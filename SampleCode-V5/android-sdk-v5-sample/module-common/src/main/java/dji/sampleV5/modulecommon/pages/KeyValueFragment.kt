@@ -32,8 +32,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import android.widget.ArrayAdapter
 
-import android.R.attr.data
-import android.R.attr.data
+
 import android.view.*
 import dji.sdk.keyvalue.key.CameraKey
 import dji.sdk.keyvalue.key.ComponentType
@@ -607,18 +606,19 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 logMessage.delete(0, logMessage.length)
             }
             R.id.iv_question_mark -> {
-                // KeyValueDialogUtil.showNormalDialog(getActivity(), "提示")
+
                 val cameraType = KeyManager.getInstance().getValue(
                     KeyTools.createKey(
                         CameraKey.KeyCameraType,
                         CapabilityManager.getInstance().componentIndex
                     )
                 )
-                    cameraType?.name?.let {
-                        CapabilityKeyChecker.check( msdkInfoVm.msdkInfo.value?.productType?.name!! ,
-                            it)
-                    }
-               // CapabilityKeyChecker.generateAllEnumList(msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
+                cameraType?.name?.let {
+                    CapabilityKeyChecker.check( msdkInfoVm.msdkInfo.value?.productType?.name!! ,
+                        it)
+                }
+                // KeyValueDialogUtil.showNormalDialog(getActivity(), "提示")
+                //CapabilityKeyChecker.generateAllEnumList(msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
 
             }
         }

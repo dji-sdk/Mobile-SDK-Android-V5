@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -124,7 +124,7 @@
                                       </dd>
                                       <dd><a href="Value_Common_Struct_Velocity3D.html">Velocity3D</a>
                                       </dd>
-                                      <dd><a href="Value_Common_Struct_IntValueConfig.html">IntMinMax</a>
+                                      <dd><a href="Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
                                       </dd>
                                       <dd><a href="Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
                                       </dd>
@@ -837,12 +837,24 @@
 获取遥控器对频状态。
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
+<div class="api-row" id="key_remotecontroller_controllinggimbal"><div class="api-col left">云台控制</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_controllinggimbal_inline">KeyControllingGimbal</a></div></div><div class="inline-doc" id="key_remotecontroller_controllinggimbal_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyControllingGimbal</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;ComponentIndexType&gt; KeyControllingGimbal = <span class="keyword">new</span> KeyControllingGimbal()</span><br><span class="line">           .canGet(<span class="keyword">false</span>).canSet(<span class="keyword">true</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="描述：-v30">描述：</h5>
+<p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/KeyTools.html#value_common_enum_componentindextype">ComponentIndexType</a></code><br><br>
+设置遥控器需要控制的云台和相机。飞行器上电后，遥控器默认控制主（左）云台和相机。可以通过此接口设置遥控器控制右云台和相机或者上云台和相机。
+<br><br><b>注意：<br>
+支持机型：M300 RTK和M350 RTK。</b>
+<br><br><code><i>MSDK 5.7.0开始支持</i></code></font></p>
+</div>
 <div class="api-row" id="key_remotecontroller_rebootdevice"><div class="api-col left">重启</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_rebootdevice_inline">KeyRebootDevice</a></div></div><div class="inline-doc" id="key_remotecontroller_rebootdevice_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyRebootDevice</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;EmptyMsg,EmptyMsg&gt; KeyRebootDevice = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"RebootDevice"</span>, EmptyValueConverter.converter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v30">描述：</h5>
+<h5 id="描述：-v31">描述：</h5>
 <p><font color="#666">重启遥控器。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 </div>
 <html><p><br></p></html>
@@ -852,7 +864,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Boolean&gt; KeyMultiControlIsSupported = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"MultiControlIsSupported"</span>, SingleValueConverter.BooleanConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"IsMasterSlaveModeV4Supported"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v31">描述：</h5>
+<h5 id="描述：-v32">描述：</h5>
 <p><font color="#666"><b>参数: </b>Boolean<br><br>
 <code>true</code>表示支持双控功能。
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -862,7 +874,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;MultiControlChannel,EmptyMsg&gt; KeyMultiControlRequestPairing = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"MultiControlRequestPairing", new SingleValueConverter&lt;&gt;(MultiControlChannel.class,MultiControlChannelInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("StartModePairing")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v32">描述：</h5>
+<h5 id="描述：-v33">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/DJIValue.html#value_common_enum_rcmodechannel">MultiControlChannel</a></code><br><br> 启动双控对频操作，可选择把遥控器切换成A控或者B控跟飞行器对频。 <br><br><b>注意： 调用此接口把遥控器对频为<code><a href="../../Components/IKeyManager/DJIValue.html#value_common_enum_rcmodechannel_channel_b">CHANNEL_B</a></code>后，将无法使用<code><a href="../../Components/IRTKCenter/IRTKCenter.html#irtkcenter">IRTKCenter</a></code>相关功能。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_remotecontroller_multicontrolchannel"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_multicontrolchannel_inline">KeyMultiControlChannel</a></div></div><div class="inline-doc" id="key_remotecontroller_multicontrolchannel_inline" <blockquote>
@@ -870,7 +882,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;MultiControlChannel&gt; KeyMultiControlChannel = <span class="keyword">new</span> KeyMultiControlChannel()</span><br><span class="line">           .canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v33">描述：</h5>
+<h5 id="描述：-v34">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/DJIValue.html#value_common_enum_rcmodechannel">MultiControlChannel</a></code><br><br>
 获取当前遥控器的多控频道类型。
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -880,7 +892,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Integer&gt; KeyMultiControlOnlineRcCount = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"MultiControlOnlineRcCount"</span>, SingleValueConverter.IntegerConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"MultiRcOnlineRCCount"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v34">描述：</h5>
+<h5 id="描述：-v35">描述：</h5>
 <p><font color="#666"><b>参数: </b>Integer<br><br> 获取当前已连接的遥控器个数。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_remotecontroller_multirconlineappcount"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_multirconlineappcount_inline">KeyMultiControlOnlineAppCount</a></div></div><div class="inline-doc" id="key_remotecontroller_multirconlineappcount_inline" <blockquote>
@@ -888,7 +900,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Integer&gt; KeyMultiControlOnlineAppCount = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"MultiControlOnlineAppCount"</span>, SingleValueConverter.IntegerConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"MultiRcOnlineAPPCount"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v35">描述：</h5>
+<h5 id="描述：-v36">描述：</h5>
 <p><font color="#666"><b>参数: </b>Integer<br><br> 获取当前已连接的APP个数。<br> 注意：此处提及的APP包括DJI的官方APP，以及通过DJI MSDK开发的第三方APP。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_remotecontroller_rcmultistatus"><div class="api-col left">双控连接状态</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_rcmultistatus_inline">KeyMultiControlStatus</a></div></div><div class="inline-doc" id="key_remotecontroller_rcmultistatus_inline" <blockquote>
@@ -896,7 +908,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIKeyInfo&lt;MultiControlStatusInfo&gt; KeyMultiControlStatus = new DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"MultiControlStatus", new DJIValueConverter&lt;&gt;(MultiControlStatusInfo.class)).canGet(true).canSet(false).canListen(true).canPerformAction(false).setIsEvent(false).setInnerIdentifier("RcMultiStatus")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v36">描述：</h5>
+<h5 id="描述：-v37">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RcMultiStatusMsg.html#value_remotecontroller_struct_rcmultistatusmsg">MultiControlStatusInfo</a></code><br><br>
 获取遥控器双控连接状态。可以通过这个接口查看A控、A控中的App、B控、B控中App是否在线状态。<br>
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -906,7 +918,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIKeyInfo&lt;MultiControlFlightControlAuthorityOwnerInfo&gt; KeyMultiControlFlightControlAuthorityOwner = new DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"MultiControlFlightControlAuthorityOwner", new DJIValueConverter&lt;&gt;(MultiControlFlightControlAuthorityOwnerInfo.class)).canGet(true).canSet(false).canListen(true).canPerformAction(false).setIsEvent(false).setInnerIdentifier("MultiRCFlightControlAuthOwner")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v37">描述：</h5>
+<h5 id="描述：-v38">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_RemoteController_Struct_MultiRCFlightControlAuthOwnerMsg.html#value_remotecontroller_struct_multircflightcontrolauthownermsg">MultiControlFlightControlAuthorityOwnerInfo</a></code><br><br> 获取当前飞行控制权是在A控还是在B控。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_remotecontroller_multircgimbalscontrolauthowner"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_multircgimbalscontrolauthowner_inline">KeyMultiControlGimbalAuthorityOwner</a></div></div><div class="inline-doc" id="key_remotecontroller_multircgimbalscontrolauthowner_inline" <blockquote>
@@ -914,7 +926,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIKeyInfo&lt;List&lt;MultiControlChannelInfo&gt;&gt; KeyMultiControlGimbalAuthorityOwner = new DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"MultiControlGimbalAuthorityOwner", new SingleValueConverter&lt;&gt;((Class)List.class,MultiRcGimbalsControlAuthOwnerMsg.class)).canGet(true).canSet(false).canListen(true).canPerformAction(false).setIsEvent(false).setInnerIdentifier("MultiRcGimbalsControlAuthOwner")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v38">描述：</h5>
+<h5 id="描述：-v39">描述：</h5>
 <p><font color="#666"><b>参数: </b>List&lt;<code><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RCModeChannelTypeMsg.html#value_remotecontroller_struct_rcmodechanneltypemsg">MultiControlChannelInfo</a></code>&gt;<br><br> 获取当前云台控制权是在A控还是在B控。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_remotecontroller_multirccontrolauthoritysurpass"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_multirccontrolauthoritysurpass_inline">KeyMultiControlAuthorityObtain</a></div></div><div class="inline-doc" id="key_remotecontroller_multirccontrolauthoritysurpass_inline" <blockquote>
@@ -922,7 +934,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;List&lt;MultiControlAuthorityType&gt;,EmptyMsg&gt; KeyMultiControlAuthorityObtain = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"MultiControlAuthorityObtain", new SingleValueConverter&lt;&gt;((Class)List.class,RCAuthorityModes.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("MultiRcControlAuthoritySurpass")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v39">描述：</h5>
+<h5 id="描述：-v40">描述：</h5>
 <p><font color="#666"><b>参数: </b>List&lt;<code><a href="../../Components/IKeyManager/DJIValue.html#value_common_enum_rcauthoritymode">MultiControlAuthorityType</a></code>&gt;<br><br>
 抢夺飞行或者云台控制权。当遥控器仅仅拥有云台控制权时，可通过摇杆来控制云台，当用户同时拥有飞行控制权和云台控制权时，摇杆用来控制飞行，波轮用来控制云台。
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -932,7 +944,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;MultiControlLockAuthorityInfo,EmptyMsg&gt; KeyMultiControlLockAuthority = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"MultiControlLockAuthority", new DJIValueConverter&lt;&gt;(MultiControlLockAuthorityInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("MultiRcControlLockRight")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v40">描述：</h5>
+<h5 id="描述：-v41">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_Common_Struct_RCAuthorityLockControlMsg.html#value_common_struct_rcauthoritylockcontrolmsg">MultiControlLockAuthorityInfo</a></code><br><br>
 锁定飞行或者云台控制权, 锁定后控制权将不能被其他控抢夺。
 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -942,7 +954,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Boolean&gt; KeyMultiControlFlightControlAuthorityLockStatus = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"MultiControlFlightControlAuthorityLockStatus"</span>, SingleValueConverter.BooleanConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"MultiRCFlightControlAuthLockState"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v41">描述：</h5>
+<h5 id="描述：-v42">描述：</h5>
 <p><font color="#666"><b>参数: </b>Boolean<br><br> 返回飞行控制权是否锁定。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_remotecontroller_multirclostnotice"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_multirclostnotice_inline">KeyMultiControlLostControlNotice</a></div></div><div class="inline-doc" id="key_remotecontroller_multirclostnotice_inline" <blockquote>
@@ -950,7 +962,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIKeyInfo&lt;MultiControlLostControlInfo&gt; KeyMultiControlLostControlNotice = new DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"MultiControlLostControlNotice", new DJIValueConverter&lt;&gt;(MultiControlLostControlInfo.class)).canGet(false).canSet(false).canListen(true).canPerformAction(false).setIsEvent(true).setInnerIdentifier("MultiRcLostNotice")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v42">描述：</h5>
+<h5 id="描述：-v43">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_RemoteController_Struct_RCAuthorityLostPushMsg.html#value_remotecontroller_struct_rcauthoritylostpushmsg">MultiControlLostControlInfo</a></code><br><br> 监听具有飞行或者云台控制权的遥控器失去连接的通知事件。当具有飞行控制权的遥控器失去连接的时候，无飞行控制权的遥控器可以调用<code><a href="../../Components/IKeyManager/Key_RemoteController_RemoteControllerKey.html#key_remotecontroller_multirccontrolauthoritysurpass">KeyMultiControlAuthorityObtain</a></code>接管飞行控制权，也可以调用<code><a href="../../Components/IKeyManager/Key_RemoteController_RemoteControllerKey.html#key_remotecontroller_multircexecuteaircraftlostlogic">KeyMultiControlExecuteFailSafeActionWhenLostControl</a></code>让飞行器立即执行失控行为<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_failsafeaction">KeyFailsafeAction</a></code>。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_remotecontroller_multircexecuteaircraftlostlogic"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_remotecontroller_multircexecuteaircraftlostlogic_inline">KeyMultiControlExecuteFailSafeActionWhenLostControl</a></div></div><div class="inline-doc" id="key_remotecontroller_multircexecuteaircraftlostlogic_inline" <blockquote>
@@ -958,7 +970,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;EmptyMsg,EmptyMsg&gt; KeyMultiControlExecuteFailSafeActionWhenLostControl = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"MultiControlExecuteFailSafeActionWhenLostControl"</span>, EmptyValueConverter.converter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>).setInnerIdentifier(<span class="string">"MultiRcExecuteAircraftLostLogic"</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v43">描述：</h5>
+<h5 id="描述：-v44">描述：</h5>
 <p><font color="#666">执行失控行为。当具有飞行控制权的遥控器失去连接的时候，无飞行控制权的遥控器可以调用此接口让飞行器立即执行失控行为<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_failsafeaction">KeyFailsafeAction</a></code>。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 

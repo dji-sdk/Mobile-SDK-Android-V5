@@ -472,6 +472,28 @@
     <string name="uxsdk_camera_ndvi_panel_widget_title">Camera NDVI Panel Widget</string>
     <string name="uxsdk_camera_visible_panel_widget_title">Camera Visible Panel Widget</string>
     <string name="uxsdk_device_health_and_status_widget_title">Device Health and Status Widget</string>
+    <string name="uxsdk_gimbal_fine_tune_widget_title">Gimbal Fine Tune Widget</string>
+    <string name="uxsdk_flyc_gohome_mode_widget_title">FC Return Home Mode Widget</string>
+    <string name="uxsdk_flyc_lost_action_widget_title">FC Lost Action Widget</string>
+    <string name="uxsdk_flyc_home_set_widget_title">FC Home Point  Widget</string>
+    <string name="uxsdk_flyc_home_distance_height_limit_widget_title">FC Distance Height Limit Widget</string>
+    <string name="uxsdk_flyc_imu_state_widget_title">FC IMU Status Widget</string>
+    <string name="uxsdk_flyc_compass_state_widget_title">FC Compass Status Widget</string>
+    <string name="uxsdk_flyc_fpa_widget_title"> FC Flight Mode Widget</string>
+    <string name="uxsdk_gimbal_setting_widget_title">Gimbal Setting Widget</string>
+    <string name="uxsdk_battery_info_widget_title">Battery Info Widget</string>
+    <string name="uxsdk_battery_setting_widget_title">Battery Setting Widget</string>
+    <string name="uxsdk_battery_alert_widget_title">Battery Alert Widget</string>
+    <string name="uxsdk_frequency_setting_widget_title">HD Frequency Mode Widget</string>
+    <string name="uxsdk_sdr_info_widget_title">HD SDR Info Widget</string>
+    <string name="uxsdk_sdr_band_width_select_title">HD SDR Band Width Select Widget</string>
+    <string name="uxsdk_sdr_band_width_title">HD SDR Band Width Widget</string>
+    <string name="uxsdk_sdr_video_rate_title">HD SDR Video Rate Widget</string>
+    <string name="uxsdk_sdr_channel_mode_title">HD SDR Channel Mode Widget</string>
+    <string name="uxsdk_sdr_freq_title">HD SDR Frequency Widget</string>
+    <string name="uxsdk_hdmi_setting_title">HD HDMI Setting Widget</string>
+    <string name="uxsdk_common_about_widget_title">Common About Widget</string>
+    <string name="uxsdk_common_device_name_widget_title">Common Device Name Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>
@@ -838,6 +860,270 @@
     <string name="uxsdk_fpv_message_box_empty_content_v2">当前正常</string>
     <string name="uxsdk_fpv_tip_remote_disconnect">飞行器未连接</string>
 
+
+    <string name="uxsdk_setting_menu_flyc_set_altitude_rth">设定高度返航</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth">智能高度返航</string>
+
+    <string name="uxsdk_setting_ui_flyc_fs_gohome">返航</string>
+    <string name="uxsdk_setting_ui_flyc_fs_landing">下降</string>
+    <string name="uxsdk_setting_ui_flyc_fs_hover">悬停</string>
+
+    <!--HD-->
+    <string name="uxsdk_setting_menu_title_hd_hdmi_system_setting_hdmi_decoder_summary">视频输出类型</string>
+
+    <string name="uxsdk_setting_ui_flyc_cali_begin">已开始校准</string>
+    <string name="uxsdk_setting_ui_flyc_cali_failed"> 请重试</string>
+
+    <string name="uxsdk_setting_menu_flyc_smart_rth_preset_altitude_des">当环境，光线满足视觉系统工作要求时，飞行器将寻找空旷环境上升到设定返航高度，并自动规划最佳返航路线进行返航</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth_smart_altitude_des">当环境，光线满足视觉系统工作要求时，飞行器将自动规划最佳返航路线及返航高度，请注意飞行安全</string>
+
+    <!--Gimbal Widget-->
+    <string name="uxsdk_gimbal_caling">云台校准中 %1$d%%，请不要移动飞机</string>
+    <string name="uxsdk_gimbal_gimbal_reset_params_success">重置成功</string>
+    <string name="uxsdk_gimbal_gimbal_reset_params_fail">重置失败</string>
+    <string name="uxsdk_gimbal_cali_success">云台校准成功！</string>
+    <string name="uxsdk_gimbal_cali_fail">云台校准失败！</string>
+
+    <!--RcCheckFrequency Widget-->
+    <string name="uxsdk_setting_ui_rc_stop_pair">停止对频</string>
+    <string name="uxsdk_setting_ui_rc_start_pair">开始对频</string>
+
+
+    <!-- APAS -->
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_list">避障行为</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_off_btn">关闭</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_off_description">飞机将不进行障碍物躲避行为</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_brake_btn">刹停</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_brake_description">开启后，飞机遇到障碍物将自动悬停</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_detour_btn">绕行</string>
+    <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_detour_description">开启后，飞机遇到障碍物将自动选择绕过障碍物或者悬停</string>
+    <string name="uxsdk_setting_menu_perception_break_description">刹停模式：飞行器将在遇到障碍物时自动刹停（需打开对应方向的刹停开关）</string>
+    <string name="uxsdk_setting_menu_perception_apas_description">绕行模式：处于N挡手动飞行模式下，飞行器将自动绕开障碍物或悬停</string>
+    <string name="uxsdk_setting_menu_perception_close_description">关闭模式：飞行器不会自动绕开障碍物或刹停，但仍会显示障碍物信息，请谨慎飞行</string>
+    <string name="uxsdk_setting_menu_perception_apas_off_dialog_content">关闭后，飞行器全向避障系统将不可用，飞行器全向有障碍物时将不会自动刹停，但仍会显示障碍物信息。确认关闭？</string>
+    <string name="uxsdk_setting_menu_perception_break_s_mode">当前为%1$s挡，刹停无法生效，请切换至N挡</string>
+    <string name="uxsdk_setting_menu_perception_apas_s_mode">当前为%1$s挡，绕行无法生效，请切换至N挡</string>
+
+    <!--General Widget-->
+    <string name="uxsdk_setting_ui_general_battery">电池</string>
+    <string name="uxsdk_fpv_top_bar_battery_left_battery">左电池</string>
+    <string name="uxsdk_fpv_top_bar_battery_right_battery">右电池</string>
+    <string name="uxsdk_setting_ui_gimbal_calibration_tip">电机转动时不能校准云台，请停止电机后再进行云台自动校准。</string>
+    <string name="uxsdk_setting_ui_rc_cele_tip">点击开始前，将所有摇杆都放到中位。在校准过程中，务必严格根据提示进行操作，否则可能导致校准不成功。</string>
+    <string name="uxsdk_setting_menu_title_rc_check_frequency">遥控器对频</string>
+    <string name="uxsdk_dialog_message_rc_cannot_frequency_motorup">电机正在起转不能对频</string>
+    <string name="uxsdk_setting_ui_omni_perception_desc">关闭后将对飞行器造成以下影响：\n1、无法在室内低空定高悬停；\n2、无法在室内使用避障功能；\n3、降落速度保护将无法正常运行(高速着陆可能导致机体受损，请注意着陆速度)。</string>
+
+
+    <string name="uxsdk_setting_menu_flyc_gohome_altitude_title">返航高度</string>
+    <string name="uxsdk_setting_menu_flyc_max_height_title">限高</string>
+    <string name="uxsdk_setting_menu_flyc_max_radius_title">距离限制</string>
+    <string name="uxsdk_setting_menu_flyc_max_radius_title_limit">限远</string>
+    <string name="uxsdk_setting_menu_setting_success">保存成功</string>
+    <string name="uxsdk_setting_menu_setting_fail">设置失败</string>
+    <string name="uxsdk_setting_menu_flyc_gohome_altitude_limit">无法设置高于当前限高的返航高度.</string>
+    <string name="uxsdk_setting_menu_flyc_flight_altitude_limit">请输入范围内的数字</string>
+    <string name="uxsdk_setting_menu_flyc_gohome_altitude_desc">飞行器距离返航点50m以外返航时，将飞行至您所设置的高度进行返航。飞行器距离返航点50m以内将以当前高度进行返航。若感知系统正常工作，飞行器遇障会上升或悬停。</string>
+    <string name="uxsdk_checklist_manual_flight_mode_title">飞行挡位</string>
+    <string name="uxsdk_setting_menu_flyc_fpa">允许切换飞行挡位</string>
+    <string name="uxsdk_setting_menu_flyc_mode_nosport">P 挡 (定位)，使用GPS或视觉定位系统实现精确悬停；\n\nA 挡 (姿态)，不使用GPS和视觉定位系统，不能精确悬停；\n\nF 挡 (功能)，和P 挡类似，可使用智能飞行挡位。</string>
+    <string name="uxsdk_setting_ui_flyc_mode_spt">T/P/S</string>
+    <string name="uxsdk_setting_ui_flyc_mode_snt">T/S/N</string>
+    <string name="uxsdk_setting_ui_flyc_mode_sna">A/S/N</string>
+    <string name="uxsdk_setting_ui_flyc_mode_tns">T/N/S</string>
+    <string name="uxsdk_setting_ui_flyc_mode_spa">A/P/S</string>
+    <string name="uxsdk_setting_ui_flyc_mode_ans">A/N/S</string>
+    <string name="uxsdk_checklist_manual_compass_title">指南针</string>
+    <string name="uxsdk_checklist_manual_imu_title">IMU</string>
+    <string name="uxsdk_setting_menu_flyc_mode">S 挡 (运动) - 飞行器机动性提高，GPS定位和下视感知定位正常工作；\n\nP 挡 (定位) - GPS定位和下视感知定位正常工作；\n\nT 挡 (三脚架) - 飞行器最大飞行速度1m/s，同时降低了操控感度，方便用户微调构图，拍摄更加平稳流畅。GPS定位和下视视觉定位系统正常工作。</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti">S挡（运动）-飞行器机动性提高，GPS定位和下视感知定位正常工作；\nP挡（定位）-GPS定位和下视感知定位正常工作；\nA挡（姿态）- 前/后视障碍物感知系统、GPS定位和下视视觉定位系统不工作，不能精确悬停。</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_n_mode">A挡（姿态）- 前/后视障碍物感知系统、GPS定位和下视视觉定位系统不工作，不能精确悬停。\nS挡（运动）-飞行器机动性提高，GPS定位和下视感知定位正常工作；\nN挡（普通）-GPS定位和下视感知定位正常工作；</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_n_mode_rc511">A挡（姿态）- 前/后视障碍物感知系统、GPS定位和下视视觉定位系统不工作，不能精确悬停。\nN挡（普通）-GPS定位和下视感知定位正常工作；\nS挡（运动）-飞行器机动性提高，GPS定位和下视感知定位正常工作；</string>
+    <string name="uxsdk_setting_menu_flyc_mode_m300">T 挡 (三脚架) - 三脚架挡在P挡的基础上限制了飞行速度，使飞行器在拍摄过程中更稳定；\n\nP 挡 (定位) - GPS定位和下视感知定位正常工作；\n\nS 挡 (运动) - 飞行器机动性提高，GPS定位和下视感知定位正常工作。</string>
+    <string name="uxsdk_setting_menu_flyc_mode_n">T 挡 (三脚架) - 三脚架挡在N挡的基础上限制了飞行速度，使飞行器在拍摄过程中更稳定；\n\nS 挡 (运动) - 飞行器机动性提高，GPS定位和下视感知定位正常工作。\n\nN 挡 (普通) - GPS定位和下视感知定位正常工作；</string>
+    <string name="uxsdk_setting_menu_flyc_mode_n_rc511">T 挡 (三脚架) - 三脚架挡在N挡的基础上限制了飞行速度，使飞行器在拍摄过程中更稳定；\n\nS 挡 (运动) - 飞行器机动性提高，GPS定位和下视感知定位正常工作。\n\nN 挡 (普通) - GPS定位和下视感知定位正常工作；</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title">飞行挡位切换为A/P/S</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode_rc511">飞行挡位切换为A/N/S</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode">飞行挡位切换为A/S/N</string>
+    <string name="uxsdk_setting_menu_title_sensors_state">传感器状态</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_cur_use">当前使用</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_good">优</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_normal">良</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_bad">差</string>
+    <string name="uxsdk_setting_ui_redundance_compass_cal_tip">电机起转不能进行指南针校准</string>
+    <string name="uxsdk_setting_ui_compass_cal_in_sim_tip">模拟器环境下不能进行指南针校准</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_calc">校准IMU</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_calc">校准指南针</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_acc_label">加速度计</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_gryo_label">陀螺仪</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_bias">零偏</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_vector">干扰量</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_remark">备注</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass">指南针</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass1_label">指南针1</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass2_label">指南针2</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass3_label">指南针3</string>
+
+    <string name="uxsdk_setting_ui_a3sensor_imu0">IMU1</string>
+    <string name="uxsdk_setting_ui_a3sensor_imu1">IMU2</string>
+    <string name="uxsdk_setting_ui_a3sensor_imu2">IMU3</string>
+
+    <string name="uxsdk_setting_ui_a3sensor_acc0">ACC1</string>
+    <string name="uxsdk_setting_ui_a3sensor_acc1">ACC2</string>
+    <string name="uxsdk_setting_ui_a3sensor_acc2">ACC3</string>
+
+    <string name="uxsdk_setting_ui_a3sensor_gyro0">GYRO1</string>
+    <string name="uxsdk_setting_ui_a3sensor_gyro1">GYRO2</string>
+    <string name="uxsdk_setting_ui_a3sensor_gyro2">GYRO3</string>
+
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_0">未知状态</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_1">未连接</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_2">校准中</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_3">校准失败</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_4">数据异常</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_5">预热中</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_imu_stat_6">不静止</string>
+
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_0">未知状态</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_1">未连接</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_2">校准中</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_3">未校准</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_4">数据异常</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_empty"/>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_8">校准失败</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_9">方向异常</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_0">请重启飞行器</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_1">未连接</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_3">请校准指南针</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_4">重启复现请联系技术支持</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_7">请远离干扰源或重新校准指南针</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_8">请远离干扰源或重新校准指南针</string>
+    <string name="uxsdk_setting_ui_redundancy_sensor_compass_stat_action_9">请检测指南针模块安装方向或者是否有电磁干扰</string>
+    <string name="uxsdk_setting_ui_imu_tip">电机起转不能进行IMU校准</string>
+    <string name="uxsdk_app_check_aircraft_connection">请检查飞机是否已连接</string>
+    <string name="uxsdk_setting_menu_title_sensors_state_na_info">飞行器在环境光良好时（白天）使用视觉定向，不使用指南针定向，此时可忽略干扰量</string>
+    <string name="uxsdk_setting_menu_flyc_failSafe_title">失联行为</string>
+    <string name="uxsdk_setting_menu_common_gimbal_version">云台%1$s</string>
+    <string name="uxsdk_setting_menu_common_camera_version">%1$s相机</string>
+    <string name="uxsdk_setting_menu_common_serial">序列号</string>
+    <string name="uxsdk_hms_carepage_maintenance_highvoltage_title">高电量存储</string>
+    <string name="uxsdk_hms_carepage_maintenance_highvoltage_info">高电量存储，即电池电量90%（含）以上状态存储。12个月内，电池高电位存储累计时间少于 120 天，其循环次数可达 400 次。可通过修改电池自放电天数调整高电量存储时间。</string>
+    <string name="uxsdk_hms_carepage_maintenance_highvoltage_need_upgrade_info">电池固件版本过低，无法获取高电位存储时间，建议升级电池固件版本</string>
+    <string name="uxsdk_setting_ui_battery_product_date">生产日期：</string>
+    <string name="uxsdk_setting_ui_battery_serial_number">序列号：</string>
+    <string name="uxsdk_setting_ui_battery_discharge_day">%1$d 天</string>
+    <string name="uxsdk_setting_ui_battery_history_normal_status">正常</string>
+    <string name="uxsdk_setting_ui_battery_abnormal_state">异常</string>
+    <string name="uxsdk_setting_ui_battery_history_invalid_status">无效电池！</string>
+    <string name="uxsdk_setting_ui_battery_history_exception_status">通讯异常！</string>
+    <string name="uxsdk_setting_ui_battery_history_firstlevel_current">放电过流</string>
+    <string name="uxsdk_setting_ui_battery_history_secondlevel_current">放电过流</string>
+    <string name="uxsdk_setting_ui_battery_history_firstlevel_over_temperature">放电过温</string>
+    <string name="uxsdk_setting_ui_battery_history_secondlevel_overt_temperature">放电过温</string>
+    <string name="uxsdk_setting_ui_battery_history_firstlevel_low_temperature">放电低温</string>
+    <string name="uxsdk_setting_ui_battery_history_secondlevel_low_temperature">放电低温</string>
+    <string name="uxsdk_setting_ui_battery_history_short_circuit">放电短路</string>
+    <string name="uxsdk_setting_ui_battery_history_under_voltage">电池低压保护</string>
+    <string name="uxsdk_setting_ui_battery_history_invalid">电芯异常</string>
+    <string name="uxsdk_setting_ui_battery_history_discharge">发生存储自放电</string>
+    <string name="uxsdk_celsius">°C</string>
+    <string name="uxsdk_fahrenheit">°F</string>
+    <string name="uxsdk_kelvins">K</string>
+    <string name="uxsdk_checklist_manual_serious_low_battery_percent">严重低电量：%1$s</string>
+    <string name="uxsdk_checklist_manual_low_battery_percent">低电量：%1$s</string>
+    <string name="uxsdk_checklist_manual_avoidance_warning">告警：%1$s</string>
+    <string name="uxsdk_checklist_manual_avoidance_stop">刹停：%1$s</string>
+    <string name="uxsdk_setting_common_device_name_input_tip">请输入设备名称</string>
+    <string name="uxsdk_setting_common_device_name_illegal">文件名请勿包含以下字符：&lt; &gt; : \" / \\ | ? * . _</string>
+    <string name="uxsdk_setting_common_device_name_save_success">保存成功</string>
+    <string name="uxsdk_setting_common_device_name_save_fail">保存失败</string>
+
+    <string name="uxsdk_setting_ui_hd_sdr_channel_select">图传选择</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_select_des">最多选择两路图传</string>
+    <string name="uxsdk_setting_ui_hd_sdr_signal_good">良好</string>
+    <string name="uxsdk_setting_ui_hd_sdr_signal_normal">一般</string>
+    <string name="uxsdk_setting_ui_hd_sdr_signal_bad">微弱</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_state_title">信号状态</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_state_summary">\n\n干扰信号强度：%1$s \n\n下行带宽：%2$s \n\n图传码率：%3$s \n\n</string>
+    <string name="uxsdk_setting_ui_hd_lb_channel_state_summary">\n\n干扰信号强度：%1$s \n\n信道：%2$s \n\n图传码率：%3$s \n\n</string>
+
+    <string name="uxsdk_setting_ui_hd_sdr_channel_select_title">图传信道选择</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_choose">请选择</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_0">信道 0</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_1">信道 1</string>
+
+    <!--region imu calibration -->
+    <string name="uxsdk_setting_ui_imu_title">IMU校准</string>
+    <string name="uxsdk_setting_ui_imu_start">开始</string>
+    <string name="uxsdk_setting_ui_imu_prepare_desc1">请先拆卸螺旋桨</string>
+    <string name="uxsdk_setting_ui_imu_prepare_desc2">请按照图示和说明进行校准，除了按照提示翻转飞机外请勿移动飞机</string>
+    <string name="uxsdk_setting_ui_imu_prepare_desc3">保持飞行器电源开启，请勿启动电机</string>
+    <string name="uxsdk_setting_ui_imu_process_desc1">如图所示摆放飞行器在平坦干燥处</string>
+    <string name="uxsdk_setting_ui_imu_process_desc2">保持飞行器电源开启，请勿启动电机</string>
+    <string name="uxsdk_setting_ui_imu_success">IMU校准成功</string>
+    <string name="uxsdk_setting_ui_imu_back">返回飞行/相机画面</string>
+    <string name="uxsdk_setting_ui_imu_restart">立即重启飞行器</string>
+    <string name="uxsdk_setting_ui_imu_fail">IMU校准失败，请重试</string>
+    <string name="uxsdk_setting_ui_imu_fail_reason">第%1$d个IMU校准失败的错误码为%2$d</string>
+    <string name="uxsdk_setting_ui_imu_retry">重试</string>
+    <string name="uxsdk_setting_ui_imu_exit_tip">IMU校准中，此时退出校准飞行器将无法正常使用，您确定要退出吗？</string>
+    <string name="uxsdk_setting_ui_imu_calibrating">正在校准，请稍候</string>
+
+    <!--endregion-->
+
+    <string name="uxsdk_setting_menu_flyc_home_point">返航点设置</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_drone">返航点设置为飞行器当前位置</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_current_rc">返航点设置为本遥控器</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_partner_rc">返航点设置为同伴遥控器</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_pin">返航点设置为Pin点</string>
+    <string name="uxsdk_fpv_toast_homepoint_gps_weak">GNSS信号弱，无法获取当前位置</string>
+    <string name="uxsdk_fpv_toast_homepoint_setting_failed">返航点设置失败</string>
+
+    <string name="uxsdk_setting_ui_rc_calibration_1">1.操控摇杆校准：校准时请将左右摇杆的所有方向推动到最大行程并且重复几次</string>
+    <string name="uxsdk_setting_ui_rc_calibration_2">2.左拨轮校准：校准时请拨动左边的拨轮到最大行程并且重复几次</string>
+    <string name="uxsdk_setting_ui_rc_pro_calibration_2">2.左右拨轮校准：校准时请拨动左边和右边的拨轮到最大行程并且重复几次</string>
+    <string name="uxsdk_setting_ui_rc_pro_calibration_3">3.左右拨杆校准：校准时请拨动左边和右边的拨杆到最大行程并且重复几次</string>
+    <string name="uxsdk_setting_ui_rc_calibration_hint_start">请点击开始校准，并按提示操作</string>
+    <string name="uxsdk_setting_ui_rc_calibration_status_finish">已完成遥控器校准</string>
+    <string name="uxsdk_setting_ui_rc_calibration_hint_wheel_calibration">请向左、或向右波动左边滚轮至光标位置，重复此步骤。</string>
+    <string name="uxsdk_setting_ui_rc_calibration_status_wheel">左滚轮校准</string>
+    <string name="uxsdk_setting_ui_rc_calibration_hint_calibration">请将摇杆推至光标位置，跟随轨迹缓慢滑动，重复此步骤。</string>
+    <string name="uxsdk_setting_ui_rc_calibration_continue">继续</string>
+    <string name="uxsdk_setting_ui_rc_calibration_tip">请先关闭飞机电源，然后进行遥控器校准。</string>
+    <string name="uxsdk_setting_ui_rc_cele_in_progress_hint">请按提示操作</string>
+    <string name="uxsdk_setting_ui_rc_calibration_stick_label">摇杆</string>
+    <string name="uxsdk_setting_ui_rc_calibration_dial_label">波轮</string>
+    <string name="uxsdk_setting_ui_rc_calibration_left_wheel_label">左波轮校准</string>
+    <string name="uxsdk_setting_ui_rc_calibration_right_wheel_label">右波轮校准</string>
+    <string name="uxsdk_setting_ui_rc_calibration_left_label">左拨轮</string>
+    <string name="uxsdk_setting_ui_rc_calibration_right_label">右拨轮</string>
+    <string name="uxsdk_setting_ui_rc_calibration_stick_desc">缓慢操作左右摇杆使小球的移动轨迹填满正方形边框。</string>
+    <string name="uxsdk_setting_ui_rc_calibration_wheel_desc">缓慢拨动左右波轮到最大位置处多次。</string>
+    <string name="uxsdk_setting_ui_rc_plus_calibration_1">缓慢推动左右摇杆至上下左右方向最大行程</string>
+    <string name="uxsdk_setting_ui_rc_cele">校准</string>
+    <string name="uxsdk_setting_ui_rc_calibration_time_out">遥控器校准超时，即将重置遥控器校准状态。</string>
+    <string name="uxsdk_setting_ui_setting_fail_disconnect">设置失败，请检查和设备之间的连接后重试</string>
+    <string name="uxsdk_setting_ui_rc_start">开始</string>
+    <string name="uxsdk_setting_ui_rc_finish">完成</string>
+
+    <string name="uxsdk_fpv_checklist_calibration_success">指南针校准成功</string>
+    <string name="uxsdk_fpv_checklist_calibration_fail">指南针校准失败</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_1">成功进入校准指南针模式，请远离金属或带强电物体等，并在离地1.5m(4.9ft)左右，水平旋转飞行器360度</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_2">成功进入校准指南针模式，请远离金属或带强电物体等，并在离地1.5m(4.9ft)左右，竖直旋转飞行器360度</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_1_desc">水平旋转飞行器360度</string>
+    <string name="uxsdk_fpv_checklist_compass_tip_2_desc">竖直旋转飞行器360度</string>
+    <string name="uxsdk_fpv_checklist_compass_820_tip_2_desc">如下图所示，手持3号及6号机臂，原地旋转一周</string>
+    <string name="uxsdk_fpv_checklist_cancel_cele">取消校准</string>
+    <string name="uxsdk_fpv_compass_adjust_complete">指南针校准成功</string>
+    <string name="uxsdk_fpv_compass_adjust_fail">环境磁场干扰过大，请远离干扰源（如大型电器设备，钢筋铁柱等）并保持飞行器距离地面1米以上后，重新进行校准。</string>
+    <string name="uxsdk_fpv_low_battery_back_home_tip">当前电量仅够返回返航点，请尽快返航。</string>
+    <string name="uxsdk_setting_ui_compass_tip">电机起转不能进行指南针校准</string>
+
+    <string name="uxsdk_fpv_gimbal_roll_finetune">水平</string>
+    <string name="uxsdk_fpv_gimbal_yaw_finetune">偏航</string>
+    <string name="uxsdk_fpv_gimbal_pitch_finetune">俯仰</string>
+    <string name="uxsdk_setting_menu_title_gimbal_reset_param">重置云台参数</string>
+    <string name="uxsdk_setting_menu_title_gimbal_calibration">云台自动校准</string>
 </resources>
 
 

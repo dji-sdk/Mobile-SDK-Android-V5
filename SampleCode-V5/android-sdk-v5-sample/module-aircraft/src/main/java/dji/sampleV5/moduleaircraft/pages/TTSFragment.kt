@@ -11,6 +11,7 @@ import dji.sampleV5.moduleaircraft.models.MegaphoneVM
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.megaphone.FileInfo
+import dji.v5.manager.aircraft.megaphone.PlayMode
 import dji.v5.manager.aircraft.megaphone.UploadType
 import dji.v5.utils.common.LogUtils
 import kotlinx.android.synthetic.main.frag_tts.*
@@ -69,5 +70,22 @@ class TTSFragment:DJIFragment(){
                     })
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        megaphoneVM.getPlayMode(object :CommonCallbacks.CompletionCallbackWithParam<PlayMode>{
+            override fun onSuccess(t: PlayMode?) {
+               if (t != PlayMode.UNKNOWN) {
+                   megaphoneVM.stopPlay(null)
+               }
+            }
+
+            override fun onFailure(error: IDJIError) {
+               LogUtils.e(logTag , "Get Play Mode Failed!")
+            }
+
+        })
+
     }
 }

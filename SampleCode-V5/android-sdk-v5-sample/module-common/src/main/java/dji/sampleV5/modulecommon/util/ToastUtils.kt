@@ -12,11 +12,12 @@ private const val TAG = "ToastUtils"
 object ToastUtils {
     private var handlerThread: HandlerThread? = null
     private var handler: Handler? = null
+    private var toast: Toast? = null
 
     private var isActivityDestroy = false
 
 
-    //Toast必须在子线程，否则500遥控器（Android 版本7.1.2）会奔溃：https://www.jianshu.com/p/ccfc5fa3130c
+    //Toast必须在子线程，否则SmartController遥控器（Android 版本7.1.2）会奔溃：https://www.jianshu.com/p/ccfc5fa3130c
     fun init() {
         handlerThread = HandlerThread("ToastUtils")
         handlerThread?.start()
@@ -41,8 +42,9 @@ object ToastUtils {
         }
 
         handler?.post {
-            Toast.makeText(ContextUtil.getContext(), msg, Toast.LENGTH_SHORT).show()
+            toast?.cancel()
+            toast = Toast.makeText(ContextUtil.getContext(), msg, Toast.LENGTH_SHORT)
+            toast?.show()
         }
-
     }
 }

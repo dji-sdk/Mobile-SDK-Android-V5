@@ -1471,4 +1471,145 @@
         <attr name="uxsdk_fadingEdgeColor"/>
     </declare-styleable>
 
+    <attr name="uxsdk_topDividerEnable" format="boolean"/>
+    <attr name="uxsdk_topDividerColor" format="color|reference"/>
+    <attr name="uxsdk_topDividerMarginLeft" format="dimension|reference"/>
+    <attr name="uxsdk_topDividerHeight" format="dimension|reference"/>
+    <attr name="uxsdk_bottomDividerEnable" format="boolean"/>
+    <attr name="uxsdk_bottomDividerColor" format="color|reference"/>
+    <attr name="uxsdk_bottomDividerHeight" format="dimension|reference"/>
+    <attr name="uxsdk_bottomDividerMarginLeft" format="dimension|reference"/>
+    <declare-styleable name="DividerConstraintLayout">
+        <attr name="uxsdk_topDividerEnable"/>
+        <attr name="uxsdk_topDividerColor"/>
+        <attr name="uxsdk_topDividerHeight"/>
+        <attr name="uxsdk_topDividerMarginLeft"/>
+        <attr name="uxsdk_bottomDividerEnable"/>
+        <attr name="uxsdk_bottomDividerColor"/>
+        <attr name="uxsdk_bottomDividerHeight"/>
+        <attr name="uxsdk_bottomDividerMarginLeft"/>
+    </declare-styleable>
+
+    <attr name="uxsdk_tabs" format="reference"/>
+    <attr name="uxsdk_select" format="integer"/>
+    <attr name="uxsdk_textColor" format="color|reference"/>
+    <attr name="uxsdk_fixedSize" format="boolean"/>
+    <declare-styleable name="TabModeWidget">
+        <attr name="uxsdk_tabs"/>
+        <attr name="uxsdk_select"/>
+        <attr name="uxsdk_textSize"/>
+        <attr name="uxsdk_textColor"/>
+        <attr name="uxsdk_fixedSize"/>
+    </declare-styleable>
+
+    <declare-styleable name="TabSelectCell">
+        <attr name="uxsdk_title"/>
+        <attr name="uxsdk_summary"/>
+        <attr name="uxsdk_select"/>
+        <attr name="uxsdk_tabs"/>
+        <attr name="uxsdk_desc"/>
+    </declare-styleable>
+    <declare-styleable name="BasicRangeSeekBar">
+        <attr name="uxsdk_bar_min_value" format="float" />
+        <attr name="uxsdk_bar_max_value" format="float" />
+        <attr name="uxsdk_bar_step_value" format="float" />
+        <attr name="uxsdk_bar_height" format="dimension" />
+        <attr name="uxsdk_bar_thumbs_normal" format="reference" />
+        <attr name="uxsdk_bar_left_side_color" format="color" />
+        <attr name="uxsdk_bar_right_side_color" format="color" />
+        <attr name="uxsdk_bar_center_color" format="color" />
+    </declare-styleable>
+
+
+
+    <declare-styleable name="DividerRelativeLayout">
+        <attr name="uxsdk_topDividerEnable"/>
+        <attr name="uxsdk_bottomDividerEnable"/>
+        <attr name="uxsdk_bottomDividerColor"/>
+        <attr name="uxsdk_bottomDividerHeight"/>
+        <attr name="uxsdk_topDividerMarginLeft"/>
+        <attr name="uxsdk_bottomDividerMarginLeft"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwitcherCell">
+        <attr name="uxsdk_title"/>
+        <attr name="uxsdk_titleColor"/>
+        <attr name="uxsdk_titleTextSize"/>
+        <attr name="uxsdk_summary"/>
+        <attr name="uxsdk_summaryColor"/>
+        <attr name="uxsdk_summaryTextSize"/>
+        <attr name="uxsdk_switchToggleBg" format="reference"/>
+        <attr name="uxsdk_layout"/>
+        <attr name="uxsdk_checked"/>
+        <attr name="uxsdk_disableHint"/>
+        <attr name="uxsdk_infoPopupHint"/>
+        <attr name="uxsdk_showInfoHintIcon" format="boolean"/>
+        <attr name="uxsdk_desc"/>
+        <attr name="uxsdk_descColor" format="color|reference"/>
+        <attr name="uxsdk_descTextSize" format="dimension|reference"/>
+        <attr name="uxsdk_descMarginVertical" format="dimension|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="EditorCell">
+        <attr name="uxsdk_title"/>
+        <attr name="uxsdk_summary"/>
+        <attr name="uxsdk_tips"/>
+        <attr name="uxsdk_layout"/>
+        <attr name="uxsdk_value"/>
+        <attr name="uxsdk_number"/>
+        <attr name="uxsdk_minValue"/>
+        <attr name="uxsdk_maxValue"/>
+        <attr name="uxsdk_tipsTextSize"/>
+        <attr name="uxsdk_summaryTextSize"/>
+        <attr name="uxsdk_titleTextSize"/>
+        <attr name="uxsdk_summaryColor"/>
+        <attr name="uxsdk_editorColor" format="color|reference"/>
+        <attr name="uxsdk_editorBg" format="reference"/>
+        <attr name="uxsdk_editorWidth" format="dimension"/>
+        <attr name="uxsdk_gravityCenter" format="boolean"/>
+        <attr name="uxsdk_showLine"/>
+    </declare-styleable>
+
+    <declare-styleable name="TabGroupWidget">
+        <attr name="uxsdk_tabs"/>
+        <attr name="uxsdk_fixedSize"/>
+        <attr name="uxsdk_select"/>
+        <attr name="uxsdk_textSize"/>
+        <attr name="uxsdk_textColor"/>
+        <attr name="uxsdk_textBold" format="boolean"/>
+        <attr name="uxsdk_coverStyle"/>
+        <attr name="uxsdk_tabsPadding"/>
+    </declare-styleable>
+
+    <declare-styleable name="DividerLinearLayout">
+        <attr name="uxsdk_topDividerEnable"/>
+        <attr name="uxsdk_bottomDividerEnable"/>
+        <attr name="uxsdk_bottomDividerColor"/>
+        <attr name="uxsdk_bottomDividerHeight"/>
+        <attr name="uxsdk_topDividerMarginLeft"/>
+        <attr name="uxsdk_bottomDividerMarginLeft"/>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="TextCell">
+        <attr name="uxsdk_text_cell_subhead" format="string"/>
+        <attr name="uxsdk_text_cell_subheadColor" format="color|reference"/>
+        <attr name="uxsdk_text_cell_title"/>
+        <attr name="uxsdk_text_cell_titleColor" format="color|reference"/>
+        <attr name="uxsdk_text_cell_titleTextSize"/>
+        <attr name="uxsdk_text_cell_infoImageView" format="reference"/>
+        <attr name="uxsdk_text_cell_arrowRes" format="reference"/>
+        <attr name="uxsdk_text_cell_content"/>
+        <attr name="uxsdk_text_cell_contentColor"/>
+        <attr name="uxsdk_text_cell_contentTextSize"/>
+        <attr name="uxsdk_text_cell_arrow"/>
+        <attr name="uxsdk_text_cell_drawable" format="string|reference"/>
+        <attr name="uxsdk_text_cell_summary"/>
+        <attr name="uxsdk_text_cell_summaryColor"/>
+        <attr name="uxsdk_text_cell_summaryTextSize"/>
+        <attr name="uxsdk_text_cell_showLine"/>
+        <attr name="uxsdk_text_cell_showShortLine" format="boolean"/>
+        <attr name="uxsdk_text_cell_showHint" format="boolean"/>
+    </declare-styleable>
 </resources>

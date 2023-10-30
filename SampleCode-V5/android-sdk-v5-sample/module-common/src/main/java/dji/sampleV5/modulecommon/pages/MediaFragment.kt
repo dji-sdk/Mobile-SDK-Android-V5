@@ -15,8 +15,10 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import dji.sampleV5.modulecommon.R
 import dji.sampleV5.modulecommon.data.MEDIA_FILE_DETAILS_STR
+import dji.sampleV5.modulecommon.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.modulecommon.models.MediaVM
 import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.sdk.keyvalue.value.camera.CameraStorageLocation
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -34,11 +36,9 @@ import java.util.ArrayList
  * @time 2022/04/19 5:04 下午
  * @description:  回放下载操作界面
  */
-class MediaFragment : DJIFragment(){
-
-    private val TAG = LogUtils.getTag(this)
+class MediaFragment : DJIFragment() {
     private val mediaVM: MediaVM by activityViewModels()
-    var adapter:MediaListAdapter?= null
+    var adapter: MediaListAdapter? = null
 
     private var isload = false
     override fun onCreateView(
@@ -49,13 +49,11 @@ class MediaFragment : DJIFragment(){
         return inflater.inflate(R.layout.frag_media_page, container, false);
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initData()
     }
-
 
     private fun initData() {
 
@@ -63,9 +61,9 @@ class MediaFragment : DJIFragment(){
             mediaVM.init()
             isload = true
         }
-        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!!  , ::onItemClick )
+        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!!, ::onItemClick)
         media_recycle_list.adapter = adapter
-        mediaVM.mediaFileListData.observe(viewLifecycleOwner){
+        mediaVM.mediaFileListData.observe(viewLifecycleOwner) {
             adapter!!.notifyDataSetChanged()
             tv_list_count.text = "Count:${it.data.size}"
         }
@@ -74,27 +72,27 @@ class MediaFragment : DJIFragment(){
         mediaVM.fileListState.observe(viewLifecycleOwner) {
             if (it == MediaFileListState.UPDATING) {
                 fetch_progress?.visibility = View.VISIBLE
-            } else{
+            } else {
                 fetch_progress?.visibility = View.GONE
             }
 
-            tv_get_list_state?.setText("State:\n ${it.name}")
+            tv_get_list_state?.text = "State:\n ${it.name}"
         }
 
-        mediaVM.isPlayBack.observe(viewLifecycleOwner){
-            tv_playback.setText("isPlayingBack : ${it}")
+        mediaVM.isPlayBack.observe(viewLifecycleOwner) {
+            tv_playback.text = "isPlayingBack : ${it}"
         }
 
     }
 
-
     private fun initView() {
-        media_recycle_list.layoutManager = GridLayoutManager(context , 3)
-        btn_delete.setOnClickListener(){
-            var mediafiles = ArrayList<MediaFile>()
+        media_recycle_list.layoutManager = GridLayoutManager(context, 3)
+        btn_delete.setOnClickListener {
+            val mediafiles = ArrayList<MediaFile>()
             if (adapter?.getSelectedItems()?.size != 0) {
                 mediafiles.addAll(adapter?.getSelectedItems()!!)
-                MediaDataCenter.getInstance().mediaManager.deleteMediaFiles(mediafiles , object :CommonCallbacks.CompletionCallback {
+                MediaDataCenter.getInstance().mediaManager.deleteMediaFiles(mediafiles, object :
+                    CommonCallbacks.CompletionCallback {
                     override fun onSuccess() {
                         clearSelectFiles()
                         ToastUtils.showToast("delete success ");
@@ -110,22 +108,22 @@ class MediaFragment : DJIFragment(){
             }
 
         }
-        btn_refresh_file_list.setOnClickListener(){
-            var fetchCount = if (TextUtils.isEmpty(fetchCount.text.toString())) {
+        btn_refresh_file_list.setOnClickListener() {
+            val fetchCount = if (TextUtils.isEmpty(fetchCount.text.toString())) {
                 -1  //all
             } else {
                 fetchCount.text.toString().toInt()
             }
 
-            var mediaFileIndex = if (TextUtils.isEmpty(mediaIndex.text.toString())) {
+            val mediaFileIndex = if (TextUtils.isEmpty(mediaIndex.text.toString())) {
                 -1 //start fetch index
             } else {
                 mediaIndex.text.toString().toInt()
             }
-            mediaVM.pullMediaFileListFromCamera(mediaFileIndex , fetchCount)
+            mediaVM.pullMediaFileListFromCamera(mediaFileIndex, fetchCount)
         }
 
-        btn_select.setOnClickListener() {
+        btn_select.setOnClickListener {
             if (adapter == null) {
                 return@setOnClickListener
             }
@@ -141,10 +139,34 @@ class MediaFragment : DJIFragment(){
             updateDeleteBtn(adapter?.selectionMode!!)
         }
 
+        btn_set_xmp_custom_info.setOnClickListener {
+            KeyValueDialogUtil.showInputDialog(
+                activity, "xmp custom info",
+                "MSDK_V5", "", false
+            ) {
+                it?.let {
+                    mediaVM.setMediaFileXMPCustomInfo(it)
+                }
+            }
+        }
+
+        btn_get_xmp_custom_info.setOnClickListener {
+            mediaVM.getMediaFileXMPCustomInfo()
+        }
 
         sp_choose_component.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
                 mediaVM.setComponentIndex(ComponentIndexType.find(index))
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //do nothing
+            }
+        }
+
+        sp_choose_storage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+                mediaVM.setStorage(CameraStorageLocation.find(index))
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -161,19 +183,18 @@ class MediaFragment : DJIFragment(){
         }
 
         btn_take_photo.setOnClickListener {
-            mediaVM.takePhoto(object :CommonCallbacks.CompletionCallback{
+            mediaVM.takePhoto(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
-                   ToastUtils.showToast("take photo success")
+                    ToastUtils.showToast("take photo success")
                 }
 
                 override fun onFailure(error: IDJIError) {
                     ToastUtils.showToast("take photo failed")
                 }
-
             })
         }
-
     }
+
     private fun updateDeleteBtn(enable: Boolean) {
         btn_delete.isEnabled = enable
     }
@@ -183,15 +204,19 @@ class MediaFragment : DJIFragment(){
         adapter?.notifyDataSetChanged()
     }
 
-    private fun onItemClick(mediaFile: MediaFile , view: View){
+    private fun onItemClick(mediaFile: MediaFile, view: View) {
 
-        ViewCompat.setTransitionName(view, mediaFile.fileName );
+        ViewCompat.setTransitionName(view, mediaFile.fileName);
+
         val extra = FragmentNavigatorExtras(
             view to "tansitionImage"
         )
 
-        Navigation.findNavController(view).navigate( R.id.media_details_page , bundleOf(
-            MEDIA_FILE_DETAILS_STR to mediaFile   ) , null , extra)
+        Navigation.findNavController(view).navigate(
+            R.id.media_details_page, bundleOf(
+                MEDIA_FILE_DETAILS_STR to mediaFile
+            ), null, extra
+        )
 
     }
 
@@ -205,6 +230,4 @@ class MediaFragment : DJIFragment(){
         mediaVM.destroy()
         adapter = null
     }
-
-
 }

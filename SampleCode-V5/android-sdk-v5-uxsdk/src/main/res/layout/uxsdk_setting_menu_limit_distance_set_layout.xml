@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:tag="setting:multi_rc:flyc">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <dji.v5.ux.core.base.EditorCell
+            android:id="@+id/setting_menu_aircraft_goHomeAttitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="afterDescendants"
+            android:tag="setting:multi_rc:default"
+            app:uxsdk_summary="@string/uxsdk_setting_menu_flyc_gohome_altitude_title"
+            app:uxsdk_tips="20~1500m"
+            app:uxsdk_value="120"
+            app:uxsdk_number="true"
+            app:uxsdk_minValue="20"
+            app:uxsdk_maxValue="1500"
+            app:uxsdk_bottomDividerEnable="false"
+            />
+        <dji.v5.ux.core.base.EditorCell
+            android:id="@+id/setting_menu_aircraft_maxHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="setting:multi_rc:default"
+            app:uxsdk_summary="@string/uxsdk_setting_menu_flyc_max_height_title"
+            app:uxsdk_tips="20~1500m"
+            app:uxsdk_value="120"
+            app:uxsdk_number="true"
+            app:uxsdk_minValue="20"
+            app:uxsdk_maxValue="1500"
+            />
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/setting_menu_aircraft_maxRadius_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="setting:multi_rc:default"
+        app:uxsdk_summary="@string/uxsdk_setting_menu_flyc_max_radius_title"
+        android:visibility="visible"
+        />
+
+    <dji.v5.ux.core.base.EditorCell
+        android:id="@+id/setting_menu_aircraft_maxRadius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="setting:multi_rc:default"
+        app:uxsdk_summary="@string/uxsdk_setting_menu_flyc_max_radius_title_limit"
+        app:uxsdk_tips="15~8000m"
+        app:uxsdk_value="500"
+        app:uxsdk_number="true"
+        app:uxsdk_minValue="15"
+        app:uxsdk_maxValue="8000"
+        />
+
+
+    </LinearLayout>
+</merge>

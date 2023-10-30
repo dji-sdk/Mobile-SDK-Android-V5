@@ -31,7 +31,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -44,6 +48,8 @@ import androidx.core.widget.ImageViewCompat;
  * Utility class for converting and applying changes to Views.
  */
 public final class ViewUtil {
+
+    private static final Handler UI_Handler = new Handler(Looper.getMainLooper());
 
     private ViewUtil() {
         // Util class
@@ -116,7 +122,19 @@ public final class ViewUtil {
      * @param duration How long to display the toast.
      */
     public static void showToast(Context context, String message, int duration) {
-        Toast.makeText(context, message, duration).show();
+        if (context == null) {
+            return;
+        }
+        Runnable runnable = () -> Toast.makeText(context, message, duration).show();
+        if (UI_Handler.getLooper().isCurrentThread()) {
+            runnable.run();
+        } else {
+            UI_Handler.post(runnable);
+        }
+    }
+
+    public static void showToast(Context context, String message) {
+        showToast(context, message, Toast.LENGTH_SHORT);
     }
 
     public static boolean dispatchKeyEvent(Context context, KeyEvent keyEvent) {
@@ -142,6 +160,18 @@ public final class ViewUtil {
             }
         }
         return null;
+    }
+
+    public static void setKeepScreen(Activity activity, boolean isKeep) {
+        Window window = activity.getWindow();
+        if (window == null) {
+            return;
+        }
+        if (isKeep) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
 
 }

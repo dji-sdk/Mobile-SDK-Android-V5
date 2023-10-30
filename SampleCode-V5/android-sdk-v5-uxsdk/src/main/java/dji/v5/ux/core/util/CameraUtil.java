@@ -25,23 +25,30 @@ package dji.v5.ux.core.util;
 
 import android.content.res.Resources;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import dji.sdk.keyvalue.value.camera.CameraAperture;
 import dji.sdk.keyvalue.value.camera.CameraExposureCompensation;
 import dji.sdk.keyvalue.value.camera.CameraFlatMode;
 import dji.sdk.keyvalue.value.camera.CameraISO;
 import dji.sdk.keyvalue.value.camera.CameraShutterSpeed;
+import dji.sdk.keyvalue.value.camera.CameraType;
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType;
 import dji.sdk.keyvalue.value.camera.PhotoFileFormat;
 import dji.sdk.keyvalue.value.camera.VideoFrameRate;
 import dji.sdk.keyvalue.value.camera.VideoResolution;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
+import dji.sdk.keyvalue.value.payload.PayloadCameraType;
 import dji.v5.common.video.stream.PhysicalDevicePosition;
 import dji.v5.ux.R;
 
@@ -74,6 +81,29 @@ public final class CameraUtil {
 
     private static final String EV_SUBSTITUENT4 = "P";
     private static final String EV_SUPPLANTER4 = ".";
+
+    private static final String DEFAULT_PAYLOAD_NAME = "Payload Camera";
+
+    private final static Map<CameraType, String> CAMERA_TYPE_STRING_MAP = new HashMap<CameraType, String>();
+
+    static {
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_XT, "XT");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_X30, "X30");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_XT2, "XT2");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.PAYLOAD, DEFAULT_PAYLOAD_NAME);
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_XTS, "XT S");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_H20, "H20");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_H20T, "H20T");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_H20N, "H20N");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.M200_V2_CAMERA, "FPV");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.M30, "M30");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.M30T, "M30T");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.M3E, "M3E");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.M3T, "M3T");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.M3M, "M3M");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_L1, "L1");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_P1, "P1");
+    }
 
     private CameraUtil() {
         // prevent instantiation of util class
@@ -354,4 +384,47 @@ public final class CameraUtil {
                 lensType == CameraLensType.CAMERA_LENS_MS_NIR ||
                 lensType == CameraLensType.CAMERA_LENS_MS_NDVI;
     }
+
+    public static String getCameraDisplayName(CameraType cameraType) {
+        String name = CAMERA_TYPE_STRING_MAP.get(cameraType);
+        if (name == null) {
+            name = "";
+        }
+        return name;
+    }
+
+    public static String getPayloadCameraName(PayloadCameraType payloadCameraType) {
+        String name = "UNKNOWN";
+        switch (payloadCameraType) {
+            case EP600:
+                name = "P1";
+                break;
+            case EP800:
+                name = "L1";
+                break;
+            default:
+                break;
+        }
+
+        return name;
+    }
+
+    public static List<ComponentIndexType> getConnectionCameraList(
+            boolean cameraConnection1,
+            boolean cameraConnection2,
+            boolean cameraConnection3
+    ) {
+        List<ComponentIndexType> list = new ArrayList<>();
+        if (cameraConnection1) {
+            list.add(ComponentIndexType.LEFT_OR_MAIN);
+        }
+        if (cameraConnection2) {
+            list.add(ComponentIndexType.RIGHT);
+        }
+        if (cameraConnection3) {
+            list.add(ComponentIndexType.UP);
+        }
+        return list;
+    }
+
 }

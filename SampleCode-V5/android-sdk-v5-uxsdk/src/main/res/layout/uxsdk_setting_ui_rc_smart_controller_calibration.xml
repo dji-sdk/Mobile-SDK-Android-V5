@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dji.v5.ux.remotecontroller.calibration.SmartControllerCalibrationView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/setting_ui_rc_calibration_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <dji.v5.ux.remotecontroller.calibration.CalibrationRadioButton
+            android:id="@+id/setting_ui_rc_calibration_stick_rg"
+            style="@style/camera_raw_settings_sg_radio_button"
+            android:layout_width="@dimen/uxsdk_90_dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:background="@drawable/uxsdk_edit_radiobutton_tab_bg"
+            android:textSize="@dimen/uxsdk_12_dp"
+            android:text="@string/setting_ui_rc_calibration_stick_label" />
+
+        <dji.v5.ux.remotecontroller.calibration.CalibrationRadioButton
+            android:id="@+id/setting_ui_rc_calibration_wheel_rg"
+            style="@style/camera_raw_settings_sg_radio_button"
+            android:background="@drawable/uxsdk_edit_radiobutton_tab_bg"
+            android:layout_width="@dimen/uxsdk_90_dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/uxsdk_12_dp"
+            android:text="@string/setting_ui_rc_calibration_dial_label" />
+    </RadioGroup>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/calibration_pages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/uxsdk_12_dp"
+        android:background="@color/uxsdk_transparent"/>
+
+    <View
+        android:id="@+id/sc_calibration_btn_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/uxsdk_setting_ui_item_divider_color" />
+
+    <Button
+        android:id="@+id/fpv_rcsetting_cele_btn"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:background="@drawable/uxsdk_selector_blue_rect_mask"
+        android:textSize="14sp"
+        android:textColor="@color/uxsdk_rc_calibration_btn_txt"
+        android:text="@string/setting_ui_rc_cal"
+        android:textAllCaps="false"/>
+
+    <View style="@style/HorizontalDivider"/>
+</dji.v5.ux.remotecontroller.calibration.SmartControllerCalibrationView>

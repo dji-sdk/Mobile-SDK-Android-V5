@@ -352,4 +352,122 @@
         <item name="lineHeight">@dimen/uxsdk_14_dp</item>
     </style>
 
+    <style name="Widget.TextView.BatteryInfoName" parent="">
+        <item name="android:minHeight">@dimen/uxsdk_24_dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="uxsdk_setting_ui_item_txt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/uxsdk_setting_menu_rtk_common_title_txt</item>
+        <item name="android:textSize">@dimen/uxsdk_14_dp</item>
+    </style>
+
+    <style name="uxsdk_setting_ui_desc_txt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/uxsdk_dic_color_c24_white_Transparent6</item>
+        <item name="android:textSize">@dimen/uxsdk_dic_text_size_12sp</item>
+    </style>
+
+    <style name="NoTitleDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="colorAccent">@color/uxsdk_dic_color_c9_blue</item>
+    </style>
+
+    <style name="uxsdk_horizontal_divider_medium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/uxsdk_divider_size_medium</item>
+        <item name="android:background">@color/uxsdk_dic_color_c20_divider</item>
+    </style>
+
+    <style name="uxsdk_setting_circle">
+        <item name="android:layout_width">9dp</item>
+        <item name="android:layout_height">9dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/uxsdk_selector_setting_circle</item>
+    </style>
+
+
+    <style name="MissionPanelTabStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/uxsdk_text_size_small</item>
+        <item name="android:textStyle">normal</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="setting_ui_item_edittext">
+        <item name="android:layout_width">@dimen/uxsdk_140_dp</item>
+        <item name="android:layout_height">@dimen/uxsdk_30_dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/uxsdk_dic_color_c10_sea_blue</item>
+        <item name="android:textSize">@dimen/uxsdk_dic_text_size_18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:background">@drawable/uxsdk_setting_ui_item_edittext</item>
+    </style>
+
+    <style name="setting_ui_item_btn_big">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/uxsdk_dic_color_c10_sea_blue_state</item>
+        <item name="android:textSize">@dimen/uxsdk_dic_text_size_18sp</item>
+        <item name="android:paddingBottom">1dp</item>
+    </style>
+
+    <style name="sg_radio_button">
+        <item name="android:textColor">@drawable/uxsdk_button_text_color</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:minHeight">33dp</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
+    <style name="camera_raw_settings_sg_radio_button" parent="@style/sg_radio_button">
+        <item name="android:minHeight">@dimen/uxsdk_30_dp</item>
+    </style>
+
+    <style name="HorizontalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#33ffffff</item>
+        <!--        <item name="android:contentDescription">@string/app_name</item>-->
+    </style>
+
+    <style name="setting_ui_txt_gray">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/uxsdk_setting_ui_battery_txt_gray</item>
+        <item name="android:textSize">@dimen/uxsdk_14_dp</item>
+    </style>
+
+    <style name="setting_ui_txt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/uxsdk_dic_color_c8_white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <declare-styleable name="DJICalProgressBar">
+        <attr name="uxsdk_orientation_sb" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+
 </resources>

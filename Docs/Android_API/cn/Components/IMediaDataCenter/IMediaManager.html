@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -124,7 +124,7 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntMinMax</a>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
                                       </dd>
@@ -679,75 +679,93 @@
 <p><font color="#666">删除相机中的多媒体文件。调用此接口后，多媒体文件列表状态<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code>会变成<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_updating">UPDATING</a></code>，当删除操作完成以后，多媒体文件列表状态<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate">MediaFileListState</a></code>为<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_up_to_date">UP_TO_DATE</a></code>，请调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code>更新多媒体文件列表数据。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v7">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">List&lt;<a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_mediafile">MediaFile</a>&gt; <font color="#000">files</font></font></td><td><font color="#666"><i>需要删除的多媒体文件列表。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_setmediafilexmpcustominfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_setmediafilexmpcustominfo_inline">setMediaFileXMPCustomInfo</a></div></div><div class="inline-doc" id="imediamanager_setmediafilexmpcustominfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>setMediaFileXMPCustomInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMediaFileXMPCustomInfo</span><span class="params">(@NonNull String information, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v13">描述：</h5>
+<p><font color="#666">设置XMP自定义信息。设置成功后，每次生成照片文件，XMP自定义信息都会存储在照片文件的XMP元数据中。你可以调用MdeiaFile类中的<code><a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_imediafile_pullxmpcustominfofromcamera">pullXMPCustomInfoFromCamera</a></code>方法从相机中拉取指定照片文件的XMP自定义信息。 <br><b>注意：<br> 1. 一次设置多次有效，相机重启后会把自定义信息清除，需要重新设置。<br> 2. 目前只支持Zenmuse H20系列相机，Zenmuse L1相机，Zenmuse P1相机。</b> <br><br><code><i>MSDK 5.7.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v8">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">information</font></font></td><td><font color="#666"><i>需要设置的XMP自定义信息。使用UTF-8编码，长度小于或等于31个字符。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediamanager_getmediafilexmpcustominfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_getmediafilexmpcustominfo_inline">getMediaFileXMPCustomInfo</a></div></div><div class="inline-doc" id="imediamanager_getmediafilexmpcustominfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getMediaFileXMPCustomInfo</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getMediaFileXMPCustomInfo</span><span class="params">(@NonNull <span class="keyword">final</span> CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v14">描述：</h5>
+<p><font color="#666">获取设置的XMP自定义信息。 <br><br><code><i>MSDK 5.7.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v9">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull final <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;String&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_playvideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_playvideo_inline">playVideo</a></div></div><div class="inline-doc" id="imediamanager_playvideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>playVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">playVideo</span><span class="params">(MediaFile mediaFile, CommonCallbacks.CompletionCallbackWithParam&lt;IVideoFrame&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v13">描述：</h5>
+<h5 id="描述：-v15">描述：</h5>
 <p><font color="#666">开始播放设置的多媒体文件，媒体文件数据通过回调方法的获取。 <br><li>1. 如果你希望自己实现解码以播放视频，你通过callback中获取到的视频帧数据<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoFrame.html#ivideostreammanager_ivideoframe">IVideoFrame</a></code>,调用自定义解码器进行解码以播放视频。</li> <li>2. 你也可以使用DJI提供的解码器<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder">IVideoDecoder</a></code>来进行解码以播放视频。用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_videochanneltype_extendedstreamchannel">EXTENDED_STREAM_CHANNEL</a></code>初始化<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder">IVideoDecoder</a></code>，然后调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder_setmediafile">setMediaFile</a></code>把需要解码的媒体文件设置到解码器中，最后调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder_queueinframe">queueInFrame</a></code>将callback中获取到的视频帧数据<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoFrame.html#ivideostreammanager_ivideoframe">IVideoFrame</a></code>送入队列进行解码。</li> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v8">输入参数：</h5>
+<h5 id="输入参数：-v10">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager_MediaFile.html#imediamanager_mediafile">MediaFile</a> <font color="#000">mediaFile</font></font></td><td><font color="#666"><i>需要播放的多媒体文件。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoFrame.html#ivideostreammanager_ivideoframe">IVideoFrame</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_seekvideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_seekvideo_inline">seekVideo</a></div></div><div class="inline-doc" id="imediamanager_seekvideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>seekVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">seekVideo</span><span class="params">(<span class="keyword">int</span> position, CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v14">描述：</h5>
+<h5 id="描述：-v16">描述：</h5>
 <p><font color="#666">跳转播放多媒体文件。可以设置新的播放位置开始播放。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v9">输入参数：</h5>
+<h5 id="输入参数：-v11">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int <font color="#000">position</font></font></td><td><font color="#666"><i>需要跳转播放的位置，单位：秒。</i></font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_pausevideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_pausevideo_inline">pauseVideo</a></div></div><div class="inline-doc" id="imediamanager_pausevideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>pauseVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pauseVideo</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v15">描述：</h5>
+<h5 id="描述：-v17">描述：</h5>
 <p><font color="#666">暂停播放多媒体文件。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v10">输入参数：</h5>
+<h5 id="输入参数：-v12">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_resumevideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_resumevideo_inline">resumeVideo</a></div></div><div class="inline-doc" id="imediamanager_resumevideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>resumeVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resumeVideo</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v16">描述：</h5>
+<h5 id="描述：-v18">描述：</h5>
 <p><font color="#666">恢复播放多媒体文件。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v11">输入参数：</h5>
+<h5 id="输入参数：-v13">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_stopvideo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_stopvideo_inline">stopVideo</a></div></div><div class="inline-doc" id="imediamanager_stopvideo_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>stopVideo</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stopVideo</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v17">描述：</h5>
+<h5 id="描述：-v19">描述：</h5>
 <p><font color="#666">停止播放多媒体文件。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v12">输入参数：</h5>
+<h5 id="输入参数：-v14">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_addvideoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_addvideoplaystatelistener_inline">addVideoPlayStateListener</a></div></div><div class="inline-doc" id="imediamanager_addvideoplaystatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>addVideoPlayStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addVideoPlayStateListener</span><span class="params">(VideoPlayStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v18">描述：</h5>
+<h5 id="描述：-v20">描述：</h5>
 <p><font color="#666">设置多媒体文件播放状态监听器。通过此监听器可以监听多媒体文件播放的状态。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v13">输入参数：</h5>
+<h5 id="输入参数：-v15">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStateListener.html#imediamanager_videoplaystatelistener">VideoPlayStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>多媒体文件播放状态监听器</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_removevideoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_removevideoplaystatelistener_inline">removeVideoPlayStateListener</a></div></div><div class="inline-doc" id="imediamanager_removevideoplaystatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeVideoPlayStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeVideoPlayStateListener</span><span class="params">(VideoPlayStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v19">描述：</h5>
+<h5 id="描述：-v21">描述：</h5>
 <p><font color="#666">删除多媒体文件播放状态监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v14">输入参数：</h5>
+<h5 id="输入参数：-v16">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager_VideoPlayStateListener.html#imediamanager_videoplaystatelistener">VideoPlayStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>多媒体文件播放状态监听器</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediamanager_removeallvideoplaystatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_removeallvideoplaystatelistener_inline">removeAllVideoPlayStateListener</a></div></div><div class="inline-doc" id="imediamanager_removeallvideoplaystatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeAllVideoPlayStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeAllVideoPlayStateListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v20">描述：</h5>
+<h5 id="描述：-v22">描述：</h5>
 <p><font color="#666">删除所有多媒体文件列表播放监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="imediamanager_release"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediamanager_release_inline">release</a></div></div><div class="inline-doc" id="imediamanager_release_inline" <blockquote>
@@ -755,7 +773,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v21">描述：</h5>
+<h5 id="描述：-v23">描述：</h5>
 <p><font color="#666">资源释放。调用此接口将会取消多媒体文件数据下载，清空缩略图缓存，清空多媒体文件列表数据。建议你在系统内存不足的时候调用。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <h5 id="related">Related:</h5>
@@ -764,7 +782,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MediaFileFilter</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
-<h5 id="描述：-v22">描述：</h5>
+<h5 id="描述：-v24">描述：</h5>
 <p><font color="#666">拉取多媒体文件列表过滤器设置类。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafilefilter_video_inline"></a>VIDEO</font></td><td><font color="#666">视频。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafilefilter_photo_inline"></a>PHOTO</font></td><td><font color="#666">照片。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafilefilter_all_inline"></a>ALL</font></td><td><font color="#666">所有多媒体文件。</font></td></tr></table></html>
@@ -775,7 +793,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MediaFileListState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
-<h5 id="描述：-v23">描述：</h5>
+<h5 id="描述：-v25">描述：</h5>
 <p><font color="#666">多媒体文件列表状态。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafileliststate_idle_inline"></a>IDLE</font></td><td><font color="#666">空闲状态。当多媒体文件列表为空闲状态时，需要调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_pullmediafilelistfromcamera">pullMediaFileListFromCamera</a></code>从相机中拉取全量数据。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafileliststate_up_to_date_inline"></a>UP_TO_DATE</font></td><td><font color="#666">最新状态。当多媒体文件列表为最新状态时，需要调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code>更新多媒体文件列表数据。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_mediafileliststate_updating_inline"></a>UPDATING</font></td><td><font color="#666">更新中状态。当多媒体文件列表为更新中状态时，表示MSDK正在跟相机中的数据进行同步，当同步完成后，状态会变成<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_mediafileliststate_up_to_date">UP_TO_DATE</a></code>,需要调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_getmediafilelistdata">getMediaFileListData</a></code>更新多媒体文件列表数据。</font></td></tr></table></html>
@@ -786,7 +804,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> VideoPlayState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.media</font></td></tr></table></html>
-<h5 id="描述：-v24">描述：</h5>
+<h5 id="描述：-v26">描述：</h5>
 <p><font color="#666">多媒体文件播放状态枚举类型。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v3">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_idle_inline"></a>IDLE</font></td><td><font color="#666">空闲状态。未开启多媒体文件播放功能，可以调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_playvideo">playVideo</a></code>进行多媒体文件播放。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_playing_inline"></a>PLAYING</font></td><td><font color="#666">播放中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_ended_inline"></a>ENDED</font></td><td><font color="#666">播放结束。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imediamanager_videoplaystate_stopped_inline"></a>STOPPED</font></td><td><font color="#666">停止播放。当调用<code><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager_stopvideo">stopVideo</a></code>接口成功停止播放多媒体文件后会回调此状态。</font></td></tr></table></html>

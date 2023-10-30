@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <shape>
+            <corners
+                android:bottomLeftRadius="@dimen/tab_border_radius"
+                android:topLeftRadius="@dimen/tab_border_radius"/>
+            <solid
+                android:color="@color/uxsdk_theme_fpv_dark_main"/>
+            <stroke
+                android:width="@dimen/tab_border_width"
+                android:color="@color/uxsdk_theme_fpv_dark_main"/>
+        </shape>
+    </item>
+
+    <item android:state_checked="true">
+        <shape>
+            <corners
+                android:bottomLeftRadius="@dimen/tab_border_radius"
+                android:topLeftRadius="@dimen/tab_border_radius"/>
+            <solid
+                android:color="@color/uxsdk_theme_fpv_dark_main"/>
+            <stroke
+                android:width="@dimen/tab_border_width"
+                android:color="@color/uxsdk_theme_fpv_dark_main"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <corners
+                android:bottomLeftRadius="@dimen/tab_border_radius"
+                android:topLeftRadius="@dimen/tab_border_radius"/>
+
+            <solid
+                android:color="@color/uxsdk_transparent"/>
+
+            <stroke
+                android:width="@dimen/tab_border_width"
+                android:color="@color/uxsdk_theme_fpv_dark_main"/>
+        </shape>
+    </item>
+</selector>   

@@ -56,10 +56,12 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
             override fun onSuccess() {
                 enterPlaybackSuccess = true
                 LogUtils.e(TAG , "enter success");
+                operate.visibility = View.VISIBLE
             }
 
             override fun onFailure(error: IDJIError) {
                 enterPlaybackSuccess = false
+                operate.visibility = View.INVISIBLE
                 LogUtils.e(TAG , "enter failed" + error.description());
             }
 
@@ -100,6 +102,11 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
 
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MediaDataCenter.getInstance().mediaManager.pauseVideo(null)
     }
 
 

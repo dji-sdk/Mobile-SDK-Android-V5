@@ -18,6 +18,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import dji.sampleV5.modulecommon.R
+import dji.sampleV5.modulecommon.data.DJIToastResult
 import dji.sampleV5.modulecommon.data.MEDIA_FILE_DETAILS_STR
 import dji.sampleV5.modulecommon.models.MediaDetailsVM
 import dji.sampleV5.modulecommon.models.MediaVM
@@ -42,11 +43,12 @@ import dji.sampleV5.modulecommon.util.ToastUtils
  * @time 2022/04/25 9:18 下午
  * @description:
  */
-class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
+class MediaFileDetailsFragment : DJIFragment(), View.OnClickListener {
     private val mediaDetailsVM: MediaDetailsVM by activityViewModels()
     var mediaFile: MediaFile? = null
-    var mediaFileDir  = "/mediafile"
+    var mediaFileDir = "/mediafile"
     lateinit var image: ImageView
+
     @Nullable
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,10 +75,12 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
         preview_file.setOnClickListener(this)
         download_file.setOnClickListener(this)
         cancel_download.setOnClickListener(this)
+        pull_xmp_file_data.setOnClickListener(this)
+        pull_xmp_custom_info.setOnClickListener(this)
     }
 
 
-    private fun initTransition(){
+    private fun initTransition() {
         sharedElementEnterTransition = DetailsTransition()
         enterTransition = Fade()
         sharedElementReturnTransition = DetailsTransition()
@@ -90,9 +94,9 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        when(view?.id){
+        when (view?.id) {
             R.id.preview_file -> {
-              fetchPreview()
+                fetchPreview()
             }
             R.id.download_file -> {
                 downloadFile()
@@ -107,17 +111,28 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
                 }
             }
 
+            R.id.pull_xmp_file_data -> {
+                pullXMPFileDataFromCamera()
+            }
+
+            R.id.pull_xmp_custom_info -> {
+                pullXMPCustomInfoFromCamera()
+            }
         }
     }
 
     private fun enterVideoPage() {
-        Navigation.findNavController(image).navigate( R.id.video_play_page , bundleOf(
-            MEDIA_FILE_DETAILS_STR to mediaFile   ) , )
+        Navigation.findNavController(image).navigate(
+            R.id.video_play_page,
+            bundleOf(
+                MEDIA_FILE_DETAILS_STR to mediaFile
+            ),
+        )
     }
 
-
-    fun fetchPreview(){
-        mediaFile?.pullPreviewFromCamera(object :CommonCallbacks.CompletionCallbackWithParam<Bitmap>{
+    private fun fetchPreview() {
+        mediaFile?.pullPreviewFromCamera(object :
+            CommonCallbacks.CompletionCallbackWithParam<Bitmap> {
             override fun onSuccess(t: Bitmap?) {
 
                 AndroidSchedulers.mainThread().scheduleDirect {
@@ -125,14 +140,15 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
                     Glide.with(ContextUtil.getContext()).load(t).into(image)
                 }
             }
+
             override fun onFailure(error: IDJIError) {
-                LogUtils.e("MediaFile" , "fetch preview failed$error" )
+                LogUtils.e("MediaFile", "fetch preview failed$error")
             }
 
         })
     }
 
-    fun downloadFile(){
+    private fun downloadFile() {
         val dirs: File = File(DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), mediaFileDir))
         if (!dirs.exists()) {
             dirs.mkdirs()
@@ -140,20 +156,20 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
 
         val filepath = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), mediaFileDir + "/" + mediaFile?.fileName)
         val file: File = File(filepath)
-        var offset : Long = 0L
+        var offset: Long = 0L
         if (file.exists()) {
             offset = file.length();
         }
-        val outputStream = FileOutputStream(file,true)
+        val outputStream = FileOutputStream(file, true)
         val bos = BufferedOutputStream(outputStream)
         var beginTime = System.currentTimeMillis()
-        mediaFile?.pullOriginalMediaFileFromCamera(offset , object :MediaFileDownloadListener {
+        mediaFile?.pullOriginalMediaFileFromCamera(offset, object : MediaFileDownloadListener {
             override fun onStart() {
                 showProgress()
             }
 
             override fun onProgress(total: Long, current: Long) {
-                updateProgress(offset , current , total)
+                updateProgress(offset, current, total)
             }
 
             override fun onRealtimeDataUpdate(data: ByteArray, position: Long) {
@@ -161,36 +177,43 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
                     bos.write(data)
                     bos.flush()
                 } catch (e: IOException) {
-                    LogUtils.e("MediaFile" , "write error" + e.message)
+                    LogUtils.e("MediaFile", "write error" + e.message)
                 }
             }
 
             override fun onFinish() {
-                var spendTime = (System.currentTimeMillis() - beginTime)
-                var speedBytePerMill : Float? = mediaFile?.fileSize?.div(spendTime.toFloat())
-                var divs = 1000.div(1024 * 1024.toFloat());
-                var speedKbPerSecond : Float?= speedBytePerMill?.times(divs)
 
-                ToastUtils.showToast(getString(R.string.msg_download_compelete_tips) + "${speedKbPerSecond }Mbps"
-                        + getString(R.string.msg_download_save_tips) + "${filepath}"  )
+                var spendTime = (System.currentTimeMillis() - beginTime)
+                var speedBytePerMill: Float? = mediaFile?.fileSize?.div(spendTime.toFloat())
+                var divs = 1000.div(1024 * 1024.toFloat());
+                var speedKbPerSecond: Float? = speedBytePerMill?.times(divs)
+
+                if (mediaFile!!.fileSize <= offset) {
+                    ToastUtils.showToast(getString(R.string.already_download))
+                } else {
+                    ToastUtils.showToast(
+                        getString(R.string.msg_download_compelete_tips) + "${speedKbPerSecond}Mbps"
+                                + getString(R.string.msg_download_save_tips) + "${filepath}"
+                    )
+                }
                 hideProgress()
                 try {
                     outputStream.close()
                     bos.close()
                 } catch (error: IOException) {
-                    LogUtils.e("MediaFile" , "close error$error" )
+                    LogUtils.e("MediaFile", "close error$error")
                 }
             }
 
             override fun onFailure(error: IDJIError?) {
-                LogUtils.e("MediaFile" , "download error$error" )
+                LogUtils.e("MediaFile", "download error$error")
             }
 
         })
     }
 
-    fun cancleDownload(){
-        mediaFile?.stopPullOriginalMediaFileFromCamera(object:CommonCallbacks.CompletionCallback{
+    private fun cancleDownload() {
+        mediaFile?.stopPullOriginalMediaFileFromCamera(object : CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
                 hideProgress()
             }
@@ -199,28 +222,51 @@ class MediaFileDetailsFragment : DJIFragment() ,View.OnClickListener {
                 hideProgress()
 
             }
-
         })
     }
 
+    private fun pullXMPFileDataFromCamera() {
+        mediaFile?.pullXMPFileDataFromCamera(object :
+            CommonCallbacks.CompletionCallbackWithParam<String> {
+            override fun onSuccess(s: String) {
+                ToastUtils.showToast(s)
+            }
 
-    fun showProgress(){
-        progressContainer.setVisibility(View.VISIBLE)
-
+            override fun onFailure(error: IDJIError) {
+                ToastUtils.showToast(error.toString())
+            }
+        })
     }
 
-    fun updateProgress(offset : Long , currentsize:Long , total:Long){
-        var fullSize = offset + total;
-        var downloadedSize = offset + currentsize
-        progressBar.setMax(fullSize.toInt())
-        progressBar.setProgress(downloadedSize.toInt())
+    private fun pullXMPCustomInfoFromCamera() {
+        mediaFile?.pullXMPCustomInfoFromCamera(object :
+            CommonCallbacks.CompletionCallbackWithParam<String> {
+            override fun onSuccess(s: String) {
+                ToastUtils.showToast(s)
+            }
+
+            override fun onFailure(error: IDJIError) {
+                ToastUtils.showToast(error.toString())
+            }
+        })
+    }
+
+    fun showProgress() {
+        progressContainer.visibility = View.VISIBLE
+    }
+
+    fun updateProgress(offset: Long, currentsize: Long, total: Long) {
+        val fullSize = offset + total;
+        val downloadedSize = offset + currentsize
+        progressBar.max = fullSize.toInt()
+        progressBar.progress = downloadedSize.toInt()
         val data: Double = StringUtils.formatDouble((downloadedSize.toDouble() / fullSize.toDouble()))
         val result: String = StringUtils.formatDouble(data * 100, "#0").toString() + "%"
-        progressInfo.setText(result)
+        progressInfo.text = result
     }
 
-    fun hideProgress(){
-        progressContainer.setVisibility(View.GONE)
+    fun hideProgress() {
+        progressContainer.visibility = View.GONE
     }
 
 }

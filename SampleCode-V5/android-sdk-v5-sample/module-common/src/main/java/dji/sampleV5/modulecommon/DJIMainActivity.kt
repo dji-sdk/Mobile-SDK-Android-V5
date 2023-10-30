@@ -11,7 +11,6 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import dji.sampleV5.modulecommon.models.BaseMainActivityVm
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
 import dji.sampleV5.modulecommon.models.MSDKManagerVM
@@ -70,12 +69,22 @@ abstract class DJIMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 有一些手机从系统桌面进入的时候可能会重启main类型的activity
+        // 需要校验这种情况，业界标准做法，基本所有app都需要这个
+        if (!isTaskRoot) {
+            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN == intent.action) {
+                finish()
+                return
+            }
+        }
+
         window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            systemUiVisibility =
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
 
         initMSDKInfoView()
-        observeSDKManagerStatus()
+        observeSDKManager()
         checkPermissionAndRequest()
     }
 
@@ -119,12 +128,12 @@ abstract class DJIMainActivity : AppCompatActivity() {
         }
         view_base_info.setOnClickListener {
             baseMainActivityVm.doPairing {
-                ToastUtils.showToast(it)
+                showToast(it)
             }
         }
     }
 
-    private fun observeSDKManagerStatus() {
+    private fun observeSDKManager() {
         msdkManagerVM.lvRegisterState.observe(this) { resultPair ->
             val statusText: String?
             if (resultPair.first) {
@@ -135,27 +144,32 @@ abstract class DJIMainActivity : AppCompatActivity() {
                     prepareUxActivity()
                 }, 5000)
             } else {
-                ToastUtils.showToast("Register Failure: ${resultPair.second}")
+                showToast("Register Failure: ${resultPair.second}")
                 statusText = StringUtils.getResStr(this, R.string.unregistered)
             }
             text_view_registered.text = StringUtils.getResStr(R.string.registration_status, statusText)
         }
 
         msdkManagerVM.lvProductConnectionState.observe(this) { resultPair ->
-            ToastUtils.showToast("Product: ${resultPair.second} ,ConnectionState:  ${resultPair.first}")
+            showToast("Product: ${resultPair.second} ,ConnectionState:  ${resultPair.first}")
         }
 
         msdkManagerVM.lvProductChanges.observe(this) { productId ->
-            ToastUtils.showToast("Product: $productId Changed")
+            showToast("Product: $productId Changed")
         }
 
         msdkManagerVM.lvInitProcess.observe(this) { processPair ->
-            ToastUtils.showToast("Init Process event: ${processPair.first.name}")
+            showToast("Init Process event: ${processPair.first.name}")
         }
 
         msdkManagerVM.lvDBDownloadProgress.observe(this) { resultPair ->
-            ToastUtils.showToast("Database Download Progress current: ${resultPair.first}, total: ${resultPair.second}")
+            showToast("Database Download Progress current: ${resultPair.first}, total: ${resultPair.second}")
         }
+    }
+
+    private fun showToast(content: String) {
+        ToastUtils.showToast(content)
+
     }
 
 
@@ -212,6 +226,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
         disposable.dispose()
         ToastUtils.destroy()
     }

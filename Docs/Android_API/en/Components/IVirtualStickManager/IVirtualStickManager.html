@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -124,7 +124,7 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntMinMax</a>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
                                       </dd>
@@ -588,7 +588,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enableVirtualStick</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="description-v2">Description:</h5>
-<p><font color="#666">Open the virtual stick mode. <br><b>Note: <br> For flight safety, when the aircraft is close(about 30 meters) to the restricted flight zone or restricted distance, the remote controller will get the control of the aircraft, and the virtual stick cannot be used.</b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
+<p><font color="#666">Open the virtual stick mode. <br><b>Note: <br> 1. For flight safety, when the aircraft is close(about 30 meters) to the restricted flight zone or restricted distance, the remote controller will get the control of the aircraft, and the virtual stick cannot be used.<br> 2. Currently, only M300 RTK, M350 RTK and M30 series aircraft support obstacle avoidance in virtual joystick mode. <br> 3. The virtual stick normal mode supports obstacle avoidance by default. <br> 4. In the virtual stick advanced mode, obstacle avoidance is supported only when the vertical control Mode is velocity mode, the  yaw control mode is angular velocity mode, and the roll pitch control mode is velocity mode.<br></b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="input-parameters">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="ivirtualstickmanager_disablevirtualstick"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ivirtualstickmanager_disablevirtualstick_inline">disableVirtualStick</a></div></div><div class="inline-doc" id="ivirtualstickmanager_disablevirtualstick_inline" <blockquote>

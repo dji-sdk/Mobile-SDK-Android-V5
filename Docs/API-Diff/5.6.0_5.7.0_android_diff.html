@@ -1,0 +1,47 @@
+<html>
+<style>
+  table, th, td {
+     border: 1px solid rgb(200,200,200);
+     border-collapse: collapse;
+     }
+  table {
+     table-layout: fixed;
+     width: 1900px;
+     }
+  td {
+     overflow-x: auto;
+     }
+  th, td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    }
+  .comments {
+    color: #292;
+    }
+  .source-code {
+    color: #22F;
+    }
+  .interface-parent {
+    color: #AAA;
+    }
+  .interface-name {
+    color: #000;
+    }
+  .check-mark {
+    text-align: center;
+    }
+</style>
+<body>
+<br>
+
+<h1>DJI Mobile SDK V5 5.6.0 to 5.7.0 Differences</h1>
+
+<br>
+
+<h2>APIs added to 5.7.0</h2>
+
+<table class="diff-table"><tr valign="top"><td width=15%><font color="#000">Parent and Name</font></td><td width=15%><font color="#000">Code</font></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.datacenter.media.MediaFile.</span><span class="interface-name">getXMPCustomInfo</span></td><td width=15%><span class="source-code">String getXMPCustomInfo() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.datacenter.media.MediaFile.</span><span class="interface-name">getXMPFileData</span></td><td width=15%><span class="source-code">String getXMPFileData() </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.datacenter.media.MediaFile.</span><span class="interface-name">pullXMPCustomInfoFromCamera</span></td><td width=15%><span class="source-code">void pullXMPCustomInfoFromCamera(CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback) </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.datacenter.media.MediaFile.</span><span class="interface-name">pullXMPFileDataFromCamera</span></td><td width=15%><span class="source-code">void pullXMPFileDataFromCamera(CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback) </span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IMediaManager.</span><span class="interface-name">getMediaFileXMPCustomInfo</span></td><td width=15%><span class="source-code">    void getMediaFileXMPCustomInfo(@NonNull final CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.v5.manager.interfaces.IMediaManager.</span><span class="interface-name">setMediaFileXMPCustomInfo</span></td><td width=15%><span class="source-code">    void setMediaFileXMPCustomInfo(@NonNull String information, CommonCallbacks.CompletionCallback callback)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.sdk.keyvalue.key.FlightControllerKey.</span><span class="interface-name">KeyLowBatteryRTHInfo</span></td><td width=15%><span class="source-code">static final DJIKeyInfo&lt;LowBatteryRTHInfo&gt; KeyLowBatteryRTHInfo = new KeyLowBatteryRTHInfo().canGet(true).canSet(false).canListen(true).canPerformAction(false).setIsEvent(false)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.sdk.keyvalue.key.RemoteControllerKey.</span><span class="interface-name">KeyControllingGimbal</span></td><td width=15%><span class="source-code">static final DJIKeyInfo&lt;ComponentIndexType&gt; KeyControllingGimbal = new KeyControllingGimbal()
+            .canGet(false).canSet(true).canListen(false).canPerformAction(false).setIsEvent(false)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.sdk.keyvalue.key.FlightControllerKey.</span><span class="interface-name">KeyLowBatteryRTHConfirm</span></td><td width=15%><span class="source-code">static final DJIActionKeyInfo&lt;Boolean, EmptyMsg&gt; KeyLowBatteryRTHConfirm = new KeyLowBatteryRTHConfirm().canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType.</span><span class="interface-name">POINT_CLOUD_CAMERA</span></td><td width=15%><span class="source-code">    POINT_CLOUD_CAMERA(14)</span></td></tr><tr valign="top"><td width=15%><span class="interface-parent">dji.sdk.keyvalue.value.camera.CameraType.</span><span class="interface-name">ZENMUSE_L2</span></td><td width=15%><span class="source-code">    ZENMUSE_L2(84), </span></td></tr></table><p style="font-size:50%; color:white">--android --android </p></body>
+</html>
+

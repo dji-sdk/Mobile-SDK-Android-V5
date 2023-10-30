@@ -24,8 +24,10 @@
 package dji.v5.ux.core.util;
 
 import androidx.annotation.NonNull;
+
 import dji.v5.ux.core.base.SchedulerProvider;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.processors.BehaviorProcessor;
 
 /**
@@ -103,5 +105,14 @@ public final class DataProcessor<T> {
     @NonNull
     public Flowable<T> toFlowable() {
         return processor.observeOn(SchedulerProvider.computation()).onBackpressureLatest();
+    }
+
+    @NonNull
+    public Flowable<T> toFlowableOnUI() {
+        return processor.observeOn(SchedulerProvider.ui()).onBackpressureLatest();
+    }
+
+    public Observable<T> toObservableOnUI() {
+        return toFlowableOnUI().toObservable();
     }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <dji.v5.ux.core.base.TextCell
+        android:id="@+id/tc_setting_menu_sdr_info_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/uxsdk_2_dp"
+        app:uxsdk_bottomDividerEnable="false"
+        app:uxsdk_text_cell_content=""
+        app:uxsdk_text_cell_contentTextSize="@dimen/uxsdk_16_dp"
+        app:uxsdk_text_cell_contentColor="@color/uxsdk_normal_state_color"
+        app:uxsdk_text_cell_summaryColor="@color/uxsdk_white_60_percent"
+        app:uxsdk_text_cell_title="@string/setting_ui_hd_sdr_channel_state_title"
+        app:uxsdk_text_cell_titleColor="@color/uxsdk_white_95_percent"
+        app:uxsdk_text_cell_titleTextSize="@dimen/uxsdk_16_dp"/>
+
+</merge>

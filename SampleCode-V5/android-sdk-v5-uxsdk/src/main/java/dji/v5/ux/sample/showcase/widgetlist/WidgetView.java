@@ -79,7 +79,7 @@ public class WidgetView extends ConstraintLayout {
         inflate(getContext(), R.layout.uxsdk_view_widget, this);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         setLayoutParams(params);
         containerView = findViewById(R.id.widget_container);
         aspectRatioTextView = findViewById(R.id.textview_aspect_ratio);

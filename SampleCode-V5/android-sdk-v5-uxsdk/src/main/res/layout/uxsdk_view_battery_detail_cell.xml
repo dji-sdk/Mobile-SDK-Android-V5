@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/uxsdk_15_dp">
+
+    <dji.v5.ux.core.widget.battery.BatteryVerticalProgressBar
+        android:id="@+id/battery_part_pgb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/uxsdk_23_dp"
+        android:layout_height="@dimen/uxsdk_37_dp"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false"
+        android:max="100"
+        android:padding="0dp"
+        android:progress="10"
+        android:progressDrawable="@drawable/uxsdk_setting_ui_battery_volume_normal_pgb" />
+
+    <TextView
+        android:id="@+id/battery_part_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/battery_part_pgb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/uxsdk_5_dp"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="@dimen/uxsdk_10_dp" />
+
+</RelativeLayout>

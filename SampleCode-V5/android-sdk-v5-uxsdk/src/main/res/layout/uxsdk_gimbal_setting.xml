@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/setting_menu_gimbal_reset_param"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_56_dp"
+        android:gravity="center"
+        android:text="@string/uxsdk_setting_menu_title_gimbal_reset_param"
+        android:textAllCaps="false"
+        android:textColor="@color/uxsdk_setting_ui_btn_hover"
+        android:textSize="@dimen/uxsdk_14_dp" />
+
+    <Button
+        android:id="@+id/setting_menu_gimbal_calibration"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/uxsdk_setting_menu_title_gimbal_calibration"
+        android:textAllCaps="false"
+        android:textColor="@color/uxsdk_setting_ui_btn_hover"
+        android:textSize="@dimen/uxsdk_14_dp" />
+
+
+    <dji.v5.ux.gimbal.GimbalFineTuneWidget
+        android:id="@+id/setting_menu_gimbal_fine_tune"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>
