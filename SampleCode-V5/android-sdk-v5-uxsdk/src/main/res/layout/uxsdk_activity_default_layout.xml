@@ -289,8 +289,8 @@
 
         <Button
             android:id="@+id/myLiveStream"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:elevation="10dp"
             android:foreground="?selectableItemBackground"
             android:padding="8dp"
@@ -302,7 +302,7 @@
             app:layout_constraintHorizontal_bias="0"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="10dp"
-            android:text="LiveStream" />
+            android:background="@drawable/uxsdk_livestream_start" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -197,6 +197,12 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     streamManager.startStream();
+                    if (streamManager.isStreaming()) {
+                        liveStreamButton.setBackgroundResource(R.drawable.uxsdk_livestream_stop);
+                    }
+                    else {
+                        liveStreamButton.setBackgroundResource(R.drawable.uxsdk_livestream_start);
+                    }
                 }
             });
         };

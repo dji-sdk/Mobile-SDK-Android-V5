@@ -19,10 +19,10 @@ import dji.v5.utils.common.ToastUtils
 class StreamManager() {
     private val manager = MediaDataCenter.getInstance().liveStreamManager
     private val listener = this.manager.addLiveStreamStatusListener(streamer)
+    private var isStreaming: Boolean = this.manager.isStreaming
     val userName = "rinao"
     val password = "unicorn"
     val port = 8554
-    var isStreaming = this.manager.isStreaming
     var streamSettings = this.manager.liveStreamSettings
 
 
@@ -36,6 +36,10 @@ class StreamManager() {
             Log.e("StreamManager", "Stream error: ${error.toString()}")
         }
 
+    }
+
+    fun isStreaming(): Boolean {
+        return this.isStreaming
     }
 
     fun startStream() {
