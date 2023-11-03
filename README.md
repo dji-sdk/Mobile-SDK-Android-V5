@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.7.0
+# DJI Mobile SDK for Android V5 Latest Version 5.7.1
 
 [中文版](README_CN.md)
 
@@ -91,7 +91,7 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.7.0
+> **Notice:** sdkVersion = 5.7.1
 
 | SDK package | Explanation | How to use|
 | :---------------: | :-----------------:  | :---------------: |

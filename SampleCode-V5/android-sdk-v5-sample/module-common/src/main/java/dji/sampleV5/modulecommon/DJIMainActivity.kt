@@ -228,6 +228,5 @@ abstract class DJIMainActivity : AppCompatActivity() {
         super.onDestroy()
         handler.removeCallbacksAndMessages(null)
         disposable.dispose()
-        ToastUtils.destroy()
     }
 }
