@@ -108,6 +108,7 @@ class MediaVM : DJIViewModel() {
     }
 
     fun setComponentIndex(index: ComponentIndexType) {
+        isPlayBack.postValue(false)
         KeyManager.getInstance().cancelListen(this)
         KeyManager.getInstance().listen(KeyTools.createKey(CameraKey.KeyIsPlayingBack, index), this) { _, newValue ->
             isPlayBack.postValue(newValue)

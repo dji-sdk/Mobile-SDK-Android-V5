@@ -289,15 +289,6 @@ fun View.setBorder(
 }
 
 /**
- * android 12以上场景会有opengl崩溃，部分图传相关的ui先暂时关闭该功能。
- */
-fun View.disableHardwareAccelerated() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-        setLayerType(View.LAYER_TYPE_NONE, null)
-    }
-}
-
-/**
  * On click listener for recycler view.
  */
 fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int) -> Unit): T {

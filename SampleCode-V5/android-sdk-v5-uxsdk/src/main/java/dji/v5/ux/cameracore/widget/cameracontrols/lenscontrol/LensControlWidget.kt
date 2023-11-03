@@ -132,6 +132,7 @@ open class LensControlWidget @JvmOverloads constructor(
             CameraVideoStreamSourceType.INFRARED_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_ir)
             CameraVideoStreamSourceType.NDVI_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_ndvi)
             CameraVideoStreamSourceType.RGB_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_rgb)
+            CameraVideoStreamSourceType.POINT_CLOUD_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_point_cloud)
             else -> ""
         }
     }

@@ -25,8 +25,11 @@ More refer to the release notes." </string>
     <string name="item_key_value_title">Key/Value</string>
     <string name="item_key_value_description">Demonstrate how to use the Key/Value function</string>
 
-    <string name="item_multi_video_decoding_title">Multi-Video Decoding</string>
+    <string name="item_multi_video_decoding_title">Multi-Video Decoding (VideoStreamManager - Deprecated)</string>
     <string name="item_multi_video_decoding_description">Demonstrate how to use the Multi-Video Decoding function</string>
+
+    <string name="item_multi_camera_stream_title">Multi-Video Decoding (CameraStreamManager - New)</string>
+    <string name="item_multi_camera_stream_description">Demonstrate how to use the Multi-Video Decoding function</string>
 
     <string name="item_waypoint_title">Waypoint</string>
     <string name="item_waypoint_description">Demonstrate how to use the waypoint flight function</string>
@@ -458,4 +461,8 @@ More refer to the release notes." </string>
     <string name="btn_unlock_enhanced_warning_fly_zone">Unlock Enhanced Warning Fly Zone</string>
     <string name="btn_unlock_all_enhanced_warning_fly_zone">Unlock All Enhanced Warning Fly Zone</string>
 
+    <!-- Camera preview -->
+    <string name="title_select_yuv_format">Select Image Format</string>
+    <string name="title_select_yuv_format_ok">OK</string>
+    <string name="title_select_yuv_format_cancel">Cancel</string>
 </resources>

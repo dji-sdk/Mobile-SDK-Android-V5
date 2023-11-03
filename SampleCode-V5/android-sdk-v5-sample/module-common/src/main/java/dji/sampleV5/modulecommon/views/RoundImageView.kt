@@ -29,7 +29,6 @@ class RoundImageView(context: Context?, attrs: AttributeSet?) : AppCompatImageVi
         mPaint!!.isAntiAlias = true
         mPaint!!.isFilterBitmap = true
         mPaint!!.color = 0xfeffffff.toInt()
-        setLayerType(LAYER_TYPE_SOFTWARE, mPaint)
     }
 
     private fun initPath() {

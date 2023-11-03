@@ -1,5 +1,6 @@
 package dji.sampleV5.modulecommon
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dji.sampleV5.modulecommon.data.FragmentPageItem
 import dji.v5.utils.common.StringUtils
 
+
 /**
  * Class Description
  *
@@ -19,7 +21,7 @@ import dji.v5.utils.common.StringUtils
  * Copyright (c) 2021, DJI All Rights Reserved.
  */
 class MainFragmentListAdapter(private val onClick: (FragmentPageItem) -> Unit) :
-        ListAdapter<FragmentPageItem, MainFragmentListAdapter.ViewHolder>(DiffCallback) {
+    ListAdapter<FragmentPageItem, MainFragmentListAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.frag_main_item, parent, false)
@@ -49,6 +51,13 @@ class MainFragmentListAdapter(private val onClick: (FragmentPageItem) -> Unit) :
             currentPageInfoItem = pageInfo
             titleTextView.text = StringUtils.getResStr(itemView.context, pageInfo.title)
             descriptionTextView.text = StringUtils.getResStr(itemView.context, pageInfo.description)
+            if (pageInfo.isStrike) {
+                titleTextView.paintFlags = titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                descriptionTextView.paintFlags = descriptionTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                titleTextView.paintFlags = titleTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                descriptionTextView.paintFlags = descriptionTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
         }
     }
 

@@ -139,7 +139,6 @@ class TakeOffWidgetModel(
      * Performs precision take off action
      */
     fun performPrecisionTakeOffAction(): Completable {
-        //TODO KeyPrecisionStartTakeoff存在问题，csdk那边修复时间未知，这里先换成takeoff
         return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff))
             .onErrorResumeNext { error: Throwable? ->
                 if (areMotorsOnDataProcessor.value) {

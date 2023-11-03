@@ -26,8 +26,11 @@
     <string name="item_key_value_title">Key/Value</string>
     <string name="item_key_value_description">演示如何使用Key/Value功能</string>
 
-    <string name="item_multi_video_decoding_title">多路视频解码</string>
+    <string name="item_multi_video_decoding_title">多路视频解码 (VideoStreamManager - 废弃)</string>
     <string name="item_multi_video_decoding_description">演示如何使用多路图传和多路解码模块</string>
+
+    <string name="item_multi_camera_stream_title">多路视频解码 (CameraStreamManager - 新版)</string>
+    <string name="item_multi_camera_stream_description">演示如何使用多路图传和多路解码模块</string>
 
     <string name="item_waypoint_title">航点飞行</string>
     <string name="item_waypoint_description">演示如何使用航点飞行功能</string>
@@ -461,4 +464,8 @@
     <string name="btn_unlock_enhanced_warning_fly_zone">解禁加强警告区</string>
     <string name="btn_unlock_all_enhanced_warning_fly_zone">解禁全部加强警告区</string>
 
+    <!-- Camera preview -->
+    <string name="title_select_yuv_format">选择图片格式</string>
+    <string name="title_select_yuv_format_ok">确定</string>
+    <string name="title_select_yuv_format_cancel">取消</string>
 </resources>

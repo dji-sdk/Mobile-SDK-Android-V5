@@ -15,7 +15,8 @@ class CommonFragmentPageInfoFactory : IFragmentPageInfoFactory {
     override fun createPageInfo(): FragmentPageItemList {
         return FragmentPageItemList(R.navigation.nav_common).apply {
             items.add(FragmentPageItem(R.id.key_value_page, R.string.item_key_value_title, R.string.item_key_value_description))
-            items.add(FragmentPageItem(R.id.key_multi_video_decoding_page, R.string.item_multi_video_decoding_title, R.string.item_multi_video_decoding_description))
+            items.add(FragmentPageItem(R.id.key_multi_camera_stream_page, R.string.item_multi_camera_stream_title, R.string.item_multi_camera_stream_description))
+            items.add(FragmentPageItem(R.id.key_multi_video_decoding_page, R.string.item_multi_video_decoding_title, R.string.item_multi_video_decoding_description, true))
             items.add(FragmentPageItem(R.id.key_data_protection_page, R.string.item_data_protection_title, R.string.item_data_protection_description))
             items.add(FragmentPageItem(R.id.key_diagnostic_page, R.string.item_diagnostic_title, R.string.item_diagnostic_description))
             items.add(FragmentPageItem(R.id.key_media_playback_page, R.string.item_media_playback_title, R.string.item_media_playback_description))

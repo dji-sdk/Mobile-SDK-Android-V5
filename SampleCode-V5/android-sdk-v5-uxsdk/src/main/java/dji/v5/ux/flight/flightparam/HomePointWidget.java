@@ -178,7 +178,7 @@ public class HomePointWidget extends ConstraintLayoutWidget<Object> {
 
             @Override
             public void onComplete() {
-                ViewUtil.showToast(getContext() ,true? R.string.uxsdk_fpv_toast_homepoint_setting_current_rc : R.string.uxsdk_fpv_toast_homepoint_setting_partner_rc, Toast.LENGTH_SHORT);
+                ViewUtil.showToast(getContext() , R.string.uxsdk_fpv_toast_homepoint_setting_current_rc, Toast.LENGTH_SHORT);
 
             }
 

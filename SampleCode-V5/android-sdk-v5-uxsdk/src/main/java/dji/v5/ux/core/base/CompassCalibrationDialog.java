@@ -69,7 +69,7 @@ public class CompassCalibrationDialog extends BaseDialog implements View.OnClick
 
     private static int[] aircraftCompassIconM30 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_m30, R.drawable.uxsdk_fpv_compass_vertical_m30};
     private static int[] aircraftCompassIconM300 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_m300, R.drawable.uxsdk_fpv_compass_vertical_m300};
-    private static int[] aircraftCompassIconM3 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_wm265, R.drawable.uxsdk_fpv_compass_vertical_m3};
+    private static int[] aircraftCompassIconM3 = new int[] {R.drawable.uxsdk_fpv_compass_horizontal_m3e, R.drawable.uxsdk_fpv_compass_vertical_m3e};
 
     public CompassCalibrationDialog(@NonNull Context context) {
         this(context, R.style.NoTitleDialog);

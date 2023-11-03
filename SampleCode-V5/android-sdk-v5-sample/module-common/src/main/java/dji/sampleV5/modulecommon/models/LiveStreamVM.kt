@@ -1,10 +1,10 @@
 package dji.sampleV5.modulecommon.models
 
 import androidx.lifecycle.MutableLiveData
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
-import dji.v5.common.video.channel.VideoChannelState
-import dji.v5.common.video.channel.VideoChannelType
+import dji.v5.common.utils.CallbackUtils
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.interfaces.ILiveStreamManager
 import dji.v5.manager.datacenter.livestream.*
@@ -12,7 +12,7 @@ import dji.v5.manager.datacenter.livestream.settings.AgoraSettings
 import dji.v5.manager.datacenter.livestream.settings.GB28181Settings
 import dji.v5.manager.datacenter.livestream.settings.RtmpSettings
 import dji.v5.manager.datacenter.livestream.settings.RtspSettings
-import dji.v5.manager.datacenter.video.VideoStreamManager
+import dji.v5.manager.interfaces.ICameraStreamManager
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DjiSharedPreferencesManager
 
@@ -24,30 +24,37 @@ import dji.v5.utils.common.DjiSharedPreferencesManager
  * Copyright : ©2022 DJI All Rights Reserved.
  */
 class LiveStreamVM : DJIViewModel() {
+    private val availableCameraUpdatedListener: ICameraStreamManager.AvailableCameraUpdatedListener
     private val liveStreamStatusListener: LiveStreamStatusListener
     private val RTMP_KEY = "livestream-rtmp"
     private val RTSP_KEY = "livestream-rtsp"
     private val GB28181_KEY = "livestream-gb28181"
     private val AGORA_KEY = "livestream-agora"
-    val curLiveStreanmStatus = MutableLiveData<LiveStreamStatus>()
-    val curLiveStreamError = MutableLiveData<IDJIError>()
+    val liveStreamStatus = MutableLiveData<LiveStreamStatus?>()
+    val liveStreamError = MutableLiveData<IDJIError?>()
+    val availableCameraList = MutableLiveData<List<ComponentIndexType>>()
     val streamManager: ILiveStreamManager = MediaDataCenter.getInstance().liveStreamManager
-
+    val cameraManager: ICameraStreamManager = MediaDataCenter.getInstance().cameraStreamManager
 
     init {
         liveStreamStatusListener = object : LiveStreamStatusListener {
             override fun onLiveStreamStatusUpdate(status: LiveStreamStatus?) {
                 status?.let {
-                    curLiveStreanmStatus.postValue(it)
+                    liveStreamStatus.postValue(it)
                 }
             }
 
             override fun onError(error: IDJIError?) {
                 error?.let {
-                    curLiveStreamError.postValue(it)
+                    liveStreamError.postValue(it)
                 }
             }
         }
+
+        availableCameraUpdatedListener = ICameraStreamManager.AvailableCameraUpdatedListener { list ->
+            availableCameraList.postValue(list)
+        }
+
         addListener()
     }
 
@@ -56,92 +63,61 @@ class LiveStreamVM : DJIViewModel() {
         removeListener()
     }
 
-    fun startStream(callback: CommonCallbacks.CompletionCallback){
-        streamManager.startStream(callback)
+    private fun reset() {
+        liveStreamError.postValue(null)
+        liveStreamStatus.postValue(null)
     }
 
-    fun stopStream(callback: CommonCallbacks.CompletionCallback){
-        streamManager.stopStream(callback)
+    fun startStream(callback: CommonCallbacks.CompletionCallback?) {
+        streamManager.startStream(object : CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                CallbackUtils.onSuccess(callback)
+                reset();
+            }
+
+            override fun onFailure(error: IDJIError) {
+                CallbackUtils.onFailure(callback, error)
+            }
+
+        })
     }
 
-    fun isStreaming():Boolean{
+    fun stopStream(callback: CommonCallbacks.CompletionCallback?) {
+        streamManager.stopStream(object : CommonCallbacks.CompletionCallback {
+            override fun onSuccess() {
+                CallbackUtils.onSuccess(callback)
+                reset();
+            }
+
+            override fun onFailure(error: IDJIError) {
+                CallbackUtils.onFailure(callback, error)
+            }
+
+        })
+    }
+
+    fun isStreaming(): Boolean {
         return streamManager.isStreaming;
+    }
+
+    fun setCameraIndex(cameraIndex: ComponentIndexType) {
+        streamManager.cameraIndex = cameraIndex
     }
 
     fun setLiveStreamConfig(liveStreamSettings: LiveStreamSettings) {
         streamManager.liveStreamSettings = liveStreamSettings;
     }
 
-    fun getLiveStreamConfig(): LiveStreamSettings? {
-        return streamManager.liveStreamSettings
-    }
-
-    fun setVideoChannel(videoChannel:VideoChannelType){
-        streamManager.videoChannelType = videoChannel
-    }
-
-    fun getVideoChannel():VideoChannelType{
-        return streamManager.videoChannelType
-    }
-
-    fun setLiveStreamQuality(liveStreamQuality:StreamQuality){
+    fun setLiveStreamQuality(liveStreamQuality: StreamQuality) {
         streamManager.liveStreamQuality = liveStreamQuality
     }
 
-    fun getLiveStreamQuality():StreamQuality{
-        return streamManager.liveStreamQuality
-    }
-
-    fun setLiveVideoBitRateMode(bitRateMode: LiveVideoBitrateMode){
+    fun setLiveVideoBitRateMode(bitRateMode: LiveVideoBitrateMode) {
         streamManager.liveVideoBitrateMode = bitRateMode
-    }
-
-    fun getLiveVideoBitRateMode():LiveVideoBitrateMode{
-        return streamManager.liveVideoBitrateMode
     }
 
     fun setLiveVideoBitRate(bitrate: Int) {
         streamManager.liveVideoBitrate = bitrate
-    }
-
-    fun getLiveVideoBitRate():Int{
-        return streamManager.liveVideoBitrate
-    }
-
-    fun setLiveAudioEnabled(enabled: Boolean) {
-        streamManager.isLiveAudioEnabled = enabled
-    }
-
-    fun getLiveAudioEnabled(): Boolean {
-        return streamManager.isLiveAudioEnabled
-    }
-
-    fun getLiveStreamTypes(): Array<LiveStreamType> {
-        return listOf(
-            LiveStreamType.RTMP,
-            LiveStreamType.RTSP,
-            LiveStreamType.GB28181,
-            LiveStreamType.AGORA
-        ).toTypedArray()
-    }
-
-    fun getLiveStreamBitRateModes(): Array<LiveVideoBitrateMode> {
-        return listOf(LiveVideoBitrateMode.AUTO, LiveVideoBitrateMode.MANUAL).toTypedArray()
-    }
-
-    fun getLiveStreamQualities(): Array<StreamQuality> {
-        return listOf(
-            StreamQuality.FULL_HD,
-            StreamQuality.HD,
-            StreamQuality.SD
-        ).toTypedArray()
-    }
-
-    fun getLiveStreamChannelTypes(): Array<VideoChannelType> {
-        return listOf(
-            VideoChannelType.PRIMARY_STREAM_CHANNEL,
-            VideoChannelType.SECONDARY_STREAM_CHANNEL
-        ).toTypedArray()
     }
 
     fun setRTMPConfig(rtmpUrl: String) {
@@ -176,7 +152,7 @@ class LiveStreamVM : DJIViewModel() {
         setLiveStreamConfig(liveStreamConfig)
     }
 
-    fun getRtspSettings():String{
+    fun getRtspSettings(): String {
         return DjiSharedPreferencesManager.getString(ContextUtil.getContext(), RTSP_KEY, "")
     }
 
@@ -212,7 +188,7 @@ class LiveStreamVM : DJIViewModel() {
         setLiveStreamConfig(liveStreamConfig)
     }
 
-    fun getGb28181Settings():String{
+    fun getGb28181Settings(): String {
         return DjiSharedPreferencesManager.getString(ContextUtil.getContext(), GB28181_KEY, "")
     }
 
@@ -227,7 +203,7 @@ class LiveStreamVM : DJIViewModel() {
             .setLiveStreamType(LiveStreamType.AGORA)
             .setAgoraSettings(agoraConfig)
             .build()
-        val agoraSettings = channelId+"^_^"+token+"^_^"+uid
+        val agoraSettings = channelId + "^_^" + token + "^_^" + uid
         DjiSharedPreferencesManager.putString(
             ContextUtil.getContext(),
             AGORA_KEY,
@@ -236,29 +212,17 @@ class LiveStreamVM : DJIViewModel() {
         setLiveStreamConfig(liveStreamConfig)
     }
 
-    fun getAgoraSettings():String{
+    fun getAgoraSettings(): String {
         return DjiSharedPreferencesManager.getString(ContextUtil.getContext(), AGORA_KEY, "")
     }
 
     fun addListener() {
         streamManager.addLiveStreamStatusListener(liveStreamStatusListener)
+        cameraManager.addAvailableCameraUpdatedListener(availableCameraUpdatedListener)
     }
 
     fun removeListener() {
         streamManager.removeLiveStreamStatusListener(liveStreamStatusListener)
-    }
-
-
-    fun refreshLiveStreamStatus() {
-        curLiveStreanmStatus.postValue(curLiveStreanmStatus.value)
-    }
-
-    fun refreshLiveStreamError() {
-        curLiveStreamError.postValue(curLiveStreamError.value)
-    }
-
-    fun getChannelStatus(channel: VideoChannelType): VideoChannelState {
-        return VideoStreamManager.getInstance().getAvailableVideoChannel(channel)
-            ?.let { it.videoChannelStatus } ?: let { VideoChannelState.CLOSE }
+        cameraManager.removeAvailableCameraUpdatedListener(availableCameraUpdatedListener)
     }
 }

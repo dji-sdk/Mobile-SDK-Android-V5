@@ -105,7 +105,7 @@ open class DeviceHealthAndStatusWidget @JvmOverloads constructor(
         addReaction(widgetModel.deviceMessageProcessor.toFlowable()
             .observeOn(SchedulerProvider.ui())
             .subscribe {
-                LogUtils.i(logTag, JsonUtil.toJson(it))
+                LogUtils.d(logTag, JsonUtil.toJson(it))
                 updateDisplayMessage()
                 updateLevelCount()
             }

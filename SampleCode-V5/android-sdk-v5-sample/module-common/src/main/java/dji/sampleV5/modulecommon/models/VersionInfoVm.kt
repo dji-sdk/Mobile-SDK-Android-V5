@@ -20,12 +20,23 @@ class VersionInfoVm : DJIViewModel() {
     /**
      * Pair中的Bool表示最新版本是否大于当前版本
      */
-    private val latestVersionInfoSubject: BehaviorSubject<Pair<VersionInfo, Boolean>> = BehaviorSubject.create()
+    private val latestVersionInfoSubject: BehaviorSubject<Pair<VersionInfo, Boolean>> =
+        BehaviorSubject.create()
 
     /**
      * 已经截取版本号中的字母，仅保留数字和分隔符[.]
      */
-    private val currentBuildVersion = cutoffLetterUntilDigit(SDKConfig.getInstance().registrationSDKVersion)
+    private val currentBuildVersion: String
+
+    init {
+        val version = cutoffLetterUntilDigit(SDKConfig.getInstance().registrationSDKVersion)
+        val lastIndexOf = version.indexOf('-')
+        currentBuildVersion = if (lastIndexOf > 0) {
+            version.subSequence(0, lastIndexOf).toString()
+        } else {
+            version
+        }
+    }
 
     fun getCurrentVersionInfo(): Single<VersionInfo> {
         return repository.fetchCurrentVersionInfo(currentBuildVersion)

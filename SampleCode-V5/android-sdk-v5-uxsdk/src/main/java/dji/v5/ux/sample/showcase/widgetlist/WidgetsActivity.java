@@ -152,7 +152,7 @@ public class WidgetsActivity extends AppCompatActivity implements WidgetListFrag
                 }
             }
         });
-        // 设置观察者，防止系统UI获取焦点后进入到非全屏状态
+        // 防止系统UI获取焦点后进入到非全屏状态
 
 
         WidgetListFragment listFragment = new WidgetListFragment();

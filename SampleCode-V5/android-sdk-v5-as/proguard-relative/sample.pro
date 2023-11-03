@@ -52,6 +52,7 @@
 -keep class com.here.**{*;}
 -keep class com.mapbox.**{*;}
 -keep class retrofit2.**{*;}
+-keep class xcrash.**{*;}
 
 -keepclasseswithmembers,allowshrinking class * {
     native <methods>;

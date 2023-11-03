@@ -741,6 +741,7 @@
     <string name="uxsdk_lens_type_ir">IR</string>
     <string name="uxsdk_lens_type_ndvi">NDVI</string>
     <string name="uxsdk_lens_type_rgb">RGB</string>
+    <string name="uxsdk_lens_type_point_cloud">PointCloud</string>
 
     <!--RTK Connect Widget-->
     <string name="uxsdk_rtk_problem_detection">Check the following</string>

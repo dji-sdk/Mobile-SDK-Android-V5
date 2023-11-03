@@ -8,5 +8,6 @@ data class FragmentPageItemList(
 data class FragmentPageItem(
     val id: Int = DEFAULT_RES_ID,
     val title: Int = DEFAULT_RES_ID,
-    val description: Int = DEFAULT_RES_ID
+    val description: Int = DEFAULT_RES_ID,
+    val isStrike: Boolean = false
 )

@@ -156,6 +156,9 @@ class MediaFragment : DJIFragment() {
 
         sp_choose_component.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+                if (mediaVM.isPlayBack.value == true) {
+                    mediaVM.disable()
+                }
                 mediaVM.setComponentIndex(ComponentIndexType.find(index))
             }
 
@@ -228,6 +231,9 @@ class MediaFragment : DJIFragment() {
     override fun onDestroy() {
         super.onDestroy()
         mediaVM.destroy()
+        if (mediaVM.isPlayBack.value == true) {
+            mediaVM.disable()
+        }
         adapter = null
     }
 }

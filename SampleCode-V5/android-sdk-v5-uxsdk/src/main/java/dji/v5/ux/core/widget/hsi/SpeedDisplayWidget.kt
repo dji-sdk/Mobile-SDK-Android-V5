@@ -102,8 +102,6 @@ open class SpeedDisplayWidget @JvmOverloads constructor(context: Context, attrs:
     }
 
     private fun updateWindStatus(windSpeed: Float, fcWindDirectionStatus: WindDirection, fcWindWarning: WindWarning, aircraftDegree: Float) {
-        LogUtils.d(TAG, "windSpeed :" + windSpeed + " Direction:" + fcWindDirectionStatus.name + " waring:" + fcWindWarning.name + " " +
-                "aircraftDegree:" + aircraftDegree)
         val value = UnitUtils.transFormSpeedIntoDifferentUnit(windSpeed)
         val textStr = String.format(Locale.ENGLISH, "WS %04.1f %s", value, getWindDirectionText(fcWindDirectionStatus, aircraftDegree))
         if (textStr != mTvWsValue?.text.toString()) {

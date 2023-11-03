@@ -21,6 +21,7 @@ import dji.v5.manager.datacenter.media.VideoPlayState
 import dji.v5.utils.common.LogUtils
 import kotlinx.android.synthetic.main.video_play_page.*
 import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.v5.manager.interfaces.IMediaManager
 
 
 class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickListener {
@@ -124,17 +125,17 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     override fun surfaceCreated(holder: SurfaceHolder) {
         if (videoDecoder == null) {
             videoDecoder = createVideoDecoder()
-        } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
+        }
+        if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()
         }
-        videoDecoder?.mediaFile = mediaFile
     }
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         if (videoDecoder == null) {
             videoDecoder = createVideoDecoder()
-
-        } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
+        }
+        if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
             videoDecoder?.onResume()
         }
     }
@@ -163,7 +164,9 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
             this@VideoPlayFragment.context,
             VideoChannelType.EXTENDED_STREAM_CHANNEL,
             DecoderOutputMode.SURFACE_MODE,
-            surfaceView.holder
+            surfaceView.holder,
+            surfaceView.width,
+            surfaceView.height
         )
     }
     private fun play(){
@@ -173,7 +176,7 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
         }
         MediaDataCenter.getInstance().mediaManager.playVideo(mediaFile , object :CommonCallbacks.CompletionCallbackWithParam<IVideoFrame>{
             override fun onSuccess(data: IVideoFrame?) {
-                videoDecoder?.queueInFrame(data!!)
+//                videoDecoder?.queueInFrame(data!!)
 
             }
 

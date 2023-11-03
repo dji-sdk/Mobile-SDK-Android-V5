@@ -12,6 +12,12 @@
         tools:layout="@layout/frag_key_value_page"/>
 
     <fragment
+        android:id="@+id/key_multi_camera_stream_page"
+        android:name="dji.sampleV5.modulecommon.pages.CameraStreamListFragment"
+        android:label="multi_video_decoding_page"
+        tools:layout="@layout/frag_camera_stream_list"/>
+
+    <fragment
         android:id="@+id/key_multi_video_decoding_page"
         android:name="dji.sampleV5.modulecommon.pages.MultiVideoChannelFragment"
         android:label="multi_video_decoding_page"
@@ -31,9 +37,9 @@
 
     <fragment
         android:id="@+id/key_live_stream_page"
-        android:name="dji.sampleV5.modulecommon.pages.LiveStreamFragment"
+        android:name="dji.sampleV5.modulecommon.pages.LiveFragment"
         android:label="live_stream_page"
-        tools:layout="@layout/frag_live_stream_page"/>
+        tools:layout="@layout/frag_live"/>
 
     <fragment
         android:id="@+id/key_login_account_page"

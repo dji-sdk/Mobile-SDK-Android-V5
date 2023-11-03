@@ -29,7 +29,7 @@ class VideoChannelVM(channelType: VideoChannelType) : DJIViewModel() {
                 videoChannel = it
                 curChannelType = channelType
                 if (videoChannelInfo.value == null) {
-                    videoChannelInfo.value = VideoChannelInfo(videoChannel!!.videoChannelStatus)
+                    videoChannelInfo.value = VideoChannelInfo(it.videoChannelStatus)
                 }
                 videoChannelInfo.value?.streamSource = videoChannel!!.streamSource
                 videoChannelInfo.value?.videoChannelType = videoChannel!!.videoChannelType
@@ -46,6 +46,7 @@ class VideoChannelVM(channelType: VideoChannelType) : DJIViewModel() {
                     } else {
                         videoChannelInfo.value?.videoChannelState = to
                     }
+                    videoChannelInfo.value?.format = videoChannel!!.videoStreamFormat.name
                     if (to == VideoChannelState.ON || to == VideoChannelState.SOCKET_ON) {
                         videoChannelInfo.value?.streamSource = videoChannel!!.streamSource
                     } else {

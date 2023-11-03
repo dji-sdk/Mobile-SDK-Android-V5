@@ -731,6 +731,7 @@
     <string name="uxsdk_lens_type_ir">红外</string>
     <string name="uxsdk_lens_type_ndvi">多光谱</string>
     <string name="uxsdk_lens_type_rgb">可见光</string>
+    <string name="uxsdk_lens_type_point_cloud">点云</string>
 
     <!--RTK Connect Widget-->
     <string name="uxsdk_rtk_problem_detection">请检测以下问题</string>

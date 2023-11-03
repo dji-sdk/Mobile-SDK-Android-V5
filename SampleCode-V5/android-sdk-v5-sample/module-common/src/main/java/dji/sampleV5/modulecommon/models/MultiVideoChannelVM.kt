@@ -24,7 +24,7 @@ class MultiVideoChannelVM : DJIViewModel() {
     var primaryChannel = MediaDataCenter.getInstance().videoStreamManager.getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL)
     var secondaryChannel = MediaDataCenter.getInstance().videoStreamManager.getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL)
     var curPrimarySource: StreamSource? = null
-    var curSecondarySource:StreamSource? = null
+    var curSecondarySource: StreamSource? = null
     val primaryChannelStateListener = object : VideoChannelStateChangeListener {
         override fun onUpdate(from: VideoChannelState?, to: VideoChannelState?) {
             if (VideoChannelState.ON == to) {
@@ -40,6 +40,7 @@ class MultiVideoChannelVM : DJIViewModel() {
                     curPrimarySource?.let { it1 -> addStreamSource(it1) }
                 }
             }
+            updateVideoChannel()
         }
     }
     val secondaryChannelStateListener = object : VideoChannelStateChangeListener {
@@ -58,35 +59,14 @@ class MultiVideoChannelVM : DJIViewModel() {
                     curSecondarySource?.let { it1 -> addStreamSource(it1) }
                 }
             }
+            updateVideoChannel()
         }
     }
+
     private val streamSourcesListener = StreamSourceListener {
         it?.let {
             availableVideoStreamSources.value = CopyOnWriteArrayList(it.toMutableList())
-            videoStreamSources.value = CopyOnWriteArrayList(it.toMutableList())
-            handler.postDelayed({
-                val allChannels = getAllVideoChannels()
-                allChannels?.let {
-                    it.forEach {
-                        if (it.videoChannelStatus == VideoChannelState.ON){
-                            /**
-                             * 更换相机时重新组织videoStreamSources，去除掉channel已经开启的部分
-                             */
-                            videoStreamSources.value!!.forEach { v ->
-                                run {
-                                    if (v.streamId == it?.streamSource?.streamId) {
-                                        videoStreamSources.value!!.remove(v)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                videoStreamSources.postValue(videoStreamSources.value)
-            }, DELAY_TIME)
-            //更换相机时触发自动分配StreamSource，需要给一定delayTime
-
-            availableVideoStreamSources.postValue(availableVideoStreamSources.value)
+            updateVideoChannel()
         }
     }
 
@@ -94,7 +74,7 @@ class MultiVideoChannelVM : DJIViewModel() {
         MediaDataCenter.getInstance().videoStreamManager.addStreamSourcesListener(streamSourcesListener)
     }
 
-    fun removeStreamSourceListener(){
+    fun removeStreamSourceListener() {
         MediaDataCenter.getInstance().videoStreamManager.removeStreamSourcesListener(streamSourcesListener)
     }
 
@@ -125,8 +105,8 @@ class MultiVideoChannelVM : DJIViewModel() {
         secondaryChannel?.removeVideoChannelStateChangeListener(secondaryChannelStateListener)
     }
 
-    fun removeStreamSource(source:StreamSource){
-        val targetSource = videoStreamSources.value!!.find { it.streamId == source.streamId}
+    fun removeStreamSource(source: StreamSource) {
+        val targetSource = videoStreamSources.value!!.find { it.streamId == source.streamId }
         targetSource?.let {
             videoStreamSources.value!!.remove(it)
         }
@@ -146,18 +126,18 @@ class MultiVideoChannelVM : DJIViewModel() {
     fun addConnectionListener() {
         FlightControllerKey.KeyConnection.create().listen(this) {
             it?.let {
-                if (it){
+                if (it) {
                     reset()
                 }
             }
         }
     }
 
-    fun removeConnectionListener(){
+    fun removeConnectionListener() {
         FlightControllerKey.KeyConnection.create().cancelListen(this)
     }
 
-    private fun reset(){
+    private fun reset() {
         primaryChannel = MediaDataCenter.getInstance().videoStreamManager.getAvailableVideoChannel(VideoChannelType.PRIMARY_STREAM_CHANNEL)
         secondaryChannel = MediaDataCenter.getInstance().videoStreamManager.getAvailableVideoChannel(VideoChannelType.SECONDARY_STREAM_CHANNEL)
         removeChannelStateListener()
@@ -165,5 +145,32 @@ class MultiVideoChannelVM : DJIViewModel() {
         removeStreamSourceListener()
         initMultiVideoChannels()
         videoStreamSources.postValue(videoStreamSources.value)
+    }
+
+    private fun updateVideoChannel() {
+        handler.post {
+            availableVideoStreamSources.value?.let { availableVideoStreamSourceList ->
+                videoStreamSources.value = CopyOnWriteArrayList(availableVideoStreamSourceList)
+                val allChannels = getAllVideoChannels()
+                allChannels?.let {
+                    it.forEach {
+                        if (it.videoChannelStatus == VideoChannelState.ON) {
+                            /**
+                             * 更换相机时重新组织videoStreamSources，去除掉channel已经开启的部分
+                             */
+                            videoStreamSources.value!!.forEach { v ->
+                                run {
+                                    if (v.streamId == it?.streamSource?.streamId) {
+                                        videoStreamSources.value!!.remove(v)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                videoStreamSources.postValue(videoStreamSources.value)
+            }
+        }
+        //更换相机时触发自动分配StreamSource，需要给一定delayTime
     }
 }

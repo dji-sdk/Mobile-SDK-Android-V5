@@ -108,7 +108,6 @@ abstract class DJIMainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initMSDKInfoView() {
-        ToastUtils.init()
         msdkInfoVm.msdkInfo.observe(this) {
             text_view_version.text = StringUtils.getResStr(R.string.sdk_version, it.SDKVersion + " " + it.buildVer)
             text_view_product_name.text = StringUtils.getResStr(R.string.product_name, it.productType.name)
@@ -228,6 +227,5 @@ abstract class DJIMainActivity : AppCompatActivity() {
         super.onDestroy()
         handler.removeCallbacksAndMessages(null)
         disposable.dispose()
-        ToastUtils.destroy()
     }
 }
