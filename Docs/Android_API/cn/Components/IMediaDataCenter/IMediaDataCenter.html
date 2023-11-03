@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
@@ -88,11 +88,15 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
                                       </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
                                       </dd>
@@ -120,7 +124,7 @@
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a>
                                       </dd>
-                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntMinMax</a>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
                                       </dd>
@@ -143,6 +147,8 @@
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcMultiStatusMsg.html">MultiControlStatusInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_RCAuthorityLostPushMsg.html">MultiControlLostControlInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFirmwareInfo.html">RcFirmwareInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_RemoteController_Struct_MultiRCFlightControlAuthOwnerMsg.html">MultiControlFlightControlAuthorityOwnerInfo</a>
                                       </dd>
@@ -171,6 +177,10 @@
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1ResetUserAccountInfo.html">AccessLockerResetSecurityCodeInfo</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a>
                                       </dd>
                                       <dd><a href="../IKeyManager/Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a>
                                       </dd>
@@ -218,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -235,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -314,7 +334,13 @@
                             </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
                             </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
                             <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
                             </dd>
                     </ul>
                   </dd>
@@ -422,6 +448,8 @@
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
                             </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
                             </dd>
                             <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
@@ -472,13 +500,27 @@
                             </dd>
                     </ul>
                   </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
                   <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
                             </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
                             </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
                             <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -509,6 +551,8 @@
                     </ul>
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
+                  </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
                   </dd>
                   <dd><a data-href="../IDeviceStatusManager/IDeviceStatusManager.html" class="sub-toggle">IDeviceStatusManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
@@ -546,7 +590,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IMediaDataCenter</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：">描述：</h5>
-<p><font color="#666">此类是多媒体数据中心管理类，用于获取VideoStreamManager，MediaManager和LiveStreamManager实例，提供了码流管理，多媒体文件管理和直播管理等功能。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">此类是多媒体数据中心管理类，用于获取CameraStreamManager，MediaManager和LiveStreamManager实例，提供了码流管理，多媒体文件管理和直播管理等功能。 <br><b>注意：<br> <code><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager">IVideoStreamManager</a></code>从MSDK 5.8.0版本开始废弃。请使用<code><a href="../../Components/IMediaDataCenter/ICameraStreamManager.html#icamerastreammanager">ICameraStreamManager</a></code>来实现码流管理相关功能。</b>           <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="类成员">类成员:</h5>
 <div class="api-row" id="imediadatacenter_getvideostreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediadatacenter_getvideostreammanager_inline">getVideoStreamManager</a></div></div><div class="inline-doc" id="imediadatacenter_getvideostreammanager_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getVideoStreamManager</h6></div>
@@ -554,29 +598,38 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">IVideoStreamManager <span class="title">getVideoStreamManager</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v2">描述：</h5>
-<p><font color="#666">获取VideoStreamManager实例，该实例用于管理码流的参数设置和码流数据输出等功能。 <br><b>注意：当有新的DJI硬件产品连接后，需要重新调用此方法获取最新VideoStreamManager实例。可通过<code><a href="../../Components/IKeyManager/Key_Product_ProductKey.html#key_product_connection">KeyConnection</a></code>和<code><a href="../../Components/IKeyManager/Key_Product_ProductKey.html#key_product_producttype">KeyProductType</a></code>判断是否有新的DJI硬件产品连接。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">获取VideoStreamManager实例，该实例用于管理码流的参数设置和码流数据获取和渲染等功能。 <br><b>注意：<br> 1. 当有新的DJI硬件产品连接后，需要重新调用此方法获取最新VideoStreamManager实例。可通过<code><a href="../../Components/IKeyManager/Key_Product_ProductKey.html#key_product_connection">KeyConnection</a></code>和<code><a href="../../Components/IKeyManager/Key_Product_ProductKey.html#key_product_producttype">KeyProductType</a></code>判断是否有新的DJI硬件产品连接。<br> 2. 该接口从MSDK 5.8.0版本开始废弃。请调用<code><a href="../../Components/IMediaDataCenter/IMediaDataCenter.html#imediadatacenter_getcamerastreammanager">getCameraStreamManager</a></code>获取CameraStreamManager实例来实现码流管理相关功能。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="返回值：">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager">IVideoStreamManager</a></font></td><td><font color="#666"><i>返回VideoStreamManager实例。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imediadatacenter_getcamerastreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediadatacenter_getcamerastreammanager_inline">getCameraStreamManager</a></div></div><div class="inline-doc" id="imediadatacenter_getcamerastreammanager_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getCameraStreamManager</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">ICameraStreamManager <span class="title">getCameraStreamManager</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v3">描述：</h5>
+<p><font color="#666">获取CameraStreamManager实例，该实例支持相机镜头的码流显示、获取码流数据和帧数据等功能。CameraStreamManager针对VideoStreamManager做了抽象设计，屏蔽了底层通道的概念。让码流管理更加简单和稳定。建议你用CameraStreamManager代替VideoStreamManager实现码流管理相关功能。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="返回值：-v2">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ICameraStreamManager.html#icamerastreammanager">ICameraStreamManager</a></font></td><td><font color="#666"><i>返回CameraStreamManager实例。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediadatacenter_getmediamanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediadatacenter_getmediamanager_inline">getMediaManager</a></div></div><div class="inline-doc" id="imediadatacenter_getmediamanager_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getMediaManager</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">IMediaManager <span class="title">getMediaManager</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v3">描述：</h5>
+<h5 id="描述：-v4">描述：</h5>
 <p><font color="#666">获取MediaManager实例，该实例用于管理相机中的多媒体文件列表下载，多媒体文件预览，下载和视频播放等功能。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="返回值：-v2">返回值：</h5>
+<h5 id="返回值：-v3">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IMediaManager.html#imediamanager">IMediaManager</a></font></td><td><font color="#666"><i>返回MediaManager实例。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imediadatacenter_getlivestreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imediadatacenter_getlivestreammanager_inline">getLiveStreamManager</a></div></div><div class="inline-doc" id="imediadatacenter_getlivestreammanager_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getLiveStreamManager</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">ILiveStreamManager <span class="title">getLiveStreamManager</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v4">描述：</h5>
+<h5 id="描述：-v5">描述：</h5>
 <p><font color="#666">获取LiveStreamManager实例，该实例用于直播的参数设置和直播的开启和停止等功能。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="返回值：-v3">返回值：</h5>
+<h5 id="返回值：-v4">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager">ILiveStreamManager</a></font></td><td><font color="#666"><i>返回LiveStreamManager实例。</i></font></td></tr></table></html></div>
 <h5 id="related">Related:</h5>
-<div class="api-row" id="ivideostreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html">IVideoStreamManager</a></div></div><div class="api-row" id="imediamanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IMediaManager.html">IMediaManager</a></div></div><div class="api-row" id="ilivestreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html">ILiveStreamManager</a></div></div>
+<div class="api-row" id="ivideostreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html">IVideoStreamManager</a></div></div><div class="api-row" id="icamerastreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/ICameraStreamManager.html">ICameraStreamManager</a></div></div><div class="api-row" id="imediamanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/IMediaManager.html">IMediaManager</a></div></div><div class="api-row" id="ilivestreammanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html">ILiveStreamManager</a></div></div>
 
         </div>
       </div>
