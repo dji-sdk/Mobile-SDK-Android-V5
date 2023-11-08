@@ -4,7 +4,7 @@ import static dji.v5.ux.mapkit.core.Mapkit.MapProviderConstant.GOOGLE_MAP_PROVID
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-
+import android.util.Log;
 import dji.v5.ux.mapkit.core.Mapkit;
 import dji.v5.ux.mapkit.core.MapkitOptions;
 import dji.v5.ux.mapkit.core.exceptions.MapkitInitializerException;
@@ -20,7 +20,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 public class GoogleProvider extends MapProvider {
 
-    // private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 69;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 69;
 
     public GoogleProvider() {
         providerType = GOOGLE_MAP_PROVIDER;
@@ -36,9 +36,9 @@ public class GoogleProvider extends MapProvider {
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
         int result = googleApiAvailability.isGooglePlayServicesAvailable(context);
         if (result != ConnectionResult.SUCCESS) {
-            //if (googleApiAvailability.isUserResolvableError(result)) {
-            //    googleApiAvailability.getErrorDialog(context, result, PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            //}
+            if (googleApiAvailability.isUserResolvableError(result)) {
+                //googleApiAvailability.getErrorDialog(context, result, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            }
             throw new MapkitInitializerException(GOOGLE_MAP_PROVIDER);
         }
         return mapView;

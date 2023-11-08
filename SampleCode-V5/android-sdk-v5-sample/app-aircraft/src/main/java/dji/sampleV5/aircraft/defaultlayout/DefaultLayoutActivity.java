@@ -34,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import dji.sampleV5.aircraft.BuildConfig;
 import dji.sampleV5.aircraft.video.StreamManager;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
@@ -68,6 +69,7 @@ import dji.v5.ux.core.widget.setting.SettingWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
 import dji.v5.ux.map.MapWidget;
+import dji.v5.ux.mapkit.core.maps.DJIMap;
 import dji.v5.ux.mapkit.core.maps.DJIUiSettings;
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget;
 import dji.v5.ux.visualcamera.CameraNDVIPanelWidget;
@@ -162,14 +164,17 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         //小surfaceView放置在顶部，避免被大的遮挡
         secondaryFPVWidget.setSurfaceViewZOrderOnTop(true);
         secondaryFPVWidget.setSurfaceViewZOrderMediaOverlay(true);
+        mapWidget.initMapLibreMap(BuildConfig.MAPLIBRE_TOKEN, map ->
+            map.setMapType(DJIMap.MapType.NORMAL)
+        );
 
-        mapWidget.initAMap(map -> {
-            // map.setOnMapClickListener(latLng -> onViewClick(mapWidget));
-            DJIUiSettings uiSetting = map.getUiSettings();
-            if (uiSetting != null) {
-                uiSetting.setZoomControlsEnabled(false);//hide zoom widget
-            }
-        });
+//        mapWidget.initAMap(map -> {
+//            // map.setOnMapClickListener(latLng -> onViewClick(mapWidget));
+//            DJIUiSettings uiSetting = map.getUiSettings();
+//            if (uiSetting != null) {
+//                uiSetting.setZoomControlsEnabled(false);//hide zoom widget
+//            }
+//        });
         mapWidget.onCreate(savedInstanceState);
     }
 

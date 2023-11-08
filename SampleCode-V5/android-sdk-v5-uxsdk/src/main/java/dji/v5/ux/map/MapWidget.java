@@ -23,6 +23,7 @@
 
 package dji.v5.ux.map;
 
+import android.util.Log;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -176,7 +177,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
     @Override
     protected void initView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         inflate(context, R.layout.uxsdk_widget_map, this);
-
         if (!isInEditMode()) {
             widgetModel = new MapWidgetModel(DJISDKModel.getInstance(),
                     ObservableInMemoryKeyedStore.getInstance());
@@ -868,6 +868,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
      *                 initializing.
      */
     public void initAMap(@Nullable final OnMapReadyListener listener) {
+
         mapView = new AMapProvider().dispatchMapViewRequest(getContext(), null);
         addView((ViewGroup) mapView, 0);
         mapView.getDJIMapAsync(map -> {
@@ -891,7 +892,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
         mapView.getDJIMapAsync(map -> {
             this.map = map;
             postInit(listener);
-
+            flyZoneHelper.initializeMap(map);
         });
     }
 

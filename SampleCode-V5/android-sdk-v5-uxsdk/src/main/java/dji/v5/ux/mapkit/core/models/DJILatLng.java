@@ -1,5 +1,7 @@
 package dji.v5.ux.mapkit.core.models;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
+
 import dji.v5.ux.mapkit.core.utils.DJIGpsUtils;
 
 //Doc key: DJIMap_DJILatLng
@@ -7,7 +9,7 @@ import dji.v5.ux.mapkit.core.utils.DJIGpsUtils;
  *  Represents a point which includes latitude, longitude, altitude,  and accuracy
  *  info on a map.
  */
-public class DJILatLng {
+public class DJILatLng extends LatLng {
 
    // private static final String TAG = DJILatLng.class.getSimpleName();
 

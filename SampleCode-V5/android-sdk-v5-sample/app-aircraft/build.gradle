@@ -44,7 +44,15 @@ android {
                     '../../android-sdk-v5-as/proguard-relative/sample.pro'
         }
     }
+    buildTypes {
+        release {
+            buildConfigField "String", "MAPLIBRE_TOKEN", MAPLIBRE_TOKEN
+        }
 
+        debug {
+            buildConfigField "String", "MAPLIBRE_TOKEN", MAPLIBRE_TOKEN
+        }
+    }
     packagingOptions {
         // 因为mrtc库内部使用了NDK的c++_shared的编译参数
         // 与其他库重复引用了，因此选其中一个即可
