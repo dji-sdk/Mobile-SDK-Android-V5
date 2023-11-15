@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dji.sampleV5.modulecommon.R
-import dji.sampleV5.modulecommon.models.CameraStreamDetailFragmentVM
+import dji.sampleV5.modulecommon.models.CameraStreamDetailVM
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.manager.interfaces.ICameraStreamManager
@@ -44,7 +44,7 @@ class CameraStreamDetailFragment : Fragment() {
         }
     }
 
-    private val viewModel: CameraStreamDetailFragmentVM by viewModels()
+    private val viewModel: CameraStreamDetailVM by viewModels()
 
     private lateinit var rgScaleLayout: RadioGroup
     private lateinit var mrgLensTypeLayout: RadioGroup

@@ -23,7 +23,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 const val TAG = "CameraStreamDetailFragmentVM"
-class CameraStreamDetailFragmentVM : DJIViewModel() {
+class CameraStreamDetailVM : DJIViewModel() {
 
     private val _availableLensListData = MutableLiveData<List<CameraVideoStreamSourceType>>(ArrayList())
     private val _currentLensData = MutableLiveData(CameraVideoStreamSourceType.DEFAULT_CAMERA)

@@ -65,13 +65,19 @@ public class OmniPerceptionMenuFragment extends MenuFragment {
         super.onResume();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        KeyManager.getInstance().cancelListen(this);
+    }
+
     private void updatePrecisionWidgetVisible() {
         if (precisionLandingWidget == null) {
             return;
         }
         if (isDownwardVisionSystemOpen && !ProductUtil.isM3EProduct()) {
             precisionLandingWidget.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             precisionLandingWidget.setVisibility(View.GONE);
         }
     }

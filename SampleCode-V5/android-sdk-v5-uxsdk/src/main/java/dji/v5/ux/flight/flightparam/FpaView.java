@@ -82,9 +82,9 @@ public class FpaView extends LinearLayout implements SwitcherCell.OnCheckedChang
         KeyManager.getInstance().listen(KeyTools.createKey(FlightControllerKey.KeyMultipleFlightModeEnabled), this, (oldValue, open) -> {
             LogUtils.d( TAG, "MultipleFlightModeEnabled = " + open);
             mSwitcherCell.setOnCheckedChangedListener(null);
-            mSwitcherCell.setChecked(open);
+            mSwitcherCell.setChecked(Boolean.TRUE.equals(open));
             mSwitcherCell.setOnCheckedChangedListener(FpaView.this);
-            updateView(open);
+            updateView(Boolean.TRUE.equals(open));
         });
 
     }

@@ -8,14 +8,14 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import dji.sampleV5.modulecommon.R
-import dji.sampleV5.modulecommon.models.CameraStreamListFragmentVM
+import dji.sampleV5.modulecommon.models.CameraStreamListVM
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 
 class CameraStreamListFragment : DJIFragment() {
 
     private lateinit var llCameraList: LinearLayout
 
-    private val viewModule: CameraStreamListFragmentVM by viewModels()
+    private val viewModule: CameraStreamListVM by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_camera_stream_list, container, false)

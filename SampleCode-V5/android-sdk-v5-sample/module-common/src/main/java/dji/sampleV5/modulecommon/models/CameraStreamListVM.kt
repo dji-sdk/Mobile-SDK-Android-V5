@@ -6,7 +6,7 @@ import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.interfaces.ICameraStreamManager.AvailableCameraUpdatedListener
 
-class CameraStreamListFragmentVM : DJIViewModel(), AvailableCameraUpdatedListener {
+class CameraStreamListVM : DJIViewModel(), AvailableCameraUpdatedListener {
 
     private val _availableCameraListData = MutableLiveData<List<ComponentIndexType>>(ArrayList())
 

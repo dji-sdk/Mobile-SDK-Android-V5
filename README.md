@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Alpha Version 5.8.0-a2
+# DJI Mobile SDK for Android V5 Latest Alpha Version 5.8.0-a3
 
 [中文版](README_CN.md)
 
@@ -10,14 +10,23 @@
 4. All changes in the alpha version will be merged into the official version and will be strictly tested before the release.
 5. It is not suggested that developers directly merge the MSDK alpha version and released it as an official version.
 
-## Release Date
+## 5.8.0-a3 Release Notes（2023.11.15）
 
-2023.11.03
+- New API: ICameraStreamManager.setKeepAliveDecoding(bool).
+> If this API is set to false and there is no any Surface, ReceiveStreamListener and CameraFrameListener, the decoder pauses to reduce the background performance and battery consumption. However, it increases the latency of the first camera data transmission. If this API is set to true, the decoder continues working, increasing the background performance and power consumption, and reduces the latency of the first camera data transmission.. The default value is false.
 
-## Release Notes
+- New API: ICameraStreamManager.setPriorityEnsureFrameRate(bool).
+> If this API is set to true, frame rate is prioritized. When the stream signal is weak or the interference is strong, the frame rate of video stream transmission is prioritized over the quality. The advantage is the frame rate is relatively stable, but screen flicker might occur. If this API is set to false, the quality is prioritized, and frame in bad quality will be discarded. The default value is false.
+
+- Optimized decoding performance under multiple payloads.
+
+- Optimized the loading speed of video stream transmission.
+
+- No need to manually add dependencies: 'com.iqiyi.xcrash:xcrash-android-lib:3.1.0'
+
+## 5.8.0-a2 Release Notes（2023.11.03）
 
 - Support camera stream management class: ICameraStreamManager.
-
 > **Note:**
 > IVideoStreamManager will be deprecated starting from MSDK 5.8.0. Please use ICameraStreamManager to implement video stream management related functions.
 > The ProGuard rules for MSDK v5.8.0 alpha have been changed. Please make sure you have synchronized your project with sample.pro file.
@@ -29,7 +38,7 @@
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.8.0-a2
+> **Notice:** sdkVersion = 5.8.0-a3
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

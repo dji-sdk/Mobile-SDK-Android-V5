@@ -21,6 +21,8 @@ import dji.v5.manager.datacenter.media.VideoPlayState
 import dji.v5.utils.common.LogUtils
 import kotlinx.android.synthetic.main.video_play_page.*
 import dji.sampleV5.modulecommon.util.ToastUtils
+import dji.v5.manager.datacenter.camera.StreamInfo
+import dji.v5.manager.interfaces.ICameraStreamManager
 import dji.v5.manager.interfaces.IMediaManager
 
 
@@ -174,9 +176,9 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
             ToastUtils.showToast("Please retry")
             return
         }
+        // old function，depends on VideoDecoder
         MediaDataCenter.getInstance().mediaManager.playVideo(mediaFile , object :CommonCallbacks.CompletionCallbackWithParam<IVideoFrame>{
             override fun onSuccess(data: IVideoFrame?) {
-//                videoDecoder?.queueInFrame(data!!)
 
             }
 
@@ -184,6 +186,24 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
                 ToastUtils.showToast("play failed:" + error.description())
             }
         })
+
+        // new function, depends on surface
+//        MediaDataCenter.getInstance().mediaManager.playVideoToSurface(
+//            mediaFile,
+//            surfaceView.holder.surface,
+//            surfaceView.width,
+//            surfaceView.height,
+//            ICameraStreamManager.ScaleType.CENTER_INSIDE,
+//            object : IMediaManager.MediaFrameListener {
+//                override fun onReceiveStream(data: ByteArray?, offset: Int, length: Int, info: StreamInfo) {
+//
+//                }
+//
+//                override fun onError(error: IDJIError) {
+//                    ToastUtils.showToast("play failed:" + error.description())
+//                }
+//
+//            })
     }
 
     private fun operateSeekBar() {

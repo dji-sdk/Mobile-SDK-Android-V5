@@ -23,11 +23,10 @@
 
 package dji.v5.ux.sample.showcase.defaultlayout;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewStub;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.List;
@@ -76,7 +75,6 @@ import dji.v5.ux.core.util.ViewUtil;
 import dji.v5.ux.core.widget.fpv.FPVWidget;
 import dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget;
 import dji.v5.ux.core.widget.hsi.PrimaryFlightDisplayWidget;
-import dji.v5.ux.core.widget.setting.SettingPanelWidget;
 import dji.v5.ux.core.widget.setting.SettingWidget;
 import dji.v5.ux.core.widget.simulator.SimulatorIndicatorWidget;
 import dji.v5.ux.core.widget.systemstatus.SystemStatusWidget;
@@ -185,8 +183,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             }
         });
         mapWidget.onCreate(savedInstanceState);
-        ObservableInMemoryKeyedStore.getInstance().addObserver(UXKeys.create(GlobalPreferenceKeys.GIMBAL_ADJUST_CLICKED)) .observeOn(SchedulerProvider.ui())
-                .subscribe(this::isGimableAdjustClicked);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
         //实现RTK监测网络，并自动重连机制
         DJINetworkManager.getInstance().addNetworkStatusListener(networkStatusListener);
@@ -272,6 +269,10 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                 .subscribeOn(SchedulerProvider.io())
                 .subscribe(result -> runOnUiThread(() -> onCameraSourceUpdated(result.devicePosition, result.lensType)))
         );
+        compositeDisposable.add(ObservableInMemoryKeyedStore.getInstance()
+                .addObserver(UXKeys.create(GlobalPreferenceKeys.GIMBAL_ADJUST_CLICKED))
+                .observeOn(SchedulerProvider.ui())
+                .subscribe(this::isGimableAdjustClicked));
         ViewUtil.setKeepScreen(this, true);
     }
 

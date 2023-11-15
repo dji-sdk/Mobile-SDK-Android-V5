@@ -64,7 +64,6 @@ dependencies {
 
     //sdk依赖项（common下是通用功能，其他包也可以）
     compileOnly deps.aircraftProvided
-    implementation deps.xcrash
 
     //网络库的依赖项
     runtimeOnly deps.networkImp
