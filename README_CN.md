@@ -72,8 +72,10 @@
   ```
 
 
-- 如果需要MSDK使用网络（默认都需要），使用：
+- 如果MSDK不需要使用网络（默认需要使用），可以使用：
   ```groovy
-  runtimeOnly 'com.dji:dji-sdk-v5-networkImp-alpha:{sdkVersion}'
+  implementation("com.dji:dji-sdk-v5-aircraft-alpha:{sdkVersion}") {
+      exclude group: 'com.dji', module: 'dji-sdk-v5-networkImp-alpha'
+  }
   ```
 

@@ -71,7 +71,9 @@
   compileOnly 'com.dji:dji-sdk-v5-aircraft-provided-alpha:{sdkVersion}'
   ```
 
-- If the MSDK have to use network(required by default), please use:
+- If the MSDK does not need to use the network(required by default), please use:
   ```groovy
-  runtimeOnly 'com.dji:dji-sdk-v5-networkImp-alpha:{sdkVersion}'
+  implementation("com.dji:dji-sdk-v5-aircraft-alpha:{sdkVersion}") {
+      exclude group: 'com.dji', module: 'dji-sdk-v5-networkImp-alpha'
+  }
   ```
