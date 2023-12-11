@@ -66,20 +66,48 @@ class BatteryInfoWidgetModel(
         get() = productTypeProcessor.toFlowableOnUI()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyBatteryException, batteryIndex), batteryExceptionProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyBatteryTemperature, batteryIndex), batteryTemperatureProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyVoltage, batteryIndex), batteryVoltageProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent, batteryIndex), batteryChargeRemainingProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyConnection, batteryIndex), batteryConnectionProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyIsCommunicationException, batteryIndex), batteryIsCommunicationExceptionProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyNumberOfDischarges, batteryIndex), batteryNumberOfDischargesProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyIndustryBatteryType, batteryIndex), batteryIndustryBatteryTypeProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyBatteryHighVoltageStorageTime, batteryIndex), batteryBatteryHighVoltageStorageSecProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeySerialNumber, batteryIndex), batterySerialNumberProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyBatteryManufacturedDate, batteryIndex), batteryManufacturedDateProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyCellVoltages, batteryIndex), batteryCellVoltagesProcessor)
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyBatteryOverviews, ComponentIndexType.AGGREGATION), batteryOverviewProcessor)
-        bindDataProcessor(KeyTools.createKey(ProductKey.KeyProductType), productTypeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyBatteryException, batteryIndex), batteryExceptionProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyBatteryTemperature, batteryIndex), batteryTemperatureProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyVoltage, batteryIndex), batteryVoltageProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyChargeRemainingInPercent, batteryIndex), batteryChargeRemainingProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyConnection, batteryIndex), batteryConnectionProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyIsCommunicationException, batteryIndex), batteryIsCommunicationExceptionProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyNumberOfDischarges, batteryIndex), batteryNumberOfDischargesProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyIndustryBatteryType, batteryIndex), batteryIndustryBatteryTypeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyBatteryHighVoltageStorageTime, batteryIndex), batteryBatteryHighVoltageStorageSecProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeySerialNumber, batteryIndex), batterySerialNumberProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyBatteryManufacturedDate, batteryIndex), batteryManufacturedDateProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyCellVoltages, batteryIndex), batteryCellVoltagesProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyBatteryOverviews, ComponentIndexType.AGGREGATION), batteryOverviewProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                ProductKey.KeyProductType), productTypeProcessor)
     }
 
     override fun inCleanup() {

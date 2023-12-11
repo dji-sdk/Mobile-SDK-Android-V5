@@ -25,7 +25,6 @@ package dji.v5.ux.core.panel.listitem.overview
 
 import android.content.Context
 import android.util.AttributeSet
-import dji.v5.manager.diagnostic.DJIDeviceStatus
 import dji.v5.manager.diagnostic.WarningLevel
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.R

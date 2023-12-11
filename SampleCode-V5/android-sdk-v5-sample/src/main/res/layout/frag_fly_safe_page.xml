@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/fly_safe_button_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_hide_or_show_all_fly_zone_info"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_btn_hide_or_show_all_fly_zone_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_get_fly_zones_in_surrounding_area"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_get_fly_zones_in_surrounding_area"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_hide_or_show_all_fly_zone_info" />
+
+            <Button
+                android:id="@+id/btn_download_fly_zone_licenses_from_server"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_download_fly_zone_licenses_from_server"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_get_fly_zones_in_surrounding_area" />
+
+            <Button
+                android:id="@+id/btn_push_fly_zone_licenses_to_aircraft"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_push_fly_zone_licenses_to_aircraft"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_download_fly_zone_licenses_from_server" />
+
+            <Button
+                android:id="@+id/btn_pull_fly_zone_licenses_from_aircraft"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_pull_fly_zone_licenses_from_aircraft"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_push_fly_zone_licenses_to_aircraft" />
+
+            <Button
+                android:id="@+id/btn_delete_fly_zone_licenses_from_aircraft"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_delete_fly_zone_licenses_from_aircraft"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_pull_fly_zone_licenses_from_aircraft" />
+
+            <Button
+                android:id="@+id/btn_set_fly_zone_licenses_enabled"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_fly_zone_licenses_enabled"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_delete_fly_zone_licenses_from_aircraft" />
+
+            <Button
+                android:id="@+id/btn_unlock_authorization_fly_zone"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_unlock_authorization_fly_zone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_fly_zone_licenses_enabled" />
+
+            <Button
+                android:id="@+id/btn_unlock_all_enhanced_warning_fly_zone"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_unlock_all_enhanced_warning_fly_zone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_unlock_authorization_fly_zone" />
+            <dji.v5.ux.accessory.DescSpinnerCell
+                android:id="@+id/importMode"
+                android:layout_width="100dp"
+                android:background="@color/uxsdk_dark_gray"
+                android:layout_height="wrap_content"
+                app:uxsdk_entries="@array/ce_import_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_unlock_all_enhanced_warning_fly_zone" />
+
+            <Button
+                android:id="@+id/btn_import"
+                style="@style/main_fragment_btn"
+                android:text="导入本地限飞数据"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/importMode" />
+
+            <Button
+                android:id="@+id/btn_sync"
+                style="@style/main_fragment_btn"
+                android:text="同步数据到飞机"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_import" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <dji.v5.ux.map.MapWidget
+        android:id="@+id/map_widget"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/fly_safe_button_list"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></dji.v5.ux.map.MapWidget>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/lte_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/uxsdk_dark_gray"
+        app:layout_constraintWidth_percent="0.55"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lte_fly_zone_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/fly_safe_button_list"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fly_safe_notification_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                tools:text="@string/item_fly_safe_title"
+                android:textColor="@color/red"
+                android:textSize="@dimen/uxsdk_9_dp" />
+
+            <TextView
+                android:id="@+id/aircraft_fly_zone_license_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                tools:text="@string/item_fly_safe_title"
+                android:textColor="@color/green"
+                android:textSize="@dimen/uxsdk_14_dp" />
+
+            <TextView
+                android:id="@+id/server_fly_zone_license_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                tools:text="@string/item_fly_safe_title"
+                android:textColor="@color/blue_highlight"
+                android:textSize="@dimen/uxsdk_14_dp" />
+
+            <LinearLayout
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/update_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    tools:text="@string/item_fly_safe_title"
+                    android:textColor="@color/blue_highlight"
+                    android:textSize="@dimen/uxsdk_14_dp" />
+
+                <TextView
+                    android:id="@+id/sysn_and_import_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginLeft = "5dp"
+                    tools:text="@string/item_fly_safe_title"
+                    android:textColor="@color/red_light"
+                    android:textSize="@dimen/uxsdk_14_dp" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/database_info_sdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginLeft = "5dp"
+                tools:text="@string/item_fly_safe_title"
+                android:textColor="@color/blue_highlight"
+                android:textSize="@dimen/uxsdk_14_dp" />
+
+            <TextView
+                android:id="@+id/database_info_aircraft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginLeft = "5dp"
+                tools:text="@string/item_fly_safe_title"
+                android:textColor="@color/blue_highlight"
+                android:textSize="@dimen/uxsdk_14_dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/lte_fly_zone_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@color/uxsdk_dark_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/lte_toast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/lte_text"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fly_zone_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                tools:text="@string/item_fly_safe_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/uxsdk_14_dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/lte_toast"
+        android:layout_width="@dimen/uxsdk_100_dp"
+        android:layout_height="wrap_content"
+        android:text="toast"
+        android:textColor="@color/red"
+        android:textSize="@dimen/uxsdk_9_dp"
+        android:maxLines="10"
+        android:gravity="bottom|right"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/fly_safe_button_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,9 +66,15 @@ class VideoSignalWidgetModel(
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(AirLinkKey.KeyFrequencyPoint), ocuFrequencyPointIndexProcessor)
-        bindDataProcessor(KeyTools.createKey(AirLinkKey.KeyDownLinkQualityRaw), videoSignalQualityProcessor)
-        bindDataProcessor(KeyTools.createKey(AirLinkKey.KeyFrequencyBand), airlinkFrequencyBandProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                AirLinkKey.KeyFrequencyPoint), ocuFrequencyPointIndexProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                AirLinkKey.KeyDownLinkQualityRaw), videoSignalQualityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                AirLinkKey.KeyFrequencyBand), airlinkFrequencyBandProcessor)
     }
 
     override fun inCleanup() {

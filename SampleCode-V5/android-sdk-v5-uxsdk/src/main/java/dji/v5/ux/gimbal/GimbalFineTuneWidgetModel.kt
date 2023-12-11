@@ -25,9 +25,15 @@ open class GimbalFineTuneWidgetModel constructor(
     private val pitchAdjustDegreeProcessor = DataProcessor.create(0.0)
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyFineTuneRollTotalDegree, gimbalIndex.index), rollAdjustDegreeProcessor)
-        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyFineTuneYawTotalDegree, gimbalIndex.index), yawAdjustDegreeProcessor)
-        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyFineTunePitchTotalDegree, gimbalIndex.index), pitchAdjustDegreeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                GimbalKey.KeyFineTuneRollTotalDegree, gimbalIndex.index), rollAdjustDegreeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                GimbalKey.KeyFineTuneYawTotalDegree, gimbalIndex.index), yawAdjustDegreeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                GimbalKey.KeyFineTunePitchTotalDegree, gimbalIndex.index), pitchAdjustDegreeProcessor)
     }
 
     override fun inCleanup() {

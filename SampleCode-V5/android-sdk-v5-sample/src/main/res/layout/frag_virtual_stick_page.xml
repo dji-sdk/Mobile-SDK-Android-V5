@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/stick_button_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_enable_virtual_stick"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_enable_virtual_stick"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_disable_virtual_stick"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_disable_virtual_stick"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_enable_virtual_stick" />
+
+            <Button
+                android:id="@+id/btn_set_virtual_stick_speed_level"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_set_virtual_stick_speed_level"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_disable_virtual_stick" />
+
+            <Button
+                android:id="@+id/btn_take_off"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_take_off"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_set_virtual_stick_speed_level" />
+
+            <Button
+                android:id="@+id/btn_landing"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_landing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_take_off" />
+
+            <Button
+                android:id="@+id/btn_use_rc_stick"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_use_rc_stick_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_landing" />
+
+
+            <Button
+                android:id="@+id/btn_enable_virtual_stick_advanced_mode"
+                style="@style/main_fragment_btn"
+                android:text="@string/enable_virtual_stick_advanced_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_use_rc_stick" />
+
+            <Button
+                android:id="@+id/btn_disable_virtual_stick_advanced_mode"
+                style="@style/main_fragment_btn"
+                android:text="@string/disable_virtual_stick_advanced_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_enable_virtual_stick_advanced_mode" />
+
+            <Button
+                android:id="@+id/btn_set_virtual_stick_advanced_param"
+                style="@style/main_fragment_btn"
+                android:text="@string/set_virtual_stick_advanced_param"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_disable_virtual_stick_advanced_mode" />
+
+            <Button
+                android:id="@+id/btn_send_virtual_stick_advanced_param"
+                style="@style/main_fragment_btn"
+                android:text="@string/send_virtual_stick_advanced_param"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_set_virtual_stick_advanced_param" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/virtual_stick_info_tv"
+        android:layout_width="@dimen/uxsdk_500_dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/stick_button_list"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/green"
+        android:maxLines="30"
+        android:textSize="10dp"
+        android:text="virtual info">
+    </TextView>
+
+    <TextView
+        android:id="@+id/simulator_state_info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="simulator state info:"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
+    <dji.sampleV5.aircraft.virtualstick.OnScreenJoystick
+        android:id="@+id/left_stick_view"
+        android:background="@mipmap/joystick_bg"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toEndOf="@+id/stick_button_list"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.sampleV5.aircraft.virtualstick.OnScreenJoystick
+        android:id="@+id/right_stick_view"
+        android:background="@mipmap/joystick_bg"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <dji.v5.ux.core.widget.hsi.HorizontalSituationIndicatorWidget
+        android:id="@+id/widget_horizontal_situation_indicator"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/stick_button_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

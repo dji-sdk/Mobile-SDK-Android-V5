@@ -15,7 +15,6 @@ import dji.v5.ux.core.base.SchedulerProvider.ui
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import kotlinx.android.synthetic.main.uxsdk_camera_lens_control_widget.view.*
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Class Description

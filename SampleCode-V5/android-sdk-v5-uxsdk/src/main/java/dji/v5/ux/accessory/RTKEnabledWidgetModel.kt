@@ -50,7 +50,8 @@ class RTKEnabledWidgetModel(
 ) : WidgetModel(djiSdkModel, keyedStore) {
 
     //region Fields
-    private val isRTKEnabledKey: DJIKey<Boolean> = KeyTools.createKey(RtkMobileStationKey.KeyRTKEnable)
+    private val isRTKEnabledKey: DJIKey<Boolean> = KeyTools.createKey(
+        RtkMobileStationKey.KeyRTKEnable)
     private val isRTKEnabledProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     private val isMotorOnProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     private val homePointDataSourceProcessor: DataProcessor<RTKHomePointInfo> = DataProcessor.create(RTKHomePointInfo())
@@ -77,9 +78,15 @@ class RTKEnabledWidgetModel(
     //region Lifecycle
     override fun inSetup() {
         bindDataProcessor(isRTKEnabledKey, isRTKEnabledProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
-        bindDataProcessor(KeyTools.createKey(RtkMobileStationKey.KeyRTKHomePointInfo), homePointDataSourceProcessor)
-        bindDataProcessor(KeyTools.createKey(RtkMobileStationKey.KeyRTKTakeoffAltitudeInfo), isRTKTakeoffHeightSetProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RtkMobileStationKey.KeyRTKHomePointInfo), homePointDataSourceProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RtkMobileStationKey.KeyRTKTakeoffAltitudeInfo), isRTKTakeoffHeightSetProcessor)
     }
 
     override fun inCleanup() {

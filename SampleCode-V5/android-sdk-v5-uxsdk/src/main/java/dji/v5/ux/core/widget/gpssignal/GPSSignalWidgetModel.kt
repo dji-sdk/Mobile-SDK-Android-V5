@@ -104,7 +104,9 @@ class GpsSignalWidgetModel(
 
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyGPSSatelliteCount), gpsSatelliteCountProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyGPSSatelliteCount), gpsSatelliteCountProcessor)
         rtkCenter.addRTKSystemStateListener(rtkSystemStateListener)
         rtkCenter.rtkStationManager.addRTKStationConnectStatusListener(connectStatusListener)
         rtkCenter.qxrtkManager.addNetworkRTKServiceInfoListener(networkServiceInfoListener)

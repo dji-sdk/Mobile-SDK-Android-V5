@@ -32,8 +32,12 @@ open class ExposureModeSettingModel constructor(
     private var lensType = CameraLensType.CAMERA_LENS_ZOOM
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyExposureMode, cameraIndex, lensType), exposureModeProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyExposureModeRange, cameraIndex, lensType), exposureModeRangeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyExposureMode, cameraIndex, lensType), exposureModeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyExposureModeRange, cameraIndex, lensType), exposureModeRangeProcessor)
     }
 
     override fun inCleanup() {
@@ -55,6 +59,8 @@ open class ExposureModeSettingModel constructor(
     }
 
     fun setExposureMode(mode: CameraExposureMode): Completable {
-        return djiSdkModel.setValue(KeyTools.createCameraKey(CameraKey.KeyExposureMode, cameraIndex, lensType), mode)
+        return djiSdkModel.setValue(
+            KeyTools.createCameraKey(
+                CameraKey.KeyExposureMode, cameraIndex, lensType), mode)
     }
 }

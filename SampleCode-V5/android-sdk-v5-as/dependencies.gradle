@@ -1,9 +1,8 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft-alpha:5.8.0-a3"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided-alpha:5.8.0-a3"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp-alpha:5.8.0-a3"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft-alpha:5.8.0-a4"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided-alpha:5.8.0-a4"
 
     //三方依赖库
     deps.gson = 'com.google.code.gson:gson:2.9.1'

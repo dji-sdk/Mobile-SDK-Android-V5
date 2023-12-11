@@ -13,13 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D;
-import dji.sdk.keyvalue.value.flightcontroller.FailsafeAction;
 import dji.sdk.keyvalue.value.remotecontroller.RCMode;
 import dji.sdk.keyvalue.value.remotecontroller.RcGPSInfo;
 import dji.v5.common.utils.GpsUtils;
 import dji.v5.utils.common.LocationUtil;
 import dji.v5.ux.R;
-import dji.v5.ux.accessory.DescSpinnerCell;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;

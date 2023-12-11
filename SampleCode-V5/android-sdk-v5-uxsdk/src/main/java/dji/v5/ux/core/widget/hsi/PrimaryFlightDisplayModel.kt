@@ -27,8 +27,12 @@ open class PrimaryFlightDisplayModel constructor(
     val aircraftAttitudeProcessor: DataProcessor<Attitude> = DataProcessor.create(Attitude())
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity), velocityProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude), aircraftAttitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftVelocity), velocityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftAttitude), aircraftAttitudeProcessor)
     }
 
     override fun inCleanup() {

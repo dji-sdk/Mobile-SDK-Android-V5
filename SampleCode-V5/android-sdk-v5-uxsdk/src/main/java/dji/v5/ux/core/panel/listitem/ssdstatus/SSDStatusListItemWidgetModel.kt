@@ -63,9 +63,15 @@ class SSDStatusListItemWidgetModel(
     val ssdState: Flowable<SSDState> = ssdStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsInternalSSDSupported, cameraIndex), ssdSupportedProcessor)
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDRemainingSpaceInMB, cameraIndex), ssdRemainingCapacityProcessor)
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDOperationState, cameraIndex), ssdOperationStateProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeyIsInternalSSDSupported, cameraIndex), ssdSupportedProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeySSDRemainingSpaceInMB, cameraIndex), ssdRemainingCapacityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeySSDOperationState, cameraIndex), ssdOperationStateProcessor)
     }
 
     override fun updateStates() {
@@ -89,7 +95,9 @@ class SSDStatusListItemWidgetModel(
      * Format SSD
      */
     fun formatSSD(): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(CameraKey.KeyFormatStorage, cameraIndex))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                CameraKey.KeyFormatStorage, cameraIndex))
     }
 
 

@@ -23,14 +23,11 @@
 package dji.v5.ux.core.widget.fpv
 
 import dji.sdk.keyvalue.key.CameraKey
-import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.camera.CameraOrientation
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.camera.VideoResolutionFrameRate
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
-import dji.v5.common.callback.CommonCallbacks
-import dji.v5.common.error.IDJIError
 import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.common.video.interfaces.IVideoChannel
 import dji.v5.common.video.stream.StreamSource
@@ -47,7 +44,6 @@ import dji.v5.ux.core.module.FlatCameraModule
 import dji.v5.ux.core.util.CameraUtil
 import dji.v5.ux.core.util.DataProcessor
 import dji.v5.ux.core.util.RxUtil
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 
 /**

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/release_note_loading"
+        android:textColor="@color/white"
+        tools:ignore="HardcodedText" />
+
+    <ScrollView
+        android:id="@+id/scroll_news"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/panel_icon_msg"
+        app:layout_constraintEnd_toEndOf="@+id/msg_panel"
+        app:layout_constraintHeight_percent="0.65"
+        app:layout_constraintStart_toStartOf="@+id/msg_panel"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_news_title"
+        app:layout_constraintVertical_bias="0"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_gray2"
+            android:orientation="vertical">
+
+            <dji.sampleV5.aircraft.views.ItemNewsLayout
+                android:id="@+id/item_latest_version_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+
+            <dji.sampleV5.aircraft.views.ItemNewsLayout
+                android:id="@+id/item_current_version_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</merge>

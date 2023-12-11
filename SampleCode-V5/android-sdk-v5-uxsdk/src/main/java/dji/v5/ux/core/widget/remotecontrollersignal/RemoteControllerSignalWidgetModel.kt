@@ -52,7 +52,9 @@ class RemoteControllerSignalWidgetModel(
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(AirLinkKey.KeyUpLinkQualityRaw), upLinkQualityRawProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                AirLinkKey.KeyUpLinkQualityRaw), upLinkQualityRawProcessor)
     }
 
     override fun inCleanup() {

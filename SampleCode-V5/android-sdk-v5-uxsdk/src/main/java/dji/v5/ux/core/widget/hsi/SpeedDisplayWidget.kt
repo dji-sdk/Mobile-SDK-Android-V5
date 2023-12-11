@@ -22,7 +22,6 @@ import android.util.AttributeSet
 import dji.sdk.keyvalue.value.common.Attitude
 import dji.sdk.keyvalue.value.flightcontroller.WindDirection
 import dji.sdk.keyvalue.value.flightcontroller.WindWarning
-import dji.v5.utils.common.LogUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import java.util.*
 

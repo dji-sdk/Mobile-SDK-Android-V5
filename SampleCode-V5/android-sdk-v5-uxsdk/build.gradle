@@ -64,6 +64,5 @@ dependencies {
     api deps.playservicesbase
 
     compileOnly deps.aircraftProvided
-    compileOnly deps.aircraft
 
 }

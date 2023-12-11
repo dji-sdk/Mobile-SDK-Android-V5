@@ -28,9 +28,12 @@ class NDVIStreamSelectionPanelWidgetModel constructor(
 
     //窄带
     val narrowBandModelList = StreamPanelUtil.NARROW_BAND_MODEL_LIST
-    val cameraVideoStreamSourceProcessor: DataProcessor<CameraVideoStreamSourceType> = DataProcessor.create(CameraVideoStreamSourceType.UNKNOWN)
-    val currentNarrowBandModelProcessor: DataProcessor<StreamPanelUtil.NarrowBandModel> = DataProcessor.create(StreamPanelUtil.NarrowBandModel(CameraVideoStreamSourceType.UNKNOWN, "UNKNOWN", -1))
-    val cameraModeDataProcessor: DataProcessor<CameraMode> = DataProcessor.create(CameraMode.UNKNOWN)
+    val cameraVideoStreamSourceProcessor: DataProcessor<CameraVideoStreamSourceType> = DataProcessor.create(
+        CameraVideoStreamSourceType.UNKNOWN)
+    val currentNarrowBandModelProcessor: DataProcessor<StreamPanelUtil.NarrowBandModel> = DataProcessor.create(StreamPanelUtil.NarrowBandModel(
+        CameraVideoStreamSourceType.UNKNOWN, "UNKNOWN", -1))
+    val cameraModeDataProcessor: DataProcessor<CameraMode> = DataProcessor.create(
+        CameraMode.UNKNOWN)
     val visibleNarrowBandModeProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
 
     //绿植

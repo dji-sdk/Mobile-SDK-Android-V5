@@ -1164,6 +1164,13 @@
     <string name="uxsdk_fpv_gimbal_pitch_finetune">俯仰</string>
     <string name="uxsdk_setting_menu_title_gimbal_reset_param">重置云台参数</string>
     <string name="uxsdk_setting_menu_title_gimbal_calibration">云台自动校准</string>
+
+    <string name="uxsdk_link_frequency_band_dual">双频</string>
+    <string name="uxsdk_link_frequency_band_three">三频</string>
+    <string name="uxsdk_link_frequency_band_5">5G</string>
+    <string name="uxsdk_link_frequency_band_2_dot_4">2.4G</string>
+    <string name="uxsdk_link_frequency_band_5_dot_7">5.7G</string>
+    <string name="uxsdk_link_frequency_band_1_dot_4">840M&amp;1.4G</string>
 </resources>
 
 

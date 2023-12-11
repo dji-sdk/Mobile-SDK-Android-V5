@@ -58,7 +58,9 @@ class FlightModeWidgetModel(
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyFlightModeString), flightModeStringProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyFlightModeString), flightModeStringProcessor)
     }
 
     override fun inCleanup() {

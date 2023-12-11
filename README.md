@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Alpha Version 5.8.0-a3
+# DJI Mobile SDK for Android V5 Latest Alpha Version 5.8.0-a4
 
 [中文版](README_CN.md)
 
@@ -9,6 +9,25 @@
 3. The alpha version is not strictly tested before the release. There might exist some unstable problems. Please judge and choose whether to use this version according to the release note. If you have other problems, please contact us immediately.
 4. All changes in the alpha version will be merged into the official version and will be strictly tested before the release.
 5. It is not suggested that developers directly merge the MSDK alpha version and released it as an official version.
+
+## 5.8.0-a4 Release Notes（2023.12.11）
+
+- Delete the API interface: ICameraStreamManager setPriorityEnsureFrameRate (bool).
+> Priority The frame rate priority is easy to cause screen problems, so do not open the interface.
+
+- Improve compatibility with decoding and encoding capabilities.
+
+- Optimize the stability and video stream quality of the video stream transmission
+
+- No need to manually add this dependency: `runtimeOnly 'com.dji: dji-SDK-V5-NetworkIMP-alpha :{sdkVersion}'`
+
+- Upgrade the APG version of the Sample project to support JAVA 17
+
+- You no longer need to manually add `ProGuard rules` to the sdk，`ProGuard rules` is built into the sdk
+
+- Add features to meet local regulatory requirements
+
+- Some Bug fixes
 
 ## 5.8.0-a3 Release Notes（2023.11.15）
 
@@ -38,7 +57,7 @@
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.8.0-a3
+> **Notice:** sdkVersion = 5.8.0-a4
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |

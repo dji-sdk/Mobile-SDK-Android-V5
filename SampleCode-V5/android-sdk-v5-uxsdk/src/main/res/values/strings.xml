@@ -1182,4 +1182,12 @@
     <string name="uxsdk_fpv_gimbal_pitch_finetune">Tilt</string>
     <string name="uxsdk_setting_menu_title_gimbal_reset_param">Reset Gimbal Parameters</string>
     <string name="uxsdk_setting_menu_title_gimbal_calibration">Gimbal Calibration</string>
+
+    <string name="uxsdk_link_frequency_band_dual">Dual Band</string>
+    <string name="uxsdk_link_frequency_band_three">Three Bands</string>
+    <string name="uxsdk_link_frequency_band_2_dot_4">2.4G</string>
+    <string name="uxsdk_link_frequency_band_5">5G</string>
+    <string name="uxsdk_link_frequency_band_5_dot_7">5.7G</string>
+    <string name="uxsdk_link_frequency_band_1_dot_4">840M&amp;1.4G</string>
+
 </resources>

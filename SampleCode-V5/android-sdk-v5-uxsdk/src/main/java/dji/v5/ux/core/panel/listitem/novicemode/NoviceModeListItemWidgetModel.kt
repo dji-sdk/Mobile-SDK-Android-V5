@@ -53,7 +53,9 @@ class NoviceModeListItemWidgetModel(
 
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyNoviceModeEnabled), noviceModeDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyNoviceModeEnabled), noviceModeDataProcessor)
     }
 
     override fun updateStates() {
@@ -76,7 +78,9 @@ class NoviceModeListItemWidgetModel(
      * Toggle novice mode on/off
      */
     fun toggleNoviceMode(): Completable {
-        return djiSdkModel.setValue(KeyTools.createKey(FlightControllerKey.KeyNoviceModeEnabled), !noviceModeDataProcessor.value)
+        return djiSdkModel.setValue(
+            KeyTools.createKey(
+                FlightControllerKey.KeyNoviceModeEnabled), !noviceModeDataProcessor.value)
     }
 
     /**

@@ -108,8 +108,12 @@ class AirSenseWidgetModel @JvmOverloads constructor(
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAirSenseSystemConnected), airSenseConnectedProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAirSenseSystemInformation), airSenseSystemInformationProcessor){
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAirSenseSystemConnected), airSenseConnectedProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAirSenseSystemInformation), airSenseSystemInformationProcessor){
             airSenseWarningLevelProcessor.onNext(it.warningLevel)
         }
     }

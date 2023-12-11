@@ -65,9 +65,15 @@ class EMMCStatusListItemWidgetModel(
     val eMMCState: Flowable<EMMCState> = eMMCStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyIsInternalStorageSupported, cameraIndex), eMMCSupportedProcessor)
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageRemainSpace, cameraIndex), eMMCRemainingCapacityProcessor)
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyInternalStorageState, cameraIndex), eMMCOperationStateProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeyIsInternalStorageSupported, cameraIndex), eMMCSupportedProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeyInternalStorageRemainSpace, cameraIndex), eMMCRemainingCapacityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeyInternalStorageState, cameraIndex), eMMCOperationStateProcessor)
     }
 
     override fun inCleanup() {

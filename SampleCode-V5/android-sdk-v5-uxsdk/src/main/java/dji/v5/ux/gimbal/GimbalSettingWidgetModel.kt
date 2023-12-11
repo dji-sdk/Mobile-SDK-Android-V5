@@ -33,8 +33,12 @@ open class GimbalSettingWidgetModel constructor(
     private val areMotorsOnProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyGimbalCalibrationStatus, gimbalIndex.index), calibrationStatusProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), areMotorsOnProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                GimbalKey.KeyGimbalCalibrationStatus, gimbalIndex.index), calibrationStatusProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAreMotorsOn), areMotorsOnProcessor)
     }
 
     override fun inCleanup() {

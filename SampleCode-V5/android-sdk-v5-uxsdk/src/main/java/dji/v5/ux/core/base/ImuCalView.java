@@ -22,8 +22,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.mikepenz.iconics.view.IconicsImageView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

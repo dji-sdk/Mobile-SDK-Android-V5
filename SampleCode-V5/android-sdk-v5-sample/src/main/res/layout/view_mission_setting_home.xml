@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dji.sampleV5.aircraft.pages.view.MissionSettingHomeView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@color/mission_edit_panel_container_bg"
+    android:padding="@dimen/uxsdk_10_dp"
+    android:scrollbars="none"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="航线字段编辑"/>
+
+
+        <dji.v5.ux.accessory.DescSpinnerCell
+            android:id="@+id/product_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:uxsdk_summary="选择飞行器"
+            app:uxsdk_entries="@array/wayline_aircraft"/>
+
+        <dji.v5.ux.accessory.DescSpinnerCell
+            android:id="@+id/waypoint_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:uxsdk_summary="航点类型"
+            app:uxsdk_entries="@array/wayline_waypoint_type"/>
+
+
+        <dji.v5.ux.accessory.DescSpinnerCell
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:uxsdk_summary="完成动作"
+            app:uxsdk_entries="@array/wayline_finish_action"/>
+
+        <com.tomlonghurst.expandablehinttext.ExpandableHintText
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/execute_height"
+            app:imageColor="@color/uxsdk_colorPrimary"
+            android:inputType="number"
+            android:lines="1"
+            android:hint="飞行高度"
+            android:text="50"
+            app:textBoxColor="@android:color/white"
+            android:textColor="@color/uxsdk_colorPrimary"
+            app:floatingLabelColor="@android:color/white"
+            />
+
+        <com.tomlonghurst.expandablehinttext.ExpandableHintText
+
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/global_speed"
+            app:imageColor="@color/uxsdk_colorPrimary"
+            android:inputType="number"
+            android:text="5"
+            android:lines="1"
+            android:hint="航点飞行速度"
+            app:textBoxColor="@android:color/white"
+            android:textColor="@color/uxsdk_colorPrimary"
+            app:floatingLabelColor="@android:color/white"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:inputType="number"/>
+    </LinearLayout>
+
+</dji.sampleV5.aircraft.pages.view.MissionSettingHomeView>

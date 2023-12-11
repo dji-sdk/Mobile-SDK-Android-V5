@@ -3,12 +3,7 @@ package dji.v5.ux.core.widget.hsi
 import dji.sdk.keyvalue.key.*
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.common.Velocity3D
-import dji.sdk.keyvalue.value.flightassistant.PerceptionInformation
-import dji.sdk.keyvalue.value.flightassistant.PerceptionPushOmnidirectionalRadarStatus
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKTakeoffAltitudeInfo
-import dji.sdk.keyvalue.value.flightassistant.OmnidirectionalObstacleAvoidanceStatus
-import dji.sdk.keyvalue.value.product.ProductType
-import dji.sdk.wpmz.value.mission.WaylineWaylinesParseInfo
 import dji.v5.manager.KeyManager
 import dji.v5.manager.aircraft.perception.PerceptionManager
 import dji.v5.manager.aircraft.perception.data.ObstacleData
@@ -17,11 +12,6 @@ import dji.v5.manager.aircraft.perception.listener.ObstacleDataListener
 import dji.v5.manager.aircraft.perception.listener.PerceptionInformationListener
 import dji.v5.manager.aircraft.perception.radar.RadarInformation
 import dji.v5.manager.aircraft.perception.radar.RadarInformationListener
-import dji.v5.manager.aircraft.waypoint3.WPMZParserManager
-import dji.v5.manager.aircraft.waypoint3.WPMZParserManager.getCurrentKmzInfo
-import dji.v5.manager.aircraft.waypoint3.WaypointMissionExecuteStateListener
-import dji.v5.manager.aircraft.waypoint3.WaypointMissionManager
-import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
@@ -70,13 +60,25 @@ open class AttitudeDisplayModel constructor(
 
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity), velocityProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAltitude), altitudeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyGoHomeHeight), goHomeHeightProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHeightLimit), limitMaxFlightHeightInMeterProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftVelocity), velocityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAltitude), altitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyGoHomeHeight), goHomeHeightProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHeightLimit), limitMaxFlightHeightInMeterProcessor)
 
-        bindDataProcessor(KeyTools.createKey(RtkMobileStationKey.KeyRTKTakeoffAltitudeInfo), rtkTakeoffAltitudeInfoProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), aircraftLocationDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RtkMobileStationKey.KeyRTKTakeoffAltitudeInfo), rtkTakeoffAltitudeInfoProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftLocation), aircraftLocationDataProcessor)
 
 
         perceptionManager.addPerceptionInformationListener(perceptionInformationListener)

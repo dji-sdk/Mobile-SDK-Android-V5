@@ -99,8 +99,12 @@ class RTKTypeSwitchWidgetModel(
     }
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
-        addDisposable(RxUtil.addListener(KeyTools.createKey(ProductKey.KeyProductType), this).subscribe {
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
+        addDisposable(RxUtil.addListener(
+            KeyTools.createKey(
+                ProductKey.KeyProductType), this).subscribe {
             productTypeProcessor.onNext(it)
             updateSupportReferenceStationList()
         })

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_aircraft"
+    app:startDestination="@id/waypoint_page">
+
+    <fragment
+        android:id="@+id/waypoint_page"
+        android:name="dji.sampleV5.aircraft.pages.WaypointFragment"
+        android:label="waypoint_page"
+        tools:layout="@layout/frag_waypoint_page" />
+
+    <fragment
+        android:id="@+id/virtual_stick_page"
+        android:name="dji.sampleV5.aircraft.pages.VirtualStickFragment"
+        android:label="virtual_stick_page"
+        tools:layout="@layout/frag_virtual_stick_page" />
+
+    <fragment
+        android:id="@+id/flight_record_page"
+        android:name="dji.sampleV5.aircraft.pages.FlightRecordFragment"
+        android:label="flight_record_page"
+        android:layout="@layout/frag_flight_record_page" />
+
+    <fragment
+        android:id="@+id/network_rtk_page"
+        android:name="dji.sampleV5.aircraft.pages.RTKNetworkFragment"
+        android:label="network_rtk_page"
+        android:layout="@layout/frag_network_rtk_page" />
+
+
+    <fragment
+        android:id="@+id/flight_upgrade_page"
+        android:name="dji.sampleV5.aircraft.pages.UpgradeFragment"
+        android:label="flight_upgrade_page"
+        android:layout="@layout/frag_upgrade_page" />
+
+    <fragment
+        android:id="@+id/flight_simulator_page"
+        android:name="dji.sampleV5.aircraft.pages.SimulatorFragment"
+        android:label="flight_record_page"
+        android:layout="@layout/frag_simulator_page" />
+
+    <fragment
+        android:id="@+id/megaphone_page"
+        android:name="dji.sampleV5.aircraft.pages.MegaphoneFragment"
+        android:layout="@layout/frag_megaphone_page" />
+
+    <fragment
+        android:id="@+id/psdk_data_page"
+        android:name="dji.sampleV5.aircraft.pages.PayLoadDataFragment"
+        android:label="psdk_data_page"
+        android:layout="@layout/frag_payload_data_page" />
+
+    <fragment
+        android:id="@+id/psdk_widget_page"
+        android:name="dji.sampleV5.aircraft.pages.PayloadWidgetFragment"
+        android:label="psdk_widget_page"
+        android:layout="@layout/frag_payload_widget_page" />
+
+    <fragment
+        android:id="@+id/psdk_center_page"
+        android:name="dji.sampleV5.aircraft.pages.PayloadCenterFragment"
+        android:label="psdk_center_page"
+        android:layout="@layout/frag_payload_center_page">
+        <action
+            android:id="@+id/action_open_payload_data_page"
+            app:destination="@id/psdk_data_page" />
+
+        <action
+            android:id="@+id/action_open_payload_widget_page"
+            app:destination="@id/psdk_widget_page" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/waypoint_v3_page"
+        android:name="dji.sampleV5.aircraft.pages.WayPointV3Fragment"
+        android:label="waypoint_v3_page"
+        android:layout="@layout/frag_waypointv3_page" />
+    <fragment
+        android:id="@+id/station_rtk_page"
+        android:name="dji.sampleV5.aircraft.pages.RTKStationFragment"
+        android:label="station_rtk_test_page"
+        android:layout="@layout/frag_station_rtk_page" />
+    <fragment
+        android:id="@+id/rtk_center_page"
+        android:name="dji.sampleV5.moduledrone.pages.RTKCenterFragment"
+        android:label="rtk_center_page"
+        android:layout="@layout/frag_rtk_center_page">
+        <action
+            android:id="@+id/action_open_network_trk_pag"
+            app:destination="@id/network_rtk_page" />
+
+        <action
+            android:id="@+id/action_open_rtk_station_page"
+            app:destination="@id/station_rtk_page" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/perception_page"
+        android:name="dji.sampleV5.aircraft.pages.PerceptionFragment"
+        android:label="perception_page"
+        android:layout="@layout/frag_perception_page" />
+
+    <fragment
+        android:id="@+id/uas_jp_page"
+        android:name="dji.sampleV5.aircraft.pages.UASJapanFragment"
+        android:label="uas_jp_page"
+        tools:layout="@layout/frag_uas_jp_page" />
+    <fragment
+        android:id="@+id/uas_us_page"
+        android:name="dji.sampleV5.aircraft.pages.UASUSFragment"
+        android:label="uas_us_page"
+        tools:layout="@layout/frag_uas_us_page" />
+
+    <fragment
+        android:id="@+id/uas_european_page"
+        android:name="dji.sampleV5.aircraft.pages.UASEuropeanFragment"
+        android:label="uas_france_page"
+        tools:layout="@layout/frag_uas_european_page" />
+
+    <fragment
+        android:id="@+id/uas_france_page"
+        android:name="dji.sampleV5.aircraft.pages.UASFranceFragment"
+        android:label="uas_france_page"
+        tools:layout="@layout/frag_uas_france_page" />
+
+    <fragment
+        android:id="@+id/uas_china_page"
+        android:name="UASChinaFragment"
+        android:label="uas_jp_page"
+        tools:layout="@layout/frag_uas_china_page" />
+
+    <fragment
+        android:id="@+id/uas_page"
+        android:name="dji.sampleV5.aircraft.pages.UASRemoteFragment"
+        android:label="uas_page"
+        tools:layout="@layout/frag_uas_page">
+        <action
+            android:id="@+id/action_open_uas_jp_pag"
+            app:destination="@id/uas_jp_page" />
+
+        <action
+            android:id="@+id/action_open_uas_france_page"
+            app:destination="@id/uas_france_page" />
+
+        <action
+            android:id="@+id/action_open_uas_us_page"
+            app:destination="@id/uas_us_page" />
+
+        <action
+            android:id="@+id/action_open_uas_chin_page"
+            app:destination="@id/uas_china_page" />
+
+        <action
+            android:id="@+id/action_open_uas_european_page"
+            app:destination="@id/uas_european_page" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lte_page"
+        android:name="dji.sampleV5.aircraft.pages.LTEFragment"
+        android:label="lte_page"
+        android:layout="@layout/frag_lte_page" />
+
+    <fragment
+        android:id="@+id/fly_safe_page"
+        android:name="dji.sampleV5.aircraft.pages.FlySafeFragment"
+        android:label="fly_safe_page"
+        android:layout="@layout/frag_fly_safe_page" />
+
+    <fragment
+        android:id="@+id/security_code_page"
+        android:name="dji.sampleV5.aircraft.pages.SecurityCodeFragment"
+        android:label="security_code_page"
+        tools:layout="@layout/frag_security_code_page" />
+
+
+    <fragment
+        android:id="@+id/mop_center_page"
+        android:name="dji.sampleV5.aircraft.pages.MOPCenterFragment"
+        android:label="mop_center_page"
+        tools:layout="@layout/frag_mop_center_page">
+        <action
+            android:id="@+id/action_open_mop_interface_page"
+            app:destination="@id/mop_interface_page" />
+
+        <action
+            android:id="@+id/action_open_down_page"
+            app:destination="@id/mop_down_page" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mop_interface_page"
+        android:name="dji.sampleV5.aircraft.pages.MopInterfaceFragment"
+        android:label="mop_interface_page"
+        tools:layout="@layout/frag_mop_interface_page" />
+    <fragment
+        android:id="@+id/mop_down_page"
+        android:name="dji.sampleV5.aircraft.pages.MopDownFragment"
+        android:label="mop_down_page"
+        tools:layout="@layout/frag_mop_down_page" />
+</navigation>

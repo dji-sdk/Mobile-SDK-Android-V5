@@ -59,9 +59,15 @@ class VPSWidgetModel(
         get() = vpsStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyVisionPositioningEnabled), visionPositioningEnabledProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyIsUltrasonicUsed), ultrasonicBeingUsedProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyUltrasonicHeight), rawUltrasonicHeightProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightAssistantKey.KeyVisionPositioningEnabled), visionPositioningEnabledProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyIsUltrasonicUsed), ultrasonicBeingUsedProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyUltrasonicHeight), rawUltrasonicHeightProcessor)
 
         val unitTypeKey = GlobalPreferenceKeys.create(GlobalPreferenceKeys.UNIT_TYPE)
         bindDataProcessor(unitTypeKey, unitTypeDataProcessor)

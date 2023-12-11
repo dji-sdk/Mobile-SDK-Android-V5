@@ -54,10 +54,16 @@ class SimulatorControlWidgetModel(
     //private val simulatorWindDataKey: DJIKey = FlightControllerKey.create(FlightControllerKey.SIMULATOR_WIND_DATA)
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeySimulatorState), simulatorStateDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyGPSSatelliteCount), satelliteCountDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeySimulatorState), simulatorStateDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyGPSSatelliteCount), satelliteCountDataProcessor)
         //bindDataProcessor(simulatorWindDataKey, simulatorWindDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyIsSimulatorStarted), simulatorActiveDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyIsSimulatorStarted), simulatorActiveDataProcessor)
     }
 
     override fun inCleanup() { // No clean up needed
@@ -75,7 +81,9 @@ class SimulatorControlWidgetModel(
      * @return Completable to determine status of the action
      */
     fun startSimulator(initializationData: SimulatorInitializationSettings): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartSimulator), initializationData)
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                FlightControllerKey.KeyStartSimulator), initializationData)
     }
 
     /**
@@ -84,7 +92,9 @@ class SimulatorControlWidgetModel(
      * @return Completable to determine status of the action
      */
     fun stopSimulator(): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStopSimulator))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                FlightControllerKey.KeyStopSimulator))
     }
 
     /**

@@ -48,7 +48,8 @@ class SystemStatusWidgetModel(
 ) : WidgetModel(djiSdkModel, keyedStore) {
 
     //region Fields
-    private val systemStatusProcessor: DataProcessor<DJIDeviceStatus> = DataProcessor.create(DJIDeviceStatus.NORMAL)
+    private val systemStatusProcessor: DataProcessor<DJIDeviceStatus> = DataProcessor.create(
+        DJIDeviceStatus.NORMAL)
     private val areMotorsOnDataProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     private val maxHeightProcessor: DataProcessor<Int> = DataProcessor.create(0)
     private val unitTypeProcessor: DataProcessor<UnitConversionUtil.UnitType> = DataProcessor.create(UnitConversionUtil.UnitType.METRIC)
@@ -96,8 +97,12 @@ class SystemStatusWidgetModel(
 
     //region LifeCycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), areMotorsOnDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyFlightLimitHeight), maxHeightProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAreMotorsOn), areMotorsOnDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyFlightLimitHeight), maxHeightProcessor)
         val unitKey = UXKeys.create(GlobalPreferenceKeys.UNIT_TYPE)
         bindDataProcessor(unitKey, unitTypeProcessor)
 

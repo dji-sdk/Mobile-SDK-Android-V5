@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mission_action_type">
+        <item>Stay</item>
+        <item>StartTakePhoto</item>
+        <item>StartRecord</item>
+        <item>StopRecord</item>
+        <item>RotateAircraft</item>
+        <item>GimbalPitch</item>
+    </string-array>
+
+    <string-array name="megaphone_index_array">
+        <item>Port</item>
+        <item>StarBoard</item>
+        <item>Top</item>
+        <item>OSDK</item>
+    </string-array>
+
+    <string-array name="index_arrays">
+        <item>LEFT_OR_MAIN</item>
+        <item>RIGHT</item>
+        <item>UP</item>
+        <item>UNKNOWN</item>
+    </string-array>
+
+    <string-array name="maps_array">
+        <item>Auto</item>
+        <item>AMap</item>
+        <item>Maplibre</item>
+    </string-array>
+
+    <string-array name="maps_array_all">
+        <item>Auto</item>
+        <item>AMap</item>
+        <item>Maplibre</item>
+        <item>Google</item>
+    </string-array>
+
+    <string-array name="sub_index_arrays">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="sub_type_arrays">
+        <item>65534</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+
+    <string-array name="media_component_arrays">
+        <item>MAIN</item>
+        <item>RIGHT</item>
+        <item>UP</item>
+    </string-array>
+
+    <string-array name="media_storage_arrays">
+        <item>SDCARD</item>
+        <item>INNER</item>
+    </string-array>
+
+    <string-array name="wayline_aircraft">
+        <item>Matrice 30</item>
+        <item>Matrice 30T</item>
+        <item>Matrice 300 RTK</item>
+        <item>DJI Mavic 3 Serials</item>
+        <item>DJI Mavic 3 Thermal</item>
+    </string-array>
+
+    <string-array name="wayline_yaw_mode">
+        <item>Along to wayline</item>
+        <item>Manual control</item>
+        <item>Lock current yaw angle</item>
+    </string-array>
+
+
+    <string-array name="wayline_waypoint_type">
+        <item>Straight route. Aircraft stops</item>
+        <item>Curved route. Aircraft stops</item>
+        <item>Curved route. Aircraft continues</item>
+        <item>Coordinated turn. Skips waypoint</item>
+    </string-array>
+
+    <string-array name="wayline_finish_action">
+        <item>自动返航</item>
+        <item>原地降落</item>
+        <item>返回航线起始点悬停</item>
+        <item>退出航线模式</item>
+    </string-array>
+
+    <string-array name="wayline_action">
+        <item>Take Photo</item>
+        <item>Start Record</item>
+        <item>Stop Record</item>
+        <item>Gimbal Pitch</item>
+    </string-array>
+
+    <string-array name="kml_heigh_mode">
+        <item>WGS84</item>
+        <item>EGM96</item>
+        <item>RELATIVE</item>
+    </string-array>
+
+    <string-array name="ce_import_mode">
+        <item>Manual</item>
+        <item>AUTO</item>
+    </string-array>
+</resources>

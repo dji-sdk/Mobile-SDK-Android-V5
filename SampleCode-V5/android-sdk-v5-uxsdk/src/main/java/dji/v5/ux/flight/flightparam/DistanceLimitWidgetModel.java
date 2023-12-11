@@ -1,22 +1,13 @@
 package dji.v5.ux.flight.flightparam;
 
 
-import android.content.Context;
-import android.util.AttributeSet;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import dji.sdk.keyvalue.key.FlightControllerKey;
 import dji.sdk.keyvalue.key.KeyTools;
-import dji.sdk.keyvalue.value.flightcontroller.FailsafeAction;
 import dji.sdk.keyvalue.value.flightcontroller.GoHomePathMode;
-import dji.v5.ux.R;
 import dji.v5.ux.core.base.DJISDKModel;
-import dji.v5.ux.core.base.EditorCell;
-import dji.v5.ux.core.base.SwitcherCell;
 import dji.v5.ux.core.base.WidgetModel;
-import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
 import dji.v5.ux.core.util.DataProcessor;
 import io.reactivex.rxjava3.core.Completable;

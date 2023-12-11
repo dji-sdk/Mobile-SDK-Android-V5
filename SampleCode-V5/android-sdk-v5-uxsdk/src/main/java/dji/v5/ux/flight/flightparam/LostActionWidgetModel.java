@@ -4,10 +4,7 @@ import androidx.annotation.NonNull;
 
 import dji.sdk.keyvalue.key.FlightControllerKey;
 import dji.sdk.keyvalue.key.KeyTools;
-import dji.sdk.keyvalue.key.ProductKey;
 import dji.sdk.keyvalue.value.flightcontroller.FailsafeAction;
-import dji.sdk.keyvalue.value.flightcontroller.GoHomePathMode;
-import dji.sdk.keyvalue.value.product.ProductType;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.WidgetModel;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;

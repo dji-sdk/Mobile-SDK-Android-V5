@@ -33,9 +33,15 @@ class SettingPanelWidgetModel(
 
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(ProductKey.KeyProductType), productTypeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyConnection), flightControllerConnectProcessor)
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyRcMachineMode), rcModeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                ProductKey.KeyProductType), productTypeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyConnection), flightControllerConnectProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyRcMachineMode), rcModeProcessor)
 
         PayloadCenter.getInstance().payloadManager.forEach {
             it.value.addPayloadBasicInfoListener { payloadBasicInfo ->

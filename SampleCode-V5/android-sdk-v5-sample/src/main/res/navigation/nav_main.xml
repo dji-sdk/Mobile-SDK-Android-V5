@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/main_host_page">
+
+    <fragment
+        android:id="@+id/main_host_page"
+        android:name="dji.sampleV5.aircraft.pages.MainFragment"
+        android:label="main_page"
+        tools:layout="@layout/frag_main_page"/>
+
+</navigation>

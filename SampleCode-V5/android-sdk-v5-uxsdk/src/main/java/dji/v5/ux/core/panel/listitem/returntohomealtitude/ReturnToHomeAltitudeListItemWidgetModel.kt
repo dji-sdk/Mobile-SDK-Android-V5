@@ -24,7 +24,6 @@
 package dji.v5.ux.core.panel.listitem.returntohomealtitude
 
 import dji.sdk.keyvalue.key.FlightControllerKey
-import dji.sdk.keyvalue.value.common.IntMinMax
 import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.common.IntValueConfig
 import io.reactivex.rxjava3.core.Flowable
@@ -66,12 +65,20 @@ class ReturnToHomeAltitudeListItemWidgetModel(
         get() = returnToHomeAltitudeStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyGoHomeHeight), returnToHomeAltitudeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHeightLimit), maxFlightAltitudeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHeightLimitRange), maxFlightHeightRangeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyGoHomeHeight), returnToHomeAltitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHeightLimit), maxFlightAltitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHeightLimitRange), maxFlightHeightRangeProcessor)
         val unitTypeKey = GlobalPreferenceKeys.create(GlobalPreferenceKeys.UNIT_TYPE)
         bindDataProcessor(unitTypeKey, unitTypeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyNoviceModeEnabled), noviceModeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyNoviceModeEnabled), noviceModeProcessor)
         preferencesManager?.setUpListener()
         preferencesManager?.let { unitTypeProcessor.onNext(it.unitType) }
     }
@@ -143,7 +150,9 @@ class ReturnToHomeAltitudeListItemWidgetModel(
         } else {
             returnToHomeAltitude
         }
-        return djiSdkModel.setValue(KeyTools.createKey(FlightControllerKey.KeyGoHomeHeight), tempAltitude)
+        return djiSdkModel.setValue(
+            KeyTools.createKey(
+                FlightControllerKey.KeyGoHomeHeight), tempAltitude)
     }
 
     /**
