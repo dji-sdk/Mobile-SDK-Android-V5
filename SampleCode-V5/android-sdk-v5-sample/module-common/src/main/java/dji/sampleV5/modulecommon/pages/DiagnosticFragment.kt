@@ -35,7 +35,7 @@ class DiagnosticFragment : DJIFragment() {
             updateDiagnosticMsg()
         }
 
-        diagnosticVm.currentDeviceStatus.observe(viewLifecycleOwner) {
+        diagnosticVm.lastDeviceStatus.observe(viewLifecycleOwner) {
             updateDiagnosticMsg()
         }
     }
