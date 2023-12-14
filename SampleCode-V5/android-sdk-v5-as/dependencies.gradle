@@ -1,9 +1,9 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.7.1"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.7.1"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.7.1"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.7.2"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.7.2"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.7.2"
 
 
     //三方依赖库
