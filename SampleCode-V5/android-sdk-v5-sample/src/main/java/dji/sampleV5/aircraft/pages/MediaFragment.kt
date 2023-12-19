@@ -134,6 +134,14 @@ class MediaFragment : DJIFragment() {
             updateDeleteBtn(adapter?.selectionMode!!)
         }
 
+        btn_download.setOnClickListener {
+            val mediafiles = ArrayList<MediaFile>()
+            if (adapter?.getSelectedItems()?.size != 0)
+                mediafiles.addAll(adapter?.getSelectedItems()!!)
+                mediaVM.downloadMediaFile(mediafiles)
+
+        }
+
         btn_set_xmp_custom_info.setOnClickListener {
             dji.sampleV5.aircraft.keyvalue.KeyValueDialogUtil.showInputDialog(
                 activity, "xmp custom info",

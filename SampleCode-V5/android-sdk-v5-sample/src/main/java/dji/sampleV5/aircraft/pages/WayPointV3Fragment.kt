@@ -408,7 +408,7 @@ class WayPointV3Fragment : DJIFragment() {
             override fun onWaylineExecutingInfoUpdate(it: WaylineExecutingInfo) {
                 wayline_execute_state_tv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
                         "WaypointIndex:${it.currentWaypointIndex} \n" +
-                        "MissionName : ${if (curMissionExecuteState == WaypointMissionExecuteState.READY) "" else it.missionFileName}"
+                        "MissionName : ${ it.missionFileName}"
             }
 
             override fun onWaylineExecutingInterruptReasonUpdate(error: IDJIError?) {
@@ -667,13 +667,7 @@ class WayPointV3Fragment : DJIFragment() {
         val onMapReadyListener = MapWidget.OnMapReadyListener { map ->
             map.setMapType(DJIMap.MapType.NORMAL)
         }
-        val useAmap = wayPointV3VM.isInMainlandChina();
-        if (useAmap) {
-            map_widget.initAMap(onMapReadyListener)
-        } else {
-            map_widget.initMapLibreMap(BuildConfig.MAPLIBRE_TOKEN, onMapReadyListener)
-        }
-
+        map_widget.initAMap(onMapReadyListener)
 
         map_widget.onCreate(savedInstanceState) //需要再init后调用否则Amap无法显示
     }

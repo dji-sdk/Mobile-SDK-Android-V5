@@ -1,6 +1,7 @@
 package dji.sampleV5.aircraft.models
 
 import androidx.lifecycle.MutableLiveData
+import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.data.DJIToastResult
 import dji.sdk.keyvalue.key.CameraKey
 import dji.sdk.keyvalue.key.KeyTools
@@ -19,6 +20,17 @@ import dji.v5.manager.datacenter.media.*
 import dji.v5.utils.common.LogUtils
 import dji.sampleV5.aircraft.util.ToastUtils
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation
+import dji.v5.utils.common.ContextUtil
+import dji.v5.utils.common.DiskUtil
+import dji.v5.utils.common.StringUtils
+import io.reactivex.rxjava3.annotations.Nullable
+import kotlinx.android.synthetic.main.layout_media_play_download_progress.progressBar
+import kotlinx.android.synthetic.main.layout_media_play_download_progress.progressInfo
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.ArrayList
 
 /**
  * @author feel.feng
@@ -165,5 +177,60 @@ class MediaVM : DJIViewModel() {
                     (throwable as RxError).djiError
                 )
             }
+    }
+
+    fun  downloadMediaFile(mediaList : ArrayList<MediaFile>){
+        mediaList.forEach {
+            downloadFile(it)
+        }
+    }
+
+    private fun downloadFile(mediaFile :MediaFile ) {
+        val dirs = File(DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(),  "/mediafile"))
+        if (!dirs.exists()) {
+            dirs.mkdirs()
+        }
+        val filepath = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(),  "/mediafile/"  + mediaFile?.fileName)
+        val file = File(filepath)
+        var offset = 0L
+        val outputStream = FileOutputStream(file, true)
+        val bos = BufferedOutputStream(outputStream)
+        mediaFile?.pullOriginalMediaFileFromCamera(offset, object : MediaFileDownloadListener {
+            override fun onStart() {
+                LogUtils.i("MediaFile" , "${mediaFile.fileIndex } start download"  )
+            }
+
+            override fun onProgress(total: Long, current: Long) {
+                val fullSize = offset + total;
+                val downloadedSize = offset + current
+                val data: Double = StringUtils.formatDouble((downloadedSize.toDouble() / fullSize.toDouble()))
+                val result: String = StringUtils.formatDouble(data * 100, "#0").toString() + "%"
+                LogUtils.i("MediaFile"  , "${mediaFile.fileIndex}  progress $result")
+            }
+
+            override fun onRealtimeDataUpdate(data: ByteArray, position: Long) {
+                try {
+                    bos.write(data)
+                    bos.flush()
+                } catch (e: IOException) {
+                    LogUtils.e("MediaFile", "write error" + e.message)
+                }
+            }
+
+            override fun onFinish() {
+                try {
+                    outputStream.close()
+                    bos.close()
+                } catch (error: IOException) {
+                    LogUtils.e("MediaFile", "close error$error")
+                }
+                LogUtils.i("MediaFile" , "${mediaFile.fileIndex }  download finish"  )
+            }
+
+            override fun onFailure(error: IDJIError?) {
+                LogUtils.e("MediaFile", "download error$error")
+            }
+
+        })
     }
 }

@@ -70,18 +70,4 @@ class RTKCenterVM : DJIViewModel() {
         RTKCenter.getInstance().setRTKMaintainAccuracyEnabled(enable, null)
     }
 
-    fun getRTKMaintainAccuracyEnabled() {
-        RTKCenter.getInstance().getRTKMaintainAccuracyEnabled(object : CommonCallbacks.CompletionCallbackWithParam<Boolean> {
-            override fun onSuccess(t: Boolean?) {
-                rtkAccuracyMaintainLD.postValue(t)
-            }
-
-            override fun onFailure(error: IDJIError) {
-                rtkAccuracyMaintainLD.postValue(false)
-                toastResult?.postValue(DJIToastResult.failed(error.toString()))
-            }
-
-        })
-    }
-
 }

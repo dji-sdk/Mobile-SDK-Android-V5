@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 最新Alpha版本 5.8.0-a4
+# DJI Mobile SDK for Android V5 最新Alpha版本 5.8.0-a5
 
 [English Version](README.md)
 
@@ -9,6 +9,12 @@
 3. Alpha版本未经过严格发布测试，可能存在一些不稳定问题。请开发者根据版本发布记录，自行判断和选择使用Alpha版本。如果有其他问题请第一时间反馈给我们。
 4. Alpha版本的所有改动都会同步到正式版本，进行严格的发布测试后对外发布。
 5. 不建议开发者直接集成MSDK Alpha版本作为正式版本进行发布。
+
+## 5.8.0-a5发布记录（2023.12.19）
+
+- 优化图传的图像质量
+
+- 一些Bug修复
 
 ## 5.8.0-a4发布记录（2023.12.11）
 
@@ -57,7 +63,7 @@
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.8.0-a4
+> **注意：** sdkVersion = 5.8.0-a5
 
 | SDK包  <div style="width: 150pt">  | 说明  <div style="width: 200pt">   | 使用方式 <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |
@@ -72,10 +78,8 @@
   ```
 
 
-- 如果MSDK不需要使用网络（默认需要使用），可以使用：
+- 如果需要MSDK使用网络（默认都需要），使用：
   ```groovy
-  implementation("com.dji:dji-sdk-v5-aircraft-alpha:{sdkVersion}") {
-      exclude group: 'com.dji', module: 'dji-sdk-v5-networkImp-alpha'
-  }
+  runtimeOnly 'com.dji:dji-sdk-v5-networkImp-alpha:{sdkVersion}'
   ```
 

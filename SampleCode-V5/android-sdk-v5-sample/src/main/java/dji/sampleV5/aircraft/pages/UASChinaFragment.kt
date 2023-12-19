@@ -32,7 +32,6 @@ class UASChinaFragment : DJIFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         uasChinaVM.addRealNameRegistrationStatusListener()
-        uasChinaVM.addUASRemoteIDStatusListener()
 
         uasChinaVM.uasRemoteIDStatus.observe(viewLifecycleOwner) {
             updateInfo()
@@ -51,13 +50,10 @@ class UASChinaFragment : DJIFragment() {
     override fun onDestroy() {
         super.onDestroy()
         uasChinaVM.removeRealNameRegistrationStatusListener()
-        uasChinaVM.clearRemoteIdStatusListener()
     }
 
     private fun updateInfo() {
         val builder = StringBuilder()
-        builder.append("Uas Remote ID Status:").append(JsonUtil.toJson(uasChinaVM.uasRemoteIDStatus.value))
-        builder.append("\n")
         builder.append("Uas Uom Real Name Status:")
             .append(uasChinaVM.uomRealNameFCStatus.value?.name +getRealNameStatusTip(uasChinaVM.uomRealNameFCStatus.value))
         builder.append("\n")

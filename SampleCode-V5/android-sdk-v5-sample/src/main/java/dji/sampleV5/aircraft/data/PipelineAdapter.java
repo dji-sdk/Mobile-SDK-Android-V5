@@ -28,7 +28,7 @@ import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-;import dji.sampleV5.aircraft.R;
+import dji.sampleV5.aircraft.R;
 import dji.v5.common.error.DJIPipeLineError;
 import dji.v5.manager.mop.DataResult;
 import dji.v5.manager.mop.Pipeline;

@@ -60,8 +60,6 @@ class RTKCenterFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener,
         rtkCenterVM.addRTKLocationInfoListener()
         rtkCenterVM.addRTKSystemStateListener()
 
-        rtkCenterVM.getRTKMaintainAccuracyEnabled()
-
     }
 
     private fun initListener() {

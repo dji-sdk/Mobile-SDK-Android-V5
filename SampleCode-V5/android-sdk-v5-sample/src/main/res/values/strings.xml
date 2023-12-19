@@ -432,6 +432,7 @@ More refer to the release notes." </string>
 
     <string name="delete_files">delete file</string>
     <string name="select_files">select file</string>
+    <string name="download_files">download file</string>
     <string name="set_xmp_custom_info">set xmp custom info</string>
     <string name="get_xmp_custom_info">get xmp custom info</string>
     <string name="unselect_files"> unselect file</string>

@@ -41,18 +41,9 @@ class UASChinaVM: DJIViewModel() {
         uasRemoteIDManager.addRealNameRegistrationStatusListener(listener)
     }
 
-    fun addUASRemoteIDStatusListener() {
-        uasRemoteIDManager.addUASRemoteIDStatusListener {
-            uasRemoteIDStatus.postValue(it)
-        }
-    }
 
     fun removeRealNameRegistrationStatusListener() {
         uasRemoteIDManager.removeRealNameRegistrationStatusListener(listener)
-    }
-
-    fun clearRemoteIdStatusListener() {
-        uasRemoteIDManager.clearUASRemoteIDStatusListener()
     }
 
     fun updateRealNameRegistrationStateFromUOM() {
@@ -67,6 +58,4 @@ class UASChinaVM: DJIViewModel() {
             }
         })
     }
-
-
 }

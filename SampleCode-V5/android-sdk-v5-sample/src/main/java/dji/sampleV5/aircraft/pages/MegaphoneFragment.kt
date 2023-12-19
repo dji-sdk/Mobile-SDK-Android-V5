@@ -389,21 +389,21 @@ class MegaphoneFragment : DJIFragment() {
 
     private fun updateMegaphonePlayState() {
         mainHandler.post {
-            curPlayMode = megaphoneVM.megaphonePlayState.value!!.playMode
+            curPlayMode = megaphoneVM.megaphonePlayState.value?.let { it.playMode }
+                ?: let { PlayMode.UNKNOWN }
             if (curPlayMode == PlayMode.SINGLE) {
                 btn_play_mode.setImageResource(R.drawable.ic_action_playback_repeat_1)
             } else {
                 btn_play_mode.setImageResource(R.drawable.ic_action_playback_repeat)
             }
-
-            tv_megaphone_state.text = megaphoneVM.megaphonePlayState.value!!.status.toString()
-
-            sb_volume_control.progress = megaphoneVM.megaphonePlayState.value!!.volume
+            tv_megaphone_state.text = megaphoneVM.megaphonePlayState.value?.let { it.status.toString() }?:let { "N/A" }
+            sb_volume_control.progress = megaphoneVM.megaphonePlayState.value?.let { it.volume }?:let { 0 }
             val textSource =
-                getString(R.string.cur_volume_value) + "${megaphoneVM.megaphonePlayState.value!!.volume}"
+                getString(R.string.cur_volume_value) + "${megaphoneVM.megaphonePlayState.value?.let { it.volume }?:let { 0 }}"
             tv_cur_volume_value.text = textSource
 
-            if (megaphoneVM.megaphonePlayState.value!!.status == MegaphoneStatus.PLAYING) {
+            val megaphoneStatus = megaphoneVM.megaphonePlayState.value?.let { it.status }?:let { MegaphoneStatus.UNKNOWN }
+            if (megaphoneStatus == MegaphoneStatus.PLAYING) {
                 btn_play_control.setImageResource(R.drawable.ic_media_stop)
                 isPlaying = true
             } else {

@@ -130,12 +130,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_select" />
 
             <Button
+                android:id="@+id/btn_download"
+                style="@style/main_fragment_btn"
+                android:text="@string/download_files"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_delete" />
+
+            <Button
                 android:id="@+id/btn_set_xmp_custom_info"
                 style="@style/main_fragment_btn"
                 android:text="@string/set_xmp_custom_info"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_delete" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_download" />
 
             <Button
                 android:id="@+id/btn_get_xmp_custom_info"
