@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Alpha Version 5.8.0-a5
+# DJI Mobile SDK for Android V5 Latest Alpha Version 5.8.0-a6
 
 [中文版](README_CN.md)
 
@@ -9,6 +9,10 @@
 3. The alpha version is not strictly tested before the release. There might exist some unstable problems. Please judge and choose whether to use this version according to the release note. If you have other problems, please contact us immediately.
 4. All changes in the alpha version will be merged into the official version and will be strictly tested before the release.
 5. It is not suggested that developers directly merge the MSDK alpha version and released it as an official version.
+
+## 5.8.0-a6 Release Notes（2023.12.21）
+
+- Some Bug fixes
 
 ## 5.8.0-a5 Release Notes（2023.12.19）
 
@@ -25,7 +29,7 @@
 
 - Optimize the stability and video stream quality of the video stream transmission
 
-- No need to manually add this dependency: `runtimeOnly 'com.dji: dji-SDK-V5-NetworkIMP-alpha :{sdkVersion}'`
+- No need to manually add this dependency: `runtimeOnly "com.dji: dji-SDK-V5-NetworkIMP-alpha :{sdkVersion}"`
 
 - Upgrade the APG version of the Sample project to support JAVA 17
 
@@ -63,7 +67,7 @@
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.8.0-a5
+> **Notice:** sdkVersion = 5.8.0-a6
 
 | SDK package  <div style="width: 150pt">  | Explanation  <div style="width: 200pt">   | How to use <div style="width: 300pt">|
 | :---------------: | :-----------------:  | :---------------: |
@@ -73,11 +77,11 @@
 
 - If only the aircraft product is in need to support, please use:
   ```groovy
-  implementation 'com.dji:dji-sdk-v5-aircraft-alpha:{sdkVersion}'
-  compileOnly 'com.dji:dji-sdk-v5-aircraft-provided-alpha:{sdkVersion}'
+  implementation "com.dji:dji-sdk-v5-aircraft-alpha:{sdkVersion}"
+  compileOnly "com.dji:dji-sdk-v5-aircraft-provided-alpha:{sdkVersion}"
   ```
 
 - If the MSDK have to use network(required by default), please use:
   ```groovy
-  runtimeOnly 'com.dji:dji-sdk-v5-networkImp-alpha:{sdkVersion}'
+  runtimeOnly "com.dji:dji-sdk-v5-networkImp-alpha:{sdkVersion}"
   ```
