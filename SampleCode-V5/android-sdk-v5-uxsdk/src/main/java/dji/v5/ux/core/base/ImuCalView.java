@@ -22,8 +22,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.mikepenz.iconics.view.IconicsImageView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -50,7 +48,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
     private static final String TAG = ImuCalView.class.getSimpleName();
 
     // title
-     IconicsImageView mCloseImg = null;
+     ImageView mCloseImg = null;
 
     // process
      LinearLayout mProcessLy = null;

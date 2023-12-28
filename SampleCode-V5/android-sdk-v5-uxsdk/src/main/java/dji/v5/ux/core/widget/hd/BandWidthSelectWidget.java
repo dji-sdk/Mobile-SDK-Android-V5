@@ -54,6 +54,7 @@ public class BandWidthSelectWidget extends ConstraintLayoutWidget<Object> implem
 
         initBandwidthItems();
         initBandwidthItemsUI();
+        setVisibility(GONE);
     }
 
     @Override

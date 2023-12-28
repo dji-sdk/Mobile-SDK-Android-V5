@@ -5,8 +5,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/uxsdk_15_dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/setting_menu_perception_pic_1"
@@ -21,8 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/uxsdk_20_dp"
+            android:layout_marginBottom="@dimen/uxsdk_15_dp"
             android:layout_toRightOf="@id/setting_menu_perception_pic_1"
-            android:text="@string/setting_menu_desc_perception_downwards"
+            android:text="@string/uxsdk_setting_menu_desc_omni_perception_downwards"
             android:textColor="@color/uxsdk_dic_color_c24_white_Transparent6"
             android:textSize="@dimen/uxsdk_setting_perception_icon_text_size" />
     </RelativeLayout>

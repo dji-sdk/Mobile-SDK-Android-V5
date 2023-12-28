@@ -26,8 +26,6 @@ package dji.v5.ux.core.panel.listitem.rcbattery
 import dji.sdk.keyvalue.key.RemoteControllerKey
 import dji.sdk.keyvalue.value.remotecontroller.BatteryInfo
 import dji.sdk.keyvalue.key.KeyTools
-import dji.v5.utils.common.JsonUtil
-import dji.v5.utils.common.LogUtils
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
@@ -63,8 +61,12 @@ class RCBatteryListItemWidgetModel(
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyConnection), rcConnectionProcessor)
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyBatteryInfo), rcBatteryLevelProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyConnection), rcConnectionProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyBatteryInfo), rcBatteryLevelProcessor)
     }
 
     override fun inCleanup() {

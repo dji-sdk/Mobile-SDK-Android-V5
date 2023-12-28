@@ -13,13 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D;
-import dji.sdk.keyvalue.value.flightcontroller.FailsafeAction;
 import dji.sdk.keyvalue.value.remotecontroller.RCMode;
 import dji.sdk.keyvalue.value.remotecontroller.RcGPSInfo;
 import dji.v5.common.utils.GpsUtils;
 import dji.v5.utils.common.LocationUtil;
+import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
-import dji.v5.ux.accessory.DescSpinnerCell;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
@@ -165,6 +164,7 @@ public class HomePointWidget extends ConstraintLayoutWidget<Object> {
         if (location == null) {
             return;
         }
+        LogUtils.i("RcHome" , "isCurrentRc keep " + isCurrentRc);
         LocationCoordinate2D location2D = new LocationCoordinate2D(location.getLatitude(), location.getLongitude());
         if (!GpsUtils.isValid(location2D.getLatitude() , location2D.getLongitude())) {
             ViewUtil.showToast(getContext(),R.string.uxsdk_fpv_toast_homepoint_setting_failed , Toast.LENGTH_SHORT);

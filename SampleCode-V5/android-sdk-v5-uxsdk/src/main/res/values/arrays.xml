@@ -178,12 +178,12 @@
     </string-array>
 
     <array name="uxsdk_sdr_frequency_names">
-        <item>@string/link_frequency_band_dual</item>
-        <item>@string/link_frequency_band_2_dot_4</item>
-        <item>@string/link_frequency_band_5</item>
-        <item>@string/link_frequency_band_1_dot_4</item>
-        <item>@string/link_frequency_band_5_dot_7</item>
-        <item>@string/link_frequency_band_three</item>
+        <item>@string/uxsdk_link_frequency_band_dual</item>
+        <item>@string/uxsdk_link_frequency_band_2_dot_4</item>
+        <item>@string/uxsdk_link_frequency_band_5</item>
+        <item>@string/uxsdk_link_frequency_band_1_dot_4</item>
+        <item>@string/uxsdk_link_frequency_band_5_dot_7</item>
+        <item>@string/uxsdk_link_frequency_band_three</item>
     </array>
 
     <string-array name="uxsdk_hd_channel_mode">
@@ -215,5 +215,11 @@
         <item>@string/uxsdk_setting_ui_flyc_mode_snt</item>
         <item>@string/uxsdk_setting_ui_flyc_mode_sna</item>
     </string-array>
+
+    <array name="uxsdk_common_setting_auxiliary_light_mode">
+        <item>@string/uxsdk_vision_flash_light_auto</item>
+        <item>@string/uxsdk_vision_flash_light_on</item>
+        <item>@string/uxsdk_vision_flash_light_off</item>
+    </array>
 
 </resources>

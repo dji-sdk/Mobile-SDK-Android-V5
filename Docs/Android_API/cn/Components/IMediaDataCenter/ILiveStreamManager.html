@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -537,6 +557,14 @@
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatus.html">UARegistrationNumberStatus</a>
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -594,7 +622,7 @@
 <div class="api-row" id="ilivestreammanager_setlivestreamsettings"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_setlivestreamsettings_inline">setLiveStreamSettings</a></div></div><div class="inline-doc" id="ilivestreammanager_setlivestreamsettings_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setLiveStreamSettings</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">setLiveStreamSettings</span><span class="params">(LiveStreamSettings settings)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setLiveStreamSettings</span><span class="params">(LiveStreamSettings settings)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v3">描述：</h5>
 <p><font color="#666">设置直播参数。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
@@ -612,110 +640,134 @@
 <div class="api-row" id="ilivestreammanager_setvideochanneltype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_setvideochanneltype_inline">setVideoChannelType</a></div></div><div class="inline-doc" id="ilivestreammanager_setvideochanneltype_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setVideoChannelType</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setVideoChannelType</span><span class="params">(VideoChannelType videoChannelType)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setVideoChannelType</span><span class="params">(VideoChannelType videoChannelType)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v5">描述：</h5>
-<p><font color="#666">设置直播所使用的码流通道。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">设置直播所使用的码流通道。
+<br><b>注意：<br>
+该接口从MSDK 5.8.0版本开始废弃。请调用<code><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager_setcameraindex">setCameraIndex</a></code>设置需要直播的相机索引。</b>
+<br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v2">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_videochanneltype">VideoChannelType</a> <font color="#000">videoChannelType</font></font></td><td><font color="#666"><i>码流通道类型。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_getvideochanneltype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_getvideochanneltype_inline">getVideoChannelType</a></div></div><div class="inline-doc" id="ilivestreammanager_getvideochanneltype_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getVideoChannelType</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">VideoChannelType <span class="title">getVideoChannelType</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function">VideoChannelType <span class="title">getVideoChannelType</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v6">描述：</h5>
-<p><font color="#666">获取直播所使用的码流通道。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">获取直播所使用的码流通道。
+<br><b>注意：<br>
+该接口从MSDK 5.8.0版本开始废弃。请调用<code><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager_getcameraindex">getCameraIndex</a></code>获取设置的相机索引。</b><br>
+<br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="返回值：-v3">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_videochanneltype">VideoChannelType</a></font></td><td><font color="#666"><i>返回码流通道类型。</i></font></td></tr></table></html></div>
+<div class="api-row" id="ilivestreammanager_setcameraindex"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_setcameraindex_inline">setCameraIndex</a></div></div><div class="inline-doc" id="ilivestreammanager_setcameraindex_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>setCameraIndex</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setCameraIndex</span><span class="params">(@NonNull ComponentIndexType cameraIndex)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v7">描述：</h5>
+<p><font color="#666">设置需要进行直播的相机索引。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v3">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IKeyManager/KeyTools.html#value_common_enum_componentindextype">ComponentIndexType</a> <font color="#000">cameraIndex</font></font></td><td><font color="#666"><i>需要进行直播的相机索引。</i></font></td></tr></table></html></div>
+<div class="api-row" id="ilivestreammanager_getcameraindex"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_getcameraindex_inline">getCameraIndex</a></div></div><div class="inline-doc" id="ilivestreammanager_getcameraindex_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getCameraIndex</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">ComponentIndexType <span class="title">getCameraIndex</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v8">描述：</h5>
+<p><font color="#666">获取设置的相机索引。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="返回值：-v4">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IKeyManager/KeyTools.html#value_common_enum_componentindextype">ComponentIndexType</a></font></td><td><font color="#666"><i>返回设置的相机索引。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_startstream"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_startstream_inline">startStream</a></div></div><div class="inline-doc" id="ilivestreammanager_startstream_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startStream</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startStream</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v7">描述：</h5>
+<h5 id="描述：-v9">描述：</h5>
 <p><font color="#666">开启直播。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v3">输入参数：</h5>
+<h5 id="输入参数：-v4">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_stopstream"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_stopstream_inline">stopStream</a></div></div><div class="inline-doc" id="ilivestreammanager_stopstream_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>stopStream</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stopStream</span><span class="params">(CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
+<h5 id="描述：-v10">描述：</h5>
 <p><font color="#666">停止直播。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v4">输入参数：</h5>
+<h5 id="输入参数：-v5">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_setlivestreamquality"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_setlivestreamquality_inline">setLiveStreamQuality</a></div></div><div class="inline-doc" id="ilivestreammanager_setlivestreamquality_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setLiveStreamQuality</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setLiveStreamQuality</span><span class="params">(StreamQuality quality)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v9">描述：</h5>
+<h5 id="描述：-v11">描述：</h5>
 <p><font color="#666">设置直播视频质量类型。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v5">输入参数：</h5>
+<h5 id="输入参数：-v6">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager_streamquality">StreamQuality</a> <font color="#000">quality</font></font></td><td><font color="#666"><i>直播视频质量类型。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_getlivestreamquality"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_getlivestreamquality_inline">getLiveStreamQuality</a></div></div><div class="inline-doc" id="ilivestreammanager_getlivestreamquality_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getLiveStreamQuality</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">StreamQuality <span class="title">getLiveStreamQuality</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v10">描述：</h5>
+<h5 id="描述：-v12">描述：</h5>
 <p><font color="#666">获取直播视频质量类型。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="返回值：-v4">返回值：</h5>
+<h5 id="返回值：-v5">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager_streamquality">StreamQuality</a></font></td><td><font color="#666"><i>返回直播视频质量类型。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_setlivevideobitratemode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_setlivevideobitratemode_inline">setLiveVideoBitrateMode</a></div></div><div class="inline-doc" id="ilivestreammanager_setlivevideobitratemode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setLiveVideoBitrateMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setLiveVideoBitrateMode</span><span class="params">(LiveVideoBitrateMode bitrateMode)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v11">描述：</h5>
+<h5 id="描述：-v13">描述：</h5>
 <p><font color="#666">设置直播码率模式。自动模式下MSDK会根据网络情况自动设置直播码率，手动模式下需要调用<code><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager_setlivevideobitrate">setLiveVideoBitrate</a></code>手动设置码率。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v6">输入参数：</h5>
+<h5 id="输入参数：-v7">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager_livevideobitratemode">LiveVideoBitrateMode</a> <font color="#000">bitrateMode</font></font></td><td><font color="#666"><i>直播码率模式。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_getlivevideobitratemode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_getlivevideobitratemode_inline">getLiveVideoBitrateMode</a></div></div><div class="inline-doc" id="ilivestreammanager_getlivevideobitratemode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getLiveVideoBitrateMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">LiveVideoBitrateMode <span class="title">getLiveVideoBitrateMode</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v12">描述：</h5>
+<h5 id="描述：-v14">描述：</h5>
 <p><font color="#666">获取直播码率模式。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="返回值：-v5">返回值：</h5>
+<h5 id="返回值：-v6">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ILiveStreamManager.html#ilivestreammanager_livevideobitratemode">LiveVideoBitrateMode</a></font></td><td><font color="#666"><i>返回直播码率模式。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_setlivevideobitrate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_setlivevideobitrate_inline">setLiveVideoBitrate</a></div></div><div class="inline-doc" id="ilivestreammanager_setlivevideobitrate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setLiveVideoBitrate</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setLiveVideoBitrate</span><span class="params">(<span class="keyword">int</span> bitrate)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v13">描述：</h5>
+<h5 id="描述：-v15">描述：</h5>
 <p><font color="#666">设置直播码率。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v7">输入参数：</h5>
+<h5 id="输入参数：-v8">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int <font color="#000">bitrate</font></font></td><td><font color="#666"><i>直播码率。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_getlivevideobitrate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_getlivevideobitrate_inline">getLiveVideoBitrate</a></div></div><div class="inline-doc" id="ilivestreammanager_getlivevideobitrate_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getLiveVideoBitrate</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getLiveVideoBitrate</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v14">描述：</h5>
+<h5 id="描述：-v16">描述：</h5>
 <p><font color="#666">获取直播码率。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="返回值：-v6">返回值：</h5>
+<h5 id="返回值：-v7">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int</font></td><td><font color="#666"><i>返回直播码率。</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_addlivestreamstatuslistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_addlivestreamstatuslistener_inline">addLiveStreamStatusListener</a></div></div><div class="inline-doc" id="ilivestreammanager_addlivestreamstatuslistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>addLiveStreamStatusListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addLiveStreamStatusListener</span><span class="params">(LiveStreamStatusListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v15">描述：</h5>
+<h5 id="描述：-v17">描述：</h5>
 <p><font color="#666">设置直播状态监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v8">输入参数：</h5>
+<h5 id="输入参数：-v9">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ILiveStreamManager_LiveStreamStatusListener.html#ilivestreammanager_livestreamstatuslistener">LiveStreamStatusListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>直播状态监听器</i></font></td></tr></table></html></div>
 <div class="api-row" id="ilivestreammanager_removelivestreamstatuslistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_removelivestreamstatuslistener_inline">removeLiveStreamStatusListener</a></div></div><div class="inline-doc" id="ilivestreammanager_removelivestreamstatuslistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeLiveStreamStatusListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeLiveStreamStatusListener</span><span class="params">(LiveStreamStatusListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v16">描述：</h5>
+<h5 id="描述：-v18">描述：</h5>
 <p><font color="#666">删除直播状态监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v9">输入参数：</h5>
+<h5 id="输入参数：-v10">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMediaDataCenter/ILiveStreamManager_LiveStreamStatusListener.html#ilivestreammanager_livestreamstatuslistener">LiveStreamStatusListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>直播状态监听器</i></font></td></tr></table></html></div>
 <h5 id="related">Related:</h5>
 <div class="api-row" id="ilivestreammanager_livestreamsettings"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMediaDataCenter/ILiveStreamManager_LiveStreamSettings.html">LiveStreamSettings</a></div></div><div class="api-row" id="ilivestreammanager_livestreamtype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#ilivestreammanager_livestreamtype_inline">LiveStreamType</a></div></div><div class="inline-doc" id="ilivestreammanager_livestreamtype_inline" <blockquote>
@@ -723,7 +775,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> LiveStreamType</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.livestream</font></td></tr></table></html>
-<h5 id="描述：-v17">描述：</h5>
+<h5 id="描述：-v19">描述：</h5>
 <p><font color="#666">直播协议类型类。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_livestreamtype_rtmp_inline"></a>RTMP</font></td><td><font color="#666">RTMP类型。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_livestreamtype_rtsp_inline"></a>RTSP</font></td><td><font color="#666">RTSP类型。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_livestreamtype_gb28181_inline"></a>GB28181</font></td><td><font color="#666">GB28181类型。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_livestreamtype_agora_inline"></a>AGORA</font></td><td><font color="#666">声网类型。</font></td></tr></table></html>
@@ -734,7 +786,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> StreamQuality</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.livestream</font></td></tr></table></html>
-<h5 id="描述：-v18">描述：</h5>
+<h5 id="描述：-v20">描述：</h5>
 <p><font color="#666">直播视频质量类型。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_streamquality_sd_inline"></a>SD</font></td><td><font color="#666">标清。分辨率为960*540，帧率为30fps，码率约为500KByte/s。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_streamquality_hd_inline"></a>HD</font></td><td><font color="#666">高清。分辨率为1280*720，帧率为30fps，码率约为1MByte/s。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_streamquality_full_hd_inline"></a>FULL_HD</font></td><td><font color="#666">超清。分辨率为1920*1080，帧率为30fps，码率约为3MByte/s。</font></td></tr></table></html>
@@ -745,7 +797,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> LiveVideoBitrateMode</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.datacenter.livestream</font></td></tr></table></html>
-<h5 id="描述：-v19">描述：</h5>
+<h5 id="描述：-v21">描述：</h5>
 <p><font color="#666">直播码率模式。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v3">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_livevideobitratemode_auto_inline"></a>AUTO</font></td><td><font color="#666">自动。在这种模式下，MSDK会根据网络情况自动设置码率，设置的原则是流畅度优先。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ilivestreammanager_livevideobitratemode_manual_inline"></a>MANUAL</font></td><td><font color="#666">手动。这是直播码率的默认模式，默认的直播码率为2*1024kbps。</font></td></tr></table></html>

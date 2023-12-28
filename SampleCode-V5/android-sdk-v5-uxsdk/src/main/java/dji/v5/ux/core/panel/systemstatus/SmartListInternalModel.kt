@@ -54,7 +54,9 @@ class SmartListInternalModel(
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(ProductKey.KeyProductType), modelProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                ProductKey.KeyProductType), modelProcessor)
     }
 
     override fun inCleanup() {

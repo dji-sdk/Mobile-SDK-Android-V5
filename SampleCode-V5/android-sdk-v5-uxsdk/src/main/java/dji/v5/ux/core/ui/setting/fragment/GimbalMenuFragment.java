@@ -21,6 +21,6 @@ public class GimbalMenuFragment extends MenuFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.uxsdk_fragment_not_yet_implement;
+        return R.layout.uxsdk_setting_menu_gimbal_layout;
     }
 }

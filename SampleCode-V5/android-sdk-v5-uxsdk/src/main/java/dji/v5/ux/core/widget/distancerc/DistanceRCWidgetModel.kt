@@ -63,8 +63,12 @@ class DistanceRCWidgetModel(
         get() = distanceRCStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor)
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyRcGPSInfo), rcGPSDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyRcGPSInfo), rcGPSDataProcessor)
         bindDataProcessor(GlobalPreferenceKeys.create(GlobalPreferenceKeys.UNIT_TYPE), unitTypeDataProcessor)
         preferencesManager?.setUpListener()
         preferencesManager?.let { unitTypeDataProcessor.onNext(it.unitType) }

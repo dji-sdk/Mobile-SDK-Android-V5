@@ -3,7 +3,6 @@ package dji.v5.ux.warning
 import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.v5.et.create
 import dji.v5.manager.diagnostic.*
-import dji.v5.ux.cameracore.widget.cameracapture.shootphoto.CameraPhotoState
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore

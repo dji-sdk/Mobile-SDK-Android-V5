@@ -38,7 +38,9 @@ interface IFPVParams {
          * 当前未考虑遥控器连接不同飞机，未观察连接飞机的变化，当出现遥控支持不同飞机时，需要观察飞机状态变化。
          */
         fun getCurrent(): IFPVParams {
-            val type = KeyManager.getInstance().getValue(KeyTools.createKey(ProductKey.KeyProductType), ProductType.UNKNOWN)
+            val type = KeyManager.getInstance().getValue(
+                KeyTools.createKey(
+                    ProductKey.KeyProductType), ProductType.UNKNOWN)
             if (type == ProductType.M300_RTK || type == ProductType.M350_RTK) {
                 return M300FpvParams
             } else if (type == ProductType.M30_SERIES) {

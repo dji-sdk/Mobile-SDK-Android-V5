@@ -15,7 +15,6 @@ import dji.v5.ux.core.base.SchedulerProvider.ui
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import kotlinx.android.synthetic.main.uxsdk_camera_lens_control_widget.view.*
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * Class Description
@@ -132,6 +131,7 @@ open class LensControlWidget @JvmOverloads constructor(
             CameraVideoStreamSourceType.INFRARED_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_ir)
             CameraVideoStreamSourceType.NDVI_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_ndvi)
             CameraVideoStreamSourceType.RGB_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_rgb)
+            CameraVideoStreamSourceType.POINT_CLOUD_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_point_cloud)
             else -> ""
         }
     }

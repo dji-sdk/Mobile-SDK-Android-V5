@@ -21,7 +21,9 @@ import dji.sdk.keyvalue.value.remotecontroller.RCMode;
 import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.accessory.RTKStartServiceHelper;
+import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
+import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
 import dji.v5.ux.core.ui.setting.SettingFragmentPagerAdapter;
 import dji.v5.ux.core.ui.setting.data.MenuBean;
 import dji.v5.ux.core.ui.setting.taplayout.TabViewPager;
@@ -46,12 +48,10 @@ import io.reactivex.rxjava3.disposables.Disposable;
 public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
     private final String tag = LogUtils.getTag(this);
 
-    private ProductType mProductType;
-    private ProductType mPrevProductType;
+    private ProductType mProductType = ProductType.UNKNOWN;
+    private ProductType mPrevProductType = ProductType.UNKNOWN;
     private boolean mProductConnected;
-    private boolean mSearchlightConnected;
-    private RCMode mCurrentRcMode = RCMode.NORMAL;
-
+    private RCMode mCurrentRcMode = RCMode.CHANNEL_A;
 
     private FragmentManager fm;
     private TabViewPager viewPager;
@@ -62,7 +62,7 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
     private Disposable mRestartDispose;
     private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
-    private SettingPanelWidgetModel widgetModel;
+    private SettingPanelWidgetModel widgetModel = new SettingPanelWidgetModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance());
 
     public SettingPanelWidget(Context context) {
         this(context, null);
@@ -76,13 +76,10 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
         super(context, attrs, defStyleAttr);
         initializeView();
         showWidgets();
-    }
-
-    public void setWidgetModel(SettingPanelWidgetModel settingPanelWidgetModel) {
-        this.widgetModel = settingPanelWidgetModel;
         prepareData();
 
     }
+
 
     protected void initializeView() {
         LayoutInflater.from(getContext()).inflate(R.layout.uxsdk_panel_layout_setting, this, true);
@@ -93,57 +90,58 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
     }
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (!isInEditMode()) {
+            widgetModel.setup();
+        }
+    }
+
 
     protected void prepareData() {
-        mCompositeDisposable.add(widgetModel.getRcModeProcessor().toFlowable().subscribe(rcMode -> {
-            if (rcMode != mCurrentRcMode) {
+        mCompositeDisposable.add(widgetModel.getRcModeProcessor().toFlowableOnUI().distinctUntilChanged().subscribe(rcMode -> {
+            if (rcMode != RCMode.UNKNOWN && rcMode != mCurrentRcMode) {
                 mCurrentRcMode = rcMode;
                 updateData(rcMode);
             }
         }));
 
+        mPrevProductType = widgetModel.getProduceType();
+        mCompositeDisposable.add(widgetModel.getProductTypeProcessor().toFlowableOnUI().distinctUntilChanged().subscribe(productType -> mProductType = productType));
 
-        mCompositeDisposable.add(widgetModel.getProductTypeProcessor().toFlowable().subscribe(productType -> mProductType = productType));
-
-        mCompositeDisposable.add(widgetModel.getFlightControllerConnectProcessor().toFlowable().subscribe(connection -> {
+        mProductConnected = widgetModel.getFlightControllerConnectStatus();
+        mCompositeDisposable.add(widgetModel.getFlightControllerConnectProcessor().toFlowableOnUI().distinctUntilChanged().subscribe(connection -> {
             if (connection != mProductConnected) {
                 mProductConnected = connection;
-                if (mProductConnected && mPrevProductType != mProductType) {
+                if (mProductConnected && mProductType != ProductType.UNKNOWN && mPrevProductType != mProductType) {
                     delayRestartPanel();
+                    mPrevProductType = mProductType;
                 }
-                mPrevProductType = mProductType;
             }
         }));
 
-        addRTKRtkModuleAvailableListener();
-        addPayloadConnectListener();
-
-
-    }
-
-    private void addRTKRtkModuleAvailableListener() {
-        mCompositeDisposable.add(RTKStartServiceHelper.INSTANCE.getRtkModuleAvailable().subscribe(aBoolean -> {
+        mCompositeDisposable.add(RTKStartServiceHelper.INSTANCE.getRtkModuleAvailable().distinctUntilChanged().observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
             if (isSupportAdvRtk(aBoolean)) {
                 mAdapter.addRTKPanel();
             } else {
                 mAdapter.removeRTKPanel();
             }
         }));
-    }
 
-    private void addPayloadConnectListener() {
-        mCompositeDisposable.add(widgetModel.getPayloadConnectedProcessor().toFlowable().distinctUntilChanged().subscribe(aBoolean -> {
-            if (aBoolean) {
-                mAdapter.addPayloadPanel();
-            } else {
+        mCompositeDisposable.add(widgetModel.getPayloadConnectedStatusMapProcessor().toFlowableOnUI().subscribe(payloadIndexTypeBooleanHashMap -> {
+            if (payloadIndexTypeBooleanHashMap.isEmpty()) {
                 mAdapter.removePayloadPanel();
+            } else {
+                mAdapter.addPayloadPanel();
             }
+
         }));
 
     }
 
+
     protected void showWidgets() {
-        LogUtils.d(tag, "showWidgets");
         fm = ((FragmentActivity) getContext()).getSupportFragmentManager();
         if (isSlaverRcMode(mCurrentRcMode)) {
             createSlaverFragments();
@@ -152,7 +150,6 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
         }
         mAdapter = new SettingFragmentPagerAdapter(fm, menus, mFragments);
         viewPager.setAdapter(mAdapter);
-        //        mAdapter.notifyDataSetChanged();
         mTabLayout.setupWithViewPager(viewPager);
 
 
@@ -177,6 +174,9 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
     protected void onDetachedFromWindow() {
         destroy();
         super.onDetachedFromWindow();
+        if (!isInEditMode()) {
+            widgetModel.cleanup();
+        }
     }
 
     private void destroy() {
@@ -208,9 +208,7 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
 
     private void setMasterFragmentData() {
-        LogUtils.d(tag, "setMasterFragmentData");
         createMasterFragments();
-        //        mAdapter.notifyDataSetChanged();
         if (!TextUtils.isEmpty(getCurrentItemFlag())) {
             setCurrentItem(getCurrentItemFlag());
         } else {
@@ -245,10 +243,6 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
         mFragments.add(SettingMenuFragment.newInstance(MenuFragmentFactory.FRAGMENT_TAG_GIMBAL));
 
-        if (mSearchlightConnected) {
-            menus.add(new MenuBean(R.drawable.uxsdk_ic_setting_psdk_active, R.drawable.uxsdk_ic_setting_psdk));
-            mFragments.add(SettingMenuFragment.newInstance(MenuFragmentFactory.FRAGMENT_TAG_SEARCHLIGHT_ACCESSORY));
-        }
         if (isSupportAdvRtk(false)) {
             menus.add(new MenuBean(R.drawable.uxsdk_ic_setting_rtk_active, R.drawable.uxsdk_ic_setting_rtk));
             mFragments.add(SettingMenuFragment.newInstance(MenuFragmentFactory.FRAGMENT_TAG_RTK));
@@ -260,7 +254,6 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
     private void setSlaverFragmentData() {
         createSlaverFragments();
-        //        mAdapter.notifyDataSetChanged();
         setCurrentItem(MenuFragmentFactory.FRAGMENT_TAG_RC);
         mAdapter.notifyDataSetChanged();
     }
@@ -283,7 +276,7 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
     public void setCurrentItem(String flag) {
         if (mAdapter == null) {
-            LogUtils.d(tag, "SettingPanel is not ready!");
+            LogUtils.e(tag, "SettingPanel is not ready!");
             return;
         }
         int result = mAdapter.getSelectIndex(flag);
@@ -306,9 +299,6 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
                 .delay(1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
-                    menus.clear();
-                    mFragments.clear();
-                    mAdapter.notifyDataSetChanged();
                     if (isSlaverRcMode(mCurrentRcMode)) {
                         setSlaverFragmentData();
                     } else {
@@ -318,7 +308,6 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
     }
 
     private void updateData(RCMode rcMode) {
-        LogUtils.d(tag, "rcMode=" + rcMode);
         if (isSlaverRcMode(rcMode)) {
             setSlaverFragmentData();
         } else {
@@ -327,7 +316,6 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
     }
 
     private boolean isSlaverRcMode(RCMode mode) {
-
         if (mode != null) {
             return mode == RCMode.SLAVE || mode == RCMode.SLAVE_SUB;
         }
@@ -337,7 +325,7 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
     //辅控不支持RTK
     private boolean isSupportAdvRtk(Boolean isRTKModuleAvailable) {
-        return !isSlaverRcMode(mCurrentRcMode) && isRTKModuleAvailable || ProductUtil.isM300Product() || ProductUtil.isM30Product()||ProductUtil.isM3EProduct();
+        return !isSlaverRcMode(mCurrentRcMode) && isRTKModuleAvailable || ProductUtil.isM300Product() || ProductUtil.isM30Product() || ProductUtil.isM350Product();
     }
 
     @Override

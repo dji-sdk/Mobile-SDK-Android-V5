@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -537,6 +557,14 @@
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatus.html">UARegistrationNumberStatus</a>
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -629,24 +657,44 @@
 <h5 id="返回值：-v5">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_flyzoneshape">FlyZoneShape</a></font></td><td><font color="#666"><i>返回限飞区形状类型。</i></font></td></tr></table></html></div>
 <html><p><br></p></html>
+<h4 id="地理感知">地理感知</h4>
+<div class="api-row" id="iflyzonemanager_flyzoneinformation_getlowerlimit"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flyzoneinformation_getlowerlimit_inline">getLowerLimit</a></div></div><div class="inline-doc" id="iflyzonemanager_flyzoneinformation_getlowerlimit_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getLowerLimit</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getLowerLimit</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
+<h5 id="描述：-v7">描述：</h5>
+<p><font color="#666">获取地理感知数据的下限，目前仅支持欧盟地理感知数据。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="返回值：-v6">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回地理感知数据的下限。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iflyzonemanager_flyzoneinformation_getupperlimit"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flyzoneinformation_getupperlimit_inline">getUpperLimit</a></div></div><div class="inline-doc" id="iflyzonemanager_flyzoneinformation_getupperlimit_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>getUpperLimit</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getUpperLimit</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
+<h5 id="描述：-v8">描述：</h5>
+<p><font color="#666">获取地理感知数据的上限，目前仅支持欧盟地理感知数据。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="返回值：-v7">返回值：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回地理感知数据的上限。</i></font></td></tr></table></html></div>
+<html><p><br></p></html>
 <h4 id="圆形限飞区信息">圆形限飞区信息</h4>
 <div class="api-row" id="iflyzonemanager_flyzoneinformation_getcirclecenter"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flyzoneinformation_getcirclecenter_inline">getCircleCenter</a></div></div><div class="inline-doc" id="iflyzonemanager_flyzoneinformation_getcirclecenter_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getCircleCenter</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">LocationCoordinate2D <span class="title">getCircleCenter</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v7">描述：</h5>
+<h5 id="描述：-v9">描述：</h5>
 <p><font color="#666">获取圆形限飞区中心坐标。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
-<h5 id="返回值：-v6">返回值：</h5>
+<h5 id="返回值：-v8">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IKeyManager/Value_Common_Struct_LocationCoordinate2D.html#value_common_struct_locationcoordinate2d">LocationCoordinate2D</a></font></td><td><font color="#666"><i>返回圆形限飞区中心坐标。</i></font></td></tr></table></html></div>
 <div class="api-row" id="iflyzonemanager_flyzoneinformation_getcircleradius"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flyzoneinformation_getcircleradius_inline">getCircleRadius</a></div></div><div class="inline-doc" id="iflyzonemanager_flyzoneinformation_getcircleradius_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getCircleRadius</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">getCircleRadius</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
+<h5 id="描述：-v10">描述：</h5>
 <p><font color="#666">获取圆形限飞区的半径。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
-<h5 id="返回值：-v7">返回值：</h5>
+<h5 id="返回值：-v9">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">double</font></td><td><font color="#666"><i>返回圆形限飞区的半径。</i></font></td></tr></table></html></div>
 <html><p><br></p></html>
 <h4 id="多边形限飞区信息">多边形限飞区信息</h4>
@@ -655,9 +703,9 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">List&lt;MultiPolygonFlyZoneInformation&gt; <span class="title">getMultiPolygonFlyZoneInformation</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v9">描述：</h5>
+<h5 id="描述：-v11">描述：</h5>
 <p><font color="#666">获取多边形限飞区信息。包含圆柱和多边形限飞区信息。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
-<h5 id="返回值：-v8">返回值：</h5>
+<h5 id="返回值：-v10">返回值：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">List&lt;<a href="../../Components/IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html#iflyzonemanager_multipolygonflyzoneinformation">MultiPolygonFlyZoneInformation</a>&gt;</font></td><td><font color="#666"><i>返回多边形限飞区的信息。</i></font></td></tr></table></html></div>
 
         </div>

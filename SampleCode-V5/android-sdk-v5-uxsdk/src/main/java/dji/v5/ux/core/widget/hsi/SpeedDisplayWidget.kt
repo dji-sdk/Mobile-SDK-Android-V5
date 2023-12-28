@@ -22,7 +22,6 @@ import android.util.AttributeSet
 import dji.sdk.keyvalue.value.common.Attitude
 import dji.sdk.keyvalue.value.flightcontroller.WindDirection
 import dji.sdk.keyvalue.value.flightcontroller.WindWarning
-import dji.v5.utils.common.LogUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import java.util.*
 
@@ -102,8 +101,6 @@ open class SpeedDisplayWidget @JvmOverloads constructor(context: Context, attrs:
     }
 
     private fun updateWindStatus(windSpeed: Float, fcWindDirectionStatus: WindDirection, fcWindWarning: WindWarning, aircraftDegree: Float) {
-        LogUtils.d(TAG, "windSpeed :" + windSpeed + " Direction:" + fcWindDirectionStatus.name + " waring:" + fcWindWarning.name + " " +
-                "aircraftDegree:" + aircraftDegree)
         val value = UnitUtils.transFormSpeedIntoDifferentUnit(windSpeed)
         val textStr = String.format(Locale.ENGLISH, "WS %04.1f %s", value, getWindDirectionText(fcWindDirectionStatus, aircraftDegree))
         if (textStr != mTvWsValue?.text.toString()) {

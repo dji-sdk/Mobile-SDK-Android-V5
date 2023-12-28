@@ -12,7 +12,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.StyleRes
 import androidx.core.content.res.use
-import androidx.fragment.app.FragmentTransaction
+import dji.sdk.keyvalue.utils.ProductUtil
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.sdk.keyvalue.value.rtkbasestation.RTKServiceState
 import dji.sdk.keyvalue.value.rtkmobilestation.GNSSType
@@ -491,7 +491,42 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
     init {
         initItemValues()
         initListener()
+        updateLabelView()
         attrs?.let { initAttributes(context, it) }
+    }
+
+    private fun updateLabelView() {
+        if (ProductUtil.isM3EProduct()) {
+            //orientation
+            orientationTextView.visibility = GONE
+            orientationTitleTextView.visibility = GONE
+            //Antenna2
+            beiDouAntenna2TextView.visibility = GONE
+            galileoAntenna2TextView.visibility = GONE
+            glonassAntenna2TextView.visibility = GONE
+            gpsAntenna2TextView.visibility = GONE
+            antenna2TitleTextView.visibility = GONE
+            antenna1TitleTextView.visibility = GONE
+            //courseAngle
+            courseAngleTitleTextView.visibility = GONE
+            courseAngleTextView.visibility = GONE
+
+
+        } else {
+            //orientation
+            orientationTextView.visibility = VISIBLE
+            orientationTitleTextView.visibility = VISIBLE
+            //Antenna2
+            beiDouAntenna2TextView.visibility = VISIBLE
+            galileoAntenna2TextView.visibility = VISIBLE
+            glonassAntenna2TextView.visibility = VISIBLE
+            gpsAntenna2TextView.visibility = VISIBLE
+            antenna2TitleTextView.visibility = VISIBLE
+            antenna1TitleTextView.visibility = VISIBLE
+            //courseAngle
+            courseAngleTitleTextView.visibility = VISIBLE
+            courseAngleTextView.visibility = VISIBLE
+        }
     }
 
     private fun initListener() {
@@ -918,6 +953,9 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
                     GNSSType.GPS -> {
                         gpsAntenna1TextView.text = count
                     }
+                    else -> {
+                        //do something
+                    }
                 }
             }
         }
@@ -941,7 +979,9 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
                     GNSSType.GPS -> {
                         gpsAntenna2TextView.text = count
                     }
-
+                    else -> {
+                        //do something
+                    }
                 }
             }
         }
@@ -964,6 +1004,9 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
                     }
                     GNSSType.GPS -> {
                         gpsBaseStationTextView.text = count
+                    }
+                    else -> {
+                        //do something
                     }
                 }
             }

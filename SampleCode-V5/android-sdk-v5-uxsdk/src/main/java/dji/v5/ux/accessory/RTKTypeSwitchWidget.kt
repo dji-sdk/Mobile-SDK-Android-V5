@@ -25,8 +25,8 @@ import dji.v5.ux.core.extension.getString
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.isFastClick
 import dji.v5.ux.core.extension.show
+import dji.v5.ux.core.util.ViewUtil
 import dji.v5.ux.util.RtkSettingWatcher
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 
 /**
  * Description :基站启动页
@@ -102,7 +102,7 @@ open class RTKTypeSwitchWidget @JvmOverloads constructor(
             val coordinate = coordinateSystemList[position]
             RTKUtil.saveRTKCoordinateSystem(currentRTKSource, coordinate)
             LogUtils.i(TAG, "select:$coordinate, reStartRtkService now!(Thread.currentThread().name${Thread.currentThread().name})")
-            RTKStartServiceHelper.startRtkService()
+            RTKStartServiceHelper.startRtkService(true)
         }
     }
 
@@ -385,7 +385,7 @@ open class RTKTypeSwitchWidget @JvmOverloads constructor(
         val isParamsValid = (isHostValid && isMountPointValid
                 && isPortValid && isUserValid && isPwdValid)
         if (!isParamsValid) {
-            Toast.makeText(context, R.string.uxsdk_rtk_setting_menu_rtk_setting_fail_settings_invalid, Toast.LENGTH_SHORT).show()
+            ViewUtil.showToast(context, R.string.uxsdk_rtk_setting_menu_customer_rtk_save_failed_tips, Toast.LENGTH_SHORT)
             return
         }
         startRtkCustomNetwork(host, port, user, pw, mountPint)
@@ -401,7 +401,7 @@ open class RTKTypeSwitchWidget @JvmOverloads constructor(
         rtkSetting.mountPoint = mountPint
         RTKUtil.saveRtkCustomNetworkSetting(rtkSetting)
         LogUtils.i(TAG, "rtkSetting=$rtkSetting,startRtkCustomNetwork now!(Thread.currentThread().name${Thread.currentThread().name})")
-        RTKStartServiceHelper.startRtkService()
+        RTKStartServiceHelper.startRtkService(true)
     }
 
     /**

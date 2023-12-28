@@ -27,6 +27,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
@@ -39,7 +40,6 @@ import androidx.constraintlayout.widget.Guideline
 import androidx.core.content.res.use
 import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.common.video.decoder.DecoderOutputMode
-import dji.v5.common.video.decoder.DecoderState
 import dji.v5.common.video.decoder.VideoDecoder
 import dji.v5.common.video.interfaces.IVideoDecoder
 import dji.v5.common.video.stream.PhysicalDevicePosition
@@ -291,8 +291,6 @@ open class FPVWidget @JvmOverloads constructor(
         if (!isInEditMode) {
             widgetModel.cleanup()
         }
-        videoDecoder?.destroy()
-        videoDecoder = null
         super.onDetachedFromWindow()
     }
 
@@ -309,41 +307,31 @@ open class FPVWidget @JvmOverloads constructor(
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
-        LogUtils.i(logTag, "surfaceCreated", videoChannelType, videoDecoder == null)
-        if (videoDecoder == null) {
-            videoDecoder = VideoDecoder(
-                context,
-                videoChannelType,
-                DecoderOutputMode.SURFACE_MODE,
-                fpvSurfaceView.holder,
-                fpvSurfaceView.width,
-                fpvSurfaceView.height,
-                true
-            )
-        } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
-            videoDecoder?.onResume()
-        }
+        // do nothing
     }
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        if (videoDecoder == null) {
+        updateVideoDecoder(holder.surface, width, height)
+    }
+
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
+        updateVideoDecoder(null, 0, 0)
+    }
+
+    private fun updateVideoDecoder(surface: Surface?, width: Int, height: Int) {
+        videoDecoder?.destroy()
+        if (surface != null && width > 0 && height > 0) {
             videoDecoder = VideoDecoder(
                 context,
                 videoChannelType,
                 DecoderOutputMode.SURFACE_MODE,
                 fpvSurfaceView.holder,
-                fpvSurfaceView.width,
-                fpvSurfaceView.height,
+                width,
+                height,
                 true
             )
-        } else if (videoDecoder?.decoderStatus == DecoderState.PAUSED) {
-            videoDecoder?.onResume()
+            videoDecoder!!.onResume()
         }
-        LogUtils.i(logTag, "surfaceChanged", videoChannelType, videoDecoder?.videoWidth, videoDecoder?.videoHeight)
-    }
-
-    override fun surfaceDestroyed(holder: SurfaceHolder) {
-        videoDecoder?.onPause()
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
@@ -367,19 +355,14 @@ open class FPVWidget @JvmOverloads constructor(
     fun updateVideoSource(source: StreamSource, channelType: VideoChannelType) {
         LogUtils.i(logTag, "updateVideoSource", JsonUtil.toJson(source), channelType)
         widgetModel.streamSource = source
-        if (videoChannelType != channelType) {
-            changeVideoDecoder(channelType)
+        if (videoChannelType!=channelType){
+            videoChannelType = channelType
+            videoDecoder?.videoChannelType = channelType
+            fpvSurfaceView.invalidate()
         }
-        videoChannelType = channelType
     }
 
     fun getStreamSource() = widgetModel.streamSource
-
-    private fun changeVideoDecoder(channel: VideoChannelType) {
-        LogUtils.i(logTag, "changeVideoDecoder", channel)
-        videoDecoder?.videoChannelType = channel
-        fpvSurfaceView.invalidate()
-    }
 
     fun setOnFPVStreamSourceListener(listener: FPVStreamSourceListener) {
         widgetModel.streamSourceListener = listener
@@ -473,7 +456,8 @@ open class FPVWidget @JvmOverloads constructor(
 
     private fun updateGridLineVisibility() {
         gridLineView.visibility = if (isGridLinesEnabled
-            && widgetModel.streamSource?.physicalDevicePosition == PhysicalDevicePosition.NOSE) View.VISIBLE else View.GONE
+            && widgetModel.streamSource?.physicalDevicePosition == PhysicalDevicePosition.NOSE
+        ) View.VISIBLE else View.GONE
     }
     //endregion
 

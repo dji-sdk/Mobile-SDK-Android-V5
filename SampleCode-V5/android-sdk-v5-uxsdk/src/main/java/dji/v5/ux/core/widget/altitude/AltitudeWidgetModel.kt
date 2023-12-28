@@ -57,8 +57,12 @@ class AltitudeWidgetModel @JvmOverloads constructor(
         get() = altitudeStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAltitude), altitudeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyTakeoffLocationAltitude), takeOffLocationAltitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAltitude), altitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyTakeoffLocationAltitude), takeOffLocationAltitudeProcessor)
         bindDataProcessor(GlobalPreferenceKeys.create(GlobalPreferenceKeys.UNIT_TYPE), unitTypeDataProcessor)
         preferencesManager?.setUpListener()
         preferencesManager?.let { unitTypeDataProcessor.onNext(it.unitType) }

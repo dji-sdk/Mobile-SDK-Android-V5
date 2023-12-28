@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -537,6 +557,14 @@
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatus.html">UARegistrationNumberStatus</a>
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -778,7 +806,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;EmptyMsg,EmptyMsg&gt; KeyStartIMUCalibration = <span class="keyword">new</span> DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"StartIMUCalibration"</span>, EmptyValueConverter.converter,EmptyValueConverter.converter).canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
 <h5 id="描述：-v25">描述：</h5>
-<p><font color="#666">启动IMU校准。对于具有多个IMU的飞行器，此方法将进行所有IMU的校准。 建议在IMU校准后调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_rebootdevice">KeyRebootDevice</a></code>重启设备。 <br><br>以下是IMU校准的操作流程： <li>1. 调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_startimucalibration">KeyStartIMUCalibration</a></code>启动IMU校准，通过监听<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_imucalibrationhint">KeyIMUCalibrationInfo</a></code>获取IMU校准信息。<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationstate">IMUCalibrationState</a></code>变成校准中<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationstate_calibrating">CALIBRATING</a></code>则表示成功启动IMU校准。</li> <li>2. 调用<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationstocalibrate">getOrientationsToCalibrate</a></code>获取未校准的飞机方向列表。参考<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationorientation">IMUCalibrationOrientation</a></code>中的图示，依次摆放飞机进行单个飞机方向的IMU校准，在校准过程中保持飞行器静止和水平。</li> <li>3. 调用<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationcalibrationstate">getOrientationCalibrationState</a></code>获取单个飞机方向的IMU校准状态，当校准状态变成<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imuorientationcalibrationstate_completed">SUCCESSFUL</a></code>再摆放下一个方向。</li> <li>3. 当未校准的飞机方向列表<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationstocalibrate">getOrientationsToCalibrate</a></code>为空的时候，<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationcalibrationstate">getOrientationCalibrationState</a></code>获取到的总体校准状态变成校准成功状态<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationstate_successful">SUCCESSFUL</a></code>则表示IMU校准已完成。</li> <br><b>注意：<br> 请勿在飞行器电机起转后启动IMU校准。可通过<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_aremotorson">KeyAreMotorsOn</a></code>判断飞行器电机是否起转。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">启动IMU校准。对于具有多个IMU的飞行器，此方法将进行所有IMU的校准。 建议在IMU校准后调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_rebootdevice">KeyRebootDevice</a></code>重启设备。 <br><br>以下是IMU校准的操作流程： <li>调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_startimucalibration">KeyStartIMUCalibration</a></code>启动IMU校准，通过监听<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_imucalibrationhint">KeyIMUCalibrationInfo</a></code>获取IMU校准信息。<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationstate">IMUCalibrationState</a></code>变成校准中<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationstate_calibrating">CALIBRATING</a></code>则表示成功启动IMU校准。</li> <li>调用<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationstocalibrate">getOrientationsToCalibrate</a></code>获取未校准的飞机方向列表。参考<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationorientation">IMUCalibrationOrientation</a></code>中的图示，依次摆放飞机进行单个飞机方向的IMU校准，在校准过程中保持飞行器静止和水平。</li> <li>调用<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationcalibrationstate">getOrientationCalibrationState</a></code>获取单个飞机方向的IMU校准状态，当校准状态变成<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imuorientationcalibrationstate_completed">SUCCESSFUL</a></code>再摆放下一个方向。</li> <li>当未校准的飞机方向列表<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationstocalibrate">getOrientationsToCalibrate</a></code>为空的时候，<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html#value_flightcontroller_struct_imucalibrationhint_getorientationcalibrationstate">getOrientationCalibrationState</a></code>获取到的总体校准状态变成校准成功状态<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_imucalibrationstate_successful">SUCCESSFUL</a></code>则表示IMU校准已完成。</li> <br><b>注意：<br> 请勿在飞行器电机起转后启动IMU校准。可通过<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_aremotorson">KeyAreMotorsOn</a></code> 判断飞行器电机是否起转。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_imucalibrationhint"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_imucalibrationhint_inline">KeyIMUCalibrationInfo</a></div></div><div class="inline-doc" id="key_flightcontroller_imucalibrationhint_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyIMUCalibrationInfo</h6></div>
@@ -794,7 +822,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;Integer&gt; KeyUltrasonicHeight = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"UltrasonicHeight"</span>, SingleValueConverter.IntegerConverter).canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
 <h5 id="描述：-v27">描述：</h5>
-<p><font color="#666"><b>参数: </b>Integer<br><br> 获取超声波测距高度。该高度为飞机起飞后，从上往下测量的距离。单位：分米，最大可测距离为25.5米。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666"><b>参数: </b>Integer<br><br> 获取超声波测距高度，单位：分米。该高度为飞机起飞后，从上往下测量的距离。通常会融合气压计高度，让数据更加准确。 <br><b>注意：<br> 1. 此高度的最大可测距离通常为25.5米，根据飞机实际能力而定。<br> 2. 如果飞行器自带下视传感器，此高度还会融合下视传感器测距高度。<br> 3. 如果飞行器自带红外传感器，此高度还会融合红外传感器测距高度。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_windwarning"><div class="api-col left">风速</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_windwarning_inline">KeyWindWarning</a></div></div><div class="inline-doc" id="key_flightcontroller_windwarning_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">final </font>KeyWindWarning</h6></div>
@@ -1177,13 +1205,21 @@
 <h5 id="描述：-v71">描述：</h5>
 <p><font color="#666"><b>参数: </b>Boolean<br><br> <code>true</code>表示开启智能低电量返航功能。为防止因电池电量不足而出现不必要的危险，飞行器将会根据飞行的位置信息，智能地判断当前电量是否充足。若当前电量仅够完成返航过程，MSDK将提示是否需要执行返航。若用户在10秒内不作选择，则10秒后飞行器将自动进入返航。返航过程中可短按遥控器智能返航按键取消返航过程。智能低电量返航在同一次飞行过程中仅出现一次。如果用户取消低电量返航提醒并继续飞行，将可能导致飞行器返回时电量不足而迫降，造成飞行器丢失或坠毁。为了安全起见，不建议关闭此功能。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
-<div class="api-row" id="key_flightcontroller_gohomeassessment"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_gohomeassessment_inline">KeyGoHomeAssessment</a></div></div><div class="inline-doc" id="key_flightcontroller_gohomeassessment_inline" <blockquote>
-<div class="article"><h6><font color="#AAA">final </font>KeyGoHomeAssessment</h6></div>
+<div class="api-row" id="key_flightcontroller_msdklowbatteryrthinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_msdklowbatteryrthinfo_inline">KeyLowBatteryRTHInfo</a></div></div><div class="inline-doc" id="key_flightcontroller_msdklowbatteryrthinfo_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyLowBatteryRTHInfo</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;LowBatteryRTHInfo&gt; KeyGoHomeAssessment = <span class="keyword">new</span> DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),<span class="string">"GoHomeAssessment"</span>, <span class="keyword">new</span> DJIValueConverter&lt;&gt;(LowBatteryRTHInfo<span class="class">.<span class="keyword">class</span>)).<span class="title">canGet</span>(<span class="title">true</span>).<span class="title">canSet</span>(<span class="title">false</span>).<span class="title">canListen</span>(<span class="title">true</span>).<span class="title">canPerformAction</span>(<span class="title">false</span>).<span class="title">setIsEvent</span>(<span class="title">false</span>)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;LowBatteryRTHInfo&gt; KeyLowBatteryRTHInfo = <span class="keyword">new</span> KeyLowBatteryRTHInfo().canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
 <h5 id="描述：-v72">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html#value_flightcontroller_struct_gohomeassessment">LowBatteryRTHInfo</a></code><br><br> 获取智能低电量返航相关信息。仅在<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_smartbatteryrthenabled">KeyLowBatteryRTHEnabled</a></code>开启后有效。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+</div>
+<div class="api-row" id="key_flightcontroller_msdklowbatteryrthconfirm"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_msdklowbatteryrthconfirm_inline">KeyLowBatteryRTHConfirm</a></div></div><div class="inline-doc" id="key_flightcontroller_msdklowbatteryrthconfirm_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">final </font>KeyLowBatteryRTHConfirm</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIActionKeyInfo&lt;Boolean, EmptyMsg&gt; KeyLowBatteryRTHConfirm = <span class="keyword">new</span> KeyLowBatteryRTHConfirm().canGet(<span class="keyword">false</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">false</span>).canPerformAction(<span class="keyword">true</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
+<h5 id="描述：-v73">描述：</h5>
+<p><font color="#666"><b>参数: </b>Boolean<br><br> 确认或者取消返航操作。当调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_msdklowbatteryrthinfo">KeyLowBatteryRTHInfo</a></code>获取到的状态为<code><a href="../../Components/IKeyManager/DJIValue.html#value_flightcontroller_enum_smartrthstate_counting_down">COUNTING_DOWN</a></code>时，你可以调用此接口确认或者取消返航操作。 <code>true</code>表示确认返航。<code>false</code>表示取消返航。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
 </div>
 <html><p><br></p></html>
 <h4 id="安全密码">安全密码</h4>
@@ -1192,7 +1228,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIKeyInfo&lt;List&lt;AccessLockerDeviceStatus&gt;&gt; KeyAccessLockerAllDeviceStatus = new DJIKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerAllDeviceStatus", new SingleValueConverter&lt;&gt;((Class)List.class,AccessLockerV1AllDeviceStates.class)).canGet(true).canSet(false).canListen(true).canPerformAction(false).setIsEvent(false).setInnerIdentifier("AccessLockerV1AllDeviceStates")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v73">描述：</h5>
+<h5 id="描述：-v74">描述：</h5>
 <p><font color="#666"><b>参数: </b>List&lt;<code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1DeviceState.html#value_flightcontroller_struct_accesslockerv1devicestate">AccessLockerDeviceStatus</a></code>&gt;<br><br> 获取存储设备的安全密码状态。可通过此接口获取飞行器上的存储设备是否支持安全密码功能，是否开启安全密码功能以及是否需要验证安全密码。 <br>安全密码是为了保护您的媒体数据安全。设置安全密码后，MSDK App连接飞行器后需要进行密码校验，验证通过后才可以进行拍照录像以及读写存储设备中的媒体数据。 <br><li><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html#value_flightcontroller_struct_accesslockerv1encryptionstate_getisfeaturesupported">getIsFeatureSupported</a></code>为<code>true</code>，表示该存储设备支持安全密码功能。你可以调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1setupuseraccount">KeyAccessLockerSetSecurityCode</a></code>设置安全密码。</li> <li><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html#value_flightcontroller_struct_accesslockerv1encryptionstate_getisfeatureenabled">getIsFeatureEnabled</a></code>为<code>true</code>，表示该存储设备的安全密码功能已开启。你可以调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1modifyuseraccount">KeyAccessLockerModifySecurityCode</a></code>进行安全密码修改。如果你忘记了安全密码，你可以调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1resetuseraccount">KeyAccessLockerResetSecurityCode</a></code>重置安全密码。</li> <li><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html#value_flightcontroller_struct_accesslockerv1encryptionstate_getisfeatureneedtobeverified">getIsFeatureNeedToBeVerified</a></code>为<code>true</code>，表示该存储设备需要验证安全密码。请调用<code><a href="../../Components/IKeyManager/Key_FlightController_FlightControllerKey.html#key_flightcontroller_accesslockerv1verifyuseraccount">KeyAccessLockerVerifySecurityCode</a></code>进行安全密码验证，否则将无法进行拍照录像，并且无法读写存储设备中的媒体数据。当飞行器重启或者存储设备拔插后通常需要验证安全密码。</li> <li>DJI不会在设备上存储用户密码，也不会回传DJI。</li> <li>用户忘记密码后，不支持找回密码。如您不慎遗失安全密码，只能通过格式化的方式来解锁存储设备。</li> <li>安全密码仅支持禅思H20系列相机，M30系列机型相机及Mavic 3行业系列相机，暂不支持禅思 P1、禅思 L1以及其他第三方负载。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></li></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_accesslockerv1setupuseraccount"><div class="api-col left">设置安全密码</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_accesslockerv1setupuseraccount_inline">KeyAccessLockerSetSecurityCode</a></div></div><div class="inline-doc" id="key_flightcontroller_accesslockerv1setupuseraccount_inline" <blockquote>
@@ -1200,7 +1236,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerSetSecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerSetSecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerSetSecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerSetSecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1SetupUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v74">描述：</h5>
+<h5 id="描述：-v75">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1setupuseraccountinfo">AccessLockerSetSecurityCodeInfo</a></code><br><br> 设置安全密码。可通过此接口选择设备和存储类型进行安全密码设置。 <li>设置安全密码后存储设备将被格式化，请确认媒体数据已备份。</li> <li>请妥善保管安全密码，遗失后将无法找回，只能通过格式化的方式来解锁存储设备。</li> <li>你设置的密码长度需要至少4位，建议使用数字,大写、小写字母组成密码。</li>
 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 </div>
@@ -1209,7 +1245,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerVerifySecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerVerifySecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerVerifySecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerVerifySecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1VerifyUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v75">描述：</h5>
+<h5 id="描述：-v76">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1VerifyUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1verifyuseraccountinfo">AccessLockerVerifySecurityCodeInfo</a></code><br><br> 校验安全密码。可通过此接口校验安全密码，验证通过后才可以进行拍照录像以及读写存储设备中的媒体数据。
 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 </div>
@@ -1218,7 +1254,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerModifySecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerModifySecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerModifySecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerModifySecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1ModifyUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v76">描述：</h5>
+<h5 id="描述：-v77">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1ModifyUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1modifyuseraccountinfo">AccessLockerModifySecurityCodeInfo</a></code><br><br> 修改安全密码。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 </div>
 <div class="api-row" id="key_flightcontroller_accesslockerv1resetuseraccount"><div class="api-col left">重置安全密码</div><div class="api-col middle" style="color:#AAA"> </div><div class="api-col right"><a class="trigger" href="#key_flightcontroller_accesslockerv1resetuseraccount_inline">KeyAccessLockerResetSecurityCode</a></div></div><div class="inline-doc" id="key_flightcontroller_accesslockerv1resetuseraccount_inline" <blockquote>
@@ -1226,7 +1262,7 @@
 
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">static final DJIActionKeyInfo&lt;AccessLockerResetSecurityCodeInfo,EmptyMsg&gt; KeyAccessLockerResetSecurityCode = new DJIActionKeyInfo&lt;&gt;(componentType.value(),subComponentType.value(),"AccessLockerResetSecurityCode", new DJIValueConverter&lt;&gt;(AccessLockerResetSecurityCodeInfo.class),EmptyValueConverter.converter).canGet(false).canSet(false).canListen(false).canPerformAction(true).setIsEvent(false).setInnerIdentifier("AccessLockerV1ResetUserAccount")</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v77">描述：</h5>
+<h5 id="描述：-v78">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AccessLockerV1ResetUserAccountInfo.html#value_flightcontroller_struct_accesslockerv1resetuseraccountinfo">AccessLockerResetSecurityCodeInfo</a></code><br><br> 重置安全密码。重置安全密码将会格式化存储设备，请确认媒体数据已备份。 <br><br><code><i>MSDK 5.1.0开始支持</i></code></font></p>
 </div>
 <html><p><br></p></html>
@@ -1236,7 +1272,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> DJIKeyInfo&lt;AirSenseSystemInformation&gt; KeyAirSenseSystemInformation = <span class="keyword">new</span> KeyAirSenseSystemInformation().canGet(<span class="keyword">true</span>).canSet(<span class="keyword">false</span>).canListen(<span class="keyword">true</span>).canPerformAction(<span class="keyword">false</span>).setIsEvent(<span class="keyword">false</span>)</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.sdk.keyvalue.key</font></td></tr></table></html>
-<h5 id="描述：-v78">描述：</h5>
+<h5 id="描述：-v79">描述：</h5>
 <p><font color="#666"><b>参数: </b><code><a href="../../Components/IKeyManager/Value_FlightController_Struct_AirSenseSystemInformation.html#value_flightcontroller_struct_airsensesysteminformation">AirSenseSystemInformation</a></code><br><br> 获取 DJI AirSense 系统的信息。包含警告级别和检测到的飞机（安装了 AirSense 系统的载人飞行器，譬如民航、直升机等，简称飞机）的详细状态。<br> DJI AirSense 仅在特定情况下发出附近飞机的警告，它不会控制 DJI 飞行器自动避开其他飞机。请确保您的飞行器始终在视线范围内飞行并始终谨慎飞行。收到警告后，将飞行器降低到安全高度。此外，DJI AirSense 有以下限制：<br> <li>DJI AirSense 只能接收 1090ES（RTCA DO-260）或 UAT（RTCA Do-282）标准下配备 ADS-B 输出设备的飞机发送的信息。对于没有 ADS-B 输出或 ADS-B 输出故障的飞机，DJI AirSense 无法接收相关广播信息或发出警告。</li> <li>当飞机与 DJI 飞行器之间有障碍物时，DJI 飞行器将无法接收到飞机发送的 ADS-B 信息或告警。</li> <li>DJI AirSense 可能会因环境变化和干扰而收不到飞机发送的 ADS-B 信息或发出警告。强烈建议谨慎飞行，并在飞行过程中注意周围环境。</li> <li>DJI AirSense 无法在 DJI 飞行器无法准确定位时发出警告。</li> <li>DJI AirSense 在禁用或配置错误时无法接收飞机发送的 ADS-B 消息或发出警告。</li> <br><br><code><i>MSDK 5.5.0开始支持</i></code></font></p>
 </div>
 

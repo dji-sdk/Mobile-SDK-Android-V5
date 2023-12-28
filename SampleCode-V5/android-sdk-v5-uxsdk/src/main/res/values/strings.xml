@@ -496,6 +496,7 @@
     <string name="uxsdk_hdmi_setting_title">HD HDMI Setting Widget</string>
     <string name="uxsdk_common_about_widget_title">Common About Widget</string>
     <string name="uxsdk_common_device_name_widget_title">Common Device Name Widget</string>
+    <string name="uxsdk_common_led_widget_title">Common Led Widget</string>
     <string name="uxsdk_gimbal_caling">Gimbal calibration at %1$d%%. Please don\'t move the aircraft.</string>
     <string name="uxsdk_gimbal_gimbal_reset_params_success">Reset successful</string>
     <string name="uxsdk_gimbal_gimbal_reset_params_fail">Reset failed</string>
@@ -731,6 +732,7 @@
     <string name="uxsdk_rtk_setting_menu_rtk_setting_success">Set successfully</string>
     <string name="uxsdk_rtk_setting_menu_setting_fail">Setting failed</string>
     <string name="uxsdk_rtk_setting_menu_rtk_setting_fail_settings_invalid">Setting failed. Invalid parameters</string>
+    <string name="uxsdk_rtk_setting_menu_customer_rtk_save_failed_tips">Setting failed,possible reasons:\n1. Input parameter incorrect. Check input parameter\n2. Account expired. Check if account is valid\n3. Not network connection. Check network connection status\n4. Server error. Contact RTK supplier to check server status</string>
 
 
     <!--Lens Control Widget-->
@@ -739,6 +741,7 @@
     <string name="uxsdk_lens_type_ir">IR</string>
     <string name="uxsdk_lens_type_ndvi">NDVI</string>
     <string name="uxsdk_lens_type_rgb">RGB</string>
+    <string name="uxsdk_lens_type_point_cloud">PointCloud</string>
 
     <!--RTK Connect Widget-->
     <string name="uxsdk_rtk_problem_detection">Check the following</string>
@@ -871,7 +874,7 @@
     <string name="uxsdk_fpv_message_box_empty_content_v2">Normal</string>
     <string name="uxsdk_fpv_tip_remote_disconnect">Aircraft not connected</string>
 
-    <string name="uxsdk_setting_menu_flyc_set_altitude_rth">Vorgabe</string>
+    <string name="uxsdk_setting_menu_flyc_set_altitude_rth">Preset</string>
     <string name="uxsdk_setting_menu_flyc_smart_rth">Optimal</string>
 
     <string name="uxsdk_setting_ui_flyc_fs_gohome">Return To Home</string>
@@ -879,7 +882,7 @@
     <string name="uxsdk_setting_ui_flyc_fs_hover">Hover</string>
 
     <!--HD-->
-    <string name="uxsdk_setting_menu_title_hd_hdmi_system_setting_hdmi_decoder_summary">Video Display Mode</string>
+    <string name="uxsdk_setting_menu_title_hd_hdmi_system_setting_hdmi_decoder_summary">Video Output Type</string>
 
     <string name="uxsdk_setting_ui_flyc_cali_begin">Starting Calibraition</string>
     <string name="uxsdk_setting_ui_flyc_cali_failed"> Calibraition Failed ,Please retry</string>
@@ -890,6 +893,8 @@
     <!--RcCheckFrequency Widget-->
     <string name="uxsdk_setting_ui_rc_stop_pair">StopPairing</string>
     <string name="uxsdk_setting_ui_rc_start_pair">StartPairing</string>
+    <string name="uxsdk_setting_ui_rc_pairing_finish">Linking Complete</string>
+
 
     <!-- APAS -->
     <string name="uxsdk_fpv_setting_safe_obstacle_avoidance_behavior_list">Obstacle Avoidance</string>
@@ -914,10 +919,12 @@
     <string name="uxsdk_fpv_top_bar_battery_left_battery">Left Battery</string>
     <string name="uxsdk_fpv_top_bar_battery_right_battery">Right Battery</string>
     <string name="uxsdk_setting_ui_gimbal_calibration_tip">Stop motor running before gimbal auto calibration.</string>
-    <string name="uxsdk_setting_ui_rc_cele_tip">Center both control sticks before pressing Start. Follow the prompts on screen to calibrate.</string>
     <string name="uxsdk_setting_menu_title_rc_check_frequency">Link to Aircraft</string>
     <string name="uxsdk_dialog_message_rc_cannot_frequency_motorup">The remote controller cannot be linked when the aircraft motors are spinning.</string>
     <string name="uxsdk_setting_ui_omni_perception_desc">Disabling the Vision Positioning System will have the following effects on the aircraft:\n1. Unable to hover in place at low altitude indoors.\n2. Unable to engage obstacle braking indoors.\n3. Unable to engage landing speed protection. Landing at high speed may damage the aircraft. Pay attention to the landing speed.</string>
+    <string name="uxsdk_battery_check_battery_detail_button_txt">Detalles</string>
+    <string name="uxsdk_setting_ui_gimbal_auto_calibration_tip">Check that aircraft is level and nothing is obstructing the gimbal’s range of motion.
+        begin auto calibration.</string>
 
     <string name="uxsdk_setting_menu_flyc_gohome_altitude_title">RTH Altitude</string>
     <string name="uxsdk_setting_menu_flyc_max_height_title">Max Altitude</string>
@@ -960,6 +967,20 @@
     <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode_rc511">Flight Mode Configuration Switched to A/N/S</string>
     <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode">Flight Mode Configuration Switched to A/S/N</string>
     <string name="uxsdk_setting_menu_title_sensors_state">Sensor Status</string>
+    <string name="uxsdk_setting_menu_title_device_name">Device Name</string>
+    <string name="uxsdk_setting_menu_title_about">About</string>
+
+    <string name="uxsdk_vision_flash_light_auto">AUTO</string>
+    <string name="uxsdk_vision_flash_light_on">ON</string>
+    <string name="uxsdk_vision_flash_light_off">OFF</string>
+    <string name="uxsdk_setting_menu_title_led">LED Settings</string>
+    <string name="uxsdk_setting_ui_rc_custom_navigation_led">Navigation Beacon On/Off</string>
+    <string name="uxsdk_setting_common_leds_hide_mode">Hide Mode</string>
+    <string name="uxsdk_setting_menu_top_auxiliary_light">Top Auxiliary Light</string>
+    <string name="uxsdk_setting_menu_bottom_auxiliary_light">Bottom Auxiliary Light</string>
+    <string name="uxsdk_setting_menu_beacon_led">Beacons</string>
+    <string name="uxsdk_setting_menu_arm_led">Frame Arm LEDs</string>
+    <string name="uxsdk_setting_menu_status_led">Status LEDs</string>
 
     <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_cur_use">In Use</string>
     <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_good">Excellent</string>
@@ -1062,8 +1083,8 @@
     <string name="uxsdk_setting_ui_hd_sdr_signal_normal">Average</string>
     <string name="uxsdk_setting_ui_hd_sdr_signal_bad">Weak</string>
     <string name="uxsdk_setting_ui_hd_sdr_channel_state_title">Signal Strength</string>
-    <string name="uxsdk_setting_ui_hd_sdr_channel_state_summary">\n\nSignal Strength: %1$s\n\nDownlink Bandwidth: %2$s\n\nImage Transmission Bit Rate: %3$s\n</string>
-    <string name="uxsdk_setting_ui_hd_lb_channel_state_summary">\n\nSignal Strength: %1$s\n\nChannel: %2$s\n\nImage Transmission Bit Rate: %3$s\n</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_state_summary">\nSignal Strength: %1$s\n\nDownlink Bandwidth: %2$s\n\nImage Transmission Bit Rate: %3$s\n</string>
+    <string name="uxsdk_setting_ui_hd_lb_channel_state_summary">\nSignal Strength: %1$s\n\nChannel: %2$s\n\nImage Transmission Bit Rate: %3$s\n</string>
 
     <string name="uxsdk_setting_ui_hd_sdr_channel_select_title">Image channel selection</string>
     <string name="uxsdk_setting_ui_hd_sdr_channel_choose">Please select</string>
@@ -1089,7 +1110,7 @@
 
     <!--endregion-->
 
-    <string name="uxsdk_setting_menu_flyc_home_point">GoHome Point Set</string>
+    <string name="uxsdk_setting_menu_flyc_home_point">Home Point Settings</string>
     <string name="uxsdk_fpv_toast_homepoint_setting_drone">Aircraft location set as Home Point</string>
     <string name="uxsdk_fpv_toast_homepoint_setting_current_rc">Remote controller location set as Home Point</string>
     <string name="uxsdk_fpv_toast_homepoint_setting_partner_rc">Companion controller location set as Home Point</string>
@@ -1097,6 +1118,19 @@
     <string name="uxsdk_fpv_toast_homepoint_gps_weak">GNSS signal weak. Unable to obtain location info</string>
     <string name="uxsdk_fpv_toast_homepoint_setting_failed">Failed to set Home Point</string>
 
+    <!-- Rc Calibration -->
+    <string name="uxsdk_setting_ui_rc_calibration">Remote Controller Calibration</string>
+    <string name="uxsdk_setting_ui_rc_cal">Calibrate</string>
+    <string name="uxsdk_setting_ui_rc_finish_tip">Push all sticks throughout their maximum range and repeat several times. Then press Finish to complete the calibration.</string>
+    <string name="uxsdk_setting_ui_rc_start">Start</string>
+    <string name="uxsdk_setting_ui_rc_finish">Done</string>
+    <string name="uxsdk_setting_ui_rc_cele_tip">Center both control sticks before pressing Start. Follow the prompts on screen to calibrate.</string>
+    <string name="uxsdk_setting_ui_rc_cele">Calibrate</string>
+    <string name="uxsdk_setting_ui_rc_limit_tip">Move each stick through its complete range of motion several times. Then press Finish to complete calibration.</string>
+    <string name="uxsdk_setting_ui_rc_middle_desc">Center both control sticks, then press Start to begin calibration.</string>
+    <string name="uxsdk_setting_ui_rc_calibration_time_out">The last remote controller calibration has been time out, the calibration state will be reset.</string>
+    <string name="uxsdk_setting_ui_setting_fail_disconnect">Setting failed. Check the device connection and retry.</string>
+    <string name="uxsdk_setting_ui_rc_tip_disconnect">Disconnected</string>
     <string name="uxsdk_setting_ui_rc_calibration_1">1.Stick Calibration: Move the sticks through their entire range of motion repeatedly.</string>
     <string name="uxsdk_setting_ui_rc_calibration_2">2.Left Dial Calibration: Turn the left dial up to its limit repeatedly.</string>
     <string name="uxsdk_setting_ui_rc_pro_calibration_2">2.Dial Calibration: Turn the dials up to their limits repeatedly.</string>
@@ -1118,11 +1152,7 @@
     <string name="uxsdk_setting_ui_rc_calibration_stick_desc">Move control sticks gently to fill out the square with the ball\'s trajectories.</string>
     <string name="uxsdk_setting_ui_rc_calibration_wheel_desc">Turn the left and right dials to the maximum repeatedly.</string>
     <string name="uxsdk_setting_ui_rc_plus_calibration_1">Slowly move both control sticks through their entire range of motion</string>
-    <string name="uxsdk_setting_ui_rc_cele">Calibrate</string>
-    <string name="uxsdk_setting_ui_rc_calibration_time_out">The last remote controller calibration has been time out, the calibration state will be reset.</string>
-    <string name="uxsdk_setting_ui_setting_fail_disconnect">Setting failed. Check the device connection and retry.</string>
-    <string name="uxsdk_setting_ui_rc_start">Start</string>
-    <string name="uxsdk_setting_ui_rc_finish">Done</string>
+
 
 
     <string name="uxsdk_fpv_checklist_calibration_success">Compass Calibrated.</string>
@@ -1137,10 +1167,27 @@
     <string name="uxsdk_fpv_compass_adjust_fail">Intensive electromagnetic interference nearby. Ensure no magnets or metal objects are near the compass and keep the aircraft 1 meter above ground for recalibration.</string>
     <string name="uxsdk_fpv_low_battery_back_home_tip">The remaining battery is only enough for RTH. Return home now.</string>
     <string name="uxsdk_setting_ui_compass_tip">Cannot calibrate compass while the motors are rotating.</string>
+    <string name="uxsdk_app_operator_fail">Operate Failed ,Please Retry</string>
+    <string name="uxsdk_setting_menu_desc_omni_perception_downwards">Vision positioning systems help aircraft hover and support landing protection when GPS signal is weak. Disabling downward vision system will disable landing protection</string>
+
+    <string name="uxsdk_setting_menu_flyc_limit_high_notice">Flying above 120 m (400 ft) may violate local laws and regulations. To ensure flight safety, make sure you understand relevant regulations before flying</string>
+    <string name="uxsdk_setting_menu_flyc_limit_high_notice_above_500">Flying above 500 m (1,640 ft) may violate local laws and regulations. To ensure flight safety, make sure you understand relevant regulations before flying. Max altitude settings will revert to default after restarting aircraft</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_content">In this configuration, Tripod (T) mode becomes Attitude (A) mode. The current flight mode is not affected. \n In A mode, the aircraft is easily disturbed and drifts horizontally as a result. Aircraft is unable to hover or engage Active Braking. Control the aircraft to hover manually.</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth_set_altitude">When aircraft is farther than 50 m from Home Point, aircraft will automatically calculate RTH route, fly to open area, ascend to preset altitude, and return to home\nWhen aircraft is 5 to 50 m from Home Point, aircraft will fly planned route and return to home at current altitude\nWhen aircraft is less than 5 m from Home Point, aircraft will land automatically\nIf lighting is insufficient or environment is not suitable for vision system to work properly, such as direct sunlight at dusk or weak or no light at night, aircraft will fly to Home Point in straight line at preset altitude</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth_smart_altitude">Aircraft will automatically calculate optimal RTH route. If lighting is insufficient or environment is not suitable for vision system to work properly, such as direct sunlight at dusk or weak or no light at night, aircraft will fly to Home Point in straight line at preset altitude</string>
+    <string name="uxsdk_setting_menu_close_bottom_aux_tips">Turning off the bottom auxiliary light disables the downward vision sensing system when landing in low ambient light. Fly with caution.</string>
 
     <string name="uxsdk_fpv_gimbal_roll_finetune">Horizontal</string>
     <string name="uxsdk_fpv_gimbal_yaw_finetune">Yaw</string>
     <string name="uxsdk_fpv_gimbal_pitch_finetune">Tilt</string>
     <string name="uxsdk_setting_menu_title_gimbal_reset_param">Reset Gimbal Parameters</string>
     <string name="uxsdk_setting_menu_title_gimbal_calibration">Gimbal Calibration</string>
+
+    <string name="uxsdk_link_frequency_band_dual">Dual Band</string>
+    <string name="uxsdk_link_frequency_band_three">Three Bands</string>
+    <string name="uxsdk_link_frequency_band_2_dot_4">2.4G</string>
+    <string name="uxsdk_link_frequency_band_5">5G</string>
+    <string name="uxsdk_link_frequency_band_5_dot_7">5.7G</string>
+    <string name="uxsdk_link_frequency_band_1_dot_4">840M&amp;1.4G</string>
+
 </resources>

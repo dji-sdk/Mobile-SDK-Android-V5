@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@android:color/background_dark">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@android:color/background_dark">
 
     <TextView
         android:id="@+id/fpv_left_tv"
@@ -69,5 +81,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/fpv_gimbal_finetune_value_tv"
         app:layout_constraintTop_toTopOf="@id/fpv_gimbal_finetune_minus_img" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+        android:background="@color/uxsdk_dic_color_c20_divider"
+        />
+
+    <TextView
+        android:id="@+id/fpv_gimbal_ok_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_36_dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/app_done"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="@dimen/uxsdk_12_dp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent" />
+</LinearLayout>
 
 </merge>

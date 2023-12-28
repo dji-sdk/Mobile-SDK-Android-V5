@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dji.sampleV5.aircraft">
+
+    <!-- Sample permission requirement -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Google Maps -->
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="${GMAP_API_KEY}" />
+
+    <!-- AMaps -->
+    <meta-data
+        android:name="com.amap.api.v2.apikey"
+        android:value="${AMAP_API_KEY}" />
+
+
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.usb.accessory"
+        android:required="true"/>
+
+    <application
+        android:name="dji.sampleV5.aircraft.DJIAircraftApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_main"
+        android:label="@string/app_name_aircraft"
+        android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+
+        <meta-data
+            android:name="com.dji.sdk.API_KEY"
+            android:value="${API_KEY}"/>
+
+        <activity
+            android:name="dji.sampleV5.aircraft.DJIAircraftMainActivity"
+            android:theme="@style/full_screen_theme"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".UsbAttachActivity"
+            android:theme="@style/translucent_theme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+                android:resource="@xml/accessory_filter" />
+        </activity>
+
+        <activity android:name="dji.v5.ux.sample.showcase.defaultlayout.DefaultLayoutActivity"
+            android:theme="@style/full_screen_theme"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"/>
+
+        <activity android:name="dji.v5.ux.sample.showcase.widgetlist.WidgetsActivity"
+            android:theme="@style/full_screen_theme"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"/>
+
+        <activity android:name="dji.sampleV5.aircraft.AircraftTestingToolsActivity"
+            android:theme="@style/full_screen_theme"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"/>
+    </application>
+
+</manifest>

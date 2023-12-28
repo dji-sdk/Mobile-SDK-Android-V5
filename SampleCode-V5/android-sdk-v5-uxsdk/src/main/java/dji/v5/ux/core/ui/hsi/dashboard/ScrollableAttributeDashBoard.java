@@ -24,7 +24,6 @@ import androidx.annotation.Nullable;
 
 
 import dji.v5.utils.common.DJIExecutor;
-import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
 import dji.v5.utils.common.AndUtil;
 import dji.v5.ux.core.util.FontUtils;
@@ -517,7 +516,6 @@ public abstract class ScrollableAttributeDashBoard extends View {
         super.onDraw(canvas);
         drawCurrentValue(canvas);
         clipPointerArea(canvas);
-        LogUtils.d(TAG,"mShowFramework="+mShowFramework);
         if (mShowFramework) {
             drawCalibration(canvas);
             drawCalibrationFramework(canvas);
@@ -538,7 +536,6 @@ public abstract class ScrollableAttributeDashBoard extends View {
      * @see #drawCurrentBackground(Canvas, int, int)
      */
     private void clipPointerArea(Canvas canvas) {
-        LogUtils.d(TAG,"mPointerHeight="+mPointerHeight);
         int currentAreaOffsetX = mFrameworkPaddingStart + mPointerLineInnerWidth + mTextPadding;
         boolean alginLeft = isAlginLeft();
         if (!alginLeft) {
@@ -749,7 +746,6 @@ public abstract class ScrollableAttributeDashBoard extends View {
             drawCurrentValueLine(canvas, mPointerHeight, alginLeft);
             drawCurrentBackground(canvas, currentWidth, mPointerHeight);
         }
-        LogUtils.d(TAG,"mShowBorder="+mShowBorder);
         drawCurrentText(canvas, currentValueString, alginLeft);
         drawCurrentName(canvas, mAttributeName, alginLeft);
         drawCurrentUnit(canvas, displayValue.mDisplayUnit, alginLeft);

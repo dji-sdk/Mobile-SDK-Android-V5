@@ -42,7 +42,8 @@ class OverviewListItemWidgetModel(
         keyedStore: ObservableInMemoryKeyedStore
 ) : WidgetModel(djiSdkModel, keyedStore) {
 
-    private val systemStatusProcessor: DataProcessor<DJIDeviceStatus> = DataProcessor.create(DJIDeviceStatus.NORMAL)
+    private val systemStatusProcessor: DataProcessor<DJIDeviceStatus> = DataProcessor.create(
+        DJIDeviceStatus.NORMAL)
     private val overviewStateProcessor: DataProcessor<OverviewState> = DataProcessor.create(OverviewState.ProductDisconnected)
 
     private val deviceStatusChangeListener = DJIDeviceStatusChangeListener { _, to ->

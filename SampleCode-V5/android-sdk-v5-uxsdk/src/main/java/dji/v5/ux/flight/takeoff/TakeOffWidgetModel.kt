@@ -125,7 +125,9 @@ class TakeOffWidgetModel(
      * Performs take off action
      */
     fun performTakeOffAction(): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                FlightControllerKey.KeyStartTakeoff))
             .onErrorResumeNext { error: Throwable ->
                 if (areMotorsOnDataProcessor.value) {
                     return@onErrorResumeNext Completable.complete()
@@ -139,8 +141,9 @@ class TakeOffWidgetModel(
      * Performs precision take off action
      */
     fun performPrecisionTakeOffAction(): Completable {
-        //TODO KeyPrecisionStartTakeoff存在问题，csdk那边修复时间未知，这里先换成takeoff
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartTakeoff))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                FlightControllerKey.KeyStartTakeoff))
             .onErrorResumeNext { error: Throwable? ->
                 if (areMotorsOnDataProcessor.value) {
                     return@onErrorResumeNext Completable.complete()
@@ -154,14 +157,18 @@ class TakeOffWidgetModel(
      * Performs landing action
      */
     fun performLandingAction(): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStartAutoLanding))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                FlightControllerKey.KeyStartAutoLanding))
     }
 
     /**
      * Performs cancel landing action
      */
     fun performCancelLandingAction(): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyStopAutoLanding))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                FlightControllerKey.KeyStopAutoLanding))
     }
 
     /**
@@ -169,25 +176,43 @@ class TakeOffWidgetModel(
      * landing confirmation is received.
      */
     fun performLandingConfirmationAction(): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(FlightControllerKey.KeyConfirmLanding))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                FlightControllerKey.KeyConfirmLanding))
     }
 
     //endregion
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyIsFlying), isFlyingDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyIsInLandingMode), isAutoLandingDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyIsLandingConfirmationNeeded), isLandingConfNeededDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyTouchDownConfirmLimitHeight), forceLandingHeightDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyFlightModeString), flightModeStringDataProcessor) { value: Any ->
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyIsFlying), isFlyingDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyIsInLandingMode), isAutoLandingDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyIsLandingConfirmationNeeded), isLandingConfNeededDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyTouchDownConfirmLimitHeight), forceLandingHeightDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyFlightModeString), flightModeStringDataProcessor) { value: Any ->
             isInAttiModeDataProcessor.onNext((value as String).contains("atti", ignoreCase = true))
         }
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), areMotorsOnDataProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyFCFlightMode), flightModeProcessor) {
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAreMotorsOn), areMotorsOnDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyFCFlightMode), flightModeProcessor) {
             isGoingHomeDataProcessor.onNext(it == FCFlightMode.GO_HOME || it == FCFlightMode.AUTO_LANDING)
         }
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAutoRTHReason), autoRTHReasonProcessor) {
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAutoRTHReason), autoRTHReasonProcessor) {
             isCancelAutoLandingDisabledProcessor.onNext(
                 it == FCAutoRTHReason.WARNING_POWER_LANDING
                         || it == FCAutoRTHReason.SMART_POWER_LANDING
@@ -197,11 +222,17 @@ class TakeOffWidgetModel(
                         || it == FCAutoRTHReason.BATTERY_FORCE_LANDING
             )
         }
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyRcMachineMode), rcModeDataProcessor)
-        bindDataProcessor(KeyTools.createKey(ProductKey.KeyProductType), productModelProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyRcMachineMode), rcModeDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                ProductKey.KeyProductType), productModelProcessor)
         val unitKey = UXKeys.create(GlobalPreferenceKeys.UNIT_TYPE)
         bindDataProcessor(unitKey, unitTypeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightAssistantKey.KeyLandingProtectionState), landingProtectionStateDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightAssistantKey.KeyLandingProtectionState), landingProtectionStateDataProcessor)
         preferencesManager?.setUpListener()
     }
 

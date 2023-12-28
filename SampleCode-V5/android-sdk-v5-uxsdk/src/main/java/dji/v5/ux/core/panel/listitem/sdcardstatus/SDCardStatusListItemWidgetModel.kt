@@ -64,8 +64,12 @@ class SDCardStatusListItemWidgetModel(
     val sdCardState: Flowable<SDCardState> = sdCardStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDRemainingSpaceInMB, cameraIndex), sdCardRemainingCapacityProcessor)
-        bindDataProcessor(KeyTools.createKey(CameraKey.KeyCameraSDCardState, cameraIndex), sdCardOperationStateProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeySSDRemainingSpaceInMB, cameraIndex), sdCardRemainingCapacityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                CameraKey.KeyCameraSDCardState, cameraIndex), sdCardOperationStateProcessor)
 
     }
 
@@ -91,7 +95,9 @@ class SDCardStatusListItemWidgetModel(
      * Format SDCard
      */
     fun formatSDCard(): Completable {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(CameraKey.KeyFormatStorage, cameraIndex))
+        return djiSdkModel.performActionWithOutResult(
+            KeyTools.createKey(
+                CameraKey.KeyFormatStorage, cameraIndex))
     }
 
     /**

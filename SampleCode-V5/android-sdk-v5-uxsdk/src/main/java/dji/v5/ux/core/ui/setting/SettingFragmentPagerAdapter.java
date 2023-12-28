@@ -13,12 +13,14 @@ import java.util.List;
 
 import dji.v5.utils.common.AndUtil;
 import dji.v5.utils.common.ContextUtil;
+import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
 import dji.v5.ux.core.ui.setting.data.MenuBean;
 import dji.v5.ux.core.ui.setting.taplayout.QTabView;
 import dji.v5.ux.core.ui.setting.taplayout.TabAdapter;
 import dji.v5.ux.core.ui.setting.ui.MenuFragmentFactory;
 import dji.v5.ux.core.ui.setting.ui.SettingMenuFragment;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
 /**
  * Description :
@@ -93,12 +95,10 @@ public class SettingFragmentPagerAdapter extends FragmentPagerAdapter implements
     }
 
     public void removeRTKPanel() {
-
         removeMenuPanel(MenuFragmentFactory.FRAGMENT_TAG_RTK, R.drawable.uxsdk_ic_setting_rtk);
     }
 
     public void addRTKPanel() {
-
         addMenuPanel(MenuFragmentFactory.FRAGMENT_TAG_GIMBAL, MenuFragmentFactory.FRAGMENT_TAG_RTK, R.drawable.uxsdk_ic_setting_rtk_active,
                 R.drawable.uxsdk_ic_setting_rtk);
     }
@@ -125,7 +125,7 @@ public class SettingFragmentPagerAdapter extends FragmentPagerAdapter implements
             MenuBean menu = mAdapterMenus.get(payloadIndex);
             if (menu.getNormalIcon() == normalIcon) {
                 mAdapterMenus.remove(payloadIndex);
-                mAdapterFragments.remove(payloadIndex);
+                 mAdapterFragments.remove(payloadIndex);
                 notifyDataSetChanged();
             }
         }

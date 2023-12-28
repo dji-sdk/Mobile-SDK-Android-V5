@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 最新版本 V5.7.2
+# DJI Mobile SDK for Android V5 最新版本 V5.8.0
 [English Version](README.md)
 
 ## DJI Mobile SDK V5 是什么?
@@ -28,7 +28,8 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 │   │   ├── 5.2.0_5.3.0_android_diff.html
 │   │   ├── 5.4.0_5.5.0_android_diff.html
 │   │   ├── 5.5.0_5.6.0_android_diff.html
-│   │   └── 5.6.0_5.7.0_android_diff.html
+│   │   ├── 5.6.0_5.7.0_android_diff.html
+│   │   └── 5.7.0_5.8.0_android_diff.html
 │   └── Android_API
 │       ├── cn
 │       └── en
@@ -38,14 +39,12 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 └── SampleCode-V5
     ├── android-sdk-v5-as
     ├── android-sdk-v5-sample
-    │   ├── app-aircraft
-    │   ├── module-aircraft
-    │   └── module-common
     └── android-sdk-v5-uxsdk
     
 ```
 
 ### API 差异
+- [5.7.0_5.8.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.7.0_5.8.0_android_diff.html)
 - [5.6.0_5.7.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.6.0_5.7.0_android_diff.html)
 - [5.5.0_5.6.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.5.0_5.6.0_android_diff.html)
 - [5.4.0_5.5.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.4.0_5.5.0_android_diff.html)
@@ -64,27 +63,19 @@ DJI Android SDK 与基于<a href=https://www.gnu.org/licenses/lgpl-2.1.html.en>L
 
 Sample分为3部分：
 
-- 基础模块：提供各产品包的基础操作。
-- 场景化Sample：提供对飞机的场景化Sample支持。
-- App模块：提供一个飞机App。
+- 场景化示例：提供对飞机的场景化支持。
+- Sample模块：提供一个飞机Sample App。
 
 详细配置请参考[settings.gradle](SampleCode-V5/android-sdk-v5-as/settings.gradle)。
 
-基础模块：
+场景化示例：
 
-- sample-module-common：Sample的通用代码。
-- sample-module-aircraft：飞机App特有代码，依赖sample-module-common。
-
-场景化Sample：
-
-- uxsdk：场景化Sample，当前仅支持飞机(`dji-sdk-v5-aircraft`)。
+- uxsdk：场景化示例，当前仅支持飞机。
 
 
-App模块：
+Sample模块：
 
-- sample-app-aircraft：编译飞机App，依赖sample-module-aircraft、uxsdk。
-
-
+- sample：编译飞机sample App，依赖uxsdk。
 
 ## 整合
 
@@ -93,7 +84,7 @@ App模块：
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.7.2
+> **注意：** sdkVersion = 5.8.0
 
 | SDK包| 说明| 使用方式|
 | :---------------: | :-----------------:  | :---------------: |
@@ -116,11 +107,3 @@ App模块：
 
 您可以 [填写表单](https://djisdksupport.zendesk.com/hc/zh-cn/community/topics) 以获得DJI的技术支持。
 
-
-## 加入我们
-
-DJI 招聘软件工程师，based在深圳。如果你想和我们一起把DJI产品做得更好，请：
-- 发送简历到 <software-sz@dji.com>
-- 提交您的简历：[https://we.dji.com/zh-CN/position/detail?positionId=1382258951346253824](https://we.dji.com/zh-CN/position/detail?positionId=1382258951346253824)
-
-更多岗位详情请浏览 <https://we.dji.com/zh-CN/social>。

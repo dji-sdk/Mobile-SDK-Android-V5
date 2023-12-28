@@ -26,7 +26,6 @@ package dji.v5.ux.accessory
 import dji.sdk.keyvalue.key.DJIKey
 import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.key.RtkMobileStationKey
-import dji.v5.manager.KeyManager
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
@@ -59,7 +58,8 @@ class RTKWidgetModel(
 
     //region Lifecycle
     override fun inSetup() {
-        val rtkEnabledKey: DJIKey<Boolean> = KeyTools.createKey(RtkMobileStationKey.KeyRTKEnable)
+        val rtkEnabledKey: DJIKey<Boolean> = KeyTools.createKey(
+            RtkMobileStationKey.KeyRTKEnable)
         bindDataProcessor(rtkEnabledKey, rtkEnabledProcessor)
     }
 

@@ -24,7 +24,6 @@
 package dji.v5.ux.core.panel.listitem.maxaltitude
 
 import dji.sdk.keyvalue.key.FlightControllerKey
-import dji.sdk.keyvalue.value.common.IntMinMax
 import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.common.IntValueConfig
 import dji.v5.et.create
@@ -70,10 +69,18 @@ class MaxAltitudeListItemWidgetModel(
         get() = maxAltitudeStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHeightLimit), maxFlightHeightProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyGoHomeHeight), returnHomeFlightHeightProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHeightLimitRange), maxFlightHeightRangeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyNoviceModeEnabled), noviceModeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHeightLimit), maxFlightHeightProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyGoHomeHeight), returnHomeFlightHeightProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHeightLimitRange), maxFlightHeightRangeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyNoviceModeEnabled), noviceModeProcessor)
         bindDataProcessor(GlobalPreferenceKeys.create(GlobalPreferenceKeys.UNIT_TYPE), unitTypeDataProcessor)
         preferencesManager?.setUpListener()
         preferencesManager?.let { unitTypeDataProcessor.onNext(it.unitType) }
@@ -148,7 +155,9 @@ class MaxAltitudeListItemWidgetModel(
         } else {
             maxAltitudeLimit
         }
-        return djiSdkModel.setValue(KeyTools.createKey(FlightControllerKey.KeyHeightLimit), tempLimit)
+        return djiSdkModel.setValue(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHeightLimit), tempLimit)
             .doOnComplete {
                 if (tempLimit < returnHomeFlightHeightProcessor.value) {
                     addDisposable(setReturnHomeMaxAltitude(tempLimit).subscribe({

@@ -798,5 +798,7 @@
     <dimen name="uxsdk_dialog_img_height">128dp</dimen>
     <dimen name="uxsdk_dialog_common_input_et_height">40dp</dimen>
 
+    <dimen name="uxsdk_setting_common_item_height">56dp</dimen>
+
 
 </resources>

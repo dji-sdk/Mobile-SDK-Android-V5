@@ -15,7 +15,9 @@
 
     <ImageView
         android:id="@+id/iv_fpv_top_bar_setting"
-        android:layout_width="@dimen/uxsdk_40_dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="20dp"
+        android:layout_width="@dimen/uxsdk_30_dp"
         android:layout_height="wrap_content"
         android:scaleType="center"
         android:stateListAnimator="@animator/uxsdk_pressed_alpha_040"

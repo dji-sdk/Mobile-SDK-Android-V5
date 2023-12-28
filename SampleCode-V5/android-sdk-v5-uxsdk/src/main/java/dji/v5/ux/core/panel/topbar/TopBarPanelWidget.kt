@@ -141,7 +141,7 @@ open class TopBarPanelWidget @JvmOverloads constructor(
     /**
      * Getter for [SettingWidget]. Null when excluded from the bar panel.
      */
-//    val settingWidget: SettingWidget?
+    val settingWidget: SettingWidget?
 
     /**
      * Getter for [ConnectionWidget]. Null when excluded from the bar panel.
@@ -225,12 +225,12 @@ open class TopBarPanelWidget @JvmOverloads constructor(
             batteryWidget = null
         }
 
-//        if (!WidgetValue.SETTING.isItemExcluded(excludedItemsValue)) {
-//            settingWidget = SettingWidget(context, attrs)
-//            rightPanelItems.add(PanelItem(settingWidget))
-//        } else {
-//            settingWidget = null
-//        }
+        if (!WidgetValue.SETTING.isItemExcluded(excludedItemsValue)) {
+            settingWidget = SettingWidget(context, attrs)
+            rightPanelItems.add(PanelItem(settingWidget))
+        } else {
+            settingWidget = null
+        }
         addRightWidgets(rightPanelItems.toTypedArray())
     }
 

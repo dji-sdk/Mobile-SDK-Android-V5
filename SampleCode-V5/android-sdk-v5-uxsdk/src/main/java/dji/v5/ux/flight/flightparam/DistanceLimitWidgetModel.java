@@ -1,21 +1,13 @@
 package dji.v5.ux.flight.flightparam;
 
 
-import android.content.Context;
-import android.util.AttributeSet;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import dji.sdk.keyvalue.key.FlightControllerKey;
 import dji.sdk.keyvalue.key.KeyTools;
-import dji.sdk.keyvalue.value.flightcontroller.FailsafeAction;
-import dji.v5.ux.R;
+import dji.sdk.keyvalue.value.flightcontroller.GoHomePathMode;
 import dji.v5.ux.core.base.DJISDKModel;
-import dji.v5.ux.core.base.EditorCell;
-import dji.v5.ux.core.base.SwitcherCell;
 import dji.v5.ux.core.base.WidgetModel;
-import dji.v5.ux.core.base.widget.ConstraintLayoutWidget;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
 import dji.v5.ux.core.util.DataProcessor;
 import io.reactivex.rxjava3.core.Completable;
@@ -27,6 +19,7 @@ public class DistanceLimitWidgetModel extends WidgetModel {
     private final DataProcessor<Integer> heightLimitDataProcessor = DataProcessor.create(500);
     private final DataProcessor<Integer> distanceLimitDataProcessor = DataProcessor.create(5000);
     private final DataProcessor<Boolean> distanceLimitEnableDataProcessor = DataProcessor.create(false);
+    private final DataProcessor<GoHomePathMode> goHomePathModeProcessor = DataProcessor.create(GoHomePathMode.UNKNOWN);
 
     protected DistanceLimitWidgetModel(@NonNull DJISDKModel djiSdkModel, @NonNull ObservableInMemoryKeyedStore uxKeyManager) {
         super(djiSdkModel, uxKeyManager);
@@ -38,6 +31,7 @@ public class DistanceLimitWidgetModel extends WidgetModel {
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHeightLimit), heightLimitDataProcessor);
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyDistanceLimit) , distanceLimitDataProcessor);
         bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyDistanceLimitEnabled) , distanceLimitEnableDataProcessor);
+        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyGoHomePathMode) , goHomePathModeProcessor);
     }
 
     @Override
@@ -45,6 +39,9 @@ public class DistanceLimitWidgetModel extends WidgetModel {
         //do nothing
     }
 
+    public Flowable<GoHomePathMode> getGoHomePathMode(){
+        return goHomePathModeProcessor.toFlowable();
+    }
 
     public Flowable<Integer> getGoHomeHeight(){
         return goHomeHeightDataProcessor.toFlowable();

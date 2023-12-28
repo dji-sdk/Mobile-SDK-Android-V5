@@ -108,25 +108,35 @@ class CompassWidgetModel(
     //region Lifecycle
     override fun inSetup() {
 
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude), aircraftAttitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftAttitude), aircraftAttitudeProcessor)
 
         // Set the home location when changed and update the various calculations
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHomeLocation), homeLocationProcessor) {
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHomeLocation), homeLocationProcessor) {
             updateCalculations()
         }
 
         // Update the aircraft's location
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor) {
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor) {
             calculateAircraftAngleAndDistanceFromCenterLocation()
         }
 
         // Update the RC's location
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyRcGPSInfo), rcGPSDataProcessor) {
+        bindDataProcessor(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyRcGPSInfo), rcGPSDataProcessor) {
             updateGPSData(it)
         }
 
         // Update the gimbal heading
-        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyYawRelativeToAircraftHeading, gimbalIndex), gimbalYawProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                GimbalKey.KeyYawRelativeToAircraftHeading, gimbalIndex), gimbalYawProcessor)
         registerMobileDeviceSensorListener()
 
         // Start mobile device's location updates if available

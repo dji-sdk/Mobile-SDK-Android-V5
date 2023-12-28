@@ -22,6 +22,6 @@ public class RtkMenuFragment extends MenuFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.uxsdk_fragment_not_yet_implement;
+        return R.layout.uxsdk_fragemnt_setting_ui_rtk_layout;
     }
 }

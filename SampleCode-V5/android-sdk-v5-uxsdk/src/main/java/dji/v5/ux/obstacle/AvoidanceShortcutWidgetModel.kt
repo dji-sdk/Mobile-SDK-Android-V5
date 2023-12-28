@@ -41,8 +41,12 @@ class AvoidanceShortcutWidgetModel(
     }
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(ProductKey.KeyProductType),productTypeProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyFCFlightMode),flightModeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                ProductKey.KeyProductType),productTypeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyFCFlightMode),flightModeProcessor)
         perceptionManager.addPerceptionInformationListener(perceptionInformationListener)
 
     }

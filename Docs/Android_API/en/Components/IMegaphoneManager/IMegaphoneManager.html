@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -538,6 +558,14 @@
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
                             </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
@@ -582,165 +610,191 @@
 <h5 id="description">Description:</h5>
 <p><font color="#666">Class that is used to manage megaphone. Users can setup parameters and play videos on megaphone through this class. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="class-members">Class Members:</h5>
+<div class="api-row" id="imegaphonemanager_addmegaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_addmegaphoneinfolistener_inline">addMegaphoneInfoListener</a></div></div><div class="inline-doc" id="imegaphonemanager_addmegaphoneinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>addMegaphoneInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addMegaphoneInfoListener</span><span class="params">(MegaphoneInfoListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="description-v2">Description:</h5>
+<p><font color="#666">Sets the listener of megaphone information. <br><br><code><i>Supported since MSDK 5.8.0</i></code></font></p>
+<h5 id="input-parameters">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html#imegaphonemanager_megaphoneinfolistener">MegaphoneInfoListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Megaphone information listener.</i></font></td></tr></table></html></div>
+<div class="api-row" id="imegaphonemanager_removemegaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_removemegaphoneinfolistener_inline">removeMegaphoneInfoListener</a></div></div><div class="inline-doc" id="imegaphonemanager_removemegaphoneinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>removeMegaphoneInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeMegaphoneInfoListener</span><span class="params">(MegaphoneInfoListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="description-v3">Description:</h5>
+<p><font color="#666">Remove the listener of megaphone information. <br><br><code><i>Supported since MSDK 5.8.0</i></code></font></p>
+<h5 id="input-parameters-v2">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html#imegaphonemanager_megaphoneinfolistener">MegaphoneInfoListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Megaphone information listener.</i></font></td></tr></table></html></div>
+<div class="api-row" id="imegaphonemanager_clearallmegaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_clearallmegaphoneinfolistener_inline">clearAllMegaphoneInfoListener</a></div></div><div class="inline-doc" id="imegaphonemanager_clearallmegaphoneinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>clearAllMegaphoneInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearAllMegaphoneInfoListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="description-v4">Description:</h5>
+<p><font color="#666">Remove all the listeners of megaphone information. <br><br><code><i>Supported since MSDK 5.8.0</i></code></font></p>
+</div>
 <div class="api-row" id="imegaphonemanager_setvolume"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_setvolume_inline">setVolume</a></div></div><div class="inline-doc" id="imegaphonemanager_setvolume_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setVolume</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setVolume</span><span class="params">(@NonNull <span class="keyword">int</span> volume, @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v2">Description:</h5>
+<h5 id="description-v5">Description:</h5>
 <p><font color="#666">To set the volume of megaphone. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters">Input Parameters:</h5>
+<h5 id="input-parameters-v3">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull int <font color="#000">volume</font></font></td><td><font color="#666"><i>Volume that needs to be set.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getvolume"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getvolume_inline">getVolume</a></div></div><div class="inline-doc" id="imegaphonemanager_getvolume_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getVolume</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getVolume</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;Integer&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v3">Description:</h5>
+<h5 id="description-v6">Description:</h5>
 <p><font color="#666">To get the volume of megaphone. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v2">Input Parameters:</h5>
+<h5 id="input-parameters-v4">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;Integer&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_setplaymode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_setplaymode_inline">setPlayMode</a></div></div><div class="inline-doc" id="imegaphonemanager_setplaymode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setPlayMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setPlayMode</span><span class="params">(@NonNull PlayMode playMode, @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v4">Description:</h5>
+<h5 id="description-v7">Description:</h5>
 <p><font color="#666">To set the megaphone play mode, including single play and loop play. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v3">Input Parameters:</h5>
+<h5 id="input-parameters-v5">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_playmode">PlayMode</a> <font color="#000">playMode</font></font></td><td><font color="#666"><i>Play mode that needs to be set.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getplaymode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getplaymode_inline">getPlayMode</a></div></div><div class="inline-doc" id="imegaphonemanager_getplaymode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getPlayMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPlayMode</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;PlayMode&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v5">Description:</h5>
+<h5 id="description-v8">Description:</h5>
 <p><font color="#666">To get the megaphone play mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v4">Input Parameters:</h5>
+<h5 id="input-parameters-v6">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_playmode">PlayMode</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_setworkmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_setworkmode_inline">setWorkMode</a></div></div><div class="inline-doc" id="imegaphonemanager_setworkmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setWorkMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setWorkMode</span><span class="params">(@NonNull WorkMode workMode,@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v6">Description:</h5>
+<h5 id="description-v9">Description:</h5>
 <p><font color="#666">To set the work mode of the megaphone, including TTS text mode and voice mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v5">Input Parameters:</h5>
+<h5 id="input-parameters-v7">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_workmode">WorkMode</a> <font color="#000">workMode</font></font></td><td><font color="#666"><i>Work mode that needs to be set.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getworkmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getworkmode_inline">getWorkMode</a></div></div><div class="inline-doc" id="imegaphonemanager_getworkmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getWorkMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getWorkMode</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;WorkMode&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v7">Description:</h5>
+<h5 id="description-v10">Description:</h5>
 <p><font color="#666">To get the work mode of the megaphone. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v6">Input Parameters:</h5>
+<h5 id="input-parameters-v8">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_workmode">WorkMode</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getstatus"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getstatus_inline">getStatus</a></div></div><div class="inline-doc" id="imegaphonemanager_getstatus_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getStatus</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getStatus</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;MegaphoneStatus&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v8">Description:</h5>
+<h5 id="description-v11">Description:</h5>
 <p><font color="#666">To get the status of megaphone. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v7">Input Parameters:</h5>
+<h5 id="input-parameters-v9">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_megaphonestatus">MegaphoneStatus</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_startplay"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_startplay_inline">startPlay</a></div></div><div class="inline-doc" id="imegaphonemanager_startplay_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startPlay</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startPlay</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v9">Description:</h5>
+<h5 id="description-v12">Description:</h5>
 <p><font color="#666">The megaphone starts playing. Before calling the start play interface, you need to call the file transfer method <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startpushingfiletomegaphone">startPushingFileToMegaphone</a></code> or the streaming transfer method <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startrealtimetransmission">startRealTimeTransmission</a></code> to transmit the data to be played to the megaphone. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v8">Input Parameters:</h5>
+<h5 id="input-parameters-v10">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_stopplay"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_stopplay_inline">stopPlay</a></div></div><div class="inline-doc" id="imegaphonemanager_stopplay_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>stopPlay</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stopPlay</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v10">Description:</h5>
+<h5 id="description-v13">Description:</h5>
 <p><font color="#666">The megaphone stops playing. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v9">Input Parameters:</h5>
+<h5 id="input-parameters-v11">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_startpushingfiletomegaphone"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_startpushingfiletomegaphone_inline">startPushingFileToMegaphone</a></div></div><div class="inline-doc" id="imegaphonemanager_startpushingfiletomegaphone_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startPushingFileToMegaphone</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startPushingFileToMegaphone</span><span class="params">(@NonNull FileInfo fileInfo, @Nullable CommonCallbacks.CompletionCallbackWithProgress&lt;Integer&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v11">Description:</h5>
+<h5 id="description-v14">Description:</h5>
 <p><font color="#666">Transfer TTS data or audio files to the megaphone. When the data transfer is complete, you can call the <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startplay">startPlay</a></code> interface to play. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v10">Input Parameters:</h5>
+<h5 id="input-parameters-v12">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMegaphoneManager/IMegaphoneManager_FileInfo.html#imegaphonemanager_fileinfo">FileInfo</a> <font color="#000">fileInfo</font></font></td><td><font color="#666"><i>File Information.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithProgress&lt;Integer&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_cancelpushingfiletomegaphone"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_cancelpushingfiletomegaphone_inline">cancelPushingFileToMegaphone</a></div></div><div class="inline-doc" id="imegaphonemanager_cancelpushingfiletomegaphone_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>cancelPushingFileToMegaphone</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cancelPushingFileToMegaphone</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v12">Description:</h5>
+<h5 id="description-v15">Description:</h5>
 <p><font color="#666">Stop transferring TTS data or audio files to the megaphone. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v11">Input Parameters:</h5>
+<h5 id="input-parameters-v13">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_startrealtimetransmission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_startrealtimetransmission_inline">startRealTimeTransmission</a></div></div><div class="inline-doc" id="imegaphonemanager_startrealtimetransmission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startRealTimeTransmission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startRealTimeTransmission</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v13">Description:</h5>
+<h5 id="description-v16">Description:</h5>
 <p><font color="#666">Turn on streaming transferring mode. You can call <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_sendrealtimedatatomegaphone">sendRealTimeDataToMegaphone</a></code> to send the data to be played to the megaphone, and call <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_appendeoftorealtimedata">appendEOFToRealTimeData</a></code> to add the EOF flag, indicating that the data is sent. Then call the <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startplay">startPlay</a></code> interface to play. <br><b>Notice: The data in streaming transferring mode must be audio data in OPUS encoded format.</b> <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v12">Input Parameters:</h5>
+<h5 id="input-parameters-v14">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_sendrealtimedatatomegaphone"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_sendrealtimedatatomegaphone_inline">sendRealTimeDataToMegaphone</a></div></div><div class="inline-doc" id="imegaphonemanager_sendrealtimedatatomegaphone_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>sendRealTimeDataToMegaphone</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sendRealTimeDataToMegaphone</span><span class="params">(<span class="keyword">byte</span>[] data, <span class="keyword">int</span> length, @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v14">Description:</h5>
+<h5 id="description-v17">Description:</h5>
 <p><font color="#666">Send the data to be played to the megaphone. You can call this interface multiple times to send data to be played. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v13">Input Parameters:</h5>
+<h5 id="input-parameters-v15">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">byte[] <font color="#000">data</font></font></td><td><font color="#666"><i>The data to be transmitted must be audio data in OPUS encoding format.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">int <font color="#000">length</font></font></td><td><font color="#666"><i>Data length.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_appendeoftorealtimedata"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_appendeoftorealtimedata_inline">appendEOFToRealTimeData</a></div></div><div class="inline-doc" id="imegaphonemanager_appendeoftorealtimedata_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>appendEOFToRealTimeData</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">appendEOFToRealTimeData</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v15">Description:</h5>
+<h5 id="description-v18">Description:</h5>
 <p><font color="#666">Add the EOF flag to indicate that the data is sent. You can call the <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startplay">startPlay</a></code> interface to play. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v14">Input Parameters:</h5>
+<h5 id="input-parameters-v16">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_cancelrealtimetransmission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_cancelrealtimetransmission_inline">cancelRealTimeTransmission</a></div></div><div class="inline-doc" id="imegaphonemanager_cancelrealtimetransmission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>cancelRealTimeTransmission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cancelRealTimeTransmission</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v16">Description:</h5>
+<h5 id="description-v19">Description:</h5>
 <p><font color="#666">Cancel this transfer and clear the uploaded data. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v15">Input Parameters:</h5>
+<h5 id="input-parameters-v17">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>Return the callback of execution result.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_addrealtimetransmissionstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_addrealtimetransmissionstatelistener_inline">addRealTimeTransmissionStateListener</a></div></div><div class="inline-doc" id="imegaphonemanager_addrealtimetransmissionstatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>addRealTimeTransmissionStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addRealTimeTransmissionStateListener</span><span class="params">(@Nullable RealTimeTransimissionStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v17">Description:</h5>
+<h5 id="description-v20">Description:</h5>
 <p><font color="#666">To set the status listener for streaming transferring mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v16">Input Parameters:</h5>
+<h5 id="input-parameters-v18">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html#imegaphonemanager_realtimetransimissionstatelistener">RealTimeTransimissionStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Status listener for streaming transferring mode.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_removerealtimetransmissionstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_removerealtimetransmissionstatelistener_inline">removeRealTimeTransmissionStateListener</a></div></div><div class="inline-doc" id="imegaphonemanager_removerealtimetransmissionstatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeRealTimeTransmissionStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeRealTimeTransmissionStateListener</span><span class="params">(@Nullable RealTimeTransimissionStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v18">Description:</h5>
+<h5 id="description-v21">Description:</h5>
 <p><font color="#666">Remove the status listener for streaming transferring mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
-<h5 id="input-parameters-v17">Input Parameters:</h5>
+<h5 id="input-parameters-v19">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html#imegaphonemanager_realtimetransimissionstatelistener">RealTimeTransimissionStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>Status listener for streaming transferring mode.</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_clearallrealtimetransmissionstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_clearallrealtimetransmissionstatelistener_inline">clearAllRealTimeTransmissionStateListener</a></div></div><div class="inline-doc" id="imegaphonemanager_clearallrealtimetransmissionstatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>clearAllRealTimeTransmissionStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearAllRealTimeTransmissionStateListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="description-v19">Description:</h5>
+<h5 id="description-v22">Description:</h5>
 <p><font color="#666">Remove every status listener for streaming transferring mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 </div>
 <h5 id="related">Related:</h5>
@@ -749,7 +803,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MegaphoneIndex</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="description-v20">Description:</h5>
+<h5 id="description-v23">Description:</h5>
 <p><font color="#666">Megaphone position. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_portside_inline"></a>PORTSIDE</font></td><td><font color="#666">The magaphone is at portside(Main).</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_starboard_inline"></a>STARBOARD</font></td><td><font color="#666">The megaphone is at starboard.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_upside_inline"></a>UPSIDE</font></td><td><font color="#666">The megaphone is at upside.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_osdk_inline"></a>OSDK</font></td><td><font color="#666">The megaphone is conncet with OSDK port.</font></td></tr></table></html>
@@ -760,7 +814,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WorkMode</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="description-v21">Description:</h5>
+<h5 id="description-v24">Description:</h5>
 <p><font color="#666">Speaker working mode. Includes TTS text mode and voice mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_workmode_tts_inline"></a>TTS</font></td><td><font color="#666">TTS mode. Input text is converted into voice to play.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_workmode_voice_inline"></a>VOICE</font></td><td><font color="#666">Voice mode. Input voice to play.</font></td></tr></table></html>
@@ -771,7 +825,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> PlayMode</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="description-v22">Description:</h5>
+<h5 id="description-v25">Description:</h5>
 <p><font color="#666">Speaker playing mode, including single playing mode and loop playing mode. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v3">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_playmode_single_inline"></a>SINGLE</font></td><td><font color="#666">Single play mode.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_playmode_loop_inline"></a>LOOP</font></td><td><font color="#666">Loop play mode.</font></td></tr></table></html>
@@ -782,7 +836,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MegaphoneStatus</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="description-v23">Description:</h5>
+<h5 id="description-v26">Description:</h5>
 <p><font color="#666">Speaker status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v4">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_idel_inline"></a>IDEL</font></td><td><font color="#666">The megaphone is idle.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_in_transmission_inline"></a>IN_TRANSMISSION</font></td><td><font color="#666">The megaphone is in data transmission status.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_playing_inline"></a>PLAYING</font></td><td><font color="#666">The megaphone is in data playing status.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_in_exception_inline"></a>IN_EXCEPTION</font></td><td><font color="#666">The microphone is in an abnormal status. Please contact the equipment provider to solve it.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_tts_in_conversion_inline"></a>TTS_IN_CONVERSION</font></td><td><font color="#666">TTS is being converted to voice.</font></td></tr></table></html>
@@ -793,7 +847,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> UploadType</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="description-v24">Description:</h5>
+<h5 id="description-v27">Description:</h5>
 <p><font color="#666">The type for the file transfer method, including local audio file data and TTS binary data. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v5">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadtype_tts_data_inline"></a>TTS_DATA</font></td><td><font color="#666">TTS binary data type. To set this mode, you need to call <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager_FileInfo.html#imegaphonemanager_fileinfo_setdata">setData</a></code> to set the TTS binary data.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadtype_voice_file_inline"></a>VOICE_FILE</font></td><td><font color="#666">Local audio file type. To set this mode, you need to call <code><a href="../../Components/IMegaphoneManager/IMegaphoneManager_FileInfo.html#imegaphonemanager_fileinfo_setfile">setFile</a></code> to set the local audio file path.</font></td></tr></table></html>
@@ -804,12 +858,13 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> UploadState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="description-v25">Description:</h5>
+<h5 id="description-v28">Description:</h5>
 <p><font color="#666">Streaming mode upload status. <br><br><code><i>Supported since MSDK 5.0.0</i></code></font></p>
 <h5 id="enum-members-v6">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_uploading_inline"></a>UPLOADING</font></td><td><font color="#666">Uploading.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_upload_success_inline"></a>UPLOAD_SUCCESS</font></td><td><font color="#666">Upload successfully.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_upload_failed_inline"></a>UPLOAD_FAILED</font></td><td><font color="#666">Upload failed. Please upload again.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_md5_failed_inline"></a>MD5_FAILED</font></td><td><font color="#666">MD5 verification failed.</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_aborted_inline"></a>ABORTED</font></td><td><font color="#666">Uploading aborted.</font></td></tr></table></html>
 <h5 id="class-members-v7">Class Members:</h5>
 </div>
+<div class="api-row" id="imegaphonemanager_megaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a></div></div><div class="api-row" id="imegaphonemanager_megaphoneinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a></div></div>
 
         </div>
       </div>

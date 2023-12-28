@@ -62,7 +62,9 @@ class HorizontalVelocityWidgetModel(
         get() = horizontalVelocityStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity), aircraftVelocityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftVelocity), aircraftVelocityProcessor)
         bindDataProcessor(GlobalPreferenceKeys.create(GlobalPreferenceKeys.UNIT_TYPE), unitTypeDataProcessor)
         preferencesManager?.setUpListener()
         preferencesManager?.let { unitTypeDataProcessor.onNext(it.unitType) }

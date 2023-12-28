@@ -660,6 +660,9 @@ open class TakeOffWidget @JvmOverloads constructor(
             TakeOffLandingState.WAITING_FOR_LANDING_CONFIRMATION -> showLandingConfirmationDialog()
             TakeOffLandingState.READY_TO_TAKE_OFF,
             TakeOffLandingState.TAKE_OFF_DISABLED -> slidingDialog?.dismiss()
+            else -> {
+                //do nothing
+            }
         }
     }
 

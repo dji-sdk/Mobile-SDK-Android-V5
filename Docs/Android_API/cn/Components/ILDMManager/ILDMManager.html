@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -537,6 +557,14 @@
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatus.html">UARegistrationNumberStatus</a>
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
                             </dd>
                     </ul>
                   </dd>
@@ -660,7 +688,7 @@
 <h5 id="描述：-v9">描述：</h5>
 <p><font color="#666">LDM例外模块类型，设置LDM例外模块可以正常访问网络。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
-<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_msdk_init_and_registration_inline"></a>MSDK_INIT_AND_REGISTRATION</font></td><td><font color="#666">MSDK初始化和注册模块。LDM下，MSDK初始化和注册模块以及LDM拉取DJI服务器License功能（调用<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_enableldm">enableLDM</a></code>）时可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_live_streaming_inline"></a>LIVE_STREAMING</font></td><td><font color="#666">直播模块。LDM下，直播模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_rtk_inline"></a>RTK</font></td><td><font color="#666">RTK模块。LDM下，RTK模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_firmware_upgrade_inline"></a>FIRMWARE_UPGRADE</font></td><td><font color="#666">固件升级模块。LDM下，固件升级模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_experence_improvement_inline"></a>EXPERENCE_IMPROVEMENT</font></td><td><font color="#666">产品改进计划模块。LDM下，产品改进计划模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_user_account_inline"></a>USER_ACCOUNT</font></td><td><font color="#666">用户账号模块。LDM下，用户账号模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_lte_inline"></a>LTE</font></td><td><font color="#666">LTE模块。LDM下，LTE模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_fly_safe_inline"></a>FLY_SAFE</font></td><td><font color="#666">限飞模块。LDM下，限飞模块可以正常访问网络。</font></td></tr></table></html>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_msdk_init_and_registration_inline"></a>MSDK_INIT_AND_REGISTRATION</font></td><td><font color="#666">MSDK初始化和注册模块。LDM下，MSDK初始化和注册模块以及LDM拉取DJI服务器License功能（调用<code><a href="../../Components/ILDMManager/ILDMManager.html#ildmmanager_enableldm">enableLDM</a></code>）时可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_live_streaming_inline"></a>LIVE_STREAMING</font></td><td><font color="#666">直播模块。LDM下，直播模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_rtk_inline"></a>RTK</font></td><td><font color="#666">RTK模块。LDM下，RTK模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_firmware_upgrade_inline"></a>FIRMWARE_UPGRADE</font></td><td><font color="#666">固件升级模块。LDM下，固件升级模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_experence_improvement_inline"></a>EXPERENCE_IMPROVEMENT</font></td><td><font color="#666">产品改进计划模块。LDM下，产品改进计划模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_user_account_inline"></a>USER_ACCOUNT</font></td><td><font color="#666">用户账号模块。LDM下，用户账号模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_lte_inline"></a>LTE</font></td><td><font color="#666">LTE模块。LDM下，LTE模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_fly_safe_inline"></a>FLY_SAFE</font></td><td><font color="#666">限飞模块。LDM下，限飞模块可以正常访问网络。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#ildmmanager_ldmexemptmodule_real_name_inline"></a>REAL_NAME</font></td><td><font color="#666">实名制模块。LDM下，实名制模块可以正常访问网络。</font></td></tr></table></html>
 <h5 id="class-members">Class Members:</h5>
 </div>
 

@@ -1,0 +1,524 @@
+<html>
+ <head>
+  <style>
+  table, th, td {
+     border: 1px solid rgb(200,200,200);
+     border-collapse: collapse;
+     }
+  table {
+     table-layout: fixed;
+     width: 1900px;
+     }
+  td {
+     overflow-x: auto;
+     }
+  th, td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    }
+  .comments {
+    color: #292;
+    }
+  .source-code {
+    color: #22F;
+    }
+  .interface-parent {
+    color: #AAA;
+    }
+  .interface-name {
+    color: #000;
+    }
+  .check-mark {
+    text-align: center;
+    }
+</style> 
+ </head>
+ <body> 
+  <br /> 
+  <h1>DJI Mobile SDK V5 5.7.0 to 5.8.0 Differences</h1> 
+  <br /> 
+  <h2>API changes</h2> 
+  <table class="diff-table">
+   <tbody>
+    <tr valign="top">
+     <td width="15%"><font color="#000">5.7.0 Parent and Name</font></td>
+     <td width="15%"><font color="#000">5.7.0 Code</font></td>
+     <td width="15%"><font color="#000">5.8.0 Parent and Name</font></td>
+     <td width="15%"><font color="#000">5.8.0 Code</font></td>
+     <td width="3%"><font color="#000">Parent</font></td>
+     <td width="3%"><font color="#000">Name</font></td>
+     <td width="3%"><font color="#000">Type</font></td>
+     <td width="3%"><font color="#000">Param</font></td>
+     <td width="3%"><font color="#000">Return</font></td>
+    </tr>
+    
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.RemoteIdWorkingState.</span><span class="interface-name">UNKNOWN_ERROR</span></td>
+     <td width="15%"><span class="source-code"> UNKNOWN_ERROR(65535)</span></td>
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.RemoteIdWorkingState.</span><span class="interface-name">NOT_SUPPORTED</span></td>
+     <td width="15%"><span class="source-code"> NOT_SUPPORTED(5)</span></td>
+     <td width="3%"></td>
+     <td width="3%">
+      <div class="check-mark">
+       X
+      </div></td>
+     <td width="3%"></td>
+     <td width="3%"></td>
+     <td width="3%"></td>
+    </tr>
+   </tbody>
+  </table>
+  <br /> 
+  <h2>APIs added to 5.8.0</h2> 
+  <table class="diff-table">
+   <tbody>
+    <tr valign="top">
+     <td width="15%"><font color="#000">Parent and Name</font></td>
+     <td width="15%"><font color="#000">Code</font></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.</span><span class="interface-name">ICameraStreamManager</span></td>
+     <td width="15%"><span class="source-code">interface ICameraStreamManager </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">AvailableCameraUpdatedListener</span></td>
+     <td width="15%"><span class="source-code">interface AvailableCameraUpdatedListener </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.AvailableCameraUpdatedListener.</span><span class="interface-name">onAvailableCameraUpdated</span></td>
+     <td width="15%"><span class="source-code"> void onAvailableCameraUpdated(@NonNull List&lt;ComponentIndexType&gt; availableCameraList)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">CameraFrameListener</span></td>
+     <td width="15%"><span class="source-code">interface CameraFrameListener </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.CameraFrameListener.</span><span class="interface-name">onFrame</span></td>
+     <td width="15%"><span class="source-code"> void onFrame(@NonNull byte[] frameData, int offset, int length, int width, int height, @NonNull FrameFormat format)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">FrameFormat</span></td>
+     <td width="15%"><span class="source-code">enum FrameFormat </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.FrameFormat.</span><span class="interface-name">NV21</span></td>
+     <td width="15%"><span class="source-code"> NV21(ImageFormat.NV21)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.FrameFormat.</span><span class="interface-name">RGBA_8888</span></td>
+     <td width="15%"><span class="source-code"> RGBA_8888(ImageFormat.FLEX_RGBA_8888)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.FrameFormat.</span><span class="interface-name">YUV420_888</span></td>
+     <td width="15%"><span class="source-code"> YUV420_888(ImageFormat.YUV_420_888)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.FrameFormat.</span><span class="interface-name">YUV444_888</span></td>
+     <td width="15%"><span class="source-code"> YUV444_888(ImageFormat.YUV_444_888)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.FrameFormat.</span><span class="interface-name">YUY2</span></td>
+     <td width="15%"><span class="source-code"> YUY2(ImageFormat.YUY2)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">MimeType</span></td>
+     <td width="15%"><span class="source-code">enum MimeType </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.MimeType.</span><span class="interface-name">H264</span></td>
+     <td width="15%"><span class="source-code"> H264(MediaFormat.MIMETYPE_VIDEO_AVC)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.MimeType.</span><span class="interface-name">H265</span></td>
+     <td width="15%"><span class="source-code"> H265(MediaFormat.MIMETYPE_VIDEO_HEVC)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">ReceiveStreamListener</span></td>
+     <td width="15%"><span class="source-code">interface ReceiveStreamListener </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.ReceiveStreamListener.</span><span class="interface-name">onReceiveStream</span></td>
+     <td width="15%"><span class="source-code"> void onReceiveStream( @NonNull byte[] data, int offset, int length, @NonNull StreamInfo info)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">ScaleType</span></td>
+     <td width="15%"><span class="source-code">enum ScaleType </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.ScaleType.</span><span class="interface-name">CENTER_CROP</span></td>
+     <td width="15%"><span class="source-code"> CENTER_CROP(1)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.ScaleType.</span><span class="interface-name">CENTER_INSIDE</span></td>
+     <td width="15%"><span class="source-code"> CENTER_INSIDE(2)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.ScaleType.</span><span class="interface-name">FIX_XY</span></td>
+     <td width="15%"><span class="source-code"> FIX_XY(0)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.datacenter.camera.</span><span class="interface-name">StreamInfo</span></td>
+     <td width="15%"><span class="source-code">class StreamInfo </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.datacenter.camera.StreamInfo.</span><span class="interface-name">getFrameRate</span></td>
+     <td width="15%"><span class="source-code">int getFrameRate() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.datacenter.camera.StreamInfo.</span><span class="interface-name">getHeight</span></td>
+     <td width="15%"><span class="source-code">int getHeight() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.datacenter.camera.StreamInfo.</span><span class="interface-name">getMimeType</span></td>
+     <td width="15%"><span class="source-code">ICameraStreamManager.MimeType getMimeType() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.datacenter.camera.StreamInfo.</span><span class="interface-name">getPresentationTimeMs</span></td>
+     <td width="15%"><span class="source-code">long getPresentationTimeMs() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.datacenter.camera.StreamInfo.</span><span class="interface-name">getWidth</span></td>
+     <td width="15%"><span class="source-code">int getWidth() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.datacenter.camera.StreamInfo.</span><span class="interface-name">isKeyFrame</span></td>
+     <td width="15%"><span class="source-code">boolean isKeyFrame() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">addAvailableCameraUpdatedListener</span></td>
+     <td width="15%"><span class="source-code"> void addAvailableCameraUpdatedListener(@NonNull AvailableCameraUpdatedListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">addFrameListener</span></td>
+     <td width="15%"><span class="source-code"> void addFrameListener(@NonNull ComponentIndexType cameraIndex, @NonNull FrameFormat format, @NonNull CameraFrameListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">addReceiveStreamListener</span></td>
+     <td width="15%"><span class="source-code"> void addReceiveStreamListener(@NonNull ComponentIndexType cameraIndex, @NonNull ReceiveStreamListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">putCameraStreamSurface</span></td>
+     <td width="15%"><span class="source-code"> void putCameraStreamSurface(@NonNull ComponentIndexType cameraIndex, @NonNull Surface surface, int surfaceWidth, int surfaceHeight, @NonNull ScaleType scaleType)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">removeAvailableCameraUpdatedListener</span></td>
+     <td width="15%"><span class="source-code"> void removeAvailableCameraUpdatedListener(@NonNull AvailableCameraUpdatedListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">removeCameraStreamSurface</span></td>
+     <td width="15%"><span class="source-code"> void removeCameraStreamSurface(@NonNull Surface surface)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">removeFrameListener</span></td>
+     <td width="15%"><span class="source-code"> void removeFrameListener(@NonNull CameraFrameListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">removeReceiveStreamListener</span></td>
+     <td width="15%"><span class="source-code"> void removeReceiveStreamListener(@NonNull ReceiveStreamListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ICameraStreamManager.</span><span class="interface-name">setKeepAliveDecoding</span></td>
+     <td width="15%"><span class="source-code"> void setKeepAliveDecoding(boolean isKeepALive)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.</span><span class="interface-name">FlySafeDatabaseComponent</span></td>
+     <td width="15%"><span class="source-code">enum FlySafeDatabaseComponent </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseComponent.</span><span class="interface-name">AIRCRAFT</span></td>
+     <td width="15%"><span class="source-code"> AIRCRAFT(0)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseComponent.</span><span class="interface-name">MSDK</span></td>
+     <td width="15%"><span class="source-code"> MSDK(1)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.</span><span class="interface-name">FlySafeDatabaseInfo</span></td>
+     <td width="15%"><span class="source-code">class FlySafeDatabaseInfo </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlySafeDatabaseInfo.</span><span class="interface-name">getComponent</span></td>
+     <td width="15%"><span class="source-code">FlySafeDatabaseComponent getComponent() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlySafeDatabaseInfo.</span><span class="interface-name">getDatabaseName</span></td>
+     <td width="15%"><span class="source-code">String getDatabaseName() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlySafeDatabaseInfo.</span><span class="interface-name">getDatabaseSize</span></td>
+     <td width="15%"><span class="source-code">long getDatabaseSize()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlySafeDatabaseInfo.</span><span class="interface-name">getDatabaseTimeStamp</span></td>
+     <td width="15%"><span class="source-code">long getDatabaseTimeStamp() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlySafeDatabaseInfo.</span><span class="interface-name">getFlySafeDatabaseUpgradeMode</span></td>
+     <td width="15%"><span class="source-code">FlySafeDatabaseUpgradeMode getFlySafeDatabaseUpgradeMode()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.</span><span class="interface-name">FlySafeDatabaseListener</span></td>
+     <td width="15%"><span class="source-code">interface FlySafeDatabaseListener </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseListener.</span><span class="interface-name">onFlySafeDatabaseInfoUpdate</span></td>
+     <td width="15%"><span class="source-code"> void onFlySafeDatabaseInfoUpdate(FlySafeDatabaseInfo flySafeDatabaseInfo)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseListener.</span><span class="interface-name">onFlySafeDatabaseStateUpdate</span></td>
+     <td width="15%"><span class="source-code"> void onFlySafeDatabaseStateUpdate(FlySafeDatabaseState flySafeDatabaseState)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.</span><span class="interface-name">FlySafeDatabaseState</span></td>
+     <td width="15%"><span class="source-code">enum FlySafeDatabaseState </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseState.</span><span class="interface-name">NEED_TO_IMPORT</span></td>
+     <td width="15%"><span class="source-code"> NEED_TO_IMPORT(1)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseState.</span><span class="interface-name">NEED_TO_SYNC</span></td>
+     <td width="15%"><span class="source-code"> NEED_TO_SYNC(0)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseState.</span><span class="interface-name">UP_TO_DATE</span></td>
+     <td width="15%"><span class="source-code"> UP_TO_DATE(2)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.</span><span class="interface-name">FlySafeDatabaseUpgradeMode</span></td>
+     <td width="15%"><span class="source-code">enum FlySafeDatabaseUpgradeMode </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseUpgradeMode.</span><span class="interface-name">AUTOMATIC_UPGRADE</span></td>
+     <td width="15%"><span class="source-code"> AUTOMATIC_UPGRADE(1)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.FlySafeDatabaseUpgradeMode.</span><span class="interface-name">MANUAL_IMPORT</span></td>
+     <td width="15%"><span class="source-code"> MANUAL_IMPORT(0)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlyZoneInformation.</span><span class="interface-name">getLowerLimit</span></td>
+     <td width="15%"><span class="source-code">double getLowerLimit()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlyZoneInformation.</span><span class="interface-name">getUpperLimit</span></td>
+     <td width="15%"><span class="source-code">double getUpperLimit()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.FlyZoneLicenseInfo.</span><span class="interface-name">getRidUnlockType</span></td>
+     <td width="15%"><span class="source-code">RidUnlockType getRidUnlockType() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.</span><span class="interface-name">RidUnlockType</span></td>
+     <td width="15%"><span class="source-code">enum RidUnlockType </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.RidUnlockType.</span><span class="interface-name">CHINA</span></td>
+     <td width="15%"><span class="source-code"> CHINA(2)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.RidUnlockType.</span><span class="interface-name">EUROPEAN</span></td>
+     <td width="15%"><span class="source-code"> EUROPEAN(1)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.flysafe.info.RidUnlockType.</span><span class="interface-name">UNKNOWN</span></td>
+     <td width="15%"><span class="source-code"> UNKNOWN(255)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IFlyZoneManager.</span><span class="interface-name">addFlySafeDatabaseListener</span></td>
+     <td width="15%"><span class="source-code"> void addFlySafeDatabaseListener(@NonNull FlySafeDatabaseListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IFlyZoneManager.</span><span class="interface-name">clearAllFlySafeDatabaseListener</span></td>
+     <td width="15%"><span class="source-code"> void clearAllFlySafeDatabaseListener()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IFlyZoneManager.</span><span class="interface-name">importFlySafeDynamicDatabaseToMSDK</span></td>
+     <td width="15%"><span class="source-code"> void importFlySafeDynamicDatabaseToMSDK(String databaseFilePath, @NonNull CommonCallbacks.CompletionCallbackWithProgress&lt;Double&gt; callback)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IFlyZoneManager.</span><span class="interface-name">pushFlySafeDynamicDatabaseToAircraft</span></td>
+     <td width="15%"><span class="source-code"> void pushFlySafeDynamicDatabaseToAircraft(@NonNull CommonCallbacks.CompletionCallbackWithProgress&lt;Double&gt; callback)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IFlyZoneManager.</span><span class="interface-name">removeFlySafeDatabaseListener</span></td>
+     <td width="15%"><span class="source-code"> void removeFlySafeDatabaseListener(@NonNull FlySafeDatabaseListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IFlyZoneManager.</span><span class="interface-name">setFlySafeDynamicDatabaseUpgradeMode</span></td>
+     <td width="15%"><span class="source-code"> void setFlySafeDynamicDatabaseUpgradeMode(@NonNull FlySafeDatabaseUpgradeMode flySafeDynamicDatabaseUpgradeMode , @NonNull CommonCallbacks.CompletionCallback callback)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.common.ldm.LDMExemptModule.</span><span class="interface-name">REAL_NAME</span></td>
+     <td width="15%"><span class="source-code"> REAL_NAME</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ILiveStreamManager.</span><span class="interface-name">getCameraIndex</span></td>
+     <td width="15%"><span class="source-code"> ComponentIndexType getCameraIndex()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.ILiveStreamManager.</span><span class="interface-name">setCameraIndex</span></td>
+     <td width="15%"><span class="source-code"> void setCameraIndex(@NonNull ComponentIndexType cameraIndex)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMediaDataCenter.</span><span class="interface-name">getCameraStreamManager</span></td>
+     <td width="15%"><span class="source-code"> ICameraStreamManager getCameraStreamManager()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMediaManager.</span><span class="interface-name">MediaFrameListener</span></td>
+     <td width="15%"><span class="source-code">interface MediaFrameListener</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMediaManager.MediaFrameListener.</span><span class="interface-name">onError</span></td>
+     <td width="15%"><span class="source-code"> void onError(@NonNull IDJIError error)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMediaManager.MediaFrameListener.</span><span class="interface-name">onReceiveStream</span></td>
+     <td width="15%"><span class="source-code"> void onReceiveStream( byte[] data, int offset, int length, @NonNull StreamInfo info)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMediaManager.</span><span class="interface-name">playVideoToSurface</span></td>
+     <td width="15%"><span class="source-code"> void playVideoToSurface(MediaFile mediaFile, Surface surface, int surfaceWidth, int surfaceHeight, ICameraStreamManager.ScaleType scaleType, MediaFrameListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.megaphone.</span><span class="interface-name">MegaphoneInfo</span></td>
+     <td width="15%"><span class="source-code">class MegaphoneInfo </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.megaphone.</span><span class="interface-name">MegaphoneInfoListener</span></td>
+     <td width="15%"><span class="source-code">interface MegaphoneInfoListener </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.megaphone.MegaphoneInfoListener.</span><span class="interface-name">onUpdateMegaphoneInfo</span></td>
+     <td width="15%"><span class="source-code"> void onUpdateMegaphoneInfo(MegaphoneInfo megaphoneInfo)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.megaphone.MegaphoneInfo.</span><span class="interface-name">getPlayMode</span></td>
+     <td width="15%"><span class="source-code">PlayMode getPlayMode() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.megaphone.MegaphoneInfo.</span><span class="interface-name">getStatus</span></td>
+     <td width="15%"><span class="source-code">MegaphoneStatus getStatus() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.megaphone.MegaphoneInfo.</span><span class="interface-name">getVolume</span></td>
+     <td width="15%"><span class="source-code">Integer getVolume() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.megaphone.MegaphoneInfo.</span><span class="interface-name">getWorkMode</span></td>
+     <td width="15%"><span class="source-code">WorkMode getWorkMode() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMegaphoneManager.</span><span class="interface-name">addMegaphoneInfoListener</span></td>
+     <td width="15%"><span class="source-code"> void addMegaphoneInfoListener(MegaphoneInfoListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMegaphoneManager.</span><span class="interface-name">clearAllMegaphoneInfoListener</span></td>
+     <td width="15%"><span class="source-code"> void clearAllMegaphoneInfoListener()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IMegaphoneManager.</span><span class="interface-name">removeMegaphoneInfoListener</span></td>
+     <td width="15%"><span class="source-code"> void removeMegaphoneInfoListener(MegaphoneInfoListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.AreaStrategy.</span><span class="interface-name">CHINA_STRATEGY</span></td>
+     <td width="15%"><span class="source-code"> CHINA_STRATEGY(AreaCode.CHINA.value())</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.AreaStrategy.</span><span class="interface-name">EUROPEAN_STRATEGY</span></td>
+     <td width="15%"><span class="source-code"> EUROPEAN_STRATEGY(&quot;EU&quot;)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.</span><span class="interface-name">OperatorRegistrationNumberStatus</span></td>
+     <td width="15%"><span class="source-code">class OperatorRegistrationNumberStatus implements KeepProguard </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.</span><span class="interface-name">OperatorRegistrationNumberStatusListener</span></td>
+     <td width="15%"><span class="source-code">interface OperatorRegistrationNumberStatusListener </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.OperatorRegistrationNumberStatusListener.</span><span class="interface-name">onUpdate</span></td>
+     <td width="15%"><span class="source-code"> void onUpdate(OperatorRegistrationNumberStatus operatorRegNumberStatus)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.OperatorRegistrationNumberStatus.</span><span class="interface-name">isOperatorRegistrationNumberImport</span></td>
+     <td width="15%"><span class="source-code">boolean isOperatorRegistrationNumberImport() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.</span><span class="interface-name">RealNameRegistrationStatus</span></td>
+     <td width="15%"><span class="source-code">class RealNameRegistrationStatus </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.</span><span class="interface-name">RealNameRegistrationStatusListener</span></td>
+     <td width="15%"><span class="source-code">interface RealNameRegistrationStatusListener </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.RealNameRegistrationStatusListener.</span><span class="interface-name">onUpdate</span></td>
+     <td width="15%"><span class="source-code"> void onUpdate(RealNameRegistrationStatus realNameRegistrationStatus)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.RealNameRegistrationStatus.</span><span class="interface-name">getRealNameRegistrationStateFromAircraft</span></td>
+     <td width="15%"><span class="source-code">RealNameRegistrationState getRealNameRegistrationStateFromAircraft() </span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.RemoteIdWorkingState.</span><span class="interface-name">NOT_SUPPORTED</span></td>
+     <td width="15%"><span class="source-code"> NOT_SUPPORTED(5)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.uas.RemoteIdWorkingState.</span><span class="interface-name">NO_BROADCAST</span></td>
+     <td width="15%"><span class="source-code"> NO_BROADCAST(4)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">addOperatorRegistrationNumberStatusListener</span></td>
+     <td width="15%"><span class="source-code"> void addOperatorRegistrationNumberStatusListener(OperatorRegistrationNumberStatusListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">addRealNameRegistrationStatusListener</span></td>
+     <td width="15%"><span class="source-code"> void addRealNameRegistrationStatusListener(RealNameRegistrationStatusListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">clearAllOperatorRegistrationNumberStatusListener</span></td>
+     <td width="15%"><span class="source-code"> void clearAllOperatorRegistrationNumberStatusListener()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">clearAllRealNameRegistrationStatusListener</span></td>
+     <td width="15%"><span class="source-code"> void clearAllRealNameRegistrationStatusListener()</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">getOperatorRegistrationNumber</span></td>
+     <td width="15%"><span class="source-code"> void getOperatorRegistrationNumber(@NonNull CommonCallbacks.CompletionCallbackWithParam&lt;String&gt; callback)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">removeOperatorRegistrationNumberStatusListener</span></td>
+     <td width="15%"><span class="source-code"> void removeOperatorRegistrationNumberStatusListener(OperatorRegistrationNumberStatusListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">removeRealNameRegistrationStatusListener</span></td>
+     <td width="15%"><span class="source-code"> void removeRealNameRegistrationStatusListener(RealNameRegistrationStatusListener listener)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">setOperatorRegistrationNumber</span></td>
+     <td width="15%"><span class="source-code"> void setOperatorRegistrationNumber(String number, @NonNull CommonCallbacks.CompletionCallback callback)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">setUASRemoteIDAreaStrategy</span></td>
+     <td width="15%"><span class="source-code"> IDJIError setUASRemoteIDAreaStrategy(AreaStrategy strategy)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.interfaces.IUASRemoteIDManager.</span><span class="interface-name">updateRealNameRegistrationStateFromUOM</span></td>
+     <td width="15%"><span class="source-code"> void updateRealNameRegistrationStateFromUOM( CommonCallbacks.CompletionCallback callback)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.WaypointActionListener.</span><span class="interface-name">onExecutionFinish</span></td>
+     <td width="15%"><span class="source-code"> void onExecutionFinish(int actionGroup, int actionId, @Nullable IDJIError error)</span></td>
+    </tr>
+    <tr valign="top">
+     <td width="15%"><span class="interface-parent">dji.v5.manager.aircraft.waypoint3.WaypointActionListener.</span><span class="interface-name">onExecutionStart</span></td>
+     <td width="15%"><span class="source-code"> void onExecutionStart(int actionGroup , int actionId)</span></td>
+    </tr>
+   </tbody>
+  </table>
+  <p style="font-size:50%; color:white">--android --android </p>  
+ </body>
+</html>

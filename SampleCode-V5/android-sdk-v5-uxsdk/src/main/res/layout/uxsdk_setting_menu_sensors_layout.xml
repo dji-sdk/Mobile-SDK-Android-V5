@@ -22,7 +22,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/uxsdk_vertical_margin_medium"
             app:uxsdk_tabsPadding="@dimen/speaker_fpv_tab_padding"
-            app:uxsdk_coverStyle="white"
+            app:uxsdk_coverStyle="0"
             app:uxsdk_textColor="@color/uxsdk_white"
             app:uxsdk_textBold="true"
             app:uxsdk_tabs="@array/uxsdk_flyc_sensors"

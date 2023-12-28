@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.7.2
+# DJI Mobile SDK for Android V5 Latest Version 5.8.0
 
 [中文版](README_CN.md)
 
@@ -28,7 +28,8 @@ Supported Product:
 │   │   ├── 5.2.0_5.3.0_android_diff.html
 │   │   ├── 5.4.0_5.5.0_android_diff.html
 │   │   ├── 5.5.0_5.6.0_android_diff.html
-│   │   └── 5.6.0_5.7.0_android_diff.html
+│   │   ├── 5.6.0_5.7.0_android_diff.html
+│   │   └── 5.7.0_5.8.0_android_diff.html
 │   └── Android_API
 │       ├── cn
 │       └── en
@@ -38,14 +39,11 @@ Supported Product:
 └── SampleCode-V5
     ├── android-sdk-v5-as
     ├── android-sdk-v5-sample
-    │   ├── app-aircraft
-    │   ├── module-aircraft
-    │   └── module-common
     └── android-sdk-v5-uxsdk
-
 ```
 
 ### API Difference
+- [5.7.0_5.8.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.7.0_5.8.0_android_diff.html)
 - [5.6.0_5.7.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.6.0_5.7.0_android_diff.html)
 - [5.5.0_5.6.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.5.0_5.6.0_android_diff.html)
 - [5.4.0_5.5.0_android_diff.html](https://dji-sdk.github.io/Mobile-SDK-Android-V5/Docs/API-Diff/5.4.0_5.5.0_android_diff.html)
@@ -64,25 +62,18 @@ The DJI Android SDK is dynamically linked with unmodified libraries of <a href=h
 
 Sample can be divided into three parts:
 
-- Basic module: Provides basic operation of every poduct package.
-- Scenographic Sample: Provides scenographic sample support of aircraft.
-- App Module: Offer an Airplane App.
+- Scenographic Example: Provides scenographic sample support of aircraft.
+- Sample Module: Offer an Airplane Sample App.
 
 For detailed configuration, please refer to [settings.gradle](SampleCode-V5/android-sdk-v5-as/settings.gradle).
 
-Basic module:
+Scenographic Example：
 
-- sample-module-common: Common code for sample.
-- sample-module-aircraft: Unique code of aircraft App, which depends on sample-module-common.
+- uxsdk: Scenographic Example. Currently only aircraft are supported.
 
-Scenographic Sample：
+Sample module:
 
-- uxsdk: Scenographic Sample. Currently only aircraft(`dji-sdk-v5-aircraft`) are supported.
-
-App module:
-
-- sample-app-aircraft：Compile aircraft App, which depends on sample-module-aircraft, uxsdk.
-
+- sample：Compile aircraft sample App, which depends on uxsdk.
 
 ## Integration
 
@@ -91,7 +82,7 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.7.2
+> **Notice:** sdkVersion = 5.8.0
 
 | SDK package | Explanation | How to use|
 | :---------------: | :-----------------:  | :---------------: |
@@ -118,10 +109,3 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 You can get support from DJI with the following method:
 
 - Post questions in DJI Developer Forums: [**DEVELOPER SUPPORT**](https://djisdksupport.zendesk.com/hc/en-us/community/topics)
-
-## Join Us
-
-DJI is looking for all kinds of Software Engineers to continue building the Future of Possible. Available positions in Shenzhen, China and around the world. If you are interested, please:
-* send your resume to <software-sz@dji.com>.
-
-For more details, and list of all our global offices, please check <https://we.dji.com/jobs_en.html>.

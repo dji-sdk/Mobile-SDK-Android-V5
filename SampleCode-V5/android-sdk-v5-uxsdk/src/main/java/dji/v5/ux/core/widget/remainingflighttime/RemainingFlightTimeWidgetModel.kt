@@ -65,21 +65,31 @@ class RemainingFlightTimeWidgetModel(
     override fun inSetup() {
         // For total percentage and flight time
 
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyChargeRemainingInPercent), chargeRemainingProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyChargeRemainingInPercent), chargeRemainingProcessor)
 
         // For red bar batteryPercentNeededToLand
         // For H image and yellow bar batteryPercentNeededToGoHome
         // For flight time text remainingFlightTime
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyLowBatteryRTHInfo), goHomeAssessmentProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyLowBatteryRTHInfo), goHomeAssessmentProcessor)
 
         // For white dot on the left
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeySeriousLowBatteryWarningThreshold), seriousLowBatteryThresholdProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeySeriousLowBatteryWarningThreshold), seriousLowBatteryThresholdProcessor)
 
         // For white dot on the right
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyLowBatteryWarningThreshold), lowBatteryThresholdProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyLowBatteryWarningThreshold), lowBatteryThresholdProcessor)
 
         // To check if aircraft is flying
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyIsFlying), isAircraftFlyingDataProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyIsFlying), isAircraftFlyingDataProcessor)
     }
 
     override fun inCleanup() { // No Clean up required

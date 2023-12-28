@@ -53,7 +53,9 @@ class LocationWidgetModel(
         get() = locationStateProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor)
     }
 
     override fun updateStates() {

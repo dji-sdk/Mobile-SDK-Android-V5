@@ -1,7 +1,6 @@
 package dji.v5.ux.accessory
 
 import android.os.Handler
-import android.text.TextUtils
 import android.widget.Toast
 import dji.rtk.CoordinateSystem
 import dji.sdk.keyvalue.key.*
@@ -20,7 +19,6 @@ import dji.v5.utils.common.*
 import dji.v5.ux.R
 import dji.v5.ux.core.util.DataProcessor
 import dji.v5.ux.core.util.ViewUtil
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -40,6 +38,7 @@ object RTKStartServiceHelper {
     private val qxRTKManager = RTKCenter.getInstance().qxrtkManager
     private val customManager = RTKCenter.getInstance().customRTKManager
     private val cmccRtkManager = RTKCenter.getInstance().cmccrtkManager
+    private var isStartByUser=false
 
     private var productType: ProductType = ProductType.UNKNOWN
     private var rtkDongleConnection = false
@@ -55,7 +54,10 @@ object RTKStartServiceHelper {
         if (rtkSource != it.rtkReferenceStationSource) {
             rtkSource = it.rtkReferenceStationSource
             LogUtils.i(TAG, "rtkSource change into:$rtkSource")
-            startRtkService()
+            //避免未输入账号信息下去启动导致的失败
+            if (rtkSource != RTKReferenceStationSource.CUSTOM_NETWORK_SERVICE) {
+                startRtkService()
+            }
         }
     }
 
@@ -67,7 +69,9 @@ object RTKStartServiceHelper {
     }
 
     private fun observerRTKNoduleAvailable() {
-        RxUtil.addListener(KeyTools.createKey(ProductKey.KeyProductType), this).subscribe {
+        RxUtil.addListener(
+            KeyTools.createKey(
+                ProductKey.KeyProductType), this).subscribe {
             if (it != ProductType.UNRECOGNIZED && productType != it) {
                 LogUtils.i(TAG, "productType=$it")
                 productType = it
@@ -75,7 +79,9 @@ object RTKStartServiceHelper {
             }
 
         }
-        RxUtil.addListener(KeyTools.createKey(RtkMobileStationKey.KeyIsRTKDongleConnect), this).subscribe {
+        RxUtil.addListener(
+            KeyTools.createKey(
+                RtkMobileStationKey.KeyIsRTKDongleConnect), this).subscribe {
             if (rtkDongleConnection != it) {
                 LogUtils.i(TAG, "rtkDongleConnection=$it")
                 rtkDongleConnection = it
@@ -84,7 +90,9 @@ object RTKStartServiceHelper {
 
         }
 
-        RxUtil.addListener(KeyTools.createKey(FlightControllerKey.KeyConnection), this).subscribe {
+        RxUtil.addListener(
+            KeyTools.createKey(
+                FlightControllerKey.KeyConnection), this).subscribe {
             if (fcConnected != it) {
                 LogUtils.i(TAG, "fcConnected=$it")
                 fcConnected = it
@@ -112,7 +120,8 @@ object RTKStartServiceHelper {
     }
 
     @Synchronized
-    fun startRtkService() {
+    fun startRtkService(isStartByUser:Boolean=false) {
+        this.isStartByUser =isStartByUser
         LogUtils.i(TAG, "startRtkService")
         if (!rtkModuleAvailableProcessor.value) {
             LogUtils.e(TAG, "rtkModule is unAvailable,startRtkServiceIfNeed fail!")
@@ -164,7 +173,9 @@ object RTKStartServiceHelper {
                             LogUtils.e(TAG, "startCMCCRtkService fail:rtkNetworkCoordinateSystem=$rtkNetworkCoordinateSystem,error=$error")
                             setStartRTKState(false)
                             isHasStartRTK.set(false)
-                            showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                            if (isStartByUser) {
+                                showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                            }
 
                         }
 
@@ -228,7 +239,9 @@ object RTKStartServiceHelper {
 
                     override fun onFailure(error: IDJIError) {
                         LogUtils.e(TAG, "startQxRtkService fail:$error")
-                        showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                        if (isStartByUser) {
+                            showToast(StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail))
+                        }
                         setStartRTKState(false)
                         isHasStartRTK.set(false)
 
@@ -281,13 +294,10 @@ object RTKStartServiceHelper {
                             LogUtils.e(TAG, "startRtkCustomNetworkService fail:$error")
                             setStartRTKState(false)
                             isHasStartRTK.set(false)
-
-                            val errorTip = if (!TextUtils.isEmpty(error.description())) {
-                                error.description()
-                            } else {
-                                StringUtils.getResStr(R.string.uxsdk_rtk_setting_menu_setting_fail)
+                            if (isStartByUser) {
+                                ViewUtil.showToast(ContextUtil.getContext(),R.string.uxsdk_rtk_setting_menu_customer_rtk_save_failed_tips,Toast.LENGTH_SHORT)
                             }
-                            showToast(errorTip)
+
                         }
 
                     })

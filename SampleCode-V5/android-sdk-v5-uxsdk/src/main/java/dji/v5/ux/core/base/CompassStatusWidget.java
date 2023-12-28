@@ -24,7 +24,6 @@ import dji.sdk.keyvalue.key.FlightControllerKey;
 import dji.sdk.keyvalue.key.KeyTools;
 import dji.sdk.keyvalue.key.ProductKey;
 import dji.sdk.keyvalue.value.common.EmptyMsg;
-import dji.sdk.keyvalue.value.flightcontroller.CompassCalibrationState;
 import dji.sdk.keyvalue.value.flightcontroller.CompassSensorState;
 import dji.sdk.keyvalue.value.flightcontroller.CompassState;
 import dji.sdk.keyvalue.value.flightcontroller.RedundancySensorUsedStateMsg;
@@ -43,7 +42,7 @@ public class CompassStatusWidget extends ConstraintLayout {
 
     private int[] mCompassStasActionStrIds = new int[] {
         R.string.uxsdk_setting_ui_redundancy_sensor_compass_stat_action_0,
-        R.string.uxsdk_setting_ui_redundancy_sensor_compass_stat_action_1,
+        R.string.uxsdk_setting_ui_redundancy_sensor_compass_stat_empty,
         R.string.uxsdk_setting_ui_redundancy_sensor_compass_stat_empty,
         R.string.uxsdk_setting_ui_redundancy_sensor_compass_stat_action_3,
         R.string.uxsdk_setting_ui_redundancy_sensor_compass_stat_action_4,

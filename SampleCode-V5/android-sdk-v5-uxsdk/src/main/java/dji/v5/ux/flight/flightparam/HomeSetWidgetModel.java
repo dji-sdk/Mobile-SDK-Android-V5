@@ -6,20 +6,15 @@ import android.location.Location;
 
 import androidx.annotation.NonNull;
 
-import java.security.Key;
-
 import dji.sdk.keyvalue.key.FlightControllerKey;
 import dji.sdk.keyvalue.key.KeyTools;
 import dji.sdk.keyvalue.key.ProductKey;
 import dji.sdk.keyvalue.key.RemoteControllerKey;
-import dji.sdk.keyvalue.value.common.EmptyMsg;
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D;
-import dji.sdk.keyvalue.value.flightcontroller.FailsafeAction;
 import dji.sdk.keyvalue.value.product.ProductType;
 import dji.sdk.keyvalue.value.remotecontroller.RCMode;
 import dji.sdk.keyvalue.value.remotecontroller.RcGPSInfo;
 import dji.v5.common.utils.GpsUtils;
-import dji.v5.common.utils.RxUtil;
 import dji.v5.manager.KeyManager;
 import dji.v5.utils.common.LocationUtil;
 import dji.v5.ux.core.base.DJISDKModel;

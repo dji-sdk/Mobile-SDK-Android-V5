@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -538,6 +558,14 @@
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
                             </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
@@ -577,10 +605,10 @@
       </div>
       <div class="site-main">
         <div class="article"><div class="article"><h1><font color="#AAA">class </font>IVideoStreamManager</h1></div>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IVideoStreamManager</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"> <span class="class"><span class="keyword">interface</span> <span class="title">IVideoStreamManager</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：">描述：</h5>
-<p><font color="#666">码流管理类。用于管理码流通道设置和码流数据输出等功能。以下是接口使用流程： <br><li>1. 调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager_getavailablestreamsources">getAvailableStreamSources</a></code>获取可用的码流源。</li> <li>2. 调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager_getavailablevideochannels">getAvailableVideoChannels</a></code>获取可用的码流通道。</li> <li>3. 调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager_getavailablevideochannels">getAvailableVideoChannels</a></code>中的<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_startchannel">startChannel</a></code>设置步骤1获取到的<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_StreamSource.html#ivideostreammanager_streamsource">StreamSource</a></code>把码流源和码流通道进行绑定，并且开启当前码流通道。</li> <li>4. 如果你希望自己实现解码功能，你通过添加调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_addstreamdatalistener">addStreamDataListener</a></code>添加码流数据监听器来接收码流数据。</li> <li>5. 如果你不希望自己实现解码功能，你也可以使用DJI提供的解码器<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder">IVideoDecoder</a></code>来进行解码。</li> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
+<p><font color="#666">码流管理类。用于管理码流通道设置和码流数据获取和渲染等功能。以下是接口使用流程： <br><li>1. 调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager_getavailablestreamsources">getAvailableStreamSources</a></code>获取可用的码流源。</li> <li>2. 调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager_getavailablevideochannels">getAvailableVideoChannels</a></code>获取可用的码流通道。</li> <li>3. 调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager.html#ivideostreammanager_getavailablevideochannels">getAvailableVideoChannels</a></code>中的<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_startchannel">startChannel</a></code>设置步骤1获取到的<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_StreamSource.html#ivideostreammanager_streamsource">StreamSource</a></code>把码流源和码流通道进行绑定，并且开启当前码流通道。</li> <li>4. 如果你希望自己实现解码功能，你通过添加调用<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoChannel.html#ivideostreammanager_ivideochannel_addstreamdatalistener">addStreamDataListener</a></code>添加码流数据监听器来接收码流数据。</li> <li>5. 如果你不希望自己实现解码功能，你也可以使用DJI提供的解码器<code><a href="../../Components/IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html#ivideostreammanager_ivideodecoder">IVideoDecoder</a></code>来进行解码。</li> <br><b>注意：<br> 该接口从MSDK 5.8.0版本开始废弃。请使用<code><a href="../../Components/IMediaDataCenter/ICameraStreamManager.html#icamerastreammanager">ICameraStreamManager</a></code>来实现码流管理相关功能。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="类成员">类成员:</h5>
 <div class="api-row" id="ivideostreammanager_getavailablestreamsources"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#ivideostreammanager_getavailablestreamsources_inline">getAvailableStreamSources</a></div></div><div class="inline-doc" id="ivideostreammanager_getavailablestreamsources_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getAvailableStreamSources</h6></div>

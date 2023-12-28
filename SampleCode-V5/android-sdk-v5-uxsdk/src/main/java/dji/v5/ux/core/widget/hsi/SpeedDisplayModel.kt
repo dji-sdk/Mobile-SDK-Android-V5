@@ -33,12 +33,22 @@ open class SpeedDisplayModel constructor(
     val windWarningProcessor = DataProcessor.create(WindWarning.UNKNOWN)
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftVelocity), velocityProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftAttitude), aircraftAttitudeProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftVelocity), velocityProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftAttitude), aircraftAttitudeProcessor)
 
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyWindSpeed), windSpeedProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyWindDirection), windDirectionProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyWindWarning), windWarningProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyWindSpeed), windSpeedProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyWindDirection), windDirectionProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyWindWarning), windWarningProcessor)
     }
 
     override fun inCleanup() {

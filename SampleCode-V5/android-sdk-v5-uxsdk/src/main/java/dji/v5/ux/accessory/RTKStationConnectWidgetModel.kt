@@ -76,7 +76,9 @@ class RTKStationConnectWidgetModel(
 
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
         rtkStationManager.addRTKStationConnectStatusListener(stationConnectStatusListener)
         rtkStationManager.addConnectedRTKStationInfoListener(connectedRTKStationInfoListener)
         rtkStationManager.addSearchRTKStationListener(searchStationListener)

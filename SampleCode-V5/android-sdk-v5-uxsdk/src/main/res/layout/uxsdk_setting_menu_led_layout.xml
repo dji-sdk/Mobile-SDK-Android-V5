@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/setting_menu_common_led_beacon"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_setting_common_item_height"
+        android:visibility="gone"
+        app:uxsdk_summary="@string/uxsdk_setting_menu_beacon_led" />
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/setting_menu_common_led_arm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_setting_common_item_height"
+        android:visibility="gone"
+        app:uxsdk_summary="@string/uxsdk_setting_menu_arm_led" />
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/setting_menu_common_led_status"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_setting_common_item_height"
+        android:visibility="gone"
+        app:uxsdk_summary="@string/uxsdk_setting_menu_status_led" />
+
+    <dji.v5.ux.core.base.SwitcherCell
+        android:id="@+id/setting_menu_common_leds_hide_mode"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_setting_common_item_height"
+        android:visibility="gone"
+        app:uxsdk_summary="@string/uxsdk_setting_common_leds_hide_mode" />
+
+    <LinearLayout
+        android:id="@+id/setting_menu_common_led"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <dji.v5.ux.core.base.SwitcherCell
+            android:id="@+id/setting_menu_common_beacon_led"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_setting_common_item_height"
+            app:uxsdk_summary="@string/uxsdk_setting_ui_rc_custom_navigation_led" />
+
+        <dji.v5.ux.core.base.TabSelectCell
+            android:id="@+id/setting_menu_common_top_auxiliary_light"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_setting_common_item_height"
+            app:uxsdk_summary="@string/uxsdk_setting_menu_top_auxiliary_light"
+            app:uxsdk_tabs="@array/uxsdk_common_setting_auxiliary_light_mode" />
+
+        <dji.v5.ux.core.base.TabSelectCell
+            android:id="@+id/setting_menu_common_bottom_auxiliary_light"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/uxsdk_setting_common_item_height"
+            app:uxsdk_summary="@string/uxsdk_setting_menu_bottom_auxiliary_light"
+            app:uxsdk_tabs="@array/uxsdk_common_setting_auxiliary_light_mode" />
+    </LinearLayout>
+</LinearLayout>

@@ -61,8 +61,12 @@ class DistanceHomeWidgetModel(
 
     override fun inSetup() {
 
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyHomeLocation), homeLocationProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyHomeLocation), homeLocationProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAircraftLocation), aircraftLocationProcessor)
 
         val unitTypeKey = GlobalPreferenceKeys.create(GlobalPreferenceKeys.UNIT_TYPE)
         bindDataProcessor(unitTypeKey, unitTypeDataProcessor)

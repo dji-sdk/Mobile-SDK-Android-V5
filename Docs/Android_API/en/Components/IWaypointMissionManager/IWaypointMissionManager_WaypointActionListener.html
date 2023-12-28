@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -538,6 +558,14 @@
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
                             </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
@@ -585,7 +613,7 @@
 <div class="api-row" id="iwaypointmissionmanager_waypointactionlistener_onexecutionstart"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointactionlistener_onexecutionstart_inline">onExecutionStart</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointactionlistener_onexecutionstart_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>onExecutionStart</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onExecutionStart</span><span class="params">(<span class="keyword">int</span> actionId)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onExecutionStart</span><span class="params">(<span class="keyword">int</span> actionId)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.waypoint3</font></td></tr></table></html>
 <h5 id="description-v2">Description:</h5>
 <p><font color="#666">This method will be called back when the waypint action starts to execute. <br><br><code><i>Supported since MSDK 5.6.0</i></code></font></p>
@@ -594,12 +622,30 @@
 <div class="api-row" id="iwaypointmissionmanager_waypointactionlistener_onexecutionfinish"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointactionlistener_onexecutionfinish_inline">onExecutionFinish</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointactionlistener_onexecutionfinish_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>onExecutionFinish</h6></div>
 
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onExecutionFinish</span><span class="params">(<span class="keyword">int</span> actionId, @Nullable IDJIError error)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onExecutionFinish</span><span class="params">(<span class="keyword">int</span> actionId, @Nullable IDJIError error)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.waypoint3</font></td></tr></table></html>
 <h5 id="description-v3">Description:</h5>
 <p><font color="#666">This method will be called back when the waypoint action finishes executing. <br><br><code><i>Supported since MSDK 5.6.0</i></code></font></p>
 <h5 id="input-parameters-v2">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int <font color="#000">actionId</font></font></td><td><font color="#666"><i>The waypoint action ID to end execution.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJIError/DJIError.html#djierror">IDJIError</a> <font color="#000">error</font></font></td><td><font color="#666"><i>The error code for the execution interruption of the waypoint action.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iwaypointmissionmanager_waypointactionlistener_onexecutionstartwithgroup"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointactionlistener_onexecutionstartwithgroup_inline">onExecutionStart</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointactionlistener_onexecutionstartwithgroup_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>onExecutionStart</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onExecutionStart</span><span class="params">(<span class="keyword">int</span> actionGroup , <span class="keyword">int</span> actionId)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.waypoint3</font></td></tr></table></html>
+<h5 id="description-v4">Description:</h5>
+<p><font color="#666">This method will be called back when the waypint action starts to execute. <br><br><code><i>Supported since MSDK 5.8.0</i></code></font></p>
+<h5 id="input-parameters-v3">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int <font color="#000">actionGroup</font></font></td><td><font color="#666"><i>The waypoint action group to start executing.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">int <font color="#000">actionId</font></font></td><td><font color="#666"><i>The waypoint action ID to start executing.</i></font></td></tr></table></html></div>
+<div class="api-row" id="iwaypointmissionmanager_waypointactionlistener_onexecutionfinishwithgroup"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointactionlistener_onexecutionfinishwithgroup_inline">onExecutionFinish</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointactionlistener_onexecutionfinishwithgroup_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>onExecutionFinish</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">onExecutionFinish</span><span class="params">(<span class="keyword">int</span> actionGroup, <span class="keyword">int</span> actionId, @Nullable IDJIError error)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>Package:</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.waypoint3</font></td></tr></table></html>
+<h5 id="description-v5">Description:</h5>
+<p><font color="#666">This method will be called back when the waypoint action finishes executing. <br><br><code><i>Supported since MSDK 5.8.0</i></code></font></p>
+<h5 id="input-parameters-v4">Input Parameters:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">int <font color="#000">actionGroup</font></font></td><td><font color="#666"><i>The waypoint action group to start executing.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">int <font color="#000">actionId</font></font></td><td><font color="#666"><i>The waypoint action ID to end execution.</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJIError/DJIError.html#djierror">IDJIError</a> <font color="#000">error</font></font></td><td><font color="#666"><i>The error code for the execution interruption of the waypoint action.</i></font></td></tr></table></html></div>
 
         </div>
       </div>

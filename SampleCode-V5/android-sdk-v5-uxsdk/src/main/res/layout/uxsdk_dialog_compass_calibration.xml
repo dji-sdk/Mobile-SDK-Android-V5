@@ -70,7 +70,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/uxsdk_dialog_divide_view_height"
-            android:background="@color/uxsdk_gray"
+            android:background="@color/uxsdk_dialog_divide_line_gray"
             />
 
         <LinearLayout
@@ -95,7 +95,7 @@
                 android:id="@+id/compass_calibration_bottom_divider"
                 android:layout_width="@dimen/uxsdk_dialog_divide_line_width"
                 android:layout_height="match_parent"
-                android:background="@color/uxsdk_gray"
+                android:background="@color/uxsdk_dialog_divide_line_gray"
                 android:visibility="gone"
                 />
 

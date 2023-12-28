@@ -55,8 +55,12 @@
 
                 <dji.v5.ux.cameracore.widget.fpvinteraction.FPVInteractionWidget
                     android:id="@+id/widget_fpv_interaction"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.80"
+                    app:layout_constraintStart_toStartOf="parent"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="0dp" />
             </dji.v5.ux.core.widget.fpv.FPVWidget>
@@ -106,6 +110,17 @@
             android:id="@+id/widget_horizontal_situation_indicator"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/widget_auto_exposure_lock"
+            app:layout_constraintVertical_bias="0.95" />
+
+        <dji.v5.ux.gimbal.GimbalFineTuneWidget
+            android:id="@+id/setting_menu_gimbal_fine_tune"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -289,16 +304,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="@dimen/uxsdk_510_dp"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="end">-->
+    <dji.v5.ux.core.widget.setting.SettingPanelWidget
+        android:id="@+id/manual_right_nav_setting"
+        android:layout_width="@dimen/uxsdk_510_dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/uxsdk_fpv_popover_content_background_color"
+        android:descendantFocusability="afterDescendants">
 
-<!--        <ViewStub-->
-<!--            android:id="@+id/manual_right_nav_setting_stub"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout="@layout/uxsdk_viewstub_layout_manual_right_nav_setting" />-->
-<!--    </FrameLayout>-->
+    </dji.v5.ux.core.widget.setting.SettingPanelWidget>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

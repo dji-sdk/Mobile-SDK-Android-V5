@@ -28,8 +28,6 @@ import dji.v5.manager.aircraft.perception.listener.ObstacleDataListener;
 import dji.v5.manager.aircraft.perception.listener.PerceptionInformationListener;
 import dji.v5.manager.aircraft.perception.radar.RadarInformation;
 import dji.v5.manager.aircraft.perception.radar.RadarInformationListener;
-import dji.v5.manager.interfaces.IPerceptionManager;
-import dji.v5.manager.interfaces.IRadarManager;
 import dji.v5.ux.core.base.DJISDKModel;
 import dji.v5.ux.core.base.WidgetModel;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;

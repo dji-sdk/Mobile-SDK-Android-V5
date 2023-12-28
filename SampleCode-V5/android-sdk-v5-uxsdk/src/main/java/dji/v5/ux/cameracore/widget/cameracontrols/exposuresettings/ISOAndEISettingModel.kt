@@ -11,7 +11,6 @@ import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.util.CameraUtil
 import dji.v5.ux.core.util.DataProcessor
-import dji.v5.ux.core.util.SettingDefinitions
 import io.reactivex.rxjava3.core.Completable
 
 /**
@@ -42,16 +41,36 @@ open class ISOAndEISettingModel constructor(
     val flatCameraModeProcessor: DataProcessor<CameraFlatMode> = DataProcessor.create(CameraFlatMode.UNKNOWN)
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyISO, cameraIndex, lensType), ISOProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyExposureSettings, cameraIndex, lensType), exposureSettingsProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyISORange, cameraIndex, lensType), ISORangeProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyExposureSensitivityMode, cameraIndex, lensType), exposureSensitivityModeProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyEI, cameraIndex, lensType), eiValueProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyRecommendedEI, cameraIndex, lensType), eiRecommendedValueProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyEIRange, cameraIndex, lensType), eiValueRangeProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyCameraWorkMode, cameraIndex, lensType), cameraModeProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyCameraFlatMode, cameraIndex, lensType), flatCameraModeProcessor)
-        bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyExposureMode, cameraIndex, lensType), exposureModeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyISO, cameraIndex, lensType), ISOProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyExposureSettings, cameraIndex, lensType), exposureSettingsProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyISORange, cameraIndex, lensType), ISORangeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyExposureSensitivityMode, cameraIndex, lensType), exposureSensitivityModeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyEI, cameraIndex, lensType), eiValueProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyRecommendedEI, cameraIndex, lensType), eiRecommendedValueProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyEIRange, cameraIndex, lensType), eiValueRangeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyCameraWorkMode, cameraIndex, lensType), cameraModeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyCameraFlatMode, cameraIndex, lensType), flatCameraModeProcessor)
+        bindDataProcessor(
+            KeyTools.createCameraKey(
+                CameraKey.KeyExposureMode, cameraIndex, lensType), exposureModeProcessor)
     }
 
     override fun inCleanup() {
@@ -69,11 +88,15 @@ open class ISOAndEISettingModel constructor(
     }
 
     fun setISO(iso: CameraISO): Completable {
-        return djiSdkModel.setValue(KeyTools.createCameraKey(CameraKey.KeyISO, cameraIndex, lensType), iso)
+        return djiSdkModel.setValue(
+            KeyTools.createCameraKey(
+                CameraKey.KeyISO, cameraIndex, lensType), iso)
     }
 
     fun setEI(ei: EIType): Completable {
-        return djiSdkModel.setValue(KeyTools.createCameraKey(CameraKey.KeyEI, cameraIndex, lensType), ei)
+        return djiSdkModel.setValue(
+            KeyTools.createCameraKey(
+                CameraKey.KeyEI, cameraIndex, lensType), ei)
     }
 
     fun isEIEnable(): Boolean {

@@ -494,6 +494,7 @@
     <string name="uxsdk_hdmi_setting_title">HD HDMI Setting Widget</string>
     <string name="uxsdk_common_about_widget_title">Common About Widget</string>
     <string name="uxsdk_common_device_name_widget_title">Common Device Name Widget</string>
+    <string name="uxsdk_common_led_widget_title">Common Led Widget</string>
 
     <!-- Simulator Widget -->
     <string name="uxsdk_simulator_zero_string">0</string>
@@ -721,6 +722,8 @@
     <string name="uxsdk_rtk_setting_menu_rtk_setting_success">设置成功</string>
     <string name="uxsdk_rtk_setting_menu_setting_fail">设置失败</string>
     <string name="uxsdk_rtk_setting_menu_rtk_setting_fail_settings_invalid">设置失败，参数有误</string>
+    <string name="uxsdk_rtk_setting_menu_customer_rtk_save_failed_tips">保存失败，可能原因：\n1.输入参数不正确，请检查输入参数\n2.账号过期，请确认账号是否有效\n3.无网络，请检查网络连接状态\n4.服务器故障，请联系RTK供应商确认服务器状态</string>
+
 
     <!--Lens Control Widget-->
     <string name="uxsdk_lens_type_wide">广角</string>
@@ -728,6 +731,7 @@
     <string name="uxsdk_lens_type_ir">红外</string>
     <string name="uxsdk_lens_type_ndvi">多光谱</string>
     <string name="uxsdk_lens_type_rgb">可见光</string>
+    <string name="uxsdk_lens_type_point_cloud">点云</string>
 
     <!--RTK Connect Widget-->
     <string name="uxsdk_rtk_problem_detection">请检测以下问题</string>
@@ -841,10 +845,9 @@
     <string name="uxsdk_setting_menu_title_hd">图传设置</string>
     <string name="uxsdk_setting_menu_title_battery">智能电池信息</string>
     <string name="uxsdk_setting_menu_title_gimbal">云台设置</string>
-    <string name="uxsdk_setting_menu_title_rtk">RTK</string>
+    <string name="uxsdk_setting_menu_title_rtk">RTK设置</string>
     <string name="uxsdk_setting_menu_title_common">通用设置</string>
     <string name="uxsdk_payload_setting_title">Payload 设置</string>
-
 
     <string name="uxsdk_dialog_loading">正在加载中...</string>
     <!--MapView-->
@@ -887,6 +890,8 @@
     <!--RcCheckFrequency Widget-->
     <string name="uxsdk_setting_ui_rc_stop_pair">停止对频</string>
     <string name="uxsdk_setting_ui_rc_start_pair">开始对频</string>
+    <string name="uxsdk_setting_ui_rc_pairing_finish">对频完成</string>
+
 
 
     <!-- APAS -->
@@ -909,11 +914,11 @@
     <string name="uxsdk_fpv_top_bar_battery_left_battery">左电池</string>
     <string name="uxsdk_fpv_top_bar_battery_right_battery">右电池</string>
     <string name="uxsdk_setting_ui_gimbal_calibration_tip">电机转动时不能校准云台，请停止电机后再进行云台自动校准。</string>
-    <string name="uxsdk_setting_ui_rc_cele_tip">点击开始前，将所有摇杆都放到中位。在校准过程中，务必严格根据提示进行操作，否则可能导致校准不成功。</string>
     <string name="uxsdk_setting_menu_title_rc_check_frequency">遥控器对频</string>
     <string name="uxsdk_dialog_message_rc_cannot_frequency_motorup">电机正在起转不能对频</string>
     <string name="uxsdk_setting_ui_omni_perception_desc">关闭后将对飞行器造成以下影响：\n1、无法在室内低空定高悬停；\n2、无法在室内使用避障功能；\n3、降落速度保护将无法正常运行(高速着陆可能导致机体受损，请注意着陆速度)。</string>
-
+    <string name="uxsdk_battery_check_battery_detail_button_txt">查看电池详细信息</string>
+    <string name="uxsdk_setting_ui_gimbal_auto_calibration_tip">请确保您的飞机在地面上，并保持水平，开始自动校准</string>
 
     <string name="uxsdk_setting_menu_flyc_gohome_altitude_title">返航高度</string>
     <string name="uxsdk_setting_menu_flyc_max_height_title">限高</string>
@@ -946,6 +951,21 @@
     <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode_rc511">飞行挡位切换为A/N/S</string>
     <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_title_n_mode">飞行挡位切换为A/S/N</string>
     <string name="uxsdk_setting_menu_title_sensors_state">传感器状态</string>
+    <string name="uxsdk_setting_menu_title_device_name">设备名称</string>
+    <string name="uxsdk_setting_menu_title_about">关于</string>
+
+    <string name="uxsdk_vision_flash_light_auto">自动</string>
+    <string name="uxsdk_vision_flash_light_on">打开</string>
+    <string name="uxsdk_vision_flash_light_off">关闭</string>
+    <string name="uxsdk_setting_menu_title_led">灯光设置</string>
+    <string name="uxsdk_setting_menu_top_auxiliary_light">上补光灯</string>
+    <string name="uxsdk_setting_menu_bottom_auxiliary_light">下补光灯</string>
+    <string name="uxsdk_setting_ui_rc_custom_navigation_led">夜航灯开启/关闭</string>
+    <string name="uxsdk_setting_common_leds_hide_mode">隐蔽模式</string>
+    <string name="uxsdk_setting_menu_beacon_led">夜航灯</string>
+    <string name="uxsdk_setting_menu_arm_led">机臂灯</string>
+    <string name="uxsdk_setting_menu_status_led">状态灯</string>
+
     <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_cur_use">当前使用</string>
     <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_good">优</string>
     <string name="uxsdk_setting_ui_redundancy_sensor_imu_desc_normal">良</string>
@@ -1044,8 +1064,8 @@
     <string name="uxsdk_setting_ui_hd_sdr_signal_normal">一般</string>
     <string name="uxsdk_setting_ui_hd_sdr_signal_bad">微弱</string>
     <string name="uxsdk_setting_ui_hd_sdr_channel_state_title">信号状态</string>
-    <string name="uxsdk_setting_ui_hd_sdr_channel_state_summary">\n\n干扰信号强度：%1$s \n\n下行带宽：%2$s \n\n图传码率：%3$s \n\n</string>
-    <string name="uxsdk_setting_ui_hd_lb_channel_state_summary">\n\n干扰信号强度：%1$s \n\n信道：%2$s \n\n图传码率：%3$s \n\n</string>
+    <string name="uxsdk_setting_ui_hd_sdr_channel_state_summary">\n干扰信号强度：%1$s \n\n下行带宽：%2$s \n\n图传码率：%3$s \n</string>
+    <string name="uxsdk_setting_ui_hd_lb_channel_state_summary">\n干扰信号强度：%1$s \n\n信道：%2$s \n\n图传码率：%3$s \n</string>
 
     <string name="uxsdk_setting_ui_hd_sdr_channel_select_title">图传信道选择</string>
     <string name="uxsdk_setting_ui_hd_sdr_channel_choose">请选择</string>
@@ -1071,6 +1091,7 @@
 
     <!--endregion-->
 
+
     <string name="uxsdk_setting_menu_flyc_home_point">返航点设置</string>
     <string name="uxsdk_fpv_toast_homepoint_setting_drone">返航点设置为飞行器当前位置</string>
     <string name="uxsdk_fpv_toast_homepoint_setting_current_rc">返航点设置为本遥控器</string>
@@ -1079,6 +1100,19 @@
     <string name="uxsdk_fpv_toast_homepoint_gps_weak">GNSS信号弱，无法获取当前位置</string>
     <string name="uxsdk_fpv_toast_homepoint_setting_failed">返航点设置失败</string>
 
+    <!-- Rc Calibration-->
+    <string name="uxsdk_setting_ui_rc_calibration">遥控器校准</string>
+    <string name="uxsdk_setting_ui_rc_cal">立即校准</string>
+    <string name="uxsdk_setting_ui_rc_finish_tip">推动所有通道的摇杆到最大工作范围并重复几次，然后点击完成按钮完成校准</string>
+    <string name="uxsdk_setting_ui_rc_start">开始</string>
+    <string name="uxsdk_setting_ui_rc_finish">完成</string>
+    <string name="uxsdk_setting_ui_rc_cele_tip">点击开始前，将所有摇杆都放到中位。在校准过程中，务必严格根据提示进行操作，否则可能导致校准不成功。</string>
+    <string name="uxsdk_setting_ui_rc_cele">立即校准</string>
+    <string name="uxsdk_setting_ui_rc_limit_tip">推动所有通道的摇杆到最大工作范围并重复几次，然后点击完成按钮完成校准</string>
+    <string name="uxsdk_setting_ui_rc_middle_desc">请将摇杆放在中位并点击开始按钮</string>
+    <string name="uxsdk_setting_ui_rc_calibration_time_out">遥控器校准超时，即将重置遥控器校准状态。</string>
+    <string name="uxsdk_setting_ui_setting_fail_disconnect">设置失败，请检查和设备之间的连接后重试</string>
+    <string name="uxsdk_setting_ui_rc_tip_disconnect">设备未连接</string>
     <string name="uxsdk_setting_ui_rc_calibration_1">1.操控摇杆校准：校准时请将左右摇杆的所有方向推动到最大行程并且重复几次</string>
     <string name="uxsdk_setting_ui_rc_calibration_2">2.左拨轮校准：校准时请拨动左边的拨轮到最大行程并且重复几次</string>
     <string name="uxsdk_setting_ui_rc_pro_calibration_2">2.左右拨轮校准：校准时请拨动左边和右边的拨轮到最大行程并且重复几次</string>
@@ -1100,11 +1134,8 @@
     <string name="uxsdk_setting_ui_rc_calibration_stick_desc">缓慢操作左右摇杆使小球的移动轨迹填满正方形边框。</string>
     <string name="uxsdk_setting_ui_rc_calibration_wheel_desc">缓慢拨动左右波轮到最大位置处多次。</string>
     <string name="uxsdk_setting_ui_rc_plus_calibration_1">缓慢推动左右摇杆至上下左右方向最大行程</string>
-    <string name="uxsdk_setting_ui_rc_cele">校准</string>
-    <string name="uxsdk_setting_ui_rc_calibration_time_out">遥控器校准超时，即将重置遥控器校准状态。</string>
-    <string name="uxsdk_setting_ui_setting_fail_disconnect">设置失败，请检查和设备之间的连接后重试</string>
-    <string name="uxsdk_setting_ui_rc_start">开始</string>
-    <string name="uxsdk_setting_ui_rc_finish">完成</string>
+
+
 
     <string name="uxsdk_fpv_checklist_calibration_success">指南针校准成功</string>
     <string name="uxsdk_fpv_checklist_calibration_fail">指南针校准失败</string>
@@ -1118,12 +1149,28 @@
     <string name="uxsdk_fpv_compass_adjust_fail">环境磁场干扰过大，请远离干扰源（如大型电器设备，钢筋铁柱等）并保持飞行器距离地面1米以上后，重新进行校准。</string>
     <string name="uxsdk_fpv_low_battery_back_home_tip">当前电量仅够返回返航点，请尽快返航。</string>
     <string name="uxsdk_setting_ui_compass_tip">电机起转不能进行指南针校准</string>
+    <string name="uxsdk_app_operator_fail">操作失败,请重试</string>
+    <string name="uxsdk_setting_menu_desc_omni_perception_downwards">视觉定位系统帮助你在GPS信号不佳的地方稳定悬停，并对降落保护等功能提供支持。关闭下视觉避障将关闭降落保护功能。</string>
+
+    <string name="uxsdk_setting_menu_flyc_limit_high_notice">飞行高度高于120米（约400英尺）可能违反当地法律法规，请您事先了解相关规定，确保安全合法飞行</string>
+    <string name="uxsdk_setting_menu_flyc_limit_high_notice_above_500">飞行高度高于500米（约1640英尺）可能违反当地法律法规，请您事先了解相关规定，确保安全合法飞行。 该设置仅本次飞行有效，重启飞行器后需重新设置。</string>
+    <string name="uxsdk_setting_menu_flyc_mode_atti_dialog_content">飞行挡位的T挡（三脚架）替换为A挡（姿态）。A挡（姿态）下，飞行器容易受外界干扰，从而在水平方向将会产生飘移，飞行器自身无法实现定点悬停以及自主刹车，需要用户手动操控遥控器才能实现飞行器悬停。</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth_set_altitude">返航距离 &gt;50m 时：飞行器将自动寻找空旷位置，上升到设定高度后按照最佳路线返航\n返航距离在 5-50m 时：将保持当前高度按照最佳路线返航\n返航距离 ≤5m 时：飞行器将直接降落</string>
+    <string name="uxsdk_setting_menu_flyc_smart_rth_smart_altitude">智能返航模式下，飞行器将自动规划最佳返航高度。 当环境，光线不满足视觉系统要求时（譬如傍晚阳光直射、夜间弱光无光），飞行器将使用您设定的返航高度进行直线返航</string>
+    <string name="uxsdk_setting_menu_close_bottom_aux_tips">关闭下补光灯，弱光环境下飞行器降落时下视感知系统将无法使用，存在一定风险</string>
 
     <string name="uxsdk_fpv_gimbal_roll_finetune">水平</string>
     <string name="uxsdk_fpv_gimbal_yaw_finetune">偏航</string>
     <string name="uxsdk_fpv_gimbal_pitch_finetune">俯仰</string>
     <string name="uxsdk_setting_menu_title_gimbal_reset_param">重置云台参数</string>
     <string name="uxsdk_setting_menu_title_gimbal_calibration">云台自动校准</string>
+
+    <string name="uxsdk_link_frequency_band_dual">双频</string>
+    <string name="uxsdk_link_frequency_band_three">三频</string>
+    <string name="uxsdk_link_frequency_band_5">5G</string>
+    <string name="uxsdk_link_frequency_band_2_dot_4">2.4G</string>
+    <string name="uxsdk_link_frequency_band_5_dot_7">5.7G</string>
+    <string name="uxsdk_link_frequency_band_1_dot_4">840M&amp;1.4G</string>
 </resources>
 
 

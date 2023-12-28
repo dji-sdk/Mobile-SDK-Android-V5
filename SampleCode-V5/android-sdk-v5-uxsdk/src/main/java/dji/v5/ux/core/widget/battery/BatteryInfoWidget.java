@@ -56,11 +56,11 @@ public class BatteryInfoWidget extends ConstraintLayoutWidget<Object> {
     protected TextView serialNumber;
     protected TextView productionDate;
     protected ViewGroup cellsLayout;
+    protected ViewGroup batteryBottomLayout;
     protected Group highVoltage;
 
     protected int temperatureType = Temperature.TEMPERATURE_CELSIUS;
     protected float temperatureValue = 0.0f;
-
     protected boolean supportHighVoltageHint = false;
     protected boolean isConnected;
 
@@ -97,6 +97,7 @@ public class BatteryInfoWidget extends ConstraintLayoutWidget<Object> {
         productionDate = findViewById(R.id.setting_menu_battery_production_date);
         highVoltage = findViewById(R.id.group_high_voltage);
         cellsLayout = findViewById(R.id.setting_menu_battery_cells_view_stub);
+        batteryBottomLayout = findViewById(R.id.setting_menu_battery_bottom_view);
 
         setBackgroundResource(R.drawable.uxsdk_background_fpv_setting);
         showHighVoltage(supportHighVoltage());
@@ -382,10 +383,8 @@ public class BatteryInfoWidget extends ConstraintLayoutWidget<Object> {
     private void updateBatteryCells(List<Integer> cellVoltages) {
         if (cellVoltages == null || cellVoltages.isEmpty()) {
             cellsLayout.removeAllViews();
-            cellsLayout.setVisibility(GONE);
             return;
         }
-        cellsLayout.setVisibility(VISIBLE);
         int cellNumber = cellVoltages.size();
         int childCount = cellsLayout.getChildCount();
         if (childCount < cellNumber) {
@@ -408,6 +407,13 @@ public class BatteryInfoWidget extends ConstraintLayoutWidget<Object> {
         }
     }
 
+    public void setEnableBatteryCells(boolean isEnable) {
+        cellsLayout.setVisibility(isEnable ? VISIBLE : GONE);
+    }
+
+    public void setEnableSerialNumber(boolean isEnable) {
+        batteryBottomLayout.setVisibility(isEnable ? VISIBLE : GONE);
+    }
 
     /**
      * 是否支持高压存储，M350新电池、M30新版本电池

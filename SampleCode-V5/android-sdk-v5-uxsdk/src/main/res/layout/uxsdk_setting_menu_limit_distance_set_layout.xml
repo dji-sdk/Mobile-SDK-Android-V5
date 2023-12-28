@@ -23,6 +23,19 @@
             app:uxsdk_maxValue="1500"
             app:uxsdk_bottomDividerEnable="false"
             />
+
+        <TextView
+            android:id="@+id/setting_menu_aircraft_go_home_mode_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/uxsdk_vertical_margin_medium"
+            android:layout_marginBottom="8dp"
+            android:drawableLeft="@drawable/uxsdk_setting_ui_go_home_mode_height_fixed"
+            android:drawablePadding="@dimen/uxsdk_setting_flyc_fly_mode_desc_margin_start"
+            android:gravity="center_vertical"
+            android:text="@string/uxsdk_setting_menu_flyc_smart_rth_set_altitude"
+            android:textColor="@color/uxsdk_dic_color_c5_deepGray"
+            android:textSize="@dimen/uxsdk_dic_text_size_16sp" />
         <dji.v5.ux.core.base.EditorCell
             android:id="@+id/setting_menu_aircraft_maxHeight"
             android:layout_width="match_parent"

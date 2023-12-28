@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -538,6 +558,14 @@
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
                             </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
@@ -580,7 +608,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IFlyZoneManager</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：">描述：</h5>
-<p><font color="#666">此类是限飞解禁管理类，主要支持如下功能：<br> <li>获取飞行安全相关提示。</li> <li>获取飞行器周边的限飞区。</li> <li>解除加强警告区。</li> <li>解锁授权区。</li> <li>解禁限飞区：下载限飞区解禁证书，将解禁证书导入到飞行器，使能或者关闭飞行器解禁证书。</li> <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<p><font color="#666">此类是限飞解禁管理类，主要支持如下功能：<br> <li>获取飞行安全相关提示。</li> <li>获取飞行器周边的限飞区。</li> <li>解除加强警告区。</li> <li>解锁授权区。</li> <li>解禁限飞区：下载限飞区解禁证书，将解禁证书导入到飞行器，使能或者关闭飞行器解禁证书。</li> <li>飞行安全数据库更新。</li> <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="类成员">类成员:</h5>
 <h4 id="飞行安全通知">飞行安全通知</h4>
 <div class="api-row" id="iflyzonemanager_addflysafenotificationlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_addflysafenotificationlistener_inline">addFlySafeNotificationListener</a></div></div><div class="inline-doc" id="iflyzonemanager_addflysafenotificationlistener_inline" <blockquote>
@@ -617,7 +645,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFlyZonesInSurroundingArea</span><span class="params">(@NonNull LocationCoordinate2D location, @NonNull CommonCallbacks.CompletionCallbackWithParam&lt;List&lt;FlyZoneInformation&gt;&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
 <h5 id="描述：-v5">描述：</h5>
-<p><font color="#666">获取距离中心位置50公里范围内的限飞区。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
+<p><font color="#666">获取距离中心位置50公里范围内的限飞区。 <br><b>注意：<br> 如果获取到的限飞区数量过多，在地图上绘制限飞区可能存在卡顿问题，建议做相关优化显示。</b> <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="输入参数：-v3">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IKeyManager/Value_Common_Struct_LocationCoordinate2D.html#value_common_struct_locationcoordinate2d">LocationCoordinate2D</a> <font color="#000">location</font></font></td><td><font color="#666"><i>设置中心位置。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;List&lt;<a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html#iflyzonemanager_flyzoneinformation">FlyZoneInformation</a>&gt;&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <html><p><br></p></html>
@@ -701,13 +729,69 @@
 <h5 id="输入参数：-v11">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html#iflyzonemanager_flyzonelicenseinfo">FlyZoneLicenseInfo</a> <font color="#000">info</font></font></td><td><font color="#666"><i>证书信息。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">boolean <font color="#000">isEnabled</font></font></td><td><font color="#666"><i><code>true</code>表示使能解禁证书。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <html><p><br></p></html>
+<h4 id="飞行安全数据库">飞行安全数据库</h4>
+<div class="api-row" id="iflyzonemanager_addflysafedatabaselistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_addflysafedatabaselistener_inline">addFlySafeDatabaseListener</a></div></div><div class="inline-doc" id="iflyzonemanager_addflysafedatabaselistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>addFlySafeDatabaseListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addFlySafeDatabaseListener</span><span class="params">(@NonNull FlySafeDatabaseListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v14">描述：</h5>
+<p><font color="#666">添加飞行安全数据库的监听器。飞行安全数据库信息包括：数据库更新模式，数据库更新状态，手动导入的数据库信息。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v12">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html#iflyzonemanager_flysafedatabaselistener">FlySafeDatabaseListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>飞行安全数据库的监听器</i></font></td></tr></table></html></div>
+<div class="api-row" id="iflyzonemanager_removeflysafedatabaselistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_removeflysafedatabaselistener_inline">removeFlySafeDatabaseListener</a></div></div><div class="inline-doc" id="iflyzonemanager_removeflysafedatabaselistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>removeFlySafeDatabaseListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeFlySafeDatabaseListener</span><span class="params">(@NonNull FlySafeDatabaseListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v15">描述：</h5>
+<p><font color="#666">移除飞行安全数据库的监听器。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v13">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html#iflyzonemanager_flysafedatabaselistener">FlySafeDatabaseListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>飞行安全数据库的监听器</i></font></td></tr></table></html></div>
+<div class="api-row" id="iflyzonemanager_clearallflysafedatabaselistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_clearallflysafedatabaselistener_inline">clearAllFlySafeDatabaseListener</a></div></div><div class="inline-doc" id="iflyzonemanager_clearallflysafedatabaselistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>clearAllFlySafeDatabaseListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearAllFlySafeDatabaseListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v16">描述：</h5>
+<p><font color="#666">移除所有飞行安全数据库的监听器。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+</div>
+<div class="api-row" id="iflyzonemanager_setflysafedynamicdatabaseupgrademode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_setflysafedynamicdatabaseupgrademode_inline">setFlySafeDynamicDatabaseUpgradeMode</a></div></div><div class="inline-doc" id="iflyzonemanager_setflysafedynamicdatabaseupgrademode_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>setFlySafeDynamicDatabaseUpgradeMode</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setFlySafeDynamicDatabaseUpgradeMode</span><span class="params">(@NonNull FlySafeDatabaseUpgradeMode flySafeDynamicDatabaseUpgradeMode , @NonNull CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v17">描述：</h5>
+<p><font color="#666">设置飞行安全动态数据库的更新模式，当前只支持手动导入欧盟地理感知数据。如果你希望在欧盟地区合规飞行无人机，请参照如下流程将欧盟地理感知数据导入到飞行器中。</font></p>
+<li>查阅<a href="https://www.easa.europa.eu/en/domains/civil-drones/naa" target="_blank" rel="noopener">欧洲航空安全局</a>官网下载地理感知数据导入到飞行器中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_setflysafedynamicdatabaseupgrademode">setFlySafeDynamicDatabaseUpgradeMode</a></code>将飞行安全动态数据库更新模式设置为手动导入模式。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_importflysafedynamicdatabasetomsdk">importFlySafeDynamicDatabaseToMSDK</a></code>将地理感知数据导入到MSDK中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_pushflysafedynamicdatabasetoaircraft">pushFlySafeDynamicDatabaseToAircraft</a></code>将地理感知数据同步到飞行器中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_getflyzonesinsurroundingarea">getFlyZonesInSurroundingArea</a></code>获取以飞行器为中心，50公里范围内到地理感知数据。</li> <br><br><code><i>MSDK 5.8.0开始支持</i></code>
+<h5 id="输入参数：-v14">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_flysafedatabaseupgrademode">FlySafeDatabaseUpgradeMode</a> <font color="#000">flySafeDynamicDatabaseUpgradeMode</font></font></td><td><font color="#666"><i>飞行安全动态数据库更新模式，当前只支持手动导入模式。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iflyzonemanager_importflysafedynamicdatabasetomsdk"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_importflysafedynamicdatabasetomsdk_inline">importFlySafeDynamicDatabaseToMSDK</a></div></div><div class="inline-doc" id="iflyzonemanager_importflysafedynamicdatabasetomsdk_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>importFlySafeDynamicDatabaseToMSDK</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">importFlySafeDynamicDatabaseToMSDK</span><span class="params">(String databaseFilePath, @NonNull CommonCallbacks.CompletionCallbackWithProgress&lt;Double&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v18">描述：</h5>
+<p><font color="#666">将飞行安全动态数据库导入到MSDK中，当前只支持导入欧盟地理感知数据。如果你希望在欧盟地区合规飞行无人机，请参照如下流程将欧盟地理感知数据导入到飞行器中。 <li>查阅<a href="https://www.easa.europa.eu/en/domains/civil-drones/naa" target="_blank" rel="noopener">欧洲航空安全局</a>官网下载地理感知数据导入到飞行器中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_setflysafedynamicdatabaseupgrademode">setFlySafeDynamicDatabaseUpgradeMode</a></code>将飞行安全动态数据库更新模式设置为手动导入模式。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_importflysafedynamicdatabasetomsdk">importFlySafeDynamicDatabaseToMSDK</a></code>将地理感知数据导入到MSDK中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_pushflysafedynamicdatabasetoaircraft">pushFlySafeDynamicDatabaseToAircraft</a></code>将地理感知数据同步到飞行器中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_getflyzonesinsurroundingarea">getFlyZonesInSurroundingArea</a></code>获取以飞行器为中心，50公里范围内到地理感知数据。</li> <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v15">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String <font color="#000">databaseFilePath</font></font></td><td><font color="#666"><i>数据库文件路径，数据库文件必须为JSON格式并且需要符合ED-269规范。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithProgress&lt;Double&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<div class="api-row" id="iflyzonemanager_pushflysafedynamicdatabasetoaircraft"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_pushflysafedynamicdatabasetoaircraft_inline">pushFlySafeDynamicDatabaseToAircraft</a></div></div><div class="inline-doc" id="iflyzonemanager_pushflysafedynamicdatabasetoaircraft_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>pushFlySafeDynamicDatabaseToAircraft</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushFlySafeDynamicDatabaseToAircraft</span><span class="params">(@NonNull CommonCallbacks.CompletionCallbackWithProgress&lt;Double&gt;  callback)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v19">描述：</h5>
+<p><font color="#666">将飞行安全动态数据库同步到飞行器中。当前只支持同步欧盟地理感知数据。如果你希望在欧盟地区合规飞行无人机，请参照如下流程将欧盟地理感知数据导入到飞行器中。 <li>查阅<a href="https://www.easa.europa.eu/en/domains/civil-drones/naa" target="_blank" rel="noopener">欧洲航空安全局</a>官网下载地理感知数据导入到飞行器中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_setflysafedynamicdatabaseupgrademode">setFlySafeDynamicDatabaseUpgradeMode</a></code>将飞行安全动态数据库更新模式设置为手动导入模式。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_importflysafedynamicdatabasetomsdk">importFlySafeDynamicDatabaseToMSDK</a></code>将地理感知数据导入到MSDK中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_pushflysafedynamicdatabasetoaircraft">pushFlySafeDynamicDatabaseToAircraft</a></code>将地理感知数据同步到飞行器中。</li> <li>调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_getflyzonesinsurroundingarea">getFlyZonesInSurroundingArea</a></code>获取以飞行器为中心，50公里范围内到地理感知数据。</li> <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v16">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithProgress&lt;Double&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
+<html><p><br></p></html>
 <h5 id="related">Related:</h5>
 <div class="api-row" id="iflyzonemanager_flysafetipevent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafetipevent_inline">FlySafeTipEvent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafetipevent_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">enum </font>FlySafeTipEvent</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlySafeTipEvent</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v14">描述：</h5>
+<h5 id="描述：-v20">描述：</h5>
 <p><font color="#666">飞行安全提示信息的事件枚举。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_takeoffinheightlimitzonewithoutgps_inline"></a>TAKE_OFF_IN_HEIGHT_LIMIT_ZONE_WITHOUT_GPS</font></td><td><font color="#666">飞行器低于限高区，无GPS信号，请注意飞行安全。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_takeoffinheightlimitzone_inline"></a>TAKE_OFF_IN_HEIGHT_LIMIT_ZONE</font></td><td><font color="#666">飞行器低于限高区，请注意飞行安全。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_takeoffinwarningarea_inline"></a>TAKE_OFF_IN_WARNING_AREA</font></td><td><font color="#666">飞行器处于警告区，请注意飞行安全。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_touchnoflyzone_inline"></a>TOUCH_NO_FLY_ZONE</font></td><td><font color="#666">飞行器已接近禁飞区，请注意飞行安全。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_touchauthorizationzone_inline"></a>TOUCH_AUTHORIZATION_ZONE</font></td><td><font color="#666">飞行器已接近授权区，请注意飞行安全。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_reachmaximumflightheight_inline"></a>REACH_MAXIMUM_FLIGHT_HEIGHT</font></td><td><font color="#666">飞行器已达限高区内的最大飞行高度。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_rthaffectedatboundaryofgeozone_inline"></a>RTH_AFFECTED_AT_BOUNDARY_OF_GEO_ZONE</font></td><td><font color="#666">飞行器已接近限飞区，返航可能会受到影响。请小心飞离限飞区。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_atboundaryofcustomunlockzone_inline"></a>AT_BOUNDARY_OF_CUSTOM_UNLOCK_ZONE</font></td><td><font color="#666">飞行器已接近解禁区。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_enterlimitheightarea_inline"></a>ENTER_LIMIT_HEIGHT_AREA</font></td><td><font color="#666">飞行器已进入限高区。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_collisionwithlimitheightareasooninwhitelistvalidarea_inline"></a>COLLISION_WITH_LIMIT_HEIGHT_AREA_SOON_IN_WHITE_LIST_VALID_AREA</font></td><td><font color="#666">飞行器已接近解禁区，请注意飞行安全。</font></td></tr></table></html>
@@ -718,7 +802,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlySafeWarningEvent</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v15">描述：</h5>
+<h5 id="描述：-v21">描述：</h5>
 <p><font color="#666">飞行安全警告信息的事件枚举。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinnoflyzone_inline"></a>TAKE_OFF_FAILED_IN_NO_FLY_ZONE</font></td><td><font color="#666">飞行器在禁飞区无法起飞。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinnoflyzonewithoutgps_inline"></a>TAKE_OFF_FAILED_IN_NO_FLY_ZONE_WITHOUT_GPS</font></td><td><font color="#666">移动设备处于禁飞区，飞行器GPS信号不好，无法起飞。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedwithoutcustomunlocking_inline"></a>TAKE_OFF_FAILED_WITHOUT_CUSTOM_UNLOCKING</font></td><td><font color="#666">不能起飞。 您尚未申请在该区域飞行。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinauthorizedzonewithoutgpsandunlocking_inline"></a>TAKE_OFF_FAILED_IN_AUTHORIZED_AREA_WITHOUT_GPS_AND_UNLOCKING</font></td><td><font color="#666">移动设备在授权区，飞行器GPS信号不好，解锁前无法起飞。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinauthorizedzonewithoutunlocking_inline"></a>TAKE_OFF_FAILED_IN_AUTHORIZED_ZONE_WITHOUT_UNLOCKING</font></td><td><font color="#666">飞行器在授权区，未解锁前不能起飞。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinauthorizedzone_inline"></a>TAKE_OFF_FAILED_IN_AUTHORIZED_ZONE</font></td><td><font color="#666">飞行器在授权区，你未获得飞行授权。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeoffinenhancedwarningzone_inline"></a>TAKE_OFF_IN_ENHANCED_WARNING_ZONE</font></td><td><font color="#666">飞行器处于加强警告区，请注意飞行安全。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeoffnearnoflyzone_inline"></a>TAKE_OFF_NEAR_NO_FLY_ZONE</font></td><td><font color="#666">附近有禁飞区，请注意飞行限制。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_limitedrestrictionsnearby_inline"></a>LIMITED_RESTRICTIONS_NEARBY</font></td><td><font color="#666">附近有禁飞区，请注意飞行限制。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_authorizedzonewithoutunlockingnearby_inline"></a>AUTHORIZED_ZONE_WITHOUT_UNLOCKING_NEARBY</font></td><td><font color="#666">附近有授权区，请注意飞行限制。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_authorizedzoneandrestrictionsnearby_inline"></a>AUTHORIZED_ZONE_AND_RESTRICTIONS_NEARBY</font></td><td><font color="#666">附近有授权区，你已获得飞行授权。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_restrictionsinlimitedflyzonenearby_inline"></a>RESTRICTIONS_IN_LIMITED_FLY_ZONE_NEARBY</font></td><td><font color="#666">附近有禁飞区，请注意飞行限制。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_inauthorizationzone_inline"></a>IN_AUTHORIZATION_ZONE</font></td><td><font color="#666">飞行器在授权区，你已获得飞行授权。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinnoflyzonewithweakgps_inline"></a>TAKE_OFF_FAILED_UNDER_LIMIT_AREA_WITH_GPS_ONCE</font></td><td><font color="#666">移动设备在禁飞区，飞行器GPS信号不好，解锁前无法起飞。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_haveonehourwillapplytfrs_inline"></a>HAVE_ONE_HOUR_WILL_APPLY_TFRS</font></td><td><font color="#666">1小时后，7KM内将有临时限飞区生效，请注意飞行安全。</font></td></tr></table></html>
@@ -729,7 +813,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlySafeSeriousWarningEvent</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v16">描述：</h5>
+<h5 id="描述：-v22">描述：</h5>
 <p><font color="#666">飞行安全严重警告信息的事件枚举。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members-v3">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_innoflyzone_inline"></a>IN_NO_FLY_ZONE</font></td><td><font color="#666">飞行器处于禁飞区，倒计时结束后会强制自动掉落。你将无法控制飞行器油门，但可以控制飞行器的前后左右以避开障碍物。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_inheightlimitzone_inline"></a>IN_LIMIT_HEIGHT_AREA</font></td><td><font color="#666">飞行器处于限高区，倒计时结束后会自动下降到限高高度。你将无法控制飞行器油门，但可以控制飞行器的前后左右以避开障碍物。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_inauthorizationzonewithoutunlocking_inline"></a>IN_AUTHORIZATION_ZONE_WITHOUT_UNLOCKING</font></td><td><font color="#666">飞行器处于授权区，倒计时结束后会强制自动掉落。你将无法控制飞行器油门，但可以控制飞行器的前后左右以避开障碍物。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_havethreeminwillapplytfrs_inline"></a>HAVE_THREE_MIN_WILL_APPLY_TFRS</font></td><td><font color="#666">三分钟后，附近将有临时限飞区生效，请注意飞行安全。</font></td></tr></table></html>
@@ -740,7 +824,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlySafeReturnToHomeEvent</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v17">描述：</h5>
+<h5 id="描述：-v23">描述：</h5>
 <p><font color="#666">飞行安全返航信息的事件枚举。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members-v4">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafereturntohomeevent_nearnoflyzone_inline"></a>NEAR_NO_FLY_ZONE</font></td><td><font color="#666">接近禁飞区。返航可能会受到影响。请小心飞行。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafereturntohomeevent_crossnoflyzone_inline"></a>CROSS_NO_FLY_ZONE</font></td><td><font color="#666">当前返航路线将经过禁飞区。返航可能会失败，请注意飞行器位置。</font></td></tr></table></html>
@@ -751,7 +835,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlyZoneType</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v18">描述：</h5>
+<h5 id="描述：-v24">描述：</h5>
 <p><font color="#666">限飞区类型。包括机场，公园，学校，体育馆等。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members-v5">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_airport_inline"></a>AIRPORT</font></td><td><font color="#666">机场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_commercialairport_inline"></a>COMMERCIAL_AIRPORTS</font></td><td><font color="#666">商业机场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_privatecommercialairport_inline"></a>PRIVATE_COMMERCIAL_AIRPORTS</font></td><td><font color="#666">私人商业机场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_recreationalairport_inline"></a>RECREATIONAL_AIRPORTS</font></td><td><font color="#666">休闲机场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_privaterecreationalairport_inline"></a>PRIVATE_RECREATIONAL_AIRPORTS</font></td><td><font color="#666">私人休闲机场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_heliport_inline"></a>HELIPORT</font></td><td><font color="#666">直升机场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_unpavedairport_inline"></a>UNPAVED_AIRPORT</font></td><td><font color="#666">未使用机场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_nationalpark_inline"></a>NATIONAL_PARKS</font></td><td><font color="#666">公园。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_noaa_inline"></a>NOAA</font></td><td><font color="#666">美国国家海洋和大气局。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_parcel_inline"></a>PARCEL</font></td><td><font color="#666">邮局。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_powerplant_inline"></a>POWER_PLANT</font></td><td><font color="#666">发电厂。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_school_inline"></a>SCHOOL</font></td><td><font color="#666">学校。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_stadium_inline"></a>STADIUM</font></td><td><font color="#666">体育场。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_nuclearpowerplant_inline"></a>NUCLEAR_POWER_PLANT</font></td><td><font color="#666">核电站。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_prohibitedspecialuse_inline"></a>PROHIBITED_SPECIAL_USE</font></td><td><font color="#666">特殊用途。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_restrictedspecialuse_inline"></a>RESTRICTED_SPECIAL_USE</font></td><td><font color="#666">特殊用途。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_special_inline"></a>SPECIAL</font></td><td><font color="#666">特殊限飞区。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_temporaryflightrestriction_inline"></a>TEMPORARY_FLIGHT_RESTRICTIONS</font></td><td><font color="#666">临时飞行限制。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_classbairspace_inline"></a>CLASS_B_AIR_SPACE</font></td><td><font color="#666">B类管制空域。 有关美国受控空域（B、C、D、E 类）的更多信息，请参见http://www.dji.com/flysafe/geo-system#notes。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_classcairspace_inline"></a>CLASS_C_AIR_SPACE</font></td><td><font color="#666">C类管制空域。 有关美国受控空域（B、C、D、E 类）的更多信息，请参见http://www.dji.com/flysafe/geo-system#notes。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_classdairspace_inline"></a>CLASS_D_AIR_SPACE</font></td><td><font color="#666">D类管制空域。 有关美国受控空域（B、C、D、E 类）的更多信息，请参见http://www.dji.com/flysafe/geo-system#notes。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_classeairspace_inline"></a>CLASS_E_AIR_SPACE</font></td><td><font color="#666">E类管制空域。 有关美国受控空域（B、C、D、E 类）的更多信息，请参见http://www.dji.com/flysafe/geo-system#notes。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_prison_inline"></a>PRISON</font></td><td><font color="#666">监狱。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonetype_military_inline"></a>MILITARY</font></td><td><font color="#666">军事用地。</font></td></tr></table></html>
@@ -762,7 +846,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlyZoneCategory</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v19">描述：</h5>
+<h5 id="描述：-v25">描述：</h5>
 <p><font color="#666">限飞区策略。包括禁飞区，授权区，警告区和加强警告区等。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members-v6">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonecategory_warning_inline"></a>WARNING</font></td><td><font color="#666">警告区。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonecategory_enhancedwarning_inline"></a>ENHANCED_WARNING</font></td><td><font color="#666">加强警告区。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonecategory_authorization_inline"></a>AUTHORIZATION</font></td><td><font color="#666">授权区。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzonecategory_restricted_inline"></a>RESTRICTED</font></td><td><font color="#666">禁飞区。</font></td></tr></table></html>
@@ -773,7 +857,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlyZoneShape</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v20">描述：</h5>
+<h5 id="描述：-v26">描述：</h5>
 <p><font color="#666">限飞区形状类型。包括圆形和多边形。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members-v7">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzoneshape_circle_inline"></a>CIRCLE</font></td><td><font color="#666">圆形。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flyzoneshape_multipolygon_inline"></a>MULTI_POLYGON</font></td><td><font color="#666">多边形。包含圆柱和多边形限飞区。</font></td></tr></table></html>
@@ -784,13 +868,56 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MultiPolygonFlyZoneShape</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
-<h5 id="描述：-v21">描述：</h5>
+<h5 id="描述：-v27">描述：</h5>
 <p><font color="#666">多边形限飞区形状类型。包括圆柱和多边形。 <br><br><code><i>MSDK 5.3.0开始支持</i></code></font></p>
 <h5 id="enum-members-v8">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_multipolygonflyzoneshape_cylinder_inline"></a>CYLINDER</font></td><td><font color="#666">圆柱。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_multipolygonflyzoneshape_polygon_inline"></a>POLYGON</font></td><td><font color="#666">多边形。</font></td></tr></table></html>
 <h5 id="class-members-v8">Class Members:</h5>
 </div>
-<div class="api-row" id="iflyzonemanager_multipolygonflyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a></div></div><div class="api-row" id="iflyzonemanager_flyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a></div></div><div class="api-row" id="iflyzonemanager_flyzonelicenseinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a></div></div><div class="api-row" id="iflyzonemanager_flysafenotificationlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a></div></div>
+<div class="api-row" id="iflyzonemanager_multipolygonflyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a></div></div><div class="api-row" id="iflyzonemanager_flyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a></div></div><div class="api-row" id="iflyzonemanager_flyzonelicenseinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a></div></div><div class="api-row" id="iflyzonemanager_ridunlocktype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_ridunlocktype_inline">RidUnlockType</a></div></div><div class="inline-doc" id="iflyzonemanager_ridunlocktype_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>RidUnlockType</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> RidUnlockType</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe.info</font></td></tr></table></html>
+<h5 id="描述：-v28">描述：</h5>
+<p><font color="#666">RID解禁类型。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="enum-members-v9">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_ridunlocktype_european_inline"></a>EUROPEAN</font></td><td><font color="#666">欧盟。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_ridunlocktype_china_inline"></a>CHINA</font></td><td><font color="#666">中国。</font></td></tr></table></html>
+<h5 id="class-members-v9">Class Members:</h5>
+</div>
+<div class="api-row" id="iflyzonemanager_flysafenotificationlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a></div></div><div class="api-row" id="iflyzonemanager_flysafedatabaselistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a></div></div><div class="api-row" id="iflyzonemanager_flysafedatabaseinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a></div></div><div class="api-row" id="iflyzonemanager_flysafedatabaseupgrademode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafedatabaseupgrademode_inline">FlySafeDatabaseUpgradeMode</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafedatabaseupgrademode_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>FlySafeDatabaseUpgradeMode</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlySafeDatabaseUpgradeMode</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe</font></td></tr></table></html>
+<h5 id="描述：-v29">描述：</h5>
+<p><font color="#666">飞行安全数据库更新模式。包括手动导入和自动更新。MSDK只支持手动导入模式，如需要使用自动更新模式，请使用DJI官方APP。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="enum-members-v10">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafedatabaseupgrademode_manual_import_inline"></a>MANUAL_IMPORT</font></td><td><font color="#666">手动导入模式。MSDK只支持手动更新模式，如需要使用自动更新模式，请使用DJI官方APP。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafedatabaseupgrademode_automatic_upgrade_inline"></a>AUTOMATIC_UPGRADE</font></td><td><font color="#666">自动更新模式。MSDK只支持手动更新模式，如需要使用自动更新模式，请使用DJI官方APP。自动更新模式只能作为飞行安全的补充，如果你希望在欧盟地区合规飞行无人机，请参照将欧盟地理感知数据手动导入到飞行器中。</font></td></tr></table></html>
+<h5 id="class-members-v10">Class Members:</h5>
+</div>
+<div class="api-row" id="iflyzonemanager_flysafedatabasecomponent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafedatabasecomponent_inline">FlySafeDatabaseComponent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafedatabasecomponent_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>FlySafeDatabaseComponent</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlySafeDatabaseComponent</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe</font></td></tr></table></html>
+<h5 id="描述：-v30">描述：</h5>
+<p><font color="#666">飞行安全数据库模块类型。包括MSDK和飞行器。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="enum-members-v11">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafedatabasecomponent_aircraft_inline"></a>AIRCRAFT</font></td><td><font color="#666">飞行器。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafedatabasecomponent_msdk_inline"></a>MSDK</font></td><td><font color="#666">MSDK。</font></td></tr></table></html>
+<h5 id="class-members-v11">Class Members:</h5>
+</div>
+<div class="api-row" id="iflyzonemanager_flysafedatabasestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafedatabasestate_inline">FlySafeDatabaseState</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafedatabasestate_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">enum </font>FlySafeDatabaseState</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> FlySafeDatabaseState</span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.flysafe</font></td></tr></table></html>
+<h5 id="描述：-v31">描述：</h5>
+<p><font color="#666">飞行安全数据库状态。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="enum-members-v12">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafedatabasestate_need_to_import_inline"></a>NEED_TO_IMPORT</font></td><td><font color="#666">需要导入。表示MSDK当前的数据库没有包含飞行器当前位置的数据。请调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_importflysafedynamicdatabasetomsdk">importFlySafeDynamicDatabaseToMSDK</a></code>导入飞行器位置附近的数据库。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafedatabasestate_need_to_sync_inline"></a>NEED_TO_SYNC</font></td><td><font color="#666">需要同步。表示需要将MSDK中数据库同步给飞行器。请调用<code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_pushflysafedynamicdatabasetoaircraft">pushFlySafeDynamicDatabaseToAircraft</a></code>将MSDK中的数据库推送给飞行器。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafedatabasestate_up_to_date_inline"></a>UP_TO_DATE</font></td><td><font color="#666">已更新到最新数据。表示MSDK的数据库已经成功同步给飞行器。</font></td></tr></table></html>
+<h5 id="class-members-v12">Class Members:</h5>
+</div>
 
         </div>
       </div>

@@ -30,9 +30,15 @@ class RcCheckFrequencyWidgetModel(
 
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyConnection), connectionProcessor)
-        bindDataProcessor(KeyTools.createKey(RemoteControllerKey.KeyPairingStatus), pairingStateProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyAreMotorsOn), isMotorOnProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyConnection), connectionProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyPairingStatus), pairingStateProcessor)
 
     }
 
@@ -42,11 +48,15 @@ class RcCheckFrequencyWidgetModel(
     }
 
     fun startPairing(): Completable {
-        return RxUtil.performActionWithOutResult(KeyTools.createKey(RemoteControllerKey.KeyRequestPairing))
+        return RxUtil.performActionWithOutResult(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyRequestPairing))
     }
 
     fun stopPairing(): Completable {
-        return RxUtil.performActionWithOutResult(KeyTools.createKey(RemoteControllerKey.KeyStopPairing))
+        return RxUtil.performActionWithOutResult(
+            KeyTools.createKey(
+                RemoteControllerKey.KeyStopPairing))
     }
 
 }

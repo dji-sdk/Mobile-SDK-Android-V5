@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_common"
+    app:startDestination="@id/key_value_page">
+
+    <fragment
+        android:id="@+id/key_value_page"
+        android:name="dji.sampleV5.aircraft.pages.KeyValueFragment"
+        android:label="key_value_page"
+        tools:layout="@layout/frag_key_value_page"/>
+
+    <fragment
+        android:id="@+id/key_multi_camera_stream_page"
+        android:name="dji.sampleV5.aircraft.pages.CameraStreamListFragment"
+        android:label="multi_video_decoding_page"
+        tools:layout="@layout/frag_camera_stream_list"/>
+
+    <fragment
+        android:id="@+id/key_multi_video_decoding_page"
+        android:name="dji.sampleV5.aircraft.pages.MultiVideoChannelFragment"
+        android:label="multi_video_decoding_page"
+        tools:layout="@layout/frag_multi_video_channel_page"/>
+
+    <fragment
+        android:id="@+id/key_data_protection_page"
+        android:name="dji.sampleV5.aircraft.pages.DataProtectionFragment"
+        android:label="data_protection"
+        tools:layout="@layout/frag_data_protection_page"/>
+
+    <fragment
+        android:id="@+id/key_diagnostic_page"
+        android:name="dji.sampleV5.aircraft.pages.DiagnosticFragment"
+        android:label="diagnostic_page"
+        tools:layout="@layout/frag_diagnostic_page"/>
+
+    <fragment
+        android:id="@+id/key_live_stream_page"
+        android:name="dji.sampleV5.aircraft.pages.LiveFragment"
+        android:label="live_stream_page"
+        tools:layout="@layout/frag_live"/>
+
+    <fragment
+        android:id="@+id/key_login_account_page"
+        android:name="dji.sampleV5.aircraft.pages.LoginFragment"
+        android:label="login_account_page"
+        tools:layout="@layout/frag_login_account_page"/>
+
+    <fragment
+        android:id="@+id/key_log_info_page"
+        android:name="dji.sampleV5.aircraft.pages.LogInfoFragment"
+        android:label="log_info_page"
+        tools:layout="@layout/frag_log_info_page"/>
+
+    <fragment
+        android:id="@+id/media_page"
+        android:name="dji.sampleV5.aircraft.pages.MediaFragment"
+        android:label="media_page"
+        android:layout="@layout/frag_media_page">
+        <action
+            android:id="@+id/action_enter_media_details_page"
+            app:destination="@id/media_details_page" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/media_details_page"
+        android:name="dji.sampleV5.aircraft.pages.MediaFileDetailsFragment"
+        android:label="media_details"
+        android:layout="@layout/frag_mediafile_details">
+        <action
+            android:id="@+id/action_enter_video_play_page"
+            app:destination="@id/video_play_page" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/video_play_page"
+        android:name="dji.sampleV5.aircraft.pages.VideoPlayFragment"
+        android:label="media_play"
+        android:layout="@layout/video_play_page">
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/key_media_playback_page"
+        android:name="dji.sampleV5.aircraft.pages.MediaFragment"
+        android:label="media_playback"
+        tools:layout="@layout/frag_media_page">
+        <action
+            android:id="@+id/action_enter_media_details_page"
+            app:destination="@id/media_details_page" />
+    </fragment>
+
+
+
+</navigation>

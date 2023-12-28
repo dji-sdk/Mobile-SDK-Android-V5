@@ -68,7 +68,9 @@ class AircraftBatteryTemperatureListItemWidgetModel(
 
     //region Lifecycle
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(BatteryKey.KeyBatteryTemperature), batteryTemperatureProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                BatteryKey.KeyBatteryTemperature), batteryTemperatureProcessor)
         val temperatureUnitTypeKey = GlobalPreferenceKeys.create(GlobalPreferenceKeys.TEMPERATURE_UNIT_TYPE)
         bindDataProcessor(temperatureUnitTypeKey, temperatureUnitTypeProcessor)
         preferencesManager?.setUpListener()

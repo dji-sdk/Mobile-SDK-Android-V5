@@ -2,7 +2,6 @@ package dji.v5.ux.warning
 
 import android.content.Context
 import android.graphics.Outline
-import android.graphics.PostProcessor
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +17,9 @@ import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.WidgetSizeDescription
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
-import dji.v5.ux.core.base.widget.FrameLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.popover.Popover
 import dji.v5.ux.core.popover.PopoverHelper
-import dji.v5.ux.core.widget.gpssignal.GpsSignalPopoverView
-import dji.v5.ux.visualcamera.ndvi.NDVIStreamPopoverViewWidget
-import kotlinx.android.synthetic.main.uxsdk_camera_status_action_item_content.view.*
 import kotlinx.android.synthetic.main.uxsdk_fpv_top_bar_widget_warning_message.view.*
 import kotlin.math.roundToInt
 
@@ -105,7 +100,7 @@ open class DeviceHealthAndStatusWidget @JvmOverloads constructor(
         addReaction(widgetModel.deviceMessageProcessor.toFlowable()
             .observeOn(SchedulerProvider.ui())
             .subscribe {
-                LogUtils.i(logTag, JsonUtil.toJson(it))
+                LogUtils.d(logTag, JsonUtil.toJson(it))
                 updateDisplayMessage()
                 updateLevelCount()
             }

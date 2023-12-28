@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 
-import dji.v5.common.utils.RxUtil;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 /*

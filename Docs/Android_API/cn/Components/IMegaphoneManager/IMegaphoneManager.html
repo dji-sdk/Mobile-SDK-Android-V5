@@ -228,8 +228,6 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
-                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
-                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -245,6 +243,18 @@
                                         </ul>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -273,6 +283,8 @@
                                       <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
                                       </dd>
                               </ul>
                             </dd>
@@ -430,6 +442,10 @@
                             </dd>
                             <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
                             </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -488,6 +504,10 @@
                             </dd>
                             <dd><a href="IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
                             </dd>
+                            <dd><a href="IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
@@ -538,6 +558,14 @@
                             </dd>
                             <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
                             </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
+                            </dd>
                     </ul>
                   </dd>
                   <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
@@ -582,183 +610,209 @@
 <h5 id="描述：">描述：</h5>
 <p><font color="#666">麦克风喊话器负载管理类。可通过此类设置喊话器的参数，播放录制的音频。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="类成员">类成员:</h5>
+<div class="api-row" id="imegaphonemanager_addmegaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_addmegaphoneinfolistener_inline">addMegaphoneInfoListener</a></div></div><div class="inline-doc" id="imegaphonemanager_addmegaphoneinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>addMegaphoneInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addMegaphoneInfoListener</span><span class="params">(MegaphoneInfoListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v2">描述：</h5>
+<p><font color="#666">设置喊话器信息监听器。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="输入参数：">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html#imegaphonemanager_megaphoneinfolistener">MegaphoneInfoListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>喊话器信息监听器。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imegaphonemanager_removemegaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_removemegaphoneinfolistener_inline">removeMegaphoneInfoListener</a></div></div><div class="inline-doc" id="imegaphonemanager_removemegaphoneinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>removeMegaphoneInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeMegaphoneInfoListener</span><span class="params">(MegaphoneInfoListener listener)</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v3">描述：</h5>
+<p><font color="#666">移除喊话器信息监听器。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+<h5 id="输入参数：-v2">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html#imegaphonemanager_megaphoneinfolistener">MegaphoneInfoListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>喊话器信息监听器。</i></font></td></tr></table></html></div>
+<div class="api-row" id="imegaphonemanager_clearallmegaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_clearallmegaphoneinfolistener_inline">clearAllMegaphoneInfoListener</a></div></div><div class="inline-doc" id="imegaphonemanager_clearallmegaphoneinfolistener_inline" <blockquote>
+<div class="article"><h6><font color="#AAA">method </font>clearAllMegaphoneInfoListener</h6></div>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearAllMegaphoneInfoListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
+<h5 id="描述：-v4">描述：</h5>
+<p><font color="#666">移除所有喊话器信息监听器。 <br><br><code><i>MSDK 5.8.0开始支持</i></code></font></p>
+</div>
 <div class="api-row" id="imegaphonemanager_setmegaphoneindex"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_setmegaphoneindex_inline">setMegaphoneIndex</a></div></div><div class="inline-doc" id="imegaphonemanager_setmegaphoneindex_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setMegaphoneIndex</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setMegaphoneIndex</span><span class="params">(@NonNull MegaphoneIndex megaphoneIndex,@NonNull CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v2">描述：</h5>
+<h5 id="描述：-v5">描述：</h5>
 <p><font color="#666">设置目标喊话器的位置。请根据已连接的喊话器位置进行设置。对于可以支持多个喊话器的机型，可以调用这个接口选择目标喊话器进行设置和操作。如果不调用此接口，MSDK会默认选择一个已连接的喊话器进行操作。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：">输入参数：</h5>
+<h5 id="输入参数：-v3">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_megaphoneindex">MegaphoneIndex</a> <font color="#000">megaphoneIndex</font></font></td><td><font color="#666"><i>目标喊话器的位置</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getmegaphoneindex"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getmegaphoneindex_inline">getMegaphoneIndex</a></div></div><div class="inline-doc" id="imegaphonemanager_getmegaphoneindex_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getMegaphoneIndex</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getMegaphoneIndex</span><span class="params">(@NonNull CommonCallbacks.CompletionCallbackWithParam&lt;MegaphoneIndex&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v3">描述：</h5>
+<h5 id="描述：-v6">描述：</h5>
 <p><font color="#666">获取设置的目标喊话器位置。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v2">输入参数：</h5>
+<h5 id="输入参数：-v4">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_megaphoneindex">MegaphoneIndex</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_setvolume"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_setvolume_inline">setVolume</a></div></div><div class="inline-doc" id="imegaphonemanager_setvolume_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setVolume</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setVolume</span><span class="params">(@NonNull <span class="keyword">int</span> volume, @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v4">描述：</h5>
+<h5 id="描述：-v7">描述：</h5>
 <p><font color="#666">设置喊话器音量。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v3">输入参数：</h5>
+<h5 id="输入参数：-v5">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull int <font color="#000">volume</font></font></td><td><font color="#666"><i>需要设置的音量。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getvolume"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getvolume_inline">getVolume</a></div></div><div class="inline-doc" id="imegaphonemanager_getvolume_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getVolume</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getVolume</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;Integer&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v5">描述：</h5>
+<h5 id="描述：-v8">描述：</h5>
 <p><font color="#666">获取喊话器音量。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v4">输入参数：</h5>
+<h5 id="输入参数：-v6">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;Integer&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_setplaymode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_setplaymode_inline">setPlayMode</a></div></div><div class="inline-doc" id="imegaphonemanager_setplaymode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setPlayMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setPlayMode</span><span class="params">(@NonNull PlayMode playMode, @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v6">描述：</h5>
+<h5 id="描述：-v9">描述：</h5>
 <p><font color="#666">设置喊话器播放模式。包括单次播放和循环播放。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v5">输入参数：</h5>
+<h5 id="输入参数：-v7">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_playmode">PlayMode</a> <font color="#000">playMode</font></font></td><td><font color="#666"><i>需要设置的播放模式。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getplaymode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getplaymode_inline">getPlayMode</a></div></div><div class="inline-doc" id="imegaphonemanager_getplaymode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getPlayMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPlayMode</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;PlayMode&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v7">描述：</h5>
+<h5 id="描述：-v10">描述：</h5>
 <p><font color="#666">获取喊话器播放模式。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v6">输入参数：</h5>
+<h5 id="输入参数：-v8">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_playmode">PlayMode</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_setworkmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_setworkmode_inline">setWorkMode</a></div></div><div class="inline-doc" id="imegaphonemanager_setworkmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>setWorkMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setWorkMode</span><span class="params">(@NonNull WorkMode workMode,@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v8">描述：</h5>
+<h5 id="描述：-v11">描述：</h5>
 <p><font color="#666">设置喊话器工作模式。包括TTS文本模式和语音模式。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v7">输入参数：</h5>
+<h5 id="输入参数：-v9">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_workmode">WorkMode</a> <font color="#000">workMode</font></font></td><td><font color="#666"><i>需要设置的工作模式。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getworkmode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getworkmode_inline">getWorkMode</a></div></div><div class="inline-doc" id="imegaphonemanager_getworkmode_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getWorkMode</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getWorkMode</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;WorkMode&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v9">描述：</h5>
+<h5 id="描述：-v12">描述：</h5>
 <p><font color="#666">获取喊话器工作模式。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v8">输入参数：</h5>
+<h5 id="输入参数：-v10">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_workmode">WorkMode</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_getstatus"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_getstatus_inline">getStatus</a></div></div><div class="inline-doc" id="imegaphonemanager_getstatus_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>getStatus</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getStatus</span><span class="params">(@Nullable CommonCallbacks.CompletionCallbackWithParam&lt;MegaphoneStatus&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v10">描述：</h5>
+<h5 id="描述：-v13">描述：</h5>
 <p><font color="#666">获取喊话器状态。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v9">输入参数：</h5>
+<h5 id="输入参数：-v11">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;<a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_megaphonestatus">MegaphoneStatus</a>&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_startplay"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_startplay_inline">startPlay</a></div></div><div class="inline-doc" id="imegaphonemanager_startplay_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startPlay</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startPlay</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v11">描述：</h5>
+<h5 id="描述：-v14">描述：</h5>
 <p><font color="#666">喊话器开始播放。在调用开始播放接口之前，你需要调用文件传输方式<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startpushingfiletomegaphone">startPushingFileToMegaphone</a></code>或者流式传输方式<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startrealtimetransmission">startRealTimeTransmission</a></code>把需要播放的数据传给喊话器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v10">输入参数：</h5>
+<h5 id="输入参数：-v12">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_stopplay"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_stopplay_inline">stopPlay</a></div></div><div class="inline-doc" id="imegaphonemanager_stopplay_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>stopPlay</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">stopPlay</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v12">描述：</h5>
+<h5 id="描述：-v15">描述：</h5>
 <p><font color="#666">喊话器停止播放。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v11">输入参数：</h5>
+<h5 id="输入参数：-v13">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_startpushingfiletomegaphone"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_startpushingfiletomegaphone_inline">startPushingFileToMegaphone</a></div></div><div class="inline-doc" id="imegaphonemanager_startpushingfiletomegaphone_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startPushingFileToMegaphone</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startPushingFileToMegaphone</span><span class="params">(@NonNull FileInfo fileInfo, @Nullable CommonCallbacks.CompletionCallbackWithProgress&lt;Integer&gt; callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v13">描述：</h5>
+<h5 id="描述：-v16">描述：</h5>
 <p><font color="#666">传输TTS数据或者音频文件到喊话器。当数据传输完成后，你可以调用<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startplay">startPlay</a></code>接口进行播放。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v12">输入参数：</h5>
+<h5 id="输入参数：-v14">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMegaphoneManager/IMegaphoneManager_FileInfo.html#imegaphonemanager_fileinfo">FileInfo</a> <font color="#000">fileInfo</font></font></td><td><font color="#666"><i>文件信息。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithProgress&lt;Integer&gt; <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_cancelpushingfiletomegaphone"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_cancelpushingfiletomegaphone_inline">cancelPushingFileToMegaphone</a></div></div><div class="inline-doc" id="imegaphonemanager_cancelpushingfiletomegaphone_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>cancelPushingFileToMegaphone</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cancelPushingFileToMegaphone</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v14">描述：</h5>
+<h5 id="描述：-v17">描述：</h5>
 <p><font color="#666">取消传输TTS数据或者音频文件到喊话器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v13">输入参数：</h5>
+<h5 id="输入参数：-v15">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_startrealtimetransmission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_startrealtimetransmission_inline">startRealTimeTransmission</a></div></div><div class="inline-doc" id="imegaphonemanager_startrealtimetransmission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>startRealTimeTransmission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">startRealTimeTransmission</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v15">描述：</h5>
+<h5 id="描述：-v18">描述：</h5>
 <p><font color="#666">开启流式传输模式。你可以调用<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_sendrealtimedatatomegaphone">sendRealTimeDataToMegaphone</a></code>向喊话器发送需要播放的数据，调用<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_appendeoftorealtimedata">appendEOFToRealTimeData</a></code>添加EOF标志位，表示数据发送完毕。然后调用<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startplay">startPlay</a></code>接口进行播放。 <br><b>注意：流式传输模式的数据必须为OPUS编码格式的音频数据。</b> <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v14">输入参数：</h5>
+<h5 id="输入参数：-v16">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_sendrealtimedatatomegaphone"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_sendrealtimedatatomegaphone_inline">sendRealTimeDataToMegaphone</a></div></div><div class="inline-doc" id="imegaphonemanager_sendrealtimedatatomegaphone_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>sendRealTimeDataToMegaphone</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sendRealTimeDataToMegaphone</span><span class="params">(<span class="keyword">byte</span>[] data, <span class="keyword">int</span> length, @Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v16">描述：</h5>
+<h5 id="描述：-v19">描述：</h5>
 <p><font color="#666">向喊话器发送需要播放数据。可以多次调用此接口发送播放数据。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v15">输入参数：</h5>
+<h5 id="输入参数：-v17">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">byte[] <font color="#000">data</font></font></td><td><font color="#666"><i>需要传输的数据，数据必须为OPUS编码格式的音频数据。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">int <font color="#000">length</font></font></td><td><font color="#666"><i>数据长度。</i></font></td></tr><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_appendeoftorealtimedata"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_appendeoftorealtimedata_inline">appendEOFToRealTimeData</a></div></div><div class="inline-doc" id="imegaphonemanager_appendeoftorealtimedata_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>appendEOFToRealTimeData</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">appendEOFToRealTimeData</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v17">描述：</h5>
+<h5 id="描述：-v20">描述：</h5>
 <p><font color="#666">添加EOF标志位，表示数据发送完毕。你可以调用<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager.html#imegaphonemanager_startplay">startPlay</a></code>接口进行播放。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v16">输入参数：</h5>
+<h5 id="输入参数：-v18">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_cancelrealtimetransmission"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_cancelrealtimetransmission_inline">cancelRealTimeTransmission</a></div></div><div class="inline-doc" id="imegaphonemanager_cancelrealtimetransmission_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>cancelRealTimeTransmission</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cancelRealTimeTransmission</span><span class="params">(@Nullable CommonCallbacks.CompletionCallback callback)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v18">描述：</h5>
+<h5 id="描述：-v21">描述：</h5>
 <p><font color="#666">取消本次传输，将清空已上传的数据。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v17">输入参数：</h5>
+<h5 id="输入参数：-v19">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</font></font></td><td><font color="#666"><i>返回执行结果的回调。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_addrealtimetransmissionstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_addrealtimetransmissionstatelistener_inline">addRealTimeTransmissionStateListener</a></div></div><div class="inline-doc" id="imegaphonemanager_addrealtimetransmissionstatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>addRealTimeTransmissionStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addRealTimeTransmissionStateListener</span><span class="params">(@Nullable RealTimeTransimissionStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v19">描述：</h5>
+<h5 id="描述：-v22">描述：</h5>
 <p><font color="#666">设置流式传输模式的状态监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v18">输入参数：</h5>
+<h5 id="输入参数：-v20">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html#imegaphonemanager_realtimetransimissionstatelistener">RealTimeTransimissionStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>流式传输模式的状态监听器。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_removerealtimetransmissionstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_removerealtimetransmissionstatelistener_inline">removeRealTimeTransmissionStateListener</a></div></div><div class="inline-doc" id="imegaphonemanager_removerealtimetransmissionstatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>removeRealTimeTransmissionStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">removeRealTimeTransmissionStateListener</span><span class="params">(@Nullable RealTimeTransimissionStateListener listener)</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v20">描述：</h5>
+<h5 id="描述：-v23">描述：</h5>
 <p><font color="#666">移除流式传输模式的状态监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
-<h5 id="输入参数：-v19">输入参数：</h5>
+<h5 id="输入参数：-v21">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@Nullable <a href="../../Components/IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html#imegaphonemanager_realtimetransimissionstatelistener">RealTimeTransimissionStateListener</a> <font color="#000">listener</font></font></td><td><font color="#666"><i>流式传输模式的状态监听器。</i></font></td></tr></table></html></div>
 <div class="api-row" id="imegaphonemanager_clearallrealtimetransmissionstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imegaphonemanager_clearallrealtimetransmissionstatelistener_inline">clearAllRealTimeTransmissionStateListener</a></div></div><div class="inline-doc" id="imegaphonemanager_clearallrealtimetransmissionstatelistener_inline" <blockquote>
 <div class="article"><h6><font color="#AAA">method </font>clearAllRealTimeTransmissionStateListener</h6></div>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clearAllRealTimeTransmissionStateListener</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.interfaces</font></td></tr></table></html>
-<h5 id="描述：-v21">描述：</h5>
+<h5 id="描述：-v24">描述：</h5>
 <p><font color="#666">移除所有流式传输模式的状态监听器。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 </div>
 <h5 id="related">Related:</h5>
@@ -767,7 +821,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MegaphoneIndex</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="描述：-v22">描述：</h5>
+<h5 id="描述：-v25">描述：</h5>
 <p><font color="#666">喊话器位置。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_portside_inline"></a>PORTSIDE</font></td><td><font color="#666">喊话器位于飞行器左舷侧（主）。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_starboard_inline"></a>STARBOARD</font></td><td><font color="#666">喊话器位于飞行器右舷侧。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_upside_inline"></a>UPSIDE</font></td><td><font color="#666">喊话器位于飞行器上侧。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphoneindex_osdk_inline"></a>OSDK</font></td><td><font color="#666">喊话器跟OSDK口连接。</font></td></tr></table></html>
@@ -778,7 +832,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> WorkMode</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="描述：-v23">描述：</h5>
+<h5 id="描述：-v26">描述：</h5>
 <p><font color="#666">喊话器工作模式。包括TTS文本模式和语音模式。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v2">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_workmode_tts_inline"></a>TTS</font></td><td><font color="#666">TTS模式，输入本文转换成语音进行播放。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_workmode_voice_inline"></a>VOICE</font></td><td><font color="#666">语音模式，输入语音进行播放。</font></td></tr></table></html>
@@ -789,7 +843,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> PlayMode</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="描述：-v24">描述：</h5>
+<h5 id="描述：-v27">描述：</h5>
 <p><font color="#666">喊话器播放模式。包括单次播放和循环播放。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v3">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_playmode_single_inline"></a>SINGLE</font></td><td><font color="#666">单次播放模式。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_playmode_loop_inline"></a>LOOP</font></td><td><font color="#666">循环播放模式。</font></td></tr></table></html>
@@ -800,7 +854,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> MegaphoneStatus</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="描述：-v25">描述：</h5>
+<h5 id="描述：-v28">描述：</h5>
 <p><font color="#666">喊话器状态。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v4">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_idel_inline"></a>IDEL</font></td><td><font color="#666">喊话器处于空闲状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_in_transmission_inline"></a>IN_TRANSMISSION</font></td><td><font color="#666">喊话器处于数据传输状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_playing_inline"></a>PLAYING</font></td><td><font color="#666">喊话器处于数据播放状态。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_in_exception_inline"></a>IN_EXCEPTION</font></td><td><font color="#666">喊话器处于异常状态，请联系设备提供商解决。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_megaphonestatus_tts_in_conversion_inline"></a>TTS_IN_CONVERSION</font></td><td><font color="#666">TTS正在转换成语音中。</font></td></tr></table></html>
@@ -811,7 +865,7 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> UploadType</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="描述：-v26">描述：</h5>
+<h5 id="描述：-v29">描述：</h5>
 <p><font color="#666">文件传输方式的传输的类型。包括本地音频文件数据和TTS二进制数据。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v5">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadtype_tts_data_inline"></a>TTS_DATA</font></td><td><font color="#666">TTS二进制数据类型，TTS二进制数据需要采用UTF-8格式。设置为此类型，你需要调用<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager_FileInfo.html#imegaphonemanager_fileinfo_setdata">setData</a></code>设置TTS二进制数据。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadtype_voice_file_inline"></a>VOICE_FILE</font></td><td><font color="#666">本地音频文件类型，音频文件需要采用OPUS编码格式。设置为此类型，你需要调用<code><a href="../../Components/IMegaphoneManager/IMegaphoneManager_FileInfo.html#imegaphonemanager_fileinfo_setfile">setFile</a></code>设置本地音频文件路径。</font></td></tr></table></html>
@@ -822,12 +876,13 @@
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> UploadState</span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width="15%"><font color="#999"><i>包：</i></font></td><td width="85%"><font color="#999">dji.v5.manager.aircraft.megaphone</font></td></tr></table></html>
-<h5 id="描述：-v27">描述：</h5>
+<h5 id="描述：-v30">描述：</h5>
 <p><font color="#666">流式传输模式上传状态。 <br><br><code><i>MSDK 5.0.0开始支持</i></code></font></p>
 <h5 id="enum-members-v6">Enum Members:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_uploading_inline"></a>UPLOADING</font></td><td><font color="#666">上传中。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_upload_success_inline"></a>UPLOAD_SUCCESS</font></td><td><font color="#666">上传成功。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_upload_failed_inline"></a>UPLOAD_FAILED</font></td><td><font color="#666">上传失败，请重新上传。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_md5_failed_inline"></a>MD5_FAILED</font></td><td><font color="#666">MD5校验失败。</font></td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imegaphonemanager_uploadstate_aborted_inline"></a>ABORTED</font></td><td><font color="#666">上传终止。</font></td></tr></table></html>
 <h5 id="class-members-v6">Class Members:</h5>
 </div>
+<div class="api-row" id="imegaphonemanager_megaphoneinfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a></div></div><div class="api-row" id="imegaphonemanager_megaphoneinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a></div></div>
 
         </div>
       </div>

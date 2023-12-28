@@ -16,6 +16,13 @@
         android:textColor="@color/uxsdk_setting_ui_btn_hover"
         android:textSize="@dimen/uxsdk_14_dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+        android:background="@color/uxsdk_dic_color_c20_divider"
+        />
+
     <Button
         android:id="@+id/setting_menu_gimbal_calibration"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -27,11 +34,32 @@
         android:textColor="@color/uxsdk_setting_ui_btn_hover"
         android:textSize="@dimen/uxsdk_14_dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+        android:background="@color/uxsdk_dic_color_c20_divider"
+        />
 
-    <dji.v5.ux.gimbal.GimbalFineTuneWidget
-        android:id="@+id/setting_menu_gimbal_fine_tune"
+
+    <Button
+        android:id="@+id/setting_menu_gimbal_adjust"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" />
+        android:gravity="center"
+        android:text="@string/setting_menu_title_gimbal_fine_tune"
+        android:textAllCaps="false"
+        android:textColor="@color/uxsdk_setting_ui_btn_hover"
+        android:textSize="@dimen/uxsdk_14_dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/uxsdk_divider_size_medium"
+        android:layout_marginTop="@dimen/uxsdk_vertical_margin_minimal"
+        android:background="@color/uxsdk_dic_color_c20_divider"
+        />
+
+
 
 </LinearLayout>

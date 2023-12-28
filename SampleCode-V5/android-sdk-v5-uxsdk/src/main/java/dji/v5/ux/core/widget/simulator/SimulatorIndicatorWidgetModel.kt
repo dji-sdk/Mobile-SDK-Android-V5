@@ -52,7 +52,9 @@ class SimulatorIndicatorWidgetModel(
         get() = isSimulatorStartedProcessor.toFlowable()
 
     override fun inSetup() {
-        bindDataProcessor(KeyTools.createKey(FlightControllerKey.KeyIsSimulatorStarted), isSimulatorStartedProcessor)
+        bindDataProcessor(
+            KeyTools.createKey(
+                FlightControllerKey.KeyIsSimulatorStarted), isSimulatorStartedProcessor)
     }
 
     override fun inCleanup() {
