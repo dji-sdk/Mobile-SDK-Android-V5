@@ -178,72 +178,72 @@ open class SystemStatusSmartListModel @JvmOverloads constructor(
         /**
          * Maps to [RCStickModeListItemWidget].
          */
-        RC_STICK_MODE("rc_stick_mode", 2),
+        RC_STICK_MODE("rc_stick_mode", 1 shl 1),
 
         /**
          * Maps to [RCBatteryListItemWidget].
          */
-        RC_BATTERY("rc_battery", 3),
+        RC_BATTERY("rc_battery", 1 shl 2),
 
         /**
          * Maps to [AircraftBatteryTemperatureListItemWidget].
          */
-        AIRCRAFT_BATTERY_TEMPERATURE("aircraft_battery_temperature", 4),
+        AIRCRAFT_BATTERY_TEMPERATURE("aircraft_battery_temperature", 1 shl 3),
 
         /**
          * Maps to [SDCardStatusListItemWidget].
          */
-        SD_CARD_STATUS("sd_card_status", 5),
+        SD_CARD_STATUS("sd_card_status", 1 shl 4),
 
         /**
          * Maps to [EMMCStatusListItemWidget].
          */
-        EMMC_STATUS("emmc_status", 6),
+        EMMC_STATUS("emmc_status", 1 shl 5),
 
         /**
          * Maps to [MaxAltitudeListItemWidget].
          */
-        MAX_ALTITUDE("max_altitude", 7),
+        MAX_ALTITUDE("max_altitude", 1 shl 6),
 
         /**
          * Maps to [MaxFlightDistanceListItemWidget].
          */
-        MAX_FLIGHT_DISTANCE("max_flight_distance", 8),
+        MAX_FLIGHT_DISTANCE("max_flight_distance", 1 shl 7),
 
         /**
          * Maps to [TravelModeListItemWidget].
          */
-        TRAVEL_MODE("travel_mode", 9),
+        TRAVEL_MODE("travel_mode", 1 shl 8),
 
         /**
          * Maps to [UnitModeListItemWidget].
          */
-        UNIT_MODE("unit_mode", 10),
+        UNIT_MODE("unit_mode", 1 shl 9),
 
         /**
          * Maps to [SSDStatusListItemWidget].
          */
-        SSD_STATUS("ssd_status", 11),
+        SSD_STATUS("ssd_status", 1 shl 10),
 
         /**
          * Maps to [NoviceModeListItemWidget].
          */
-        NOVICE_MODE("novice_mode", 12),
+        NOVICE_MODE("novice_mode", 1 shl 11),
 
         /**
          * Maps to [OverviewListItemWidget].
          */
-        OVERVIEW_STATUS("overview_status", 13),
+        OVERVIEW_STATUS("overview_status", 1 shl 12),
 
         /**
          * Maps to [ReturnToHomeAltitudeListItemWidget].
          */
-        RTH_ALTITUDE("rth_altitude", 14),
+        RTH_ALTITUDE("rth_altitude", 1 shl 13),
 
         /**
          * Maps to [ObstacleAvoidanceListItemWidget].
          */
-        OBSTACLE_AVOIDANCE("obstacle_avoidance", 15);
+        OBSTACLE_AVOIDANCE("obstacle_avoidance", 1 shl 14);
 
         /**
          * Checks if the item is excluded given the flag [excludeItems].

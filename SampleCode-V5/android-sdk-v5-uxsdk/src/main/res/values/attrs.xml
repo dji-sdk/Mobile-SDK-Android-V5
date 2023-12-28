@@ -648,19 +648,19 @@
         <attr name="uxsdk_excludeItem">
             <flag name="flight_mode" value="1" />
             <flag name="rc_stick_mode" value="2" />
-            <flag name="rc_battery" value="3" />
-            <flag name="aircraft_battery_temperature" value="4" />
-            <flag name="sd_card_status" value="5" />
-            <flag name="emmc_status" value="6" />
-            <flag name="max_altitude" value="7" />
-            <flag name="max_flight_distance" value="8" />
-            <flag name="travel_mode" value="9" />
-            <flag name="unit_mode" value="10" />
-            <flag name="ssd_status" value="11" />
-            <flag name="novice_mode" value="12" />
-            <flag name="overview_status" value="13" />
-            <flag name="rth_altitude" value="14" />
-            <flag name="obstacle_avoidance" value="15" />
+            <flag name="rc_battery" value="4" />
+            <flag name="aircraft_battery_temperature" value="8" />
+            <flag name="sd_card_status" value="16" />
+            <flag name="emmc_status" value="32" />
+            <flag name="max_altitude" value="64" />
+            <flag name="max_flight_distance" value="128" />
+            <flag name="travel_mode" value="256" />
+            <flag name="unit_mode" value="512" />
+            <flag name="ssd_status" value="1024" />
+            <flag name="novice_mode" value="2048" />
+            <flag name="overview_status" value="4096" />
+            <flag name="rth_altitude" value="8192" />
+            <flag name="obstacle_avoidance" value="16384" />
         </attr>
     </declare-styleable>
 
