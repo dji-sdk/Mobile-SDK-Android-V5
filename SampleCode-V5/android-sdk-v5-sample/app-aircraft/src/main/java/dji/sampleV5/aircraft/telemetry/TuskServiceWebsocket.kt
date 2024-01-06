@@ -9,8 +9,12 @@ class TuskServiceWebsocket {
     private val client: OkHttpClient = OkHttpClient()
     private lateinit var webSocket: WebSocket
     private val gson: Gson = Gson()
-
+// Set of Variables that system is expected to receive from server
+    var maxVelocity: Double = 6.0 // m/s
     var waypointList =  listOf<Coordinate>()
+    var nextWaypoint = Coordinate(0.0, 0.0, 0.0)
+    var isGatherAction = false
+    var isAlertAction = false
 
     // Establish WebSocket connection
     fun connectWebSocket() {

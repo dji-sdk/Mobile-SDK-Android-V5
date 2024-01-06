@@ -44,7 +44,7 @@ class PachKeyManager() {
             0.0, 0.0, 0.0, 0.0, 0, windDirection = null, false)
     var statusData = TuskAircraftStatus( connected = false, battery = 0, gpsSignal = 0, gps = 0,
         signalQuality =  0,  goHomeState = null, flightMode = null, motorsOn = false, homeLocationLat = null,
-            homeLocationLong = null, gimbalAngle = 0.0, goHomeStatus = null, takeoffAltitude = null)
+            homeLocationLong = null, gimbalAngle = 0.0, goHomeStatus = null, takeoffAltitude = null, decisionStatus = null)
     var controllerStatus = TuskControllerStatus( battery = 0, pauseButton = false, goHomeButton = false,
             leftStickX = 0,leftStickY=0,rightStickX=0,rightStickY=0, fiveDUp = false, fiveDDown = false,
             fiveDRight = false, fiveDLeft = false, fiveDPress = false)
@@ -123,7 +123,8 @@ class PachKeyManager() {
                     Log.v("PachKeyManager", "FiveD Pressed")
 //                    followWaypoints(backyardCoordinatesComplexChangingAlt)
                     HIPPOWaypoints = telemService.waypointList
-                    followWaypoints(HIPPOWaypoints)
+//                    followWaypoints(HIPPOWaypoints)
+                    flyHippo()
                     Log.v("PachKeyManager", "Following Waypoint List: $HIPPOWaypoints")
                 }
             }
@@ -564,6 +565,19 @@ class PachKeyManager() {
                     }
                 })
     }
+    private fun decisionChecks(): Boolean {
+        // Function checks to see if any key decision points have been reached
+        if (telemService.isAlertAction) {
+            Log.v("PachKeyManager", "Alert Action")
+            return false
+        }
+        if (telemService.isGatherAction) {
+            Log.v("PachKeyManager", "Gather Action")
+            return false
+        }
+
+        return true
+    }
 
     private fun safetyChecks(): Boolean {
         // Function checks all safety information before returning a boolean for proceeding.
@@ -598,8 +612,10 @@ class PachKeyManager() {
         // When called, this function will make the aircraft go to a certain altitude
     }
 
-    suspend fun go2Location(lat: Double, lon: Double, alt: Double){
+    suspend fun go2Location(lat: Double, lon: Double, alt: Double, yaw: Double=-1.0){
         // When called, this function will make the aircraft go to a certain location
+        // Setting the yaw to a negative number will cause the yaw to be dynamically set. Helpful
+        // cases when the aircraft needs to adjust its heading to reach a location
         // Edge Cases:
         // What if drone is already flying?
         // What if drone loses connection or GPS signal?
@@ -607,84 +623,19 @@ class PachKeyManager() {
         // What if drone is already at the location?
         // What if the operator takes control of the aircraft?
 
-
-        // compute yaw angle based on current location and target location
-        //val yawAngle = computeYawAngle(lat, lon)
-        //Log.v("PachKeyManager", "Yaw Offset: $yawAngle")
-//        // command yaw and altitude angle to drone
-//        while (((abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance) &&
-//                    (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance))) {
-//            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle")
-//            Log.v("PachKeyManager", "Commanded Altitude: $alt")
-//            if (safetyChecks()) {
-//                controller.sendYawAlt(yawAngle, alt)
-//
-//            } else{
-//                Log.v("PachKeyManager", "Safety Check Failed")
-//                break
-//            }
-//            delay(500L)
-//        }
-
-//        yawtol = abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance
-//        disttol = distance > pidController.posTolerance
-//        tolnotmet = [yawtol, disttol]
-//        while any tolnotmet{
-//
-//        }
-//
-//        while (abs(stateData.yaw?.minus(yawAngle)!!) > pidController.yawTolerance){
-//            Log.v("PachKeyManager", "Commanded Yaw: $yawAngle")
-//
-//            if (safetyChecks()) {
-//                controller.sendYaw(yawAngle)
-//
-//            } else{
-//                Log.v("PachKeyManager", "Safety Check Failed")
-//                break
-//            }
-//            delay(100L)
-//        }
-//
-//        while (abs(stateData.altitude?.minus(alt)!!) > pidController.altTolerance){
-//            Log.v("PachKeyManager", "Commanded Altitude: $alt")
-//            if (safetyChecks()) {
-//                controller.setAlt(alt)
-//            } else{
-//                Log.v("PachKeyManager", "Safety Check Failed")
-//                break
-//            }
-//            delay(100L)
-//        }
-//
-//        // compute distance to target location using lat and lon
-//        var distance = computeLatLonDistance(lat, lon)
-//        pidController.setSetpoint(distance)
-//        while (distance > pidController.posTolerance) { // add check for velocity tolerance: if velocity too high, keep going
-//            // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
-//            //What if we overshoot the target location? Will the aircraft back up or turn around?
-//            Log.v("PachKeyManager", "Distance: $distance")
-//            val xvel = pidController.getControl(distance)
-//            val clippedXvel = xvel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
-//            Log.v("PachKeyManager", "Commanded X Velocity: $xvel, Clipped Velocity  $clippedXvel")
-//            distance = computeLatLonDistance(lat, lon)
-//
-//            // command drone x velocity to move to target location
-//            if (safetyChecks()) {
-//                controller.sendForwardVel(clippedXvel)
-//            } else{
-//                Log.v("PachKeyManager", "Safety Check Failed")
-//                break
-//            }
-//            delay(100L)
-//        }
-        ///////////////////////////////////////////////////////////////////////
         // compute distance to target location using lat and lon
         var distance = computeLatLonDistance(lat, lon)
-        var yawAngle = computeYawAngle(lat, lon)
+        var yawDynamic = false  // Used if the yaw should be changed between waypoints
+        var yawAngle = Double.NaN
+        if (yaw<0.0){ // If yaw is negative, compute yaw angle
+            yawAngle = computeYawAngle(lat, lon)
+            yawDynamic = true
+        } else{
+            yawAngle = yaw
+        }
         var xVel = pidController.getControl(distance)
         pidController.setSetpoint(distance)
-        while (distance > pidController.posTolerance) { // add check for velocity tolerance: if velocity too high, keep going
+        while (distance > pidController.posTolerance) {
             // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             Log.v("PachKeyManager", "Distance: $distance")
@@ -694,32 +645,92 @@ class PachKeyManager() {
             distance = computeLatLonDistance(lat, lon)
 
             // Update Yaw
-            yawAngle = computeYawAngle(lat, lon)
+            if (yawDynamic){
+                yawAngle = computeYawAngle(lat, lon)
+            }
+//            yawAngle = computeYawAngle(lat, lon)
 
             Log.v("PachKeyManager", "Commanded Yaw: $yawAngle | Commanded Altitude: $alt | xvel: $xVel | clippedXvel: $clippedXvel")
 
             // command drone x velocity to move to target location
-            if (safetyChecks()) {
-                controller.sendVirtualStickVelocityBody(clippedXvel, 0.0, yawAngle, alt)
-            } else{
-                Log.v("PachKeyManager", "Safety Check Failed")
+            if (decisionChecks()) {
+                if (safetyChecks()) {
+                    controller.sendVirtualStickVelocityBody(clippedXvel, 0.0, yawAngle, alt)
+                } else {
+                    Log.v("PachKeyManager", "Safety Check Failed")
+                    break
+                }
+            } else {
+                Log.v("PachKeyManager", "Decision Check Failed")
                 break
             }
             delay(100L)
         }
-        ///////////////////////////////////////////////////////////////////////
+    }
 
+    suspend fun flyHippo() {
+        // Function will fly using the HIPPO decision making framework.
+        // This will fly to a given waypoint and continue along to the following waypoint unless
+        // a specific decision making flag has been raised.
+        // When called, this function will make the aircraft go to a certain location
+        // Edge Cases:
+        // What if drone is already flying?
+        // What if drone loses connection or GPS signal?
+        // What if remote controller is disconnected?
+        // What if drone is already at the location?
+        // What if the operator takes control of the aircraft?
+
+        // compute distance to target location using lat and lon
+        var waypoint = telemService.nextWaypoint
+        val orbitRadius = 10.0
+        pidController.maxVelocity = telemService.maxVelocity
+        while (safetyChecks()) {
+            if (decisionChecks()) {
+                go2Location(
+                    waypoint.lat,
+                    waypoint.lon,
+                    waypoint.alt,
+                    -1.0
+                ) // Adding a negative yaw means that it will be computed for us
+            } else if (telemService.isAlertAction) {
+                // Alert action stops the aircraft's movement
+                telemService.isAlertAction = false
+                Log.v("PachKeyManager", "Alert Action")
+                // TODO: Configure Alert Message
+                break
+            } else if (telemService.isGatherAction) {
+                // Send Gather Confirmation
+                Log.v("PachKeyManager", "Gather Action")
+                statusData = statusData.copy(decisionStatus = "GatheringInfo")
+                sendStatus(statusData)
+                flyOrbitPath(
+                    Coordinate(stateData.latitude!!, stateData.longitude!!,stateData.altitude!!),
+                    orbitRadius)
+                Log.v("PackKeyManager", "Orbit Complete")
+            }
+             else {
+                Log.v("PachKeyManager", "Unknown Decision Check Failed")
+                break
+            }
+            // Handle logic for updating waypoint
+            if (telemService.isGatherAction){
+                telemService.isGatherAction = false
+                Log.v("PachKeyManager", "Continuing to Waypoint")
+            }
+            else if (telemService.nextWaypoint != waypoint) {
+                waypoint = telemService.nextWaypoint
+                statusData = statusData.copy(decisionStatus = "WaypointReached")
+                sendStatus(statusData)
+            } else{
+                Log.v("PachKeyManager", "Waypoint not updated")
+                break
+            }
+        }
+        controller.endVirtualStick()
     }
 
     // compute distance to target location using lat and lon
-    fun computeDistance(lat: Double, lon: Double)
-            : Double {
-        val latdiff = lat - stateData.latitude!!
-        val londiff = lon - stateData.longitude!!
-        return sqrt(latdiff.pow(2) + londiff.pow(2))
-    }
-
-    fun computeLatLonDistance(lat1 : Double, lon1: Double): Double {  // generally used geo measurement function
+    private fun computeLatLonDistance(lat1 : Double, lon1: Double): Double {  // generally used geo measurement function
         val lat2 = stateData.latitude!!
         val lon2 = stateData.longitude!!
         val R = 6378.137 // Radius of earth in KM
@@ -735,6 +746,7 @@ class PachKeyManager() {
 
     private fun computeYawAngle(lat: Double, lon: Double)
             : Double {
+        // Computes yaw angle to target location to keep aircraft facing forward
         val yDiff = lat - stateData.latitude!!
         val xDiff = lon - stateData.longitude!!
         val res = atan2(yDiff, xDiff) *(180 / PI)
@@ -764,8 +776,7 @@ class PachKeyManager() {
 
         for (wp in wpList){
             if (safetyChecks()) {
-                go2Location(wp.lat, wp.lon, wp.alt)
-
+                go2Location(wp.lat, wp.lon, wp.alt, -1.0) // Adding a negative yaw means that it will be computed for us
 
             } else{
                 Log.v("SafetyChecks", "Safety Check Failed")
@@ -773,7 +784,48 @@ class PachKeyManager() {
             }
         }
 
-//        controller.endVirtualStick()
+        controller.endVirtualStick()
+    }
+
+    suspend fun flyOrbitPath(center:Coordinate, radius:Double=10.0) {
+        // When called, this function will make the aircraft fly in a circle around a point
+
+        // Check to see that virtual stick is enabled
+        if (!controller.virtualStickState.isVirtualStickEnable) {
+            controller.enableVirtualStick()
+        }
+        if (!controller.virtualStickState.isVirtualStickAdvancedModeEnabled) {
+            controller.enableVirtualStickAdvancedMode()
+        }
+
+        // Create a list of points that are evenly spaced around the circle
+        val numPoints = 45
+        val circlePoints = Array(numPoints) { Coordinate(0.0, 0.0, 0.0) }
+        for (i in 1..numPoints) {
+            val numDegrees = 360.0/numPoints*i
+            val x = radius * cos(Math.toRadians((i.toDouble() / numDegrees) * 360.0)) + center.lat
+            val y = radius * sin(Math.toRadians((i.toDouble() / numDegrees) * 360.0)) + center.lon
+            val z = center.alt
+            circlePoints[i - 1] = Coordinate(x, y, z)
+        }
+
+        // Fly the orbit
+        for (i in 1..numPoints) {
+            val angle = 360.0/numPoints*i
+            val yawAngle = if (angle<180) {
+                angle+180
+            } else{
+                angle-180
+            }
+            val wp = circlePoints[i - 1]
+            if (safetyChecks()) {
+                go2Location(wp.lat, wp.lon, wp.alt, yawAngle)
+
+            } else{
+                Log.v("SafetyChecks", "Safety Check Failed")
+                break
+            }
+        }
     }
 }
 
