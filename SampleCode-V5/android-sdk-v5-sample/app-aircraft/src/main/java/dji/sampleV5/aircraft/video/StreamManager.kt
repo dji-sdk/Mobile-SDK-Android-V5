@@ -15,6 +15,8 @@ import dji.v5.manager.datacenter.livestream.LiveStreamStatusListener
 import dji.v5.manager.datacenter.livestream.LiveStreamType
 import dji.v5.manager.datacenter.livestream.settings.RtspSettings
 import dji.v5.utils.common.ToastUtils
+import java.net.Inet4Address
+import java.net.NetworkInterface
 
 class StreamManager() {
     private val manager = MediaDataCenter.getInstance().liveStreamManager
@@ -107,6 +109,35 @@ class StreamManager() {
             primaryChannel.addVideoChannelStateChangeListener(primaryChannelStateListener)
         }
 
+    }
+
+    private fun getLocalIPAddress(): String? {
+        try {
+            val en = NetworkInterface.getNetworkInterfaces()
+            while (en.hasMoreElements()) {
+                val networkInterface = en.nextElement()
+                val enu = networkInterface.inetAddresses
+                while (enu.hasMoreElements()) {
+                    val inetAddress = enu.nextElement()
+                    if (!inetAddress.isLoopbackAddress && inetAddress is Inet4Address) {
+                        return inetAddress.getHostAddress()
+                    }
+                }
+            }
+        } catch (ex: Exception) {
+            Log.v("StreamManager", "Failed to get IP address: $ex")
+            ex.printStackTrace()
+        }
+
+        return null
+    }
+    fun getStreamURL(): String {
+        val ip = getLocalIPAddress()
+        val port = manager.liveStreamSettings?.rtspSettings?.port
+        val username = manager.liveStreamSettings?.rtspSettings?.userName
+        val password = manager.liveStreamSettings?.rtspSettings?.password
+        Log.v("StreamManager", "Stream URL: rtsp://$username:$password@$ip:$port:streaming/live/1")
+        return "rtsp://$username:$password@$ip:$port/streaming/live/1"
     }
 
 }

@@ -52,9 +52,11 @@ class TuskServiceWebsocket {
             val args = jsonObject.opt("args")
 
             when (action) {
-                "AllAircraftStatus" -> handleGetAllAircraftStatus(args)
-                "NewControllerStatus" -> handleNewControllerStatus(args)
+                "AllAircraftStatus" -> handleGetAllAircraftStatus(args) //Unused
+                "NewControllerStatus" -> handleNewControllerStatus(args) //Unused
                 "FollowWaypoints" -> handleWaypointSet(args as JSONObject?)
+                "FlightWaypoint" -> handleNewWaypoint(args as JSONObject?)
+                "FlightStatus" -> handleFlightStatusUpdate(args as JSONObject?)
                 else -> Log.d("TuskService", "Unknown action: $action")
             }
         } catch (e: Exception) {
@@ -83,6 +85,15 @@ class TuskServiceWebsocket {
         sendWebSocketMessage("NewAircraftStatus", gson.toJson(status))
     }
 
+    // Post Autonomy Status
+    fun postAutonomyStatus(status: String) {
+        sendWebSocketMessage("NextFlightStatus", gson.toJson(status))
+    }
+
+    fun postStreamURL(url: String) {
+        sendWebSocketMessage("SetStream", gson.toJson(url))
+    }
+
     // Post controller status
     fun postControlStatus(status: TuskControllerStatus) {
         sendWebSocketMessage("NewControllerStatus", gson.toJson(status))
@@ -100,6 +111,7 @@ class TuskServiceWebsocket {
     }
 
     private fun handleWaypointSet(args: Any?) {
+        // Handle action "FollowWaypoints" with the waypoint list
         try {
             if (args is JSONObject) {
                 val flightPathArray = args.optJSONArray("flightPath")
@@ -122,6 +134,45 @@ class TuskServiceWebsocket {
             }
         } catch (e: Exception) {
             Log.e("TuskService", "Failed to handle FollowWaypoints action: ${e.message}")
+        }
+    }
+
+    private fun handleNewWaypoint(args: Any?) {
+        // Handle action "flightWaypoint" with the next waypoint
+        try {
+            if (args is JSONObject) {
+                val waypoint = args.optJSONArray("nextFlightWaypoint")
+                if (waypoint != null) {
+                    val lat = waypoint.optDouble(0)
+                    val long = waypoint.optDouble(1)
+                    val alt = waypoint.optDouble(2)
+                    Log.d(
+                        "WaypointService",
+                        "Next Waypoint - Latitude: $lat, Longitude: $long,  Altitude: $alt"
+                    )
+                    nextWaypoint = Coordinate(lat, long, 50.0)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("TuskService", "Failed to handle FlightWaypoint action: ${e.message}")
+        }
+    }
+
+    private fun handleFlightStatusUpdate(args: Any?){
+        // Handle action "FlightStatus" with decision making event
+        try {
+            if (args is JSONObject) {
+                val event = args.optString("event")
+                if (event == "gather-info"){
+                    isGatherAction = true
+                } else if (event == "alert"){
+                    isAlertAction = true
+                } else {
+                    Log.d("TuskService", "Invalid event format for FlightStatus action")
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("TuskService", "Failed to handle FlightStatus action: ${e.message}")
         }
     }
 
