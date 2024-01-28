@@ -54,4 +54,12 @@ data class TuskControllerStatus(
     @SerializedName("fiveDPress") val fiveDPress: Boolean?,
 )
 
-data class Coordinate(val lat: Double, val lon: Double, val alt: Double)
+data class Event(
+    @SerializedName("event") val event: String?
+)
+
+data class StreamInfo(
+    @SerializedName("rtspUrl") val url: String?
+)
+
+data class Coordinate(val lat: Double, val lon: Double, var alt: Double)

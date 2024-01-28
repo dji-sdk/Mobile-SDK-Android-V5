@@ -19,7 +19,7 @@ class TuskServiceWebsocket {
     // Establish WebSocket connection
     fun connectWebSocket() {
 //        val request = Request.Builder().url("ws://192.168.20.169:8084").build()
-        val request = Request.Builder().url("ws://192.168.20.159:8084").build()
+        val request = Request.Builder().url("ws://192.168.0.102:8084").build()
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 Log.d("TuskService", "WebSocket connection opened")
@@ -47,10 +47,10 @@ class TuskServiceWebsocket {
     // Handle received WebSocket message
     private fun handleWebSocketMessage(message: String) {
         try {
+            Log.v("TuskServiceAction", "Received WebSocket message: $message")
             val jsonObject = JSONObject(message)
             val action = jsonObject.optString("action")
             val args = jsonObject.opt("args")
-
             when (action) {
                 "AllAircraftStatus" -> handleGetAllAircraftStatus(args) //Unused
                 "NewControllerStatus" -> handleNewControllerStatus(args) //Unused
@@ -65,14 +65,9 @@ class TuskServiceWebsocket {
     }
     // Send WebSocket message
     private fun sendWebSocketMessage(action: String, args: Any) {
-        Log.v("TuskService", "Sending Websocket Message $action $args")
+//        Log.v("TuskService", "Sending Websocket Message $action $args")
         val data = "{\"action\":\"$action\",\"args\":$args}"
         webSocket.send(data)
-    }
-
-    // Get all aircraft statuses
-    suspend fun getAllAircraftStatus() {
-        sendWebSocketMessage("GetAllAircraftStatus", "")
     }
 
     // Post aircraft state
@@ -86,11 +81,11 @@ class TuskServiceWebsocket {
     }
 
     // Post Autonomy Status
-    fun postAutonomyStatus(status: String) {
-        sendWebSocketMessage("NextFlightStatus", gson.toJson(status))
+    fun postAutonomyStatus(status: Event) {
+        sendWebSocketMessage("newFlightStatus", gson.toJson(status))
     }
 
-    fun postStreamURL(url: String) {
+    fun postStreamURL(url: StreamInfo) {
         sendWebSocketMessage("SetStream", gson.toJson(url))
     }
 
@@ -141,17 +136,16 @@ class TuskServiceWebsocket {
         // Handle action "flightWaypoint" with the next waypoint
         try {
             if (args is JSONObject) {
-                val waypoint = args.optJSONArray("nextFlightWaypoint")
-                if (waypoint != null) {
-                    val lat = waypoint.optDouble(0)
-                    val long = waypoint.optDouble(1)
-                    val alt = waypoint.optDouble(2)
-                    Log.d(
-                        "WaypointService",
-                        "Next Waypoint - Latitude: $lat, Longitude: $long,  Altitude: $alt"
-                    )
-                    nextWaypoint = Coordinate(lat, long, 50.0)
-                }
+                val lat = args.getDouble("latitude")
+                val long = args.getDouble("longitude")
+                val alt = args.getDouble("altitude")
+                maxVelocity = args.getDouble("speed")
+                Log.d(
+                    "WaypointService",
+                    "Next Waypoint - Latitude: $lat, Longitude: $long,  Altitude: $alt"
+                )
+                nextWaypoint = Coordinate(lat, long, alt)
+//                maxVelocity = speed
             }
         } catch (e: Exception) {
             Log.e("TuskService", "Failed to handle FlightWaypoint action: ${e.message}")
@@ -162,10 +156,11 @@ class TuskServiceWebsocket {
         // Handle action "FlightStatus" with decision making event
         try {
             if (args is JSONObject) {
-                val event = args.optString("event")
-                if (event == "gather-info"){
+                val event = args.optJSONArray("event")
+                val flag = event?.get(0)
+                if (flag == "gather-info"){
                     isGatherAction = true
-                } else if (event == "alert"){
+                } else if (flag == "alert-operator"){
                     isAlertAction = true
                 } else {
                     Log.d("TuskService", "Invalid event format for FlightStatus action")

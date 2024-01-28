@@ -2,6 +2,8 @@ package dji.sampleV5.aircraft.control
 
 import android.util.Log
 import dji.sampleV5.aircraft.telemetry.Coordinate
+import dji.sampleV5.aircraft.telemetry.Event
+import dji.sampleV5.aircraft.telemetry.StreamInfo
 import dji.sampleV5.aircraft.telemetry.TuskAircraftState
 import dji.sampleV5.aircraft.telemetry.TuskAircraftStatus
 import dji.sampleV5.aircraft.telemetry.TuskControllerStatus
@@ -114,7 +116,7 @@ class PachKeyManager() {
                 }
 
                 if (fiveDDown) {
-                    streamer.startStream()
+//                    streamer.startStream()
                     sendStreamURL(streamer.getStreamURL())
 //                    streamer.initChannelStateListener()
 //                    controller.startLanding()
@@ -126,11 +128,13 @@ class PachKeyManager() {
 //                    Log.v("PachKeyManager", "Following Waypoint List: $HIPPOWaypoints")
 //                    HIPPOWaypoints = telemService.waypointList
 //                    followWaypoints(HIPPOWaypoints)
-//                    flyHippo()
-                    flyOrbitPath(
-                        Coordinate(stateData.latitude!!, stateData.longitude!!,stateData.altitude!!),
-                        10.0)
-                    Log.v("PachKeyManager", "Orbit Complete")
+                    flyHippo()
+//                    flyOrbitPath(
+//                        Coordinate(stateData.latitude!!, stateData.longitude!!,stateData.altitude!!),
+//                        10.0)
+//                    diveAndYaw(60.0, 20.0)
+                    controller.endVirtualStick()
+                    Log.v("PachKeyManager", "Finished fiveDPress Execution")
                 }
             }
 
@@ -148,11 +152,11 @@ class PachKeyManager() {
     }
 
     private fun sendAutonomyStatus(status: String) {
-        telemService.postAutonomyStatus(status)
+        telemService.postAutonomyStatus(Event(status))
     }
 
     private fun sendStreamURL(url: String) {
-        telemService.postStreamURL(url)
+        telemService.postStreamURL(StreamInfo(url))
     }
 
     private fun sendControllerStatus(status: TuskControllerStatus) {
@@ -607,8 +611,41 @@ class PachKeyManager() {
 
         return true
     }
-    fun go2Altitude(alt: Double){
+    suspend fun goToAltitude(alt: Double){
         // When called, this function will make the aircraft go to a certain altitude
+        while (stateData.altitude!! != alt) {
+            Log.v("PachKeyManager", "Altitude Set: ${alt}. Current Altitude: ${stateData.altitude}")
+            // command drone x velocity to move to target location
+            if (safetyChecks()) {
+                controller.sendVirtualStickVelocityBody(0.0, 0.0, stateData.yaw!!, alt)
+            } else {
+                Log.v("PachKeyManager", "Safety Check Failed")
+                break
+            }
+
+            delay(100L)
+        }
+    }
+
+    private fun adjustAltForTerrain(alt: Double): Double {
+        // Function expects the input to be in MSL altitude.
+        // Using the takeoff altitude, we then adjust to account for relative altitude in meters
+        return alt - statusData.takeoffAltitude!!
+    }
+
+    suspend fun goToYawAngle(angle: Double){
+        // When called aircraft will rotate to a given yaw angle
+        while (stateData.yaw!! != angle) {
+            Log.v("PachKeyManager", "Yaw Set: ${stateData.yaw}")
+            // command drone x velocity to move to target location
+            if (safetyChecks()) {
+                controller.sendVirtualStickVelocityBody(0.0, 0.0, angle, stateData.altitude!!)
+            } else {
+                Log.v("PachKeyManager", "Safety Check Failed")
+                break
+            }
+            delay(100L)
+        }
     }
 
     suspend fun go2LocationForward(lat: Double, lon: Double, alt: Double){
@@ -656,24 +693,26 @@ class PachKeyManager() {
         }
     }
 
-    suspend fun go2LocationFixedYaw(lat: Double, lon: Double, alt: Double, yaw: Double){
+    suspend fun goToLocationFixedYaw(lat: Double, lon: Double, alt: Double, yaw: Double){
         // Function goes to a coordinate location assuming a fixed yaw angle
-
         // compute distance to target location using lat and lon
+        // TODO: There seems to be a control issue with this implementation.
+        //  Aircraft doesn't seem to reach the waypoint in the expected manner. Potential coordinate frame issue.
+        //  Can try checking basic flight control
         var distance = computeLatLonDistance(lat, lon)
         while (distance > pidController.posTolerance) {
             // ((distance > pidController.posTolerance) and (stateData.velocityX!! > pidController.velTolerance))
             //What if we overshoot the target location? Will the aircraft back up or turn around?
             Log.v("PachKeyManager", "Distance: $distance")
-            val latError = computeLatDistance(lat)
-            val lonError = computeLonDistance(lon)
-            Log.v("PachKeyManager", "Lat Error: $latError | Lon Error: $lonError | Distance: $distance")
-            val xVel = pidController.getControl(lonError)
-            val yVel = pidController.getControl(latError)
+            val yError = computeLatDistance(lat)
+            val xError = computeLonDistance(lon)
+            Log.v("PachKeyManager", "Y Error: $yError | X Error: $xError | Distance: $distance")
+            val xVel = pidController.getControl(xError)
+            val yVel = pidController.getControl(yError)
             val clippedXvel = xVel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
             val clippedYvel = yVel.coerceIn(-pidController.maxVelocity, pidController.maxVelocity)
 
-            Log.v("PachKeyManager", "Commanded Yaw: $yaw | Commanded Altitude: $alt | xvel: $xVel | clippedXvel: $clippedXvel")
+            Log.v("PachKeyManager", "Commanded Yaw: $yaw | Commanded Altitude: $alt | xvel: $xVel | yvel: $yVel")
             // command drone x & y velocity to move to target location with a defined yaw
             if (!telemService.isAlertAction) {
                 if (safetyChecks()) {
@@ -686,7 +725,7 @@ class PachKeyManager() {
                 Log.v("PachKeyManager", "Alerted Operator")
                 break
             }
-            delay(100L)
+            delay(50L)
             distance = computeLatLonDistance(lat, lon)
         }
     }
@@ -704,9 +743,11 @@ class PachKeyManager() {
         // What if the operator takes control of the aircraft?
 
         // compute distance to target location using lat and lon
-        var waypoint = telemService.nextWaypoint
+        var waypoint = getNewDirection()
         val orbitRadius = 10.0
-        pidController.maxVelocity = telemService.maxVelocity
+        // Check to see that advanced virtual stick is enabled
+        controller.ensureAdvancedVirtualStickMode()
+
         while (safetyChecks()) {
             if (decisionChecks()) {
                 go2LocationForward(
@@ -723,10 +764,11 @@ class PachKeyManager() {
                 // Send Gather Confirmation
                 Log.v("PachKeyManager", "Gather Action")
                 sendAutonomyStatus("GatheringInfo")
-                flyOrbitPath(
-                    Coordinate(stateData.latitude!!, stateData.longitude!!,stateData.altitude!!),
-                    orbitRadius)
-                Log.v("PackKeyManager", "Orbit Complete")
+                diveAndYaw(waypoint.alt-10, 30.0)
+//                flyOrbitPath(
+//                    Coordinate(stateData.latitude!!, stateData.longitude!!,stateData.altitude!!),
+//                    orbitRadius)
+                Log.v("PackKeyManager", "Gathering Complete")
             }
              else {
                 Log.v("PachKeyManager", "Unknown Decision Check Failed")
@@ -743,7 +785,7 @@ class PachKeyManager() {
                 break
             }
             else if (telemService.nextWaypoint != waypoint) {
-                waypoint = telemService.nextWaypoint
+                waypoint = getNewDirection()
                 sendAutonomyStatus("WaypointReached")
             } else{
                 Log.v("PachKeyManager", "Waypoint not updated")
@@ -751,6 +793,14 @@ class PachKeyManager() {
             }
         }
         controller.endVirtualStick()
+    }
+
+    private fun getNewDirection(): Coordinate {
+        // Function will update flight parameters based on the external information
+        val waypoint = telemService.nextWaypoint
+        waypoint.alt = adjustAltForTerrain(waypoint.alt)
+        pidController.maxVelocity = telemService.maxVelocity
+        return waypoint
     }
 
     private suspend fun followWaypoints(wpList: List<Coordinate>){
@@ -762,13 +812,8 @@ class PachKeyManager() {
             controller.startTakeOff()
         }
 
-        // Check to see that virtual stick is enabled
-        if (!controller.virtualStickState.isVirtualStickEnable){
-            controller.enableVirtualStick()
-        }
-        if (!controller.virtualStickState.isVirtualStickAdvancedModeEnabled){
-            controller.enableVirtualStickAdvancedMode()
-        }
+        // Check to see that advanced virtual stick is enabled
+        controller.ensureAdvancedVirtualStickMode()
 
         for (wp in wpList){
             if (safetyChecks()) {
@@ -786,13 +831,8 @@ class PachKeyManager() {
     suspend fun flyOrbitPath(center:Coordinate, radius:Double=10.0) {
         // When called, this function will make the aircraft fly in a circle around a point
 
-        // Check to see that virtual stick is enabled
-        if (!controller.virtualStickState.isVirtualStickEnable) {
-            controller.enableVirtualStick()
-        }
-        if (!controller.virtualStickState.isVirtualStickAdvancedModeEnabled) {
-            controller.enableVirtualStickAdvancedMode()
-        }
+        // Check to see that advanced virtual stick is enabled
+        controller.ensureAdvancedVirtualStickMode()
 
         // Create a list of points that are evenly spaced around the circle
         val numPoints = 5
@@ -818,12 +858,35 @@ class PachKeyManager() {
             val wp = circlePoints[i - 1]
             if (!telemService.isAlertAction) {
                 Log.v("PachKeyManager", "NextWaypoint: $wp")
-                go2LocationFixedYaw(wp.lat, wp.lon, wp.alt, yawAngle)
+                goToLocationFixedYaw(wp.lat, wp.lon, wp.alt, yawAngle)
             } else {
                 Log.v("PachKeyManager", "Alerted Operator")
                 break
             }
         }
+    }
+
+    suspend fun diveAndYaw(alt: Double, yawDiff: Double) {
+        // Function will make the aircraft descend to a certain altitude and change yaw angles
+        // Check to see that advanced virtual stick is enabled
+        controller.ensureAdvancedVirtualStickMode()
+        Log.v("PachKeyManager", "Diving to $alt")
+        goToAltitude(alt)
+        // Controller yaw angle has a range of [-180, 180] with 0 at North. Positive is CW
+        val yawL = if (stateData.yaw!! - yawDiff<-180.0) {
+            stateData.yaw!! - yawDiff + 360.0
+        } else {
+            stateData.yaw!! - yawDiff
+        }
+        val yawR = if (stateData.yaw!! + yawDiff > 180.0) {
+            stateData.yaw!! + yawDiff - 360.0
+        } else {
+            stateData.yaw!! + yawDiff
+        }
+        Log.v("PachKeyManager", "Yawing Left to $yawL")
+        goToYawAngle(yawL)
+        Log.v("PachKeyManager", "Yawing Right to $yawR")
+        goToYawAngle(yawR)
     }
 
     // compute distance to target location using lat and lon
@@ -846,19 +909,28 @@ class PachKeyManager() {
         val dLat = lat2 * Math.PI / 180.0 - lat1 * Math.PI / 180.0;
         val a = sin(dLat/2) * sin(dLat/2)
         val d =  2.0 * atan2(Math.sqrt(a), sqrt(1-a))* R * 1000.0
-        return d
+        return if (lat2<lat1) {
+            -d
+        } else {
+            d
+        }
     }
 
     private fun computeLonDistance(lon1: Double) : Double{
         // Computes distance in meters between current longitude and target longitude.
         // Assumes a constant latitude taken as the current aircraft position
+        // Use East as positive direction
         val lat2 = stateData.latitude!!
         val lon2 = stateData.longitude!!
         val dLon = lon2 * Math.PI / 180.0 - lon1 * Math.PI / 180.0
         val a = cos(lat2 * Math.PI / 180) * cos(lat2 * Math.PI / 180) *
                 Math.sin(dLon/2) * Math.sin(dLon/2)
         val d = 2.0 * atan2(Math.sqrt(a), sqrt(1-a)) * R * 1000.0
-        return d // meters
+        return if (lon2>lon1) {
+            -d
+        } else{
+            d
+        }
     }
 
     private fun computeYawAngle(lat: Double, lon: Double)

@@ -143,6 +143,15 @@ class VirtualStickControl{
 //        virtualStickVM.disableVirtualStickAdvancedMode()
     }
 
+    fun ensureAdvancedVirtualStickMode(){
+        if (!virtualStickState.isVirtualStickEnable){
+            enableVirtualStick()
+        }
+        if (!virtualStickState.isVirtualStickAdvancedModeEnabled){
+            enableVirtualStickAdvancedMode()
+        }
+    }
+
     fun sendYawAlt(yaw: Double, alt: Double){
         sendAdvancedVirtualStickData(0.0, 0.0, yaw, "ANGLE", "GROUND", "POSITION", alt, "ANGLE")
     }
