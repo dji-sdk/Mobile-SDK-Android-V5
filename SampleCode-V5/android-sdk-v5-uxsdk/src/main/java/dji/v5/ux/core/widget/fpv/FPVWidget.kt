@@ -26,6 +26,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.media.MediaFormat
 import android.util.AttributeSet
 import android.view.Surface
 import android.view.SurfaceHolder
@@ -42,6 +43,7 @@ import dji.v5.common.video.channel.VideoChannelType
 import dji.v5.common.video.decoder.DecoderOutputMode
 import dji.v5.common.video.decoder.VideoDecoder
 import dji.v5.common.video.interfaces.IVideoDecoder
+import dji.v5.common.video.interfaces.YuvDataListener
 import dji.v5.common.video.stream.PhysicalDevicePosition
 import dji.v5.common.video.stream.StreamSource
 import dji.v5.utils.common.DisplayUtil
@@ -60,6 +62,11 @@ import dji.v5.ux.core.util.RxUtil
 import dji.v5.ux.core.widget.fpv.FPVWidget.ModelState
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.functions.Consumer
+
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.face.FaceDetection
+import com.google.mlkit.vision.face.FaceDetectorOptions
+import com.google.mlkit.vision.face.FaceDetectorOptions.CLASSIFICATION_MODE_ALL
 
 private const val TAG = "FPVWidget"
 private const val ORIGINAL_SCALE = 1f
@@ -254,6 +261,32 @@ open class FPVWidget @JvmOverloads constructor(
 
     //endregion
 
+    val options = FaceDetectorOptions.Builder().setClassificationMode(CLASSIFICATION_MODE_ALL).build()
+    val detector = FaceDetection.getClient(options)
+
+    val listener = object : YuvDataListener {
+        override fun onReceive(
+            mediaFormat: MediaFormat?,
+            data: ByteArray?,
+            width: Int,
+            height: Int
+        ) {
+            LogUtils.i("receive YUV Data: ", width, ", ", height, ", ", data?.size)
+            var inputImage = InputImage.fromByteArray(data!!, 1280, 720, 0, InputImage.IMAGE_FORMAT_YV12)
+            detector.process(inputImage).addOnSuccessListener {
+                    faces -> for (face in faces) {
+                val bounds = face.boundingBox
+                LogUtils.i("Face Detection", "bottom: ", bounds.bottom, ", Left: ", bounds.left,
+                    ", Top: ", bounds.top, ", Right: ", bounds.right, ", leftEyeOpen: " + face.leftEyeOpenProbability,
+                    ", rightEyeOpen: ", face.rightEyeOpenProbability, ", smile: " + face.smilingProbability
+                )
+            }
+            }.addOnFailureListener{
+                    e -> LogUtils.i("error listening: ", e)
+            }
+        }
+    };
+
     //region Constructor
     override fun initView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
         inflate(context, R.layout.uxsdk_widget_fpv, this)
@@ -332,6 +365,7 @@ open class FPVWidget @JvmOverloads constructor(
             )
             videoDecoder!!.onResume()
         }
+        videoDecoder?.addYuvDataListener(listener);
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {

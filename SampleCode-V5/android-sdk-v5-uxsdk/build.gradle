@@ -52,6 +52,8 @@ dependencies {
     implementation deps.mikepenzIonicons
     implementation deps.material
 
+    implementation 'com.google.mlkit:face-detection:16.1.5'
+
     api deps.maplibreAnotation
     api deps.maplibreTurf
     api deps.maplibreSdk
