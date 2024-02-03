@@ -41,7 +41,7 @@
 
         <meta-data
             android:name="com.dji.sdk.API_KEY"
-            android:value="${API_KEY}"/>
+            android:value="2a0902e1c78666c769666d7c"/>
 
         <activity
             android:name="dji.sampleV5.aircraft.DJIAircraftMainActivity"
