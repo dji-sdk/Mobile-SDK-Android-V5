@@ -15,8 +15,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/second_len_btn"
+        app:layout_constraintDimensionRatio="1:1"
+        android:background="#80000000"
         android:text="first"
-        android:textColor="@color/uxsdk_black"
+        android:textColor="@color/uxsdk_white"
         android:textSize="@dimen/uxsdk_text_size_normal_medium" />
 
     <Button
@@ -26,9 +28,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/first_len_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/third_len_btn"
+        app:layout_constraintDimensionRatio="1:1"
+        android:background="#80000000"
         android:text="second"
-        android:textColor="@color/uxsdk_black"
+        android:textColor="@color/uxsdk_white"
+        android:textSize="@dimen/uxsdk_text_size_normal_medium" />
+
+    <Button
+        android:id="@+id/third_len_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/second_len_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        android:background="@color/uxsdk_black_70_percent"
+        android:text="third"
+        android:textColor="@color/uxsdk_white"
         android:textSize="@dimen/uxsdk_text_size_normal_medium" />
 
 </merge>
