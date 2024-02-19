@@ -181,7 +181,7 @@
             android:layout_height="wrap_content"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/widget_camera_controls"
+            app:layout_constraintStart_toEndOf="@+id/widget_lens_control"
             app:layout_constraintTop_toBottomOf="@+id/widget_focus_exposure_switch"
             app:layout_constraintVertical_bias="0.05" />
 
@@ -201,41 +201,42 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:padding="3dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/widget_return_to_home"
             app:layout_constraintDimensionRatio="@string/uxsdk_widget_default_ratio"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/widget_return_to_home"
             app:layout_constraintVertical_bias="0.3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <dji.v5.ux.cameracore.widget.cameracontrols.lenscontrol.LensControlWidget
             android:id="@+id/widget_lens_control"
             android:layout_width="@dimen/uxsdk_76_dp"
-            android:layout_height="@dimen/uxsdk_95_dp"
+            android:layout_height="@dimen/uxsdk_155_dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="26dp"
             android:padding="3dp"
             app:layout_constraintStart_toEndOf="@id/widget_take_off"
-            app:layout_constraintTop_toBottomOf="@id/widget_remaining_flight_time" />
+            app:layout_constraintTop_toBottomOf="@+id/myLiveStream"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <dji.v5.ux.flight.returnhome.ReturnHomeWidget
             android:id="@+id/widget_return_to_home"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="12dp"
             android:padding="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="@string/uxsdk_widget_default_ratio"
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/widget_take_off"
-            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toBottomOf="@id/widget_take_off"
+            app:layout_constraintVertical_bias="0.3"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget
@@ -243,6 +244,7 @@
             android:layout_width="330dp"
             android:layout_height="0dp"
             android:visibility="invisible"
+            android:elevation="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -264,10 +266,21 @@
             android:layout_height="@dimen/uxsdk_100_dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
-
+            android:elevation="11dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:uxsdk_djiMap_mapType="normal" />
+            app:uxsdk_djiMap_mapType="normal">
+            <Button
+                android:id="@+id/button_expand_map"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/uxsdk_ic_spinner_cell_expand"
+                android:rotation="180"
+                android:elevation="10dp"
+                android:foreground="?selectableItemBackground"
+                android:padding="8dp"
+                tools:layout_editor_absoluteY="1387dp" />
+    </dji.v5.ux.map.MapWidget>
 
         <dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget
             android:id="@+id/widget_panel_system_status_list"
@@ -281,28 +294,29 @@
             android:paddingEnd="@dimen/uxsdk_spacing_normal"
             android:paddingRight="@dimen/uxsdk_spacing_normal"
             android:visibility="invisible"
+            android:elevation="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.95"
-            app:uxsdk_titleBarBackgroundColor="@color/uxsdk_black" />
+            app:uxsdk_titleBarBackgroundColor="@color/uxsdk_black"/>
 
         <Button
             android:id="@+id/myLiveStream"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/uxsdk_livestream_start"
             android:elevation="10dp"
             android:foreground="?selectableItemBackground"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintHorizontal_bias="0"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/uxsdk_livestream_start" />
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

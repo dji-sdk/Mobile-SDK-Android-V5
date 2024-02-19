@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.common.CameraLensType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
@@ -34,6 +35,7 @@ open class LensControlWidget @JvmOverloads constructor(
 
     private var firstBtnSource = CameraVideoStreamSourceType.ZOOM_CAMERA
     private var secondBtnSource = CameraVideoStreamSourceType.WIDE_CAMERA
+    private var thirdBtnSource = CameraVideoStreamSourceType.INFRARED_CAMERA
 
     private val widgetModel by lazy {
         LensControlModel(DJISDKModel.getInstance(), ObservableInMemoryKeyedStore.getInstance())
@@ -52,6 +54,7 @@ open class LensControlWidget @JvmOverloads constructor(
         })
         first_len_btn.setOnClickListener(this)
         second_len_btn.setOnClickListener(this)
+        third_len_btn.setOnClickListener(this)
     }
 
     override fun onAttachedToWindow() {
@@ -75,8 +78,19 @@ open class LensControlWidget @JvmOverloads constructor(
     override fun onClick(v: View?) {
         if (v == first_len_btn) {
             dealLensBtnClicked(firstBtnSource)
+            first_len_btn.setBackgroundResource(R.color.uxsdk_dic_color_c10_light_sea_blue)
+            second_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
+            third_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
         } else if (v == second_len_btn) {
             dealLensBtnClicked(secondBtnSource)
+            first_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
+            second_len_btn.setBackgroundResource(R.color.uxsdk_dic_color_c10_light_sea_blue)
+            third_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
+        } else if (v == third_len_btn) {
+            dealLensBtnClicked(thirdBtnSource)
+            first_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
+            second_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
+            third_len_btn.setBackgroundResource(R.color.uxsdk_dic_color_c10_light_sea_blue)
         }
     }
 
@@ -98,31 +112,12 @@ open class LensControlWidget @JvmOverloads constructor(
         addDisposable(widgetModel.setCameraVideoStreamSource(source).observeOn(ui()).subscribe())
     }
 
+    // only for button initialization - when camera views are available, set the button to be that camera
     private fun updateBtnView() {
         val videoSourceRange = widgetModel.properCameraVideoStreamSourceRangeProcessor.value
-        //单源
-        if (videoSourceRange.size <= 1) {
-            first_len_btn.visibility = INVISIBLE
-            second_len_btn.visibility = INVISIBLE
-            return
-        }
-        first_len_btn.visibility = VISIBLE
-        //双源
-        if (videoSourceRange.size == 2) {
-            updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange,widgetModel.cameraVideoStreamSourceProcessor.value).also {
-                firstBtnSource = it
-            })
-            second_len_btn.visibility = INVISIBLE
-            return
-        }
-        //超过2个源
-        second_len_btn.visibility = VISIBLE
-        updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange, secondBtnSource).also {
-            firstBtnSource = it
-        })
-        updateBtnText(second_len_btn, getProperVideoSource(videoSourceRange, firstBtnSource).also {
-            secondBtnSource = it
-        })
+        updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange, firstBtnSource))
+        updateBtnText(second_len_btn, getProperVideoSource(videoSourceRange, secondBtnSource))
+        updateBtnText(third_len_btn, getProperVideoSource(videoSourceRange, thirdBtnSource))
     }
 
     private fun updateBtnText(button: Button, source: CameraVideoStreamSourceType) {
@@ -138,7 +133,7 @@ open class LensControlWidget @JvmOverloads constructor(
 
     private fun getProperVideoSource(range: List<CameraVideoStreamSourceType>, exceptSource: CameraVideoStreamSourceType): CameraVideoStreamSourceType {
         for (source in range) {
-            if (source != widgetModel.cameraVideoStreamSourceProcessor.value && source != exceptSource) {
+            if (source != widgetModel.cameraVideoStreamSourceProcessor.value && source == exceptSource) {
                 return source
             }
         }

@@ -26,6 +26,7 @@ package dji.sampleV5.aircraft.defaultlayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -116,6 +117,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
     private VideoChannelStateChangeListener primaryChannelStateListener = null;
     private VideoChannelStateChangeListener secondaryChannelStateListener = null;
     private Button liveStreamButton;
+    private Button mapExpand;
     //endregion
 
     //region Lifecycle
@@ -151,7 +153,7 @@ public class DefaultLayoutActivity extends AppCompatActivity {
 //        if (stub != null) {
 //            mSettingPanelWidget = (SettingPanelWidget) stub.inflate();
 //        }
-
+        mapExpand = (Button) findViewById(R.id.button_expand_map);
         liveStreamButton = (Button) findViewById(R.id.myLiveStream) ;
         streamManager = new StreamManager();
 
@@ -210,7 +212,28 @@ public class DefaultLayoutActivity extends AppCompatActivity {
                     }
                 }
             });
-        };
+        }
+        if (mapExpand != null && mapWidget != null) {
+            mapExpand.setOnClickListener(new View.OnClickListener() {
+                final int mapWidth = getResources().getDimensionPixelSize(R.dimen.uxsdk_150_dp);
+                final int mapHeight = getResources().getDimensionPixelSize(R.dimen.uxsdk_100_dp);
+                @Override
+                public void onClick(View view) {
+                    ViewGroup.LayoutParams params = mapWidget.getLayoutParams();
+                    if (params.width == mapWidth) {
+                        params.height = primaryFpvWidget.getHeight() - (topBarPanel.getBottom() + getResources().getDimensionPixelSize(R.dimen.uxsdk_12_dp));
+                        params.width = primaryFpvWidget.getWidth() - getResources().getDimensionPixelSize(R.dimen.uxsdk_24_dp);
+                        mapExpand.setRotation(0);
+                    }
+                    else {
+                        params.height = mapHeight;
+                        params.width = mapWidth;
+                        mapExpand.setRotation(180);
+                    }
+                    mapWidget.setLayoutParams(params);
+                }
+            });
+        }
     }
 
     private void toggleRightDrawer() {
