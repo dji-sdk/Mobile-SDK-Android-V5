@@ -1,7 +1,9 @@
 package dji.sampleV5.aircraft
 
+import android.util.Log
 import dji.sampleV5.aircraft.control.PachKeyManager
 import dji.sampleV5.aircraft.defaultlayout.DefaultLayoutActivity
+import dji.sampleV5.aircraft.telemetry.TuskServiceWebsocket
 import dji.sampleV5.modulecommon.DJIMainActivity
 import dji.v5.common.utils.GeoidManager
 import dji.v5.ux.core.communication.DefaultGlobalPreferences
@@ -37,6 +39,12 @@ class DJIAircraftMainActivity : DJIMainActivity() {
 
     override fun prepareTestingToolsActivity() {
         enableTestingTools(AircraftTestingToolsActivity::class.java)
+    }
+
+    override fun callTuskServiceCallback() {
+        Log.d("TuskService", "Callback called successfully")
+        val ws = TuskServiceWebsocket()
+        ws.connectWebSocket()
     }
 
 //    fun prepareConfigurationTools(){

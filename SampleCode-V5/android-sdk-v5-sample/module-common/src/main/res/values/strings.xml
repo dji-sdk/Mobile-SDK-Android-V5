@@ -116,6 +116,7 @@ More refer to the release notes." </string>
     <string name="showcase">Showcase &amp; Tools</string>
     <string name="widget_list">Widget List</string>
     <string name="testing_tools">Testing Tools</string>
+    <string name="ws_reconnect" translatable="false">Reconnect Websocket</string>
     <string name="livestream_shortcut" translatable="false">Livestream Settings</string>
     <string name="flight_settings" translatable="false">RINAO Configuration Settings</string>
     <string name="default_layout">Default Layout</string>

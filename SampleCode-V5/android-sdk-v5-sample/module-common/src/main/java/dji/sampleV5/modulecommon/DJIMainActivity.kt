@@ -6,13 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import dji.sampleV5.modulecommon.models.BaseMainActivityVm
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
 import dji.sampleV5.modulecommon.util.Helper
+import dji.sampleV5.modulecommon.util.ITuskServiceCallback
 import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
 import dji.v5.manager.interfaces.SDKManagerCallback
@@ -30,7 +33,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
-abstract class DJIMainActivity : AppCompatActivity() {
+abstract class DJIMainActivity : AppCompatActivity(), ITuskServiceCallback {
 
     val tag: String = LogUtils.getTag(this)
     private val permissionArray = arrayOf(
@@ -45,7 +48,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
     private val baseMainActivityVm: BaseMainActivityVm by viewModels()
     protected val msdkInfoVm: MSDKInfoVm by viewModels()
     private val handler: Handler = Handler(Looper.getMainLooper())
-
+//    private val reconnectStream: Button = reconnect_ws
     abstract fun prepareUxActivity()
 
     abstract fun prepareTestingToolsActivity()
@@ -59,7 +62,10 @@ abstract class DJIMainActivity : AppCompatActivity() {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-
+        reconnect_ws.setOnClickListener {
+            Log.d("TuskService", "Button Pressed?")
+            callTuskServiceCallback()
+        }
         initMSDKInfoView()
         checkPermissionAndRequest()
     }

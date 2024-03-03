@@ -1,11 +1,12 @@
 package dji.sampleV5.aircraft.telemetry
 import android.util.Log
 import com.google.gson.Gson
+import dji.sampleV5.modulecommon.util.ITuskServiceCallback
 import okhttp3.*
 import okio.ByteString
 import org.json.JSONObject
 
-class TuskServiceWebsocket {
+class TuskServiceWebsocket : ITuskServiceCallback{
     private val client: OkHttpClient = OkHttpClient()
     private lateinit var webSocket: WebSocket
     private val gson: Gson = Gson()
@@ -177,5 +178,9 @@ class TuskServiceWebsocket {
 
     fun postControllerStatus(status: TuskControllerStatus) {
 
+    }
+
+    override fun callTuskServiceCallback() {
+        connectWebSocket()
     }
 }
