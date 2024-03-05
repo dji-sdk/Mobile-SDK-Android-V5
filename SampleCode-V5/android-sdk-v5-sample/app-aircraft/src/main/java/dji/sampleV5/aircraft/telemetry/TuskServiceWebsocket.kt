@@ -6,7 +6,7 @@ import okhttp3.*
 import okio.ByteString
 import org.json.JSONObject
 
-class TuskServiceWebsocket : ITuskServiceCallback{
+class TuskServiceWebsocket{
     private val client: OkHttpClient = OkHttpClient()
     private lateinit var webSocket: WebSocket
     private val gson: Gson = Gson()
@@ -18,9 +18,17 @@ class TuskServiceWebsocket : ITuskServiceCallback{
     var isAlertAction = false
 
     // Establish WebSocket connection
-    fun connectWebSocket() {
+    private val defaultIP: String = "ws://192.168.0.102:8084"
+    private var currentIP: String = defaultIP
+    fun getCurrentIP(): String {
+        return currentIP
+    }
+    fun setCurrentIP(ip: String) {
+        currentIP = ip
+    }
+    fun connectWebSocket(ip: String=currentIP) {
 //        val request = Request.Builder().url("ws://192.168.20.169:8084").build()
-        val request = Request.Builder().url("ws://192.168.0.102:8084").build()
+        val request = Request.Builder().url(ip).build()
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 Log.d("TuskService", "WebSocket connection opened")
@@ -180,7 +188,7 @@ class TuskServiceWebsocket : ITuskServiceCallback{
 
     }
 
-    override fun callTuskServiceCallback() {
-        connectWebSocket()
-    }
+//    override fun callReconnectWebsocket() {
+//        connectWebSocket()
+//    }
 }

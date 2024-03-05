@@ -1,6 +1,7 @@
 package dji.sampleV5.aircraft
 
 import android.util.Log
+import android.widget.Toast
 import dji.sampleV5.aircraft.control.PachKeyManager
 import dji.sampleV5.aircraft.defaultlayout.DefaultLayoutActivity
 import dji.sampleV5.aircraft.telemetry.TuskServiceWebsocket
@@ -41,9 +42,10 @@ class DJIAircraftMainActivity : DJIMainActivity() {
         enableTestingTools(AircraftTestingToolsActivity::class.java)
     }
 
-    override fun callTuskServiceCallback() {
+    override fun callReconnectWebsocket() {
         Log.d("TuskService", "Callback called successfully")
         val ws = TuskServiceWebsocket()
+        Toast.makeText(applicationContext, "Reconnecting WS with IP:\n ${ws.getCurrentIP()}", Toast.LENGTH_LONG).show()
         ws.connectWebSocket()
     }
 

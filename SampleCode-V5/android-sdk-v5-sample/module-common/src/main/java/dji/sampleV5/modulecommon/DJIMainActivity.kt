@@ -64,7 +64,7 @@ abstract class DJIMainActivity : AppCompatActivity(), ITuskServiceCallback {
         }
         reconnect_ws.setOnClickListener {
             Log.d("TuskService", "Button Pressed?")
-            callTuskServiceCallback()
+            callReconnectWebsocket()
         }
         initMSDKInfoView()
         checkPermissionAndRequest()
