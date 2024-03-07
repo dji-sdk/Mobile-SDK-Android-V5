@@ -26,7 +26,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_light"
+    android:background="#ECECEC"
     tools:context=".DJIMainActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/left_side"
@@ -34,6 +34,88 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_info_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/view_base_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_white_bg"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/rinao_logo"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:id="@+id/text_view_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:text="@string/sdk_version" />
+
+                <TextView
+                    android:id="@+id/text_view_package_product_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:text="@string/package_product_category"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text_view_registered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:text="@string/unregistered"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text_view_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:text="@string/product_name"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text_view_is_debug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="4dp"
+                    android:gravity="center"
+                    android:text="@string/is_sdk_debug"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/right_side"
@@ -42,93 +124,17 @@
         app:layout_constraintStart_toEndOf="@id/left_side"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="0dp">
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view_info_panel"
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toStartOf="@+id/msg_panel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/view_base_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/view_case_panel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/text_view_version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                tools:text="@string/sdk_version" />
-
-            <TextView
-                android:id="@+id/text_view_package_product_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
-                android:text="@string/package_product_category"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/text_view_registered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
-                android:text="@string/unregistered"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/text_view_product_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
-                android:gravity="center"
-                android:text="@string/product_name"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/text_view_is_debug"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
-                android:gravity="center"
-                android:text="@string/is_sdk_debug"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
         <ScrollView
             android:id="@+id/view_case_panel"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_base_info"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/white">
+            app:layout_constraintTop_toTopOf="@+id/right_side"
+            app:layout_constraintBottom_toBottomOf="@id/right_side"
+            android:background="@color/white"
+            android:elevation="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -209,202 +215,80 @@
                     android:padding="8dp"
                     android:text="@string/ws_reconnect"
                     android:textColor="@color/selector_enable_button" />
+
+                <Button
+                    android:id="@+id/live_stream_shortcut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:elevation="10dp"
+                    android:enabled="true"
+                    android:foreground="?selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/livestream_shortcut"
+                    android:textColor="@color/selector_enable_button" />
             </LinearLayout>
         </ScrollView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/msg_panel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="2dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/view_info_panel"
-        app:layout_constraintLeft_toRightOf="@+id/view_info_panel"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view_info_panel" />
+<!--    <View-->
+<!--        android:id="@+id/msg_panel"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginLeft="2dp"-->
+<!--        android:background="@color/white"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/view_info_panel"-->
+<!--        app:layout_constraintLeft_toRightOf="@+id/view_info_panel"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/view_info_panel" />-->
 
-    <TextView
-        android:id="@+id/configuration_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/flight_settings"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/msg_panel"
-        app:layout_constraintTop_toTopOf="@+id/msg_panel" />
+<!--        <ImageView-->
+<!--            android:id="@+id/icon_sdk_forum"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:elevation="10dp"-->
+<!--            android:foreground="?selectableItemBackground"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/website_hosting_icon"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintDimensionRatio="H,1:1"-->
+<!--            app:layout_constraintHeight_percent="0.65"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0"></ImageView>-->
 
-    <Button
-        android:id="@+id/live_stream_shortcut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:elevation="10dp"
-        android:enabled="true"
-        android:foreground="?selectableItemBackground"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/livestream_shortcut"
-        android:textColor="@color/selector_enable_button"
-        app:layout_constrainedWidth="@+id/msg_panel"
-        app:layout_constraintStart_toStartOf="@+id/msg_panel"
-        app:layout_constraintTop_toBottomOf="@+id/configuration_title" />
-    <TextView
-        android:id="@+id/text_view_news_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/news"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/msg_panel"
-        app:layout_constraintTop_toBottomOf="@+id/live_stream_shortcut" />
-    <ScrollView
-        android:id="@+id/scroll_news"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/panel_icon_msg"
-        app:layout_constraintEnd_toEndOf="@+id/msg_panel"
-        app:layout_constraintHeight_percent="0.55"
-        app:layout_constraintStart_toStartOf="@+id/msg_panel"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_news_title"
-        app:layout_constraintVertical_bias="0">
+<!--        <ImageView-->
+<!--            android:id="@+id/icon_release_node"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/drone_icon"-->
+<!--            android:elevation="10dp"-->
+<!--            android:foreground="?selectableItemBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintDimensionRatio="H,1:1"-->
+<!--            app:layout_constraintHeight_percent="0.65"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0"></ImageView>-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <dji.sampleV5.modulecommon.views.ItemNewsLayout
-                android:id="@+id/item_news_uxsdk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-
-            <dji.sampleV5.modulecommon.views.ItemNewsLayout
-                android:id="@+id/item_news_msdk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
-    </ScrollView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/panel_icon_msg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/msg_panel"
-        app:layout_constraintEnd_toEndOf="@+id/msg_panel"
-        app:layout_constraintStart_toStartOf="@+id/msg_panel"
-        app:layout_constraintTop_toBottomOf="@+id/scroll_news">
-
-        <ImageView
-            android:id="@+id/icon_sdk_forum"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:elevation="10dp"
-            android:foreground="?selectableItemBackground"
-            android:scaleType="centerInside"
-            android:src="@drawable/website_hosting_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/guide_1"
-            app:layout_constraintHeight_percent="0.65"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"></ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="top|center"
-            android:text="@string/sdk_forum"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/guide_1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/icon_sdk_forum" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guide_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.33" />
-
-        <ImageView
-            android:id="@+id/icon_release_node"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/drone_icon"
-            android:elevation="10dp"
-            android:foreground="?selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,1:1"
-            app:layout_constraintEnd_toStartOf="@+id/guide_2"
-            app:layout_constraintHeight_percent="0.65"
-            app:layout_constraintStart_toEndOf="@+id/guide_1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"></ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="top|center"
-            android:text="@string/release_nodes"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/guide_2"
-            app:layout_constraintStart_toStartOf="@+id/guide_1"
-            app:layout_constraintTop_toBottomOf="@+id/icon_release_node" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guide_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.66" />
-
-        <ImageView
-            android:id="@+id/icon_tech_support"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/psp_portable_playstation_icon"
-            android:elevation="10dp"
-            android:foreground="?selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="H,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.65"
-            app:layout_constraintStart_toEndOf="@+id/guide_2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"></ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="top|center"
-            android:text="@string/tech_support"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guide_2"
-            app:layout_constraintTop_toBottomOf="@+id/icon_tech_support" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <ImageView-->
+<!--            android:id="@+id/icon_tech_support"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/psp_portable_playstation_icon"-->
+<!--            android:elevation="10dp"-->
+<!--            android:foreground="?selectableItemBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintDimensionRatio="H,1:1"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHeight_percent="0.65"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0"></ImageView>-->
 
     <TextView
         android:id="@+id/text_core_info"
@@ -415,5 +299,4 @@
         android:textSize="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

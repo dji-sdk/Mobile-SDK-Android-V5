@@ -102,25 +102,25 @@ abstract class DJIMainActivity : AppCompatActivity(), ITuskServiceCallback {
         baseMainActivityVm.registerState.observe(this) {
             text_view_registered.text = StringUtils.getResStr(R.string.registration_status, it)
         }
-        baseMainActivityVm.sdkNews.observe(this) {
-            item_news_msdk.setTitle(StringUtils.getResStr(it.title))
-            item_news_msdk.setDescription(StringUtils.getResStr(it.description))
-            item_news_msdk.setDate(it.date)
-
-            item_news_uxsdk.setTitle(StringUtils.getResStr(it.title))
-            item_news_uxsdk.setDescription(StringUtils.getResStr(it.description))
-            item_news_uxsdk.setDate(it.date)
-        }
-
-        icon_sdk_forum.setOnClickListener {
-            Helper.startBrowser(this, StringUtils.getResStr(R.string.sdk_forum_url))
-        }
-        icon_release_node.setOnClickListener {
-            Helper.startBrowser(this, StringUtils.getResStr(R.string.release_node_url))
-        }
-        icon_tech_support.setOnClickListener {
-            Helper.startBrowser(this, StringUtils.getResStr(R.string.tech_support_url))
-        }
+//        baseMainActivityVm.sdkNews.observe(this) {
+//            item_news_msdk.setTitle(StringUtils.getResStr(it.title))
+//            item_news_msdk.setDescription(StringUtils.getResStr(it.description))
+//            item_news_msdk.setDate(it.date)
+//
+//            item_news_uxsdk.setTitle(StringUtils.getResStr(it.title))
+//            item_news_uxsdk.setDescription(StringUtils.getResStr(it.description))
+//            item_news_uxsdk.setDate(it.date)
+//        }
+//
+//        icon_sdk_forum.setOnClickListener {
+//            Helper.startBrowser(this, StringUtils.getResStr(R.string.sdk_forum_url))
+//        }
+//        icon_release_node.setOnClickListener {
+//            Helper.startBrowser(this, StringUtils.getResStr(R.string.release_node_url))
+//        }
+//        icon_tech_support.setOnClickListener {
+//            Helper.startBrowser(this, StringUtils.getResStr(R.string.tech_support_url))
+//        }
         view_base_info.setOnClickListener {
             baseMainActivityVm.doPairing {
                 ToastUtils.showToast(it)
