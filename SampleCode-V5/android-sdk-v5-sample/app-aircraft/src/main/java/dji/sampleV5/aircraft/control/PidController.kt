@@ -6,7 +6,7 @@ class PidController(private val kp: Float, private val ki: Float, private val kd
     private var integral: Double = 0.0
     private var setpoint: Double = 0.0
     var maxVelocity: Double = 6.0 // m/s
-    val posTolerance: Double = 2.0 // m
+    val posTolerance: Double = 5.0 // m
     val yawTolerance: Double = 0.5 // degrees
     val altTolerance: Double = 5.0 // meters
     val velTolerance: Double = 1.0 // m/s

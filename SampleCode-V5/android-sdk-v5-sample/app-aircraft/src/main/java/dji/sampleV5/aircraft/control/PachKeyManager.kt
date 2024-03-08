@@ -133,7 +133,7 @@ class PachKeyManager() {
 //                        Coordinate(stateData.latitude!!, stateData.longitude!!,stateData.altitude!!),
 //                        10.0)
 //                    diveAndYaw(60.0, 20.0)
-                    controller.endVirtualStick()
+//                    controller.endVirtualStick()
                     Log.v("PachKeyManager", "Finished fiveDPress Execution")
                 }
             }
@@ -157,6 +157,7 @@ class PachKeyManager() {
 
     private fun sendStreamURL(url: String) {
         telemService.postStreamURL(StreamInfo(url))
+        Log.v("PachKeyManager", "Stream URL: $url")
     }
 
     private fun sendControllerStatus(status: TuskControllerStatus) {
@@ -742,14 +743,22 @@ class PachKeyManager() {
         // What if drone is already at the location?
         // What if the operator takes control of the aircraft?
 
+        // If drone is not flying, then takeoff
+        if (stateData.isFlying!=true){
+            controller.startTakeOff()
+        }
+
         // compute distance to target location using lat and lon
         var waypoint = getNewDirection()
+        var waypointID = telemService.nextWaypointID
+        sendAutonomyStatus("waypoint-reached")
         val orbitRadius = 10.0
         // Check to see that advanced virtual stick is enabled
         controller.ensureAdvancedVirtualStickMode()
 
         while (safetyChecks()) {
             if (decisionChecks()) {
+                Log.v("PachKeyManagerHIPPO", "Going to Waypoint: $waypoint")
                 go2LocationForward(
                     waypoint.lat,
                     waypoint.lon,
@@ -757,39 +766,51 @@ class PachKeyManager() {
             } else if (telemService.isAlertAction) {
                 // Alert action stops the aircraft's movement
                 telemService.isAlertAction = false
-                Log.v("PachKeyManager", "Alert Action")
+                Log.v("PachKeyManagerHIPPO", "Alert Action")
                 sendAutonomyStatus("AlertedOperator")
                 break
             } else if (telemService.isGatherAction) {
                 // Send Gather Confirmation
-                Log.v("PachKeyManager", "Gather Action")
+                Log.v("PachKeyManagerHIPPO", "Gather Action")
                 sendAutonomyStatus("GatheringInfo")
                 diveAndYaw(waypoint.alt-10, 30.0)
 //                flyOrbitPath(
 //                    Coordinate(stateData.latitude!!, stateData.longitude!!,stateData.altitude!!),
 //                    orbitRadius)
-                Log.v("PackKeyManager", "Gathering Complete")
+                Log.v("PackKeyManagerHIPPO", "Gathering Complete")
             }
              else {
-                Log.v("PachKeyManager", "Unknown Decision Check Failed")
+                Log.v("PachKeyManagerHIPPO", "Unknown Decision Check Failed")
                 break
             }
+
             // Handle logic for updating waypoint
             if (telemService.isGatherAction){
                 telemService.isGatherAction = false
-                Log.v("PachKeyManager", "Continuing to Waypoint")
+                Log.v("PachKeyManagerHIPPO", "Continuing to Waypoint")
             }
             else if (telemService.isAlertAction){
                 telemService.isAlertAction = false
-                Log.v("PachKeyManager", "Alerted Operator")
+                Log.v("PachKeyManagerHIPPO", "Alerted Operator")
                 break
             }
-            else if (telemService.nextWaypoint != waypoint) {
-                waypoint = getNewDirection()
-                sendAutonomyStatus("WaypointReached")
-            } else{
-                Log.v("PachKeyManager", "Waypoint not updated")
-                break
+            else {
+                if (telemService.plannerAction == "stay" && telemService.isStayAction){
+                    Log.v("PachKeyManagerHIPPO", "Staying at Waypoint: $waypoint")
+                    sendAutonomyStatus("waypoint-reached")
+                    delay(telemService.dwellTime.toLong())
+                    telemService.isStayAction = false // reset flag to false so stay action is not taken
+                }
+                else if (waypointID != telemService.nextWaypointID) {
+                    waypoint = getNewDirection()
+                    waypointID = telemService.nextWaypointID
+                    sendAutonomyStatus("waypoint-reached")
+                    Log.v("PachKeyManagerHIPPO", "Waypoint Updated")
+//                    delay(100L)
+                } else {
+                    delay(100L)
+                    Log.v("PachKeyManagerHIPPO", "Waypoint Not Updated")
+                }
             }
         }
         controller.endVirtualStick()
@@ -797,8 +818,16 @@ class PachKeyManager() {
 
     private fun getNewDirection(): Coordinate {
         // Function will update flight parameters based on the external information
-        val waypoint = telemService.nextWaypoint
-        waypoint.alt = adjustAltForTerrain(waypoint.alt)
+        // Copy next waypoint variable to new variable
+        val newAlt : Double = adjustAltForTerrain(telemService.nextWaypoint.alt)
+        val waypoint = Coordinate(
+            telemService.nextWaypoint.lat,
+            telemService.nextWaypoint.lon,
+            newAlt
+        )
+        if (telemService.plannerAction == "stay"){
+            telemService.isStayAction = true
+        }
         pidController.maxVelocity = telemService.maxVelocity
         return waypoint
     }
@@ -849,12 +878,13 @@ class PachKeyManager() {
         Log.v("PachKeyManager", "Circle Points: $circlePoints")
         // Fly the orbit
         for (i in 1..numPoints) {
-            val angle = 360.0/numPoints*i
-            val yawAngle = if (angle<180) {
-                angle+180
-            } else{
-                angle-180
-            }
+//            val angle =
+            val yawAngle = 360.0/numPoints*i - 180.0
+//            val yawAngle = if (angle<180) {
+//                angle+180
+//            } else{
+//                angle-180
+//            }
             val wp = circlePoints[i - 1]
             if (!telemService.isAlertAction) {
                 Log.v("PachKeyManager", "NextWaypoint: $wp")
@@ -885,8 +915,10 @@ class PachKeyManager() {
         }
         Log.v("PachKeyManager", "Yawing Left to $yawL")
         goToYawAngle(yawL)
+        delay(500L)
         Log.v("PachKeyManager", "Yawing Right to $yawR")
         goToYawAngle(yawR)
+        delay(500L)
     }
 
     // compute distance to target location using lat and lon
