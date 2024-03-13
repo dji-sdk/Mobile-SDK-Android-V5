@@ -16,6 +16,10 @@ class TuskServiceWebsocket{
     var nextWaypoint = Coordinate(0.0, 0.0, 0.0)
     var isGatherAction = false
     var isAlertAction = false
+    var isStayAction = false
+    var nextWaypointID = 0
+    var plannerAction = "idle"
+    var dwellTime = 0
 
     // Establish WebSocket connection
     private val defaultIP: String = "ws://192.168.0.102:8084"
@@ -100,7 +104,7 @@ class TuskServiceWebsocket{
 
     // Post Autonomy Status
     fun postAutonomyStatus(status: Event) {
-        sendWebSocketMessage("newFlightStatus", gson.toJson(status))
+        sendWebSocketMessage("NewFlightStatus", gson.toJson(status))
     }
 
     fun postStreamURL(url: StreamInfo) {
@@ -158,12 +162,18 @@ class TuskServiceWebsocket{
                 val long = args.getDouble("longitude")
                 val alt = args.getDouble("altitude")
                 maxVelocity = args.getDouble("speed")
+                maxVelocity *= (10.0 / 36.0)  // Convert from km/h to m/s
+                nextWaypointID = args.getInt("waypointID")
+                plannerAction = args.getString("plannerAction")
+                dwellTime = args.getInt("dwellTime")
+
                 Log.d(
                     "WaypointService",
-                    "Next Waypoint - Latitude: $lat, Longitude: $long,  Altitude: $alt"
+                    "Next Waypoint - Latitude: $lat, Longitude: $long,  Altitude: $alt, " +
+                            "Speed: $maxVelocity, WaypointID: $nextWaypointID, " +
+                            "PlannerAction: $plannerAction, DwellTime: $dwellTime"
                 )
                 nextWaypoint = Coordinate(lat, long, alt)
-//                maxVelocity = speed
             }
         } catch (e: Exception) {
             Log.e("TuskService", "Failed to handle FlightWaypoint action: ${e.message}")
