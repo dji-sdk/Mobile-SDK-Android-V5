@@ -2,6 +2,7 @@ package dji.v5.ux.cameracore.widget.cameracontrols.lenscontrol
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.core.content.ContextCompat
@@ -15,6 +16,7 @@ import dji.v5.ux.core.base.ICameraIndex
 import dji.v5.ux.core.base.SchedulerProvider.ui
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
+import kotlinx.android.synthetic.main.uxsdk_activity_default_layout.view.widget_lens_control
 import kotlinx.android.synthetic.main.uxsdk_camera_lens_control_widget.view.*
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -78,26 +80,16 @@ open class LensControlWidget @JvmOverloads constructor(
     override fun onClick(v: View?) {
         if (v == first_len_btn) {
             dealLensBtnClicked(firstBtnSource)
-            first_len_btn.setBackgroundResource(R.color.uxsdk_dic_color_c10_light_sea_blue)
-            second_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
-            third_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
         } else if (v == second_len_btn) {
             dealLensBtnClicked(secondBtnSource)
-            first_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
-            second_len_btn.setBackgroundResource(R.color.uxsdk_dic_color_c10_light_sea_blue)
-            third_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
         } else if (v == third_len_btn) {
             dealLensBtnClicked(thirdBtnSource)
-            first_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
-            second_len_btn.setBackgroundResource(R.color.uxsdk_black_70_percent)
-            third_len_btn.setBackgroundResource(R.color.uxsdk_dic_color_c10_light_sea_blue)
         }
     }
 
     override fun getCameraIndex() = widgetModel.getCameraIndex()
 
     override fun getLensType() = widgetModel.getLensType()
-
     override fun updateCameraSource(cameraIndex: ComponentIndexType, lensType: CameraLensType) {
         if (widgetModel.getCameraIndex() == cameraIndex) {
             return
@@ -118,8 +110,19 @@ open class LensControlWidget @JvmOverloads constructor(
         updateBtnText(first_len_btn, getProperVideoSource(videoSourceRange, firstBtnSource))
         updateBtnText(second_len_btn, getProperVideoSource(videoSourceRange, secondBtnSource))
         updateBtnText(third_len_btn, getProperVideoSource(videoSourceRange, thirdBtnSource))
+        updateBtnBackground(first_len_btn, getProperVideoSource(videoSourceRange, firstBtnSource))
+        updateBtnBackground(second_len_btn, getProperVideoSource(videoSourceRange, secondBtnSource))
+        updateBtnBackground(third_len_btn, getProperVideoSource(videoSourceRange, thirdBtnSource))
     }
 
+    private fun updateBtnBackground(button: Button, source: CameraVideoStreamSourceType) {
+        if (source == widgetModel.cameraVideoStreamSourceProcessor.value) {
+            button.setBackgroundResource(R.color.uxsdk_dic_color_c10_light_sea_blue)
+        }
+        else {
+            button.setBackgroundResource(R.color.uxsdk_black_70_percent)
+        }
+    }
     private fun updateBtnText(button: Button, source: CameraVideoStreamSourceType) {
         button.text = when (source) {
             CameraVideoStreamSourceType.WIDE_CAMERA -> StringUtils.getResStr(R.string.uxsdk_lens_type_wide)

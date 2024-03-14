@@ -1,11 +1,12 @@
 package dji.sampleV5.aircraft.telemetry
 import android.util.Log
 import com.google.gson.Gson
+import dji.sampleV5.modulecommon.util.ITuskServiceCallback
 import okhttp3.*
 import okio.ByteString
 import org.json.JSONObject
 
-class TuskServiceWebsocket {
+class TuskServiceWebsocket{
     private val client: OkHttpClient = OkHttpClient()
     private lateinit var webSocket: WebSocket
     private val gson: Gson = Gson()
@@ -21,9 +22,26 @@ class TuskServiceWebsocket {
     var dwellTime = 0
 
     // Establish WebSocket connection
+    private val defaultIP: String = "ws://192.168.0.102:8084"
+    private var currentIP: String = defaultIP
+    private var connectionStatus: Boolean = false
+
+    fun setConnectionStatus (status: Boolean) {
+        connectionStatus = status
+    }
+
+    fun getConnectionStatus(): Boolean {
+        return connectionStatus
+    }
+    fun getCurrentIP(): String {
+        return currentIP
+    }
+    fun setCurrentIP(ip: String) {
+        currentIP = ip
+    }
     fun connectWebSocket() {
 //        val request = Request.Builder().url("ws://192.168.20.169:8084").build()
-        val request = Request.Builder().url("ws://192.168.0.101:8084").build()
+        val request = Request.Builder().url(currentIP).build()
         webSocket = client.newWebSocket(request, object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 Log.d("TuskService", "WebSocket connection opened")
@@ -188,4 +206,8 @@ class TuskServiceWebsocket {
     fun postControllerStatus(status: TuskControllerStatus) {
 
     }
+
+//    override fun callReconnectWebsocket() {
+//        connectWebSocket()
+//    }
 }

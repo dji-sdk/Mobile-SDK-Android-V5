@@ -2,17 +2,27 @@ package dji.sampleV5.modulecommon
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dji.sampleV5.modulecommon.models.BaseMainActivityVm
 import dji.sampleV5.modulecommon.models.MSDKInfoVm
 import dji.sampleV5.modulecommon.util.Helper
+import dji.sampleV5.modulecommon.util.ITuskServiceCallback
 import dji.v5.common.error.IDJIError
 import dji.v5.common.register.DJISDKInitEvent
 import dji.v5.manager.interfaces.SDKManagerCallback
@@ -21,6 +31,8 @@ import dji.v5.utils.common.PermissionUtil
 import dji.v5.utils.common.StringUtils
 import dji.v5.utils.common.ToastUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.settings_dialog.reconnect_ws
+import kotlinx.android.synthetic.main.settings_dialog.testing_tool_button
 
 /**
  * Class Description
@@ -30,7 +42,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  * Copyright (c) 2022, DJI All Rights Reserved.
  */
-abstract class DJIMainActivity : AppCompatActivity() {
+abstract class DJIMainActivity : AppCompatActivity(), ITuskServiceCallback {
 
     val tag: String = LogUtils.getTag(this)
     private val permissionArray = arrayOf(
@@ -46,18 +58,46 @@ abstract class DJIMainActivity : AppCompatActivity() {
     protected val msdkInfoVm: MSDKInfoVm by viewModels()
     private val handler: Handler = Handler(Looper.getMainLooper())
 
+    //    private val reconnectStream: Button = reconnect_ws
     abstract fun prepareUxActivity()
 
     abstract fun prepareTestingToolsActivity()
 
+//    abstract fun loadSettingsActivity()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.d("debug","Begin debug")
         window.decorView.apply {
             systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        }
+
+        val bottomSheetDialog = Dialog(this)
+        bottomSheetDialog.setContentView(R.layout.settings_dialog)
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        bottomSheetDialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            displayMetrics.heightPixels
+        )
+
+        // Set onClickListener for wsButton
+        reconnect_ws.setOnClickListener {
+            Log.d("TuskService", "Button Pressed?")
+            callReconnectWebsocket()
+        }
+
+        // Show the settings dialog when the settingsButton is clicked
+        settings_button.setOnClickListener {
+//            bottomSheetDialog.show()
+            settings_panel.visibility = View.VISIBLE
+        }
+
+        close_button.setOnClickListener {
+            settings_panel.visibility = View.INVISIBLE
         }
 
         initMSDKInfoView()
@@ -96,25 +136,25 @@ abstract class DJIMainActivity : AppCompatActivity() {
         baseMainActivityVm.registerState.observe(this) {
             text_view_registered.text = StringUtils.getResStr(R.string.registration_status, it)
         }
-        baseMainActivityVm.sdkNews.observe(this) {
-            item_news_msdk.setTitle(StringUtils.getResStr(it.title))
-            item_news_msdk.setDescription(StringUtils.getResStr(it.description))
-            item_news_msdk.setDate(it.date)
-
-            item_news_uxsdk.setTitle(StringUtils.getResStr(it.title))
-            item_news_uxsdk.setDescription(StringUtils.getResStr(it.description))
-            item_news_uxsdk.setDate(it.date)
-        }
-
-        icon_sdk_forum.setOnClickListener {
-            Helper.startBrowser(this, StringUtils.getResStr(R.string.sdk_forum_url))
-        }
-        icon_release_node.setOnClickListener {
-            Helper.startBrowser(this, StringUtils.getResStr(R.string.release_node_url))
-        }
-        icon_tech_support.setOnClickListener {
-            Helper.startBrowser(this, StringUtils.getResStr(R.string.tech_support_url))
-        }
+//        baseMainActivityVm.sdkNews.observe(this) {
+//            item_news_msdk.setTitle(StringUtils.getResStr(it.title))
+//            item_news_msdk.setDescription(StringUtils.getResStr(it.description))
+//            item_news_msdk.setDate(it.date)
+//
+//            item_news_uxsdk.setTitle(StringUtils.getResStr(it.title))
+//            item_news_uxsdk.setDescription(StringUtils.getResStr(it.description))
+//            item_news_uxsdk.setDate(it.date)
+//        }
+//
+//        icon_sdk_forum.setOnClickListener {
+//            Helper.startBrowser(this, StringUtils.getResStr(R.string.sdk_forum_url))
+//        }
+//        icon_release_node.setOnClickListener {
+//            Helper.startBrowser(this, StringUtils.getResStr(R.string.release_node_url))
+//        }
+//        icon_tech_support.setOnClickListener {
+//            Helper.startBrowser(this, StringUtils.getResStr(R.string.tech_support_url))
+//        }
         view_base_info.setOnClickListener {
             baseMainActivityVm.doPairing {
                 ToastUtils.showToast(it)
@@ -171,6 +211,10 @@ abstract class DJIMainActivity : AppCompatActivity() {
         enableShowCaseButton(testing_tool_button, cl)
     }
 
+//    fun <T> enableSettings(cl: Class<T>) {
+//        enableShowCaseButton(settingsButton, cl)
+//    }
+
     fun <T> enableLiveStreamShortcut(cl: Class<T>){
         enableShowCaseButton(live_stream_shortcut, cl)
     }
@@ -179,6 +223,7 @@ abstract class DJIMainActivity : AppCompatActivity() {
         view.isEnabled = true
         view.setOnClickListener {
             Intent(this, cl).also {
+                Log.d("debug","starting activity ${cl.name}")
                 startActivity(it)
             }
         }
