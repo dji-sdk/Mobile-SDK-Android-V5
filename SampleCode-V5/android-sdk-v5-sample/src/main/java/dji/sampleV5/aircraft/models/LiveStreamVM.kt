@@ -15,6 +15,7 @@ import dji.v5.manager.datacenter.livestream.settings.RtspSettings
 import dji.v5.manager.interfaces.ICameraStreamManager
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DjiSharedPreferencesManager
+import java.lang.ref.WeakReference
 
 /**
  * ClassName : LiveStreamVM
@@ -69,10 +70,11 @@ class LiveStreamVM : DJIViewModel() {
     }
 
     fun startStream(callback: CommonCallbacks.CompletionCallback?) {
+        val weakReference = WeakReference(this)
         streamManager.startStream(object : CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
                 CallbackUtils.onSuccess(callback)
-                reset();
+                weakReference.get()?.reset()
             }
 
             override fun onFailure(error: IDJIError) {
@@ -83,10 +85,11 @@ class LiveStreamVM : DJIViewModel() {
     }
 
     fun stopStream(callback: CommonCallbacks.CompletionCallback?) {
+        val weakReference = WeakReference(this)
         streamManager.stopStream(object : CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
                 CallbackUtils.onSuccess(callback)
-                reset();
+                weakReference.get()?.reset()
             }
 
             override fun onFailure(error: IDJIError) {
