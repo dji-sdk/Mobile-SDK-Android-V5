@@ -127,6 +127,26 @@ class MegaphoneVM : DJIViewModel() {
                 isOSDKPayloadConnect.value = it
             }
         }
+        PayloadKey.KeyConnection.create(ComponentIndexType.PORT_1).listen(this) {
+            it?.let {
+                isPort1Connect.value = it
+            }
+        }
+        PayloadKey.KeyConnection.create(ComponentIndexType.PORT_2).listen(this) {
+            it?.let {
+                isPort2Connect.value = it
+            }
+        }
+        PayloadKey.KeyConnection.create(ComponentIndexType.PORT_3).listen(this) {
+            it?.let {
+                isPort3Connect.value = it
+            }
+        }
+        PayloadKey.KeyConnection.create(ComponentIndexType.PORT_4).listen(this) {
+            it?.let {
+                isPort4Connect.value = it
+            }
+        }
     }
 
     override fun onCleared() {

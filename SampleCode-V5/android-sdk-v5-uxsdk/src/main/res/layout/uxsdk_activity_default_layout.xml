@@ -35,11 +35,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fpv_holder"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/panel_top_bar"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <dji.v5.ux.core.widget.fpv.FPVWidget
                 android:id="@+id/widget_primary_fpv"
@@ -47,8 +48,10 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 app:uxsdk_cameraNameTextSize="14dp"
                 app:uxsdk_cameraSideTextSize="14dp">
 
@@ -58,7 +61,7 @@
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.80"
+                    app:layout_constraintHeight_percent="1.00"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="0dp" />
@@ -73,7 +76,7 @@
                 app:layout_constraintHorizontal_bias="0.04"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.18"
+                app:layout_constraintVertical_bias="0.10"
                 app:uxsdk_cameraNameTextSize="8dp"
                 app:uxsdk_cameraSideTextSize="8dp"
                 app:uxsdk_interactionEnabled="false"

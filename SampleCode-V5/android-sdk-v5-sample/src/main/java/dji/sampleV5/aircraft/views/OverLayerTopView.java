@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -15,14 +16,10 @@ import java.util.List;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import dji.sampleV5.aircraft.models.LookAtVM;
+import dji.sdk.keyvalue.value.common.DoubleRect;
 import dji.v5.manager.datacenter.camera.view.PinPoint;
+import dji.v5.manager.intelligent.AutoSensingTarget;
 
-/**
- * Class Description
- *
- * @author Hoker
- * @date 2020-02-28
- */
 public class OverLayerTopView extends AppCompatImageView {
     private Paint rectBorderPaint;
     private Paint pointPaint;
@@ -30,6 +27,10 @@ public class OverLayerTopView extends AppCompatImageView {
     private int screenWidth, screenHeight;
     private final StringBuilder buffer = new StringBuilder();
     private List<LookAtVM.Point> points = new ArrayList<>();
+
+    private DoubleRect selectBound;
+    private List<AutoSensingTarget> currentTargetInfo;
+    private final RectF rect = new RectF();
 
     public OverLayerTopView(Context context) {
         this(context, null, 0);
@@ -87,6 +88,20 @@ public class OverLayerTopView extends AppCompatImageView {
                 }
             }
         }
+        if (selectBound != null) {
+            drawBound(canvas, selectBound);
+        }
+        if (currentTargetInfo != null) {
+            for (AutoSensingTarget targetInfo : currentTargetInfo) {
+                DoubleRect boundInfo = targetInfo.getRect();
+                if (boundInfo == null) {
+                    continue;
+                }
+                drawBound(canvas, boundInfo);
+                drawTipText(canvas, initTargetInfo(targetInfo), rect.centerX(), rect.centerY());
+            }
+            super.onDraw(canvas);
+        }
         super.onDraw(canvas);
     }
 
@@ -104,6 +119,14 @@ public class OverLayerTopView extends AppCompatImageView {
         canvas.drawPoint(x * screenWidth, y * screenHeight, pointPaint);
     }
 
+    private void drawBound(Canvas canvas, DoubleRect boundInfo) {
+        rect.left = (float) (boundInfo.getX() - boundInfo.getWidth() / 2) * screenWidth;
+        rect.right = (float) (boundInfo.getX() + boundInfo.getWidth() / 2) * screenWidth;
+        rect.top = (float) (boundInfo.getY() - boundInfo.getHeight() / 2) * screenHeight;
+        rect.bottom = (float) (boundInfo.getY() + boundInfo.getHeight() / 2) * screenHeight;
+        canvas.drawRect(rect, rectBorderPaint);
+    }
+
     private void drawTipText(Canvas canvas, String str, float x, float y) {
         StaticLayout sy = new StaticLayout(str, wordPaint, 800,
                 Layout.Alignment.ALIGN_CENTER, 1, 0, true);
@@ -113,10 +136,27 @@ public class OverLayerTopView extends AppCompatImageView {
         canvas.restore();
     }
 
+    private String initTargetInfo(AutoSensingTarget info) {
+        buffer.setLength(0);
+        buffer.append("Id:").append(info.getTargetIndex()).append("\n");
+        buffer.append(info.getLabel());
+        return buffer.toString();
+    }
+
     public void onPointsChanged(List<LookAtVM.Point> pinPoints) {
         if (points != null) {
             this.points = pinPoints;
         }
+        invalidate();
+    }
+
+    public void onTargetChange(List<AutoSensingTarget> targetInfo) {
+        currentTargetInfo = targetInfo;
+        invalidate();
+    }
+
+    public void onSelectBoundInfo(DoubleRect info) {
+        selectBound = info;
         invalidate();
     }
 }

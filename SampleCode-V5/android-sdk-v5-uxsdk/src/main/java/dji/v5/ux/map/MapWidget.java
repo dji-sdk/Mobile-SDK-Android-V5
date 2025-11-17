@@ -91,7 +91,7 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
 
     //region  Constants
     private static final int COUNTER_REFRESH_THRESHOLD = 200;
-    private static final int MAX_FLY_ZONE_SHOW_ON_MAP = 50;
+    private static final int MAX_FLY_ZONE_SHOW_ON_MAP = 100;
     private static final int FLIGHT_ANIM_DURATION = 130;
     private static final int ROTATION_ANIM_DURATION = 100;
     private static final int AIRCRAFT_MARKER_ELEVATION = 7;
@@ -235,7 +235,6 @@ public class MapWidget extends ConstraintLayoutWidget<Object> implements View.On
                 .subscribeOn(SchedulerProvider.io())
                 .observeOn(SchedulerProvider.ui())
                 .subscribe(this::onFlyZoneListUpdate));
-
     }
 
     @Override

@@ -8,7 +8,6 @@ import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
-import dji.v5.common.utils.GpsUtils
 import dji.v5.et.create
 import dji.v5.et.get
 import dji.v5.manager.KeyManager
@@ -92,7 +91,7 @@ class FlySafeVM : DJIViewModel() {
         removeFlySafeDatabaseListener()
     }
 
-    fun getAircraftLocation(): LocationCoordinate2D = FlightControllerKey.KeyAircraftLocation.create().get(LocationCoordinate2D(0.0, 0.0))
+    fun getAircraftLocation(): LocationCoordinate3D = FlightControllerKey.KeyAircraftLocation3D.create().get(LocationCoordinate3D(0.0, 0.0,0.0))
 
     fun getFlyZonesInSurroundingArea(location: LocationCoordinate2D) {
         FlyZoneManager.getInstance().getFlyZonesInSurroundingArea(location, object :
@@ -297,22 +296,6 @@ class FlySafeVM : DJIViewModel() {
 
     private fun removeFlySafeDatabaseListener() {
         FlyZoneManager.getInstance().clearAllFlySafeDatabaseListener()
-    }
-
-    fun sortFlyZonesByDistanceFromAircraft(flyZones: MutableList<FlyZoneInformation>) {
-        val aircraftLocation = getAircraftLocation()
-        val c = java.util.Comparator<FlyZoneInformation> { o1, o2 ->
-            val distanceO1: Double = GpsUtils.distanceBetween(
-                aircraftLocation.latitude, aircraftLocation.longitude,
-                o1.circleCenter.latitude, o1.circleCenter.longitude
-            ) - o1.circleRadius
-            val distanceO2: Double = GpsUtils.distanceBetween(
-                aircraftLocation.latitude, aircraftLocation.longitude,
-                o2.circleCenter.latitude, o2.circleCenter.longitude
-            ) - o2.circleRadius
-            distanceO1.compareTo(distanceO2)
-        }
-        flyZones.sortWith(c)
     }
 
     data class DataBaseInfo(

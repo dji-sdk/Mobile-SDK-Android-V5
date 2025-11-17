@@ -92,6 +92,34 @@ class MegaphoneFragment : DJIFragment() {
             }
         }
 
+        megaphoneVM.isPort1Connect.observe(viewLifecycleOwner) {
+            updateMegaphoneConnectState()
+            if (curMegaphoneIndex == MegaphoneIndex.PORT_1){
+                updateStatus()
+            }
+        }
+
+        megaphoneVM.isPort1Connect.observe(viewLifecycleOwner) {
+            updateMegaphoneConnectState()
+            if (curMegaphoneIndex == MegaphoneIndex.PORT_2){
+                updateStatus()
+            }
+        }
+
+        megaphoneVM.isPort1Connect.observe(viewLifecycleOwner) {
+            updateMegaphoneConnectState()
+            if (curMegaphoneIndex == MegaphoneIndex.PORT_3){
+                updateStatus()
+            }
+        }
+
+        megaphoneVM.isPort1Connect.observe(viewLifecycleOwner) {
+            updateMegaphoneConnectState()
+            if (curMegaphoneIndex == MegaphoneIndex.PORT_4){
+                updateStatus()
+            }
+        }
+
         megaphoneVM.megaphonePlayState.observe(viewLifecycleOwner) {
             updateMegaphonePlayState()
         }
@@ -438,6 +466,38 @@ class MegaphoneFragment : DJIFragment() {
                 connectionBuilder.append("  " + textSource)
             } else {
                 val textSource = "<font color=\'#00ff00\'><small>OSDK</small></font>"
+                connectionBuilder.append("  " + textSource)
+            }
+
+            if (megaphoneVM.isPort1Connect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>PORT_1</small></font>"
+                connectionBuilder.append("  " + textSource)
+            } else {
+                val textSource = "<font color=\'#00ff00\'><small>PORT_1</small></font>"
+                connectionBuilder.append("  " + textSource)
+            }
+
+            if (megaphoneVM.isPort2Connect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>PORT_2</small></font>"
+                connectionBuilder.append("  " + textSource)
+            } else {
+                val textSource = "<font color=\'#00ff00\'><small>PORT_2</small></font>"
+                connectionBuilder.append("  " + textSource)
+            }
+
+            if (megaphoneVM.isPort3Connect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>PORT_3</small></font>"
+                connectionBuilder.append("  " + textSource)
+            } else {
+                val textSource = "<font color=\'#00ff00\'><small>PORT_3</small></font>"
+                connectionBuilder.append("  " + textSource)
+            }
+
+            if (megaphoneVM.isPort4Connect.value == false) {
+                val textSource = "<font color=\'#ff0000\'><small>PORT_4</small></font>"
+                connectionBuilder.append("  " + textSource)
+            } else {
+                val textSource = "<font color=\'#00ff00\'><small>PORT_4</small></font>"
                 connectionBuilder.append("  " + textSource)
             }
             binding?.tvMegaphoneConnectStatus?.text = Html.fromHtml(connectionBuilder.toString())

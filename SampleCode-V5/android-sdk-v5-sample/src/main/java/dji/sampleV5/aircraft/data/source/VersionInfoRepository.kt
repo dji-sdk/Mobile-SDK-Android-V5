@@ -272,7 +272,7 @@ class VersionInfoRepository {
     private fun getLanguageHeaderValue(): String {
         //"ZH" means Chinese
         val currentLocale = Locale.getDefault()
-        val country: String = currentLocale.country.toLowerCase(Locale.ROOT)
+        val country: String = currentLocale.country.lowercase(Locale.ROOT)
         LogUtils.i(LOG_TAG,currentLocale.language,currentLocale.script)
         return if ("zh".equals(currentLocale.language, true) && "cn".equals(country)) {
             "cn"

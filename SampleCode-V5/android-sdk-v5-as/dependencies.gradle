@@ -1,9 +1,9 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.12.0"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.12.0"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.12.0"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.17.0"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.17.0"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.17.0"
 
     //三方依赖库
     deps.gson = 'com.google.code.gson:gson:2.9.1'
@@ -14,7 +14,7 @@ ext {
     deps.wire = 'com.squareup.wire:wire-runtime:2.2.0'
 
     deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
-    deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.11'
+    deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.14'
     deps.xcrash = 'com.iqiyi.xcrash:xcrash-android-lib:3.1.0'
     deps.rx2Java = 'io.reactivex.rxjava2:rxjava:2.2.4' // 目前在CSDK升级模块中使用rxjava2
     deps.maplibreTurf = 'org.maplibre.gl:android-sdk-turf:5.9.1'

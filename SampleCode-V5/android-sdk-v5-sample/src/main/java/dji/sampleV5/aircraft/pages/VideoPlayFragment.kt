@@ -23,13 +23,16 @@ import dji.v5.common.video.decoder.VideoDecoder
 import dji.v5.common.video.interfaces.IVideoDecoder
 import dji.v5.common.video.interfaces.IVideoFrame
 import dji.v5.manager.datacenter.MediaDataCenter
+import dji.v5.manager.datacenter.camera.StreamInfo
 import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.manager.datacenter.media.VideoPlayState
+import dji.v5.manager.interfaces.ICameraStreamManager
+import dji.v5.manager.interfaces.IMediaManager
 import dji.v5.utils.common.LogUtils
 
 class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickListener {
 
-    val videoPlayVM : VideoPlayVM by activityViewModels()
+    val videoPlayVM: VideoPlayVM by activityViewModels()
     private var binding: VideoPlayPageBinding? = null
     private lateinit var surfaceView: SurfaceView
     private var videoDecoder: IVideoDecoder? = null
@@ -59,17 +62,18 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     }
 
     private fun enterPlayback() {
-        MediaDataCenter.getInstance().mediaManager.enable(object :CommonCallbacks.CompletionCallback{
+        MediaDataCenter.getInstance().mediaManager.enable(object :
+            CommonCallbacks.CompletionCallback {
             override fun onSuccess() {
                 enterPlaybackSuccess = true
-                LogUtils.e(TAG , "enter success")
+                LogUtils.e(TAG, "enter success")
                 binding?.operate?.visibility = View.VISIBLE
             }
 
             override fun onFailure(error: IDJIError) {
                 enterPlaybackSuccess = false
                 binding?.operate?.visibility = View.INVISIBLE
-                LogUtils.e(TAG , "enter failed" + error.description());
+                LogUtils.e(TAG, "enter failed" + error.description());
             }
 
         })
@@ -80,14 +84,14 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
         surfaceView.setOnClickListener(this)
         operateSeekBar()
         videoPlayVM.addVideoPlayStateListener()
-        binding?.stop?.setOnClickListener(){
+        binding?.stop?.setOnClickListener() {
             videoPlayVM.stop()
         }
         videoPlayVM.videoPlayStatus.observe(viewLifecycleOwner) {
             videoPlayState = it.state
-            when(it.state) {
+            when (it.state) {
                 VideoPlayState.PLAYING -> {
-                    val currentDouble: Double = it.getPlayingPosition()
+                    val currentDouble: Double = it.playingPosition
                     var currentIntPosition = currentDouble.toInt()
                     val videoTime = mediaFile!!.duration.toDouble()
                     val totalVideoTime = videoTime.toInt()
@@ -97,7 +101,7 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
                         currentIntPosition = totalVideoTime
                     }
                     binding?.seekBar?.progress = currentIntPosition
-                    binding?.playingtime?.setText(videoPlayVM.showTime(currentIntPosition))
+                    binding?.playingtime?.text = videoPlayVM.showTime(currentIntPosition)
                     binding?.operate?.visibility = View.GONE
                 }
 
@@ -153,7 +157,7 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     override fun onClick(view: View) {
         when (view.id) {
             R.id.surfaceView -> {
-                when(videoPlayState) {
+                when (videoPlayState) {
                     VideoPlayState.PLAYING -> videoPlayVM.pause()
                     VideoPlayState.PAUSED -> videoPlayVM.resume()
                     else -> {
@@ -166,7 +170,7 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
     }
 
     private fun createVideoDecoder(): IVideoDecoder {
-        return  VideoDecoder(
+        return VideoDecoder(
             this@VideoPlayFragment.context,
             VideoChannelType.EXTENDED_STREAM_CHANNEL,
             DecoderOutputMode.SURFACE_MODE,
@@ -175,39 +179,30 @@ class VideoPlayFragment : DJIFragment(), SurfaceHolder.Callback, View.OnClickLis
             surfaceView.height
         )
     }
-    private fun play(){
+
+    private fun play() {
         if (!enterPlaybackSuccess) {
             ToastUtils.showToast("Please retry")
             return
         }
-        // old function，depends on VideoDecoder
-        MediaDataCenter.getInstance().mediaManager.playVideo(mediaFile , object :CommonCallbacks.CompletionCallbackWithParam<IVideoFrame>{
-            override fun onSuccess(data: IVideoFrame?) {
-                // do nothing
-            }
-
-            override fun onFailure(error: IDJIError) {
-                ToastUtils.showToast("play failed:" + error.description())
-            }
-        })
 
         // new function, depends on surface
-//        MediaDataCenter.getInstance().mediaManager.playVideoToSurface(
-//            mediaFile,
-//            surfaceView.holder.surface,
-//            surfaceView.width,
-//            surfaceView.height,
-//            ICameraStreamManager.ScaleType.CENTER_INSIDE,
-//            object : IMediaManager.MediaFrameListener {
-//                override fun onReceiveStream(data: ByteArray?, offset: Int, length: Int, info: StreamInfo) {
-//
-//                }
-//
-//                override fun onError(error: IDJIError) {
-//                    ToastUtils.showToast("play failed:" + error.description())
-//                }
-//
-//            })
+        MediaDataCenter.getInstance().mediaManager.playVideoToSurface(
+            mediaFile,
+            surfaceView.holder.surface,
+            surfaceView.width,
+            surfaceView.height,
+            ICameraStreamManager.ScaleType.CENTER_INSIDE,
+            object : IMediaManager.MediaFrameListener {
+                override fun onReceiveStream(data: ByteArray?, offset: Int, length: Int, info: StreamInfo) {
+
+                }
+
+                override fun onError(error: IDJIError) {
+                    ToastUtils.showToast("play failed:" + error.description())
+                }
+
+            })
     }
 
     private fun operateSeekBar() {

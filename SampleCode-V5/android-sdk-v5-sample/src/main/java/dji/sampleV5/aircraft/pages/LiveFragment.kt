@@ -347,7 +347,7 @@ class LiveFragment : DJIFragment() {
             liveStreamVM.getRtmpUrl().length
         )
         val configDialog = requireContext().let {
-            AlertDialog.Builder(it, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
+            AlertDialog.Builder(it, androidx.appcompat.R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
                 .setIcon(android.R.drawable.ic_menu_camera)
                 .setTitle(R.string.ad_set_live_stream_rtmp_config)
                 .setCancelable(false)
@@ -401,7 +401,7 @@ class LiveFragment : DJIFragment() {
         }
 
         val configDialog = requireContext().let {
-            AlertDialog.Builder(it, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
+            AlertDialog.Builder(it, androidx.appcompat.R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
                 .setIcon(android.R.drawable.ic_menu_camera)
                 .setTitle(R.string.ad_set_live_stream_rtsp_config)
                 .setCancelable(false)
@@ -493,7 +493,7 @@ class LiveFragment : DJIFragment() {
         }
 
         val configDialog = requireContext().let {
-            AlertDialog.Builder(it, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
+            AlertDialog.Builder(it, androidx.appcompat.R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
                 .setIcon(android.R.drawable.ic_menu_camera)
                 .setTitle(R.string.ad_set_live_stream_gb28181_config)
                 .setCancelable(false)
@@ -560,7 +560,7 @@ class LiveFragment : DJIFragment() {
         }
 
         val configDialog = requireContext().let {
-            AlertDialog.Builder(it, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
+            AlertDialog.Builder(it, androidx.appcompat.R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
                 .setIcon(android.R.drawable.ic_menu_camera)
                 .setTitle(R.string.ad_set_live_stream_agora_config)
                 .setCancelable(false)

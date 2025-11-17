@@ -2,11 +2,8 @@ package dji.v5.ux.core.base.charts.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import androidx.core.view.ViewCompat;
-
-import dji.v5.ux.BuildConfig;
 import dji.v5.ux.core.base.charts.computator.PreviewChartComputator;
 import dji.v5.ux.core.base.charts.gesture.PreviewChartTouchHandler;
 import dji.v5.ux.core.base.charts.model.LineChartData;
@@ -37,10 +34,6 @@ public class PreviewLineChartView extends LineChartView {
     }
 
     public void setPreviewColor(int color) {
-        if (BuildConfig.DEBUG) {
-            Log.d("PreviewLineChartView", "Changing preview area color");
-        }
-
         this.previewChartRenderer.setPreviewColor(color);
         ViewCompat.postInvalidateOnAnimation(this);
     }

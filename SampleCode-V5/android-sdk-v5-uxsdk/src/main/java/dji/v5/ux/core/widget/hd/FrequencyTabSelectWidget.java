@@ -3,12 +3,11 @@ package dji.v5.ux.core.widget.hd;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import dji.sdk.keyvalue.value.airlink.ChannelSelectionMode;
 import dji.sdk.keyvalue.value.airlink.FrequencyBand;
 import dji.v5.utils.common.LogUtils;
@@ -23,7 +22,7 @@ public class FrequencyTabSelectWidget extends ConstraintLayoutWidget<Object> imp
     private static final String TAG = "FrequencyTabSelectWidget";
 
     private TabSelectCell frequencySelectTab;
-    private FrequencyBand mOcuSyncFrequencyBand = FrequencyBand.BAND_DUAL;
+    private FrequencyBand mOcuSyncFrequencyBand = FrequencyBand.BAND_MULTI;
 
     private List<FrequencyBand> mSupportOcuSyncFrequencyBands;
 
@@ -101,7 +100,7 @@ public class FrequencyTabSelectWidget extends ConstraintLayoutWidget<Object> imp
             if(mSupportOcuSyncFrequencyBands != null && mAllFrequencyNames != null) {
                 for (FrequencyBand band : mSupportOcuSyncFrequencyBands) {
                     if (band.value() < mAllFrequencyNames.length) {
-                        if (band == FrequencyBand.BAND_DUAL
+                        if (band == FrequencyBand.BAND_MULTI
                                 && mChannelSelectionMode != ChannelSelectionMode.AUTO) {
                             continue;
                         }
@@ -157,7 +156,7 @@ public class FrequencyTabSelectWidget extends ConstraintLayoutWidget<Object> imp
         }
 
         switch (band) {
-            case BAND_DUAL:
+            case BAND_MULTI:
                 if (is1Dot4Support) {
                     //三频
                     return 5;

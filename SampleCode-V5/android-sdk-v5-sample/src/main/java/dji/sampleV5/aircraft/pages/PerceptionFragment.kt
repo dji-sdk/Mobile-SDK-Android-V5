@@ -133,7 +133,6 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
                     CommonCallbacks.CompletionCallback {
                     override fun onSuccess() {
                         updateCurrentErrorMsg(isSuccess = true)
-
                     }
 
                     override fun onFailure(error: IDJIError) {

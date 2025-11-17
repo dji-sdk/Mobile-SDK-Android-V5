@@ -52,7 +52,7 @@ interface IOmniAbility {
                 KeyTools.createKey(
                     ProductKey.KeyProductType), ProductType.UNKNOWN)
             return when {
-                DpadProductManager.getInstance().isSmartController || type == ProductType.M300_RTK || type == ProductType.M350_RTK -> M300OmniAbility
+                DpadProductManager.getInstance().isSmartController || type == ProductType.M300_RTK || type == ProductType.M350_RTK|| type == ProductType.DJI_MATRICE_400 -> M300OmniAbility
                 DpadProductManager.getInstance().isDjiRcPlus || type == ProductType.M30_SERIES -> M30OmniAbility
                 DpadProductManager.getInstance().isDjiRcPro || type == ProductType.DJI_MAVIC_3_ENTERPRISE_SERIES -> M3EOmniAbility
                 else -> M300OmniAbility

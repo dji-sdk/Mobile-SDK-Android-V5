@@ -85,6 +85,6 @@ class UASFranceFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener 
 
     override fun onDestroy() {
         super.onDestroy()
-        uasFranceVM.clearAllElectronicIDStatusListener()
+        uasFranceVM.clearAllListener()
     }
 }

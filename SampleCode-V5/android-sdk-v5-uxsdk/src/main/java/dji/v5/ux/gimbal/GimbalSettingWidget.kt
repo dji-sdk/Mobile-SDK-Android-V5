@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.gimbal.GimbalCalibrationState
 import dji.sdk.keyvalue.value.gimbal.GimbalCalibrationStatusInfo
 import dji.v5.utils.common.LogUtils
@@ -15,7 +16,6 @@ import dji.v5.ux.core.base.SchedulerProvider.ui
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.ui.setting.dialog.CommonLoadingDialog
-import dji.v5.ux.core.util.SettingDefinitions.GimbalIndex
 import dji.v5.ux.core.util.ViewUtil
 
 
@@ -111,11 +111,11 @@ open class GimbalSettingWidget @JvmOverloads constructor(
         }
     }
 
-    override fun getGimbalIndex(): GimbalIndex {
+    override fun getGimbalIndex(): ComponentIndexType {
         return widgetModel.getGimbalIndex()
     }
 
-    override fun updateGimbalIndex(gimbalIndex: GimbalIndex) {
+    override fun updateGimbalIndex(gimbalIndex: ComponentIndexType) {
         widgetModel.updateGimbalIndex(gimbalIndex)
     }
 }

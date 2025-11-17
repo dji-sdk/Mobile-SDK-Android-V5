@@ -48,11 +48,11 @@ class VideoPlayVM : DJIViewModel(){
      fun pause(){
         MediaDataCenter.getInstance().mediaManager.pauseVideo(object :CommonCallbacks.CompletionCallback{
             override fun onSuccess() {
-                LogUtils.i(TAG, "play success")
+                LogUtils.i(TAG, "pause success")
             }
 
             override fun onFailure(error: IDJIError) {
-                LogUtils.e(TAG, "play video faild$error")
+                LogUtils.e(TAG, "pause video faild$error")
             }
 
         })

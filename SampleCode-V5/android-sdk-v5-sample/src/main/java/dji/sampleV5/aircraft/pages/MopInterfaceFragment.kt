@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragMopInterfacePageBinding
 import dji.sampleV5.aircraft.models.MopVM
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.mop.PipelineDeviceType
 import dji.sdk.keyvalue.value.mop.TransmissionControlType
 import dji.v5.utils.common.LogUtils
@@ -33,7 +35,7 @@ class MopInterfaceFragment : DJIFragment() {
     private var binding: FragMopInterfacePageBinding? = null
     private var messageList = ArrayList<String>()
     private lateinit var payLoadAdapter: ArrayAdapter<String>
-
+    private var payloadIndex: ComponentIndexType = ComponentIndexType.LEFT_OR_MAIN
 
     private val onKeyListener: View.OnKeyListener = object : View.OnKeyListener {
         override
@@ -69,7 +71,7 @@ class MopInterfaceFragment : DJIFragment() {
             val deviceType = getType(binding?.rgMopType?.checkedRadioButtonId ?: -1)
             val transferType = if (binding?.cbReliable?.isChecked ?: false) TransmissionControlType.STABLE else TransmissionControlType.UNRELIABLE
             val id = binding?.etChannelId?.text.toString().trim().toInt()
-            mopVM.connect(id, deviceType, transferType)
+            mopVM.connect(payloadIndex, id, deviceType, transferType)
         }
 
         binding?.btnDisconnect?.setOnClickListener {
@@ -92,6 +94,18 @@ class MopInterfaceFragment : DJIFragment() {
             messageList.add(t)
             payLoadAdapter.notifyDataSetChanged()
             binding?.messageListview?.setSelection(messageList.size - 1)
+        }
+
+        binding?.spChooseComponent?.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+                val selectedItem = parent?.getItemAtPosition(index).toString()
+                payloadIndex = ComponentIndexType.valueOf(selectedItem)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //do nothing
+            }
         }
     }
 

@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import dji.sdk.keyvalue.utils.CameraUtil;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.utils.common.LogUtils;
@@ -147,6 +146,9 @@ public class FocalZoomWidgetView extends ViewWidget implements ICameraIndex {
         addDisposable(widgetModel.focalZoomRatios.toFlowable()
                 .observeOn(SchedulerProvider.ui())
                 .subscribe(ratios -> pushFocalLength(ratios.floatValue())));
+        addDisposable(widgetModel.focalZoomRatiosRange.toFlowable()
+                .observeOn(SchedulerProvider.ui())
+                .subscribe(range -> pushFocalLengthRange(range.getGears())));
     }
 
     @NonNull
@@ -164,7 +166,6 @@ public class FocalZoomWidgetView extends ViewWidget implements ICameraIndex {
     @Override
     public void updateCameraSource(@NonNull ComponentIndexType cameraIndex, @NonNull CameraLensType lensType) {
         widgetModel.updateCameraSource(cameraIndex, lensType);
-        mFocalLengthGears = CameraUtil.getFocalLengthGears(widgetModel.getCameraIndex().value());
     }
 
     @Override
@@ -513,6 +514,9 @@ public class FocalZoomWidgetView extends ViewWidget implements ICameraIndex {
     }
 
     private void setCurrentValue(float curValue) {
+        if (mFocalLengthGears.length < 1) {
+            return;
+        }
         curValue = curValue < mFocalLengthGears[0] ? mFocalLengthGears[0] : curValue;
         curValue = curValue > mFocalLengthGears[mFocalLengthGears.length - 1] ? mFocalLengthGears[mFocalLengthGears.length - 1] : curValue;
         reviseValueAndShow(curValue);
@@ -778,6 +782,14 @@ public class FocalZoomWidgetView extends ViewWidget implements ICameraIndex {
             if (Math.abs(mCurrentDroneFocalMultiTimes - mCurrentScreenFocalMultiTimes) > THRESHOLD) {
                 this.post(() -> setCurrentValue(mCurrentDroneFocalMultiTimes));
             }
+        }
+    }
+
+    public void pushFocalLengthRange(int[] gears) {
+        mFocalLengthGears = gears;
+        if (myHandler != null) {
+            myHandler.removeMessages(FOCAL_CHECK_MESSAGE_TYPE);
+            myHandler.sendEmptyMessageDelayed(FOCAL_CHECK_MESSAGE_TYPE, FOCAL_CHANGE_TIMEOUT);
         }
     }
 

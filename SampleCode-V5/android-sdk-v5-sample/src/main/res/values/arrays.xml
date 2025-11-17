@@ -14,15 +14,29 @@
         <item>STARBOARD</item>
         <item>UPSIDE</item>
         <item>OSDK</item>
+        <item>PORT_1</item>
+        <item>PORT_2</item>
+        <item>PORT_3</item>
+        <item>PORT_4</item>
     </string-array>
 
-    <string-array name="index_arrays">
+    <string-array name="component_index_arrays">
         <item>LEFT_OR_MAIN</item>
         <item>RIGHT</item>
         <item>UP</item>
-        <item>AGGREGATION</item>
+        <item>INDEX_3</item>
         <item>UP_TYPE_C</item>
         <item>UP_TYPE_C_EXT_ONE</item>
+        <item>INDEX_6</item>
+        <item>FPV</item>
+        <item>INDEX_8</item>
+        <item>PORT_1</item>
+        <item>PORT_2</item>
+        <item>PORT_3</item>
+        <item>PORT_4</item>
+        <item>PORT_5</item>
+        <item>PORT_6</item>
+        <item>PORT_7</item>
         <item>UNKNOWN</item>
     </string-array>
 
@@ -61,13 +75,6 @@
         <item>9</item>
     </string-array>
 
-
-    <string-array name="media_component_arrays">
-        <item>MAIN</item>
-        <item>RIGHT</item>
-        <item>UP</item>
-    </string-array>
-
     <string-array name="media_storage_arrays">
         <item>SDCARD</item>
         <item>INNER</item>
@@ -77,6 +84,7 @@
         <item>Matrice 30</item>
         <item>Matrice 30T</item>
         <item>Matrice 300 RTK</item>
+        <item>Matrice 400 RTK</item>
         <item>DJI Mavic 3 Serials</item>
         <item>DJI Mavic 3 Thermal</item>
     </string-array>
@@ -107,6 +115,38 @@
         <item>Start Record</item>
         <item>Stop Record</item>
         <item>Gimbal Pitch</item>
+        <item>Zoom</item>
+        <item>Hover</item>
+        <item>Aircraft Yaw</item>
+    </string-array>
+
+    <string-array name="mission_finish_action">
+        <item>NO_ACTION</item>
+        <item>GO_HOME</item>
+        <item>AUTO_LAND</item>
+        <item>GOTO_FIRST_WAYPOINT</item>
+    </string-array>
+
+    <string-array name="rc_lost_action">
+        <item>GO_BACK</item>
+        <item>LANDING</item>
+        <item>HOVER</item>
+    </string-array>
+
+    <string-array name="aircraft_heading">
+        <item>FOLLOW_WAYLINE</item>
+        <item>FIXED</item>
+        <item>MANUALLY</item>
+        <item>TOWARD_POI</item>
+        <item>SMOOTH_TRANSITION</item>
+    </string-array>
+
+    <string-array name="gimbal_heading">
+        <item>FOLLOW_WAYLINE</item>
+        <item>FIXED</item>
+        <item>MANUALLY</item>
+        <item>TOWARD_POI</item>
+        <item>SMOOTH_TRANSITION</item>
     </string-array>
 
     <string-array name="kml_heigh_mode">

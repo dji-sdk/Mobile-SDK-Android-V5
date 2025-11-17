@@ -38,13 +38,13 @@ import dji.sdk.keyvalue.value.common.Attitude
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.remotecontroller.RcGPSInfo
 import dji.sdk.keyvalue.key.KeyTools
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.utils.common.LocationUtil
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.WidgetModel
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.util.*
-import dji.v5.ux.core.util.SettingDefinitions.GimbalIndex
 import kotlin.math.abs
 
 private const val SENSOR_SENSITIVE_PARAM = 2
@@ -87,7 +87,7 @@ class CompassWidgetModel(
     private var rcOrMobileLatitude = 0.0
     private var rcOrMobileLongitude = 0.0
     private var latestSensorValue = 0f
-    private var gimbalIndex = GimbalIndex.PORT.index
+    private var gimbalIndex = ComponentIndexType.LEFT_OR_MAIN
 
     /**
      * values[0]: azimuth, rotation around the Z axis.
@@ -324,8 +324,8 @@ class CompassWidgetModel(
      *
      * @return current gimbal index.
      */
-    fun getGimbalIndex(): GimbalIndex? {
-        return GimbalIndex.find(gimbalIndex)
+    fun getGimbalIndex(): ComponentIndexType {
+        return gimbalIndex
     }
 
     /**
@@ -333,9 +333,9 @@ class CompassWidgetModel(
      *
      * @param gimbalIndex index of the gimbal.
      */
-    fun setGimbalIndex(gimbalIndex: GimbalIndex?) {
+    fun setGimbalIndex(gimbalIndex: ComponentIndexType?) {
         if (gimbalIndex != null) {
-            this.gimbalIndex = gimbalIndex.index
+            this.gimbalIndex = gimbalIndex
         }
         restart()
     }

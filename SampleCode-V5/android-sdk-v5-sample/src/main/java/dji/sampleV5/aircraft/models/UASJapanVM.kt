@@ -74,7 +74,8 @@ class UASJapanVM : DJIViewModel() {
         }
     }
 
-    fun clearAllUARegistrationNumberStatusListener() {
+    fun clearAllListener() {
         instance.clearUASRemoteIDStatusListener()
+        instance.clearAllUARegistrationNumberStatusListener()
     }
 }

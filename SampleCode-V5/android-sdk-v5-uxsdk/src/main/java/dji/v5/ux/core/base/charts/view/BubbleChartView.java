@@ -2,11 +2,8 @@ package dji.v5.ux.core.base.charts.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import androidx.core.view.ViewCompat;
-
-import dji.v5.ux.BuildConfig;
 import dji.v5.ux.core.base.charts.listener.BubbleChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.listener.DummyBubbleChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.model.BubbleChartData;
@@ -42,10 +39,6 @@ public class BubbleChartView extends AbstractChartView implements BubbleChartDat
     }
 
     public void setBubbleChartData(BubbleChartData data) {
-        if (BuildConfig.DEBUG) {
-            Log.d("BubbleChartView", "Setting data for BubbleChartView");
-        }
-
         if (null == data) {
             this.data = BubbleChartData.generateDummyData();
         } else {

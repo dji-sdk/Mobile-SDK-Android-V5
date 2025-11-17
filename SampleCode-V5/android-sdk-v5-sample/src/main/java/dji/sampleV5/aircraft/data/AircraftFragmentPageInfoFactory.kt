@@ -31,6 +31,7 @@ class AircraftFragmentPageInfoFactory : IFragmentPageInfoFactory {
             items.add(FragmentPageItem(R.id.security_code_page, R.string.item_security_code_title, R.string.item_security_code_description))
             items.add(FragmentPageItem(R.id.mop_center_page, R.string.item_mop_title, R.string.item_mop_description))
             items.add(FragmentPageItem(R.id.look_at_page, R.string.item_look_at_title, R.string.item_look_at_description))
+            items.add(FragmentPageItem(R.id.intelligent_flight_page, R.string.item_intelligent_flight_title, R.string.item_intelligent_flight__description))
         }
     }
 }

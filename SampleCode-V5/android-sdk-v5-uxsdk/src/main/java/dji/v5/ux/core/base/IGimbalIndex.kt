@@ -1,7 +1,6 @@
 package dji.v5.ux.core.base
 
-import androidx.annotation.Nullable
-import dji.v5.ux.core.util.SettingDefinitions.GimbalIndex
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 
 /**
  * Class Description
@@ -18,13 +17,12 @@ interface IGimbalIndex {
      *
      * @return current gimbal index.
      */
-    @Nullable
-    fun getGimbalIndex(): GimbalIndex
+    fun getGimbalIndex(): ComponentIndexType
 
     /**
      * Set gimbal index to which the model should react.
      *
      * @param gimbalIndex index of the gimbal.
      */
-    fun updateGimbalIndex(gimbalIndex: GimbalIndex)
+    fun updateGimbalIndex(gimbalIndex: ComponentIndexType)
 }

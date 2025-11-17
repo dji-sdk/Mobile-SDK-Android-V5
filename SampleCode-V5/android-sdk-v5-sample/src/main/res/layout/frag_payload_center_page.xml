@@ -21,4 +21,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bt_open_payload_data_page" />
 
+    <Button
+        android:id="@+id/bt_open_intelligent_box_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Intelligent Box Page"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_open_payload_widget_page" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

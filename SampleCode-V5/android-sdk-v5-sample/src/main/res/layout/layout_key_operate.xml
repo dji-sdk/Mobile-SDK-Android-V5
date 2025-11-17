@@ -104,7 +104,7 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="componentindex"/>
+                android:text="componentIndex"/>
 
             <Spinner
                 android:id="@+id/sp_index"
@@ -112,7 +112,7 @@
                 android:layout_width="@dimen/keyvalue_list_spinner_width"
                 android:textColor="@color/white"
                 android:dropDownWidth="@dimen/keyvalue_list_spinner_width"
-                android:entries="@array/index_arrays"
+                android:entries="@array/component_index_arrays"
                 />
         </LinearLayout>
 

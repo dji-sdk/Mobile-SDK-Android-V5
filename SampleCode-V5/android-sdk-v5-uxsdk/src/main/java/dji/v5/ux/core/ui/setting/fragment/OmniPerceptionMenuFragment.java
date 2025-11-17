@@ -68,7 +68,7 @@ public class OmniPerceptionMenuFragment extends MenuFragment {
         if (precisionLandingWidget == null) {
             return;
         }
-        if (isDownwardVisionSystemOpen && !ProductUtil.isM3EProduct() && !ProductUtil.isM4EProduct()) {
+        if (isDownwardVisionSystemOpen && !ProductUtil.isM3EProduct() && !ProductUtil.isM4EProduct() && !ProductUtil.isM4DProduct()) {
             precisionLandingWidget.setVisibility(View.VISIBLE);
         } else {
             precisionLandingWidget.setVisibility(View.GONE);

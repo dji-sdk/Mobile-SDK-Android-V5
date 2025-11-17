@@ -29,7 +29,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import dji.v5.utils.common.LogUtils
-import dji.v5.ux.BuildConfig
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -176,15 +175,11 @@ abstract class FrameLayoutWidget<T : Any> @JvmOverloads constructor(
 
     open fun recordInvalidateCallStack(view: View) {
         view.postInvalidate()
-        if (BuildConfig.DEBUG) {
-            throw RuntimeException("Only the original thread that created a view hierarchy can touch its views.")
-        } else {
-            val stringBuilder = StringBuilder()
-            for (stackTraceElement in Thread.currentThread().stackTrace) {
-                stringBuilder.append(stackTraceElement)
-                stringBuilder.append("\n")
-            }
-            LogUtils.e(TAG, " async call invalidate \n$stringBuilder")
+        val stringBuilder = StringBuilder()
+        for (stackTraceElement in Thread.currentThread().stackTrace) {
+            stringBuilder.append(stackTraceElement)
+            stringBuilder.append("\n")
         }
+        LogUtils.e(TAG, " async call invalidate \n$stringBuilder")
     }
 }

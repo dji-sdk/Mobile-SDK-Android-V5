@@ -57,6 +57,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_eu" />
 
+            <Button
+                android:id="@+id/btn_singapore"
+                style="@style/main_fragment_btn"
+                android:text="Open Singapore Page"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_china" />
+
+
+            <Button
+                android:id="@+id/btn_uae"
+                style="@style/main_fragment_btn"
+                android:text="Open United Arab Emirates Page"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_singapore" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

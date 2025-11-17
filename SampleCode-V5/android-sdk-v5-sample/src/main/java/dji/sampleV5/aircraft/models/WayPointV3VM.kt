@@ -13,6 +13,8 @@ import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.common.Velocity3D
+import dji.sdk.wpmz.value.mission.WaylineExitOnRCLostAction
+import dji.sdk.wpmz.value.mission.WaylineFinishedAction
 import dji.sdk.keyvalue.value.flightcontroller.FlightMode
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -277,4 +279,34 @@ class WayPointV3VM : DJIViewModel() {
             googleApiAvailability.isGooglePlayServicesAvailable(ContextUtil.getContext())
         return resultCode == ConnectionResult.SUCCESS
     }
+
+}
+data class MissionGlobalModel( var globalSpeed:Double = 5.0,
+                               var finishAction: WaylineFinishedAction = WaylineFinishedAction.GO_HOME,
+                                var lostAction: WaylineExitOnRCLostAction = WaylineExitOnRCLostAction.GO_BACK) {
+    companion object {
+        fun transStringToFinishAction(textStr: String): WaylineFinishedAction {
+            WaylineFinishedAction.values().forEach {
+                if (it.name == textStr) {
+                    return it
+                }
+            }
+            return WaylineFinishedAction.UNKNOWN
+        }
+
+        fun transStringToLostAction(textStr: String): WaylineExitOnRCLostAction {
+            WaylineExitOnRCLostAction.values().forEach {
+                if (it.name == textStr) {
+                    return it
+                }
+            }
+            return WaylineExitOnRCLostAction.UNKNOWN
+        }
+
+        fun transFinishActionToIndex(finishAction: WaylineFinishedAction): Int {
+            return finishAction.value()
+        }
+
+    }
+
 }

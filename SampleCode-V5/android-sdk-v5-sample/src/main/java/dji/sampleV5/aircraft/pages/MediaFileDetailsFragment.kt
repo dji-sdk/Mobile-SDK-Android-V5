@@ -182,11 +182,11 @@ class MediaFileDetailsFragment : DJIFragment(), View.OnClickListener {
                 val speedKbPerSecond: Float? = speedBytePerMill?.times(divs)
 
                 if (mediaFile!!.fileSize <= offset) {
-                    ToastUtils.showToast(getString(R.string.already_download))
+                    ToastUtils.showToast(getString(R.string.already_download) + getString(R.string.msg_download_save_tips) + ":" + filepath)
                 } else {
                     ToastUtils.showToast(
                         getString(R.string.msg_download_compelete_tips) + "${speedKbPerSecond}Mbps"
-                                + getString(R.string.msg_download_save_tips) + "${filepath}"
+                                + getString(R.string.msg_download_save_tips) + ":" + filepath
                     )
                 }
                 hideProgress()

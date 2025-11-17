@@ -53,5 +53,14 @@ class PayloadCenterFragment : DJIFragment() {
             }
         }
 
+        binding?.btOpenIntelligentBoxPage?.setOnClickListener {
+            val values = PayloadIndexType.allValues
+            initPopupNumberPicker(Helper.makeList(values)) {
+                val bundle = Bundle()
+                bundle.putInt(KEY_PAYLOAD_INDEX_TYPE, values[indexChosen[0]].value())
+                Navigation.findNavController(it).navigate(R.id.action_open_intelligent_box_page, bundle)
+
+            }
+        }
     }
 }

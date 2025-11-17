@@ -241,7 +241,7 @@ open class VideoSignalWidget @JvmOverloads constructor(
             frequencyBandTextView.text = when (frequencyBandType) {
                 FrequencyBand.BAND_2_DOT_4G -> FREQUENCY_BAND_2_DOT_4_GHZ
                 FrequencyBand.BAND_1_DOT_4G -> FREQUENCY_BAND_2_DOT_4_GHZ
-                FrequencyBand.BAND_DUAL -> FREQUENCY_BAND_5_GHZ
+                FrequencyBand.BAND_MULTI -> FREQUENCY_BAND_5_GHZ
                 else -> ""
             }
         }
@@ -259,7 +259,7 @@ open class VideoSignalWidget @JvmOverloads constructor(
                     frequencyBandTextView.text = when (values.first) {
                         FrequencyBand.BAND_2_DOT_4G -> FREQUENCY_BAND_2_DOT_4_GHZ
                         FrequencyBand.BAND_5_DOT_8G -> FREQUENCY_BAND_5_DOT_8_GHZ
-                        FrequencyBand.BAND_DUAL -> getAutoFrequencyBandStr(values.second)
+                        FrequencyBand.BAND_MULTI -> getAutoFrequencyBandStr(values.second)
                         else -> ""
                     }
                 }

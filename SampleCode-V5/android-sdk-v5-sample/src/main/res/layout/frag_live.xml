@@ -72,9 +72,9 @@
 
         <Button
             android:id="@+id/btn_start"
-            android:layout_width="72dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="12dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="start"
@@ -82,9 +82,9 @@
 
         <Button
             android:id="@+id/btn_stop"
-            android:layout_width="72dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="stop"
@@ -92,9 +92,9 @@
 
         <Button
             android:id="@+id/btn_show_view"
-            android:layout_width="72dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="show local"
@@ -102,9 +102,9 @@
 
         <Button
             android:id="@+id/btn_hide_view"
-            android:layout_width="72dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:text="hide local"
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/white"
-                android:tag="3"
+                android:tag="7"
                 android:text="FPV"
                 android:textColor="@color/white"
                 android:textSize="11sp" />
@@ -181,6 +181,46 @@
                 android:buttonTint="@color/white"
                 android:tag="10000"
                 android:text="VISION_ASSIST"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/rb_camera_vision_port1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:tag="20001"
+                android:text="PORT_1"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/rb_camera_vision_port2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:tag="20002"
+                android:text="PORT_2"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/rb_camera_vision_port3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:tag="20003"
+                android:text="PORT_3"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/rb_camera_vision_port4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:tag="20004"
+                android:text="PORT_4"
                 android:textColor="@color/white"
                 android:textSize="11sp" />
 
@@ -236,6 +276,16 @@
                 android:buttonTint="@color/white"
                 android:tag="3"
                 android:text="FULL_HD"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/rb_quality_original"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:tag="100"
+                android:text="ORIGINAL"
                 android:textColor="@color/white"
                 android:textSize="11sp" />
 

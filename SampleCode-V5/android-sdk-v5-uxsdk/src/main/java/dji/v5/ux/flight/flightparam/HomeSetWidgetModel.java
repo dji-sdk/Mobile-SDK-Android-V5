@@ -65,7 +65,7 @@ public class HomeSetWidgetModel extends WidgetModel {
 
     boolean isSupportMultiRc() {
         ProductType curType = productTypeProcessor.getValue();
-        return curType == ProductType.M30_SERIES || curType == ProductType.M350_RTK || curType == ProductType.M300_RTK;
+        return curType == ProductType.M30_SERIES || curType == ProductType.M350_RTK || curType == ProductType.M300_RTK || curType == ProductType.DJI_MATRICE_400;
     }
 
     boolean isCurrentRc(RCMode mode) {

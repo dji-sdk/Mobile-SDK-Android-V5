@@ -303,13 +303,13 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
             CameraStorageInfo internalInfo = cameraStorageInfos.getCameraStorageInfoByLocation(CameraStorageLocation.INTERNAL);
             if (internalInfo != null) {
                 innerStorageState.onNext(internalInfo.getStorageState());
-                sdAvailableCaptureCount.onNext(internalInfo.getAvailablePhotoCount());
+                innerStorageAvailableCaptureCount.onNext(internalInfo.getAvailablePhotoCount());
             }
 
             CameraStorageInfo sdcardInfo = cameraStorageInfos.getCameraStorageInfoByLocation(CameraStorageLocation.SDCARD);
             if (sdcardInfo != null) {
                 sdCardState.onNext(sdcardInfo.getStorageState());
-                innerStorageAvailableCaptureCount.onNext(sdcardInfo.getAvailablePhotoCount());
+                sdAvailableCaptureCount.onNext(sdcardInfo.getAvailablePhotoCount());
             }
         });
         bindDataProcessor(KeyTools.createKey(CameraKey.KeySSDOperationState, cameraIndex), ssdState);
@@ -336,7 +336,7 @@ public class ShootPhotoWidgetModel extends WidgetModel implements ICameraIndex {
 
     private boolean isSupportShootPhoto(){
         CameraType cameraType = KeyManager.getInstance().getValue(KeyTools.createKey(CameraKey.KeyCameraType ,cameraIndex) ,CameraType.NOT_SUPPORTED);
-        return cameraType == CameraType.M3T || cameraType == CameraType.M3E || cameraType == CameraType.M3M || cameraType == CameraType.ZENMUSE_H20T;
+        return cameraType == CameraType.M3T || cameraType == CameraType.M3E || cameraType == CameraType.M3TA || cameraType == CameraType.M3M || cameraType == CameraType.ZENMUSE_H20T;
     }
 
     //region Helpers

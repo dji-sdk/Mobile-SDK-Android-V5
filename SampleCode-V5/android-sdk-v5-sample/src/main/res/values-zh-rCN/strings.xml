@@ -325,7 +325,7 @@
     <string name="tip_set_password_not_support">当前设备SD不支持加密，无法设置密码</string>
     <string name="tip_has_set_password_already">当前设备SD已设置密码，无法继续设置密码。您可以选择修改密码或者重置密码</string>
     <string name="tip_modify_password_not_support">当前设备SD还未设置密码，请先设置密码</string>
-    <string name="tip_device_type">MASTER表示飞机，SLAVE1表示左云台，SLAVE2表示右云台，SLAVE3表示上云台</string>
+    <string name="tip_device_type">MASTER表示飞机，SLAVE1表示左云台，SLAVE2表示右云台，SLAVE3表示上云台\n。Port上，Port_1表示SLAVE1，Port_2表示SLAVE2，.. ，Port_8表示SLAVE8。</string>
 
     <string name="securitycode_operation_result_success">操作成功</string>
     <string name="securitycode_operation_result_running">系统繁忙，请稍后再试</string>
@@ -347,7 +347,7 @@
     <string name="item_uas_description">演示如何使用无人机远程识别相关功能</string>
     <string name="bt_set_eid_enable">Set electronicId enabled</string>
     <string name="bt_set_ua_registration_number">Set ua registration number</string>
-
+    <string name="m3e_little_battery_connceted">DJI Mavic 3 行业系列电池（欧盟 C1 版）</string>
 
     <!-- key类型 -->
     <string name="key_type_battery">battery key</string>
@@ -391,6 +391,7 @@
     <string name="on_board">OnBoard</string>
     <string name="payload">Payload</string>
     <string name="lidar">Lidar</string>
+    <string name="intelligent_box">Intelligent Box</string>
     <string name="key">Key 列表</string>
     <string name="key_search">搜索</string>
     <string name="commonlyused_key">常用Key</string>
@@ -484,6 +485,10 @@
     <!-- Look at preview -->
     <string name="item_look_at_title">Look At</string>
     <string name="item_look_at_description">演示如何使用Look At相关功能</string>
+
+    <!-- Intelligent Flight preview -->
+    <string name="item_intelligent_flight_title">智能飞行</string>
+    <string name="item_intelligent_flight__description">演示如何使用智能飞行相关功能</string>
 
     <!-- app silently upgrade preview -->
     <string name="item_app_silently_upgrade_title">APP静默升级</string>

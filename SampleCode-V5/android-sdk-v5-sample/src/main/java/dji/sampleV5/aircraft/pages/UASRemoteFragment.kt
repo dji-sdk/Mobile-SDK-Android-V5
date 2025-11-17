@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragUasPageBinding
+import androidx.navigation.findNavController
 
 /**
  * Description :无人机远程识别的演示入口页面
@@ -40,6 +41,13 @@ class UASRemoteFragment : DJIFragment() {
         }
         binding?.btnChina?.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_open_uas_chin_page)
+        }
+        binding?.btnSingapore?.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_open_uas_singapore_page)
+        }
+
+        binding?.btnUae?.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_open_uas_uae_page)
         }
     }
 }

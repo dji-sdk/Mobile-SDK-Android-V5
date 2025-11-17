@@ -251,7 +251,7 @@ class VideoChannelFragment : DJIFragment(), View.OnClickListener, SurfaceHolder.
             }
             if (!items.isNullOrEmpty()) {
                 dialog = this@VideoChannelFragment.requireContext().let { context ->
-                    AlertDialog.Builder(context, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
+                    AlertDialog.Builder(context, androidx.appcompat.R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
                         .setIcon(android.R.drawable.ic_menu_camera)
                         .setTitle(R.string.select_stream_source)
                         .setCancelable(false)

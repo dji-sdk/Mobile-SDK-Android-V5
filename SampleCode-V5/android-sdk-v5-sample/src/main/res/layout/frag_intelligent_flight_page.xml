@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/button_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_show_map"
+                style="@style/main_fragment_btn"
+                android:text="show map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_show_fpv"
+                style="@style/main_fragment_btn"
+                android:text="show fpv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_show_map" />
+
+            <Button
+                android:id="@+id/btn_hide_msg"
+                style="@style/main_fragment_btn"
+                android:text="hide msg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_show_fpv" />
+
+            <Button
+                android:id="@+id/btn_start_auto_sensing"
+                style="@style/main_fragment_btn"
+                android:text="start auto sensing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_hide_msg" />
+
+            <Button
+                android:id="@+id/btn_stop_auto_sensing"
+                style="@style/main_fragment_btn"
+                android:text="stop auto sensing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_auto_sensing" />
+
+            <Button
+                android:id="@+id/btn_select_intelligent_model"
+                style="@style/main_fragment_btn"
+                android:text="Select Intelligent Model"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_stop_auto_sensing" />
+
+            <Button
+                android:id="@+id/btn_select_camera"
+                style="@style/main_fragment_btn"
+                android:text="select camera"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_select_intelligent_model" />
+
+            <Button
+                android:id="@+id/btn_select_lens"
+                style="@style/main_fragment_btn"
+                android:text="select lens"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_select_camera" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_select_lens"/>
+
+            <Button
+                android:id="@+id/btn_start_spotlight_for_industry"
+                style="@style/main_fragment_btn"
+                android:layout_marginTop="6dp"
+                android:text="start spotlight for industry"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line" />
+
+            <Button
+                android:id="@+id/btn_enter_spotlight_mode"
+                style="@style/main_fragment_btn"
+                android:layout_marginTop="6dp"
+                android:text="enter spotlight mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_spotlight_for_industry" />
+
+            <Button
+                android:id="@+id/btn_exit_spotlight_mode"
+                style="@style/main_fragment_btn"
+                android:layout_marginTop="6dp"
+                android:text="exit spotlight mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_enter_spotlight_mode" />
+
+            <Button
+                android:id="@+id/btn_start_spotlight_for_consume"
+                style="@style/main_fragment_btn"
+                android:text="start spotlight for consume"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_exit_spotlight_mode" />
+
+            <Button
+                android:id="@+id/btn_stop_spotlight"
+                style="@style/main_fragment_btn"
+                android:text="stop spotlight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_spotlight_for_consume" />
+
+            <Button
+                android:id="@+id/btn_select_auto_target"
+                style="@style/main_fragment_btn"
+                android:text="select auto target"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_stop_spotlight" />
+
+            <Button
+                android:id="@+id/btn_confirm_target"
+                style="@style/main_fragment_btn"
+                android:text="confirm target"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_select_auto_target" />
+
+            <View
+                android:id="@+id/line_0"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_confirm_target"/>
+
+            <Button
+                android:id="@+id/btn_start_poi_mission_for_industry"
+                style="@style/main_fragment_btn"
+                android:text="start poi for industry"
+                android:layout_marginTop="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_0" />
+
+            <Button
+                android:id="@+id/btn_start_poi_mission_for_consume"
+                style="@style/main_fragment_btn"
+                android:text="start poi for consume"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_poi_mission_for_industry" />
+
+            <Button
+                android:id="@+id/btn_stop_poi_mission"
+                style="@style/main_fragment_btn"
+                android:text="stop poi"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_poi_mission_for_consume"/>
+
+            <Button
+                android:id="@+id/btn_update_poi_mission_target"
+                style="@style/main_fragment_btn"
+                android:text="update poi target"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_stop_poi_mission" />
+
+            <Button
+                android:id="@+id/btn_lock_poi_circular_velocity"
+                style="@style/main_fragment_btn"
+                android:text="lock/unlock poi circular velocity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_poi_mission_target"/>
+
+            <Button
+                android:id="@+id/btn_lock_poi_gimbal_pitch"
+                style="@style/main_fragment_btn"
+                android:text="lock/unlock poi gimbal pitch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_lock_poi_circular_velocity" />
+
+            <Button
+                android:id="@+id/btn_set_poi_circle_speed"
+                style="@style/main_fragment_btn"
+                android:text="set circle speed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_lock_poi_gimbal_pitch" />
+
+            <View
+                android:id="@+id/line_1"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_poi_circle_speed"/>
+
+            <Button
+                android:id="@+id/btn_start_fly_to_mission"
+                style="@style/main_fragment_btn"
+                android:text="start fly to "
+                android:layout_marginTop="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_1" />
+
+            <Button
+                android:id="@+id/btn_stop_fly_to_mission"
+                style="@style/main_fragment_btn"
+                android:text="stop fly to "
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_fly_to_mission" />
+
+            <Button
+                android:id="@+id/btn_set_fly_to_mode"
+                style="@style/main_fragment_btn"
+                android:text="set fly to mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_stop_fly_to_mission" />
+
+            <Button
+                android:id="@+id/btn_set_fly_to_height"
+                style="@style/main_fragment_btn"
+                android:text="set fly to height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_fly_to_mode" />
+
+            <View
+                android:id="@+id/line_2"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#CCCCCC"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_set_fly_to_height"/>
+
+            <Button
+                android:id="@+id/btn_start_smart_track"
+                style="@style/main_fragment_btn"
+                android:text="start smart track "
+                android:layout_marginTop="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_2" />
+
+            <Button
+                android:id="@+id/btn_stop_smart_track"
+                style="@style/main_fragment_btn"
+                android:text="stop smart track "
+                android:layout_marginTop="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_start_smart_track" />
+
+            <Button
+                android:id="@+id/btn_select_smart_track_index"
+                style="@style/main_fragment_btn"
+                android:text="select smart track target"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_stop_smart_track" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ToggleButton
+        android:id="@+id/waypoint_add"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="CLOSE ADD"
+        android:textOff= "Add Point"
+        android:background="@drawable/toggle_selector"
+        android:layout_marginLeft="3dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf ="@+id/button_list" />
+
+    <dji.v5.ux.map.MapWidget
+        android:id="@+id/map_widget"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@+id/button_list"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </dji.v5.ux.map.MapWidget>
+
+    <SurfaceView
+        android:id="@+id/sv_camera"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/button_list"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <dji.sampleV5.aircraft.views.OverLayerTopView
+        android:id="@+id/over_layer_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_list"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/intelligent_flight_info_tv"
+        android:layout_width="@dimen/uxsdk_500_dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/waypoint_add"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/red"
+        android:maxLines="30"
+        android:scrollbars="vertical"
+        android:textSize="10dp"
+        android:text="info">
+    </TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

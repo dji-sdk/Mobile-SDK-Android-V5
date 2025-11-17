@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.aircraft.util.ToastUtils
 import dji.sdk.keyvalue.key.CameraKey
 import dji.sdk.keyvalue.key.FlightControllerKey
+import dji.sdk.keyvalue.value.camera.CameraMode
+import dji.sdk.keyvalue.value.airlink.ChannelPriority
 import dji.sdk.keyvalue.value.camera.CameraType
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
@@ -40,6 +42,7 @@ class CameraStreamDetailVM : DJIViewModel() {
     private val _isVisionAssistEnabled = MutableLiveData(false)
     private val _visionAssistViewDirection = MutableLiveData(VisionAssistDirection.UNKNOWN)
     private val _visionAssistViewDirectionRange = MutableLiveData<List<VisionAssistDirection>>(ArrayList())
+    val cameraStreamEnableMap = MutableLiveData(emptyMap<ComponentIndexType, Boolean>())
 
     private var cameraIndex = ComponentIndexType.UNKNOWN
     private var cameraType = ""
@@ -56,6 +59,17 @@ class CameraStreamDetailVM : DJIViewModel() {
 
         override fun onVisionAssistViewDirectionRangeUpdated(modes: MutableList<VisionAssistDirection>) {
             _visionAssistViewDirectionRange.postValue(modes)
+        }
+    }
+
+    private val availableCameraUpdatedListener = object :
+        ICameraStreamManager.AvailableCameraUpdatedListener {
+        override fun onAvailableCameraUpdated(availableCameraList: MutableList<ComponentIndexType>) {
+            //do nothing
+        }
+
+        override fun onCameraStreamEnableUpdate(map: MutableMap<ComponentIndexType, Boolean>) {
+            cameraStreamEnableMap.postValue(map)
         }
     }
 
@@ -82,7 +96,9 @@ class CameraStreamDetailVM : DJIViewModel() {
     override fun onCleared() {
         super.onCleared()
         setCameraIndex(ComponentIndexType.UNKNOWN)
+        MediaDataCenter.getInstance().cameraStreamManager.removeAvailableCameraUpdatedListener(availableCameraUpdatedListener)
         MediaDataCenter.getInstance().cameraStreamManager.removeVisionAssistStatusListener(visionAssistStatusListener)
+        KeyManager.getInstance().cancelListen(this)
         doStopDownloadStreamToLocal()
     }
 
@@ -99,6 +115,7 @@ class CameraStreamDetailVM : DJIViewModel() {
         listenAvailableLens()
         listenCurrentLens()
         listenVisionAssistStatus()
+        MediaDataCenter.getInstance().cameraStreamManager.addAvailableCameraUpdatedListener(availableCameraUpdatedListener)
     }
 
     private fun listenCameraName() {
@@ -254,6 +271,16 @@ class CameraStreamDetailVM : DJIViewModel() {
     }
 
     fun getStreamEncoderBitrate() = MediaDataCenter.getInstance().cameraStreamManager.getStreamEncoderBitrate(cameraIndex)
+
+    fun changeCameraMode(mode: CameraMode) {
+        CameraKey.KeyCameraMode.create().set(mode)
+    }
+
+    fun setStreamPriority(priority: ChannelPriority) = MediaDataCenter.getInstance().cameraStreamManager.setStreamPriority(cameraIndex, priority)
+
+    fun getStreamPriority() = MediaDataCenter.getInstance().cameraStreamManager.getStreamPriority(cameraIndex)
+
+    fun enableStream(enable: Boolean) = MediaDataCenter.getInstance().cameraStreamManager.enableStream(cameraIndex, enable)
 
     private fun doStopDownloadStreamToLocal() {
         MediaDataCenter.getInstance().cameraStreamManager.removeReceiveStreamListener(streamListener)

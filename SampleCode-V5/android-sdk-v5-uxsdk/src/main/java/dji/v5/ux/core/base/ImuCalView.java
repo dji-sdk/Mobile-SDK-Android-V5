@@ -124,7 +124,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
 
     private void initViews() {
         mPrepareDesc = RESIDS_PREPARE_DESC_REMOVE_DESC1;
-        sideSequence = (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct())? IImuResources.SIDE_SEQUENCE_M2E : IImuResources.SIDE_SEQUENCE;
+        sideSequence = (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct())? IImuResources.SIDE_SEQUENCE_M2E : IImuResources.SIDE_SEQUENCE;
 
         final int[] descResIds = new int[]{
             R.id.imu_cal_right_desc_ly1, R.id.imu_cal_right_desc_ly2, R.id.imu_cal_right_desc_ly3
@@ -435,7 +435,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
     private int getReadyResId() {
         if(ProductUtil.isM30Product()){
             return R.drawable.uxsdk_setting_ui_imu_ready_m320;
-        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct()) {
+        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
             return R.drawable.uxsdk_img_device_home_m3e;
         } else{
             return R.drawable.uxsdk_setting_ui_imu_ready_m300;
@@ -447,7 +447,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
 
         if (ProductUtil.isM30Product()) {
             resIds = RESIDS_AIRCRAFT_M320;
-        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct()) {
+        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
             resIds = RESIDS_AIRCRAFT_M3E;
         } else {
             resIds = RESIDS_AIRCRAFT_M300;

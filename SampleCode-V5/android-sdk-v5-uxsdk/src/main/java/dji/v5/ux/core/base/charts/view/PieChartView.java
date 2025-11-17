@@ -2,16 +2,11 @@ package dji.v5.ux.core.base.charts.view;
 
 import android.content.Context;
 import android.graphics.RectF;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import androidx.core.view.ViewCompat;
-
-import dji.v5.ux.BuildConfig;
 import dji.v5.ux.core.base.charts.animation.PieChartRotationAnimator;
 import dji.v5.ux.core.base.charts.animation.PieChartRotationAnimatorV14;
-import dji.v5.ux.core.base.charts.animation.PieChartRotationAnimatorV8;
 import dji.v5.ux.core.base.charts.gesture.PieChartTouchHandler;
 import dji.v5.ux.core.base.charts.listener.DummyPieChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.listener.PieChartOnValueSelectListener;
@@ -29,7 +24,7 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
     protected PieChartRotationAnimator rotationAnimator;
 
     public PieChartView(Context context) {
-        this(context, (AttributeSet)null, 0);
+        this(context, (AttributeSet) null, 0);
     }
 
     public PieChartView(Context context, AttributeSet attrs) {
@@ -42,12 +37,7 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
         this.pieChartRenderer = new PieChartRenderer(context, this, this);
         this.touchHandler = new PieChartTouchHandler(context, this);
         this.setChartRenderer(this.pieChartRenderer);
-        if (Build.VERSION.SDK_INT < 14) {
-            this.rotationAnimator = new PieChartRotationAnimatorV8(this);
-        } else {
-            this.rotationAnimator = new PieChartRotationAnimatorV14(this);
-        }
-
+        this.rotationAnimator = new PieChartRotationAnimatorV14(this);
         this.setPieChartData(PieChartData.generateDummyData());
     }
 
@@ -56,10 +46,6 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
     }
 
     public void setPieChartData(PieChartData data) {
-        if (BuildConfig.DEBUG) {
-            Log.d("PieChartView", "Setting data for ColumnChartView");
-        }
-
         if (null == data) {
             this.data = PieChartData.generateDummyData();
         } else {
@@ -76,7 +62,7 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
     public void callTouchListener() {
         SelectedValue selectedValue = this.chartRenderer.getSelectedValue();
         if (selectedValue.isSet()) {
-            SliceValue sliceValue = (SliceValue)this.data.getValues().get(selectedValue.getFirstIndex());
+            SliceValue sliceValue = (SliceValue) this.data.getValues().get(selectedValue.getFirstIndex());
             this.onValueTouchListener.onValueSelected(selectedValue.getFirstIndex(), sliceValue);
         } else {
             this.onValueTouchListener.onValueDeselected();
@@ -111,7 +97,7 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
     public void setChartRotation(int rotation, boolean isAnimated) {
         if (isAnimated) {
             this.rotationAnimator.cancelAnimation();
-            this.rotationAnimator.startAnimation((float)this.pieChartRenderer.getChartRotation(), (float)rotation);
+            this.rotationAnimator.startAnimation((float) this.pieChartRenderer.getChartRotation(), (float) rotation);
         } else {
             this.pieChartRenderer.setChartRotation(rotation);
         }
@@ -120,12 +106,12 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
     }
 
     public boolean isChartRotationEnabled() {
-        return this.touchHandler instanceof PieChartTouchHandler ? ((PieChartTouchHandler)this.touchHandler).isRotationEnabled() : false;
+        return this.touchHandler instanceof PieChartTouchHandler ? ((PieChartTouchHandler) this.touchHandler).isRotationEnabled() : false;
     }
 
     public void setChartRotationEnabled(boolean isRotationEnabled) {
         if (this.touchHandler instanceof PieChartTouchHandler) {
-            ((PieChartTouchHandler)this.touchHandler).setRotationEnabled(isRotationEnabled);
+            ((PieChartTouchHandler) this.touchHandler).setRotationEnabled(isRotationEnabled);
         }
 
     }

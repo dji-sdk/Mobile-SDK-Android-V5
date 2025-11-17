@@ -5,8 +5,11 @@ package dji.sampleV5.aircraft.keyvalue
  * @time 2022/10/26 2:25 下午
  * @description:
  */
-class KeyActionCommand(private val productType: String,
-                       private val componentTypeName: String) : KeyOperatorCommand(productType , componentTypeName) {
+class KeyActionCommand(
+    private val productType: String,
+    private val componentTypeName: String,
+    private val componentIndex: Int
+) : KeyOperatorCommand(productType, componentTypeName, componentIndex) {
 
     private val TAG_GET = "【ACTION】"
     private val TAG_ERROR = "ActionErrorMsg"
@@ -16,15 +19,15 @@ class KeyActionCommand(private val productType: String,
     }
 
     override fun run(item: KeyItem<*, *>) {
-       super.doKeyParam(item, KeyCheckType.ACTION)
+        super.doKeyParam(item, KeyCheckType.ACTION)
     }
 
     override fun getTAG(): String {
-       return TAG_GET
+        return TAG_GET
     }
 
     override fun getErrorTAG(): String {
-       return TAG_ERROR
+        return TAG_ERROR
     }
 
 

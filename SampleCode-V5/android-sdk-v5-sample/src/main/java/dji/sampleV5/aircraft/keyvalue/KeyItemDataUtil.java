@@ -8,6 +8,7 @@ import java.util.List;
 import dji.sdk.keyvalue.converter.DJIValueConverter;
 import dji.sdk.keyvalue.converter.IDJIValueConverter;
 import dji.sdk.keyvalue.converter.SingleValueConverter;
+import dji.sdk.keyvalue.key.AIBoxKey;
 import dji.sdk.keyvalue.key.AirLinkKey;
 import dji.sdk.keyvalue.key.BatteryKey;
 import dji.sdk.keyvalue.key.BleKey;
@@ -99,8 +100,8 @@ public class KeyItemDataUtil {
         initList(keyList, RadarKey.getKeyList());
     }
 
-    public static void initAppKeyList(List<KeyItem<?, ?>> keyList) {
-//        initList(keyList , AppKey.getKeyList());
+    public static void initIntelligentBoxList(List<KeyItem<?, ?>> keyList) {
+        initList(keyList, AIBoxKey.getKeyList());
     }
 
     public static void initMobileNetworkKeyList(List<KeyItem<?, ?>> keyList) {
@@ -244,6 +245,10 @@ public class KeyItemDataUtil {
         keyList.clear();
 
         initLidarKeyList(keyList);
+        allKeyList.addAll(keyList);
+        keyList.clear();
+
+        initIntelligentBoxList(keyList);
         allKeyList.addAll(keyList);
         keyList.clear();
     }

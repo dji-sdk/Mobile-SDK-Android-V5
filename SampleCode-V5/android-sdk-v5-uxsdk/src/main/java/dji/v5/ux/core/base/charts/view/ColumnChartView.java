@@ -2,9 +2,7 @@ package dji.v5.ux.core.base.charts.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
-import dji.v5.ux.BuildConfig;
 import dji.v5.ux.core.base.charts.listener.ColumnChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.listener.DummyColumnChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.model.Column;
@@ -38,10 +36,6 @@ public class ColumnChartView extends AbstractChartView implements ColumnChartDat
     }
 
     public void setColumnChartData(ColumnChartData data) {
-        if ( BuildConfig.DEBUG) {
-            Log.d("ColumnChartView", "Setting data for ColumnChartView");
-        }
-
         if (null == data) {
             this.data = ColumnChartData.generateDummyData();
         } else {

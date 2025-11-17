@@ -5,11 +5,70 @@
     android:orientation="vertical"
     android:background = "@color/gray"
     android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:gravity="center"
+        android:text="全局设置"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <dji.v5.ux.accessory.DescSpinnerCell
+                android:id ="@+id/lost_action"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:uxsdk_summary="失控行为"
+                app:uxsdk_entries="@array/rc_lost_action"/>
+
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text = "全局速度"
+                    android:hint="0.1~12m/s"
+                    />
+                <EditText android:id="@+id/global_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text= "8"
+                    android:inputType="number"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <dji.v5.ux.accessory.DescSpinnerCell
+            android:id ="@+id/mission_finish_type"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:uxsdk_summary="任务结束动作"
+            app:uxsdk_entries="@array/mission_finish_action"/>
+
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@color/gray"
         android:gravity="center"
         android:text="添加航点"
@@ -18,7 +77,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="120dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,41 +106,143 @@
                 android:text = "5"
                 android:textSize="18sp" />
 
-
-            <dji.v5.ux.accessory.DescSpinnerCell
-                android:id ="@+id/action_type"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:uxsdk_summary="航点动作"
+                android:text = "是否使用全局速度"/>
+            <CheckBox
+                android:id="@+id/cb_use_global_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <dji.v5.ux.accessory.DescSpinnerCell
+                    android:id ="@+id/action_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    app:uxsdk_summary="航点动作1"
+                    app:uxsdk_entries="@array/wayline_action"/>
+                <Button
+                    android:id="@+id/show_multiAction"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="显示动作2"/>
+            </LinearLayout>
+
+
+
+            <EditText android:id="@+id/action_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:visibility="gone"
+                android:text = "3"
+                android:textSize="18sp" />
+
+            <dji.v5.ux.accessory.DescSpinnerCell
+                android:id ="@+id/action_type1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:uxsdk_summary="航点动作2"
+                android:visibility="gone"
                 app:uxsdk_entries="@array/wayline_action"/>
 
+            <EditText android:id="@+id/action_value1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:visibility="gone"
+                android:text = "3"
+                android:textSize="18sp" />
 
+            <dji.v5.ux.accessory.DescSpinnerCell
+                android:id ="@+id/aircraft_heading_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:uxsdk_summary="机头朝向"
+                app:uxsdk_entries="@array/aircraft_heading"/>
+
+            <EditText android:id="@+id/aircraft_heading_angle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text = "5"
+                android:textSize="18sp" />
+
+            <dji.v5.ux.accessory.DescSpinnerCell
+                android:id ="@+id/gimbal_heading_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:uxsdk_summary="云台朝向"
+                app:uxsdk_entries="@array/gimbal_heading"/>
+
+            <EditText android:id="@+id/gimbal_heading_angle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text = "5"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text = "兴趣点-经度纬度"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText android:id="@+id/poi_longitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text = "113"
+                    android:textSize="18sp" />
+                <EditText android:id="@+id/poi_latitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text = "23"
+                    android:textSize="18sp" />
+                <EditText android:id="@+id/poi_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text = "100"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/gray"
+                    android:text="取消"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                <Button android:id="@+id/btn_add"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/gray"
+                    android:text="添加点"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:orientation="horizontal"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@color/gray"
-            android:text="取消"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
-        <Button android:id="@+id/btn_add"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/gray"
-            android:text="添加点"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
-    </LinearLayout>
 </LinearLayout>

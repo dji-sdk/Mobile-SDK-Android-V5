@@ -21,6 +21,7 @@ import dji.v5.utils.common.LogUtils
 import dji.sampleV5.aircraft.util.ToastUtils
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation
 import dji.sdk.keyvalue.value.common.EmptyMsg
+import dji.v5.common.error.DJICommonError
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DiskUtil
 import dji.v5.utils.common.StringUtils
@@ -38,7 +39,9 @@ import java.util.ArrayList
 class MediaVM : DJIViewModel() {
     var mediaFileListData = MutableLiveData<MediaFileListData>()
     var fileListState = MutableLiveData<MediaFileListState>()
-    var isPlayBack = MutableLiveData<Boolean?>()
+    var isPlayBack = MutableLiveData<Boolean>()
+    var componentIndex = MutableLiveData<ComponentIndexType>()
+
     fun init() {
         addMediaFileListStateListener()
         mediaFileListData.value = MediaDataCenter.getInstance().mediaManager.mediaFileListData
@@ -120,14 +123,17 @@ class MediaVM : DJIViewModel() {
     }
 
     fun setComponentIndex(index: ComponentIndexType) {
+        componentIndex.postValue(index)
         isPlayBack.postValue(false)
         KeyManager.getInstance().cancelListen(this)
         KeyManager.getInstance().listen(
-            KeyTools.createKey(
+            createKey(
                 CameraKey.KeyIsPlayingBack, index
             ), this
         ) { _, newValue ->
-            isPlayBack.postValue(newValue)
+            newValue?.let {
+                isPlayBack.postValue(it)
+            }
         }
         val mediaSource = MediaFileListDataSource.Builder().setIndexType(index).build()
         MediaDataCenter.getInstance().mediaManager.setMediaFileDataSource(mediaSource)
@@ -165,9 +171,13 @@ class MediaVM : DJIViewModel() {
     }
 
     fun takePhoto(callback: CommonCallbacks.CompletionCallback) {
-        RxUtil.setValue(createKey<CameraMode>(
-            CameraKey.KeyCameraMode), CameraMode.PHOTO_NORMAL)
-            .andThen(RxUtil.performActionWithOutResult(createKey(CameraKey.KeyStartShootPhoto)))
+        val index = componentIndex.value
+        if (index == null) {
+            CallbackUtils.onFailure(callback, DJICommonError.FACTORY.build(DJICommonError.DISCONNECTED))
+            return
+        }
+        RxUtil.setValue(createKey<CameraMode>(CameraKey.KeyCameraMode, index), CameraMode.PHOTO_NORMAL)
+            .andThen(RxUtil.performActionWithOutResult(createKey(CameraKey.KeyStartShootPhoto, index)))
             .subscribe({ CallbackUtils.onSuccess(callback) }
             ) { throwable: Throwable ->
                 CallbackUtils.onFailure(
@@ -178,9 +188,15 @@ class MediaVM : DJIViewModel() {
     }
 
     fun formatSDCard(callback: CommonCallbacks.CompletionCallback) {
-        KeyManager.getInstance().performAction(KeyTools.createKey(CameraKey.KeyFormatStorage),CameraStorageLocation.SDCARD  , object :CommonCallbacks.CompletionCallbackWithParam<EmptyMsg>{
+        val index = componentIndex.value
+        if (index == null) {
+            CallbackUtils.onFailure(callback, DJICommonError.FACTORY.build(DJICommonError.DISCONNECTED))
+            return
+        }
+        KeyManager.getInstance().performAction(createKey(CameraKey.KeyFormatStorage, index), CameraStorageLocation.SDCARD, object :
+            CommonCallbacks.CompletionCallbackWithParam<EmptyMsg> {
             override fun onSuccess(t: EmptyMsg?) {
-               callback.onSuccess()
+                callback.onSuccess()
             }
 
             override fun onFailure(error: IDJIError) {
@@ -190,25 +206,25 @@ class MediaVM : DJIViewModel() {
         })
     }
 
-    fun  downloadMediaFile(mediaList : ArrayList<MediaFile>){
+    fun downloadMediaFile(mediaList: ArrayList<MediaFile>) {
         mediaList.forEach {
             downloadFile(it)
         }
     }
 
-    private fun downloadFile(mediaFile :MediaFile ) {
-        val dirs = File(DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(),  "/mediafile"))
+    private fun downloadFile(mediaFile: MediaFile) {
+        val dirs = File(DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), "/mediafile"))
         if (!dirs.exists()) {
             dirs.mkdirs()
         }
-        val filepath = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(),  "/mediafile/"  + mediaFile?.fileName)
+        val filepath = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), "/mediafile/" + mediaFile.fileName)
         val file = File(filepath)
         var offset = 0L
         val outputStream = FileOutputStream(file, true)
         val bos = BufferedOutputStream(outputStream)
-        mediaFile?.pullOriginalMediaFileFromCamera(offset, object : MediaFileDownloadListener {
+        mediaFile.pullOriginalMediaFileFromCamera(offset, object : MediaFileDownloadListener {
             override fun onStart() {
-                LogUtils.i("MediaFile" , "${mediaFile.fileIndex } start download"  )
+                LogUtils.i("MediaFile", "${mediaFile.fileIndex} start download")
             }
 
             override fun onProgress(total: Long, current: Long) {
@@ -216,7 +232,7 @@ class MediaVM : DJIViewModel() {
                 val downloadedSize = offset + current
                 val data: Double = StringUtils.formatDouble((downloadedSize.toDouble() / fullSize.toDouble()))
                 val result: String = StringUtils.formatDouble(data * 100, "#0").toString() + "%"
-                LogUtils.i("MediaFile"  , "${mediaFile.fileIndex}  progress $result")
+                LogUtils.i("MediaFile", "${mediaFile.fileIndex}  progress $result")
             }
 
             override fun onRealtimeDataUpdate(data: ByteArray, position: Long) {
@@ -235,7 +251,7 @@ class MediaVM : DJIViewModel() {
                 } catch (error: IOException) {
                     LogUtils.e("MediaFile", "close error$error")
                 }
-                LogUtils.i("MediaFile" , "${mediaFile.fileIndex }  download finish"  )
+                LogUtils.i("MediaFile", "${mediaFile.fileIndex}  download finish")
             }
 
             override fun onFailure(error: IDJIError?) {

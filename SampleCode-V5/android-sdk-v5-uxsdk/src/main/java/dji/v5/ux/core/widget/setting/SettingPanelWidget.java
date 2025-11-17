@@ -325,7 +325,7 @@ public class SettingPanelWidget extends ConstraintLayoutWidget<Boolean> {
 
     //辅控不支持RTK
     private boolean isSupportAdvRtk(Boolean isRTKModuleAvailable) {
-        return !isSlaverRcMode(mCurrentRcMode) && isRTKModuleAvailable || ProductUtil.isM300Product() || ProductUtil.isM30Product() || ProductUtil.isM350Product();
+        return !isSlaverRcMode(mCurrentRcMode) && isRTKModuleAvailable || ProductUtil.isM300Product() || ProductUtil.isM30Product() || ProductUtil.isM350Product()|| ProductUtil.isM400Product();
     }
 
     @Override

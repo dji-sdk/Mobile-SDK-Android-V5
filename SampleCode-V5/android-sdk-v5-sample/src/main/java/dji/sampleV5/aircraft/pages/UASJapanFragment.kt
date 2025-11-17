@@ -59,7 +59,7 @@ class UASJapanFragment : DJIFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        uasJapanVM.clearAllUARegistrationNumberStatusListener()
+        uasJapanVM.clearAllListener()
     }
 
     inner class UATest {

@@ -31,8 +31,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -64,7 +66,6 @@ import dji.v5.ux.core.extension.ViewExtensions;
 import dji.v5.ux.core.panel.systemstatus.SystemStatusListPanelWidget;
 import dji.v5.ux.core.panel.topbar.TopBarPanelWidget;
 import dji.v5.ux.core.util.CameraUtil;
-import dji.v5.ux.core.util.CommonUtils;
 import dji.v5.ux.core.util.DataProcessor;
 import dji.v5.ux.core.util.ViewUtil;
 import dji.v5.ux.core.widget.fpv.FPVWidget;
@@ -126,8 +127,16 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             RTKStartServiceHelper.INSTANCE.startRtkService(false);
         }
     };
-    private final ICameraStreamManager.AvailableCameraUpdatedListener availableCameraUpdatedListener = availableCameraList -> {
-        runOnUiThread(() -> updateFPVWidgetSource(availableCameraList));
+    private final ICameraStreamManager.AvailableCameraUpdatedListener availableCameraUpdatedListener = new ICameraStreamManager.AvailableCameraUpdatedListener() {
+        @Override
+        public void onAvailableCameraUpdated(@NonNull List<ComponentIndexType> availableCameraList) {
+            runOnUiThread(() -> updateFPVWidgetSource(availableCameraList));
+        }
+
+        @Override
+        public void onCameraStreamEnableUpdate(@NonNull Map<ComponentIndexType, Boolean> cameraStreamEnableMap) {
+            //
+        }
     };
 
     //endregion
@@ -330,6 +339,14 @@ public class DefaultLayoutActivity extends AppCompatActivity {
             return ComponentIndexType.RIGHT;
         } else if (cameraList.contains(ComponentIndexType.UP)) {
             return ComponentIndexType.UP;
+        } else if (cameraList.contains(ComponentIndexType.PORT_1)) {
+            return ComponentIndexType.PORT_1;
+        } else if (cameraList.contains(ComponentIndexType.PORT_2)) {
+            return ComponentIndexType.PORT_2;
+        } else if (cameraList.contains(ComponentIndexType.PORT_3)) {
+            return ComponentIndexType.PORT_4;
+        } else if (cameraList.contains(ComponentIndexType.PORT_4)) {
+            return ComponentIndexType.PORT_4;
         } else if (cameraList.contains(ComponentIndexType.VISION_ASSIST)) {
             return ComponentIndexType.VISION_ASSIST;
         }
@@ -348,7 +365,6 @@ public class DefaultLayoutActivity extends AppCompatActivity {
         //如果无需使能或者显示的，也就没有必要切换了。
         if (fpvInteractionWidget.isInteractionEnabled()) {
             fpvInteractionWidget.updateCameraSource(devicePosition, lensType);
-            fpvInteractionWidget.updateGimbalIndex(CommonUtils.getGimbalIndex(devicePosition));
         }
         if (lensControlWidget.getVisibility() == View.VISIBLE) {
             lensControlWidget.updateCameraSource(devicePosition, lensType);

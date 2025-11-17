@@ -50,6 +50,19 @@
                 android:text="PSDK" />
         </RadioGroup>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Component:"/>
+
+        <Spinner
+            android:id="@+id/sp_choose_component"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="11dp"
+            android:entries="@array/component_index_arrays" />
+
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/cb_reliable"
             android:layout_width="wrap_content"

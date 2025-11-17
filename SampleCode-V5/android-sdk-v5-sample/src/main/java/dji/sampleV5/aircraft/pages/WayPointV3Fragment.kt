@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,6 +34,7 @@ import com.dji.wpmzsdk.common.utils.kml.model.WaypointActionType
 import com.dji.wpmzsdk.manager.WPMZManager
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragWaypointv3PageBinding
+import dji.sampleV5.aircraft.models.MissionGlobalModel
 import dji.sampleV5.aircraft.models.WayPointV3VM
 import dji.sampleV5.aircraft.util.DialogUtil
 import dji.sampleV5.aircraft.util.ToastUtils
@@ -44,12 +46,22 @@ import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.flightcontroller.FlightMode
 import dji.sdk.wpmz.jni.JNIWPMZManager
+import dji.sdk.wpmz.value.mission.Wayline
 import dji.sdk.wpmz.value.mission.WaylineActionInfo
+import dji.sdk.wpmz.value.mission.WaylineActionType
 import dji.sdk.wpmz.value.mission.WaylineExecuteWaypoint
+import dji.sdk.wpmz.value.mission.WaylineExitOnRCLostAction
+import dji.sdk.wpmz.value.mission.WaylineFinishedAction
 import dji.sdk.wpmz.value.mission.WaylineLocationCoordinate2D
+import dji.sdk.wpmz.value.mission.WaylineLocationCoordinate3D
 import dji.sdk.wpmz.value.mission.WaylineMission
 import dji.sdk.wpmz.value.mission.WaylineMissionConfig
 import dji.sdk.wpmz.value.mission.WaylineWaypoint
+import dji.sdk.wpmz.value.mission.WaylineWaypointGimbalHeadingMode
+import dji.sdk.wpmz.value.mission.WaylineWaypointGimbalHeadingParam
+import dji.sdk.wpmz.value.mission.WaylineWaypointYawMode
+import dji.sdk.wpmz.value.mission.WaylineWaypointYawParam
+import dji.sdk.wpmz.value.mission.WaylineWaypointYawPathMode
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.utils.GpsUtils
@@ -107,8 +119,10 @@ class WayPointV3Fragment : DJIFragment() {
     private val OPEN_FILE_CHOOSER = 0
     private val OPEN_DOCUMENT_TREE = 1
     private val OPEN_MANAGE_EXTERNAL_STORAGE = 2
+    private val missionGlobalModel= MissionGlobalModel()
 
     private val showWaypoints: ArrayList<WaypointInfoModel> = ArrayList()
+    private val interestPoint : WaylineLocationCoordinate3D = WaylineLocationCoordinate3D()
     private val pointMarkers: ArrayList<DJIMarker?> = ArrayList()
     var curMissionPath = ""
     val rootDir = DiskUtil.getExternalCacheDirPath(ContextUtil.getContext(), WAYPOINT_SAMPLE_FILE_DIR)
@@ -319,7 +333,7 @@ class WayPointV3Fragment : DJIFragment() {
     private fun saveKmz(showToast: Boolean) {
         val kmzOutPath = rootDir + "generate_test.kmz"
         val waylineMission: WaylineMission = createWaylineMission()
-        val missionConfig: WaylineMissionConfig = KMZTestUtil.createMissionConfig()
+        val missionConfig: WaylineMissionConfig = KMZTestUtil.createMissionConfig(missionGlobalModel)
         val template: Template = KMZTestUtil.createTemplate(showWaypoints)
         WPMZManager.getInstance()
             .generateKMZFile(kmzOutPath, waylineMission, missionConfig, template)
@@ -418,6 +432,7 @@ class WayPointV3Fragment : DJIFragment() {
     private fun addMapListener() {
         binding?.waypointAdd?.setOnCheckedChangeListener { _, isOpen ->
             if (isOpen) {
+                binding?.waypointInterest?.isChecked = false
                 binding?.mapWidget?.map?.setOnMapClickListener {
                     showWaypointDlg(it, object :
                         CommonCallbacks.CompletionCallbackWithParam<WaypointInfoModel> {
@@ -437,6 +452,20 @@ class WayPointV3Fragment : DJIFragment() {
                 binding?.mapWidget?.map?.removeAllOnMapClickListener()
             }
         }
+
+        binding?.waypointInterest?.setOnCheckedChangeListener { _, isOpen ->
+            if (isOpen) {
+                binding?.waypointAdd?.isChecked = false
+                binding?.mapWidget?.map?.setOnMapClickListener {
+                    showWaypointPoiDlg(it)
+                    binding?.waypointInterest?.isChecked = false
+                }
+            } else {
+                binding?.mapWidget?.map?.removeAllOnMapClickListener()
+            }
+        }
+
+
     }
 
     private fun addListener() {
@@ -564,8 +593,6 @@ class WayPointV3Fragment : DJIFragment() {
             && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Environment.isExternalStorageManager()) {
             showFileChooser()
         }
-
-
     }
 
     fun checkPath() {
@@ -775,22 +802,45 @@ class WayPointV3Fragment : DJIFragment() {
     fun markWaypoints() {
         // version参数实际未用到
         var waypoints: ArrayList<WaylineExecuteWaypoint> = ArrayList<WaylineExecuteWaypoint>()
-        val parseInfo = JNIWPMZManager.getWaylines("1.0.0", curMissionPath)
+        val parseInfo  = WPMZManager.getInstance().getKMZInfo(curMissionPath).waylineWaylinesParseInfo
         var waylines = parseInfo.waylines
         waylines.forEach() {
             waypoints.addAll(it.waypoints)
             markLine(it.waypoints)
+            checkSpecialActionType(it)
         }
         waypoints.forEach() {
             markWaypoint(DJILatLng(it.location.latitude, it.location.longitude), it.waypointIndex)
         }
     }
 
-    fun markWaypoint(latlong: DJILatLng, waypointIndex: Int): DJIMarker? {
+    private fun checkSpecialActionType(it: Wayline) : Boolean {
+        it.actionGroups.forEach(){
+            it.actions.forEach(){
+                if (it.actionType == WaylineActionType.MEGAPHONE || it.actionType == WaylineActionType.SEARCHLIGHT){
+                    LogUtils.i(LogPath.WAYPOINT , "kmz contains metaphone or light ${it.actionType}")
+                    return true
+                }
+
+            }
+        }
+        return false
+    }
+
+    fun markWaypoint(latlong: DJILatLng, waypointIndex: Int) : DJIMarker?{
         var markOptions = DJIMarkerOptions()
         markOptions.position(latlong)
-        markOptions.icon(getMarkerRes(waypointIndex, 0f))
+        markOptions.icon(getMarkerRes(waypointIndex.toString(), 0f))
         markOptions.title(waypointIndex.toString())
+        markOptions.isInfoWindowEnable = true
+        return binding?.mapWidget?.map?.addMarker(markOptions)
+    }
+
+    fun markPoiWaypoint(latlong: DJILatLng): DJIMarker? {
+        var markOptions = DJIMarkerOptions()
+        markOptions.position(latlong)
+        markOptions.icon(getMarkerRes("POI", 0f))
+        markOptions.title("POI")
         markOptions.isInfoWindowEnable = true
         return binding?.mapWidget?.map?.addMarker(markOptions)
     }
@@ -815,7 +865,7 @@ class WayPointV3Fragment : DJIFragment() {
      * Notice: recycle the bitmap after use
      */
     fun getMarkerBitmap(
-        index: Int,
+        index: String,
         rotation: Float,
     ): Bitmap? {
         // create View for marker
@@ -824,7 +874,7 @@ class WayPointV3Fragment : DJIFragment() {
                 .inflate(R.layout.waypoint_marker_style_layout, null)
         val markerBg = markerView.findViewById<ImageView>(R.id.image_content)
         val markerTv = markerView.findViewById<TextView>(R.id.image_text)
-        markerTv.text = index.toString()
+        markerTv.text = index
         markerTv.setTextColor(AndUtil.getResColor(R.color.blue))
         markerTv.textSize =
             AndUtil.getDimension(R.dimen.mission_waypoint_index_text_large_size)
@@ -844,7 +894,7 @@ class WayPointV3Fragment : DJIFragment() {
     }
 
     private fun getMarkerRes(
-        index: Int,
+        index: String,
         rotation: Float,
     ): DJIBitmapDescriptor? {
         return DJIBitmapDescriptorFactory.fromBitmap(
@@ -875,8 +925,71 @@ class WayPointV3Fragment : DJIFragment() {
         val etHeight = dialogView.findViewById<View>(R.id.et_height) as EditText
         val etSpd = dialogView.findViewById<View>(R.id.et_speed) as EditText
         val viewActionType = dialogView.findViewById<View>(R.id.action_type) as DescSpinnerCell
+        val actionValueView = dialogView.findViewById<EditText>(R.id.action_value)
+        var showMultiAction = dialogView.findViewById<Button>(R.id.show_multiAction)
+
+        val viewActionType1 = dialogView.findViewById<View>(R.id.action_type1) as DescSpinnerCell
+        val actionValueView1 = dialogView.findViewById<EditText>(R.id.action_value1)
+        viewActionType.addOnItemSelectedListener(object : DescSpinnerCell.OnItemSelectedListener{
+            override fun onItemSelected(position: Int) {
+               val curAction =  getCurActionType(position)
+                if ( curAction== WaypointActionType.CAMERA_ZOOM || curAction ==  WaypointActionType.STAY){
+                    actionValueView.visibility = View.VISIBLE
+                } else {
+                    actionValueView.visibility = View.GONE
+                }
+            }
+
+        })
+
+        viewActionType1.addOnItemSelectedListener(object : DescSpinnerCell.OnItemSelectedListener{
+            override fun onItemSelected(position: Int) {
+                val curAction =  getCurActionType(position)
+                if ( curAction== WaypointActionType.CAMERA_ZOOM || curAction ==  WaypointActionType.STAY){
+                    actionValueView1.visibility = View.VISIBLE
+                } else {
+                    actionValueView1.visibility = View.GONE
+                }
+            }
+
+        })
+
+        showMultiAction.setOnClickListener{
+            if (viewActionType1.visibility == View.VISIBLE) {
+                viewActionType1.visibility = View.GONE
+            } else {
+                viewActionType1.visibility = View.VISIBLE
+            }
+        }
+
+
         val btnLogin = dialogView.findViewById<View>(R.id.btn_add) as Button
         val btnCancel = dialogView.findViewById<View>(R.id.btn_cancel) as Button
+        val cbUseGlobalSpeed = dialogView.findViewById<View>(R.id.cb_use_global_speed) as CheckBox
+
+        val etGlobalSpeed =  dialogView.findViewById<View>(R.id.global_speed) as EditText
+        val missionFinishType = dialogView.findViewById<View>(R.id.mission_finish_type) as DescSpinnerCell
+        val missionLostAction = dialogView.findViewById<View>(R.id.lost_action) as DescSpinnerCell
+
+        //机头朝向
+        val aircraftHeadingModeView = dialogView.findViewById<View>(R.id.aircraft_heading_mode) as DescSpinnerCell
+        val headingAngleView = dialogView.findViewById<EditText>(R.id.aircraft_heading_angle)
+        val poiLongitudeView = dialogView.findViewById<EditText>(R.id.poi_longitude)
+        val poiLatitudeView = dialogView.findViewById<EditText>(R.id.poi_latitude)
+        val poiHeightView = dialogView.findViewById<EditText>(R.id.poi_height)
+
+        //航点间云台俯仰
+        val gimbalHeadingView = dialogView.findViewById<View>(R.id.gimbal_heading_mode) as DescSpinnerCell
+        val gimbalHeadingGimbalView = dialogView.findViewById<EditText>(R.id.gimbal_heading_angle)
+
+
+
+        etGlobalSpeed.setText(missionGlobalModel.globalSpeed.toString())
+        missionFinishType.select(MissionGlobalModel.transFinishActionToIndex(missionGlobalModel.finishAction))//
+        missionLostAction.select(missionGlobalModel.lostAction.value())
+        poiLongitudeView.setText(interestPoint.longitude.toString())
+        poiLatitudeView.setText(interestPoint.latitude.toString())
+        poiHeightView.setText(interestPoint.altitude.toString())
 
         btnLogin.setOnClickListener {
             var waypointInfoModel = WaypointInfoModel()
@@ -887,15 +1000,82 @@ class WayPointV3Fragment : DJIFragment() {
             waypoint.height = etHeight.text.toString().toDouble()
             // 根据坐标类型，如果为egm96 需要加上高程差
             waypoint.ellipsoidHeight = etHeight.text.toString().toDouble()
-            waypoint.speed = etSpd.text.toString().toDouble()
+            if (cbUseGlobalSpeed.isChecked){
+                waypoint.speed = etGlobalSpeed.text.toString().toDouble()
+            } else {
+                waypoint.speed = etSpd.text.toString().toDouble()
+            }
             waypoint.useGlobalTurnParam = true
+            waypoint.gimbalPitchAngle = gimbalHeadingGimbalView.text.toString().toDouble()
+
+            //
+            val aircraftHeadingMode = WaylineWaypointYawMode.find(aircraftHeadingModeView.getSelectPosition())
+            val yawParam = WaylineWaypointYawParam()
+
+            yawParam.enableYawAngle = (aircraftHeadingMode == WaylineWaypointYawMode.SMOOTH_TRANSITION)
+            yawParam.yawAngle = headingAngleView.text.toString().toDouble()
+            yawParam.yawMode = aircraftHeadingMode
+            yawParam.yawPathMode = WaylineWaypointYawPathMode.FOLLOW_BAD_ARC
+            yawParam.poiLocation = WaylineLocationCoordinate3D(
+                poiLatitudeView.text.toString().toDouble(),
+                poiLongitudeView.text.toString().toDouble(),
+                poiHeightView.text.toString().toDouble()
+            )
+            waypoint.yawParam = yawParam
+            waypoint.useGlobalYawParam = false
+            waypoint.isWaylineWaypointYawParamSet = true
+            //
+
+            //
+            val gimbalYawMode = WaylineWaypointGimbalHeadingMode.find(gimbalHeadingView.getSelectPosition())
+            val gimbalYawParam = WaylineWaypointGimbalHeadingParam()
+            gimbalYawParam.headingMode = gimbalYawMode
+            gimbalYawParam.pitchAngle =  gimbalHeadingGimbalView.text.toString().toDouble()
+            waypoint.gimbalHeadingParam = gimbalYawParam
+            waypoint.isWaylineWaypointGimbalHeadingParamSet = true
+
+            //
+
             waypointInfoModel.waylineWaypoint = waypoint
             val actionInfos: MutableList<WaylineActionInfo> = ArrayList()
-            actionInfos.add(KMZTestUtil.createActionInfo(getCurActionType(viewActionType)))
+            val curSelectAction = getCurActionType(viewActionType.getSelectPosition())
+            val curSelectAction1 = getCurActionType(viewActionType1.getSelectPosition())
+            actionInfos.add(KMZTestUtil.createActionInfo(curSelectAction, actionValueView.text.toString().toInt()))
+            if (viewActionType1.visibility == View.VISIBLE){
+                actionInfos.add(KMZTestUtil.createActionInfo(curSelectAction1, actionValueView1.text.toString().toInt()))
+            }
+
             waypointInfoModel.waylineWaypoint = waypoint
             waypointInfoModel.actionInfos = actionInfos
+
+            missionGlobalModel.globalSpeed = etGlobalSpeed.text.toString().toDouble()
+            missionGlobalModel.finishAction = WaylineFinishedAction.find(missionFinishType.getSelectPosition())
+            missionGlobalModel.lostAction = WaylineExitOnRCLostAction.find(missionLostAction.getSelectPosition())
             callbacks.onSuccess(waypointInfoModel)
             dialog.dismiss()
+        }
+        btnCancel.setOnClickListener { dialog.dismiss() }
+        dialog.show()
+    }
+
+
+    private fun showWaypointPoiDlg(djiLatLng: DJILatLng) {
+        val builder = AlertDialog.Builder(requireActivity())
+        val dialog = builder.create()
+        val dialogView = View.inflate(requireActivity(), R.layout.dialog_add_poipoint, null)
+        dialog.setView(dialogView)
+
+        val poiHeight = dialogView.findViewById<View>(R.id.poi_height) as EditText
+        val btnAdd = dialogView.findViewById<View>(R.id.btn_add) as Button
+        val btnCancel = dialogView.findViewById<View>(R.id.btn_cancel) as Button
+
+        btnAdd.setOnClickListener {
+            interestPoint.longitude = djiLatLng.longitude
+            interestPoint.latitude = djiLatLng.latitude
+            interestPoint.altitude = poiHeight.text.toString().toDouble()
+            pointMarkers.add(markPoiWaypoint(djiLatLng))
+            dialog.dismiss()
+
         }
         btnCancel.setOnClickListener { dialog.dismiss() }
         dialog.show()
@@ -923,12 +1103,15 @@ class WayPointV3Fragment : DJIFragment() {
         }
     }
 
-    private fun getCurActionType(viewActionType: DescSpinnerCell): WaypointActionType? {
-        return when (viewActionType.getSelectPosition()) {
+    private fun getCurActionType(position: Int): WaypointActionType? {
+        return when (position) {
             0 -> WaypointActionType.START_TAKE_PHOTO
             1 -> WaypointActionType.START_RECORD
             2 -> WaypointActionType.STOP_RECORD
             3 -> WaypointActionType.GIMBAL_PITCH
+            4 -> WaypointActionType.CAMERA_ZOOM
+            5 -> WaypointActionType.STAY
+            6 -> WaypointActionType.ROTATE_AIRCRAFT
             else -> {
                 WaypointActionType.START_TAKE_PHOTO
             }

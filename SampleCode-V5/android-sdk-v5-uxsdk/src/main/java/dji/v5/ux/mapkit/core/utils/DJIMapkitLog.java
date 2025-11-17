@@ -2,7 +2,8 @@ package dji.v5.ux.mapkit.core.utils;
 
 import android.util.Log;
 
-import dji.v5.ux.BuildConfig;
+import dji.v5.utils.common.LogPath;
+import dji.v5.utils.common.LogUtils;
 
 
 /**
@@ -11,7 +12,8 @@ import dji.v5.ux.BuildConfig;
 
 public final class DJIMapkitLog {
 
-    private DJIMapkitLog(){}
+    private DJIMapkitLog() {
+    }
 
     private static final String TAG = "DJIMapKit";
 
@@ -24,15 +26,11 @@ public final class DJIMapkitLog {
     }
 
     public static void d(String log) {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, log);
-        }
+        LogUtils.d(LogPath.FLY_SAFE, log);
     }
 
     public static void d(String tag, String message) {
-        if (BuildConfig.DEBUG) {
-            Log.d(tag, message);
-        }
+        LogUtils.d(LogPath.FLY_SAFE, message);
     }
 
     public static void e(String log) {

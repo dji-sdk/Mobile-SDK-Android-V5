@@ -33,6 +33,17 @@
                 android:layout_height="50dp"
                 android:text="选择本地文件" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="2">
+            <Button
+                android:id="@+id/btn_convert_to_opus"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="mp3转化为opus" />
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout

@@ -30,7 +30,6 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
-import android.os.Build
 import android.util.SparseLongArray
 import android.view.View
 import android.widget.Button
@@ -175,7 +174,7 @@ var ImageView.imageDrawable: Drawable?
  * @param dialogClickListener
  */
 fun View.showAlertDialog(
-    @StyleRes dialogTheme: Int = R.style.Theme_AppCompat_Dialog,
+    @StyleRes dialogTheme: Int = androidx.appcompat.R.style.Theme_AppCompat_Dialog,
     title: String? = getString(R.string.uxsdk_alert),
     icon: Drawable? = null,
     message: String? = null,
@@ -206,7 +205,7 @@ fun View.showAlertDialog(
  * @param dialogClickListener
  */
 fun View.showConfirmationDialog(
-    @StyleRes dialogTheme: Int = R.style.Theme_AppCompat_Dialog,
+    @StyleRes dialogTheme: Int = androidx.appcompat.R.style.Theme_AppCompat_Dialog,
     title: String? = getString(R.string.uxsdk_alert),
     icon: Drawable? = null,
     message: String? = null,

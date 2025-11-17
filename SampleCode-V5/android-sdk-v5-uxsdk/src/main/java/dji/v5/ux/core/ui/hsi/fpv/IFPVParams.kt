@@ -41,7 +41,7 @@ interface IFPVParams {
             val type = KeyManager.getInstance().getValue(
                 KeyTools.createKey(
                     ProductKey.KeyProductType), ProductType.UNKNOWN)
-            if (type == ProductType.M300_RTK || type == ProductType.M350_RTK) {
+            if (type == ProductType.M300_RTK || type == ProductType.M350_RTK || type == ProductType.DJI_MATRICE_400) {
                 return M300FpvParams
             } else if (type == ProductType.M30_SERIES) {
                 return M30FpvParams

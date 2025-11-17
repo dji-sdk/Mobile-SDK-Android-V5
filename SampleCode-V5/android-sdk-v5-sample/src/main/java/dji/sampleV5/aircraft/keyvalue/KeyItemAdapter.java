@@ -9,15 +9,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-
-import androidx.annotation.NonNull;
-import androidx.collection.SparseArrayCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import androidx.collection.SparseArrayCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import dji.sampleV5.aircraft.R;
 
 
@@ -45,6 +43,9 @@ public class KeyItemAdapter extends RecyclerView.Adapter<KeyItemAdapter.ComViewH
 
     @Override
     public void onBindViewHolder(@NonNull ComViewHolder holder, int position) {
+        if (mFilterList.size() <= position) {
+            return;
+        }
         convert(holder, mFilterList.get(position));
     }
 

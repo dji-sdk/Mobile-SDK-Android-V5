@@ -56,10 +56,11 @@ public class MOPCmdHelper {
         return cmd;
     }
 
-    public static byte[] getFileDataHeader(int size, int flag) {
+    public static byte[] getFileDataHeader(int size, int flag, int seq) {
         byte[] cmd = new byte[PACK_HEADER_SIZE];
         cmd[0] = CMD_FILE_DATA;
         cmd[1] = (byte) flag;
+        cmd[2] = (byte) seq;
         cmd[4] = (byte) (size & 0xff);
         cmd[5] = (byte) (size >> 8 & 0xff);
         cmd[6] = (byte) (size >> 16 & 0xff);
@@ -282,26 +283,28 @@ public class MOPCmdHelper {
         listener.onTipEvent(event);
     }
 
-    private static int uploadFile(Pipeline data, byte[] buff, long time, PipelineAdapter.OnEventListener listener) {
+    private static int uploadFile(Pipeline pipeline, byte[] buff, long time, PipelineAdapter.OnEventListener listener) {
         int size = 3072;
         byte[] header;
         int hadWrote = 0;
+        int seq = 0;
         if (buff.length <= size) {
-            header = getFileDataHeader(buff.length, CMD_1);
-            int result = writeData(data, buff, time, header, hadWrote, buff.length, listener);
-            LogUtils.i(TAG, UPLOAD_FILE + result, "/MOP");
+            header = getFileDataHeader(buff.length, CMD_1, seq);
+            int result = writeData(pipeline, buff, time, header, hadWrote, buff.length, listener);
+            LogUtils.i(TAG, UPLOAD_FILE + result, "/MOP", ",seq:", seq);
             return result;
         } else {
             while (buff.length - hadWrote > size) {
-                header = getFileDataHeader(size, CMD_0);
-                int result = writeData(data, buff, time, header, hadWrote, size, listener);
+                header = getFileDataHeader(size, CMD_0, seq);
+                int result = writeData(pipeline, buff, time, header, hadWrote, size, listener);
 
                 hadWrote += size;
-                LogUtils.i(TAG, UPLOAD_FILE + hadWrote + " result:" + result);
+                LogUtils.i(TAG, UPLOAD_FILE + hadWrote + " result:" + result, ",seq:", seq);
+                seq++;
             }
             int length = buff.length - hadWrote;
-            header = getFileDataHeader(length, CMD_1);
-            int result = writeData(data, buff, time, header, hadWrote, length, listener);
+            header = getFileDataHeader(length, CMD_1, seq);
+            int result = writeData(pipeline, buff, time, header, hadWrote, length, listener);
             hadWrote += result;
             LogUtils.i(TAG, UPLOAD_FILE + length, "/MOP");
         }

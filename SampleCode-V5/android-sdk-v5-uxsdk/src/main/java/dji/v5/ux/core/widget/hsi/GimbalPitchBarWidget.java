@@ -30,7 +30,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * 云台Pitch角度展示Widget
- *
+ * <p>
  * 注意：GimbalPitchBarWidget必须关联到相机，所以只能使用在主界面，比如DefaultLayoutActivity中
  */
 public class GimbalPitchBarWidget extends FrameLayoutWidget<Boolean> implements ICameraIndex {
@@ -537,7 +537,7 @@ public class GimbalPitchBarWidget extends FrameLayoutWidget<Boolean> implements 
     public void updateCameraSource(@NonNull ComponentIndexType cameraIndex, @NonNull CameraLensType lensType) {
         widgetModel.updateCameraSource(cameraIndex, lensType);
 
-        Log.e("testMM" ,"updateCameraSource" + componentIndexType + "---" + cameraIndex);
+        Log.e("testMM", "updateCameraSource" + componentIndexType + "---" + cameraIndex);
         if (componentIndexType != cameraIndex) {
             componentIndexType = cameraIndex;
             onStop();

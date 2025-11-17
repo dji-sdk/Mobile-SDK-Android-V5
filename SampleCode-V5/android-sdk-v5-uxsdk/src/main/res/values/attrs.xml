@@ -52,12 +52,6 @@
         <enum name="thermal" value="2" />
     </attr>
 
-    <attr name="uxsdk_gimbalIndex">
-        <enum name="port" value="0" />
-        <enum name="starboard" value="1" />
-        <enum name="top" value="2" />
-    </attr>
-
     <attr name="uxsdk_speedMetricUnitType">
         <enum name="metersPerSecond" value="0" />
         <enum name="kmPerHour" value="1" />
@@ -287,7 +281,7 @@
     </declare-styleable>
 
     <declare-styleable name="CompassWidget">
-        <attr name="uxsdk_gimbalIndex" />
+        <attr name="uxsdk_cameraIndex" />
         <attr name="uxsdk_homeIcon" format="reference" />
         <attr name="uxsdk_rcLocationIcon" format="reference" />
         <attr name="uxsdk_aircraftIcon" format="reference" />
@@ -986,7 +980,6 @@
 
     <declare-styleable name="FPVInteractionWidget">
         <attr name="uxsdk_cameraIndex" />
-        <attr name="uxsdk_gimbalIndex" />
         <attr name="uxsdk_lensType" />
         <attr name="uxsdk_manualFocusIcon" format="reference" />
         <attr name="uxsdk_autoFocusIcon" format="reference" />

@@ -325,7 +325,7 @@ More refer to the release notes." </string>
     <string name="tip_verify_password_fail">The current device SD card does not need to be decrypted</string>
     <string name="tip_modify_password_not_support">The current device SD has not set a password, please set a password first</string>
     <string name="tip_has_set_password_already">The current device SD has been set with a password and cannot continue to set the password. You can choose to change your password or reset your password</string>
-    <string name="tip_device_type">MASTER means aircraft, SLAVE1 means left gimbal, SLAVE2 means right gimbal, SLAVE3 means upper gimbal</string>
+    <string name="tip_device_type">MASTER means aircraft, SLAVE1 means left gimbal, SLAVE2 means right gimbal, SLAVE3 means upper gimbal\n.On the Port,Port_1 means SLAVE1,Port_2 means SLAVE2 .. ,Port_8 means SLAVE8.</string>
 
     <string name="securitycode_operation_result_success">Operation success</string>
     <string name="securitycode_operation_result_running">System busy. Try again later</string>
@@ -345,7 +345,7 @@ More refer to the release notes." </string>
     <string name="item_uas_description">Demonstrate how to use the related functions of uas</string>
     <string name="bt_set_eid_enable">Set electronicId enabled</string>
     <string name="bt_set_ua_registration_number">Set ua registration number</string>
-
+    <string name="m3e_little_battery_connceted">DJI Mavic 3 Enterprise Series Battery (EU C1 Version)</string>
 
     <!-- key Type-->
     <string name="key_type_battery">battery key</string>
@@ -387,6 +387,7 @@ More refer to the release notes." </string>
     <string name="on_board">OnBoard</string>
     <string name="payload">Payload</string>
     <string name="lidar">Lidar</string>
+    <string name="intelligent_box">Intelligent Box</string>
     <string name="key">Key List</string>
     <string name="key_search">Search</string>
     <string name="commonlyused_key">Commonly Used Key</string>
@@ -483,6 +484,10 @@ More refer to the release notes." </string>
     <!-- Look At preview -->
     <string name="item_look_at_title">Look At</string>
     <string name="item_look_at_description">Demonstrate how to use look at</string>
+
+    <!-- Intelligent Flight preview -->
+    <string name="item_intelligent_flight_title">Intelligent Flight</string>
+    <string name="item_intelligent_flight__description">Demonstrate how to use intelligent flight</string>
 
     <!-- app silently upgrade preview -->
     <string name="item_app_silently_upgrade_title">APP Silently Upgrade</string>

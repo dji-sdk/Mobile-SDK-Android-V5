@@ -68,7 +68,6 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
     private final ObservableInMemoryKeyedStore keyedStore;
     //region Fields
     private ComponentIndexType cameraIndex = ComponentIndexType.LEFT_OR_MAIN;
-    private int gimbalIndex;
     private CameraLensType lensIndex = CameraLensType.CAMERA_LENS_WIDE;
     private DJIKey<DoublePoint2D> focusTargetKey;
     private DJIKey<DoublePoint2D> meteringPointKey;
@@ -81,7 +80,6 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
                                      @NonNull ObservableInMemoryKeyedStore keyedStore,
                                      @Nullable GlobalPreferencesInterface preferencesManager) {
         super(djiSdkModel, keyedStore);
-        gimbalIndex = SettingDefinitions.GimbalIndex.PORT.getIndex();
         meteringModeProcessor = DataProcessor.create(CameraMeteringMode.UNKNOWN);
         controlModeProcessor = DataProcessor.create(SettingDefinitions.ControlMode.SPOT_METER);
         if (preferencesManager != null) {
@@ -102,7 +100,7 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
         meteringModeKey = KeyTools.createCameraKey(CameraKey.KeyCameraMeteringMode, cameraIndex, lensIndex);
         bindDataProcessor(meteringModeKey, meteringModeProcessor, this::setMeteringMode);
         bindDataProcessor(KeyTools.createCameraKey(CameraKey.KeyAELockEnabled, cameraIndex, lensIndex), aeLockedProcessor);
-        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyYawAdjustSupported, gimbalIndex), isYawAdjustSupportedProcessor);
+        bindDataProcessor(KeyTools.createKey(GimbalKey.KeyYawAdjustSupported, cameraIndex), isYawAdjustSupportedProcessor);
         controlModeKey = UXKeys.create(GlobalPreferenceKeys.CONTROL_MODE);
         bindDataProcessor(controlModeKey, controlModeProcessor);
 
@@ -152,28 +150,6 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
         this.cameraIndex = cameraIndex;
         this.lensIndex = lensType;
         restart();
-    }
-
-    /**
-     * Get the gimbal index for which the model is reacting.
-     *
-     * @return current gimbal index.
-     */
-    @Nullable
-    public SettingDefinitions.GimbalIndex getGimbalIndex() {
-        return SettingDefinitions.GimbalIndex.find(gimbalIndex);
-    }
-
-    /**
-     * Set gimbal index to which the model should react.
-     *
-     * @param gimbalIndex index of the gimbal.
-     */
-    public void setGimbalIndex(@Nullable SettingDefinitions.GimbalIndex gimbalIndex) {
-        if (gimbalIndex != null && this.gimbalIndex != gimbalIndex.getIndex()) {
-            this.gimbalIndex = gimbalIndex.getIndex();
-            restart();
-        }
     }
 
     /**
@@ -267,7 +243,7 @@ public class FPVInteractionWidgetModel extends WidgetModel implements ICameraInd
      * @return Completable representing the success/failure of the set action.
      */
     public Completable rotateGimbalBySpeed(double yaw, double pitch) {
-        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(GimbalKey.KeyRotateBySpeed, gimbalIndex),
+        return djiSdkModel.performActionWithOutResult(KeyTools.createKey(GimbalKey.KeyRotateBySpeed, cameraIndex),
                 new GimbalSpeedRotation(pitch, yaw, 0.0, new CtrlInfo()));
     }
     //endregion

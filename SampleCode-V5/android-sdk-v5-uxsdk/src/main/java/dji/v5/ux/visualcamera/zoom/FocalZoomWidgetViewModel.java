@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import dji.sdk.keyvalue.key.CameraKey;
 import dji.sdk.keyvalue.key.DJIKey;
 import dji.sdk.keyvalue.key.KeyTools;
+import dji.sdk.keyvalue.value.camera.ZoomRatiosRange;
 import dji.sdk.keyvalue.value.common.CameraLensType;
 import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.manager.KeyManager;
@@ -36,10 +37,14 @@ class FocalZoomWidgetViewModel extends WidgetModel implements ICameraIndex {
     private Emitter<Double> mSendFocalLengthEmitter;
     private DJIKey<Double> cameraZoomRatiosKey;
     private DJIKey<Double> thermalZoomRatiosKey;
+    private DJIKey<ZoomRatiosRange> cameraZoomRatiosRangeKey;
+    private DJIKey<ZoomRatiosRange> thermalZoomRatiosRangeKey;
     public final DataProcessor<Double> focalZoomRatios = DataProcessor.create(0.0D);
+    public final DataProcessor<ZoomRatiosRange> focalZoomRatiosRange = DataProcessor.create(new ZoomRatiosRange());
     private final DataProcessor<Double> visibleFocalZoomRatios =  DataProcessor.create(0.0D);
     private final DataProcessor<Double> thermalFocalZoomRatios =  DataProcessor.create(0.0D);
-
+    private final DataProcessor<ZoomRatiosRange> visibleFocalZoomRatiosRange =  DataProcessor.create(new ZoomRatiosRange());
+    private final DataProcessor<ZoomRatiosRange> thermalFocalZoomRatiosRange =  DataProcessor.create(new ZoomRatiosRange());
     private long mSendFocusDistanceTime = 0;
 
     public FocalZoomWidgetViewModel(@NonNull DJISDKModel djiSdkModel, @NonNull ObservableInMemoryKeyedStore uxKeyManager) {
@@ -60,6 +65,20 @@ class FocalZoomWidgetViewModel extends WidgetModel implements ICameraIndex {
         bindDataProcessor(thermalZoomRatiosKey, thermalFocalZoomRatios, ratios -> {
             if (lensType == CameraLensType.CAMERA_LENS_THERMAL) {
                 focalZoomRatios.onNext(ratios);
+            }
+        });
+
+        cameraZoomRatiosRangeKey = KeyTools.createCameraKey(CameraKey.KeyCameraZoomRatiosRange, cameraIndex, CameraLensType.CAMERA_LENS_ZOOM);
+        thermalZoomRatiosRangeKey = KeyTools.createCameraKey(CameraKey.KeyThermalZoomRatiosRange, cameraIndex, CameraLensType.CAMERA_LENS_ZOOM);
+
+        bindDataProcessor(cameraZoomRatiosRangeKey, visibleFocalZoomRatiosRange, range -> {
+            if (lensType == CameraLensType.CAMERA_LENS_ZOOM) {
+                focalZoomRatiosRange.onNext(range);
+            }
+        });
+        bindDataProcessor(thermalZoomRatiosRangeKey, thermalFocalZoomRatiosRange, range -> {
+            if (lensType == CameraLensType.CAMERA_LENS_THERMAL) {
+                focalZoomRatiosRange.onNext(range);
             }
         });
     }

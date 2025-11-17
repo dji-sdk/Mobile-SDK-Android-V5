@@ -51,8 +51,14 @@ class LiveStreamVM : DJIViewModel() {
             }
         }
 
-        availableCameraUpdatedListener = ICameraStreamManager.AvailableCameraUpdatedListener { list ->
-            availableCameraList.postValue(list)
+        availableCameraUpdatedListener = object :ICameraStreamManager.AvailableCameraUpdatedListener {
+            override fun onAvailableCameraUpdated(list: MutableList<ComponentIndexType>) {
+                availableCameraList.postValue(list)
+            }
+
+            override fun onCameraStreamEnableUpdate(cameraStreamEnableMap: MutableMap<ComponentIndexType, Boolean>) {
+
+            }
         }
 
         addListener()

@@ -6,11 +6,14 @@ import com.dji.wpmzsdk.common.utils.kml.model.WaypointActionType;
 import java.util.ArrayList;
 import java.util.List;
 
+import dji.sampleV5.aircraft.models.MissionGlobalModel;
 import dji.sampleV5.aircraft.utils.wpml.WaypointInfoModel;
+import dji.sdk.wpmz.value.mission.ActionAircraftHoverParam;
 import dji.sdk.wpmz.value.mission.ActionGimbalRotateParam;
 import dji.sdk.wpmz.value.mission.ActionStartRecordParam;
 import dji.sdk.wpmz.value.mission.ActionStopRecordParam;
 import dji.sdk.wpmz.value.mission.ActionTakePhotoParam;
+import dji.sdk.wpmz.value.mission.ActionZoomParam;
 import dji.sdk.wpmz.value.mission.CameraLensType;
 import dji.sdk.wpmz.value.mission.WaylineActionGroup;
 import dji.sdk.wpmz.value.mission.WaylineActionInfo;
@@ -29,6 +32,7 @@ import dji.sdk.wpmz.value.mission.WaylineExitOnRCLostBehavior;
 import dji.sdk.wpmz.value.mission.WaylineFinishedAction;
 import dji.sdk.wpmz.value.mission.WaylineFlyToWaylineMode;
 import dji.sdk.wpmz.value.mission.WaylineGimbalActuatorRotateMode;
+import dji.sdk.wpmz.value.mission.WaylineLocationCoordinate3D;
 import dji.sdk.wpmz.value.mission.WaylineMission;
 import dji.sdk.wpmz.value.mission.WaylineMissionConfig;
 import dji.sdk.wpmz.value.mission.WaylinePayloadInfo;
@@ -59,6 +63,8 @@ public class KMZTestUtil {
     public static final WaylinePositioningType DEF_POSITION_TYPE = WaylinePositioningType.GPS;
     public static final WaylineAltitudeMode DEF_ALTITUDE_MODE = WaylineAltitudeMode.RELATIVE_TO_START_POINT;
     public static final Double DEF_PITCH_ANGLE = -30d;
+    public static final Double DEF_HOVER_TIME = 10d;
+    public static final Double DEF_FOCAL_LENGTH = 5d;
 
     private KMZTestUtil(){}
 
@@ -69,16 +75,16 @@ public class KMZTestUtil {
         return waylineMission;
     }
 
-    public static WaylineMissionConfig createMissionConfig(){
+    public static WaylineMissionConfig createMissionConfig(MissionGlobalModel missionGlobalModel){
         WaylineMissionConfig config = new WaylineMissionConfig();
         config.setFlyToWaylineMode(DEF_WAYLINE_MODE);
-        config.setFinishAction(DEF_FINISH_ACTION);
+        config.setFinishAction(missionGlobalModel.getFinishAction());
         WaylineDroneInfo droneInfo = new WaylineDroneInfo();
         config.setDroneInfo(droneInfo);
         config.setSecurityTakeOffHeight(DEF_TAKE_OFF_HEIGHT);
         config.setIsSecurityTakeOffHeightSet(true);
         config.setExitOnRCLostBehavior(DEF_EXIT_RC_LOST_BEHAV);
-        config.setExitOnRCLostType(DEF_RC_LOST_ACTION);
+        config.setExitOnRCLostType(missionGlobalModel.getLostAction());
         config.setGlobalTransitionalSpeed(DEF_GLOBAL_TRANSITION_SPEED);
         List<WaylinePayloadInfo> payloadInfos = new ArrayList<>();
         config.setPayloadInfo(payloadInfos);
@@ -108,9 +114,11 @@ public class KMZTestUtil {
 
 
     public static  WaylineTemplateWaypointInfo createTemplateWaypointInfo(List<WaypointInfoModel> waypointInfoModels) {
+        WaylineLocationCoordinate3D poiLocation = new WaylineLocationCoordinate3D();
         List<WaylineWaypoint> waypoints = new ArrayList<>();
         for (WaypointInfoModel infoModel:waypointInfoModels){
             waypoints.add(infoModel.getWaylineWaypoint());
+            poiLocation =  infoModel.getWaylineWaypoint().getYawParam().getPoiLocation();
         }
 
         WaylineTemplateWaypointInfo waypointInfo = new WaylineTemplateWaypointInfo();
@@ -123,9 +131,10 @@ public class KMZTestUtil {
         waypointInfo.setIsTemplateGlobalTurnModeSet(true);
         WaylineWaypointYawParam yawParam = new WaylineWaypointYawParam();
         yawParam.setYawMode(WaylineWaypointYawMode.FOLLOW_WAYLINE);
+        yawParam.setPoiLocation(poiLocation);
         waypointInfo.setGlobalYawParam(yawParam);
         waypointInfo.setIsTemplateGlobalYawParamSet(true);
-        waypointInfo.setPitchMode(WaylineWaypointPitchMode.MANUALLY);
+        waypointInfo.setPitchMode(WaylineWaypointPitchMode.USE_POINT_SETTING);
 
         return waypointInfo;
     }
@@ -181,7 +190,7 @@ public class KMZTestUtil {
         return actionGroups;
     }
 
-    public static WaylineActionInfo createActionInfo(WaypointActionType actionType) {
+    public static WaylineActionInfo createActionInfo(WaypointActionType actionType ,  Integer actionValue) {
 
         switch (actionType) {
             case START_TAKE_PHOTO:
@@ -192,10 +201,34 @@ public class KMZTestUtil {
                 return transStopRecord();
             case GIMBAL_PITCH:
                 return transGimbalPitch();
+            case STAY:
+                return transAircraftStay(actionValue);
+            case CAMERA_ZOOM:
+                return transCameraZoom(actionValue);
             default:
                 return null;
 
         }
+    }
+
+    private static WaylineActionInfo transCameraZoom(Integer focalLength) {
+        WaylineActionInfo info = new WaylineActionInfo();
+        info.setActionType(WaylineActionType.ZOOM);
+        ActionZoomParam param = new ActionZoomParam();
+        param.setPayloadPositionIndex(0);
+        param.setFocalFactor(Double.valueOf(focalLength));
+        param.setIsUseFocalFactor(true);
+        info.setZoomParam(param);
+        return info;
+    }
+
+    private static WaylineActionInfo transAircraftStay(Integer hoverTime) {
+        WaylineActionInfo info  = new WaylineActionInfo();
+        info.setActionType(WaylineActionType.HOVER);
+        ActionAircraftHoverParam param = new ActionAircraftHoverParam();
+        param.setHoverTime(Double.valueOf(hoverTime));
+        info.setAircraftHoverParam(param);
+        return info;
     }
 
     private static WaylineActionInfo transGimbalPitch() {

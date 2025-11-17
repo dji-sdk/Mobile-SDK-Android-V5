@@ -30,6 +30,9 @@ class CameraStreamListFragment : DJIFragment() {
     }
 
     private fun updateAvailableCamera(availableCameraList: List<ComponentIndexType>) {
+        if (availableCameraList.isEmpty()){
+            return
+        }
         var ft = childFragmentManager.beginTransaction()
         val fragmentList = childFragmentManager.fragments
         for (fragment in fragmentList) {

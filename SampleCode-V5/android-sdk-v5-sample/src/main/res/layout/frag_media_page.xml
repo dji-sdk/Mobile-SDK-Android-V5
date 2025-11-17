@@ -62,8 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/white"
-                    android:entries="@array/media_component_arrays"
-                  />
+                    android:textSize="11dp"
+                    android:entries="@array/component_index_arrays" />
             </LinearLayout>
 
             <LinearLayout
@@ -83,8 +83,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/white"
-                    android:entries="@array/media_storage_arrays"
-                    />
+                    android:textSize="11dp"
+                    android:entries="@array/media_storage_arrays" />
             </LinearLayout>
 
             <EditText
@@ -207,9 +207,11 @@
             android:dividerHeight="1dp" />
 
         <TextView
-            android:id="@+id/tv_playback"
+            android:id="@+id/tv_playback_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="11dp"
+            android:textColor="@color/green"
             android:text="NA"/>
 
     </FrameLayout>

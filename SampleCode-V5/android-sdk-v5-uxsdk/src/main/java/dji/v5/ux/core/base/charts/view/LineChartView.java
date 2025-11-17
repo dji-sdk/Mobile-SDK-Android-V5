@@ -3,9 +3,7 @@ package dji.v5.ux.core.base.charts.view;
 import android.content.Context;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-import android.util.Log;
 
-import dji.v5.ux.BuildConfig;
 import dji.v5.ux.core.base.charts.listener.DummyLineChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.listener.LineChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.model.ChartData;
@@ -40,10 +38,6 @@ public class LineChartView extends AbstractChartView implements LineChartDataPro
     }
 
     public void setLineChartData(LineChartData data) {
-        if (BuildConfig.DEBUG) {
-            Log.d("LineChartView", "Setting data for LineChartView");
-        }
-
         if (null == data) {
             this.data = LineChartData.generateDummyData();
         } else {

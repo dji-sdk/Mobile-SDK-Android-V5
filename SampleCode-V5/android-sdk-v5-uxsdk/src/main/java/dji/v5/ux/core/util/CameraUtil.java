@@ -97,6 +97,7 @@ public final class CameraUtil {
         CAMERA_TYPE_STRING_MAP.put(CameraType.M30T, "M30T");
         CAMERA_TYPE_STRING_MAP.put(CameraType.M3E, "M3E");
         CAMERA_TYPE_STRING_MAP.put(CameraType.M3T, "M3T");
+        CAMERA_TYPE_STRING_MAP.put(CameraType.M3TA, "M3TA");
         CAMERA_TYPE_STRING_MAP.put(CameraType.M3M, "M3M");
         CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_L1, "L1");
         CAMERA_TYPE_STRING_MAP.put(CameraType.ZENMUSE_P1, "P1");

@@ -2,6 +2,7 @@ package dji.sampleV5.aircraft.pages
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class MediaFragment : DJIFragment() {
     private val mediaVM: MediaVM by activityViewModels()
     var adapter: MediaListAdapter? = null
     private var binding: FragMediaPageBinding? = null
+    private var takeNum: Int = 0
 
     private var isload = false
     override fun onCreateView(
@@ -67,18 +69,28 @@ class MediaFragment : DJIFragment() {
 
         mediaVM.fileListState.observe(viewLifecycleOwner) {
             if (it == MediaFileListState.UPDATING) {
+                // 禁用按钮防止重复点击
+                binding?.btnTakePhoto?.isEnabled = false
                 binding?.fetchProgress?.visibility = View.VISIBLE
             } else {
                 binding?.fetchProgress?.visibility = View.GONE
+                binding?.btnTakePhoto?.isEnabled = true
             }
 
             binding?.tvGetListState?.text = "State:\n ${it.name}"
         }
 
         mediaVM.isPlayBack.observe(viewLifecycleOwner) {
-            binding?.tvPlayback?.text = "isPlayingBack : ${it}"
+            updatePlaybackMsg()
         }
 
+        mediaVM.componentIndex.observe(viewLifecycleOwner) {
+            updatePlaybackMsg()
+        }
+    }
+
+    private fun updatePlaybackMsg() {
+        binding?.tvPlaybackMsg?.text = "isPlayingBack : ${mediaVM.isPlayBack.value}\nIndex : ${mediaVM.componentIndex.value}\n"
     }
 
     private fun initView() {
@@ -139,7 +151,7 @@ class MediaFragment : DJIFragment() {
             val mediafiles = ArrayList<MediaFile>()
             if (adapter?.getSelectedItems()?.size != 0)
                 mediafiles.addAll(adapter?.getSelectedItems()!!)
-                mediaVM.downloadMediaFile(mediafiles)
+            mediaVM.downloadMediaFile(mediafiles)
 
         }
 
@@ -158,10 +170,11 @@ class MediaFragment : DJIFragment() {
             mediaVM.getMediaFileXMPCustomInfo()
         }
 
-        binding?.spChooseComponent?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
-
-                mediaVM.setComponentIndex(ComponentIndexType.find(index))
+        binding?.spChooseComponent?.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
+                val selectedItem = parent?.getItemAtPosition(index).toString()
+                mediaVM.setComponentIndex(ComponentIndexType.valueOf(selectedItem))
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -169,7 +182,8 @@ class MediaFragment : DJIFragment() {
             }
         }
 
-        binding?.spChooseStorage?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding?.spChooseStorage?.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, index: Int, p3: Long) {
                 mediaVM.setStorage(CameraStorageLocation.find(index))
             }
@@ -192,20 +206,19 @@ class MediaFragment : DJIFragment() {
                 override fun onSuccess() {
                     ToastUtils.showToast("take photo success")
                 }
-
                 override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast("take photo failed")
+                    ToastUtils.showToast("take photo failed $error")
                 }
             })
         }
         binding?.btnFormat?.setOnClickListener {
-            mediaVM.formatSDCard(object :CommonCallbacks.CompletionCallback{
+            mediaVM.formatSDCard(object : CommonCallbacks.CompletionCallback {
                 override fun onSuccess() {
                     ToastUtils.showToast("format SDCard success")
                 }
 
                 override fun onFailure(error: IDJIError) {
-                    ToastUtils.showToast("format SDCard failed ${error.errorCode()}" )
+                    ToastUtils.showToast("format SDCard failed ${error.errorCode()}")
                 }
 
             })
@@ -245,10 +258,10 @@ class MediaFragment : DJIFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaVM.destroy()
         if (mediaVM.isPlayBack.value == true) {
             mediaVM.disable()
         }
+        mediaVM.destroy()
         adapter = null
     }
 }

@@ -87,6 +87,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     val onBoardKeyList: List<dji.sampleV5.aircraft.keyvalue.KeyItem<*, *>> = ArrayList()
     val payloadKeyList: List<dji.sampleV5.aircraft.keyvalue.KeyItem<*, *>> = ArrayList()
     val lidarKeyList: List<dji.sampleV5.aircraft.keyvalue.KeyItem<*, *>> = ArrayList()
+    val intelligentBoxList: MutableList<dji.sampleV5.aircraft.keyvalue.KeyItem<*, *>> = ArrayList()
     var keyValuesharedPreferences: SharedPreferences? = null
     val selectMode = false
     var totalKeyCount: Int? = null
@@ -283,6 +284,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         binding?.layoutKeyOperate?.btSet?.isEnabled = currentKeyItem!!.canSet()
         binding?.layoutKeyOperate?.btGet?.isEnabled = currentKeyItem!!.canGet()
         binding?.layoutKeyOperate?.btListen?.isEnabled = currentKeyItem!!.canListen()
+        binding?.layoutKeyOperate?.btUnlistenall?.isEnabled = currentKeyItem!!.canListen()
         binding?.layoutKeyOperate?.btAction?.isEnabled = currentKeyItem!!.canAction()
         keyValuesharedPreferences?.edit()?.putLong(keyItem.toString(), keyItem.count)?.apply()
         keyItem.isItemSelected = true
@@ -464,6 +466,13 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 currentKeyItemList.addAll(lidarKeyList)
             }
 
+            dji.sampleV5.aircraft.keyvalue.ChannelType.INTELLIGENT_BOX -> {
+                tips = Util.getString(R.string.intelligent_box)
+                dji.sampleV5.aircraft.keyvalue.KeyItemDataUtil.initIntelligentBoxList(intelligentBoxList)
+                currentKeyItemList.addAll(intelligentBoxList)
+            }
+
+
             else -> {
                 LogUtils.d(TAG, "nothing to do")
             }
@@ -632,12 +641,12 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
                 cameraType?.name?.let {
                     dji.sampleV5.aircraft.keyvalue.CapabilityKeyChecker.check(
                         msdkInfoVm.msdkInfo.value?.productType?.name!!,
-                        it
+                        it,
+                        CapabilityManager.getInstance().componentIndex
                     )
                 }
                 // KeyValueDialogUtil.showNormalDialog(getActivity(), "提示")
                 //CapabilityKeyChecker.generateAllEnumList(msdkInfoVm.msdkInfo.value?.productType?.name!! , cameraType!!.name )
-
             }
         }
     }
@@ -689,18 +698,7 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
     }
 
     private fun getComponentIndex(compentName: String): Int {
-        return when (compentName) {
-            ComponentIndexType.LEFT_OR_MAIN.name -> ComponentIndexType.LEFT_OR_MAIN.value()
-            ComponentIndexType.RIGHT.name -> ComponentIndexType.RIGHT.value()
-            ComponentIndexType.UP.name -> ComponentIndexType.UP.value()
-            ComponentIndexType.AGGREGATION.name -> ComponentIndexType.AGGREGATION.value()
-            ComponentIndexType.UP_TYPE_C.name -> ComponentIndexType.UP_TYPE_C.value()
-            ComponentIndexType.UP_TYPE_C_EXT_ONE.name -> ComponentIndexType.UP_TYPE_C_EXT_ONE.value()
-
-            else -> {
-                ComponentIndexType.UNKNOWN.value()
-            }
-        }
+        return ComponentIndexType.valueOf(compentName).value()
     }
 
     private fun setKeyInfo() {

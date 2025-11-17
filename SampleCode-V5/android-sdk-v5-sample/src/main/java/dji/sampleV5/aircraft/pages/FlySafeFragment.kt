@@ -8,29 +8,24 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import dji.sampleV5.aircraft.R
-import dji.sampleV5.aircraft.models.FlySafeVM
-import dji.sampleV5.aircraft.BuildConfig
-import dji.sampleV5.aircraft.databinding.FragAppSilentlyUpgradePageBinding
 import dji.sampleV5.aircraft.databinding.FragFlySafePageBinding
 import dji.sampleV5.aircraft.keyvalue.KeyValueDialogUtil
+import dji.sampleV5.aircraft.models.FlySafeVM
 import dji.sampleV5.aircraft.util.Helper
+import dji.sampleV5.aircraft.util.ToastUtils
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
+import dji.v5.manager.aircraft.flysafe.FlySafeDatabaseComponent
+import dji.v5.manager.aircraft.flysafe.FlySafeDatabaseUpgradeMode
 import dji.v5.manager.aircraft.flysafe.info.FlySafeLicenseType
 import dji.v5.manager.aircraft.flysafe.info.FlyZoneInformation
 import dji.v5.manager.aircraft.flysafe.info.FlyZoneLicenseInfo
-import dji.v5.manager.areacode.AreaCode
-import dji.v5.manager.areacode.AreaCodeManager
 import dji.v5.utils.common.DateUtils
-import dji.v5.utils.common.JsonUtil
-import dji.sampleV5.aircraft.util.ToastUtils
-import dji.v5.manager.aircraft.flysafe.FlySafeDatabaseComponent
-import dji.v5.manager.aircraft.flysafe.FlySafeDatabaseUpgradeMode
 import dji.v5.utils.common.DocumentUtil
+import dji.v5.utils.common.JsonUtil
 import dji.v5.ux.accessory.DescSpinnerCell
 import dji.v5.ux.map.MapWidget
 import dji.v5.ux.mapkit.core.maps.DJIMap
-import java.util.*
+import java.util.Date
 
 /**
  * Class Description

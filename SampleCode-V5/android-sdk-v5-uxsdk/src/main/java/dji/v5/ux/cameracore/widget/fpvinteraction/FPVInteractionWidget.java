@@ -32,7 +32,6 @@ import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import androidx.annotation.AnimatorRes;
@@ -52,10 +51,9 @@ import dji.v5.ux.core.base.SchedulerProvider;
 import dji.v5.ux.core.base.widget.FrameLayoutWidget;
 import dji.v5.ux.core.communication.GlobalPreferencesManager;
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore;
-import dji.v5.ux.core.util.UxErrorHandle;
 import dji.v5.ux.core.util.SettingDefinitions;
 import dji.v5.ux.core.util.SettingDefinitions.ControlMode;
-import dji.v5.ux.core.util.SettingDefinitions.GimbalIndex;
+import dji.v5.ux.core.util.UxErrorHandle;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
@@ -92,7 +90,6 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
     private float moveDeltaX;
     private float moveDeltaY;
     private float velocityFactor;
-    private Disposable gimbalMoveDisposable;
     private AtomicBoolean isInteractionEnabledAtomic;
     private String cameraName;
 
@@ -262,12 +259,10 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
 
     /**
      * Get the index of the gimbal to which the widget is reacting
-     *
-     * @return {@link GimbalIndex}
      */
     @Nullable
-    public GimbalIndex getGimbalIndex() {
-        return widgetModel.getGimbalIndex();
+    public ComponentIndexType getGimbalIndex() {
+        return widgetModel.getCameraIndex();
     }
 
     /**
@@ -275,10 +270,10 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
      *
      * @param gimbalIndex index of the gimbal.
      */
-    public void updateGimbalIndex(@Nullable GimbalIndex gimbalIndex) {
-        if (!isInEditMode()) {
-            widgetModel.setGimbalIndex(gimbalIndex);
-        }
+    public void updateGimbalIndex(@Nullable ComponentIndexType gimbalIndex) {
+//        if (!isInEditMode()) {
+//            widgetModel.setGimbalIndex(gimbalIndex);
+//        }
     }
 
     @NonNull
@@ -373,10 +368,8 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
      * @param y      The y coordinate the of the point the user dragged the gimbal controls to.
      */
     private void rotateGimbal(float firstX, float firstY, float x, float y) {
-        if (gimbalMoveDisposable == null) {
-            toggleGimbalRotateBySpeed();
-        }
         if (widgetModel.canRotateGimbalYaw()) {
+            toggleGimbalRotateBySpeed();
             moveDeltaX = x - firstX;
         } else {
             moveDeltaX = 0;
@@ -388,29 +381,21 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
      * Stop rotating the gimbal.
      */
     private void stopGimbalRotation() {
-        if (gimbalMoveDisposable != null && !gimbalMoveDisposable.isDisposed()) {
-            gimbalMoveDisposable.dispose();
-            gimbalMoveDisposable = null;
-        }
         this.moveDeltaX = 0;
         this.moveDeltaY = 0;
     }
 
     private void toggleGimbalRotateBySpeed() {
-        gimbalMoveDisposable = Flowable.interval(50, TimeUnit.MILLISECONDS)
-                .subscribeOn(SchedulerProvider.io())
-                .subscribe(aLong -> {
-                    float yawVelocity = moveDeltaX / velocityFactor;
-                    float pitchVelocity = moveDeltaY / velocityFactor;
+        float yawVelocity = moveDeltaX / velocityFactor;
+        float pitchVelocity = moveDeltaY / velocityFactor;
 
-                    if (Math.abs(yawVelocity) >= 1 || Math.abs(pitchVelocity) >= 1) {
-                        addDisposable(widgetModel.rotateGimbalBySpeed(yawVelocity, -pitchVelocity)
-                                .observeOn(SchedulerProvider.ui())
-                                .subscribe(() -> {
-                                    //do nothing
-                                }, UxErrorHandle.logErrorConsumer(TAG, "rotate gimbal: ")));
-                    }
-                });
+        if (Math.abs(yawVelocity) >= 1 || Math.abs(pitchVelocity) >= 1) {
+            addDisposable(widgetModel.rotateGimbalBySpeed(yawVelocity, -pitchVelocity)
+                    .observeOn(SchedulerProvider.ui())
+                    .subscribe(() -> {
+                        //do nothing
+                    }, UxErrorHandle.logErrorConsumer(TAG, "rotate gimbal: ")));
+        }
     }
 
     private void updateVisibility() {
@@ -432,7 +417,6 @@ public class FPVInteractionWidget extends FrameLayoutWidget<Object> implements V
         if (!isInEditMode()) {
             widgetModel.updateCameraSource(ComponentIndexType.find(typedArray.getInt(R.styleable.FPVInteractionWidget_uxsdk_cameraIndex, 0)),
                     CameraLensType.find(typedArray.getInt(R.styleable.FPVInteractionWidget_uxsdk_lensType, 0)));
-            updateGimbalIndex(GimbalIndex.find(typedArray.getInt(R.styleable.FPVInteractionWidget_uxsdk_gimbalIndex, 0)));
         }
 
         Drawable manualFocusIcon = typedArray.getDrawable(R.styleable.FPVInteractionWidget_uxsdk_manualFocusIcon);

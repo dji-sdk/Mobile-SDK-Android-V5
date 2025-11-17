@@ -65,7 +65,7 @@ class DataProtectionFragment : DJIFragment() {
 
         binding?.btnClearLog?.setOnClickListener {
             val configDialog = requireContext().let {
-                AlertDialog.Builder(it, R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
+                AlertDialog.Builder(it, androidx.appcompat.R.style.Base_ThemeOverlay_AppCompat_Dialog_Alert)
                     .setTitle(R.string.clear_msdk_log)
                     .setCancelable(false)
                     .setPositiveButton(R.string.ad_confirm) { configDialog, _ ->

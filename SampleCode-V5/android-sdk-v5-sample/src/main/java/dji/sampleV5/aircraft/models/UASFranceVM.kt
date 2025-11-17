@@ -35,7 +35,8 @@ class UASFranceVM : UASEuropeanVM() {
         }
     }
 
-    fun clearAllElectronicIDStatusListener() {
+    fun clearAllListener() {
         uasRemoteIDManager.clearAllElectronicIDStatusListener()
+        uasRemoteIDManager.clearUASRemoteIDStatusListener()
     }
 }

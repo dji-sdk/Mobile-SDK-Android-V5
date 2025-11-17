@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import dji.v5.utils.common.LogUtils;
-import dji.v5.ux.BuildConfig;
 
 public class BaseFrameLayout extends FrameLayout {
 
@@ -40,23 +39,18 @@ public class BaseFrameLayout extends FrameLayout {
             try {
                 recordInvalidateCallStack(this);
             } catch (Exception e) {
-                LogUtils.e(TAG,"invalidate runtime error: "+e.getMessage());
+                LogUtils.e(TAG, "invalidate runtime error: " + e.getMessage());
             }
         }
     }
 
-    public static void recordInvalidateCallStack(View view){
+    public static void recordInvalidateCallStack(View view) {
         view.postInvalidate();
-        if (BuildConfig.DEBUG) {
-            LogUtils.e("recordInvalidateCallStack","recordInvalidateCallStack");
-        } else {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
-                stringBuilder.append(stackTraceElement);
-                stringBuilder.append("\n");
-            }
-            LogUtils.e("View", " async call invalidate \n" + stringBuilder);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
+            stringBuilder.append(stackTraceElement);
+            stringBuilder.append("\n");
         }
+        LogUtils.e("View", " async call invalidate \n" + stringBuilder);
     }
-
 }

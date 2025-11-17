@@ -25,7 +25,6 @@ package dji.v5.ux.core.util;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * This class contains enums for UX SDK settings.
@@ -34,109 +33,6 @@ public final class SettingDefinitions {
 
     private SettingDefinitions() {
         //Empty Constructor
-    }
-
-    /**
-     * The gimbal index to determine control over aircraft with multiple gimbals.
-     */
-    public enum GimbalIndex {
-        /**
-         * The gimbal index corresponds to the port side of the aircraft.
-         */
-        PORT(0),
-        /**
-         * The gimbal index corresponds to the starboard side of the aircraft.
-         */
-        STARBOARD(1),
-        /**
-         * The gimbal index corresponds to the top of the aircraft.
-         */
-        TOP(2),
-
-        UNKONWN(3);
-
-        private int index;
-
-        GimbalIndex(int index) {
-            this.index = index;
-        }
-
-        private static GimbalIndex[] values;
-
-        public static GimbalIndex[] getValues() {
-            if (values == null) {
-                values = values();
-            }
-            return values;
-        }
-
-        @Nullable
-        public static GimbalIndex find(@IntRange(from = 0, to = 2) int index) {
-            for (GimbalIndex gimbalIndex : GimbalIndex.getValues()) {
-                if (gimbalIndex.getIndex() == index) {
-                    return gimbalIndex;
-                }
-            }
-            return null;
-        }
-
-        public int getIndex() {
-            return index;
-        }
-    }
-
-    /**
-     * The camera's location on the aircraft.
-     */
-    public enum CameraSide {
-        /**
-         * The camera is on the port side of the aircraft.
-         */
-        PORT("Port-side"),
-        /**
-         * The camera is on the starboard side of the aircraft.
-         */
-        STARBOARD("Starboard-side"),
-        /**
-         * The camera is on top of the aircraft.
-         */
-        TOP("Top-side"),
-        /**
-         * The camera is on an unknown side of the aircraft.
-         */
-        UNKNOWN("Unknown");
-
-        private String side;
-
-        CameraSide(String side) {
-            this.side = side;
-        }
-
-        private static CameraSide[] values;
-
-        public static CameraSide[] getValues() {
-            if (values == null) {
-                values = values();
-            }
-            return values;
-        }
-
-        public static CameraSide find(String side) {
-            CameraSide result = UNKNOWN;
-            for (int i = 0; i < getValues().length; i++) {
-                if (getValues()[i].side.equals(side)) {
-                    result = getValues()[i];
-                    break;
-                }
-            }
-            return result;
-        }
-
-        @Override
-        @NonNull
-        public String toString() {
-            return side;
-        }
     }
 
     /**

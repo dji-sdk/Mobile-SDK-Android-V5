@@ -93,7 +93,12 @@ enum class ChannelType(name: String) {
     /**
      * lidar
      */
-    CHANNEL_TYPE_LIDAR("LIDAR");
+    CHANNEL_TYPE_LIDAR("LIDAR"),
+
+    /**
+     * IntelligentBox
+     */
+    INTELLIGENT_BOX("INTELLIGENT BOX");
 
     private val value: String
     override fun toString(): String {

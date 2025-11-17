@@ -246,7 +246,7 @@ open class UnitModeListItemWidget @JvmOverloads constructor(
 
         val str1 = SpannableString(getString(R.string.uxsdk_dialog_unit_change_notice))
         str1.setSpan(AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, str1.length, 0)
-        builder.appendln(str1).appendln()
+        builder.appendLine(str1).appendLine()
 
         val str2 = SpannableString(resources.getString(R.string.uxsdk_dialog_unit_change_example))
         str2.setSpan(AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, str2.length, 0)

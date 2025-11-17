@@ -37,19 +37,18 @@ import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import androidx.core.content.res.use
 import dji.sdk.keyvalue.value.common.Attitude
+import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.ux.R
-import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
 import dji.v5.ux.core.extension.*
-import dji.v5.ux.core.util.MobileGPSLocationUtil
-import dji.v5.ux.core.util.SettingDefinitions.GimbalIndex
 import dji.v5.ux.core.widget.compass.CompassWidget.ModelState
 import dji.v5.ux.core.widget.compass.CompassWidget.ModelState.CompassStateUpdated
 import dji.v5.ux.core.widget.compass.CompassWidget.ModelState.ProductConnected
 import dji.v5.ux.core.widget.compass.CompassWidgetModel.*
+import io.reactivex.rxjava3.core.Flowable
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -572,7 +571,7 @@ open class CompassWidget @JvmOverloads constructor(
      *
      * @return [GimbalIndex]
      */
-    fun getGimbalIndex(): GimbalIndex? {
+    fun getGimbalIndex(): ComponentIndexType {
         return widgetModel.getGimbalIndex()
     }
 
@@ -581,7 +580,7 @@ open class CompassWidget @JvmOverloads constructor(
      *
      * @param gimbalIndex index of the gimbal.
      */
-    fun setGimbalIndex(gimbalIndex: GimbalIndex?) {
+    fun setGimbalIndex(gimbalIndex: ComponentIndexType?) {
         if (!isInEditMode) {
             widgetModel.setGimbalIndex(gimbalIndex)
         }
@@ -727,8 +726,8 @@ open class CompassWidget @JvmOverloads constructor(
     @SuppressLint("Recycle")
     private fun initAttributes(context: Context, attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.CompassWidget).use { typedArray ->
-            typedArray.getIntAndUse(R.styleable.CompassWidget_uxsdk_gimbalIndex) {
-                setGimbalIndex(GimbalIndex.find(it))
+            typedArray.getIntAndUse(R.styleable.CompassWidget_uxsdk_cameraIndex) {
+                setGimbalIndex(ComponentIndexType.find(it))
             }
             typedArray.getDrawableAndUse(R.styleable.CompassWidget_uxsdk_homeIcon) {
                 homeIcon = it

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import dji.sampleV5.aircraft.R;
+import dji.sdk.keyvalue.value.common.ComponentIndexType;
 import dji.v5.common.error.DJIPipeLineError;
 import dji.v5.manager.mop.DataResult;
 import dji.v5.manager.mop.Pipeline;
@@ -37,9 +39,10 @@ import dji.v5.utils.common.DiskUtil;
 import dji.v5.utils.common.LogUtils;
 
 public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHolder> {
-    private final List<Pipeline> data;
+    private final List<Pair<ComponentIndexType, Pipeline>> data;
     private final LayoutInflater mInflater;
     private ViewHolder curHolder;
+
     private final OnDisconnectListener listener = new OnDisconnectListener() {
         @Override
         public void onDisconnect(Pipeline d) {
@@ -51,21 +54,20 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
         }
     };
 
-
-    public PipelineAdapter(Context context, List<Pipeline> data) {
+    public PipelineAdapter(Context context, List<Pair<ComponentIndexType, Pipeline>> data) {
         this.mInflater = LayoutInflater.from(context);
         this.data = data;
     }
 
-    public void addItem(Pipeline action) {
+    public void addItem(ComponentIndexType indexType, Pipeline action) {
         if (action == null || data == null || data.contains(action)) {
             return;
         }
-        data.add(action);
+        data.add(new Pair<>(indexType, action));
         notifyItemInserted(getItemCount() - 1);
     }
 
-    public List<Pipeline> getData() {
+    public List<Pair<ComponentIndexType, Pipeline>> getData() {
         return data;
     }
 
@@ -182,11 +184,11 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
             disconnectTv = itemView.findViewById(R.id.tv_disconnect);
             filenameTv = itemView.findViewById(R.id.et_file_name);
             autoDownloadSwitch = itemView.findViewById(R.id.switch_auto_download);
-
         }
 
-        public void setData(Pipeline pipeline) {
+        public void setData(Pair<ComponentIndexType, Pipeline> pair) {
             destroy();
+            Pipeline pipeline = pair.second;
             uploadThread = new HandlerThread("upload");
             downloadThread = new HandlerThread("download");
             uploadThread.start();
@@ -204,7 +206,7 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                     });
                 } else if (id == R.id.tv_disconnect) {
                     destroy();
-                    disconnect(pipeline);
+                    disconnect(pair.first, pipeline);
                 }
             };
 
@@ -220,8 +222,8 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
             listenerWeakReference = new WeakReference<>(listener);
         }
 
-        private void disconnect(Pipeline pipeline) {
-            PipelineManager.getInstance().disconnectPipeline(pipeline.getId(), pipeline.getPipelineDeviceType(),
+        private void disconnect(ComponentIndexType indexType, Pipeline pipeline) {
+            PipelineManager.getInstance().disconnectPipeline(indexType, pipeline.getId(), pipeline.getPipelineDeviceType(),
                     pipeline.getTransmissionControlType());
             if (listenerWeakReference != null && listenerWeakReference.get() != null) {
                 listenerWeakReference.get().onDisconnect(pipeline);
@@ -287,20 +289,20 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                 MOPCmdHelper.sendUploadFileReq(data, uploadFileName, outputStream.toByteArray(), time, MOPCmdHelper.getMD5(tmp), listener);
 
             } catch (IOException e) {
-                LogUtils.e(tag,e.getMessage());
+                LogUtils.e(tag, e.getMessage());
             } finally {
                 try {
-                    if (inputStream != null){
+                    if (inputStream != null) {
                         inputStream.close();
                     }
-                    if (out != null){
+                    if (out != null) {
                         out.close();
                     }
-                    if (outputStream != null){
+                    if (outputStream != null) {
                         outputStream.close();
                     }
                 } catch (IOException e) {
-                    LogUtils.e(tag,e.getMessage());
+                    LogUtils.e(tag, e.getMessage());
                 }
             }
 
@@ -341,7 +343,7 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                 file.createNewFile();
                 stream = new RandomAccessFile(file, "rw");
             } catch (IOException e) {
-                LogUtils.e(tag,e.getMessage());
+                LogUtils.e(tag, e.getMessage());
             }
 
             while (true) {
@@ -386,11 +388,11 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                                 updateDownloadUI();
                             });
                             try {
-                                if (stream != null){
+                                if (stream != null) {
                                     stream.write(dataBuff, 0, len);
                                 }
                             } catch (IOException e) {
-                                LogUtils.e(tag,e.getMessage());
+                                LogUtils.e(tag, e.getMessage());
                             }
                         } else if (dataResult.getError() != null && dataResult.getError().errorCode().equals(DJIPipeLineError.CLOSING)) {
                             LogUtils.e(tag, "Pipeline is closing,finish down");
@@ -405,19 +407,19 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                     // 确认是否能接着传
                     if (MOPCmdHelper.parseCommonAck(pipeline)) {
                         try {
-                            if (stream != null){
+                            if (stream != null) {
                                 stream.seek(position);
                             }
                         } catch (IOException e) {
-                            LogUtils.e(tag,e.getMessage());
+                            LogUtils.e(tag, e.getMessage());
                         }
                     } else {
                         try {
-                            if(stream != null){
+                            if (stream != null) {
                                 stream.close();
                             }
                         } catch (IOException e) {
-                            LogUtils.e(tag,e.getMessage());
+                            LogUtils.e(tag, e.getMessage());
                         }
                         downloadLogTv.post(() -> downloadLogTv.setText("transfer failure"));
                         downloading = false;
@@ -433,11 +435,11 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                 }
             }
             try {
-                if (stream != null){
+                if (stream != null) {
                     stream.close();
                 }
             } catch (IOException e) {
-                LogUtils.e(tag,e.getMessage());
+                LogUtils.e(tag, e.getMessage());
             }
             downloading = false;
 

@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import dji.v5.utils.common.LogUtils;
-import dji.v5.ux.BuildConfig;
 
 
 public class BaseFrameLayout extends FrameLayout {
@@ -48,16 +47,12 @@ public class BaseFrameLayout extends FrameLayout {
 
     public static void recordInvalidateCallStack(View view) {
         view.postInvalidate();
-        if (BuildConfig.DEBUG) {
-            throw new NonMainThreadInvalidateException();
-        } else {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
-                stringBuilder.append(stackTraceElement);
-                stringBuilder.append("\n");
-            }
-            LogUtils.e("View", " async call invalidate \n" + stringBuilder);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
+            stringBuilder.append(stackTraceElement);
+            stringBuilder.append("\n");
         }
+        LogUtils.e("View", " async call invalidate \n" + stringBuilder);
     }
 
     public static class NonMainThreadInvalidateException extends RuntimeException {

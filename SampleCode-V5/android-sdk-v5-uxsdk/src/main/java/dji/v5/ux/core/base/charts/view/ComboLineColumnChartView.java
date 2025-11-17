@@ -2,9 +2,7 @@ package dji.v5.ux.core.base.charts.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 
-import dji.v5.ux.BuildConfig;
 import dji.v5.ux.core.base.charts.listener.ComboLineColumnChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.listener.DummyCompoLineColumnChartOnValueSelectListener;
 import dji.v5.ux.core.base.charts.model.ChartData;
@@ -51,16 +49,7 @@ public class ComboLineColumnChartView extends AbstractChartView implements Combo
     }
 
     public void setComboLineColumnChartData(ComboLineColumnChartData data) {
-        if (BuildConfig.DEBUG) {
-            Log.d("ComboLineColumnChartView", "Setting data for ComboLineColumnChartView");
-        }
-
-        if (null == data) {
-            this.data = null;
-        } else {
-            this.data = data;
-        }
-
+        this.data = data;
         super.onChartDataChange();
     }
 
