@@ -22,10 +22,12 @@ open class RemoteControllerButtonDownModel constructor(
 
     val isShutterButtonDownProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
     val isRecordButtonDownProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
+    val isRCSwitchButtonDownProcessor: DataProcessor<Boolean> = DataProcessor.create(false)
 
     override fun inSetup() {
         bindDataProcessor(RemoteControllerKey.KeyShutterButtonDown.create(), isShutterButtonDownProcessor)
         bindDataProcessor(RemoteControllerKey.KeyRecordButtonDown.create(), isRecordButtonDownProcessor)
+        bindDataProcessor(RemoteControllerKey.KeyRCSwitchButtonDown.create(), isRCSwitchButtonDownProcessor)
     }
 
     override fun inCleanup() {
