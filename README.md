@@ -4,13 +4,13 @@
 
 ## What is DJI Mobile SDK V5?
 
-DJI Mobile SDK V5 has a series of APIs to control the software and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.
+DJI Mobile SDK V5 has a series of APIs to control the so[README_CN.md](README_CN.md)ftware and hardware interfaces of an aircraft. We provide an open source production sample and a tutorial for developers to develop a more competitive drone solution on mobile device. This improves the experience and efficiency of MSDK App development.
 
 Supported Product:
 * [DJI Mavic 3TA]()
 * [Matrice 400]()
 * [Matrice 4D Enterprise Series]()
-* [DJI Mini4 PRO](https://www.dji.com/cn/mini-4-pro?from=store-product-page)
+* [DJI Mini4 PRO](https://www.dji.com/cn/mini-4-pro?from=store-product-page)[README_CN.md](README_CN.md)
 * [Matrice 4 Enterprise Series](https://enterprise.dji.com/cn/matrice-4-series)
 * [H30 Series](https://enterprise.dji.com/cn/zenmuse-h30-series)
 * [DJI Mini3 Pro](https://www.dji.com/cn/mini-3-pro?site=brandsite&from=landing_page)
@@ -19,7 +19,7 @@ Supported Product:
 * [M30 Series](https://www.dji.com/matrice-30?site=brandsite&from=nav)
 * [M300 RTK](https://www.dji.com/matrice-300?site=brandsite&from=nav)
 * [Matrice 350 RTK](https://enterprise.dji.com/cn/matrice-350-rtk)
-* [DJI Mavic 3TA]()
+* [DJI Mavic 3TA]()[README_CN.md](README_CN.md)
 
 ## Project Directory Introduction
 
@@ -91,4 +91,4 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 You can get support from DJI with the following method:
 
-- Post questions in DJI Developer Forums: [**DEVELOPER SUPPORT**](https://djisdksupport.zendesk.com/hc/en-us/community/topics)
+- Post questions in DJI Developer Forums: [**DEVELOPER SUPPORT**](https://djisdksupport.zendesk.com/hc/en-us/community/topics).
