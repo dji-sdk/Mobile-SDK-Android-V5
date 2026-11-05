@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.manager.aircraft.uas.AreaStrategy
 import dji.v5.manager.aircraft.uas.ElectronicIDStatus
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 
 /**
  * Description :法国无人机远程识别VM

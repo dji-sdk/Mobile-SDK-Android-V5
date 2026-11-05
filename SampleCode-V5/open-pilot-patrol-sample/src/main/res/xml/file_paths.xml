@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <cache-path name="preview" path="archive_preview/" />
+    <files-path name="internal_files" path="" />
+    <external-files-path name="files" path="" />
+    <external-path name="external" path="" />
+</paths>

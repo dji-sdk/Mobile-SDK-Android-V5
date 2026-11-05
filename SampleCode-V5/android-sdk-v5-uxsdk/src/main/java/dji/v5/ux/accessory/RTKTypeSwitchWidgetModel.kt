@@ -145,7 +145,7 @@ class RTKTypeSwitchWidgetModel(
      * 获取支持的差分数据源
      */
     private fun getSupportReferenceStationSource(supportNetworkRTK: Boolean): List<RTKReferenceStationSource> {
-        return if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
+        return if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct() || ProductUtil.isM5Product()) {
             getMavicSupportReferenceStationSource(supportNetworkRTK)
         } else {
             getDefaultSupportReferenceStationSource(supportNetworkRTK)

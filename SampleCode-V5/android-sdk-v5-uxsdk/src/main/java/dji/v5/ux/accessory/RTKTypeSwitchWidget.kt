@@ -25,9 +25,9 @@ import dji.v5.ux.core.extension.getString
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.isFastClick
 import dji.v5.ux.core.extension.show
-import dji.v5.ux.core.util.ToastUtils
 import dji.v5.ux.core.util.ViewUtil
 import dji.v5.ux.util.RtkSettingWatcher
+import dji.v5.ux.util.ToastUtils
 
 /**
  * Description :基站启动页

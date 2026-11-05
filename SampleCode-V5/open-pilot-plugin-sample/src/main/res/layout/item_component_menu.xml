@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- 主体行 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginHorizontal="@dimen/uxsdk_12_dp"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="14dp">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_setting"
+            android:scaleType="fitCenter"
+            app:tint="@color/color_menu_item_accent"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_menu_item_accent"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/bg_menu_item_arrow"
+            android:scaleType="centerInside"
+            app:tint="@color/color_menu_item_accent" />
+
+    </LinearLayout>
+
+    <!-- 分割线：左侧对齐图标文字，视觉上不延伸到边缘 -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="@dimen/uxsdk_20_dp"
+        android:layout_marginEnd="@dimen/uxsdk_10_dp"
+        android:background="#1A000000" />
+
+</LinearLayout>

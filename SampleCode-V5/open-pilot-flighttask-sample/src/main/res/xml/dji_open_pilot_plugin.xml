@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 插件 ID 取 APK 包名；名称、开发者和描述优先读取 dji_open_pilot_plugin_* 字符串资源。 -->
+<plugin xmlns:dop="https://dji.com/open-pilot"
+    dop:description="Flight Task Management Demo"
+    dop:developer="DJI Inc."
+    dop:name="Flight Task Management"
+    dop:version="0.1.0" />

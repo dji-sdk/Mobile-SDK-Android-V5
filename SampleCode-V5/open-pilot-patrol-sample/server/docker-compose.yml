@@ -1,0 +1,24 @@
+name: patrol-demo
+
+services:
+  patrol-server:
+    build: .
+    ports:
+      - "127.0.0.1:18081:18081"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 18081
+      DATA_DIR: /app/runtime
+    volumes:
+      - data:/app/runtime
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:18081/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+volumes:
+  data:
+    name: patrol-demo-data

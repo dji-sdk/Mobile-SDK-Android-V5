@@ -166,6 +166,34 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_warminglight_control"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/megaphone_warninglight_control"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"/>
+
+
+                <ImageButton
+                    android:id="@+id/btn_play_warminglight_control"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_media_play" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

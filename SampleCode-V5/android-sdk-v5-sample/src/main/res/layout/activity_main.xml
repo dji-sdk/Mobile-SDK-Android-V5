@@ -59,13 +59,21 @@
                 android:textSize="14sp"
                 tools:text="@string/sdk_version" />
 
+<!--            <TextView-->
+<!--                android:id="@+id/text_view_package_product_category"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_margin="4dp"-->
+<!--                android:text="@string/package_product_category"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14sp" />-->
             <TextView
-                android:id="@+id/text_view_package_product_category"
+                android:id="@+id/text_view_plugin_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="4dp"
-                android:text="@string/package_product_category"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -78,6 +86,15 @@
                 android:text="@string/unregistered"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/text_view_remote_server_state"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_margin="4dp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14sp" />-->
 
             <TextView
                 android:id="@+id/text_view_product_name"

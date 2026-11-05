@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - CheckBox Case 预览</title>
+    <style>
+        /* 基础重置与透明预览底色 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: transparent; 
+            color: #FFFFFF;
+            margin: 0;
+            padding: 12px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .rv-card { background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+
+        .rv-item-container { 
+            display: flex; 
+            flex-direction: row; 
+            gap: 12px; 
+            align-items: center; 
+        }
+
+        /* ====== 自定义 CheckBox 样式 ====== */
+        .rv-checkbox-wrapper {
+            flex: 1; /* 均分空间 */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            height: 30px; /* 对应 setHeight(30) */
+        }
+
+        /* 隐藏原生 CheckBox */
+        .rv-checkbox-wrapper input[type="checkbox"] {
+            display: none;
+        }
+
+        /* 模拟的 CheckBox 外框 */
+        .rv-checkbox-box {
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 2px;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+
+        /* 对勾 SVG (默认隐藏) */
+        .rv-checkbox-box svg {
+            width: 14px;
+            height: 14px;
+            opacity: 0;
+            stroke-dasharray: 20;
+            stroke-dashoffset: 20;
+            transition: all 0.2s;
+        }
+
+        .rv-checkbox-label {
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+
+        /* 选中状态的通用逻辑 */
+        .rv-checkbox-wrapper input[type="checkbox"]:checked + .rv-checkbox-box {
+            border-color: transparent;
+        }
+
+        .rv-checkbox-wrapper input[type="checkbox"]:checked + .rv-checkbox-box svg {
+            opacity: 1;
+            stroke-dashoffset: 0;
+        }
+
+        /* ====== 颜色 Tint ====== */
+        /* 蓝色 (BLUE_DEFAULT) */
+        .tint-blue input[type="checkbox"]:checked + .rv-checkbox-box { background-color: #1A8BFF; }
+        /* 红色 (RED_DEFAULT) */
+        .tint-red input[type="checkbox"]:checked + .rv-checkbox-box { background-color: #E41F29; }
+        /* 绿色 (GREEN_1) */
+        .tint-green input[type="checkbox"]:checked + .rv-checkbox-box { background-color: #00C774; }
+
+        /* ====== 禁用状态 ====== */
+        .is-disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_checkbox">复选框 CheckBox</div>
+        <div class="rv-item-container">
+            <!-- 未选中 (左侧框) -->
+            <label class="rv-checkbox-wrapper tint-blue">
+                <input type="checkbox">
+                <div class="rv-checkbox-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="rv-checkbox-label" data-i18n="cb_left">左侧框</span>
+            </label>
+            
+            <!-- 已选中 (右侧框) -->
+            <label class="rv-checkbox-wrapper tint-blue">
+                <input type="checkbox" checked>
+                <div class="rv-checkbox-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="rv-checkbox-label" data-i18n="cb_right">右侧框</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_state">02 组件状态</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_disabled">禁用态</div>
+        <div class="rv-item-container is-disabled">
+            <!-- 已选中 禁用 -->
+            <label class="rv-checkbox-wrapper tint-blue">
+                <input type="checkbox" checked disabled>
+                <div class="rv-checkbox-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="rv-checkbox-label" data-i18n="cb_checked">已选中</span>
+            </label>
+            
+            <!-- 未选中 禁用 -->
+            <label class="rv-checkbox-wrapper tint-blue">
+                <input type="checkbox" disabled>
+                <div class="rv-checkbox-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="rv-checkbox-label" data-i18n="cb_unchecked">未选中</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_style">03 组件样式</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_checkbox_color">复选框颜色</div>
+        <div class="rv-item-container">
+            <!-- 蓝 Tint -->
+            <label class="rv-checkbox-wrapper tint-blue">
+                <input type="checkbox" checked>
+                <div class="rv-checkbox-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="rv-checkbox-label" data-i18n="color_blue">蓝</span>
+            </label>
+            
+            <!-- 红 Tint -->
+            <label class="rv-checkbox-wrapper tint-red">
+                <input type="checkbox" checked>
+                <div class="rv-checkbox-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="rv-checkbox-label" data-i18n="color_red">红</span>
+            </label>
+
+            <!-- 绿 Tint -->
+            <label class="rv-checkbox-wrapper tint-green">
+                <input type="checkbox" checked>
+                <div class="rv-checkbox-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span class="rv-checkbox-label" data-i18n="color_green">绿</span>
+            </label>
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:         { zh: "01 组件类型", en: "01 Component Type" },
+            card_state:        { zh: "02 组件状态", en: "02 Component State" },
+            card_style:        { zh: "03 组件样式", en: "03 Component Style" },
+            sec_checkbox:      { zh: "复选框 CheckBox", en: "CheckBox" },
+            sec_disabled:      { zh: "禁用态",     en: "Disabled State" },
+            sec_checkbox_color:{ zh: "复选框颜色", en: "CheckBox Color" },
+            cb_left:           { zh: "左侧框",     en: "Left Box" },
+            cb_right:          { zh: "右侧框",     en: "Right Box" },
+            cb_checked:        { zh: "已选中",     en: "Checked" },
+            cb_unchecked:      { zh: "未选中",     en: "Unchecked" },
+            color_blue:        { zh: "蓝",         en: "Blue" },
+            color_red:         { zh: "红",         en: "Red" },
+            color_green:       { zh: "绿",         en: "Green" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

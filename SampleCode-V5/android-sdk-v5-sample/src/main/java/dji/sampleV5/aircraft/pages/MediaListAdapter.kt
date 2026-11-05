@@ -19,6 +19,7 @@ import dji.v5.common.error.IDJIError
 import dji.v5.manager.datacenter.media.MediaFile
 import dji.v5.utils.common.ContextUtil
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import java.lang.ref.WeakReference
 import java.util.ArrayList
 
 /**
@@ -27,13 +28,27 @@ import java.util.ArrayList
  * @description:
  */
 class MediaListAdapter(
-    val data: List<MediaFile>,
     private val onClick: (MediaFile, View) -> Unit
 ) :
     RecyclerView.Adapter<MediaListAdapter.ViewHolder>() {
 
+    /**
+     * 内部数据副本，避免直接持有 SDK 内部被后台线程并发修改的 List，
+     * 从而防止 RecyclerView "Inconsistency detected" 崩溃。
+     */
+    private val data: ArrayList<MediaFile> = ArrayList()
+
     val mSelectedItems: ArrayList<MediaFile> = ArrayList<MediaFile>()
     var selectionMode: Boolean = false
+
+    /**
+     * 在主线程提交数据快照并刷新。调用方需保证传入的是一份拷贝。
+     */
+    fun submitList(newList: List<MediaFile>) {
+        data.clear()
+        data.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_mediafile_list, parent, false)
@@ -43,7 +58,6 @@ class MediaListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
         val mediaFile = data[position]
-        holder.imageView.tag = position
         holder.setItemData(mediaFile)
         holder.imageView.setImageDrawable(
             ContextCompat.getDrawable(
@@ -54,11 +68,13 @@ class MediaListAdapter(
         if (mediaFile.thumbNail != null) {
             holder.imageView.setImageBitmap(mediaFile.thumbNail)
         } else {
+            val weakHolder = WeakReference(holder)
             mediaFile.pullThumbnailFromCamera(object :
                 CommonCallbacks.CompletionCallbackWithParam<Bitmap> {
                 override fun onSuccess(t: Bitmap?) {
                     AndroidSchedulers.mainThread().scheduleDirect {
-                        if (holder.imageView.tag == position) {
+                        // 用 adapterPosition 校验，避免 ViewHolder 复用导致缩略图错绑
+                        if (holder.adapterPosition == position) {
                             holder.imageView.setImageBitmap(t)
                         }
                     }
@@ -67,7 +83,8 @@ class MediaListAdapter(
 
                 override fun onFailure(error: IDJIError) {
                     AndroidSchedulers.mainThread().scheduleDirect {
-                        holder.imageView.setImageDrawable(
+                        val h = weakHolder.get() ?: return@scheduleDirect
+                        h.imageView.setImageDrawable(
                             ContextCompat.getDrawable(
                                 ContextUtil.getContext(),
                                 R.drawable.aircraft

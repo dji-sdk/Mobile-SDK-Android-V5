@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head>
   <meta charset="utf-8">
@@ -39,12 +39,20 @@
           </div>
         </div>
         <div class="nav scrollable js-tree-menu">
-          <dl>
-            <dt>Manager Classes
+          <dl class="sidebar-group sidebar-group--common">
+            <dt>Common APIs
             </dt>
                   <dd><a data-href="../SDKManager/DJISDKManager.html" class="sub-toggle">ISDKManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../SDKManager/ISDKManager_SDKManagerCallback.html">SDKManagerCallback</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_InitSettings.html">InitSettings</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_PluginAPPConfig.html">PluginAPPConfig</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_APPVersion.html">APPVersion</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_OpenLocation.html">OpenLocation</a>
                             </dd>
                     </ul>
                   </dd>
@@ -248,6 +256,8 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
+                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -268,6 +278,14 @@
                             </dd>
                             <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                               <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_VisionAssistStatusListener.html">VisionAssistStatusListener</a>
+                                      </dd>
                                       <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/ICameraStreamManager_PinPointInfo.html">PinPointInfo</a>
@@ -671,8 +689,146 @@
                     </ul>
                   </dd>
           </dl>
-          <dl>
-            <dt>Misc Classes
+          <dl class="sidebar-group sidebar-group--plugins">
+            <dt>Plugin APIs
+            </dt>
+                  <dd><a data-href="../IARManager/IARManager.html" class="sub-toggle">IARManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IARManager/IARManager_ARCircleInfo.html">ARCircleInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARDistAlpha.html">ARDistAlpha</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARDistLineWidth.html">ARDistLineWidth</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARFaceStroke.html">ARFaceStroke</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARIconOrthographicConfig.html">ARIconOrthographicConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARIconPerspectiveConfig.html">ARIconPerspectiveConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARLineInfo.html">ARLineInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPointConfig.html">ARPointConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPointInfo.html">ARPointInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPolygonFace.html">ARPolygonFace</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPolygonInfo.html">ARPolygonInfo</a>
+                            </dd>
+                            <dd><a data-href="../IARManager/IARManager_ARRadarConfig.html" class="sub-toggle">ARRadarConfig<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IARManager/IARManager_ARRadarConfig_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARStrokeInfo.html">ARStrokeInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARTextConfig.html">ARTextConfig</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IRemoteViewPageManager/IRemoteViewPageManager.html" class="sub-toggle">IRemoteViewPageManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ActivityConfig.html">ActivityConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_DividerConfig.html">DividerConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnCheckedChangeListener.html">IRemoteViewOnCheckedChangeListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnClickListener.html">IRemoteViewOnClickListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnItemSelectedListener.html">IRemoteViewOnItemSelectedListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewTextWatcher.html">IRemoteViewTextWatcher</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_LayoutParam.html">LayoutParam</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ListItemData.html">ListItemData</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ListItemOperation.html">ListItemOperation</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_RemoteView.html">RemoteView</a>
+                            </dd>
+                            <dd><a data-href="../IRemoteViewPageManager/IRemoteViewPageManager_ShapeDescriptor.html" class="sub-toggle">ShapeDescriptor<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ShapeDescriptor_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_TextSpanSeparatorConfig.html">TextSpanSeparatorConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_WidgetLayoutParam.html">WidgetLayoutParam</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ICameraViewDrawingManager/ICameraViewDrawingManager.html" class="sub-toggle">ICameraViewDrawingManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingBoxInfo.html">DrawingBoxInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingPolygonInfo.html">DrawingPolygonInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingTextInfo.html">DrawingTextInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_OpenDoubleRect.html">OpenDoubleRect</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_OpenPoint.html">OpenPoint</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IRemoteDialogManager/IRemoteDialogManager.html" class="sub-toggle">IRemoteDialogManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IRemoteDialogManager/IRemoteDialogManager_DialogConfig.html" class="sub-toggle">DialogConfig<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogConfig_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogElementConfig.html">DialogElementConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogMessage.html">DialogMessage</a>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_IDialogMessageListener.html">IDialogMessageListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IMapWidgetManager/IMapWidgetManager.html" class="sub-toggle">IMapWidgetManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapCircleOptions.html">MapCircleOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapElement.html">MapElement</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapMarkerOptions.html">MapMarkerOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapPolygonOptions.html">MapPolygonOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapPolylineOptions.html">MapPolylineOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapWidget.html">MapWidget</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapWidgetItem.html">MapWidgetItem</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapWidgetLayer.html">MapWidgetLayer</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../IRemoteServerConfigManager/IRemoteServerConfigManager.html">IRemoteServerConfigManager</a>
+                  </dd>
+                  <dd><a href="../IFileTransferManager/IFileTransferManager.html">IFileTransferManager</a>
+                  </dd>
+                  <dd><a data-href="../INavigateManager/INavigateManager.html" class="sub-toggle">INavigateManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../INavigateManager/INavigateManager_NavigateAction.html">NavigateAction</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../IDisconnectActionManager/IDisconnectActionManager.html">IDisconnectActionManager</a>
+                  </dd>
+                  <dd><a href="../IRemoteControlManager/IRemoteControlManager.html">IRemoteControlManager</a>
+                  </dd>
+          </dl>
+          <dl class="sidebar-group sidebar-group--references">
+            <dt>References
             </dt>
                   <dd><a href="../DJIError/DJIError.html">IDJIError</a>
                   </dd>
@@ -774,10 +930,7 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">downloadFlyZoneLicensesFromServer</span><span class="params">(<span class="meta">@NonNull</span> CommonCallbacks.CompletionCallbackWithParam&lt;List&lt;FlyZoneLicenseInfo&gt;&gt; callback)</span></span><br></pre></td></tr></table></figure>
 <html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>Package:</i></td><td width=85%><font color="#999">dji.v5.manager.interfaces</td></tr></table></html>
 <h5 id="Description-8">Description:</h5>
-<p><font color="#666">Gets the licenses for restricted fly zone from the server. In order to get the unlock licenses for the relevant account, please call <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_logindjiuseraccountwithinterface">logInDJIUserAccount</a></code> to log in to the DJI account first,<br>
-<br><b>Note:<br><br>
-If you want to draw the restricted fly zone in the license on the map, please pass the areaID in the restricted fly zone to <code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_getflyzonesbyareaid">getFlyZonesByAreaID</a></code>, then you can get the restricted fly zone information of the areaID for drawing. </b><br>
-<br><br><code><i>Supported since MSDK 5.3.0</i></code></p>
+<p><font color="#666">Gets the licenses for restricted fly zone from the server. In order to get the unlock licenses for the relevant account, please call <code><a href="../../Components/IUserAccountManager/IUserAccountManager.html#iuseraccountmanager_logindjiuseraccountwithinterface">logInDJIUserAccount</a></code> to log in to the DJI account first, <br><b>Note:<br> If you want to draw the restricted fly zone in the license on the map, please pass the areaID in the restricted fly zone to <code><a href="../../Components/IFlyZoneManager/IFlyZoneManager.html#iflyzonemanager_getflyzonesbyareaid">getFlyZonesByAreaID</a></code>, then you can get the restricted fly zone information of the areaID for drawing. </b> <br><br><code><i>Supported since MSDK 5.3.0</i></code></p>
 <h5 id="Input-Parameters-6">Input Parameters:</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;List&lt;<a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html#iflyzonemanager_flyzonelicenseinfo">FlyZoneLicenseInfo</a>&gt;&gt; <font color="#000">callback</td><td><font color="#666"><i>Return the callback of execution result.</i></td></tr></table></html></div>
 <div class="api-row" id="iflyzonemanager_getflyzonesbyareaid"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_getflyzonesbyareaid_inline">getFlyZonesByAreaID</a></div></div><div class="inline-doc" id="iflyzonemanager_getflyzonesbyareaid_inline"
@@ -927,7 +1080,7 @@ After the push is successful, you can call <code><a href="../../Components/IFlyZ
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_takeoffinheightlimitzonewithoutgps_inline"></a>TAKE_OFF_IN_HEIGHT_LIMIT_ZONE_WITHOUT_GPS</td><td><font color="#666">The aircraft is below the height limit zone and has no GPS signal, please pay attention to flight safety.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_takeoffinheightlimitzone_inline"></a>TAKE_OFF_IN_HEIGHT_LIMIT_ZONE</td><td><font color="#666">The aircraft is below the height limit zone, please pay attention to flight safety.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_takeoffinwarningarea_inline"></a>TAKE_OFF_IN_WARNING_AREA</td><td><font color="#666">The aircraft is in the warning zone, please pay attention to flight safety.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_touchnoflyzone_inline"></a>TOUCH_NO_FLY_ZONE</td><td><font color="#666">The aircraft has touched the no-fly zone, please control the aircraft as far as possible.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_touchauthorizationzone_inline"></a>TOUCH_AUTHORIZATION_ZONE</td><td><font color="#666">The aircraft has touched the authorized area, please control the aircraft as far as possible.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_reachmaximumflightheight_inline"></a>REACH_MAXIMUM_FLIGHT_HEIGHT</td><td><font color="#666">The aircraft has reached the maximum flight height in the height limit zone.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_rthaffectedatboundaryofgeozone_inline"></a>RTH_AFFECTED_AT_BOUNDARY_OF_GEO_ZONE</td><td><font color="#666">Your aircraft is at the boundary of a limited fly zone, Return To Home may be affected. Please fly away with caution.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_atboundaryofcustomunlockzone_inline"></a>AT_BOUNDARY_OF_CUSTOM_UNLOCK_ZONE</td><td><font color="#666">Your aircraft is at the boundary of an Custom Unlocking Zone.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_enterlimitheightarea_inline"></a>ENTER_LIMIT_HEIGHT_AREA</td><td><font color="#666">The aircraft has entered the height limited area.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafetipevent_collisionwithlimitheightareasooninwhitelistvalidarea_inline"></a>COLLISION_WITH_LIMIT_HEIGHT_AREA_SOON_IN_WHITE_LIST_VALID_AREA</td><td><font color="#666">The aircraft is approaching the fly zone, please pay attention to flight safety.</td></tr></table></html>
 <h5 id="Class-Members-2">Class Members:</h5>
 </div>
-<div class="api-row" id="iflyzonemanager_flysafetipinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a></div></div><div class="api-row" id="iflyzonemanager_flysafewarningevent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafewarningevent_inline">FlySafeWarningEvent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafewarningevent_inline"
+<div class="api-row" id="iflyzonemanager_flysafetipinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flysafetipinformation_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html" data-class-name="FlySafeTipInformation"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlySafeTipInformation <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FlySafeTipInformation</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Fly safety tips information.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flysafewarningevent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafewarningevent_inline">FlySafeWarningEvent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafewarningevent_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>FlySafeWarningEvent</h6></div>
 </blockquote>
@@ -939,7 +1092,7 @@ After the push is successful, you can call <code><a href="../../Components/IFlyZ
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinnoflyzone_inline"></a>TAKE_OFF_FAILED_IN_NO_FLY_ZONE</td><td><font color="#666">The aircraft was unable to take off in the no-fly zone.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinnoflyzonewithoutgps_inline"></a>TAKE_OFF_FAILED_IN_NO_FLY_ZONE_WITHOUT_GPS</td><td><font color="#666">The mobile device is in the no-fly zone, and the GPS signal of the aircraft is not good enough to take off.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedwithoutcustomunlocking_inline"></a>TAKE_OFF_FAILED_WITHOUT_CUSTOM_UNLOCKING</td><td><font color="#666">Cannot take off. You have not applied to fly in this zone.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinauthorizedzonewithoutgpsandunlocking_inline"></a>TAKE_OFF_FAILED_IN_AUTHORIZED_AREA_WITHOUT_GPS_AND_UNLOCKING</td><td><font color="#666">The mobile device is in the authorized area, and the GPS signal of the aircraft is not good, and it cannot take off before unlocking.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinauthorizedzonewithoutunlocking_inline"></a>TAKE_OFF_FAILED_IN_AUTHORIZED_ZONE_WITHOUT_UNLOCKING</td><td><font color="#666">The aircraft is not allowed to take off before being unlocked in the authorized area.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinauthorizedzone_inline"></a>TAKE_OFF_FAILED_IN_AUTHORIZED_ZONE</td><td><font color="#666">The aircraft is in the authorized area and you have obtained a fly license.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeoffinenhancedwarningzone_inline"></a>TAKE_OFF_IN_ENHANCED_WARNING_ZONE</td><td><font color="#666">The aircraft is in the enhanced warning zone, please pay attention to fly safety.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeoffnearnoflyzone_inline"></a>TAKE_OFF_NEAR_NO_FLY_ZONE</td><td><font color="#666">There is a no-fly zone nearby and there are fly restrictions.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_limitedrestrictionsnearby_inline"></a>LIMITED_RESTRICTIONS_NEARBY</td><td><font color="#666">There are limited restrictions in the nearby area.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_authorizedzonewithoutunlockingnearby_inline"></a>AUTHORIZED_ZONE_WITHOUT_UNLOCKING_NEARBY</td><td><font color="#666">There is a authorized zone nearby and there are flight restrictions.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_authorizedzoneandrestrictionsnearby_inline"></a>AUTHORIZED_ZONE_AND_RESTRICTIONS_NEARBY</td><td><font color="#666">There are authorized areas nearby and you have obtained a flight certificate.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_restrictionsinlimitedflyzonenearby_inline"></a>RESTRICTIONS_IN_LIMITED_FLY_ZONE_NEARBY</td><td><font color="#666">There are flight restrictions in the nearby limited flight area.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_inauthorizationzone_inline"></a>IN_AUTHORIZATION_ZONE</td><td><font color="#666">The aircraft is in the authorized area and you have obtained a flight certificate.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_takeofffailedinnoflyzonewithweakgps_inline"></a>TAKE_OFF_FAILED_UNDER_LIMIT_AREA_WITH_GPS_ONCE</td><td><font color="#666">The mobile device is in the no-fly zone, and the GPS signal of the aircraft is not good enough to take off.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafewarningevent_haveonehourwillapplytfrs_inline"></a>HAVE_ONE_HOUR_WILL_APPLY_TFRS</td><td><font color="#666">After 1 hour, a temporary restricted flight zone will take effect within 7KM, please pay attention to flight safety.</td></tr></table></html>
 <h5 id="Class-Members-3">Class Members:</h5>
 </div>
-<div class="api-row" id="iflyzonemanager_flyingsafetywarninginformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a></div></div><div class="api-row" id="iflyzonemanager_flysafeseriouswarningevent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafeseriouswarningevent_inline">FlySafeSeriousWarningEvent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafeseriouswarningevent_inline"
+<div class="api-row" id="iflyzonemanager_flyingsafetywarninginformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flyingsafetywarninginformation_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html" data-class-name="FlySafeWarningInformation"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlySafeWarningInformation <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FlySafeWarningInformation</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Fly safety warning information.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flysafeseriouswarningevent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafeseriouswarningevent_inline">FlySafeSeriousWarningEvent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafeseriouswarningevent_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>FlySafeSeriousWarningEvent</h6></div>
 </blockquote>
@@ -951,7 +1104,7 @@ After the push is successful, you can call <code><a href="../../Components/IFlyZ
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_innoflyzone_inline"></a>IN_NO_FLY_ZONE</td><td><font color="#666">The aircraft is in the no-fly zone. After the countdown is over, it will force an automatic drop. You will not be able to control the throttle, but you can adjust the horizontal direction to avoid obstacles.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_inheightlimitzone_inline"></a>IN_LIMIT_HEIGHT_AREA</td><td><font color="#666">The aircraft is in the height limit zone. After the countdown is over, it will automatically drop to the limit height, you will not be able to control the throttle, but you can adjust the horizontal direction to avoid obstacles.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_inauthorizationzonewithoutunlocking_inline"></a>IN_AUTHORIZATION_ZONE_WITHOUT_UNLOCKING</td><td><font color="#666">The aircraft is in the authorized area.  After the countdown is over, it will automatically drop to the limit height, you will not be able to control the throttle, but you can adjust the horizontal direction to avoid obstacles.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafeseriouswarningevent_havethreeminwillapplytfrs_inline"></a>HAVE_THREE_MIN_WILL_APPLY_TFRS</td><td><font color="#666">Three minutes later, a temporary restricted flight zone will take effect nearby, please pay attention to fly safety.</td></tr></table></html>
 <h5 id="Class-Members-4">Class Members:</h5>
 </div>
-<div class="api-row" id="iflyzonemanager_flyingsafetyseriouswarninginformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a></div></div><div class="api-row" id="iflyzonemanager_flysafereturntohomeevent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafereturntohomeevent_inline">FlySafeReturnToHomeEvent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafereturntohomeevent_inline"
+<div class="api-row" id="iflyzonemanager_flyingsafetyseriouswarninginformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flyingsafetyseriouswarninginformation_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html" data-class-name="FlySafeSeriousWarningInformation"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlySafeSeriousWarningInformation <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FlySafeSeriousWarningInformation</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Fly safety serious warning information.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flysafereturntohomeevent"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafereturntohomeevent_inline">FlySafeReturnToHomeEvent</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafereturntohomeevent_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>FlySafeReturnToHomeEvent</h6></div>
 </blockquote>
@@ -963,7 +1116,7 @@ After the push is successful, you can call <code><a href="../../Components/IFlyZ
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafereturntohomeevent_nearnoflyzone_inline"></a>NEAR_NO_FLY_ZONE</td><td><font color="#666">Approaching a No-Fly Zone. Return to home may be affected. Fly with caution.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_flysafereturntohomeevent_crossnoflyzone_inline"></a>CROSS_NO_FLY_ZONE</td><td><font color="#666">Current Return to home route will pass a No-Fly zone. Pay attention to the aircraft's position to avoid Return to home failure.</td></tr></table></html>
 <h5 id="Class-Members-5">Class Members:</h5>
 </div>
-<div class="api-row" id="iflyzonemanager_flysafereturntohomeinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a></div></div><div class="api-row" id="iflyzonemanager_flysafelicensetype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafelicensetype_inline">FlySafeLicenseType</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafelicensetype_inline"
+<div class="api-row" id="iflyzonemanager_flysafereturntohomeinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flysafereturntohomeinformation_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html" data-class-name="FlySafeReturnToHomeInformation"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlySafeReturnToHomeInformation <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FlySafeReturnToHomeInformation</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Fly safety return to home information.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flysafelicensetype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafelicensetype_inline">FlySafeLicenseType</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafelicensetype_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>FlySafeLicenseType</h6></div>
 </blockquote>
@@ -1023,7 +1176,7 @@ After the push is successful, you can call <code><a href="../../Components/IFlyZ
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_multipolygonflyzoneshape_cylinder_inline"></a>CYLINDER</td><td><font color="#666">Cylinder.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_multipolygonflyzoneshape_polygon_inline"></a>POLYGON</td><td><font color="#666">Polygon.</td></tr></table></html>
 <h5 id="Class-Members-10">Class Members:</h5>
 </div>
-<div class="api-row" id="iflyzonemanager_multipolygonflyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a></div></div><div class="api-row" id="iflyzonemanager_flyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a></div></div><div class="api-row" id="iflyzonemanager_flyzonelicenseinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a></div></div><div class="api-row" id="iflyzonemanager_ridunlocktype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_ridunlocktype_inline">RidUnlockType</a></div></div><div class="inline-doc" id="iflyzonemanager_ridunlocktype_inline"
+<div class="api-row" id="iflyzonemanager_multipolygonflyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_multipolygonflyzoneinformation_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html" data-class-name="MultiPolygonFlyZoneInformation"><blockquote><div class="article"><h6><font color="#AAA">class </font>MultiPolygonFlyZoneInformation <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MultiPolygonFlyZoneInformation</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Polygon restricted fly zone information.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flyzoneinformation"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flyzoneinformation_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html" data-class-name="FlyZoneInformation"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlyZoneInformation <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">FlyZoneInformation</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Restricted fl zone information class.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flyzonelicenseinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flyzonelicenseinfo_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html" data-class-name="FlyZoneLicenseInfo"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlyZoneLicenseInfo <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FlyZoneLicenseInfo</span> implements <span class="title class_">KeepProguard</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Restricted fly zone licenses class.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_ridunlocktype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_ridunlocktype_inline">RidUnlockType</a></div></div><div class="inline-doc" id="iflyzonemanager_ridunlocktype_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>RidUnlockType</h6></div>
 </blockquote>
@@ -1035,7 +1188,7 @@ After the push is successful, you can call <code><a href="../../Components/IFlyZ
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_ridunlocktype_european_inline"></a>EUROPEAN</td><td><font color="#666">European.</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iflyzonemanager_ridunlocktype_china_inline"></a>CHINA</td><td><font color="#666">China.</td></tr></table></html>
 <h5 id="Class-Members-11">Class Members:</h5>
 </div>
-<div class="api-row" id="iflyzonemanager_flysafenotificationlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a></div></div><div class="api-row" id="iflyzonemanager_flysafedatabaselistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a></div></div><div class="api-row" id="iflyzonemanager_flysafedatabaseinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a></div></div><div class="api-row" id="iflyzonemanager_flysafedatabaseupgrademode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafedatabaseupgrademode_inline">FlySafeDatabaseUpgradeMode</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafedatabaseupgrademode_inline"
+<div class="api-row" id="iflyzonemanager_flysafenotificationlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flysafenotificationlistener_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html" data-class-name="FlySafeNotificationListener"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlySafeNotificationListener <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">FlySafeNotificationListener</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Fly safety notification listener.</font></p><p><code><i>MSDK 5.3.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flysafedatabaselistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flysafedatabaselistener_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html" data-class-name="FlySafeDatabaseListener"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlySafeDatabaseListener <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">FlySafeDatabaseListener</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Fly safety database listener.</font></p><p><code><i>MSDK 5.8.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flysafedatabaseinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iflyzonemanager_flysafedatabaseinfo_inline" data-class-href="../../Components/IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html" data-class-name="FlySafeDatabaseInfo"><blockquote><div class="article"><h6><font color="#AAA">class </font>FlySafeDatabaseInfo <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FlySafeDatabaseInfo</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">Fly safety database information class.</font></p><p><code><i>MSDK 5.8.0开始支持</i></code></p></div><div class="api-row" id="iflyzonemanager_flysafedatabaseupgrademode"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iflyzonemanager_flysafedatabaseupgrademode_inline">FlySafeDatabaseUpgradeMode</a></div></div><div class="inline-doc" id="iflyzonemanager_flysafedatabaseupgrademode_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>FlySafeDatabaseUpgradeMode</h6></div>
 </blockquote>
@@ -1074,27 +1227,33 @@ After the push is successful, you can call <code><a href="../../Components/IFlyZ
 
         </div>
       </div>
+      <div class="site-toc">
+        <div class="site-toc-inner">
+          <div class="site-toc-title">On this page</div>
+          <ul class="site-toc-list"></ul>
+        </div>
+      </div>
     </div>
     <div id="search-modal" class="search-modal modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header"><a href="javascript:;" @click="closeSearch" class="btn-close">×</a>
-            <h2 class="title">Search Mobile SDK Document
+            <h2 class="title">搜索 Mobile SDK 文档
             </h2>
             <input type="text" v-model="searchInput" @keydown.enter="search">
           </div>
           <div class="modal-body">
-            <p v-show="!!searchCount" class="search-count"><span v-cloak>{{searchCount}}</span>&nbsp;Results
+            <p v-show="!!searchCount" class="search-count"><span v-cloak>{{searchCount}}</span>&nbsp;搜索结果
             </p>
             <ul v-show="!!searchCount" class="search-result">
               <li v-for="item in searchResult"><a v-bind:href="item.url | docUrl">
                   <h3 class="title">{{{(item.highlights && item.highlights.title) || item.title}}}</h3>
                   <p class="content">{{{(item.highlights && item.highlights.content[0]) || item.title}}}</p></a></li>
             </ul>
-            <div v-show="showLoadMore" class="text-center"><a href="javascript:;" @click="loadMoreSearch" class="btn-learn-more">Load More</a></div>
-            <div v-show="searchLoading" class="text-center">Loading...
+            <div v-show="showLoadMore" class="text-center"><a href="javascript:;" @click="loadMoreSearch" class="btn-learn-more">加载更多</a></div>
+            <div v-show="searchLoading" class="text-center">加载中...
             </div>
-            <div v-show="!searchCount &amp;&amp; !searchLoading" class="text-center">Not Found
+            <div v-show="!searchCount &amp;&amp; !searchLoading" class="text-center">未找到结果
             </div>
           </div>
         </div>

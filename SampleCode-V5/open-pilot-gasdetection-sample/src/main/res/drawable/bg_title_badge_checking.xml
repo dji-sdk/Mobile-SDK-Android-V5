@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 标题栏徽章：检测中（浅灰中性底），沿用 open-pilot-plugin-sample 未注册徽章的中性档 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/title_badge_neutral_bg" />
+    <stroke
+        android:width="@dimen/divider_height"
+        android:color="@color/title_badge_neutral_border" />
+    <corners android:radius="@dimen/title_badge_corner" />
+</shape>

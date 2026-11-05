@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pilot 插件合约文案：资源名由 open-pilot-client 约定，不可修改 -->
+    <string name="dji_open_pilot_plugin_name">Flight Task Management</string>
+    <string name="dji_open_pilot_plugin_description">Pilot plugin demo for flight task dispatch, route execution, and data synchronization</string>
+    <string name="dji_open_pilot_plugin_developer">DJI Inc.</string>
+
+    <!-- PluginActivity -->
+    <string name="tab_job">Tasks</string>
+    <string name="tab_asset">Assets</string>
+    <string name="tab_transfer">Network Transfer</string>
+    <string name="return_to_pilot">Return to Pilot</string>
+    <string name="conn_connected">Connected</string>
+    <string name="conn_disconnected">Disconnected</string>
+    <string name="conn_incompatible">Incompatible version</string>
+    <string name="pilot_checking">Pilot checking</string>
+    <string name="pilot_connected">Pilot connected</string>
+    <string name="pilot_disconnected">Pilot offline</string>
+    <string name="pilot_incompatible">Pilot incompatible</string>
+    <string name="backend_checking">Server checking</string>
+    <string name="backend_connected">Server connected</string>
+    <string name="backend_unavailable">Server unavailable</string>
+    <string name="conn_uninitialized">Uninitialized</string>
+
+    <!-- 悬浮窗 -->
+    <string name="fw_title">Task Management</string>
+    <string name="fw_idle">No tasks</string>
+    <string name="fw_job_position">Task %1$d/%2$d</string>
+    <string name="fw_job_deadline">Deadline: %1$s</string>
+    <string name="fw_btn_previous">Previous</string>
+    <string name="fw_btn_next">Next</string>
+    <string name="fw_btn_confirm">Confirm Task</string>
+    <string name="fw_btn_reject">Reject Task</string>
+    <string name="fw_btn_task_detail">View Task Details</string>
+    <string name="fw_preparing">Flight Preparation</string>
+    <string name="fw_start_hint">Starting execution will upload the route and launch the wayline mission</string>
+    <string name="fw_ready_to_start">Ready to start</string>
+    <string name="fw_uploading_wayline">Uploading route</string>
+    <string name="fw_btn_start_execution">Start Execution</string>
+    <string name="fw_executing">Wayline in progress</string>
+    <string name="fw_route_status_value">Wayline status: %1$s</string>
+    <string name="fw_wayline_executing">Executing</string>
+    <string name="fw_wayline_paused">Paused</string>
+    <string name="fw_current_waypoint">Waypoint: %1$d/%2$d</string>
+    <string name="fw_photos_captured">Captured: %1$d</string>
+    <string name="fw_photos_uploaded">Uploaded: %1$d</string>
+    <string name="fw_syncing">Syncing</string>
+    <string name="fw_download_progress">Photos downloaded: %1$d/%2$d</string>
+    <string name="fw_file_progress">Photos uploaded: %1$d/%2$d</string>
+    <string name="fw_byte_progress">Photo data: %1$s/%2$s</string>
+    <string name="fw_btn_retry_photos">Retry Photos</string>
+    <string name="fw_btn_pause_sync">Handle Later</string>
+    <string name="fw_retry_started_toast">Photo pull started</string>
+    <string name="fw_retry_success_toast">Photos pulled and queued for upload</string>
+    <string name="fw_retry_failed_toast">Photo pull failed: %1$s</string>
+    <string name="fw_photos_not_found_toast">Frozen photos are not in the current camera list. Reflight is not required; verify that the files still exist on the camera.</string>
+    <string name="fw_sync_paused_toast">Sync paused. Retry when ready.</string>
+    <string name="fw_failed">Upload failed</string>
+    <string name="fw_execution_failed">Execution failed</string>
+    <string name="fw_route_interrupted">Wayline did not finish. Retry to execute the route again.</string>
+    <string name="fw_failed_count">Failed files: %1$d</string>
+    <string name="fw_upload_failed_message">File synchronization failed</string>
+    <string name="fw_btn_retry">Retry</string>
+    <string name="fw_done">Sync complete</string>
+    <string name="fw_cancelled">Task rejected</string>
+    <string name="fw_done_files">Files: %1$d</string>
+    <string name="fw_done_size">Total size: %1$s</string>
+    <string name="fw_btn_back_jobs">Switch Task</string>
+
+    <!-- Task page -->
+    <string name="task_list_title">Tasks</string>
+    <string name="task_group_current">Current task</string>
+    <string name="task_group_pending">Pending</string>
+    <string name="task_group_completed">Completed</string>
+    <string name="task_info">Task information</string>
+    <string name="task_requirement">Requirements</string>
+    <string name="task_deadline">Deadline</string>
+    <string name="task_id">Task ID</string>
+    <string name="route_status">Route status</string>
+    <string name="route_cloud_status">Cloud route</string>
+    <string name="route_execute_status">Execution</string>
+    <string name="sync_status">Sync status</string>
+    <string name="file_progress">Files</string>
+    <string name="no_transfer">No files to transfer</string>
+    <string name="empty_tasks">No tasks</string>
+
+    <!-- Asset page -->
+    <string name="filter_all">All</string>
+    <string name="filter_photo">Photos</string>
+    <string name="filter_route">Routes</string>
+    <string name="asset_preview">Asset preview</string>
+    <string name="asset_type">Type</string>
+    <string name="asset_size">Size</string>
+    <string name="asset_status">Status</string>
+    <string name="empty_assets">No local files</string>
+    <string name="asset_group_counts">Photos %1$d · Originals %2$d · Uploaded %3$d</string>
+    <string name="asset_continue_finalization">Continue pull and upload</string>
+    <string name="asset_retry_started">Photo pull and upload started</string>
+    <string name="asset_retry_success">Photos pulled and queued for upload</string>
+    <string name="asset_retry_failed">Photo pull and upload failed: %1$s</string>
+
+    <!-- Transfer page -->
+    <string name="current_transfers">Network transfer queue</string>
+    <string name="transfer_progress">Transfer progress</string>
+    <string name="session_info">Session information</string>
+    <string name="session_id">Session ID</string>
+    <string name="parts">Parts</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="remaining">Remaining</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="retry">Retry</string>
+    <string name="empty_transfers">No transfers</string>
+    <string name="status_dispatched">Awaiting acceptance</string>
+    <string name="status_accepted">Ready to execute</string>
+    <string name="status_in_progress">In progress</string>
+    <string name="status_finalizing">Finalizing</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_cancelled">Cancelled</string>
+    <string name="status_queued">Queued</string>
+    <string name="status_uploading">Uploading</string>
+    <string name="status_uploaded">Uploaded</string>
+    <string name="status_failed">Failed</string>
+    <string name="status_paused">Paused</string>
+    <string name="status_pending_download">Pending download</string>
+    <string name="status_downloaded">Downloaded</string>
+    <string name="simulator_title">Flight simulator</string>
+    <string name="simulator_coordinates">Test coordinates\nLatitude: 22.5799591658722\nLongitude: 113.940530488361</string>
+    <string name="simulator_enable">Enable</string>
+    <string name="simulator_disable">Disable</string>
+    <string name="simulator_enabled">Simulator enabled</string>
+    <string name="simulator_disabled">Simulator disabled</string>
+    <string name="simulator_enable_failed">Failed to enable simulator: %1$s</string>
+    <string name="simulator_disable_failed">Failed to disable simulator: %1$s</string>
+    <string name="cancel">Cancel</string>
+</resources>

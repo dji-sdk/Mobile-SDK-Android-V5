@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - Button Case 预览</title>
+    <style>
+        /* 禁用移动端 WebView 默认的点击高亮颜色 */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* 基础重置与 Pilot 暗色主题背景 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: transparent; /* 透明背景，依靠Activity背景 */
+            color: #FFFFFF;
+            margin: 0;
+            padding: 12px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .rv-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+        .rv-divider { height: 1px; background-color: rgba(255, 255, 255, 0.15); margin: 2px 0; }
+
+        /* ====== 水平排布 ====== */
+        .rv-btn-container { 
+            display: flex; 
+            flex-direction: row; 
+            gap: 12px; 
+            align-items: center; 
+        }
+
+        .rv-btn {
+            flex: 1; /* 均分宽度 */
+            display: flex; align-items: center; justify-content: center;
+            height: 32px; border-radius: 4px; font-size: 14px; font-weight: 500;
+            box-sizing: border-box;
+        }
+
+        .rv-btn-filled { background-color: #1A8BFF; color: #FFFFFF; border: none; }
+        .rv-btn-stroke { background-color: transparent; color: #FFFFFF; border: 1px solid #1A8BFF; color: #1A8BFF;} 
+        .rv-btn-text { background-color: transparent; color: #1A8BFF; border: none; font-weight: bold; }
+
+        .rv-tab-group { display: flex; flex-direction: row; width: 100%; }
+        .rv-tab-btn { flex: 1; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; }
+        .rv-tab-active { background-color: #1A8BFF; color: #FFFFFF; border-radius: 4px 0 0 4px; }
+        .rv-tab-inactive { background-color: #FAFAFA33; color: #FFFFFF; border-radius: 0 4px 4px 0; }
+
+        .is-disabled { opacity: 0.4; }
+        
+        .btn-size-l { height: 32px; }
+        .btn-size-m { height: 26px; }
+        .btn-size-s { height: 20px; font-size: 12px; }
+        
+        .btn-shape-square { border-radius: 0; }
+        .btn-shape-rounded { border-radius: 4px; }
+        .btn-shape-pill { border-radius: 24px; }
+        
+        .btn-custom-green { background-color: #00C774; color: #FFFFFF; border: none; }
+        .btn-custom-blue-stroke { background-color: transparent; border: 2px solid #1A8BFF; color: #1A8BFF; }
+        .btn-custom-red-text { background-color: transparent; border: none; color: #FF4D4F; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_basic_btn">基础按钮</div>
+        <div class="rv-btn-container">
+            <div class="rv-btn rv-btn-filled" data-i18n="btn_filled">填充按钮</div>
+            <div class="rv-btn rv-btn-stroke" data-i18n="btn_stroke">描边按钮</div>
+            <div class="rv-btn rv-btn-text" data-i18n="btn_text">文字按钮</div>
+        </div>
+        
+        <div class="rv-divider"></div>
+        
+        <div class="rv-section-title" data-i18n="sec_combo_btn">组合按钮</div>
+        <div class="rv-tab-group">
+            <div class="rv-tab-btn rv-tab-active" data-i18n="btn_primary">主要按钮</div>
+            <div class="rv-tab-btn rv-tab-inactive" data-i18n="btn_secondary">次要按钮</div>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_state">02 组件状态</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_btn_disabled">按钮禁用态</div>
+        <div class="rv-btn-container is-disabled">
+            <div class="rv-btn rv-btn-filled" data-i18n="btn_filled">填充按钮</div>
+            <div class="rv-btn rv-btn-stroke" data-i18n="btn_stroke">描边按钮</div>
+            <div class="rv-btn rv-btn-text" data-i18n="btn_text">文字按钮</div>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_style">03 组件样式</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_btn_size">按钮尺寸</div>
+        <div class="rv-btn-container">
+            <div class="rv-btn rv-btn-filled btn-size-l" data-i18n="btn_size_l">大-32 PX</div>
+            <div class="rv-btn rv-btn-filled btn-size-m" data-i18n="btn_size_m">中-26 PX</div>
+            <div class="rv-btn rv-btn-filled btn-size-s" data-i18n="btn_size_s">小-20 PX</div>
+        </div>
+        
+        <div class="rv-divider"></div>
+        
+        <div class="rv-section-title" data-i18n="sec_btn_shape">按钮形状</div>
+        <div class="rv-btn-container">
+            <div class="rv-btn rv-btn-filled btn-shape-square" data-i18n="btn_shape_square">方形按钮</div>
+            <div class="rv-btn rv-btn-filled btn-shape-rounded" data-i18n="btn_shape_round">圆角矩形按钮</div>
+            <div class="rv-btn rv-btn-filled btn-shape-pill" data-i18n="btn_shape_pill">圆形按钮</div>
+        </div>
+
+        <div class="rv-divider"></div>
+        
+        <!-- 自定义颜色移动到这里 -->
+        <div class="rv-section-title" data-i18n="sec_custom_color">自定义颜色</div> 
+        <div class="rv-btn-container">
+            <div class="rv-btn btn-custom-green btn-shape-rounded" data-i18n="btn_filled">填充按钮</div>
+            <div class="rv-btn btn-custom-blue-stroke btn-shape-rounded" data-i18n="btn_stroke">描边按钮</div>
+            <div class="rv-btn btn-custom-red-text" data-i18n="btn_text">文字按钮</div>
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:        { zh: "01 组件类型", en: "01 Component Type" },
+            card_state:       { zh: "02 组件状态", en: "02 Component State" },
+            card_style:       { zh: "03 组件样式", en: "03 Component Style" },
+            sec_basic_btn:    { zh: "基础按钮",   en: "Basic Buttons" },
+            sec_combo_btn:    { zh: "组合按钮",   en: "Grouped Buttons" },
+            sec_btn_disabled: { zh: "按钮禁用态", en: "Disabled State" },
+            sec_btn_size:     { zh: "按钮尺寸",   en: "Button Size" },
+            sec_btn_shape:    { zh: "按钮形状",   en: "Button Shape" },
+            sec_custom_color: { zh: "自定义颜色", en: "Custom Color" },
+            btn_filled:       { zh: "填充按钮",   en: "Filled" },
+            btn_stroke:       { zh: "描边按钮",   en: "Outlined" },
+            btn_text:         { zh: "文字按钮",   en: "Text" },
+            btn_primary:      { zh: "主要按钮",   en: "Primary" },
+            btn_secondary:    { zh: "次要按钮",   en: "Secondary" },
+            btn_size_l:       { zh: "大-32 PX",   en: "Large-32 PX" },
+            btn_size_m:       { zh: "中-26 PX",   en: "Medium-26 PX" },
+            btn_size_s:       { zh: "小-20 PX",   en: "Small-20 PX" },
+            btn_shape_square: { zh: "方形按钮",       en: "Square" },
+            btn_shape_round:  { zh: "圆角矩形按钮",   en: "Rounded" },
+            btn_shape_pill:   { zh: "圆形按钮",       en: "Pill" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

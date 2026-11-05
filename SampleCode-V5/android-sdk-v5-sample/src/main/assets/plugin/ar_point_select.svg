@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none"
+    version="1.1" width="8" height="8" viewBox="0 0 8 8">
+    <g>
+        <ellipse id="point_normal_bg_2"
+            cx="4" cy="4" rx="4" ry="4"
+            fill="#1FA3F6"
+            fill-opacity="1" />
+    </g>
+    <g>
+        <ellipse id="point_normal_bg_1"
+            cx="4" cy="4" rx="3.75" ry="3.75"
+            fill-opacity="0"
+            stroke-opacity="1" stroke="#FFFFFF" fill="none" stroke-width="0.5" />
+    </g>
+</svg>

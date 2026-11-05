@@ -60,7 +60,6 @@ public abstract class BaseFragment extends Fragment {
             return;
         }
         FragmentTransaction transaction = fm.beginTransaction();
-        // TODO Animation
         transaction.replace(containerViewId, fragment);
         transaction.addToBackStack(fragment.getClass().getSimpleName());
         transaction.commitAllowingStateLoss();
@@ -71,7 +70,6 @@ public abstract class BaseFragment extends Fragment {
             return;
         }
         FragmentTransaction transaction = fm.beginTransaction();
-        // TODO Animation
         transaction.replace(containerViewId, fragment);
         transaction.commitAllowingStateLoss();
     }

@@ -1,5 +1,25 @@
 include ':sample'
 project(':sample').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-sample')
 
+//open-pilot-plugin-sample 插件 APP
+include ':open-pilot-plugin-sample'
+project(':open-pilot-plugin-sample').projectDir = new File(rootProject.projectDir, '../open-pilot-plugin-sample')
+
+//open-pilot-flighttask-sample 飞行任务管理 Demo 插件 APP
+include ':open-pilot-flighttask-sample'
+project(':open-pilot-flighttask-sample').projectDir = new File(rootProject.projectDir, '../open-pilot-flighttask-sample')
+
+//open-pilot-patrol-sample 智能巡检作业 Demo 插件 APP
+include ':open-pilot-patrol-sample'
+project(':open-pilot-patrol-sample').projectDir = new File(rootProject.projectDir, '../open-pilot-patrol-sample')
+
+//open-pilot-gasdetection-sample 气体检测 Demo 插件 APP
+include ':open-pilot-gasdetection-sample'
+project(':open-pilot-gasdetection-sample').projectDir = new File(rootProject.projectDir, '../open-pilot-gasdetection-sample')
+
+// 可复用 Pilot-PSDK 通信库（插件工程内子模块）
+include ':open-pilot-gasdetection-sample:psdk-bridge'
+project(':open-pilot-gasdetection-sample:psdk-bridge').projectDir = new File(rootProject.projectDir, '../open-pilot-gasdetection-sample/psdk-bridge')
+
 include ':uxsdk'// uxsdk模块
 project(':uxsdk').projectDir = new File(rootProject.projectDir, '../android-sdk-v5-uxsdk')

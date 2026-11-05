@@ -1,0 +1,112 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'dji.sample.flighttask'
+    compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+
+    defaultConfig {
+        applicationId "com.dji.sample.flighttask"
+        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "0.1.0"
+        buildConfigField "String", "FLIGHT_TASK_SERVER_URL", "\"${project.findProperty('FLIGHT_TASK_SERVER_URL') ?: ''}\""
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+        manifestPlaceholders = [API_KEY: project.findProperty("FLIGHTTASK_SAMPLE_API_KEY") ?: ""]
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('msdkkeystore.jks')
+            storePassword '123456'
+            keyAlias 'msdkkeystore'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    packagingOptions {
+        // 加固 so 不可 strip
+        doNotStrip "*/*/*.so"
+        // AGP 8 默认 useLegacyPackaging=false 会导致 so 不压缩、apk 体积翻倍，恢复 AGP7 行为
+        jniLibs {
+            useLegacyPackaging true
+        }
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
+
+    dependencies {
+        compileOnly deps.aircraftProvided
+        implementation deps.aircraft
+        runtimeOnly deps.networkImp
+
+        //本地sdk aar依赖编译时，需要手动添加sdk对其他aar的依赖。
+        /** <-----------------sdk 所需--------------------> **/
+        api deps.gson
+        api deps.rx3Android
+        api deps.rx3Kt
+        api deps.documentfile
+        api deps.wpmzSdk
+        runtimeOnly deps.rx2Java
+        api deps.room
+        api deps.room_rxjava
+        api deps.sqlcipher
+        implementation deps.aspectj_rt
+        implementation deps.xcrash
+        implementation deps.wire
+        implementation deps.okio
+        api project(':uxsdk')
+
+        //网路库
+        //runtimeOnly networkImp
+        implementation deps.okhttp3
+
+        /** <-----------------open-pilot-flighttask-sample 所需--------------------> **/
+        // :utils、:open-pilot-base、:open-pilot-client、csdkAircraft 已 embed 进 aircraft aar，不能再重复依赖。
+        implementation deps.appcompat
+        implementation deps.constraintLayout
+        implementation deps.aacCommon
+        implementation deps.aacRuntime
+        implementation deps.fragment
+        implementation deps.lifecycleViewModel
+        implementation deps.lifecycleLiveData
+        implementation deps.material
+        implementation deps.cardview
+    }
+}

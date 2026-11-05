@@ -37,7 +37,7 @@ import dji.v5.manager.mop.PipelineManager;
 import dji.v5.utils.common.BytesUtil;
 import dji.v5.utils.common.DiskUtil;
 import dji.v5.utils.common.LogUtils;
-import dji.v5.ux.core.util.ToastUtils;
+import dji.v5.ux.util.ToastUtils;
 
 public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHolder> {
     private final List<Pair<ComponentIndexType, Pipeline>> data;
@@ -136,7 +136,6 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
         private final TextView disconnectTv;
         private final TextView filenameTv;
         private final Switch autoDownloadSwitch;
-
         HandlerThread uploadThread;
         HandlerThread downloadThread;
         Handler uploadHandler;
@@ -161,6 +160,8 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
 
         private int uploadSuccessCount;
         private int uploadCount;
+        private final long DOWNLOAD_TIMEOUT_MS = 5 * 60 * 1000L;
+        private final int MAX_OUTER_LOOPS = 228;
 
         private String uploadFileName = "mopSample.log";
         private final OnEventListener listener = new OnEventListener() {
@@ -201,6 +202,10 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                 if (id == R.id.tv_upload) {
                     showDialog(itemView.getContext(), pipeline);
                 } else if (id == R.id.tv_download) {
+                    if (downloadThread == null || !downloadThread.isAlive()) {
+                        LogUtils.i(tag, "Download thread not available, reinitializing");
+                        return;
+                    }
                     downloadHandler.post(() -> {
                         resetDownInfo();
                         downloadFile(pipeline, filenameTv.getText().toString());
@@ -316,15 +321,14 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
             if (pipeline == null) {
                 return;
             }
-
             if (downloading) {
                 toast("downloading");
                 return;
             }
             downloading = true;
             long time = System.currentTimeMillis();
+            int outerLoopCount = 0;
 
-            // 获取文件信息
             MOPCmdHelper.FileInfo fileInfo = MOPCmdHelper.sendDownloadFileReq(pipeline, filename, listener);
             if (fileInfo == null || !fileInfo.isExist()) {
                 LogUtils.e(tag, "downloadFile fail", "/MOP");
@@ -334,7 +338,6 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
             downloadFileInfoLog = fileInfo.toString();
             updateDownloadUI();
 
-            RandomAccessFile stream = null;
             try {
                 LogUtils.i(tag, " fileInfo=" + fileInfo);
                 File file = DiskUtil.getDiskCacheDir(itemView.getContext(), fileInfo.getFilename());
@@ -342,108 +345,139 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
                     file.delete();
                 }
                 file.createNewFile();
-                stream = new RandomAccessFile(file, "rw");
-            } catch (IOException e) {
-                LogUtils.e(tag, e.getMessage());
-            }
 
-            while (true) {
-                // 开始读取文件数据
-                byte[] headBuff = new byte[MOPCmdHelper.PACK_HEADER_SIZE];
-                DataResult readData = pipeline.readData(headBuff);
-                if (readData.getError() != null && readData.getError().errorCode().equals(DJIPipeLineError.CLOSING)) {
-                    LogUtils.e(tag, "Pipeline is closing,finish down");
-                    return;
-                }
-                if (readData.getLength() < MOPCmdHelper.PACK_HEADER_SIZE) {
-                    LogUtils.e(tag, "readData.getLength()=" + readData.getLength() + " <8,jump over!result=" + readData);
-                    continue;
-                }
-                // 这个包带有的文件字节
-                MOPCmdHelper.FileTransResult result = MOPCmdHelper.parseFileDataCmd(headBuff);
-                if (result == null) {
-                    LogUtils.e(tag, "FileTransResult=null ,finish down");
-                    downloading = false;
-                    return;
-                }
-                if (result.isSuccess()) {
-                    int length = result.getLength();
-                    int sum = 0;
-                    int readLength = length;
-                    while (sum < length) {
-                        byte[] dataBuff = new byte[readLength];
-                        DataResult dataResult = pipeline.readData(dataBuff);
-                        int len = dataResult.getLength();
-                        if (len > 0) {
-                            downloadPackCount++;
-                            downloadSize += len;
-                            byte[] subArray = BytesUtil.subArray(dataBuff, 0, 3);
-                            sum += len;
-                            readLength -= len;
-                            String tmp = BytesUtil.toHexStringLowercase(subArray);
-                            LogUtils.i(tag, "pack seq:" + downloadPackCount + ", data:" + tmp + ", length:" + len);
-                            LogUtils.i(tag, filename + " download : " + sum);
-                            downloadLogTv.post(() -> {
-                                downloadProgress = String.format("have downloadPack = %d, downloadSize:%d/%d, useTime:%d(ms)", downloadPackCount,
-                                        downloadSize, fileInfo.getFileLength(), System.currentTimeMillis() - time);
-                                updateDownloadUI();
-                            });
-                            try {
-                                if (stream != null) {
-                                    stream.write(dataBuff, 0, len);
-                                }
-                            } catch (IOException e) {
-                                LogUtils.e(tag, e.getMessage());
-                            }
-                        } else if (dataResult.getError() != null && dataResult.getError().errorCode().equals(DJIPipeLineError.CLOSING)) {
-                            LogUtils.e(tag, "Pipeline is closing,finish down");
+                try (RandomAccessFile stream = new RandomAccessFile(file, "rw")) {
+                    int retry_count_out = 0;
+                    while (true) {
+                        if(++retry_count_out > 5) {
+                            LogUtils.e(tag, "Max retries reached (" + retry_count_out + "), finish down");
+                            downloading = false;
                             return;
                         }
-                    }
-                } else {
-                    // 解析出错位置
-                    int position = MOPCmdHelper.parseFileFailIndex(pipeline);
-                    // ack
-                    MOPCmdHelper.sendTransFileFailAck(pipeline, position);
-                    // 确认是否能接着传
-                    if (MOPCmdHelper.parseCommonAck(pipeline)) {
-                        try {
-                            if (stream != null) {
-                                stream.seek(position);
-                            }
-                        } catch (IOException e) {
-                            LogUtils.e(tag, e.getMessage());
+                        if (System.currentTimeMillis() - time > DOWNLOAD_TIMEOUT_MS) {
+                            LogUtils.e(tag, "Download timeout after " + DOWNLOAD_TIMEOUT_MS + "ms");
+                            downloading = false;
+                            return;
                         }
-                    } else {
-                        try {
-                            if (stream != null) {
-                                stream.close();
-                            }
-                        } catch (IOException e) {
-                            LogUtils.e(tag, e.getMessage());
-                        }
-                        downloadLogTv.post(() -> downloadLogTv.setText("transfer failure"));
-                        downloading = false;
-                        return;
-                    }
 
-                }
-                if (MOPCmdHelper.isFileEnd(headBuff)) {
-                    LogUtils.i(tag, "Download success ,updateDownloadUI");
-                    downloadResult = "Download success";
-                    updateDownloadUI();
-                    break;
-                }
-            }
-            try {
-                if (stream != null) {
-                    stream.close();
+                        if (++outerLoopCount > MAX_OUTER_LOOPS) {
+                            LogUtils.e(tag, "Too many outer loops: " + outerLoopCount);
+                            downloading = false;
+                            return;
+                        }
+
+                        if (Thread.currentThread().isInterrupted()) {
+                            LogUtils.i(tag, "Download thread interrupted");
+                            downloading = false;
+                            return;
+                        }
+
+                        byte[] headBuff = new byte[MOPCmdHelper.PACK_HEADER_SIZE];
+                        DataResult readData = pipeline.readData(headBuff);
+                        if (readData.getError() != null && readData.getError().errorCode().equals(DJIPipeLineError.CLOSING)) {
+                            LogUtils.e(tag, "Pipeline is closing,finish down");
+                            downloading = false;
+                            return;
+                        }
+                        if (readData.getLength() < MOPCmdHelper.PACK_HEADER_SIZE) {
+                            LogUtils.e(tag, "readData.getLength()=" + readData.getLength() + " <8,jump over!result=" + readData);
+                            continue;
+                        }
+                        MOPCmdHelper.FileTransResult result = MOPCmdHelper.parseFileDataCmd(headBuff);
+                        if (result == null) {
+                            LogUtils.e(tag, "FileTransResult=null ,finish down");
+                            downloading = false;
+                            return;
+                        }
+                        if (result.isSuccess()) {
+                            int length = result.getLength();
+                            int sum = 0;
+                            int readLength = length;
+                            int retry_count = 0;
+                            while (sum < length) {
+                                if (Thread.currentThread().isInterrupted()) {
+                                    LogUtils.i(tag, "Inner loop thread interrupted");
+                                    downloading = false;
+                                    return;
+                                }
+
+                                byte[] dataBuff = new byte[readLength];
+                                DataResult dataResult = pipeline.readData(dataBuff);
+                                int len = dataResult.getLength();
+                                if (len > 0) {
+                                    retry_count = 0;
+                                    downloadPackCount++;
+                                    downloadSize += len;
+                                    byte[] subArray = BytesUtil.subArray(dataBuff, 0, Math.min(3, len));
+                                    sum += len;
+                                    readLength -= len;
+                                    String tmp = BytesUtil.toHexStringLowercase(subArray);
+                                    LogUtils.i(tag, "pack seq:" + downloadPackCount + ", data:" + tmp + ", length:" + len);
+                                    LogUtils.i(tag, filename + " download : " + sum);
+
+                                    if (downloadLogTv != null) {
+                                        downloadLogTv.post(() -> {
+                                            downloadProgress = String.format("have downloadPack = %d, downloadSize:%d/%d, useTime:%d(ms)", downloadPackCount,
+                                                    downloadSize, fileInfo.getFileLength(), System.currentTimeMillis() - time);
+                                            updateDownloadUI();
+                                        });
+                                    }
+                                    stream.write(dataBuff, 0, len);
+                                } else {
+                                    if (dataResult.getError() != null && dataResult.getError().errorCode().equals(DJIPipeLineError.CLOSING)) {
+                                        LogUtils.e(tag, "Pipeline is closing, finish down");
+                                        downloading = false;
+                                        return;
+                                    }
+                                    LogUtils.i(tag, "reTry :" + retry_count);
+                                    retry_count++;
+                                    if (retry_count >= 6) {
+                                        LogUtils.e(tag, "Max retries reached (" + retry_count + "), finish down");
+                                        downloading = false;
+                                        return;
+                                    }
+                                    try {
+                                        Thread.sleep(30);
+                                    } catch (InterruptedException e) {
+                                        Thread.currentThread().interrupt();
+                                        LogUtils.e(tag, "Thread interrupted during retry delay");
+                                        downloading = false;
+                                        return;
+                                    }
+                                }
+                            }
+                        } else {
+                            // 解析出错位置
+                            int position = MOPCmdHelper.parseFileFailIndex(pipeline);
+                            // ack
+                            MOPCmdHelper.sendTransFileFailAck(pipeline, position);
+                            // 确认是否能接着传
+                            if (MOPCmdHelper.parseCommonAck(pipeline)) {
+                                stream.seek(position);
+                            } else {
+                                if (downloadLogTv != null) {
+                                    downloadLogTv.post(() -> {
+                                        downloadLogTv.setText("transfer failure");
+                                    });
+                                }
+                                downloading = false;
+                                return;
+                            }
+                        }
+                        if (MOPCmdHelper.isFileEnd(headBuff)) {
+                            LogUtils.i(tag, "Download success ,updateDownloadUI");
+                            downloadResult = "Download success";
+                            updateDownloadUI();
+                            break;
+                        }
+                    }
                 }
             } catch (IOException e) {
-                LogUtils.e(tag, e.getMessage());
+                LogUtils.e(tag, "File operation error: " + e.getMessage());
+                downloading = false;
+                return;
             }
             downloading = false;
-
             boolean result = verifyMd5(fileInfo, DiskUtil.getDiskCacheDir(itemView.getContext(), fileInfo.getFilename()));
             downloadResult = "verify md5 :" + result;
             downloadCount++;
@@ -455,7 +489,11 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
             }
             updateDownloadUI();
             if (autoDownloadSwitch.isChecked()) {
-                downloadTv.postDelayed(() -> downloadTv.performClick(), 500);
+                if (downloadTv != null) {
+                    downloadTv.postDelayed(() -> {
+                        downloadTv.performClick();
+                    }, 500);
+                }
             }
         }
 
@@ -463,7 +501,7 @@ public class PipelineAdapter extends RecyclerView.Adapter<PipelineAdapter.ViewHo
             String md5 = BytesUtil.toHexStringLowercase(fileInfo.getMd5());
             String md5_1 = BytesUtil.toHexStringLowercase(MOPCmdHelper.getMD5(file));
             String log = String.format("MOPCmdHelper.FileInfo_md5: %s, file_md5:%s", md5, md5_1);
-            LogUtils.e("PipelineAdapter", log, "/MOP");
+            LogUtils.i("PipelineAdapter", log, "/MOP");
             return md5.equals(md5_1);
         }
 

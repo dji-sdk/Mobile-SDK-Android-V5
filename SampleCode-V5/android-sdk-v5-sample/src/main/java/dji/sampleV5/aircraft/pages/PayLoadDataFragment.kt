@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import dji.sampleV5.aircraft.databinding.FragPayloadDataPageBinding
 import dji.sampleV5.aircraft.models.PayLoadDataVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.manager.aircraft.payload.PayloadIndexType
 import dji.v5.utils.common.LogUtils
 

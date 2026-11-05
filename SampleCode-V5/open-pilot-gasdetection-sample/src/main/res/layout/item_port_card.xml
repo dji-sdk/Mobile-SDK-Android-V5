@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    单个载荷端口卡：默认只给现场最关心的三件事（端口与连接状态、产品名、最近错误），
+    固件 / 功能开关 / 收帧解码计数收进「详情」折叠，避免两个端口就占满一屏。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/card_gap"
+    android:background="@drawable/bg_card"
+    android:orientation="vertical"
+    android:padding="@dimen/card_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvPortName"
+            style="@style/CardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvPortState"
+            style="@style/LabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvPortProduct"
+        style="@style/LabelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_gap" />
+
+    <!-- 最近错误：无错误时整行隐藏，不占高度 -->
+    <TextView
+        android:id="@+id/tvPortLastError"
+        style="@style/CaptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_gap"
+        android:textColor="@color/status_error"
+        android:visibility="gone" />
+
+    <!-- 折叠入口：文字表达状态，热区 48dp -->
+    <TextView
+        android:id="@+id/tvPortDetailsToggle"
+        style="@style/LabelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/row_touch_min_height"
+        android:text="@string/gas_device_details"
+        android:textColor="@color/brand_blue" />
+
+    <LinearLayout
+        android:id="@+id/llPortDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvPortFirmware"
+            style="@style/LabelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvPortFeature"
+            style="@style/LabelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvPortCounts"
+            style="@style/CaptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/field_gap" />
+    </LinearLayout>
+
+</LinearLayout>

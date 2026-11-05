@@ -16,8 +16,8 @@ import dji.sampleV5.aircraft.models.BaseMainActivityVm
 import dji.sampleV5.aircraft.models.MSDKInfoVm
 import dji.sampleV5.aircraft.models.MSDKManagerVM
 import dji.sampleV5.aircraft.models.globalViewModels
-import dji.sampleV5.aircraft.util.Helper
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.Helper
+import dji.v5.ux.util.ToastUtils
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.PermissionUtil
 import dji.v5.utils.common.StringUtils
@@ -74,8 +74,8 @@ abstract class DJIMainActivity : AppCompatActivity() {
         // 需要校验这种情况，业界标准做法，基本所有app都需要这个
         if (!isTaskRoot && intent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN == intent.action) {
 
-                finish()
-                return
+            finish()
+            return
 
         }
 
@@ -112,7 +112,8 @@ abstract class DJIMainActivity : AppCompatActivity() {
         msdkInfoVm.msdkInfo.observe(this) {
             binding.textViewVersion.text = StringUtils.getResStr(R.string.sdk_version, it.SDKVersion + " " + it.buildVer)
             binding.textViewProductName.text = StringUtils.getResStr(R.string.product_name, it.productType.name)
-            binding.textViewPackageProductCategory.text = StringUtils.getResStr(R.string.package_product_category, it.packageProductCategory)
+//            binding.textViewPackageProductCategory.text = StringUtils.getResStr(R.string.package_product_category, it.packageProductCategory)
+            binding.textViewPluginName.text = StringUtils.getResStr(R.string.sdk_app_name, StringUtils.getResStr(R.string.app_name_aircraft))
             binding.textViewIsDebug.text = StringUtils.getResStr(R.string.is_sdk_debug, it.isDebug)
             binding.textCoreInfo.text = it.coreInfo.toString()
         }
@@ -166,13 +167,16 @@ abstract class DJIMainActivity : AppCompatActivity() {
         msdkManagerVM.lvDBDownloadProgress.observe(this) { resultPair ->
             showToast("Database Download Progress current: ${resultPair.first}, total: ${resultPair.second}")
         }
+
+//        msdkManagerVM.lvServerState.observe(this) { state ->
+//            showToast("Remote Server State: ${state.name}")
+//            binding.textViewRemoteServerState.text = StringUtils.getResStr(R.string.remote_server_status, state)
+//        }
     }
 
     private fun showToast(content: String) {
         ToastUtils.showToast(content)
-
     }
-
 
     fun <T> enableDefaultLayout(cl: Class<T>) {
         enableShowCaseButton(binding.defaultLayoutButton, cl)

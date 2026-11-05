@@ -40,9 +40,8 @@ import androidx.annotation.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import dji.v5.ux.R
-import dji.v5.ux.core.util.ToastUtils
 import dji.v5.ux.core.util.UnitConversionUtil.UnitType
-
+import dji.v5.ux.util.ToastUtils
 
 /**
  * Get the [String] for the given [stringRes].

@@ -9,8 +9,8 @@ import androidx.fragment.app.activityViewModels
 import dji.sampleV5.aircraft.data.QuickTestConfig
 import dji.sampleV5.aircraft.databinding.FragSimulatorPageBinding
 import dji.sampleV5.aircraft.models.SimulatorVM
-import dji.sampleV5.aircraft.util.Helper
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.Helper
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError

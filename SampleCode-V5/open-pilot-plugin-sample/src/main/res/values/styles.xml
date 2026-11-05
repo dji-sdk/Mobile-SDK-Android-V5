@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- 通用胶囊开关样式，供 SwitchCompat 复用 -->
+    <style name="AppSwitch">
+        <item name="track">@drawable/switch_track</item>
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:switchMinWidth">44dp</item>
+        <item name="android:thumbTextPadding">0dp</item>
+        <item name="android:background">@null</item>
+        <!-- 关闭 AppCompat 默认 tint（否则 track/thumb 会被主题染成青绿色） -->
+        <item name="thumbTint">@null</item>
+        <item name="trackTint">@null</item>
+    </style>
+
+    <!-- KeyManager 主操作按钮（蓝底圆角） -->
+    <style name="KeyActionButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_key_action_btn</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingHorizontal">4dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <!-- KeyManager 次要按钮（白底蓝描边圆角） -->
+    <style name="KeyActionButtonOutline" parent="KeyActionButton">
+        <item name="android:background">@drawable/bg_key_action_btn_outline</item>
+        <item name="android:textColor">@color/uxsdk_blue_2</item>
+    </style>
+
+    <!-- Antd 风格 Spinner 下拉框弹窗控制 -->
+    <style name="AntdSpinnerTheme" parent="ThemeOverlay.AppCompat.Light">
+        <!-- 将下拉列表的样式代理到自定义的 AntdSpinnerListViewStyle -->
+        <item name="dropDownListViewStyle">@style/AntdSpinnerListViewStyle</item>
+    </style>
+
+    <!-- 解决重叠问题：给 PopupWindow 单独设置 overlapAnchor -->
+    <style name="AntdSpinnerPopupTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="overlapAnchor">false</item>
+        <item name="android:overlapAnchor">false</item>
+    </style>
+
+    <style name="AntdSpinnerListViewStyle" parent="Widget.AppCompat.ListView.DropDown">
+        <!-- 滚动条悬浮于内容之上，不挤占 padding -->
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <!-- 滚动条粗细 -->
+        <item name="android:scrollbarSize">4dp</item>
+        <!-- 优雅的半透明小圆角滑块 -->
+        <item name="android:scrollbarThumbVertical">@drawable/bg_scrollbar_thumb</item>
+        <!-- 去除轨道背景 -->
+        <item name="android:scrollbarTrackVertical">@null</item>
+        <!-- 停止滚动后自动淡出 -->
+        <item name="android:fadeScrollbars">true</item>
+    </style>
+
+</resources>

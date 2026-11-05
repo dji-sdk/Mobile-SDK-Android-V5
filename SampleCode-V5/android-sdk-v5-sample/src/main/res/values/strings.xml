@@ -28,7 +28,45 @@ More refer to the release notes." </string>
     <string name="item_multi_video_decoding_title">Multi-Video Decoding (VideoStreamManager - Deprecated)</string>
     <string name="item_multi_video_decoding_description">Demonstrate how to use the Multi-Video Decoding function</string>
 
-    <string name="item_multi_camera_stream_title">Multi-Video Decoding (CameraStreamManager - New)</string>
+    <string name="item_ar_projection_title">AR Projection</string>
+    <string name="item_ar_projection_description">Demonstrate how to use the AR projection feature</string>
+
+    <!-- AR Projection Page Buttons -->
+    <string name="btn_ar_query_file_list">Query File List</string>
+    <string name="btn_ar_prepare_res">Prepare Image And Config Res</string>
+    <string name="btn_ar_jump_to_home">Jump to Pilot Home</string>
+    <string name="btn_ar_jump_to_map">Jump to Pilot Map</string>
+    <string name="btn_ar_init_ar_config_list">Initialize AR Configs</string>
+    <string name="btn_ar_query_ar_config">Query AR Config</string>
+    <string name="btn_ar_upload_ar_config">Upload AR Point Config</string>
+    <string name="btn_ar_query_ar_info">Query AR Point</string>
+    <string name="btn_ar_upload_ar_info">Upload AR Point</string>
+    <string name="btn_ar_update_ar_info">Update AR Point</string>
+     <string name="btn_ar_delete_ar_info">Delete AR Point</string>
+    <!-- AR Line -->
+    <string name="btn_ar_upload_ar_line">Upload AR Line</string>
+    <string name="btn_ar_query_ar_line">Query AR Line</string>
+    <string name="btn_ar_update_ar_line">Update AR Line</string>
+    <string name="btn_ar_delete_ar_line">Delete AR Line</string>
+    <!-- AR Polygon -->
+    <string name="btn_ar_upload_ar_polygon">Upload AR Polygon</string>
+    <string name="btn_ar_query_ar_polygon">Query AR Polygon</string>
+    <string name="btn_ar_update_ar_polygon">Update AR Polygon</string>
+    <string name="btn_ar_delete_ar_polygon">Delete AR Polygon</string>
+    <!-- AR Circle -->
+    <string name="btn_ar_upload_ar_circle">Upload AR Circle</string>
+    <string name="btn_ar_query_ar_circle">Query AR Circle</string>
+    <string name="btn_ar_update_ar_circle">Update AR Circle</string>
+    <string name="btn_ar_delete_ar_circle">Delete AR Circle</string>
+    <!-- AR Projection CheckBox Labels -->
+    <string name="cb_ar_hide_all">Hide All</string>
+    <string name="cb_ar_hide_icon">Hide Icon</string>
+    <string name="cb_ar_hide_text">Hide Text</string>
+
+    <string name="item_remote_control_title">Remote Control</string>
+    <string name="item_remote_control_description">Test switching Pilot main camera view</string>
+
+    <string name="item_multi_camera_stream_title">Multi-Video Decoding (CameraStreamManager)</string>
     <string name="item_multi_camera_stream_description">Demonstrate how to use the Multi-Video Decoding function</string>
 
     <string name="item_waypoint_title">Waypoint</string>
@@ -117,8 +155,10 @@ More refer to the release notes." </string>
     <string name="wsbridge_ip">WSBridge IP</string>
     <string name="sdk_version">Version: %1$s</string>
     <string name="product_name">Product Name: %1$s</string>
+    <string name="sdk_app_name">APP Name: %1$s</string>
     <string name="is_sdk_debug">Is SDK Debug: %1$s</string>
     <string name="registration_status">Registration Status: %1$s</string>
+    <string name="remote_server_status">Remote Server State: %1$s</string>
     <string name="package_product_category">Package Category: %1$s</string>
     <string name="remote_controller">Remote Controller Only</string>
     <string name="unregistered">Unregistered</string>
@@ -155,6 +195,7 @@ More refer to the release notes." </string>
     <string name="title_megaphone">Megaphone</string>
     <string name="megaphone_state">Megaphone State</string>
     <string name="megaphone_control">Megaphone Control</string>
+    <string name="megaphone_warninglight_control">WarningLight Control</string>
     <string name="megaphone_index">Megaphone Index</string>
     <string name="rt_transmission_status">Real-time Transmission Status:</string>
     <string name="btn_tts">TTS</string>
@@ -494,4 +535,145 @@ More refer to the release notes." </string>
     <string name="item_app_silently_upgrade_description">Demonstrate APP Silently Upgrade functions</string>
     <string name="btn_silently_upgrade_package">Set Silently Upgrade Package</string>
     <string name="btn_install_test_app">Install Test App</string>
+
+    <!-- plugin preview -->
+    <string name="item_normal_title">Normal Plugin</string>
+    <string name="item_normal_description">Demonstrate how to use the normal plugin function</string>
+
+    <!-- Open Pilot Plugin -->
+    <string name="dji_open_pilot_plugin_name">Sample 5 DJI Open Pilot Plugin</string>
+    <string name="dji_open_pilot_plugin_description">Sample plugin 5 for demonstrating DJI Open Pilot integration</string>
+    <string name="dji_open_pilot_plugin_developer">DJI Inc.</string>
+
+    <!-- cable_inspection preview -->
+    <string name="item_cable_inspection_title">Cable Inspection</string>
+    <string name="item_cable_inspection_description">Demonstrate how to use the Cable Inspection function</string>
+
+    <!-- frag_normal_plugin_page buttons -->
+    <string name="btn_query_file_list_from_remote">Query File List From Remote</string>
+    <string name="btn_push_file_list_to_remote">Push File List To Remote</string>
+    <string name="btn_prepare_res">Prepare Res</string>
+    <string name="btn_add_map_widget">Add Map Widget</string>
+    <string name="btn_layer_scene_add_layer">[Layer]Create Layers(LayerA+LayerB)</string>
+    <string name="btn_add_layer_a_widgets">[Layer]Batch Add LayerA(Marker+Polygon)</string>
+    <string name="btn_add_layer_b_widgets">[Layer]Batch Add LayerB(Marker+Polyline+Circle)</string>
+    <string name="btn_update_layer_a_batch">[Layer]Batch Update LayerA Positions</string>
+    <string name="btn_toggle_layer_a_visible">[Layer]Toggle LayerA Visible</string>
+    <string name="btn_toggle_layer_b_visible">[Layer]Toggle LayerB Visible</string>
+    <string name="btn_query_all_widgets">[Layer]Query All Widgets</string>
+    <string name="btn_query_layer_a">[Layer]Query LayerA Widgets</string>
+    <string name="btn_clear_layer_a">[Layer]Clear LayerA</string>
+    <string name="btn_remove_layer_a">[Layer]Remove LayerA</string>
+    <string name="btn_add_map_widget_callback">[Layer]Add Single Widget(with cb)</string>
+    <string name="btn_remove_one_layer_a_widget">[Layer]Remove Single Widget(with cb)</string>
+    <string name="btn_remove_layer_a_batch">[Layer]Batch Remove First 2 in LayerA</string>
+    <string name="btn_query_map_element">Query Map Element</string>
+    <string name="btn_init_open_box_sample_view">Init Sample Remote View</string>
+    <string name="btn_init_property_sample_view">P0 Property Sample</string>
+    <string name="btn_init_wrap_content_sample_view">WrapContent Sample</string>
+    <string name="btn_hide_ar_annotations">Hide AR Annotations</string>
+    <string name="btn_add_map_element">Add Map Element</string>
+    <string name="btn_update_map_element">Update Map Element</string>
+    <string name="btn_delete_map_element">Delete Map Element</string>
+    <string name="btn_jump_to_home">Jump Pilot Default</string>
+    <string name="btn_jump_to_map">Jump Pilot Map</string>
+    <string name="btn_jump_to_waypoint_mission_list">Jump Waypoint Mission List</string>
+    <string name="btn_jump_to_album">Jump Pilot Album</string>
+    <string name="btn_jump_to_plugin_marketplace">Jump Plugin Marketplace</string>
+    <string name="btn_move_modeling_file_to_public">Move Modeling File To Public</string>
+    <string name="btn_update_open_drawing_box">Update Open Drawing Box</string>
+    <string name="btn_clear_open_drawing_box">Clear Open Drawing Box</string>
+    <string name="btn_update_open_polygon_drawing">Update Open Polygon Drawing</string>
+    <string name="btn_clear_open_polygon_drawing">Clear Open Polygon Drawing</string>
+    <string name="btn_update_open_text_drawing">Update Open Text Drawing</string>
+    <string name="btn_clear_open_text_drawing">Clear Open Text Drawing</string>
+    <string name="btn_dialog_service_list">Dialog</string>
+    <string name="btn_init_remote_view_property_demo">Init Remote View Property Demo</string>
+    <string name="btn_register_disconnect_landing">Register Disconnect Landing</string>
+    <string name="btn_clear_disconnect_actions">Clear Disconnect Actions</string>
+    <string name="btn_push_screenshot_to_app_log">Push Screenshot to Remote App Log</string>
+
+    <!-- remote view i18n sample -->
+    <string name="remote_sample_output_label">Output: </string>
+    <string name="remote_sample_btn_test">Button Test: </string>
+    <string name="remote_sample_btn_1">Button 1</string>
+    <string name="remote_sample_btn_2">Button 2</string>
+    <string name="remote_sample_switch_test">Switch Test: </string>
+    <string name="remote_sample_switch_desc">Switch</string>
+    <string name="remote_sample_checkbox_test">Checkbox Test: </string>
+    <string name="remote_sample_checkbox_option">Option</string>
+    <string name="remote_sample_edit_text_label">Edit Text: </string>
+    <string name="remote_sample_change_image">Change Image</string>
+    <string name="remote_sample_full_screen">Full Screen</string>
+    <string name="remote_sample_web_test">WebView Test: </string>
+    <string name="remote_sample_load_web">Load Web</string>
+    <string name="remote_sample_spinner_test">Spinner Test: </string>
+    <string name="remote_sample_spinner_opt_1">Option 1</string>
+    <string name="remote_sample_spinner_opt_2">Option 2</string>
+    <string name="remote_sample_spinner_opt_3">Option 3</string>
+    <string name="remote_sample_list_test">List Test: </string>
+    <string name="remote_sample_list_insert">Insert Item</string>
+    <string name="remote_sample_list_remove">Remove Item</string>
+
+    <!-- remote view i18n sample - callback output -->
+    <string name="remote_sample_cb_btn1_clicked">Button 1 clicked</string>
+    <string name="remote_sample_cb_btn2_clicked">Button 2 clicked</string>
+    <string name="remote_sample_cb_switch">Switch: %1$s, type: %2$s</string>
+    <string name="remote_sample_cb_checkbox">CheckBox: %1$s, type: %2$s</string>
+    <string name="remote_sample_cb_edit_text">EditText: %s</string>
+    <string name="remote_sample_cb_web_load">Loading: %s</string>
+    <string name="remote_sample_cb_spinner">Spinner: %1$s (index=%2$s)</string>
+    <string name="remote_sample_cb_image_clicked">ImageView clicked</string>
+    <string name="remote_sample_cb_list_click">List click: position=%1$s, itemId=%2$s</string>
+    <string name="remote_sample_cb_list_inserted">Inserted: New Item #%s at position 0</string>
+    <string name="remote_sample_cb_list_removed">Removed item at position 0</string>
+
+    <!-- MSDKManagerVM -->
+    <string name="msdk_btn_jump_to_msdk">Jump to MSDK Plugin</string>
+
+    <!-- remote sample list items -->
+    <string name="remote_sample_list_item_text">Text Item</string>
+    <string name="remote_sample_list_item_normal_icon">Normal Icon</string>
+    <string name="remote_sample_list_item_clicked_icon">Clicked Icon</string>
+    <string name="remote_sample_list_item_m4e_title">Matrice 4E</string>
+    <string name="remote_sample_list_item_m4e_subtitle">Industrial UAV</string>
+    <string name="remote_sample_list_item_m3m_title">Mavic 3M</string>
+    <string name="remote_sample_list_item_m3m_subtitle">Multispectral UAV</string>
+    <string name="remote_sample_list_item_rc">Remote Controller</string>
+    <string name="remote_sample_list_item_divider">--- Divider ---</string>
+    <string name="remote_sample_list_item_care">DJI Care</string>
+    <string name="remote_sample_list_item_battery_title">Battery</string>
+    <string name="remote_sample_list_item_battery_subtitle">86%</string>
+    <string name="remote_sample_list_new_item">New Item #%s</string>
+
+    <!-- dialog i18n sample -->
+    <string name="dialog_sample_output_label">Callback Result: </string>
+    <string name="dialog_sample_output_placeholder">Result will be shown here</string>
+    <string name="dialog_sample_type_label">Dialog Type: </string>
+    <string name="dialog_sample_btn_alert">Alert Dialog</string>
+    <string name="dialog_sample_btn_confirm">Confirm Dialog</string>
+    <string name="dialog_sample_btn_prompt">Prompt Dialog</string>
+    <string name="dialog_sample_btn_single">Single Choice</string>
+    <string name="dialog_sample_btn_multi">Multi Choice</string>
+    <string name="dialog_alert_title">Pilot Alert</string>
+    <string name="dialog_alert_message">This is a Matrice 4</string>
+    <string name="dialog_confirm_title">Pilot Confirm</string>
+    <string name="dialog_confirm_message">Is this a Matrice 4?</string>
+    <string name="dialog_confirm_btn_no">No</string>
+    <string name="dialog_confirm_btn_yes">Yes</string>
+    <string name="dialog_prompt_title">Pilot Input</string>
+    <string name="dialog_prompt_message">Please enter your device name:</string>
+    <string name="dialog_single_title">Pilot Single Choice</string>
+    <string name="dialog_single_message">Select your favorite DJI product:</string>
+    <string name="dialog_multi_title">Pilot Multi Choice</string>
+    <string name="dialog_multi_message">Select products you have used:</string>
+    <string name="dialog_btn_cancel">Cancel</string>
+    <string name="dialog_btn_confirm">Confirm</string>
+    <string name="dialog_already_exists">Dialog already exists, do not add repeatedly</string>
+    <string name="remote_sample_perf_test">Perf Test</string>
+    <string name="remote_sample_perf_test_stop">Stop Test</string>
+    <string name="remote_sample_perf_test_starting">Perf test starting...</string>
+    <string name="remote_sample_perf_test_running">Testing...\nRound: %d\nElapsed: %dms\nAvg: %sms/op\nSpeed: %sMB/s</string>
+    <string name="remote_sample_perf_test_done">Perf test done!\nTotal rounds: %d\nTotal time: %dms\nTotal R/W: %dMB\nSpeed: %sMB/s</string>
+
 </resources>

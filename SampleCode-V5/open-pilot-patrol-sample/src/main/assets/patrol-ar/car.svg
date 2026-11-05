@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" version="1.1">
+    <g id="patrol_car_normal">
+        <path d="M32 3C16.5 3 4 15.5 4 31c0 12.5 14.5 23.5 28 30 13.5-6.5 28-17.5 28-30C60 15.5 47.5 3 32 3Z" fill="#3B82F6"/>
+        <path d="M15 36v-4.2l4.2-7.3h25.6l4.2 7.3V36h-3.2a4.3 4.3 0 0 0-8.6 0h-11.2a4.3 4.3 0 0 0-8.6 0H15Zm5.6-10.6-2.4 4.2h27.6l-2.4-4.2H20.6Z" fill="#FFFFFF"/>
+        <circle cx="22" cy="36" r="3.6" fill="#FFFFFF"/>
+        <circle cx="42" cy="36" r="3.6" fill="#FFFFFF"/>
+    </g>
+</svg>

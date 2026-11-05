@@ -262,7 +262,6 @@ public class SwitcherCell extends DividerConstraintLayout {
         mSummary.setTextColor(textColor);
         mTitle.setTextColor(textColor);
         mInfoIcon.setAlpha(enabled ? 1f : 0.5f);
-        // HYAPP-10169
         // mDesc.setTextColor(textColor);
         setToggleEnabled(enabled);
         mDisableHintView.setVisibility(enabled ? GONE : VISIBLE);

@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 Latest Version 5.18.0
+# DJI Mobile SDK for Android V5 Latest Version 5.20.1
 
 [中文版](README_CN.md)
 
@@ -32,7 +32,11 @@ Supported Product:
 └── SampleCode-V5
     ├── android-sdk-v5-as
     ├── android-sdk-v5-sample
-    └── android-sdk-v5-uxsdk
+    ├── android-sdk-v5-uxsdk
+    ├── open-pilot-plugin-sample
+    ├── open-pilot-flighttask-sample
+    ├── open-pilot-gasdetection-sample
+    └── open-pilot-patrol-sample
 ```
 
 
@@ -57,6 +61,10 @@ Scenographic Example：
 Sample module:
 
 - sample：Compile aircraft sample App, which depends on uxsdk.
+- plugin sample：Compile aircraft plugin sample App, which depends on uxsdk.
+- flighttask sample：Flight task management demo plugin, with a local Node.js backend and a web console.
+- gasdetection sample：Gas detection demo plugin, with a local Node.js backend.
+- patrol sample：Intelligent patrol demo plugin, with a local Node.js backend.
 
 ## Integration
 
@@ -65,7 +73,7 @@ For further detail on how to integrate the DJI Android SDK into your Android Stu
 
 ## AAR Explanation
 
-> **Notice:** sdkVersion = 5.18.0
+> **Notice:** sdkVersion = 5.20.1
 
 | SDK package | Explanation | How to use|
 | :---------------: | :-----------------:  | :---------------: |

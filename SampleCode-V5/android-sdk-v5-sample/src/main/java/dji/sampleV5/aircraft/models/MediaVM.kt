@@ -1,10 +1,8 @@
 package dji.sampleV5.aircraft.models
 
 import androidx.lifecycle.MutableLiveData
-import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.data.DJIToastResult
 import dji.sdk.keyvalue.key.CameraKey
-import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.key.KeyTools.createKey
 
 import dji.sdk.keyvalue.value.camera.CameraMode
@@ -18,7 +16,7 @@ import dji.v5.manager.KeyManager
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.media.*
 import dji.v5.utils.common.LogUtils
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation
 import dji.sdk.keyvalue.value.common.EmptyMsg
 import dji.v5.common.error.DJICommonError

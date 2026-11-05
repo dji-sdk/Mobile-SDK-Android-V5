@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - EditText Case 预览 (新版结构)</title>
+    <style>
+        /* 禁用移动端 WebView 默认的点击高亮颜色 */
+        * { -webkit-tap-highlight-color: transparent; }
+
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: transparent; color: #FFFFFF; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+        .rv-card { background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+        .rv-divider { height: 1px; background-color: rgba(255, 255, 255, 0.15); margin: 2px 0; }
+
+        .rv-item-container { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+
+        /* ====== 自定义 EditText 样式 ====== */
+        .rv-input {
+            width: 100%;
+            height: 36px; /* 对应 setHeight(36) */
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: none; /* 移除浏览器默认外发光 */
+            background: transparent;
+            border: none;
+            padding: 0 10px;
+            pointer-events: none; /* 彻底屏蔽鼠标和触摸的所有点击、聚焦、滑动等交互事件 */
+            user-select: none; /* 屏蔽文本选中 */
+        }
+
+        /* 解决 placeholder 颜色问题 (对应 GREY_3，相对 GREY_4 稍亮一些的灰色) */
+        .rv-input::placeholder { color: #8C8C8C; }
+
+        /* 文本对齐 */
+        .txt-center { text-align: center; }
+        .txt-left { text-align: left; }
+
+        /* 文本样式 */
+        .txt-white { color: #FFFFFF; } /* 白色默认字 */
+        .txt-blue { color: #1A8BFF; } /* BLUE_DEFAULT */
+        .txt-blue1 { color: #0F59A4; } /* BLUE_1 */
+        .txt-red { color: #E41F29; } /* RED_DEFAULT */
+        .txt-hint-red { color: rgba(213, 73, 65, 0.333); } /* 0x55D54941 (AARRGGBB) -> CSS rgba */
+        .txt-grey { color: rgba(255, 255, 255, 0.333); } /* GREY_55 (0x55FFFFFF) */
+        .txt-grey99 { color: rgba(0, 0, 0, 1); } /* GREY_99 (0x99000000) */
+        .txt-bold { font-weight: bold; }
+        .txt-size-13 { font-size: 13px; } /* 对应 13f */
+
+        /* 背景形状 (ShapeDescriptor) */
+        /* 1. 黑底圆角4f (BLACK_1) */
+        .bg-black-radius {
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-radius: 4px;
+        }
+
+        /* 2. 灰1单像素描边圆角4f */
+        .bg-stroke-grey {
+            border: 1px solid #888888; /* GREY_1 描边 */
+            border-radius: 4px;
+        }
+
+        /* 3. 灰88底圆角4f (GREY_88) */
+        .bg-grey88-radius {
+            background-color: rgba(231, 231, 231, 0.433); /* GREY_88: 0x88E7E7E7 */
+            border-radius: 4px;
+        }
+
+        /* 4. 蓝底2像素描边圆角4f */
+        .bg-stroke-blue-thick {
+            border: 2px solid #1A8BFF; /* BLUE_DEFAULT 2px */
+            border-radius: 4px;
+        }
+
+        /* ====== 禁用状态 ====== */
+        .is-disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Card 01 -->
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_basic_input">基础输入框</div>
+        <div class="rv-item-container">
+            <!-- 填充输入框: 黑底,圆角4f,蓝字,居中 -->
+            <input type="text" class="rv-input bg-black-radius txt-center txt-blue" data-i18n-value="edit_filled" value="填充输入框" readonly="readonly">
+            
+            <!-- 描边输入框: 1dp灰边,圆角4f,居中,白字 -->
+            <input type="text" class="rv-input bg-stroke-grey txt-center txt-white" data-i18n-value="edit_stroke" value="描边输入框" readonly="readonly">
+            
+            <!-- 默认输入框: 无边无底,居中,白字 -->
+            <input type="text" class="rv-input txt-center txt-white" data-i18n-value="edit_default" value="默认输入框" readonly="readonly">
+        </div>
+    </div>
+
+    <!-- Card 02 -->
+    <div class="rv-card-title" data-i18n="card_state">02 组件状态</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_hint_state">提示态</div>
+        <div class="rv-item-container">
+            <!-- 提示态 - 灰色 -->
+            <input type="text" class="rv-input bg-black-radius txt-center txt-grey" data-i18n-value="edit_hint_input" value="请输入内容" readonly="readonly">
+            
+            <!-- 提示态 - 红色 -->
+            <input type="text" class="rv-input bg-black-radius txt-center txt-hint-red" data-i18n-value="edit_hint_input" value="请输入内容" readonly="readonly">
+        </div>
+        
+        <div class="rv-divider"></div>
+
+        <div class="rv-section-title" data-i18n="sec_disabled">禁用态</div>
+        <div class="rv-item-container">
+            <!-- 禁用 - 填充 -->
+            <input type="text" class="rv-input bg-black-radius txt-center txt-blue is-disabled" data-i18n-value="edit_filled" value="填充输入框" readonly="readonly">
+            
+            <!-- 禁用 - 描边 -->
+            <input type="text" class="rv-input bg-stroke-grey txt-center txt-white is-disabled" data-i18n-value="edit_stroke" value="描边输入框" readonly="readonly">
+            
+            <!-- 禁用 - 默认 -->
+            <input type="text" class="rv-input txt-center txt-white is-disabled" data-i18n-value="edit_default" value="默认输入框" readonly="readonly">
+        </div>
+    </div>
+
+    <!-- Card 03 -->
+    <div class="rv-card-title" data-i18n="card_style">03 组件样式</div>
+    <div class="rv-card">
+        <!-- Section: 键盘类型 -->
+        <div class="rv-section-title" data-i18n="sec_keyboard_type">键盘类型</div>
+        <div class="rv-item-container">
+            <input type="text" class="rv-input bg-black-radius txt-center txt-blue" value="012345678910" readonly="readonly">
+            <input type="password" class="rv-input bg-black-radius txt-center txt-blue" value="............" readonly="readonly">
+        </div>
+
+        <div class="rv-divider"></div>
+
+        <!-- Section: 输入限制 -->
+        <div class="rv-section-title" data-i18n="sec_input_limit">输入限制</div>
+        <div class="rv-item-container">
+            <input type="text" class="rv-input bg-black-radius txt-center txt-blue" value="0000 1111 2222 3333" readonly="readonly">
+            <input type="text" class="rv-input bg-black-radius txt-center txt-blue" data-i18n-value="edit_max8" value="最多输入8个字符" readonly="readonly">
+        </div>
+
+        <div class="rv-divider"></div>
+
+        <!-- Section: 文字样式 -->
+        <div class="rv-section-title" data-i18n="sec_text_style">文字样式</div>
+        <div class="rv-item-container">
+            <!-- 修改对齐方式为 CENTER_VERTICAL，HTML里默认上下居中，只需处理左右靠左即可 -->
+            <input type="text" class="rv-input bg-black-radius txt-left txt-blue txt-size-13" data-i18n-value="edit_blue_left" value="蓝字左对齐" readonly="readonly">
+            <input type="text" class="rv-input bg-black-radius txt-center txt-blue txt-bold txt-size-13" data-i18n-value="edit_center_bold" value="居中加粗" readonly="readonly">
+        </div>
+
+        <div class="rv-divider"></div>
+
+        <!-- Section: 自定义背景 -->
+        <div class="rv-section-title" data-i18n="sec_custom_bg">自定义背景</div>
+        <div class="rv-item-container">
+            <!-- 灰底(GREY_88)灰字(GREY_99)居中 -->
+            <input type="text" class="rv-input bg-grey88-radius txt-center txt-grey99" data-i18n-value="edit_filled" value="填充输入框" readonly="readonly">
+            <!-- 蓝边白字居中 -->
+            <input type="text" class="rv-input bg-stroke-blue-thick txt-center txt-white" data-i18n-value="edit_stroke" value="描边输入框" readonly="readonly">
+            <!-- 无底白字居中 -->
+            <input type="text" class="rv-input txt-center txt-white" data-i18n-value="edit_default" value="默认输入框" readonly="readonly">
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:        { zh: "01 组件类型", en: "01 Component Type" },
+            card_state:       { zh: "02 组件状态", en: "02 Component State" },
+            card_style:       { zh: "03 组件样式", en: "03 Component Style" },
+            sec_basic_input:  { zh: "基础输入框", en: "Basic Input" },
+            sec_hint_state:   { zh: "提示态",     en: "Hint State" },
+            sec_disabled:     { zh: "禁用态",     en: "Disabled State" },
+            sec_keyboard_type:{ zh: "键盘类型",   en: "Keyboard Type" },
+            sec_input_limit:  { zh: "输入限制",   en: "Input Restriction" },
+            sec_text_style:   { zh: "文字样式",   en: "Text Style" },
+            sec_custom_bg:    { zh: "自定义背景", en: "Custom Background" },
+            edit_filled:      { zh: "填充输入框", en: "Filled input" },
+            edit_stroke:      { zh: "描边输入框", en: "Outlined input" },
+            edit_default:     { zh: "默认输入框", en: "Default input" },
+            edit_hint_input:  { zh: "请输入内容", en: "Please enter content" },
+            edit_max8:        { zh: "最多输入8个字符", en: "Max 8 characters" },
+            edit_blue_left:   { zh: "蓝字左对齐", en: "Blue text, left-aligned" },
+            edit_center_bold: { zh: "居中加粗",   en: "Centered and bold" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

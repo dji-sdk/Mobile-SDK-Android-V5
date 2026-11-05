@@ -1,9 +1,9 @@
 ext {
     deps = [:]
     //DJI MSDK V5包
-    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.18.0"
-    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.18.0"
-    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.18.0"
+    deps.aircraft = "com.dji:dji-sdk-v5-aircraft:5.20.1"
+    deps.aircraftProvided = "com.dji:dji-sdk-v5-aircraft-provided:5.20.1"
+    deps.networkImp = "com.dji:dji-sdk-v5-networkImp:5.20.1"
 
     //三方依赖库
     deps.gson = 'com.google.code.gson:gson:2.9.1'
@@ -16,12 +16,12 @@ ext {
     deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.14.9'
     deps.leakcanary = 'com.squareup.leakcanary:leakcanary-android:2.14'
     deps.xcrash = 'com.iqiyi.xcrash:xcrash-android-lib:3.1.0'
-    deps.rx2Java = 'io.reactivex.rxjava2:rxjava:2.2.4' // 目前在CSDK升级模块中使用rxjava2
+    deps.rx2Java = "io.reactivex.rxjava2:rxjava:2.2.11" // 目前在CSDK升级模块中使用rxjava2
     deps.maplibreTurf = 'org.maplibre.gl:android-sdk-turf:5.9.1'
     deps.maplibreSdk = 'org.maplibre.gl:android-sdk:10.3.5'
     deps.lottie = 'com.airbnb.android:lottie:3.3.1'//RTK扫描页中使用，用于实现动画效果
     deps.cardview = 'androidx.cardview:cardview:1.0.0'//PopoverView中使用
-    deps.material = 'com.google.android.material:material:1.0.0'//AvoidanceShortcutWidget使用
+    deps.material = 'com.google.android.material:material:1.11.0'//AvoidanceShortcutWidget使用
     deps.lynx = 'com.github.pedrovgs:lynx:1.1.0'// app显示logcat
 
     /*RTK设置页面使用-start*/
@@ -47,6 +47,7 @@ ext {
     deps.constraintLayout = 'androidx.constraintlayout:constraintlayout:2.1.4'
     deps.multidex = 'androidx.multidex:multidex:2.0.1'
     deps.recyclerview = 'androidx.recyclerview:recyclerview:1.1.0'
+    deps.viewpager2 = 'androidx.viewpager2:viewpager2:1.0.0'
     deps.lifecycleJava8 = 'androidx.lifecycle:lifecycle-common-java8:2.3.1'
     deps.lifecycleRuntime = 'androidx.lifecycle:lifecycle-runtime:2.3.1'
     deps.lifecycleViewModel = 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
@@ -63,6 +64,9 @@ ext {
     deps.ktxNavigation = "androidx.navigation:navigation-fragment-ktx:2.5.3"
     deps.ktxNavigationUi = "androidx.navigation:navigation-ui-ktx:2.5.3"
     deps.documentfile = 'androidx.documentfile:documentfile:1.0.1'
+    deps.activity = 'androidx.activity:activity-ktx:1.8.0'
+    deps.lifecycleViewModelKtx = 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    deps.coroutinesAndroid = 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     //解析xml
     deps.dom = 'org.dom4j:dom4j:2.1.1'
 
@@ -76,7 +80,7 @@ ext {
 
     //wpmz 航线文件解析
     //本地依赖验证时将该aar放到主工程目录sdklib 并将sdk中aircraft 的gradle添加为本地依赖方式 api (name:"djisdkwpmz", ext:'aar')
-    deps.wpmzSdk = 'com.dji:wpmzsdk:1.0.5.1'
+    deps.wpmzSdk = 'com.dji:wpmzsdk:1.0.5.2'
     //sample 扩展EditText
     deps.expandedit = "com.github.thomhurst:ExpandableHintText:1.0.7"
 
@@ -91,4 +95,9 @@ ext {
     deps.aspectj_tools = 'org.aspectj:aspectjtools:1.9.6'
     deps.aspectj_rt = 'org.aspectj:aspectjrt:1.9.6'
     deps.aspectj_weaver = 'org.aspectj:aspectjweaver:1.9.6'
+
+    //rxjava2（open-pilot-plugin-sample / 气体检测 使用）
+    deps.rxJava = deps.rx2Java
+    deps.rxAndroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
+    deps.rxjava2_rxkotlin = "io.reactivex.rxjava2:rxkotlin:2.2.0"
 }

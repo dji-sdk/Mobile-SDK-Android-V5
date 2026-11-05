@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" version="1.1">
+    <g id="patrol_unknown_normal">
+        <path d="M32 3C16.5 3 4 15.5 4 31c0 12.5 14.5 23.5 28 30 13.5-6.5 28-17.5 28-30C60 15.5 47.5 3 32 3Z" fill="#6B7280"/>
+        <path d="M32 14c-5.8 0-10.5 4.7-10.5 10.5h5.8c0-2.6 2.1-4.7 4.7-4.7s4.7 2.1 4.7 4.7c0 3.4-4.7 4.6-4.7 9.1h5.8c0-2.6 4.7-4 4.7-9.1C42.5 18.7 37.8 14 32 14Z" fill="#FFFFFF"/>
+        <path d="M29.1 38h5.8v6h-5.8z" fill="#FFFFFF"/>
+    </g>
+</svg>

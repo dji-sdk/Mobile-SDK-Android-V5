@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    android:orientation="vertical">
+
+    <FrameLayout style="@style/DemoTopBar">
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/DemoTopBarBackButton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="@string/return_to_pilot" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/DemoTopBarTitle"
+            android:text="@string/dji_open_pilot_plugin_name" />
+
+        <!--
+            Pilot / 服务连接状态徽章：圆点 + 文字 + 圆角描边背景，样式对齐 open-pilot-plugin-sample。
+            背景与文字色由 PluginActivity 按状态切换，布局中的初始值取「检测中」中性档，
+            避免首帧出现错误的绿/红。
+        -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/badge_pilot"
+                style="@style/DemoTopBarBadge"
+                android:background="@drawable/bg_status_badge_unregistered">
+
+                <View
+                    android:id="@+id/dot_pilot"
+                    style="@style/DemoTopBarBadgeDot" />
+
+                <TextView
+                    android:id="@+id/tv_pilot_badge"
+                    style="@style/DemoTopBarBadgeText"
+                    android:text="@string/pilot_checking" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/badge_backend"
+                style="@style/DemoTopBarBadge"
+                android:layout_marginStart="@dimen/demo_top_bar_badge_gap"
+                android:background="@drawable/bg_status_badge_unregistered">
+
+                <View
+                    android:id="@+id/dot_backend"
+                    style="@style/DemoTopBarBadgeDot" />
+
+                <TextView
+                    android:id="@+id/tv_backend_badge"
+                    style="@style/DemoTopBarBadgeText"
+                    android:text="@string/backend_checking" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/demo_top_bar_divider" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E5E9ED" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_tab_job"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/tab_job"
+            android:textAllCaps="false"
+            android:textColor="#087EA4" />
+
+        <Button
+            android:id="@+id/btn_tab_asset"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/tab_asset"
+            android:textAllCaps="false"
+            android:textColor="#65717D" />
+
+        <Button
+            android:id="@+id/btn_tab_transfer"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/tab_transfer"
+            android:textAllCaps="false"
+            android:textColor="#65717D" />
+    </LinearLayout>
+
+</LinearLayout>

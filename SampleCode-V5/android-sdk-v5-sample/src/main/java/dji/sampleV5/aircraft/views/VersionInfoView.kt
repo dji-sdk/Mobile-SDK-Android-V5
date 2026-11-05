@@ -14,6 +14,7 @@ import dji.sampleV5.aircraft.models.VersionInfoVm
 import dji.sampleV5.aircraft.util.DialogUtil
 import dji.v5.utils.common.DjiSharedPreferencesManager
 import dji.v5.utils.common.StringUtils
+import dji.v5.ux.util.Helper
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -80,7 +81,7 @@ class VersionInfoView @JvmOverloads constructor(
 
             DialogUtil.showTwoButtonDialog(context, StringUtils.getResStr(R.string.news_dialog_content_tips),
                 StringUtils.getResStr(R.string.news_dialog_btn_left), {
-                    dji.sampleV5.aircraft.util.Helper.startBrowser(context, StringUtils.getResStr(R.string.release_node_url))
+                    Helper.startBrowser(context, StringUtils.getResStr(R.string.release_node_url))
                 }, StringUtils.getResStr(R.string.news_dialog_btn_right), {
                 })
         }

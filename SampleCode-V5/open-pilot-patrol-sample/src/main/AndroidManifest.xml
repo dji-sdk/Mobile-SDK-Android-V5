@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Android 13+ 上传进度通知需要；未授权时静默降级，不阻塞上传。 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <uses-feature android:name="android.hardware.usb.host" android:required="false" />
+    <uses-feature android:name="android.hardware.usb.accessory" android:required="true" />
+
+    <queries>
+        <package android:name="com.dji.industry.pilot" />
+    </queries>
+
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/my_app_name"
+        android:requestLegacyExternalStorage="true"
+        android:extractNativeLibs="true"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:usesCleartextTraffic"
+        android:theme="@style/AppTheme">
+
+        <!-- DJI AppKey：build.gradle 读取 Gradle 项目属性 PATROL_SAMPLE_API_KEY 并注入。 -->
+        <meta-data
+            android:name="com.dji.sdk.API_KEY"
+            android:value="${DJI_API_KEY}" />
+
+        <!-- Pilot 通过扫描此 meta-data 发现插件 APP -->
+        <meta-data
+            android:name="dji.open.pilot.client.OPEN_PILOT_PERMISSION_META_DATA"
+            android:value="open pilot" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Pilot 跨进程拉起插件页面：exported 必须为 true；带屏遥控器为横屏设备，统一声明横屏；
+              singleTask 保证 Pilot 重复拉起时复用同一实例而不是叠加多个 Activity。 -->
+        <activity
+            android:name="dji.sample.patrol.PluginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>

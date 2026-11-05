@@ -3,7 +3,7 @@ package dji.sampleV5.moduleaircraft.models
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.aircraft.data.DJIToastResult
 import dji.sampleV5.aircraft.models.DJIViewModel
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 
 import dji.sdk.keyvalue.value.flightcontroller.RealNameRegistrationState
 import dji.v5.common.callback.CommonCallbacks

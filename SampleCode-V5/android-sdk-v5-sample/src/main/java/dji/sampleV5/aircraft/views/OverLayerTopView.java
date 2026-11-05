@@ -10,14 +10,18 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import androidx.appcompat.widget.AppCompatImageView;
+import dji.sampleV5.aircraft.data.QuickTestConfig;
 import dji.sampleV5.aircraft.models.LookAtVM;
 import dji.sdk.keyvalue.value.common.DoubleRect;
 import dji.v5.manager.datacenter.camera.view.PinPoint;
+import dji.v5.manager.intelligent.AutoParsingMask;
 import dji.v5.manager.intelligent.AutoSensingTarget;
 
 public class OverLayerTopView extends AppCompatImageView {
@@ -30,7 +34,10 @@ public class OverLayerTopView extends AppCompatImageView {
 
     private DoubleRect selectBound;
     private List<AutoSensingTarget> currentTargetInfo;
+    private AutoParsingMask currentParsingMask;
     private final RectF rect = new RectF();
+    SparseArray<Paint> paintCache = new SparseArray<>();
+    private final Map<Integer, Integer> maskColorMap = QuickTestConfig.INSTANCE.getCR810_OBSTACLE_COLOR_MAP();
 
     public OverLayerTopView(Context context) {
         this(context, null, 0);
@@ -91,6 +98,11 @@ public class OverLayerTopView extends AppCompatImageView {
         if (selectBound != null) {
             drawBound(canvas, selectBound);
         }
+
+        if (currentParsingMask != null) {
+            drawMask(canvas, currentParsingMask.getMaskID());
+        }
+
         if (currentTargetInfo != null) {
             for (AutoSensingTarget targetInfo : currentTargetInfo) {
                 DoubleRect boundInfo = targetInfo.getRect();
@@ -100,9 +112,58 @@ public class OverLayerTopView extends AppCompatImageView {
                 drawBound(canvas, boundInfo);
                 drawTipText(canvas, initTargetInfo(targetInfo), rect.centerX(), rect.centerY());
             }
-            super.onDraw(canvas);
         }
         super.onDraw(canvas);
+    }
+
+    private void drawMask(Canvas canvas, int[][] maskID) {
+        if (maskID.length == 0 || maskID[0].length == 0) return;
+
+        int maskWidth = maskID[0].length;
+        int maskHeight = maskID.length;
+
+        float blockWidth = (float) screenWidth / maskWidth;
+        float blockHeight = (float) screenHeight / maskHeight;
+
+        for (int y = 0; y < maskHeight; y++) {
+            float top = y * blockHeight;
+            int currentMask = -2;
+            int startX = -1;
+
+            for (int x = 0; x < maskWidth; x++) {
+                int mask = maskID[y][x];
+
+                if (mask != currentMask) {
+                    if (currentMask != -2) {
+                        drawBlock(canvas, currentMask, startX * blockWidth, top,
+                                (x - startX) * blockWidth, blockHeight);
+                    }
+                    currentMask = mask;
+                    startX = x;
+                }
+            }
+
+            if (currentMask != -2) {
+                drawBlock(canvas, currentMask, startX * blockWidth, top,
+                        (maskWidth - startX) * blockWidth, blockHeight);
+            }
+        }
+    }
+
+    private void drawBlock(Canvas canvas, int maskId, float left, float top, float width, float height) {
+        Paint paint = paintCache.get(maskId);
+        Integer color = maskColorMap.get(maskId);
+        if (color == null) {
+            color = Color.BLACK;
+        }
+        if (paint == null) {
+            paint = new Paint();
+            paint.setColor(color);
+            paint.setStyle(Paint.Style.FILL);
+            paintCache.put(maskId, paint);
+        }
+
+        canvas.drawRect(left, top, left + width, top + height, paint);
     }
 
     private String initPointInfo(LookAtVM.Point point) {
@@ -150,8 +211,9 @@ public class OverLayerTopView extends AppCompatImageView {
         invalidate();
     }
 
-    public void onTargetChange(List<AutoSensingTarget> targetInfo) {
+    public void onTargetChange(List<AutoSensingTarget> targetInfo, AutoParsingMask parsingMask) {
         currentTargetInfo = targetInfo;
+        currentParsingMask = parsingMask;
         invalidate();
     }
 

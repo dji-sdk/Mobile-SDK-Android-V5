@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" version="1.1">
+    <g id="patrol_boat_normal">
+        <path d="M32 3C16.5 3 4 15.5 4 31c0 12.5 14.5 23.5 28 30 13.5-6.5 28-17.5 28-30C60 15.5 47.5 3 32 3Z" fill="#06B6D4"/>
+        <path d="M31 13l-11 22h11V13Z" fill="#FFFFFF"/>
+        <path d="M34 15l9 17h-9V15Z" fill="#FFFFFF"/>
+        <path d="M15 38h34l-5.5 8h-23L15 38Z" fill="#FFFFFF"/>
+    </g>
+</svg>

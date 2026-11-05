@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 标题栏徽章：异常（浅红底 + 语义错误色描边），形态对齐 open-pilot-plugin-sample TopBar 徽章 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/title_badge_bad_bg" />
+    <stroke
+        android:width="@dimen/divider_height"
+        android:color="@color/title_badge_bad_border" />
+    <corners android:radius="@dimen/title_badge_corner" />
+</shape>

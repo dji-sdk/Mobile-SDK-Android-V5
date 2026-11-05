@@ -1,0 +1,24 @@
+name: flight-task-demo
+
+services:
+  flight-task-server:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8080
+      DATA_DIR: /app/runtime
+    volumes:
+      - data:/app/runtime
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+volumes:
+  data:
+    name: flight-task-demo-data

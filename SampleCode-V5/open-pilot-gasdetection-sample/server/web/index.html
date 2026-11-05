@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f8fb">
+  <title>气体检测管理台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#tasks" aria-label="气体检测管理台首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 15.5 8.8 7h6.4l4.8 8.5-3.1 1.8-2.4-4.4H9.4L7 17.3z"/><circle cx="12" cy="9.5" r="1.7"/></svg>
+        </span>
+        <span><strong>气体检测</strong><small>运营管理台</small></span>
+      </a>
+      <nav class="nav-list" aria-label="主导航">
+        <a class="nav-item active" href="#tasks" data-view-link="tasks">
+          <svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>
+          <span>任务工单</span>
+        </a>
+        <a class="nav-item" href="#records" data-view-link="records">
+          <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5M8 17h3"/></svg>
+          <span>检测记录</span>
+        </a>
+      </nav>
+      <div class="sidebar-foot">
+        <span class="health-dot" id="healthDot"></span>
+        <span><strong id="healthText">正在连接</strong><small>Demo Server</small></span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menuButton" type="button" aria-label="展开菜单">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <div class="breadcrumb"><span>气体检测管理</span><b>/</b><strong id="pageCrumb">任务工单</strong></div>
+        <div class="topbar-right">
+          <span class="date-chip" id="today"></span>
+          <span class="avatar">管</span>
+        </div>
+      </header>
+
+      <section class="view active" id="tasksView" aria-labelledby="tasksTitle">
+        <div class="page-heading">
+          <div><p class="eyebrow">TASK OPERATIONS</p><h1 id="tasksTitle">任务工单</h1><p>创建、分配和跟踪气体检测任务的全流程状态</p></div>
+          <button class="primary-button" type="button" data-action="new-job"><span>＋</span> 新增任务</button>
+        </div>
+
+        <div class="stat-grid" id="jobStats" aria-label="任务统计"></div>
+
+        <section class="panel">
+          <div class="panel-toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input id="jobSearch" type="search" placeholder="搜索任务名称或编号" aria-label="搜索任务">
+            </div>
+            <select id="jobStatusFilter" aria-label="按状态筛选">
+              <option value="">全部状态</option>
+              <option value="DRAFT">草稿</option>
+              <option value="DISPATCHED">待接收</option>
+              <option value="ACCEPTED">待执行</option>
+              <option value="IN_PROGRESS">执行中</option>
+              <option value="FINALIZING">同步中</option>
+              <option value="COMPLETED">已完成</option>
+              <option value="CANCELLED">已取消</option>
+              <option value="REJECTED">已拒绝</option>
+            </select>
+            <button class="secondary-button refresh-button" type="button" data-action="refresh-jobs">
+              <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg> 刷新
+            </button>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>任务信息</th><th>遥控器 SN</th><th>截止时间</th><th>检测通道</th><th>状态</th><th class="align-right">操作</th></tr></thead>
+              <tbody id="jobsTable"></tbody>
+            </table>
+          </div>
+          <div class="state-box" id="jobsState" hidden></div>
+          <div class="panel-footer"><span id="jobsCount">共 0 条任务</span></div>
+        </section>
+      </section>
+
+      <section class="view" id="recordsView" aria-labelledby="recordsTitle">
+        <div class="page-heading">
+          <div><p class="eyebrow">DETECTION RECORDS</p><h1 id="recordsTitle">检测记录</h1><p>查看插件回传的采样记录与告警统计</p></div>
+          <button class="secondary-button" type="button" data-action="refresh-records">刷新记录</button>
+        </div>
+        <section class="panel records-panel">
+          <div class="panel-toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input id="recordSearch" type="search" placeholder="搜索任务、记录编号或遥控器" aria-label="搜索检测记录">
+            </div>
+            <select id="recordJobFilter" aria-label="按任务筛选"><option value="">全部任务</option></select>
+          </div>
+          <div class="record-groups" id="recordGrid"></div>
+          <div class="state-box" id="recordsState" hidden></div>
+          <div class="panel-footer"><span id="recordsCount">共 0 条记录</span></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="overlay" id="jobModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="jobModalTitle">
+      <header class="modal-header"><div><p class="eyebrow">DETECTION FORM</p><h2 id="jobModalTitle">新增任务</h2></div><button class="icon-button" type="button" data-action="close-modal" aria-label="关闭">×</button></header>
+      <form id="jobForm">
+        <input type="hidden" name="jobId">
+        <div class="form-body">
+          <label class="field field-wide"><span>任务名称 <b>*</b></span><input name="title" required maxlength="80" placeholder="例如：船舶尾气检测-001"></label>
+          <label class="field"><span>遥控器 SN</span><select name="rcSn" id="deviceSelect"><option value="">暂不分配</option></select></label>
+          <label class="field"><span>截止时间</span><input name="deadline" type="datetime-local"></label>
+          <label class="field"><span>目标纬度</span><input name="latitude" type="number" step="0.000001" min="-90" max="90" value="22.5" required></label>
+          <label class="field"><span>目标经度</span><input name="longitude" type="number" step="0.000001" min="-180" max="180" value="113.9" required></label>
+          <label class="field"><span>相对高度（米）</span><input name="altitudeM" type="number" step="1" min="0" max="500" value="60" required></label>
+          <label class="field"><span>安全边界（米）</span><input name="safetyBoundaryM" type="number" step="1" min="1" max="5000" value="200" required></label>
+          <label class="field field-wide"><span>作业要求</span><textarea name="requirements" rows="3" maxlength="500" placeholder="填写采样位置、航向或其他执行要求"></textarea></label>
+          <div class="field field-wide channel-field">
+            <span>通道与阈值 <b>*</b></span>
+            <div class="channel-table-scroll">
+              <table class="channel-table">
+                <thead><tr><th>通道 ID</th><th>显示名</th><th>单位</th><th>阈值</th><th></th></tr></thead>
+                <tbody id="channelRows"></tbody>
+              </table>
+            </div>
+            <button class="secondary-button channel-add" type="button" data-action="add-channel">添加通道</button>
+            <small class="field-hint">阈值为演示值，不代表法规限值</small>
+          </div>
+        </div>
+        <footer class="modal-footer"><button class="secondary-button" type="button" data-action="close-modal">取消</button><button class="secondary-button accent" type="submit" value="draft">保存草稿</button><button class="primary-button" type="submit" value="dispatch">保存并下发</button></footer>
+      </form>
+    </section>
+  </div>
+
+  <div class="overlay drawer-overlay" id="detailDrawer" hidden>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <header class="drawer-header"><div><p class="eyebrow">TASK DETAIL</p><h2 id="detailTitle">任务详情</h2></div><button class="icon-button" type="button" data-action="close-detail" aria-label="关闭">×</button></header>
+      <div class="drawer-body" id="detailBody"></div>
+    </aside>
+  </div>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

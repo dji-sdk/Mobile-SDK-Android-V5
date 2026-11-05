@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  演示后端是本地 HTTP（默认 127.0.0.1:18082，通过 adb reverse 映射）。
+  Android 9+ 默认禁止明文流量，这里只对回环地址放行，其余域名仍保持 HTTPS 要求。
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">127.0.0.1</domain>
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
+</network-security-config>

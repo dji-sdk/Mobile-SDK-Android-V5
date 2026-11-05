@@ -2,7 +2,7 @@ package dji.sampleV5.aircraft.models
 
 import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.aircraft.R
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.key.BatteryKey
 import dji.sdk.keyvalue.utils.ProductUtil
 import dji.v5.common.callback.CommonCallbacks

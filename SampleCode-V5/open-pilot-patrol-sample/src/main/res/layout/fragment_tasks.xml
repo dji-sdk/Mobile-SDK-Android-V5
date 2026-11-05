@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:background="#F8FAFB"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_list_title"
+            android:textColor="#596572"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/ll_task_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
+
+    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#E3E8EC" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <!-- 空态：未选中任务时只显示它，详情容器整体隐藏（不显示空白卡片）。 -->
+            <TextView
+                android:id="@+id/tv_empty_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_tasks"
+                android:textColor="@color/detail_label_text"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_detail_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_task_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#17212B"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_task_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="#16874B"
+                    android:textSize="12sp" />
+
+                <!-- 任务信息：要求 / 截止时间 / 任务标识 -->
+                <TextView
+                    style="@style/DetailBlockTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/task_info" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_field_gap"
+                    android:background="@drawable/bg_patrol_panel"
+                    android:orientation="vertical"
+                    android:padding="@dimen/detail_card_padding">
+
+                    <TextView
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/task_requirement" />
+
+                    <TextView
+                        android:id="@+id/tv_task_requirement"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+
+                    <TextView
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_field_gap"
+                        android:text="@string/task_deadline" />
+
+                    <TextView
+                        android:id="@+id/tv_task_deadline"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+
+                    <TextView
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_field_gap"
+                        android:text="@string/task_id" />
+
+                    <TextView
+                        android:id="@+id/tv_task_id"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+                </LinearLayout>
+
+                <!-- 航线状态：云端航线 / 巡逻航线 / 执行进度 + 时间线节点链 -->
+                <TextView
+                    style="@style/DetailBlockTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_block_gap"
+                    android:text="@string/route_status" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_field_gap"
+                    android:background="@drawable/bg_patrol_panel"
+                    android:orientation="vertical"
+                    android:padding="@dimen/detail_card_padding">
+
+                    <TextView
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/route_cloud_status" />
+
+                    <TextView
+                        android:id="@+id/tv_route_cloud"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+
+                    <TextView
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_field_gap"
+                        android:text="@string/fw_patrol_route_state_label" />
+
+                    <TextView
+                        android:id="@+id/tv_route_state"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+
+                    <TextView
+                        android:id="@+id/tv_route_progress_label"
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_field_gap"
+                        android:text="@string/route_execute_status" />
+
+                    <TextView
+                        android:id="@+id/tv_route_progress"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+
+                    <!-- 时间线：节点链（圆点 + 连接线 + 文案），未渲染时用空态文案兜底 -->
+                    <TextView
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_field_gap"
+                        android:text="@string/fw_patrol_timeline_label" />
+
+                    <TextView
+                        android:id="@+id/tv_timeline_earlier"
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_timeline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:id="@+id/tv_timeline_empty"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap"
+                        android:text="@string/fw_patrol_timeline_empty"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <!-- 同步状态：文件进度 / 数据量 -->
+                <TextView
+                    style="@style/DetailBlockTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_block_gap"
+                    android:text="@string/sync_status" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_field_gap"
+                    android:background="@drawable/bg_patrol_panel"
+                    android:orientation="vertical"
+                    android:padding="@dimen/detail_card_padding">
+
+                    <TextView
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/file_progress" />
+
+                    <TextView
+                        android:id="@+id/tv_sync_files"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+
+                    <TextView
+                        android:id="@+id/tv_sync_byte_label"
+                        style="@style/DetailFieldLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_field_gap"
+                        android:text="@string/detail_byte_label" />
+
+                    <TextView
+                        android:id="@+id/tv_sync_bytes"
+                        style="@style/DetailFieldValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_label_gap" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

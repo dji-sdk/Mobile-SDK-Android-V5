@@ -39,7 +39,7 @@ import androidx.annotation.StyleRes
 import dji.v5.ux.core.extension.textColor
 import dji.v5.ux.core.extension.textColorStateList
 import dji.v5.ux.R
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.ux.training.util.SimulatorPresetUtils
 import dji.v5.ux.training.simulatorcontrol.SimulatorControlWidget
 

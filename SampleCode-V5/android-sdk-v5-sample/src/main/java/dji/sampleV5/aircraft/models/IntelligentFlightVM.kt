@@ -310,6 +310,19 @@ class IntelligentFlightVM : DJIViewModel() {
             })
     }
 
+    fun updateFlyToTarget(target: FlyToTarget) {
+        IntelligentFlightManager.getInstance().flyToMissionManager.updateMissionTarget(target,
+            object : CommonCallbacks.CompletionCallback {
+                override fun onSuccess() {
+                    toastResult?.postValue(DJIToastResult.success("updateFlyToTarget"))
+                }
+
+                override fun onFailure(error: IDJIError) {
+                    toastResult?.postValue(DJIToastResult.failed("updateFlyToTarget,$error"))
+                }
+            })
+    }
+
     fun setFlyToMode(mode: FlyToMode) {
         val param = FlyToParam()
         param.flyToMode = mode

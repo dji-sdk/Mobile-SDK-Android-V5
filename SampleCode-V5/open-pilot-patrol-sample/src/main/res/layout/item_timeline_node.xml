@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    航线状态时间线的一个节点：左侧 rail gutter（圆点 + 连接线），右侧内容列（节点文案 / 事件时间 / 描述）。
+    连接线默认取「未开始」弱化色，渲染时按上一个节点状态覆盖；最后一个节点的连接线由代码隐藏。
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="@dimen/timeline_gutter"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/timeline_dot"
+            android:layout_width="@dimen/timeline_dot"
+            android:layout_height="@dimen/timeline_dot"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="@dimen/timeline_dot_top_margin"
+            android:background="@drawable/bg_timeline_dot" />
+
+        <View
+            android:id="@+id/timeline_rail"
+            android:layout_width="@dimen/timeline_rail_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/timeline_rail_top_margin"
+            android:background="@color/timeline_node_pending" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/timeline_node_gap">
+
+        <TextView
+            android:id="@+id/timeline_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/detail_value_text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/timeline_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_label_gap"
+            android:textColor="@color/detail_label_text"
+            android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

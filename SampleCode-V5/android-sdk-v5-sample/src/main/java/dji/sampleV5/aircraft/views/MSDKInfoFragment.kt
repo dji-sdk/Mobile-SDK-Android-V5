@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import dji.sampleV5.aircraft.R
-import dji.sampleV5.aircraft.databinding.FragMainTitleBinding
 import dji.sampleV5.aircraft.pages.DJIFragment
-import dji.v5.utils.common.LogUtils
 
 /**
  * Class Description
@@ -52,7 +49,7 @@ open class MSDKInfoFragment : DJIFragment() {
     private fun initMSDKInfo() {
         msdkInfoVm.msdkInfo.observe(viewLifecycleOwner) {
             it?.let {
-                val mainInfo = "MSDK Info:[Ver:${it.SDKVersion} BuildVer:${it.buildVer} Debug:${it.isDebug} ProductCategory:${it.packageProductCategory} LDMLicenseLoaded:${it.isLDMLicenseLoaded} ]"
+                val mainInfo = "MSDK Info:[Ver:${it.SDKVersion} ${it.pluginVersion} BuildVer:${it.buildVer} Debug:${it.isDebug} LinkMode:${it.sdkLinkMode} LDMLicenseLoaded:${it.isLDMLicenseLoaded} ]"
                 msdkInfoTextMain.text = mainInfo
                 val secondInfo = "Device:${it.productType} | Network:${it.networkInfo} | CountryCode:${it.countryCode} | FirmwareVer:${it.firmwareVer} | LDMEnabled:${it.isLDMEnabled}"
                 msdkInfoTextSecond.text = secondInfo

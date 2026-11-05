@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- KeyManager 演示模块迁移所需数组（来自 android-sdk-v5-sample） -->
+    <string-array name="component_index_arrays">
+        <item>LEFT_OR_MAIN</item>
+        <item>RIGHT</item>
+        <item>UP</item>
+        <item>INDEX_3</item>
+        <item>UP_TYPE_C</item>
+        <item>UP_TYPE_C_EXT_ONE</item>
+        <item>INDEX_6</item>
+        <item>FPV</item>
+        <item>INDEX_8</item>
+        <item>PORT_1</item>
+        <item>PORT_2</item>
+        <item>PORT_3</item>
+        <item>PORT_4</item>
+        <item>PORT_5</item>
+        <item>PORT_6</item>
+        <item>PORT_7</item>
+        <item>UNKNOWN</item>
+    </string-array>
+
+    <string-array name="sub_type_arrays">
+        <item>65534</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="sub_index_arrays">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>

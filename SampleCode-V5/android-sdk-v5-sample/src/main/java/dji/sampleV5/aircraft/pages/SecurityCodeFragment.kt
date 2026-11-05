@@ -9,11 +9,10 @@ import androidx.fragment.app.viewModels
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.data.DeviceLockStatus
 import dji.sampleV5.aircraft.data.ModifyPasswordBean
-import dji.sampleV5.aircraft.databinding.FragAppSilentlyUpgradePageBinding
 import dji.sampleV5.aircraft.databinding.FragSecurityCodePageBinding
 import dji.sampleV5.aircraft.models.SecurityCodeVM
-import dji.sampleV5.aircraft.util.Helper
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.Helper
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.flightcontroller.AccessLockerDeviceType
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.StringUtils

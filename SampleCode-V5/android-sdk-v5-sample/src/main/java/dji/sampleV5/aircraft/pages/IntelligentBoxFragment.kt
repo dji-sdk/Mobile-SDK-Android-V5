@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import dji.sampleV5.aircraft.databinding.FragIntelligentBoxPageBinding
 import dji.sampleV5.aircraft.models.IntelligentBoxVM
 import dji.sampleV5.aircraft.pages.PayloadCenterFragment.Companion.KEY_PAYLOAD_INDEX_TYPE
-import dji.sampleV5.aircraft.util.Helper
+import dji.v5.ux.util.Helper
 import dji.v5.manager.aircraft.aibox.IntelligentBoxAppInfo
 import dji.v5.manager.aircraft.aibox.IntelligentBoxInfo
 import dji.v5.manager.aircraft.payload.PayloadIndexType

@@ -118,7 +118,6 @@ public class DJICalProgressBar extends BaseView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // TODO Auto-generated method stub
         super.onDraw(canvas);
 
         int w = getWidth();

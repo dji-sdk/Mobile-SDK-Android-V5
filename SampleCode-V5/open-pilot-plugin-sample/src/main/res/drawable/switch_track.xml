@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 通用胶囊开关轨道：选中为亮蓝，未选中为浅灰，全圆角胶囊 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/switch_track_on" />
+            <corners android:radius="100dp" />
+            <size android:width="44dp" android:height="24dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/switch_track_off" />
+            <corners android:radius="100dp" />
+            <size android:width="44dp" android:height="24dp" />
+        </shape>
+    </item>
+</selector>

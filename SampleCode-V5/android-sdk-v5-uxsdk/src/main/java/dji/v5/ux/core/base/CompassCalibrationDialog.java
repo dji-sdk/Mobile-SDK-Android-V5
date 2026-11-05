@@ -273,7 +273,7 @@ public class CompassCalibrationDialog extends BaseDialog implements View.OnClick
         int[] resIds;
         if(ProductUtil.isM30Product()){
             resIds = aircraftCompassIconM30;
-        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
+        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct() || ProductUtil.isM5Product()) {
             resIds = aircraftCompassIconM3;
         } else{
             resIds = aircraftCompassIconM300;

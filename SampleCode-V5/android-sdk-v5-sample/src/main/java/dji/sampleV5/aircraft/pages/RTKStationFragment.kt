@@ -12,7 +12,7 @@ import dji.sampleV5.aircraft.data.DJIRTKBaseStationConnectInfo
 import dji.sampleV5.aircraft.data.RtkStationScanAdapter
 import dji.sampleV5.aircraft.databinding.FragStationRtkPageBinding
 import dji.sampleV5.aircraft.models.RTKStationVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.common.LocationCoordinate3D
 import dji.sdk.keyvalue.value.rtkbasestation.RTKBaseStationResetPasswordInfo
 import dji.sdk.keyvalue.value.rtkbasestation.RTKStationConnetState

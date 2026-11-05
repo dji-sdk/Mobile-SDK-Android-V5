@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 
 import dji.v5.utils.common.LogUtils;
 import dji.v5.ux.R;
-import dji.v5.ux.core.util.ToastUtils;
+import dji.v5.ux.util.ToastUtils;
 import dji.v5.ux.mapkit.core.Mapkit;
 import dji.v5.ux.mapkit.core.MapkitOptions;
 

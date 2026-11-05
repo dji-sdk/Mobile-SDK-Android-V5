@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 诊断日志只写入应用私有缓存目录，不暴露外部存储路径 -->
+    <cache-path name="diagnostics" path="diagnostics/" />
+</paths>

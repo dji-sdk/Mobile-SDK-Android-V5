@@ -103,6 +103,15 @@
                 android:gravity="center"
                 android:text="XMP Custom Info"
                 android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/parse_thermal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Thermal Parse"
+                android:textAllCaps="false"/>
         </LinearLayout>
 
         <LinearLayout

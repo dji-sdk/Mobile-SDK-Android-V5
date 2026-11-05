@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - Spinner Case 预览</title>
+    <style>
+        /* 禁用移动端 WebView 默认的点击高亮 */
+        * { -webkit-tap-highlight-color: transparent; }
+
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: transparent; color: #FFFFFF; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+        .rv-card { background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+        .rv-divider { height: 1px; background-color: rgba(255, 255, 255, 0.15); margin: 2px 0; }
+
+        /* ====== 自定义下拉框容器 ====== */
+        .rv-spinner {
+            position: relative;
+            width: 100%;
+            height: 40px; /* setHeight(40) */
+            font-size: 14px;
+            border-radius: 4px; /* cornerRadius 4f */
+            user-select: none;
+            /* 基础样式: 黑底、白边、蓝字 (依据代码逻辑) */
+            background-color: #000000; /* BLACK_1 */
+            border: 1px solid #FFFFFF; /* GREY_FF 描边 */
+            color: #2696FF; /* BLUE_DEFAULT */
+            box-sizing: border-box;
+        }
+
+        /* 核心 Hack：用隐藏的 checkbox 控制下拉菜单展开/折叠 */
+        .spinner-toggle {
+            display: none;
+        }
+
+        /* 表面显示的点击区域（折叠态） */
+        .spinner-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* 文字和箭头两端对齐 */
+            width: 100%;
+            height: 100%;
+            padding: 0 12px;
+            box-sizing: border-box;
+            cursor: pointer;
+            border-radius: inherit;
+        }
+
+        /* 文字容器，方便控制居中或左对齐 */
+        .spinner-text-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 代码中所有都设了 setGravity(GravityType.CENTER) */
+        }
+
+        /* 箭头 SVG */
+        .spinner-arrow {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+            stroke: rgba(231, 231, 231, 0.533); /* GREY_88 灰色箭头 */
+        }
+
+        /* ====== 展开浮层菜单 ====== */
+        .spinner-dropdown {
+            position: absolute;
+            top: 100%; /* 吸附在底部 */
+            left: -1px; /* 补偿描边的 1px，使其与外部边框齐平 */
+            width: calc(100% + 2px); 
+            max-height: 0; /* 默认折叠 */
+            overflow: hidden;
+            opacity: 0; /* 折叠时彻底隐藏阴影和边框 */
+            pointer-events: none;
+            background-color: #000000; /* BLACK_1 */
+            border-radius: 4px;
+            border: 1px solid #FFFFFF; /* GREY_FF 描边 */
+            z-index: 10;
+            transition: max-height 0.2s ease, opacity 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            color: rgba(231, 231, 231, 0.533); /* GREY_88 灰色下拉文字 */
+        }
+
+        /* 展开状态的触发逻辑 */
+        .spinner-toggle:checked ~ .spinner-dropdown {
+            max-height: 200px; /* 展开高度 */
+            opacity: 1; /* 展开时显示 */
+            pointer-events: auto;
+            margin-top: 4px; /* 浮层间隔 */
+        }
+
+        /* 箭头反转 */
+        .spinner-toggle:checked ~ .spinner-header .spinner-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* 列表项 */
+        .dropdown-item {
+            padding: 10px 12px;
+            text-align: center; /* 下拉菜单文字也居中对齐 */
+        }
+        
+        /* 根据代码逻辑，选中项在头部显示蓝色，在下拉列表中的颜色受 setDropdownTextColor 控制，即 GREY_88。但为了区分哪一项是 active，在 HTML 演示中我们让 active 保持一点高亮 (如蓝色)，如果不想要特殊高亮可以移除。根据截图，下拉菜单中的选中项依然是蓝色。 */
+        .dropdown-item.active { color: #2696FF; } /* 选中的保持蓝色高亮以对齐视觉 */
+
+        /* ====== 样式变种 ====== */
+
+        /* 禁用态 */
+        .is-disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* 03 自定义弹窗配色 - 黑底黑框(BLACK_1)，灰底(BLACK_3)，白字(GREY_FF)白箭头 */
+        .style-custom-dark {
+            background-color: #373A41; /* BLACK_3 */
+            border: 1px solid #000000; /* BLACK_1 描边 */
+            color: #FFFFFF; /* GREY_FF 选中的文字颜色 */
+        }
+        .style-custom-dark .spinner-arrow {
+            stroke: #FFFFFF; /* GREY_FF 白色箭头 */
+        }
+        
+        /* 自定义深色浮层 */
+        .style-custom-dark .spinner-dropdown {
+            background-color: #373A41; /* 浮层背景和主体一致？根据代码，下拉背景貌似是公用的，这里统一处理 */
+            border: 1px solid #000000;
+        }
+        /* 针对此样式的下拉文字（GREY_88）不变，只有选中的是白字 */
+        .style-custom-dark .dropdown-item.active { color: #FFFFFF; } 
+
+        /* 03 文本样式 - 左对齐 */
+        .style-text-left .spinner-text-wrap {
+            justify-content: flex-start; /* 覆盖默认的居中对齐，改为左对齐 */
+        }
+        .style-text-left .dropdown-item {
+            text-align: left; /* 下拉项也改为左对齐 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_spinner">下拉框</div>
+        <!-- Default Spinner -->
+        <div class="rv-spinner">
+            <input type="checkbox" id="spin1" class="spinner-toggle">
+            <label for="spin1" class="spinner-header">
+                <div class="spinner-text-wrap"><span data-i18n="opt_land">降落</span></div>
+                <svg class="spinner-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="spinner-dropdown">
+                <div class="dropdown-item active" data-i18n="opt_land">降落</div>
+                <div class="dropdown-item" data-i18n="opt_rth">返航</div>
+                <div class="dropdown-item" data-i18n="opt_hover">悬停</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_state">02 组件状态</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_disabled">禁用态</div>
+        <!-- Disabled Spinner -->
+        <div class="rv-spinner is-disabled">
+            <input type="checkbox" id="spin2" class="spinner-toggle" disabled>
+            <label for="spin2" class="spinner-header">
+                <div class="spinner-text-wrap"><span data-i18n="opt_land">降落</span></div>
+                <svg class="spinner-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="spinner-dropdown">
+                <div class="dropdown-item active" data-i18n="opt_land">降落</div>
+                <div class="dropdown-item" data-i18n="opt_rth">返航</div>
+                <div class="dropdown-item" data-i18n="opt_hover">悬停</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_style">03 组件样式</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_text_style">文本样式</div>
+        <!-- Text Style Spinner (Left aligned) -->
+        <div class="rv-spinner style-text-left">
+            <input type="checkbox" id="spin3" class="spinner-toggle">
+            <label for="spin3" class="spinner-header">
+                <div class="spinner-text-wrap"><span data-i18n="opt_land">降落</span></div>
+                <svg class="spinner-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="spinner-dropdown">
+                <div class="dropdown-item active" data-i18n="opt_land">降落</div>
+                <div class="dropdown-item" data-i18n="opt_rth">返航</div>
+                <div class="dropdown-item" data-i18n="opt_hover">悬停</div>
+            </div>
+        </div>
+
+        <div class="rv-divider" style="margin: 12px 0;"></div>
+
+        <div class="rv-section-title" data-i18n="sec_custom_dropdown_color">自定义弹窗配色</div>
+        <!-- Custom Dark Spinner -->
+        <div class="rv-spinner style-custom-dark">
+            <input type="checkbox" id="spin4" class="spinner-toggle">
+            <label for="spin4" class="spinner-header">
+                <div class="spinner-text-wrap"><span data-i18n="opt_land">降落</span></div>
+                <svg class="spinner-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </label>
+            <div class="spinner-dropdown">
+                <div class="dropdown-item active" data-i18n="opt_land">降落</div>
+                <div class="dropdown-item" data-i18n="opt_rth">返航</div>
+                <div class="dropdown-item" data-i18n="opt_hover">悬停</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:                 { zh: "01 组件类型", en: "01 Component Type" },
+            card_state:                { zh: "02 组件状态", en: "02 Component State" },
+            card_style:                { zh: "03 组件样式", en: "03 Component Style" },
+            sec_spinner:               { zh: "下拉框",     en: "Spinner" },
+            sec_disabled:              { zh: "禁用态",     en: "Disabled State" },
+            sec_text_style:            { zh: "文本样式",   en: "Text Style" },
+            sec_custom_dropdown_color: { zh: "自定义弹窗配色", en: "Custom Dropdown Colors" },
+            opt_land:                  { zh: "降落",       en: "Land" },
+            opt_rth:                   { zh: "返航",       en: "Return to Home" },
+            opt_hover:                 { zh: "悬停",       en: "Hover" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

@@ -35,6 +35,20 @@
         <item name="android:autoSizeTextType">uniform</item>
     </style>
 
+    <style name="ar_projection_fragment_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:layout_marginEnd">3dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:color">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:autoSizeMaxTextSize">11dp</item>
+        <item name="android:autoSizeMinTextSize">10dp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+    </style>
+
     <style name="main_fragment_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

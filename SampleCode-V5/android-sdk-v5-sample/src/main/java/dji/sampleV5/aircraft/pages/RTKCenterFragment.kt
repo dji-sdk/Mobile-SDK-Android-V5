@@ -14,7 +14,7 @@ import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragRtkCenterPageBinding
 import dji.sampleV5.aircraft.models.RTKCenterVM
 import dji.sampleV5.aircraft.pages.DJIFragment
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.rtkbasestation.RTKReferenceStationSource
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKLocation
 import dji.sdk.keyvalue.value.rtkmobilestation.RTKSatelliteInfo

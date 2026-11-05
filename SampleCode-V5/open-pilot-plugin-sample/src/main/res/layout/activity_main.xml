@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <!-- TopBar：标题居中 + 右侧徽章 -->
+    <FrameLayout style="@style/DemoTopBar">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/DemoTopBarTitle"
+            android:text="@string/dji_open_pilot_plugin_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- 连接状态徽章 -->
+            <LinearLayout
+                android:id="@+id/badge_connected"
+                style="@style/DemoTopBarBadge"
+                android:layout_marginEnd="@dimen/demo_top_bar_badge_gap"
+                android:background="@drawable/bg_status_badge_disconnected">
+
+                <View
+                    android:id="@+id/dot_connected"
+                    style="@style/DemoTopBarBadgeDot"
+                    android:backgroundTint="@color/demo_top_bar_error" />
+
+                <TextView
+                    android:id="@+id/tv_connected"
+                    style="@style/DemoTopBarBadgeText"
+                    android:text="@string/badge_disconnected"
+                    android:textColor="@color/demo_top_bar_error" />
+            </LinearLayout>
+
+            <!-- 注册状态徽章 -->
+            <LinearLayout
+                android:id="@+id/badge_registered"
+                style="@style/DemoTopBarBadge"
+                android:background="@drawable/bg_status_badge_unregistered">
+
+                <View
+                    android:id="@+id/dot_registered"
+                    style="@style/DemoTopBarBadgeDot" />
+
+                <TextView
+                    android:id="@+id/tv_registered"
+                    style="@style/DemoTopBarBadgeText"
+                    android:text="@string/badge_unregistered" />
+            </LinearLayout>
+
+            <!-- 国家码徽章（开关打开且已注册后显示） -->
+            <LinearLayout
+                android:id="@+id/badge_country_code"
+                style="@style/DemoTopBarBadge"
+                android:layout_marginStart="@dimen/demo_top_bar_badge_gap"
+                android:background="@drawable/bg_status_badge_registered"
+                android:visibility="gone">
+
+                <View
+                    android:id="@+id/dot_country_code"
+                    style="@style/DemoTopBarBadgeDot"
+                    android:backgroundTint="@color/demo_top_bar_blue" />
+
+                <TextView
+                    android:id="@+id/tv_country_code"
+                    style="@style/DemoTopBarBadgeText"
+                    android:textColor="@color/demo_top_bar_blue" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- TopBar 底部分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/demo_top_bar_divider" />
+
+    <!-- 模块卡片网格 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_modules"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="true" />
+</LinearLayout>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - Layout Case 预览</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: transparent; color: #FFFFFF; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+        .rv-card { background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+        .rv-divider { height: 1px; background-color: rgba(255, 255, 255, 0.15); margin: 8px 0; }
+
+        .rv-item-container { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+
+        /* ====== 公共颜色 ====== */
+        .bg-blue-light { background-color: #4196FF; } /* 顶栏蓝 */
+        .bg-blue-dark { background-color: #0659D9; } /* 容器底蓝 */
+        .bg-blue-default { background-color: #1A8BFF; } /* 默认蓝 */
+        .bg-white-trans { background-color: rgba(255,255,255,0.15); } /* 内容块半透明白 */
+        
+        .txt-white { color: #FFFFFF; }
+        .txt-center { text-align: center; display: flex; align-items: center; justify-content: center; }
+
+        /* ====== 01 组件类型 - 基础容器 ====== */
+        .layout-container {
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+        }
+
+        .layout-header {
+            height: 36px;
+            font-size: 14px;
+        }
+
+        .layout-body {
+            padding: 8px;
+            display: flex;
+            gap: 8px;
+        }
+
+        /* 1. 线性水平 */
+        .body-horizontal { flex-direction: row; height: 60px; }
+        .body-horizontal .content-block { flex: 1; border-radius: 2px; font-size: 14px; }
+
+        /* 2. 线性垂直 */
+        .body-vertical { flex-direction: column; }
+        .body-vertical .content-block { height: 50px; border-radius: 4px; font-size: 14px; }
+        .body-vertical .btn-block { height: 36px; border-radius: 4px; font-size: 14px; background-color: #2696FF; }
+
+        /* 3. 约束布局 (相对定位模拟) */
+        .body-constraint {
+            position: relative;
+            height: 120px;
+        }
+        .constraint-block {
+            position: absolute;
+            width: 50px;
+            height: 28px;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+        .pos-tl { top: 8px; left: 8px; }
+        .pos-tr { top: 8px; right: 8px; }
+        .pos-center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .pos-bl { bottom: 8px; left: 8px; }
+        .pos-br { bottom: 8px; right: 8px; }
+
+        /* ====== 02 组件样式 - 嵌套与权重 ====== */
+        
+        /* 1. 权重定宽 */
+        .weight-row { display: flex; flex-direction: row; height: 30px; gap: 4px; }
+        .weight-block { border-radius: 2px; font-size: 14px; }
+        .w-1 { flex: 1; }
+        .w-2 { flex: 2; }
+        .w-3 { flex: 3; }
+
+        /* 2. 手动定宽 */
+        .manual-width-row { display: flex; flex-direction: row; height: 30px; gap: 4px; justify-content: flex-start; }
+        .width-block { border-radius: 2px; font-size: 14px; }
+
+        /* 3. 嵌套布局 */
+        .nested-container {
+            display: flex;
+            flex-direction: row;
+            height: 100px;
+            border: 1px solid #0659D9;
+            padding: 2px;
+            gap: 2px;
+        }
+        .nested-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #1A8BFF;
+            padding: 2px;
+            gap: 2px;
+            border-radius: 2px;
+        }
+        .nested-cell {
+            background-color: rgba(255,255,255,0.15);
+            border-radius: 2px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Card 01 -->
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_basic_usage">基础用法</div>
+        <div class="rv-item-container">
+            
+            <!-- 线性水平布局 -->
+            <div class="layout-container bg-blue-dark">
+                <div class="layout-header bg-blue-light txt-center txt-white" data-i18n="lay_linear_h">线性水平布局</div>
+                <div class="layout-body body-horizontal">
+                    <div class="content-block bg-white-trans txt-center txt-white" data-i18n="lay_content2">内容2</div>
+                    <div class="content-block bg-white-trans txt-center txt-white" data-i18n="lay_content3">内容3</div>
+                    <div class="content-block bg-white-trans txt-center txt-white" data-i18n="lay_content4">内容4</div>
+                </div>
+            </div>
+
+            <!-- 线性垂直布局 -->
+            <div class="layout-container bg-blue-dark">
+                <div class="layout-header bg-blue-light txt-center txt-white" data-i18n="lay_linear_v">线性垂直布局</div>
+                <div class="layout-body body-vertical">
+                    <div class="content-block bg-white-trans txt-center txt-white" data-i18n="lay_content">内容</div>
+                    <div class="content-block bg-white-trans txt-center txt-white" data-i18n="lay_content">内容</div>
+                    <div class="btn-block txt-center txt-white" data-i18n="lay_button">按钮</div>
+                </div>
+            </div>
+
+            <!-- 约束布局 -->
+            <div class="layout-container bg-blue-dark">
+                <div class="layout-header bg-blue-light txt-center txt-white" data-i18n="lay_constraint">约束布局</div>
+                <div class="layout-body body-constraint">
+                    <div class="constraint-block bg-white-trans txt-center txt-white pos-tl" data-i18n="lay_tl">左上</div>
+                    <div class="constraint-block bg-white-trans txt-center txt-white pos-tr" data-i18n="lay_tr">右上</div>
+                    <div class="constraint-block bg-white-trans txt-center txt-white pos-center" data-i18n="lay_center">居中</div>
+                    <div class="constraint-block bg-white-trans txt-center txt-white pos-bl" data-i18n="lay_bl">左下</div>
+                    <div class="constraint-block bg-white-trans txt-center txt-white pos-br" data-i18n="lay_br">右下</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Card 02 -->
+    <div class="rv-card-title" data-i18n="card_style_02">02 组件样式</div>
+    <div class="rv-card">
+        <div class="rv-item-container">
+            
+            <div class="rv-section-title" data-i18n="sec_weight_width">权重定宽</div>
+            <div class="weight-row">
+                <div class="weight-block bg-blue-default txt-center txt-white w-1">1</div>
+                <div class="weight-block bg-blue-default txt-center txt-white w-2">2</div>
+                <div class="weight-block bg-blue-default txt-center txt-white w-3">3</div>
+            </div>
+
+            <div class="rv-divider"></div>
+
+            <div class="rv-section-title" data-i18n="sec_manual_width">手动定宽</div>
+            <div class="manual-width-row">
+                <div class="width-block bg-blue-default txt-center txt-white" style="width: 30px;">30dp</div>
+                <div class="width-block bg-blue-default txt-center txt-white" style="width: 50px;">50dp</div>
+                <div class="width-block bg-blue-default txt-center txt-white" style="width: 40px;">40dp</div>
+            </div>
+
+            <div class="rv-divider"></div>
+
+            <div class="rv-section-title" data-i18n="sec_nested">嵌套布局</div>
+            <div class="nested-container">
+                <!-- Col 1 -->
+                <div class="nested-col">
+                    <div class="nested-cell w-1"></div>
+                </div>
+                <!-- Col 2 -->
+                <div class="nested-col">
+                    <div class="nested-cell w-1"></div>
+                    <div class="nested-cell w-1"></div>
+                </div>
+                <!-- Col 3 -->
+                <div class="nested-col">
+                    <div class="nested-cell w-1"></div>
+                    <div class="nested-cell w-2"></div>
+                    <div class="nested-cell w-3"></div>
+                </div>
+                <!-- Col 4 -->
+                <div class="nested-col">
+                    <div class="nested-cell w-1"></div>
+                    <div class="nested-cell w-2"></div>
+                    <div class="nested-cell w-3"></div>
+                    <div class="nested-cell" style="flex: 4;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:        { zh: "01 组件类型", en: "01 Component Type" },
+            card_style_02:    { zh: "02 组件样式", en: "02 Component Style" },
+            sec_basic_usage:  { zh: "基础用法",   en: "Basic Usage" },
+            sec_weight_width: { zh: "权重定宽",   en: "Weighted Width" },
+            sec_manual_width: { zh: "手动定宽",   en: "Fixed Width" },
+            sec_nested:       { zh: "嵌套布局",   en: "Nested Layout" },
+            lay_linear_h:     { zh: "线性水平布局", en: "Horizontal Linear Layout" },
+            lay_linear_v:     { zh: "线性垂直布局", en: "Vertical Linear Layout" },
+            lay_constraint:   { zh: "约束布局",   en: "Constraint Layout" },
+            lay_content:      { zh: "内容",       en: "Content" },
+            lay_content2:     { zh: "内容2",      en: "Content 2" },
+            lay_content3:     { zh: "内容3",      en: "Content 3" },
+            lay_content4:     { zh: "内容4",      en: "Content 4" },
+            lay_button:       { zh: "按钮",       en: "Button" },
+            lay_tl:           { zh: "左上",       en: "Top-Left" },
+            lay_tr:           { zh: "右上",       en: "Top-Right" },
+            lay_center:       { zh: "居中",       en: "Center" },
+            lay_bl:           { zh: "左下",       en: "Bottom-Left" },
+            lay_br:           { zh: "右下",       en: "Bottom-Right" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

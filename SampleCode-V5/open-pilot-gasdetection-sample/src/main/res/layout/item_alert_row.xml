@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/field_gap"
+    android:background="@drawable/bg_card"
+    android:orientation="vertical"
+    android:padding="@dimen/card_padding">
+
+    <TextView
+        android:id="@+id/tvAlertTitle"
+        style="@style/CardTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvAlertObserved"
+        style="@style/LabelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_gap" />
+
+    <TextView
+        android:id="@+id/tvAlertThreshold"
+        style="@style/LabelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvAlertMeta"
+        style="@style/CaptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_gap" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/field_gap"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAlertAck"
+            style="@style/KeyActionButton.Primary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/gas_alert_ack" />
+
+        <Button
+            android:id="@+id/btnAlertReview"
+            style="@style/KeyActionButton.Secondary"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/field_gap"
+            android:layout_weight="1"
+            android:text="@string/gas_alert_review" />
+
+        <Button
+            android:id="@+id/btnAlertDismiss"
+            style="@style/KeyActionButton.Secondary"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/field_gap"
+            android:layout_weight="1"
+            android:text="@string/gas_alert_dismiss" />
+    </LinearLayout>
+
+</LinearLayout>

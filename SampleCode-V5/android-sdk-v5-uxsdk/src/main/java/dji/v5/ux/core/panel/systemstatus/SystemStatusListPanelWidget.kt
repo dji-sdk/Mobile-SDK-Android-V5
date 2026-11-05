@@ -26,6 +26,7 @@ package dji.v5.ux.core.panel.systemstatus
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.use
 import dji.v5.utils.common.LogUtils
 import dji.v5.ux.R
@@ -110,7 +111,6 @@ class SystemStatusListPanelWidget @JvmOverloads constructor(
     init {
         val excludedItemsValue = attrs?.let { initAttributes(context, it) }
         val excludedItemsSet = getExcludedItems(excludedItemsValue)
-
         smartListModel = SystemStatusSmartListModel(context, attrs, excludedItemsSet)
     }
 

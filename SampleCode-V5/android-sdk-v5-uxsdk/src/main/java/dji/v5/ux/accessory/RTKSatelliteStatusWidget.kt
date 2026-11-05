@@ -497,7 +497,7 @@ open class RTKSatelliteStatusWidget @JvmOverloads constructor(
     }
 
     private fun updateLabelView() {
-        if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
+        if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct() || ProductUtil.isM5Product()) {
             //orientation
             orientationTextView.visibility = GONE
             orientationTitleTextView.visibility = GONE

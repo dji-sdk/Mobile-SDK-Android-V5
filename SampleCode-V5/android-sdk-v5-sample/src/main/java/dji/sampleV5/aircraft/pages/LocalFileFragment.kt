@@ -16,7 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.aircraft.databinding.FragLocalFileBinding
 import dji.sampleV5.aircraft.models.MegaphoneVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.recorder.PCMTools
@@ -25,7 +25,6 @@ import dji.v5.manager.aircraft.megaphone.UploadType
 import dji.v5.utils.common.ContextUtil
 import dji.v5.utils.common.DJIExecutor
 import dji.v5.utils.common.DeviceInfoUtil.getPackageName
-import dji.v5.utils.common.DocumentUtil
 import dji.v5.utils.common.FileUtils
 import java.io.File
 

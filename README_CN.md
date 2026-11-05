@@ -1,4 +1,4 @@
-# DJI Mobile SDK for Android V5 最新版本 V5.18.0
+# DJI Mobile SDK for Android V5 最新版本 V5.20.1
 [English Version](README.md)
 
 ## DJI Mobile SDK V5 是什么?
@@ -32,7 +32,11 @@ DJI Mobile SDK V5拥有更加简洁易用的无人机硬件控制接口和软件
 └── SampleCode-V5
     ├── android-sdk-v5-as
     ├── android-sdk-v5-sample
-    └── android-sdk-v5-uxsdk
+    ├── android-sdk-v5-uxsdk
+    ├── open-pilot-plugin-sample
+    ├── open-pilot-flighttask-sample
+    ├── open-pilot-gasdetection-sample
+    └── open-pilot-patrol-sample
 ```
 
 
@@ -58,6 +62,10 @@ Sample分为3部分：
 Sample模块：
 
 - sample：编译飞机sample App，依赖uxsdk。
+- plugin sample：编译飞机插件示例 App，依赖uxsdk。
+- flighttask sample：飞行任务管理示例插件，自带本地 Node.js 后端与网页管理台。
+- gasdetection sample：气体检测示例插件，自带本地 Node.js 后端。
+- patrol sample：智能巡检示例插件，自带本地 Node.js 后端。
 
 ## 整合
 
@@ -66,7 +74,7 @@ Sample模块：
 
 ## AAR说明
 
-> **注意：** sdkVersion = 5.18.0
+> **注意：** sdkVersion = 5.20.1
 
 | SDK包| 说明| 使用方式|
 | :---------------: | :-----------------:  | :---------------: |

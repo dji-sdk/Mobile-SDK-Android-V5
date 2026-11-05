@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 轮播指示器·未选中态：半透明白短圆角条（宽 12dp × 高 4dp，由 layout 指定尺寸） -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#80FFFFFF" />
+    <corners android:radius="2dp" />
+</shape>

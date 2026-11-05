@@ -317,7 +317,7 @@ object KeyItemHelper {
              return true
          }
          if (clazz == MutableList::class.java) {
-             field[obj] = ArrayList<Any>()// todo
+             field[obj] = ArrayList<Any>()
              return true
          } else if (clazz == String::class.java) {
              field[obj] = ""

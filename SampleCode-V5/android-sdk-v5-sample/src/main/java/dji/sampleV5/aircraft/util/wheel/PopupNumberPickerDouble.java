@@ -95,7 +95,6 @@ public class PopupNumberPickerDouble extends PopupWindow {
 		
 		ImageButton select_button = (ImageButton) view.findViewById(R.id.id_select_imageButton1);
 		select_button.setOnClickListener(v -> {
-			// TODO Auto-generated method stub
 			valueChangeListen.onValueChange(picker_currentPos1, picker_currentPos2);
 
 		});
@@ -119,7 +118,6 @@ public class PopupNumberPickerDouble extends PopupWindow {
 
 		@Override
 		protected CharSequence getItemText(int index) {
-			// TODO Auto-generated method stub
 			return strItemValue[index].toString();
 		}
 
@@ -148,7 +146,6 @@ public class PopupNumberPickerDouble extends PopupWindow {
 
 		@Override
 		protected CharSequence getItemText(int index) {
-			// TODO Auto-generated method stub
 			return "";
 		}
 
@@ -184,7 +181,6 @@ public class PopupNumberPickerDouble extends PopupWindow {
 
 		@Override
 		protected CharSequence getItemText(int index) {
-			// TODO Auto-generated method stub
 			return "";
 		}
 

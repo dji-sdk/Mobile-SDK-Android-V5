@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pilot 插件合约文件（Pilot 发现插件后读取插件元信息的唯一入口）。
+  文件名与路径固定为 res/xml/dji_open_pilot_plugin.xml，不可改名或移动。
+
+  注意：
+  1. 四个属性全部必填，缺任意一项 Pilot 会静默跳过整个插件（插件列表不出现且无报错）。
+  2. 插件 ID 固定取 APK 包名（applicationId），不需要也无法通过合约声明。
+  3. dop:name / dop:developer / dop:description 只是兜底值；若 strings.xml 中定义了
+      dji_open_pilot_plugin_name / dji_open_pilot_plugin_developer /
+      dji_open_pilot_plugin_description 三个固定名称的字符串，Pilot 会优先使用它们
+      并按遥控器当前语言取对应翻译（见 values/ 与 values-zh/strings.xml）。
+-->
+<plugin xmlns:dop="https://dji.com/open-pilot"
+    dop:name="SmartPatrol"
+    dop:version="1.0.0"
+    dop:developer="DJI Inc."
+    dop:description="A DJI Pilot plugin" />

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - WebView Case 预览</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: transparent; color: #FFFFFF; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+        .rv-card { background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+
+        .rv-item-container { display: flex; flex-direction: column; align-items: stretch; }
+
+        /* ====== WebView (Iframe) 样式 ====== */
+        .rv-webview-container {
+            width: 100%;
+            height: 160px; /* 为了在宽屏设备上视觉平衡，略微放大高度 */
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #FFFFFF; /* 在加载完成前展示白底 */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-sizing: border-box;
+            /* 居中定位 */
+            position: relative;
+        }
+
+        .rv-webview-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        /* Loading 占位提示 (为了应对网络慢时全白不好看) */
+        .loading-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888888;
+            font-size: 12px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .rv-webview-container iframe { position: relative; z-index: 1; }
+
+    </style>
+</head>
+<body>
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_load_web">加载网页</div>
+        <div class="rv-item-container">
+            <div class="rv-webview-container">
+                <!-- 网络差时的兜底提示 -->
+                <div class="loading-hint">Loading example.com...</div>
+                <!-- 通过 Iframe 真实嵌入网页，替换掉了不允许 iframe 嵌套的 dji.com -->
+                <iframe src="https://developer.dji.com/cn/" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:    { zh: "01 组件类型", en: "01 Component Type" },
+            sec_load_web: { zh: "加载网页",   en: "Load Web Page" }
+        };
+        // 由 Android 侧 onPageFinished 调用，传入 "zh" / "en"。
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.aircraft.databinding.FragLogInfoPageBinding
 import dji.sampleV5.aircraft.models.MSDKCrashLogVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 
 /**
  * ClassName : LogInfoFragment

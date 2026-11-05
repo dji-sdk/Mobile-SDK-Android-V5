@@ -1,6 +1,6 @@
 package dji.sampleV5.aircraft.models
 
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.manager.dataprotect.DataProtectionManager
 import dji.v5.utils.common.DJIExecutor
 import dji.v5.utils.common.LogUtils

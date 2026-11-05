@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用名备用资源；Manifest android:label 实际使用 dji_open_pilot_plugin_name -->
+    <string name="app_name">Gas Detection</string>
+
+    <!-- Pilot 插件合约文案：资源名由 open-pilot-client 约定，不可修改；契约 XML 中为兜底值 -->
+    <string name="dji_open_pilot_plugin_name">Gas Detection</string>
+    <string name="dji_open_pilot_plugin_description">Gas detection payload demo</string>
+    <string name="dji_open_pilot_plugin_developer">DJI Inc.</string>
+
+    <!-- 负载调试页：输入与操作 -->
+    <string name="gas_max_bytes_hint">Packet limit: 16..255 (protocol) / 1..255 (raw)</string>
+    <string name="gas_hex_input_label">Hex bytes; unchecked = UTF-8</string>
+    <string name="gas_payload_input_hint">00 41 FF</string>
+    <string name="gas_apply_port">Apply port / start receiving</string>
+    <string name="gas_send_bytes">Send</string>
+    <string name="gas_protocol_mode">Use reusable protocol bridge (JSON) instead of raw debug</string>
+
+    <!-- 负载调试页：协议模式 -->
+    <string name="gas_protocol_listening">Protocol bridge on %1$s, max=%2$d</string>
+    <string name="gas_protocol_error">Bridge rejected: %1$s</string>
+    <string name="gas_protocol_state">Bridge: %1$s %2$s</string>
+    <string name="gas_protocol_event">EVT cmd=%1$d params=%2$s</string>
+    <string name="gas_protocol_result">Result: %1$s</string>
+
+    <!-- 负载调试页：端口与在线状态 -->
+    <string name="gas_ports_idle">Select the actual online payload port, then Apply</string>
+    <string name="gas_ports_online">Online ports: %1$s; %2$s: %3$s</string>
+    <string name="gas_port_item">%1$s (%2$d)</string>
+
+    <!-- 负载调试页：操作校验与错误提示 -->
+    <string name="gas_error_pilot_not_connected">Pilot not connected</string>
+    <string name="gas_error_select_port_and_bytes">Select a port and maximum bytes 1..255</string>
+    <string name="gas_error_port_not_online">%1$s is not online</string>
+    <string name="gas_listening">Listening %1$s, max=%2$d. Actual aircraft MTU must be verified.</string>
+
+    <!-- SDK 注册与连接状态（入口页状态栏显示） -->
+    <string name="gas_status_initializing">SDK initializing</string>
+    <string name="gas_status_init_progress">%1$s %2$d</string>
+    <string name="gas_status_registered">SDK registered</string>
+    <string name="gas_status_register_failed">Registration failed: %1$s</string>
+    <string name="gas_status_aircraft_connected">Aircraft connected: %1$d</string>
+    <string name="gas_status_aircraft_disconnected">Aircraft disconnected: %1$d</string>
+    <string name="gas_status_aircraft_changed">Aircraft changed: %1$d</string>
+    <string name="gas_status_pilot">Pilot: %1$s</string>
+    <string name="gas_status_pilot_incompatible">Pilot incompatible: %1$s</string>
+
+    <!-- 入口页：插件身份与就绪状态 -->
+    <string name="entry_version">Version %1$s</string>
+    <string name="entry_back_to_pilot">Back to Pilot</string>
+    <string name="entry_pilot_connected">Pilot connected</string>
+    <string name="entry_pilot_disconnected">Pilot disconnected</string>
+    <string name="entry_service_checking">Service checking</string>
+    <string name="entry_service_connected">Service connected</string>
+    <string name="entry_service_unavailable">Service unavailable</string>
+    <string name="entry_pilot_not_connected">Pilot is not connected</string>
+    <string name="entry_status_sdk_unregistered">SDK not registered</string>
+    <string name="entry_status_pilot_disconnected">Pilot not connected</string>
+    <string name="entry_status_aircraft_disconnected">Aircraft not connected</string>
+    <string name="entry_status_all_ready">All ready</string>
+    <string name="entry_open_debug">Payload debug</string>
+
+    <!-- 调试页：标题与字段标签 -->
+    <string name="debug_title">Payload debug</string>
+    <string name="debug_back">Back</string>
+    <string name="gas_port_label">Payload port</string>
+    <string name="gas_max_bytes_label">Maximum bytes</string>
+    <string name="gas_payload_input_label">Payload data</string>
+    <string name="gas_log_label">Log</string>
+
+    <!-- 检测任务：阶段与预检 -->
+    <string name="gas_task_title">Tasks</string>
+    <string name="gas_task_none">No tasks</string>
+    <string name="gas_task_conflict">Another task is in progress</string>
+    <string name="gas_tab_task">Tasks</string>
+    <string name="gas_task_accept">Accept</string>
+    <string name="gas_task_reject">Reject</string>
+    <string name="gas_task_manual">Switch to manual</string>
+    <string name="gas_task_recheck">Re-check</string>
+    <string name="gas_task_finish">Finish</string>
+    <string name="gas_task_stage_label">Stage: %1$s</string>
+    <string name="gas_task_stage_idle">Idle</string>
+    <string name="gas_task_stage_new_order">New order</string>
+    <string name="gas_task_stage_detail">Task detail</string>
+    <string name="gas_task_stage_prep">Preflight</string>
+    <string name="gas_task_stage_not_ready">Preflight failed</string>
+    <string name="gas_task_stage_ready">Ready</string>
+    <string name="gas_task_stage_manual">Manual monitoring</string>
+    <string name="gas_task_stage_finalizing">Finalizing</string>
+    <string name="gas_task_stage_flyto">Flying to target</string>
+    <string name="gas_task_stage_search">Searching target</string>
+    <string name="gas_task_stage_follow">Following</string>
+    <string name="gas_task_preflight_pass">Preflight passed</string>
+    <string name="gas_task_preflight_fail">Preflight failed: %1$s</string>
+    <string name="gas_task_failure_payload_offline">Payload offline</string>
+    <string name="gas_task_failure_config_invalid">Channel config unavailable</string>
+    <string name="gas_task_failure_auto_unsupported">Aircraft does not support auto flight</string>
+    <string name="gas_task_failure_auto_unknown">Aircraft capability unknown</string>
+    <string name="gas_task_failure_unknown">Unknown reason</string>
+    <string name="gas_task_failure_aircraft_disconnected">Aircraft not connected</string>
+    <string name="gas_task_failure_not_flying">Aircraft not flying</string>
+    <string name="gas_task_failure_gps_weak">GPS signal too weak</string>
+    <string name="gas_task_failure_battery_low">Battery too low</string>
+    <string name="gas_task_failure_mission_running">Another smart mission is running</string>
+    <string name="gas_task_failure_authority_occupied">Flight control occupied</string>
+    <string name="gas_task_failure_target_missing">Target point or height missing</string>
+    <string name="gas_task_target">Target %1$.5f, %2$.5f</string>
+    <string name="gas_task_boundary">Safety boundary %1$.0f m</string>
+    <string name="gas_task_requirements">Requirement: %1$s</string>
+    <string name="gas_task_deadline">Deadline: %1$s</string>
+    <string name="gas_task_value_missing">--</string>
+    <string name="gas_task_error_network">Sync failed: %1$s</string>
+    <string name="gas_task_error_http">Sync failed: HTTP %1$d</string>
+    <string name="gas_task_error_parse">Parse failed: %1$s</string>
+
+    <!-- 悬浮窗 -->
+    <string name="gas_floating_collapsed">Gas detection</string>
+    <string name="gas_floating_detail">View details</string>
+    <string name="gas_floating_collapse">Collapse</string>
+    <string name="gas_floating_entry_hint">No active inspection task</string>
+    <string name="gas_floating_entry_open_app">Open Gas Detection app</string>
+    <string name="gas_floating_fresh">Payload online</string>
+    <string name="gas_floating_offline">Payload offline</string>
+
+    <!-- 悬浮窗：任务待接收态 -->
+    <string name="gas_floating_job_stage">Task acceptance</string>
+    <string name="gas_floating_job_label_stage">Stage</string>
+    <string name="gas_floating_job_label_task">Task</string>
+    <string name="gas_floating_job_position">%1$d/%2$d</string>
+    <string name="gas_floating_job_previous">Previous</string>
+    <string name="gas_floating_job_next">Next</string>
+    <string name="gas_floating_job_deadline_none">Not provided</string>
+
+    <!-- 悬浮窗：任务链节点 -->
+    <string name="gas_chain_receive">Received</string>
+    <string name="gas_chain_prepare">Pre-check</string>
+    <string name="gas_chain_flyto">Fly to</string>
+    <string name="gas_chain_sampling">Sampling</string>
+    <string name="gas_chain_finish">Wrap-up</string>
+
+    <!-- 自动飞行 -->
+    <string name="gas_auto_start">Start auto flight</string>
+    <string name="gas_auto_exit">Exit auto</string>
+    <string name="gas_auto_emergency_stop">Emergency stop</string>
+    <string name="gas_auto_status">Auto: %1$s · Control: %2$s</string>
+    <string name="gas_auto_status_with_reason">Auto: %1$s · Control: %2$s · %3$s</string>
+    <string name="gas_auto_phase_starting">Starting</string>
+    <string name="gas_auto_phase_flying">Flying</string>
+    <string name="gas_auto_phase_arrived">Arrived</string>
+    <string name="gas_auto_phase_handover">Handover</string>
+    <string name="gas_auto_flyto_prepare">Preparing</string>
+    <string name="gas_auto_flyto_launch_pre">Pre-takeoff</string>
+    <string name="gas_auto_flyto_launch">Taking off</string>
+    <string name="gas_auto_flyto_marchon">Cruising</string>
+    <string name="gas_auto_flyto_finished">Arrived</string>
+    <string name="gas_auto_flyto_interrupted">Interrupted</string>
+    <string name="gas_auto_flyto_unknown">Unknown</string>
+    <string name="gas_auto_authority_rc">RC</string>
+    <string name="gas_auto_authority_msdk">MSDK</string>
+    <string name="gas_auto_authority_osdk">OSDK</string>
+    <string name="gas_auto_authority_airport">Dock</string>
+    <string name="gas_auto_authority_auto_test">Auto test</string>
+    <string name="gas_auto_authority_unknown">Unknown</string>
+    <string name="gas_auto_handover_user_exit">Exited by pilot</string>
+    <string name="gas_auto_handover_interrupted">Task interrupted</string>
+    <string name="gas_auto_handover_not_confirmed">Command not confirmed</string>
+    <string name="gas_auto_handover_not_advanced">State not advanced</string>
+    <string name="gas_auto_handover_disconnected">Aircraft disconnected</string>
+    <string name="gas_auto_handover_battery">Low battery</string>
+    <string name="gas_auto_handover_gps">Positioning lost</string>
+    <string name="gas_auto_handover_fc">Flight controller takeover</string>
+    <string name="gas_auto_handover_stop_failed">Emergency stop failed</string>
+    <string name="gas_auto_confirm_title">Start auto flight?</string>
+    <string name="gas_auto_confirm_message">Target %1$.6f, %2$.6f · Height %3$d m. You can exit auto flight at any time.</string>
+    <string name="gas_auto_confirm_start">Start</string>
+    <string name="gas_auto_confirm_cancel">Cancel</string>
+    <string name="gas_auto_stop_confirm_title">Emergency stop?</string>
+    <string name="gas_auto_stop_confirm_message">Only use this when the remote controller cannot take over. It sends an emergency stop command to the aircraft.</string>
+    <string name="gas_auto_stop_confirm_ok">Stop now</string>
+    <string name="gas_auto_stop_issued">Emergency stop sent</string>
+    <string name="gas_auto_stop_failed">Emergency stop failed: %1$s</string>
+    <string name="gas_auto_start_rejected">Cannot start: preflight is no longer valid</string>
+    <string name="gas_auto_confirm_handover">Confirm takeover</string>
+    <string name="gas_auto_exit_hint">Take over with the remote controller</string>
+    <string name="gas_floating_notice_nav_failed">Cannot open plugin page</string>
+
+    <!-- 监测 / 传输主页 -->
+    <string name="gas_block_task_info">Task info</string>
+    <string name="gas_block_auto">Auto flight</string>
+    <string name="gas_transfer_photos">Task photos</string>
+    <string name="gas_tab_tasks">Tasks</string>
+    <string name="gas_tab_device">Device</string>
+    <string name="gas_job_status_dispatched">Dispatched</string>
+    <string name="gas_job_status_accepted">Accepted</string>
+    <string name="gas_job_status_in_progress">In progress</string>
+    <string name="gas_job_status_finalizing">Finalizing</string>
+    <string name="gas_job_status_completed">Completed</string>
+    <string name="gas_job_status_cancelled">Cancelled</string>
+    <string name="gas_job_status_rejected">Rejected</string>
+    <string name="gas_task_group_active">In progress</string>
+    <string name="gas_task_group_pending">Pending</string>
+    <string name="gas_task_group_done">Completed</string>
+    <string name="gas_task_detail_empty">Select a task on the left to view details</string>
+    <string name="gas_task_list_empty">No tasks</string>
+    <string name="gas_task_select_blocked">Finish the current task before switching</string>
+    <string name="gas_task_multiple_active">Multiple active tasks found. Only the selected one can be operated.</string>
+    <string name="gas_task_item_meta">Target %1$.5f, %2$.5f</string>
+    <string name="gas_transfer_task">Task: %1$s</string>
+    <string name="gas_transfer_count">Photos: %1$d</string>
+    <string name="gas_transfer_no_task">No task selected</string>
+    <string name="gas_transfer_empty">No photos yet. Photos taken during the task will appear here.</string>
+    <string name="gas_capture_photo">Take photo (not enabled)</string>
+    <string name="gas_capture_hint">Photo capture will be available in a later version.</string>
+    <string name="gas_tab_monitor">Monitor</string>
+    <string name="gas_tab_transport">Transport</string>
+    <string name="gas_section_channels">Channels</string>
+    <string name="gas_section_batch">Sampling batch</string>
+    <string name="gas_section_ports">Payload ports</string>
+    <string name="gas_section_freshness">Data timing</string>
+    <string name="gas_section_catalog">Channel mapping</string>
+    <string name="gas_device_latest">Latest data %1$d s ago</string>
+    <string name="gas_device_details">Details</string>
+    <string name="gas_device_expand">Expand</string>
+    <string name="gas_device_collapse">Collapse</string>
+    <string name="gas_device_advanced">Advanced diagnostics</string>
+    <string name="gas_payload_summary">Online payloads: %1$d · Ports: %2$d</string>
+    <string name="gas_channel_empty">No task channels. Accept a task to show readings.</string>
+    <string name="gas_channel_not_provided">Not provided</string>
+    <string name="gas_channel_quality">Quality: %1$s</string>
+    <string name="gas_channel_source_time">Source time: %1$s</string>
+    <string name="gas_channel_received_time">Received: %1$s</string>
+    <string name="gas_channel_stale">Expired · last update %1$s</string>
+    <string name="gas_channel_fresh">Fresh</string>
+    <string name="gas_channel_insufficient">Not enough samples</string>
+    <string name="gas_trend_rising">Rising</string>
+    <string name="gas_trend_falling">Falling</string>
+    <string name="gas_trend_stable">Stable</string>
+    <string name="gas_quality_valid">Valid</string>
+    <string name="gas_quality_invalid">Invalid</string>
+    <string name="gas_quality_out_of_range">Out of range</string>
+    <string name="gas_quality_sensor_fault">Sensor fault</string>
+    <string name="gas_quality_calibration_due">Calibration due</string>
+    <string name="gas_quality_time_uncertain">Time uncertain</string>
+    <string name="gas_batch_session">Session: %1$s</string>
+    <string name="gas_batch_counts">Samples %1$d · valid %2$d · invalid %3$d</string>
+    <string name="gas_batch_updated">Last update: %1$s</string>
+    <string name="gas_batch_live">Sampling</string>
+    <string name="gas_batch_offline">Offline</string>
+    <string name="gas_batch_none">No samples yet</string>
+    <string name="gas_link_started">Ingest running</string>
+    <string name="gas_link_stopped">Ingest not started</string>
+    <string name="gas_link_hint">Connect Pilot to start payload ingest.</string>
+    <string name="gas_port_connected">Connected</string>
+    <string name="gas_port_disconnected">Disconnected</string>
+    <string name="gas_port_product">Product: %1$s</string>
+    <string name="gas_port_firmware">Firmware: %1$s</string>
+    <string name="gas_port_feature">Feature opened: %1$s</string>
+    <string name="gas_port_counts">RX %1$d · decoded %2$d · ignored %3$d · failed %4$d · no adapter %5$d</string>
+    <string name="gas_port_last_error">Last error: %1$s (%2$s)</string>
+    <string name="gas_port_empty">No payload ports</string>
+    <string name="gas_port_counts_unknown">No parsing data yet</string>
+    <string name="gas_freshness_source">Source time: %1$s</string>
+    <string name="gas_freshness_received">Received time: %1$s</string>
+    <string name="gas_freshness_delta">Delta: %1$d ms</string>
+    <string name="gas_freshness_threshold">Expire after: %1$d ms</string>
+    <string name="gas_freshness_none">No measurements yet</string>
+    <string name="gas_catalog_version">Catalog version: %1$s</string>
+    <string name="gas_catalog_entry">%1$d → %2$s (%3$s / %4$s)</string>
+    <string name="gas_catalog_empty">No channel mapping</string>
+    <string name="gas_catalog_unavailable">Configuration not loaded: %1$s</string>
+    <string name="gas_export_diagnostics">Export diagnostics</string>
+    <string name="gas_export_success">Diagnostics exported</string>
+    <string name="gas_export_failed">Export failed: %1$s</string>
+    <string name="gas_export_no_app">No app can share the file; saved to %1$s</string>
+    <string name="gas_diagnostics_share_title">Share diagnostics</string>
+    <string name="gas_value_unknown">--</string>
+    <string name="gas_value_yes">Yes</string>
+    <string name="gas_value_no">No</string>
+
+    <!-- 异常告警 -->
+    <string name="gas_alert_section">Alerts</string>
+    <string name="gas_alert_count">Alerts (%1$d)</string>
+    <string name="gas_alert_empty">No alerts</string>
+    <string name="gas_alert_type_threshold">Threshold exceeded</string>
+    <string name="gas_alert_type_sensor_fault">Sensor fault</string>
+    <string name="gas_alert_type_stale">Data expired</string>
+    <string name="gas_alert_type_quality">Data quality</string>
+    <string name="gas_alert_state_new">New</string>
+    <string name="gas_alert_state_acknowledged">Acknowledged</string>
+    <string name="gas_alert_state_review">Under review</string>
+    <string name="gas_alert_state_dismissed">Dismissed</string>
+    <string name="gas_alert_state_closed">Closed</string>
+    <string name="gas_alert_ack">Acknowledge</string>
+    <string name="gas_alert_review">Mark abnormal</string>
+    <string name="gas_alert_dismiss">Dismiss</string>
+    <string name="gas_alert_title">%1$s · %2$s</string>
+    <string name="gas_alert_observed">Observed %1$s %2$s</string>
+    <string name="gas_alert_threshold">Threshold %1$s %2$s</string>
+    <string name="gas_alert_meta">%1$s · %2$s</string>
+    <string name="gas_floating_alert">Alert: %1$s · %2$s</string>
+    <string name="gas_floating_alert_none">No alerts</string>
+
+    <!-- 船舶识别与目标关联 -->
+    <string name="gas_vessel_label">Vessel: %1$s</string>
+    <string name="gas_vessel_state_starting">starting detection</string>
+    <string name="gas_vessel_state_searching">searching (%1$d/%2$d)</string>
+    <string name="gas_vessel_state_lost">target lost, searching</string>
+    <string name="gas_vessel_state_locked">locked #%1$d · %2$ds · %3$s</string>
+    <string name="gas_vessel_state_unavailable">recognition unavailable (%1$s)</string>
+    <string name="gas_vessel_confirm_pending">pending confirmation</string>
+    <string name="gas_vessel_confirm_done">%1$s (confirmed)</string>
+    <string name="gas_vessel_failure_start">start failed</string>
+    <string name="gas_vessel_failure_timeout">no enable confirmation</string>
+    <string name="gas_vessel_failure_lost">detection stopped</string>
+    <string name="gas_vessel_block">Cannot start search: %1$s</string>
+    <string name="gas_vessel_block_not_arrived">not arrived yet</string>
+    <string name="gas_vessel_block_disconnected">aircraft not connected</string>
+    <string name="gas_vessel_block_not_flying">aircraft not flying</string>
+    <string name="gas_vessel_block_mission_running">another intelligent mission is running</string>
+    <string name="gas_vessel_block_mission_unknown">intelligent mission state unknown</string>
+    <string name="gas_vessel_block_stage">task stage not ready</string>
+    <string name="gas_vessel_search_start">Start search</string>
+    <string name="gas_vessel_retry">Retry detection</string>
+    <string name="gas_vessel_confirm">Confirm vessel</string>
+    <string name="gas_vessel_dialog_title">Confirm vessel</string>
+    <string name="gas_vessel_name_label">Vessel name or number</string>
+    <string name="gas_vessel_name_hint">e.g. Patrol 01</string>
+    <string name="gas_vessel_name_required">Enter a vessel name or number</string>
+    <string name="gas_vessel_dialog_save">Save</string>
+    <string name="gas_vessel_confirm_rejected">Confirm failed: the target is no longer valid</string>
+    <string name="gas_floating_vessel_confirm_message">Mark the locked target “%1$s” as confirmed. You can edit the name on the task page.</string>
+    <string name="gas_floating_finish_confirm_message">Finish this task? A detection record will be generated and the task moves to finalizing.</string>
+    <string name="gas_floating_finish_rejected">Finish failed: the current stage does not allow it</string>
+
+    <!-- 虚拟摇杆跟随 -->
+    <string name="gas_follow_start">Start follow</string>
+    <string name="gas_follow_confirm_title">Start following vessel</string>
+    <string name="gas_follow_confirm_message">The aircraft will hold position relative to the target: forward/back within ±1.0 m/s, yaw within ±10°/s, altitude held. You can stop at any time.</string>
+    <string name="gas_follow_label">Follow: %1$s</string>
+    <string name="gas_follow_status_arming">establishing control</string>
+    <string name="gas_follow_status_active">following · control %1$s</string>
+    <string name="gas_follow_status_releasing">stopping follow...</string>
+    <string name="gas_follow_status_stopped">ended · %1$s</string>
+    <string name="gas_follow_status_stopped_unconfirmed">ended · %1$s · release not confirmed, take over with RC</string>
+    <string name="gas_follow_reason_target_lost">target lost</string>
+    <string name="gas_follow_reason_target_stale">target observation expired</string>
+    <string name="gas_follow_reason_invalid_rect">target area unsupported</string>
+    <string name="gas_follow_reason_authority">control authority changed</string>
+    <string name="gas_follow_reason_battery">low battery</string>
+    <string name="gas_follow_reason_gps">weak GPS</string>
+    <string name="gas_follow_reason_fc">flight controller takeover</string>
+    <string name="gas_follow_reason_disconnected">disconnected</string>
+    <string name="gas_follow_reason_enable_failed">enable failed</string>
+    <string name="gas_follow_reason_authority_timeout">control not confirmed</string>
+    <string name="gas_follow_reason_advanced_timeout">advanced mode not confirmed</string>
+    <string name="gas_follow_reason_release_timeout">release not confirmed</string>
+    <string name="gas_follow_reason_user_exit">exited by pilot</string>
+    <string name="gas_follow_reason_task_finished">task finished</string>
+    <string name="gas_follow_reason_stage">task stage not ready</string>
+    <string name="gas_follow_block_not_locked">wait for target lock</string>
+    <string name="gas_follow_block_safety">flight safety conditions not met</string>
+    <string name="gas_follow_block_authority">control authority is occupied</string>
+    <string name="gas_follow_block_active">already following</string>
+
+    <!-- 检测记录 -->
+    <string name="gas_record_section">Inspection record</string>
+    <string name="gas_record_empty">No inspection records yet</string>
+    <string name="gas_record_summary">%1$s · samples %2$d · alerts %3$d</string>
+    <string name="gas_record_error">Last error: %1$s</string>
+    <string name="gas_record_retry">Retry upload</string>
+    <string name="gas_record_generated">Inspection record generated</string>
+    <string name="gas_record_status_queued">Waiting to upload</string>
+    <string name="gas_record_status_uploading">Uploading</string>
+    <string name="gas_record_status_uploaded">Uploaded</string>
+    <string name="gas_record_status_failed">Upload failed</string>
+
+    <!-- 检测记录（双栏） -->
+    <string name="gas_record_detail_meta">Samples %1$d · valid %2$d · invalid %3$d · alerts %4$d</string>
+    <string name="gas_record_status_label">Status: %1$s</string>
+    <string name="gas_record_channel_line">%1$s %2$s · valid %3$d · min %4$s / max %5$s / avg %6$s</string>
+    <string name="gas_record_uploaded_at">Uploaded at %1$s</string>
+    <string name="gas_record_empty_detail">Select a record on the left to view details</string>
+
+</resources>

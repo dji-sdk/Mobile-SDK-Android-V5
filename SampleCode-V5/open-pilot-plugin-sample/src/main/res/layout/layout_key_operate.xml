@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- KeyManager 右下操作台（浅色化，保留全部 binding id） -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!-- 当前选中 Key 名 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_current_key"
+            android:textColor="@color/card_desc_text"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/card_title_text"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            tools:text="KeyAircraftLocation3D" />
+
+        <!-- 死代码：保留 id，隐藏 -->
+        <Button
+            android:id="@+id/bt_add_command"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add As Command"
+            android:textAllCaps="false"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/demo_divider" />
+
+    <!-- 操作按钮行 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_get"
+            style="@style/KeyActionButton"
+            android:text="@string/key_btn_get" />
+
+        <Button
+            android:id="@+id/bt_set"
+            style="@style/KeyActionButton"
+            android:layout_marginStart="8dp"
+            android:text="@string/key_btn_set" />
+
+        <Button
+            android:id="@+id/bt_listen"
+            style="@style/KeyActionButton"
+            android:layout_marginStart="8dp"
+            android:text="@string/key_btn_listen" />
+
+        <Button
+            android:id="@+id/bt_action"
+            style="@style/KeyActionButton"
+            android:layout_marginStart="8dp"
+            android:text="@string/key_btn_action" />
+
+        <Button
+            android:id="@+id/bt_unlistenall"
+            style="@style/KeyActionButtonOutline"
+            android:layout_marginStart="8dp"
+            android:text="@string/key_btn_unlisten_all" />
+
+        <!-- 死代码：保留 id，隐藏 -->
+        <Button
+            android:id="@+id/bt_gpscoord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="StartGpsTest"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- 参数 Spinner 行 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/key_label_component_index"
+                android:textColor="@color/card_desc_text"
+                android:textSize="10sp" />
+
+            <Spinner
+                android:id="@+id/sp_index"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_spinner_antd_selector"
+                android:dropDownWidth="match_parent"
+                android:popupTheme="@style/AntdSpinnerPopupTheme"
+                android:popupBackground="@drawable/bg_spinner_popup_antd"
+                android:theme="@style/AntdSpinnerTheme"
+                app:popupTheme="@style/AntdSpinnerPopupTheme" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_subtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/key_label_subtype"
+                android:textColor="@color/card_desc_text"
+                android:textSize="10sp" />
+
+            <Spinner
+                android:id="@+id/sp_subtype"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_spinner_antd_selector"
+                android:dropDownWidth="match_parent"
+                android:popupTheme="@style/AntdSpinnerPopupTheme"
+                android:popupBackground="@drawable/bg_spinner_popup_antd"
+                android:theme="@style/AntdSpinnerTheme"
+                app:popupTheme="@style/AntdSpinnerPopupTheme" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/key_label_subindex"
+                android:textColor="@color/card_desc_text"
+                android:textSize="10sp" />
+
+            <Spinner
+                android:id="@+id/sp_subindex"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_spinner_antd_selector"
+                android:dropDownWidth="match_parent"
+                android:popupTheme="@style/AntdSpinnerPopupTheme"
+                android:popupBackground="@drawable/bg_spinner_popup_antd"
+                android:theme="@style/AntdSpinnerTheme"
+                app:popupTheme="@style/AntdSpinnerPopupTheme" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 结果标题 + Clear -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/key_result_title"
+            android:textColor="@color/card_title_text"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_clearlog"
+            style="@style/KeyActionButtonOutline"
+            android:layout_width="wrap_content"
+            android:minWidth="64dp"
+            android:paddingHorizontal="12dp"
+            android:text="@string/key_btn_clear" />
+    </LinearLayout>
+
+    <!-- 结果日志卡片 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_key_log_card"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|start"
+            android:scrollbars="vertical"
+            android:textColor="@color/log_text"
+            android:textIsSelectable="true"
+            android:textSize="10sp"
+            tools:text="12:30:01: result..." />
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|start"
+            android:scrollbars="vertical"
+            android:text="@string/operate_listen_record_tips"
+            android:textColor="@color/card_desc_text"
+            android:textSize="12sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>
