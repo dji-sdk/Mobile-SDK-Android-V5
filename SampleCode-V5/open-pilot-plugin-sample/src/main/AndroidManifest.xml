@@ -1,0 +1,126 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dji.open.pilot.plugin">
+
+    <!-- 首次激活 DJI SDK 需要联网访问注册服务器 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 航线任务 Demo：读取本地 KMZ 文件需要全部文件访问权限 -->
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <application
+        android:name="com.dji.open.pilot.plugin.main.PluginApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
+        android:label="@string/dji_open_pilot_plugin_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+
+        <!-- DJI SDK 激活 Key，值通过 build.gradle manifestPlaceholders 注入 -->
+        <meta-data
+            android:name="com.dji.sdk.API_KEY"
+            android:value="${API_KEY}" />
+
+        <!-- Pilot 通过扫描此 meta-data 发现插件 APP -->
+        <meta-data
+            android:name="dji.open.pilot.client.OPEN_PILOT_PERMISSION_META_DATA"
+            android:value="open pilot" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.main.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.remoteviewpage.RemoteViewPageDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.armanager.ARDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.mapmanager.MapDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.cameradrawing.CameraDrawingDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.waypoint.WaypointDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.dialogmanager.DialogDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.navigatemanager.NavigateDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.filetransfer.FileTransferDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.pipeline.PipelineDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.mediatask.MediaTaskDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <activity
+            android:name="com.dji.open.pilot.plugin.sampleitem.keymanager.KeyDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+
+    </application>
+
+</manifest>

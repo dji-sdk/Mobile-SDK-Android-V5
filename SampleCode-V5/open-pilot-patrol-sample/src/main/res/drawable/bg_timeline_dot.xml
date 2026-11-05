@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    航线状态时间线的节点圆点：单一 oval 形状，填充色由运行期 backgroundTintList 按节点状态着色，
+    避免为「已完成 / 当前 / 失败 / 未开始」四档各建一份只差颜色的 drawable。
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#FFFFFFFF" />
+</shape>

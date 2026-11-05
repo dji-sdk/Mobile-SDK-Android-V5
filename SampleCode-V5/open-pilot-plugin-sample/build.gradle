@@ -1,0 +1,118 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.dji.open.pilot.plugin'
+    compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+
+    defaultConfig {
+        applicationId "com.dji.open.pilot.plugin"
+        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+        manifestPlaceholders = [API_KEY: project.findProperty("OPEN_PLUGIN_SAMPLE_API_KEY") ?: ""]
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('msdkkeystore.jks')
+            storePassword '123456'
+            keyAlias 'msdkkeystore'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    packagingOptions {
+        // 加固 so 不可 strip
+        doNotStrip "*/*/*.so"
+        // AGP 8 默认 useLegacyPackaging=false，会把 so 以 Stored(不压缩) 方式打入 apk，
+        // 导致 apk 体积接近翻倍。这里显式开启压缩打包，恢复 AGP7 行为，apk 体积可减半。
+        jniLibs {
+            useLegacyPackaging true
+        }
+        // 多个 AAR（mrtc、mmkv 等）均包含同名 .so，取第一个即可
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
+
+    dependencies {
+        compileOnly deps.aircraftProvided
+        implementation deps.aircraft
+        runtimeOnly deps.networkImp
+
+        //本地sdk aar依赖编译时，需要手动添加sdk对其他aar的依赖。
+        /** <-----------------sdk 所需--------------------> **/
+        api deps.gson
+        api deps.rx3Android
+        api deps.rx3Kt
+        api deps.documentfile
+        api deps.wpmzSdk
+        runtimeOnly deps.rx2Java
+        api deps.room
+        api deps.room_rxjava
+        api deps.sqlcipher
+        implementation deps.aspectj_rt
+        implementation deps.xcrash
+        api project(':uxsdk')
+
+        //网路库
+        //runtimeOnly networkImp
+        implementation deps.okhttp3
+
+        /** <-----------------open-pilot-plugin-sample 所需--------------------> **/
+        // 注意：:utils、:open-pilot-base、:open-pilot-client 已 embed 进加固的 aircraft aar，
+        // 此处不能再源码依赖，否则类重复冲突
+
+        implementation deps.appcompat
+        implementation deps.constraintLayout
+        implementation deps.aacCommon
+        implementation deps.aacRuntime
+        implementation deps.fragment
+        implementation deps.rxJava
+        implementation deps.rxAndroid
+        implementation deps.rxjava2_rxkotlin
+        implementation deps.lifecycleViewModel
+        implementation deps.lifecycleLiveData
+
+        implementation deps.material
+        implementation deps.viewpager2
+        implementation deps.cardview
+    }
+}

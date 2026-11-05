@@ -186,20 +186,15 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
         this.selectFirstMatch = selectFirstMatch;
         this.defaultSelected = defaultSelected || -1;
         if (value) {
-            // $('.js-tree-menu').hide();
-            $('#panel').css('height', '100%');
+            // 搜索有输入：打开悬浮结果面板（CSS 上通过 .panel_results_open 定位/显示）
+            $('#panel').addClass('panel_results_open').css('height', '')
             $('.clean-search').show()
-                // this.$element.removeClass('panel_tree').addClass('panel_results');
-                // this.tree.setNavigationActive(false);
-                // this.setNavigationActive(true);
+            // 动态计算面板位置：跟随搜索框正下方 fixed 悬浮，逃出 sidebar 裁剪
+            positionResultPanel()
         } else {
-            $('#panel').css('height', '0px');
+            // 无输入：关闭面板
+            $('#panel').removeClass('panel_results_open').css('height', '')
             $('.clean-search').hide()
-                // $('.js-tree-menu').show();
-
-            // this.$element.addClass('panel_tree').removeClass('panel_results');
-            // this.tree.setNavigationActive(true);
-            // this.setNavigationActive(false);
         }
         if (value != this.lastQuery) {
             this.lastQuery = value;
@@ -280,10 +275,14 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
 
     this.select = function() {
         var href = this.$current.data('path') || ''
+        // 无论 href 是否有效，点击后都关闭搜索结果面板
+        // （保留搜索框内容，用户可手动清空）
+        try {
+            $('#panel').removeClass('panel_results_open')
+        } catch (e) {}
         if (href && (href.indexOf('undefined') != href.length - 9)) {
             location.href = href;
         }
-        // this.open(this.$current.data('path'));
     }
 
     this.move = function(isDown) {
@@ -313,7 +312,7 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
             html += '<span class="badge badge_' + (badge % 6 + 1) + '">' + escapeHTML(this.data.badges[badge] || 'unknown') + '</span>';
         }
         html += hlt(result.namespace) + '</p>';
-        if (result.snippet) html += '<p class="snippet">' + escapeHTML(result.snippet) + '</p>';
+        if (result.snippet) html += '<p class="snippet">' + sanitizeSnippet(result.snippet) + '</p>';
         li.innerHTML = html;
         var prefix = window.pathPrefix; //
         if (typeof prefix == 'undefined') {
@@ -326,7 +325,8 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
             }
         }
         if (prefix == '') prefix = './';
-        jQuery.data(li, 'path', prefix + result.path.substr(1) + '?search=' + this.searchValue + '&i=' + index + '&' + result.params);
+        // 中文搜索词必须编码后再进入 URL，否则目标页解码乱码
+        jQuery.data(li, 'path', prefix + result.path.substr(1) + '?search=' + encodeURIComponent(this.searchValue) + '&i=' + index + '&' + result.params);
         return li;
     }
 
@@ -376,6 +376,72 @@ Searchdoc.Panel.prototype = $.extend({}, Searchdoc.Navigation, new function() {
         return html.replace(/[&<>]/g, function(c) {
             return '&#' + c.charCodeAt(0) + ';';
         });
+    }
+
+    // 动态定位搜索结果面板（fixed 悬浮）：
+    // 让面板始终紧贴搜索框正下方，宽度对齐搜索框
+    function positionResultPanel() {
+        var $searcher = $('.site-sidebar .searcher')
+        var $result = $('#panel.panel_results_open .result')
+        if (!$searcher.length || !$result.length) return
+        var rect = $searcher[0].getBoundingClientRect()
+        var top = rect.bottom
+        var left = rect.left
+        var width = rect.width
+        var vh = window.innerHeight || document.documentElement.clientHeight
+        $result.css({
+            top: top + 'px',
+            left: left + 'px',
+            width: width + 'px',
+            maxHeight: (vh - top - 20) + 'px'
+        })
+    }
+    // 页面滚动 / 窗口变化时同步位置
+    $(window).on('scroll resize', function () {
+        if ($('#panel').hasClass('panel_results_open')) {
+            positionResultPanel()
+        }
+    })
+    // 侧栏内部滚动（sticky 状态下 searcher 位置不动，但保险起见也监听）
+    $(document).on('scroll', '.site-sidebar', function () {
+        if ($('#panel').hasClass('panel_results_open')) {
+            positionResultPanel()
+        }
+    })
+
+    // 搜索结果 snippet：白名单渲染部分 HTML 标签（<i>/<b>/<code>/<br>），
+    // 其他标签一律剥离；同时把已被转义的 &lt;xxx&gt; 还原回真实标签再重新过滤。
+    // 这样可以让 "MSDK 5.20.0开始支持" 这种 <i>...</i> 正常显示成斜体，
+    // 而不是原样输出 "<i>MSDK...</i>" 字符串。
+    function sanitizeSnippet(html) {
+        if (!html) return '';
+        // 先把 HTML 实体反转义回真实标签
+        var s = String(html)
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        // 白名单标签：i, b, code, br（含闭合形式）
+        // 步骤：1. 保护白名单标签为占位符  2. 剥离剩余所有 <...>  3. 还原白名单
+        var whitelist = ['i', 'b', 'code', 'br'];
+        var placeholders = [];
+        s = s.replace(/<\/?([a-zA-Z][a-zA-Z0-9]*)\s*[^>]*>/g, function(match, tag) {
+            if (whitelist.indexOf(tag.toLowerCase()) !== -1) {
+                // 只保留标签本身，剥掉属性
+                var isClose = match.charAt(1) === '/';
+                var isSelfClose = /\/>$/.test(match);
+                var safe = '<' + (isClose ? '/' : '') + tag.toLowerCase() + (isSelfClose ? '/' : '') + '>';
+                placeholders.push(safe);
+                return '\u0003' + (placeholders.length - 1) + '\u0004';
+            }
+            return '' // 剥离
+        });
+        // 剩余的散落 < > 转义
+        s = s.replace(/[<>]/g, function(c) { return c === '<' ? '&lt;' : '&gt;'; });
+        // 还原白名单标签
+        s = s.replace(/\u0003(\d+)\u0004/g, function(_, i) {
+            return placeholders[parseInt(i, 10)] || '';
+        });
+        return s;
     }
 
 });

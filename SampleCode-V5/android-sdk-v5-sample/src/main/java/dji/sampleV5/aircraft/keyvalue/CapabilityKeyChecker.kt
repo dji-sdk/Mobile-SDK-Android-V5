@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.CompletableObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import java.lang.Exception
 import java.lang.StringBuilder
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 
 /**
  * @author feel.feng

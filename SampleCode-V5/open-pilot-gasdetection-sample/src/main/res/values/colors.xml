@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 应用图标（adaptive icon）背景色 -->
+    <color name="ic_launcher_background">#2E8B57</color>
+
+    <!-- 公共页面语义色（来源：open-pilot-app-ui-spec.md §3） -->
+    <color name="page_bg">#FFF5F5F5</color>
+    <color name="top_bar_bg">#FFFFFFFF</color>
+    <color name="top_bar_divider">#FFE8E8F0</color>
+    <color name="card_bg">#FFFFFFFF</color>
+    <color name="log_panel_bg">#FFFAFAFC</color>
+    <color name="text_primary">#FF1A1A3A</color>
+    <color name="text_secondary">#FF6060A0</color>
+    <color name="hint_text">#FFA0A0C0</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- 主色与交互态 -->
+    <color name="brand_blue">#FF007BFF</color>
+    <color name="brand_blue_pressed">#FF1FA3F6</color>
+    <color name="secondary_pressed_bg">#FFE6F2FF</color>
+    <color name="input_border">#FFD9D9D9</color>
+
+    <!-- 状态色：成功 / 错误 / 待处理 -->
+    <color name="status_ok">#FF28A856</color>
+    <color name="status_wip">#FFE08000</color>
+    <color name="status_error">#FFE03030</color>
+    <color name="status_todo">#FFB0B0C8</color>
+    <color name="status_ok_bg">#1F28A856</color>
+    <color name="status_error_bg">#1FE03030</color>
+
+    <!--
+        标题栏徽章三态色。形态对齐 open-pilot-plugin-sample 的 TopBar 徽章（白底/浅红底 + 1dp 描边 +
+        圆点 + 加粗文字），标题栏专用色对齐四个 Demo 的 demo_top_bar 资源；业务成功色保持不变。
+    -->
+    <color name="title_badge_ok_bg">#FFFFFFFF</color>
+    <color name="title_badge_ok_border">@color/demo_top_bar_connected</color>
+    <color name="title_badge_ok_text">@color/demo_top_bar_connected</color>
+    <color name="title_badge_bad_bg">#FFFFEAEA</color>
+    <color name="title_badge_bad_border">#FFF5C0C0</color>
+    <color name="title_badge_bad_text">@color/demo_top_bar_error</color>
+    <color name="title_badge_neutral_bg">#FFF5F5F5</color>
+    <color name="title_badge_neutral_border">#FFDCDCDC</color>
+    <color name="title_badge_neutral_text">@color/demo_top_bar_neutral</color>
+
+    <!-- 列表-详情双栏 -->
+    <color name="list_panel_bg">#FFF8FAFB</color>
+    <color name="task_item_selected_bg">#FFE6F2FF</color>
+
+    <!-- 按钮禁用态 -->
+    <color name="button_disabled_bg">#FFD8D8E0</color>
+    <color name="button_disabled_text">#FFB0B0C8</color>
+    <color name="secondary_border">#FFDADAEA</color>
+
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- remote view i18n sample -->
+    <string name="remote_sample_output_label">出力: </string>
+    <string name="remote_sample_btn_test">ボタンテスト: </string>
+    <string name="remote_sample_btn_1">ボタン1</string>
+    <string name="remote_sample_btn_2">ボタン2</string>
+    <string name="remote_sample_switch_test">スイッチテスト: </string>
+    <string name="remote_sample_switch_desc">スイッチ</string>
+    <string name="remote_sample_checkbox_test">チェックボックステスト: </string>
+    <string name="remote_sample_checkbox_option">オプション</string>
+    <string name="remote_sample_edit_text_label">テキスト入力: </string>
+    <string name="remote_sample_change_image">画像切替</string>
+    <string name="remote_sample_full_screen">全画面切替</string>
+    <string name="remote_sample_web_test">WebViewテスト: </string>
+    <string name="remote_sample_load_web">Webを読み込む</string>
+    <string name="remote_sample_spinner_test">スピナーテスト: </string>
+    <string name="remote_sample_spinner_opt_1">オプション1</string>
+    <string name="remote_sample_spinner_opt_2">オプション2</string>
+    <string name="remote_sample_spinner_opt_3">オプション3</string>
+    <string name="remote_sample_list_test">リストテスト: </string>
+    <string name="remote_sample_list_insert">項目を挿入</string>
+    <string name="remote_sample_list_remove">項目を削除</string>
+
+    <!-- remote view i18n sample - callback output -->
+    <string name="remote_sample_cb_btn1_clicked">ボタン1がクリックされました</string>
+    <string name="remote_sample_cb_btn2_clicked">ボタン2がクリックされました</string>
+    <string name="remote_sample_cb_switch">スイッチ: %1$s、タイプ: %2$s</string>
+    <string name="remote_sample_cb_checkbox">チェックボックス: %1$s、タイプ: %2$s</string>
+    <string name="remote_sample_cb_edit_text">入力内容: %s</string>
+    <string name="remote_sample_cb_web_load">読み込み中: %s</string>
+    <string name="remote_sample_cb_spinner">選択: %1$s（インデックス=%2$s）</string>
+    <string name="remote_sample_cb_image_clicked">画像がクリックされました</string>
+    <string name="remote_sample_cb_list_click">リストクリック: 位置=%1$s、ID=%2$s</string>
+    <string name="remote_sample_cb_list_inserted">新しい項目 #%s を位置0に挿入しました</string>
+    <string name="remote_sample_cb_list_removed">位置0の項目を削除しました</string>
+
+    <!-- MSDKManagerVM -->
+    <string name="msdk_btn_jump_to_msdk">MSDKプラグインへ移動</string>
+
+    <!-- dialog i18n sample -->
+    <string name="dialog_sample_output_label">コールバック結果: </string>
+    <string name="dialog_sample_output_placeholder">ここに結果が表示されます</string>
+    <string name="dialog_sample_type_label">ダイアログタイプ: </string>
+    <string name="dialog_sample_btn_alert">アラート</string>
+    <string name="dialog_sample_btn_confirm">確認</string>
+    <string name="dialog_sample_btn_prompt">入力</string>
+    <string name="dialog_sample_btn_single">単一選択</string>
+    <string name="dialog_sample_btn_multi">複数選択</string>
+    <string name="dialog_alert_title">Pilot アラート</string>
+    <string name="dialog_alert_message">これはMatrice 4です</string>
+    <string name="dialog_confirm_title">Pilot 確認</string>
+    <string name="dialog_confirm_message">これはMatrice 4ですか？</string>
+    <string name="dialog_confirm_btn_no">いいえ</string>
+    <string name="dialog_confirm_btn_yes">はい</string>
+    <string name="dialog_prompt_title">Pilot 入力</string>
+    <string name="dialog_prompt_message">デバイス名を入力してください:</string>
+    <string name="dialog_single_title">Pilot 単一選択</string>
+    <string name="dialog_single_message">お気に入りのDJI製品を選んでください:</string>
+    <string name="dialog_multi_title">Pilot 複数選択</string>
+    <string name="dialog_multi_message">使用したことのあるDJI製品を選んでください:</string>
+    <string name="dialog_btn_cancel">キャンセル</string>
+    <string name="dialog_btn_confirm">確認</string>
+    <string name="dialog_already_exists">ダイアログはすでに存在します。重複して追加しないでください</string>
+
+    <!-- remote sample list items -->
+    <string name="remote_sample_list_item_text">テキスト項目</string>
+    <string name="remote_sample_list_item_normal_icon">通常アイコン</string>
+    <string name="remote_sample_list_item_clicked_icon">選択アイコン</string>
+    <string name="remote_sample_list_item_m4e_title">Matrice 4E</string>
+    <string name="remote_sample_list_item_m4e_subtitle">産業用ドローン</string>
+    <string name="remote_sample_list_item_m3m_title">Mavic 3M</string>
+    <string name="remote_sample_list_item_m3m_subtitle">マルチスペクトルドローン</string>
+    <string name="remote_sample_list_item_rc">リモートコントローラー</string>
+    <string name="remote_sample_list_item_divider">--- 区切り線 ---</string>
+    <string name="remote_sample_list_item_care">DJI Care</string>
+    <string name="remote_sample_list_item_battery_title">バッテリー</string>
+    <string name="remote_sample_list_item_battery_subtitle">86%</string>
+    <string name="remote_sample_list_new_item">新しい項目 #%s</string>
+    <string name="remote_sample_perf_test">パフォーマンステスト</string>
+    <string name="remote_sample_perf_test_stop">テスト停止</string>
+    <string name="remote_sample_perf_test_starting">テスト開始中...</string>
+    <string name="remote_sample_perf_test_running">テスト中...\nラウンド: %d\n経過: %dms\n平均: %sms/回\n速度: %sMB/s</string>
+    <string name="remote_sample_perf_test_done">テスト完了!\n総ラウンド: %d\n総時間: %dms\n総読書: %dMB\n速度: %sMB/s</string>
+
+</resources>

@@ -120,7 +120,6 @@ public class PopupNumberPicker extends PopupWindow {
 
 		@Override
 		protected CharSequence getItemText(int index) {
-			// TODO Auto-generated method stub
 			return strItemValue[index].toString();
 		}
 

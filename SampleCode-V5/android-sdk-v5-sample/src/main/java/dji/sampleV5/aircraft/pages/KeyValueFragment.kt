@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragmentKeyListBinding
 import dji.sampleV5.aircraft.keyvalue.KeyItemHelper.processSubListLogic
-import dji.v5.ux.core.util.ToastUtils.showToast
+import dji.v5.ux.util.ToastUtils.showToast
 import dji.sampleV5.aircraft.util.Util
 import dji.sdk.keyvalue.converter.EmptyValueConverter
 import dji.sdk.keyvalue.key.CameraKey
@@ -499,7 +499,9 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
         resetSearchFilter()
         setKeyCount(showList.size)
         resetSelected()
-        cameraParamsAdapter?.notifyDataSetChanged()
+        // 不在此处调用 notifyDataSetChanged()：
+        // resetSearchFilter() 已触发 filter.filter("") → publishResults() → notifyDataSetChanged()
+        // 提前 notify 会导致 RecyclerView 在 mFilterList 更新前就开始 layout，引发越界崩溃
         DjiSharedPreferencesManager.putBoolean(context, CAPABILITY_ENABLE, enable)
         if (enable) {
             binding?.tvCapablity?.text = "Officially released key"
@@ -585,8 +587,8 @@ class KeyValueFragment : DJIFragment(), View.OnClickListener {
      * 清空search框
      */
     private fun resetSearchFilter() {
+        // setText("") 会触发 TextWatcher.afterTextChanged → filter.filter("")，无需再次显式调用
         binding?.etFilter?.setText("")
-        cameraParamsAdapter?.filter?.filter("")
     }
 
     private fun isCapabilitySwitchOn(): Boolean {

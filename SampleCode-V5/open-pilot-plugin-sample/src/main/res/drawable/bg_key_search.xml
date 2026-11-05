@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- KeyManager 搜索框背景：浅灰底圆角 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FFF2F2F6" />
+    <corners android:radius="16dp" />
+</shape>

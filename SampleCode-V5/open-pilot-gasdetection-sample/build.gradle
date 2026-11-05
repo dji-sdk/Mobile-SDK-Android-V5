@@ -1,0 +1,120 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.dji.sample.gasdetection'
+    compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+
+    defaultConfig {
+        applicationId 'com.dji.sample.gasdetection'
+        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName '1.0.0'
+        // AppKey 统一从大工程 android-sdk-v5-as/gradle.properties 注入（随仓库提交）；
+        // 属性缺失时注入空值，不阻断编译（只影响 SDK 注册）。
+        manifestPlaceholders = [DJI_API_KEY: project.findProperty('GASDETECTION_SAMPLE_API_KEY') ?: '']
+        // 演示后台地址统一从大工程 gradle.properties 注入；缺省值仅在属性缺失时兜底。
+        buildConfigField "String", "GASDETECTION_SERVER_URL",
+                "\"${project.findProperty('GASDETECTION_SERVER_URL') ?: 'http://127.0.0.1:18082'}\""
+        ndk { abiFilters 'arm64-v8a' }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("$rootDir/msdkkeystore.jks")
+            storePassword '123456'
+            keyAlias 'msdkkeystore'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += ['-Xjvm-default=all']
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        // 多语言资源必须齐备：漏译或孤 key 直接报错
+        error 'MissingTranslation', 'ExtraTranslation'
+    }
+
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+
+    packagingOptions {
+        // AGP 8 默认 useLegacyPackaging=false 会导致 so 不压缩、apk 体积翻倍，恢复 AGP7 行为
+        jniLibs { useLegacyPackaging true }
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        // 加固 so 被 strip 会导致运行时崩溃
+        doNotStrip '**/*.so'
+    }
+
+}
+
+dependencies {
+  compileOnly deps.aircraftProvided
+  implementation deps.aircraft
+  runtimeOnly deps.networkImp
+
+  //本地sdk aar依赖编译时，需要手动添加sdk对其他aar的依赖。
+  /** <-----------------sdk 所需--------------------> **/
+  api deps.gson
+  api deps.rx3Android
+  api deps.rx3Kt
+  api deps.documentfile
+  api deps.wpmzSdk
+  runtimeOnly deps.rx2Java
+  api deps.room
+  api deps.room_rxjava
+  api deps.sqlcipher
+  implementation deps.aspectj_rt
+  implementation deps.xcrash
+  implementation deps.wire
+  implementation deps.okio
+  api project(':uxsdk')
+
+  //网路库
+  //runtimeOnly networkImp
+  implementation deps.okhttp3
+
+  /** <-----------------open-pilot-gasdetection-sample 所需--------------------> **/
+  // :utils、:open-pilot-base、:open-pilot-client、csdkAircraft 已 embed 进 aircraft aar，不能再重复依赖。
+  implementation deps.coroutinesAndroid
+  implementation project(':open-pilot-gasdetection-sample:psdk-bridge')
+
+  implementation deps.appcompat
+  implementation deps.activity
+  implementation deps.constraintLayout
+  implementation deps.aacCommon
+  implementation deps.aacRuntime
+  implementation deps.fragment
+  implementation deps.rxJava
+  implementation deps.rxAndroid
+  implementation deps.rxjava2_rxkotlin
+  implementation deps.lifecycleViewModel
+  implementation deps.lifecycleLiveData
+}

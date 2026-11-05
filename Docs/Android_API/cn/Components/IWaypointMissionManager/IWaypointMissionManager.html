@@ -1,4 +1,4 @@
-<script>window.pathPrefix="../../";</script><script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
 <html lang="en" style="padding-bottom:0px" class="local"></html>
 <head>
   <meta charset="utf-8">
@@ -39,12 +39,20 @@
           </div>
         </div>
         <div class="nav scrollable js-tree-menu">
-          <dl>
-            <dt>Manager Classes
+          <dl class="sidebar-group sidebar-group--common">
+            <dt>Common APIs
             </dt>
                   <dd><a data-href="../SDKManager/DJISDKManager.html" class="sub-toggle">ISDKManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                     <ul class="sub-menu">
                             <dd><a href="../SDKManager/ISDKManager_SDKManagerCallback.html">SDKManagerCallback</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_InitSettings.html">InitSettings</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_PluginAPPConfig.html">PluginAPPConfig</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_APPVersion.html">APPVersion</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_OpenLocation.html">OpenLocation</a>
                             </dd>
                     </ul>
                   </dd>
@@ -248,6 +256,8 @@
                                       </dd>
                                       <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                                         <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
+                                                </dd>
                                                 <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
                                                 </dd>
                                         </ul>
@@ -268,6 +278,14 @@
                             </dd>
                             <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
                               <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_VisionAssistStatusListener.html">VisionAssistStatusListener</a>
+                                      </dd>
                                       <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
                                       </dd>
                                       <dd><a href="../IMediaDataCenter/ICameraStreamManager_PinPointInfo.html">PinPointInfo</a>
@@ -669,8 +687,146 @@
                     </ul>
                   </dd>
           </dl>
-          <dl>
-            <dt>Misc Classes
+          <dl class="sidebar-group sidebar-group--plugins">
+            <dt>Plugin APIs
+            </dt>
+                  <dd><a data-href="../IARManager/IARManager.html" class="sub-toggle">IARManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IARManager/IARManager_ARCircleInfo.html">ARCircleInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARDistAlpha.html">ARDistAlpha</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARDistLineWidth.html">ARDistLineWidth</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARFaceStroke.html">ARFaceStroke</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARIconOrthographicConfig.html">ARIconOrthographicConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARIconPerspectiveConfig.html">ARIconPerspectiveConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARLineInfo.html">ARLineInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPointConfig.html">ARPointConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPointInfo.html">ARPointInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPolygonFace.html">ARPolygonFace</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPolygonInfo.html">ARPolygonInfo</a>
+                            </dd>
+                            <dd><a data-href="../IARManager/IARManager_ARRadarConfig.html" class="sub-toggle">ARRadarConfig<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IARManager/IARManager_ARRadarConfig_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARStrokeInfo.html">ARStrokeInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARTextConfig.html">ARTextConfig</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IRemoteViewPageManager/IRemoteViewPageManager.html" class="sub-toggle">IRemoteViewPageManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ActivityConfig.html">ActivityConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_DividerConfig.html">DividerConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnCheckedChangeListener.html">IRemoteViewOnCheckedChangeListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnClickListener.html">IRemoteViewOnClickListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnItemSelectedListener.html">IRemoteViewOnItemSelectedListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewTextWatcher.html">IRemoteViewTextWatcher</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_LayoutParam.html">LayoutParam</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ListItemData.html">ListItemData</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ListItemOperation.html">ListItemOperation</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_RemoteView.html">RemoteView</a>
+                            </dd>
+                            <dd><a data-href="../IRemoteViewPageManager/IRemoteViewPageManager_ShapeDescriptor.html" class="sub-toggle">ShapeDescriptor<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ShapeDescriptor_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_TextSpanSeparatorConfig.html">TextSpanSeparatorConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_WidgetLayoutParam.html">WidgetLayoutParam</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ICameraViewDrawingManager/ICameraViewDrawingManager.html" class="sub-toggle">ICameraViewDrawingManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingBoxInfo.html">DrawingBoxInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingPolygonInfo.html">DrawingPolygonInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingTextInfo.html">DrawingTextInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_OpenDoubleRect.html">OpenDoubleRect</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_OpenPoint.html">OpenPoint</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IRemoteDialogManager/IRemoteDialogManager.html" class="sub-toggle">IRemoteDialogManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IRemoteDialogManager/IRemoteDialogManager_DialogConfig.html" class="sub-toggle">DialogConfig<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogConfig_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogElementConfig.html">DialogElementConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogMessage.html">DialogMessage</a>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_IDialogMessageListener.html">IDialogMessageListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IMapWidgetManager/IMapWidgetManager.html" class="sub-toggle">IMapWidgetManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapCircleOptions.html">MapCircleOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapElement.html">MapElement</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapMarkerOptions.html">MapMarkerOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapPolygonOptions.html">MapPolygonOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapPolylineOptions.html">MapPolylineOptions</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapWidget.html">MapWidget</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapWidgetItem.html">MapWidgetItem</a>
+                            </dd>
+                            <dd><a href="../IMapWidgetManager/IMapWidgetManager_MapWidgetLayer.html">MapWidgetLayer</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../IRemoteServerConfigManager/IRemoteServerConfigManager.html">IRemoteServerConfigManager</a>
+                  </dd>
+                  <dd><a href="../IFileTransferManager/IFileTransferManager.html">IFileTransferManager</a>
+                  </dd>
+                  <dd><a data-href="../INavigateManager/INavigateManager.html" class="sub-toggle">INavigateManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../INavigateManager/INavigateManager_NavigateAction.html">NavigateAction</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../IDisconnectActionManager/IDisconnectActionManager.html">IDisconnectActionManager</a>
+                  </dd>
+                  <dd><a href="../IRemoteControlManager/IRemoteControlManager.html">IRemoteControlManager</a>
+                  </dd>
+          </dl>
+          <dl class="sidebar-group sidebar-group--references">
+            <dt>References
             </dt>
                   <dd><a href="../DJIError/DJIError.html">IDJIError</a>
                   </dd>
@@ -882,7 +1038,7 @@
 <h5 id="输入参数：-16">输入参数：</h5>
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">String <font color="#000">missionFileName</td><td><font color="#666"><i>需要停止的航线任务文件名。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>返回执行结果的回调。</i></td></tr></table></html></div>
 <h5 id="Related">Related:</h5>
-<div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointMissionExecuteStateListener.html">WaypointMissionExecuteStateListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waylineexecutinginfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waypointactionlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a></div></div><div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointmissionexecutestate_inline">WaypointMissionExecuteState</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointmissionexecutestate_inline"
+<div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointMissionExecuteStateListener.html">WaypointMissionExecuteStateListener</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iwaypointmissionmanager_waypointmissionexecutestatelistener_inline" data-class-href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointMissionExecuteStateListener.html" data-class-name="WaypointMissionExecuteStateListener"><blockquote><div class="article"><h6><font color="#AAA">class </font>WaypointMissionExecuteStateListener <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">WaypointMissionExecuteStateListener</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">航线执行状态监听器。</font></p><p><code><i>MSDK 5.0.0开始支持</i></code></p></div><div class="api-row" id="iwaypointmissionmanager_waylineexecutinginfolistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iwaypointmissionmanager_waylineexecutinginfolistener_inline" data-class-href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html" data-class-name="WaylineExecutingInfoListener"><blockquote><div class="article"><h6><font color="#AAA">class </font>WaylineExecutingInfoListener <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">WaylineExecutingInfoListener</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">航线信息监听器。</font></p><p><code><i>MSDK 5.0.0开始支持</i></code></p></div><div class="api-row" id="iwaypointmissionmanager_waypointactionlistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iwaypointmissionmanager_waypointactionlistener_inline" data-class-href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html" data-class-name="WaypointActionListener"><blockquote><div class="article"><h6><font color="#AAA">class </font>WaypointActionListener <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">WaypointActionListener</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">航线动作监听器。</font></p><p><code><i>MSDK 5.6.0开始支持</i></code></p></div><div class="api-row" id="iwaypointmissionmanager_waypointmissionexecutestate"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_waypointmissionexecutestate_inline">WaypointMissionExecuteState</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_waypointmissionexecutestate_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>WaypointMissionExecuteState</h6></div>
 </blockquote>
@@ -894,7 +1050,7 @@
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_idle_inline"></a>IDLE</td><td><font color="#666">初始化状态。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_not_supported_inline"></a>NOT_SUPPORTED</td><td><font color="#666">此机型不支持航线任务3.0。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_ready_inline"></a>READY</td><td><font color="#666">航线任务准备状态,此状态下可上传航线任务文件,也可执行已上传的航线任务。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_uploading_inline"></a>UPLOADING</td><td><font color="#666">航线任务文件上传中。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_preparing_inline"></a>PREPARING</td><td><font color="#666">航线任务执行准备中。调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_startmission">startMission</a></code>启动执行航线任务后，飞行器在准备执行航线任务中。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_enter_wayline_inline"></a>ENTER_WAYLINE</td><td><font color="#666">进入航线飞行,飞往指定航线的第一个航点。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_executing_inline"></a>EXECUTING</td><td><font color="#666">航线任务执行中。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_interrupted_inline"></a>INTERRUPTED</td><td><font color="#666">航线任务执行中断，表示用户调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_pausemission">pauseMission</a></code>暂停航线或者飞控异常。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_recovering_inline"></a>RECOVERING</td><td><font color="#666">航线任务恢复中。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_waypointmissionexecutestate_finished_inline"></a>FINISHED</td><td><font color="#666">航线任务完成。表示航线任务执行完成或者调用<code><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager.html#iwaypointmissionmanager_stopmission">stopMission</a></code>停止执行航线任务。</td></tr></table></html>
 <h5 id="Class-Members">Class Members:</h5>
 </div>
-<div class="api-row" id="iwaypointmissionmanager_waylineexecutinginfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a></div></div><div class="api-row" id="iwaypointmissionmanager_breakpointinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a></div></div><div class="api-row" id="iwaypointmissionmanager_recoveractiontype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_recoveractiontype_inline">RecoverActionType</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_recoveractiontype_inline"
+<div class="api-row" id="iwaypointmissionmanager_waylineexecutinginfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iwaypointmissionmanager_waylineexecutinginfo_inline" data-class-href="../../Components/IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html" data-class-name="WaylineExecutingInfo"><blockquote><div class="article"><h6><font color="#AAA">class </font>WaylineExecutingInfo <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">WaylineExecutingInfo</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">当前执行的航线信息。</font></p><p><code><i>MSDK 5.0.0开始支持</i></code></p></div><div class="api-row" id="iwaypointmissionmanager_breakpointinfo"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iwaypointmissionmanager_breakpointinfo_inline" data-class-href="../../Components/IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html" data-class-name="BreakPointInfo"><blockquote><div class="article"><h6><font color="#AAA">class </font>BreakPointInfo <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BreakPointInfo</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">航线任务断点信息。</font></p><p><code><i>MSDK 5.6.0开始支持</i></code></p></div><div class="api-row" id="iwaypointmissionmanager_recoveractiontype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#iwaypointmissionmanager_recoveractiontype_inline">RecoverActionType</a></div></div><div class="inline-doc" id="iwaypointmissionmanager_recoveractiontype_inline"
 <blockquote>
 <div class="article"><h6 ><font color="#AAA">enum </font>RecoverActionType</h6></div>
 </blockquote>
@@ -906,8 +1062,14 @@
 <html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_recoveractiontype_gobacktorecordpoint_inline"></a>GoBackToRecordPoint</td><td><font color="#666">当航线任务恢复后，飞行器飞向暂停时的断点。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_recoveractiontype_gobacktonextpoint_inline"></a>GoBackToNextPoint</td><td><font color="#666">当航线任务恢复后，飞机飞往暂停时断点的下一个航点。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#iwaypointmissionmanager_recoveractiontype_gobacktonextnextpoint_inline"></a>GoBackToNextNextPoint</td><td><font color="#666">当航线任务恢复后，飞机飞往暂停时断点的下下个航点。</td></tr></table></html>
 <h5 id="Class-Members-2">Class Members:</h5>
 </div>
-<div class="api-row" id="iwpmzmanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a></div></div>
+<div class="api-row" id="iwpmzmanager"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="iwpmzmanager_inline" data-class-href="../../Components/IWaypointMissionManager/IWPMZManager.html" data-class-name="IWPMZManager"><blockquote><div class="article"><h6><font color="#AAA">class </font>IWPMZManager <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">IWPMZManager</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">此类是航线任务编辑类，用于航线任务文件的加载，航线字段的编辑和航线任务文件生成。航线字段的含义请参考代码注释和航线文件格式。接口调用流程请参阅：航线教程。</font></p><p><code><i>MSDK 5.6.0开始支持</i></code></p></div>
 
+        </div>
+      </div>
+      <div class="site-toc">
+        <div class="site-toc-inner">
+          <div class="site-toc-title">本页目录</div>
+          <ul class="site-toc-list"></ul>
         </div>
       </div>
     </div>

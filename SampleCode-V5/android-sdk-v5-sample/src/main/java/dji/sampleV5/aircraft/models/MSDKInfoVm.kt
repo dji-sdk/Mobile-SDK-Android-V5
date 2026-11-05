@@ -40,10 +40,11 @@ class MSDKInfoVm : DJIViewModel() {
         msdkInfo.value = MSDKInfo(msdkInfoModel.getSDKVersion())
         msdkInfo.value?.buildVer = msdkInfoModel.getBuildVersion()
         msdkInfo.value?.isDebug = msdkInfoModel.isDebug()
-        msdkInfo.value?.packageProductCategory = msdkInfoModel.getPackageProductCategory()
+        msdkInfo.value?.sdkLinkMode = msdkInfoModel.getSDKLinkMode()
         msdkInfo.value?.isLDMEnabled = LDMManager.getInstance().isLDMEnabled.toString()
         msdkInfo.value?.isLDMLicenseLoaded = LDMManager.getInstance().isLDMLicenseLoaded.toString()
         msdkInfo.value?.coreInfo = msdkInfoModel.getCoreInfo()
+        msdkInfo.value?.pluginVersion = "(${dji.open.pilot.base.BuildConfig.OPEN_API_PLATFORM},${dji.open.pilot.base.BuildConfig.OPEN_API_VERSION})"
 
         areaCodeChangeListener = AreaCodeChangeListener { _, changed ->
             LogUtils.i(logTag, "areaCodeData", changed)
@@ -100,7 +101,7 @@ class MSDKInfoVm : DJIViewModel() {
     }
 
     private fun updateNetworkInfo(isAvailable: Boolean) {
-        msdkInfo.value?.networkInfo = if(isAvailable) ONLINE_STR else NO_NETWORK_STR
+        msdkInfo.value?.networkInfo = if (isAvailable) ONLINE_STR else NO_NETWORK_STR
     }
 
     private fun updateFirmwareVersion() {

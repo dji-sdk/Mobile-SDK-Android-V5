@@ -4,7 +4,7 @@ package dji.sampleV5.aircraft.keyvalue;
 import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
-import dji.v5.ux.core.util.ToastUtils;
+import dji.v5.ux.util.ToastUtils;
 import dji.sampleV5.aircraft.util.Util;
 import dji.sdk.keyvalue.converter.DJIValueConverter;
 import dji.sdk.keyvalue.converter.EmptyValueConverter;

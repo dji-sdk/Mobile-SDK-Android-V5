@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#2E8B57</color>
+
+    <!-- Material 3 tokens — Light -->
+    <color name="md_theme_primary">#3CB371</color>
+    <color name="md_theme_primary_variant">#2E8B57</color>
+    <color name="md_theme_on_primary">#FFFFFF</color>
+    <color name="md_theme_secondary">#66CDAA</color>
+    <color name="md_theme_on_secondary">#0F1F10</color>
+    <color name="md_theme_background">#FFFFFF</color>
+    <color name="md_theme_on_background">#111111</color>
+    <color name="md_theme_surface">#FFFFFF</color>
+    <color name="md_theme_surface_variant">#F5F5F5</color>
+    <color name="md_theme_on_surface">#111111</color>
+    <color name="md_theme_on_surface_variant">#4A4A4A</color>
+    <color name="md_theme_error">#B00020</color>
+    <color name="md_theme_on_error">#FFFFFF</color>
+    <color name="md_theme_outline">#CCCCCC</color>
+
+    <!-- Status colors -->
+    <color name="status_ok">#2E8B57</color>
+    <color name="status_bad">#D32F2F</color>
+
+    <!-- Title bar -->
+    <color name="top_bar_bg">#FFFFFFFF</color>
+    <color name="top_bar_title">#FF1A1A3A</color>
+    <color name="top_bar_divider">#FFE8E8F0</color>
+
+    <!-- Secondary (outlined) button — 对齐 open-pilot-app-ui-spec §5.1：白底蓝字、1dp 蓝描边 -->
+    <color name="secondary_button_fill">#FFFFFFFF</color>
+    <color name="secondary_button_fill_pressed">#FFEAF3FF</color>
+    <color name="secondary_button_stroke">#FF007BFF</color>
+    <color name="secondary_button_text">#FF007BFF</color>
+
+    <!-- Connection badge: connected -->
+    <color name="badge_connected_bg">#FFFFFFFF</color>
+    <color name="badge_connected_text">#FF00C774</color>
+    <color name="badge_connected_border">#FF00C774</color>
+
+    <!-- Connection badge: disconnected -->
+    <color name="badge_disconnected_bg">#FFFFEAEA</color>
+    <color name="badge_disconnected_text">#FFE03030</color>
+    <color name="badge_disconnected_border">#FFF5C0C0</color>
+
+    <!-- Registration badge: registered -->
+    <color name="badge_registered_bg">#FFFFFFFF</color>
+    <color name="badge_registered_text">#FF007BFF</color>
+    <color name="badge_registered_border">#FF007BFF</color>
+
+    <!-- Registration badge: unregistered -->
+    <color name="badge_unregistered_bg">#FFF5F5F5</color>
+    <color name="badge_unregistered_text">#FFA0A0A0</color>
+    <color name="badge_unregistered_border">#FFDCDCDC</color>
+
+    <!-- Status dot base color (runtime tinted) -->
+    <color name="status_dot_default">#FFB0B0C8</color>
+
+    <!--
+        任务详情区（面 A）语义色。按 open-pilot-app-ui-spec §3 的语义命名，取值对齐工程既有色板，
+        不引入第二套色板：
+        - detail_value_text 沿用本页既有主文字档 #FF25313D；
+        - detail_label_text 沿用本页既有弱化说明灰 #FF65717D；
+        - timeline_node_done 复用连接徽标 / 任务状态的既有成功绿 #FF18864B；
+        - timeline_node_current 取 ui-spec 主色 / 选中强调 #FF007BFF（与 secondary_button_stroke 同值）；
+        - timeline_node_failed 复用 status_bad 取值 #FFD32F2F；
+        - timeline_node_pending 复用 status_dot_default 取值 #FFB0B0C8（ui-spec status_todo）。
+        本页为既有硬编码浅色页面，这组颜色不随夜模式切换，与页面其它区域表现一致（见 design D1 偏离 4）。
+    -->
+    <color name="detail_label_text">#FF65717D</color>
+    <color name="detail_value_text">#FF25313D</color>
+    <color name="timeline_node_done">#FF18864B</color>
+    <color name="timeline_node_current">#FF007BFF</color>
+    <color name="timeline_node_failed">#FFD32F2F</color>
+    <color name="timeline_node_pending">#FFB0B0C8</color>
+</resources>

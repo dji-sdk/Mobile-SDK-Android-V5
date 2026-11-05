@@ -3,7 +3,7 @@ package dji.sampleV5.aircraft.models
 import android.view.Surface
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.key.CameraKey
 import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.value.camera.CameraMode
@@ -24,7 +24,6 @@ import dji.v5.manager.interfaces.ICameraStreamManager.FrameFormat
 import dji.v5.manager.interfaces.ICameraStreamManager.ScaleType
 import dji.v5.utils.common.DJIExecutor
 import dji.v5.utils.common.DateUtils
-import dji.v5.utils.common.LogPath
 import dji.v5.utils.common.LogUtils
 import dji.v5.utils.common.StringUtils
 import dji.v5.ux.R
@@ -132,22 +131,22 @@ class CameraStreamDetailVM : DJIViewModel() {
 
     private fun updateCameraName() {
         _cameraName.postValue("")
-        if (cameraIndex == ComponentIndexType.UNKNOWN) {
-            return
-        }
-        if (cameraIndex == ComponentIndexType.FPV) {
-            _cameraName.postValue(ComponentIndexType.FPV.name)
-            return
-        }
-        if (cameraIndex == ComponentIndexType.VISION_ASSIST) {
-            var msg = ComponentIndexType.VISION_ASSIST.name
-            if (!isMotorOn) {
-                msg = "$msg(${StringUtils.getResStr(R.string.uxsdk_assistant_video_empty_text)})"
+        when (cameraIndex) {
+            ComponentIndexType.UNKNOWN -> {
+                return
             }
-            _cameraName.postValue(msg)
-            return
+            ComponentIndexType.FPV -> {
+                _cameraName.postValue(ComponentIndexType.FPV.name)
+            }
+            ComponentIndexType.VISION_ASSIST -> {
+                var msg = ComponentIndexType.VISION_ASSIST.name
+                if (!isMotorOn) {
+                    msg = "$msg(${StringUtils.getResStr(R.string.uxsdk_assistant_video_empty_text)})"
+                }
+                _cameraName.postValue(msg)
+            }
+            else -> _cameraName.postValue(cameraType)
         }
-        _cameraName.postValue(cameraType)
     }
 
     private fun listenAvailableLens() {

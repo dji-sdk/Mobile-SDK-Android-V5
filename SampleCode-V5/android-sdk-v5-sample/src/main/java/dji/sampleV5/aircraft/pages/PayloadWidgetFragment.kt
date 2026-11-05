@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.data.PayloadWidgetIconAdapter
 import dji.sampleV5.aircraft.data.PayloadWidgetItem
-import dji.sampleV5.aircraft.databinding.FragAppSilentlyUpgradePageBinding
 import dji.sampleV5.aircraft.databinding.FragPayloadWidgetPageBinding
 import dji.sampleV5.aircraft.models.PayloadWidgetVM
 import dji.sdk.keyvalue.value.payload.WidgetValue
@@ -17,7 +15,7 @@ import dji.v5.manager.aircraft.payload.PayloadIndexType
 import dji.v5.manager.aircraft.payload.data.PayloadWidgetInfo
 import dji.v5.manager.aircraft.payload.widget.PayloadWidget
 import dji.v5.utils.common.LogUtils
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 
 /**
  * Description :

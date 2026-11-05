@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  KeyManager 演示页（UI 重构 · 阶段A 静态布局）
+  结构：TopBar + 左通道栏 + 右上 Key 列表卡 + 右下操作台卡
+  注：为保证阶段A可独立编译，暂保留旧 Activity 仍引用的 id（部分先隐藏占位，阶段B切换逻辑）
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <!-- TopBar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/top_bar_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/module_key"
+            android:textColor="@color/top_bar_title"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="1dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bar_divider" />
+
+    <!-- 主体：左右分栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <!-- ===== 左栏：通道下拉 + 能力集开关 + 搜索 + 统计 + Key 列表 ===== -->
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rv_menu_card"
+            android:clipToOutline="true"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- 1. 通道分类下拉框 -->
+            <Spinner
+                android:id="@+id/sp_channel"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_spinner_antd_selector"
+                android:dropDownWidth="match_parent"
+                android:popupTheme="@style/AntdSpinnerPopupTheme"
+                android:popupBackground="@drawable/bg_spinner_popup_antd"
+                android:theme="@style/AntdSpinnerTheme"
+                app:popupTheme="@style/AntdSpinnerPopupTheme" />
+
+            <!-- 2. 能力集开关（全部Key） -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="4dp">
+
+                <TextView
+                    android:id="@+id/tv_capablity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/key_capability_all"
+                    android:textColor="@color/card_title_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/iv_capability"
+                    style="@style/AppSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false" />
+            </LinearLayout>
+
+            <!-- 3. 搜索输入框 (方案B: 独立一行) -->
+            <LinearLayout
+                android:id="@+id/ll_filter"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_key_search"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_key_search" />
+
+                <EditText
+                    android:id="@+id/et_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:background="@null"
+                    android:hint="@string/key_search"
+                    android:imeOptions="actionDone"
+                    android:paddingVertical="0dp"
+                    android:singleLine="true"
+                    android:textColor="@color/card_title_text"
+                    android:textColorHint="@color/hint_text"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- 4. 数量统计 + 校验帮助说明 (方案B: 独立一行) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Count: "
+                    android:textColor="@color/hint_text"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="(0)"
+                    android:textColor="@color/card_title_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_question_mark"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_key_help"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:background="@color/demo_divider" />
+
+            <!-- 5. Key 列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="4dp"
+                android:clipToPadding="false" />
+        </LinearLayout>
+
+        <!-- ===== 右栏：操作台卡 ===== -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_rv_menu_card"
+            android:clipToOutline="true"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/layout_key_operate"
+                layout="@layout/layout_key_operate" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

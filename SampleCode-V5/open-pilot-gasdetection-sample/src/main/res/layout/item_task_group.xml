@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LabelText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/label_gap"
+    android:paddingTop="@dimen/task_item_gap"
+    android:paddingEnd="@dimen/label_gap"
+    android:paddingBottom="@dimen/label_gap"
+    android:textStyle="bold" />

@@ -10,10 +10,9 @@ import android.widget.SeekBar
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.data.MEDIA_FILE_DETAILS_STR
-import dji.sampleV5.aircraft.databinding.FragAppSilentlyUpgradePageBinding
 import dji.sampleV5.aircraft.databinding.VideoPlayPageBinding
 import dji.sampleV5.aircraft.models.VideoPlayVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.common.video.channel.VideoChannelType
@@ -21,7 +20,6 @@ import dji.v5.common.video.decoder.DecoderOutputMode
 import dji.v5.common.video.decoder.DecoderState
 import dji.v5.common.video.decoder.VideoDecoder
 import dji.v5.common.video.interfaces.IVideoDecoder
-import dji.v5.common.video.interfaces.IVideoFrame
 import dji.v5.manager.datacenter.MediaDataCenter
 import dji.v5.manager.datacenter.camera.StreamInfo
 import dji.v5.manager.datacenter.media.MediaFile

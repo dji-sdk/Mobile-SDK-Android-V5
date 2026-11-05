@@ -1,0 +1,59 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".PsdkApplication"
+        android:allowBackup="false"
+        android:extractNativeLibs="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/dji_open_pilot_plugin_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/FullScreenTheme">
+
+        <!-- DJI AppKey：build.gradle 读取 Gradle 项目属性 GASDETECTION_SAMPLE_API_KEY 并注入。 -->
+        <meta-data
+            android:name="com.dji.sdk.API_KEY"
+            android:value="${DJI_API_KEY}" />
+
+        <!-- Pilot 通过扫描此 meta-data 发现插件 APP -->
+        <meta-data
+            android:name="dji.open.pilot.client.OPEN_PILOT_PERMISSION_META_DATA"
+            android:value="open pilot" />
+
+        <!-- Pilot 跨进程拉起插件页面：exported 必须为 true；带屏遥控器为横屏设备，统一声明横屏；
+             singleTask 保证 Pilot 重复拉起时复用同一实例而不是叠加多个 Activity。 -->
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 负载调试页：仅由入口页在同进程内打开，不导出、不注册为 Pilot 或启动器入口 -->
+        <activity
+            android:name=".ui.PayloadDebugActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreenTheme" />
+
+        <!-- 诊断日志分享：只暴露应用私有 cache/diagnostics 目录，不申请存储权限 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+</manifest>

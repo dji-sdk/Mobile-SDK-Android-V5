@@ -12,6 +12,12 @@
         tools:layout="@layout/frag_key_value_page"/>
 
     <fragment
+        android:id="@+id/normal_plugin_page"
+        android:name="dji.sampleV5.aircraft.pages.NormalPluginFragment"
+        android:label="normal_page"
+        tools:layout="@layout/frag_normal_plugin_page"/>
+
+    <fragment
         android:id="@+id/key_multi_camera_stream_page"
         android:name="dji.sampleV5.aircraft.pages.CameraStreamListFragment"
         android:label="multi_video_decoding_page"
@@ -95,5 +101,23 @@
         android:name="dji.sampleV5.aircraft.pages.APPSilentlyUpgradeFragment"
         android:label="log_info_page"
         tools:layout="@layout/frag_app_silently_upgrade_page"/>
+
+    <fragment
+        android:id="@+id/ar_projection_page"
+        android:name="dji.sampleV5.aircraft.pages.ARProjectionFragment"
+        android:label="ar_projection_page"
+        tools:layout="@layout/frag_ar_projection_page"/>
+
+    <fragment
+        android:id="@+id/cable_inspection_page"
+        android:name="dji.sampleV5.aircraft.pages.CableInspectionFragment"
+        android:label="cable_inspection_page"
+        tools:layout="@layout/frag_cable_inspection_page"/>
+
+    <fragment
+        android:id="@+id/remote_control_page"
+        android:name="dji.sampleV5.aircraft.pages.RemoteControlFragment"
+        android:label="remote_control_page"
+        tools:layout="@layout/frag_remote_control_page"/>
 
 </navigation>

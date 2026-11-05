@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f8fb">
+  <title>巡逻任务管理台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#tasks" aria-label="巡逻任务管理台首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 15.5 8.8 7h6.4l4.8 8.5-3.1 1.8-2.4-4.4H9.4L7 17.3z"/><circle cx="12" cy="9.5" r="1.7"/></svg>
+        </span>
+        <span><strong>巡逻任务</strong><small>运营管理台</small></span>
+      </a>
+      <nav class="nav-list" aria-label="主导航">
+        <a class="nav-item active" href="#tasks" data-view-link="tasks">
+          <svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>
+          <span>任务工单</span>
+        </a>
+        <a class="nav-item" href="#assets" data-view-link="assets">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m5 17 4-4 3 3 2-2 5 3"/></svg>
+          <span>媒体文件</span>
+        </a>
+      </nav>
+      <div class="sidebar-foot">
+        <span class="health-dot" id="healthDot"></span>
+        <span><strong id="healthText">正在连接</strong><small>Demo Server</small></span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menuButton" type="button" aria-label="展开菜单">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <div class="breadcrumb"><span>巡逻任务管理</span><b>/</b><strong id="pageCrumb">任务工单</strong></div>
+        <div class="topbar-right">
+          <span class="date-chip" id="today"></span>
+          <span class="avatar">管</span>
+        </div>
+      </header>
+
+      <section class="view active" id="tasksView" aria-labelledby="tasksTitle">
+        <div class="page-heading">
+          <div><p class="eyebrow">TASK OPERATIONS</p><h1 id="tasksTitle">任务工单</h1><p>创建、分配和跟踪巡逻任务的全流程状态</p></div>
+          <button class="primary-button" type="button" data-action="new-job"><span>＋</span> 新增任务</button>
+        </div>
+
+        <div class="stat-grid" id="jobStats" aria-label="任务统计"></div>
+
+        <section class="panel">
+          <div class="panel-toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input id="jobSearch" type="search" placeholder="搜索任务名称或编号" aria-label="搜索任务">
+            </div>
+            <select id="jobStatusFilter" aria-label="按状态筛选">
+              <option value="">全部状态</option>
+              <option value="DRAFT">草稿</option>
+              <option value="DISPATCHED">待接收</option>
+              <option value="ACCEPTED">待执行</option>
+              <option value="IN_PROGRESS">执行中</option>
+              <option value="FINALIZING">同步中</option>
+              <option value="COMPLETED">已完成</option>
+              <option value="CANCELLED">已取消</option>
+            </select>
+            <button class="secondary-button refresh-button" type="button" data-action="refresh-jobs">
+              <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg> 刷新
+            </button>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>任务信息</th><th>遥控器 SN</th><th>截止时间</th><th>航线</th><th>状态</th><th class="align-right">操作</th></tr></thead>
+              <tbody id="jobsTable"></tbody>
+            </table>
+          </div>
+          <div class="state-box" id="jobsState" hidden></div>
+          <div class="panel-footer"><span id="jobsCount">共 0 条任务</span></div>
+        </section>
+      </section>
+
+      <section class="view" id="assetsView" aria-labelledby="assetsTitle">
+        <div class="page-heading">
+          <div><p class="eyebrow">MEDIA LIBRARY</p><h1 id="assetsTitle">媒体文件</h1><p>集中查看任务回传照片与航线文件</p></div>
+          <button class="secondary-button" type="button" data-action="refresh-assets">刷新文件</button>
+        </div>
+        <section class="panel media-panel">
+          <div class="panel-toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input id="assetSearch" type="search" placeholder="搜索文件名、任务或资源编号" aria-label="搜索媒体">
+            </div>
+            <select id="assetTypeFilter" aria-label="按文件类型筛选"><option value="">全部类型</option><option value="photo">照片</option><option value="route">航线</option></select>
+            <select id="assetStatusFilter" aria-label="按同步状态筛选"><option value="">全部状态</option><option value="UPLOADED">已同步</option><option value="UPLOADING">同步中</option><option value="FAILED">失败</option></select>
+          </div>
+          <div class="asset-groups" id="assetGrid"></div>
+          <div class="state-box" id="assetsState" hidden></div>
+          <div class="panel-footer"><span id="assetsCount">共 0 个文件</span></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="overlay" id="jobModal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="jobModalTitle">
+      <header class="modal-header"><div><p class="eyebrow">MISSION FORM</p><h2 id="jobModalTitle">新增任务</h2></div><button class="icon-button" type="button" data-action="close-modal" aria-label="关闭">×</button></header>
+      <form id="jobForm">
+        <input type="hidden" name="jobId">
+        <div class="form-body">
+          <label class="field field-wide"><span>任务名称 <b>*</b></span><input name="title" required maxlength="80" placeholder="例如：北区光伏板巡检"></label>
+          <label class="field"><span>任务类型</span><select name="missionType"><option value="INSPECTION">巡检任务</option><option value="MAPPING">测绘任务</option><option value="SECURITY">安防巡逻</option><option value="OTHER">其他任务</option></select></label>
+          <label class="field"><span>遥控器 SN</span><select name="rcSn" id="deviceSelect"><option value="">暂不分配</option></select></label>
+          <label class="field"><span>截止时间</span><input name="deadline" type="datetime-local"></label>
+          <label class="field field-wide"><span>作业要求</span><textarea name="requirements" rows="3" maxlength="500" placeholder="填写拍摄模式、重叠率或其他执行要求"></textarea></label>
+          <label class="field field-wide"><span>KMZ 航线文件</span><span class="file-picker"><input name="route" type="file" accept=".kmz,application/vnd.google-earth.kmz"><span class="file-copy"><b>上传或替换完整 KMZ</b><small id="routeFileHint">管理台不编辑航点、高度或速度</small></span></span></label>
+        </div>
+        <footer class="modal-footer"><button class="secondary-button" type="button" data-action="close-modal">取消</button><button class="secondary-button accent" type="submit" value="draft">保存草稿</button><button class="primary-button" type="submit" value="dispatch">保存并下发</button></footer>
+      </form>
+    </section>
+  </div>
+
+  <div class="overlay drawer-overlay" id="detailDrawer" hidden>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <header class="drawer-header"><div><p class="eyebrow">TASK DETAIL</p><h2 id="detailTitle">任务详情</h2></div><button class="icon-button" type="button" data-action="close-detail" aria-label="关闭">×</button></header>
+      <div class="drawer-body" id="detailBody"></div>
+    </aside>
+  </div>
+
+  <div class="overlay lightbox-overlay" id="assetLightbox" hidden>
+    <figure class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <header class="lightbox-header">
+        <div><strong id="lightboxTitle">照片预览</strong><small id="lightboxMeta"></small></div>
+        <button class="icon-button" type="button" data-action="close-lightbox" aria-label="关闭">×</button>
+      </header>
+      <div class="lightbox-stage"><img id="lightboxImage" alt=""></div>
+      <footer class="lightbox-footer"><a class="secondary-button" id="lightboxDownload" download>下载原图</a></footer>
+    </figure>
+  </div>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="badge_connected_bg">@color/demo_top_bar_bg</color>
+    <color name="badge_connected_border">@color/demo_top_bar_connected</color>
+    <color name="badge_disconnected_bg">#FFFFEAEA</color>
+    <color name="badge_disconnected_border">#FFF5C0C0</color>
+    <color name="badge_unregistered_bg">#FFF5F5F5</color>
+    <color name="badge_unregistered_border">#FFDCDCDC</color>
+</resources>

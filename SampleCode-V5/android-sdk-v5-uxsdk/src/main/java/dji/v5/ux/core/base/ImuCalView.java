@@ -124,7 +124,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
 
     private void initViews() {
         mPrepareDesc = RESIDS_PREPARE_DESC_REMOVE_DESC1;
-        sideSequence = (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct())? IImuResources.SIDE_SEQUENCE_M2E : IImuResources.SIDE_SEQUENCE;
+        sideSequence = (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct() || ProductUtil.isM5Product())? IImuResources.SIDE_SEQUENCE_M2E : IImuResources.SIDE_SEQUENCE;
 
         final int[] descResIds = new int[]{
             R.id.imu_cal_right_desc_ly1, R.id.imu_cal_right_desc_ly2, R.id.imu_cal_right_desc_ly3
@@ -158,7 +158,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
 
     @Override
     protected void onDetachedFromWindow() {
-        // todo 飞机断开连接后关闭对话框
+        // 飞机断开连接后关闭对话框
         super.onDetachedFromWindow();
     }
 
@@ -254,7 +254,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
             updateProgress(100 * imuCalibrationHint.getOrientationsCalibrated().size() / totalProgress);
         } else if (imuCalibrationHint.getCalibrationState() == IMUCalibrationState.FAILED) {
             mStatusDescTv.setText(getContext().getString(R.string.uxsdk_setting_ui_imu_fail));
-            // TODO 添加IMU校准失败的错误码或错误原因
+            // 添加IMU校准失败的错误码或错误原因
         } else if (imuCalibrationHint.getCalibrationState() == IMUCalibrationState.SUCCESSFUL) {
             // 校准成功后拉取下IMU状态刷新其状态值。SDK里面IMU状态直接读的内存中的调参值，如果没有其他地方去拉取的话校准成功后状态还是异常
             //Pilot2Repo.FlightController().IMUCheckStatus().getValueAsync().subscribe();
@@ -435,7 +435,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
     private int getReadyResId() {
         if(ProductUtil.isM30Product()){
             return R.drawable.uxsdk_setting_ui_imu_ready_m320;
-        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
+        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct() || ProductUtil.isM5Product()) {
             return R.drawable.uxsdk_img_device_home_m3e;
         } else{
             return R.drawable.uxsdk_setting_ui_imu_ready_m300;
@@ -447,7 +447,7 @@ public class ImuCalView extends LinearLayout implements View.OnClickListener {
 
         if (ProductUtil.isM30Product()) {
             resIds = RESIDS_AIRCRAFT_M320;
-        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
+        } else if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct() || ProductUtil.isM5Product()) {
             resIds = RESIDS_AIRCRAFT_M3E;
         } else {
             resIds = RESIDS_AIRCRAFT_M300;

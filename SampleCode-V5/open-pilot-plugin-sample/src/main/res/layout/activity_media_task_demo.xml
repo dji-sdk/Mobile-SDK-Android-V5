@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <!-- TopBar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/top_bar_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp">
+
+        <ImageView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="6dp"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/module_media_task"
+            android:textColor="@color/top_bar_title"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_server_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_desc_text"
+            android:textSize="11sp"
+            tools:text="Server: Connected" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bar_divider" />
+
+    <!-- 主体区域容器（充满 TopBar 下方的所有剩余空间） -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- 底层：原本的左侧控制区 + 右侧媒体网格 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- 左：控制卡片（单列 25% 宽度，可滚动） -->
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/bg_rv_menu_card"
+                android:layout_margin="4dp"
+                android:padding="10dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- 相机下拉框 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/media_component_label"
+                        android:textColor="@color/card_title_text"
+                        android:textSize="11sp" />
+
+                    <Spinner
+                        android:id="@+id/btn_component"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_file_transfer_selector" />
+
+                    <!-- 存储下拉框 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/media_storage_label"
+                        android:textColor="@color/card_title_text"
+                        android:textSize="11sp" />
+
+                    <Spinner
+                        android:id="@+id/btn_storage"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/bg_file_transfer_selector" />
+
+                    <!-- 回放状态 -->
+                    <TextView
+                        android:id="@+id/tv_playback_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/card_desc_text"
+                        android:textSize="11sp"
+                        tools:text="Playback: Unknown" />
+
+                    <TextView
+                        android:id="@+id/btn_enter_playback"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_enter_playback"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_exit_playback"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_exit_playback"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <!-- 拉取范围 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_media_index"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_media_input"
+                            android:hint="@string/media_index_hint"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:textColor="@color/card_title_text"
+                            android:textColorHint="@color/hint_text"
+                            android:textSize="11sp" />
+
+                        <View
+                            android:layout_width="6dp"
+                            android:layout_height="1dp" />
+
+                        <EditText
+                            android:id="@+id/et_media_count"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_media_input"
+                            android:hint="@string/media_count_hint"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:textColor="@color/card_title_text"
+                            android:textColorHint="@color/hint_text"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btn_pull_files"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_pull"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_stop_pull"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_stop_pull"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <!-- 选择 / 批量下载 -->
+                    <TextView
+                        android:id="@+id/btn_select_mode"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_select_mode_on"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_download_selected"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_download_selected"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <!-- 相机级 XMP -->
+                    <TextView
+                        android:id="@+id/btn_set_xmp"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_set_xmp"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_get_xmp"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_get_xmp"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <!-- 拍照 / 格式化 -->
+                    <TextView
+                        android:id="@+id/btn_take_photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_take_photo"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btn_format_storage"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_format_storage"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_camera_xmp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/card_desc_text"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/tv_operation_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="@color/card_desc_text"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- 右侧网格区域 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.75"
+                android:layout_marginVertical="4dp">
+
+                <!-- 媒体网格（默认充满） -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_media_files"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingVertical="4dp" />
+
+                    <TextView
+                        android:id="@+id/tv_empty_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:textColor="@color/hint_text"
+                        android:textSize="12sp"
+                        android:text="@string/media_select_hint" />
+                </FrameLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- 顶层：覆盖详情层（点击图片后显示，宽度 match_parent，背景不透明覆盖全屏） -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_detail_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/page_bg"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:id="@+id/layout_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_file_metadata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/card_title_text"
+                    android:textSize="12sp" />
+
+                <!-- 预览图 -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_card_thumb_placeholder">
+
+                    <ImageView
+                        android:id="@+id/iv_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@null"
+                        android:scaleType="fitCenter" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_preview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_preview_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/hint_text"
+                        android:textSize="12sp" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/btn_pull_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_view_effect_btn"
+                    android:gravity="center"
+                    android:text="@string/media_pull_preview"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <!-- 下载 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_download_file"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_download"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp" />
+
+                    <TextView
+                        android:id="@+id/btn_cancel_download"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_cancel_download"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progress_download"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:max="100" />
+
+                <TextView
+                    android:id="@+id/tv_download_progress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/card_desc_text"
+                    android:textSize="11sp" />
+
+                <!-- XMP -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_pull_xmp"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_xmp_file"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp" />
+
+                    <TextView
+                        android:id="@+id/btn_pull_xmp_custom"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:gravity="center"
+                        android:text="@string/media_xmp_custom"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_xmp_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/card_desc_text"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_xmp_custom_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/card_desc_text"
+                    android:textSize="11sp" />
+
+                <!-- 热成像 -->
+                <TextView
+                    android:id="@+id/btn_parse_thermal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_view_effect_btn"
+                    android:gravity="center"
+                    android:text="@string/media_thermal_parse"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_thermal_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/card_desc_text"
+                    android:textSize="11sp" />
+
+                <!-- 受限能力 -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:background="@color/demo_divider" />
+
+                <TextView
+                    android:id="@+id/tv_capability_limit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/media_capability_limit"
+                    android:textColor="@color/hint_text"
+                    android:textSize="11sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_delete_disabled"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_media_capability_disabled"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="@string/media_delete_unavailable"
+                        android:textColor="@color/hint_text"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="1dp" />
+
+                    <TextView
+                        android:id="@+id/btn_video_disabled"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_media_capability_disabled"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="@string/media_video_unavailable"
+                        android:textColor="@color/hint_text"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_reference_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/media_reference"
+                    android:textColor="@color/hint_text"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </FrameLayout>
+</LinearLayout>

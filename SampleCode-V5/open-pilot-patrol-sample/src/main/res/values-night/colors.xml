@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 tokens — Dark -->
+    <color name="md_theme_primary">#3CB371</color>
+    <color name="md_theme_primary_variant">#2E8B57</color>
+    <color name="md_theme_on_primary">#0F1F10</color>
+    <color name="md_theme_secondary">#66CDAA</color>
+    <color name="md_theme_on_secondary">#0F1F10</color>
+    <color name="md_theme_background">#000000</color>
+    <color name="md_theme_on_background">#FFFFFF</color>
+    <color name="md_theme_surface">#1A1A1A</color>
+    <color name="md_theme_surface_variant">#262626</color>
+    <color name="md_theme_on_surface">#FFFFFF</color>
+    <color name="md_theme_on_surface_variant">#D0D0D0</color>
+    <color name="md_theme_error">#FF6B6B</color>
+    <color name="md_theme_on_error">#FFFFFF</color>
+    <color name="md_theme_outline">#444444</color>
+</resources>

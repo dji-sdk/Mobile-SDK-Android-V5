@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dji.rtk.CoordinateSystem
-import dji.sampleV5.aircraft.util.Helper
+import dji.v5.ux.util.Helper
 import dji.sampleV5.aircraft.databinding.FragNetworkRtkPageBinding
 import dji.sampleV5.aircraft.models.RTKNetworkVM
 import dji.sampleV5.moduledrone.pages.RTKCenterFragment.Companion.KEY_IS_CMCC_RTK
@@ -18,7 +18,7 @@ import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.JsonUtil
 import dji.v5.utils.common.LogUtils
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 
 /**
  * Class Description

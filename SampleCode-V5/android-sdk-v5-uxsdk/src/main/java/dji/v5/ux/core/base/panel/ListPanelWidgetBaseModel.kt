@@ -28,7 +28,6 @@ import androidx.annotation.IntRange
 import io.reactivex.rxjava3.core.Flowable
 import dji.v5.ux.core.util.DataProcessor
 
-// TODO:
 // * Documentation UX-5195
 
 /**

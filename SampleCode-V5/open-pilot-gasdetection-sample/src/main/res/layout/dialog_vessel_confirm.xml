@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 船名/编号确认弹窗：复用公共标签与输入框样式，不引入第二套表单外观。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/card_padding">
+
+    <TextView
+        style="@style/LabelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gas_vessel_name_label" />
+
+    <EditText
+        android:id="@+id/etVesselName"
+        style="@style/InputBox"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/label_gap"
+        android:hint="@string/gas_vessel_name_hint"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="1" />
+</LinearLayout>

@@ -13,8 +13,8 @@ import androidx.fragment.app.activityViewModels
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragDataProtectionPageBinding
 import dji.sampleV5.aircraft.models.DataProtectionVm
-import dji.sampleV5.aircraft.util.Helper
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.Helper
+import dji.v5.ux.util.ToastUtils
 import dji.v5.common.error.IDJIError
 import dji.v5.common.ldm.LDMExemptModule
 import dji.v5.network.DJIHttpCallback

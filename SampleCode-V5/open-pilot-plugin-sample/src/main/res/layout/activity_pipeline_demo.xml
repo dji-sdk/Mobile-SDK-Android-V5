@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <!-- top bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/top_bar_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp">
+
+        <ImageView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:src="@drawable/icon_back" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/module_pipeline"
+            android:textColor="@color/top_bar_title"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="1dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bar_divider" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ======== 收发区 ======== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rv_menu_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Interface (Send / Receive)"
+                    android:textColor="@color/card_title_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/ed_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/tv_send_data_to_psdk_hint"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_channel_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_edit_common"
+                        android:hint="pipeline id"
+                        android:inputType="number"
+                        android:paddingVertical="0dp"
+                        android:text="49152"
+                        android:textSize="14sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_mop_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/bg_edit_common"
+                        android:checkedButton="@id/rb_payload"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_on_board"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="OSDK"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_payload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="PSDK"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/cb_reliable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bg_edit_common"
+                        android:checked="true"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="8dp"
+                        android:text="STABLE"
+                        android:textSize="14sp" />
+
+                    <Spinner
+                        android:id="@+id/sp_choose_component"
+                        android:layout_width="160dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bg_spinner_antd_selector"
+                        android:dropDownWidth="match_parent"
+                        android:popupTheme="@style/AntdSpinnerPopupTheme"
+                        android:popupBackground="@drawable/bg_spinner_popup_antd"
+                        android:theme="@style/AntdSpinnerTheme"
+                        app:popupTheme="@style/AntdSpinnerPopupTheme" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btn_connect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_selector_common"
+                        android:gravity="center"
+                        android:text="connect"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/btn_disconnect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/bg_selector_common"
+                        android:gravity="center"
+                        android:text="disconnect"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/btn_send_data_to_payload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/bg_selector_common"
+                        android:gravity="center"
+                        android:text="send data"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/message_listview"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- ======== 上传下载区 ======== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_rv_menu_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Download / Upload"
+                    android:textColor="@color/card_title_text"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_channel_id_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_edit_common"
+                        android:hint="pipeline id"
+                        android:inputType="number"
+                        android:paddingVertical="0dp"
+                        android:text="49153"
+                        android:textSize="14sp" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_mop_type_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/bg_edit_common"
+                        android:checkedButton="@id/rb_payload_down"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_on_board_down"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="OSDK"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_payload_down"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="PSDK"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+
+                    <Spinner
+                        android:id="@+id/sp_choose_component_down"
+                        android:layout_width="160dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bg_spinner_antd_selector"
+                        android:dropDownWidth="match_parent"
+                        android:popupTheme="@style/AntdSpinnerPopupTheme"
+                        android:popupBackground="@drawable/bg_spinner_popup_antd"
+                        android:theme="@style/AntdSpinnerTheme"
+                        app:popupTheme="@style/AntdSpinnerPopupTheme" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/cb_reliable_down"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/bg_edit_common"
+                        android:checked="true"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="8dp"
+                        android:text="STABLE"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_connect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/bg_selector_common"
+                        android:gravity="center"
+                        android:text="connect"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rc_pipeline"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

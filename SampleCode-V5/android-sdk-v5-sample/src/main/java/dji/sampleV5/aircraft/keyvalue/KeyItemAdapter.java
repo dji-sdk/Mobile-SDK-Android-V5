@@ -26,6 +26,7 @@ public class KeyItemAdapter extends RecyclerView.Adapter<KeyItemAdapter.ComViewH
     protected List<KeyItem<?, ?>> dataList;
     protected List<KeyItem<?, ?>> mFilterList;
     protected Context context;
+    private Filter mFilter;
 
 
     public KeyItemAdapter(Context context, List<KeyItem<?, ?>> dataList, KeyItemActionListener<KeyItem<?, ?>> callback) {
@@ -76,42 +77,49 @@ public class KeyItemAdapter extends RecyclerView.Adapter<KeyItemAdapter.ComViewH
 
     @Override
     public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String charString = charSequence.toString();
-                if (charString.isEmpty()) {
-                    mFilterList = dataList;
-                } else {
-                    List<KeyItem<?, ?>> filteredList = new ArrayList<>();
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (int i = 0, length = charSequence.length(); i < length; i++) {
-                        if (stringBuilder.length() > 0) {
-                            stringBuilder.append("+.*");
+        if (mFilter == null) {
+            mFilter = new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence charSequence) {
+                    // 只做计算，结果赋给局部变量，不写 mFilterList（避免后台线程与主线程竞争）
+                    String charString = charSequence.toString();
+                    List<KeyItem<?, ?>> result;
+                    if (charString.isEmpty()) {
+                        // 用快照而非直接引用，防止主线程 data.clear() 与本线程并发
+                        result = new ArrayList<>(dataList);
+                    } else {
+                        List<KeyItem<?, ?>> filteredList = new ArrayList<>();
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int i = 0, length = charSequence.length(); i < length; i++) {
+                            if (stringBuilder.length() > 0) {
+                                stringBuilder.append("+.*");
+                            }
+                            stringBuilder.append(charSequence.charAt(i));
                         }
-                        stringBuilder.append(charSequence.charAt(i));
+                        Pattern pattern = Pattern.compile(stringBuilder.toString(), Pattern.CASE_INSENSITIVE);
+                        for (KeyItem<?, ?> item : dataList) {
+                            if (pattern.matcher(item.keyInfo.getIdentifier()).find()) {
+                                filteredList.add(item);
+                            }
+                        }
+                        result = filteredList;
                     }
-                    Pattern pattern = Pattern.compile(stringBuilder.toString(), Pattern.CASE_INSENSITIVE);
-                    for (KeyItem<?, ?> item : dataList) {
-                        if (pattern.matcher(item.keyInfo.getIdentifier()).find()) {
-                            filteredList.add(item);
-                        }
 
-                    }
-                    mFilterList = filteredList;
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = result;
+                    return filterResults;
                 }
 
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = mFilterList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                mFilterList = (ArrayList<KeyItem<?, ?>>) filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
+                @Override
+                protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                    // mFilterList 只在主线程（publishResults）中被赋值，消除竞争
+                    //noinspection unchecked
+                    mFilterList = (List<KeyItem<?, ?>>) filterResults.values;
+                    notifyDataSetChanged();
+                }
+            };
+        }
+        return mFilter;
     }
 
 

@@ -17,7 +17,7 @@ import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.data.MEDIA_FILE_DETAILS_STR
 import dji.sampleV5.aircraft.databinding.FragMediaPageBinding
 import dji.sampleV5.aircraft.models.MediaVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.camera.CameraStorageLocation
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
@@ -59,10 +59,14 @@ class MediaFragment : DJIFragment() {
             mediaVM.init()
             isload = true
         }
-        adapter = MediaListAdapter(mediaVM.mediaFileListData.value?.data!!, ::onItemClick)
+        adapter = MediaListAdapter(::onItemClick)
         binding?.mediaRecycleList?.adapter = adapter
+        // 提交初始数据快照（拷贝一份，避免持有 SDK 内部可变 List 引用）
+        mediaVM.mediaFileListData.value?.data?.let {
+            adapter?.submitList(ArrayList(it))
+        }
         mediaVM.mediaFileListData.observe(viewLifecycleOwner) {
-            adapter!!.notifyDataSetChanged()
+            adapter?.submitList(ArrayList(it.data))
             binding?.tvListCount?.text = "Count:${it.data.size}"
         }
 

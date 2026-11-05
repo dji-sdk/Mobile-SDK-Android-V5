@@ -1,5 +1,6 @@
 package dji.sampleV5.aircraft.pages
 
+import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.data.FragmentPageItem
 import dji.v5.utils.common.StringUtils
+import dji.v5.utils.inner.SDKConfig
+import dji.v5.ux.core.extension.textColor
 
 
 /**
@@ -34,7 +37,8 @@ class MainFragmentListAdapter(private val onClick: (FragmentPageItem) -> Unit) :
         holder.bind(item)
     }
 
-    class ViewHolder(itemView: View, val onClick: (FragmentPageItem) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, val onClick: (FragmentPageItem) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
 
         private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.item_description)
@@ -52,12 +56,17 @@ class MainFragmentListAdapter(private val onClick: (FragmentPageItem) -> Unit) :
             currentPageInfoItem = pageInfo
             titleTextView.text = StringUtils.getResStr(itemView.context, pageInfo.title)
             descriptionTextView.text = StringUtils.getResStr(itemView.context, pageInfo.description)
-            if (pageInfo.isStrike) {
+            val isNotAvailable = !pageInfo.sdkLinKMode.contains(SDKConfig.getInstance().initSettings.sdkLinKMode)
+            if (pageInfo.isStrike || isNotAvailable) {
                 titleTextView.paintFlags = titleTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 descriptionTextView.paintFlags = descriptionTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                titleTextView.textColor = Color.GRAY
+                descriptionTextView.textColor = Color.GRAY
             } else {
                 titleTextView.paintFlags = titleTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 descriptionTextView.paintFlags = descriptionTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                titleTextView.textColor = Color.WHITE
+                descriptionTextView.textColor = Color.WHITE
             }
         }
     }

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 apply from: rootProject.file('dependencies.gradle')
 
@@ -35,5 +37,9 @@ allprojects {
                 dirs new File(rootProject.projectDir.getAbsolutePath() + '/libs')
             }
         }
+    }
+
+    tasks.withType(KotlinCompile).configureEach {
+        kotlinOptions.jvmTarget = "1.8"
     }
 }

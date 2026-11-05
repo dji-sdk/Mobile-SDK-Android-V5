@@ -1,6 +1,7 @@
 package dji.sampleV5.aircraft.models
 
 import dji.v5.common.register.PackageProductCategory
+import dji.v5.common.register.SDKLinKMode
 import dji.v5.utils.inner.SDKConfig
 
 /**
@@ -14,8 +15,8 @@ class MSDKInfoModel {
         return SDKConfig.getInstance().isDebug
     }
 
-    fun getPackageProductCategory(): PackageProductCategory {
-        return SDKConfig.getInstance().packageProductCategory
+    fun getSDKLinkMode(): SDKLinKMode {
+        return SDKConfig.getInstance().initSettings.sdkLinKMode
     }
 
     fun getSDKVersion(): String {

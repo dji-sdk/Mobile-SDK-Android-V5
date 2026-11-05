@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - ImageView Case 预览</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: transparent; /* 生产环境透明 */
+            color: #FFFFFF;
+            margin: 0;
+            padding: 12px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .rv-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; align-self: flex-start; }
+
+        .rv-item-container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            align-items: center; 
+        }
+
+        /* 基础图片框架 - 完全匹配 27:16 原图比例 */
+        .rv-img-wrapper {
+            position: relative;
+            width: 160px; 
+            height: 95px; /* 160 / (432/256) ≈ 95 */
+            border-radius: 4px; 
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .rv-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+        }
+
+        .shape-square { border-radius: 0; }
+        .shape-rounded { border-radius: 12px; }
+        
+        .shape-circle-wrapper {
+            width: 95px; /* 取原图的高度作为圆形的直径 */
+            height: 95px;
+            border-radius: 50%;
+            background-color: #FF0000; 
+            overflow: hidden;
+        }
+
+        .style-alpha .rv-img { opacity: 0.4; } 
+        
+        .style-tint::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 204, 0, 0.3);
+            pointer-events: none;
+        }
+
+        .style-stroke {
+            border: 3px solid #FFCC00; 
+            border-radius: 8px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-item-container">
+            <div class="rv-section-title" data-i18n="img_square">方形图片</div>
+            <div class="rv-img-wrapper shape-square">
+                <!-- 实际环境使用本地相对路径加载 sea_view.webp -->
+                <img class="rv-img" src="file:///android_asset/plugin/sea_view.webp" alt="sea view" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=432&h=256&auto=format&fit=crop'">
+            </div>
+
+            <div class="rv-section-title" data-i18n="img_round">圆角图片</div>
+            <div class="rv-img-wrapper shape-rounded">
+                <img class="rv-img" src="file:///android_asset/plugin/sea_view.webp" alt="sea view" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=432&h=256&auto=format&fit=crop'">
+            </div>
+
+            <div class="rv-section-title" data-i18n="img_circle">圆形图片</div>
+            <div class="shape-circle-wrapper">
+                <img class="rv-img" src="file:///android_asset/plugin/sea_view.webp" alt="sea view" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=432&h=256&auto=format&fit=crop'">
+            </div>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_style_02">02 组件样式</div>
+    <div class="rv-card">
+        <div class="rv-item-container">
+            <div class="rv-section-title" data-i18n="img_basic">基础图片</div>
+            <div class="rv-img-wrapper">
+                <img class="rv-img" src="file:///android_asset/plugin/sea_view.webp" alt="sea view" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=432&h=256&auto=format&fit=crop'">
+            </div>
+
+            <div class="rv-section-title" data-i18n="img_alpha">半透明图片</div>
+            <div class="rv-img-wrapper style-alpha">
+                <img class="rv-img" src="file:///android_asset/plugin/sea_view.webp" alt="sea view" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=432&h=256&auto=format&fit=crop'">
+            </div>
+
+            <div class="rv-section-title" data-i18n="img_fill">颜色填充图片</div>
+            <div class="rv-img-wrapper style-tint">
+                <img class="rv-img" src="file:///android_asset/plugin/sea_view.webp" alt="sea view" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=432&h=256&auto=format&fit=crop'">
+            </div>
+
+            <div class="rv-section-title" data-i18n="img_stroke">颜色描边图片</div>
+            <div class="rv-img-wrapper style-stroke">
+                <img class="rv-img" src="file:///android_asset/plugin/sea_view.webp" alt="sea view" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=432&h=256&auto=format&fit=crop'">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:     { zh: "01 组件类型", en: "01 Component Type" },
+            card_style_02: { zh: "02 组件样式", en: "02 Component Style" },
+            img_square:    { zh: "方形图片",     en: "Square Image" },
+            img_round:     { zh: "圆角图片",     en: "Rounded Image" },
+            img_circle:    { zh: "圆形图片",     en: "Circular Image" },
+            img_basic:     { zh: "基础图片",     en: "Basic Image" },
+            img_alpha:     { zh: "半透明图片",   en: "Translucent Image" },
+            img_fill:      { zh: "颜色填充图片", en: "Color-Filled Image" },
+            img_stroke:    { zh: "颜色描边图片", en: "Color-Stroked Image" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

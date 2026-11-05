@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dji_open_pilot_plugin_name">Pilot 开放插件 Sample</string>
+
+    <string name="badge_connected">已连接</string>
+    <string name="badge_disconnected">未连接</string>
+    <string name="badge_registered">已注册</string>
+    <string name="badge_unregistered">未注册</string>
+
+    <!-- 国家码 Demo -->
+    <string name="badge_country_code_prefix">国家码：%1$s</string>
+
+    <!-- 模块名称 -->
+    <string name="module_remote_view_page">自定义UI组件</string>
+    <string name="module_ar">AR 投射</string>
+    <string name="module_map">地图控件</string>
+    <string name="module_dialog">对话框</string>
+    <string name="module_camera_drawing">图传绘制</string>
+    <string name="module_navigate">页面跳转</string>
+    <string name="module_waypoint">航线任务</string>
+    <string name="module_key">Key Manager</string>
+    <string name="module_file_transfer">文件传输</string>
+    <string name="module_pipeline">MOP 数据管道</string>
+    <string name="module_camera_stream">相机码流</string>
+    <string name="module_area_code">国家码</string>
+    <string name="module_language">语言设置</string>
+    <string name="module_remote_control">遥控器控制</string>
+    <string name="module_disconnect_action">断连保护</string>
+    <string name="module_intelligent">智能识别</string>
+    <string name="module_modeling">建模</string>
+    <string name="module_media_task">媒体文件任务</string>
+    <string name="module_link">连接入口</string>
+
+    <!-- 模块说明 -->
+    <string name="desc_remote_view_page">在 Pilot 界面叠加自定义控件，支持 TextView/Button/EditText 等，可实时更新属性。</string>
+    <string name="desc_ar">向地图/图传叠加 AR 信息点，支持图标投射（透视/正交）、文字标注和雷达圈。</string>
+    <string name="desc_map">向 Pilot 地图添加标记、圆、多边形、折线等元素，支持点击回调和状态订阅。</string>
+    <string name="desc_dialog">在 Pilot 弹出提示框、确认框、输入框、单选/多选框，支持用户操作回调。</string>
+    <string name="desc_camera_drawing">在图传画面叠加矩形框、实心多边形和自定义文字，适用于目标检测可视化。</string>
+    <string name="desc_navigate">控制 Pilot 跳转到指定页面（首页/地图/航线列表/相册等）。</string>
+    <string name="desc_waypoint">KMZ 文件推送到 Pilot/飞机，支持任务控制、断点续飞和状态订阅。</string>
+    <string name="desc_key">DJI Key-Value 通道，支持 getValue/setValue/listen/performAction。</string>
+    <string name="desc_file_transfer">上传插件文件到插件私有目录或 Pilot 日志目录。当前 SDK 不支持删除。</string>
+    <string name="desc_pipeline">建立与飞机的 MOP 数据管道，支持连接/读写/分块大数据传输。</string>
+    <string name="desc_camera_stream">订阅指定通道的相机码流帧数据回调。</string>
+    <string name="desc_area_code">查询和更新国家码，支持国家码变更订阅。</string>
+    <string name="desc_language">获取 Pilot APP 当前语言，订阅语言切换变更事件。</string>
+    <string name="desc_remote_control">切换 Pilot 主画面的主相机（指定 ComponentIndexType）。</string>
+    <string name="desc_disconnect_action">配置断连时自动执行的 Key 操作，防止断联后设备状态异常。</string>
+    <string name="desc_intelligent">设置截帧模式、订阅自动识别目标通知、下载截帧文件。</string>
+    <string name="desc_modeling">订阅建模任务状态，将建模结果文件导出到公共目录。</string>
+    <string name="desc_media_task">浏览相机媒体文件、加载预览图、断点下载原文件、读取 XMP 与解析热成像照片。</string>
+    <string name="desc_link">SDK 初始化与 Pilot 服务端连接状态订阅（已在主界面集成）。</string>
+
+    <string name="demo_status_done">已实现</string>
+    <string name="demo_status_wip">开发中</string>
+    <string name="demo_status_todo">待开发</string>
+    <string name="thumb_placeholder">暂无截图</string>
+
+    <!-- RemoteViewPage Demo 菜单：组件类型 -->
+    <string name="comp_hint_select">请选择左侧组件</string>
+    <string name="comp_group_basic">基础组件</string>
+    <string name="comp_group_input">数据录入</string>
+    <string name="comp_group_display">数据展示</string>
+    <string name="comp_layout_title">Layout</string>
+    <string name="comp_textview_title">Text</string>
+    <string name="comp_imageview_title">ImageView</string>
+    <string name="comp_progressbar_title">ProgressBar</string>
+    <string name="comp_webview_title">WebView</string>
+    <string name="comp_listview_title">List</string>
+    <string name="comp_button_title">Button</string>
+    <string name="comp_edittext_title">Input</string>
+    <string name="comp_checkbox_title">CheckBox</string>
+    <string name="comp_switch_title">Switch</string>
+    <string name="comp_spinner_title">Spinner</string>
+    <string name="btn_view_effect">查看效果</string>
+    <string name="switch_live_stream_ar">Pilot直播带AR (setLiveStreamAREnabled)</string>
+    <string name="btn_back_to_plugin_app">返回插件 APP</string>
+    <string name="label_reference_code">封装类：%1$s\n参考代码：%2$s</string>
+    <string name="label_reference_interface">接口类：%1$s\n参考代码：%2$s</string>
+
+    <!-- 悬浮窗公共卡片标题 -->
+    <string name="card_title_result">01 结果展示</string>
+    <string name="card_title_action">02 操作</string>
+
+    <!-- RemoteViewPage Drawer 公共卡片标题 -->
+    <string name="demo_card_type">01 组件类型</string>
+    <string name="demo_card_state">02 组件状态</string>
+    <string name="demo_card_style">03 组件样式</string>
+    <string name="demo_card_style_02">02 组件样式</string>
+
+    <!-- Drawer 样本演示文案：公共 -->
+    <string name="demo_custom_color">自定义颜色</string>
+    <string name="demo_color_blue">蓝色</string>
+    <string name="demo_color_red">红色</string>
+    <string name="demo_color_green">绿色</string>
+
+    <!-- Button Drawer -->
+    <string name="demo_button_basic">基础按钮</string>
+    <string name="demo_button_group">组合按钮</string>
+    <string name="demo_button_disabled">按钮禁用态</string>
+    <string name="demo_button_size">按钮尺寸</string>
+    <string name="demo_button_shape">按钮形状</string>
+    <string name="demo_button_filled">填充按钮</string>
+    <string name="demo_button_stroke">描边按钮</string>
+    <string name="demo_button_text">文字按钮</string>
+    <string name="demo_button_primary">主要按钮</string>
+    <string name="demo_button_secondary">次要按钮</string>
+    <string name="demo_button_size_l">大-32 PX</string>
+    <string name="demo_button_size_m">中-26 PX</string>
+    <string name="demo_button_size_s">小-20 PX</string>
+    <string name="demo_button_shape_square">方形按钮</string>
+    <string name="demo_button_shape_round">圆角矩形按钮</string>
+    <string name="demo_button_shape_circle">圆形按钮</string>
+
+    <!-- TextView Drawer -->
+    <string name="demo_text_basic">基础文本</string>
+    <string name="demo_text_normal">普通文本信息</string>
+    <string name="demo_text_underline">下划线文本信息</string>
+    <string name="demo_text_strike">删除线文本信息</string>
+    <string name="demo_text_bold">加粗文本信息</string>
+    <string name="demo_text_color">色彩文本信息</string>
+    <string name="demo_text_special">特殊类型</string>
+    <string name="demo_text_single">单行文本信息</string>
+    <string name="demo_text_truncate">文本信息内容多，截断处理不展示全部内容</string>
+    <string name="demo_text_wrap">文本信息内容多，折行展示全部信息</string>
+    <string name="demo_text_scroll">这是一些文本信息，文本信息内容多，可滚动展示信息\n第2行\n第3行\n第4行\n第5行</string>
+    <string name="demo_text_richtext"><![CDATA[电量: <font color="%1$s"><b>%2$d%%</b></font>，动作: <font color="%3$s"><b><u><big>降落</big></u></b></font>]]></string>
+    <string name="demo_text_state_normal">文本正常态</string>
+    <string name="demo_text_state_disabled">文本置灰态</string>
+    <string name="demo_text_size">字体尺寸</string>
+    <string name="demo_text_size_l">大，字号12sp，字间距0.01 em，默认行高</string>
+    <string name="demo_text_size_m">中，字号11sp，字间距0.03em，1倍行高+1dp</string>
+    <string name="demo_text_size_s">小，字号9sp，字间距0.05 em，1.3倍行高</string>
+    <string name="demo_text_color_sample">普通字体颜色</string>
+
+    <!-- EditText Drawer -->
+    <string name="demo_edit_basic">基础输入框</string>
+    <string name="demo_edit_filled">填充输入框</string>
+    <string name="demo_edit_stroke">描边输入框</string>
+    <string name="demo_edit_default">默认输入框</string>
+    <string name="demo_edit_hint_state">提示态</string>
+    <string name="demo_edit_hint_input">请输入内容</string>
+    <string name="demo_edit_disabled">禁用态</string>
+    <string name="demo_edit_keyboard">键盘类型</string>
+    <string name="demo_edit_hint_number">数字模式</string>
+    <string name="demo_edit_hint_password">密码模式</string>
+    <string name="demo_edit_limit">输入限制</string>
+    <string name="demo_edit_hint_bankcard">银行卡号</string>
+    <string name="demo_edit_max8">最多输入8个字符，最多输入8个字符</string>
+    <string name="demo_edit_text_style">文字样式</string>
+    <string name="demo_edit_blue_left">蓝字左对齐</string>
+    <string name="demo_edit_center_bold">居中加粗</string>
+    <string name="demo_edit_custom_bg">自定义背景</string>
+
+    <!-- Layout Drawer -->
+    <string name="demo_layout_basic">基础用法</string>
+    <string name="demo_layout_linear_h">线性水平布局</string>
+    <string name="demo_layout_linear_v">线性垂直布局</string>
+    <string name="demo_layout_constraint">约束布局</string>
+    <string name="demo_layout_content">内容</string>
+    <string name="demo_layout_button">按钮</string>
+    <string name="demo_layout_tl">左上</string>
+    <string name="demo_layout_tr">右上</string>
+    <string name="demo_layout_center">居中</string>
+    <string name="demo_layout_bl">左下</string>
+    <string name="demo_layout_br">右下</string>
+    <string name="demo_layout_weight">权重定宽</string>
+    <string name="demo_layout_fixed">手动定宽</string>
+    <string name="demo_layout_nested">嵌套布局</string>
+
+    <!-- Spinner Drawer -->
+    <string name="demo_spinner_type">下拉框</string>
+    <string name="demo_spinner_disabled">禁用态</string>
+    <string name="demo_spinner_text_style">文本样式</string>
+    <string name="demo_spinner_custom_bg">自定义弹窗配色</string>
+    <string name="demo_spinner_item_option1">选项一</string>
+    <string name="demo_spinner_item_option2">选项二</string>
+    <string name="demo_spinner_item_option3">选项三</string>
+    <string name="demo_spinner_item_option4">选项四</string>
+    <string name="demo_spinner_item_option5">选项五</string>
+    <string name="demo_spinner_item_land">降落</string>
+    <string name="demo_spinner_item_rth">返航</string>
+    <string name="demo_spinner_item_hover">悬停</string>
+    <string name="demo_spinner_item_long">这是一条超超超超超超超长的选项文案</string>
+    <string name="demo_spinner_item_short">短文案</string>
+
+    <!-- Switch Drawer -->
+    <string name="demo_switch_type">开关 Switch</string>
+    <string name="demo_switch_disabled">禁用态</string>
+    <string name="demo_switch_size">开关大小</string>
+    <string name="demo_switch_color">开关颜色</string>
+
+    <!-- CheckBox Drawer -->
+    <string name="demo_checkbox_type">复选框 CheckBox</string>
+    <string name="demo_checkbox_disabled">禁用态</string>
+    <string name="demo_checkbox_color">复选框颜色</string>
+    <string name="demo_checkbox_left">左侧框</string>
+    <string name="demo_checkbox_right">右侧框</string>
+    <string name="demo_checkbox_checked">已选中</string>
+    <string name="demo_checkbox_unchecked">未选中</string>
+
+    <!-- ProgressBar Drawer -->
+    <string name="demo_progress_horizontal">水平进度条</string>
+    <string name="demo_progress_circle">圆形进度条</string>
+    <string name="demo_progress_circle_state">圆形进度条状态</string>
+    <string name="demo_progress_horizontal_size">水平进度条大小</string>
+    <string name="demo_progress_circle_size">圆形进度条大小</string>
+    <string name="demo_progress_horizontal_color">水平进度条颜色</string>
+    <string name="demo_progress_circle_color">圆形进度条颜色</string>
+
+    <!-- ImageView Drawer -->
+    <string name="demo_image_square">方形图片</string>
+    <string name="demo_image_round">圆角图片</string>
+    <string name="demo_image_circle">圆形图片</string>
+    <string name="demo_image_basic">基础图片</string>
+    <string name="demo_image_alpha">半透明图片</string>
+    <string name="demo_image_fill">颜色填充图片</string>
+    <string name="demo_image_stroke">颜色描边图片</string>
+
+    <!-- WebView Drawer -->
+    <string name="demo_web_load">加载网页</string>
+
+    <!-- ListView Drawer -->
+    <string name="demo_list_basic">基础列表</string>
+    <string name="demo_list_text">文本列表</string>
+    <string name="demo_list_icon_text">图标文本列表</string>
+    <string name="demo_list_icon_twoline">图文双行列表</string>
+    <string name="demo_list_success">成功</string>
+    <string name="demo_list_fail">失败</string>
+    <string name="demo_list_success_desc">这是一个成功图标</string>
+    <string name="demo_list_fail_desc">这是一个失败图标</string>
+
+    <!-- RemoteViewPage 悬浮窗导航栏标题 -->
+    <string name="comp_nav_layout">布局</string>
+    <string name="comp_nav_text">文本</string>
+    <string name="comp_nav_button">按钮</string>
+    <string name="comp_nav_edittext">输入框</string>
+    <string name="comp_nav_checkbox">复选框</string>
+    <string name="comp_nav_switch">开关</string>
+    <string name="comp_nav_spinner">下拉框</string>
+    <string name="comp_nav_imageview">图片</string>
+    <string name="comp_nav_webview">网页</string>
+    <string name="comp_nav_listview">列表</string>
+    <string name="comp_nav_progressbar">进度条</string>
+
+    <!-- AR Demo -->
+    <string name="ar_point_title">点</string>
+    <string name="ar_point_desc">AR 点投射</string>
+    <string name="ar_line_title">线</string>
+    <string name="ar_line_desc">AR 线投射</string>
+    <string name="ar_polygon_title">面</string>
+    <string name="ar_polygon_desc">AR 多边形投射</string>
+    <string name="ar_circle_title">圆</string>
+    <string name="ar_circle_desc">AR 圆投射</string>
+    <string name="ar_radar_title">雷达</string>
+    <string name="ar_radar_desc">AR 雷达扫描范围</string>
+    <string name="ar_projection_title">投射控制</string>
+    <string name="ar_projection_desc">当前 SDK 不支持分码流 AR 投射控制，显示和隐藏按钮已禁用。</string>
+    <string name="ar_hint_select">请选择左侧 AR 元素</string>
+
+    <!-- AR 悬浮窗导航栏标题 -->
+    <string name="ar_nav_point">点</string>
+    <string name="ar_nav_line">线</string>
+    <string name="ar_nav_polygon">面</string>
+    <string name="ar_nav_circle">圆</string>
+    <string name="ar_nav_radar">雷达</string>
+    <string name="ar_nav_projection">投射控制</string>
+    <string name="ar_group_custom_projection">自定义投射</string>
+    <string name="ar_group_system_projection">系统投射</string>
+    <string name="ar_btn_query">查询</string>
+    <string name="ar_btn_upload">上传</string>
+    <string name="ar_btn_update">更新</string>
+    <string name="ar_btn_delete">删除</string>
+    <string name="ar_btn_radar_show">显示</string>
+    <string name="ar_btn_radar_hide">隐藏</string>
+    <string name="ar_projection_group_fpv">FPV</string>
+    <string name="ar_projection_group_left_or_main">主码流</string>
+    <string name="ar_btn_projection_show">显示</string>
+    <string name="ar_btn_projection_hide">隐藏</string>
+
+    <!-- 图传绘制 Demo 菜单 -->
+    <string name="cvd_box_title">矩形框</string>
+    <string name="cvd_box_desc">叠加检测矩形框</string>
+    <string name="cvd_polygon_title">多边形</string>
+    <string name="cvd_polygon_desc">叠加实心多边形区域</string>
+    <string name="cvd_text_title">文字</string>
+    <string name="cvd_text_desc">叠加自定义实时文字</string>
+    <string name="cvd_hint_select">请选择左侧绘制元素</string>
+    <string name="cvd_group_drawing">图传绘制</string>
+
+    <!-- 图传绘制悬浮窗导航栏标题 -->
+    <string name="cvd_nav_box">矩形框</string>
+    <string name="cvd_nav_polygon">多边形</string>
+    <string name="cvd_nav_text">文字</string>
+
+    <!-- 图传绘制按钮 -->
+    <string name="cvd_btn_update">更新</string>
+    <string name="cvd_btn_clear">清除</string>
+
+    <!-- 图传绘制结果消息 -->
+    <string name="cvd_box_updating">正在更新 %1$d 个矩形框…</string>
+    <string name="cvd_polygon_updating">正在更新 %1$d 个多边形…</string>
+    <string name="cvd_text_updating">正在更新 %1$d 条文字…</string>
+    <string name="cvd_done">更新%s成功</string>
+    <string name="cvd_cleared">已清除</string>
+    <string name="cvd_failed">更新%s失败：%s</string>
+    <string name="cvd_text_content">文字绘制中</string>
+    <string name="cvd_polygon_distance_text">距离前方障碍物距离：%.1f m</string>
+
+    <!-- AR result messages: common -->
+    <string name="ar_already_uploaded">已上传过%s，请先删除再重新上传</string>
+    <string name="ar_location_failed">获取飞机位置失败</string>
+    <string name="ar_location_failed_check">获取飞机位置失败，请确认飞机已连接</string>
+    <string name="ar_config_not_ready">configId 为空，请等待自动上传完成</string>
+    <string name="ar_please_upload_first">请先上传%s</string>
+    <string name="ar_no_deletable">没有可删除的%s</string>
+    <string name="ar_deleted_all">已删除全部 %1$d 个%2$s</string>
+    <string name="ar_delete_done">删除 %1$d 个%2$s完成</string>
+
+    <!-- AR result messages: query -->
+    <string name="ar_query_found">查询到 %1$d 个%2$s</string>
+    <string name="ar_query_failed">查询%s失败: %s</string>
+
+    <!-- AR result messages: point -->
+    <string name="ar_point_upload_done">上传完成：6个点（40m×3 + 80m×3）</string>
+    <string name="ar_point_upload_toast">上传 6 个点完成</string>
+    <string name="ar_point_upload_failed">上传点失败: %s</string>
+    <string name="ar_point_update_toggled">已切换：80m文字隐藏，40m图标隐藏</string>
+    <string name="ar_point_update_restored">已恢复：全部可见</string>
+    <string name="ar_point_update_failed">更新点失败: %s</string>
+    <string name="ar_point_no_uploaded">没有已上传的点，请先上传</string>
+    <string name="ar_point_delete_failed">删除点失败: %s</string>
+
+    <!-- AR result messages: line -->
+    <string name="ar_line_upload_success">上传线成功, id=%s（含 6 个点）</string>
+    <string name="ar_line_upload_failed">上传线失败: %s</string>
+    <string name="ar_line_update_success">更新线成功：绿色虚线</string>
+    <string name="ar_line_update_failed">更新线失败: %s</string>
+    <string name="ar_line_delete_failed">删除线失败: %s</string>
+
+    <!-- AR result messages: polygon -->
+    <string name="ar_polygon_upload_success">上传面成功, id=%s（等边三角形 + 3 个点）</string>
+    <string name="ar_polygon_upload_failed">上传面失败: %s</string>
+    <string name="ar_polygon_update_success">更新面成功：三棱柱拉伸至 80m</string>
+    <string name="ar_polygon_update_failed">更新面失败: %s</string>
+    <string name="ar_polygon_delete_failed">删除面失败: %s</string>
+
+    <!-- AR result messages: circle -->
+    <string name="ar_circle_upload_success">上传圆成功, id=%s（绿色，半径20m）</string>
+    <string name="ar_circle_upload_failed">上传圆失败: %s</string>
+    <string name="ar_circle_update_success">更新圆成功：绿色圆柱体拉伸至 80m</string>
+    <string name="ar_circle_update_failed">更新圆失败: %s</string>
+    <string name="ar_circle_delete_failed">删除圆失败: %s</string>
+
+    <!-- AR result messages: radar -->
+    <string name="ar_radar_enabled">雷达已开启</string>
+    <string name="ar_radar_enable_failed">开启雷达失败: %s</string>
+    <string name="ar_radar_disabled">雷达已关闭</string>
+    <string name="ar_radar_disable_failed">关闭雷达失败: %s</string>
+
+    <!-- AR result messages: projection -->
+    <string name="ar_projection_state_shown">显示</string>
+    <string name="ar_projection_state_hidden">隐藏</string>
+    <string name="ar_projection_result">%1$s 投射已%2$s</string>
+    <string name="ar_projection_failed">设置 %1$s 投射失败: %2$s</string>
+
+    <!-- Dialog Demo -->
+    <string name="dialog_type_alert_title">提示框</string>
+    <string name="dialog_type_alert_desc">Pilot 单确认按钮提示框</string>
+    <string name="dialog_type_confirm_title">确认框</string>
+    <string name="dialog_type_confirm_desc">Pilot 双按钮确认框</string>
+    <string name="dialog_type_prompt_title">输入框</string>
+    <string name="dialog_type_prompt_desc">Pilot 带输入框的对话框</string>
+    <string name="dialog_type_single_title">单选框</string>
+    <string name="dialog_type_single_desc">Pilot 单选对话框</string>
+    <string name="dialog_type_multi_title">多选框</string>
+    <string name="dialog_type_multi_desc">Pilot 多选对话框</string>
+    <string name="dialog_hint_select">请选择左侧对话框类型</string>
+
+    <!-- Dialog floating window labels -->
+    <string name="dialog_btn_show_alert">提示框</string>
+    <string name="dialog_btn_show_confirm">确认框</string>
+    <string name="dialog_btn_show_prompt">输入框</string>
+    <string name="dialog_btn_show_single">单选框</string>
+    <string name="dialog_btn_show_multi">多选框</string>
+
+    <!-- Dialog content -->
+    <string name="dialog_alert_title">Pilot 提示框</string>
+    <string name="dialog_alert_message">这是一台Matrice 4</string>
+    <string name="dialog_confirm_title">Pilot 确认框</string>
+    <string name="dialog_confirm_message">这是一台Matrice 4吗？</string>
+    <string name="dialog_confirm_btn_no">否</string>
+    <string name="dialog_confirm_btn_yes">是</string>
+    <string name="dialog_prompt_title">Pilot 输入框</string>
+    <string name="dialog_prompt_message">请输入您的设备名称:</string>
+    <string name="dialog_prompt_hint">设备名称</string>
+    <string name="dialog_single_title">Pilot 单选框</string>
+    <string name="dialog_single_message">选择您最喜欢的 DJI 产品:</string>
+    <string name="dialog_multi_title">Pilot 多选框</string>
+    <string name="dialog_multi_message">选择您使用过的 DJI 产品:</string>
+    <string name="dialog_btn_cancel">取消</string>
+    <string name="dialog_btn_confirm">确认</string>
+
+    <!-- ============ 页面跳转 Demo ============ -->
+    <string name="navigate_hint_select">请选择左侧跳转目标</string>
+
+    <!-- 跳转菜单类型 -->
+    <string name="navigate_type_pilot_home_title">Pilot 主页</string>
+    <string name="navigate_type_pilot_home_desc">跳转到 Pilot 主页</string>
+    <string name="navigate_type_pilot_map_title">Pilot 地图页</string>
+    <string name="navigate_type_pilot_map_desc">跳转到 Pilot 地图页</string>
+    <string name="navigate_type_pilot_waypoint_title">Pilot 航线页</string>
+    <string name="navigate_type_pilot_waypoint_desc">跳转到 Pilot 航线展示页</string>
+    <string name="navigate_type_pilot_album_title">Pilot 相册页</string>
+    <string name="navigate_type_pilot_album_desc">跳转到 Pilot 相册页（cameraIndex = 0）</string>
+    <string name="navigate_type_pilot_default_title">Pilot 当前页</string>
+    <string name="navigate_type_pilot_default_desc">跳转到 Pilot 当前页面</string>
+    <string name="navigate_type_plugin_app_title">插件 APP</string>
+    <string name="navigate_type_plugin_app_desc">跳转回插件 APP（PLUGIN_APP）</string>
+    <string name="navigate_type_self_define_title">自定义插件页</string>
+    <string name="navigate_type_self_define_desc">跳转到插件 APP 栈顶 Activity（SELF_DEFINE）</string>
+    <string name="navigate_type_remote_view_title">自定义远程页</string>
+    <string name="navigate_type_remote_view_desc">跳转到自定义的远程 Activity 页面</string>
+
+    <!-- 跳转悬浮窗按钮 -->
+    <string name="navigate_btn_pilot_home">跳转 Pilot 主页</string>
+    <string name="navigate_btn_pilot_map">跳转 Pilot 地图页</string>
+    <string name="navigate_btn_pilot_waypoint">跳转航线展示页</string>
+    <string name="navigate_btn_pilot_album">跳转 Pilot 相册页</string>
+    <string name="navigate_btn_pilot_default">跳转当前页面</string>
+    <string name="navigate_btn_plugin_app">跳转插件 APP 首页</string>
+    <string name="navigate_btn_self_define">跳转插件 APP 当前页</string>
+    <string name="navigate_btn_remote_view">跳转自定义远程页</string>
+
+    <!-- 航线任务 Demo -->
+    <string name="toast_not_registered">MSDK 未注册成功，请先联网完成注册</string>
+    <string name="toast_not_connected">未连接到 Pilot，请先安装并启动 Pilot</string>
+    <string name="waypoint_btn_import_kmz">选择 KMZ 并导入航线</string>
+    <string name="waypoint_permission_denied">缺少全部文件访问权限，请先在系统设置中授权</string>
+    <string name="waypoint_hint_select">请选择 KMZ 文件导入航线</string>
+    <string name="waypoint_path_resolve_failed">文件路径解析失败</string>
+
+    <!-- ===== 地图控件 Demo ===== -->
+    <string name="map_hint_select">请选择左侧地图用例</string>
+    <!-- 用例：缩放级别 -->
+    <string name="map_zoom_title">比例尺缩放</string>
+    <string name="map_zoom_desc">通过 setZoomLevel 调整手动飞行地图的比例尺缩放</string>
+    <string name="map_nav_zoom">比例尺缩放</string>
+    <string name="map_btn_zoom_in">放大 (+1)</string>
+    <string name="map_btn_zoom_out">缩小 (-1)</string>
+    <string name="map_zoom_call_success">已调用 setZoomLevel，目标 zoom=%1$.2f，等待状态回调…</string>
+    <string name="map_zoom_call_failed">setZoomLevel 失败：%1$s</string>
+    <!-- 用例：中心点模式 -->
+    <string name="map_center_mode_title">设置中心点</string>
+    <string name="map_center_mode_desc">通过 setMapCenterMode 设置手动飞行地图的中心点模式</string>
+    <string name="map_nav_center_mode">设置中心点</string>
+    <string name="map_btn_follow_aircraft">跟随飞机</string>
+    <string name="map_btn_free">自由</string>
+    <string name="map_center_mode_call_success">已调用 setMapCenterMode，模式=%1$s，等待状态回调…</string>
+    <string name="map_center_mode_call_failed">setMapCenterMode(%1$s) 失败：%2$s</string>
+    <!-- 状态回显 / 通用 -->
+    <string name="map_state_header">[地图状态] ready=%1$s  zoom=%2$.2f</string>
+    <string name="map_not_ready">地图未就绪（请先进入飞行界面）</string>
+
+    <!-- 菜单分组 -->
+    <string name="map_group_widget">地图控件</string>
+    <string name="map_group_element">地图元素</string>
+    <string name="map_group_view">地图视图</string>
+    <!-- 通用 -->
+    <string name="map_no_location">无法获取飞机位置</string>
+    <string name="map_op_failed">%1$s 失败：%2$s</string>
+    <!-- 方位 / marker -->
+    <string name="map_dir_north">北</string>
+    <string name="map_dir_east">东</string>
+    <string name="map_dir_south">南</string>
+    <string name="map_dir_west">西</string>
+    <string name="map_marker_rc">遥控器/起飞点</string>
+    <string name="map_marker_rc_desc">起飞点（近似遥控器/操作员位置）</string>
+    <string name="map_marker_dir_desc">飞机周围方位标记</string>
+    <string name="map_marker_center">中心</string>
+    <string name="map_marker_click_content">该地图控件被点击。</string>
+    <string name="map_marker_click_btn">确定</string>
+    <string name="map_marker_clicked_toast">Marker 被点击：%1$s</string>
+    <string name="map_marker_text_east">正东</string>
+    <string name="map_marker_text_south">正南</string>
+    <string name="map_marker_text_west">正西</string>
+    <string name="map_marker_text_north">正北</string>
+    <!-- 用例：地图控件 -->
+    <string name="map_widget_title">地图控件</string>
+    <string name="map_widget_desc">以飞机为中心添加/删除 Marker、线、面、圆</string>
+    <string name="map_nav_widget">地图控件</string>
+    <string name="map_btn_add_marker">加 Marker</string>
+    <string name="map_btn_remove_marker">删 Marker</string>
+    <string name="map_btn_add_polyline">加线</string>
+    <string name="map_btn_remove_polyline">删线</string>
+    <string name="map_btn_add_polygon">加面</string>
+    <string name="map_btn_remove_polygon">删面</string>
+    <string name="map_btn_add_circle">加圆</string>
+    <string name="map_btn_remove_circle">删圆</string>
+    <string name="map_btn_add_marker_text">加文字</string>
+    <string name="map_btn_remove_marker_text">删文字</string>
+    <string name="map_btn_query_widgets">查询控件</string>
+    <string name="map_widget_add_success">已添加：%1$s（%2$s）</string>
+    <string name="map_widget_remove_success">已删除 %1$s</string>
+    <string name="map_widget_none_to_remove">没有可删除的 %1$s</string>
+    <string name="map_widget_already_added">%1$s 已添加，请先删除</string>
+    <string name="map_widget_query_result">查询结果：%1$d 个控件</string>
+    <!-- 用例：批量控件 -->
+    <string name="map_batch_title">批量控件</string>
+    <string name="map_batch_desc">批量增/改/删全套控件（更新时颜色变绿）</string>
+    <string name="map_nav_batch">批量控件</string>
+    <string name="map_btn_batch_add">批量添加</string>
+    <string name="map_btn_batch_update">批量更新</string>
+    <string name="map_btn_batch_remove">批量移除</string>
+    <string name="map_batch_already_added">已添加，请先移除</string>
+    <string name="map_batch_add_first">请先批量添加</string>
+    <string name="map_batch_add_success">批量添加了 %1$d 个控件</string>
+    <string name="map_batch_update_success">批量更新：线/面/圆变绿，marker 已移除</string>
+    <string name="map_batch_remove_success">批量移除了 %1$d 个控件</string>
+    <!-- 用例：图层管理 -->
+    <string name="map_layer_title">图层管理</string>
+    <string name="map_layer_desc">四方位「三角形+内切圆+marker」，分别归入三个图层</string>
+    <string name="map_nav_layer">图层管理</string>
+    <string name="map_layer_target_title">操作目标图层</string>
+    <string name="map_layer_triangle">三角形层</string>
+    <string name="map_layer_circle">内切圆层</string>
+    <string name="map_layer_marker">Marker层</string>
+    <string name="map_layer_all">全部图层</string>
+    <string name="map_btn_layer_build">建层并绘制</string>
+    <string name="map_btn_layer_hide">隐藏</string>
+    <string name="map_btn_layer_show">显示</string>
+    <string name="map_btn_layer_query">按层查询</string>
+    <string name="map_btn_layer_clear">清空</string>
+    <string name="map_btn_layer_remove">删除</string>
+    <string name="map_layer_already_built">图层已创建</string>
+    <string name="map_layer_build_first">请先建层并绘制</string>
+    <string name="map_layer_build_success">已建 3 个图层，绘制 %1$d 个控件</string>
+    <string name="map_layer_hide_success">图层已隐藏</string>
+    <string name="map_layer_show_success">图层已显示</string>
+    <string name="map_layer_query_result">图层 %1$s：%2$d 个控件</string>
+    <string name="map_layer_clear_success">图层已清空</string>
+    <string name="map_layer_remove_success">图层已删除</string>
+    <!-- 用例：地图元素 -->
+    <string name="map_element_title">地图元素</string>
+    <string name="map_element_desc">以飞机为中心的 MapElement 增删改查（Pilot 地图 + AR 渲染）</string>
+    <string name="map_nav_element">地图元素</string>
+    <string name="map_btn_element_insert">新增</string>
+    <string name="map_btn_element_query">查询</string>
+    <string name="map_btn_element_update">更新</string>
+    <string name="map_btn_element_delete">删除</string>
+    <string name="map_btn_element_toggle_ar">AR 显隐</string>
+    <string name="map_element_already_added">本 Sample 已拥有全部类型元素，请查询或删除以管理目标</string>
+    <string name="map_element_add_first">请先新增</string>
+    <string name="map_element_insert_success">已新增 %1$s</string>
+    <string name="map_element_query_result">查询结果：%1$d 个元素</string>
+    <string name="map_element_update_success">已将 %1$s 更新为绿色</string>
+    <string name="map_element_delete_success">已删除 %1$s</string>
+    <string name="map_element_ar_hidden">隐藏 AR 注记：请求已提交</string>
+    <string name="map_element_ar_shown">显示 AR 注记：请求已提交</string>
+    <string name="map_element_store_failed">归属 ID 保存失败，请检查本地存储</string>
+    <string name="map_element_disconnected">连接已断开，待处理请求已清理，归属 ID 保留以便重试</string>
+    <string name="map_element_timeout">15 秒内未收到回调，结果未知，保留以便重试</string>
+    <string name="map_element_creation_pending">创建结果未知，该类型保持未决，收到真实回调前禁止重复新增</string>
+    <string name="map_element_owned_found">已恢复本 Sample 归属的远端元素对象</string>
+    <string name="map_element_owned_pending">查询暂未包含归属 ID，保留归属，请再次查询后重试</string>
+    <string name="map_element_query_invalid">查询未返回有效快照，保留归属 ID</string>
+    <string name="map_element_delete_submitted">删除请求已获回执，等待查询确认</string>
+    <string name="map_element_delete_unconfirmed">最多 3 次查询内未双次确认删除，归属 ID 保留以便重试</string>
+
+    <!-- 文件传输 Demo -->
+    <string name="file_transfer_destination_title">01 目标位置</string>
+    <string name="file_transfer_action_desc">选择目标目录后上传本地文件。当前 SDK 不支持删除。</string>
+    <string name="file_transfer_selected_destination">目标位置：%1$s</string>
+    <string name="file_transfer_upload">上传</string>
+    <string name="file_transfer_delete">删除</string>
+    <string name="file_transfer_reference">IFileTransferManager · FileTransferDemoViewModel</string>
+
+    <!-- KeyManager 演示模块（迁移自 android-sdk-v5-sample） -->
+    <string name="key">Key 列表</string>
+    <string name="key_search">搜索</string>
+    <string name="commonlyused_key">常用Key</string>
+    <string name="key_value_set">设置 </string>
+    <string name="confirm">确认</string>
+    <string name="operate_listen_record_tips">push info：</string>
+    <string name="index_tips">index:表示负载的位置一般为0 \n subType:表示镜头 0 = zoom ，1 = wide ， 2 = ir \n subIndex:目前只有电池箱用到表示下一级小配件位置</string>
+    <string name="battery">电池</string>
+    <string name="gimbal">云台</string>
+    <string name="camera">相机</string>
+    <string name="ble">BLE</string>
+    <string name="airlink">AIRLINK</string>
+    <string name="flight_assistant">FlightAssistant</string>
+    <string name="flight_control">FlightController</string>
+    <string name="remote_controller">遥控</string>
+    <string name="product">Product</string>
+    <string name="rtkbase">RTK基站</string>
+    <string name="rtkmobile">RTK移动站</string>
+    <string name="ocusync">OcuSync</string>
+    <string name="radar">Radar</string>
+    <string name="mobile_network">Mobile Network</string>
+    <string name="on_board">OnBoard</string>
+    <string name="payload">Payload</string>
+    <string name="lidar">Lidar</string>
+    <string name="intelligent_box">Intelligent Box</string>
+
+    <!-- KeyManager UI 重构：分组 Header -->
+    <string name="key_group_flight">飞行控制</string>
+    <string name="key_group_camera_gimbal">相机云台</string>
+    <string name="key_group_link">图传链路</string>
+    <string name="key_group_rc_rtk">遥控与定位</string>
+    <string name="key_group_system">电源与整机</string>
+    <string name="key_group_perception">感知与智能</string>
+
+    <!-- KeyManager UI 重构：操作按钮 -->
+    <string name="key_btn_get">GET</string>
+    <string name="key_btn_set">SET</string>
+    <string name="key_btn_listen">LISTEN</string>
+    <string name="key_btn_action">ACTION</string>
+    <string name="key_btn_unlisten_all">取消全部监听</string>
+    <string name="key_btn_clear">清空</string>
+
+    <!-- KeyManager UI 重构：参数 Spinner label -->
+    <string name="key_label_component_index">componentIndex</string>
+    <string name="key_label_subtype">subtype</string>
+    <string name="key_label_lenstype">lenstype</string>
+    <string name="key_label_subindex">subIndex</string>
+
+    <!-- KeyManager UI 重构：能力集开关 & 提示 -->
+    <string name="key_capability_all">All Key</string>
+    <string name="key_capability_official">Official Keys</string>
+    <string name="key_hint_select_key">请选择一个 Key 进行操作</string>
+    <string name="key_result_title">结果</string>
+    <string name="key_current_key">当前 Key</string>
+
+    <!-- MOP Pipeline 演示 -->
+    <string name="tv_send_data_to_psdk_hint">请输入发送给 PSDK 的测试数据</string>
+
+    <!-- ===== 多媒体文件任务演示 ===== -->
+    <!-- 顶部状态 -->
+    <string name="media_server_state">服务端：%1$s</string>
+    <string name="media_server_connected">已连接</string>
+    <string name="media_server_disconnected">未连接</string>
+
+    <!-- 控制卡片 -->
+    <string name="media_component_label">相机组件</string>
+    <string name="media_storage_label">存储位置</string>
+    <string name="media_playback_label">回放状态：%1$s</string>
+    <string name="media_playback_unknown">未知</string>
+    <string name="media_playback_entering">进入中</string>
+    <string name="media_playback_entered_state">已进入</string>
+    <string name="media_playback_exiting">退出中</string>
+    <string name="media_playback_exited_state">已退出</string>
+    <string name="media_playback_failed_state">失败</string>
+    <string name="media_enter_playback">进入回放</string>
+    <string name="media_exit_playback">退出回放</string>
+    <string name="media_index_hint">起始序号</string>
+    <string name="media_count_hint">拉取数量</string>
+    <string name="media_pull">拉取列表</string>
+    <string name="media_stop_pull">停止拉取</string>
+    <string name="media_select_mode_on">多选</string>
+    <string name="media_select_mode_off">退出多选</string>
+    <string name="media_download_selected">下载所选</string>
+    <string name="media_set_xmp">设置相机 XMP</string>
+    <string name="media_get_xmp">读取相机 XMP</string>
+    <string name="media_take_photo">拍照</string>
+    <string name="media_format_storage">格式化 SD 卡</string>
+    <string name="media_format_confirm_title">格式化 SD 卡</string>
+    <string name="media_format_confirm_message">SD 卡内所有文件将被清除，是否继续？</string>
+    <string name="media_xmp_input_title">相机 XMP 自定义信息</string>
+    <string name="media_xmp_input_hint">请输入自定义信息</string>
+    <string name="media_xmp_current">相机自定义信息：%1$s</string>
+
+    <!-- 文件列表 -->
+    <string name="media_empty">暂无媒体文件</string>
+    <string name="media_loading">加载中…</string>
+    <string name="media_list_failed">媒体列表加载失败</string>
+    <string name="media_load_failed">加载失败</string>
+    <string name="media_select_hint">请在左侧选择一个媒体文件</string>
+    <string name="media_selected_count">已选：%1$d</string>
+    <string name="media_selected_mark">&#10003;</string>
+    <string name="media_file_meta">%1$s · %2$s</string>
+
+    <!-- 文件详情 -->
+    <string name="media_metadata">文件名：%1$s\n序号：%2$d\n类型：%3$s\n大小：%4$s\n时间：%5$s</string>
+    <string name="media_download_location">下载位置：%1$s</string>
+    <string name="media_unknown">未知</string>
+    <string name="media_pull_preview">加载预览图</string>
+    <string name="media_download">下载原文件</string>
+    <string name="media_cancel_download">取消下载</string>
+    <string name="media_download_progress_speed">进度：%1$d%%  速度：%2$s/s</string>
+    <string name="media_download_received_speed">文件大小未知 · 已接收：%1$s  速度：%2$s/s</string>
+    <string name="media_xmp_file">文件 XMP</string>
+    <string name="media_xmp_custom">文件自定义信息</string>
+    <string name="media_xmp_pull">读取 XMP</string>
+    <string name="media_thermal">热成像</string>
+    <string name="media_thermal_parse">解析热成像</string>
+    <string name="media_thermal_result">最高：%1$.1f℃  最低：%2$.1f℃  辐射率：%3$.2f  环境温度：%4$.1f℃  时间：%5$s</string>
+
+    <!-- 受限能力 -->
+    <string name="media_delete_unavailable">删除</string>
+    <string name="media_video_unavailable">播放视频</string>
+    <string name="media_capability_limit">REMOTE 模式下不支持删除与视频播放，本演示中已禁用。</string>
+    <string name="media_reference">IMediaManager · MediaTaskDemoViewModel</string>
+
+    <!-- 结果与提示 -->
+    <string name="media_no_selection">请先选择文件</string>
+    <string name="media_invalid_range">起始序号或数量非法</string>
+    <string name="media_operation_timeout">操作超时</string>
+    <string name="media_operation_failed">操作失败：%1$s</string>
+    <string name="media_disconnected_error">未连接 Pilot</string>
+    <string name="media_playback_entered">已进入回放模式</string>
+    <string name="media_playback_exited">已退出回放模式</string>
+    <string name="media_download_failed">下载失败</string>
+    <string name="media_download_timeout">下载超时</string>
+    <string name="media_download_completed">下载完成</string>
+    <string name="media_download_incomplete">下载未完成，可稍后续传</string>
+    <string name="media_download_cancelled">已取消下载</string>
+    <string name="media_batch_download_result">批量下载结束：成功 %1$d 个，失败 %2$d 个</string>
+    <string name="media_xmp_set_success">相机 XMP 自定义信息设置成功</string>
+    <string name="media_xmp_set_mismatch">相机 XMP 自定义信息已设置，但读回不一致</string>
+    <string name="media_xmp_get_success">已读取相机 XMP 自定义信息</string>
+    <string name="media_thermal_need_download">请先完整下载原文件</string>
+    <string name="media_take_photo_success">已触发拍照</string>
+    <string name="media_format_storage_success">已请求格式化 SD 卡</string>
+</resources>

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import dji.sampleV5.aircraft.R
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.rtkbasestation.RTKStationConnetState
 import dji.v5.utils.common.LogUtils
 

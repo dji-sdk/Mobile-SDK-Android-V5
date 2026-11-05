@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pilot 插件合约文案：与默认英文资源保持 key 一致 -->
+    <string name="dji_open_pilot_plugin_name">飞行任务管理</string>
+    <string name="dji_open_pilot_plugin_description">用于演示飞行任务下发、航线执行与数据同步的 Pilot 开放插件</string>
+    <string name="dji_open_pilot_plugin_developer">DJI Inc.</string>
+
+    <!-- PluginActivity -->
+    <string name="tab_job">任务</string>
+    <string name="tab_asset">资源</string>
+    <string name="tab_transfer">网络传输</string>
+    <string name="return_to_pilot">返回 Pilot</string>
+    <string name="conn_connected">已连接</string>
+    <string name="conn_disconnected">未连接</string>
+    <string name="conn_incompatible">版本不兼容</string>
+    <string name="pilot_checking">Pilot 检测中</string>
+    <string name="pilot_connected">Pilot 已连接</string>
+    <string name="pilot_disconnected">Pilot 未连接</string>
+    <string name="pilot_incompatible">Pilot 不兼容</string>
+    <string name="backend_checking">服务检测中</string>
+    <string name="backend_connected">服务已连接</string>
+    <string name="backend_unavailable">服务不可用</string>
+    <string name="conn_uninitialized">未初始化</string>
+
+    <!-- 悬浮窗 -->
+    <string name="fw_title">任务管理</string>
+    <string name="fw_idle">暂无任务</string>
+    <string name="fw_job_position">工单 %1$d/%2$d</string>
+    <string name="fw_job_deadline">截止：%1$s</string>
+    <string name="fw_btn_previous">上一个</string>
+    <string name="fw_btn_next">下一个</string>
+    <string name="fw_btn_confirm">确认任务</string>
+    <string name="fw_btn_reject">拒绝任务</string>
+    <string name="fw_btn_task_detail">查看任务详情</string>
+    <string name="fw_preparing">飞行准备</string>
+    <string name="fw_start_hint">开始执行将上传航线并启动航线任务</string>
+    <string name="fw_ready_to_start">准备就绪</string>
+    <string name="fw_uploading_wayline">航线上传中</string>
+    <string name="fw_btn_start_execution">开始执行</string>
+    <string name="fw_executing">航线进行中</string>
+    <string name="fw_route_status_value">航线状态：%1$s</string>
+    <string name="fw_wayline_executing">执行中</string>
+    <string name="fw_wayline_paused">已暂停</string>
+    <string name="fw_current_waypoint">当前航点：%1$d/%2$d</string>
+    <string name="fw_photos_captured">已拍照：%1$d</string>
+    <string name="fw_photos_uploaded">已上传：%1$d</string>
+    <string name="fw_syncing">同步中</string>
+    <string name="fw_download_progress">照片拉取：%1$d/%2$d</string>
+    <string name="fw_file_progress">照片上传：%1$d/%2$d</string>
+    <string name="fw_byte_progress">照片字节：%1$s/%2$s</string>
+    <string name="fw_btn_retry_photos">重新拉取</string>
+    <string name="fw_btn_pause_sync">稍后处理</string>
+    <string name="fw_retry_started_toast">已开始拉取照片</string>
+    <string name="fw_retry_success_toast">照片已拉取并加入上传队列</string>
+    <string name="fw_retry_failed_toast">照片拉取失败：%1$s</string>
+    <string name="fw_photos_not_found_toast">冻结清单中的照片不在当前相机列表中；无需重飞，请确认照片仍保存在相机中</string>
+    <string name="fw_sync_paused_toast">同步已暂停，可稍后重新拉取</string>
+    <string name="fw_failed">上传失败</string>
+    <string name="fw_execution_failed">执行失败</string>
+    <string name="fw_route_interrupted">航线未执行完成，请重新执行航线</string>
+    <string name="fw_failed_count">失败数：%1$d</string>
+    <string name="fw_upload_failed_message">文件同步失败</string>
+    <string name="fw_btn_retry">重试</string>
+    <string name="fw_done">同步完成</string>
+    <string name="fw_cancelled">任务已拒绝</string>
+    <string name="fw_done_files">文件数：%1$d</string>
+    <string name="fw_done_size">总大小：%1$s</string>
+    <string name="fw_btn_back_jobs">切换任务</string>
+
+    <!-- 任务页 -->
+    <string name="task_list_title">任务工单</string>
+    <string name="task_group_current">当前任务</string>
+    <string name="task_group_pending">待处理</string>
+    <string name="task_group_completed">已完成</string>
+    <string name="task_info">任务信息</string>
+    <string name="task_requirement">要求</string>
+    <string name="task_deadline">截止</string>
+    <string name="task_id">工单 ID</string>
+    <string name="route_status">航线状态</string>
+    <string name="route_cloud_status">云端航线</string>
+    <string name="route_execute_status">执行状态</string>
+    <string name="sync_status">同步状态</string>
+    <string name="file_progress">文件进度</string>
+    <string name="no_transfer">暂无传输文件</string>
+    <string name="empty_tasks">暂无任务</string>
+
+    <!-- 资源页 -->
+    <string name="filter_all">全部</string>
+    <string name="filter_photo">照片</string>
+    <string name="filter_route">航线</string>
+    <string name="asset_preview">资源预览</string>
+    <string name="asset_type">类型</string>
+    <string name="asset_size">大小</string>
+    <string name="asset_status">状态</string>
+    <string name="empty_assets">暂无本地文件</string>
+    <string name="asset_group_counts">照片 %1$d · 本地原片 %2$d · 已上传 %3$d</string>
+    <string name="asset_continue_finalization">继续拉取并上传</string>
+    <string name="asset_retry_started">已开始继续拉取并上传</string>
+    <string name="asset_retry_success">照片已拉取并加入上传队列</string>
+    <string name="asset_retry_failed">继续拉取并上传失败：%1$s</string>
+
+    <!-- 传输页 -->
+    <string name="current_transfers">网络传输队列</string>
+    <string name="transfer_progress">传输进度</string>
+    <string name="session_info">会话信息</string>
+    <string name="session_id">会话 ID</string>
+    <string name="parts">分片</string>
+    <string name="uploaded">已上传</string>
+    <string name="remaining">剩余</string>
+    <string name="pause">暂停</string>
+    <string name="resume">恢复</string>
+    <string name="retry">重试</string>
+    <string name="empty_transfers">暂无传输任务</string>
+    <string name="status_dispatched">待接收</string>
+    <string name="status_accepted">待执行</string>
+    <string name="status_in_progress">执行中</string>
+    <string name="status_finalizing">收尾同步</string>
+    <string name="status_completed">已完成</string>
+    <string name="status_cancelled">已取消</string>
+    <string name="status_queued">等待中</string>
+    <string name="status_uploading">上传中</string>
+    <string name="status_uploaded">已上传</string>
+    <string name="status_failed">失败</string>
+    <string name="status_paused">已暂停</string>
+    <string name="status_pending_download">待拉取</string>
+    <string name="status_downloaded">已下载</string>
+    <string name="simulator_title">飞行模拟器</string>
+    <string name="simulator_coordinates">测试坐标\n纬度：22.5799591658722\n经度：113.940530488361</string>
+    <string name="simulator_enable">开启</string>
+    <string name="simulator_disable">关闭</string>
+    <string name="simulator_enabled">模拟器已开启</string>
+    <string name="simulator_disabled">模拟器已关闭</string>
+    <string name="simulator_enable_failed">模拟器开启失败：%1$s</string>
+    <string name="simulator_disable_failed">模拟器关闭失败：%1$s</string>
+    <string name="cancel">取消</string>
+</resources>

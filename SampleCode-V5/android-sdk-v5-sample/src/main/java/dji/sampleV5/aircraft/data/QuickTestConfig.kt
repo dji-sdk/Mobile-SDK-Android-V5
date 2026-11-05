@@ -1,5 +1,6 @@
 package dji.sampleV5.aircraft.data
 
+import android.graphics.Color
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.v5.manager.aircraft.lte.LTEPrivatizationServerInfo
 import dji.v5.manager.areacode.AreaCode
@@ -22,6 +23,29 @@ object QuickTestConfig {
         SimulatorArea("禁飞区", LocationCoordinate2D(22.645945, 113.816311), AreaCode.CHINA),
         SimulatorArea("授权区", LocationCoordinate2D(22.395237, 114.203203), AreaCode.CHINA),
         SimulatorArea("加强警告区", LocationCoordinate2D(22.208262, 114.03056), AreaCode.CHINA),
+    )
+
+    val CR810_OBSTACLE_COLOR_MAP: Map<Int, Int> = mapOf(
+        0 to Color.argb(128, 128, 0, 0),      // floor
+        1 to Color.argb(128, 220, 220, 0),    // wire
+        2 to Color.argb(128, 128, 128, 128),  // fabric
+        3 to Color.argb(128, 0, 0, 128),      // paper
+        4 to Color.argb(128, 0, 64, 128),     // danger
+        5 to Color.argb(128, 192, 0, 0),      // stool
+        6 to Color.argb(128, 192, 128, 0),    // scale
+        7 to Color.argb(128, 64, 0, 128),     // base
+        8 to Color.argb(128, 128, 64, 0),     // stuck
+        9 to Color.argb(128, 64, 0, 0),       // shoes
+        10 to Color.argb(128, 64, 128, 128),   // door
+        11 to Color.argb(128, 192, 0, 128),    // threshold
+        12 to Color.argb(128, 192, 128, 128),   // carpet
+        13 to Color.argb(128, 128, 0, 128),    // curtain
+        14 to Color.argb(128, 128, 128, 0),    // cleanable
+        15 to Color.argb(128, 0, 192, 0),      // particulate
+        16 to Color.argb(128, 224, 224, 192),  // liquid
+        17 to Color.argb(128, 0, 128, 0),      // background
+        18 to Color.argb(128, 0, 0, 192),      // test
+        -1 to Color.argb(128, 255, 255, 255)   // ignore
     )
 
     fun getCacheLTEAuthenticationInfo(): LTEAuthCacheInfo? {

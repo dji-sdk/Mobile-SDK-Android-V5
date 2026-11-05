@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- KeyManager Key 列表项（浅色 + 选中态由 Adapter 控制 params_item 背景） -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="6dp"
+    android:paddingVertical="2dp">
+
+    <LinearLayout
+        android:id="@+id/params_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="4dp">
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="9dp"
+            android:text="KeyName"
+            android:textColor="@color/card_title_text"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,44 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="dji.sample.flighttask">
+
+    <!-- 首次激活 DJI SDK 需要联网注册；工单/上传走网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="dji.sample.flighttask.FlightTaskApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher"
+        android:label="@string/dji_open_pilot_plugin_name"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:usesCleartextTraffic"
+        android:theme="@style/FullScreenTheme">
+
+        <!-- DJI AppKey：build.gradle 读取 Gradle 项目属性 FLIGHTTASK_SAMPLE_API_KEY 并注入。 -->
+        <meta-data
+            android:name="com.dji.sdk.API_KEY"
+            android:value="${API_KEY}" />
+
+        <!-- Pilot 通过扫描此 meta-data 发现插件 APP -->
+        <meta-data
+            android:name="dji.open.pilot.client.OPEN_PILOT_PERMISSION_META_DATA"
+            android:value="open pilot" />
+
+        <activity
+            android:name="dji.sample.flighttask.PluginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

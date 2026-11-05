@@ -1,0 +1,25 @@
+.gradle/
+build/
+
+# 模块级 gradlew 由本地按需生成，不入版本库
+/gradlew
+
+local.properties
+.idea/
+*.iml
+
+# open-pilot-wizard 流程产物（本地台账与任务文档，不进版本库；与 open-pilot-patrol-sample 一致）
+/.open-pilot-wizard/
+/openspec/
+
+# PSDK 设备端 C 桥接源码（core / V3 / V4），只在本地保留，不入版本库
+/psdk-bridge-c-core/
+/psdk-bridge-c-v3/
+/psdk-bridge-c-v4/
+
+# 载荷侧 PSDK 应用仅供本地联调，本次不发布
+/payload-app*/
+
+# 本地开发记录与任务排期不纳入发布
+/docs/dev-log/
+/docs/PRD-BACKLOG.md

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基础色 -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <!-- 主界面背景 -->
+    <color name="page_bg">#ffF5F5F5</color>
+    <color name="top_bar_bg">#FFFFFFFF</color>
+    <color name="top_bar_divider">#FFE8E8F0</color>
+    <color name="status_bar_bg">#FFF0F0F8</color>
+    <color name="status_bar_divider">#FFE0E0EC</color>
+
+    <!-- 状态徽章：已连接 -->
+    <color name="badge_connected_bg">#FFFFFFFF</color>
+    <color name="badge_connected_text">#FF00C774</color>
+    <color name="badge_connected_border">#FF00C774</color>
+
+    <!-- 状态徽章：未连接 -->
+    <color name="badge_disconnected_bg">#FFFFEAEA</color>
+    <color name="badge_disconnected_text">#FFE03030</color>
+    <color name="badge_disconnected_border">#FFF5C0C0</color>
+
+    <!-- 状态徽章：已注册 -->
+    <color name="badge_registered_bg">#FFFFFFFF</color>
+    <color name="badge_registered_text">#FF007BFF</color>
+    <color name="badge_registered_border">#FF007BFF</color>
+
+    <!-- 模块图标背板 -->
+    <color name="module_icon_bg">#FFECEFF0</color>
+    <color name="module_icon_tint">#FF3A3F53</color>
+
+    <!-- 状态徽章：未注册 -->
+    <color name="badge_unregistered_bg">#FFF5F5F5</color>
+    <color name="badge_unregistered_text">#FFA0A0A0</color>
+    <color name="badge_unregistered_border">#FFDCDCDC</color>
+
+    <!-- 卡片 -->
+    <color name="card_bg">#FFFFFFFF</color>
+    <color name="card_border">#ffFFFFFF</color>
+    <color name="card_tag_bg">#FFEFEFFA</color>
+    <color name="card_tag_text">#FF7070B0</color>
+    <color name="card_tag_border">#FFE0E0F5</color>
+    <color name="card_title_text">#FF1A1A3A</color>
+    <color name="card_desc_text">#FF6060A0</color>
+    <color name="card_thumb_bg">#FFF5F5FC</color>
+    <color name="card_thumb_border">#FFC8C8E0</color>
+    <color name="card_thumb_text">#FFB0B0D0</color>
+
+    <!-- Demo 状态 -->
+    <color name="status_done">#FF28A856</color>
+    <color name="status_wip">#FFE08000</color>
+    <color name="status_todo">#FFB0B0C8</color>
+
+    <!-- 提示文字 -->
+    <color name="hint_text">#FFA0A0C0</color>
+    <color name="top_bar_title">#FF1A1A3A</color>
+    <color name="grey_01">#80000000</color>
+
+    <!-- Demo 页 -->
+    <color name="log_bg">#FFF5F5F5</color>
+    <color name="log_text">#FF333333</color>
+    <color name="demo_divider">#FFE0E0E0</color>
+
+    <color name="uxsdk_blue">#20A3F6</color>
+    <color name="uxsdk_blue_2">#ff007BFF</color>
+    <color name="uxsdk_blue_material_A400">#00B0FF</color>
+    <color name="uxsdk_blue_material_A400_25_percent">#3F00B0FF</color>
+    <color name="uxsdk_blue_material_A400_66_percent">#9900B0FF</color>
+    <color name="uxsdk_blue_highlight">#ff1fa3f6</color>
+
+    <!-- 通用开关（胶囊样式） -->
+    <color name="switch_track_on">#FF2E7DFF</color>
+    <color name="switch_track_off">#FFE3E5EA</color>
+    <color name="switch_thumb">#FFFFFFFF</color>
+    <color name="switch_thumb_stroke">#22000000</color>
+
+    <!-- KeyManager 演示模块迁移所需颜色（来自 android-sdk-v5-sample） -->
+    <color name="light_gray2">#444444</color>
+    <color name="gray">#ff5e5e5e</color>
+    <color name="darkturquoise">#00CED1</color>
+    <color name="honeydew">#F0FFF0</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- MOP Pipeline 演示迁移所需颜色 -->
+    <color name="red">#FFFF0000</color>
+    <color name="blue">#FF0000FF</color>
+</resources>

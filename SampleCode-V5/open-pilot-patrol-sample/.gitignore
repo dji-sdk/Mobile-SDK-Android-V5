@@ -1,0 +1,12 @@
+/.idea/
+/.kotlin/
+/app/build/
+/uxsdk/build/
+/build/
+/.gradle/
+/.open-pilot-wizard/
+/.claude/
+/openspec/
+/.opencode/
+/local.properties
+/gradlew

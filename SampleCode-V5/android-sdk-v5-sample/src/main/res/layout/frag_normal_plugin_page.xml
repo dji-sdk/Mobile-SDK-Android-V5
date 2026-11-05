@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/button_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.15">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_query_file_list_from_remote"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_query_file_list_from_remote"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_push_file_list_to_remote"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_push_file_list_to_remote"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_query_file_list_from_remote" />
+
+            <Button
+                android:id="@+id/btn_prepare_res"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_prepare_res"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_push_file_list_to_remote" />
+
+            <Button
+                android:id="@+id/btn_add_map_widget"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_add_map_widget"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_prepare_res" />
+
+            <Button
+                android:id="@+id/btn_layer_scene_add_layer"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_layer_scene_add_layer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_add_map_widget" />
+
+            <Button
+                android:id="@+id/btn_add_layer_a_widgets"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_add_layer_a_widgets"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_layer_scene_add_layer" />
+
+            <Button
+                android:id="@+id/btn_add_layer_b_widgets"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_add_layer_b_widgets"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_add_layer_a_widgets" />
+
+            <Button
+                android:id="@+id/btn_update_layer_a_batch"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_update_layer_a_batch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_add_layer_b_widgets" />
+
+            <Button
+                android:id="@+id/btn_toggle_layer_a_visible"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_toggle_layer_a_visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_layer_a_batch" />
+
+            <Button
+                android:id="@+id/btn_toggle_layer_b_visible"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_toggle_layer_b_visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_toggle_layer_a_visible" />
+
+            <Button
+                android:id="@+id/btn_query_all_widgets"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_query_all_widgets"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_toggle_layer_b_visible" />
+
+            <Button
+                android:id="@+id/btn_query_layer_a"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_query_layer_a"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_query_all_widgets" />
+
+            <Button
+                android:id="@+id/btn_add_map_widget_callback"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_add_map_widget_callback"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_query_layer_a" />
+
+            <Button
+                android:id="@+id/btn_remove_one_layer_a_widget"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_remove_one_layer_a_widget"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_add_map_widget_callback" />
+
+            <Button
+                android:id="@+id/btn_remove_layer_a_batch"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_remove_layer_a_batch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_remove_one_layer_a_widget" />
+
+            <Button
+                android:id="@+id/btn_clear_layer_a"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_clear_layer_a"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_remove_layer_a_batch" />
+
+            <Button
+                android:id="@+id/btn_remove_layer_a"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_remove_layer_a"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_clear_layer_a" />
+
+            <Button
+                android:id="@+id/btn_query_map_element"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_query_map_element"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_remove_layer_a"/>
+
+            <Button
+                android:id="@+id/btn_init_open_box_sample_view"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_init_open_box_sample_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_query_map_element"/>
+
+            <Button
+                android:id="@+id/btn_init_property_sample_view"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_init_property_sample_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_init_open_box_sample_view"/>
+
+            <Button
+                android:id="@+id/btn_init_wrap_content_sample_view"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_init_wrap_content_sample_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_init_property_sample_view"/>
+
+            <Button
+                android:id="@+id/btn_hide_ar_annotations"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_hide_ar_annotations"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_init_wrap_content_sample_view"/>
+
+            <Button
+                android:id="@+id/btn_add_map_element"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_add_map_element"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_hide_ar_annotations"/>
+
+            <Button
+                android:id="@+id/btn_update_map_element"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_update_map_element"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_add_map_element"/>
+
+            <Button
+                android:id="@+id/btn_delete_map_element"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_delete_map_element"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_map_element"/>
+
+            <Button
+                android:id="@+id/btn_jump_to_home"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_jump_to_home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_delete_map_element" />
+
+            <Button
+                android:id="@+id/btn_jump_to_map"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_jump_to_map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_jump_to_home" />
+
+            <Button
+                android:id="@+id/btn_jump_to_waypoint_mission_list"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_jump_to_waypoint_mission_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_jump_to_map" />
+
+            <Button
+                android:id="@+id/btn_jump_to_album"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_jump_to_album"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_jump_to_waypoint_mission_list" />
+
+            <Button
+                android:id="@+id/btn_jump_to_plugin_marketplace"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_jump_to_plugin_marketplace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_jump_to_album" />
+
+            <Button
+                android:id="@+id/btn_move_modeling_file_to_public"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_move_modeling_file_to_public"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_jump_to_plugin_marketplace" />
+
+            <Button
+                android:id="@+id/btn_update_open_drawing_box"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_update_open_drawing_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_move_modeling_file_to_public" />
+
+            <Button
+                android:id="@+id/btn_clear_open_drawing_box"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_clear_open_drawing_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_open_drawing_box" />
+
+            <Button
+                android:id="@+id/btn_update_open_polygon_drawing"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_update_open_polygon_drawing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_clear_open_drawing_box" />
+
+            <Button
+                android:id="@+id/btn_clear_open_polygon_drawing"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_clear_open_polygon_drawing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_open_polygon_drawing" />
+
+            <Button
+                android:id="@+id/btn_update_open_text_drawing"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_update_open_text_drawing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_clear_open_polygon_drawing" />
+
+            <Button
+                android:id="@+id/btn_clear_open_text_drawing"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_clear_open_text_drawing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_open_text_drawing" />
+
+            <Button
+                android:id="@+id/btn_dialog_service_list"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_dialog_service_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_clear_open_text_drawing" />
+
+            <Button
+                android:id="@+id/btn_init_remote_view_property_demo"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_init_remote_view_property_demo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_dialog_service_list" />
+
+            <Button
+                android:id="@+id/btn_register_disconnect_landing"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_register_disconnect_landing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_init_remote_view_property_demo" />
+
+            <Button
+                android:id="@+id/btn_clear_disconnect_actions"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_clear_disconnect_actions"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_register_disconnect_landing" />
+
+            <Button
+                android:id="@+id/btn_push_screenshot_to_app_log"
+                style="@style/main_fragment_btn"
+                android:text="@string/btn_push_screenshot_to_app_log"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_clear_disconnect_actions" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/msg_text"
+        android:text="sensing data"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:maxWidth="180dp"
+        android:textColor="@color/red"
+        android:gravity="start"
+        android:textSize="8dp"
+        app:layout_constraintStart_toEndOf="@+id/button_list"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/kmz_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/msg_text"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/kml_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/ic_waypoint_kml"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="KMZ Import"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kml_img" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_import_AI_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/kmz_btn"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_import_AI_photo_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:src="@mipmap/ic_waypoint_kml"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="AI photo Import"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_import_AI_photo_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <dji.sampleV5.aircraft.views.AIImageView
+        android:id="@+id/imageView_AI_photo"
+        android:layout_width="430dp"
+        android:layout_height="310dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

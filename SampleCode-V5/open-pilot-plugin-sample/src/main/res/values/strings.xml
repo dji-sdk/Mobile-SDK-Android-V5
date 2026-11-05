@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dji_open_pilot_plugin_name">Open Pilot Plugin Sample</string>
+
+    <!-- 状态栏 -->
+    <string name="badge_connected">Connected</string>
+    <string name="badge_disconnected">Disconnected</string>
+    <string name="badge_registered">Registered</string>
+    <string name="badge_unregistered">Unregistered</string>
+
+    <string name="badge_country_code_prefix">Country Code: %1$s</string>
+
+    <!-- 模块名称 -->
+    <string name="module_remote_view_page">Custom UI Widgets</string>
+    <string name="module_ar">AR Projection</string>
+    <string name="module_map">Map Widgets</string>
+    <string name="module_dialog">Dialog</string>
+    <string name="module_camera_drawing">Camera Drawing</string>
+    <string name="module_navigate">Navigation</string>
+    <string name="module_waypoint">Waypoint Mission</string>
+    <string name="module_key">Key Manager</string>
+    <string name="module_file_transfer">File Transfer</string>
+    <string name="module_pipeline">MOP Pipeline</string>
+    <string name="module_camera_stream">Camera Stream</string>
+    <string name="module_area_code">Country Code</string>
+    <string name="module_language">Language Settings</string>
+    <string name="module_remote_control">Remote Control</string>
+    <string name="module_disconnect_action">Disconnect Protection</string>
+    <string name="module_intelligent">Intelligent Recognition</string>
+    <string name="module_modeling">Modeling</string>
+    <string name="module_media_task">Media File Task</string>
+    <string name="module_link">Connection Entry</string>
+
+    <!-- 模块说明 -->
+    <string name="desc_remote_view_page">Overlay custom widgets on the Pilot UI (TextView/Button/EditText, etc.) with real-time property updates.</string>
+    <string name="desc_ar">Overlay AR points on map/live view with icon projection (perspective/orthographic), text labels and radar rings.</string>
+    <string name="desc_map">Add markers, circles, polygons and polylines to the Pilot map, with click callbacks and state subscription.</string>
+    <string name="desc_dialog">Show alert, confirm, prompt and single/multi choice dialogs in Pilot with user action callbacks.</string>
+    <string name="desc_camera_drawing">Overlay rectangles, filled polygons and custom text on the live view, for object detection visualization.</string>
+    <string name="desc_navigate">Navigate Pilot to a specified page (home/map/waypoint list/album, etc.).</string>
+    <string name="desc_waypoint">Push KMZ files to Pilot/aircraft with mission control, resume and state subscription.</string>
+    <string name="desc_key">DJI Key-Value channel, supporting getValue/setValue/listen/performAction.</string>
+    <string name="desc_file_transfer">Upload plugin files to the private or Pilot log destination. Deletion is unavailable in the current SDK.</string>
+    <string name="desc_pipeline">Establish a MOP data pipeline with the aircraft, supporting connect/read-write/chunked large data transfer.</string>
+    <string name="desc_camera_stream">Subscribe to camera stream frame data callbacks for a specified channel.</string>
+    <string name="desc_area_code">Query and update country code, with country code change subscription.</string>
+    <string name="desc_language">Get the current Pilot APP language and subscribe to language change events.</string>
+    <string name="desc_remote_control">Switch the primary camera of the Pilot main view (by ComponentIndexType).</string>
+    <string name="desc_disconnect_action">Configure Key actions executed automatically on disconnect to prevent abnormal device state.</string>
+    <string name="desc_intelligent">Set frame capture mode, subscribe to auto-recognition target notifications, and download captured frames.</string>
+    <string name="desc_modeling">Subscribe to modeling task state and export modeling result files to a public directory.</string>
+    <string name="desc_media_task">Browse camera media, load previews, resume-download originals, read XMP and parse thermal photos.</string>
+    <string name="desc_link">SDK initialization and Pilot server connection state subscription (integrated on the main screen).</string>
+
+    <!-- Demo 状态 -->
+    <string name="demo_status_done">Implemented</string>
+    <string name="demo_status_wip">In Progress</string>
+    <string name="demo_status_todo">Planned</string>
+
+    <!-- 卡片占位 -->
+    <string name="thumb_placeholder">No preview available</string>
+
+    <!-- RemoteViewPage Demo -->
+    <!-- RemoteViewPage Demo 菜单：组件类型 -->
+    <string name="comp_hint_select">Please select a component on the left</string>
+    <string name="comp_group_basic">Basic Components</string>
+    <string name="comp_group_input">Data Entry</string>
+    <string name="comp_group_display">Data Display</string>
+    <string name="comp_layout_title">Layout</string>
+    <string name="comp_textview_title">Text</string>
+    <string name="comp_imageview_title">ImageView</string>
+    <string name="comp_progressbar_title">ProgressBar</string>
+    <string name="comp_webview_title">WebView</string>
+    <string name="comp_listview_title">List</string>
+    <string name="comp_button_title">Button</string>
+    <string name="comp_edittext_title">Input</string>
+    <string name="comp_checkbox_title">CheckBox</string>
+    <string name="comp_switch_title">Switch</string>
+    <string name="comp_spinner_title">Spinner</string>
+
+    <!-- RemoteViewPage 悬浮窗导航栏标题 -->
+    <string name="comp_nav_layout">Layout</string>
+    <string name="comp_nav_text">Text</string>
+    <string name="comp_nav_button">Button</string>
+    <string name="comp_nav_edittext">Input</string>
+    <string name="comp_nav_checkbox">CheckBox</string>
+    <string name="comp_nav_switch">Switch</string>
+    <string name="comp_nav_spinner">Spinner</string>
+    <string name="comp_nav_imageview">Image</string>
+    <string name="comp_nav_webview">Web</string>
+    <string name="comp_nav_listview">List</string>
+    <string name="comp_nav_progressbar">Progress</string>
+    <string name="switch_live_stream_ar">Pilot直播带AR (setLiveStreamAREnabled)</string>
+    <string name="btn_view_effect">Preview in Pilot</string>
+    <string name="btn_back_to_plugin_app">Back to Plugin App</string>
+    <string name="label_reference_code">Class: %1$s\nSample: %2$s</string>
+    <string name="label_reference_interface">Interface: %1$s\nSample: %2$s</string>
+
+    <!-- 悬浮窗公共卡片标题 -->
+    <string name="card_title_result">01 Result</string>
+    <string name="card_title_action">02 Actions</string>
+
+    <!-- RemoteViewPage Drawer 公共卡片标题 -->
+    <string name="demo_card_type">01 Component Type</string>
+    <string name="demo_card_state">02 Component State</string>
+    <string name="demo_card_style">03 Component Style</string>
+    <string name="demo_card_style_02">02 Component Style</string>
+
+    <!-- Drawer 样本演示文案：公共 -->
+    <string name="demo_custom_color">Custom Color</string>
+    <string name="demo_color_blue">Blue</string>
+    <string name="demo_color_red">Red</string>
+    <string name="demo_color_green">Green</string>
+
+    <!-- Button Drawer -->
+    <string name="demo_button_basic">Basic Buttons</string>
+    <string name="demo_button_group">Grouped Buttons</string>
+    <string name="demo_button_disabled">Disabled State</string>
+    <string name="demo_button_size">Button Size</string>
+    <string name="demo_button_shape">Button Shape</string>
+    <string name="demo_button_filled">Filled</string>
+    <string name="demo_button_stroke">Outlined</string>
+    <string name="demo_button_text">Text</string>
+    <string name="demo_button_primary">Primary</string>
+    <string name="demo_button_secondary">Secondary</string>
+    <string name="demo_button_size_l">Large-32 PX</string>
+    <string name="demo_button_size_m">Medium-26 PX</string>
+    <string name="demo_button_size_s">Small-20 PX</string>
+    <string name="demo_button_shape_square">Square</string>
+    <string name="demo_button_shape_round">Rounded</string>
+    <string name="demo_button_shape_circle">Circular</string>
+
+    <!-- TextView Drawer -->
+    <string name="demo_text_basic">Basic Text</string>
+    <string name="demo_text_normal">Normal text</string>
+    <string name="demo_text_underline">Underlined text</string>
+    <string name="demo_text_strike">Strikethrough text</string>
+    <string name="demo_text_bold">Bold text</string>
+    <string name="demo_text_color">Colored text</string>
+    <string name="demo_text_special">Special Types</string>
+    <string name="demo_text_single">Single-line text</string>
+    <string name="demo_text_truncate">Long text, truncated and not fully shown</string>
+    <string name="demo_text_wrap">Long text, wrapped to show all content</string>
+    <string name="demo_text_scroll">This is some text, long content, scrollable\nLine 2\nLine 3\nLine 4\nLine 5</string>
+    <string name="demo_text_richtext"><![CDATA[Battery: <font color="%1$s"><b>%2$d%%</b></font>, Action: <font color="%3$s"><b><u><big>Land</big></u></b></font>]]></string>
+    <string name="demo_text_state_normal">Normal state</string>
+    <string name="demo_text_state_disabled">Disabled state</string>
+    <string name="demo_text_size">Font Size</string>
+    <string name="demo_text_size_l">Large, 12sp, letter-spacing 0.01em, default line height</string>
+    <string name="demo_text_size_m">Medium, 11sp, letter-spacing 0.03em, 1x line height +1dp</string>
+    <string name="demo_text_size_s">Small, 9sp, letter-spacing 0.05em, 1.3x line height</string>
+    <string name="demo_text_color_sample">Normal font color</string>
+
+    <!-- EditText Drawer -->
+    <string name="demo_edit_basic">Basic Input</string>
+    <string name="demo_edit_filled">Filled input</string>
+    <string name="demo_edit_stroke">Outlined input</string>
+    <string name="demo_edit_default">Default input</string>
+    <string name="demo_edit_hint_state">Hint State</string>
+    <string name="demo_edit_hint_input">Please enter content</string>
+    <string name="demo_edit_disabled">Disabled State</string>
+    <string name="demo_edit_keyboard">Keyboard Type</string>
+    <string name="demo_edit_hint_number">Numeric mode</string>
+    <string name="demo_edit_hint_password">Password mode</string>
+    <string name="demo_edit_limit">Input Restriction</string>
+    <string name="demo_edit_hint_bankcard">Bank card number</string>
+    <string name="demo_edit_max8">Max 8 characters, max 8 characters</string>
+    <string name="demo_edit_text_style">Text Style</string>
+    <string name="demo_edit_blue_left">Blue text, left-aligned</string>
+    <string name="demo_edit_center_bold">Centered and bold</string>
+    <string name="demo_edit_custom_bg">Custom Background</string>
+
+    <!-- Layout Drawer -->
+    <string name="demo_layout_basic">Basic Usage</string>
+    <string name="demo_layout_linear_h">Horizontal Linear Layout</string>
+    <string name="demo_layout_linear_v">Vertical Linear Layout</string>
+    <string name="demo_layout_constraint">Constraint Layout</string>
+    <string name="demo_layout_content">Content</string>
+    <string name="demo_layout_button">Button</string>
+    <string name="demo_layout_tl">Top-Left</string>
+    <string name="demo_layout_tr">Top-Right</string>
+    <string name="demo_layout_center">Center</string>
+    <string name="demo_layout_bl">Bottom-Left</string>
+    <string name="demo_layout_br">Bottom-Right</string>
+    <string name="demo_layout_weight">Weighted Width</string>
+    <string name="demo_layout_fixed">Manual Width</string>
+    <string name="demo_layout_nested">Nested Layout</string>
+
+    <!-- Spinner Drawer -->
+    <string name="demo_spinner_type">Spinner</string>
+    <string name="demo_spinner_disabled">Disabled</string>
+    <string name="demo_spinner_text_style">Text Style</string>
+    <string name="demo_spinner_custom_bg">Custom Popup Color</string>
+    <string name="demo_spinner_item_option1">Option 1</string>
+    <string name="demo_spinner_item_option2">Option 2</string>
+    <string name="demo_spinner_item_option3">Option 3</string>
+    <string name="demo_spinner_item_option4">Option 4</string>
+    <string name="demo_spinner_item_option5">Option 5</string>
+    <string name="demo_spinner_item_land">Land</string>
+    <string name="demo_spinner_item_rth">Return to Home</string>
+    <string name="demo_spinner_item_hover">Hover</string>
+    <string name="demo_spinner_item_long">This is an extremely extremely extremely long option text</string>
+    <string name="demo_spinner_item_short">Short Text</string>
+
+    <!-- Switch Drawer -->
+    <string name="demo_switch_type">Switch</string>
+    <string name="demo_switch_disabled">Disabled</string>
+    <string name="demo_switch_size">Switch Size</string>
+    <string name="demo_switch_color">Switch Color</string>
+
+    <!-- CheckBox Drawer -->
+    <string name="demo_checkbox_type">CheckBox</string>
+    <string name="demo_checkbox_disabled">Disabled</string>
+    <string name="demo_checkbox_color">CheckBox Color</string>
+    <string name="demo_checkbox_left">Left Box</string>
+    <string name="demo_checkbox_right">Right Box</string>
+    <string name="demo_checkbox_checked">Checked</string>
+    <string name="demo_checkbox_unchecked">Unchecked</string>
+
+    <!-- ProgressBar Drawer -->
+    <string name="demo_progress_horizontal">Horizontal Progress Bar</string>
+    <string name="demo_progress_circle">Circular Progress Bar</string>
+    <string name="demo_progress_circle_state">Circular Progress Bar State</string>
+    <string name="demo_progress_horizontal_size">Horizontal Progress Bar Size</string>
+    <string name="demo_progress_circle_size">Circular Progress Bar Size</string>
+    <string name="demo_progress_horizontal_color">Horizontal Progress Bar Color</string>
+    <string name="demo_progress_circle_color">Circular Progress Bar Color</string>
+
+    <!-- ImageView Drawer -->
+    <string name="demo_image_square">Square Image</string>
+    <string name="demo_image_round">Rounded Image</string>
+    <string name="demo_image_circle">Circular Image</string>
+    <string name="demo_image_basic">Basic Image</string>
+    <string name="demo_image_alpha">Translucent Image</string>
+    <string name="demo_image_fill">Color-Filled Image</string>
+    <string name="demo_image_stroke">Color-Stroked Image</string>
+
+    <!-- WebView Drawer -->
+    <string name="demo_web_load">Load Web Page</string>
+
+    <!-- ListView Drawer -->
+    <string name="demo_list_basic">Basic List</string>
+    <string name="demo_list_text">Text List</string>
+    <string name="demo_list_icon_text">Icon Text List</string>
+    <string name="demo_list_icon_twoline">Icon Two-Line List</string>
+    <string name="demo_list_success">Success</string>
+    <string name="demo_list_fail">Failed</string>
+    <string name="demo_list_success_desc">This is a success icon</string>
+    <string name="demo_list_fail_desc">This is a failure icon</string>
+
+    <!-- AR Demo -->
+    <string name="ar_point_title">Point</string>
+    <string name="ar_point_desc">AR point projection</string>
+    <string name="ar_line_title">Line</string>
+    <string name="ar_line_desc">AR line projection</string>
+    <string name="ar_polygon_title">Polygon</string>
+    <string name="ar_polygon_desc">AR polygon projection</string>
+    <string name="ar_circle_title">Circle</string>
+    <string name="ar_circle_desc">AR circle projection</string>
+    <string name="ar_radar_title">Radar</string>
+    <string name="ar_radar_desc">AR radar scan range</string>
+    <string name="ar_projection_title">Projection Control</string>
+    <string name="ar_projection_desc">Per-stream AR projection control is unavailable in the current SDK. Show and Hide are disabled.</string>
+    <string name="ar_hint_select">Please select an AR element on the left</string>
+
+    <!-- AR 悬浮窗导航栏标题 -->
+    <string name="ar_nav_point">Point</string>
+    <string name="ar_nav_line">Line</string>
+    <string name="ar_nav_polygon">Polygon</string>
+    <string name="ar_nav_circle">Circle</string>
+    <string name="ar_nav_radar">Radar</string>
+    <string name="ar_nav_projection">Projection Control</string>
+    <string name="ar_group_custom_projection">Custom Projection</string>
+    <string name="ar_group_system_projection">System Projection</string>
+    <string name="ar_btn_query">Query</string>
+    <string name="ar_btn_upload">Upload</string>
+    <string name="ar_btn_update">Update</string>
+    <string name="ar_btn_delete">Delete</string>
+    <string name="ar_btn_radar_show">Show</string>
+    <string name="ar_btn_radar_hide">Hide</string>
+    <string name="ar_projection_group_fpv">FPV</string>
+    <string name="ar_projection_group_left_or_main">Main Stream</string>
+    <string name="ar_btn_projection_show">Show</string>
+    <string name="ar_btn_projection_hide">Hide</string>
+
+    <!-- 图传绘制 Demo 菜单 -->
+    <string name="cvd_box_title">Box</string>
+    <string name="cvd_box_desc">Overlay detection rectangles</string>
+    <string name="cvd_polygon_title">Polygon</string>
+    <string name="cvd_polygon_desc">Overlay filled polygon regions</string>
+    <string name="cvd_text_title">Text</string>
+    <string name="cvd_text_desc">Overlay custom real-time text</string>
+    <string name="cvd_hint_select">Please select a drawing element on the left</string>
+    <string name="cvd_group_drawing">Camera View Drawing</string>
+
+    <!-- 图传绘制悬浮窗导航栏标题 -->
+    <string name="cvd_nav_box">Box</string>
+    <string name="cvd_nav_polygon">Polygon</string>
+    <string name="cvd_nav_text">Text</string>
+
+    <!-- 图传绘制按钮 -->
+    <string name="cvd_btn_update">Update</string>
+    <string name="cvd_btn_clear">Clear</string>
+
+    <!-- 图传绘制结果消息 -->
+    <string name="cvd_box_updating">Updating %1$d boxes…</string>
+    <string name="cvd_polygon_updating">Updating %1$d polygons…</string>
+    <string name="cvd_text_updating">Updating %1$d text items…</string>
+    <string name="cvd_done">Update %s success</string>
+    <string name="cvd_cleared">Cleared</string>
+    <string name="cvd_failed">Update %s failed: %s</string>
+    <string name="cvd_text_content">Drawing text…</string>
+    <string name="cvd_polygon_distance_text">Distance to obstacle ahead: %.1f m</string>
+
+    <!-- 航线任务 Demo -->
+    <string name="toast_not_registered">MSDK is not registered. Please connect to the internet to complete registration first.</string>
+    <string name="toast_not_connected">Not connected to Pilot. Please install and launch Pilot first.</string>
+    <string name="waypoint_btn_import_kmz">Select KMZ and import waypoint mission</string>
+    <string name="waypoint_permission_denied">All Files Access permission is missing. Please grant it in system settings first.</string>
+    <string name="waypoint_hint_select">Please select a KMZ file to import a waypoint mission</string>
+    <string name="waypoint_path_resolve_failed">Failed to resolve file path</string>
+
+    <!-- AR result messages: common -->
+    <string name="ar_already_uploaded">Already uploaded %s, please delete first</string>
+    <string name="ar_location_failed">Failed to get aircraft location</string>
+    <string name="ar_location_failed_check">Failed to get aircraft location, please confirm aircraft is connected</string>
+    <string name="ar_config_not_ready">configId is null, please wait for auto upload</string>
+    <string name="ar_please_upload_first">Please upload %s first</string>
+    <string name="ar_no_deletable">No %s to delete</string>
+    <string name="ar_deleted_all">Deleted all %1$d %2$s</string>
+    <string name="ar_delete_done">Deleted %1$d %2$s</string>
+
+    <!-- AR result messages: query -->
+    <string name="ar_query_found">Found %1$d %2$s</string>
+    <string name="ar_query_failed">Query %s failed: %s</string>
+
+    <!-- AR result messages: point -->
+    <string name="ar_point_upload_done">Upload completed: 6 points (40m×3 + 80m×3)</string>
+    <string name="ar_point_upload_toast">Upload 6 points completed</string>
+    <string name="ar_point_upload_failed">Upload point failed: %s</string>
+    <string name="ar_point_update_toggled">Toggled: 80m text hidden, 40m icon hidden</string>
+    <string name="ar_point_update_restored">Restored: all visible</string>
+    <string name="ar_point_update_failed">Update point failed: %s</string>
+    <string name="ar_point_no_uploaded">No uploaded points, please upload first</string>
+    <string name="ar_point_delete_failed">Delete point failed: %s</string>
+
+    <!-- AR result messages: line -->
+    <string name="ar_line_upload_success">Upload line success, id=%s (with 6 points)</string>
+    <string name="ar_line_upload_failed">Upload line failed: %s</string>
+    <string name="ar_line_update_success">Update line success: green dashed line</string>
+    <string name="ar_line_update_failed">Update line failed: %s</string>
+    <string name="ar_line_delete_failed">Delete line failed: %s</string>
+
+    <!-- AR result messages: polygon -->
+    <string name="ar_polygon_upload_success">Upload polygon success, id=%s (equilateral triangle + 3 points)</string>
+    <string name="ar_polygon_upload_failed">Upload polygon failed: %s</string>
+    <string name="ar_polygon_update_success">Update polygon success: triangular prism extruded to 80m</string>
+    <string name="ar_polygon_update_failed">Update polygon failed: %s</string>
+    <string name="ar_polygon_delete_failed">Delete polygon failed: %s</string>
+
+    <!-- AR result messages: circle -->
+    <string name="ar_circle_upload_success">Upload circle success, id=%s (green, radius 20m)</string>
+    <string name="ar_circle_upload_failed">Upload circle failed: %s</string>
+    <string name="ar_circle_update_success">Update circle success: green cylinder extruded to 80m</string>
+    <string name="ar_circle_update_failed">Update circle failed: %s</string>
+    <string name="ar_circle_delete_failed">Delete circle failed: %s</string>
+
+    <!-- AR result messages: radar -->
+    <string name="ar_radar_enabled">Radar enabled</string>
+    <string name="ar_radar_enable_failed">Enable radar failed: %s</string>
+    <string name="ar_radar_disabled">Radar disabled</string>
+    <string name="ar_radar_disable_failed">Disable radar failed: %s</string>
+
+    <!-- AR result messages: projection -->
+    <string name="ar_projection_state_shown">shown</string>
+    <string name="ar_projection_state_hidden">hidden</string>
+    <string name="ar_projection_result">%1$s projection %2$s</string>
+    <string name="ar_projection_failed">Set %1$s projection failed: %2$s</string>
+
+    <!-- Dialog Demo -->
+    <string name="dialog_type_alert_title">Alert Dialog</string>
+    <string name="dialog_type_alert_desc">Pilot alert dialog with a single confirm</string>
+    <string name="dialog_type_confirm_title">Confirm Dialog</string>
+    <string name="dialog_type_confirm_desc">Pilot confirm dialog with two buttons</string>
+    <string name="dialog_type_prompt_title">Prompt Dialog</string>
+    <string name="dialog_type_prompt_desc">Pilot input dialog with text field</string>
+    <string name="dialog_type_single_title">Single Choice</string>
+    <string name="dialog_type_single_desc">Pilot single choice dialog</string>
+    <string name="dialog_type_multi_title">Multi Choice</string>
+    <string name="dialog_type_multi_desc">Pilot multi choice dialog</string>
+    <string name="dialog_hint_select">Please select a dialog type on the left</string>
+
+    <!-- Dialog floating window labels -->
+    <string name="dialog_btn_show_alert">Alert Dialog</string>
+    <string name="dialog_btn_show_confirm">Confirm Dialog</string>
+    <string name="dialog_btn_show_prompt">Prompt Dialog</string>
+    <string name="dialog_btn_show_single">Single Choice</string>
+    <string name="dialog_btn_show_multi">Multi Choice</string>
+
+    <!-- Dialog content (aligned with android-sdk-v5-sample) -->
+    <string name="dialog_alert_title">Pilot Alert</string>
+    <string name="dialog_alert_message">This is a Matrice 4</string>
+    <string name="dialog_confirm_title">Pilot Confirm</string>
+    <string name="dialog_confirm_message">Is this a Matrice 4?</string>
+    <string name="dialog_confirm_btn_no">No</string>
+    <string name="dialog_confirm_btn_yes">Yes</string>
+    <string name="dialog_prompt_title">Pilot Input</string>
+    <string name="dialog_prompt_message">Please enter your device name:</string>
+    <string name="dialog_prompt_hint">Device name</string>
+    <string name="dialog_single_title">Pilot Single Choice</string>
+    <string name="dialog_single_message">Select your favorite DJI product:</string>
+    <string name="dialog_multi_title">Pilot Multi Choice</string>
+    <string name="dialog_multi_message">Select products you have used:</string>
+    <string name="dialog_btn_cancel">Cancel</string>
+    <string name="dialog_btn_confirm">Confirm</string>
+
+    <!-- ============ Navigation Demo ============ -->
+    <string name="navigate_hint_select">Please select a navigation target on the left</string>
+
+    <!-- Navigation menu types -->
+    <string name="navigate_type_pilot_home_title">Pilot Home</string>
+    <string name="navigate_type_pilot_home_desc">Navigate to the Pilot home page</string>
+    <string name="navigate_type_pilot_map_title">Pilot Map</string>
+    <string name="navigate_type_pilot_map_desc">Navigate to the Pilot map page</string>
+    <string name="navigate_type_pilot_waypoint_title">Pilot Waypoint List</string>
+    <string name="navigate_type_pilot_waypoint_desc">Navigate to the Pilot waypoint mission list</string>
+    <string name="navigate_type_pilot_album_title">Pilot Album</string>
+    <string name="navigate_type_pilot_album_desc">Navigate to the Pilot album (cameraIndex = 0)</string>
+    <string name="navigate_type_pilot_default_title">Pilot Current Page</string>
+    <string name="navigate_type_pilot_default_desc">Navigate to the current Pilot page</string>
+    <string name="navigate_type_plugin_app_title">Plugin App</string>
+    <string name="navigate_type_plugin_app_desc">Navigate back to the plugin app (PLUGIN_APP)</string>
+    <string name="navigate_type_self_define_title">Custom Plugin Page</string>
+    <string name="navigate_type_self_define_desc">Navigate to the plugin app top activity (SELF_DEFINE)</string>
+    <string name="navigate_type_remote_view_title">Custom Remote Page</string>
+    <string name="navigate_type_remote_view_desc">Navigate to the custom remote view activity</string>
+
+    <!-- Navigation floating-box buttons -->
+    <string name="navigate_btn_pilot_home">Go to Pilot Home</string>
+    <string name="navigate_btn_pilot_map">Go to Pilot Map</string>
+    <string name="navigate_btn_pilot_waypoint">Go to Waypoint List</string>
+    <string name="navigate_btn_pilot_album">Go to Pilot Album</string>
+    <string name="navigate_btn_pilot_default">Go to Current Page</string>
+    <string name="navigate_btn_plugin_app">Go to Plugin App Home</string>
+    <string name="navigate_btn_self_define">Go to Plugin App Current Page</string>
+    <string name="navigate_btn_remote_view">Go to Custom Remote Page</string>
+
+    <!-- ===== Map Widget Demo ===== -->
+    <string name="map_hint_select">Please select a map case on the left</string>
+    <!-- 用例：比例尺缩放 -->
+    <string name="map_zoom_title">Map Scale</string>
+    <string name="map_zoom_desc">Adjust the manual-flight map scale via setZoomLevel</string>
+    <string name="map_nav_zoom">Map Scale</string>
+    <string name="map_btn_zoom_in">Zoom In (+1)</string>
+    <string name="map_btn_zoom_out">Zoom Out (-1)</string>
+    <string name="map_zoom_call_success">setZoomLevel called, target zoom=%1$.2f, waiting for state callback…</string>
+    <string name="map_zoom_call_failed">setZoomLevel failed: %1$s</string>
+    <!-- 用例：设置中心点 -->
+    <string name="map_center_mode_title">Set Center</string>
+    <string name="map_center_mode_desc">Set the manual-flight map center mode via setMapCenterMode</string>
+    <string name="map_nav_center_mode">Set Center</string>
+    <string name="map_btn_follow_aircraft">Follow Aircraft</string>
+    <string name="map_btn_free">Free</string>
+    <string name="map_center_mode_call_success">setMapCenterMode called, mode=%1$s, waiting for state callback…</string>
+    <string name="map_center_mode_call_failed">setMapCenterMode(%1$s) failed: %2$s</string>
+    <!-- 状态回显 / 通用 -->
+    <string name="map_state_header">[MapState] ready=%1$s  zoom=%2$.2f</string>
+    <string name="map_not_ready">Map not ready (open the flight view first)</string>
+
+    <!-- 菜单分组 -->
+    <string name="map_group_widget">Map Widget</string>
+    <string name="map_group_element">Map Element</string>
+    <string name="map_group_view">Map View</string>
+    <!-- 通用 -->
+    <string name="map_no_location">Cannot get aircraft location</string>
+    <string name="map_op_failed">%1$s failed: %2$s</string>
+    <!-- 方位 / marker -->
+    <string name="map_dir_north">North</string>
+    <string name="map_dir_east">East</string>
+    <string name="map_dir_south">South</string>
+    <string name="map_dir_west">West</string>
+    <string name="map_marker_rc">RC / Home</string>
+    <string name="map_marker_rc_desc">Home point (approx. RC/operator)</string>
+    <string name="map_marker_dir_desc">Direction marker around aircraft</string>
+    <string name="map_marker_center">Center</string>
+    <string name="map_marker_click_content">This map widget was clicked.</string>
+    <string name="map_marker_click_btn">OK</string>
+    <string name="map_marker_clicked_toast">Marker clicked: %1$s</string>
+    <string name="map_marker_text_east">East</string>
+    <string name="map_marker_text_south">South</string>
+    <string name="map_marker_text_west">West</string>
+    <string name="map_marker_text_north">North</string>
+    <!-- 用例：地图控件 -->
+    <string name="map_widget_title">Map Widget</string>
+    <string name="map_widget_desc">Add/remove Marker, Polyline, Polygon, Circle centered on the aircraft</string>
+    <string name="map_nav_widget">Map Widget</string>
+    <string name="map_btn_add_marker">Add Marker</string>
+    <string name="map_btn_remove_marker">Del Marker</string>
+    <string name="map_btn_add_polyline">Add Line</string>
+    <string name="map_btn_remove_polyline">Del Line</string>
+    <string name="map_btn_add_polygon">Add Polygon</string>
+    <string name="map_btn_remove_polygon">Del Polygon</string>
+    <string name="map_btn_add_circle">Add Circle</string>
+    <string name="map_btn_remove_circle">Del Circle</string>
+    <string name="map_btn_add_marker_text">Add Text</string>
+    <string name="map_btn_remove_marker_text">Del Text</string>
+    <string name="map_btn_query_widgets">Query Widgets</string>
+    <string name="map_widget_add_success">Added: %1$s (%2$s)</string>
+    <string name="map_widget_remove_success">Removed %1$s</string>
+    <string name="map_widget_none_to_remove">No %1$s to remove</string>
+    <string name="map_widget_already_added">%1$s already added, remove it first</string>
+    <string name="map_widget_query_result">Query result: %1$d widget(s)</string>
+    <!-- 用例：批量控件 -->
+    <string name="map_batch_title">Batch Widgets</string>
+    <string name="map_batch_desc">Batch add/update/remove the full widget set (colors turn green on update)</string>
+    <string name="map_nav_batch">Batch Widgets</string>
+    <string name="map_btn_batch_add">Batch Add</string>
+    <string name="map_btn_batch_update">Batch Update</string>
+    <string name="map_btn_batch_remove">Batch Remove</string>
+    <string name="map_batch_already_added">Already added, remove first</string>
+    <string name="map_batch_add_first">Please batch add first</string>
+    <string name="map_batch_add_success">Batch added %1$d widget(s)</string>
+    <string name="map_batch_update_success">Batch updated: shapes turned green, markers removed</string>
+    <string name="map_batch_remove_success">Batch removed %1$d widget(s)</string>
+    <!-- 用例：图层管理 -->
+    <string name="map_layer_title">Layer Manage</string>
+    <string name="map_layer_desc">Triangle+incircle+marker in 4 directions, grouped into 3 layers</string>
+    <string name="map_nav_layer">Layer Manage</string>
+    <string name="map_layer_target_title">Target Layer</string>
+    <string name="map_layer_triangle">Triangle Layer</string>
+    <string name="map_layer_circle">Incircle Layer</string>
+    <string name="map_layer_marker">Marker Layer</string>
+    <string name="map_layer_all">All Layers</string>
+    <string name="map_btn_layer_build">Build Layers &amp; Draw</string>
+    <string name="map_btn_layer_hide">Hide</string>
+    <string name="map_btn_layer_show">Show</string>
+    <string name="map_btn_layer_query">Query</string>
+    <string name="map_btn_layer_clear">Clear</string>
+    <string name="map_btn_layer_remove">Remove</string>
+    <string name="map_layer_already_built">Layers already built</string>
+    <string name="map_layer_build_first">Please build layers first</string>
+    <string name="map_layer_build_success">Built 3 layers, drew %1$d widget(s)</string>
+    <string name="map_layer_hide_success">Layer hidden</string>
+    <string name="map_layer_show_success">Layer shown</string>
+    <string name="map_layer_query_result">Layer %1$s: %2$d widget(s)</string>
+    <string name="map_layer_clear_success">Layer cleared</string>
+    <string name="map_layer_remove_success">Layer removed</string>
+    <!-- 用例：地图元素 -->
+    <string name="map_element_title">Map Element</string>
+    <string name="map_element_desc">MapElement CRUD (rendered by Pilot map + AR) centered on the aircraft</string>
+    <string name="map_nav_element">Map Element</string>
+    <string name="map_btn_element_insert">Insert</string>
+    <string name="map_btn_element_query">Query</string>
+    <string name="map_btn_element_update">Update</string>
+    <string name="map_btn_element_delete">Delete</string>
+    <string name="map_btn_element_toggle_ar">Toggle AR</string>
+    <string name="map_element_already_added">All Sample element types are already owned; query or delete to manage them</string>
+    <string name="map_element_add_first">Please insert first</string>
+    <string name="map_element_insert_success">Inserted %1$s</string>
+    <string name="map_element_query_result">Query result: %1$d element(s)</string>
+    <string name="map_element_update_success">Updated %1$s to green</string>
+    <string name="map_element_delete_success">Deleted %1$s</string>
+    <string name="map_element_ar_hidden">Hide AR annotations: request submitted</string>
+    <string name="map_element_ar_shown">Show AR annotations: request submitted</string>
+    <string name="map_element_store_failed">Ownership could not be saved; check local storage</string>
+    <string name="map_element_disconnected">Disconnected; pending requests canceled, owned IDs retained for retry</string>
+    <string name="map_element_timeout">No callback within 15 seconds; outcome unknown, retained for retry</string>
+    <string name="map_element_creation_pending">Creation outcome unknown; this type remains pending until a real callback, insertion blocked</string>
+    <string name="map_element_owned_found">Sample-owned remote element restored</string>
+    <string name="map_element_owned_pending">Owned ID missing from query; ownership retained, query again to retry</string>
+    <string name="map_element_query_invalid">Query returned no snapshot; ownership retained</string>
+    <string name="map_element_delete_submitted">Delete request acknowledged; awaiting query confirmation</string>
+    <string name="map_element_delete_unconfirmed">Deletion not confirmed twice within 3 queries; owned ID retained for retry</string>
+
+    <!-- File Transfer Demo -->
+    <string name="file_transfer_destination_title">01 Destination</string>
+    <string name="file_transfer_action_desc">Choose a destination, then upload a local file. Deletion is unavailable in the current SDK.</string>
+    <string name="file_transfer_selected_destination">Destination: %1$s</string>
+    <string name="file_transfer_upload">Upload</string>
+    <string name="file_transfer_delete">Delete</string>
+    <string name="file_transfer_reference">IFileTransferManager · FileTransferDemoViewModel</string>
+
+    <!-- KeyManager 演示模块（迁移自 android-sdk-v5-sample） -->
+    <string name="key">Key List</string>
+    <string name="key_search">Search</string>
+    <string name="commonlyused_key">Commonly Used Key</string>
+    <string name="key_value_set">Set </string>
+    <string name="confirm">Confirm</string>
+    <string name="operate_listen_record_tips">push info：</string>
+    <string name="index_tips">index:represent the position of the load is generally 0 \n subType:represent lens ,0 = zoom ,1 = wide , 2 = ir \n subIndex:currently only the battery box is used to indicate the location of the next level gadgets</string>
+    <string name="battery">Battery</string>
+    <string name="gimbal">Gimbal</string>
+    <string name="camera">Camera</string>
+    <string name="ble">BLE</string>
+    <string name="airlink">AIRLINK</string>
+    <string name="flight_assistant">FlightAssistant</string>
+    <string name="flight_control">FlightController</string>
+    <string name="remote_controller">Remote Controller Only</string>
+    <string name="product">Product</string>
+    <string name="rtkbase">RTK Base</string>
+    <string name="rtkmobile">RTK mobile</string>
+    <string name="ocusync">OcuSync</string>
+    <string name="radar">Radar</string>
+    <string name="mobile_network">Mobile Network</string>
+    <string name="on_board">OnBoard</string>
+    <string name="payload">Payload</string>
+    <string name="lidar">Lidar</string>
+    <string name="intelligent_box">Intelligent Box</string>
+
+    <!-- KeyManager UI 重构：分组 Header -->
+    <string name="key_group_flight">Flight</string>
+    <string name="key_group_camera_gimbal">Camera &amp; Gimbal</string>
+    <string name="key_group_link">Link</string>
+    <string name="key_group_rc_rtk">RC &amp; RTK</string>
+    <string name="key_group_system">System</string>
+    <string name="key_group_perception">Perception</string>
+
+    <!-- KeyManager UI 重构：操作按钮 -->
+    <string name="key_btn_get">GET</string>
+    <string name="key_btn_set">SET</string>
+    <string name="key_btn_listen">LISTEN</string>
+    <string name="key_btn_action">ACTION</string>
+    <string name="key_btn_unlisten_all">UNLISTEN ALL</string>
+    <string name="key_btn_clear">Clear</string>
+
+    <!-- KeyManager UI 重构：参数 Spinner label -->
+    <string name="key_label_component_index">componentIndex</string>
+    <string name="key_label_subtype">subtype</string>
+    <string name="key_label_lenstype">lenstype</string>
+    <string name="key_label_subindex">subIndex</string>
+
+    <!-- KeyManager UI 重构：能力集开关 & 提示 -->
+    <string name="key_capability_all">All Keys</string>
+    <string name="key_capability_official">Official Keys</string>
+    <string name="key_hint_select_key">Select a Key to operate</string>
+    <string name="key_result_title">Result</string>
+    <string name="key_current_key">Current Key</string>
+
+    <!-- MOP Pipeline 演示 -->
+    <string name="tv_send_data_to_psdk_hint">Please enter test data sent to PSDK</string>
+
+    <!-- ===== Media File Task Demo ===== -->
+    <!-- 顶部状态 -->
+    <string name="media_server_state">Server: %1$s</string>
+    <string name="media_server_connected">Connected</string>
+    <string name="media_server_disconnected">Disconnected</string>
+
+    <!-- 控制卡片 -->
+    <string name="media_component_label">Component</string>
+    <string name="media_storage_label">Storage</string>
+    <string name="media_playback_label">Playback: %1$s</string>
+    <string name="media_playback_unknown">Unknown</string>
+    <string name="media_playback_entering">Entering</string>
+    <string name="media_playback_entered_state">Entered</string>
+    <string name="media_playback_exiting">Exiting</string>
+    <string name="media_playback_exited_state">Exited</string>
+    <string name="media_playback_failed_state">Failed</string>
+    <string name="media_enter_playback">Enter Playback</string>
+    <string name="media_exit_playback">Exit Playback</string>
+    <string name="media_index_hint">Index</string>
+    <string name="media_count_hint">Count</string>
+    <string name="media_pull">Pull List</string>
+    <string name="media_stop_pull">Stop Pull</string>
+    <string name="media_select_mode_on">Multi-select</string>
+    <string name="media_select_mode_off">Exit Multi-select</string>
+    <string name="media_download_selected">Download Selected</string>
+    <string name="media_set_xmp">Set Camera XMP</string>
+    <string name="media_get_xmp">Get Camera XMP</string>
+    <string name="media_take_photo">Take Photo</string>
+    <string name="media_format_storage">Format SD Card</string>
+    <string name="media_format_confirm_title">Format SD Card</string>
+    <string name="media_format_confirm_message">All files on the SD card will be erased. Continue?</string>
+    <string name="media_xmp_input_title">Camera XMP Custom Info</string>
+    <string name="media_xmp_input_hint">Enter custom info</string>
+    <string name="media_xmp_current">Camera custom info: %1$s</string>
+
+    <!-- 文件列表 -->
+    <string name="media_empty">No media files</string>
+    <string name="media_loading">Loading…</string>
+    <string name="media_list_failed">Failed to load media list</string>
+    <string name="media_load_failed">Load failed</string>
+    <string name="media_select_hint">Select a media file on the left</string>
+    <string name="media_selected_count">Selected: %1$d</string>
+    <string name="media_selected_mark">&#10003;</string>
+    <string name="media_file_meta">%1$s · %2$s</string>
+
+    <!-- 文件详情 -->
+    <string name="media_metadata">Name: %1$s\nIndex: %2$d\nType: %3$s\nSize: %4$s\nDate: %5$s</string>
+    <string name="media_download_location">Saved at: %1$s</string>
+    <string name="media_unknown">Unknown</string>
+    <string name="media_pull_preview">Load Preview</string>
+    <string name="media_download">Download</string>
+    <string name="media_cancel_download">Cancel Download</string>
+    <string name="media_download_progress_speed">Progress: %1$d%%  Speed: %2$s/s</string>
+    <string name="media_download_received_speed">Size unknown · Received: %1$s  Speed: %2$s/s</string>
+    <string name="media_xmp_file">File XMP</string>
+    <string name="media_xmp_custom">File Custom Info</string>
+    <string name="media_xmp_pull">Load XMP</string>
+    <string name="media_thermal">Thermal</string>
+    <string name="media_thermal_parse">Parse Thermal</string>
+    <string name="media_thermal_result">Max: %1$.1f℃  Min: %2$.1f℃  Emissivity: %3$.2f  Ambient: %4$.1f℃  Time: %5$s</string>
+
+    <!-- 受限能力 -->
+    <string name="media_delete_unavailable">Delete</string>
+    <string name="media_video_unavailable">Play Video</string>
+    <string name="media_capability_limit">Delete and video playback are not supported in REMOTE mode, so they are disabled in this demo.</string>
+    <string name="media_reference">IMediaManager · MediaTaskDemoViewModel</string>
+
+    <!-- 结果与提示 -->
+    <string name="media_no_selection">Please select files first</string>
+    <string name="media_invalid_range">Invalid index or count</string>
+    <string name="media_operation_timeout">Operation timed out</string>
+    <string name="media_operation_failed">Operation failed: %1$s</string>
+    <string name="media_disconnected_error">Not connected to Pilot</string>
+    <string name="media_playback_entered">Entered playback mode</string>
+    <string name="media_playback_exited">Exited playback mode</string>
+    <string name="media_download_failed">Download failed</string>
+    <string name="media_download_timeout">Download timed out</string>
+    <string name="media_download_completed">Download completed</string>
+    <string name="media_download_incomplete">Download incomplete, resume later</string>
+    <string name="media_download_cancelled">Download cancelled</string>
+    <string name="media_batch_download_result">Batch download finished: %1$d succeeded, %2$d failed</string>
+    <string name="media_xmp_set_success">Camera XMP custom info set successfully</string>
+    <string name="media_xmp_set_mismatch">Camera XMP custom info set but read-back differs</string>
+    <string name="media_xmp_get_success">Camera XMP custom info read</string>
+    <string name="media_thermal_need_download">Download the original file completely first</string>
+    <string name="media_take_photo_success">Photo capture triggered</string>
+    <string name="media_format_storage_success">SD card format requested</string>
+</resources>

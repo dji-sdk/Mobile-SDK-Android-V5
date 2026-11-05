@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 检测记录列表项：标题 + 上传状态，选中态复用任务列表的 selector。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/task_item_gap"
+    android:background="@drawable/bg_task_item"
+    android:orientation="vertical"
+    android:padding="@dimen/task_item_padding">
+
+    <TextView
+        android:id="@+id/tvRecordItemTitle"
+        style="@style/BodyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvRecordItemStatus"
+        style="@style/LabelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_gap" />
+</LinearLayout>

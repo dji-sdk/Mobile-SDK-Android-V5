@@ -37,7 +37,7 @@ import dji.sampleV5.aircraft.databinding.FragWaypointv3PageBinding
 import dji.sampleV5.aircraft.models.MissionGlobalModel
 import dji.sampleV5.aircraft.models.WayPointV3VM
 import dji.sampleV5.aircraft.util.DialogUtil
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sampleV5.aircraft.utils.KMZTestUtil
 import dji.sampleV5.aircraft.utils.KMZTestUtil.createWaylineMission
 import dji.sampleV5.aircraft.utils.wpml.WaypointInfoModel
@@ -45,7 +45,6 @@ import dji.sdk.keyvalue.key.FlightControllerKey
 import dji.sdk.keyvalue.key.KeyTools
 import dji.sdk.keyvalue.value.common.LocationCoordinate2D
 import dji.sdk.keyvalue.value.flightcontroller.FlightMode
-import dji.sdk.wpmz.jni.JNIWPMZManager
 import dji.sdk.wpmz.value.mission.Wayline
 import dji.sdk.wpmz.value.mission.WaylineActionInfo
 import dji.sdk.wpmz.value.mission.WaylineActionType
@@ -254,6 +253,10 @@ class WayPointV3Fragment : DJIFragment() {
         binding?.btnWaylineSelect?.setOnClickListener {
             selectWaylines.clear()
             val waylineids = wayPointV3VM.getAvailableWaylineIDs(curMissionPath)
+            if (waylineids.isEmpty()) {
+                ToastUtils.showToast("No waylines found, please select a KMZ file first")
+                return@setOnClickListener
+            }
             showMultiChoiceDialog(waylineids)
         }
 
@@ -470,28 +473,34 @@ class WayPointV3Fragment : DJIFragment() {
 
     private fun addListener() {
         wayPointV3VM.addMissionStateListener {
-            binding?.missionExecuteStateTv?.text = "Mission Execute State : ${it.name}"
-            binding?.btnMissionUpload?.isEnabled = it == WaypointMissionExecuteState.READY
-            curMissionExecuteState = it
-            if (it == WaypointMissionExecuteState.FINISHED) {
-                ToastUtils.showToast("Mission Finished")
+            mainHandler.post{
+                binding?.missionExecuteStateTv?.text = "Mission Execute State : ${it.name}"
+                binding?.btnMissionUpload?.isEnabled = it == WaypointMissionExecuteState.READY
+                curMissionExecuteState = it
+                if (it == WaypointMissionExecuteState.FINISHED) {
+                    ToastUtils.showToast("Mission Finished")
+                }
             }
             LogUtils.i(LogPath.SAMPLE, "State is ${it.name}")
         }
         wayPointV3VM.addWaylineExecutingInfoListener(object : WaylineExecutingInfoListener {
             override fun onWaylineExecutingInfoUpdate(it: WaylineExecutingInfo) {
-                binding?.waylineExecuteStateTv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
-                        "WaypointIndex:${it.currentWaypointIndex} \n" +
-                        "MissionName : ${it.missionFileName}"
-            }
-
-            override fun onWaylineExecutingInterruptReasonUpdate(error: IDJIError?) {
-                if (error != null) {
-                    binding?.waylineExecuteStateTv?.text = "Wayline Execute Interrupt Reason:${error.errorCode()}"
-                    LogUtils.e(LogPath.SAMPLE, "interrupt error:${error.errorCode()}")
+                mainHandler.post {
+                    binding?.waylineExecuteStateTv?.text = "Wayline Execute Info WaylineID:${it.waylineID} \n" +
+                            "WaypointIndex:${it.currentWaypointIndex} \n" +
+                            "MissionName : ${it.missionFileName}"
                 }
             }
 
+            override fun onWaylineExecutingInterruptReasonUpdate(error: IDJIError?) {
+                mainHandler.post {
+                    if (error != null) {
+                        val originStr = binding?.missionExecuteStateTv?.text.toString()
+                        binding?.waylineExecuteStateTv?.text = "$originStr\n InterruptReason:${error.errorCode()}"
+                    }
+                }
+                LogUtils.e(LogPath.SAMPLE, "interrupt error:${error?.errorCode()}")
+            }
         })
 
         wayPointV3VM.addWaypointActionListener(object : WaypointActionListener {
@@ -771,27 +780,22 @@ class WayPointV3Fragment : DJIFragment() {
 
 
     fun showMultiChoiceDialog(waylineids: List<Int>) {
-        var items: ArrayList<String> = ArrayList()
-        waylineids
-            .filter {
-                it >= 0
-            }
-            .map {
-                items.add(it.toString())
-            }
+        val validIds = waylineids.filter { it >= 0 }
+        val items = validIds.map { it.toString() }.toTypedArray()
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
         builder.setTitle("Select Wayline")
         builder.setPositiveButton("OK", null)
         builder.setMultiChoiceItems(
-            items.toTypedArray(),
+            items,
             null,
             object : OnMultiChoiceClickListener {
                 override fun onClick(p0: DialogInterface?, index: Int, isSelect: Boolean) {
+                    val waylineId = validIds[index]
                     if (isSelect) {
-                        selectWaylines.add(index)
+                        selectWaylines.add(waylineId)
                     } else {
-                        selectWaylines.remove(index)
+                        selectWaylines.remove(waylineId)
                     }
                 }
             }).create().show()

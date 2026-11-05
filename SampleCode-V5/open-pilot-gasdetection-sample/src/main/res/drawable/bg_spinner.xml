@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/card_bg" />
+            <stroke
+                android:width="@dimen/divider_height"
+                android:color="@color/input_border" />
+            <corners android:radius="@dimen/input_radius" />
+        </shape>
+    </item>
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:drawable="@drawable/ic_arrow_drop_down"
+        android:gravity="end|center_vertical"
+        android:right="@dimen/spinner_icon_inset" />
+</layer-list>

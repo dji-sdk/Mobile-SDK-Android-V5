@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - Switch Case 预览 (精确修正版)</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: transparent; color: #FFFFFF; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+        .rv-card { background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+        .rv-divider { height: 1px; background-color: rgba(255, 255, 255, 0.15); margin: 2px 0; }
+
+        .rv-item-container { display: flex; flex-direction: row; gap: 16px; align-items: center; }
+        .rv-item-container-vertical { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+
+        /* ====== 自定义 Switch 样式 ====== */
+        .rv-switch-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* 隐藏原生 checkbox */
+        .rv-switch-wrapper input[type="checkbox"] { display: none; }
+
+        /* 轨道 Track (默认关闭状态色) */
+        .rv-switch-track {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.2); 
+            border-radius: 34px;
+            transition: .2s;
+        }
+
+        /* 滑块 Thumb (默认白色) */
+        .rv-switch-thumb {
+            position: absolute;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            transition: .2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3); 
+        }
+
+        /* 选中状态 Default On (蓝色轨道) */
+        .rv-switch-wrapper input[type="checkbox"]:checked + .rv-switch-track {
+            background-color: #1A8BFF; /* BLUE_DEFAULT */
+        }
+
+        /* ====== 尺寸系统 - 精确修正 ====== */
+        /* 1. 40x20 (基础小) */
+        .sw-40-20 { width: 40px; height: 20px; }
+        .sw-40-20 .rv-switch-thumb { width: 20px; height: 20px; left: 0; bottom: 0; } 
+        .sw-40-20 input[type="checkbox"]:checked + .rv-switch-track .rv-switch-thumb { transform: translateX(20px); } 
+
+        /* 2. 35x15 (大小渐变-1) */
+        .sw-35-15 { width: 35px; height: 15px; }
+        .sw-35-15 .rv-switch-thumb { width: 15px; height: 15px; left: 0; bottom: 0; }
+        .sw-35-15 input[type="checkbox"]:checked + .rv-switch-track .rv-switch-thumb { transform: translateX(20px); } 
+
+        /* 3. 45x20 (大小渐变-2) */
+        .sw-45-20 { width: 45px; height: 20px; }
+        .sw-45-20 .rv-switch-thumb { width: 20px; height: 20px; left: 0; bottom: 0; }
+        .sw-45-20 input[type="checkbox"]:checked + .rv-switch-track .rv-switch-thumb { transform: translateX(25px); } 
+
+        /* 4. 55x25 (大小渐变-3 / 颜色统一尺寸) */
+        .sw-55-25 { width: 55px; height: 25px; }
+        .sw-55-25 .rv-switch-thumb { width: 25px; height: 25px; left: 0; bottom: 0; }
+        .sw-55-25 input[type="checkbox"]:checked + .rv-switch-track .rv-switch-thumb { transform: translateX(30px); } 
+
+        /* ====== 自定义颜色 Track Tint ====== */
+        .track-green input[type="checkbox"]:checked + .rv-switch-track { background-color: #00C774; } /* GREEN_1 */
+        .track-blue2 input[type="checkbox"]:checked + .rv-switch-track { background-color: #3C70BB; } /* BLUE_2 截图偏灰蓝 */
+        .track-red input[type="checkbox"]:checked + .rv-switch-track { background-color: #E41F29; } /* RED_DEFAULT */
+
+        /* ====== 禁用状态 ====== */
+        .is-disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* 禁用态下如果是关闭，根据截图滑块也变成了深灰色 */
+        .is-disabled input[type="checkbox"]:not(:checked) + .rv-switch-track .rv-switch-thumb {
+            background-color: #CCCCCC;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Card 01 -->
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_switch">开关 Switch</div>
+        <div class="rv-item-container">
+            <!-- 40x20, Off -->
+            <label class="rv-switch-wrapper sw-40-20">
+                <input type="checkbox">
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Card 02 -->
+    <div class="rv-card-title" data-i18n="card_state">02 组件状态</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_disabled">禁用态</div>
+        <div class="rv-item-container is-disabled">
+            <!-- 40x20, Off, Disabled -->
+            <label class="rv-switch-wrapper sw-40-20">
+                <input type="checkbox" disabled>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+            <!-- 40x20, On, Disabled -->
+            <label class="rv-switch-wrapper sw-40-20">
+                <input type="checkbox" checked disabled>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Card 03 -->
+    <div class="rv-card-title" data-i18n="card_style">03 组件样式</div>
+    <div class="rv-card">
+        <!-- Section 1: 垂直排布大小 -->
+        <div class="rv-section-title" data-i18n="sec_switch_size">开关大小</div>
+        <div class="rv-item-container-vertical">
+            <!-- 35x15, On -->
+            <label class="rv-switch-wrapper sw-35-15">
+                <input type="checkbox" checked>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+            <!-- 45x20, On -->
+            <label class="rv-switch-wrapper sw-45-20">
+                <input type="checkbox" checked>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+            <!-- 55x25, On -->
+            <label class="rv-switch-wrapper sw-55-25">
+                <input type="checkbox" checked>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+        </div>
+
+        <div class="rv-divider"></div>
+        
+        <!-- Section 2: 垂直颜色 (根据截图修改为垂直排布) -->
+        <div class="rv-section-title" data-i18n="sec_switch_color">开关颜色</div>
+        <div class="rv-item-container-vertical">
+            <!-- 55x25, On, GREEN_1 -->
+            <label class="rv-switch-wrapper sw-55-25 track-green">
+                <input type="checkbox" checked>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+            <!-- 55x25, On, BLUE_2 -->
+            <label class="rv-switch-wrapper sw-55-25 track-blue2">
+                <input type="checkbox" checked>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+            <!-- 55x25, On, RED_DEFAULT -->
+            <label class="rv-switch-wrapper sw-55-25 track-red">
+                <input type="checkbox" checked>
+                <div class="rv-switch-track"><div class="rv-switch-thumb"></div></div>
+            </label>
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:        { zh: "01 组件类型", en: "01 Component Type" },
+            card_state:       { zh: "02 组件状态", en: "02 Component State" },
+            card_style:       { zh: "03 组件样式", en: "03 Component Style" },
+            sec_switch:       { zh: "开关 Switch", en: "Switch" },
+            sec_disabled:     { zh: "禁用态",     en: "Disabled State" },
+            sec_switch_size:  { zh: "开关大小",   en: "Switch Size" },
+            sec_switch_color: { zh: "开关颜色",   en: "Switch Color" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

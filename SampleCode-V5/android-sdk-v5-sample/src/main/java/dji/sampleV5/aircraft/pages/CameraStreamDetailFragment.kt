@@ -17,8 +17,8 @@ import androidx.fragment.app.viewModels
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.aircraft.models.CameraStreamDetailVM
-import dji.sampleV5.aircraft.util.Helper
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.Helper
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.camera.CameraMode
 import dji.sdk.keyvalue.value.airlink.ChannelPriority
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
@@ -27,7 +27,6 @@ import dji.sdk.keyvalue.value.flightassistant.VisionAssistDirection
 import dji.v5.manager.interfaces.ICameraStreamManager
 import dji.v5.utils.common.LogPath
 import dji.v5.utils.common.LogUtils
-import dji.v5.utils.common.StringUtils
 import dji.v5.ux.core.extension.textColor
 
 class CameraStreamDetailFragment : DJIFragment() {

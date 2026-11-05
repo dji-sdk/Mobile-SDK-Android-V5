@@ -1,6 +1,8 @@
 package dji.sampleV5.aircraft
 
 import android.app.Application
+import android.view.View
+import android.widget.EditText
 import dji.sampleV5.aircraft.models.MSDKManagerVM
 import dji.sampleV5.aircraft.models.globalViewModels
 

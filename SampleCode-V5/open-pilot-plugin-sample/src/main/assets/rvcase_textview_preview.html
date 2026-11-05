@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - TextView Case 预览</title>
+    <style>
+        /* 基础重置与 Pilot 暗色主题背景 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: transparent; /* 生产环境透明 */
+            color: #FFFFFF;
+            margin: 0;
+            padding: 12px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .rv-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+        .rv-divider { height: 1px; background-color: rgba(255, 255, 255, 0.15); margin: 2px 0; }
+
+        /* ====== 垂直排布 ====== */
+        .rv-item-container { 
+            display: flex; 
+            flex-direction: column; /* 改回垂直排布 */
+            gap: 12px; 
+            align-items: stretch; /* 宽度撑满 */
+        }
+
+        /* 文本项基础样式 */
+        .rv-text-item {
+            background-color: rgba(255, 255, 255, 0.05); /* 淡淡的底色作为区块区分 */
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.5;
+            box-sizing: border-box;
+        }
+
+        /* 特殊文本效果 */
+        .txt-underline { text-decoration: underline; }
+        .txt-strikethrough { text-decoration: line-through; }
+        .txt-bold { font-weight: bold; }
+        .txt-blue { color: #1890FF; }
+        .txt-red { color: #E41F29; }
+        .txt-orange { color: #FF9F0A; }
+        .txt-disabled { color: #888888; opacity: 0.6; }
+
+        /* 截断与滚动 */
+        .txt-singleline { white-space: nowrap; overflow: hidden; }
+        .txt-ellipsize { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .txt-wrap { word-break: break-all; white-space: pre-wrap; }
+        .txt-scrollable { 
+            height: 56px; 
+            overflow-y: auto; 
+            border: 1px solid rgba(255,255,255,0.2); 
+            padding-right: 4px;
+        }
+        
+        /* 隐藏滚动条但保留滚动功能（美化） */
+        .txt-scrollable::-webkit-scrollbar { width: 4px; }
+        .txt-scrollable::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
+
+        /* 字体尺寸演示 */
+        .size-l { font-size: 16px; letter-spacing: 0.01em; } /* 对应源码 12sp，网页相对放大 */
+        .size-m { font-size: 14px; letter-spacing: 0.03em; line-height: 1.5; } /* 源码 11sp */
+        .size-s { font-size: 12px; letter-spacing: 0.05em; line-height: 1.3; } /* 源码 9sp */
+
+    </style>
+</head>
+<body>
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_basic_text">基础文本</div>
+        <div class="rv-item-container">
+            <div class="rv-text-item" data-i18n="txt_normal">普通文本信息</div>
+            <div class="rv-text-item txt-underline" data-i18n="txt_underline">下划线文本信息</div>
+            <div class="rv-text-item txt-strikethrough" data-i18n="txt_strike">删除线文本信息</div>
+            <div class="rv-text-item txt-bold" data-i18n="txt_bold">加粗文本信息</div>
+            <div class="rv-text-item txt-blue" data-i18n="txt_color">色彩文本信息</div>
+        </div>
+        
+        <div class="rv-divider"></div>
+        
+        <div class="rv-section-title" data-i18n="sec_special">特殊类型</div>
+        <div class="rv-item-container">
+            <div class="rv-text-item txt-singleline" data-i18n="txt_singleline">单行文本信息</div>
+            <div class="rv-text-item txt-ellipsize" data-i18n="txt_ellipsize" data-i18n-title="txt_ellipsize" title="文本信息内容多，截断处理不展示全部内容">文本信息内容多，截断处理不展示全部内容</div>
+            <div class="rv-text-item txt-wrap" data-i18n="txt_wrap">文本信息内容多，折行展示全部信息</div>
+            <div class="rv-text-item txt-scrollable" data-i18n="txt_scroll">这是一些文本信息，文本信息内容多，可滚动展示信息<br>第2行<br>第3行<br>第4行<br>第5行</div>
+            <div class="rv-text-item" data-i18n="txt_richtext">电量: 15%，动作: 降落</div>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_state">02 组件状态</div>
+    <div class="rv-card">
+        <div class="rv-item-container">
+            <div class="rv-text-item" data-i18n="txt_state_normal">文本正常态</div>
+            <div class="rv-text-item txt-disabled" data-i18n="txt_state_disabled">文本置灰态</div>
+        </div>
+    </div>
+
+    <div class="rv-card-title" data-i18n="card_style">03 组件样式</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_font_size">字体尺寸</div>
+        <div class="rv-item-container">
+            <div class="rv-text-item size-l" data-i18n="txt_size_l">大，字号12sp，字间距0.01 em，默认行高</div>
+            <div class="rv-text-item size-m" data-i18n="txt_size_m">中，字号11sp，字间距0.03em，1倍行高+1dp</div>
+            <div class="rv-text-item size-s" data-i18n="txt_size_s">小，字号9sp，字间距0.05 em，1.3倍行高</div>
+        </div>
+        
+        <div class="rv-divider"></div>
+        
+        <div class="rv-section-title" data-i18n="sec_custom_color">自定义颜色</div> 
+        <div class="rv-item-container">
+            <div class="rv-text-item txt-blue" data-i18n="txt_color_sample">普通字体颜色</div>
+            <div class="rv-text-item txt-red" data-i18n="txt_color_sample">普通字体颜色</div>
+            <div class="rv-text-item txt-orange" data-i18n="txt_color_sample">普通字体颜色</div>
+        </div>
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:          { zh: "01 组件类型", en: "01 Component Type" },
+            card_state:         { zh: "02 组件状态", en: "02 Component State" },
+            card_style:         { zh: "03 组件样式", en: "03 Component Style" },
+            sec_basic_text:     { zh: "基础文本",   en: "Basic Text" },
+            sec_special:        { zh: "特殊类型",   en: "Special Types" },
+            sec_font_size:      { zh: "字体尺寸",   en: "Font Size" },
+            sec_custom_color:   { zh: "自定义颜色", en: "Custom Color" },
+            txt_normal:         { zh: "普通文本信息",   en: "Normal text" },
+            txt_underline:      { zh: "下划线文本信息", en: "Underlined text" },
+            txt_strike:         { zh: "删除线文本信息", en: "Strikethrough text" },
+            txt_bold:           { zh: "加粗文本信息",   en: "Bold text" },
+            txt_color:          { zh: "色彩文本信息",   en: "Colored text" },
+            txt_singleline:     { zh: "单行文本信息",   en: "Single-line text" },
+            txt_ellipsize:      { zh: "文本信息内容多，截断处理不展示全部内容", en: "Long text, truncated and not fully shown" },
+            txt_wrap:           { zh: "文本信息内容多，折行展示全部信息",       en: "Long text, wrapped to show all content" },
+            txt_scroll:         { zh: "这是一些文本信息，文本信息内容多，可滚动展示信息<br>第2行<br>第3行<br>第4行<br>第5行", en: "This is some text, long content, scrollable<br>Line 2<br>Line 3<br>Line 4<br>Line 5" },
+            txt_richtext:       { zh: '电量: 15%，动作: 降落', en: 'Battery: 15%, Action: Land' },
+            txt_state_normal:   { zh: "文本正常态", en: "Normal state" },
+            txt_state_disabled: { zh: "文本置灰态", en: "Disabled state" },
+            txt_size_l:         { zh: "大，字号12sp，字间距0.01 em，默认行高",   en: "Large, 12sp, letter-spacing 0.01em, default line height" },
+            txt_size_m:         { zh: "中，字号11sp，字间距0.03em，1倍行高+1dp", en: "Medium, 11sp, letter-spacing 0.03em, 1x line height +1dp" },
+            txt_size_s:         { zh: "小，字号9sp，字间距0.05 em，1.3倍行高",   en: "Small, 9sp, letter-spacing 0.05em, 1.3x line height" },
+            txt_color_sample:   { zh: "普通字体颜色", en: "Normal font color" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

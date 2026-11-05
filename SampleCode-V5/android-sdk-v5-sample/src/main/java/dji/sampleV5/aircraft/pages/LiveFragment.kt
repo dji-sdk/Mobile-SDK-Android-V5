@@ -10,6 +10,7 @@ import android.view.SurfaceView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.SeekBar
@@ -18,7 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.models.LiveStreamVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
@@ -380,6 +381,7 @@ class LiveFragment : DJIFragment() {
         val etRtspUsername = rtspConfigView.findViewById<EditText>(R.id.et_livestream_rtsp_username)
         val etRtspPassword = rtspConfigView.findViewById<EditText>(R.id.et_livestream_rtsp_password)
         val etRtspPort = rtspConfigView.findViewById<EditText>(R.id.et_livestream_rtsp_port)
+        val cbRtspMisb = rtspConfigView.findViewById<CheckBox>(R.id.cb_livestream_rtsp_misb)
         val rtspConfig = liveStreamVM.getRtspSettings()
         if (!TextUtils.isEmpty(rtspConfig) && rtspConfig.isNotEmpty()) {
             val configs = rtspConfig.trim().split("^_^")
@@ -411,6 +413,7 @@ class LiveFragment : DJIFragment() {
                         val inputUserName = etRtspUsername.text.toString()
                         val inputPassword = etRtspPassword.text.toString()
                         val inputPort = etRtspPort.text.toString()
+                        val inputMisbEnabled = cbRtspMisb.isChecked
                         if (TextUtils.isEmpty(inputUserName) || TextUtils.isEmpty(inputPassword) || TextUtils.isEmpty(
                                 inputPort
                             )
@@ -421,7 +424,8 @@ class LiveFragment : DJIFragment() {
                                 liveStreamVM.setRTSPConfig(
                                     inputUserName,
                                     inputPassword,
-                                    inputPort.toInt()
+                                    inputPort.toInt(),
+                                    inputMisbEnabled
                                 )
                                 startLive()
                             } catch (e: NumberFormatException) {

@@ -254,12 +254,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_start_fly_to_mission" />
 
             <Button
+                android:id="@+id/btn_update_fly_to_mission"
+                style="@style/main_fragment_btn"
+                android:text="update fly to "
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_stop_fly_to_mission" />
+
+            <Button
                 android:id="@+id/btn_set_fly_to_mode"
                 style="@style/main_fragment_btn"
                 android:text="set fly to mode"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_stop_fly_to_mission" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_fly_to_mission" />
 
             <Button
                 android:id="@+id/btn_set_fly_to_height"
@@ -358,9 +366,11 @@
         android:id="@+id/intelligent_flight_info_tv"
         android:layout_width="@dimen/uxsdk_500_dp"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toEndOf="@id/waypoint_add"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/red"
+        android:textStyle="bold"
         android:maxLines="30"
         android:scrollbars="vertical"
         android:textSize="10dp"

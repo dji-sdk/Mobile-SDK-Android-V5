@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:dop="https://dji.com/open-pilot"
+    dop:description="Open Pilot Plugin Sample"
+    dop:developer="DJI Inc."
+    dop:id="com.dji.open.pilot.plugin"
+    dop:name="Open Pilot Plugin Sample"
+    dop:version="1.0.0" />

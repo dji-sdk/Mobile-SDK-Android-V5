@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/task_item_selected_bg" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/brand_blue" />
+            <corners android:radius="@dimen/task_item_radius" />
+        </shape>
+    </item>
+    <item
+        android:width="@dimen/task_item_stripe_width"
+        android:gravity="start|center_vertical">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/brand_blue" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+</layer-list>

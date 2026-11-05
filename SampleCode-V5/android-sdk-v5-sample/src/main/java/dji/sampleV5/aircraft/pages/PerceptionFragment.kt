@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.fragment.app.viewModels
-import dji.sampleV5.aircraft.R
-import dji.sampleV5.aircraft.databinding.FragAppSilentlyUpgradePageBinding
 import dji.sampleV5.aircraft.databinding.FragPerceptionPageBinding
 import dji.sampleV5.aircraft.models.PerceptionVM
-import dji.sampleV5.aircraft.models.TAG
-import dji.sampleV5.aircraft.util.Helper
+import dji.v5.ux.util.Helper
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.perception.PerceptionManager
@@ -22,7 +19,7 @@ import dji.v5.manager.aircraft.perception.data.ObstacleData
 import dji.v5.manager.aircraft.perception.radar.RadarInformation
 import dji.v5.utils.common.LogPath
 import dji.v5.utils.common.LogUtils
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.ux.core.extension.hide
 import dji.v5.ux.core.extension.show
 
@@ -432,7 +429,7 @@ class PerceptionFragment : DJIFragment(), CompoundButton.OnCheckedChangeListener
                 ).append("\n")
                 append("ObstacleAvoidanceWarningDistance:").append(" upward:$upwardObstacleAvoidanceWarningDistance,down:$downwardObstacleAvoidanceWarningDistance,horizontal:$horizontalObstacleAvoidanceWarningDistance")
                     .append("\n")
-                append("isUpwardObstacleAvoidanceWorking:$isUpwardObstacleAvoidanceEnabled").append("\n")
+                append("isUpwardObstacleAvoidanceWorking:$upwardObstacleAvoidanceWorking").append("\n")
                 append("isLeftSideObstacleAvoidanceWorking:$leftSideObstacleAvoidanceWorking").append("\n")
                 append("isRightSideObstacleAvoidanceWorking:$rightSideObstacleAvoidanceWorking").append("\n")
                 append("isBackwardObstacleAvoidanceWorking:$backwardObstacleAvoidanceWorking").append("\n")

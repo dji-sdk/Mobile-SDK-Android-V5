@@ -8,7 +8,7 @@ import android.widget.CompoundButton
 import androidx.fragment.app.viewModels
 import dji.sampleV5.aircraft.databinding.FragUasFrancePageBinding
 import dji.sampleV5.aircraft.models.UASFranceVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.utils.common.JsonUtil

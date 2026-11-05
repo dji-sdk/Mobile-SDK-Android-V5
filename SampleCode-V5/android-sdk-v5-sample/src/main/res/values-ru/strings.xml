@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- remote view i18n sample -->
+    <string name="remote_sample_output_label">Вывод: </string>
+    <string name="remote_sample_btn_test">Тест кнопок: </string>
+    <string name="remote_sample_btn_1">Кнопка 1</string>
+    <string name="remote_sample_btn_2">Кнопка 2</string>
+    <string name="remote_sample_switch_test">Тест переключателя: </string>
+    <string name="remote_sample_switch_desc">Переключатель</string>
+    <string name="remote_sample_checkbox_test">Тест флажка: </string>
+    <string name="remote_sample_checkbox_option">Опция</string>
+    <string name="remote_sample_edit_text_label">Текст: </string>
+    <string name="remote_sample_change_image">Сменить изображение</string>
+    <string name="remote_sample_full_screen">На весь экран</string>
+    <string name="remote_sample_web_test">Тест WebView: </string>
+    <string name="remote_sample_load_web">Загрузить страницу</string>
+    <string name="remote_sample_spinner_test">Тест выпадающего списка: </string>
+    <string name="remote_sample_spinner_opt_1">Вариант 1</string>
+    <string name="remote_sample_spinner_opt_2">Вариант 2</string>
+    <string name="remote_sample_spinner_opt_3">Вариант 3</string>
+    <string name="remote_sample_list_test">Тест списка: </string>
+    <string name="remote_sample_list_insert">Вставить элемент</string>
+    <string name="remote_sample_list_remove">Удалить элемент</string>
+
+    <!-- remote view i18n sample - callback output -->
+    <string name="remote_sample_cb_btn1_clicked">Кнопка 1 нажата</string>
+    <string name="remote_sample_cb_btn2_clicked">Кнопка 2 нажата</string>
+    <string name="remote_sample_cb_switch">Переключатель: %1$s, тип: %2$s</string>
+    <string name="remote_sample_cb_checkbox">Флажок: %1$s, тип: %2$s</string>
+    <string name="remote_sample_cb_edit_text">Ввод: %s</string>
+    <string name="remote_sample_cb_web_load">Загрузка: %s</string>
+    <string name="remote_sample_cb_spinner">Выбрано: %1$s (индекс=%2$s)</string>
+    <string name="remote_sample_cb_image_clicked">Изображение нажато</string>
+    <string name="remote_sample_cb_list_click">Клик по списку: позиция=%1$s, ID=%2$s</string>
+    <string name="remote_sample_cb_list_inserted">Вставлен новый элемент #%s на позицию 0</string>
+    <string name="remote_sample_cb_list_removed">Элемент на позиции 0 удалён</string>
+
+    <!-- MSDKManagerVM -->
+    <string name="msdk_btn_jump_to_msdk">Перейти к плагину MSDK</string>
+
+    <!-- dialog i18n sample -->
+    <string name="dialog_sample_output_label">Результат обратного вызова: </string>
+    <string name="dialog_sample_output_placeholder">Здесь будет отображён результат</string>
+    <string name="dialog_sample_type_label">Тип диалога: </string>
+    <string name="dialog_sample_btn_alert">Уведомление</string>
+    <string name="dialog_sample_btn_confirm">Подтверждение</string>
+    <string name="dialog_sample_btn_prompt">Ввод</string>
+    <string name="dialog_sample_btn_single">Одиночный выбор</string>
+    <string name="dialog_sample_btn_multi">Множественный выбор</string>
+    <string name="dialog_alert_title">Уведомление Pilot</string>
+    <string name="dialog_alert_message">Это Matrice 4</string>
+    <string name="dialog_confirm_title">Подтверждение Pilot</string>
+    <string name="dialog_confirm_message">Это Matrice 4?</string>
+    <string name="dialog_confirm_btn_no">Нет</string>
+    <string name="dialog_confirm_btn_yes">Да</string>
+    <string name="dialog_prompt_title">Ввод Pilot</string>
+    <string name="dialog_prompt_message">Введите название устройства:</string>
+    <string name="dialog_single_title">Одиночный выбор Pilot</string>
+    <string name="dialog_single_message">Выберите ваш любимый продукт DJI:</string>
+    <string name="dialog_multi_title">Множественный выбор Pilot</string>
+    <string name="dialog_multi_message">Выберите продукты DJI, которыми вы пользовались:</string>
+    <string name="dialog_btn_cancel">Отмена</string>
+    <string name="dialog_btn_confirm">Подтвердить</string>
+    <string name="dialog_already_exists">Диалог уже существует, не добавляйте повторно</string>
+
+    <!-- remote sample list items -->
+    <string name="remote_sample_list_item_text">Текстовый элемент</string>
+    <string name="remote_sample_list_item_normal_icon">Обычная иконка</string>
+    <string name="remote_sample_list_item_clicked_icon">Иконка выбора</string>
+    <string name="remote_sample_list_item_m4e_title">Matrice 4E</string>
+    <string name="remote_sample_list_item_m4e_subtitle">Промышленный дрон</string>
+    <string name="remote_sample_list_item_m3m_title">Mavic 3M</string>
+    <string name="remote_sample_list_item_m3m_subtitle">Мультиспектральный дрон</string>
+    <string name="remote_sample_list_item_rc">Пульт управления</string>
+    <string name="remote_sample_list_item_divider">--- Разделитель ---</string>
+    <string name="remote_sample_list_item_care">DJI Care</string>
+    <string name="remote_sample_list_item_battery_title">Батарея</string>
+    <string name="remote_sample_list_item_battery_subtitle">86%</string>
+    <string name="remote_sample_list_new_item">Новый элемент #%s</string>
+    <string name="remote_sample_perf_test">Тест производительности</string>
+    <string name="remote_sample_perf_test_stop">Остановить тест</string>
+    <string name="remote_sample_perf_test_starting">Тест запускается...</string>
+    <string name="remote_sample_perf_test_running">Тестирование...\nКруг: %d\nВремя: %dms\nСред.: %sms/оп\nСкор.: %sMB/s</string>
+    <string name="remote_sample_perf_test_done">Тест завершён!\nВсего кругов: %d\nОбщее время: %dms\nВсего R/W: %dMB\nСкор.: %sMB/s</string>
+
+</resources>

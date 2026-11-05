@@ -147,11 +147,12 @@ class LiveStreamVM : DJIViewModel() {
         return DjiSharedPreferencesManager.getString(ContextUtil.getContext(), RTMP_KEY, "")
     }
 
-    fun setRTSPConfig(userName: String, password: String, port: Int) {
+    fun setRTSPConfig(userName: String, password: String, port: Int, misbEnabled: Boolean = false) {
         val rtspConfig = RtspSettings.Builder()
             .setUserName(userName)
             .setPassWord(password)
             .setPort(port)
+            .setMisbEnabled(misbEnabled)
             .build()
         val liveStreamConfig = LiveStreamSettings.Builder()
             .setLiveStreamType(LiveStreamType.RTSP)

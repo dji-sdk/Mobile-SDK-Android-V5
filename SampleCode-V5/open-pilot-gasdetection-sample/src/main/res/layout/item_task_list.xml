@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_task_item"
+    android:layout_marginBottom="@dimen/task_item_gap"
+    android:orientation="vertical"
+    android:padding="@dimen/task_item_padding"><!-- 任务列表项：标题 + 状态 + 目标点摘要；选中态由 selector 表达 -->
+
+    <TextView
+        android:id="@+id/tvItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/body_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvItemStatus"
+        style="@style/LabelText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_gap"
+        android:ellipsize="end"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/tvItemMeta"
+        style="@style/CaptionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_gap"
+        android:ellipsize="end"
+        android:singleLine="true" />
+</LinearLayout>

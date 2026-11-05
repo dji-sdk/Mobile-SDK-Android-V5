@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 插件页面全屏主题：带屏遥控器横屏承载，无标题栏、无系统栏遮挡 -->
+    <style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- 统一标题栏：48dp 高、白底，横屏页面的唯一标题区域 -->
+    <style name="TitleBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_bar_height</item>
+        <item name="android:background">@color/top_bar_bg</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/page_padding</item>
+        <item name="android:paddingEnd">@dimen/page_padding</item>
+    </style>
+
+    <!-- 入口页三段式标题栏：左返回 / 中标题 / 右状态徽章，对齐插件模板 TopBar -->
+    <style name="TitleBarFrame">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_bar_height</item>
+        <item name="android:background">@color/top_bar_bg</item>
+        <item name="android:paddingStart">@dimen/page_padding</item>
+        <item name="android:paddingEnd">@dimen/page_padding</item>
+    </style>
+
+    <style name="TitleText">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CardTitle">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/card_title_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BodyText">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/body_text_size</item>
+    </style>
+
+    <style name="LabelText">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/label_text_size</item>
+    </style>
+
+    <style name="CaptionText">
+        <item name="android:textColor">@color/hint_text</item>
+        <item name="android:textSize">@dimen/caption_text_size</item>
+    </style>
+
+    <!--
+        标题栏徽章容器：形态对齐 open-pilot-plugin-sample TopBar 徽章（圆点 + 11sp 加粗文字、
+        9dp×3dp 内边距、4dp 圆角）。三态无法用 state_selected 表达，背景与文字色由代码按状态选资源。
+    -->
+    <style name="TitleBadge">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/title_badge_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/title_badge_padding_horizontal</item>
+        <item name="android:paddingTop">@dimen/title_badge_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/title_badge_padding_vertical</item>
+    </style>
+
+    <!-- 徽章状态圆点：6dp 圆形，颜色由代码按状态 tint，与文字同色 -->
+    <style name="TitleBadgeDot">
+        <item name="android:layout_width">@dimen/title_badge_dot_size</item>
+        <item name="android:layout_height">@dimen/title_badge_dot_size</item>
+        <item name="android:background">@drawable/bg_status_dot</item>
+    </style>
+
+    <style name="TitleBadgeText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/label_gap</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- 公共操作按钮：36dp 高、11sp 加粗、6dp 圆角；关闭默认 tint 避免覆盖自定义背景 -->
+    <style name="KeyActionButton" parent="Widget.AppCompat.Button">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:backgroundTint">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingStart">@dimen/card_gap</item>
+        <item name="android:paddingEnd">@dimen/card_gap</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="KeyActionButton.Primary">
+        <item name="android:background">@drawable/bg_btn_primary</item>
+        <item name="android:textColor">@color/color_button_primary_text</item>
+    </style>
+
+    <style name="KeyActionButton.Secondary">
+        <item name="android:background">@drawable/bg_btn_secondary</item>
+        <item name="android:textColor">@color/color_button_secondary_text</item>
+    </style>
+
+    <!-- 危险操作：沿用次按钮形态，用公共错误色表达不可逆语义 -->
+    <style name="KeyActionButton.Danger">
+        <item name="android:background">@drawable/bg_btn_secondary</item>
+        <item name="android:textColor">@color/status_error</item>
+    </style>
+
+    <!-- 标题栏返回按钮：32dp 高，低于正文主按钮，避免与业务操作抢视觉 -->
+    <style name="TitleBarBackButton" parent="KeyActionButton.Secondary">
+        <item name="android:layout_height">32dp</item>
+        <item name="android:minHeight">32dp</item>
+        <item name="android:paddingStart">@dimen/badge_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/badge_padding_horizontal</item>
+    </style>
+
+    <!-- 公共输入 / 选择器：白底、1dp 描边、4dp 圆角 -->
+    <style name="InputBox">
+        <item name="android:layout_height">@dimen/input_min_height</item>
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:paddingStart">@dimen/card_gap</item>
+        <item name="android:paddingEnd">@dimen/card_gap</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textSize">@dimen/body_text_size</item>
+    </style>
+
+    <style name="LogPanel">
+        <item name="android:background">@drawable/bg_log_panel</item>
+        <item name="android:padding">@dimen/log_padding</item>
+        <item name="android:fillViewport">true</item>
+    </style>
+
+</resources>

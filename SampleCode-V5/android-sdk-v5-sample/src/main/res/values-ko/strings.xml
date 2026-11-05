@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- remote view i18n sample -->
+    <string name="remote_sample_output_label">출력: </string>
+    <string name="remote_sample_btn_test">버튼 테스트: </string>
+    <string name="remote_sample_btn_1">버튼 1</string>
+    <string name="remote_sample_btn_2">버튼 2</string>
+    <string name="remote_sample_switch_test">스위치 테스트: </string>
+    <string name="remote_sample_switch_desc">스위치</string>
+    <string name="remote_sample_checkbox_test">체크박스 테스트: </string>
+    <string name="remote_sample_checkbox_option">옵션</string>
+    <string name="remote_sample_edit_text_label">텍스트 입력: </string>
+    <string name="remote_sample_change_image">이미지 변경</string>
+    <string name="remote_sample_full_screen">전체 화면 전환</string>
+    <string name="remote_sample_web_test">WebView 테스트: </string>
+    <string name="remote_sample_load_web">웹 로드</string>
+    <string name="remote_sample_spinner_test">스피너 테스트: </string>
+    <string name="remote_sample_spinner_opt_1">옵션 1</string>
+    <string name="remote_sample_spinner_opt_2">옵션 2</string>
+    <string name="remote_sample_spinner_opt_3">옵션 3</string>
+    <string name="remote_sample_list_test">목록 테스트: </string>
+    <string name="remote_sample_list_insert">항목 삽입</string>
+    <string name="remote_sample_list_remove">항목 삭제</string>
+
+    <!-- remote view i18n sample - callback output -->
+    <string name="remote_sample_cb_btn1_clicked">버튼 1이 클릭되었습니다</string>
+    <string name="remote_sample_cb_btn2_clicked">버튼 2가 클릭되었습니다</string>
+    <string name="remote_sample_cb_switch">스위치: %1$s, 유형: %2$s</string>
+    <string name="remote_sample_cb_checkbox">체크박스: %1$s, 유형: %2$s</string>
+    <string name="remote_sample_cb_edit_text">입력 내용: %s</string>
+    <string name="remote_sample_cb_web_load">로드 중: %s</string>
+    <string name="remote_sample_cb_spinner">선택됨: %1$s (인덱스=%2$s)</string>
+    <string name="remote_sample_cb_image_clicked">이미지가 클릭되었습니다</string>
+    <string name="remote_sample_cb_list_click">목록 클릭: 위치=%1$s, ID=%2$s</string>
+    <string name="remote_sample_cb_list_inserted">새 항목 #%s을 위치 0에 삽입했습니다</string>
+    <string name="remote_sample_cb_list_removed">위치 0의 항목을 삭제했습니다</string>
+
+    <!-- MSDKManagerVM -->
+    <string name="msdk_btn_jump_to_msdk">MSDK 플러그인으로 이동</string>
+
+    <!-- dialog i18n sample -->
+    <string name="dialog_sample_output_label">콜백 결과: </string>
+    <string name="dialog_sample_output_placeholder">여기에 결과가 표시됩니다</string>
+    <string name="dialog_sample_type_label">다이얼로그 유형: </string>
+    <string name="dialog_sample_btn_alert">알림</string>
+    <string name="dialog_sample_btn_confirm">확인</string>
+    <string name="dialog_sample_btn_prompt">입력</string>
+    <string name="dialog_sample_btn_single">단일 선택</string>
+    <string name="dialog_sample_btn_multi">다중 선택</string>
+    <string name="dialog_alert_title">Pilot 알림</string>
+    <string name="dialog_alert_message">이것은 Matrice 4입니다</string>
+    <string name="dialog_confirm_title">Pilot 확인</string>
+    <string name="dialog_confirm_message">이것이 Matrice 4입니까?</string>
+    <string name="dialog_confirm_btn_no">아니오</string>
+    <string name="dialog_confirm_btn_yes">예</string>
+    <string name="dialog_prompt_title">Pilot 입력</string>
+    <string name="dialog_prompt_message">장치 이름을 입력하세요:</string>
+    <string name="dialog_single_title">Pilot 단일 선택</string>
+    <string name="dialog_single_message">좋아하는 DJI 제품을 선택하세요:</string>
+    <string name="dialog_multi_title">Pilot 다중 선택</string>
+    <string name="dialog_multi_message">사용해 본 DJI 제품을 선택하세요:</string>
+    <string name="dialog_btn_cancel">취소</string>
+    <string name="dialog_btn_confirm">확인</string>
+    <string name="dialog_already_exists">다이얼로그가 이미 존재합니다. 중복 추가하지 마세요</string>
+
+    <!-- remote sample list items -->
+    <string name="remote_sample_list_item_text">텍스트 항목</string>
+    <string name="remote_sample_list_item_normal_icon">일반 아이콘</string>
+    <string name="remote_sample_list_item_clicked_icon">선택 아이콘</string>
+    <string name="remote_sample_list_item_m4e_title">Matrice 4E</string>
+    <string name="remote_sample_list_item_m4e_subtitle">산업용 드론</string>
+    <string name="remote_sample_list_item_m3m_title">Mavic 3M</string>
+    <string name="remote_sample_list_item_m3m_subtitle">멀티스펙트럴 드론</string>
+    <string name="remote_sample_list_item_rc">리모트 컨트롤러</string>
+    <string name="remote_sample_list_item_divider">--- 구분선 ---</string>
+    <string name="remote_sample_list_item_care">DJI Care</string>
+    <string name="remote_sample_list_item_battery_title">배터리</string>
+    <string name="remote_sample_list_item_battery_subtitle">86%</string>
+    <string name="remote_sample_list_new_item">새 항목 #%s</string>
+    <string name="remote_sample_perf_test">성능 테스트</string>
+    <string name="remote_sample_perf_test_stop">테스트 중지</string>
+    <string name="remote_sample_perf_test_starting">테스트 시작 중...</string>
+    <string name="remote_sample_perf_test_running">테스트 중...\n라운드: %d\n경과: %dms\n평균: %sms/회\n속도: %sMB/s</string>
+    <string name="remote_sample_perf_test_done">테스트 완료!\n총 라운드: %d\n총 시간: %dms\n총 읽기/쓰기: %dMB\n속도: %sMB/s</string>
+
+</resources>

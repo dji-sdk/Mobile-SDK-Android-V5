@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    面 A（插件自身 Activity / Fragment 原生页面）公共尺寸档位。
+    本次巡逻主页改造引入，档位对齐 open-pilot-app-ui-spec §5.2（卡片内边距 16dp / 卡片间距 12dp /
+    字段间距 8dp / 标签与说明间距 4dp）与浮窗任务链的节点视觉档位（圆点 8dp、连接线 2dp）。
+    业务布局不散落 dp 字面量。
+-->
+<resources>
+    <!-- 任务详情区：面板内边距与三类间距。 -->
+    <dimen name="detail_card_padding">16dp</dimen>
+    <dimen name="detail_block_gap">12dp</dimen>
+    <dimen name="detail_field_gap">8dp</dimen>
+    <dimen name="detail_label_gap">4dp</dimen>
+
+    <!-- 航线状态时间线：节点圆点、连接线与节点间距。 -->
+    <dimen name="timeline_dot">8dp</dimen>
+    <dimen name="timeline_rail_width">2dp</dimen>
+    <dimen name="timeline_gutter">12dp</dimen>
+    <dimen name="timeline_dot_top_margin">2dp</dimen>
+    <dimen name="timeline_rail_top_margin">6dp</dimen>
+    <dimen name="timeline_node_gap">12dp</dimen>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorPrimaryVariant">@color/md_theme_primary_variant</item>
+        <item name="colorOnPrimary">@color/md_theme_on_primary</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_on_secondary</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_on_background</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_on_surface</item>
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_on_error</item>
+
+        <item name="android:statusBarColor" tools:targetApi="l">@color/md_theme_background</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">@color/md_theme_background</item>
+    </style>
+
+    <style name="AppTheme.FullScreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+<style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+<style name="PatrolSecondaryButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_patrol_secondary_button</item>
+        <!-- 采用自定义背景 selector，必须清掉 MaterialButton 默认 backgroundTint（主题 colorPrimary=#3CB371），
+             否则白底会被染成绿色；对齐 open-pilot-app-ui-spec §5.1「自定义背景时清除默认 tint」。 -->
+        <item name="backgroundTint">@null</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <!-- 主题为 MaterialComponents，布局里的 <Button> 会被 MaterialButton 接管；其默认样式带有
+             纵向 padding(4dp) 与 inset(6dp)，会挤压固定 32dp 高的按钮，导致「返回 Pilot」文字上下被裁切。
+             这里把纵向内边距与 inset 归零并强制单行居中，保证文字在 32dp 高内完整显示。 -->
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/secondary_button_text</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <!--
+        任务详情区（面 A）排版三级档位：区块标题 / 字段标签 / 字段取值。
+        字号与字重对齐 open-pilot-app-ui-spec §4（卡片标题 14sp Bold、正文 14sp、字段标签 12sp）；
+        颜色引用公共语义色，不在布局中散落 hex。
+    -->
+    <style name="DetailBlockTitle">
+        <item name="android:textColor">@color/detail_value_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DetailFieldLabel">
+        <item name="android:textColor">@color/detail_label_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="DetailFieldValue">
+        <item name="android:textColor">@color/detail_value_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+</resources>

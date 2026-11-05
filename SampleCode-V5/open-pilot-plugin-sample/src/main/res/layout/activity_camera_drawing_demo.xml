@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <!-- TopBar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/top_bar_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp">
+
+        <ImageView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:src="@drawable/icon_back"
+            android:textColor="@color/card_desc_text"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/module_camera_drawing"
+            android:textColor="@color/top_bar_title"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="1dp" />
+    </LinearLayout>
+
+    <!-- TopBar 分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/top_bar_divider" />
+
+    <!-- 左右分栏主体 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- 左侧：菜单列表 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_menu"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_rv_menu_card"
+            android:clipToOutline="true"
+            android:layout_margin="4dp"
+            android:clipToPadding="false"
+            android:paddingVertical="4dp" />
+
+        <!-- 右侧：详情区 -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/page_bg">
+
+            <!-- 默认提示 -->
+            <TextView
+                android:id="@+id/tv_empty_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/cvd_hint_select"
+                android:textColor="@color/hint_text"
+                android:textSize="13sp"
+                android:visibility="visible" />
+
+            <!-- 选中后内容区 -->
+            <LinearLayout
+                android:id="@+id/layout_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <!-- 预览图片区 -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="4dp">
+
+                    <ImageView
+                        android:id="@+id/iv_preview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter" />
+                </FrameLayout>
+
+                <!-- 查看效果按钮 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_rv_menu_card"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/uxsdk_4_dp"
+                    android:paddingHorizontal="@dimen/uxsdk_8_dp"
+                    android:paddingVertical="@dimen/uxsdk_4_dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_reference_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/uxsdk_4_dp"
+                        android:paddingBottom="@dimen/uxsdk_4_dp"
+                        android:textColor="@color/uxsdk_black_90_percent"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/btn_view_effect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_view_effect_btn"
+                        android:paddingVertical="8dp"
+                        android:text="@string/btn_view_effect"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

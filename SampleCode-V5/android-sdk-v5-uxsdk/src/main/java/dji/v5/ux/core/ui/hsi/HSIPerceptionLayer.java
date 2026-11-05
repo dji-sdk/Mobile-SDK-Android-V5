@@ -722,7 +722,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                 if (minDistanceInMeter > mHorizontalPerceptionDistance) {
                     areaColor = levelColor[0];//
                 } else if (minDistanceInMeter > mHorizontalBarrierAvoidanceDistance + 2) {
-                    // feature HYAPP-10551 避障变红由【刹停距离】改为【刹停距离+2m】
+                    // 避障变红由【刹停距离】改为【刹停距离+2m】
                     areaColor = levelColor[1];
                 } else {
                     areaColor = levelColor[2];
@@ -813,7 +813,7 @@ public class HSIPerceptionLayer implements HSIContract.HSILayer {
                 if (minDistanceInMeter > mHorizontalPerceptionDistance) {
                     areaColor = levelColor[0];//
                 } else if (minDistanceInMeter > mHorizontalBarrierAvoidanceDistance + 2) {
-                    // feature HYAPP-10551 避障变红由【刹停距离】改为【刹停距离+2m】
+                    // 避障变红由【刹停距离】改为【刹停距离+2m】
                     areaColor = levelColor[1];
                 } else {
                     areaColor = levelColor[2];

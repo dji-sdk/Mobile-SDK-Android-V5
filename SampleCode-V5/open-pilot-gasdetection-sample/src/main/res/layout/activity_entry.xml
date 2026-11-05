@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg"
+    android:orientation="vertical">
+
+    <!-- 标题栏：左返回 Pilot / 中插件标题 / 右两个状态徽章（Pilot 连接 + 服务连接，对齐 patrol 形态） -->
+    <FrameLayout style="@style/DemoTopBar">
+
+        <Button
+            android:id="@+id/btnBackToPilot"
+            style="@style/DemoTopBarBackButton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:text="@string/entry_back_to_pilot" />
+
+        <TextView
+            style="@style/DemoTopBarTitle"
+            android:text="@string/dji_open_pilot_plugin_name" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Pilot 连接徽章：圆点 + 文案，形态对齐 open-pilot-plugin-sample TopBar -->
+            <LinearLayout
+                android:id="@+id/pillPilot"
+                style="@style/DemoTopBarBadge"
+                android:background="@drawable/bg_title_badge_bad">
+
+                <View
+                    android:id="@+id/dotPilot"
+                    style="@style/DemoTopBarBadgeDot"
+                    android:backgroundTint="@color/demo_top_bar_error" />
+
+                <TextView
+                    android:id="@+id/tvPilotState"
+                    style="@style/DemoTopBarBadgeText"
+                    android:text="@string/entry_pilot_disconnected"
+                    android:textColor="@color/demo_top_bar_error" />
+            </LinearLayout>
+
+            <!-- 服务连接徽章：三态（检测中 / 已连接 / 不可用）由演示后端健康探测驱动 -->
+            <LinearLayout
+                android:id="@+id/pillService"
+                style="@style/DemoTopBarBadge"
+                android:layout_marginStart="@dimen/demo_top_bar_badge_gap"
+                android:background="@drawable/bg_title_badge_checking">
+
+                <View
+                    android:id="@+id/dotService"
+                    style="@style/DemoTopBarBadgeDot" />
+
+                <TextView
+                    android:id="@+id/tvServiceState"
+                    style="@style/DemoTopBarBadgeText"
+                    android:text="@string/entry_service_checking" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/demo_top_bar_divider" />
+
+    <!-- 内容区：任务 / 设备 / 传输三个容器，由底部 Tab 切换可见性 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- 任务页：左侧任务列表 + 右侧选中任务详情（结构参考 patrol fragment_tasks） -->
+        <LinearLayout
+            android:id="@+id/llTasksPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="@dimen/task_list_width"
+                android:layout_height="match_parent"
+                android:background="@color/list_panel_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/task_list_padding">
+
+                <TextView
+                    style="@style/CardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gas_task_title" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/field_gap"
+                    android:layout_weight="1">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/llTaskList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
+                    </ScrollView>
+
+                    <TextView
+                        android:id="@+id/tvTaskListEmpty"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/gas_task_list_empty"
+                        android:visibility="gone" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/divider_height"
+                android:layout_height="match_parent"
+                android:background="@color/top_bar_divider" />
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/page_padding">
+
+                    <!-- 未选中任务时只显示空态，详情容器整体隐藏 -->
+                    <TextView
+                        android:id="@+id/tvTaskEmpty"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gas_task_detail_empty"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/llTaskDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvTaskTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="@dimen/detail_title_text_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvTaskStage"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/label_gap" />
+
+                        <TextView
+                            android:id="@+id/tvTaskError"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/label_gap"
+                            android:textColor="@color/status_error" />
+
+                        <!-- 任务信息 -->
+                        <TextView
+                            style="@style/CardTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/card_gap"
+                            android:text="@string/gas_block_task_info" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/field_gap"
+                            android:background="@drawable/bg_card"
+                            android:orientation="vertical"
+                            android:padding="@dimen/card_padding">
+
+                            <TextView
+                                android:id="@+id/tvTaskTarget"
+                                style="@style/BodyText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/tvTaskBoundary"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/label_gap" />
+
+                            <TextView
+                                android:id="@+id/tvTaskRequirements"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/label_gap" />
+
+                            <TextView
+                                android:id="@+id/tvTaskChannels"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap" />
+
+                            <TextView
+                                android:id="@+id/tvTaskPreflight"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/card_gap"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/btnTaskAccept"
+                                    style="@style/KeyActionButton.Primary"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_task_accept" />
+
+                                <Button
+                                    android:id="@+id/btnTaskReject"
+                                    style="@style/KeyActionButton.Secondary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_task_reject" />
+
+                                <Button
+                                    android:id="@+id/btnTaskRecheck"
+                                    style="@style/KeyActionButton.Secondary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_task_recheck" />
+
+                                <Button
+                                    android:id="@+id/btnTaskManual"
+                                    style="@style/KeyActionButton.Secondary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_task_manual" />
+
+                                <Button
+                                    android:id="@+id/btnTaskFinish"
+                                    style="@style/KeyActionButton.Secondary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_task_finish" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- 自动飞行 -->
+                        <TextView
+                            style="@style/CardTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/card_gap"
+                            android:text="@string/gas_block_auto" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/field_gap"
+                            android:background="@drawable/bg_card"
+                            android:orientation="vertical"
+                            android:padding="@dimen/card_padding">
+
+                            <TextView
+                                android:id="@+id/tvTaskAuto"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:id="@+id/llAutoActions"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <Button
+                                    android:id="@+id/btnAutoStart"
+                                    style="@style/KeyActionButton.Primary"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_auto_start" />
+
+                                <Button
+                                    android:id="@+id/btnAutoExit"
+                                    style="@style/KeyActionButton.Secondary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_auto_exit" />
+
+                                <Button
+                                    android:id="@+id/btnAutoStop"
+                                    style="@style/KeyActionButton.Danger"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_auto_emergency_stop" />
+
+                                <Button
+                                    android:id="@+id/btnAutoConfirm"
+                                    style="@style/KeyActionButton.Primary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_auto_confirm_handover" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvTaskVessel"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:id="@+id/llVesselActions"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <Button
+                                    android:id="@+id/btnVesselSearch"
+                                    style="@style/KeyActionButton.Primary"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_vessel_search_start" />
+
+                                <Button
+                                    android:id="@+id/btnVesselRetry"
+                                    style="@style/KeyActionButton.Secondary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_vessel_retry" />
+
+                                <Button
+                                    android:id="@+id/btnVesselConfirm"
+                                    style="@style/KeyActionButton.Secondary"
+                                    android:layout_width="0dp"
+                                    android:layout_marginStart="@dimen/field_gap"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_vessel_confirm" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvTaskFollow"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap"
+                                android:visibility="gone" />
+
+                            <Button
+                                android:id="@+id/btnFollowStart"
+                                style="@style/KeyActionButton.Primary"
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="@dimen/field_gap"
+                                android:text="@string/gas_follow_start"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                        <!-- 通道读数 -->
+                        <TextView
+                            style="@style/CardTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/card_gap"
+                            android:text="@string/gas_section_channels" />
+
+                        <TextView
+                            android:id="@+id/tvChannelsEmpty"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/field_gap"
+                            android:text="@string/gas_channel_empty" />
+
+                        <LinearLayout
+                            android:id="@+id/llChannels"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/field_gap"
+                            android:orientation="vertical" />
+
+                        <!-- 采样批次 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/card_gap"
+                            android:background="@drawable/bg_card"
+                            android:orientation="vertical"
+                            android:padding="@dimen/card_padding">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    style="@style/CardTitle"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/gas_section_batch" />
+
+                                <TextView
+                                    android:id="@+id/tvBatchState"
+                                    style="@style/LabelText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvBatchSession"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/label_gap" />
+
+                            <TextView
+                                android:id="@+id/tvBatchCounts"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/label_gap" />
+
+                            <TextView
+                                android:id="@+id/tvBatchUpdated"
+                                style="@style/CaptionText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/label_gap" />
+                        </LinearLayout>
+
+                        <!-- 异常告警 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/card_gap"
+                            android:background="@drawable/bg_card"
+                            android:orientation="vertical"
+                            android:padding="@dimen/card_padding">
+
+                            <TextView
+                                android:id="@+id/tvAlertCount"
+                                style="@style/CardTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/gas_alert_section" />
+
+                            <TextView
+                                android:id="@+id/tvAlertsEmpty"
+                                style="@style/LabelText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap"
+                                android:text="@string/gas_alert_empty" />
+
+                            <LinearLayout
+                                android:id="@+id/llAlerts"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/field_gap"
+                                android:orientation="vertical" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- 设备页：载荷与链路诊断 -->
+        <ScrollView
+            android:id="@+id/svDevice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/page_padding">
+
+                <!--
+                    接入摘要（合并原「载荷」+「链路」）：结论先行，同一条事实只出现一次。
+                    逐端口明细交给下方端口卡，不再在此重复列端口名 / 产品 / 连接状态。
+                -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_card"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <TextView
+                        android:id="@+id/tvLinkState"
+                        style="@style/CardTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tvLinkCounts"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/label_gap" />
+
+                    <TextView
+                        android:id="@+id/tvDeviceLatest"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/label_gap"
+                        android:text="@string/gas_freshness_none" />
+
+                    <TextView
+                        android:id="@+id/tvLinkHint"
+                        style="@style/CaptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/label_gap"
+                        android:text="@string/gas_link_hint" />
+                </LinearLayout>
+
+                <!-- 端口与解析诊断 -->
+                <TextView
+                    style="@style/CardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/card_gap"
+                    android:text="@string/gas_section_ports" />
+
+                <TextView
+                    android:id="@+id/tvPortsEmpty"
+                    style="@style/LabelText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/field_gap"
+                    android:text="@string/gas_port_empty" />
+
+                <LinearLayout
+                    android:id="@+id/llPorts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/field_gap"
+                    android:orientation="vertical" />
+
+                <!-- 高级诊断：时效明细 + 通道映射，默认收起，点击整行展开 -->
+                <LinearLayout
+                    android:id="@+id/llAdvancedHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/card_gap"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/row_touch_min_height"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/CardTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/gas_device_advanced" />
+
+                    <TextView
+                        android:id="@+id/tvAdvancedState"
+                        style="@style/LabelText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gas_device_expand"
+                        android:textColor="@color/brand_blue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAdvanced"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <!-- 数据时效 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/field_gap"
+                        android:background="@drawable/bg_card"
+                        android:orientation="vertical"
+                        android:padding="@dimen/card_padding">
+
+                        <TextView
+                            style="@style/CardTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gas_section_freshness" />
+
+                        <TextView
+                            android:id="@+id/tvFreshnessSource"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/label_gap" />
+
+                        <TextView
+                            android:id="@+id/tvFreshnessReceived"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tvFreshnessDelta"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tvFreshnessThreshold"
+                            style="@style/CaptionText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/label_gap" />
+                    </LinearLayout>
+
+                    <!-- 通道目录映射 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_gap"
+                        android:background="@drawable/bg_card"
+                        android:orientation="vertical"
+                        android:padding="@dimen/card_padding">
+
+                        <TextView
+                            style="@style/CardTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gas_section_catalog" />
+
+                        <TextView
+                            android:id="@+id/tvCatalogVersion"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/label_gap" />
+
+                        <TextView
+                            android:id="@+id/tvCatalogUnavailable"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/status_error"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/tvCatalogEmpty"
+                            style="@style/LabelText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gas_catalog_empty" />
+
+                        <LinearLayout
+                            android:id="@+id/llCatalog"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/label_gap"
+                            android:orientation="vertical" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 操作行：导出为主、调试降为文字操作，不再各占一整行 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/card_gap"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnExportDiagnostics"
+                        style="@style/KeyActionButton.Primary"
+                        android:layout_width="wrap_content"
+                        android:text="@string/gas_export_diagnostics" />
+
+                    <TextView
+                        android:id="@+id/btnOpenDebug"
+                        style="@style/LabelText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/card_gap"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:minHeight="@dimen/row_touch_min_height"
+                        android:text="@string/entry_open_debug"
+                        android:textColor="@color/brand_blue" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvVersion"
+                    style="@style/CaptionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/card_gap" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- 传输页：检测记录双栏（左列表 + 右详情） -->
+        <LinearLayout
+            android:id="@+id/llTransferPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/page_padding"
+            android:visibility="gone">
+
+            <!-- 左栏：检测记录列表 -->
+            <LinearLayout
+                android:layout_width="@dimen/task_list_width"
+                android:layout_height="match_parent"
+                android:background="@color/list_panel_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/task_list_padding">
+
+                <TextView
+                    style="@style/CardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gas_record_section" />
+
+                <TextView
+                    android:id="@+id/tvRecordListEmpty"
+                    style="@style/LabelText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/field_gap"
+                    android:text="@string/gas_record_empty" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/field_gap"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:id="@+id/llRecordList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                </ScrollView>
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/divider_height"
+                android:layout_height="match_parent"
+                android:background="@color/top_bar_divider" />
+
+            <!-- 右栏：选中记录详情 -->
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_padding">
+
+                    <TextView
+                        android:id="@+id/tvRecordDetailEmpty"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gas_record_empty_detail"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvRecordTitle"
+                        style="@style/BodyText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvRecordMeta"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/label_gap" />
+
+                    <TextView
+                        android:id="@+id/tvRecordStatus"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/label_gap" />
+
+                    <TextView
+                        android:id="@+id/tvRecordChannels"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/field_gap" />
+
+                    <TextView
+                        android:id="@+id/tvRecordError"
+                        style="@style/LabelText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/field_gap"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvRecordUploadedAt"
+                        style="@style/CaptionText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/label_gap"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/btnRecordRetry"
+                        style="@style/KeyActionButton.Secondary"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/field_gap"
+                        android:text="@string/gas_record_retry"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/top_bar_divider" />
+
+    <!-- 底部 Tab：任务 / 设备 / 传输，选中态由文字颜色与指示条共同表达 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_bar_height"
+        android:background="@color/top_bar_bg"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/tabTasks"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTabTasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_tab_text"
+                android:text="@string/gas_tab_tasks"
+                android:textSize="@dimen/body_text_size" />
+
+            <View
+                android:id="@+id/indicatorTasks"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tab_indicator_height"
+                android:layout_marginStart="@dimen/page_padding"
+                android:layout_marginTop="@dimen/label_gap"
+                android:layout_marginEnd="@dimen/page_padding"
+                android:background="@color/brand_blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tabDevice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTabDevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_tab_text"
+                android:text="@string/gas_tab_device"
+                android:textSize="@dimen/body_text_size" />
+
+            <View
+                android:id="@+id/indicatorDevice"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tab_indicator_height"
+                android:layout_marginStart="@dimen/page_padding"
+                android:layout_marginTop="@dimen/label_gap"
+                android:layout_marginEnd="@dimen/page_padding"
+                android:background="@color/brand_blue"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tabTransport"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTabTransport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_tab_text"
+                android:text="@string/gas_tab_transport"
+                android:textSize="@dimen/body_text_size" />
+
+            <View
+                android:id="@+id/indicatorTransport"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tab_indicator_height"
+                android:layout_marginStart="@dimen/page_padding"
+                android:layout_marginTop="@dimen/label_gap"
+                android:layout_marginEnd="@dimen/page_padding"
+                android:background="@color/brand_blue"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

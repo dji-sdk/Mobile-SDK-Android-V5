@@ -1,0 +1,1158 @@
+<script>window.pathPrefix="../../";</script><!DOCTYPE html>
+<html lang="en" style="padding-bottom:0px" class="local"></html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link href="../../images/favicon.png" rel="shortcut icon" type="image/png">
+  <title>DJI Mobile SDK Documentation
+  </title>
+<link rel="stylesheet" href="../../stylesheets/doc-vendor.css">
+
+<link rel="stylesheet" href="../../stylesheets/doc-app.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+<body>
+  <nav id="site-header" class="site-header navbar">
+    <div class="container">
+      <div class="navbar-header"><a href="/" class="logo"><img src="../../images/dji-logo@2x.png">Android SDK API Reference</a></div>
+    </div>
+  </nav>
+  <div id="documentation-page" class="documentation-page">
+    <div class="container">
+      <div class="site-sidebar">
+        <div class="searcher">
+          <div id="panel" class="panel panel_tree">
+            <div class="header">
+              <div class="search-con">
+                <label id="search-label" for="search">
+                </label>
+                <input id="search" type="text" placeholder="Search" autosave="searchdoc" results="10" autocomplete="off">
+                <div class="search-icon"></div><a class="clean-search glyphicon glyphicon-remove-circle"></a>
+              </div>
+            </div>
+            <div class="tree">
+              <ul></ul>
+            </div>
+            <div class="result">
+              <ul></ul>
+            </div>
+          </div>
+        </div>
+        <div class="nav scrollable js-tree-menu">
+          <dl class="sidebar-group sidebar-group--common">
+            <dt>Common APIs
+            </dt>
+                  <dd><a data-href="../SDKManager/DJISDKManager.html" class="sub-toggle">ISDKManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../SDKManager/ISDKManager_SDKManagerCallback.html">SDKManagerCallback</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_InitSettings.html">InitSettings</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_PluginAPPConfig.html">PluginAPPConfig</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_APPVersion.html">APPVersion</a>
+                            </dd>
+                            <dd><a href="../SDKManager/ISDKManager_OpenLocation.html">OpenLocation</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IKeyManager/IKeyManager.html" class="sub-toggle">IKeyManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IKeyManager/KeyTools.html" class="sub-toggle">KeyTools<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IKeyManager/DJIKeyInfo.html">DJIKeyInfo&lt;T&gt;</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IKeyManager/IKeyManager_KeyListener.html">KeyListener&lt;T&gt;</a>
+                            </dd>
+                            <dd><a data-href="../IKeyManager/DJIKey.html" class="sub-toggle">DJIKey&lt;T&gt;<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IKeyManager/Key_Product_ProductKey.html">ProductKey</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Key_Airlink_AirlinkKey.html">AirLinkKey</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Key_Camera_CameraKey.html">CameraKey</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Key_Gimbal_GimbalKey.html">GimbalKey</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Key_FlightController_FlightControllerKey.html">FlightControllerKey</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Key_RemoteController_RemoteControllerKey.html">RemoteControllerKey</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Key_Battery_BatteryKey.html">BatteryKey</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IKeyManager/DJIValue.html" class="sub-toggle">DJIValue<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IKeyManager/Value_FlightController_LightGimbalTotalAdjustInfo.html">LightGimbalTotalAdjustInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Gimbal_Struct_GimbalCalibrationState.html">GimbalCalibrationStatusInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Gimbal_Struct_GimbalAttitudeRange.html">GimbalAttitudeRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_LightGimbalAdjustInfo.html">LightGimbalAdjustInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Gimbal_Struct_GimbalAngleRotation.html">GimbalAngleRotation</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Gimbal_Struct_GimbalSpeedRotation.html">GimbalSpeedRotation</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_DateTime.html">DateTime</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraHybridZoomSpec.html">CameraHybridZoomSpec</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_VideoResolutionFrameRate.html">VideoResolutionFrameRate</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKZoomRatiosRange.html">ZoomRatiosRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_VideoPreRecordDurationMsg.html">VideoPreRecordDurationInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_VideoRecordPlanMsg.html">VideoRecordPlanInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_LaserMeasureInformationMsg.html">LaserMeasureInformation</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MultiSpectralFusionDisplayRangeMsg.html">MultiSpectralFusionDisplayRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_IsRecordingInfoMsg.html">VideoRecordingStatus</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_MSDKCameraStreamSettings.html">CameraStreamSettingsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWhiteBalance.html">CameraWhiteBalanceInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraWatermarkSettings.html">CameraWatermarkSettings</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CustomExpandNameSettings.html">CustomExpandNameSettings</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_WatermarkDisplayContentSettings.html">WatermarkDisplayContentSettings</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_ZoomPointTargetMsg.html">ZoomTargetPointInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_ThermalGainModeTemperatureRangeMsg.html">ThermalGainModeTemperatureRange</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_GeneratedMediaFileInfo.html">GeneratedMediaFileInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraStorageInfos.html">CameraStorageInfos</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_PhotoIntervalShootSettings.html">PhotoIntervalShootSettings</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_CameraStorageInfo.html">CameraStorageInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_SuperResolutionStateMsg.html">SuperResolutionInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Camera_Struct_ThermalAreaTemperatureAggregationsMsg.html">ThermalAreaMetersureTemperature</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_DoubleRect.html">DoubleRect</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_Date.html">Date</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_Velocity3D.html">Velocity3D</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_IntValueConfig.html">IntValueConfig</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_RectF.html">DoubleRect4Sides</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_Attitude.html">Attitude</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_DoubleMinMax.html">DoubleMinMax</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_LocationCoordinate3D.html">LocationCoordinate3D</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_RCAuthorityModeMsg.html">MultiControlAuthorityTypeInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_DoublePoint2D.html">DoublePoint2D</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_RCAuthorityLockControlMsg.html">MultiControlLockAuthorityInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Common_Struct_LocationCoordinate2D.html">LocationCoordinate2D</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcParamChargeRemainingInfo.html">BatteryInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcMultiStatusMsg.html">MultiControlStatusInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_RCAuthorityLostPushMsg.html">MultiControlLostControlInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFirmwareInfo.html">RcFirmwareInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_MultiRCFlightControlAuthOwnerMsg.html">MultiControlFlightControlAuthorityOwnerInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_RCModeChannelTypeMsg.html">MultiControlChannelInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_RemoteController_Struct_RcFiveDimensionPressedStatus.html">FiveDimensionPressedStatus</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_LookAtInfo.html">LookAtInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncControlMsg.html">MultiGimbalSyncControlInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_GoHomeAssessment.html">LowBatteryRTHInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_MultiGimbalSyncStatus.html">MultiGimbalSyncStatus</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_IMUCalibrationHint.html">IMUCalibrationInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_GoHomeInfo.html">GoHomeInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_LEDsSettings.html">LEDsSettings</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1VerifyUserAccountInfo.html">AccessLockerVerifySecurityCodeInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1DeviceState.html">AccessLockerDeviceStatus</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1EncryptionState.html">AccessLockerEncryptionStatus</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1ModifyUserAccountInfo.html">AccessLockerModifySecurityCodeInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1ResetUserAccountInfo.html">AccessLockerResetSecurityCodeInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AccessLockerV1SetupUserAccountInfo.html">AccessLockerSetSecurityCodeInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseAirplaneState.html">AirSenseAirplaneState</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_FlightController_Struct_AirSenseSystemInformation.html">AirSenseSystemInformation</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Battery_Struct_BatteryLedsControlMsg.html">BatteryLedsInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Accessory_Struct_PlayingAudioFileInfo.html">PlayingAudioFileInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Airlink_Struct_FrequencyInterference.html">FrequencyInterferenceInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Airlink_Struct_WlmLinkQualityMsg.html">WlmLinkQualityLevelInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Airlink_Struct_WlmDongleState.html">WlmDongleInfo</a>
+                                      </dd>
+                                      <dd><a href="../IKeyManager/Value_Airlink_Struct_WlmDongleInfoMsg.html">WlmDongleListInfo</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IUserAccountManager/IUserAccountManager.html" class="sub-toggle">IUserAccountManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IUserAccountManager/IUserAccountManager_LoginInfo.html">LoginInfo</a>
+                            </dd>
+                            <dd><a href="../IUserAccountManager/IUserAccountManager_LoginInfoUpdateListener.html">LoginInfoUpdateListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ISimulatorManager/ISimulatorManager.html" class="sub-toggle">ISimulatorManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ISimulatorManager/ISimulatorManager_InitializationSettings.html">InitializationSettings</a>
+                            </dd>
+                            <dd><a href="../ISimulatorManager/ISimulatorManager_SimulatorStatusListener.html">SimulatorStatusListener</a>
+                            </dd>
+                            <dd><a href="../ISimulatorManager/ISimulatorManager_SimulatorState.html">SimulatorState</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IMediaDataCenter/IMediaDataCenter.html" class="sub-toggle">IMediaDataCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IMediaDataCenter/IVideoStreamManager.html" class="sub-toggle">IVideoStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_StreamSource.html" class="sub-toggle">StreamSource<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSource_PhysicalDeviceType.html">PhysicalDeviceType</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel.html" class="sub-toggle">IVideoChannel<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_StreamDataListener.html">StreamDataListener</a>
+                                                </dd>
+                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoChannel_VideoChannelStateChangeListener.html">VideoChannelStateChangeListener</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoFrame.html">IVideoFrame</a>
+                                      </dd>
+                                      <dd><a data-href="../IMediaDataCenter/IVideoStreamManager_IVideoDecoder.html" class="sub-toggle">IVideoDecoder<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoDecoder_YuvDataListener.html">YuvDataListener</a>
+                                                </dd>
+                                                <dd><a href="../IMediaDataCenter/IVideoStreamManager_IVideoDecoder_DecoderStateChangeListener.html">DecoderStateChangeListener</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IVideoStreamManager_StreamSourceListener.html">StreamSourceListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ICameraStreamManager.html" class="sub-toggle">ICameraStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_AvailableCameraUpdatedListener.html">AvailableCameraUpdatedListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_CameraFrameListener.html">CameraFrameListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_ReceiveStreamListener.html">ReceiveStreamListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_VisionAssistStatusListener.html">VisionAssistStatusListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_StreamInfo.html">StreamInfo</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_PinPointInfo.html">PinPointInfo</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ICameraStreamManager_PinPoint.html">PinPoint</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/IMediaManager.html" class="sub-toggle">IMediaManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a data-href="../IMediaDataCenter/IMediaManager_MediaFileListDataSource.html" class="sub-toggle">MediaFileListDataSource<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileListDataSource_Builder.html">Builder</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a data-href="../IMediaDataCenter/IMediaManager_PullMediaFileListParam.html" class="sub-toggle">PullMediaFileListParam<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/IMediaManager_PullMediaFileListParam_Builder.html">Builder</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileListData.html">MediaFileListData</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFile.html">MediaFile</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileListStateListener.html">MediaFileListStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStatus.html">VideoPlayStatus</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_VideoPlayStateListener.html">VideoPlayStateListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFileDownloadListener.html">MediaFileDownloadListener</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/IMediaManager_MediaFrameListener.html">MediaFrameListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IMediaDataCenter/ILiveStreamManager.html" class="sub-toggle">ILiveStreamManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a data-href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings.html" class="sub-toggle">LiveStreamSettings<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_Builder.html">Builder</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a data-href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_RtspSettings.html" class="sub-toggle">RtspSettings<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_RtspSettings_Builder.html">Builder</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a data-href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_RtmpSettings.html" class="sub-toggle">RtmpSettings<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_RtmpSettings_Builder.html">Builder</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a data-href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_GB28181Settings.html" class="sub-toggle">GB28181Settings<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_GB28181Settings_Builder.html">Builder</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a data-href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_AgoraSettings.html" class="sub-toggle">AgoraSettings<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                                        <ul class="sub-menu">
+                                                <dd><a href="../IMediaDataCenter/ILiveStreamManager_LiveStreamSettings_AgoraSettings_Builder.html">Builder</a>
+                                                </dd>
+                                        </ul>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ILiveStreamManager_LiveStreamStatus.html">LiveStreamStatus</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ILiveStreamManager_VideoResolution.html">VideoResolution</a>
+                                      </dd>
+                                      <dd><a href="../IMediaDataCenter/ILiveStreamManager_LiveStreamStatusListener.html">LiveStreamStatusListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IWaypointMissionManager/IWaypointMissionManager.html" class="sub-toggle">IWaypointMissionManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointMissionExecuteStateListener.html">WaypointMissionExecuteStateListener</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfoListener.html">WaylineExecutingInfoListener</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaypointActionListener.html">WaypointActionListener</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_WaylineExecutingInfo.html">WaylineExecutingInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWaypointMissionManager_BreakPointInfo.html">BreakPointInfo</a>
+                            </dd>
+                            <dd><a href="../IWaypointMissionManager/IWPMZManager.html">IWPMZManager</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IVirtualStickManager/IVirtualStickManager.html" class="sub-toggle">IVirtualStickManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IVirtualStickManager/IVirtualStickManager_DJIStick.html">IStick</a>
+                            </dd>
+                            <dd><a data-href="../IVirtualStickManager/Value_FlightController_Struct_VirtualStickFlightControlParam.html" class="sub-toggle">VirtualStickFlightControlParam<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IVirtualStickManager/IVirtualStickManager_VirtualStickRange.html">VirtualStickRange</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IVirtualStickManager/IVirtualStickManager_VirtualStickStateListener.html">VirtualStickStateListener</a>
+                            </dd>
+                            <dd><a href="../IVirtualStickManager/IVirtualStickManager_VirtualStickState.html">VirtualStickState</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IIntelligentFlightManager/IIntelligentFlightManager.html" class="sub-toggle">IIntelligentFlightManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_IntelligentFlightInfoListener.html">IntelligentFlightInfoListener</a>
+                            </dd>
+                            <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_AutoSensingInfoListener.html">AutoSensingInfoListener</a>
+                            </dd>
+                            <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_IntelligentFlightInfo.html">IntelligentFlightInfo</a>
+                            </dd>
+                            <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_AutoSensingInfo.html">AutoSensingInfo</a>
+                            </dd>
+                            <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_AutoSensingTarget.html">AutoSensingTarget</a>
+                            </dd>
+                            <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_IntelligentModel.html">IntelligentModel</a>
+                            </dd>
+                            <dd><a data-href="../IIntelligentFlightManager/IIntelligentFlightManager_ISmartTrackMissionManager.html" class="sub-toggle">ISmartTrackMissionManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_SmartTrackMissionManager_SmartTrackCapability.html">SmartTrackCapability</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_SmartTrackMissionManager_SmartTrackInfo.html">SmartTrackInfo</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_SmartTrackMissionManager_SmartTrackTarget.html">SmartTrackTarget</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IIntelligentFlightManager/IIntelligentFlightManager_ISpotLightManager.html" class="sub-toggle">ISpotLightManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_SpotLightManager_SpotLightCapability.html">SpotLightCapability</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_SpotLightManager_SpotLightTarget.html">SpotLightTarget</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IIntelligentFlightManager/IIntelligentFlightManager_IPOIMissionManager.html" class="sub-toggle">IPOIMissionManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_POIMissionManager_POICapability.html">POICapability</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_POIMissionManager_POIInfo.html">POIInfo</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_POIMissionManager_POIParam.html">POIParam</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_POIMissionManager_POITarget.html">POITarget</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IIntelligentFlightManager/IIntelligentFlightManager_IFlyToMissionManager.html" class="sub-toggle">IFlyToMissionManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_FlyToMissionManager_FlyToCapability.html">FlyToCapability</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_FlyToMissionManager_FlyToInfo.html">FlyToInfo</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_FlyToMissionManager_FlyToParam.html">FlyToParam</a>
+                                      </dd>
+                                      <dd><a href="../IIntelligentFlightManager/IIntelligentFlightManager_FlyToMissionManager_FlyToTarget.html">FlyToTarget</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPerceptionManager/IPerceptionManager.html" class="sub-toggle">IPerceptionManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPerceptionManager/IPerceptionManager_PerceptionInfo.html">PerceptionInfo</a>
+                            </dd>
+                            <dd><a href="../IPerceptionManager/IPerceptionManager_PerceptionInformationListener.html">PerceptionInformationListener</a>
+                            </dd>
+                            <dd><a href="../IPerceptionManager/IPerceptionManager_ObstacleData.html">ObstacleData</a>
+                            </dd>
+                            <dd><a href="../IPerceptionManager/IPerceptionManager_ObstacleDataListener.html">ObstacleDataListener</a>
+                            </dd>
+                            <dd><a data-href="../IPerceptionManager/IRadarManager.html" class="sub-toggle">IRadarManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPerceptionManager/IRadarManager_RadarInformation.html">RadarInformation</a>
+                                      </dd>
+                                      <dd><a href="../IPerceptionManager/IRadarManager_RadarInformationListener.html">RadarInformationListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IRTKCenter/IRTKCenter.html" class="sub-toggle">IRTKCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IRTKCenter/INetworkRTKManager.html" class="sub-toggle">INetworkRTKManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRTKCenter/INetworkRTKManager_NetworkServiceInfoListener.html">INetworkServiceInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IRTKCenter/Value_RtkBaseStation_Struct_RTKCustomNetworkSetting.html">RTKCustomNetworkSetting</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IRTKCenter/IRTKStationManager.html" class="sub-toggle">IRTKStationManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRTKCenter/Value_RtkBaseStation_Struct_RTKBaseStationConnectInfo.html">RTKStationInfo</a>
+                                      </dd>
+                                      <dd><a href="../IRTKCenter/IRTKStationManager_ConnectedTKStationInfo.html">ConnectedRTKStationInfo</a>
+                                      </dd>
+                                      <dd><a href="../IRTKCenter/IRTKStationManager_SearchStationListener.html">SearchRTKStationListener</a>
+                                      </dd>
+                                      <dd><a href="../IRTKCenter/IRTKStationManager_RTKStationConnectStatusListener.html">RTKStationConnectStatusListener</a>
+                                      </dd>
+                                      <dd><a href="../IRTKCenter/IRTKStationManager_ConnectedRTKStationInfoListener.html">ConnectedRTKStationInfoListener</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IRTKCenter/IRTKCenter_RTKLocationInfo.html">RTKLocationInfo</a>
+                            </dd>
+                            <dd><a href="../IRTKCenter/Value_RtkMobileStation_Struct_RTKLocation.html">RTKLocation</a>
+                            </dd>
+                            <dd><a href="../IRTKCenter/RTKCenter_RTKSystemState.html">RTKSystemState</a>
+                            </dd>
+                            <dd><a href="../IRTKCenter/Value_RtkMobileStation_Struct_RTKSatelliteInfo.html">RTKSatelliteInfo</a>
+                            </dd>
+                            <dd><a href="../IRTKCenter/Value_RtkMobileStation_Struct_RTKReceiverInfo.html">RTKReceiverInfo</a>
+                            </dd>
+                            <dd><a href="../IRTKCenter/IRTKCenter_RTKLocationInfoListener.html">RTKLocationInfoListener</a>
+                            </dd>
+                            <dd><a href="../IRTKCenter/IRTKCenter_RTKSystemStateListener.html">RTKSystemStateListener</a>
+                            </dd>
+                            <dd><a href="../IRTKCenter/IRTKCenter_RTKBaseListener.html">RTKBaseListener&lt;T&gt;</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IFlyZoneManager/IFlyZoneManager.html" class="sub-toggle">IFlyZoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeTipInformation.html">FlySafeTipInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetyWarningInformation.html">FlySafeWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyingSafetySeriousWarningInformation.html">FlySafeSeriousWarningInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeReturnToHomeInformation.html">FlySafeReturnToHomeInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_MultiPolygonFlyZoneInformation.html">MultiPolygonFlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneInformation.html">FlyZoneInformation</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlyZoneLicenseInfo.html">FlyZoneLicenseInfo</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeNotificationListener.html">FlySafeNotificationListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseListener.html">FlySafeDatabaseListener</a>
+                            </dd>
+                            <dd><a href="../IFlyZoneManager/IFlyZoneManager_FlySafeDatabaseInfo.html">FlySafeDatabaseInfo</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ILTEManager/ILTEManager.html" class="sub-toggle">ILTEManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfo.html">LTEAuthenticationInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfo.html">LTELinkInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEPrivatizationServerInfo.html">LTEPrivatizationServerInfo</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEAuthenticationInfoListener.html">LTEAuthenticationInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTELinkInfoListener.html">LTELinkInfoListener</a>
+                            </dd>
+                            <dd><a href="../ILTEManager/ILTEManager_LTEDongleInfoListener.html">LTEDongleInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPayloadCenter/IPayloadCenter.html" class="sub-toggle">IPayloadCenter<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IPayloadCenter/IPayloadManager.html" class="sub-toggle">IPayloadManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfoListener.html">PayloadBasicInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfoListener.html">PayloadWidgetInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadDataListener.html">PayloadDataListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadBasicInfo.html">PayloadBasicInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidgetInfo.html">PayloadWidgetInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_PayloadWidget.html">PayloadWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_FloatingWindowWidget.html">FloatingWindowWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SpeakerWidget.html">SpeakerWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_TextInputBoxWidget.html">TextInputBoxWidget</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_IconFilePath.html">IconFilePath</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IPayloadManager_SubItems.html">SubItems</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_CustomizeRcButtonConfig.html">CustomizeRcButtonConfig</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/Value_Payload_Struct_WidgetValue.html">WidgetValue</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a data-href="../IPayloadCenter/IIntelligentBoxManager.html" class="sub-toggle">IIntelligentBoxManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IPayloadCenter/IIntelligentBoxManager_IntelligentBoxInfoListener.html">IntelligentBoxInfoListener</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IIntelligentBoxManager_IntelligentBoxInfo.html">IntelligentBoxInfo</a>
+                                      </dd>
+                                      <dd><a href="../IPayloadCenter/IIntelligentBoxManager_IntelligentBoxAppInfo.html">IntelligentBoxAppInfo</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IMegaphoneManager/IMegaphoneManager.html" class="sub-toggle">IMegaphoneManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_FileInfo.html">FileInfo</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_RealTimeTransimissionStateListener.html">RealTimeTransimissionStateListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfoListener.html">MegaphoneInfoListener</a>
+                            </dd>
+                            <dd><a href="../IMegaphoneManager/IMegaphoneManager_MegaphoneInfo.html">MegaphoneInfo</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IPipelineManager/IPipelineManager.html" class="sub-toggle">IPipelineManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IPipelineManager/IPipelineManager_Pipeline.html">Pipeline</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_DataResult.html">DataResult</a>
+                            </dd>
+                            <dd><a href="../IPipelineManager/IPipelineManager_PipelineConnectionListener.html">PipelineConnectionListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IUpgradeManager/IUpgradeManager.html" class="sub-toggle">IUpgradeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_FirmwareInformation.html">FirmwareInformation</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponent.html">UpgradeableComponent</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfo.html">UpgradeInfo</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeableComponentListener.html">UpgradeableComponentListener</a>
+                            </dd>
+                            <dd><a href="../IUpgradeManager/IUpgradeManager_UpgradeInfoListener.html">UpgradeInfoListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../IFlightLogManager/IFlightLogManager.html">IFlightLogManager</a>
+                  </dd>
+                  <dd><a data-href="../IAreaCodeManager/IAreaCodeManager.html" class="sub-toggle">IAreaCodeManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IAreaCodeManager/IAreaCodeManager_AreaCodeData.html">AreaCodeData</a>
+                            </dd>
+                            <dd><a href="../IAreaCodeManager/IAreaCodeManager_AreaCodeData_AreaCodeChangeListener.html">AreaCodeChangeListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IUASRemoteIDManager/IUASRemoteIDManager.html" class="sub-toggle">IUASRemoteIDManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UASRemoteIDStatus.html">UASRemoteIDStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UASRemoteIDStatusListener.html">UASRemoteIDStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_ElectronicIDStatus.html">ElectronicIDStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_ElectronicIDStatusListener.html">ElectronicIDStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatus.html">UARegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_UARegistrationNumberStatusListener.html">UARegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_CClassStatusListener.html">CClassStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatus.html">OperatorRegistrationNumberStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_OperatorRegistrationNumberStatusListener.html">OperatorRegistrationNumberStatusListener</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatus.html">RealNameRegistrationStatus</a>
+                            </dd>
+                            <dd><a href="../IUASRemoteIDManager/IUASRemoteIDManager_RealNameRegistrationStatusListener.html">RealNameRegistrationStatusListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../ILDMManager/ILDMManager.html">ILDMManager</a>
+                  </dd>
+                  <dd><a href="../IDataProtectionManager/IDataProtectionManager.html">IDataProtectionManager</a>
+                  </dd>
+                  <dd><a data-href="../IDeviceHealthManager/IDeviceHealthManager.html" class="sub-toggle">IDeviceHealthManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IDeviceHealthManager/IDeviceHealthManager_DJIDeviceHealthInfo.html">DJIDeviceHealthInfo</a>
+                            </dd>
+                            <dd><a href="../IDeviceHealthManager/IDeviceHealthManager_DJIDeviceHealthInfoChangeListener.html">DJIDeviceHealthInfoChangeListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+          </dl>
+          <dl class="sidebar-group sidebar-group--plugins">
+            <dt>Plugin APIs
+            </dt>
+                  <dd><a data-href="../IARManager/IARManager.html" class="sub-toggle">IARManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IARManager/IARManager_ARCircleInfo.html">ARCircleInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARDistAlpha.html">ARDistAlpha</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARDistLineWidth.html">ARDistLineWidth</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARFaceStroke.html">ARFaceStroke</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARIconOrthographicConfig.html">ARIconOrthographicConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARIconPerspectiveConfig.html">ARIconPerspectiveConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARLineInfo.html">ARLineInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPointConfig.html">ARPointConfig</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPointInfo.html">ARPointInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPolygonFace.html">ARPolygonFace</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARPolygonInfo.html">ARPolygonInfo</a>
+                            </dd>
+                            <dd><a data-href="../IARManager/IARManager_ARRadarConfig.html" class="sub-toggle">ARRadarConfig<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IARManager/IARManager_ARRadarConfig_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARStrokeInfo.html">ARStrokeInfo</a>
+                            </dd>
+                            <dd><a href="../IARManager/IARManager_ARTextConfig.html">ARTextConfig</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IRemoteViewPageManager/IRemoteViewPageManager.html" class="sub-toggle">IRemoteViewPageManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ActivityConfig.html">ActivityConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_DividerConfig.html">DividerConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnCheckedChangeListener.html">IRemoteViewOnCheckedChangeListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnClickListener.html">IRemoteViewOnClickListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewOnItemSelectedListener.html">IRemoteViewOnItemSelectedListener</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_IRemoteViewTextWatcher.html">IRemoteViewTextWatcher</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_LayoutParam.html">LayoutParam</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ListItemData.html">ListItemData</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ListItemOperation.html">ListItemOperation</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_RemoteView.html">RemoteView</a>
+                            </dd>
+                            <dd><a data-href="../IRemoteViewPageManager/IRemoteViewPageManager_ShapeDescriptor.html" class="sub-toggle">ShapeDescriptor<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_ShapeDescriptor_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_TextSpanSeparatorConfig.html">TextSpanSeparatorConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteViewPageManager/IRemoteViewPageManager_WidgetLayoutParam.html">WidgetLayoutParam</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../ICameraViewDrawingManager/ICameraViewDrawingManager.html" class="sub-toggle">ICameraViewDrawingManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingBoxInfo.html">DrawingBoxInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingPolygonInfo.html">DrawingPolygonInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_DrawingTextInfo.html">DrawingTextInfo</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_OpenDoubleRect.html">OpenDoubleRect</a>
+                            </dd>
+                            <dd><a href="../ICameraViewDrawingManager/ICameraViewDrawingManager_OpenPoint.html">OpenPoint</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="../IRemoteDialogManager/IRemoteDialogManager.html" class="sub-toggle">IRemoteDialogManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a data-href="../IRemoteDialogManager/IRemoteDialogManager_DialogConfig.html" class="sub-toggle">DialogConfig<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                              <ul class="sub-menu">
+                                      <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogConfig_Builder.html">Builder</a>
+                                      </dd>
+                              </ul>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogElementConfig.html">DialogElementConfig</a>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_DialogMessage.html">DialogMessage</a>
+                            </dd>
+                            <dd><a href="../IRemoteDialogManager/IRemoteDialogManager_IDialogMessageListener.html">IDialogMessageListener</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a data-href="" class="sub-toggle">IMapWidgetManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="IMapWidgetManager_MapCircleOptions.html">MapCircleOptions</a>
+                            </dd>
+                            <dd><a href="IMapWidgetManager_MapElement.html">MapElement</a>
+                            </dd>
+                            <dd><a href="IMapWidgetManager_MapMarkerOptions.html">MapMarkerOptions</a>
+                            </dd>
+                            <dd><a href="IMapWidgetManager_MapPolygonOptions.html">MapPolygonOptions</a>
+                            </dd>
+                            <dd><a href="IMapWidgetManager_MapPolylineOptions.html">MapPolylineOptions</a>
+                            </dd>
+                            <dd><a href="IMapWidgetManager_MapWidget.html">MapWidget</a>
+                            </dd>
+                            <dd><a href="IMapWidgetManager_MapWidgetItem.html">MapWidgetItem</a>
+                            </dd>
+                            <dd><a href="IMapWidgetManager_MapWidgetLayer.html">MapWidgetLayer</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../IRemoteServerConfigManager/IRemoteServerConfigManager.html">IRemoteServerConfigManager</a>
+                  </dd>
+                  <dd><a href="../IFileTransferManager/IFileTransferManager.html">IFileTransferManager</a>
+                  </dd>
+                  <dd><a data-href="../INavigateManager/INavigateManager.html" class="sub-toggle">INavigateManager<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../INavigateManager/INavigateManager_NavigateAction.html">NavigateAction</a>
+                            </dd>
+                    </ul>
+                  </dd>
+                  <dd><a href="../IDisconnectActionManager/IDisconnectActionManager.html">IDisconnectActionManager</a>
+                  </dd>
+                  <dd><a href="../IRemoteControlManager/IRemoteControlManager.html">IRemoteControlManager</a>
+                  </dd>
+          </dl>
+          <dl class="sidebar-group sidebar-group--references">
+            <dt>References
+            </dt>
+                  <dd><a href="../DJIError/DJIError.html">IDJIError</a>
+                  </dd>
+                  <dd><a data-href="../DJICommonCallbacks/DJICommonCallbacks.html" class="sub-toggle">CommonCallbacks<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a>
+                    <ul class="sub-menu">
+                            <dd><a href="../DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html">CompletionCallback</a>
+                            </dd>
+                            <dd><a href="../DJICommonCallbacks/DJICommonCallbacks_CompletionCallbackWithParam.html">CompletionCallbackWithParam&lt;T&gt;</a>
+                            </dd>
+                    </ul>
+                  </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="site-main">
+        <div class="article"><div class="article"><h1 ><font color="#AAA">class </font>IMapWidgetManager</h1></div>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">IMapWidgetManager</span> </span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：">描述：</h5>
+<p><font color="#666">服务端地图操作接口。管理服务端地图控件、地图元素、图层及 AR 标注，支持添加、移除、更新、查询等操作。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="类成员">类成员:</h5>
+<div class="api-row" id="imapwidgetmanager_addmapwidget"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_addmapwidget_inline">addMapWidget</a></div></div><div class="inline-doc" id="imapwidgetmanager_addmapwidget_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>addMapWidget</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addMapWidget</span><span class="params">(<span class="meta">@NonNull</span> MapWidget widget)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-2">描述：</h5>
+<p><font color="#666">添加地图控件到服务端。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a> <font color="#000">widget</td><td><font color="#666"><i>地图控件。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_removemapwidget"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_removemapwidget_inline">removeMapWidget</a></div></div><div class="inline-doc" id="imapwidgetmanager_removemapwidget_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>removeMapWidget</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">removeMapWidget</span><span class="params">(<span class="meta">@NonNull</span> MapWidget widget)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-3">描述：</h5>
+<p><font color="#666">移除地图控件。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-2">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a> <font color="#000">widget</td><td><font color="#666"><i>地图控件。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_hidearannotations"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_hidearannotations_inline">hideARAnnotations</a></div></div><div class="inline-doc" id="imapwidgetmanager_hidearannotations_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>hideARAnnotations</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">hideARAnnotations</span><span class="params">(<span class="type">boolean</span> isHided, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-4">描述：</h5>
+<p><font color="#666">隐藏服务端 AR 标注。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-3">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">boolean <font color="#000">isHided</td><td><font color="#666"><i>是否隐藏。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_querymapelement"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_querymapelement_inline">queryMapElement</a></div></div><div class="inline-doc" id="imapwidgetmanager_querymapelement_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>queryMapElement</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">queryMapElement</span><span class="params">(<span class="meta">@NonNull</span> CommonCallbacks.CompletionCallbackWithParam&lt;List&lt;MapElement&gt;&gt; callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-5">描述：</h5>
+<p><font color="#666">查询服务端地图元素。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-4">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;List&lt;<a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapElement.html#imapwidgetmanager_mapelement">MapElement</a>&gt;&gt; <font color="#000">callback</td><td><font color="#666"><i>查询地图元素结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_insertmapelement"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_insertmapelement_inline">insertMapElement</a></div></div><div class="inline-doc" id="imapwidgetmanager_insertmapelement_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>insertMapElement</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">insertMapElement</span><span class="params">(<span class="meta">@NonNull</span> MapElement element, CommonCallbacks.CompletionCallbackWithParam&lt;UUID&gt; callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-6">描述：</h5>
+<p><font color="#666">新增服务端地图元素。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-5">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapElement.html#imapwidgetmanager_mapelement">MapElement</a> <font color="#000">element</td><td><font color="#666"><i>地图元素，支持 AR。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;UUID&gt; <font color="#000">callback</td><td><font color="#666"><i>新增地图元素结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_deletemapelement"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_deletemapelement_inline">deleteMapElement</a></div></div><div class="inline-doc" id="imapwidgetmanager_deletemapelement_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>deleteMapElement</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">deleteMapElement</span><span class="params">(<span class="meta">@NonNull</span> MapElement element, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-7">描述：</h5>
+<p><font color="#666">删除服务端地图元素。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-6">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapElement.html#imapwidgetmanager_mapelement">MapElement</a> <font color="#000">element</td><td><font color="#666"><i>地图元素，支持 AR。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>删除地图元素结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_updatemapelement"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_updatemapelement_inline">updateMapElement</a></div></div><div class="inline-doc" id="imapwidgetmanager_updatemapelement_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>updateMapElement</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">updateMapElement</span><span class="params">(<span class="meta">@NonNull</span> MapElement element, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-8">描述：</h5>
+<p><font color="#666">更新服务端地图元素。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-7">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapElement.html#imapwidgetmanager_mapelement">MapElement</a> <font color="#000">element</td><td><font color="#666"><i>地图元素，支持 AR。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>更新地图元素结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_addmapstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_addmapstatelistener_inline">addMapStateListener</a></div></div><div class="inline-doc" id="imapwidgetmanager_addmapstatelistener_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>addMapStateListener</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addMapStateListener</span><span class="params">(<span class="meta">@NonNull</span> IMapStateListener listener)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-9">描述：</h5>
+<p><font color="#666">添加服务端地图状态监听。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-8">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull IMapStateListener <font color="#000">listener</td><td><font color="#666"><i>地图状态监听。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_removemapstatelistener"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_removemapstatelistener_inline">removeMapStateListener</a></div></div><div class="inline-doc" id="imapwidgetmanager_removemapstatelistener_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>removeMapStateListener</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">removeMapStateListener</span><span class="params">(<span class="meta">@NonNull</span> IMapStateListener listener)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-10">描述：</h5>
+<p><font color="#666">移除服务端地图状态监听。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-9">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull IMapStateListener <font color="#000">listener</td><td><font color="#666"><i>地图状态监听。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_addmapwidget_callback"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_addmapwidget_callback_inline">addMapWidget</a></div></div><div class="inline-doc" id="imapwidgetmanager_addmapwidget_callback_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>addMapWidget</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addMapWidget</span><span class="params">(<span class="meta">@NonNull</span> MapWidget widget, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-11">描述：</h5>
+<p><font color="#666">添加地图控件到服务端（带结果回调）。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-10">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a> <font color="#000">widget</td><td><font color="#666"><i>地图控件。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_removemapwidget_callback"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_removemapwidget_callback_inline">removeMapWidget</a></div></div><div class="inline-doc" id="imapwidgetmanager_removemapwidget_callback_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>removeMapWidget</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">removeMapWidget</span><span class="params">(<span class="meta">@NonNull</span> MapWidget widget, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-12">描述：</h5>
+<p><font color="#666">移除地图控件（带结果回调）。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-11">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a> <font color="#000">widget</td><td><font color="#666"><i>地图控件。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_updatemapwidgets"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_updatemapwidgets_inline">updateMapWidgets</a></div></div><div class="inline-doc" id="imapwidgetmanager_updatemapwidgets_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>updateMapWidgets</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">updateMapWidgets</span><span class="params">(<span class="meta">@NonNull</span> List&lt;MapWidget&gt; widgets, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-13">描述：</h5>
+<p><font color="#666">批量更新地图控件。 <br><br> 按 id 匹配，对每个 widget 就地更新属性（不会产生视觉闪烁）。列表中任一 widget 的 id 不存在或试图修改不可变字段（id / source / layerId），整批更新失败，不会发起 IPC。 <br><br> 以下字段不可通过本方法修改，否则回调 WIDGET_FIELD_IMMUTABLE 错误：id（widget 唯一标识，不可变）；source（来源包名，不可变）；layerId（所属图层，如需将 widget 移动到其他图层，请先 removeMapWidgetsByIds 再重新 addMapWidgets）。 <br><br> 注意：受 Android Binder 传输限制，单次批量更新的数据总量不应超过 512KB。超限时回调 PAYLOAD_TOO_LARGE 错误。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-12">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull List&lt;<a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a>&gt; <font color="#000">widgets</td><td><font color="#666"><i>地图控件列表。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_querymapwidgets"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_querymapwidgets_inline">queryMapWidgets</a></div></div><div class="inline-doc" id="imapwidgetmanager_querymapwidgets_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>queryMapWidgets</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">queryMapWidgets</span><span class="params">(<span class="meta">@NonNull</span> CommonCallbacks.CompletionCallbackWithParam&lt;List&lt;MapWidget&gt;&gt; callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-14">描述：</h5>
+<p><font color="#666">查询当前插件添加的所有地图控件。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-13">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;List&lt;<a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a>&gt;&gt; <font color="#000">callback</td><td><font color="#666"><i>查询结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_querymapwidgetsbylayer"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_querymapwidgetsbylayer_inline">queryMapWidgetsByLayer</a></div></div><div class="inline-doc" id="imapwidgetmanager_querymapwidgetsbylayer_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>queryMapWidgetsByLayer</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">queryMapWidgetsByLayer</span><span class="params">(<span class="meta">@NonNull</span> String layerId,</span></span><br><span class="line"><span class="params">                            <span class="meta">@NonNull</span> CommonCallbacks.CompletionCallbackWithParam&lt;List&lt;MapWidget&gt;&gt; callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-15">描述：</h5>
+<p><font color="#666">查询指定图层下的所有地图控件。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-14">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">layerId</td><td><font color="#666"><i>图层 ID。</i></td></tr><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.CompletionCallbackWithParam&lt;List&lt;<a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a>&gt;&gt; <font color="#000">callback</td><td><font color="#666"><i>查询结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_addmapwidgets"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_addmapwidgets_inline">addMapWidgets</a></div></div><div class="inline-doc" id="imapwidgetmanager_addmapwidgets_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>addMapWidgets</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addMapWidgets</span><span class="params">(<span class="meta">@NonNull</span> List&lt;MapWidget&gt; widgets, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-16">描述：</h5>
+<p><font color="#666">批量添加地图控件。 <br><br> 一次 IPC 调用完成多个控件的添加，适用于 GIS 数据批量同步场景。 <br><br> 注意：受 Android Binder 传输限制，单次批量添加的数据总量不应超过 512KB。建议单次不超过 500 个简单 Marker 控件，或 200 个含坐标列表的折线/多边形控件。超限时回调 PAYLOAD_TOO_LARGE 错误。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-15">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull List&lt;<a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html#imapwidgetmanager_mapwidget">MapWidget</a>&gt; <font color="#000">widgets</td><td><font color="#666"><i>地图控件列表。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_removemapwidgetsbyids"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_removemapwidgetsbyids_inline">removeMapWidgetsByIds</a></div></div><div class="inline-doc" id="imapwidgetmanager_removemapwidgetsbyids_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>removeMapWidgetsByIds</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">removeMapWidgetsByIds</span><span class="params">(<span class="meta">@NonNull</span> List&lt;String&gt; widgetIds, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-17">描述：</h5>
+<p><font color="#666">按 id 列表批量移除地图控件。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-16">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull List&lt;String&gt; <font color="#000">widgetIds</td><td><font color="#666"><i>要移除的地图控件 id 列表。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_addlayer"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_addlayer_inline">addLayer</a></div></div><div class="inline-doc" id="imapwidgetmanager_addlayer_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>addLayer</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addLayer</span><span class="params">(<span class="meta">@NonNull</span> MapWidgetLayer layer, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-18">描述：</h5>
+<p><font color="#666">添加图层。 <br><br> 图层是地图控件的逻辑分组容器，可按业务语义将 MapWidget 组织到不同图层中（如&quot;火点层&quot;、“人员层”），支持整层显隐、整层清空。一个图层可包含任意 DrawerType 的 MapWidget。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-17">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull <a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidgetLayer.html#imapwidgetmanager_mapwidgetlayer">MapWidgetLayer</a> <font color="#000">layer</td><td><font color="#666"><i>图层。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_removelayer"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_removelayer_inline">removeLayer</a></div></div><div class="inline-doc" id="imapwidgetmanager_removelayer_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>removeLayer</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">removeLayer</span><span class="params">(<span class="meta">@NonNull</span> String layerId, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-19">描述：</h5>
+<p><font color="#666">删除图层。 <br><br> 同时删除该图层下的所有地图控件。不能删除默认层（layerId 为空），否则回调 LAYER_READONLY 错误。图层不存在时回调 LAYER_NOT_FOUND 错误。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-18">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">layerId</td><td><font color="#666"><i>图层 ID。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_setlayervisible"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_setlayervisible_inline">setLayerVisible</a></div></div><div class="inline-doc" id="imapwidgetmanager_setlayervisible_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>setLayerVisible</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">setLayerVisible</span><span class="params">(<span class="meta">@NonNull</span> String layerId, <span class="type">boolean</span> visible, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-20">描述：</h5>
+<p><font color="#666">设置图层可见性。 <br><br> 控制整个图层下所有地图控件的显示/隐藏。不能设置默认层（layerId 为空）的可见性，否则回调 LAYER_READONLY 错误。图层不存在时回调 LAYER_NOT_FOUND 错误。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-19">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">layerId</td><td><font color="#666"><i>图层 ID。</i></td></tr><tr valign="top"><td><font color="#70BF41">boolean <font color="#000">visible</td><td><font color="#666"><i>true 显示，false 隐藏。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<div class="api-row" id="imapwidgetmanager_clearlayer"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">method</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_clearlayer_inline">clearLayer</a></div></div><div class="inline-doc" id="imapwidgetmanager_clearlayer_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">method </font>clearLayer</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">clearLayer</span><span class="params">(<span class="meta">@NonNull</span> String layerId, CommonCallbacks.CompletionCallback callback)</span></span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.client.interfaces</td></tr></table></html>
+<h5 id="描述：-21">描述：</h5>
+<p><font color="#666">清空图层。 <br><br> 删除该图层下的所有地图控件，但保留图层本身。不能清空默认层（layerId 为空），否则回调 LAYER_READONLY 错误。图层不存在时回调 LAYER_NOT_FOUND 错误。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="输入参数：-20">输入参数：</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41">@NonNull String <font color="#000">layerId</td><td><font color="#666"><i>图层 ID。</i></td></tr><tr valign="top"><td><font color="#70BF41"><a href="../../Components/DJICommonCallbacks/DJICommonCallbacks.html#djicommoncallbacks">CommonCallbacks</a>.<a href="../../Components/DJICommonCallbacks/DJICommonCallbacks_CompletionCallback.html#djicommoncallbacks_completioncallback">CompletionCallback</a> <font color="#000">callback</td><td><font color="#666"><i>结果回调。</i></td></tr></table></html></div>
+<h5 id="Related">Related:</h5>
+<div class="api-row" id="imapwidgetmanager_mapcircleoptions"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapCircleOptions.html">MapCircleOptions</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mapcircleoptions_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapCircleOptions.html" data-class-name="MapCircleOptions"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapCircleOptions <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapCircleOptions</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图控件元素圆形配置。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div><div class="api-row" id="imapwidgetmanager_mapdrawertype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_mapdrawertype_inline">MapDrawerType</a></div></div><div class="inline-doc" id="imapwidgetmanager_mapdrawertype_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">enum </font>MapDrawerType</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"> <span class="keyword">enum</span> <span class="title class_">MapDrawerType</span> </span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.base.manager.map</td></tr></table></html>
+<h5 id="描述：-22">描述：</h5>
+<p><font color="#666">地图控件绘制类型。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="Enum-Members">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapdrawertype_none_inline"></a>NONE</td><td><font color="#666">无设置。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapdrawertype_marker_inline"></a>MARKER</td><td><font color="#666">地图图标。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapdrawertype_polyline_inline"></a>POLYLINE</td><td><font color="#666">地图折线。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapdrawertype_polygon_inline"></a>POLYGON</td><td><font color="#666">地图多边形。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapdrawertype_circle_inline"></a>CIRCLE</td><td><font color="#666">地图圆。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapdrawertype_pin_inline"></a>PIN</td><td><font color="#666">地图 Pin 点。</td></tr></table></html>
+<h5 id="Class-Members">Class Members:</h5>
+</div>
+<div class="api-row" id="imapwidgetmanager_mapelement"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapElement.html">MapElement</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mapelement_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapElement.html" data-class-name="MapElement"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapElement <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapElement</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图元素。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div><div class="api-row" id="imapwidgetmanager_mapelementcolor"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_mapelementcolor_inline">MapElementColor</a></div></div><div class="inline-doc" id="imapwidgetmanager_mapelementcolor_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">enum </font>MapElementColor</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">MapElementColor</span> </span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.base.manager.map</td></tr></table></html>
+<h5 id="描述：-23">描述：</h5>
+<p><font color="#666">地图元素的颜色。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="Enum-Members-2">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapelementcolor_blue_inline"></a>BLUE</td><td><font color="#666">半透明蓝。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapelementcolor_green_inline"></a>GREEN</td><td><font color="#666">半透明绿。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapelementcolor_yellow_inline"></a>YELLOW</td><td><font color="#666">半透明黄。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapelementcolor_orange_inline"></a>ORANGE</td><td><font color="#666">半透明橘。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapelementcolor_red_inline"></a>RED</td><td><font color="#666">半透明红。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapelementcolor_name_default_inline"></a>NAME_DEFAULT</td><td><font color="#666">默认颜色。</td></tr></table></html>
+<h5 id="Class-Members-2">Class Members:</h5>
+</div>
+<div class="api-row" id="imapwidgetmanager_mapmarkeroptions"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapMarkerOptions.html">MapMarkerOptions</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mapmarkeroptions_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapMarkerOptions.html" data-class-name="MapMarkerOptions"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapMarkerOptions <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapMarkerOptions</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图控件元素标注配置。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div><div class="api-row" id="imapwidgetmanager_mappolygonoptions"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapPolygonOptions.html">MapPolygonOptions</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mappolygonoptions_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapPolygonOptions.html" data-class-name="MapPolygonOptions"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapPolygonOptions <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapPolygonOptions</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图控件元素多边形配置。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div><div class="api-row" id="imapwidgetmanager_mappolylineoptions"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapPolylineOptions.html">MapPolylineOptions</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mappolylineoptions_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapPolylineOptions.html" data-class-name="MapPolylineOptions"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapPolylineOptions <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapPolylineOptions</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图控件元素折线配置。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div><div class="api-row" id="imapwidgetmanager_mapwidget"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html">MapWidget</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mapwidget_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidget.html" data-class-name="MapWidget"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapWidget <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapWidget</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图控件。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div><div class="api-row" id="imapwidgetmanager_mapwidgetitem"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidgetItem.html">MapWidgetItem</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mapwidgetitem_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidgetItem.html" data-class-name="MapWidgetItem"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapWidgetItem <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapWidgetItem</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图控件元素，用于描述地图控件的自定义配置。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div><div class="api-row" id="imapwidgetmanager_mapwidgetitemtype"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">enum</div><div class="api-col right"><a class="trigger" href="#imapwidgetmanager_mapwidgetitemtype_inline">MapWidgetItemType</a></div></div><div class="inline-doc" id="imapwidgetmanager_mapwidgetitemtype_inline"
+<blockquote>
+<div class="article"><h6 ><font color="#AAA">enum </font>MapWidgetItemType</h6></div>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"> <span class="keyword">enum</span> <span class="title class_">MapWidgetItemType</span> </span><br></pre></td></tr></table></figure>
+<html><table class="table-supportedby"><tr valign="top"><td width=15%><font color="#999"><i>包：</i></td><td width=85%><font color="#999">dji.open.pilot.base.manager.map</td></tr></table></html>
+<h5 id="描述：-24">描述：</h5>
+<p><font color="#666">地图控件元素类型。 <br><br><code><i>MSDK 5.20.1开始支持</i></code></p>
+<h5 id="Enum-Members-3">Enum Members:</h5>
+<html><table class="table-inline-parameters"><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapwidgetitemtype_dialog_inline"></a>DIALOG</td><td><font color="#666">对话框。</td></tr><tr valign="top"><td><font color="#70BF41"><a href="#imapwidgetmanager_mapwidgetitemtype_none_inline"></a>NONE</td><td><font color="#666">无设置。</td></tr></table></html>
+<h5 id="Class-Members-3">Class Members:</h5>
+</div>
+<div class="api-row" id="imapwidgetmanager_mapwidgetlayer"><div class="api-col left"></div><div class="api-col middle" style="color:#AAA">class</div><div class="api-col right"><a href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidgetLayer.html">MapWidgetLayer</a></div></div><div class="inline-doc class-inline-doc offline-class-inline-doc" id="imapwidgetmanager_mapwidgetlayer_inline" data-class-href="../../Components/IMapWidgetManager/IMapWidgetManager_MapWidgetLayer.html" data-class-name="MapWidgetLayer"><blockquote><div class="article"><h6><font color="#AAA">class </font>MapWidgetLayer <span class="class-jump-arrow">↗</span></h6></div></blockquote><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Keep</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MapWidgetLayer</span> implements <span class="title class_">Parcelable</span></span></pre></td></tr></table></figure><h5>描述</h5><p><font color="#666">地图控件图层。</font></p><p><code><i>MSDK 5.20.1开始支持</i></code></p></div>
+
+        </div>
+      </div>
+      <div class="site-toc">
+        <div class="site-toc-inner">
+          <div class="site-toc-title">本页目录</div>
+          <ul class="site-toc-list"></ul>
+        </div>
+      </div>
+    </div>
+    <div id="search-modal" class="search-modal modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header"><a href="javascript:;" @click="closeSearch" class="btn-close">×</a>
+            <h2 class="title">搜索 Mobile SDK 文档
+            </h2>
+            <input type="text" v-model="searchInput" @keydown.enter="search">
+          </div>
+          <div class="modal-body">
+            <p v-show="!!searchCount" class="search-count"><span v-cloak>{{searchCount}}</span>&nbsp;搜索结果
+            </p>
+            <ul v-show="!!searchCount" class="search-result">
+              <li v-for="item in searchResult"><a v-bind:href="item.url | docUrl">
+                  <h3 class="title">{{{(item.highlights && item.highlights.title) || item.title}}}</h3>
+                  <p class="content">{{{(item.highlights && item.highlights.content[0]) || item.title}}}</p></a></li>
+            </ul>
+            <div v-show="showLoadMore" class="text-center"><a href="javascript:;" @click="loadMoreSearch" class="btn-learn-more">加载更多</a></div>
+            <div v-show="searchLoading" class="text-center">加载中...
+            </div>
+            <div v-show="!searchCount &amp;&amp; !searchLoading" class="text-center">未找到结果
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    window.Config = window.config = {
+      sdk: "mobile-sdk",
+      locale: "en",
+      environment: "development",
+      api_host: ""
+    };
+    
+  </script>
+  <!-- build:js /javascripts/doc-vendor.js-->
+  <script src="../../javascripts/lib/jquery-2.1.4.min.js" type="text/javascript"></script>
+  <script src="../../javascripts/lib/bootstrap.js" type="text/javascript"></script>
+  <script src="../../javascripts/lib/vue.min.js" type="text/javascript"></script>
+  <!-- endbuild-->
+  <!-- build:js /javascripts/doc-app.js-->
+  <script src="../../javascripts/util/cookie.js" type="text/javascript"></script>
+  <script src="../../javascripts/util/url-manager.js" type="text/javascript"></script>
+  <script src="../../javascripts/util/ajax-manager.js" type="text/javascript"></script>
+  <script src="../../javascripts/base/footer.js" type="text/javascript"></script>
+  <script src="../../javascripts/base/header.js" type="text/javascript"></script>
+  <script src="../../javascripts/util/searcher.js" type="text/javascript"></script>
+  <script src="../../javascripts/search_index.js" type="text/javascript"></script>
+  <script src="../../javascripts/searchdoc.js" type="text/javascript"></script>
+  <script src="../../javascripts/api.js" type="text/javascript"></script>
+  <!-- endbuild-->
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-43055594-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>

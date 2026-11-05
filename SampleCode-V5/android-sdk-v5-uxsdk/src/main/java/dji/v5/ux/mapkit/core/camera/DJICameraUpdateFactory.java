@@ -177,7 +177,7 @@ public final class DJICameraUpdateFactory {
 
         @Override
         public DJICameraPosition getCameraPosition(@NonNull DJIMap map) {
-            // TODO: 6/21/17 map.getCameraForLatLngBounds()
+            // 6/21/17 map.getCameraForLatLngBounds()
             return null;
         }
 

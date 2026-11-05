@@ -1,0 +1,121 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'dji.sample.patrol'
+    compileSdkVersion Integer.parseInt(project.ANDROID_COMPILE_SDK_VERSION)
+
+    defaultConfig {
+        applicationId "dji.sample.patrol"
+        minSdkVersion Integer.parseInt(project.ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "1.0.0"
+        // 巡逻独立后台地址：只认本模块的 PATROL_SERVER_URL 属性（默认 18081）。
+        // 不再回退读 FLIGHT_TASK_SERVER_URL——那是飞行任务 Demo 的属性（指向 8080），
+        // 一旦巡逻漏配属性会静默连到另一个 Demo 的服务上。
+        buildConfigField "String", "PATROL_SERVER_URL", "\"${project.findProperty('PATROL_SERVER_URL') ?: 'http://127.0.0.1:18081'}\""
+        // AppKey 与飞行任务、插件 Demo 保持一致：统一由聚合工程根目录 gradle.properties
+        // 的 PATROL_SAMPLE_API_KEY 注入，不再读模块级 local.properties。
+        manifestPlaceholders = [DJI_API_KEY: project.findProperty('PATROL_SAMPLE_API_KEY') ?: '']
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('msdkkeystore.jks')
+            storePassword '123456'
+            keyAlias 'msdkkeystore'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs += ["-Xjvm-default=all"]
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    packagingOptions {
+        // 加固 so 不可 strip
+        doNotStrip "*/*/*.so"
+        // AGP 8 默认 useLegacyPackaging=false 会导致 so 不压缩、apk 体积翻倍，恢复 AGP7 行为
+        jniLibs {
+            useLegacyPackaging true
+        }
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
+
+    dependencies {
+        compileOnly deps.aircraftProvided
+        implementation deps.aircraft
+        runtimeOnly deps.networkImp
+
+        //本地sdk aar依赖编译时，需要手动添加sdk对其他aar的依赖。
+        /** <-----------------sdk 所需--------------------> **/
+        api deps.gson
+        api deps.rx3Android
+        api deps.rx3Kt
+        api deps.documentfile
+        api deps.wpmzSdk
+        runtimeOnly deps.rx2Java
+        api deps.room
+        api deps.room_rxjava
+        api deps.sqlcipher
+        implementation deps.aspectj_rt
+        implementation deps.xcrash
+        implementation deps.wire
+        implementation deps.okio
+        api project(':uxsdk')
+
+        //网路库
+        //runtimeOnly networkImp
+        implementation deps.okhttp3
+
+        /** <-----------------open-pilot-patrol-sample 所需--------------------> **/
+        // :utils、:open-pilot-base、:open-pilot-client、csdkAircraft 已 embed 进 aircraft aar，不能再重复依赖。
+        implementation deps.appcompat
+        implementation deps.constraintLayout
+        implementation deps.aacCommon
+        implementation deps.aacRuntime
+        implementation deps.fragment
+        implementation deps.lifecycleViewModel
+        implementation deps.lifecycleLiveData
+        implementation deps.material
+        implementation deps.cardview
+
+        // ConnectionVM / SdkBootstrapper 使用 StateFlow + viewModelScope
+        implementation deps.coroutinesAndroid
+        implementation deps.lifecycleViewModelKtx
+    }
+}

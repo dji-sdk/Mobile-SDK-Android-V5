@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Remote View - ListView Case 预览</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: transparent; color: #FFFFFF; margin: 0; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+        .rv-card { background-color: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+        .rv-card-title { font-size: 16px; font-weight: bold; margin: 0 0 -8px 0; color: #FFFFFF; }
+        .rv-section-title { font-size: 14px; color: #CCCCCC; margin: 0 0 6px 0; }
+        .rv-divider { height: 1px; background-color: rgba(255, 255, 255, 0.15); margin: 2px 0; }
+
+        .rv-item-container { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+
+        /* ====== ListView 容器 ====== */
+        .rv-list-view {
+            background-color: transparent; /* 去掉了深蓝色背景 */
+            border-radius: 4px; /* 对应源码 2f，Web上稍微大点更圆润 */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 0.5px solid #FFFFFF; /* 改为白色实线边框 */
+        }
+
+        /* 列表项基础 */
+        .rv-list-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 12px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.05);
+            /* 分割线逻辑 */
+            border-bottom: 0.5px solid #FFECF0F1; /* 极浅灰白分割线 */
+        }
+        
+        /* 最后一项去掉底部分割线 */
+        .rv-list-item:last-child {
+            border-bottom: none;
+        }
+
+        /* 鼠标悬停/点击反馈 */
+        .rv-list-item:active { background-color: rgba(255, 255, 255, 0.15); }
+
+        /* 内容元素 */
+        .item-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .item-text-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+        }
+        
+        .item-title { font-size: 14px; color: #FFFFFF; }
+        .item-subtitle { font-size: 12px; color: #888888; }
+        .item-title-bold { font-size: 15px; font-weight: bold; color: #FFFFFF; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Card 01 -->
+    <div class="rv-card-title" data-i18n="card_type">01 组件类型</div>
+    <div class="rv-card">
+        <div class="rv-section-title" data-i18n="sec_basic_list">基础列表</div>
+        <div class="rv-item-container">
+            <div class="rv-list-view">
+                <div class="rv-list-item"><div class="item-title">Item 1</div></div>
+                <div class="rv-list-item"><div class="item-title">Item 2</div></div>
+                <div class="rv-list-item"><div class="item-title">Item 3</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 02 -->
+    <div class="rv-card-title" data-i18n="card_style_02">02 组件样式</div>
+    <div class="rv-card">
+        <!-- 文本列表 -->
+        <div class="rv-section-title" data-i18n="sec_text_list">文本列表</div>
+        <div class="rv-item-container">
+            <div class="rv-list-view">
+                <div class="rv-list-item"><div class="item-title">Item 1</div></div>
+                <div class="rv-list-item"><div class="item-title">Item 2</div></div>
+                <div class="rv-list-item"><div class="item-title">Item 3</div></div>
+            </div>
+        </div>
+
+        <div class="rv-divider"></div>
+
+        <!-- 图标文本列表 -->
+        <div class="rv-section-title" data-i18n="sec_icon_text_list">图标文本列表</div>
+        <div class="rv-item-container">
+            <div class="rv-list-view">
+                <div class="rv-list-item">
+                    <div class="item-icon">
+                        <!-- 成功图标 绿勾 -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#00C774" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="item-title" data-i18n="list_success">成功</div>
+                </div>
+                <div class="rv-list-item">
+                    <div class="item-icon">
+                        <!-- 失败图标 红叉 -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#E41F29" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </div>
+                    <div class="item-title" data-i18n="list_fail">失败</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rv-divider"></div>
+
+        <!-- 图文双行列表 -->
+        <div class="rv-section-title" data-i18n="sec_icon_twoline_list">图文双行列表</div>
+        <div class="rv-item-container">
+            <div class="rv-list-view">
+                <div class="rv-list-item">
+                    <div class="item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#00C774" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="item-text-content">
+                        <div class="item-title-bold" data-i18n="list_success">成功</div>
+                        <div class="item-subtitle" data-i18n="list_success_desc">这是一个成功图标</div>
+                    </div>
+                </div>
+                <div class="rv-list-item">
+                    <div class="item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#E41F29" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </div>
+                    <div class="item-text-content">
+                        <div class="item-title-bold" data-i18n="list_fail">失败</div>
+                        <div class="item-subtitle" data-i18n="list_fail_desc">这是一个失败图标</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // i18n 字典：key -> { zh, en }。默认 HTML 内文案为中文（无 JS 时兜底）。
+        const I18N = {
+            card_type:             { zh: "01 组件类型", en: "01 Component Type" },
+            card_style_02:         { zh: "02 组件样式", en: "02 Component Style" },
+            sec_basic_list:        { zh: "基础列表",     en: "Basic List" },
+            sec_text_list:         { zh: "文本列表",     en: "Text List" },
+            sec_icon_text_list:    { zh: "图标文本列表", en: "Icon Text List" },
+            sec_icon_twoline_list: { zh: "图文双行列表", en: "Icon Two-Line List" },
+            list_success:          { zh: "成功",         en: "Success" },
+            list_fail:             { zh: "失败",         en: "Failed" },
+            list_success_desc:     { zh: "这是一个成功图标", en: "This is a success icon" },
+            list_fail_desc:        { zh: "这是一个失败图标", en: "This is a failure icon" }
+        };
+        function setLang(lang) {
+            const l = (lang === "zh") ? "zh" : "en";
+            document.documentElement.lang = (l === "zh") ? "zh-CN" : "en";
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n")];
+                if (t) el.innerHTML = t[l];
+            });
+            document.querySelectorAll("[data-i18n-value]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-value")];
+                if (t) el.value = t[l];
+            });
+            document.querySelectorAll("[data-i18n-title]").forEach(function (el) {
+                const t = I18N[el.getAttribute("data-i18n-title")];
+                if (t) el.title = t[l];
+            });
+        }
+    </script>
+</body>
+</html>

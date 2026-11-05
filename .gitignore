@@ -88,6 +88,10 @@ lint/tmp/
 
 *.DS_Store
 
+# 示例自带资源：静默升级示例的测试 apk、MOP 示例日志，需随源码发布
+!SampleCode-V5/android-sdk-v5-sample/src/main/assets/apk/app-debug.apk
+!SampleCode-V5/android-sdk-v5-sample/src/main/assets/mop/mopSample.log
+
 # ivtTest
 android-sdk-v5-ivt/tools/*_testfile.txt
 android-sdk-v5-ivt/tools/results/

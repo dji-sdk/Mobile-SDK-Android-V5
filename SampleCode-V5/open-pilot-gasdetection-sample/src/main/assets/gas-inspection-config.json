@@ -1,0 +1,27 @@
+{
+  "catalogVersion": "1.0.0",
+  "channels": [
+    {
+      "wireId": 1,
+      "channelId": "so2",
+      "name": "SO2",
+      "unit": "µg/m³",
+      "samplingPeriodMs": 1000
+    },
+    {
+      "wireId": 2,
+      "channelId": "ox",
+      "name": "Ox",
+      "unit": "µg/m³",
+      "samplingPeriodMs": 1000
+    },
+    {
+      "wireId": 3,
+      "channelId": "co2",
+      "name": "CO2",
+      "unit": "ppm",
+      "samplingPeriodMs": 1000
+    }
+  ],
+  "staleAfterMs": 5000
+}

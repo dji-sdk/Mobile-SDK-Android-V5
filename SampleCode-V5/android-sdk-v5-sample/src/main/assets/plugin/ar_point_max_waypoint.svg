@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1" width="45" height="45" viewBox="0 0 45 45">
+    <g>
+        <ellipse id="circle_normal_select_bg"
+            cx="22.49997615814209"
+            cy="22.50009822845459"
+            rx="11.40000057220459"
+            ry="11.40000057220459"
+            fill-opacity="0"
+            stroke-opacity="0.5"
+            stroke="#000000"
+            fill="none"
+            stroke-width="3.400000047683716" />
+    </g>
+    <g>
+        <ellipse id="circle_normal_select_color"
+            cx="22.49997615814209"
+            cy="22.50009822845459"
+            rx="11.40000057220459"
+            ry="11.40000057220459"
+            fill-opacity="0"
+            stroke-opacity="1"
+            stroke="#1ABDE3"
+            fill="none"
+            stroke-width="2.4000000953674316" />
+    </g>
+    <g>
+        <g>
+            <path id="left_border_select_bg"
+                d="M8.101,14.37L8.101,7.196L15.3,7.196"
+                stroke-opacity="0.5"
+                stroke="#000000"
+                stroke-width="2.8"
+                stroke-linecap="square" />
+        </g>
+        <g>
+            <path id="bottom_border_select_bg"
+                d="M8.101,30.63L8.101,37.804L15.3,37.804"
+                stroke-opacity="0.5"
+                stroke="#000000"
+                stroke-width="2.8"
+                stroke-linecap="square" />
+        </g>
+        <g>
+            <path id="right_border_select_bg"
+                d="M36.899,14.37L36.899,7.196L29.7,7.196"
+                stroke-opacity="0.5"
+                stroke="#000000"
+                stroke-width="2.8"
+                stroke-linecap="square" />
+        </g>
+        <g>
+            <path id="top_border_select_bg"
+                d="M36.899,30.63L36.899,37.804L29.7,37.804"
+                stroke-opacity="0.5"
+                stroke="#000000"
+                stroke-width="2.8"
+                stroke-linecap="square" />
+        </g>
+
+        <g>
+            <path id="left_border_select_color"
+                d="M8.101,14.37L8.101,7.196L15.3,7.196"
+                stroke-opacity="1"
+                stroke="#1ABDE3"
+                stroke-width="1.8"
+                stroke-linecap="square"
+            />
+        </g>
+
+        <g>
+            <path id="bottom_border_select_color"
+                d="M8.101,30.63L8.101,37.804L15.3,37.804"
+                stroke-opacity="1"
+                stroke="#1ABDE3"
+                stroke-width="1.8"
+                stroke-linecap="square"
+            />
+        </g>
+        <g>
+            <path id="right_border_select_color"
+                d="M36.899,14.37L36.899,7.196L29.7,7.196"
+                stroke-opacity="1"
+                stroke="#1ABDE3"
+                stroke-width="1.8"
+                stroke-linecap="square"/>
+        </g>
+        <g>
+            <path id="top_border_select_color"
+                d="M36.899,30.63L36.899,37.804L29.7,37.804"
+                stroke-opacity="1"
+                stroke="#1ABDE3"
+                stroke-width="1.8"
+                stroke-linecap="square"/>
+        </g>
+    </g>
+</svg>

@@ -11,7 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragLoginAccountPageBinding
 import dji.sampleV5.aircraft.models.LoginVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.DJILoginError
 import dji.v5.common.error.IDJIError

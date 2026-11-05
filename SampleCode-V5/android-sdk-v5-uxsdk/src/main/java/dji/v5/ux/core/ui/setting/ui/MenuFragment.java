@@ -39,7 +39,6 @@ public abstract class MenuFragment extends AppFragment {
         if (isAnimated) {
             transaction.setCustomAnimations(R.anim.uxsdk_push_right_in, R.anim.uxsdk_fade_out, R.anim.uxsdk_fade_in, R.anim.uxsdk_push_right_out);
         }
-        // TODO
         // transaction.setCustomAnimations(R.animator.fragment_slide_right_enter, R.animator.fragment_slide_right_exit);
         transaction.replace(R.id.fragment_content, menuFragment);
         transaction.addToBackStack(menuFragment.getPreferencesTitle());

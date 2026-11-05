@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 import dji.sdk.keyvalue.utils.ProductUtil
 import dji.sdk.keyvalue.value.flightcontroller.FCFlightMode
@@ -21,7 +20,7 @@ import dji.v5.ux.core.base.DJISDKModel
 import dji.v5.ux.core.base.SchedulerProvider
 import dji.v5.ux.core.base.widget.ConstraintLayoutWidget
 import dji.v5.ux.core.communication.ObservableInMemoryKeyedStore
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.ux.core.util.ViewUtil
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.CompletableObserver
@@ -221,7 +220,7 @@ class AvoidanceShortcutWidget @JvmOverloads constructor(
      */
     private fun getAPASModeRange(): List<ObstacleAvoidanceType> {
         //行业机中只有M3支持绕行，其他机型都只支持刹停和关闭
-        return if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct()) {
+        return if (ProductUtil.isM3EProduct() || ProductUtil.isM4EProduct() || ProductUtil.isM4DProduct() || ProductUtil.isM5Product()) {
             listOf(
                 ObstacleAvoidanceType.BRAKE,
                 ObstacleAvoidanceType.BYPASS,

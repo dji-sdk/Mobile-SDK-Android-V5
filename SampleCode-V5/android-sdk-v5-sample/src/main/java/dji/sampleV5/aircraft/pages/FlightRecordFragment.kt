@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.aircraft.databinding.FragFlightRecordPageBinding
 import dji.sampleV5.aircraft.models.FlightRecordVM
-import dji.sampleV5.aircraft.util.Helper
+import dji.v5.ux.util.Helper
 import dji.v5.utils.common.DiskUtil
 
 /**

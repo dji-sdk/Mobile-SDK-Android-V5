@@ -1,9 +1,7 @@
 package dji.sampleV5.aircraft.pages
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dji.sampleV5.aircraft.R
-import dji.sampleV5.aircraft.databinding.FragAppSilentlyUpgradePageBinding
 import dji.sampleV5.aircraft.databinding.FragUpgradePageBinding
 import dji.sampleV5.aircraft.models.UpgradeVM
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.ToastUtils
 import dji.v5.common.callback.CommonCallbacks
 import dji.v5.common.error.IDJIError
 import dji.v5.manager.aircraft.upgrade.UpgradeProgressState

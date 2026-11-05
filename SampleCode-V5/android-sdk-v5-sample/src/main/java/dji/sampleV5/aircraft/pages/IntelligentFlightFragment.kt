@@ -9,16 +9,16 @@ import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import dji.sampleV5.aircraft.R
 import dji.sampleV5.aircraft.databinding.FragIntelligentFlightPageBinding
 import dji.sampleV5.aircraft.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.aircraft.models.CameraStreamDetailVM
 import dji.sampleV5.aircraft.models.IntelligentFlightVM
-import dji.sampleV5.aircraft.util.Helper
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.Helper
+import dji.v5.ux.util.ToastUtils
 import dji.sdk.keyvalue.value.camera.CameraVideoStreamSourceType
 import dji.sdk.keyvalue.value.common.ComponentIndexType
 import dji.sdk.keyvalue.value.common.DoubleRect
@@ -150,7 +150,7 @@ class IntelligentFlightFragment : DJIFragment() {
         }
         intelligentVM.autoSensingInfo.observe(viewLifecycleOwner) {
             autoSensingInfo = it
-            binding?.overLayerView?.onTargetChange(autoSensingInfo.targets)
+            binding?.overLayerView?.onTargetChange(autoSensingInfo.targets, autoSensingInfo.parsingMask)
         }
         intelligentVM.aircraftHeight.observe(viewLifecycleOwner) {
             aircraftHeight = it
@@ -160,11 +160,11 @@ class IntelligentFlightFragment : DJIFragment() {
             aircraftLocation = it
             updateIntelligentFlightInfo()
         }
-        intelligentVM.runningModelIndex.observe(viewLifecycleOwner){
+        intelligentVM.runningModelIndex.observe(viewLifecycleOwner) {
             runningModelIndex = it
             updateIntelligentFlightInfo()
         }
-        intelligentVM.intelligentModels.observe(viewLifecycleOwner){
+        intelligentVM.intelligentModels.observe(viewLifecycleOwner) {
             intelligentModels = it
             updateIntelligentFlightInfo()
         }
@@ -201,11 +201,13 @@ class IntelligentFlightFragment : DJIFragment() {
             binding?.mapWidget?.visibility = View.VISIBLE
             binding?.svCamera?.visibility = View.INVISIBLE
             binding?.overLayerView?.visibility = View.INVISIBLE
+            updateInfoStyle(showFpv = false)
         }
         binding?.btnShowFpv?.setOnClickListener {
             binding?.mapWidget?.visibility = View.INVISIBLE
             binding?.svCamera?.visibility = View.VISIBLE
             binding?.overLayerView?.visibility = View.VISIBLE
+            updateInfoStyle(showFpv = true)
         }
         binding?.svCamera?.setOnTouchListener { v, event ->
             when (event.action) {
@@ -239,6 +241,19 @@ class IntelligentFlightFragment : DJIFragment() {
                 else -> {}
             }
             return@setOnTouchListener true
+        }
+    }
+
+    private fun updateInfoStyle(showFpv: Boolean) {
+        binding?.intelligentFlightInfoTv?.apply {
+            val textColor = if (showFpv) R.color.white else R.color.red
+            setTextColor(ContextCompat.getColor(context, textColor))
+            setShadowLayer(
+                if (showFpv) 6f else 0f,
+                0f,
+                0f,
+                ContextCompat.getColor(context, android.R.color.black)
+            )
         }
     }
 
@@ -307,34 +322,17 @@ class IntelligentFlightFragment : DJIFragment() {
 
     private fun initForFlyTo() {
         binding?.btnStartFlyToMission?.setOnClickListener {
-            selectPinPoints { location ->
-                KeyValueDialogUtil.showInputDialog(
-                    activity, "(MaxSpeed,SecurityTakeoffHeight,TargetHeight)",
-                    "14,20,50", "", false
-                ) {
-                    var maxSpeed = 0
-                    var securityTakeoffHeight = 0
-                    var targetHeight = 0
-                    it?.split(",")?.apply {
-                        if (this.size != 3 && this[0].toIntOrNull() == null && this[1].toIntOrNull() == null && this[2].toIntOrNull() == null) {
-                            ToastUtils.showToast("Value Parse Error")
-                            return@showInputDialog
-                        }
-                        maxSpeed = this[0].toInt()
-                        securityTakeoffHeight = this[1].toInt()
-                        targetHeight = this[2].toInt()
-                    }
-                    val target = FlyToTarget()
-                    target.targetLocation = location
-                    target.targetLocation.altitude = targetHeight.toDouble()
-                    target.maxSpeed = maxSpeed
-                    target.securityTakeoffHeight = securityTakeoffHeight
-                    intelligentVM.startFlyTo(target)
-                }
+            doOnFlyToTarget {
+                intelligentVM.startFlyTo(it)
             }
         }
         binding?.btnStopFlyToMission?.setOnClickListener {
             intelligentVM.stopFlyTo()
+        }
+        binding?.btnUpdateFlyToMission?.setOnClickListener {
+            doOnFlyToTarget {
+                intelligentVM.updateFlyToTarget(it)
+            }
         }
         binding?.btnSetFlyToMode?.setOnClickListener {
             val index = arrayListOf(FlyToMode.SET_HEIGHT, FlyToMode.SMART_HEIGHT)
@@ -514,6 +512,34 @@ class IntelligentFlightFragment : DJIFragment() {
                 )
             )
             resetIndex()
+        }
+    }
+
+    private fun doOnFlyToTarget(onAction: ((FlyToTarget) -> Unit)) {
+        selectPinPoints { location ->
+            KeyValueDialogUtil.showInputDialog(
+                activity, "(MaxSpeed,SecurityTakeoffHeight,TargetHeight)",
+                "14,20,50", "", false
+            ) {
+                var maxSpeed = 0
+                var securityTakeoffHeight = 0
+                var targetHeight = 0
+                it?.split(",")?.apply {
+                    if (this.size != 3 && this[0].toIntOrNull() == null && this[1].toIntOrNull() == null && this[2].toIntOrNull() == null) {
+                        ToastUtils.showToast("Value Parse Error")
+                        return@showInputDialog
+                    }
+                    maxSpeed = this[0].toInt()
+                    securityTakeoffHeight = this[1].toInt()
+                    targetHeight = this[2].toInt()
+                }
+                val target = FlyToTarget()
+                target.targetLocation = location
+                target.targetLocation.altitude = targetHeight.toDouble()
+                target.maxSpeed = maxSpeed
+                target.securityTakeoffHeight = securityTakeoffHeight
+                onAction(target)
+            }
         }
     }
 

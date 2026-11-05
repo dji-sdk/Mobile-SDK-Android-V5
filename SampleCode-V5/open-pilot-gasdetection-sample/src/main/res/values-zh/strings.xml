@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 应用名备用资源；Manifest android:label 实际使用 dji_open_pilot_plugin_name -->
+    <string name="app_name">气体检测</string>
+
+    <!-- Pilot 插件合约文案：资源名由 open-pilot-client 约定，不可修改 -->
+    <string name="dji_open_pilot_plugin_name">气体检测</string>
+    <string name="dji_open_pilot_plugin_description">气体检测载荷演示</string>
+    <string name="dji_open_pilot_plugin_developer">DJI Inc.</string>
+
+    <!-- 负载调试页：输入与操作 -->
+    <string name="gas_max_bytes_hint">包长上限：16..255（协议）/ 1..255（原始）</string>
+    <string name="gas_hex_input_label">按十六进制发送；不勾选则按 UTF-8 文本</string>
+    <string name="gas_payload_input_hint">00 41 FF</string>
+    <string name="gas_apply_port">应用端口 / 开始接收</string>
+    <string name="gas_send_bytes">发送</string>
+    <string name="gas_protocol_mode">使用可复用协议桥接（JSON），关闭则走原始调试</string>
+
+    <!-- 负载调试页：协议模式 -->
+    <string name="gas_protocol_listening">协议桥接已启用：%1$s，最大 %2$d 字节</string>
+    <string name="gas_protocol_error">桥接创建被拒绝：%1$s</string>
+    <string name="gas_protocol_state">桥接状态：%1$s %2$s</string>
+    <string name="gas_protocol_event">事件 cmd=%1$d 参数=%2$s</string>
+    <string name="gas_protocol_result">结果：%1$s</string>
+
+    <!-- 负载调试页：端口与在线状态 -->
+    <string name="gas_ports_idle">请选择实际在线的负载端口，然后点击应用</string>
+    <string name="gas_ports_online">在线端口：%1$s；%2$s：%3$s</string>
+    <string name="gas_port_item">%1$s（%2$d）</string>
+
+    <!-- 负载调试页：操作校验与错误提示 -->
+    <string name="gas_error_pilot_not_connected">Pilot 未连接</string>
+    <string name="gas_error_select_port_and_bytes">请选择端口，并填写 1..255 之间的最大字节数</string>
+    <string name="gas_error_port_not_online">%1$s 不在线</string>
+    <string name="gas_listening">正在监听 %1$s，最大 %2$d 字节。飞机实际 MTU 需实机确认。</string>
+
+    <!-- SDK 注册与连接状态（入口页状态栏显示） -->
+    <string name="gas_status_initializing">SDK 初始化中</string>
+    <string name="gas_status_init_progress">%1$s %2$d</string>
+    <string name="gas_status_registered">SDK 已注册</string>
+    <string name="gas_status_register_failed">注册失败：%1$s</string>
+    <string name="gas_status_aircraft_connected">飞机已连接：%1$d</string>
+    <string name="gas_status_aircraft_disconnected">飞机已断开：%1$d</string>
+    <string name="gas_status_aircraft_changed">飞机已变更：%1$d</string>
+    <string name="gas_status_pilot">Pilot：%1$s</string>
+    <string name="gas_status_pilot_incompatible">Pilot 版本不兼容：%1$s</string>
+
+    <!-- 入口页：插件身份与就绪状态 -->
+    <string name="entry_version">版本 %1$s</string>
+    <string name="entry_back_to_pilot">返回 Pilot</string>
+    <string name="entry_pilot_connected">Pilot 已连接</string>
+    <string name="entry_pilot_disconnected">Pilot 未连接</string>
+    <string name="entry_service_checking">服务检测中</string>
+    <string name="entry_service_connected">服务已连接</string>
+    <string name="entry_service_unavailable">服务不可用</string>
+    <string name="entry_pilot_not_connected">未连接 Pilot</string>
+    <string name="entry_status_sdk_unregistered">SDK 未注册</string>
+    <string name="entry_status_pilot_disconnected">Pilot 未连接</string>
+    <string name="entry_status_aircraft_disconnected">飞机未连接</string>
+    <string name="entry_status_all_ready">全部就绪</string>
+    <string name="entry_open_debug">负载调试</string>
+
+    <!-- 调试页：标题与字段标签 -->
+    <string name="debug_title">负载调试</string>
+    <string name="debug_back">返回</string>
+    <string name="gas_port_label">载荷端口</string>
+    <string name="gas_max_bytes_label">最大字节数</string>
+    <string name="gas_payload_input_label">载荷数据</string>
+    <string name="gas_log_label">日志</string>
+
+    <!-- 检测任务：阶段与预检 -->
+    <string name="gas_task_title">任务工单</string>
+    <string name="gas_task_none">暂无任务</string>
+    <string name="gas_task_conflict">已有进行中任务</string>
+    <string name="gas_tab_task">任务</string>
+    <string name="gas_task_accept">接受</string>
+    <string name="gas_task_reject">拒绝</string>
+    <string name="gas_task_manual">改为手动监测</string>
+    <string name="gas_task_recheck">重新预检</string>
+    <string name="gas_task_finish">结束任务</string>
+    <string name="gas_task_stage_label">阶段：%1$s</string>
+    <string name="gas_task_stage_idle">空闲</string>
+    <string name="gas_task_stage_new_order">收到任务</string>
+    <string name="gas_task_stage_detail">任务详情</string>
+    <string name="gas_task_stage_prep">预检中</string>
+    <string name="gas_task_stage_not_ready">预检未通过</string>
+    <string name="gas_task_stage_ready">可启动</string>
+    <string name="gas_task_stage_manual">手动监测</string>
+    <string name="gas_task_stage_finalizing">收尾中</string>
+    <string name="gas_task_stage_flyto">飞往目标</string>
+    <string name="gas_task_stage_search">搜索目标</string>
+    <string name="gas_task_stage_follow">跟随采样</string>
+    <string name="gas_task_preflight_pass">预检通过</string>
+    <string name="gas_task_preflight_fail">预检未通过：%1$s</string>
+    <string name="gas_task_failure_payload_offline">载荷未上线</string>
+    <string name="gas_task_failure_config_invalid">通道配置不可用</string>
+    <string name="gas_task_failure_auto_unsupported">机型不支持自动作业</string>
+    <string name="gas_task_failure_auto_unknown">机型能力未知</string>
+    <string name="gas_task_failure_unknown">未知原因</string>
+    <string name="gas_task_failure_aircraft_disconnected">飞机未连接</string>
+    <string name="gas_task_failure_not_flying">飞机未起飞</string>
+    <string name="gas_task_failure_gps_weak">定位信号不足</string>
+    <string name="gas_task_failure_battery_low">电量不足</string>
+    <string name="gas_task_failure_mission_running">其它智能功能运行中</string>
+    <string name="gas_task_failure_authority_occupied">飞行控制权被占用</string>
+    <string name="gas_task_failure_target_missing">目标点或高度缺失</string>
+    <string name="gas_task_target">目标点 %1$.5f, %2$.5f</string>
+    <string name="gas_task_boundary">安全边界 %1$.0f m</string>
+    <string name="gas_task_requirements">要求：%1$s</string>
+    <string name="gas_task_deadline">截止：%1$s</string>
+    <string name="gas_task_value_missing">--</string>
+    <string name="gas_task_error_network">同步失败：%1$s</string>
+    <string name="gas_task_error_http">同步失败：HTTP %1$d</string>
+    <string name="gas_task_error_parse">数据解析失败：%1$s</string>
+
+    <!-- 悬浮窗 -->
+    <string name="gas_floating_collapsed">气体检测</string>
+    <string name="gas_floating_detail">查看详情</string>
+    <string name="gas_floating_collapse">收起</string>
+    <string name="gas_floating_entry_hint">暂无进行中的检测任务</string>
+    <string name="gas_floating_entry_open_app">打开气体检测 APP</string>
+    <string name="gas_floating_fresh">载荷在线</string>
+    <string name="gas_floating_offline">载荷离线</string>
+
+    <!-- 悬浮窗：任务待接收态 -->
+    <string name="gas_floating_job_stage">任务接收</string>
+    <string name="gas_floating_job_label_stage">阶段</string>
+    <string name="gas_floating_job_label_task">任务</string>
+    <string name="gas_floating_job_position">%1$d/%2$d</string>
+    <string name="gas_floating_job_previous">上一个</string>
+    <string name="gas_floating_job_next">下一个</string>
+    <string name="gas_floating_job_deadline_none">未提供</string>
+
+    <!-- 悬浮窗：任务链节点 -->
+    <string name="gas_chain_receive">任务接收</string>
+    <string name="gas_chain_prepare">准备预检</string>
+    <string name="gas_chain_flyto">飞往目标</string>
+    <string name="gas_chain_sampling">搜索采样</string>
+    <string name="gas_chain_finish">收尾完成</string>
+
+    <!-- 自动飞行 -->
+    <string name="gas_auto_start">启动自动飞行</string>
+    <string name="gas_auto_exit">退出自动</string>
+    <string name="gas_auto_emergency_stop">紧急停止</string>
+    <string name="gas_auto_status">自动：%1$s · 控制权 %2$s</string>
+    <string name="gas_auto_status_with_reason">自动：%1$s · 控制权 %2$s · %3$s</string>
+    <string name="gas_auto_phase_starting">启动中</string>
+    <string name="gas_auto_phase_flying">飞行中</string>
+    <string name="gas_auto_phase_arrived">已到达</string>
+    <string name="gas_auto_phase_handover">待接管</string>
+    <string name="gas_auto_flyto_prepare">准备中</string>
+    <string name="gas_auto_flyto_launch_pre">起飞前</string>
+    <string name="gas_auto_flyto_launch">起飞中</string>
+    <string name="gas_auto_flyto_marchon">巡航中</string>
+    <string name="gas_auto_flyto_finished">已到达</string>
+    <string name="gas_auto_flyto_interrupted">已中断</string>
+    <string name="gas_auto_flyto_unknown">未知</string>
+    <string name="gas_auto_authority_rc">遥控器</string>
+    <string name="gas_auto_authority_msdk">MSDK</string>
+    <string name="gas_auto_authority_osdk">OSDK</string>
+    <string name="gas_auto_authority_airport">机场</string>
+    <string name="gas_auto_authority_auto_test">自动测试</string>
+    <string name="gas_auto_authority_unknown">未知</string>
+    <string name="gas_auto_handover_user_exit">飞手退出</string>
+    <string name="gas_auto_handover_interrupted">任务中断</string>
+    <string name="gas_auto_handover_not_confirmed">命令未确认</string>
+    <string name="gas_auto_handover_not_advanced">状态未推进</string>
+    <string name="gas_auto_handover_disconnected">连接中断</string>
+    <string name="gas_auto_handover_battery">电量不足</string>
+    <string name="gas_auto_handover_gps">定位不可用</string>
+    <string name="gas_auto_handover_fc">飞控接管</string>
+    <string name="gas_auto_handover_stop_failed">紧急停止失败</string>
+    <string name="gas_auto_confirm_title">确认启动自动飞行？</string>
+    <string name="gas_auto_confirm_message">目标点 %1$.6f, %2$.6f · 高度 %3$d m。飞行过程中可随时退出自动。</string>
+    <string name="gas_auto_confirm_start">确认启动</string>
+    <string name="gas_auto_confirm_cancel">取消</string>
+    <string name="gas_auto_stop_confirm_title">确认紧急停止？</string>
+    <string name="gas_auto_stop_confirm_message">仅在遥控器无法接管时使用。该操作会向飞机下发急停命令。</string>
+    <string name="gas_auto_stop_confirm_ok">立即停止</string>
+    <string name="gas_auto_stop_issued">已下发紧急停止</string>
+    <string name="gas_auto_stop_failed">紧急停止失败：%1$s</string>
+    <string name="gas_auto_start_rejected">无法启动：预检已失效</string>
+    <string name="gas_auto_confirm_handover">确认接管</string>
+    <string name="gas_auto_exit_hint">请用遥控器接管</string>
+    <string name="gas_floating_notice_nav_failed">无法打开插件页面</string>
+
+    <!-- 监测 / 传输主页 -->
+    <string name="gas_block_task_info">任务信息</string>
+    <string name="gas_block_auto">自动飞行</string>
+    <string name="gas_transfer_photos">任务照片</string>
+    <string name="gas_tab_tasks">任务</string>
+    <string name="gas_tab_device">设备</string>
+    <string name="gas_job_status_dispatched">已下发</string>
+    <string name="gas_job_status_accepted">已接受</string>
+    <string name="gas_job_status_in_progress">进行中</string>
+    <string name="gas_job_status_finalizing">收尾中</string>
+    <string name="gas_job_status_completed">已完成</string>
+    <string name="gas_job_status_cancelled">已取消</string>
+    <string name="gas_job_status_rejected">已拒绝</string>
+    <string name="gas_task_group_active">进行中</string>
+    <string name="gas_task_group_pending">待处理</string>
+    <string name="gas_task_group_done">已完成</string>
+    <string name="gas_task_detail_empty">在左侧选择一个任务查看详情</string>
+    <string name="gas_task_list_empty">暂无任务</string>
+    <string name="gas_task_select_blocked">请先结束当前任务再切换</string>
+    <string name="gas_task_multiple_active">存在多个进行中任务，仅可操作当前选中任务</string>
+    <string name="gas_task_item_meta">目标点 %1$.5f, %2$.5f</string>
+    <string name="gas_transfer_task">任务：%1$s</string>
+    <string name="gas_transfer_count">照片：%1$d 张</string>
+    <string name="gas_transfer_no_task">未选中任务</string>
+    <string name="gas_transfer_empty">暂无照片，任务过程中拍摄的照片会显示在这里</string>
+    <string name="gas_capture_photo">拍照（未启用）</string>
+    <string name="gas_capture_hint">拍照功能将在后续版本开放</string>
+    <string name="gas_tab_monitor">监测</string>
+    <string name="gas_tab_transport">传输</string>
+    <string name="gas_section_channels">通道</string>
+    <string name="gas_section_batch">采样批次</string>
+    <string name="gas_section_ports">载荷端口</string>
+    <string name="gas_section_freshness">数据时效</string>
+    <string name="gas_section_catalog">通道映射</string>
+    <string name="gas_device_latest">最新数据 %1$d 秒前</string>
+    <string name="gas_device_details">详情</string>
+    <string name="gas_device_expand">展开</string>
+    <string name="gas_device_collapse">收起</string>
+    <string name="gas_device_advanced">高级诊断</string>
+    <string name="gas_payload_summary">在线载荷 %1$d · 端口 %2$d</string>
+    <string name="gas_channel_empty">暂无任务通道，接受任务后显示读数</string>
+    <string name="gas_channel_not_provided">未提供</string>
+    <string name="gas_channel_quality">质量：%1$s</string>
+    <string name="gas_channel_source_time">源时间：%1$s</string>
+    <string name="gas_channel_received_time">接收时间：%1$s</string>
+    <string name="gas_channel_stale">已过期 · 最后更新 %1$s</string>
+    <string name="gas_channel_fresh">新鲜</string>
+    <string name="gas_channel_insufficient">样本不足</string>
+    <string name="gas_trend_rising">上升</string>
+    <string name="gas_trend_falling">下降</string>
+    <string name="gas_trend_stable">平稳</string>
+    <string name="gas_quality_valid">有效</string>
+    <string name="gas_quality_invalid">无效</string>
+    <string name="gas_quality_out_of_range">超量程</string>
+    <string name="gas_quality_sensor_fault">传感器故障</string>
+    <string name="gas_quality_calibration_due">校准到期</string>
+    <string name="gas_quality_time_uncertain">时间不可信</string>
+    <string name="gas_batch_session">会话：%1$s</string>
+    <string name="gas_batch_counts">样本 %1$d · 有效 %2$d · 无效 %3$d</string>
+    <string name="gas_batch_updated">最后更新：%1$s</string>
+    <string name="gas_batch_live">采样中</string>
+    <string name="gas_batch_offline">离线</string>
+    <string name="gas_batch_none">暂无样本</string>
+    <string name="gas_link_started">接入运行中</string>
+    <string name="gas_link_stopped">接入未启动</string>
+    <string name="gas_link_hint">连接 Pilot 后自动开始载荷接入</string>
+    <string name="gas_port_connected">已连接</string>
+    <string name="gas_port_disconnected">未连接</string>
+    <string name="gas_port_product">产品：%1$s</string>
+    <string name="gas_port_firmware">固件：%1$s</string>
+    <string name="gas_port_feature">功能已打开：%1$s</string>
+    <string name="gas_port_counts">收帧 %1$d · 解码 %2$d · 忽略 %3$d · 失败 %4$d · 无适配器 %5$d</string>
+    <string name="gas_port_last_error">最近错误：%1$s（%2$s）</string>
+    <string name="gas_port_empty">暂无载荷端口</string>
+    <string name="gas_port_counts_unknown">暂无解析数据</string>
+    <string name="gas_freshness_source">源时间：%1$s</string>
+    <string name="gas_freshness_received">接收时间：%1$s</string>
+    <string name="gas_freshness_delta">差值：%1$d ms</string>
+    <string name="gas_freshness_threshold">过期阈值：%1$d ms</string>
+    <string name="gas_freshness_none">暂无测量</string>
+    <string name="gas_catalog_version">目录版本：%1$s</string>
+    <string name="gas_catalog_entry">%1$d → %2$s（%3$s / %4$s）</string>
+    <string name="gas_catalog_empty">暂无通道映射</string>
+    <string name="gas_catalog_unavailable">配置未加载：%1$s</string>
+    <string name="gas_export_diagnostics">导出诊断日志</string>
+    <string name="gas_export_success">诊断日志已导出</string>
+    <string name="gas_export_failed">导出失败：%1$s</string>
+    <string name="gas_export_no_app">没有可分享的应用，文件已保存到 %1$s</string>
+    <string name="gas_diagnostics_share_title">分享诊断日志</string>
+    <string name="gas_value_unknown">--</string>
+    <string name="gas_value_yes">是</string>
+    <string name="gas_value_no">否</string>
+
+    <!-- 异常告警 -->
+    <string name="gas_alert_section">异常</string>
+    <string name="gas_alert_count">异常（%1$d）</string>
+    <string name="gas_alert_empty">暂无异常</string>
+    <string name="gas_alert_type_threshold">超过阈值</string>
+    <string name="gas_alert_type_sensor_fault">传感器故障</string>
+    <string name="gas_alert_type_stale">数据过期</string>
+    <string name="gas_alert_type_quality">数据质量</string>
+    <string name="gas_alert_state_new">新告警</string>
+    <string name="gas_alert_state_acknowledged">已确认</string>
+    <string name="gas_alert_state_review">处理中</string>
+    <string name="gas_alert_state_dismissed">已忽略</string>
+    <string name="gas_alert_state_closed">已关闭</string>
+    <string name="gas_alert_ack">查看并确认</string>
+    <string name="gas_alert_review">标记异常</string>
+    <string name="gas_alert_dismiss">忽略提醒</string>
+    <string name="gas_alert_title">%1$s · %2$s</string>
+    <string name="gas_alert_observed">观测 %1$s %2$s</string>
+    <string name="gas_alert_threshold">阈值 %1$s %2$s</string>
+    <string name="gas_alert_meta">%1$s · %2$s</string>
+    <string name="gas_floating_alert">告警：%1$s · %2$s</string>
+    <string name="gas_floating_alert_none">暂无异常</string>
+
+    <!-- 船舶识别与目标关联 -->
+    <string name="gas_vessel_label">船舶：%1$s</string>
+    <string name="gas_vessel_state_starting">正在开启识别</string>
+    <string name="gas_vessel_state_searching">搜索中（%1$d/%2$d）</string>
+    <string name="gas_vessel_state_lost">已失锁，继续搜索</string>
+    <string name="gas_vessel_state_locked">已锁定 #%1$d · 连续 %2$d 秒 · %3$s</string>
+    <string name="gas_vessel_state_unavailable">识别不可用（%1$s）</string>
+    <string name="gas_vessel_confirm_pending">待确认</string>
+    <string name="gas_vessel_confirm_done">%1$s（已确认）</string>
+    <string name="gas_vessel_failure_start">开启失败</string>
+    <string name="gas_vessel_failure_timeout">未确认开启</string>
+    <string name="gas_vessel_failure_lost">识别已停止</string>
+    <string name="gas_vessel_block">无法开始搜索：%1$s</string>
+    <string name="gas_vessel_block_not_arrived">尚未到达搜索点</string>
+    <string name="gas_vessel_block_disconnected">飞机未连接</string>
+    <string name="gas_vessel_block_not_flying">飞机未起飞</string>
+    <string name="gas_vessel_block_mission_running">其它智能功能运行中</string>
+    <string name="gas_vessel_block_mission_unknown">智能功能状态未知</string>
+    <string name="gas_vessel_block_stage">当前任务阶段不允许</string>
+    <string name="gas_vessel_search_start">开始搜索船舶</string>
+    <string name="gas_vessel_retry">重试识别</string>
+    <string name="gas_vessel_confirm">确认船舶信息</string>
+    <string name="gas_vessel_dialog_title">确认船舶信息</string>
+    <string name="gas_vessel_name_label">船名或编号</string>
+    <string name="gas_vessel_name_hint">例如：海巡01</string>
+    <string name="gas_vessel_name_required">请填写船名或编号</string>
+    <string name="gas_vessel_dialog_save">保存</string>
+    <string name="gas_vessel_confirm_rejected">确认失败：目标已失效</string>
+    <string name="gas_floating_vessel_confirm_message">将当前锁定目标「%1$s」标记为已确认。可在任务页修改船名/编号。</string>
+    <string name="gas_floating_finish_confirm_message">结束当前任务？将生成检测记录并进入收尾完成。</string>
+    <string name="gas_floating_finish_rejected">无法结束：当前阶段不允许</string>
+
+    <!-- 虚拟摇杆跟随 -->
+    <string name="gas_follow_start">开始跟随</string>
+    <string name="gas_follow_confirm_title">开始跟随船舶</string>
+    <string name="gas_follow_confirm_message">飞机将保持与目标的相对位置：前后限速 ±1.0 m/s、偏航限速 ±10°/s、保持高度。任何时候都可以退出。</string>
+    <string name="gas_follow_label">跟随：%1$s</string>
+    <string name="gas_follow_status_arming">正在建立控制</string>
+    <string name="gas_follow_status_active">跟随中 · 控制权 %1$s</string>
+    <string name="gas_follow_status_releasing">正在退出跟随…</string>
+    <string name="gas_follow_status_stopped">已退出 · %1$s</string>
+    <string name="gas_follow_status_stopped_unconfirmed">已退出 · %1$s · 交还未确认，请用遥控器接管</string>
+    <string name="gas_follow_reason_target_lost">目标失锁</string>
+    <string name="gas_follow_reason_target_stale">目标观测过期</string>
+    <string name="gas_follow_reason_invalid_rect">目标区域格式不支持</string>
+    <string name="gas_follow_reason_authority">控制权已变更</string>
+    <string name="gas_follow_reason_battery">电量不足</string>
+    <string name="gas_follow_reason_gps">定位信号不足</string>
+    <string name="gas_follow_reason_fc">飞控接管</string>
+    <string name="gas_follow_reason_disconnected">连接中断</string>
+    <string name="gas_follow_reason_enable_failed">开启失败</string>
+    <string name="gas_follow_reason_authority_timeout">控制权未确认</string>
+    <string name="gas_follow_reason_advanced_timeout">高级模式未确认</string>
+    <string name="gas_follow_reason_release_timeout">交还未确认</string>
+    <string name="gas_follow_reason_user_exit">飞手退出</string>
+    <string name="gas_follow_reason_task_finished">任务结束</string>
+    <string name="gas_follow_reason_stage">当前任务阶段不允许</string>
+    <string name="gas_follow_block_not_locked">请先锁定船舶</string>
+    <string name="gas_follow_block_safety">飞行安全条件不满足</string>
+    <string name="gas_follow_block_authority">控制权已被占用</string>
+    <string name="gas_follow_block_active">已在跟随中</string>
+
+    <!-- 检测记录 -->
+    <string name="gas_record_section">检测记录</string>
+    <string name="gas_record_empty">暂无检测记录</string>
+    <string name="gas_record_summary">%1$s · 采样 %2$d · 异常 %3$d</string>
+    <string name="gas_record_error">最后错误：%1$s</string>
+    <string name="gas_record_retry">重试上传</string>
+    <string name="gas_record_generated">检测记录已生成</string>
+    <string name="gas_record_status_queued">待上传</string>
+    <string name="gas_record_status_uploading">上传中</string>
+    <string name="gas_record_status_uploaded">已上传</string>
+    <string name="gas_record_status_failed">上传失败</string>
+
+    <!-- 检测记录（双栏） -->
+    <string name="gas_record_detail_meta">采样 %1$d · 有效 %2$d · 无效 %3$d · 异常 %4$d</string>
+    <string name="gas_record_status_label">状态：%1$s</string>
+    <string name="gas_record_channel_line">%1$s %2$s · 有效 %3$d · 最小 %4$s / 最大 %5$s / 均值 %6$s</string>
+    <string name="gas_record_uploaded_at">上传时间：%1$s</string>
+    <string name="gas_record_empty_detail">选择左侧记录查看详情</string>
+
+</resources>

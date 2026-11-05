@@ -9,8 +9,8 @@ import dji.sampleV5.aircraft.data.QuickTestConfig
 import dji.sampleV5.aircraft.databinding.FragLtePageBinding
 import dji.sampleV5.aircraft.keyvalue.KeyValueDialogUtil
 import dji.sampleV5.aircraft.models.LTEVM
-import dji.sampleV5.aircraft.util.Helper
-import dji.v5.ux.core.util.ToastUtils
+import dji.v5.ux.util.Helper
+import dji.v5.ux.util.ToastUtils
 import dji.v5.manager.aircraft.lte.LTELinkType
 import dji.v5.manager.aircraft.lte.LTEPrivatizationServerInfo
 import dji.v5.utils.common.JsonUtil

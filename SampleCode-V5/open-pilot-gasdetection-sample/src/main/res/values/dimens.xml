@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 公共页面尺寸（来源：open-pilot-app-ui-spec.md §4、§5） -->
+    <dimen name="title_bar_height">48dp</dimen>
+    <dimen name="page_padding">16dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_gap">12dp</dimen>
+    <dimen name="field_gap">8dp</dimen>
+    <dimen name="label_gap">4dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="button_radius">6dp</dimen>
+    <dimen name="input_radius">4dp</dimen>
+    <dimen name="spinner_icon_inset">8dp</dimen>
+    <dimen name="spinner_end_padding">28dp</dimen>
+    <dimen name="icon_size">32dp</dimen>
+    <dimen name="icon_padding">6dp</dimen>
+    <dimen name="badge_padding_horizontal">10dp</dimen>
+
+    <!-- 标题栏徽章：对齐 open-pilot-plugin-sample TopBar（9dp×3dp 内边距、6dp 圆点、4dp 圆角） -->
+    <dimen name="title_badge_padding_horizontal">9dp</dimen>
+    <dimen name="title_badge_padding_vertical">3dp</dimen>
+    <dimen name="title_badge_dot_size">6dp</dimen>
+    <dimen name="title_badge_corner">4dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="input_min_height">36dp</dimen>
+    <!-- 折叠入口等纯文字行：保证触控热区不小于 48dp（app-ui-spec §5.1） -->
+    <dimen name="row_touch_min_height">48dp</dimen>
+    <dimen name="log_padding">12dp</dimen>
+
+    <!-- 任务页左右分栏（参考 open-pilot-patrol-sample fragment_tasks） -->
+    <dimen name="task_list_width">280dp</dimen>
+    <dimen name="task_list_padding">12dp</dimen>
+    <dimen name="task_item_radius">6dp</dimen>
+    <dimen name="task_item_padding">12dp</dimen>
+    <dimen name="task_item_gap">7dp</dimen>
+    <dimen name="task_item_stripe_width">3dp</dimen>
+
+    <!-- 字号档位 -->
+    <dimen name="title_text_size">15sp</dimen>
+    <dimen name="detail_title_text_size">21sp</dimen>
+    <dimen name="tab_bar_height">44dp</dimen>
+    <dimen name="tab_indicator_height">2dp</dimen>
+    <dimen name="sparkline_height">44dp</dimen>
+    <dimen name="sparkline_inset">4dp</dimen>
+    <dimen name="sparkline_stroke">2dp</dimen>
+    <dimen name="card_title_text_size">14sp</dimen>
+    <dimen name="body_text_size">14sp</dimen>
+    <dimen name="label_text_size">12sp</dimen>
+    <dimen name="button_text_size">11sp</dimen>
+    <dimen name="caption_text_size">11sp</dimen>
+    <dimen name="log_text_size">12sp</dimen>
+
+</resources>
