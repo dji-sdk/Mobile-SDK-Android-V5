@@ -12,10 +12,10 @@ Supported Product: [DJI Matrice 5T]() · [DJI Mavic 3TA]() · [Matrice 400]() ·
 
 | Sample | Description |
 |---|---|
-| [open-pilot-plugin-sample](SampleCode-V5/open-pilot-plugin-sample) | Pilot plugin interface demo: custom UI, map / AR, video stream drawing, waypoint, file and data pipeline |
-| [open-pilot-flighttask-sample](SampleCode-V5/open-pilot-flighttask-sample) | Flight task management: task dispatch from Web, task receiving on RC, KMZ waypoint execution, resource upload |
-| [open-pilot-gasdetection-sample](SampleCode-V5/open-pilot-gasdetection-sample) | Gas detection: task dispatch, PSDK payload access, real-time monitoring and alarm, ship identification and following |
-| [open-pilot-patrol-sample](SampleCode-V5/open-pilot-patrol-sample) | Intelligent patrol: waypoint patrol, target recognition and capture, map / AR marking, resource upload |
+| [open-pilot-plugin-sample](SampleCode-V5/open-pilot-plugin-sample/README_EN.md) | Pilot plugin interface demo: custom UI, map / AR, video stream drawing, waypoint, file and data pipeline |
+| [open-pilot-flighttask-sample](SampleCode-V5/open-pilot-flighttask-sample/README_EN.md) | Flight task management: task dispatch from Web, task receiving on RC, KMZ waypoint execution, resource upload |
+| [open-pilot-gasdetection-sample](SampleCode-V5/open-pilot-gasdetection-sample/README_EN.md) | Gas detection: task dispatch, PSDK payload access, real-time monitoring and alarm, ship identification and following |
+| [open-pilot-patrol-sample](SampleCode-V5/open-pilot-patrol-sample/README_EN.md) | Intelligent patrol: waypoint patrol, target recognition and capture, map / AR marking, resource upload |
 | [android-sdk-v5-uxsdk](SampleCode-V5/android-sdk-v5-uxsdk) | Scenographic Example (UX SDK). Currently only aircraft are supported |
 | [android-sdk-v5-sample](SampleCode-V5/android-sdk-v5-sample) | Basic MSDK Sample App, depends on uxsdk |
 
