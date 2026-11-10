@@ -5,11 +5,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -29,6 +31,7 @@ public class SettingMenuFragment extends Fragment implements FragmentManager.OnB
 
     private TextView mTitleView;
     private ImageView mBackBtn;
+    private ImageView mCloseBtn;
     private ImageView mProgressBar;
 
     private String mFragmentTag;
@@ -79,6 +82,7 @@ public class SettingMenuFragment extends Fragment implements FragmentManager.OnB
         super.onViewCreated(view, savedInstanceState);
         mTitleView = view.findViewById(R.id.setting_menu_header_title);
         mBackBtn = view.findViewById(R.id.setting_menu_header_back);
+        mCloseBtn = view.findViewById(R.id.setting_menu_header_close);
         mProgressBar = view.findViewById(R.id.setting_menu_progress_bar);
 
         if (!TextUtils.isEmpty(mFragmentTag)) {
@@ -106,6 +110,19 @@ public class SettingMenuFragment extends Fragment implements FragmentManager.OnB
                 popBackFragmentStack();
             }
         });
+        mCloseBtn.setOnClickListener(v -> closeDrawer());
+    }
+
+    private void closeDrawer() {
+        View currentView = mFragmentRoot;
+        while (currentView != null) {
+            ViewParent parent = currentView.getParent();
+            if (parent instanceof DrawerLayout) {
+                ((DrawerLayout) parent).closeDrawer(currentView);
+                return;
+            }
+            currentView = parent instanceof View ? (View) parent : null;
+        }
     }
 
     private void inflateFunctionFragment() {
@@ -163,6 +180,7 @@ public class SettingMenuFragment extends Fragment implements FragmentManager.OnB
         mProgressBar.setVisibility(View.GONE);
         mProgressBar = null;
         mBackBtn = null;
+        mCloseBtn = null;
         mTitleView = null;
         if (mLazyInflateTask != null && mFragmentRoot != null) {
             mFragmentRoot.removeCallbacks(mLazyInflateTask);
