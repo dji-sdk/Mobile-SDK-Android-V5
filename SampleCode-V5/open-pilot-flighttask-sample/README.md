@@ -1,5 +1,7 @@
 # 飞行任务管理
 
+[English Version](README_EN.md)
+
 基于 DJI Mobile SDK V5 与 DJI Pilot 开放能力的飞行任务管理示例，演示从 Web 下发任务、遥控器接收工单、执行 KMZ 航线到回传资源的完整流程。
 
 项目包含 Android 插件与 Node.js 演示后端，适合作为任务管理、航线执行和数据同步功能的开发参考。

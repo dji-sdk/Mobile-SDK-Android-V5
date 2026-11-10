@@ -1,5 +1,7 @@
 # 智能巡检作业
 
+[English Version](README_EN.md)
+
 基于 DJI Mobile SDK V5 与 DJI Pilot 开放能力的智能巡检作业示例，演示任务下发、航线巡检、目标识别与拍照、地图 / AR 标记以及资源回传。
 
 项目包含 Android 插件与 Node.js 演示后端，适合作为智能巡检业务编排与 Pilot 集成的开发参考。

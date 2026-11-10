@@ -1,5 +1,7 @@
 # Pilot 开放插件 Sample
 
+[English Version](README_EN.md)
+
 基于 DJI Mobile SDK V5 与 DJI Pilot 开放能力的接口演示插件，展示自定义 UI、地图 / AR、图传绘制、航线、文件及数据管道等能力的接入和调用方式。
 
 项目以单项能力示例为主，适合作为 Pilot 插件初始化、接口调用、远端界面交互与状态订阅的开发参考，无需启动业务后端。

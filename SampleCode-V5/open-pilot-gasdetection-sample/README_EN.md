@@ -1,5 +1,7 @@
 # Gas Detection
 
+[中文版](README.md)
+
 A gas detection sample built on DJI Mobile SDK V5, DJI Pilot open capabilities and the PSDK payload data channel. It demonstrates detection task dispatch, payload measurement access, real-time monitoring and alerts, vessel identification / following, and detection record reporting.
 
 This release provides the Android plugin and a reusable Android-side PSDK communication library, and keeps a Node.js demo backend for task debugging. The payload-side PSDK application is implemented by the device developer and is not shipped with this project.

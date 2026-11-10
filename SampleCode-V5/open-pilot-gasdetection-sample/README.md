@@ -1,5 +1,7 @@
 # 气体检测
 
+[English Version](README_EN.md)
+
 基于 DJI Mobile SDK V5、DJI Pilot 开放能力与 PSDK 载荷数据通道的气体检测示例，演示检测任务下发、载荷测量接入、实时监测与告警、船舶识别 / 跟随以及检测记录回传。
 
 本次发布 Android 插件及可复用的 Android 侧 PSDK 通信库，并保留 Node.js 演示后端用于任务联调。载荷侧 PSDK 应用由设备开发者自行实现，不随本项目发布。

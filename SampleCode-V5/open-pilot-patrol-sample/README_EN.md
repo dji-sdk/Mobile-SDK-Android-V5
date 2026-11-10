@@ -1,5 +1,7 @@
 # Smart Patrol
 
+[中文版](README.md)
+
 An intelligent patrol sample built on DJI Mobile SDK V5 and DJI Pilot open capabilities. It demonstrates task dispatch, waypoint patrol, target recognition and capture, map / AR marking and resource reporting.
 
 The project contains an Android plugin and a Node.js demo backend. It is intended as a development reference for smart patrol orchestration and Pilot integration.

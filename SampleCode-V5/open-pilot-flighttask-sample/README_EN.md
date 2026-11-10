@@ -1,5 +1,7 @@
 # Flight Task Management
 
+[中文版](README.md)
+
 A flight task management sample built on DJI Mobile SDK V5 and DJI Pilot open capabilities. It demonstrates the complete flow from dispatching a task on the Web, receiving the work order on the remote controller, executing a KMZ waypoint route, to uploading resources back.
 
 The project contains an Android plugin and a Node.js demo backend. It is intended as a development reference for task management, waypoint execution and data synchronization.

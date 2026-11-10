@@ -1,5 +1,7 @@
 # Open Pilot Plugin Sample
 
+[中文版](README.md)
+
 An interface demo plugin built on DJI Mobile SDK V5 and DJI Pilot open capabilities. It shows how to integrate and invoke custom UI, map / AR, video-stream drawing, waypoint, file and data pipeline capabilities.
 
 The project focuses on single-capability examples. It is intended as a development reference for Pilot plugin initialization, API invocation, remote UI interaction and state subscription, and does not require a business backend.
