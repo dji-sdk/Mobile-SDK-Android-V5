@@ -299,7 +299,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/textview_simulator_world_y_value"
                 app:layout_constraintLeft_toRightOf="@+id/textview_simulator_world_x_label"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textview_simulator_world_x_label" />
 
             <TextView
                 android:id="@+id/textview_simulator_world_y_label"
