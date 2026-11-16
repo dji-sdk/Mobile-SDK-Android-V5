@@ -127,6 +127,16 @@ public class PhotoVideoSwitchWidget extends FrameLayoutWidget<Object> implements
                         widgetModel.changeToVideoMode();
                     }
                 }));
+        addReaction(buttonDownModel.isRCSwitchButtonDownProcessor().toFlowable()
+                .observeOn(SchedulerProvider.ui())
+                .subscribe(aBoolean -> {
+                    if (aBoolean == Boolean.TRUE && isEnabled()) {
+                        widgetModel.toggleCameraMode()
+                                .observeOn(SchedulerProvider.ui())
+                                .subscribe(() -> {
+                                        }, RxUtil.logErrorConsumer(TAG, "Switch camera Mode"));
+                    }
+                }));
     }
 
     @NonNull
