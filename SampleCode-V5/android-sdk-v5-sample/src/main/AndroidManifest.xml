@@ -4,7 +4,6 @@
         <activity
             android:name="dji.sampleV5.aircraft.TargetHudActivity"
             android:exported="true"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:screenOrientation="landscape" />
     </application>
 </manifest>
