@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://android.com"
+    xmlns:tools="http://android.com">
+
+    <application>
+        <activity
+            android:name="dji.sampleV5.aircraft.TargetHudActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:node="merge">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

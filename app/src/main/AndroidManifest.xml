@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://android.com"
+    xmlns:tools="http://android.com">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <application
+        android:name="dji.sampleV5.aircraft.DJIAircraftApplication"
+        android:allowBackup="false"
+        android:label="TargetHUD"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:replace="android:label,android:allowBackup,android:theme">
+
+        <meta-data
+            android:name="com.dji.sdk.API_KEY"
+            android:value="e982531362447d4624bec32d" />
+
+        <activity
+            android:name="dji.sampleV5.aircraft.TargetHudActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
