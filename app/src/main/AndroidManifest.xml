@@ -15,11 +15,10 @@
     <application
         android:name="dji.sampleV5.aircraft.DJIAircraftApplication"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
         android:label="TargetHUD"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        tools:replace="android:label,android:allowBackup">
+        tools:replace="android:label,android:allowBackup,android:theme">
 
         <meta-data
             android:name="com.dji.sdk.API_KEY"
